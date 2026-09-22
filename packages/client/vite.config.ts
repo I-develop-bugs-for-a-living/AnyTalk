@@ -46,9 +46,9 @@ export default defineConfig({
         type: "module",
       },
       manifest: {
-        name: "Stoat",
-        short_name: "Stoat",
-        description: "User-first open source chat platform.",
+        name: "AnyTalk",
+        short_name: "AnyTalk",
+        description: "AnyTalk chat.",
         categories: ["communication", "chat", "messaging"],
         start_url: base,
         scope: pwaScope,

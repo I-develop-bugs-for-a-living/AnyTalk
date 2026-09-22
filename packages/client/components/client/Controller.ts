@@ -486,9 +486,9 @@ export default class ClientController {
         os = "iPadOS";
       }
 
-      friendly_name = `Stoat for Web (${name} on ${os})`;
+      friendly_name = `AnyTalk for Web (${name} on ${os})`;
     } else {
-      friendly_name = "Stoat for Web (Unknown Device)";
+      friendly_name = "AnyTalk for Web (Unknown Device)";
     }
 
     // Try to login with given credentials

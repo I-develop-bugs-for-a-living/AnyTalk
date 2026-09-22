@@ -58,7 +58,7 @@ export default function FlowHome() {
               </b>
               <span style={{ "text-align": "center", opacity: "0.5" }}>
                 <Trans>
-                  Stoat is one of the best ways to stay connected with your
+                  AnyTalk is one of the best ways to stay connected with your
                   friends and community, anywhere, anytime.
                 </Trans>
               </span>

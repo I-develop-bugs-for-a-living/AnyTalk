@@ -11,7 +11,6 @@ import type { Client, User } from "stoat.js";
 
 import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
-import { fetchLatestChangelog } from "@revolt/modal/modals/Changelog";
 import { useState } from "@revolt/state";
 
 import ClientController from "./Controller";
@@ -33,24 +32,6 @@ export function ClientContext(props: { children: JSXElement }) {
 
   const controller = new ClientController(state, instance);
   onCleanup(() => controller.dispose());
-
-  let fetchedChangelog = false;
-  createEffect(() => {
-    if (!controller.isLoggedIn() || fetchedChangelog) return;
-    fetchedChangelog = true;
-
-    fetchLatestChangelog().then((changelog) => {
-      if (!changelog) return;
-      if (state["release-notes"].lastSeenId === changelog.id) return;
-
-      state["release-notes"].markSeen(changelog.id, changelog.published_at);
-
-      openModal({
-        type: "changelog",
-        changelog,
-      });
-    });
-  });
 
   createEffect(() => {
     const policy = controller.lifecycle.policyAttentionRequired();
