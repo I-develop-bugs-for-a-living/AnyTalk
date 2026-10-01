@@ -220,6 +220,10 @@ class Voice {
     this.device.setWakeLocked();
 
     const room = new Room({
+      // Only receive video at the size it is displayed, and pause it when hidden
+      adaptiveStream: true,
+      // Stop sending simulcast layers that nobody is subscribed to
+      dynacast: true,
       audioCaptureDefaults: {
         deviceId: this.#settings.preferredAudioInputDevice,
         echoCancellation: this.#settings.echoCancellation,
