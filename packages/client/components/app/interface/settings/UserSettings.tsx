@@ -32,6 +32,7 @@ import { MyAccount } from "./user/Account";
 import AdvancedSettings from "./user/Advanced";
 import { AppearanceMenu } from "./user/appearance";
 import { MyBots, ViewBot } from "./user/bots";
+import { DeveloperSettings } from "./user/Developer";
 import { Feedback } from "./user/Feedback";
 import { LanguageSettings } from "./user/Language";
 import Native from "./user/Native";
@@ -79,6 +80,8 @@ const Config: SettingsConfiguration<{ server: Server }> = {
         return <AppearanceMenu />;
       case "advanced":
         return <AdvancedSettings />;
+      case "developer":
+        return <DeveloperSettings />;
       case "profile":
         return <EditProfile />;
       case "sessions":
@@ -342,6 +345,11 @@ const Config: SettingsConfiguration<{ server: Server }> = {
               id: "advanced",
               icon: <MdScience {...iconSize(20)} />,
               title: <Trans>Advanced</Trans>,
+            },
+            {
+              id: "developer",
+              icon: <Symbol size={20}>code</Symbol>,
+              title: <Trans>Developer</Trans>,
             },
             {
               id: "logout",

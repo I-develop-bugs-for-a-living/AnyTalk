@@ -40,6 +40,7 @@ import { VoiceCallCardContext } from "@revolt/ui/components/features/voice/callC
 import { Device, useDevice } from "@revolt/common";
 import { InRoom } from "./components/InRoom";
 import { RoomAudioManager } from "./components/RoomAudioManager";
+import { StatsRecorder } from "./components/StatsRecorder";
 import { VoiceProcessor } from "./VoiceProcessor";
 
 type State =
@@ -767,6 +768,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
         <InRoom>
           <RoomAudioManager />
         </InRoom>
+        <StatsRecorder />
       </RoomContext.Provider>
     </voiceContext.Provider>
   );

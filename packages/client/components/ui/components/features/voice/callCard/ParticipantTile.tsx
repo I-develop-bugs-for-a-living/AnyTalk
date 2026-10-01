@@ -23,6 +23,8 @@ import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import { VoiceStatefulUserIcons } from "../VoiceStatefulUserIcons";
 
+import { TrackStats } from "./TrackStats";
+
 type TileProps = {
   focus?: boolean;
 };
@@ -146,6 +148,14 @@ export function ParticipantTile(props: TileProps) {
               });
             }}
           />
+        </Show>
+        <Show
+          when={
+            (isVideo() || isScreenShare()) &&
+            state.settings.getValue("advanced:developer_mode")
+          }
+        >
+          <TrackStats />
         </Show>
         <Overlay showOnHover={isScreenShare()}>
           <OverlayInner>
