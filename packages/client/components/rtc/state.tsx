@@ -21,6 +21,7 @@ import {
   ScreenSharePresets,
   Track,
   VideoEncoding,
+  VideoPreset,
   VideoPresets,
 } from "livekit-client";
 import { Channel } from "stoat.js";
@@ -49,6 +50,13 @@ type State =
   | "RECONNECTING";
 
 export type VoiceLayout = "fullscreen" | "expanded" | "collapsed" | undefined;
+
+/** Extra screen share presets beyond what LiveKit ships */
+const SCREEN_SHARE_PRESETS = {
+  h1080fps60: new VideoPreset(1920, 1080, 8_000_000, 60, "medium"),
+  h1440fps30: new VideoPreset(2560, 1440, 8_000_000, 30, "medium"),
+  h1440fps60: new VideoPreset(2560, 1440, 12_000_000, 60, "medium"),
+};
 
 type ScreenShareQuality = Required<
   Pick<ScreenShareCaptureOptions, "contentHint" | "resolution">
@@ -441,34 +449,69 @@ class Voice {
 
     const limit = this.limits().video_resolution;
 
-    // TODO: Add more resolutions to stream from if they're enabled. May tie into premium users in the future?
-    if (
-      (limit[0] === 0 || limit[0] >= 1920) &&
-      (limit[1] === 0 || limit[1] >= 1080)
-    ) {
-      qualities.high = {
-        name: "high",
-        resolution: ScreenSharePresets.h1080fps30.resolution,
-        fullName: `1080p 30FPS`,
-        contentHint: "motion",
-        encoding: ScreenSharePresets.h1080fps30.encoding,
-      };
-      const originalResolution = ScreenSharePresets.original.resolution;
-      originalResolution.frameRate = 5;
-      originalResolution.aspectRatio = 0;
+    /** Whether the server's video_resolution limit allows this size (0 = unlimited) */
+    const fits = (width: number, height: number) =>
+      (limit[0] === 0 || limit[0] >= width) &&
+      (limit[1] === 0 || limit[1] >= height);
 
-      const limit = this.limits().video_resolution;
-      originalResolution.width = limit[0];
-      originalResolution.height = limit[1];
+    const preset = (
+      name: ScreenShareQualityName,
+      fullName: string,
+      { resolution, encoding }: VideoPreset,
+    ): ScreenShareQuality => ({
+      name,
+      fullName,
+      resolution,
+      encoding,
+      contentHint: "motion",
+    });
+
+    /** Source resolution, capped to the server limit */
+    const sourceResolution = (frameRate: number) => ({
+      width: limit[0],
+      height: limit[1],
+      frameRate,
       // If both resolutions are limited, set aspect ratio
-      if (originalResolution.height !== 0 && originalResolution.width !== 0) {
-        originalResolution.aspectRatio =
-          originalResolution.width / originalResolution.height;
-      }
+      aspectRatio: limit[0] !== 0 && limit[1] !== 0 ? limit[0] / limit[1] : 0,
+    });
 
+    if (fits(1920, 1080)) {
+      qualities.high = preset(
+        "high",
+        `1080p 30FPS`,
+        ScreenSharePresets.h1080fps30,
+      );
+      qualities.high60 = preset(
+        "high60",
+        `1080p 60FPS`,
+        SCREEN_SHARE_PRESETS.h1080fps60,
+      );
+    }
+
+    if (fits(2560, 1440)) {
+      qualities.qhd30 = preset(
+        "qhd30",
+        `1440p 30FPS`,
+        SCREEN_SHARE_PRESETS.h1440fps30,
+      );
+      qualities.qhd60 = preset(
+        "qhd60",
+        `1440p 60FPS`,
+        SCREEN_SHARE_PRESETS.h1440fps60,
+      );
+    }
+
+    if (fits(1920, 1080)) {
+      qualities.source30 = {
+        name: "source30",
+        resolution: sourceResolution(30),
+        fullName: `Source 30FPS`,
+        contentHint: "motion",
+        encoding: { maxBitrate: 10_000_000, maxFramerate: 30 },
+      };
       qualities.text = {
         name: "text",
-        resolution: originalResolution,
+        resolution: sourceResolution(5),
         fullName: `Source 5FPS`,
         contentHint: "text",
         encoding: ScreenSharePresets.original.encoding,
@@ -520,10 +563,10 @@ class Voice {
       }
 
       try {
+        // Fall back to low if the saved quality is no longer allowed by the server
         const chosenQuality =
-          this.getEnabledScreenShareQualities()[
-            this.#settings.screenShareQuality || "low"
-          ];
+          qualities[this.#settings.screenShareQuality || "low"] ??
+          qualities.low;
         const localTrack = await room.localParticipant.setScreenShareEnabled(
           true,
           {
