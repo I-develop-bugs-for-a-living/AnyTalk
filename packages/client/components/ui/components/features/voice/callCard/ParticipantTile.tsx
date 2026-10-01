@@ -73,8 +73,10 @@ export function ParticipantTile(props: TileProps) {
   const isScreenShare = () => track.source === Track.Source.ScreenShare;
   const isSpeaking = useIsSpeaking(participant);
 
+  const theater = () => !!props.focus && voice.layout() === "fullscreen";
+
   const getHeight = () => {
-    if (!props.focus || videoDims().height == 0) return {};
+    if (!props.focus || theater() || videoDims().height == 0) return {};
     // Calculate the aspect ratio
     const ratio = videoDims().width / videoDims().height;
 
@@ -92,6 +94,7 @@ export function ParticipantTile(props: TileProps) {
             video: isVideo() || isScreenShare(),
             fullscreen: voice.layout() === "fullscreen",
             ...props,
+            theater: theater(),
           }) + (isScreenShare() ? " vc_tile group" : " vc_tile")
         }
         onClick={() => voice.toggleFocus(track)}
@@ -213,6 +216,15 @@ export const tile = cva({
     fullscreen: {
       true: {
         minWidth: "20%",
+      },
+    },
+    theater: {
+      true: {
+        width: "100%",
+        height: "100%",
+        borderRadius: 0,
+        background: "black",
+        outlineColor: "transparent",
       },
     },
   },

@@ -1,6 +1,14 @@
 import { useLingui } from "@lingui/solid/macro";
 import { createResizeObserver } from "@solid-primitives/resize-observer";
-import { createEffect, createMemo, For, onMount, Show } from "solid-js";
+import {
+  createEffect,
+  createMemo,
+  createSignal,
+  For,
+  onCleanup,
+  onMount,
+  Show,
+} from "solid-js";
 import { TrackLoop } from "solid-livekit-components";
 import { styled } from "styled-system/jsx";
 
@@ -21,10 +29,36 @@ export function VoiceCallCardActiveRoom() {
   const voice = useVoice();
   const collapsed = createMemo(() => voice.layout() === "collapsed");
 
+  // Fullscreen with a focused stream: video fills the screen and the
+  // controls float on top, fading out while the mouse is idle
+  const theater = createMemo(
+    () => voice.layout() === "fullscreen" && !!voice.focusId(),
+  );
+
+  const [idle, setIdle] = createSignal(false);
+  let idleTimer: ReturnType<typeof setTimeout> | undefined;
+
+  function wake() {
+    setIdle(false);
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => setIdle(true), THEATER_IDLE_MS);
+  }
+
+  createEffect(() => {
+    if (theater()) wake();
+  });
+
+  onCleanup(() => clearTimeout(idleTimer));
+
   return (
-    <View collapsed={collapsed()}>
-      <Participants />
-      <VoiceCallControls>
+    <View
+      collapsed={collapsed()}
+      theater={theater()}
+      hideCursor={theater() && idle()}
+      onPointerMove={() => theater() && wake()}
+    >
+      <Participants theater={theater()} />
+      <VoiceCallControls theater={theater()} hidden={theater() && idle()}>
         <VoiceCallControlHolder left collapsed={collapsed()}>
           <VoiceCallCardStatus />
         </VoiceCallControlHolder>
@@ -97,13 +131,15 @@ function LayoutButtons() {
   );
 }
 
+const THEATER_IDLE_MS = 2500;
+
 const TILE_MIN_WIDTH = "250px",
   TILE_MIN_FOCUS_HEIGHT = "100px";
 
 /**
  * Show a grid of participants
  */
-function Participants() {
+function Participants(props: { theater: boolean }) {
   const voice = useVoice();
   const { t } = useLingui();
 
@@ -136,8 +172,8 @@ function Participants() {
   return (
     <Call ref={callRef} class={voice.focusId() ? "" : scrollableStyles()}>
       <InRoom>
-        <FocusedParticipant />
-        <Show when={voice.focusId()}>
+        <FocusedParticipant theater={props.theater} />
+        <Show when={voice.focusId() && !props.theater}>
           <ShowBarButtonHolder>
             <div style={{ "margin-bottom": "10px" }}>
               <IconButton
@@ -163,7 +199,7 @@ function Participants() {
         </Show>
         <Grid
           focus={!!voice.focusId()}
-          show={voice.showBar()}
+          show={voice.showBar() && !props.theater}
           class={voice.focusId() ? scrollableStyles({ direction: "x" }) : ""}
           style={{ "--vc-tile-width": tileWidth() }}
         >
@@ -188,14 +224,14 @@ function Participants() {
   );
 }
 
-function FocusedParticipant() {
+function FocusedParticipant(props: { theater: boolean }) {
   const voice = useVoice();
 
   return (
     <Show when={voice.focusTrack()}>
       <TrackLoop tracks={() => [voice.focusTrack()!]}>
         {() => (
-          <FocusBox>
+          <FocusBox theater={props.theater}>
             <ParticipantTile focus />
           </FocusBox>
         )}
@@ -221,6 +257,17 @@ const View = styled("div", {
     collapsed: {
       true: { padding: 0 },
     },
+    theater: {
+      true: {
+        position: "relative",
+        padding: 0,
+        gap: 0,
+        background: "black",
+      },
+    },
+    hideCursor: {
+      true: { cursor: "none" },
+    },
   },
 });
 
@@ -229,6 +276,25 @@ const VoiceCallControls = styled("div", {
     display: "flex",
     flexShrink: 0,
     overflow: "hidden",
+  },
+  variants: {
+    theater: {
+      true: {
+        position: "absolute",
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 1,
+        background: "linear-gradient(transparent, #000a)",
+        transition: "opacity var(--transitions-medium)",
+      },
+    },
+    hidden: {
+      true: {
+        opacity: 0,
+        pointerEvents: "none",
+      },
+    },
   },
 });
 
@@ -324,5 +390,13 @@ const FocusBox = styled("div", {
     flexDirection: "column",
     justifyContent: "center",
     margin: "0 auto",
+  },
+  variants: {
+    theater: {
+      true: {
+        width: "100%",
+        margin: 0,
+      },
+    },
   },
 });
