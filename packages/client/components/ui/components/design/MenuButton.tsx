@@ -94,7 +94,11 @@ export function MenuButton(
         </span>
       </Show>
       {local.actions && (
-        <Actions class="hover-show" onClick={(e) => e.stopPropagation()}>
+        <Actions
+          class="hover-show"
+          onClick={(e) => e.stopPropagation()}
+          onDblClick={(e) => e.stopPropagation()}
+        >
           {local.actions}
         </Actions>
       )}

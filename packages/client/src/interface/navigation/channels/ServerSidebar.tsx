@@ -559,6 +559,9 @@ function Entry(
       <MenuButton
         href={`/server/${props.channel.serverId}/channel/${props.channel.id}`}
         use:floating={props.menuGenerator(props.channel)}
+        onDblClick={() => {
+          if (props.channel.isVoice && !inCall()) voice.connect(props.channel);
+        }}
         size="normal"
         data-unread={props.channel.unread ? "" : undefined}
         data-mentions={props.channel.mentions?.size || undefined}
