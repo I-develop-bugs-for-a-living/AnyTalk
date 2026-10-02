@@ -22,9 +22,13 @@ export function VoiceStatefulUserIcons(props: {
   const isMuted = () =>
     state.voice.getUserMuted(props.userId) ? "by-user" : props.muted || false;
 
+  // deafened implies muted, so only show the headset unless we muted them
+  const showMic = () =>
+    isMuted() === "by-user" || (isMuted() && !props.deafened);
+
   return (
     <>
-      <Show when={isMuted()}>
+      <Show when={showMic()}>
         <Symbol
           size={16}
           color={

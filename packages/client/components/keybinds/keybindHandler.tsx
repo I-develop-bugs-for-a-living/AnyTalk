@@ -9,12 +9,20 @@ import {
 
 import { ReactiveSet } from "@solid-primitives/set";
 
+import { useState } from "@revolt/state";
+
 import {
   ACTION_PRIORITY,
+  CUSTOMISABLE_ACTIONS,
   KeybindAction,
+  PREVENT_DEFAULT_ACTIONS,
   keybindFilter,
 } from "./keybindActions";
-import { DEFAULT_MAC_SEQUENCES, DEFAULT_SEQUENCES } from "./keybindSequences";
+import {
+  DEFAULT_MAC_SEQUENCES,
+  DEFAULT_SEQUENCES,
+  MODIFIER_KEYS,
+} from "./keybindSequences";
 
 type KeybindContext = {
   createKeybind: (keybind: KeybindAction, callback: () => void) => void;
@@ -49,6 +57,42 @@ export function KeybindContext(props: { children: JSXElement }) {
     ? DEFAULT_MAC_SEQUENCES
     : DEFAULT_SEQUENCES;
 
+  const state = useState();
+
+  /**
+   * Keys for a keybind, taking the user's changes into account
+   */
+  function sequenceOf(keybind: KeybindAction) {
+    const custom = CUSTOMISABLE_ACTIONS.includes(keybind)
+      ? state.settings.getValue("keybinds:custom")?.[keybind]
+      : undefined;
+    return {
+      enabled: custom?.enabled ?? true,
+      keys: custom?.keys ?? sequences[keybind],
+    };
+  }
+
+  /**
+   * Whether a keybind's keys are held; customisable keybinds also need the
+   * exact modifiers, so Ctrl+M doesn't fire while pressing Ctrl+Shift+M
+   */
+  function isPressed(keybind: KeybindAction) {
+    const { enabled, keys } = sequenceOf(keybind);
+    if (!enabled) return false;
+
+    if (
+      CUSTOMISABLE_ACTIONS.includes(keybind) &&
+      MODIFIER_KEYS.some((key) => activeKeys.has(key) !== keys.includes(key))
+    )
+      return false;
+
+    return keys.every((key) =>
+      key instanceof RegExp
+        ? [...activeKeys].findIndex((item) => key.test(item)) !== -1
+        : activeKeys.has(key),
+    );
+  }
+
   /**
    * Get the currently firing keybind
    */
@@ -62,13 +106,7 @@ export function KeybindContext(props: { children: JSXElement }) {
           keybindFilter(keybind, activeKeys, currentlyBound, target),
         )
         // check whether the keybind is being pressed
-        .filter((keybind) =>
-          sequences[keybind].every((key) =>
-            key instanceof RegExp
-              ? [...activeKeys].findIndex((item) => key.test(item)) !== -1
-              : activeKeys.has(key),
-          ),
-        )
+        .filter(isPressed)
         // return the highest priority keybind
         .shift()
     );
@@ -94,11 +132,7 @@ export function KeybindContext(props: { children: JSXElement }) {
           .reduce(
             (d, keybind) => ({
               ...d,
-              [keybind]: sequences[keybind].every((key) =>
-                key instanceof RegExp
-                  ? [...activeKeys].findIndex((item) => key.test(item)) !== -1
-                  : activeKeys.has(key),
-              ),
+              [keybind]: isPressed(keybind),
             }),
             {},
           ),
@@ -115,11 +149,26 @@ export function KeybindContext(props: { children: JSXElement }) {
   }
 
   /**
+   * Letters in lower case, so releasing Shift before the letter (which
+   * changes event.key) can't leave the key stuck as pressed
+   */
+  const keyOf = (event: KeyboardEvent) =>
+    event.key.length === 1 ? event.key.toLowerCase() : event.key;
+
+  /** Key each physical key added to activeKeys */
+  const heldByCode = new Map<string, string>();
+
+  /**
    * Handle key down event by adding it to active keys
    */
   function onKeyDown(event: KeyboardEvent) {
     target = event.target as HTMLElement;
-    activeKeys.add(event.key);
+    const key = keyOf(event);
+    heldByCode.set(event.code, key);
+    activeKeys.add(key);
+
+    const action = firing();
+    if (action && PREVENT_DEFAULT_ACTIONS.has(action)) event.preventDefault();
   }
 
   /**
@@ -127,11 +176,15 @@ export function KeybindContext(props: { children: JSXElement }) {
    */
   function onKeyUp(event: KeyboardEvent) {
     target = event.target as HTMLElement;
-    activeKeys.delete(event.key);
+    // release whatever this physical key pressed, even if Shift has since
+    // changed what it types
+    activeKeys.delete(heldByCode.get(event.code) ?? keyOf(event));
+    heldByCode.delete(event.code);
   }
 
   function onFocusDropped(_: FocusEvent) {
     activeKeys.clear();
+    heldByCode.clear();
   }
 
   document.body.addEventListener("keydown", onKeyDown);

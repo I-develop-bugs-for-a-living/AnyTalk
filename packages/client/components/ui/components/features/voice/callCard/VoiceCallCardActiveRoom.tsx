@@ -10,6 +10,8 @@ import {
   Show,
 } from "solid-js";
 import { TrackLoop } from "solid-livekit-components";
+
+import { Track } from "livekit-client";
 import { styled } from "styled-system/jsx";
 
 import { useDevice } from "@revolt/common";
@@ -32,7 +34,9 @@ export function VoiceCallCardActiveRoom() {
   // Fullscreen with a focused stream: video fills the screen and the
   // controls float on top, fading out while the mouse is idle
   const theater = createMemo(
-    () => voice.layout() === "fullscreen" && !!voice.focusId(),
+    () =>
+      voice.layout() === "fullscreen" &&
+      (!!voice.focusId() || voice.isMultiStream()),
   );
 
   const [idle, setIdle] = createSignal(false);
@@ -178,9 +182,40 @@ function Participants(props: { theater: boolean }) {
     return `max(${TILE_MIN_WIDTH}, ${vidWidth}% - var(--gap-md))`;
   };
 
+  // Several streams open: tile them, and only list the other streams below
+  const multi = createMemo(() => voice.isMultiStream());
+  const hasMain = () => multi() || !!voice.focusId();
+  const others = () =>
+    multi()
+      ? voice
+          .vidTracks()
+          .filter(
+            (t) =>
+              t.source === Track.Source.ScreenShare &&
+              !voice.isWatchedStream(t),
+          )
+      : voice.vidTracks().filter((t) => !voice.isFocus(t));
+
   // Clear out any focus when the track that was focused is no longer available.
   createEffect(() => {
     if (!voice.focusTrack()) voice.toggleFocus();
+  });
+
+  // Focus a stream we just started watching, once its track is listed
+  createEffect(() => {
+    const identity = voice.pendingFocus();
+    if (!identity) return;
+    const track = voice
+      .vidTracks()
+      .find(
+        (t) =>
+          t.source === Track.Source.ScreenShare &&
+          t.participant.identity === identity,
+      );
+    if (track) {
+      voice.setFocusTrack(track);
+      voice.clearPendingFocus();
+    }
   });
 
   onMount(() => {
@@ -193,10 +228,15 @@ function Participants(props: { theater: boolean }) {
   });
 
   return (
-    <Call ref={callRef} class={voice.focusId() ? "" : scrollableStyles()}>
+    <Call ref={callRef} class={hasMain() ? "" : scrollableStyles()}>
       <InRoom>
-        <FocusedParticipant theater={props.theater} />
-        <Show when={voice.focusId() && !props.theater}>
+        <Show
+          when={multi()}
+          fallback={<FocusedParticipant theater={props.theater} />}
+        >
+          <StreamTiling />
+        </Show>
+        <Show when={hasMain() && !props.theater && others().length}>
           <ShowBarButtonHolder>
             <div style={{ "margin-bottom": "10px" }}>
               <IconButton
@@ -221,16 +261,12 @@ function Participants(props: { theater: boolean }) {
           </ShowBarButtonHolder>
         </Show>
         <Grid
-          focus={!!voice.focusId()}
+          focus={hasMain()}
           show={voice.showBar() && !props.theater}
-          class={voice.focusId() ? scrollableStyles({ direction: "x" }) : ""}
+          class={hasMain() ? scrollableStyles({ direction: "x" }) : ""}
           style={{ "--vc-tile-width": tileWidth() }}
         >
-          <TrackLoop
-            tracks={() => voice.vidTracks().filter((t) => !voice.isFocus(t))}
-          >
-            {() => <ParticipantTile />}
-          </TrackLoop>
+          <TrackLoop tracks={others}>{() => <ParticipantTile />}</TrackLoop>
           <For each={Array(testTrackCount)}>
             {() => (
               <div
@@ -244,6 +280,38 @@ function Participants(props: { theater: boolean }) {
         </Grid>
       </InRoom>
     </Call>
+  );
+}
+
+/**
+ * Open streams split across the call window like a tiling window manager:
+ * as square a grid as possible, with the last row stretched to fill
+ */
+function StreamTiling() {
+  const voice = useVoice();
+
+  const rows = createMemo(() => {
+    const streams = voice.watchedStreams();
+    const columns = Math.ceil(Math.sqrt(streams.length));
+    const out: (typeof streams)[] = [];
+    for (let i = 0; i < streams.length; i += columns) {
+      out.push(streams.slice(i, i + columns));
+    }
+    return out;
+  });
+
+  return (
+    <Tiling>
+      <For each={rows()}>
+        {(row) => (
+          <TilingRow>
+            <TrackLoop tracks={() => row}>
+              {() => <ParticipantTile fill />}
+            </TrackLoop>
+          </TilingRow>
+        )}
+      </For>
+    </Tiling>
   );
 }
 
@@ -411,6 +479,25 @@ const Grid = styled("div", {
         height: 0,
       },
     },
+  },
+});
+
+const Tiling = styled("div", {
+  base: {
+    height: 0,
+    flexGrow: 1,
+    display: "flex",
+    flexDirection: "column",
+    gap: "var(--gap-sm)",
+  },
+});
+
+const TilingRow = styled("div", {
+  base: {
+    flex: "1 1 0",
+    minHeight: 0,
+    display: "flex",
+    gap: "var(--gap-sm)",
   },
 });
 

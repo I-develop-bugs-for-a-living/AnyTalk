@@ -140,6 +140,44 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
           <Symbol>screen_share</Symbol>
         </Show>
       </IconButton>
+      <Show when={voice.watching.size}>
+        <IconButton
+          size={props.size}
+          variant={voice.multiStream() ? "filled" : "tonal"}
+          onPress={() => voice.setMultiStream(!voice.multiStream())}
+          use:floating={{
+            tooltip: {
+              placement: "top",
+              content: voice.multiStream()
+                ? t`Multi-stream: opening a stream adds it next to the others`
+                : t`Single stream: opening a stream replaces the current one`,
+            },
+          }}
+        >
+          <Show
+            when={voice.multiStream()}
+            fallback={<Symbol>crop_square</Symbol>}
+          >
+            <Symbol>grid_view</Symbol>
+          </Show>
+        </IconButton>
+        <IconButton
+          size={props.size}
+          variant="tonal"
+          onPress={() => voice.leaveStream()}
+          use:floating={{
+            tooltip: {
+              placement: "top",
+              content:
+                voice.watching.size > 1
+                  ? t`Leave all streams`
+                  : t`Leave stream`,
+            },
+          }}
+        >
+          <Symbol>cancel_presentation</Symbol>
+        </IconButton>
+      </Show>
       <Button
         size={props.size}
         variant="_error"

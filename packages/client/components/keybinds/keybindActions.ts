@@ -60,7 +60,34 @@ export enum KeybindAction {
    * Close the open and ephemeral sidebar
    */
   CLOSE_SIDEBAR = "close_sidebar",
+
+  /**
+   * Mute or unmute the microphone while in a call
+   */
+  VOICE_TOGGLE_MUTE = "voice_toggle_mute",
+
+  /**
+   * Deafen or undeafen while in a call
+   */
+  VOICE_TOGGLE_DEAFEN = "voice_toggle_deafen",
 }
+
+/**
+ * Keybinds the user can turn off and rebind (in voice settings)
+ */
+export const CUSTOMISABLE_ACTIONS: KeybindAction[] = [
+  KeybindAction.VOICE_TOGGLE_MUTE,
+  KeybindAction.VOICE_TOGGLE_DEAFEN,
+];
+
+/**
+ * Keybinds that override what the browser would do with the same keys
+ * (Ctrl+Shift+M / Ctrl+Shift+D are browser shortcuts too)
+ */
+export const PREVENT_DEFAULT_ACTIONS = new Set<KeybindAction>([
+  KeybindAction.VOICE_TOGGLE_MUTE,
+  KeybindAction.VOICE_TOGGLE_DEAFEN,
+]);
 
 /**
  * Priority of actions relative to each other
@@ -82,6 +109,8 @@ export const ACTION_PRIORITY: KeybindAction[] = [
   KeybindAction.NAVIGATION_CHANNEL_DOWN,
 
   // ... all others
+  KeybindAction.VOICE_TOGGLE_MUTE,
+  KeybindAction.VOICE_TOGGLE_DEAFEN,
   KeybindAction.CHAT_FOCUS_COMPOSITION,
 ];
 

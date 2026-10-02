@@ -1,4 +1,5 @@
-import { For, Show, splitProps } from "solid-js";
+import { useNavigate } from "@solidjs/router";
+import { For, Show, createSignal, onCleanup, splitProps } from "solid-js";
 import {
   TrackLoop,
   useEnsureParticipant,
@@ -7,14 +8,15 @@ import {
   useTracks,
 } from "solid-livekit-components";
 
-import { Track } from "livekit-client";
+import { Trans, useLingui } from "@lingui/solid/macro";
+import { ParticipantEvent, Track } from "livekit-client";
 import { Channel, VoiceParticipant } from "stoat.js";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { UserContextMenu } from "@revolt/app";
 import { useUser } from "@revolt/markdown/users";
-import { InRoom } from "@revolt/rtc";
+import { InRoom, useVoice } from "@revolt/rtc";
 
 import { Avatar, Ripple, typography } from "../../design";
 import { Row } from "../../layout";
@@ -32,7 +34,7 @@ export function VoiceChannelPreview(props: { channel: Channel }) {
       channelId={props.channel.id}
       fallback={<VariantPreview channel={props.channel} />}
     >
-      <VariantLive />
+      <VariantLive channel={props.channel} />
     </InRoom>
   );
 }
@@ -40,15 +42,27 @@ export function VoiceChannelPreview(props: { channel: Channel }) {
 /**
  * Use API as the source of truth
  */
-function VariantLive() {
+function VariantLive(props: { channel: Channel }) {
   const tracks = useTracks(
     [{ source: Track.Source.Camera, withPlaceholder: true }],
     { onlySubscribed: false },
   );
 
+  const streams = useTracks(
+    [{ source: Track.Source.ScreenShare, withPlaceholder: false }],
+    { onlySubscribed: false },
+  );
+
+  const isStreaming = (identity: string) =>
+    streams().some((t) => t.participant.identity === identity);
+
   return (
     <Base>
-      <TrackLoop tracks={tracks}>{() => <ParticipantLive />}</TrackLoop>
+      <TrackLoop tracks={tracks}>
+        {() => (
+          <ParticipantLive channel={props.channel} isStreaming={isStreaming} />
+        )}
+      </TrackLoop>
     </Base>
   );
 }
@@ -61,7 +75,12 @@ function VariantPreview(props: { channel: Channel }) {
     <Show when={props.channel.voiceParticipants.size}>
       <Base>
         <For each={[...props.channel.voiceParticipants.values()]}>
-          {(participant) => <ParticipantPreview participant={participant} />}
+          {(participant) => (
+            <ParticipantPreview
+              channel={props.channel}
+              participant={participant}
+            />
+          )}
         </For>
       </Base>
     </Show>
@@ -71,8 +90,13 @@ function VariantPreview(props: { channel: Channel }) {
 /**
  * Live variant of participant
  */
-function ParticipantLive() {
+function ParticipantLive(props: {
+  channel: Channel;
+  isStreaming: (identity: string) => boolean;
+}) {
   const participant = useEnsureParticipant();
+  const voice = useVoice();
+  const navigate = useNavigate();
 
   const isMuted = useIsMuted({
     participant,
@@ -81,14 +105,40 @@ function ParticipantLive() {
 
   const isSpeaking = useIsSpeaking(participant);
 
+  // shared by clients as a participant attribute, see Voice#shareDeafen
+  const [attributes, setAttributes] = createSignal(participant.attributes);
+  const onAttributes = () => setAttributes({ ...participant.attributes });
+  participant.on(ParticipantEvent.AttributesChanged, onAttributes);
+  onCleanup(() =>
+    participant.off(ParticipantEvent.AttributesChanged, onAttributes),
+  );
+
+  const isDeafened = () => {
+    if (participant.isLocal) return voice.deafen();
+    const shared = attributes().deafened;
+    return shared !== undefined
+      ? shared === "true"
+      : props.channel.voiceParticipants
+          .get(participant.identity)
+          ?.isReceiving() === false;
+  };
+
   return (
     <CommonUser
       userId={participant.identity}
       speaking={isSpeaking()}
       muted={isMuted()}
-      deafened={false}
+      deafened={isDeafened()}
       camera={false}
-      screenshare={false}
+      screenshare={props.isStreaming(participant.identity)}
+      onWatch={
+        participant.isLocal
+          ? undefined
+          : () => {
+              navigate(props.channel.path);
+              voice.watchStream(participant.identity);
+            }
+      }
       isLive
     />
   );
@@ -97,7 +147,13 @@ function ParticipantLive() {
 /**
  * Preview variant of participant
  */
-function ParticipantPreview(props: { participant: VoiceParticipant }) {
+function ParticipantPreview(props: {
+  channel: Channel;
+  participant: VoiceParticipant;
+}) {
+  const voice = useVoice();
+  const navigate = useNavigate();
+
   return (
     <CommonUser
       userId={props.participant.userId}
@@ -106,6 +162,12 @@ function ParticipantPreview(props: { participant: VoiceParticipant }) {
       deafened={!props.participant.isReceiving()}
       camera={props.participant.isCamera()}
       screenshare={props.participant.isScreensharing()}
+      onWatch={() => {
+        // join the call first, then open their stream
+        const userId = props.participant.userId;
+        navigate(props.channel.path);
+        voice.connect(props.channel).then(() => voice.watchStream(userId));
+      }}
     />
   );
 }
@@ -120,25 +182,29 @@ function CommonUser(props: {
   deafened: boolean;
   camera: boolean;
   screenshare: boolean;
+  /** Open this user's stream; clicking them does this while they stream */
+  onWatch?: () => void;
   isLive?: boolean;
 }) {
-  const [iconProps, rest] = splitProps(props, [
-    "muted",
-    "deafened",
-    "camera",
-    "screenshare",
-  ]);
+  const [iconProps, rest] = splitProps(props, ["muted", "deafened", "camera"]);
 
   const user = useUser(() => rest.userId);
 
+  const { t } = useLingui();
+  const canWatch = () => rest.screenshare && !!rest.onWatch;
+
   return (
     <div
-      class={previewUser({ speaking: rest.speaking })}
+      class={previewUser({ speaking: rest.speaking, watchable: canWatch() })}
+      onClick={() => canWatch() && rest.onWatch!()}
       use:floating={{
-        userCard: {
-          user: user().user!,
-          member: user().member,
-        },
+        // while streaming, a click opens the stream instead
+        userCard: canWatch()
+          ? undefined
+          : {
+              user: user().user!,
+              member: user().member,
+            },
         contextMenu: () => (
           <UserContextMenu
             user={user().user!}
@@ -151,8 +217,19 @@ function CommonUser(props: {
       <Ripple />
       <Avatar size={24} src={user().avatar} fallback={user().username} />{" "}
       <PreviewUsername>{user().username}</PreviewUsername>
-      <Row gap="sm">
+      <Row gap="sm" align>
         <VoiceStatefulUserIcons {...iconProps} userId={rest.userId} />
+        <Show when={rest.screenshare}>
+          <LiveBadge
+            use:floating={{
+              tooltip: canWatch()
+                ? { placement: "top", content: t`Watch stream` }
+                : undefined,
+            }}
+          >
+            <Trans>LIVE</Trans>
+          </LiveBadge>
+        </Show>
       </Row>
     </div>
   );
@@ -184,6 +261,11 @@ const previewUser = cva({
     borderRadius: "var(--borderRadius-md)",
   },
   variants: {
+    watchable: {
+      true: {
+        cursor: "pointer",
+      },
+    },
     speaking: {
       true: {
         color: "var(--md-sys-color-on-surface)",
@@ -206,5 +288,18 @@ const PreviewUsername = styled("span", {
     overflow: "hidden",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
+  },
+});
+
+const LiveBadge = styled("span", {
+  base: {
+    flexShrink: 0,
+    paddingInline: "5px",
+    borderRadius: "var(--borderRadius-sm)",
+    fontSize: "10px",
+    fontWeight: 700,
+    letterSpacing: "0.04em",
+    background: "var(--md-sys-color-error)",
+    color: "var(--md-sys-color-on-error)",
   },
 });

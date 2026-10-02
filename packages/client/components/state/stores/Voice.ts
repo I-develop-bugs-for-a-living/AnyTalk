@@ -82,6 +82,8 @@ export interface TypeVoice {
   screenShareFrameRate: ScreenShareFrameRate;
   screenShareQualityAsk: boolean;
   screenShareAudio: boolean;
+  /** Watching another stream adds it next to the current one(s) */
+  multiStream: boolean;
 
   inputVolume: number;
   outputVolume: number;
@@ -126,6 +128,7 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       screenShareFrameRate: 30,
       screenShareQualityAsk: true,
       screenShareAudio: true,
+      multiStream: true,
       inputVolume: 1.0,
       outputVolume: 1.0,
       deafen: false,
@@ -202,6 +205,10 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
 
     if (typeof input.screenShareAudio === "boolean") {
       data.screenShareAudio = input.screenShareAudio;
+    }
+
+    if (typeof input.multiStream === "boolean") {
+      data.multiStream = input.multiStream;
     }
 
     if (typeof input.inputVolume === "number") {
@@ -400,6 +407,13 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
   }
 
   /**
+   * Set whether several streams can be watched at once
+   */
+  set multiStream(value: boolean) {
+    this.set("multiStream", value);
+  }
+
+  /**
    * Set input volume
    */
   set inputVolume(value: number) {
@@ -495,6 +509,13 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
    */
   get screenShareAudio(): boolean {
     return this.get().screenShareAudio;
+  }
+
+  /**
+   * Get whether several streams can be watched at once
+   */
+  get multiStream(): boolean {
+    return this.get().multiStream;
   }
 
   /**

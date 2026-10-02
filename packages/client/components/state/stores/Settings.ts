@@ -95,6 +95,44 @@ interface SettingsDefinition {
    * Whether developer mode records stream recaps
    */
   "advanced:developer_record": boolean;
+
+  /**
+   * User changes to keybinds, by keybind action
+   */
+  "keybinds:custom": Record<string, CustomKeybind>;
+}
+
+/**
+ * A user's choice for one keybind
+ */
+export interface CustomKeybind {
+  enabled: boolean;
+  /** Keys to hold together, as tracked by the keybind handler */
+  keys: string[];
+}
+
+/**
+ * Keep only well-formed keybind entries
+ */
+function cleanKeybinds(
+  input: unknown,
+): Record<string, CustomKeybind> | undefined {
+  if (typeof input !== "object" || !input) return;
+
+  const out: Record<string, CustomKeybind> = {};
+  for (const [action, value] of Object.entries(input)) {
+    const { enabled, keys } = (value ?? {}) as Partial<CustomKeybind>;
+    if (
+      typeof enabled === "boolean" &&
+      Array.isArray(keys) &&
+      keys.length &&
+      keys.every((key) => typeof key === "string")
+    ) {
+      out[action] = { enabled, keys };
+    }
+  }
+
+  return out;
 }
 
 /**
@@ -126,6 +164,7 @@ const EXPECTED_TYPES: { [K in keyof SettingsDefinition]: ValueType<K> } = {
   "advanced:developer_mode": "boolean",
   "advanced:developer_overlay": "boolean",
   "advanced:developer_record": "boolean",
+  "keybinds:custom": cleanKeybinds,
 };
 
 /**

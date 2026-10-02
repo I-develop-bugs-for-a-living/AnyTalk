@@ -3,6 +3,7 @@ import {
   batch,
   createContext,
   createEffect,
+  createMemo,
   createSignal,
   JSX,
   Setter,
@@ -14,8 +15,10 @@ import {
   useTracks,
 } from "solid-livekit-components";
 
+import { ReactiveSet } from "@solid-primitives/set";
 import {
   LocalTrackPublication,
+  RemoteTrackPublication,
   Room,
   ScreenShareCaptureOptions,
   ScreenSharePresets,
@@ -43,6 +46,7 @@ import { Device, useDevice } from "@revolt/common";
 import { InRoom } from "./components/InRoom";
 import { RoomAudioManager } from "./components/RoomAudioManager";
 import { StatsRecorder } from "./components/StatsRecorder";
+import { VoiceKeybinds } from "./components/VoiceKeybinds";
 import { VoiceProcessor } from "./VoiceProcessor";
 
 type State =
@@ -128,6 +132,16 @@ class Voice {
   showBar: Accessor<boolean>;
   #setShowBar: Setter<boolean>;
 
+  /**
+   * Participants whose screen share we chose to watch; other streams are
+   * not subscribed to, so they cost no bandwidth until someone opens them
+   */
+  watching = new ReactiveSet<string>();
+
+  /** Participant whose stream should be focused once its tile shows up */
+  pendingFocus: Accessor<string | undefined>;
+  #setPendingFocus: Setter<string | undefined>;
+
   private sound: SoundController;
   private device: Device;
 
@@ -183,6 +197,10 @@ class Voice {
     const [showBar, setShowBar] = createSignal(true);
     this.showBar = showBar;
     this.#setShowBar = setShowBar;
+
+    const [pendingFocus, setPendingFocus] = createSignal<string>();
+    this.pendingFocus = pendingFocus;
+    this.#setPendingFocus = setPendingFocus;
 
     const inst = useInstance();
     this.config = inst.config;
@@ -275,13 +293,29 @@ class Voice {
       },
     });
 
-    this.vidTracks = useTracks(
+    const tracks = useTracks(
       [
         { source: Track.Source.Camera, withPlaceholder: true },
         { source: Track.Source.ScreenShare, withPlaceholder: false },
       ],
       { room, onlySubscribed: false },
     );
+
+    // One tile per person: while someone streams, the stream replaces their
+    // own tile
+    this.vidTracks = createMemo(() => {
+      const all = tracks();
+      const streaming = new Set(
+        all
+          .filter((t) => t.source === Track.Source.ScreenShare)
+          .map((t) => t.participant.identity),
+      );
+      return all.filter(
+        (t) =>
+          t.source === Track.Source.ScreenShare ||
+          !streaming.has(t.participant.identity),
+      );
+    });
 
     batch(() => {
       this.#setRoom(room);
@@ -308,6 +342,7 @@ class Voice {
         }
       }
       this.sound.playSound("userJoinVoice");
+      this.#shareDeafen(room);
     });
 
     room.addListener("disconnected", () => this.#setState("DISCONNECTED"));
@@ -326,29 +361,32 @@ class Voice {
       this.sound.playSound("userJoinVoice");
     });
 
-    room.addListener("participantDisconnected", () => {
+    room.addListener("participantDisconnected", (participant) => {
       this.sound.playSound("userLeaveVoice");
+      this.watching.delete(participant.identity);
     });
 
     room.addListener("trackPublished", (pub) => {
+      // streams aren't watched automatically, so announce them right away
       if (pub.source === Track.Source.ScreenShare) {
-        pub.once("subscribed", (track) => {
-          // Play the sound once playback starts, which might be quite a bit after subscription
-          // as it starts paused for the screen share settings modal.
-          track.once("videoPlaybackStarted", () => {
-            this.sound.playSound("streamStart");
-            if (track.sid) {
-              this.screenShareTracks.add(track.sid);
-            }
-          });
-        });
+        this.sound.playSound("streamStart");
+        this.screenShareTracks.add(pub.trackSid);
       }
     });
 
-    room.addListener("trackUnpublished", (unpub) => {
+    room.addListener("localTrackUnpublished", (unpub) => {
+      if (unpub.source === Track.Source.ScreenShare) {
+        this.watching.delete(room.localParticipant.identity);
+      }
+    });
+
+    room.addListener("trackUnpublished", (unpub, participant) => {
       if (this.screenShareTracks.has(unpub.trackSid)) {
         this.sound.playSound("streamEnd");
         this.screenShareTracks.delete(unpub.trackSid);
+      }
+      if (unpub.source === Track.Source.ScreenShare) {
+        this.watching.delete(participant.identity);
       }
     });
 
@@ -388,11 +426,26 @@ class Voice {
       });
 
       this.screenShareTracks = new Set();
+      this.watching.clear();
+      this.#setPendingFocus();
 
       this.sound.playSound("userLeaveVoice");
     } catch (e) {
       this.onErr(e);
     }
+  }
+
+  /**
+   * Tell the others in the call whether we are deafened; LiveKit itself has
+   * no notion of it since deafening only silences playback on this device
+   */
+  #shareDeafen(room: Room) {
+    room.localParticipant
+      .setAttributes({ deafened: String(this.#settings.deafen) })
+      .catch((err) =>
+        // the server's token may not allow participants to set attributes
+        console.warn("Could not share deafen state", err),
+      );
   }
 
   async toggleDeafen(fromMute?: boolean) {
@@ -405,6 +458,7 @@ class Voice {
       );
 
       this.#settings.deafen = !this.#settings.deafen;
+      this.#shareDeafen(room);
       if (fromMute) {
         this.#settings.micOn = room.localParticipant.isMicrophoneEnabled;
       }
@@ -707,9 +761,144 @@ class Voice {
 
   toggleFocus(t?: TrackReferenceOrPlaceholder) {
     const id = t ? this.trackId(t) : undefined;
-    this.#setFocus(
-      this.focusId() === id || this.vidTracks().length < 2 ? undefined : id,
+    if (this.focusId() === id || this.vidTracks().length < 2) {
+      this.#setFocus(undefined);
+    } else {
+      this.#focus(t!);
+    }
+  }
+
+  /**
+   * Focus a track; a focused stream hides the others until asked for
+   */
+  #focus(t: TrackReferenceOrPlaceholder) {
+    batch(() => {
+      this.#setFocus(this.trackId(t));
+      this.#setShowBar(t.source !== Track.Source.ScreenShare);
+    });
+  }
+
+  /**
+   * Focus a track, unless it is the only one
+   */
+  setFocusTrack(t: TrackReferenceOrPlaceholder) {
+    if (this.vidTracks().length >= 2) this.#focus(t);
+  }
+
+  /**
+   * Open a participant's screen share (our own included). With multi-stream
+   * off it replaces whatever we were watching; either way the people who
+   * aren't streaming get out of the way
+   */
+  watchStream(identity: string) {
+    if (!this.#settings.multiStream) {
+      for (const id of [...this.watching]) {
+        if (id !== identity) this.#stopWatching(id);
+      }
+    }
+
+    batch(() => {
+      this.watching.add(identity);
+      this.#setShowBar(false);
+      this.#setPendingFocus(identity);
+    });
+  }
+
+  multiStream() {
+    return this.#settings.multiStream;
+  }
+
+  /**
+   * Switch between watching several streams at once or one at a time;
+   * going down to one keeps the stream opened last
+   */
+  setMultiStream(value: boolean) {
+    this.#settings.multiStream = value;
+    if (!value && this.watching.size > 1) {
+      const last = [...this.watching].at(-1)!;
+      for (const id of [...this.watching]) {
+        if (id !== last) this.#stopWatching(id);
+      }
+      this.#setPendingFocus(last);
+    }
+  }
+
+  /**
+   * Called once the pending stream has been focused (or can't be)
+   */
+  clearPendingFocus() {
+    this.#setPendingFocus();
+  }
+
+  /**
+   * Whether a track is someone else's stream we haven't opened; those aren't
+   * subscribed to (our own stream is always previewed)
+   */
+  isUnwatchedStream(t: TrackReferenceOrPlaceholder) {
+    return (
+      t.source === Track.Source.ScreenShare &&
+      !t.participant.isLocal &&
+      !this.watching.has(t.participant.identity)
     );
+  }
+
+  /**
+   * Whether a track is a stream that is open in the call window
+   */
+  isWatchedStream(t: TrackReferenceOrPlaceholder) {
+    return (
+      t.source === Track.Source.ScreenShare &&
+      this.watching.has(t.participant.identity)
+    );
+  }
+
+  /**
+   * Streams open in the call window
+   */
+  watchedStreams() {
+    return this.vidTracks().filter((t) => this.isWatchedStream(t));
+  }
+
+  /**
+   * Whether the call window tiles several streams side by side
+   */
+  isMultiStream() {
+    return this.watchedStreams().length >= 2;
+  }
+
+  /**
+   * Stop watching the given participant's stream, or every stream
+   */
+  leaveStream(identity?: string) {
+    for (const id of identity ? [identity] : [...this.watching]) {
+      this.#stopWatching(id);
+    }
+
+    // down to a single stream again: show it on its own
+    if (this.watching.size === 1) {
+      this.#setPendingFocus([...this.watching][0]);
+    }
+  }
+
+  #stopWatching(identity: string) {
+    this.watching.delete(identity);
+
+    const participant = this.room()?.getParticipantByIdentity(identity);
+    for (const source of [
+      Track.Source.ScreenShare,
+      Track.Source.ScreenShareAudio,
+    ]) {
+      const pub = participant?.getTrackPublication(source);
+      if (pub instanceof RemoteTrackPublication) pub.setSubscribed(false);
+    }
+
+    const focused = this.focusTrack();
+    if (
+      focused?.source === Track.Source.ScreenShare &&
+      focused.participant.identity === identity
+    ) {
+      this.#setFocus(undefined);
+    }
   }
 
   isFocus(t: TrackReferenceOrPlaceholder) {
@@ -779,6 +968,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
         <VoiceCallCardContext>{props.children}</VoiceCallCardContext>
         <InRoom>
           <RoomAudioManager />
+          <VoiceKeybinds />
         </InRoom>
         <StatsRecorder />
       </RoomContext.Provider>

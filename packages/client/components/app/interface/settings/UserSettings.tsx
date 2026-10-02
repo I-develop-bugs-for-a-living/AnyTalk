@@ -34,6 +34,7 @@ import { AppearanceMenu } from "./user/appearance";
 import { MyBots, ViewBot } from "./user/bots";
 import { DeveloperSettings } from "./user/Developer";
 import { Feedback } from "./user/Feedback";
+import { HotkeysSettings } from "./user/Hotkeys";
 import { LanguageSettings } from "./user/Language";
 import Native from "./user/Native";
 import Notifications from "./user/notifications/Notifications";
@@ -98,6 +99,8 @@ const Config: SettingsConfiguration<{ server: Server }> = {
         return <Native />;
       case "voice":
         return <VoiceSettings />;
+      case "keybinds":
+        return <HotkeysSettings />;
       case "notifications":
         return <Notifications isDesktop={!!window.native} />;
       default:
@@ -306,11 +309,11 @@ const Config: SettingsConfiguration<{ server: Server }> = {
               icon: <MdNotifications {...iconSize(20)} />,
               title: <Trans>Notifications</Trans>,
             },
-            // {
-            //   id: "keybinds",
-            //   icon: <MdKeybinds {...iconSize(20)} />,
-            //   title: t("app.settings.pages.keybinds.title"),
-            // },
+            {
+              id: "keybinds",
+              icon: <Symbol size={20}>keyboard</Symbol>,
+              title: <Trans>Hotkeys</Trans>,
+            },
             {
               id: "language",
               icon: <MdLanguage {...iconSize(20)} />,

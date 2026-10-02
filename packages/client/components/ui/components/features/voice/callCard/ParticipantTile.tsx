@@ -1,4 +1,4 @@
-import { createSignal, Show } from "solid-js";
+import { createSignal, onCleanup, Show } from "solid-js";
 import {
   TrackReference,
   useEnsureParticipant,
@@ -8,6 +8,7 @@ import {
   VideoTrack,
 } from "solid-livekit-components";
 
+import { Trans, useLingui } from "@lingui/solid/macro";
 import { Track } from "livekit-client";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
@@ -16,7 +17,7 @@ import { UserContextMenu } from "@revolt/app";
 import { useUser } from "@revolt/markdown/users";
 import { useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
-import { Avatar } from "@revolt/ui/components/design";
+import { Avatar, IconButton } from "@revolt/ui/components/design";
 import { Row } from "@revolt/ui/components/layout";
 import { OverflowingText } from "@revolt/ui/components/utils";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
@@ -26,14 +27,37 @@ import { VoiceStatefulUserIcons } from "../VoiceStatefulUserIcons";
 import { StreamVolumeButton } from "./StreamVolumeButton";
 import { TrackStats } from "./TrackStats";
 
+/**
+ * Whether this window is focused and visible
+ */
+function useWindowFocused() {
+  const check = () => document.hasFocus() && !document.hidden;
+  const [focused, setFocused] = createSignal(check());
+  const update = () => setFocused(check());
+
+  window.addEventListener("focus", update);
+  window.addEventListener("blur", update);
+  document.addEventListener("visibilitychange", update);
+  onCleanup(() => {
+    window.removeEventListener("focus", update);
+    window.removeEventListener("blur", update);
+    document.removeEventListener("visibilitychange", update);
+  });
+
+  return focused;
+}
+
 type TileProps = {
   focus?: boolean;
+  /** Fill a cell of the multi-stream view */
+  fill?: boolean;
 };
 
 /**
  * Individual participant tile
  */
 export function ParticipantTile(props: TileProps) {
+  const { t } = useLingui();
   const voice = useVoice();
   const state = useState();
   const participant = useEnsureParticipant();
@@ -63,6 +87,15 @@ export function ParticipantTile(props: TileProps) {
 
   const theater = () => !!props.focus && voice.layout() === "fullscreen";
 
+  // Our own screen share is hidden while we're elsewhere: it saves drawing the
+  // preview and avoids a hall-of-mirrors when sharing this window's screen
+  const windowFocused = useWindowFocused();
+  const hideOwnStream = () =>
+    isScreenShare() && participant.isLocal && !windowFocused();
+
+  // Streams only play once we choose to watch them
+  const unwatched = () => voice.isUnwatchedStream(track);
+
   const getHeight = () => {
     if (!props.focus || theater() || videoDims().height == 0) return {};
     // Calculate the aspect ratio
@@ -78,14 +111,22 @@ export function ParticipantTile(props: TileProps) {
       <div
         class={
           tile({
-            speaking: !isScreenShare() && isSpeaking(),
+            // a stream stands in for its streamer's tile until it's watched
+            speaking: (!isScreenShare() || unwatched()) && isSpeaking(),
             video: isVideo() || isScreenShare(),
             fullscreen: voice.layout() === "fullscreen",
             ...props,
             theater: theater(),
           }) + (isScreenShare() ? " vc_tile group" : " vc_tile")
         }
-        onClick={() => voice.toggleFocus(track)}
+        onClick={() => {
+          if (isScreenShare() && !voice.isWatchedStream(track)) {
+            // open the stream (our own one too, once it's out of view)
+            voice.watchStream(participant.identity);
+          } else if (!props.fill) {
+            voice.toggleFocus(track);
+          }
+        }}
         use:floating={{
           // TODO: Conflicts with focusing, maybe only show if clicking name itself
           //   userCard: {
@@ -116,37 +157,85 @@ export function ParticipantTile(props: TileProps) {
             </AvatarOnly>
           }
         >
-          <VideoTrack
-            style={{
-              "grid-area": "1/1",
-              "object-fit": "contain",
-              width: "100%",
-              height: "100%",
-              overflow: "hidden",
-            }}
-            trackRef={track as TrackReference}
-            manageSubscription={true}
-            ref={videoRef}
-            on:resize={() => {
-              setVideoDims({
-                height: videoRef?.videoHeight || 0,
-                width: videoRef?.videoWidth || 0,
-              });
-            }}
-          />
+          <Show
+            when={!unwatched()}
+            fallback={
+              <StreamInvite>
+                <Avatar
+                  src={user().avatar}
+                  fallback={user().username}
+                  size={48}
+                  interactive={false}
+                />
+                <Row gap="sm" align>
+                  <LiveBadge>
+                    <Trans>LIVE</Trans>
+                  </LiveBadge>
+                  <OverflowingText>{user().username}</OverflowingText>
+                </Row>
+                <WatchButton>
+                  <Symbol size={18}>play_arrow</Symbol>
+                  <Trans>Watch stream</Trans>
+                </WatchButton>
+              </StreamInvite>
+            }
+          >
+            <Show
+              when={!hideOwnStream()}
+              fallback={
+                <OwnStreamHidden>
+                  <Trans>Stream is still running.</Trans>
+                </OwnStreamHidden>
+              }
+            >
+              <VideoTrack
+                style={{
+                  "grid-area": "1/1",
+                  "object-fit": "contain",
+                  width: "100%",
+                  height: "100%",
+                  overflow: "hidden",
+                }}
+                trackRef={track as TrackReference}
+                manageSubscription={true}
+                ref={videoRef}
+                on:resize={() => {
+                  setVideoDims({
+                    height: videoRef?.videoHeight || 0,
+                    width: videoRef?.videoWidth || 0,
+                  });
+                }}
+              />
+            </Show>
+          </Show>
         </Show>
         <Show
           when={
             (isVideo() || isScreenShare()) &&
+            !unwatched() &&
             state.settings.getValue("advanced:developer_mode") &&
             state.settings.getValue("advanced:developer_overlay")
           }
         >
           <TrackStats />
         </Show>
+        <Show when={props.fill}>
+          <CloseStream onClick={(e) => e.stopPropagation()}>
+            <IconButton
+              size="xs"
+              variant="tonal"
+              onPress={() => voice.leaveStream(participant.identity)}
+              use:floating={{
+                tooltip: { placement: "left", content: t`Close stream` },
+              }}
+            >
+              <Symbol>close</Symbol>
+            </IconButton>
+          </CloseStream>
+        </Show>
         {/* In fullscreen the name moves to the floating call controls */}
         <Show when={!theater()}>
-          <Overlay showOnHover={isScreenShare()}>
+          <Overlay showOnHover={isScreenShare() && !unwatched()}>
             <ParticipantInfo />
           </Overlay>
         </Show>
@@ -193,6 +282,13 @@ export function ParticipantInfo(props: {
     <OverlayInner>
       <OverflowingText>{user().username}</OverflowingText>
       <Row gap="md">
+        {/* the stream replaces the streamer's own tile, so keep their mic state */}
+        <Show when={isScreenShare()}>
+          <VoiceStatefulUserIcons
+            userId={participant.identity}
+            muted={isMuted()}
+          />
+        </Show>
         {isScreenShare() && !user().user!.self ? (
           <StreamVolumeButton
             userId={participant.identity}
@@ -253,6 +349,18 @@ export const tile = cva({
       true: {
         width: "auto",
         maxWidth: "none",
+      },
+    },
+    fill: {
+      true: {
+        flex: "1 1 0",
+        minWidth: 0,
+        width: "auto",
+        height: "100%",
+        maxWidth: "none",
+        aspectRatio: "auto",
+        cursor: "default",
+        background: "black",
       },
     },
     video: {
@@ -354,5 +462,74 @@ const OverlayInner = styled("div", {
     _first: {
       flexGrow: 1,
     },
+  },
+});
+
+const OwnStreamHidden = styled("div", {
+  base: {
+    gridArea: "1/1",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "var(--gap-md)",
+    textAlign: "center",
+    background: "#000",
+    color: "#fff",
+  },
+});
+
+const StreamInvite = styled("div", {
+  base: {
+    gridArea: "1/1",
+    minWidth: 0,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "var(--gap-sm)",
+    padding: "var(--gap-md)",
+    // leave room for the name overlay at the bottom
+    paddingBottom: "40px",
+    fontWeight: 600,
+  },
+});
+
+const LiveBadge = styled("span", {
+  base: {
+    flexShrink: 0,
+    paddingInline: "6px",
+    borderRadius: "var(--borderRadius-sm)",
+    fontSize: "11px",
+    fontWeight: 700,
+    letterSpacing: "0.04em",
+    background: "var(--md-sys-color-error)",
+    color: "var(--md-sys-color-on-error)",
+  },
+});
+
+const WatchButton = styled("span", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "var(--gap-xs)",
+    paddingBlock: "var(--gap-xs)",
+    paddingInline: "var(--gap-md)",
+    borderRadius: "var(--borderRadius-full)",
+    fontSize: "13px",
+    background: "var(--md-sys-color-primary)",
+    color: "var(--md-sys-color-on-primary)",
+  },
+});
+
+const CloseStream = styled("div", {
+  base: {
+    gridArea: "1/1",
+    justifySelf: "end",
+    alignSelf: "start",
+    zIndex: 1,
+    padding: "var(--gap-sm)",
+    opacity: 0,
+    transition: "var(--transitions-fast) opacity",
+    _groupHover: { opacity: 1 },
   },
 });

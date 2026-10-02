@@ -29,7 +29,10 @@ export function RoomAudioManager() {
     tracks().filter(
       (track) =>
         !isLocal(track.participant) &&
-        track.publication.kind === Track.Kind.Audio,
+        track.publication.kind === Track.Kind.Audio &&
+        // stream audio only plays while we watch that stream
+        (track.source !== Track.Source.ScreenShareAudio ||
+          voice.watching.has(track.participant.identity)),
     ),
   );
 

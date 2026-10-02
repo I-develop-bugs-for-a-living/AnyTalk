@@ -74,6 +74,19 @@ export function ScreenShareOptions() {
         >
           <Trans>Always Ask for Screen Share Quality</Trans>
         </CategoryButton>
+        <CategoryButton
+          icon={<Symbol>grid_view</Symbol>}
+          action={<Checkbox checked={voice.multiStream} />}
+          onClick={() => voiceContext.setMultiStream(!voice.multiStream)}
+          description={
+            <Trans>
+              Opening another stream while watching one shows them side by side.
+              When off, it replaces the stream you were watching.
+            </Trans>
+          }
+        >
+          <Trans>Watch multiple streams at once</Trans>
+        </CategoryButton>
       </CategoryButton.Group>
     </Column>
   );
