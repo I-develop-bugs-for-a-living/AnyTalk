@@ -85,6 +85,16 @@ interface SettingsDefinition {
    * Whether to show developer tools, such as call statistics
    */
   "advanced:developer_mode": boolean;
+
+  /**
+   * Whether developer mode shows live statistics on call video tiles
+   */
+  "advanced:developer_overlay": boolean;
+
+  /**
+   * Whether developer mode records stream recaps
+   */
+  "advanced:developer_record": boolean;
 }
 
 /**
@@ -114,6 +124,8 @@ const EXPECTED_TYPES: { [K in keyof SettingsDefinition]: ValueType<K> } = {
   "advanced:copy_id": "boolean",
   "advanced:admin_panel": "boolean",
   "advanced:developer_mode": "boolean",
+  "advanced:developer_overlay": "boolean",
+  "advanced:developer_record": "boolean",
 };
 
 /**
@@ -158,6 +170,8 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
       "advanced:copy_id": false,
       "advanced:admin_panel": false,
       "advanced:developer_mode": false,
+      "advanced:developer_overlay": true,
+      "advanced:developer_record": true,
     };
   }
 

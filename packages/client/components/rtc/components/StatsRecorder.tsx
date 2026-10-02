@@ -9,7 +9,8 @@ import { useVoice } from "../state";
 import { STATS_INTERVAL_MS, TrackDescriptor, statsRecorder } from "../stats";
 
 /**
- * Samples call video statistics while developer mode is on
+ * Samples call video statistics while developer mode is on and either the
+ * live overlay or recording is enabled
  */
 export function StatsRecorder() {
   const state = useState();
@@ -70,13 +71,17 @@ export function StatsRecorder() {
     const room = voice.room();
     if (!room || !state.settings.getValue("advanced:developer_mode")) return;
 
+    const overlay = !!state.settings.getValue("advanced:developer_overlay");
+    const record = !!state.settings.getValue("advanced:developer_record");
+    if (!overlay && !record) return;
+
     let busy = false;
     const interval = setInterval(async () => {
       // skip a tick rather than pile up if stats are slow
       if (busy) return;
       busy = true;
       try {
-        await statsRecorder.tick(describeTracks(room));
+        await statsRecorder.tick(describeTracks(room), { record });
       } finally {
         busy = false;
       }

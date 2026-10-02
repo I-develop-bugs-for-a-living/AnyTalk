@@ -16,6 +16,7 @@ import {
   RecapMeta,
   Sample,
   formatBitrate,
+  frozenTimeline,
   recaps,
   recapsRevision,
 } from "@revolt/rtc/stats";
@@ -36,6 +37,11 @@ type Metric = {
   title: string;
   format: (v: number) => string;
   only?: Direction;
+  /** Charted values, if not the raw sample values */
+  values?: (data: Sample[]) => (number | undefined)[];
+  yTicks?: number[];
+  /** Header text instead of the average */
+  summary?: (recap: Recap) => string;
 };
 
 const int = (v: number) => String(Math.round(v * 10) / 10);
@@ -52,7 +58,13 @@ const METRICS: Metric[] = [
     format: formatBitrate,
     only: "sending",
   },
-  { key: "available", title: "Estimated bandwidth", format: formatBitrate },
+  {
+    key: "available",
+    title: "Estimated upload bandwidth",
+    format: formatBitrate,
+    // older recaps of received streams hold a meaningless upload estimate
+    only: "sending",
+  },
   { key: "fps", title: "Frame rate", format: (v) => `${Math.round(v)} fps` },
   { key: "height", title: "Resolution", format: (v) => `${Math.round(v)}p` },
   {
@@ -63,9 +75,13 @@ const METRICS: Metric[] = [
   },
   {
     key: "frozen",
-    title: "Time frozen",
-    format: (v) => `${Math.round(v * 100)}%`,
+    title: "Running or frozen",
+    format: (v) => (v ? "Frozen" : "Running"),
     only: "receiving",
+    values: frozenTimeline,
+    yTicks: [0, 1],
+    summary: (r) =>
+      `${r.summary.freezes} freezes, ${r.summary.frozenSeconds.toFixed(1)} s`,
   },
   { key: "lost", title: "Packets lost per second", format: int },
   {
@@ -157,9 +173,9 @@ function RecapList(props: { onSelect: (id: string) => void }) {
   return (
     <Column gap="lg">
       <Text class="body">
-        While developer mode is on, statistics for every video stream you send
-        or watch in a call are recorded once per second. Recaps are stored on
-        this device only; the newest 50 are kept.
+        While developer mode and "Record stream recaps" are on, statistics for
+        every video stream you send or watch in a call are recorded once per
+        second. Recaps are stored on this device only; the newest 50 are kept.
       </Text>
       <Switch>
         <Match when={list.loading}>
@@ -167,8 +183,8 @@ function RecapList(props: { onSelect: (id: string) => void }) {
         </Match>
         <Match when={!list()?.length}>
           <Text class="label">
-            No recaps yet. Join a call with developer mode on and start or watch
-            a stream.
+            No recaps yet. Turn on "Record stream recaps", then join a call and
+            start or watch a stream.
           </Text>
         </Match>
         <Match when={list()?.length}>
@@ -380,10 +396,13 @@ function RecapView(props: { recap: Recap; onDelete: () => void }) {
             <TimeChart
               title={metric.title}
               times={times()}
-              values={props.recap.data.map(
-                (s) => s[metric.key] as number | undefined,
-              )}
+              values={
+                metric.values?.(props.recap.data) ??
+                props.recap.data.map((s) => s[metric.key] as number | undefined)
+              }
               format={metric.format}
+              yTicks={metric.yTicks}
+              summary={metric.summary?.(props.recap)}
               hover={hover()}
               onHover={setHover}
             />

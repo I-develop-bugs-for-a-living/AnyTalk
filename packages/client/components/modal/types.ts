@@ -24,7 +24,10 @@ import {
 import type { SettingsConfigurations } from "@revolt/app";
 import { CategoryData } from "@revolt/app/menus/CategoryContextMenu";
 import { ServerFolder } from "@revolt/state/stores/ServerFolders";
-import { ScreenShareQualityName } from "@revolt/state/stores/Voice";
+import {
+  ScreenShareFrameRate,
+  ScreenShareResolution,
+} from "@revolt/state/stores/Voice";
 
 import type { ChangelogResponse } from "./modals/Changelog";
 
@@ -331,19 +334,24 @@ export type Modals =
   | {
       type: "screen_share_settings";
       trackReference: TrackReference;
-      qualities: { name: string; fullName: string }[];
+      resolutions: { value: ScreenShareResolution; label: string }[];
       audio: boolean;
-      callback: (qualityName: ScreenShareQualityName, audio: boolean) => void;
+      callback: (
+        resolution: ScreenShareResolution,
+        frameRate: ScreenShareFrameRate,
+        audio: boolean,
+      ) => void;
       onCancel: () => void;
     }
   | {
       type: "screen_share_picker";
       callback: (
         idx: number,
-        qualityName: ScreenShareQualityName,
+        resolution: ScreenShareResolution,
+        frameRate: ScreenShareFrameRate,
         audio: boolean,
       ) => void;
-      qualities: { name: string; fullName: string }[];
+      resolutions: { value: ScreenShareResolution; label: string }[];
       sources: {
         idx: number;
         name: string;

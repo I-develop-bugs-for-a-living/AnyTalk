@@ -1,6 +1,13 @@
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 
-import { Parser, summarise } from "./stats";
+import {
+  Parser,
+  StatsRecorder,
+  TrackDescriptor,
+  frozenTimeline,
+  recaps,
+  summarise,
+} from "./stats";
 
 type Report = RTCStats & Record<string, unknown>;
 
@@ -92,6 +99,24 @@ describe("Parser (receiving)", () => {
     expect(info.transport).toBe("UDP / srflx");
   });
 
+  test("ignores the receiving connection's upload estimate", () => {
+    const [transport, candidatePair, local] = pair(0.04);
+    const { sample } = new Parser().parse(
+      [
+        transport,
+        {
+          ...candidatePair,
+          availableIncomingBitrate: undefined,
+          availableOutgoingBitrate: 1_000_000_000,
+        },
+        local,
+        inbound(1000, { bytesReceived: 100 }),
+      ],
+      0,
+    );
+    expect(sample.available).toBeUndefined();
+  });
+
   test("has no deltas on the first report", () => {
     const { sample } = new Parser().parse(
       [inbound(1000, { bytesReceived: 100, packetsLost: 5 })],
@@ -145,6 +170,45 @@ describe("Parser (sending)", () => {
   });
 });
 
+describe("Parser (bandwidth estimate)", () => {
+  test("uses the upload estimate for a sent track", () => {
+    const [transport, candidatePair, local] = pair(0.04);
+    const { sample } = new Parser().parse(
+      [
+        transport,
+        { ...candidatePair, availableOutgoingBitrate: 6_000_000 },
+        local,
+        {
+          id: "OUT",
+          type: "outbound-rtp",
+          kind: "video",
+          timestamp: 1000,
+          frameWidth: 1920,
+          bytesSent: 0,
+        },
+      ],
+      0,
+    );
+    expect(sample.available).toBe(6_000_000);
+  });
+});
+
+describe("frozenTimeline", () => {
+  test("marks every sample a freeze covered, not just where it ended", () => {
+    expect(
+      frozenTimeline([
+        { t: 0 },
+        { t: 1000, frozen: 0 },
+        { t: 2000, frozen: 0 },
+        { t: 3000, frozen: 0 },
+        { t: 4000, frozen: 2.5 },
+        { t: 5000, frozen: 0 },
+        { t: 6000, frozen: 0.3 },
+      ]),
+    ).toEqual([undefined, 0, 1, 1, 1, 0, 1]);
+  });
+});
+
 describe("summarise", () => {
   test("totals counters and averages rates", () => {
     const summary = summarise(
@@ -173,5 +237,45 @@ describe("summarise", () => {
     expect(summary.maxRtt).toBe(60);
     expect(summary.limitation).toEqual({ cpu: 1 });
     expect(summary.transports).toEqual(["UDP / host"]);
+  });
+});
+
+describe("StatsRecorder", () => {
+  let bytes = 0;
+  const track: TrackDescriptor = {
+    key: "TR_1",
+    direction: "receiving",
+    source: "screen_share",
+    participantId: "user",
+    participantName: "User",
+    getStats: async () => {
+      bytes += 1000;
+      const report = inbound(bytes, { bytesReceived: bytes });
+      return new Map([[report.id, report]]) as unknown as RTCStatsReport;
+    },
+  };
+
+  test("feeds the overlay but saves nothing when not recording", async () => {
+    const save = vi.spyOn(recaps, "save").mockResolvedValue();
+    const recorder = new StatsRecorder();
+
+    for (let i = 0; i < 6; i++) await recorder.tick([track], { record: false });
+
+    expect(recorder.latest()["TR_1"].sample.width).toBe(1920);
+    await recorder.flush();
+    expect(save).not.toHaveBeenCalled();
+    save.mockRestore();
+  });
+
+  test("saves a recap when recording", async () => {
+    const save = vi.spyOn(recaps, "save").mockResolvedValue();
+    const recorder = new StatsRecorder();
+
+    for (let i = 0; i < 6; i++) await recorder.tick([track], { record: true });
+
+    await recorder.flush();
+    expect(save).toHaveBeenCalledOnce();
+    expect(save.mock.calls[0][0].data).toHaveLength(6);
+    save.mockRestore();
   });
 });

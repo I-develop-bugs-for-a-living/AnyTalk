@@ -1,8 +1,14 @@
 import { Trans } from "@lingui/solid/macro";
 
 import { useVoice } from "@revolt/rtc";
+import { SCREEN_SHARE_RESOLUTION_LABELS } from "@revolt/rtc/state";
 import { useState } from "@revolt/state";
-import { ScreenShareQualityName } from "@revolt/state/stores/Voice";
+import {
+  ScreenShareFrameRate,
+  ScreenShareFrameRates,
+  ScreenShareResolution,
+  closestScreenShareResolution,
+} from "@revolt/state/stores/Voice";
 import {
   CategoryButton,
   CategorySelectOption,
@@ -16,7 +22,7 @@ export function ScreenShareOptions() {
   const { voice } = useState();
   const voiceContext = useVoice();
 
-  const qualities = voiceContext.getEnabledScreenShareQualities();
+  const resolutions = voiceContext.getEnabledScreenShareResolutions();
 
   return (
     <Column>
@@ -26,19 +32,38 @@ export function ScreenShareOptions() {
       <CategoryButton.Group>
         <CategoryButton.Select
           icon={<Symbol>screen_share</Symbol>}
-          title={<Trans>Select screen share quality</Trans>}
+          title={<Trans>Screen share resolution</Trans>}
           options={
             Object.fromEntries(
-              Object.keys(qualities).map((name) => [
-                name,
-                {
-                  title: qualities[name as ScreenShareQualityName]!.fullName,
-                },
+              resolutions.map((resolution) => [
+                resolution,
+                { title: SCREEN_SHARE_RESOLUTION_LABELS[resolution] },
               ]),
-            ) as { [key in ScreenShareQualityName]: CategorySelectOption }
+            ) as { [key in ScreenShareResolution]: CategorySelectOption }
           }
-          value={voice.screenShareQuality}
-          onUpdate={(ns) => (voice.screenShareQuality = ns)}
+          value={closestScreenShareResolution(
+            voice.screenShareResolution,
+            resolutions,
+          )}
+          onUpdate={(resolution) => (voice.screenShareResolution = resolution)}
+        />
+        <CategoryButton.Select
+          icon={<Symbol>speed</Symbol>}
+          title={<Trans>Screen share frame rate</Trans>}
+          options={
+            Object.fromEntries(
+              ScreenShareFrameRates.map((frameRate) => [
+                String(frameRate),
+                { title: `${frameRate} FPS` },
+              ]),
+            ) as Record<string, CategorySelectOption>
+          }
+          value={String(voice.screenShareFrameRate)}
+          onUpdate={(frameRate) =>
+            (voice.screenShareFrameRate = Number(
+              frameRate,
+            ) as ScreenShareFrameRate)
+          }
         />
         <CategoryButton
           icon="blank"

@@ -2,7 +2,12 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import { createFormControl, createFormGroup } from "solid-forms";
 
 import { useState } from "@revolt/state";
-import { ScreenShareQualityName } from "@revolt/state/stores/Voice";
+import {
+  ScreenShareFrameRate,
+  ScreenShareFrameRates,
+  ScreenShareResolution,
+  closestScreenShareResolution,
+} from "@revolt/state/stores/Voice";
 import { Avatar, Column, Dialog, DialogProps, Form2, Ripple } from "@revolt/ui";
 
 import { createMemo } from "solid-js";
@@ -16,17 +21,30 @@ export function ScreenSharePickerModal(
   const { t } = useLingui();
 
   const group = createFormGroup({
-    qualityName: createFormControl<ScreenShareQualityName>(
-      voice.screenShareQuality || "low",
+    resolution: createFormControl<ScreenShareResolution>(
+      closestScreenShareResolution(
+        voice.screenShareResolution,
+        props.resolutions.map((r) => r.value),
+      ),
     ),
+    frameRate: createFormControl(String(voice.screenShareFrameRate)),
     audio: createFormControl(voice.screenShareAudio),
     idx: createFormControl([0], { required: true }),
   });
 
   async function onSubmit() {
+    const frameRate = Number(
+      group.controls.frameRate.value,
+    ) as ScreenShareFrameRate;
+
+    // Remember the choice as the default for next time
+    voice.screenShareResolution = group.controls.resolution.value;
+    voice.screenShareFrameRate = frameRate;
+
     props.callback(
       group.controls.idx.value[0],
-      group.controls.qualityName.value,
+      group.controls.resolution.value,
+      frameRate,
       group.controls.audio.value,
     );
     props.onClose();
@@ -83,13 +101,18 @@ export function ScreenSharePickerModal(
             )}
           </Form2.VirtualSelect>
           <Form2.ButtonGroup
-            control={group.controls.qualityName}
-            buttonDefinitions={props.qualities.map((quality) => {
-              return {
-                children: quality.fullName,
-                value: quality.name,
-              };
-            })}
+            control={group.controls.resolution}
+            buttonDefinitions={props.resolutions.map((resolution) => ({
+              children: resolution.label,
+              value: resolution.value,
+            }))}
+          />
+          <Form2.ButtonGroup
+            control={group.controls.frameRate}
+            buttonDefinitions={ScreenShareFrameRates.map((frameRate) => ({
+              children: `${frameRate} FPS`,
+              value: String(frameRate),
+            }))}
           />
           <Form2.Checkbox control={group.controls.audio}>
             <Trans>Share audio</Trans>

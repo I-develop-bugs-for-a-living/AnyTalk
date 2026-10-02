@@ -23,6 +23,7 @@ import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import { VoiceStatefulUserIcons } from "../VoiceStatefulUserIcons";
 
+import { StreamVolumeButton } from "./StreamVolumeButton";
 import { TrackStats } from "./TrackStats";
 
 type TileProps = {
@@ -46,25 +47,10 @@ export function ParticipantTile(props: TileProps) {
     width: number;
   }>({ height: 0, width: 0 });
 
-  const isMuted = useIsMuted({
-    participant,
-    source: Track.Source.Microphone,
-  });
-
-  const isScreenShareAudioMuted = useIsMuted({
-    participant,
-    source: Track.Source.ScreenShareAudio,
-  });
-
   const isRemoteScreenShareMuted = useIsMuted({
     participant,
     source: Track.Source.ScreenShare,
   });
-
-  const isScreenShareAudioUserMuted = () =>
-    !user().user!.self && state.voice.getScreenShareMuted(user().user!.id)
-      ? "by-user"
-      : isScreenShareAudioMuted() || false;
 
   const isVideoMuted = useIsMuted({
     participant,
@@ -152,40 +138,89 @@ export function ParticipantTile(props: TileProps) {
         <Show
           when={
             (isVideo() || isScreenShare()) &&
-            state.settings.getValue("advanced:developer_mode")
+            state.settings.getValue("advanced:developer_mode") &&
+            state.settings.getValue("advanced:developer_overlay")
           }
         >
           <TrackStats />
         </Show>
-        <Overlay showOnHover={isScreenShare()}>
-          <OverlayInner>
-            <OverflowingText>{user().username}</OverflowingText>
-            <Row gap="md">
-              {isScreenShare() ? (
-                <Show when={isScreenShareAudioUserMuted()}>
-                  <Symbol
-                    size={18}
-                    color={
-                      isScreenShareAudioUserMuted() === "by-user"
-                        ? "var(--md-sys-color-error)"
-                        : undefined
-                    }
-                  >
-                    no_sound
-                  </Symbol>
-                </Show>
-              ) : (
-                <VoiceStatefulUserIcons
-                  userId={participant.identity}
-                  muted={isMuted()}
-                  camera={isVideo()}
-                />
-              )}
-            </Row>
-          </OverlayInner>
-        </Overlay>
+        {/* In fullscreen the name moves to the floating call controls */}
+        <Show when={!theater()}>
+          <Overlay showOnHover={isScreenShare()}>
+            <ParticipantInfo />
+          </Overlay>
+        </Show>
       </div>
     </Show>
+  );
+}
+
+/**
+ * Name and audio state of the participant in the current track context
+ */
+export function ParticipantInfo(props: {
+  /** Which edge the stream volume slider lines up with */
+  align?: "start" | "end";
+}) {
+  const state = useState();
+  const participant = useEnsureParticipant();
+  const track = useTrackRefContext();
+  const user = useUser(participant.identity);
+
+  const isMuted = useIsMuted({
+    participant,
+    source: Track.Source.Microphone,
+  });
+
+  const isScreenShareAudioMuted = useIsMuted({
+    participant,
+    source: Track.Source.ScreenShareAudio,
+  });
+
+  const isVideoMuted = useIsMuted({
+    participant,
+    source: Track.Source.Camera,
+  });
+
+  const isScreenShare = () => track.source === Track.Source.ScreenShare;
+
+  const isScreenShareAudioUserMuted = () =>
+    !user().user!.self && state.voice.getScreenShareMuted(user().user!.id)
+      ? "by-user"
+      : isScreenShareAudioMuted() || false;
+
+  return (
+    <OverlayInner>
+      <OverflowingText>{user().username}</OverflowingText>
+      <Row gap="md">
+        {isScreenShare() && !user().user!.self ? (
+          <StreamVolumeButton
+            userId={participant.identity}
+            noAudio={isScreenShareAudioMuted()}
+            align={props.align}
+          />
+        ) : isScreenShare() ? (
+          <Show when={isScreenShareAudioUserMuted()}>
+            <Symbol
+              size={18}
+              color={
+                isScreenShareAudioUserMuted() === "by-user"
+                  ? "var(--md-sys-color-error)"
+                  : undefined
+              }
+            >
+              no_sound
+            </Symbol>
+          </Show>
+        ) : (
+          <VoiceStatefulUserIcons
+            userId={participant.identity}
+            muted={isMuted()}
+            camera={!isVideoMuted()}
+          />
+        )}
+      </Row>
+    </OverlayInner>
   );
 }
 

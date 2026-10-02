@@ -45,6 +45,10 @@ type Props = {
   times: number[];
   values: (number | undefined)[];
   format: (value: number) => string;
+  /** Fixed y axis ticks; the highest one is the top of the chart */
+  yTicks?: number[];
+  /** Header text when nothing is hovered (defaults to the average) */
+  summary?: string;
   /** Sample index under the shared crosshair */
   hover: number | undefined;
   onHover: (index: number | undefined) => void;
@@ -66,9 +70,14 @@ export function TimeChart(props: Props) {
   const duration = () => Math.max(1, props.times.at(-1) ?? 1);
 
   const yMax = createMemo(() =>
-    niceMax(
-      Math.max(0, ...props.values.filter((v): v is number => v !== undefined)),
-    ),
+    props.yTicks
+      ? Math.max(...props.yTicks)
+      : niceMax(
+          Math.max(
+            0,
+            ...props.values.filter((v): v is number => v !== undefined),
+          ),
+        ),
   );
 
   const x = (t: number) => MARGIN.left + (t / duration()) * plotWidth();
@@ -137,7 +146,7 @@ export function TimeChart(props: Props) {
     return ticks;
   });
 
-  const yTicks = () => [0, yMax() / 2, yMax()];
+  const yTicks = () => props.yTicks ?? [0, yMax() / 2, yMax()];
 
   const hovered = () => {
     const i = props.hover;
@@ -182,9 +191,14 @@ export function TimeChart(props: Props) {
           <Show
             when={hovered()}
             fallback={
-              <Show when={average() !== undefined}>
-                <Muted>avg </Muted>
-                {props.format(average()!)}
+              <Show
+                when={props.summary === undefined}
+                fallback={<Muted>{props.summary}</Muted>}
+              >
+                <Show when={average() !== undefined}>
+                  <Muted>avg </Muted>
+                  {props.format(average()!)}
+                </Show>
               </Show>
             }
           >

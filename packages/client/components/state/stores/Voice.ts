@@ -14,30 +14,60 @@ const NoiseSuppresionStates: NoiseSuppresionState[] = [
 ];
 
 /**
- * Possible screen share qualities. Low is 720p@30fps, high 1080p@30fps, high60 1080p@60fps,
- * qhd30/qhd60 1440p@30/60fps, source30 source@30fps and text is source@5fps.
+ * Screen share resolutions. "source" is the native size of the shared screen or window.
  */
-export type ScreenShareQualityName =
-  | "low"
-  | "high"
-  | "high60"
-  | "qhd30"
-  | "qhd60"
-  | "source30"
-  | "text";
+export type ScreenShareResolution = "720p" | "1080p" | "1440p" | "source";
 
 /**
- * Array of available screen share quality names.
+ * Screen share resolutions, smallest first.
  */
-export const ScreenShareQualityNames: ScreenShareQualityName[] = [
-  "low",
-  "high",
-  "high60",
-  "qhd30",
-  "qhd60",
-  "source30",
-  "text",
+export const ScreenShareResolutions: ScreenShareResolution[] = [
+  "720p",
+  "1080p",
+  "1440p",
+  "source",
 ];
+
+/**
+ * The wanted resolution, or the closest smaller one that is allowed
+ */
+export function closestScreenShareResolution(
+  wanted: ScreenShareResolution,
+  allowed: ScreenShareResolution[],
+): ScreenShareResolution {
+  for (let i = ScreenShareResolutions.indexOf(wanted); i >= 0; i--) {
+    if (allowed.includes(ScreenShareResolutions[i])) {
+      return ScreenShareResolutions[i];
+    }
+  }
+  return "720p";
+}
+
+/**
+ * Screen share frame rates.
+ */
+export type ScreenShareFrameRate = 5 | 15 | 30 | 60;
+
+/**
+ * Available screen share frame rates.
+ */
+export const ScreenShareFrameRates: ScreenShareFrameRate[] = [5, 15, 30, 60];
+
+/**
+ * Legacy combined quality names, migrated to resolution + frame rate.
+ */
+const LEGACY_SCREEN_SHARE_QUALITIES: Record<
+  string,
+  [ScreenShareResolution, ScreenShareFrameRate]
+> = {
+  low: ["720p", 30],
+  high: ["1080p", 30],
+  high60: ["1080p", 60],
+  qhd30: ["1440p", 30],
+  qhd60: ["1440p", 60],
+  source30: ["source", 30],
+  text: ["source", 5],
+};
 
 export interface TypeVoice {
   preferredAudioInputDevice?: string;
@@ -48,7 +78,8 @@ export interface TypeVoice {
   noiseSupression: NoiseSuppresionState;
   autoGainControl: boolean;
 
-  screenShareQuality: ScreenShareQualityName;
+  screenShareResolution: ScreenShareResolution;
+  screenShareFrameRate: ScreenShareFrameRate;
   screenShareQualityAsk: boolean;
   screenShareAudio: boolean;
 
@@ -91,7 +122,8 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       echoCancellation: true,
       noiseSupression: "enhanced",
       autoGainControl: true,
-      screenShareQuality: "low",
+      screenShareResolution: "1080p",
+      screenShareFrameRate: 30,
       screenShareQualityAsk: true,
       screenShareAudio: true,
       inputVolume: 1.0,
@@ -143,11 +175,25 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       data.autoGainControl = input.autoGainControl;
     }
 
+    const legacy = (input as { screenShareQuality?: string })
+      .screenShareQuality;
+    if (legacy && LEGACY_SCREEN_SHARE_QUALITIES[legacy]) {
+      [data.screenShareResolution, data.screenShareFrameRate] =
+        LEGACY_SCREEN_SHARE_QUALITIES[legacy];
+    }
+
     if (
-      input.screenShareQuality &&
-      ScreenShareQualityNames.includes(input.screenShareQuality)
+      input.screenShareResolution &&
+      ScreenShareResolutions.includes(input.screenShareResolution)
     ) {
-      data.screenShareQuality = input.screenShareQuality;
+      data.screenShareResolution = input.screenShareResolution;
+    }
+
+    if (
+      input.screenShareFrameRate &&
+      ScreenShareFrameRates.includes(input.screenShareFrameRate)
+    ) {
+      data.screenShareFrameRate = input.screenShareFrameRate;
     }
 
     if (typeof input.screenShareQualityAsk === "boolean") {
@@ -262,7 +308,7 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
    * @returns Volume or default
    */
   getScreenShareVolume(userId: string): number {
-    return this.get().screenShareVolumes[userId] || 1.0;
+    return this.get().screenShareVolumes[userId] ?? 1.0;
   }
 
   /**
@@ -326,10 +372,17 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
   }
 
   /**
-   * Set screen share quality
+   * Set screen share resolution
    */
-  set screenShareQuality(value: ScreenShareQualityName) {
-    this.set("screenShareQuality", value);
+  set screenShareResolution(value: ScreenShareResolution) {
+    this.set("screenShareResolution", value);
+  }
+
+  /**
+   * Set screen share frame rate
+   */
+  set screenShareFrameRate(value: ScreenShareFrameRate) {
+    this.set("screenShareFrameRate", value);
   }
 
   /**
@@ -417,10 +470,17 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
   }
 
   /**
-   * Get screen share quality
+   * Get screen share resolution
    */
-  get screenShareQuality(): ScreenShareQualityName | undefined {
-    return this.get().screenShareQuality;
+  get screenShareResolution(): ScreenShareResolution {
+    return this.get().screenShareResolution;
+  }
+
+  /**
+   * Get screen share frame rate
+   */
+  get screenShareFrameRate(): ScreenShareFrameRate {
+    return this.get().screenShareFrameRate;
   }
 
   /**

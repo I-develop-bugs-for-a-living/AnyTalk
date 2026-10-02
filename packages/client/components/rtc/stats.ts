@@ -36,7 +36,10 @@ export interface Sample {
   /** Bits per second across all active layers */
   bitrate?: number;
   rtt?: number;
-  /** Estimated available bandwidth in bits per second */
+  /**
+   * Estimated available bandwidth in bits per second, in the direction of
+   * the track (upload when sending, download when receiving)
+   */
   available?: number;
   pli?: number;
   nack?: number;
@@ -157,9 +160,6 @@ export class Parser {
     if (pair) {
       const rtt = num(pair.currentRoundTripTime);
       if (rtt !== undefined) sample.rtt = rtt * 1000;
-      sample.available =
-        num(pair.availableOutgoingBitrate) ??
-        num(pair.availableIncomingBitrate);
 
       const local = byId.get(pair.localCandidateId as string);
       if (local) {
@@ -204,6 +204,7 @@ export class Parser {
       const top = outbound.find((r) => num(r.frameWidth));
       sample.bitrate = bitrate;
       sample.activeLayers = active;
+      sample.available = num(pair?.availableOutgoingBitrate);
       sample.pli = sumDelta(outbound, (r) => this.#delta(r, "pliCount"));
       sample.nack = sumDelta(outbound, (r) => this.#delta(r, "nackCount"));
 
@@ -231,6 +232,9 @@ export class Parser {
 
     if (inbound) {
       sample.bitrate = this.#rate(inbound, "bytesReceived");
+      // not availableOutgoingBitrate: the receiving connection sends next to
+      // nothing, so its upload estimate climbs unchecked to the 1 Gbps cap
+      sample.available = num(pair?.availableIncomingBitrate);
       sample.width = num(inbound.frameWidth);
       sample.height = num(inbound.frameHeight);
       sample.fps = num(inbound.framesPerSecond) ?? 0;
@@ -296,9 +300,31 @@ export function layerName(rid: string) {
 }
 
 export function formatBitrate(bps: number) {
-  return bps >= 1_000_000
-    ? `${(bps / 1_000_000).toFixed(2)} Mbps`
-    : `${Math.round(bps / 1000)} kbps`;
+  return bps >= 1_000_000_000
+    ? `${(bps / 1_000_000_000).toFixed(2)} Gbps`
+    : bps >= 1_000_000
+      ? `${(bps / 1_000_000).toFixed(2)} Mbps`
+      : `${Math.round(bps / 1000)} kbps`;
+}
+
+/**
+ * Whether the stream was frozen (1) or running (0) at each sample.
+ *
+ * Browsers only add to totalFreezesDuration once a freeze ends, so the whole
+ * freeze lands in a single sample; spread it back over the samples it covered.
+ */
+export function frozenTimeline(data: Sample[]): (number | undefined)[] {
+  const out: (number | undefined)[] = data.map((s) =>
+    s.frozen === undefined ? undefined : 0,
+  );
+
+  data.forEach((s, i) => {
+    if (!s.frozen) return;
+    const start = s.t - s.frozen * 1000;
+    for (let j = i; j >= 0 && data[j].t > start; j--) out[j] = 1;
+  });
+
+  return out;
 }
 
 /**
@@ -431,8 +457,11 @@ export class StatsRecorder {
 
   /**
    * Sample every given track once
+   *
+   * @param record Keep the samples and save them as stream recaps; otherwise
+   * only the latest sample is kept for the live overlay
    */
-  async tick(tracks: TrackDescriptor[]) {
+  async tick(tracks: TrackDescriptor[], { record }: { record: boolean }) {
     const seen = new Set<string>();
     const latest: Latest = {};
 
@@ -469,13 +498,16 @@ export class StatsRecorder {
           Date.now() - session.meta.startedAt,
         );
 
-        session.data.push(sample);
-        session.infos.push(info);
-        session.info = { ...session.info, ...info, layers: undefined };
         latest[track.key] = { sample, info, direction: track.direction };
 
-        if (session.data.length % CHECKPOINT_EVERY === 0) {
-          await this.#save(session);
+        if (record) {
+          session.data.push(sample);
+          session.infos.push(info);
+          session.info = { ...session.info, ...info, layers: undefined };
+
+          if (session.data.length % CHECKPOINT_EVERY === 0) {
+            await this.#save(session);
+          }
         }
       }),
     );

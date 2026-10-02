@@ -18,7 +18,7 @@ import { IconButton } from "@revolt/ui/components/design";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { scrollableStyles } from "@revolt/ui/directives";
 
-import { ParticipantTile, tile } from "./ParticipantTile";
+import { ParticipantInfo, ParticipantTile, tile } from "./ParticipantTile";
 import { VoiceCallCardActions } from "./VoiceCallCardActions";
 import { VoiceCallCardStatus } from "./VoiceCallCardStatus";
 
@@ -44,11 +44,26 @@ export function VoiceCallCardActiveRoom() {
     idleTimer = setTimeout(() => setIdle(true), THEATER_IDLE_MS);
   }
 
+  /** Hide the controls right away, e.g. when the window loses focus */
+  function sleep() {
+    clearTimeout(idleTimer);
+    setIdle(true);
+  }
+
   createEffect(() => {
     if (theater()) wake();
   });
 
-  onCleanup(() => clearTimeout(idleTimer));
+  onMount(() => {
+    window.addEventListener("blur", sleep);
+    document.documentElement.addEventListener("mouseleave", sleep);
+  });
+
+  onCleanup(() => {
+    clearTimeout(idleTimer);
+    window.removeEventListener("blur", sleep);
+    document.documentElement.removeEventListener("mouseleave", sleep);
+  });
 
   return (
     <View
@@ -56,11 +71,19 @@ export function VoiceCallCardActiveRoom() {
       theater={theater()}
       hideCursor={theater() && idle()}
       onPointerMove={() => theater() && wake()}
+      onPointerLeave={() => theater() && sleep()}
     >
       <Participants theater={theater()} />
       <VoiceCallControls theater={theater()} hidden={theater() && idle()}>
         <VoiceCallControlHolder left collapsed={collapsed()}>
           <VoiceCallCardStatus />
+          <Show when={theater() && voice.focusTrack()}>
+            <FocusedInfo>
+              <TrackLoop tracks={() => [voice.focusTrack()!]}>
+                {() => <ParticipantInfo align="start" />}
+              </TrackLoop>
+            </FocusedInfo>
+          </Show>
         </VoiceCallControlHolder>
         <VoiceCallCardActions size="sm" />
         <VoiceCallControlHolder right collapsed={collapsed()}>
@@ -285,6 +308,7 @@ const VoiceCallControls = styled("div", {
         right: 0,
         bottom: 0,
         zIndex: 1,
+        color: "white",
         background: "linear-gradient(transparent, #000a)",
         transition: "opacity var(--transitions-medium)",
       },
@@ -326,6 +350,14 @@ const VoiceCallControlHolder = styled("div", {
         pointerEvents: "none",
       },
     },
+  },
+});
+
+const FocusedInfo = styled("div", {
+  base: {
+    minWidth: 0,
+    alignSelf: "center",
+    fontWeight: 600,
   },
 });
 
