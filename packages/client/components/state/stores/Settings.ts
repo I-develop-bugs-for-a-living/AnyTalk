@@ -82,7 +82,8 @@ interface SettingsDefinition {
   "advanced:admin_panel": boolean;
 
   /**
-   * Whether to show developer tools, such as call statistics
+   * Whether stream developer tools are on (live video statistics and
+   * stream recaps); named before voice developer tools existed
    */
   "advanced:developer_mode": boolean;
 
@@ -95,6 +96,21 @@ interface SettingsDefinition {
    * Whether developer mode records stream recaps
    */
   "advanced:developer_record": boolean;
+
+  /**
+   * Whether voice call developer tools are on
+   */
+  "advanced:developer_voice": boolean;
+
+  /**
+   * Whether voice developer mode shows live audio statistics on call tiles
+   */
+  "advanced:developer_voice_overlay": boolean;
+
+  /**
+   * Whether voice developer mode records call recaps
+   */
+  "advanced:developer_voice_record": boolean;
 
   /**
    * User changes to keybinds, by keybind action
@@ -164,6 +180,9 @@ const EXPECTED_TYPES: { [K in keyof SettingsDefinition]: ValueType<K> } = {
   "advanced:developer_mode": "boolean",
   "advanced:developer_overlay": "boolean",
   "advanced:developer_record": "boolean",
+  "advanced:developer_voice": "boolean",
+  "advanced:developer_voice_overlay": "boolean",
+  "advanced:developer_voice_record": "boolean",
   "keybinds:custom": cleanKeybinds,
 };
 
@@ -211,6 +230,9 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
       "advanced:developer_mode": false,
       "advanced:developer_overlay": true,
       "advanced:developer_record": true,
+      "advanced:developer_voice": false,
+      "advanced:developer_voice_overlay": true,
+      "advanced:developer_voice_record": true,
     };
   }
 

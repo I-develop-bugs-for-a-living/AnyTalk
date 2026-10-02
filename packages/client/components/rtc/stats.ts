@@ -3,7 +3,8 @@ import { Accessor, Setter, createSignal } from "solid-js";
 import localforage from "localforage";
 
 /**
- * Developer mode: WebRTC statistics for video tracks in a call.
+ * Developer mode: WebRTC statistics for video tracks in a call (voice is in
+ * callStats.ts).
  *
  * Every second the recorder samples each video track, keeps the latest sample
  * for the live overlay and appends it to a session. Sessions are saved to
@@ -12,14 +13,14 @@ import localforage from "localforage";
 
 export const STATS_INTERVAL_MS = 1000;
 
-/** Maximum number of recaps kept on this device */
-const MAX_RECAPS = 50;
+/** Maximum number of recaps of each kind kept on this device */
+const MAX_RECAPS = 20;
 
 /** Sessions shorter than this are not worth keeping */
-const MIN_SAMPLES = 5;
+export const MIN_SAMPLES = 5;
 
 /** Persist in-progress sessions this often, so a crash loses little */
-const CHECKPOINT_EVERY = 30;
+export const CHECKPOINT_EVERY = 30;
 
 export type Direction = "sending" | "receiving";
 
@@ -114,20 +115,53 @@ export interface TrackDescriptor {
   channelName?: string;
   serverName?: string;
   getStats: () => Promise<RTCStatsReport | undefined>;
+  /** LiveKit's view of the participant's connection, if known */
+  connectionQuality?: () => string;
 }
 
-type Report = RTCStats & Record<string, unknown>;
+export type Report = RTCStats & Record<string, unknown>;
 
-const num = (v: unknown) => (typeof v === "number" ? v : undefined);
+export const num = (v: unknown) => (typeof v === "number" ? v : undefined);
 
 /**
- * Turns successive stats reports for one track into samples
+ * Round trip time, bandwidth estimates and transport of the connection a
+ * track's stats report belongs to
  */
-export class Parser {
+export function readConnection(reports: Report[], byId: Map<string, Report>) {
+  const transport = reports.find((r) => r.type === "transport");
+  const pair =
+    byId.get(transport?.selectedCandidatePairId as string) ??
+    reports.find(
+      (r) =>
+        r.type === "candidate-pair" && r.nominated && r.state === "succeeded",
+    );
+  if (!pair) return {};
+
+  const rtt = num(pair.currentRoundTripTime);
+  const local = byId.get(pair.localCandidateId as string);
+
+  return {
+    rtt: rtt !== undefined ? rtt * 1000 : undefined,
+    availableOutgoing: num(pair.availableOutgoingBitrate),
+    availableIncoming: num(pair.availableIncomingBitrate),
+    transport: local
+      ? `${String(local.protocol ?? "?").toUpperCase()} / ${local.candidateType}${
+          local.candidateType === "relay"
+            ? ` (${local.relayProtocol ?? "?"})`
+            : ""
+        }`
+      : undefined,
+  };
+}
+
+/**
+ * Tracks cumulative counters between successive stats reports
+ */
+export class Counters {
   #prev = new Map<string, Report>();
 
   /** Difference of a cumulative counter since the previous report */
-  #delta(report: Report, key: string) {
+  delta(report: Report, key: string) {
     const now = num(report[key]);
     const before = num(this.#prev.get(report.id)?.[key]);
     return now !== undefined && before !== undefined
@@ -135,12 +169,33 @@ export class Parser {
       : undefined;
   }
 
-  #rate(report: Report, key: string) {
+  /** Bits per second of a byte counter since the previous report */
+  rate(report: Report, key: string) {
     const prev = this.#prev.get(report.id);
-    const bytes = this.#delta(report, key);
+    const bytes = this.delta(report, key);
     if (bytes === undefined || !prev || report.timestamp <= prev.timestamp)
       return undefined;
     return (bytes * 8 * 1000) / (report.timestamp - prev.timestamp);
+  }
+
+  /** Remember reports for the next comparison */
+  remember(reports: Report[]) {
+    for (const r of reports) this.#prev.set(r.id, r);
+  }
+}
+
+/**
+ * Turns successive stats reports for one track into samples
+ */
+export class Parser {
+  #counters = new Counters();
+
+  #delta(report: Report, key: string) {
+    return this.#counters.delta(report, key);
+  }
+
+  #rate(report: Report, key: string) {
+    return this.#counters.rate(report, key);
   }
 
   parse(reports: Report[], t: number): { sample: Sample; info: StreamInfo } {
@@ -148,28 +203,9 @@ export class Parser {
     const sample: Sample = { t };
     const info: StreamInfo = {};
 
-    // connection
-    const transport = reports.find((r) => r.type === "transport");
-    const pair =
-      byId.get(transport?.selectedCandidatePairId as string) ??
-      reports.find(
-        (r) =>
-          r.type === "candidate-pair" && r.nominated && r.state === "succeeded",
-      );
-
-    if (pair) {
-      const rtt = num(pair.currentRoundTripTime);
-      if (rtt !== undefined) sample.rtt = rtt * 1000;
-
-      const local = byId.get(pair.localCandidateId as string);
-      if (local) {
-        info.transport = `${String(local.protocol ?? "?").toUpperCase()} / ${local.candidateType}${
-          local.candidateType === "relay"
-            ? ` (${local.relayProtocol ?? "?"})`
-            : ""
-        }`;
-      }
-    }
+    const connection = readConnection(reports, byId);
+    if (connection.rtt !== undefined) sample.rtt = connection.rtt;
+    if (connection.transport) info.transport = connection.transport;
 
     const outbound = reports.filter(
       (r) => r.type === "outbound-rtp" && r.kind === "video",
@@ -204,7 +240,7 @@ export class Parser {
       const top = outbound.find((r) => num(r.frameWidth));
       sample.bitrate = bitrate;
       sample.activeLayers = active;
-      sample.available = num(pair?.availableOutgoingBitrate);
+      sample.available = connection.availableOutgoing;
       sample.pli = sumDelta(outbound, (r) => this.#delta(r, "pliCount"));
       sample.nack = sumDelta(outbound, (r) => this.#delta(r, "nackCount"));
 
@@ -234,7 +270,7 @@ export class Parser {
       sample.bitrate = this.#rate(inbound, "bytesReceived");
       // not availableOutgoingBitrate: the receiving connection sends next to
       // nothing, so its upload estimate climbs unchecked to the 1 Gbps cap
-      sample.available = num(pair?.availableIncomingBitrate);
+      sample.available = connection.availableIncoming;
       sample.width = num(inbound.frameWidth);
       sample.height = num(inbound.frameHeight);
       sample.fps = num(inbound.framesPerSecond) ?? 0;
@@ -262,12 +298,11 @@ export class Parser {
         | undefined;
     }
 
-    for (const r of [...outbound, ...(inbound ? [inbound] : [])]) {
-      this.#prev.set(r.id, r);
-    }
-    for (const r of reports) {
-      if (r.type === "remote-inbound-rtp") this.#prev.set(r.id, r);
-    }
+    this.#counters.remember([
+      ...outbound,
+      ...(inbound ? [inbound] : []),
+      ...reports.filter((r) => r.type === "remote-inbound-rtp"),
+    ]);
 
     return { sample, info };
   }
@@ -373,58 +408,70 @@ export function summarise(data: Sample[], info: StreamInfo[]): RecapSummary {
   };
 }
 
-const storage = localforage.createInstance({
-  name: "anytalk",
-  storeName: "stream_recaps",
-});
+/**
+ * Recaps saved on this device, newest first; only the newest
+ * {@link MAX_RECAPS} are kept. The index holds everything but the samples.
+ */
+export function createRecapStore<
+  Meta extends { id: string },
+  Full extends Meta,
+>(storeName: string, toMeta: (recap: Full) => Meta) {
+  const storage = localforage.createInstance({ name: "anytalk", storeName });
+  const INDEX_KEY = "index";
 
-const INDEX_KEY = "index";
+  /** Bumped whenever the stored recaps change */
+  const [revision, setRevision] = createSignal(0);
+
+  return {
+    revision,
+
+    async list(): Promise<Meta[]> {
+      return (await storage.getItem<Meta[]>(INDEX_KEY)) ?? [];
+    },
+
+    async get(id: string): Promise<Full | null> {
+      return storage.getItem<Full>(`recap:${id}`);
+    },
+
+    async save(recap: Full) {
+      const index = (await this.list()).filter((r) => r.id !== recap.id);
+      index.unshift(toMeta(recap));
+
+      // drop the oldest recaps past the limit
+      for (const old of index.splice(MAX_RECAPS)) {
+        await storage.removeItem(`recap:${old.id}`);
+      }
+
+      await storage.setItem(`recap:${recap.id}`, recap);
+      await storage.setItem(INDEX_KEY, index);
+      setRevision((n) => n + 1);
+    },
+
+    async remove(id: string) {
+      await storage.removeItem(`recap:${id}`);
+      await storage.setItem(
+        INDEX_KEY,
+        (await this.list()).filter((r) => r.id !== id),
+      );
+      setRevision((n) => n + 1);
+    },
+
+    async clear() {
+      await storage.clear();
+      setRevision((n) => n + 1);
+    },
+  };
+}
 
 /**
  * Stream recap storage (local to this device)
  */
-export const recaps = {
-  async list(): Promise<RecapMeta[]> {
-    return (await storage.getItem<RecapMeta[]>(INDEX_KEY)) ?? [];
-  },
+export const recaps = createRecapStore<RecapMeta, Recap>(
+  "stream_recaps",
+  ({ info: _info, data: _data, ...meta }) => meta,
+);
 
-  async get(id: string): Promise<Recap | null> {
-    return storage.getItem<Recap>(`recap:${id}`);
-  },
-
-  async save(recap: Recap) {
-    const { info: _info, data: _data, ...meta } = recap;
-    const index = (await this.list()).filter((r) => r.id !== recap.id);
-    index.unshift(meta);
-
-    // drop the oldest recaps past the limit
-    for (const old of index.splice(MAX_RECAPS)) {
-      await storage.removeItem(`recap:${old.id}`);
-    }
-
-    await storage.setItem(`recap:${recap.id}`, recap);
-    await storage.setItem(INDEX_KEY, index);
-    setRevision((n) => n + 1);
-  },
-
-  async remove(id: string) {
-    await storage.removeItem(`recap:${id}`);
-    await storage.setItem(
-      INDEX_KEY,
-      (await this.list()).filter((r) => r.id !== id),
-    );
-    setRevision((n) => n + 1);
-  },
-
-  async clear() {
-    await storage.clear();
-    setRevision((n) => n + 1);
-  },
-};
-
-/** Bumped whenever the stored recaps change */
-const [revision, setRevision] = createSignal(0);
-export { revision as recapsRevision };
+export const recapsRevision = recaps.revision;
 
 interface Session {
   meta: Omit<RecapMeta, "endedAt" | "samples" | "summary">;

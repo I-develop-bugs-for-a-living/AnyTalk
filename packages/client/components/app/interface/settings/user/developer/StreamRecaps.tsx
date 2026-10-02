@@ -30,6 +30,14 @@ import {
 } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
+import {
+  Charts,
+  InfoGrid,
+  Tile,
+  TileLabel,
+  TileValue,
+  Tiles,
+} from "./RecapParts";
 import { TimeChart, formatDuration } from "./TimeChart";
 
 type Metric = {
@@ -173,9 +181,10 @@ function RecapList(props: { onSelect: (id: string) => void }) {
   return (
     <Column gap="lg">
       <Text class="body">
-        While developer mode and "Record stream recaps" are on, statistics for
-        every video stream you send or watch in a call are recorded once per
-        second. Recaps are stored on this device only; the newest 50 are kept.
+        While stream developer mode and "Record stream recaps" are on,
+        statistics for every video stream you send or watch in a call are
+        recorded once per second. Recaps are stored on this device only; the
+        newest 20 are kept.
       </Text>
       <Switch>
         <Match when={list.loading}>
@@ -477,52 +486,6 @@ function LimitationStrip(props: {
   );
 }
 
-const Tiles = styled("div", {
-  base: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))",
-    gap: "var(--gap-md)",
-  },
-});
-
-const Tile = styled("div", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "var(--gap-xs)",
-    padding: "var(--gap-md)",
-    borderRadius: "var(--borderRadius-lg)",
-    background: "var(--md-sys-color-surface-container)",
-  },
-});
-
-const TileLabel = styled("span", {
-  base: {
-    fontSize: "12px",
-    color: "var(--md-sys-color-on-surface-variant)",
-  },
-});
-
-const TileValue = styled("span", {
-  base: {
-    fontSize: "18px",
-    fontWeight: 600,
-    color: "var(--md-sys-color-on-surface)",
-  },
-});
-
-const InfoGrid = styled("div", {
-  base: {
-    display: "grid",
-    gridTemplateColumns: "auto 1fr",
-    alignItems: "baseline",
-    columnGap: "var(--gap-lg)",
-    rowGap: "var(--gap-xs)",
-    fontSize: "13px",
-    color: "var(--md-sys-color-on-surface)",
-  },
-});
-
 const Strip = styled("div", {
   base: {
     display: "flex",
@@ -547,13 +510,5 @@ const Swatch = styled("span", {
     width: "12px",
     height: "12px",
     borderRadius: "3px",
-  },
-});
-
-const Charts = styled("div", {
-  base: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-    gap: "var(--gap-md)",
   },
 });

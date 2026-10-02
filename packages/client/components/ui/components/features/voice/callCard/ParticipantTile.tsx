@@ -24,6 +24,8 @@ import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import { VoiceStatefulUserIcons } from "../VoiceStatefulUserIcons";
 
+import { AudioStats } from "./AudioStats";
+import { ConnectionQualityIcon } from "./ConnectionQualityIcon";
 import { StreamVolumeButton } from "./StreamVolumeButton";
 import { TrackStats } from "./TrackStats";
 
@@ -219,6 +221,16 @@ export function ParticipantTile(props: TileProps) {
         >
           <TrackStats />
         </Show>
+        {/* the multi-stream view puts its close button where this goes */}
+        <Show
+          when={
+            !props.fill &&
+            state.settings.getValue("advanced:developer_voice") &&
+            state.settings.getValue("advanced:developer_voice_overlay")
+          }
+        >
+          <AudioStats />
+        </Show>
         <Show when={props.fill}>
           <CloseStream onClick={(e) => e.stopPropagation()}>
             <IconButton
@@ -282,6 +294,7 @@ export function ParticipantInfo(props: {
     <OverlayInner>
       <OverflowingText>{user().username}</OverflowingText>
       <Row gap="md">
+        <ConnectionQualityIcon />
         {/* the stream replaces the streamer's own tile, so keep their mic state */}
         <Show when={isScreenShare()}>
           <VoiceStatefulUserIcons

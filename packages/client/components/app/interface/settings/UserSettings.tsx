@@ -32,7 +32,11 @@ import { MyAccount } from "./user/Account";
 import AdvancedSettings from "./user/Advanced";
 import { AppearanceMenu } from "./user/appearance";
 import { MyBots, ViewBot } from "./user/bots";
-import { DeveloperSettings } from "./user/Developer";
+import {
+  DeveloperSettings,
+  StreamStatsSettings,
+  VoiceStatsSettings,
+} from "./user/developer/Developer";
 import { Feedback } from "./user/Feedback";
 import { HotkeysSettings } from "./user/Hotkeys";
 import { LanguageSettings } from "./user/Language";
@@ -49,6 +53,9 @@ const Config: SettingsConfiguration<{ server: Server }> = {
    * @param key
    */
   title(ctx, key) {
+    if (key === "developer/voice") return "Voice Call Stats";
+    if (key === "developer/streams") return "Stream Stats";
+
     if (key.startsWith("bots/")) {
       const user = useUser(key.substring(5));
       return user()!.username;
@@ -83,6 +90,10 @@ const Config: SettingsConfiguration<{ server: Server }> = {
         return <AdvancedSettings />;
       case "developer":
         return <DeveloperSettings />;
+      case "developer/voice":
+        return <VoiceStatsSettings />;
+      case "developer/streams":
+        return <StreamStatsSettings />;
       case "profile":
         return <EditProfile />;
       case "sessions":
