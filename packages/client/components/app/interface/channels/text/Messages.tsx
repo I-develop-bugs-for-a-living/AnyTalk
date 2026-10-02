@@ -746,7 +746,11 @@ export function Messages(props: Props) {
       }
     };
 
-    const arr = messages();
+    // "X started a call" notices are posted by the server whenever a call
+    // starts in a voice channel; they only clutter its chat
+    const arr = messages().filter(
+      (message) => message.systemMessage?.type !== "call_started",
+    );
     arr.forEach((message, index) => {
       const next = arr[index + 1];
       let tail = true;
