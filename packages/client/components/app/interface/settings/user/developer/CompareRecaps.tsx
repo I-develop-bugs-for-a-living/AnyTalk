@@ -19,6 +19,7 @@ import {
   parseRecapCsv,
 } from "@revolt/rtc/recapCsv";
 import { Sample, recaps } from "@revolt/rtc/stats";
+import { unzipFiles } from "@revolt/rtc/zip";
 import { useState } from "@revolt/state";
 import {
   Button,
@@ -171,6 +172,47 @@ export function importRecapCsv(fileName: string, text: string) {
   });
 }
 
+function isZip(file: File) {
+  return /\.zip$/i.test(file.name) || file.type.includes("zip");
+}
+
+/**
+ * Add every recap CSV in a zip, like the ones several recaps export to
+ * @param file Zip file
+ * @returns Error messages
+ */
+async function importRecapZip(file: File) {
+  let entries: Awaited<ReturnType<typeof unzipFiles>>;
+  try {
+    entries = await unzipFiles(new Uint8Array(await file.arrayBuffer()));
+  } catch (err) {
+    return [
+      `${file.name}: can't be read as a zip (${(err as Error).message}).`,
+    ];
+  }
+
+  const decoder = new TextDecoder();
+  const csvs = entries.filter((entry) => {
+    const base = entry.name.split("/").pop() ?? "";
+    // macOS adds hidden copies of every file when zipping
+    return (
+      /\.csv$/i.test(base) &&
+      !base.startsWith("._") &&
+      !entry.name.startsWith("__MACOSX/")
+    );
+  });
+
+  if (!csvs.length) return [`${file.name}: there are no CSV files inside.`];
+
+  return csvs.flatMap((entry) => {
+    const failed = importRecapCsv(
+      entry.name.split("/").pop()!,
+      decoder.decode(entry.data),
+    );
+    return failed ? [failed] : [];
+  });
+}
+
 /**
  * Compare your own recaps with recaps exported by others as CSV
  */
@@ -182,8 +224,11 @@ export function CompareRecaps() {
   async function importFiles(files: FileList | null) {
     const errors: string[] = [];
     for (const file of Array.from(files ?? [])) {
-      const failed = importRecapCsv(file.name, await file.text());
-      if (failed) errors.push(failed);
+      if (isZip(file)) errors.push(...(await importRecapZip(file)));
+      else {
+        const failed = importRecapCsv(file.name, await file.text());
+        if (failed) errors.push(failed);
+      }
     }
     setError(errors);
     if (fileInput) fileInput.value = "";
@@ -205,9 +250,10 @@ export function CompareRecaps() {
     <Column gap="lg" style={palette()}>
       <Text class="body">
         Put your recaps next to recaps from other people. They open a recap in
-        Voice Call Stats or Stream Stats, use Download CSV and send you the
-        file, which you import here. Everything stays on this device, and
-        imports are kept until you close the app.
+        Voice Call Stats or Stream Stats and use Download CSV, or select several
+        recaps and export them as one zip, then send you the file, which you
+        import here. Everything stays on this device, and imports are kept until
+        you close the app.
       </Text>
 
       <Row gap="sm" wrap>
@@ -229,7 +275,7 @@ export function CompareRecaps() {
 
       <Row gap="sm" wrap>
         <Button size="sm" variant="tonal" onPress={() => fileInput?.click()}>
-          <Symbol>upload_file</Symbol> Import CSV
+          <Symbol>upload_file</Symbol> Import CSV or zip
         </Button>
         <Button
           size="sm"
@@ -241,7 +287,7 @@ export function CompareRecaps() {
         <input
           ref={fileInput}
           type="file"
-          accept=".csv,text/csv"
+          accept=".csv,.zip,text/csv,application/zip"
           multiple
           hidden
           onChange={(e) => importFiles(e.currentTarget.files)}

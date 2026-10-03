@@ -113,3 +113,79 @@ export function zipFiles(
   }
   return out;
 }
+
+/**
+ * Read the files of a zip archive, stored or deflated (what zip tools
+ * write by default)
+ * @param zip Zip file bytes
+ * @returns Files with their names and bytes, folders left out
+ * @throws If it isn't a zip archive
+ */
+export async function unzipFiles(
+  zip: Uint8Array,
+): Promise<{ name: string; data: Uint8Array }[]> {
+  const view = new DataView(zip.buffer, zip.byteOffset, zip.byteLength);
+
+  // the end of central directory record sits at the end, before a comment
+  let end = -1;
+  for (
+    let i = zip.length - 22;
+    i >= Math.max(0, zip.length - 22 - 65535);
+    i--
+  ) {
+    if (view.getUint32(i, true) === 0x06054b50) {
+      end = i;
+      break;
+    }
+  }
+  if (end === -1) throw new Error("Not a zip file");
+
+  const count = view.getUint16(end + 10, true);
+  let at = view.getUint32(end + 16, true);
+  const utf8 = new TextDecoder();
+  const latin1 = new TextDecoder("latin1");
+  const files: { name: string; data: Uint8Array }[] = [];
+
+  for (let n = 0; n < count; n++) {
+    if (view.getUint32(at, true) !== 0x02014b50) throw new Error("Broken zip");
+
+    const flags = view.getUint16(at + 8, true);
+    const method = view.getUint16(at + 10, true);
+    const size = view.getUint32(at + 20, true);
+    const nameLength = view.getUint16(at + 28, true);
+    const extraLength = view.getUint16(at + 30, true);
+    const commentLength = view.getUint16(at + 32, true);
+    const offset = view.getUint32(at + 42, true);
+    const name = (flags & 0x0800 ? utf8 : latin1).decode(
+      zip.subarray(at + 46, at + 46 + nameLength),
+    );
+    at += 46 + nameLength + extraLength + commentLength;
+
+    if (name.endsWith("/")) continue;
+    if (flags & 0x0001) throw new Error(`${name} is password protected`);
+
+    // the local header's name and extra field can differ from the central one
+    const start =
+      offset +
+      30 +
+      view.getUint16(offset + 26, true) +
+      view.getUint16(offset + 28, true);
+    const raw = zip.subarray(start, start + size);
+
+    if (method === 0) {
+      files.push({ name, data: raw });
+    } else if (method === 8) {
+      const stream = new Blob([raw as Uint8Array<ArrayBuffer>])
+        .stream()
+        .pipeThrough(new DecompressionStream("deflate-raw"));
+      files.push({
+        name,
+        data: new Uint8Array(await new Response(stream).arrayBuffer()),
+      });
+    } else {
+      throw new Error(`Unsupported compression in ${name}`);
+    }
+  }
+
+  return files;
+}

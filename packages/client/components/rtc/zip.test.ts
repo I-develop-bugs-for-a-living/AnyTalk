@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { crc32, zipFiles } from "./zip";
+import { crc32, unzipFiles, zipFiles } from "./zip";
 
 const bytes = (text: string) => new TextEncoder().encode(text);
 
@@ -35,5 +35,46 @@ describe("zipFiles", () => {
     expect(view.getUint32(centralStart + 16, true)).toBe(
       crc32(bytes("seconds\n1.0")),
     );
+  });
+});
+
+describe("unzipFiles", () => {
+  const text = (data: Uint8Array) => new TextDecoder().decode(data);
+
+  it("reads back what zipFiles wrote", async () => {
+    const files = await unzipFiles(
+      zipFiles([
+        { name: "a.csv", text: "seconds\n1.0" },
+        { name: "ü.csv", text: "x" },
+      ]),
+    );
+    expect(files.map((f) => [f.name, text(f.data)])).toEqual([
+      ["a.csv", "seconds\n1.0"],
+      ["ü.csv", "x"],
+    ]);
+  });
+
+  it("reads deflated zips from other tools and skips folders", async () => {
+    // made by Python's zipfile with ZIP_DEFLATED: a folder and one CSV
+    const zip = Uint8Array.from(
+      atob(
+        "UEsDBBQAAAgIAPUqQ117OOokQgAAALoAAAAYAAAAcmVjYXBzL2NhbGwtcmVjYXAtw6QuY3N2xcvBDYAwCAXQe8fomRi0EzhKBWK4/BLK/nEM3/3FzHLxmChST5PyBdomC7rp8cpZ1voNdNoGdbx0HkzjYuYWP+4PUEsDBBQAAAAIAPUqQ10AAAAAAgAAAAAAAAAHAAAAcmVjYXBzLwMAUEsBAhQDFAAACAgA9SpDXXs46iRCAAAAugAAABgAAAAAAAAAAAAAAIABAAAAAHJlY2Fwcy9jYWxsLXJlY2FwLcOkLmNzdlBLAQIUAxQAAAAIAPUqQ10AAAAAAgAAAAAAAAAHAAAAAAAAAAAAEAD9QXgAAAByZWNhcHMvUEsFBgAAAAACAAIAewAAAJ8AAAAAAA==",
+      ),
+      (c) => c.charCodeAt(0),
+    );
+
+    const files = await unzipFiles(zip);
+    expect(files.map((f) => f.name)).toEqual(["recaps/call-recap-ä.csv"]);
+    expect(text(files[0].data)).toBe(
+      'participant,direction,seconds,bitrate\n"Ann",sending,1.0,32000\n'.repeat(
+        3,
+      ),
+    );
+  });
+
+  it("rejects files that aren't zips", async () => {
+    await expect(
+      unzipFiles(new TextEncoder().encode("seconds\n")),
+    ).rejects.toThrow("Not a zip file");
   });
 });
