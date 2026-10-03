@@ -17,12 +17,14 @@ import {
 
 import { ReactiveSet } from "@solid-primitives/set";
 import {
+  AudioPresets,
   LocalTrackPublication,
   RemoteTrackPublication,
   Room,
   ScreenShareCaptureOptions,
   ScreenSharePresets,
   Track,
+  TrackEvent,
   VideoEncoding,
   VideoPresets,
 } from "livekit-client";
@@ -646,6 +648,13 @@ class Voice {
             // Send only the full-size stream: a half-size simulcast copy makes
             // shared text unreadable for viewers showing the stream small
             simulcast: false,
+            // Stream audio is music and video sound rather than speech: send
+            // it in stereo at a music bitrate, and keep sending it through
+            // silence (DTX nearly stops sending while it's quiet)
+            audioPreset: AudioPresets.musicHighQualityStereo,
+            forceStereo: true,
+            dtx: false,
+            red: false,
           },
         );
 
@@ -654,6 +663,15 @@ class Voice {
         );
 
         this.#setScreenshare(room.localParticipant.isScreenShareEnabled);
+
+        // During quiet parts the browser can report the captured audio as
+        // muted, LiveKit then stops sending it until the capture reports
+        // sound again, which might never happen. Only we pause stream audio.
+        let holdScreenAudio = false;
+        const screenAudio = screenAudioTrack?.track;
+        screenAudio?.on(TrackEvent.UpstreamPaused, () => {
+          if (!holdScreenAudio) screenAudio.resumeUpstream();
+        });
 
         if (localTrack) {
           // This event is only fired if the screen share is ended by closing the window being streamed.
@@ -707,6 +725,7 @@ class Voice {
             );
           } else if (this.#settings.screenShareQualityAsk) {
             localTrack.pauseUpstream();
+            holdScreenAudio = true;
             screenAudioTrack?.pauseUpstream();
             this.openModal({
               onCancel: async () => {
@@ -727,6 +746,7 @@ class Voice {
                 callback(resolution, frameRate, audio);
                 localTrack.resumeUpstream();
                 if (audio) {
+                  holdScreenAudio = false;
                   screenAudioTrack?.resumeUpstream();
                 }
               },
