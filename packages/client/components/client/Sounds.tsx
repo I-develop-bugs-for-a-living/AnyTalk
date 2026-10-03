@@ -1,6 +1,7 @@
 import { createContext, JSXElement, useContext } from "solid-js";
 
 import { SoundName, Sounds, useState } from "@revolt/state";
+
 import deafenSound from "../../public/assets/sounds/deafen.ogg";
 import messageSound from "../../public/assets/sounds/message_sound.ogg";
 import muteSound from "../../public/assets/sounds/mute.ogg";
@@ -16,6 +17,23 @@ import userJoinVoiceSound from "../../public/assets/sounds/user_join_voice.ogg";
 import userLeaveVoiceSound from "../../public/assets/sounds/user_leave_voice.ogg";
 import userMovedSound from "../../public/assets/sounds/user_moved.ogg";
 
+const SOURCES: Record<SoundName, string> = {
+  deafen: deafenSound,
+  message: messageSound,
+  mute: muteSound,
+  ringtoneIncoming: ringtoneIncomingSound,
+  ringtoneOutgoing: ringtoneOutgoingSound,
+  streamEnd: streamEndSound,
+  streamStart: streamStartSound,
+  streamViewerJoin: streamViewerJoinSound,
+  streamViewerLeave: streamViewerLeaveSound,
+  undeafen: undeafenSound,
+  unmute: unmuteSound,
+  userJoinVoice: userJoinVoiceSound,
+  userLeaveVoice: userLeaveVoiceSound,
+  userMoved: userMovedSound,
+};
+
 /**
  * A controller class for making sure sounds are managed in one place and to prevent undesirable sound overlaps
  */
@@ -23,6 +41,9 @@ export class SoundController {
   readonly soundState: Sounds;
 
   node?: HTMLAudioElement;
+
+  /** Repeating sound, see startLoop */
+  loopNode?: HTMLAudioElement;
 
   lastPlayedSound?: SoundName;
 
@@ -76,69 +97,43 @@ export class SoundController {
     if (!force && !this.canPlay(sound)) {
       return false;
     }
-    switch (sound) {
-      case "deafen": {
-        this.node = new Audio(deafenSound);
-        break;
-      }
-      case "message": {
-        this.node = new Audio(messageSound);
-        break;
-      }
-      case "mute": {
-        this.node = new Audio(muteSound);
-        break;
-      }
-      case "ringtoneIncoming": {
-        this.node = new Audio(ringtoneIncomingSound);
-        break;
-      }
-      case "ringtoneOutgoing": {
-        this.node = new Audio(ringtoneOutgoingSound);
-        break;
-      }
-      case "streamEnd": {
-        this.node = new Audio(streamEndSound);
-        break;
-      }
-      case "streamStart": {
-        this.node = new Audio(streamStartSound);
-        break;
-      }
-      case "streamViewerJoin": {
-        this.node = new Audio(streamViewerJoinSound);
-        break;
-      }
-      case "streamViewerLeave": {
-        this.node = new Audio(streamViewerLeaveSound);
-        break;
-      }
-      case "undeafen": {
-        this.node = new Audio(undeafenSound);
-        break;
-      }
-      case "unmute": {
-        this.node = new Audio(unmuteSound);
-        break;
-      }
-      case "userJoinVoice": {
-        this.node = new Audio(userJoinVoiceSound);
-        break;
-      }
-      case "userLeaveVoice": {
-        this.node = new Audio(userLeaveVoiceSound);
-        break;
-      }
-      case "userMoved": {
-        this.node = new Audio(userMovedSound);
-        break;
-      }
-    }
+
+    this.node = new Audio(SOURCES[sound]);
     this.lastPlayedSound = sound;
     this.node.volume = this.soundState.volume;
     // a muted sound isn't worth playing
     if (this.node.volume > 0) this.node.play().catch(() => {});
     return true;
+  }
+
+  /**
+   * Play a sound on repeat, e.g. a ringtone, replacing any other repeating
+   * sound
+   *
+   * @param sound The sound to repeat
+   * @returns Stops it again
+   */
+  startLoop(sound: SoundName): () => void {
+    this.stopLoop();
+    if (!this.canPlay(sound)) return () => {};
+
+    const node = new Audio(SOURCES[sound]);
+    node.loop = true;
+    node.volume = this.soundState.volume;
+    if (node.volume > 0) node.play().catch(() => {});
+    this.loopNode = node;
+
+    return () => {
+      if (this.loopNode === node) this.stopLoop();
+    };
+  }
+
+  /**
+   * Stop the repeating sound, if any
+   */
+  stopLoop() {
+    this.loopNode?.pause();
+    this.loopNode = undefined;
   }
 }
 

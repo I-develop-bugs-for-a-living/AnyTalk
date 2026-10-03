@@ -46,6 +46,7 @@ import {
 import { VoiceCallCardContext } from "@revolt/ui/components/features/voice/callCard/VoiceCallCard";
 
 import { Device, useDevice } from "@revolt/common";
+import { CallSounds } from "./components/CallSounds";
 import { InRoom } from "./components/InRoom";
 import { RoomAudioManager } from "./components/RoomAudioManager";
 import { StatsRecorder } from "./components/StatsRecorder";
@@ -103,8 +104,17 @@ type ScreenShareQuality = Required<
   encoding: VideoEncoding;
 };
 
+/**
+ * How long join and leave sounds wait for a move event of the same person,
+ * so a move only plays the moved sound
+ */
+const MOVE_GRACE_MS = 750;
+
 class Voice {
   #settings: VoiceSettings;
+
+  /** When people last moved into or out of our channel, by user id */
+  #movedAt = new Map<string, number>();
 
   channel: Accessor<Channel | undefined>;
   #setChannel: Setter<Channel | undefined>;
@@ -385,12 +395,12 @@ class Voice {
       }
     });
 
-    room.addListener("participantConnected", () => {
-      this.sound.playSound("userJoinVoice");
+    room.addListener("participantConnected", (participant) => {
+      this.#announce(room, participant.identity, "userJoinVoice");
     });
 
     room.addListener("participantDisconnected", (participant) => {
-      this.sound.playSound("userLeaveVoice");
+      this.#announce(room, participant.identity, "userLeaveVoice");
       this.watching.delete(participant.identity);
     });
 
@@ -434,6 +444,36 @@ class Voice {
     await room.connect(auth.url, auth.token, {
       autoSubscribe: false,
     });
+  }
+
+  /**
+   * Play the join or leave sound for someone, unless they moved between
+   * channels (see noteMove)
+   * @param room Room they joined or left
+   * @param userId User id
+   * @param sound Sound to play
+   */
+  #announce(
+    room: Room,
+    userId: string,
+    sound: "userJoinVoice" | "userLeaveVoice",
+  ) {
+    setTimeout(() => {
+      if (this.room() !== room) return;
+      const moved = this.#movedAt.get(userId);
+      if (moved !== undefined && Date.now() - moved < MOVE_GRACE_MS * 4) return;
+      this.sound.playSound(sound);
+    }, MOVE_GRACE_MS);
+  }
+
+  /**
+   * Someone moved into or out of our channel: play the moved sound instead
+   * of them joining or leaving
+   * @param userId User id
+   */
+  noteMove(userId: string) {
+    this.#movedAt.set(userId, Date.now());
+    this.sound.playSound("userMoved");
   }
 
   /**
@@ -1065,6 +1105,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
           <VoiceKeybinds />
         </InRoom>
         <StatsRecorder />
+        <CallSounds />
       </RoomContext.Provider>
     </voiceContext.Provider>
   );
