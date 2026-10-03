@@ -1,10 +1,6 @@
 import { ComponentProps, JSX, createEffect, createSignal, on } from "solid-js";
 
-import "katex/dist/katex.min.css";
-import { all } from "lowlight";
 import { html } from "property-information";
-import rehypeHighlight from "rehype-highlight";
-import rehypeKatex from "rehype-katex";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
@@ -15,6 +11,13 @@ import { VFile } from "vfile";
 
 import * as elements from "./elements";
 import { injectEmojiSize } from "./emoji/util";
+import {
+  MarkdownExtras,
+  loadHighlight,
+  loadKatex,
+  markdownExtras,
+  neededExtras,
+} from "./extras";
 import { RenderCodeblock } from "./plugins/Codeblock";
 import { RenderAnchor } from "./plugins/anchors";
 import { remarkChannels } from "./plugins/channels";
@@ -244,32 +247,57 @@ const HTML_UNIFIED_PLUGINS = [
   remarkHtmlToText,
 ];
 
-const htmlPipeline = HTML_UNIFIED_PLUGINS.reduce(
-  (pipeline, plugin) => pipeline.use(plugin) as never,
-  unifiedPipeline,
-)
-  // @ts-expect-error non-standard elements not recognised by typing
-  .use(remarkRehype, {
-    handlers: {
-      unicodeEmoji: unicodeEmojiHandler,
-      customEmoji: customEmojiHandler,
-      mention: mentionHandler,
-      timestamp: timestampHandler,
-      spoiler: spoilerHandler,
-    },
-  })
-  .use(remarkInsertBreaks)
-  .use(rehypeKatex, {
-    maxSize: 10,
-    maxExpand: 2,
-    trust: false,
-    strict: false,
-    output: "html",
-    errorColor: "var(--md-sys-color-error)",
-  })
-  .use(rehypeHighlight, {
-    languages: all,
-  });
+/**
+ * Message pipeline with whichever of maths and code highlighting are
+ * loaded (see ./extras)
+ * @param extras Loaded plugins
+ * @returns Pipeline
+ */
+function createHtmlPipeline(extras: MarkdownExtras) {
+  const pipeline = HTML_UNIFIED_PLUGINS.reduce(
+    (pipeline, plugin) => pipeline.use(plugin) as never,
+    unified()
+      .use(remarkParse)
+      .use(remarkBreaks)
+      .use(remarkGfm)
+      .use(remarkMath, {
+        singleDollarTextMath: false,
+      }),
+  )
+    // @ts-expect-error non-standard elements not recognised by typing
+    .use(remarkRehype, {
+      handlers: {
+        unicodeEmoji: unicodeEmojiHandler,
+        customEmoji: customEmojiHandler,
+        mention: mentionHandler,
+        timestamp: timestampHandler,
+        spoiler: spoilerHandler,
+      },
+    })
+    .use(remarkInsertBreaks);
+
+  // maths first, so its code elements aren't highlighted as code
+  if (extras.katex) pipeline.use([extras.katex]);
+  if (extras.highlight) pipeline.use([extras.highlight]);
+  return pipeline;
+}
+
+const htmlPipelines = new Map<string, ReturnType<typeof createHtmlPipeline>>();
+
+/**
+ * Pipeline for the plugins loaded so far, built once per combination
+ * @param extras Loaded plugins
+ * @returns Pipeline
+ */
+function htmlPipelineFor(extras: MarkdownExtras) {
+  const key = `${!!extras.katex}${!!extras.highlight}`;
+  let pipeline = htmlPipelines.get(key);
+  if (!pipeline) {
+    pipeline = createHtmlPipeline(extras);
+    htmlPipelines.set(key, pipeline);
+  }
+  return pipeline;
+}
 
 const replyPipeline = unified()
   .use(remarkParse)
@@ -366,7 +394,18 @@ export function Markdown(props: MarkdownProps) {
     const file = new VFile();
     file.value = sanitise(content);
 
-    const hastNode = htmlPipeline.runSync(htmlPipeline.parse(file), file);
+    // every pipeline parses alike, the plugins only differ afterwards
+    const extras = markdownExtras();
+    const pipeline = htmlPipelineFor(extras);
+    const tree = pipeline.parse(file);
+
+    const needs = neededExtras(tree as never);
+    if (needs.katex) loadKatex();
+    if (needs.highlight) loadHighlight();
+    waiting =
+      (needs.katex && !extras.katex) || (needs.highlight && !extras.highlight);
+
+    const hastNode = pipeline.runSync(tree, file);
 
     if (hastNode.type !== "root") {
       throw new TypeError("Expected a `root` node");
@@ -388,9 +427,23 @@ export function Markdown(props: MarkdownProps) {
     );
   }
 
+  /** Whether maths or code highlighting is still downloading */
+  let waiting = false;
+
   // Render once immediately
   // eslint-disable-next-line solid/reactivity
   const [children, setChildren] = createSignal(render(props.content));
+
+  // Render again once the maths or code highlighting it needs arrived
+  createEffect(
+    on(
+      markdownExtras,
+      () => {
+        if (waiting) setChildren(render(props.content));
+      },
+      { defer: true },
+    ),
+  );
 
   // If it ever updates, re-render the whole tree:
   createEffect(

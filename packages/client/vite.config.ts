@@ -90,10 +90,9 @@ export default defineConfig({
       external: ["hast"],
       output: {
         manualChunks: {
+          // code highlighting and maths aren't listed: they're downloaded
+          // once a message needs them, see components/markdown/extras.ts
           markdown: [
-            "lowlight",
-            "rehype-highlight",
-            "rehype-katex",
             "remark-breaks",
             "remark-gfm",
             "remark-math",
