@@ -21,6 +21,7 @@ import {
   removeCustomSound,
   saveCustomSound,
 } from "./customSounds";
+import { SoundEngine } from "./soundEngine";
 
 const SOURCES: Record<SoundName, string> = {
   deafen: deafenSound,
@@ -47,8 +48,11 @@ export class SoundController {
 
   node?: HTMLAudioElement;
 
-  /** Repeating sound, see startLoop */
-  loopNode?: HTMLAudioElement;
+  /** Stops the repeating sound, see startLoop */
+  #stopLoop?: () => void;
+
+  /** Plays sounds where <audio> elements may not, see SoundEngine */
+  #engine = new SoundEngine();
 
   lastPlayedSound?: SoundName;
 
@@ -67,7 +71,37 @@ export class SoundController {
         for (const [name, file] of files)
           this.#customUrls.set(name, URL.createObjectURL(file));
       })
-      .catch((err) => console.error("[sounds] could not load own sounds", err));
+      .catch((err) => console.error("[sounds] could not load own sounds", err))
+      .finally(() =>
+        this.#engine.preload(
+          (Object.keys(SOURCES) as SoundName[]).map((name) =>
+            this.#source(name),
+          ),
+        ),
+      );
+  }
+
+  /**
+   * Play a sound file, through the sound engine where possible and an
+   * <audio> element otherwise
+   * @returns Stops it
+   */
+  #play(sound: SoundName, loop: boolean): () => void {
+    const url = this.#source(sound);
+    const volume = this.#volume(sound);
+
+    const element = () => {
+      const node = new Audio(url);
+      node.loop = loop;
+      node.volume = volume;
+      node.play().catch(() => {});
+      if (!loop) this.node = node;
+      return () => node.pause();
+    };
+
+    // a muted sound isn't worth playing
+    if (volume <= 0) return () => {};
+    return this.#engine.play(url, volume, loop, element) ?? element();
   }
 
   /**
@@ -98,7 +132,10 @@ export class SoundController {
     else await removeCustomSound(sound);
 
     const old = this.#customUrls.get(sound);
-    if (old) URL.revokeObjectURL(old);
+    if (old) {
+      this.#engine.forget(old);
+      URL.revokeObjectURL(old);
+    }
     this.#customUrls.delete(sound);
     if (file) this.#customUrls.set(sound, URL.createObjectURL(file));
 
@@ -148,11 +185,8 @@ export class SoundController {
       return false;
     }
 
-    this.node = new Audio(this.#source(sound));
     this.lastPlayedSound = sound;
-    this.node.volume = this.#volume(sound);
-    // a muted sound isn't worth playing
-    if (this.node.volume > 0) this.node.play().catch(() => {});
+    this.#play(sound, false);
     return true;
   }
 
@@ -167,14 +201,11 @@ export class SoundController {
     this.stopLoop();
     if (!this.canPlay(sound)) return () => {};
 
-    const node = new Audio(this.#source(sound));
-    node.loop = true;
-    node.volume = this.#volume(sound);
-    if (node.volume > 0) node.play().catch(() => {});
-    this.loopNode = node;
+    const stop = this.#play(sound, true);
+    this.#stopLoop = stop;
 
     return () => {
-      if (this.loopNode === node) this.stopLoop();
+      if (this.#stopLoop === stop) this.stopLoop();
     };
   }
 
@@ -182,8 +213,8 @@ export class SoundController {
    * Stop the repeating sound, if any
    */
   stopLoop() {
-    this.loopNode?.pause();
-    this.loopNode = undefined;
+    this.#stopLoop?.();
+    this.#stopLoop = undefined;
   }
 }
 

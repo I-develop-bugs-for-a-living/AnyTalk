@@ -11,6 +11,10 @@ import { useVoice } from "../state";
 /** Stop ringing after this long */
 const RING_TIMEOUT_MS = 30_000;
 
+/** Vibration while ringing (Android): buzz, pause, buzz, then a break */
+const RING_VIBRATION = [400, 200, 400];
+const RING_VIBRATION_EVERY_MS = 2400;
+
 /** Data message topic for telling a streamer we're watching them */
 const WATCH_TOPIC = "anytalk:watching";
 
@@ -32,6 +36,26 @@ export function CallSounds() {
   let stopIncoming: (() => void) | undefined;
   let ringingChannel: string | undefined;
   let incomingTimer: ReturnType<typeof setTimeout> | undefined;
+
+  /**
+   * Play the incoming ringtone, and vibrate along on phones that can
+   * @returns Stops both
+   */
+  function ring() {
+    const stopSound = sound.startLoop("ringtoneIncoming");
+    if (!sound.canPlay("ringtoneIncoming") || !("vibrate" in navigator))
+      return stopSound;
+
+    const vibrate = () => navigator.vibrate(RING_VIBRATION);
+    vibrate();
+    const timer = setInterval(vibrate, RING_VIBRATION_EVERY_MS);
+
+    return () => {
+      stopSound();
+      clearInterval(timer);
+      navigator.vibrate(0);
+    };
+  }
 
   function stopRinging() {
     clearTimeout(incomingTimer);
@@ -81,7 +105,7 @@ export function CallSounds() {
         if (startedCall) {
           stopRinging();
           ringingChannel = channel.id;
-          stopIncoming = sound.startLoop("ringtoneIncoming");
+          stopIncoming = ring();
           incomingTimer = setTimeout(stopRinging, RING_TIMEOUT_MS);
         }
       });
