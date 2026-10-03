@@ -1,6 +1,6 @@
 import { createContext, JSXElement, useContext } from "solid-js";
 
-import { Sounds, TypeSounds, useState } from "@revolt/state";
+import { SoundName, Sounds, useState } from "@revolt/state";
 import deafenSound from "../../public/assets/sounds/deafen.ogg";
 import messageSound from "../../public/assets/sounds/message_sound.ogg";
 import muteSound from "../../public/assets/sounds/mute.ogg";
@@ -24,7 +24,7 @@ export class SoundController {
 
   node?: HTMLAudioElement;
 
-  lastPlayedSound?: keyof TypeSounds;
+  lastPlayedSound?: SoundName;
 
   constructor(soundState: Sounds) {
     this.soundState = soundState;
@@ -49,7 +49,7 @@ export class SoundController {
    * @param newSound Sound to check for playability
    * @returns Whether the sound passed is playable currently
    */
-  canPlay(newSound: keyof TypeSounds): boolean {
+  canPlay(newSound: SoundName): boolean {
     // Never let a sound turned off play
     if (!this.soundState.enabled(newSound)) {
       return false;
@@ -72,7 +72,7 @@ export class SoundController {
    * @param force Bypass canPlay check
    * @returns Whether the sound played
    */
-  playSound(sound: keyof TypeSounds, force?: boolean): boolean {
+  playSound(sound: SoundName, force?: boolean): boolean {
     if (!force && !this.canPlay(sound)) {
       return false;
     }
@@ -135,7 +135,9 @@ export class SoundController {
       }
     }
     this.lastPlayedSound = sound;
-    this.node.play();
+    this.node.volume = this.soundState.volume;
+    // a muted sound isn't worth playing
+    if (this.node.volume > 0) this.node.play().catch(() => {});
     return true;
   }
 }

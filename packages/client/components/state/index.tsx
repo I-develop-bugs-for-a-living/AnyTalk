@@ -38,7 +38,7 @@ import { Voice } from "./stores/Voice";
 export { ALLOWED_IMAGE_TYPES } from "./stores/Draft";
 export type { ResolvedEntry } from "./stores/Ordering";
 export type { ServerFolder } from "./stores/ServerFolders";
-export type { Sounds, TypeSounds } from "./stores/Sounds";
+export type { SoundName, Sounds, TypeSounds } from "./stores/Sounds";
 export { SyncWorker } from "./SyncWorker";
 
 /**

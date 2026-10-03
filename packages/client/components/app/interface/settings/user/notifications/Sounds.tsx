@@ -9,6 +9,7 @@ import {
   Checkbox,
   Column,
   IconButton,
+  Slider,
   Text,
   iconSize,
 } from "@revolt/ui";
@@ -28,6 +29,34 @@ export default function Sounds() {
         <Text class="title">
           <Trans>Sounds</Trans>
         </Text>
+        <Text class="label">
+          <Trans>Sound volume</Trans>
+        </Text>
+        <Content>
+          <SliderWrapper>
+            <Slider
+              min={0}
+              max={1}
+              step={0.05}
+              value={sounds.volume}
+              onInput={(event) => (sounds.volume = event.currentTarget.value)}
+              // preview the new volume once the slider is let go
+              onChange={() => soundController.playSound("userJoinVoice", true)}
+              labelFormatter={(label) => (label * 100).toFixed(0) + "%"}
+            />
+          </SliderWrapper>
+          <IconButton
+            onPress={() => soundController.playSound("userJoinVoice", true)}
+            use:floating={{
+              tooltip: {
+                placement: "top",
+                content: playSoundString,
+              },
+            }}
+          >
+            <MdVolumeUp {...iconSize(18)} />
+          </IconButton>
+        </Content>
         <CategoryButton.Group>
           <CategoryButton
             action={<Checkbox checked={sounds.enabled("message")} />}
@@ -226,6 +255,13 @@ export default function Sounds() {
     </Show>
   );
 }
+
+const SliderWrapper = styled("div", {
+  base: {
+    flexGrow: 1,
+    minWidth: 0,
+  },
+});
 
 /**
  * Sound content wrapper

@@ -72,7 +72,15 @@ export type TypeSounds = {
    * Play a sound when a user moves channels
    */
   userMoved: boolean;
+
+  /**
+   * Volume of all sounds, 0 to 1
+   */
+  volume: number;
 };
+
+/** Sounds that can be played and turned on or off */
+export type SoundName = Exclude<keyof TypeSounds, "volume">;
 
 export class Sounds extends AbstractStore<"sounds", TypeSounds> {
   constructor(state: State) {
@@ -97,6 +105,7 @@ export class Sounds extends AbstractStore<"sounds", TypeSounds> {
       userJoinVoice: true,
       userLeaveVoice: true,
       userMoved: true,
+      volume: 1,
     };
   }
 
@@ -131,14 +140,29 @@ export class Sounds extends AbstractStore<"sounds", TypeSounds> {
       userLeaveVoice:
         typeof input.userLeaveVoice === "boolean" ? input.userLeaveVoice : true,
       userMoved: typeof input.userMoved === "boolean" ? input.userMoved : true,
+      volume:
+        typeof input.volume === "number" && Number.isFinite(input.volume)
+          ? Math.min(1, Math.max(0, input.volume))
+          : 1,
     };
   }
 
-  enabled(t: keyof TypeSounds): boolean {
+  enabled(t: SoundName): boolean {
     return this.get()[t];
   }
 
-  toggle(t: keyof TypeSounds) {
+  toggle(t: SoundName) {
     return this.set(t, !this.enabled(t));
+  }
+
+  /**
+   * Volume of all sounds, 0 to 1
+   */
+  get volume(): number {
+    return this.get().volume;
+  }
+
+  set volume(value: number) {
+    this.set("volume", Math.min(1, Math.max(0, Number(value) || 0)));
   }
 }
