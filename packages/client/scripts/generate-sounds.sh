@@ -2,7 +2,7 @@
 # Generates the app sounds in scripts/assets_fallback/sounds with ffmpeg:
 # soft sine tones (with a quiet octave on top) that fade in quickly and
 # decay, so they never click. Matching sounds use the same notes in
-# opposite directions. The message sound isn't generated.
+# opposite directions.
 #
 # Usage: scripts/generate-sounds.sh [output directory]
 set -euo pipefail
@@ -11,12 +11,17 @@ OUT="${1:-$(dirname "$0")/assets_fallback/sounds}"
 
 # Note frequencies (Hz)
 A3=220.00 D4=293.66 E4=329.63 A4=440.00 C5=523.25 D5=587.33 E5=659.25
-G5=783.99 GS5=830.61 A5=880.00 B5=987.77 E6=1318.51
+G5=783.99 GS5=830.61 A5=880.00 B5=987.77 E6=1318.51 G6=1567.98
 
 # note FREQ START [DECAY]: a plucked note starting at START seconds
 note() {
   local decay="${3:-9}"
   echo "if(gte(t,$2),(sin(2*PI*$1*(t-$2))+0.25*sin(4*PI*$1*(t-$2)))*min(1,(t-$2)/0.006)*exp(-(t-$2)*$decay),0)"
+}
+
+# bell FREQ START DECAY: a glassy note, its inharmonic partials fade first
+bell() {
+  echo "if(gte(t,$2),(sin(2*PI*$1*(t-$2))+0.35*sin(2*PI*$1*2.76*(t-$2))*exp(-(t-$2)*8)+0.15*sin(2*PI*$1*5.4*(t-$2))*exp(-(t-$2)*16))*min(1,(t-$2)/0.003)*exp(-(t-$2)*$3),0)"
 }
 
 # tone FREQ START END: a held note, faded in and out over 30 ms
@@ -34,6 +39,9 @@ render() {
     -ac 1 -c:a libvorbis -q:a 6 "$OUT/$1.ogg"
   echo "$1.ogg"
 }
+
+# a new message: a single high bell
+render message_sound 0.6 -19 "$(bell $G6 0 7)"
 
 # someone joins / leaves the call: two notes stepping up / down
 render user_join_voice 0.55 -14 "0.5*($(note $E5 0)+$(note $A5 0.11))"
