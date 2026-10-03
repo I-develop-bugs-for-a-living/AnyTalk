@@ -17,23 +17,19 @@ import {
   callRecaps,
 } from "@revolt/rtc/callStats";
 import { Direction, formatBitrate } from "@revolt/rtc/stats";
-import {
-  Button,
-  CategoryButton,
-  CircularProgress,
-  Column,
-  Row,
-  Text,
-} from "@revolt/ui";
+import { Button, CircularProgress, Column, Row, Text } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import {
   Charts,
   InfoGrid,
+  RecapCsv,
+  RecapList as SelectableRecapList,
   Tile,
   TileLabel,
   TileValue,
   Tiles,
+  downloadRecapCsvs,
 } from "./RecapParts";
 import { TimeChart, formatDuration } from "./TimeChart";
 
@@ -107,6 +103,38 @@ export function callContext(meta: CallRecapMeta) {
 }
 
 /**
+ * A call recap as CSV, one row per microphone and second
+ * @param recap Recap
+ * @returns File name and contents
+ */
+export function callRecapCsv(recap: CallRecap): RecapCsv {
+  const keys = CALL_METRICS.map((m) => m.key).filter((k) =>
+    recap.series.some((s) => s.data.some((d) => d[k] !== undefined)),
+  );
+
+  const rows = [
+    ["participant", "direction", "seconds", ...keys].join(","),
+    ...recap.series.flatMap((s) =>
+      s.data.map((d) =>
+        [
+          JSON.stringify(s.participantName),
+          s.direction,
+          (d.t / 1000).toFixed(1),
+          ...keys.map((k) => d[k] ?? ""),
+        ].join(","),
+      ),
+    ),
+  ];
+
+  return {
+    name: `call-recap-${new Date(recap.startedAt)
+      .toISOString()
+      .replace(/[:.]/g, "-")}.csv`,
+    text: rows.join("\n"),
+  };
+}
+
+/**
  * Voice call recaps (voice developer mode)
  */
 export function CallRecaps() {
@@ -126,6 +154,14 @@ export function CallRecaps() {
 function RecapList(props: { onSelect: (id: string) => void }) {
   const [list] = createResource(callRecaps.revision, () => callRecaps.list());
 
+  async function exportRecaps(ids: string[]) {
+    const found = await Promise.all(ids.map((id) => callRecaps.get(id)));
+    downloadRecapCsvs(
+      found.filter((r) => r !== null).map(callRecapCsv),
+      `call-recaps-${new Date().toISOString().slice(0, 10)}.zip`,
+    );
+  }
+
   return (
     <Column gap="lg">
       <Text class="body">
@@ -143,37 +179,27 @@ function RecapList(props: { onSelect: (id: string) => void }) {
           </Text>
         </Match>
         <Match when={list()?.length}>
-          <CategoryButton.Group>
-            <For each={list()}>
-              {(meta) => (
-                <CategoryButton
-                  icon={<Symbol>call</Symbol>}
-                  description={`${callContext(meta)}${
-                    meta.worstIncomingLoss
-                      ? ` · up to ${percent(meta.worstIncomingLoss)} loss`
-                      : ""
-                  }`}
-                  action="chevron"
-                  onClick={() => props.onSelect(meta.id)}
-                >
-                  {callTitle(meta)}
-                </CategoryButton>
-              )}
-            </For>
-          </CategoryButton.Group>
-          <Row>
-            <Button
-              variant="text"
-              size="sm"
-              onPress={() => {
-                if (confirm("Delete all call recaps on this device?")) {
-                  callRecaps.clear();
-                }
-              }}
-            >
-              Delete all recaps
-            </Button>
-          </Row>
+          <SelectableRecapList
+            items={list()!}
+            noun="call"
+            icon={() => <Symbol>call</Symbol>}
+            title={callTitle}
+            description={(meta) =>
+              `${callContext(meta)}${
+                meta.worstIncomingLoss
+                  ? ` · up to ${percent(meta.worstIncomingLoss)} loss`
+                  : ""
+              }`
+            }
+            onOpen={props.onSelect}
+            onExport={exportRecaps}
+            onDelete={(ids) => callRecaps.removeMany(ids)}
+            onDeleteAll={() => {
+              if (confirm("Delete all call recaps on this device?")) {
+                callRecaps.clear();
+              }
+            }}
+          />
         </Match>
       </Switch>
     </Column>
@@ -254,34 +280,8 @@ function RecapView(props: { recap: CallRecap; onDelete: () => void }) {
     ] as const;
 
   function downloadCsv() {
-    const keys = CALL_METRICS.map((m) => m.key).filter((k) =>
-      props.recap.series.some((s) => s.data.some((d) => d[k] !== undefined)),
-    );
-
-    const rows = [
-      ["participant", "direction", "seconds", ...keys].join(","),
-      ...props.recap.series.flatMap((s) =>
-        s.data.map((d) =>
-          [
-            JSON.stringify(s.participantName),
-            s.direction,
-            (d.t / 1000).toFixed(1),
-            ...keys.map((k) => d[k] ?? ""),
-          ].join(","),
-        ),
-      ),
-    ];
-
-    const url = URL.createObjectURL(
-      new Blob([rows.join("\n")], { type: "text/csv" }),
-    );
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `call-recap-${new Date(props.recap.startedAt)
-      .toISOString()
-      .replace(/[:.]/g, "-")}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
+    const csv = callRecapCsv(props.recap);
+    downloadRecapCsvs([csv], csv.name);
   }
 
   return (

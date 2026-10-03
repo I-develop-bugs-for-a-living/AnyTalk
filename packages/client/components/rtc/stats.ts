@@ -448,10 +448,15 @@ export function createRecapStore<
     },
 
     async remove(id: string) {
-      await storage.removeItem(`recap:${id}`);
+      await this.removeMany([id]);
+    },
+
+    async removeMany(ids: string[]) {
+      const remove = new Set(ids);
+      for (const id of remove) await storage.removeItem(`recap:${id}`);
       await storage.setItem(
         INDEX_KEY,
-        (await this.list()).filter((r) => r.id !== id),
+        (await this.list()).filter((r) => !remove.has(r.id)),
       );
       setRevision((n) => n + 1);
     },

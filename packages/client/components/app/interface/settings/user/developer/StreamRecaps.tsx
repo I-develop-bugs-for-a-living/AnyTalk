@@ -20,23 +20,19 @@ import {
   recaps,
   recapsRevision,
 } from "@revolt/rtc/stats";
-import {
-  Button,
-  CategoryButton,
-  CircularProgress,
-  Column,
-  Row,
-  Text,
-} from "@revolt/ui";
+import { Button, CircularProgress, Column, Row, Text } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import {
   Charts,
   InfoGrid,
+  RecapCsv,
+  RecapList as SelectableRecapList,
   Tile,
   TileLabel,
   TileValue,
   Tiles,
+  downloadRecapCsvs,
 } from "./RecapParts";
 import { TimeChart, formatDuration } from "./TimeChart";
 
@@ -159,6 +155,32 @@ export function recapContext(meta: RecapMeta) {
 }
 
 /**
+ * A stream recap as CSV, one row per second
+ * @param recap Recap
+ * @returns File name and contents
+ */
+export function streamRecapCsv(recap: Recap): RecapCsv {
+  const keys = STREAM_METRICS.map((m) => m.key).filter((k) =>
+    recap.data.some((s) => s[k] !== undefined),
+  );
+  if (recap.data.some((s) => s.limitation)) keys.push("limitation");
+
+  const rows = [
+    ["seconds", ...keys].join(","),
+    ...recap.data.map((s) =>
+      [(s.t / 1000).toFixed(1), ...keys.map((k) => s[k] ?? "")].join(","),
+    ),
+  ];
+
+  return {
+    name: `stream-recap-${new Date(recap.startedAt)
+      .toISOString()
+      .replace(/[:.]/g, "-")}.csv`,
+    text: rows.join("\n"),
+  };
+}
+
+/**
  * Stream recaps (developer mode)
  */
 export function StreamRecaps() {
@@ -177,6 +199,14 @@ export function StreamRecaps() {
 
 function RecapList(props: { onSelect: (id: string) => void }) {
   const [list] = createResource(recapsRevision, () => recaps.list());
+
+  async function exportRecaps(ids: string[]) {
+    const found = await Promise.all(ids.map((id) => recaps.get(id)));
+    downloadRecapCsvs(
+      found.filter((r) => r !== null).map(streamRecapCsv),
+      `stream-recaps-${new Date().toISOString().slice(0, 10)}.zip`,
+    );
+  }
 
   return (
     <Column gap="lg">
@@ -197,41 +227,31 @@ function RecapList(props: { onSelect: (id: string) => void }) {
           </Text>
         </Match>
         <Match when={list()?.length}>
-          <CategoryButton.Group>
-            <For each={list()}>
-              {(meta) => (
-                <CategoryButton
-                  icon={
-                    <Symbol>
-                      {meta.direction === "sending" ? "upload" : "download"}
-                    </Symbol>
-                  }
-                  description={`${recapContext(meta)}${
-                    meta.direction === "receiving" && meta.summary.freezes
-                      ? ` · ${meta.summary.freezes} freezes`
-                      : ""
-                  }`}
-                  action="chevron"
-                  onClick={() => props.onSelect(meta.id)}
-                >
-                  {recapTitle(meta)}
-                </CategoryButton>
-              )}
-            </For>
-          </CategoryButton.Group>
-          <Row>
-            <Button
-              variant="text"
-              size="sm"
-              onPress={() => {
-                if (confirm("Delete all stream recaps on this device?")) {
-                  recaps.clear();
-                }
-              }}
-            >
-              Delete all recaps
-            </Button>
-          </Row>
+          <SelectableRecapList
+            items={list()!}
+            noun="stream"
+            icon={(meta) => (
+              <Symbol>
+                {meta.direction === "sending" ? "upload" : "download"}
+              </Symbol>
+            )}
+            title={recapTitle}
+            description={(meta) =>
+              `${recapContext(meta)}${
+                meta.direction === "receiving" && meta.summary.freezes
+                  ? ` · ${meta.summary.freezes} freezes`
+                  : ""
+              }`
+            }
+            onOpen={props.onSelect}
+            onExport={exportRecaps}
+            onDelete={(ids) => recaps.removeMany(ids)}
+            onDeleteAll={() => {
+              if (confirm("Delete all stream recaps on this device?")) {
+                recaps.clear();
+              }
+            }}
+          />
         </Match>
       </Switch>
     </Column>
@@ -332,28 +352,8 @@ function RecapView(props: { recap: Recap; onDelete: () => void }) {
     ] as const;
 
   function downloadCsv() {
-    const keys = STREAM_METRICS.map((m) => m.key).filter((k) =>
-      props.recap.data.some((s) => s[k] !== undefined),
-    );
-    if (props.recap.data.some((s) => s.limitation)) keys.push("limitation");
-
-    const rows = [
-      ["seconds", ...keys].join(","),
-      ...props.recap.data.map((s) =>
-        [(s.t / 1000).toFixed(1), ...keys.map((k) => s[k] ?? "")].join(","),
-      ),
-    ];
-
-    const url = URL.createObjectURL(
-      new Blob([rows.join("\n")], { type: "text/csv" }),
-    );
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `stream-recap-${new Date(props.recap.startedAt)
-      .toISOString()
-      .replace(/[:.]/g, "-")}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
+    const csv = streamRecapCsv(props.recap);
+    downloadRecapCsvs([csv], csv.name);
   }
 
   return (
