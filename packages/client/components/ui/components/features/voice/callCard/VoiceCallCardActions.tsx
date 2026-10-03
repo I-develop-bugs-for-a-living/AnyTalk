@@ -5,7 +5,7 @@ import { useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
 import { useInstance } from "@revolt/instance";
-import { useVoice } from "@revolt/rtc";
+import { screenShareSupported, useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
 import { Button, IconButton } from "@revolt/ui/components/design";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
@@ -115,31 +115,34 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
       >
         <Symbol>camera_video</Symbol>
       </IconButton>
-      <IconButton
-        size={props.size}
-        variant={limits().video && voice.screenshare() ? "filled" : "tonal"}
-        onPress={() => {
-          if (limits().video) voice.toggleScreenshare();
-        }}
-        use:floating={{
-          tooltip: {
-            placement: "top",
-            content: limits().video
-              ? voice.screenshare()
-                ? t`Stop sharing`
-                : t`Share screen`
-              : t`Coming soon! 👀`,
-          },
-        }}
-        isDisabled={!limits().video}
-      >
-        <Show
-          when={!limits().video || voice.screenshare()}
-          fallback={<Symbol>stop_screen_share</Symbol>}
+      {/* Phone browsers can't share their screen */}
+      <Show when={screenShareSupported}>
+        <IconButton
+          size={props.size}
+          variant={limits().video && voice.screenshare() ? "filled" : "tonal"}
+          onPress={() => {
+            if (limits().video) voice.toggleScreenshare();
+          }}
+          use:floating={{
+            tooltip: {
+              placement: "top",
+              content: limits().video
+                ? voice.screenshare()
+                  ? t`Stop sharing`
+                  : t`Share screen`
+                : t`Coming soon! 👀`,
+            },
+          }}
+          isDisabled={!limits().video}
         >
-          <Symbol>screen_share</Symbol>
-        </Show>
-      </IconButton>
+          <Show
+            when={!limits().video || voice.screenshare()}
+            fallback={<Symbol>stop_screen_share</Symbol>}
+          >
+            <Symbol>screen_share</Symbol>
+          </Show>
+        </IconButton>
+      </Show>
       <Show when={voice.watching.size}>
         <IconButton
           size={props.size}
@@ -209,5 +212,18 @@ const Actions = styled("div", {
 
     borderRadius: "var(--borderRadius-full)",
     background: "var(--md-sys-color-surface-container)",
+
+    // Tighter on phones, and scroll rather than cut off buttons (like
+    // hanging up) if they still don't fit
+    _phone: {
+      flexShrink: 1,
+      minWidth: 0,
+      gap: "var(--gap-sm)",
+      padding: "var(--gap-sm)",
+      overflowX: "auto",
+      scrollbarWidth: "none",
+
+      "& > *": { flexShrink: 0 },
+    },
   },
 });

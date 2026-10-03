@@ -111,7 +111,6 @@ function LayoutButtons() {
 
   return (
     <>
-      {/* TODO: Refactor call controls on mobile to make these buttons not overflow */}
       <Show when={device.layout() === "desktop"}>
         <IconButton
           size="sm"
@@ -373,6 +372,12 @@ const VoiceCallControls = styled("div", {
     display: "flex",
     flexShrink: 0,
     overflow: "hidden",
+
+    _phone: {
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: "var(--gap-sm)",
+    },
   },
   variants: {
     theater: {
@@ -405,6 +410,12 @@ const VoiceCallControlHolder = styled("div", {
     padding: "var(--gap-md)",
     opacity: 1,
     transition: "opacity var(--transitions-medium)",
+
+    // On phones the call buttons get the width, the sides only fit theirs
+    _phone: {
+      flex: "0 0 auto",
+      padding: "var(--gap-sm)",
+    },
   },
   variants: {
     left: {
