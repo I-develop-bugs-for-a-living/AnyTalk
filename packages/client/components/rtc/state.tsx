@@ -51,6 +51,7 @@ import { InRoom } from "./components/InRoom";
 import { RoomAudioManager } from "./components/RoomAudioManager";
 import { StatsRecorder } from "./components/StatsRecorder";
 import { VoiceKeybinds } from "./components/VoiceKeybinds";
+import { VoiceMoves } from "./components/VoiceMoves";
 import { VoiceProcessor } from "./VoiceProcessor";
 
 type State =
@@ -1106,6 +1107,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
         </InRoom>
         <StatsRecorder />
         <CallSounds />
+        <VoiceMoves />
       </RoomContext.Provider>
     </voiceContext.Provider>
   );

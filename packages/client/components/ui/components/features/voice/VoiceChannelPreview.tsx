@@ -15,6 +15,7 @@ import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { UserContextMenu } from "@revolt/app";
+import { useDevice } from "@revolt/common";
 import { useUser } from "@revolt/markdown/users";
 import { InRoom, useVoice } from "@revolt/rtc";
 
@@ -22,6 +23,11 @@ import { Avatar, Ripple, typography } from "../../design";
 import { Row } from "../../layout";
 
 import { VoiceStatefulUserIcons } from "./VoiceStatefulUserIcons";
+import {
+  VOICE_USER_DRAG_TYPE,
+  canMoveFrom,
+  setDraggedVoiceUser,
+} from "./voiceMove";
 
 /**
  * Render a preview of users (or the active participants) for a given channel
@@ -125,6 +131,7 @@ function ParticipantLive(props: {
 
   return (
     <CommonUser
+      channel={props.channel}
       userId={participant.identity}
       speaking={isSpeaking()}
       muted={isMuted()}
@@ -156,6 +163,7 @@ function ParticipantPreview(props: {
 
   return (
     <CommonUser
+      channel={props.channel}
       userId={props.participant.userId}
       speaking={false}
       muted={!props.participant.isPublishing()}
@@ -176,6 +184,7 @@ function ParticipantPreview(props: {
  * Component used for both variants
  */
 function CommonUser(props: {
+  channel: Channel;
   userId: string;
   speaking: boolean;
   muted: boolean;
@@ -191,12 +200,27 @@ function CommonUser(props: {
   const user = useUser(() => rest.userId);
 
   const { t } = useLingui();
+  const { isMobile } = useDevice();
   const canWatch = () => rest.screenshare && !!rest.onWatch;
+
+  // drag people into another voice channel to move them (desktop only)
+  const canDrag = () => !isMobile && canMoveFrom(rest.channel);
 
   return (
     <div
       class={previewUser({ speaking: rest.speaking, watchable: canWatch() })}
       onClick={() => canWatch() && rest.onWatch!()}
+      draggable={canDrag()}
+      // keep the channel list from starting to reorder channels instead
+      onMouseDown={(e) => canDrag() && e.stopPropagation()}
+      onDragStart={(e) => {
+        if (!canDrag() || !e.dataTransfer) return;
+        e.stopPropagation();
+        e.dataTransfer.setData(VOICE_USER_DRAG_TYPE, rest.userId);
+        e.dataTransfer.effectAllowed = "move";
+        setDraggedVoiceUser({ userId: rest.userId, from: rest.channel });
+      }}
+      onDragEnd={() => setDraggedVoiceUser(undefined)}
       use:floating={{
         // while streaming, a click opens the stream instead
         userCard: canWatch()

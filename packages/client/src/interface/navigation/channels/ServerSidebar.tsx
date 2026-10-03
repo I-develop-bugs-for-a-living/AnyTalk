@@ -13,6 +13,7 @@ import { useLingui } from "@lingui/solid/macro";
 import type { Channel, Server, ServerFlags } from "stoat.js";
 import { styled } from "styled-system/jsx";
 
+import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
 import { KeybindAction, createKeybind } from "@revolt/keybinds";
 import { TextWithEmoji } from "@revolt/markdown";
@@ -32,9 +33,17 @@ import {
   iconSize,
   symbolSize,
   typography,
+  useSnackbar,
 } from "@revolt/ui";
 import { UnreadCallout } from "@revolt/ui/components/features/navigation/UnreadCallout";
 import { VoiceChannelPreview } from "@revolt/ui/components/features/voice/VoiceChannelPreview";
+import {
+  VOICE_USER_DRAG_TYPE,
+  canMoveTo,
+  draggedVoiceUser,
+  moveVoiceUser,
+  setDraggedVoiceUser,
+} from "@revolt/ui/components/features/voice/voiceMove";
 import { createDragHandle } from "@revolt/ui/components/utils/Draggable";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
@@ -542,6 +551,33 @@ function Entry(
 
   const inCall = () => props.channel.id === voice.channel()?.id;
 
+  // someone dragged from another voice channel can be dropped here
+  const client = useClient();
+  const snackbar = useSnackbar();
+  const { t } = useLingui();
+  const [dropping, setDropping] = createSignal(false);
+  const canDrop = () => {
+    const dragged = draggedVoiceUser();
+    return !!dragged && canMoveTo(dragged.from, props.channel);
+  };
+
+  async function drop(e: DragEvent) {
+    const dragged = draggedVoiceUser();
+    setDropping(false);
+    setDraggedVoiceUser(undefined);
+    if (!dragged || !canMoveTo(dragged.from, props.channel)) return;
+    e.preventDefault();
+
+    try {
+      await moveVoiceUser(client(), dragged.userId, props.channel);
+    } catch (err) {
+      console.error("[voice] could not move user", err);
+      snackbar.show({
+        message: t`Couldn't move them to ${props.channel.name}.`,
+      });
+    }
+  }
+
   const attentionState = createMemo(() =>
     props.active
       ? "selected"
@@ -555,7 +591,23 @@ function Entry(
   );
 
   return (
-    <Column gap="sm">
+    <DropTarget
+      gap="sm"
+      dropping={dropping()}
+      onDragOver={(e) => {
+        if (!canDrop() || !e.dataTransfer?.types.includes(VOICE_USER_DRAG_TYPE))
+          return;
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "move";
+        setDropping(true);
+      }}
+      onDragLeave={(e) => {
+        // only when leaving the channel, not when moving onto a child of it
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null))
+          setDropping(false);
+      }}
+      onDrop={drop}
+    >
       <MenuButton
         href={`/server/${props.channel.serverId}/channel/${props.channel.id}`}
         use:floating={props.menuGenerator(props.channel)}
@@ -634,9 +686,30 @@ function Entry(
       </MenuButton>
 
       <VoiceChannelPreview channel={props.channel} />
-    </Column>
+    </DropTarget>
   );
 }
+
+/**
+ * Channel entry, highlighted while someone can be dropped into it
+ */
+const DropTarget = styled(Column, {
+  base: {
+    borderRadius: "var(--borderRadius-md)",
+    outline: "2px solid transparent",
+    outlineOffset: "-2px",
+    transition: "outline-color var(--transitions-fast)",
+  },
+  variants: {
+    dropping: {
+      true: {
+        outlineColor: "var(--md-sys-color-primary)",
+        background:
+          "color-mix(in srgb, var(--md-sys-color-primary) 8%, transparent)",
+      },
+    },
+  },
+});
 
 /**
  * Channel icon styling
