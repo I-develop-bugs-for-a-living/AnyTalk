@@ -8,6 +8,7 @@ import { RemoteTrackPublication, Track } from "livekit-client";
 import { useState } from "@revolt/state";
 
 import { useVoice } from "../state";
+import { createVolumeBoost, setBoostOutputDevice } from "../volumeBoost";
 
 export function RoomAudioManager() {
   const voice = useVoice();
@@ -45,27 +46,44 @@ export function RoomAudioManager() {
     }
   });
 
+  createEffect(() =>
+    setBoostOutputDevice(state.voice.preferredAudioOutputDevice),
+  );
+
   return (
     <div style={{ display: "none" }}>
       <Key each={filteredTracks()} by={(item) => getTrackReferenceId(item)}>
-        {(track) => (
-          <AudioTrack
-            trackRef={track()}
-            volume={
-              state.voice.outputVolume *
-              (track().source === Track.Source.ScreenShareAudio
-                ? state.voice.getScreenShareVolume(track().participant.identity)
-                : state.voice.getUserVolume(track().participant.identity))
-            }
-            muted={
-              (track().source === Track.Source.ScreenShareAudio
-                ? state.voice.getScreenShareMuted(track().participant.identity)
-                : state.voice.getUserMuted(track().participant.identity)) ||
-              voice.deafen()
-            }
-            enableBoosting
-          />
-        )}
+        {(track) => {
+          const isStream = () =>
+            track().source === Track.Source.ScreenShareAudio;
+
+          const volume = () =>
+            state.voice.outputVolume *
+            (isStream()
+              ? state.voice.getScreenShareVolume(track().participant.identity)
+              : state.voice.getUserVolume(track().participant.identity));
+
+          // above 100% the boost plays the track instead of the element
+          const boosted = createVolumeBoost(
+            () => track().publication as RemoteTrackPublication,
+            volume,
+          );
+
+          return (
+            <AudioTrack
+              trackRef={track()}
+              volume={boosted() ? 0 : Math.min(volume(), 1)}
+              muted={
+                (isStream()
+                  ? state.voice.getScreenShareMuted(
+                      track().participant.identity,
+                    )
+                  : state.voice.getUserMuted(track().participant.identity)) ||
+                voice.deafen()
+              }
+            />
+          );
+        }}
       </Key>
     </div>
   );

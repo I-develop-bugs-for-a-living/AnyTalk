@@ -279,7 +279,7 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
    * @returns Volume or default
    */
   getUserVolume(userId: string): number {
-    return this.get().userVolumes[userId] || 1.0;
+    return this.get().userVolumes[userId] ?? 1.0;
   }
 
   /**
