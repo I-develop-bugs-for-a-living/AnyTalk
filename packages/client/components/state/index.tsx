@@ -182,6 +182,23 @@ export class State {
   };
 
   /**
+   * Write a store to disk right away instead of after the usual delay,
+   * e.g. before reloading the page
+   * @param key Store's key
+   */
+  async flush(key: keyof Store) {
+    if (this.writeQueue[key]) {
+      clearTimeout(this.writeQueue[key]);
+      delete this.writeQueue[key];
+    }
+
+    await localforage.setItem(
+      key,
+      JSON.parse(JSON.stringify((this.store as Record<string, unknown>)[key])),
+    );
+  }
+
+  /**
    * Write data to store / disk and then synchronise it
    */
   set: SetStoreFunction<Store> = (...args: unknown[]) => {

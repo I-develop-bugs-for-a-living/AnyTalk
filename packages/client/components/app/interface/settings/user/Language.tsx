@@ -10,6 +10,7 @@ import {
   CategorySelectOption,
   Column,
   Row,
+  Text,
   Time,
   iconSize,
 } from "@revolt/ui";
@@ -26,10 +27,18 @@ import MdSchedule from "@material-design-icons/svg/outlined/schedule.svg?compone
 export function LanguageSettings() {
   return (
     <Column gap="lg">
-      <CategoryButton.Group>
-        <PickLanguage />
-        {/* <ConfigureRTL /> */}
-      </CategoryButton.Group>
+      <Column gap="sm">
+        <CategoryButton.Group>
+          <PickLanguage />
+          {/* <ConfigureRTL /> */}
+        </CategoryButton.Group>
+        <Text class="label">
+          <Trans>
+            AnyTalk reloads to switch language, only the language you use is
+            downloaded and kept offline.
+          </Trans>
+        </Text>
+      </Column>
       <CategoryButton.Group>
         <PickDateFormat />
         <PickTimeFormat />

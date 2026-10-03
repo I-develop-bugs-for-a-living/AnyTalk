@@ -82,12 +82,16 @@ export class Locale extends AbstractStore<"locale", TypeLocale> {
   }
 
   /**
-   * Switch to another language
+   * Switch to another language: save it and reload the page in it, so only
+   * the language in use is downloaded and kept offline
    * @param language Language
    */
-  switch(language: Language): void {
+  async switch(language: Language) {
+    if (language === this.get().lang) return;
+
     this.set("lang", language);
-    this.hydrate();
+    await this.state.flush("locale");
+    location.reload();
   }
 
   /**
