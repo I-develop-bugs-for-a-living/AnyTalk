@@ -1,7 +1,17 @@
 import { Trans } from "@lingui/solid/macro";
 
 import { useState } from "@revolt/state";
-import { CategoryButton, Checkbox, Column, Text } from "@revolt/ui";
+import {
+  NoiseSuppresionState,
+  enhancedNoiseSuppressionSupported,
+} from "@revolt/state/stores/Voice";
+import {
+  CategoryButton,
+  CategorySelectOption,
+  Checkbox,
+  Column,
+  Text,
+} from "@revolt/ui";
 
 /**
  * Voice processing options
@@ -18,15 +28,20 @@ export function VoiceProcessingOptions() {
         <CategoryButton.Select
           icon={"blank"}
           title={<Trans>Select noise suppression</Trans>}
-          options={{
-            disabled: { title: <Trans>Disabled</Trans> },
-            browser: { title: <Trans>Browser</Trans> },
-            enhanced: {
-              title: <Trans>Enhanced</Trans>,
-              description: <Trans>Powered by RNNoise</Trans>,
-              shortDesc: <Trans>Enhanced (RNNoise)</Trans>,
-            },
-          }}
+          options={
+            {
+              disabled: { title: <Trans>Disabled</Trans> },
+              browser: { title: <Trans>Browser</Trans> },
+              // not offered on iOS, see enhancedNoiseSuppressionSupported
+              ...(enhancedNoiseSuppressionSupported && {
+                enhanced: {
+                  title: <Trans>Enhanced</Trans>,
+                  description: <Trans>Powered by RNNoise</Trans>,
+                  shortDesc: <Trans>Enhanced (RNNoise)</Trans>,
+                },
+              }),
+            } as Record<NoiseSuppresionState, CategorySelectOption>
+          }
           value={voice.noiseSupression}
           onUpdate={(ns) => (voice.noiseSupression = ns)}
         />

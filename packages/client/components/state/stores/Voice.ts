@@ -14,6 +14,19 @@ const NoiseSuppresionStates: NoiseSuppresionState[] = [
 ];
 
 /**
+ * Whether RNNoise ("enhanced") can be used. On iOS and iPadOS it makes
+ * everyone in the call sound robotic in a Safari tab, and the system's own
+ * noise reduction ("browser") already does the job there. iPadOS reports
+ * itself as a Mac, so it's told apart by its touch screen.
+ */
+export const enhancedNoiseSuppressionSupported =
+  typeof navigator === "undefined" ||
+  !(
+    /iphone|ipad|ipod/i.test(navigator.userAgent) ||
+    (/macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints > 1)
+  );
+
+/**
  * Screen share resolutions. "source" is the native size of the shared screen or window.
  */
 export type ScreenShareResolution = "720p" | "1080p" | "1440p" | "source";
@@ -122,7 +135,9 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
   default(): TypeVoice {
     return {
       echoCancellation: true,
-      noiseSupression: "enhanced",
+      noiseSupression: enhancedNoiseSuppressionSupported
+        ? "enhanced"
+        : "browser",
       autoGainControl: true,
       screenShareResolution: "1080p",
       screenShareFrameRate: 30,
@@ -172,6 +187,14 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       NoiseSuppresionStates.includes(input.noiseSupression)
     ) {
       data.noiseSupression = input.noiseSupression;
+    }
+
+    // e.g. the old default, still saved on an iPhone
+    if (
+      data.noiseSupression === "enhanced" &&
+      !enhancedNoiseSuppressionSupported
+    ) {
+      data.noiseSupression = "browser";
     }
 
     if (typeof input.autoGainControl === "boolean") {
