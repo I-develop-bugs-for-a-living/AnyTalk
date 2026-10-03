@@ -1,11 +1,12 @@
 import { Show } from "solid-js";
 
-import { Trans } from "@lingui/solid/macro";
+import { Trans, useLingui } from "@lingui/solid/macro";
 import { Server } from "stoat.js";
 import { css } from "styled-system/css";
 
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { SOURCE_CODE_URL, UPSTREAM_URL } from "@revolt/common/lib/branding";
+import { hardReload } from "@revolt/common/lib/hardReload";
 import { useInstance } from "@revolt/instance";
 import { useUser } from "@revolt/markdown/users";
 import { useModals } from "@revolt/modal";
@@ -133,6 +134,7 @@ const Config: SettingsConfiguration<{ server: Server }> = {
     const { pop } = useModals();
     const { logout } = useClientLifecycle();
     const { limits, config } = useInstance();
+    const { t } = useLingui();
 
     return {
       context: null!,
@@ -368,6 +370,25 @@ const Config: SettingsConfiguration<{ server: Server }> = {
               id: "developer",
               icon: <Symbol size={20}>code</Symbol>,
               title: <Trans>Developer</Trans>,
+            },
+            {
+              id: "reload",
+              icon: <Symbol size={20}>refresh</Symbol>,
+              title: <Trans>Reload and clear cache</Trans>,
+              onClick() {
+                if (
+                  confirm(
+                    t`Reload AnyTalk with fresh files from the server? This is the same as Ctrl+F5 and fixes most display problems after an update. You stay logged in and keep your settings.`,
+                  )
+                ) {
+                  hardReload().then((reloading) => {
+                    if (!reloading)
+                      alert(
+                        t`You're offline. Connect to the internet first, otherwise AnyTalk couldn't load again.`,
+                      );
+                  });
+                }
+              },
             },
             {
               id: "logout",

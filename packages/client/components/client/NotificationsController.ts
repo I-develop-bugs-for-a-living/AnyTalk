@@ -74,6 +74,27 @@ export function useNotifications() {
         await enablePushSubscription();
       }
     }
+
+    void restorePushSubscription();
+  };
+
+  /**
+   * Subscribe to push again when it's allowed but the browser no longer has
+   * a subscription, e.g. after Reload and clear cache replaced the service
+   * worker
+   */
+  const restorePushSubscription = async () => {
+    if (IS_DEV || settings.pushNotificationsState !== "allowed") return;
+    if (supportsNotification && Notification.permission !== "granted") return;
+
+    try {
+      const registration = await navigator.serviceWorker?.ready;
+      if (!registration || (await registration.pushManager.getSubscription()))
+        return;
+      await setUpServiceWorkerSubscription(getClient());
+    } catch (err) {
+      console.error("[notifications] could not restore push", err);
+    }
   };
 
   const toggleNotificationPermission = async (modalOnDeny?: boolean) => {
