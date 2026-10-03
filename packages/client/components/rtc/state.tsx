@@ -21,6 +21,7 @@ import {
   LocalTrackPublication,
   RemoteTrackPublication,
   Room,
+  RoomEvent,
   ScreenShareCaptureOptions,
   ScreenSharePresets,
   Track,
@@ -135,6 +136,15 @@ class Voice {
   #setShowBar: Setter<boolean>;
 
   /**
+   * The browser won't play call audio until the user interacts with the
+   * page (iOS Safari), our microphone isn't processed meanwhile either
+   */
+  audioBlocked: Accessor<boolean>;
+  #setPlaybackBlocked: Setter<boolean>;
+  #setMicBlocked: Setter<boolean>;
+  #releaseAudioUnlock?: () => void;
+
+  /**
    * Participants whose screen share we chose to watch; other streams are
    * not subscribed to, so they cost no bandwidth until someone opens them
    */
@@ -199,6 +209,12 @@ class Voice {
     const [showBar, setShowBar] = createSignal(true);
     this.showBar = showBar;
     this.#setShowBar = setShowBar;
+
+    const [playbackBlocked, setPlaybackBlocked] = createSignal(false);
+    const [micBlocked, setMicBlocked] = createSignal(false);
+    this.audioBlocked = () => playbackBlocked() || micBlocked();
+    this.#setPlaybackBlocked = setPlaybackBlocked;
+    this.#setMicBlocked = setMicBlocked;
 
     const [pendingFocus, setPendingFocus] = createSignal<string>();
     this.pendingFocus = pendingFocus;
@@ -295,6 +311,8 @@ class Voice {
       },
     });
 
+    this.#unlockAudio(room);
+
     const tracks = useTracks(
       [
         { source: Track.Source.Camera, withPlaceholder: true },
@@ -352,9 +370,17 @@ class Voice {
     room.addListener("localTrackPublished", (pub) => {
       if (pub.audioTrack && pub.audioTrack.source === Track.Source.Microphone) {
         if (!pub.audioTrack.getProcessor()) {
-          pub.audioTrack?.setProcessor(
-            (this.voiceProcessor = new VoiceProcessor(this.#settings)),
-          );
+          pub.audioTrack
+            ?.setProcessor(
+              (this.voiceProcessor = new VoiceProcessor(
+                this.#settings,
+                this.#setMicBlocked,
+              )),
+            )
+            // without it the unprocessed microphone is sent, which still works
+            ?.catch((err) =>
+              console.error("[rtc] could not set up voice processing", err),
+            );
         }
       }
     });
@@ -410,8 +436,56 @@ class Voice {
     });
   }
 
+  /**
+   * Start call audio playback, which iOS only allows from a user gesture.
+   * Called first while still inside the tap that joined the call, then again
+   * on each interaction for as long as the browser keeps audio blocked.
+   * @param room Room
+   */
+  #unlockAudio(room: Room) {
+    const start = () =>
+      room
+        .startAudio()
+        .catch(() => {})
+        .finally(() => this.#setPlaybackBlocked(!room.canPlaybackAudio));
+
+    room.on(RoomEvent.AudioPlaybackStatusChanged, () =>
+      this.#setPlaybackBlocked(!room.canPlaybackAudio),
+    );
+
+    const onInteraction = () => {
+      if (this.audioBlocked()) {
+        start();
+        this.voiceProcessor?.resume();
+      }
+    };
+
+    const events = ["click", "touchend", "keydown"] as const;
+    events.forEach((e) => window.addEventListener(e, onInteraction, true));
+    this.#releaseAudioUnlock = () => {
+      events.forEach((e) => window.removeEventListener(e, onInteraction, true));
+      this.#setPlaybackBlocked(false);
+      this.#setMicBlocked(false);
+    };
+
+    start();
+  }
+
+  /**
+   * Retry starting call audio, must be called from a user gesture
+   */
+  startAudio() {
+    this.voiceProcessor?.resume();
+    this.room()
+      ?.startAudio()
+      .catch(() => {})
+      .finally(() => this.#setPlaybackBlocked(!this.room()?.canPlaybackAudio));
+  }
+
   disconnect() {
     this.device.releaseWakeLock();
+    this.#releaseAudioUnlock?.();
+    this.#releaseAudioUnlock = undefined;
     try {
       const room = this.room();
       if (!room) return;

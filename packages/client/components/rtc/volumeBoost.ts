@@ -24,6 +24,16 @@ type AudioContextWithSink = AudioContext & {
   setSinkId?: (sinkId: string) => Promise<void>;
 };
 
+/**
+ * iOS Safari ignores media element volume, we can't silence the element
+ * there so boosting would play tracks twice
+ */
+const canSetElementVolume = (() => {
+  const el = document.createElement("audio");
+  el.volume = 0.5;
+  return el.volume === 0.5;
+})();
+
 let context: AudioContextWithSink | undefined;
 let users = 0;
 
@@ -165,7 +175,7 @@ export function createVolumeBoost(
     });
   });
 
-  const boosting = createMemo(() => volume() > 1);
+  const boosting = createMemo(() => canSetElementVolume && volume() > 1);
 
   createEffect(() => {
     const track = mediaTrack();

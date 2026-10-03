@@ -23,9 +23,20 @@ export class VoiceProcessor implements TrackProcessor<
   private destinationNode?: MediaStreamAudioDestinationNode;
 
   private disposeSolidjsContext: () => void = () => {};
+  private onBlockedChange?: (blocked: boolean) => void;
 
-  constructor(voiceSettings: Voice) {
+  /**
+   * @param voiceSettings Voice settings
+   * @param onBlockedChange Called when the audio context stops or starts
+   * running, while stopped (e.g. suspended or interrupted on iOS) we send
+   * silence until it's resumed from a user gesture
+   */
+  constructor(
+    voiceSettings: Voice,
+    onBlockedChange?: (blocked: boolean) => void,
+  ) {
     this.settings = voiceSettings;
+    this.onBlockedChange = onBlockedChange;
 
     // Create a solid root to track changes to the settings
     createRoot((dispose) => {
@@ -67,6 +78,21 @@ export class VoiceProcessor implements TrackProcessor<
     }
   }
 
+  private updateBlocked = () => {
+    this.onBlockedChange?.(
+      !!this.audioContext && this.audioContext.state !== "running",
+    );
+  };
+
+  /**
+   * Resume the audio context, must be called from a user gesture
+   */
+  resume() {
+    if (this.audioContext && this.audioContext.state !== "running") {
+      this.audioContext.resume().catch(() => {});
+    }
+  }
+
   private rebuild() {
     this.updateNoiseSuppression(this.audioContext!);
   }
@@ -86,7 +112,9 @@ export class VoiceProcessor implements TrackProcessor<
   async destroy(): Promise<void> {
     // Destroy the solid context on processor destruction
     this.disposeSolidjsContext();
+    this.audioContext?.removeEventListener("statechange", this.updateBlocked);
     this.audioContext = undefined;
+    this.onBlockedChange?.(false);
     return this.teardown();
   }
 
@@ -137,8 +165,10 @@ export class VoiceProcessor implements TrackProcessor<
     let context = opts.audioContext;
     if (!context) {
       context = this.audioContext!;
-    } else {
+    } else if (context !== this.audioContext) {
+      this.audioContext?.removeEventListener("statechange", this.updateBlocked);
       this.audioContext = context;
+      context.addEventListener("statechange", this.updateBlocked);
     }
     if (!context) {
       return;
@@ -157,6 +187,9 @@ export class VoiceProcessor implements TrackProcessor<
     this.destinationNode = context.createMediaStreamDestination();
     this.gainNode.connect(this.destinationNode);
     this.processedTrack = this.destinationNode.stream.getAudioTracks()[0];
+
+    this.updateBlocked();
+    this.resume();
   }
 
   private async teardown() {

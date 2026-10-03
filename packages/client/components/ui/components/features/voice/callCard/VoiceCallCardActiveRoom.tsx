@@ -22,7 +22,10 @@ import { scrollableStyles } from "@revolt/ui/directives";
 
 import { ParticipantInfo, ParticipantTile, tile } from "./ParticipantTile";
 import { VoiceCallCardActions } from "./VoiceCallCardActions";
-import { VoiceCallCardStatus } from "./VoiceCallCardStatus";
+import {
+  VoiceCallCardEnableAudio,
+  VoiceCallCardStatus,
+} from "./VoiceCallCardStatus";
 
 /**
  * Call card (active)
@@ -77,6 +80,9 @@ export function VoiceCallCardActiveRoom() {
       onPointerMove={() => theater() && wake()}
       onPointerLeave={() => theater() && sleep()}
     >
+      <Show when={!collapsed()}>
+        <VoiceCallCardEnableAudio />
+      </Show>
       <Participants theater={theater()} />
       <VoiceCallControls theater={theater()} hidden={theater() && idle()}>
         <VoiceCallControlHolder left collapsed={collapsed()}>

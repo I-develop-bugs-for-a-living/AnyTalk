@@ -1,4 +1,5 @@
 import { Trans } from "@lingui/solid/macro";
+import { Show } from "solid-js";
 import { styled } from "styled-system/jsx";
 
 import { useVoice } from "@revolt/rtc";
@@ -44,6 +45,43 @@ export function VoiceCallCardStatus(props: { pip?: boolean }) {
     </Status>
   );
 }
+
+/**
+ * Shown while the browser won't play call audio until we interact (iOS)
+ */
+export function VoiceCallCardEnableAudio() {
+  const voice = useVoice();
+
+  return (
+    <Show when={voice.audioBlocked()}>
+      <EnableAudio onClick={() => voice.startAudio()}>
+        <Symbol>volume_off</Symbol>
+        <Trans>Tap to enable audio</Trans>
+      </EnableAudio>
+    </Show>
+  );
+}
+
+const EnableAudio = styled("button", {
+  base: {
+    flexShrink: 0,
+    zIndex: 1,
+    alignSelf: "center",
+
+    display: "flex",
+    alignItems: "center",
+    gap: "var(--gap-sm)",
+    padding: "var(--gap-sm) var(--gap-md)",
+
+    border: "none",
+    borderRadius: "var(--borderRadius-full)",
+    cursor: "pointer",
+    font: "inherit",
+
+    color: "var(--md-sys-color-on-error-container)",
+    background: "var(--md-sys-color-error-container)",
+  },
+});
 
 const FadeOut = styled("div", {
   base: {
