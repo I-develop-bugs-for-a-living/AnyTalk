@@ -2,85 +2,63 @@ import { State } from "..";
 
 import { AbstractStore } from ".";
 
-export type TypeSounds = {
-  /**
-   * Play sound on deafen
-   */
-  deafen: boolean;
+/**
+ * Every sound the app plays
+ */
+export const SOUND_NAMES = [
+  /** A message or notification arrived */
+  "message",
+  /** You mute or unmute your microphone */
+  "mute",
+  "unmute",
+  /** You deafen or undeafen */
+  "deafen",
+  "undeafen",
+  /** Someone joins, leaves or moves into / out of your voice channel */
+  "userJoinVoice",
+  "userLeaveVoice",
+  "userMoved",
+  /** Someone calls you in a DM or group / you call them */
+  "ringtoneIncoming",
+  "ringtoneOutgoing",
+  /** A stream starts or ends */
+  "streamStart",
+  "streamEnd",
+  /** Someone starts or stops watching your stream */
+  "streamViewerJoin",
+  "streamViewerLeave",
+] as const;
 
-  /**
-   * Play a sound on message/notification
-   */
-  message: boolean;
+/** Sounds that can be played and turned on or off */
+export type SoundName = (typeof SOUND_NAMES)[number];
 
-  /**
-   * Play sound on mute
-   */
-  mute: boolean;
+const clamp = (value: number) => Math.min(1, Math.max(0, value));
+const isVolume = (value: unknown): value is number =>
+  typeof value === "number" && Number.isFinite(value);
 
+export type TypeSounds = Record<SoundName, boolean> & {
   /**
-   * Play sound when receiving a DM call
+   * Whether any sound plays at all
    */
-  ringtoneIncoming: boolean;
-
-  /**
-   * Play sound when dialing someone in a DM call
-   */
-  ringtoneOutgoing: boolean;
-
-  /**
-   * Play a sound when a stream ends
-   */
-  streamEnd: boolean;
-
-  /**
-   * Play a sound when a stream starts
-   */
-  streamStart: boolean;
-
-  /**
-   * Play a sound when a user starts viewing your stream
-   */
-  streamViewerJoin: boolean;
-
-  /**
-   * Play a sound when a user stops viewing your stream
-   */
-  streamViewerLeave: boolean;
-
-  /**
-   * Play a sound when you undeafen
-   */
-  undeafen: boolean;
-
-  /**
-   * Play a sound when you unmute
-   */
-  unmute: boolean;
-
-  /**
-   * Play a sound when a user joins your voice channel
-   */
-  userJoinVoice: boolean;
-
-  /**
-   * Play a sound when a user leaves your voice channel
-   */
-  userLeaveVoice: boolean;
-
-  /**
-   * Play a sound when a user moves channels
-   */
-  userMoved: boolean;
+  playSounds: boolean;
 
   /**
    * Volume of all sounds, 0 to 1
    */
   volume: number;
-};
 
-/** Sounds that can be played and turned on or off */
-export type SoundName = Exclude<keyof TypeSounds, "volume">;
+  /**
+   * Volume of single sounds relative to the volume of all sounds, 0 to 1
+   * (1 when missing)
+   */
+  volumes: Partial<Record<SoundName, number>>;
+
+  /**
+   * Sounds replaced by a file of the user's: the file's name (the file
+   * itself is kept in the browser, see @revolt/client/customSounds)
+   */
+  custom: Partial<Record<SoundName, string>>;
+};
 
 export class Sounds extends AbstractStore<"sounds", TypeSounds> {
   constructor(state: State) {
@@ -91,68 +69,58 @@ export class Sounds extends AbstractStore<"sounds", TypeSounds> {
 
   default(): TypeSounds {
     return {
-      deafen: true,
-      message: true,
-      mute: true,
-      ringtoneIncoming: true,
-      ringtoneOutgoing: true,
-      streamEnd: true,
-      streamStart: true,
-      streamViewerJoin: true,
-      streamViewerLeave: true,
-      undeafen: true,
-      unmute: true,
-      userJoinVoice: true,
-      userLeaveVoice: true,
-      userMoved: true,
+      ...(Object.fromEntries(SOUND_NAMES.map((name) => [name, true])) as Record<
+        SoundName,
+        boolean
+      >),
+      playSounds: true,
       volume: 1,
+      volumes: {},
+      custom: {},
     };
   }
 
   clean(input: Partial<TypeSounds>): TypeSounds {
-    return {
-      deafen: typeof input.deafen === "boolean" ? input.deafen : true,
-      message: typeof input.message === "boolean" ? input.message : true,
-      mute: typeof input.mute === "boolean" ? input.mute : true,
-      ringtoneIncoming:
-        typeof input.ringtoneIncoming === "boolean"
-          ? input.ringtoneIncoming
-          : true,
-      ringtoneOutgoing:
-        typeof input.ringtoneOutgoing === "boolean"
-          ? input.ringtoneOutgoing
-          : true,
-      streamEnd: typeof input.streamEnd === "boolean" ? input.streamEnd : true,
-      streamStart:
-        typeof input.streamStart === "boolean" ? input.streamStart : true,
-      streamViewerJoin:
-        typeof input.streamViewerJoin === "boolean"
-          ? input.streamViewerJoin
-          : true,
-      streamViewerLeave:
-        typeof input.streamViewerLeave === "boolean"
-          ? input.streamViewerLeave
-          : true,
-      undeafen: typeof input.undeafen === "boolean" ? input.undeafen : true,
-      unmute: typeof input.unmute === "boolean" ? input.unmute : true,
-      userJoinVoice:
-        typeof input.userJoinVoice === "boolean" ? input.userJoinVoice : true,
-      userLeaveVoice:
-        typeof input.userLeaveVoice === "boolean" ? input.userLeaveVoice : true,
-      userMoved: typeof input.userMoved === "boolean" ? input.userMoved : true,
-      volume:
-        typeof input.volume === "number" && Number.isFinite(input.volume)
-          ? Math.min(1, Math.max(0, input.volume))
-          : 1,
-    };
+    const out = this.default();
+
+    for (const name of SOUND_NAMES) {
+      if (typeof input[name] === "boolean") out[name] = input[name];
+
+      const volume = input.volumes?.[name];
+      if (isVolume(volume)) out.volumes[name] = clamp(volume);
+
+      const custom = input.custom?.[name];
+      if (typeof custom === "string") out.custom[name] = custom;
+    }
+
+    if (typeof input.playSounds === "boolean")
+      out.playSounds = input.playSounds;
+    if (isVolume(input.volume)) out.volume = clamp(input.volume);
+
+    return out;
   }
 
+  /**
+   * Whether a sound is turned on (sounds may still be off altogether, see
+   * playSounds)
+   */
   enabled(t: SoundName): boolean {
     return this.get()[t];
   }
 
   toggle(t: SoundName) {
     return this.set(t, !this.enabled(t));
+  }
+
+  /**
+   * Whether any sound plays at all
+   */
+  get playSounds(): boolean {
+    return this.get().playSounds;
+  }
+
+  set playSounds(value: boolean) {
+    this.set("playSounds", value);
   }
 
   /**
@@ -163,6 +131,28 @@ export class Sounds extends AbstractStore<"sounds", TypeSounds> {
   }
 
   set volume(value: number) {
-    this.set("volume", Math.min(1, Math.max(0, Number(value) || 0)));
+    this.set("volume", clamp(Number(value) || 0));
+  }
+
+  /**
+   * Volume of a single sound relative to all sounds, 0 to 1
+   */
+  soundVolume(t: SoundName): number {
+    return this.get().volumes[t] ?? 1;
+  }
+
+  setSoundVolume(t: SoundName, value: number) {
+    this.set("volumes", t, clamp(Number(value) || 0));
+  }
+
+  /**
+   * Name of the user's file replacing a sound, if any
+   */
+  customFile(t: SoundName): string | undefined {
+    return this.get().custom[t];
+  }
+
+  setCustomFile(t: SoundName, fileName: string | undefined) {
+    this.set("custom", t, fileName);
   }
 }

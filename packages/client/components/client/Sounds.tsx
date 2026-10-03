@@ -16,6 +16,11 @@ import unmuteSound from "../../public/assets/sounds/unmute.ogg";
 import userJoinVoiceSound from "../../public/assets/sounds/user_join_voice.ogg";
 import userLeaveVoiceSound from "../../public/assets/sounds/user_leave_voice.ogg";
 import userMovedSound from "../../public/assets/sounds/user_moved.ogg";
+import {
+  loadCustomSounds,
+  removeCustomSound,
+  saveCustomSound,
+} from "./customSounds";
 
 const SOURCES: Record<SoundName, string> = {
   deafen: deafenSound,
@@ -47,12 +52,57 @@ export class SoundController {
 
   lastPlayedSound?: SoundName;
 
+  /** Object URLs of the user's own sound files */
+  #customUrls = new Map<SoundName, string>();
+
   constructor(soundState: Sounds) {
     this.soundState = soundState;
 
     this.isPlaying = this.isPlaying.bind(this);
     this.canPlay = this.canPlay.bind(this);
     this.playSound = this.playSound.bind(this);
+
+    loadCustomSounds()
+      .then((files) => {
+        for (const [name, file] of files)
+          this.#customUrls.set(name, URL.createObjectURL(file));
+      })
+      .catch((err) => console.error("[sounds] could not load own sounds", err));
+  }
+
+  /**
+   * File to play for a sound: the user's own if they picked one
+   */
+  #source(sound: SoundName) {
+    return (
+      (this.soundState.customFile(sound) && this.#customUrls.get(sound)) ||
+      SOURCES[sound]
+    );
+  }
+
+  /**
+   * Volume of a sound: of all sounds times its own
+   */
+  #volume(sound: SoundName) {
+    return this.soundState.volume * this.soundState.soundVolume(sound);
+  }
+
+  /**
+   * Replace a sound with a file of the user's, or go back to the default
+   *
+   * @param sound Sound
+   * @param file File (see checkCustomSound), or undefined for the default
+   */
+  async setCustomSound(sound: SoundName, file?: File) {
+    if (file) await saveCustomSound(sound, file);
+    else await removeCustomSound(sound);
+
+    const old = this.#customUrls.get(sound);
+    if (old) URL.revokeObjectURL(old);
+    this.#customUrls.delete(sound);
+    if (file) this.#customUrls.set(sound, URL.createObjectURL(file));
+
+    this.soundState.setCustomFile(sound, file?.name);
   }
 
   /**
@@ -72,7 +122,7 @@ export class SoundController {
    */
   canPlay(newSound: SoundName): boolean {
     // Never let a sound turned off play
-    if (!this.soundState.enabled(newSound)) {
+    if (!this.soundState.playSounds || !this.soundState.enabled(newSound)) {
       return false;
     }
 
@@ -98,9 +148,9 @@ export class SoundController {
       return false;
     }
 
-    this.node = new Audio(SOURCES[sound]);
+    this.node = new Audio(this.#source(sound));
     this.lastPlayedSound = sound;
-    this.node.volume = this.soundState.volume;
+    this.node.volume = this.#volume(sound);
     // a muted sound isn't worth playing
     if (this.node.volume > 0) this.node.play().catch(() => {});
     return true;
@@ -117,9 +167,9 @@ export class SoundController {
     this.stopLoop();
     if (!this.canPlay(sound)) return () => {};
 
-    const node = new Audio(SOURCES[sound]);
+    const node = new Audio(this.#source(sound));
     node.loop = true;
-    node.volume = this.soundState.volume;
+    node.volume = this.#volume(sound);
     if (node.volume > 0) node.play().catch(() => {});
     this.loopNode = node;
 
