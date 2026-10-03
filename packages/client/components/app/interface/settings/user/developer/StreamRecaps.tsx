@@ -40,7 +40,7 @@ import {
 } from "./RecapParts";
 import { TimeChart, formatDuration } from "./TimeChart";
 
-type Metric = {
+export type Metric = {
   key: keyof Sample;
   title: string;
   format: (v: number) => string;
@@ -58,7 +58,7 @@ const ms = (v: number) => `${Math.round(v)} ms`;
 /**
  * Charted values, in display order; charts without data are skipped
  */
-const METRICS: Metric[] = [
+export const STREAM_METRICS: Metric[] = [
   { key: "bitrate", title: "Bitrate", format: formatBitrate },
   {
     key: "targetBitrate",
@@ -141,13 +141,13 @@ function sourceName(source: string) {
       : source;
 }
 
-function recapTitle(meta: RecapMeta) {
+export function recapTitle(meta: RecapMeta) {
   return meta.direction === "sending"
     ? `Your ${sourceName(meta.source)}`
     : `${meta.participantName}'s ${sourceName(meta.source)}`;
 }
 
-function recapContext(meta: RecapMeta) {
+export function recapContext(meta: RecapMeta) {
   return [
     new Date(meta.startedAt).toLocaleString(),
     formatDuration(meta.endedAt - meta.startedAt),
@@ -277,7 +277,7 @@ function RecapView(props: { recap: Recap; onDelete: () => void }) {
   const times = createMemo(() => props.recap.data.map((s) => s.t));
 
   const metrics = createMemo(() =>
-    METRICS.filter(
+    STREAM_METRICS.filter(
       (m) =>
         (!m.only || m.only === props.recap.direction) &&
         props.recap.data.some((s) => typeof s[m.key] === "number"),
@@ -332,7 +332,7 @@ function RecapView(props: { recap: Recap; onDelete: () => void }) {
     ] as const;
 
   function downloadCsv() {
-    const keys = METRICS.map((m) => m.key).filter((k) =>
+    const keys = STREAM_METRICS.map((m) => m.key).filter((k) =>
       props.recap.data.some((s) => s[k] !== undefined),
     );
     if (props.recap.data.some((s) => s.limitation)) keys.push("limitation");

@@ -32,6 +32,7 @@ import { MyAccount } from "./user/Account";
 import AdvancedSettings from "./user/Advanced";
 import { AppearanceMenu } from "./user/appearance";
 import { MyBots, ViewBot } from "./user/bots";
+import { CompareRecaps } from "./user/developer/CompareRecaps";
 import {
   DeveloperSettings,
   StreamStatsSettings,
@@ -55,6 +56,7 @@ const Config: SettingsConfiguration<{ server: Server }> = {
   title(ctx, key) {
     if (key === "developer/voice") return "Voice Call Stats";
     if (key === "developer/streams") return "Stream Stats";
+    if (key === "developer/compare") return "Compare Recaps";
 
     if (key.startsWith("bots/")) {
       const user = useUser(key.substring(5));
@@ -94,6 +96,8 @@ const Config: SettingsConfiguration<{ server: Server }> = {
         return <VoiceStatsSettings />;
       case "developer/streams":
         return <StreamStatsSettings />;
+      case "developer/compare":
+        return <CompareRecaps />;
       case "profile":
         return <EditProfile />;
       case "sessions":

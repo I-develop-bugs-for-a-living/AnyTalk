@@ -75,6 +75,14 @@ export function DeveloperSettings() {
         >
           Stream stats
         </CategoryButton>
+        <CategoryButton
+          icon={<Symbol>compare_arrows</Symbol>}
+          action="chevron"
+          onClick={() => navigate("developer/compare")}
+          description="Put your recaps next to CSV recaps from other people"
+        >
+          Compare recaps
+        </CategoryButton>
       </CategoryButton.Group>
     </Column>
   );

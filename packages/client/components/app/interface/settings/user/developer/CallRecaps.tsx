@@ -37,7 +37,7 @@ import {
 } from "./RecapParts";
 import { TimeChart, formatDuration } from "./TimeChart";
 
-type Metric = {
+export type Metric = {
   key: keyof AudioSample;
   title: string;
   format: (v: number) => string;
@@ -52,7 +52,7 @@ const percent = (v: number) => `${(v * 100).toFixed(1)}%`;
 /**
  * Charted values, in display order; charts without data are skipped
  */
-const METRICS: Metric[] = [
+export const CALL_METRICS: Metric[] = [
   { key: "bitrate", title: "Bitrate", format: formatBitrate },
   { key: "packets", title: "Packets per second", format: int },
   {
@@ -89,11 +89,11 @@ const METRICS: Metric[] = [
   },
 ];
 
-function callTitle(meta: CallRecapMeta) {
+export function callTitle(meta: CallRecapMeta) {
   return meta.channelName ? `#${meta.channelName}` : "Call";
 }
 
-function callContext(meta: CallRecapMeta) {
+export function callContext(meta: CallRecapMeta) {
   return [
     new Date(meta.startedAt).toLocaleString(),
     formatDuration(meta.endedAt - meta.startedAt),
@@ -254,7 +254,7 @@ function RecapView(props: { recap: CallRecap; onDelete: () => void }) {
     ] as const;
 
   function downloadCsv() {
-    const keys = METRICS.map((m) => m.key).filter((k) =>
+    const keys = CALL_METRICS.map((m) => m.key).filter((k) =>
       props.recap.series.some((s) => s.data.some((d) => d[k] !== undefined)),
     );
 
@@ -373,7 +373,7 @@ function SeriesView(props: { series: CallSeries }) {
 
   const times = createMemo(() => props.series.data.map((s) => s.t));
   const metrics = createMemo(() =>
-    METRICS.filter(
+    CALL_METRICS.filter(
       (m) =>
         (!m.only || m.only === props.series.direction) &&
         props.series.data.some((s) => typeof s[m.key] === "number"),

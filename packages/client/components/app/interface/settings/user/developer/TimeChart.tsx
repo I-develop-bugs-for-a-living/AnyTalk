@@ -3,11 +3,11 @@ import { For, Show, createMemo, createSignal, onMount } from "solid-js";
 import { createResizeObserver } from "@solid-primitives/resize-observer";
 import { styled } from "styled-system/jsx";
 
-const HEIGHT = 140,
+export const HEIGHT = 140,
   MARGIN = { top: 10, right: 12, bottom: 22, left: 68 };
 
 /** X tick spacing candidates, in seconds */
-const TIME_STEPS = [5, 10, 15, 30, 60, 120, 300, 600, 900, 1800, 3600];
+export const TIME_STEPS = [5, 10, 15, 30, 60, 120, 300, 600, 900, 1800, 3600];
 
 export function formatDuration(ms: number) {
   const total = Math.round(ms / 1000),
@@ -19,7 +19,7 @@ export function formatDuration(ms: number) {
 }
 
 /** Round up to 1, 2, 2.5 or 5 × 10^n */
-function niceMax(value: number) {
+export function niceMax(value: number) {
   if (value <= 0) return 1;
   const exp = Math.pow(10, Math.floor(Math.log10(value)));
   for (const step of [1, 2, 2.5, 5, 10]) {
@@ -29,7 +29,7 @@ function niceMax(value: number) {
 }
 
 /** Index of the sample closest to time t (times are ascending) */
-function nearestIndex(times: number[], t: number) {
+export function nearestIndex(times: number[], t: number) {
   let lo = 0,
     hi = times.length - 1;
   while (lo < hi) {
@@ -38,6 +38,68 @@ function nearestIndex(times: number[], t: number) {
     else hi = mid;
   }
   return lo > 0 && t - times[lo - 1] < times[lo] - t ? lo - 1 : lo;
+}
+
+/**
+ * Line (and area) paths, reduced to min/max per pixel column so spikes
+ * survive long sessions; gaps (missing values) break the line
+ */
+export function linePaths(
+  times: number[],
+  values: (number | undefined)[],
+  scale: {
+    x: (t: number) => number;
+    y: (v: number) => number;
+    columns: number;
+    duration: number;
+  },
+) {
+  const { x, y, columns, duration } = scale;
+  const segments: [number, number][][] = [];
+  let current: [number, number][] = [];
+  let bucket = -1,
+    lo: [number, number] | undefined,
+    hi: [number, number] | undefined;
+
+  const flush = () => {
+    if (!lo || !hi) return;
+    const pts = lo[0] <= hi[0] ? [lo, hi] : [hi, lo];
+    current.push(...(lo === hi ? [lo] : pts));
+    lo = hi = undefined;
+  };
+
+  times.forEach((t, i) => {
+    const v = values[i];
+    if (v === undefined) {
+      flush();
+      if (current.length) segments.push(current);
+      current = [];
+      bucket = -1;
+      return;
+    }
+
+    const b = Math.floor((t / duration) * columns);
+    if (b !== bucket) {
+      flush();
+      bucket = b;
+    }
+
+    const p: [number, number] = [x(t), y(v)];
+    if (!lo || p[1] > lo[1]) lo = p;
+    if (!hi || p[1] < hi[1]) hi = p;
+  });
+
+  flush();
+  if (current.length) segments.push(current);
+
+  const baseline = y(0);
+  return segments.map((pts) => ({
+    line: pts.map(([px, py], i) => `${i ? "L" : "M"}${px},${py}`).join(""),
+    area:
+      `M${pts[0][0]},${baseline}` +
+      pts.map(([px, py]) => `L${px},${py}`).join("") +
+      `L${pts.at(-1)![0]},${baseline}Z`,
+  }));
 }
 
 type Props = {
@@ -83,58 +145,14 @@ export function TimeChart(props: Props) {
   const x = (t: number) => MARGIN.left + (t / duration()) * plotWidth();
   const y = (v: number) => MARGIN.top + plotHeight - (v / yMax()) * plotHeight;
 
-  /**
-   * Line path, reduced to min/max per pixel column so spikes survive
-   * long sessions; gaps (missing values) break the line
-   */
-  const paths = createMemo(() => {
-    const columns = Math.max(1, Math.floor(plotWidth()));
-    const segments: [number, number][][] = [];
-    let current: [number, number][] = [];
-    let bucket = -1,
-      lo: [number, number] | undefined,
-      hi: [number, number] | undefined;
-
-    const flush = () => {
-      if (!lo || !hi) return;
-      const pts = lo[0] <= hi[0] ? [lo, hi] : [hi, lo];
-      current.push(...(lo === hi ? [lo] : pts));
-      lo = hi = undefined;
-    };
-
-    props.times.forEach((t, i) => {
-      const v = props.values[i];
-      if (v === undefined) {
-        flush();
-        if (current.length) segments.push(current);
-        current = [];
-        bucket = -1;
-        return;
-      }
-
-      const b = Math.floor((t / duration()) * columns);
-      if (b !== bucket) {
-        flush();
-        bucket = b;
-      }
-
-      const p: [number, number] = [x(t), y(v)];
-      if (!lo || p[1] > lo[1]) lo = p;
-      if (!hi || p[1] < hi[1]) hi = p;
-    });
-
-    flush();
-    if (current.length) segments.push(current);
-
-    const baseline = y(0);
-    return segments.map((pts) => ({
-      line: pts.map(([px, py], i) => `${i ? "L" : "M"}${px},${py}`).join(""),
-      area:
-        `M${pts[0][0]},${baseline}` +
-        pts.map(([px, py]) => `L${px},${py}`).join("") +
-        `L${pts.at(-1)![0]},${baseline}Z`,
-    }));
-  });
+  const paths = createMemo(() =>
+    linePaths(props.times, props.values, {
+      x,
+      y,
+      columns: Math.max(1, Math.floor(plotWidth())),
+      duration: duration(),
+    }),
+  );
 
   const xTicks = createMemo(() => {
     const seconds = duration() / 1000;
@@ -314,7 +332,7 @@ export function TimeChart(props: Props) {
   );
 }
 
-const Card = styled("div", {
+export const Card = styled("div", {
   base: {
     minWidth: 0,
     padding: "var(--gap-md)",
@@ -324,7 +342,7 @@ const Card = styled("div", {
   },
 });
 
-const Header = styled("div", {
+export const Header = styled("div", {
   base: {
     display: "flex",
     justifyContent: "space-between",
@@ -336,7 +354,7 @@ const Header = styled("div", {
   },
 });
 
-const Readout = styled("span", {
+export const Readout = styled("span", {
   base: {
     fontWeight: 400,
     fontVariantNumeric: "tabular-nums",
@@ -344,7 +362,7 @@ const Readout = styled("span", {
   },
 });
 
-const Muted = styled("span", {
+export const Muted = styled("span", {
   base: {
     color: "var(--md-sys-color-on-surface-variant)",
   },
