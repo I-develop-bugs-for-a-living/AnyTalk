@@ -9,7 +9,8 @@ import { render } from "solid-js/web";
 import { attachDevtoolsOverlay } from "@solid-devtools/overlay";
 import { Navigate, Route, Router, useParams } from "@solidjs/router";
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
-import "material-symbols";
+// only the outlined style is used, the rounded and sharp fonts are 8 MB
+import "material-symbols/outlined.css";
 import "mdui/mdui.css";
 import { PublicBot, PublicChannelInvite } from "stoat.js";
 

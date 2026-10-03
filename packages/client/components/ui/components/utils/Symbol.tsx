@@ -24,7 +24,8 @@ interface Props {
    */
   opticalSize?: number | "auto";
   /**
-   * The type of symbol to use. This can be "outlined", "rounded", or "sharp". Defaults to "outlined".
+   * The type of symbol to use. Only "outlined" is loaded (see src/index.tsx),
+   * import "material-symbols/rounded.css" or "sharp.css" before using another.
    */
   type?: "outlined" | "rounded" | "sharp";
   /**
