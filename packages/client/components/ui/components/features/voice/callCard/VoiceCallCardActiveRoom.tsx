@@ -32,6 +32,7 @@ import {
  */
 export function VoiceCallCardActiveRoom() {
   const voice = useVoice();
+  const device = useDevice();
   const collapsed = createMemo(() => voice.layout() === "collapsed");
 
   // Fullscreen with a focused stream: video fills the screen and the
@@ -86,7 +87,16 @@ export function VoiceCallCardActiveRoom() {
       <Participants theater={theater()} />
       <VoiceCallControls theater={theater()} hidden={theater() && idle()}>
         <VoiceCallControlHolder left collapsed={collapsed()}>
-          <VoiceCallCardStatus />
+          {/* on mobile only problems are worth the space next to the controls */}
+          <Show
+            when={
+              device.layout() === "desktop" ||
+              voice.state() === "RECONNECTING" ||
+              voice.state() === "DISCONNECTED"
+            }
+          >
+            <VoiceCallCardStatus />
+          </Show>
           <Show when={theater() && voice.focusTrack()}>
             <FocusedInfo>
               <TrackLoop tracks={() => [voice.focusTrack()!]}>
