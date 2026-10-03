@@ -46,6 +46,7 @@ import {
 import { VoiceCallCardContext } from "@revolt/ui/components/features/voice/callCard/VoiceCallCard";
 
 import { Device, useDevice } from "@revolt/common";
+import { setCallAudioSession } from "./audioSession";
 import { CallSounds } from "./components/CallSounds";
 import { InRoom } from "./components/InRoom";
 import { RoomAudioManager } from "./components/RoomAudioManager";
@@ -359,11 +360,9 @@ class Voice {
     room.addListener("connected", () => {
       this.#setState("CONNECTED");
       if (this.speakingPermission)
-        room.localParticipant
-          .setMicrophoneEnabled(this.#settings.micOn)
-          .then((track) => {
-            this.#settings.micOn = track != null;
-          });
+        this.#setMicrophoneEnabled(room, this.#settings.micOn).then((track) => {
+          this.#settings.micOn = track != null;
+        });
       for (const p of room.remoteParticipants.values()) {
         const screenShareTrack = p.getTrackPublication(
           Track.Source.ScreenShare,
@@ -376,7 +375,10 @@ class Voice {
       this.#shareDeafen(room);
     });
 
-    room.addListener("disconnected", () => this.#setState("DISCONNECTED"));
+    room.addListener("disconnected", () => {
+      setCallAudioSession(false);
+      this.#setState("DISCONNECTED");
+    });
 
     room.addListener("localTrackPublished", (pub) => {
       if (pub.audioTrack && pub.audioTrack.source === Track.Source.Microphone) {
@@ -525,6 +527,7 @@ class Voice {
 
   disconnect() {
     this.device.releaseWakeLock();
+    setCallAudioSession(false);
     this.#releaseAudioUnlock?.();
     this.#releaseAudioUnlock = undefined;
     try {
@@ -553,6 +556,25 @@ class Voice {
   }
 
   /**
+   * Turn the microphone on or off, switching iOS to call audio before it
+   * opens. Muting keeps the microphone open, so call audio stays on until
+   * there is no microphone track any more (e.g. turning it on failed).
+   * @param room Room
+   * @param enabled Whether the microphone should be on
+   * @returns Microphone track publication, if any
+   */
+  async #setMicrophoneEnabled(room: Room, enabled: boolean) {
+    if (enabled) setCallAudioSession(true);
+    try {
+      return await room.localParticipant.setMicrophoneEnabled(enabled);
+    } finally {
+      setCallAudioSession(
+        !!room.localParticipant.getTrackPublication(Track.Source.Microphone),
+      );
+    }
+  }
+
+  /**
    * Tell the others in the call whether we are deafened; LiveKit itself has
    * no notion of it since deafening only silences playback on this device
    */
@@ -569,7 +591,8 @@ class Voice {
     try {
       const room = this.room();
       if (!room) throw "invalid state";
-      await room.localParticipant.setMicrophoneEnabled(
+      await this.#setMicrophoneEnabled(
+        room,
         (this.#settings.micOn || !!fromMute) &&
           !room.localParticipant.isMicrophoneEnabled,
       );
@@ -597,7 +620,8 @@ class Voice {
     try {
       const room = this.room();
       if (!room) throw "invalid state";
-      await room.localParticipant.setMicrophoneEnabled(
+      await this.#setMicrophoneEnabled(
+        room,
         !room.localParticipant.isMicrophoneEnabled,
       );
 
