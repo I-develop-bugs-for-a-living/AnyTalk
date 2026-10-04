@@ -176,7 +176,9 @@ function LayoutButtons() {
 const THEATER_IDLE_MS = 2500;
 
 const TILE_MIN_WIDTH = "250px",
-  TILE_MIN_FOCUS_HEIGHT = "100px";
+  TILE_MIN_FOCUS_HEIGHT = "100px",
+  // below this the grid scrolls instead of shrinking its tiles further
+  TILE_MIN_FIT_WIDTH = 64;
 
 /**
  * Show a grid of participants
@@ -189,11 +191,43 @@ function Participants(props: { theater: boolean }) {
   const testTrackCount = 0;
 
   let callRef: HTMLDivElement | undefined;
+  let gridRef: HTMLDivElement | undefined;
+
+  const [callSize, setCallSize] = createSignal({ width: 0, height: 0 });
+
+  /**
+   * Largest 16:9 tile width at which every tile fits into the call window,
+   * trying each column count
+   * @param count Number of tiles
+   * @returns Width in pixels, 0 if the window has no size yet
+   */
+  const fitTileWidth = (count: number) => {
+    const { width, height } = callSize();
+    if (!width || !height || !gridRef) return 0;
+
+    const gap = parseFloat(getComputedStyle(gridRef).columnGap) || 0;
+
+    let best = 0;
+    for (let columns = 1; columns <= count; columns++) {
+      const rows = Math.ceil(count / columns);
+      best = Math.max(
+        best,
+        Math.min(
+          (width - (columns - 1) * gap) / columns,
+          (((height - (rows - 1) * gap) / rows) * 16) / 9,
+        ),
+      );
+    }
+
+    return Math.floor(best);
+  };
 
   const tileWidth = () => {
-    const vidWidth = Math.round(
-      100 / (voice.vidTracks().length + testTrackCount),
-    );
+    const count = voice.vidTracks().length + testTrackCount;
+    const fit = !hasMain() && fitTileWidth(count);
+    if (fit) return `${Math.max(fit, TILE_MIN_FIT_WIDTH)}px`;
+
+    const vidWidth = Math.round(100 / count);
     return `max(${TILE_MIN_WIDTH}, ${vidWidth}% - var(--gap-md))`;
   };
 
@@ -238,6 +272,7 @@ function Participants(props: { theater: boolean }) {
       if (el === callRef) {
         el.style.setProperty("--vc-w", `${width}px`);
         el.style.setProperty("--vc-h", `${height}px`);
+        setCallSize({ width, height });
       }
     });
   });
@@ -276,6 +311,7 @@ function Participants(props: { theater: boolean }) {
           </ShowBarButtonHolder>
         </Show>
         <Grid
+          ref={gridRef}
           focus={hasMain()}
           show={voice.showBar() && !props.theater}
           class={hasMain() ? scrollableStyles({ direction: "x" }) : ""}
@@ -489,6 +525,14 @@ const Grid = styled("div", {
 
   variants: {
     focus: {
+      // the tile size is fitted to the window, so nothing may stretch it,
+      // not even its content
+      false: {
+        "& .vc_tile": {
+          minWidth: 0,
+          height: "calc(var(--vc-tile-width) * 9 / 16)",
+        },
+      },
       true: {
         flexDirection: "column",
         height: `max(20%, ${TILE_MIN_FOCUS_HEIGHT})`,

@@ -88,6 +88,9 @@ export function ParticipantTile(props: TileProps) {
   const isSpeaking = useIsSpeaking(participant);
 
   const theater = () => !!props.focus && voice.layout() === "fullscreen";
+  // the call window isn't maximized, so its tiles are small
+  const compact = () =>
+    voice.layout() !== "expanded" && voice.layout() !== "fullscreen";
 
   // Our own screen share is hidden while we're elsewhere: it saves drawing the
   // preview and avoids a hall-of-mirrors when sharing this window's screen
@@ -149,7 +152,7 @@ export function ParticipantTile(props: TileProps) {
         <Show
           when={isVideo() || isScreenShare()}
           fallback={
-            <AvatarOnly>
+            <AvatarOnly compact={compact()}>
               <Avatar
                 src={user().avatar}
                 fallback={user().username}
@@ -247,8 +250,11 @@ export function ParticipantTile(props: TileProps) {
         </Show>
         {/* In fullscreen the name moves to the floating call controls */}
         <Show when={!theater()}>
-          <Overlay showOnHover={isScreenShare() && !unwatched()}>
-            <ParticipantInfo />
+          <Overlay
+            showOnHover={isScreenShare() && !unwatched()}
+            compact={compact()}
+          >
+            <ParticipantInfo nameOnly={compact()} />
           </Overlay>
         </Show>
       </div>
@@ -262,6 +268,8 @@ export function ParticipantTile(props: TileProps) {
 export function ParticipantInfo(props: {
   /** Which edge the stream volume slider lines up with */
   align?: "start" | "end";
+  /** Leave out the icons, e.g. for the small tiles of a call window */
+  nameOnly?: boolean;
 }) {
   const state = useState();
   const participant = useEnsureParticipant();
@@ -293,42 +301,44 @@ export function ParticipantInfo(props: {
   return (
     <OverlayInner>
       <OverflowingText>{user().username}</OverflowingText>
-      <Row gap="md">
-        <ConnectionQualityIcon />
-        {/* the stream replaces the streamer's own tile, so keep their mic state */}
-        <Show when={isScreenShare()}>
-          <VoiceStatefulUserIcons
-            userId={participant.identity}
-            muted={isMuted()}
-          />
-        </Show>
-        {isScreenShare() && !user().user!.self ? (
-          <StreamVolumeButton
-            userId={participant.identity}
-            noAudio={isScreenShareAudioMuted()}
-            align={props.align}
-          />
-        ) : isScreenShare() ? (
-          <Show when={isScreenShareAudioUserMuted()}>
-            <Symbol
-              size={18}
-              color={
-                isScreenShareAudioUserMuted() === "by-user"
-                  ? "var(--md-sys-color-error)"
-                  : undefined
-              }
-            >
-              no_sound
-            </Symbol>
+      <Show when={!props.nameOnly}>
+        <Row gap="md">
+          <ConnectionQualityIcon />
+          {/* the stream replaces the streamer's own tile, so keep their mic state */}
+          <Show when={isScreenShare()}>
+            <VoiceStatefulUserIcons
+              userId={participant.identity}
+              muted={isMuted()}
+            />
           </Show>
-        ) : (
-          <VoiceStatefulUserIcons
-            userId={participant.identity}
-            muted={isMuted()}
-            camera={!isVideoMuted()}
-          />
-        )}
-      </Row>
+          {isScreenShare() && !user().user!.self ? (
+            <StreamVolumeButton
+              userId={participant.identity}
+              noAudio={isScreenShareAudioMuted()}
+              align={props.align}
+            />
+          ) : isScreenShare() ? (
+            <Show when={isScreenShareAudioUserMuted()}>
+              <Symbol
+                size={18}
+                color={
+                  isScreenShareAudioUserMuted() === "by-user"
+                    ? "var(--md-sys-color-error)"
+                    : undefined
+                }
+              >
+                no_sound
+              </Symbol>
+            </Show>
+          ) : (
+            <VoiceStatefulUserIcons
+              userId={participant.identity}
+              muted={isMuted()}
+              camera={!isVideoMuted()}
+            />
+          )}
+        </Row>
+      </Show>
     </OverlayInner>
   );
 }
@@ -419,12 +429,28 @@ const AvatarOnly = styled("div", {
     display: "grid",
     placeItems: "center",
     overflow: "hidden",
+    // leave room for the name overlay at the bottom
+    paddingBottom: "40px",
 
     // TODO: Refactor the avatar component to be reactive later.
     "& > *": {
       width: "auto !important",
       height: "30% !important",
-      minHeight: "48px",
+      // never taller than the room above the name, e.g. in small tiles
+      minHeight: "min(48px, 100%)",
+    },
+  },
+  variants: {
+    compact: {
+      // scale with the tile and stay clear of the name below
+      true: {
+        paddingBottom: "18px",
+
+        "& > *": {
+          height: "50% !important",
+          minHeight: 0,
+        },
+      },
     },
   },
 });
@@ -455,6 +481,16 @@ const Overlay = styled("div", {
       },
       false: {
         opacity: 1,
+      },
+    },
+    compact: {
+      true: {
+        padding: "var(--gap-xs) var(--gap-sm)",
+        fontSize: "12px",
+
+        "& > *": {
+          justifyContent: "center",
+        },
       },
     },
   },

@@ -141,7 +141,7 @@ export function VoiceCallCardContext(props: { children: JSX.Element }) {
   function setFloat(float: FloatType) {
     const sty = ref!.style,
       x = float[1] === "l" ? PAD_X : `calc(100vw - var(--flt-w) - ${PAD_X})`,
-      y = float[0] === "t" ? PAD_Y : `calc(100vh - var(--flt-h) - ${PAD_Y})`;
+      y = float[0] === "t" ? PAD_Y : `calc(100dvh - var(--flt-h) - ${PAD_Y})`;
     sty.transform = `translate(${x}, ${y})`;
     sty.width = "";
     sty.height = "";
@@ -158,20 +158,20 @@ export function VoiceCallCardContext(props: { children: JSX.Element }) {
       });
   });
 
+  // iPhones have no fullscreen API, there the call card only fills the page
   createEffect(() => {
+    const floating = document.getElementById("floating");
+    if (!floating?.requestFullscreen) return;
+
     if (voice.layout() === "fullscreen" && inCall()) {
-      if (
-        !document
-          .getElementById("floating")
-          ?.isSameNode(document.fullscreenElement)
-      ) {
+      if (!floating.isSameNode(document.fullscreenElement)) {
         if (document.fullscreenElement) {
-          document.exitFullscreen();
+          document.exitFullscreen().catch(() => {});
         }
-        document.getElementById("floating")?.requestFullscreen();
+        floating.requestFullscreen().catch(() => {});
       }
     } else if (document.fullscreenElement) {
-      document.exitFullscreen();
+      document.exitFullscreen().catch(() => {});
     }
   });
 
@@ -224,8 +224,10 @@ const Float = styled("div", {
     fullscreen: {
       true: {
         zIndex: 100,
-        height: "100vh",
-        top: 0,
+        // the visible height below the notch, Safari's toolbar covers part
+        // of 100vh; the card keeps its controls clear of the home indicator
+        top: "env(safe-area-inset-top)",
+        height: "calc(100dvh - env(safe-area-inset-top))",
         // Width is set by floating logic in effect above
       },
     },
@@ -365,6 +367,7 @@ const Card = styled("div", {
     layout: {
       fullscreen: {
         borderRadius: 0,
+        paddingBottom: "var(--safe-area-bottom)",
       },
       expanded: {
         borderRadius: "var(--borderRadius-xl)",
