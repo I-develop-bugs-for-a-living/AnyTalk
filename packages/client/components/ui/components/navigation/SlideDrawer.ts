@@ -49,10 +49,17 @@ export class SlideDrawer {
   private sGet!: Accessor<SlideState>;
   private sSet!: Setter<SlideState>;
 
+  /**
+   * @param drawer Element sliding over the root
+   * @param root Element holding both
+   * @param shown Whether the drawer starts out shown
+   */
   constructor(
     private drawer: HTMLElement,
     private root: HTMLElement,
+    shown = true,
   ) {
+    this.lShow = shown;
     this.start = this.start.bind(this);
     this.move = this.move.bind(this);
     root.addEventListener("touchstart", this.start);

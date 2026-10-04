@@ -26,7 +26,12 @@ export function SettingsModal(
   createEffect(
     on(contRef, (cont) => {
       if (!cont || sDrawer) return;
-      sDrawer = new SlideDrawer(cont, rootRef!);
+      // start on the list of all settings unless opened at a page
+      sDrawer = new SlideDrawer(
+        cont,
+        rootRef!,
+        !!(props.context as { page?: string } | undefined)?.page,
+      );
       setDiagDrawer(sDrawer);
     }),
   );
