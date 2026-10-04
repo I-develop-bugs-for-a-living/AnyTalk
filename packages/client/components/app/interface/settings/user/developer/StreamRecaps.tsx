@@ -8,6 +8,9 @@ import {
   createSignal,
 } from "solid-js";
 
+import { MessageDescriptor, i18n } from "@lingui/core";
+import { msg, plural, t } from "@lingui/core/macro";
+import { Trans } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
 import {
@@ -36,9 +39,13 @@ import {
 } from "./RecapParts";
 import { TimeChart, formatDuration } from "./TimeChart";
 
+/**
+ * Titles are `msg` descriptors rendered with `i18n._`, which is not reactive:
+ * a language change relies on the full reload (see state/stores/Locale.ts).
+ */
 export type Metric = {
   key: keyof Sample;
-  title: string;
+  title: MessageDescriptor;
   format: (v: number) => string;
   only?: Direction;
   /** Charted values, if not the raw sample values */
@@ -55,94 +62,114 @@ const ms = (v: number) => `${Math.round(v)} ms`;
  * Charted values, in display order; charts without data are skipped
  */
 export const STREAM_METRICS: Metric[] = [
-  { key: "bitrate", title: "Bitrate", format: formatBitrate },
+  { key: "bitrate", title: msg`Bitrate`, format: formatBitrate },
   {
     key: "targetBitrate",
-    title: "Encoder target bitrate",
+    title: msg`Encoder target bitrate`,
     format: formatBitrate,
     only: "sending",
   },
   {
     key: "available",
-    title: "Estimated upload bandwidth",
+    title: msg`Estimated upload bandwidth`,
     format: formatBitrate,
     // older recaps of received streams hold a meaningless upload estimate
     only: "sending",
   },
-  { key: "fps", title: "Frame rate", format: (v) => `${Math.round(v)} fps` },
-  { key: "height", title: "Resolution", format: (v) => `${Math.round(v)}p` },
+  { key: "fps", title: msg`Frame rate`, format: (v) => `${Math.round(v)} fps` },
+  { key: "height", title: msg`Resolution`, format: (v) => `${Math.round(v)}p` },
   {
     key: "activeLayers",
-    title: "Video copies being sent (full / half / quarter size)",
+    title: msg`Video copies being sent (full / half / quarter size)`,
     format: int,
     only: "sending",
   },
   {
     key: "frozen",
-    title: "Running or frozen",
-    format: (v) => (v ? "Frozen" : "Running"),
+    title: msg`Running or frozen`,
+    format: (v) => (v ? t`Frozen` : t`Running`),
     only: "receiving",
     values: frozenTimeline,
     yTicks: [0, 1],
-    summary: (r) =>
-      `${r.summary.freezes} freezes, ${r.summary.frozenSeconds.toFixed(1)} s`,
+    summary: (r) => {
+      const seconds = r.summary.frozenSeconds.toFixed(1);
+      return plural(r.summary.freezes, {
+        one: `# freeze, ${seconds} s`,
+        other: `# freezes, ${seconds} s`,
+      });
+    },
   },
-  { key: "lost", title: "Packets lost per second", format: int },
+  { key: "lost", title: msg`Packets lost per second`, format: int },
   {
     key: "dropped",
-    title: "Dropped frames per second",
+    title: msg`Dropped frames per second`,
     format: int,
     only: "receiving",
   },
   {
     key: "nack",
-    title: "Resend requests per second (viewers asking for lost packets again)",
+    title: msg`Resend requests per second (viewers asking for lost packets again)`,
     format: int,
   },
   {
     key: "pli",
-    title:
-      "Keyframe requests per second (viewers asking for a full new picture)",
+    title: msg`Keyframe requests per second (viewers asking for a full new picture)`,
     format: int,
   },
-  { key: "rtt", title: "Ping (round trip to the server)", format: ms },
-  { key: "jitter", title: "Jitter", format: ms, only: "receiving" },
+  { key: "rtt", title: msg`Ping (round trip to the server)`, format: ms },
+  { key: "jitter", title: msg`Jitter`, format: ms, only: "receiving" },
   {
     key: "jitterBuffer",
-    title: "Jitter buffer delay",
+    title: msg`Jitter buffer delay`,
     format: ms,
     only: "receiving",
   },
 ];
 
 /** Quality limitation reasons, coloured with status colours */
-const LIMITATIONS: Record<string, { label: string; color: string }> = {
-  none: { label: "Not limited", color: "var(--md-sys-color-outline-variant)" },
-  bandwidth: {
-    label: "Bandwidth",
-    color: "var(--customColours-warning-color)",
-  },
-  cpu: { label: "CPU", color: "var(--md-sys-color-error)" },
-  other: { label: "Other", color: "var(--md-sys-color-tertiary)" },
-};
+const LIMITATIONS: Record<string, { label: MessageDescriptor; color: string }> =
+  {
+    none: {
+      label: msg`Not limited`,
+      color: "var(--md-sys-color-outline-variant)",
+    },
+    bandwidth: {
+      label: msg`Bandwidth`,
+      color: "var(--customColours-warning-color)",
+    },
+    cpu: { label: msg`CPU`, color: "var(--md-sys-color-error)" },
+    other: { label: msg`Other`, color: "var(--md-sys-color-tertiary)" },
+  };
 
 const limitationOf = (reason?: string) =>
   LIMITATIONS[reason ?? "none"] ?? LIMITATIONS.other;
 
-function sourceName(source: string) {
-  return source === "screen_share"
-    ? "screen share"
-    : source === "camera"
-      ? "camera"
-      : source;
-}
-
+/**
+ * Heading of a stream recap, the owner and what was streamed
+ * @param meta Recap
+ */
 export function recapTitle(meta: RecapMeta) {
-  return meta.direction === "sending"
-    ? `Your ${sourceName(meta.source)}`
-    : `${meta.participantName}'s ${sourceName(meta.source)}`;
+  const { source, participantName: name } = meta;
+
+  if (meta.direction === "sending") {
+    return source === "screen_share"
+      ? t`Your screen share`
+      : source === "camera"
+        ? t`Your camera`
+        : t`Your ${source}`;
+  }
+
+  return source === "screen_share"
+    ? t`${name}'s screen share`
+    : source === "camera"
+      ? t`${name}'s camera`
+      : t`${name}'s ${source}`;
 }
 
+/**
+ * When, how long and where a stream was
+ * @param meta Recap
+ */
 export function recapContext(meta: RecapMeta) {
   return [
     new Date(meta.startedAt).toLocaleString(),
@@ -197,6 +224,9 @@ export function StreamRecaps() {
   );
 }
 
+/**
+ * Stored stream recaps to open, export or delete
+ */
 function RecapList(props: { onSelect: (id: string) => void }) {
   const [list] = createResource(recapsRevision, () => recaps.list());
 
@@ -211,10 +241,12 @@ function RecapList(props: { onSelect: (id: string) => void }) {
   return (
     <Column gap="lg">
       <Text class="body">
-        While stream developer mode and "Record stream recaps" are on,
-        statistics for every video stream you send or watch in a call are
-        recorded once per second. Recaps are stored on this device only; the
-        newest 20 are kept.
+        <Trans>
+          While stream developer mode and "Record stream recaps" are on,
+          statistics for every video stream you send or watch in a call are
+          recorded once per second. Recaps are stored on this device only; the
+          newest 20 are kept.
+        </Trans>
       </Text>
       <Switch>
         <Match when={list.loading}>
@@ -222,8 +254,10 @@ function RecapList(props: { onSelect: (id: string) => void }) {
         </Match>
         <Match when={!list()?.length}>
           <Text class="label">
-            No recaps yet. Turn on "Record stream recaps", then join a call and
-            start or watch a stream.
+            <Trans>
+              No recaps yet. Turn on "Record stream recaps", then join a call
+              and start or watch a stream.
+            </Trans>
           </Text>
         </Match>
         <Match when={list()?.length}>
@@ -239,7 +273,10 @@ function RecapList(props: { onSelect: (id: string) => void }) {
             description={(meta) =>
               `${recapContext(meta)}${
                 meta.direction === "receiving" && meta.summary.freezes
-                  ? ` · ${meta.summary.freezes} freezes`
+                  ? ` · ${plural(meta.summary.freezes, {
+                      one: "# freeze",
+                      other: "# freezes",
+                    })}`
                   : ""
               }`
             }
@@ -247,7 +284,7 @@ function RecapList(props: { onSelect: (id: string) => void }) {
             onExport={exportRecaps}
             onDelete={(ids) => recaps.removeMany(ids)}
             onDeleteAll={() => {
-              if (confirm("Delete all stream recaps on this device?")) {
+              if (confirm(t`Delete all stream recaps on this device?`)) {
                 recaps.clear();
               }
             }}
@@ -258,6 +295,9 @@ function RecapList(props: { onSelect: (id: string) => void }) {
   );
 }
 
+/**
+ * One stored stream recap, loaded by id
+ */
 function RecapDetail(props: { id: string; onBack: () => void }) {
   const [recap] = createResource(
     () => props.id,
@@ -268,7 +308,7 @@ function RecapDetail(props: { id: string; onBack: () => void }) {
     <Column gap="lg">
       <Row>
         <Button variant="text" size="sm" onPress={props.onBack}>
-          <Symbol>arrow_back</Symbol> All recaps
+          <Symbol>arrow_back</Symbol> <Trans>All recaps</Trans>
         </Button>
       </Row>
       <Switch>
@@ -276,7 +316,9 @@ function RecapDetail(props: { id: string; onBack: () => void }) {
           <CircularProgress />
         </Match>
         <Match when={!recap()}>
-          <Text class="label">This recap no longer exists.</Text>
+          <Text class="label">
+            <Trans>This recap no longer exists.</Trans>
+          </Text>
         </Match>
         <Match when={recap()}>
           {(r) => (
@@ -291,6 +333,9 @@ function RecapDetail(props: { id: string; onBack: () => void }) {
   );
 }
 
+/**
+ * Header, charts and actions of one stream recap
+ */
 function RecapView(props: { recap: Recap; onDelete: () => void }) {
   const [hover, setHover] = createSignal<number>();
 
@@ -307,35 +352,38 @@ function RecapView(props: { recap: Recap; onDelete: () => void }) {
   const tiles = createMemo(() => {
     const { summary, direction } = props.recap;
     const out: [string, string][] = [
-      ["Duration", formatDuration(props.recap.endedAt - props.recap.startedAt)],
+      [
+        t`Duration`,
+        formatDuration(props.recap.endedAt - props.recap.startedAt),
+      ],
     ];
 
     if (summary.maxWidth)
-      out.push(["Max resolution", `${summary.maxWidth}x${summary.maxHeight}`]);
+      out.push([t`Max resolution`, `${summary.maxWidth}x${summary.maxHeight}`]);
     if (summary.avgBitrate !== undefined)
-      out.push(["Avg bitrate", formatBitrate(summary.avgBitrate)]);
+      out.push([t`Avg bitrate`, formatBitrate(summary.avgBitrate)]);
     if (summary.avgFps !== undefined)
-      out.push(["Avg frame rate", `${summary.avgFps.toFixed(1)} fps`]);
+      out.push([t`Avg frame rate`, `${summary.avgFps.toFixed(1)} fps`]);
 
     if (direction === "receiving") {
       out.push([
-        "Freezes",
+        t`Freezes`,
         `${summary.freezes} (${summary.frozenSeconds.toFixed(1)} s)`,
       ]);
       const packets = summary.received + summary.lost;
       out.push([
-        "Packet loss",
+        t`Packet loss`,
         packets
           ? `${((summary.lost / packets) * 100).toFixed(2)}%`
           : String(summary.lost),
       ]);
     } else {
-      out.push(["Packets lost (server)", String(summary.lost)]);
+      out.push([t`Packets lost (server)`, String(summary.lost)]);
     }
 
     if (summary.avgRtt !== undefined)
       out.push([
-        "Ping avg / max",
+        t`Ping avg / max`,
         `${Math.round(summary.avgRtt)} / ${Math.round(summary.maxRtt ?? 0)} ms`,
       ]);
 
@@ -344,11 +392,11 @@ function RecapView(props: { recap: Recap; onDelete: () => void }) {
 
   const info = () =>
     [
-      ["Transport", props.recap.summary.transports.join(", ") || "-"],
-      ["Codec", props.recap.info.codec ?? "-"],
+      [t`Transport`, props.recap.summary.transports.join(", ") || "-"],
+      [t`Codec`, props.recap.info.codec ?? "-"],
       props.recap.direction === "sending"
-        ? ["Encoder", props.recap.info.encoder ?? "-"]
-        : ["Decoder", props.recap.info.decoder ?? "-"],
+        ? [t`Encoder`, props.recap.info.encoder ?? "-"]
+        : [t`Decoder`, props.recap.info.decoder ?? "-"],
     ] as const;
 
   function downloadCsv() {
@@ -395,15 +443,17 @@ function RecapView(props: { recap: Recap; onDelete: () => void }) {
       </Show>
 
       <Text class="label">
-        Hover a chart (or focus it and use the arrow keys) to read all values at
-        the same moment.
+        <Trans>
+          Hover a chart (or focus it and use the arrow keys) to read all values
+          at the same moment.
+        </Trans>
       </Text>
 
       <Charts>
         <For each={metrics()}>
           {(metric) => (
             <TimeChart
-              title={metric.title}
+              title={i18n._(metric.title)}
               times={times()}
               values={
                 metric.values?.(props.recap.data) ??
@@ -421,16 +471,16 @@ function RecapView(props: { recap: Recap; onDelete: () => void }) {
 
       <Row>
         <Button variant="tonal" size="sm" onPress={downloadCsv}>
-          Download CSV
+          <Trans>Download CSV</Trans>
         </Button>
         <Button
           variant="text"
           size="sm"
           onPress={() => {
-            if (confirm("Delete this recap?")) props.onDelete();
+            if (confirm(t`Delete this recap?`)) props.onDelete();
           }}
         >
-          Delete recap
+          <Trans>Delete recap</Trans>
         </Button>
       </Row>
     </>
@@ -457,12 +507,14 @@ function LimitationStrip(props: {
 
   return (
     <Column gap="sm">
-      <Text class="label">What limited the stream quality</Text>
+      <Text class="label">
+        <Trans>What limited the stream quality</Trans>
+      </Text>
       <Strip>
         <For each={runs()}>
           {(run) => (
             <div
-              title={`${limitationOf(run.reason).label}: ${run.count} s`}
+              title={`${i18n._(limitationOf(run.reason).label)}: ${run.count} s`}
               style={{
                 flex: run.count,
                 background: limitationOf(run.reason).color,
@@ -476,7 +528,7 @@ function LimitationStrip(props: {
           {([reason, seconds]) => (
             <Legend>
               <Swatch style={{ background: limitationOf(reason).color }} />
-              {limitationOf(reason).label}{" "}
+              {i18n._(limitationOf(reason).label)}{" "}
               <TileLabel>{formatDuration(seconds * 1000)}</TileLabel>
             </Legend>
           )}

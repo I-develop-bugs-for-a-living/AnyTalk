@@ -1,5 +1,7 @@
 import { For, Show, createMemo, createSignal, onMount } from "solid-js";
 
+import { plural } from "@lingui/core/macro";
+import { Trans, useLingui } from "@lingui/solid/macro";
 import { createResizeObserver } from "@solid-primitives/resize-observer";
 import { styled } from "styled-system/jsx";
 
@@ -55,6 +57,23 @@ function average(values: (number | undefined)[]) {
  * crosshair shared between charts and a legend that reads out the values
  */
 export function CompareChart(props: Props) {
+  const { t } = useLingui();
+
+  /** Moment under the pointer */
+  const atLabel = (ms: number) => {
+    const time = formatDuration(ms);
+    return t`at ${time}`;
+  };
+
+  /** Accessible name of the chart */
+  const chartLabel = () => {
+    const title = props.title;
+    const count = props.series.length;
+    return plural(count, {
+      one: `${title} over time, # recap`,
+      other: `${title} over time, # recaps`,
+    });
+  };
   let container: HTMLDivElement | undefined;
   const [width, setWidth] = createSignal(600);
 
@@ -143,9 +162,13 @@ export function CompareChart(props: Props) {
         <Readout>
           <Show
             when={props.hover !== undefined}
-            fallback={<Muted>avg per recap</Muted>}
+            fallback={
+              <Muted>
+                <Trans>avg per recap</Trans>
+              </Muted>
+            }
           >
-            <Muted>at {formatDuration(props.hover!)}</Muted>
+            <Muted>{atLabel(props.hover!)}</Muted>
           </Show>
         </Readout>
       </Header>
@@ -154,7 +177,7 @@ export function CompareChart(props: Props) {
           width={width()}
           height={HEIGHT}
           role="img"
-          aria-label={`${props.title} over time, ${props.series.length} recaps`}
+          aria-label={chartLabel()}
           tabindex="0"
           onPointerMove={onPointerMove}
           onPointerLeave={() => props.onHover(undefined)}

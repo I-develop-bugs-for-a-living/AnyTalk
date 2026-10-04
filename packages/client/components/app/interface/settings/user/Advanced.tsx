@@ -1,17 +1,21 @@
 import { For } from "solid-js";
 
+import { Trans, useLingui } from "@lingui/solid/macro";
+
 import { useState } from "@revolt/state";
 import {
   AVAILABLE_EXPERIMENTS,
   EXPERIMENTS,
 } from "@revolt/state/stores/Experiments";
 import { CategoryButton, Checkbox, Column } from "@revolt/ui";
+import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 /**
  * Advanced settings
  */
 export default function AdvancedSettings() {
   const state = useState();
+  const { t } = useLingui();
 
   return (
     <Column gap="xl">
@@ -25,7 +29,7 @@ export default function AdvancedSettings() {
             )
           }
         >
-          Compact mode
+          <Trans>Compact mode</Trans>
         </Checkbox>
         <Checkbox
           checked={state.settings.getValue("advanced:copy_id")}
@@ -33,7 +37,7 @@ export default function AdvancedSettings() {
             state.settings.setValue("advanced:copy_id", e.currentTarget.checked)
           }
         >
-          Show 'copy ID' in context menus
+          <Trans>Show 'copy ID' in context menus</Trans>
         </Checkbox>
         <Checkbox
           checked={state.settings.getValue("advanced:admin_panel")}
@@ -44,13 +48,14 @@ export default function AdvancedSettings() {
             )
           }
         >
-          Show admin panel shortcuts in context menus
+          <Trans>Show admin panel shortcuts in context menus</Trans>
         </Checkbox>
       </Column>
       <CategoryButton.Group>
         <For each={AVAILABLE_EXPERIMENTS}>
           {(key) => (
             <CategoryButton
+              icon={<Symbol>science</Symbol>}
               action={
                 <Checkbox
                   checked={state.experiments.isEnabled(key)}
@@ -62,10 +67,10 @@ export default function AdvancedSettings() {
                   }
                 />
               }
-              description={EXPERIMENTS[key].description}
+              description={t(EXPERIMENTS[key].description)}
               onClick={() => void 0}
             >
-              {EXPERIMENTS[key].title}
+              {t(EXPERIMENTS[key].title)}
             </CategoryButton>
           )}
         </For>

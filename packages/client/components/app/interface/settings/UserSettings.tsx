@@ -1,6 +1,7 @@
 import { Show } from "solid-js";
 
 import { i18n } from "@lingui/core";
+import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { Server } from "stoat.js";
 import { css } from "styled-system/css";
@@ -58,9 +59,9 @@ const Config: SettingsConfiguration<{ server: Server }> = {
    * @param key
    */
   title(ctx, key) {
-    if (key === "developer/voice") return "Voice Call Stats";
-    if (key === "developer/streams") return "Stream Stats";
-    if (key === "developer/compare") return "Compare Recaps";
+    if (key === "developer/voice") return i18n._(msg`Voice Call Stats`);
+    if (key === "developer/streams") return i18n._(msg`Stream Stats`);
+    if (key === "developer/compare") return i18n._(msg`Compare Recaps`);
 
     if (key.startsWith("bots/")) {
       const user = useUser(key.substring(5));

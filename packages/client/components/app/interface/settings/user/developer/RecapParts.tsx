@@ -1,5 +1,7 @@
 import { For, JSX, Show, createMemo, createSignal } from "solid-js";
 
+import { plural, t } from "@lingui/core/macro";
+import { Trans } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
 import { zipFiles } from "@revolt/rtc/zip";
@@ -60,8 +62,8 @@ export function downloadRecapCsvs(files: RecapCsv[], zipName: string) {
  */
 export function RecapList<Meta extends { id: string }>(props: {
   items: Meta[];
-  /** "call" or "stream", for button labels and confirmations */
-  noun: string;
+  /** What the recaps are of, for confirmations */
+  noun: "call" | "stream";
   icon: (meta: Meta) => JSX.Element;
   title: (meta: Meta) => string;
   description: (meta: Meta) => string;
@@ -102,8 +104,25 @@ export function RecapList<Meta extends { id: string }>(props: {
     }
   }
 
-  const count = () =>
-    `${selected().length} ${props.noun} recap${selected().length === 1 ? "" : "s"}`;
+  /** "N selected" header of the selection mode */
+  const selectedLabel = () => {
+    const count = selected().length;
+    return t`${count} selected`;
+  };
+
+  /** Question to confirm deleting the selected recaps */
+  const confirmDelete = () => {
+    const n = selected().length;
+    return props.noun === "call"
+      ? plural(n, {
+          one: "Delete # call recap?",
+          other: "Delete # call recaps?",
+        })
+      : plural(n, {
+          one: "Delete # stream recap?",
+          other: "Delete # stream recaps?",
+        });
+  };
 
   return (
     <>
@@ -116,11 +135,11 @@ export function RecapList<Meta extends { id: string }>(props: {
               variant="tonal"
               onPress={() => setSelecting(true)}
             >
-              Select
+              <Trans>Select</Trans>
             </Button>
           }
         >
-          <Text class="label">{selected().length} selected</Text>
+          <Text class="label">{selectedLabel()}</Text>
           <Button
             size="sm"
             variant="text"
@@ -132,7 +151,11 @@ export function RecapList<Meta extends { id: string }>(props: {
               )
             }
           >
-            {allSelected() ? "Select none" : "Select all"}
+            {allSelected() ? (
+              <Trans>Select none</Trans>
+            ) : (
+              <Trans>Select all</Trans>
+            )}
           </Button>
           <Button
             size="sm"
@@ -140,28 +163,30 @@ export function RecapList<Meta extends { id: string }>(props: {
             isDisabled={!selected().length || busy()}
             onPress={() => run(props.onExport)}
           >
-            Export
+            <Trans>Export</Trans>
           </Button>
           <Button
             size="sm"
             variant="tonal"
             isDisabled={!selected().length || busy()}
             onPress={() => {
-              if (confirm(`Delete ${count()}?`)) {
+              if (confirm(confirmDelete())) {
                 run(props.onDelete).then(stopSelecting);
               }
             }}
           >
-            Delete
+            <Trans>Delete</Trans>
           </Button>
           <Button size="sm" variant="text" onPress={stopSelecting}>
-            Cancel
+            <Trans>Cancel</Trans>
           </Button>
         </Show>
       </Row>
       <Show when={selecting() && selected().length > 1}>
         <Text class="label">
-          Several recaps are exported as one zip file with a CSV for each.
+          <Trans>
+            Several recaps are exported as one zip file with a CSV for each.
+          </Trans>
         </Text>
       </Show>
       <CategoryButton.Group>
@@ -189,7 +214,7 @@ export function RecapList<Meta extends { id: string }>(props: {
       <Show when={!selecting()}>
         <Row>
           <Button variant="text" size="sm" onPress={props.onDeleteAll}>
-            Delete all recaps
+            <Trans>Delete all recaps</Trans>
           </Button>
         </Row>
       </Show>

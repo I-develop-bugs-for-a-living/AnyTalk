@@ -1,5 +1,6 @@
 import { For, Show, createMemo, createSignal, onMount } from "solid-js";
 
+import { useLingui } from "@lingui/solid/macro";
 import { createResizeObserver } from "@solid-primitives/resize-observer";
 import { styled } from "styled-system/jsx";
 
@@ -120,6 +121,25 @@ type Props = {
  * Single-series line chart over time with a crosshair shared between charts
  */
 export function TimeChart(props: Props) {
+  const { t } = useLingui();
+
+  /** Average shown in the header, as one message so it translates whole */
+  const averageLabel = () => {
+    const value = props.format(average()!);
+    return t`avg ${value}`;
+  };
+
+  /** Moment under the pointer */
+  const atLabel = (ms: number) => {
+    const time = formatDuration(ms);
+    return t`at ${time}`;
+  };
+
+  /** Accessible name of the chart */
+  const chartLabel = () => {
+    const title = props.title;
+    return t`${title} over time`;
+  };
   let container: HTMLDivElement | undefined;
   const [width, setWidth] = createSignal(600);
 
@@ -214,8 +234,7 @@ export function TimeChart(props: Props) {
                 fallback={<Muted>{props.summary}</Muted>}
               >
                 <Show when={average() !== undefined}>
-                  <Muted>avg </Muted>
-                  {props.format(average()!)}
+                  <Muted>{averageLabel()}</Muted>
                 </Show>
               </Show>
             }
@@ -223,9 +242,9 @@ export function TimeChart(props: Props) {
             {(h) => (
               <>
                 <strong>
-                  {h().v !== undefined ? props.format(h().v!) : "no data"}
+                  {h().v !== undefined ? props.format(h().v!) : t`no data`}
                 </strong>
-                <Muted> at {formatDuration(h().t)}</Muted>
+                <Muted> {atLabel(h().t)}</Muted>
               </>
             )}
           </Show>
@@ -236,7 +255,7 @@ export function TimeChart(props: Props) {
           width={width()}
           height={HEIGHT}
           role="img"
-          aria-label={`${props.title} over time`}
+          aria-label={chartLabel()}
           tabindex="0"
           onPointerMove={onPointerMove}
           onPointerLeave={() => props.onHover(undefined)}

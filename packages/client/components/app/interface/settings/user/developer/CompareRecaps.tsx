@@ -8,6 +8,9 @@ import {
   createSignal,
 } from "solid-js";
 
+import { i18n } from "@lingui/core";
+import { t } from "@lingui/core/macro";
+import { Trans } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
 import { callRecaps } from "@revolt/rtc/callStats";
@@ -186,9 +189,9 @@ async function importRecapZip(file: File) {
   try {
     entries = await unzipFiles(new Uint8Array(await file.arrayBuffer()));
   } catch (err) {
-    return [
-      `${file.name}: can't be read as a zip (${(err as Error).message}).`,
-    ];
+    const fileName = file.name;
+    const error = (err as Error).message;
+    return [t`${fileName}: can't be read as a zip (${error}).`];
   }
 
   const decoder = new TextDecoder();
@@ -202,7 +205,10 @@ async function importRecapZip(file: File) {
     );
   });
 
-  if (!csvs.length) return [`${file.name}: there are no CSV files inside.`];
+  if (!csvs.length) {
+    const fileName = file.name;
+    return [t`${fileName}: there are no CSV files inside.`];
+  }
 
   return csvs.flatMap((entry) => {
     const failed = importRecapCsv(
@@ -236,6 +242,14 @@ export function CompareRecaps() {
 
   const visibleSources = () => sources().filter((s) => s.kind === kind());
   const count = (k: RecapKind) => sources().filter((s) => s.kind === k).length;
+  const callsLabel = () => {
+    const calls = count("call");
+    return t`Voice calls (${calls})`;
+  };
+  const streamsLabel = () => {
+    const streams = count("stream");
+    return t`Streams (${streams})`;
+  };
 
   const state = useState();
   const palette = () =>
@@ -249,11 +263,13 @@ export function CompareRecaps() {
   return (
     <Column gap="lg" style={palette()}>
       <Text class="body">
-        Put your recaps next to recaps from other people. They open a recap in
-        Voice Call Stats or Stream Stats and use Download CSV, or select several
-        recaps and export them as one zip, then send you the file, which you
-        import here. Everything stays on this device, and imports are kept until
-        you close the app.
+        <Trans>
+          Put your recaps next to recaps from other people. They open a recap in
+          Voice Call Stats or Stream Stats and use Download CSV, or select
+          several recaps and export them as one zip, then send you the file,
+          which you import here. Everything stays on this device, and imports
+          are kept until you close the app.
+        </Trans>
       </Text>
 
       <Row gap="sm" wrap>
@@ -262,27 +278,27 @@ export function CompareRecaps() {
           variant={kind() === "call" ? "filled" : "tonal"}
           onPress={() => setKind("call")}
         >
-          Voice calls ({count("call")})
+          {callsLabel()}
         </Button>
         <Button
           size="sm"
           variant={kind() === "stream" ? "filled" : "tonal"}
           onPress={() => setKind("stream")}
         >
-          Streams ({count("stream")})
+          {streamsLabel()}
         </Button>
       </Row>
 
       <Row gap="sm" wrap>
         <Button size="sm" variant="tonal" onPress={() => fileInput?.click()}>
-          <Symbol>upload_file</Symbol> Import CSV or zip
+          <Symbol>upload_file</Symbol> <Trans>Import CSV or zip</Trans>
         </Button>
         <Button
           size="sm"
           variant={picking() ? "filled" : "tonal"}
           onPress={() => setPicking(!picking())}
         >
-          <Symbol>add</Symbol> Add one of my recaps
+          <Symbol>add</Symbol> <Trans>Add one of my recaps</Trans>
         </Button>
         <input
           ref={fileInput}
@@ -310,8 +326,17 @@ export function CompareRecaps() {
         when={visibleSources().length}
         fallback={
           <Text class="label">
-            Nothing to compare yet. Import a CSV or add one of your own{" "}
-            {kind() === "call" ? "call" : "stream"} recaps.
+            {kind() === "call" ? (
+              <Trans>
+                Nothing to compare yet. Import a CSV or add one of your own call
+                recaps.
+              </Trans>
+            ) : (
+              <Trans>
+                Nothing to compare yet. Import a CSV or add one of your own
+                stream recaps.
+              </Trans>
+            )}
           </Text>
         }
       >
@@ -322,6 +347,14 @@ export function CompareRecaps() {
       </Show>
     </Column>
   );
+}
+
+/**
+ * Name of a line of a call recap: what one participant heard
+ * @param participant Participant's name
+ */
+function heardLabel(participant: string) {
+  return t`${participant} heard`;
 }
 
 /**
@@ -343,8 +376,8 @@ function MyRecaps(props: { kind: RecapKind; onAdded: () => void }) {
         recap.series.map((s) => ({
           label:
             s.direction === "sending"
-              ? "Your microphone"
-              : `${s.participantName} heard`,
+              ? t`Your microphone`
+              : heardLabel(s.participantName),
           direction: s.direction,
           rows: s.data as unknown as RecapRow[],
         })),
@@ -378,7 +411,11 @@ function MyRecaps(props: { kind: RecapKind; onAdded: () => void }) {
         <Show when={!calls.loading} fallback={<CircularProgress />}>
           <Show
             when={calls()?.length}
-            fallback={<Text class="label">You have no call recaps yet.</Text>}
+            fallback={
+              <Text class="label">
+                <Trans>You have no call recaps yet.</Trans>
+              </Text>
+            }
           >
             <CategoryButton.Group>
               <For each={calls()}>
@@ -401,7 +438,11 @@ function MyRecaps(props: { kind: RecapKind; onAdded: () => void }) {
         <Show when={!streams.loading} fallback={<CircularProgress />}>
           <Show
             when={streams()?.length}
-            fallback={<Text class="label">You have no stream recaps yet.</Text>}
+            fallback={
+              <Text class="label">
+                <Trans>You have no stream recaps yet.</Trans>
+              </Text>
+            }
           >
             <CategoryButton.Group>
               <For each={streams()}>
@@ -439,10 +480,14 @@ function SourceCard(props: { source: Source }) {
     <Card>
       <Row gap="sm" align>
         <TileLabel>
-          {props.source.origin === "mine" ? "Yours" : "Imported"}
+          {props.source.origin === "mine" ? (
+            <Trans>Yours</Trans>
+          ) : (
+            <Trans>Imported</Trans>
+          )}
         </TileLabel>
         <TextField
-          label="Name"
+          label={t`Name`}
           value={props.source.name}
           onChange={(e) => renameSource(props.source.id, e.currentTarget.value)}
         />
@@ -451,7 +496,7 @@ function SourceCard(props: { source: Source }) {
           variant="text"
           onPress={() => removeSource(props.source.id)}
         >
-          Remove
+          <Trans>Remove</Trans>
         </Button>
       </Row>
       <Show when={props.source.context}>
@@ -481,7 +526,9 @@ function SourceCard(props: { source: Source }) {
       </Row>
       <Show when={full()}>
         <TileLabel>
-          Up to {MAX_LINES} lines at once, deselect one to add another.
+          <Trans>
+            Up to {MAX_LINES} lines at once, deselect one to add another.
+          </Trans>
         </TileLabel>
       </Show>
     </Card>
@@ -550,14 +597,18 @@ function Comparison(props: { kind: RecapKind }) {
     <Show
       when={lines().length}
       fallback={
-        <Text class="label">Select at least one line above to compare.</Text>
+        <Text class="label">
+          <Trans>Select at least one line above to compare.</Trans>
+        </Text>
       }
     >
       <Palette>
         <Column gap="xs">
-          <Text class="title">Averages</Text>
+          <Text class="title">
+            <Trans>Averages</Trans>
+          </Text>
           <Text class="label">
-            Recaps are lined up at the moment each one started.
+            <Trans>Recaps are lined up at the moment each one started.</Trans>
           </Text>
         </Column>
         <TableScroll>
@@ -579,7 +630,9 @@ function Comparison(props: { kind: RecapKind }) {
             </thead>
             <tbody>
               <tr>
-                <td>Duration</td>
+                <td>
+                  <Trans>Duration</Trans>
+                </td>
                 <For each={lines()}>
                   {(l) => <td>{formatDuration(l.line.rows.at(-1)?.t ?? 0)}</td>}
                 </For>
@@ -587,7 +640,7 @@ function Comparison(props: { kind: RecapKind }) {
               <For each={metrics()}>
                 {({ metric, series }) => (
                   <tr>
-                    <td>{metric.title}</td>
+                    <td>{i18n._(metric.title)}</td>
                     <For each={series}>
                       {(s) => {
                         const avg = average(s.values);
@@ -608,14 +661,16 @@ function Comparison(props: { kind: RecapKind }) {
         </TableScroll>
 
         <Text class="label">
-          Hover a chart (or focus it and use the arrow keys) to read every recap
-          at the same moment.
+          <Trans>
+            Hover a chart (or focus it and use the arrow keys) to read every
+            recap at the same moment.
+          </Trans>
         </Text>
         <Charts>
           <For each={metrics()}>
             {({ metric, series }) => (
               <CompareChart
-                title={metric.title}
+                title={i18n._(metric.title)}
                 series={series}
                 format={metric.format}
                 formatAverage={formatAverage(metric)}

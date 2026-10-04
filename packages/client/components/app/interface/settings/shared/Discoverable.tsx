@@ -47,17 +47,20 @@ export function Discoverable(props: {
         fallback={
           <MessagePreview>
             <Text class="title" size="small">
-              <Trans>
-                This {props.discoverable instanceof Bot ? "bot" : "server"} is
-                discoverable
-              </Trans>
+              {props.discoverable instanceof Bot ? (
+                <Trans>This bot is discoverable</Trans>
+              ) : (
+                <Trans>This server is discoverable</Trans>
+              )}
             </Text>
             <Text>
-              <Trans>
-                Contact support to remove this{" "}
-                {props.discoverable instanceof Bot ? "bot" : "server"} from
-                discover
-              </Trans>
+              {props.discoverable instanceof Bot ? (
+                <Trans>Contact support to remove this bot from discover</Trans>
+              ) : (
+                <Trans>
+                  Contact support to remove this server from discover
+                </Trans>
+              )}
             </Text>
           </MessagePreview>
         }
@@ -93,7 +96,9 @@ export function Discoverable(props: {
                   <Text class="title" size="small">
                     <Trans>Can't get discover request status right now</Trans>
                   </Text>
-                  <Text>Please try again later</Text>
+                  <Text>
+                    <Trans>Please try again later</Trans>
+                  </Text>
                 </MessagePreview>
               }
             >
@@ -107,22 +112,24 @@ export function Discoverable(props: {
                     >
                       <MessagePreview>
                         <Text class="title" size="small">
-                          <Trans>
-                            Your{" "}
-                            {props.discoverable instanceof Bot
-                              ? "bot"
-                              : "server"}{" "}
-                            is under review
-                          </Trans>
+                          {props.discoverable instanceof Bot ? (
+                            <Trans>Your bot is under review</Trans>
+                          ) : (
+                            <Trans>Your server is under review</Trans>
+                          )}
                         </Text>
                         <Text>
-                          <Trans>
-                            Check back often to see if your{" "}
-                            {props.discoverable instanceof Bot
-                              ? "bot"
-                              : "server"}{" "}
-                            has been approved!
-                          </Trans>
+                          {props.discoverable instanceof Bot ? (
+                            <Trans>
+                              Check back often to see if your bot has been
+                              approved!
+                            </Trans>
+                          ) : (
+                            <Trans>
+                              Check back often to see if your server has been
+                              approved!
+                            </Trans>
+                          )}
                         </Text>
                       </MessagePreview>
                       <CategoryButton.Group>

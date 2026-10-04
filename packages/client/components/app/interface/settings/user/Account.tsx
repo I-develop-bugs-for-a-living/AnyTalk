@@ -88,7 +88,7 @@ function EditAccount() {
                   client().account.fetchEmail().then(setEmail);
                 }}
               >
-                Reveal
+                <Trans>Reveal</Trans>
               </a>
             </Show>
           </Row>

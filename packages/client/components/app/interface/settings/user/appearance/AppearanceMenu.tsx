@@ -57,15 +57,17 @@ export function AppearanceMenu() {
     <Column gap="lg">
       <MessagePreview>
         <Text>
-          Welcome to the new appearance menu, custom themes are not available
-          just yet but we are looking for feedback on how to best implement
-          them!
+          <Trans>
+            Welcome to the new appearance menu, custom themes are not available
+            just yet but we are looking for feedback on how to best implement
+            them!
+          </Trans>
         </Text>
       </MessagePreview>
 
       <Column>
         <Text class="title" size="small">
-          Colours
+          <Trans>Colours</Trans>
         </Text>
 
         <Row justify="stretch">

@@ -1,3 +1,6 @@
+import type { MessageDescriptor } from "@lingui/core";
+import { msg } from "@lingui/core/macro";
+
 import { State } from "..";
 
 import { AbstractStore } from ".";
@@ -26,15 +29,18 @@ export const ALWAYS_ON_DEVELOPMENT_EXPERIMENTS: Experiment[] = [];
  * Definitions for experiments listed by {@link Experiment}.
  */
 export const EXPERIMENTS: {
-  [key in Experiment]: { title: string; description: string };
+  [key in Experiment]: {
+    title: MessageDescriptor;
+    description: MessageDescriptor;
+  };
 } = {
   gif_picker: {
-    title: "GIF Picker Placeholder",
-    description: "Not available yet.",
+    title: msg`GIF Picker Placeholder`,
+    description: msg`Not available yet.`,
   },
   plugins: {
-    title: "Plugins v2 Placeholder",
-    description: "Not available yet.",
+    title: msg`Plugins v2 Placeholder`,
+    description: msg`Not available yet.`,
   },
 };
 

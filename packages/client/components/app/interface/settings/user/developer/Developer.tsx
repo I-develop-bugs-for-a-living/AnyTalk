@@ -1,5 +1,7 @@
 import { JSX } from "solid-js";
 
+import { Trans } from "@lingui/solid/macro";
+
 import { useState } from "@revolt/state";
 import { CategoryButton, Checkbox, Column, Text } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
@@ -17,6 +19,9 @@ type Toggle =
   | "advanced:developer_voice_overlay"
   | "advanced:developer_voice_record";
 
+/**
+ * Read and flip the developer toggles stored in settings
+ */
 function useToggle() {
   const state = useState();
   return {
@@ -37,25 +42,35 @@ export function DeveloperSettings() {
   return (
     <Column gap="lg">
       <Text class="label">
-        Developer modes measure call performance and keep statistics of previous
-        calls and streams on this device. Turn on either or both.
+        <Trans>
+          Developer modes measure call performance and keep statistics of
+          previous calls and streams on this device. Turn on either or both.
+        </Trans>
       </Text>
       <CategoryButton.Group>
         <CategoryButton
           icon={<Symbol>call</Symbol>}
           action={<Checkbox checked={value("advanced:developer_voice")} />}
           onClick={() => toggle("advanced:developer_voice")}
-          description="Measure your microphone and everyone you hear in calls"
+          description={
+            <Trans>
+              Measure your microphone and everyone you hear in calls
+            </Trans>
+          }
         >
-          Voice call developer mode
+          <Trans>Voice call developer mode</Trans>
         </CategoryButton>
         <CategoryButton
           icon={<Symbol>screen_share</Symbol>}
           action={<Checkbox checked={value("advanced:developer_mode")} />}
           onClick={() => toggle("advanced:developer_mode")}
-          description="Measure camera and screen share video you send or watch"
+          description={
+            <Trans>
+              Measure camera and screen share video you send or watch
+            </Trans>
+          }
         >
-          Stream developer mode
+          <Trans>Stream developer mode</Trans>
         </CategoryButton>
       </CategoryButton.Group>
       <CategoryButton.Group>
@@ -63,25 +78,33 @@ export function DeveloperSettings() {
           icon={<Symbol>monitoring</Symbol>}
           action="chevron"
           onClick={() => navigate("developer/voice")}
-          description="Live overlay, recording and recaps of previous calls"
+          description={
+            <Trans>Live overlay, recording and recaps of previous calls</Trans>
+          }
         >
-          Voice call stats
+          <Trans>Voice call stats</Trans>
         </CategoryButton>
         <CategoryButton
           icon={<Symbol>analytics</Symbol>}
           action="chevron"
           onClick={() => navigate("developer/streams")}
-          description="Live overlay, recording and recaps of previous streams"
+          description={
+            <Trans>
+              Live overlay, recording and recaps of previous streams
+            </Trans>
+          }
         >
-          Stream stats
+          <Trans>Stream stats</Trans>
         </CategoryButton>
         <CategoryButton
           icon={<Symbol>compare_arrows</Symbol>}
           action="chevron"
           onClick={() => navigate("developer/compare")}
-          description="Put your recaps next to CSV recaps from other people"
+          description={
+            <Trans>Put your recaps next to CSV recaps from other people</Trans>
+          }
         >
-          Compare recaps
+          <Trans>Compare recaps</Trans>
         </CategoryButton>
       </CategoryButton.Group>
     </Column>
@@ -93,12 +116,12 @@ export function DeveloperSettings() {
  */
 function ModeOptions(props: {
   mode: Toggle;
-  modeName: string;
+  modeName: JSX.Element;
   overlay: Toggle;
-  overlayDescription: string;
+  overlayDescription: JSX.Element;
   record: Toggle;
-  recordTitle: string;
-  recordDescription: string;
+  recordTitle: JSX.Element;
+  recordDescription: JSX.Element;
 }) {
   const { value, toggle } = useToggle();
   const enabled = () => value(props.mode);
@@ -109,7 +132,7 @@ function ModeOptions(props: {
         icon={<Symbol>code</Symbol>}
         action={<Checkbox checked={enabled()} />}
         onClick={() => toggle(props.mode)}
-        description="Enable the tools below"
+        description={<Trans>Enable the tools below</Trans>}
       >
         {props.modeName}
       </CategoryButton>
@@ -120,7 +143,7 @@ function ModeOptions(props: {
         onClick={() => toggle(props.overlay)}
         description={props.overlayDescription}
       >
-        Live statistics overlay
+        <Trans>Live statistics overlay</Trans>
       </CategoryButton>
       <CategoryButton
         icon={<Symbol>monitoring</Symbol>}
@@ -135,12 +158,17 @@ function ModeOptions(props: {
   );
 }
 
+/**
+ * Layout of a statistics page: mode options on top, recaps below
+ */
 function StatsPage(props: { options: JSX.Element; children: JSX.Element }) {
   return (
     <Column gap="lg">
       {props.options}
       <Column>
-        <Text class="title">Recaps</Text>
+        <Text class="title">
+          <Trans>Recaps</Trans>
+        </Text>
         {props.children}
       </Column>
     </Column>
@@ -156,12 +184,19 @@ export function VoiceStatsSettings() {
       options={
         <ModeOptions
           mode="advanced:developer_voice"
-          modeName="Voice call developer mode"
+          modeName={<Trans>Voice call developer mode</Trans>}
           overlay="advanced:developer_voice_overlay"
-          overlayDescription="Show live microphone statistics on call tiles"
+          overlayDescription={
+            <Trans>Show live microphone statistics on call tiles</Trans>
+          }
           record="advanced:developer_voice_record"
-          recordTitle="Record call recaps"
-          recordDescription="Record statistics of every call you are in, with or without the overlay"
+          recordTitle={<Trans>Record call recaps</Trans>}
+          recordDescription={
+            <Trans>
+              Record statistics of every call you are in, with or without the
+              overlay
+            </Trans>
+          }
         />
       }
     >
@@ -179,12 +214,19 @@ export function StreamStatsSettings() {
       options={
         <ModeOptions
           mode="advanced:developer_mode"
-          modeName="Stream developer mode"
+          modeName={<Trans>Stream developer mode</Trans>}
           overlay="advanced:developer_overlay"
-          overlayDescription="Show live statistics on call video tiles"
+          overlayDescription={
+            <Trans>Show live statistics on call video tiles</Trans>
+          }
           record="advanced:developer_record"
-          recordTitle="Record stream recaps"
-          recordDescription="Record statistics of every stream you send or watch, with or without the overlay"
+          recordTitle={<Trans>Record stream recaps</Trans>}
+          recordDescription={
+            <Trans>
+              Record statistics of every stream you send or watch, with or
+              without the overlay
+            </Trans>
+          }
         />
       }
     >

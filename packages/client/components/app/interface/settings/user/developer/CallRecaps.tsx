@@ -8,6 +8,10 @@ import {
   createSignal,
 } from "solid-js";
 
+import { MessageDescriptor, i18n } from "@lingui/core";
+import { msg, t } from "@lingui/core/macro";
+import { Trans } from "@lingui/solid/macro";
+
 import {
   AudioSample,
   AudioSummary,
@@ -33,9 +37,13 @@ import {
 } from "./RecapParts";
 import { TimeChart, formatDuration } from "./TimeChart";
 
+/**
+ * Titles are `msg` descriptors rendered with `i18n._`, which is not reactive:
+ * a language change relies on the full reload (see state/stores/Locale.ts).
+ */
 export type Metric = {
   key: keyof AudioSample;
-  title: string;
+  title: MessageDescriptor;
   format: (v: number) => string;
   only?: Direction;
   yTicks?: number[];
@@ -49,54 +57,63 @@ const percent = (v: number) => `${(v * 100).toFixed(1)}%`;
  * Charted values, in display order; charts without data are skipped
  */
 export const CALL_METRICS: Metric[] = [
-  { key: "bitrate", title: "Bitrate", format: formatBitrate },
-  { key: "packets", title: "Packets per second", format: int },
+  { key: "bitrate", title: msg`Bitrate`, format: formatBitrate },
+  { key: "packets", title: msg`Packets per second`, format: int },
   {
     key: "lost",
-    title: "Packets lost per second",
+    title: msg`Packets lost per second`,
     format: int,
   },
   {
     key: "concealed",
-    title: "Concealed audio (made up to hide lost packets)",
+    title: msg`Concealed audio (made up to hide lost packets)`,
     format: percent,
     only: "receiving",
   },
-  { key: "jitter", title: "Jitter", format: ms },
+  { key: "jitter", title: msg`Jitter`, format: ms },
   {
     key: "jitterBuffer",
-    title: "Jitter buffer delay",
+    title: msg`Jitter buffer delay`,
     format: ms,
     only: "receiving",
   },
-  { key: "rtt", title: "Ping (round trip to the server)", format: ms },
-  { key: "level", title: "Audio level", format: percent },
+  { key: "rtt", title: msg`Ping (round trip to the server)`, format: ms },
+  { key: "level", title: msg`Audio level`, format: percent },
   {
     key: "quality",
-    title: "Connection quality (rated by the server)",
-    format: (v) => ["Lost", "Poor", "Good", "Excellent"][Math.round(v)] ?? "-",
+    title: msg`Connection quality (rated by the server)`,
+    format: (v) =>
+      [t`Lost`, t`Poor`, t`Good`, t`Excellent`][Math.round(v)] ?? "-",
     yTicks: [0, 1, 2, 3],
   },
   {
     key: "available",
-    title: "Estimated upload bandwidth",
+    title: msg`Estimated upload bandwidth`,
     format: formatBitrate,
     only: "sending",
   },
 ];
 
+/**
+ * Heading of a call recap
+ * @param meta Recap
+ */
 export function callTitle(meta: CallRecapMeta) {
-  return meta.channelName ? `#${meta.channelName}` : "Call";
+  return meta.channelName ? `#${meta.channelName}` : t`Call`;
 }
 
+/**
+ * When, how long and with whom a call was
+ * @param meta Recap
+ */
 export function callContext(meta: CallRecapMeta) {
+  const participants = meta.participants.join(", ");
+
   return [
     new Date(meta.startedAt).toLocaleString(),
     formatDuration(meta.endedAt - meta.startedAt),
     meta.serverName,
-    meta.participants.length
-      ? `with ${meta.participants.join(", ")}`
-      : "nobody else",
+    meta.participants.length ? t`with ${participants}` : t`nobody else`,
   ]
     .filter(Boolean)
     .join(" · ");
@@ -151,6 +168,18 @@ export function CallRecaps() {
   );
 }
 
+/**
+ * Worst incoming packet loss of a call, for the recap list
+ * @param share Loss as a fraction
+ */
+function upToLoss(share: number) {
+  const loss = percent(share);
+  return t`up to ${loss} loss`;
+}
+
+/**
+ * Stored call recaps to open, export or delete
+ */
 function RecapList(props: { onSelect: (id: string) => void }) {
   const [list] = createResource(callRecaps.revision, () => callRecaps.list());
 
@@ -165,9 +194,11 @@ function RecapList(props: { onSelect: (id: string) => void }) {
   return (
     <Column gap="lg">
       <Text class="body">
-        While voice call developer mode and "Record call recaps" are on, your
-        microphone and everyone you hear are measured once per second. Recaps
-        are stored on this device only; the newest 20 calls are kept.
+        <Trans>
+          While voice call developer mode and "Record call recaps" are on, your
+          microphone and everyone you hear are measured once per second. Recaps
+          are stored on this device only; the newest 20 calls are kept.
+        </Trans>
       </Text>
       <Switch>
         <Match when={list.loading}>
@@ -175,7 +206,9 @@ function RecapList(props: { onSelect: (id: string) => void }) {
         </Match>
         <Match when={!list()?.length}>
           <Text class="label">
-            No recaps yet. Turn on "Record call recaps", then join a call.
+            <Trans>
+              No recaps yet. Turn on "Record call recaps", then join a call.
+            </Trans>
           </Text>
         </Match>
         <Match when={list()?.length}>
@@ -187,7 +220,7 @@ function RecapList(props: { onSelect: (id: string) => void }) {
             description={(meta) =>
               `${callContext(meta)}${
                 meta.worstIncomingLoss
-                  ? ` · up to ${percent(meta.worstIncomingLoss)} loss`
+                  ? ` · ${upToLoss(meta.worstIncomingLoss)}`
                   : ""
               }`
             }
@@ -195,7 +228,7 @@ function RecapList(props: { onSelect: (id: string) => void }) {
             onExport={exportRecaps}
             onDelete={(ids) => callRecaps.removeMany(ids)}
             onDeleteAll={() => {
-              if (confirm("Delete all call recaps on this device?")) {
+              if (confirm(t`Delete all call recaps on this device?`)) {
                 callRecaps.clear();
               }
             }}
@@ -206,6 +239,9 @@ function RecapList(props: { onSelect: (id: string) => void }) {
   );
 }
 
+/**
+ * One stored call recap, loaded by id
+ */
 function RecapDetail(props: { id: string; onBack: () => void }) {
   const [recap] = createResource(
     () => props.id,
@@ -216,7 +252,7 @@ function RecapDetail(props: { id: string; onBack: () => void }) {
     <Column gap="lg">
       <Row>
         <Button variant="text" size="sm" onPress={props.onBack}>
-          <Symbol>arrow_back</Symbol> All recaps
+          <Symbol>arrow_back</Symbol> <Trans>All recaps</Trans>
         </Button>
       </Row>
       <Switch>
@@ -224,7 +260,9 @@ function RecapDetail(props: { id: string; onBack: () => void }) {
           <CircularProgress />
         </Match>
         <Match when={!recap()}>
-          <Text class="label">This recap no longer exists.</Text>
+          <Text class="label">
+            <Trans>This recap no longer exists.</Trans>
+          </Text>
         </Match>
         <Match when={recap()}>
           {(r) => (
@@ -239,29 +277,36 @@ function RecapDetail(props: { id: string; onBack: () => void }) {
   );
 }
 
+/**
+ * Labelled headline numbers of a microphone
+ * @param summary Summary
+ */
 function summaryTiles(summary: AudioSummary): [string, string][] {
   const out: [string, string][] = [];
   if (summary.avgBitrate !== undefined)
-    out.push(["Avg bitrate", formatBitrate(summary.avgBitrate)]);
+    out.push([t`Avg bitrate`, formatBitrate(summary.avgBitrate)]);
   if (summary.loss !== undefined)
-    out.push(["Packet loss", percent(summary.loss)]);
+    out.push([t`Packet loss`, percent(summary.loss)]);
   if (summary.concealed !== undefined)
-    out.push(["Concealed audio", percent(summary.concealed)]);
+    out.push([t`Concealed audio`, percent(summary.concealed)]);
   if (summary.avgJitter !== undefined)
     out.push([
-      "Jitter avg / max",
+      t`Jitter avg / max`,
       `${Math.round(summary.avgJitter)} / ${Math.round(summary.maxJitter ?? 0)} ms`,
     ]);
   if (summary.poorConnection !== undefined)
-    out.push(["Poor or lost connection", percent(summary.poorConnection)]);
+    out.push([t`Poor or lost connection`, percent(summary.poorConnection)]);
   if (summary.avgRtt !== undefined)
     out.push([
-      "Ping avg / max",
+      t`Ping avg / max`,
       `${Math.round(summary.avgRtt)} / ${Math.round(summary.maxRtt ?? 0)} ms`,
     ]);
   return out;
 }
 
+/**
+ * Header, charts and actions of one call recap
+ */
 function RecapView(props: { recap: CallRecap; onDelete: () => void }) {
   const outgoing = () =>
     props.recap.series.filter((s) => s.direction === "sending");
@@ -275,8 +320,8 @@ function RecapView(props: { recap: CallRecap; onDelete: () => void }) {
 
   const info = () =>
     [
-      ["Transport", props.recap.transport ?? "-"],
-      ["Codec", props.recap.series.find((s) => s.codec)?.codec ?? "-"],
+      [t`Transport`, props.recap.transport ?? "-"],
+      [t`Codec`, props.recap.series.find((s) => s.codec)?.codec ?? "-"],
     ] as const;
 
   function downloadCsv() {
@@ -305,16 +350,22 @@ function RecapView(props: { recap: CallRecap; onDelete: () => void }) {
       </InfoGrid>
 
       <Text class="label">
-        Hover a chart (or focus it and use the arrow keys) to read all values at
-        the same moment.
+        <Trans>
+          Hover a chart (or focus it and use the arrow keys) to read all values
+          at the same moment.
+        </Trans>
       </Text>
 
       <Show when={outgoing().length}>
         <Column>
-          <Text class="title">Your microphone (outgoing)</Text>
+          <Text class="title">
+            <Trans>Your microphone (outgoing)</Trans>
+          </Text>
           <Text class="label">
-            Loss and jitter are what the server reports about the audio it got
-            from you.
+            <Trans>
+              Loss and jitter are what the server reports about the audio it got
+              from you.
+            </Trans>
           </Text>
         </Column>
         <For each={outgoing()}>
@@ -324,8 +375,12 @@ function RecapView(props: { recap: CallRecap; onDelete: () => void }) {
 
       <Show when={incoming().length}>
         <Column>
-          <Text class="title">Incoming</Text>
-          <Text class="label">How everyone else's audio reached you.</Text>
+          <Text class="title">
+            <Trans>Incoming</Trans>
+          </Text>
+          <Text class="label">
+            <Trans>How everyone else's audio reached you.</Trans>
+          </Text>
         </Column>
         <Show when={incoming().length > 1}>
           <Row gap="sm" wrap>
@@ -349,16 +404,16 @@ function RecapView(props: { recap: CallRecap; onDelete: () => void }) {
 
       <Row>
         <Button variant="tonal" size="sm" onPress={downloadCsv}>
-          Download CSV
+          <Trans>Download CSV</Trans>
         </Button>
         <Button
           variant="text"
           size="sm"
           onPress={() => {
-            if (confirm("Delete this recap?")) props.onDelete();
+            if (confirm(t`Delete this recap?`)) props.onDelete();
           }}
         >
-          Delete recap
+          <Trans>Delete recap</Trans>
         </Button>
       </Row>
     </>
@@ -396,7 +451,7 @@ function SeriesView(props: { series: CallSeries }) {
         <For each={metrics()}>
           {(metric) => (
             <TimeChart
-              title={metric.title}
+              title={i18n._(metric.title)}
               times={times()}
               values={props.series.data.map(
                 (s) => s[metric.key] as number | undefined,

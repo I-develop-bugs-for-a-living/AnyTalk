@@ -1,6 +1,8 @@
 import { JSXElement, createSignal, onMount } from "solid-js";
 import { Elements, PaymentElement, useElements, useStripe } from "solid-stripe";
 
+import { Trans } from "@lingui/solid/macro";
+
 import { loadStripe } from "@stripe/stripe-js/pure";
 
 /**
@@ -14,7 +16,7 @@ export function EditSubscriptionJoinFlow() {
     <form>
       <PaymentElement />
       <button type="submit" disabled={!stripe() || !elements()}>
-        Pay
+        <Trans>Pay</Trans>
       </button>
       {/* Show error message to your customers */}
       {/* {errorMessage() && <div>{errorMessage()}</div>} */}

@@ -1,6 +1,6 @@
 import { For, Match, Show, Switch, createSignal } from "solid-js";
 
-import { useLingui } from "@lingui/solid/macro";
+import { Trans, useLingui } from "@lingui/solid/macro";
 import {
   API,
   Channel,
@@ -551,7 +551,7 @@ export function ChannelPermissionsEditor(props: Props) {
             size="sm"
             onPress={reset}
           >
-            Reset
+            <Trans>Reset</Trans>
           </Button>
           <Button
             isDisabled={
