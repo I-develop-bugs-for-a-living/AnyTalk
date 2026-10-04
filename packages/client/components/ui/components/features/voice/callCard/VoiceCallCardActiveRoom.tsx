@@ -244,15 +244,6 @@ function Participants(props: { theater: boolean }) {
     return Math.floor(best);
   };
 
-  const tileWidth = () => {
-    const count = voice.vidTracks().length + testTrackCount;
-    const fit = !hasMain() && fitTileWidth(count);
-    if (fit) return `${Math.max(fit, TILE_MIN_FIT_WIDTH)}px`;
-
-    const vidWidth = Math.round(100 / count);
-    return `max(${TILE_MIN_WIDTH}, ${vidWidth}% - var(--gap-md))`;
-  };
-
   // Several streams open: tile them, and only list the other streams below
   const multi = createMemo(() => voice.isMultiStream());
   const hasMain = () => multi() || !!voice.focusId();
@@ -266,6 +257,24 @@ function Participants(props: { theater: boolean }) {
               !voice.isWatchedStream(t),
           )
       : voice.vidTracks().filter((t) => !voice.isFocus(t));
+
+  const tileCount = () => voice.vidTracks().length + testTrackCount;
+
+  // Width fitting every tile into the call window, 0 with a focused tile
+  const fit = createMemo(() => (hasMain() ? 0 : fitTileWidth(tileCount())));
+
+  const tileWidth = () => {
+    if (fit()) return `${Math.max(fit(), TILE_MIN_FIT_WIDTH)}px`;
+
+    const vidWidth = Math.round(100 / tileCount());
+    return `max(${TILE_MIN_WIDTH}, ${vidWidth}% - var(--gap-md))`;
+  };
+
+  // Only scroll once the tiles can't shrink any further. Fitted tiles fill
+  // the width exactly, so a scrollbar showing up for a moment narrowed the
+  // window enough to wrap the last tile into a new row, which kept the
+  // scrollbar up, and the tiles flickered between both layouts
+  const scrolls = () => !hasMain() && fit() < TILE_MIN_FIT_WIDTH;
 
   // Clear out any focus when the track that was focused is no longer available.
   createEffect(() => {
@@ -300,7 +309,7 @@ function Participants(props: { theater: boolean }) {
   });
 
   return (
-    <Call ref={callRef} class={hasMain() ? "" : scrollableStyles()}>
+    <Call ref={callRef} class={scrolls() ? scrollableStyles() : ""}>
       <InRoom>
         <Show
           when={multi()}
