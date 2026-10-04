@@ -4,7 +4,6 @@ import {
   TrackLoop,
   useEnsureParticipant,
   useIsMuted,
-  useIsSpeaking,
   useTracks,
 } from "solid-livekit-components";
 
@@ -17,7 +16,7 @@ import { styled } from "styled-system/jsx";
 import { UserContextMenu } from "@revolt/app";
 import { useDevice } from "@revolt/common";
 import { useUser } from "@revolt/markdown/users";
-import { InRoom, useVoice } from "@revolt/rtc";
+import { InRoom, useFastIsSpeaking, useVoice } from "@revolt/rtc";
 
 import { Avatar, Ripple, typography } from "../../design";
 import { Row } from "../../layout";
@@ -109,7 +108,7 @@ function ParticipantLive(props: {
     source: Track.Source.Microphone,
   });
 
-  const isSpeaking = useIsSpeaking(participant);
+  const isSpeaking = useFastIsSpeaking(participant);
 
   // shared by clients as a participant attribute, see Voice#shareDeafen
   const [attributes, setAttributes] = createSignal(participant.attributes);

@@ -4,6 +4,7 @@ export { useVoice, VoiceContext } from "./state";
 
 export { InRoom } from "./components/InRoom";
 export { RoomAudioManager } from "./components/RoomAudioManager";
+export { useFastIsSpeaking } from "./speaking";
 export { stoatSinkName } from "./virtualMic";
 
 // missing outside secure contexts (e.g. a dev server opened over http)

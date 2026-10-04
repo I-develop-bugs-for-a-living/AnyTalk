@@ -3,7 +3,6 @@ import {
   TrackReference,
   useEnsureParticipant,
   useIsMuted,
-  useIsSpeaking,
   useTrackRefContext,
   VideoTrack,
 } from "solid-livekit-components";
@@ -15,7 +14,7 @@ import { styled } from "styled-system/jsx";
 
 import { UserContextMenu } from "@revolt/app";
 import { useUser } from "@revolt/markdown/users";
-import { useVoice } from "@revolt/rtc";
+import { useFastIsSpeaking, useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
 import { Avatar, IconButton } from "@revolt/ui/components/design";
 import { Row } from "@revolt/ui/components/layout";
@@ -85,7 +84,7 @@ export function ParticipantTile(props: TileProps) {
 
   const isVideo = () => !isVideoMuted();
   const isScreenShare = () => track.source === Track.Source.ScreenShare;
-  const isSpeaking = useIsSpeaking(participant);
+  const isSpeaking = useFastIsSpeaking(participant);
 
   const theater = () => !!props.focus && voice.layout() === "fullscreen";
   // the call window isn't maximized, so its tiles are small
