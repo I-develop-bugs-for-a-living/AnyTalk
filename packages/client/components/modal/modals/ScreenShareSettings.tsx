@@ -23,17 +23,21 @@ export function ScreenShareSettingsModal(
   const group = createFormGroup({
     resolution: createFormControl<ScreenShareResolution>(
       closestScreenShareResolution(
-        voice.screenShareResolution,
+        props.live?.resolution ?? voice.screenShareResolution,
         props.resolutions.map((r) => r.value),
       ),
       { required: true },
     ),
-    frameRate: createFormControl(String(voice.screenShareFrameRate), {
-      required: true,
-    }),
-    audio: createFormControl(props.audio && voice.screenShareAudio, {
-      disabled: !props.audio,
-    }),
+    frameRate: createFormControl(
+      String(props.live?.frameRate ?? voice.screenShareFrameRate),
+      {
+        required: true,
+      },
+    ),
+    audio: createFormControl(
+      props.audio && (props.live?.audio ?? voice.screenShareAudio),
+      { disabled: !props.audio },
+    ),
     dontAsk: createFormControl(false),
   });
 
@@ -69,11 +73,11 @@ export function ScreenShareSettingsModal(
         props.onCancel();
         props.onClose();
       }}
-      title={t`Screen Share Settings`}
+      title={props.live ? t`Stream Settings` : t`Screen Share Settings`}
       actions={[
         { text: <Trans>Cancel</Trans> },
         {
-          text: <Trans>Go</Trans>,
+          text: props.live ? <Trans>Apply</Trans> : <Trans>Go</Trans>,
           onClick: () => {
             onSubmit();
             return false;
@@ -111,12 +115,22 @@ export function ScreenShareSettingsModal(
               <Trans>Share audio</Trans>
             </Form2.Checkbox>
           </Show>
-          <Form2.Checkbox control={group.controls.dontAsk}>
-            <Trans>Don't ask me again</Trans>
-          </Form2.Checkbox>
+          {/* Only asked when starting a stream */}
+          <Show when={!props.live}>
+            <Form2.Checkbox control={group.controls.dontAsk}>
+              <Trans>Don't ask me again</Trans>
+            </Form2.Checkbox>
+          </Show>
           <Show when={!props.audio}>
             <small>
-              <Trans>Audio disabled by browser</Trans>
+              <Show
+                when={props.live}
+                fallback={<Trans>Audio disabled by browser</Trans>}
+              >
+                <Trans>
+                  No audio was captured, switch window to share audio
+                </Trans>
+              </Show>
             </small>
           </Show>
         </Column>

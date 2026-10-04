@@ -18,7 +18,10 @@ import {
 import { ReactiveMap } from "@solid-primitives/map";
 import { ReactiveSet } from "@solid-primitives/set";
 import {
+  AudioCaptureOptions,
   AudioPresets,
+  LocalAudioTrack,
+  LocalTrack,
   LocalTrackPublication,
   RemoteTrackPublication,
   Room,
@@ -27,6 +30,7 @@ import {
   ScreenSharePresets,
   Track,
   TrackEvent,
+  TrackPublishOptions,
   VideoEncoding,
   VideoPresets,
 } from "livekit-client";
@@ -107,6 +111,34 @@ type ScreenShareQuality = Required<
   encoding: VideoEncoding;
 };
 
+/** What our stream is set to while streaming */
+export type StreamOptions = {
+  resolution: ScreenShareResolution;
+  frameRate: ScreenShareFrameRate;
+  audio: boolean;
+};
+
+/** Stream audio is captured as is, without the processing meant for voices */
+const STREAM_AUDIO_CAPTURE: AudioCaptureOptions = {
+  autoGainControl: false,
+  echoCancellation: false,
+  noiseSuppression: false,
+  voiceIsolation: false,
+  restrictOwnAudio: true,
+};
+
+/**
+ * Stream audio is music and video sound rather than speech: send it in
+ * stereo at a music bitrate, and keep sending it through silence (DTX nearly
+ * stops sending while it's quiet)
+ */
+const STREAM_AUDIO_PUBLISH_OPTIONS: TrackPublishOptions = {
+  audioPreset: AudioPresets.musicHighQualityStereo,
+  forceStereo: true,
+  dtx: false,
+  red: false,
+};
+
 /**
  * How long join and leave sounds wait for a move event of the same person,
  * so a move only plays the moved sound
@@ -138,6 +170,19 @@ class Voice {
 
   screenshare: Accessor<boolean>;
   #setScreenshare: Setter<boolean>;
+
+  /** What our stream is set to, once it is set up */
+  streamOptions: Accessor<StreamOptions | undefined>;
+  #setStreamOptions: Setter<StreamOptions | undefined>;
+
+  /**
+   * Captured stream audio, kept while it isn't sent so it can be turned back
+   * on without capturing again
+   */
+  #streamAudio?: LocalAudioTrack;
+
+  /** Stream audio is held back while the stream is being set up */
+  #holdStreamAudio = false;
 
   layout: Accessor<VoiceLayout>;
   #setLayout: Setter<VoiceLayout>;
@@ -216,6 +261,10 @@ class Voice {
     const [screenshare, setScreenshare] = createSignal(false);
     this.screenshare = screenshare;
     this.#setScreenshare = setScreenshare;
+
+    const [streamOptions, setStreamOptions] = createSignal<StreamOptions>();
+    this.streamOptions = streamOptions;
+    this.#setStreamOptions = setStreamOptions;
 
     const [layout, setLayout] = createSignal<VoiceLayout>();
     this.layout = layout;
@@ -542,6 +591,11 @@ class Voice {
       room.removeAllListeners();
       room.disconnect();
 
+      // not stopped by disconnecting while it isn't sent
+      this.#streamAudio?.stop();
+      this.#streamAudio = undefined;
+      this.#setStreamOptions();
+
       batch(() => {
         this.#setState("READY");
         this.#setRoom();
@@ -710,45 +764,142 @@ class Voice {
     };
   }
 
+  /** Resolutions the server allows, for the screen share pickers */
+  #resolutionOptions() {
+    return this.getEnabledScreenShareResolutions().map((value) => ({
+      value,
+      label: SCREEN_SHARE_RESOLUTION_LABELS[value],
+    }));
+  }
+
+  /**
+   * Show our own picker once the desktop app asks which screen to capture
+   *
+   * @returns The choice made in it, once made
+   */
+  #registerScreenPicker() {
+    let picked: StreamOptions | undefined;
+
+    if (window.native && window.native.onceScreenPicker) {
+      window.native.onceScreenPicker((sources) => {
+        this.openModal({
+          type: "screen_share_picker",
+          onCancel: () => {
+            window.native.screenPickerCallback(-1, false);
+          },
+          callback: (idx, resolution, frameRate, audio) => {
+            window.native.screenPickerCallback(idx, audio);
+            picked = { resolution, frameRate, audio };
+          },
+          sources: sources,
+          resolutions: this.#resolutionOptions(),
+        });
+      });
+    }
+
+    return () => picked;
+  }
+
+  /** Whether the captured stream audio is currently sent */
+  #streamAudioShared(room: Room) {
+    const audio = this.#streamAudio;
+    return (
+      !!audio &&
+      room.localParticipant.getTrackPublication(Track.Source.ScreenShareAudio)
+        ?.track === audio
+    );
+  }
+
+  /**
+   * Keep captured stream audio, so it can be turned on and off while streaming
+   */
+  #keepStreamAudio(audio: LocalAudioTrack | undefined) {
+    this.#streamAudio = audio;
+
+    // During quiet parts the browser can report the captured audio as
+    // muted, LiveKit then stops sending it until the capture reports
+    // sound again, which might never happen. Only we pause stream audio.
+    audio?.on(TrackEvent.UpstreamPaused, () => {
+      if (!this.#holdStreamAudio) audio.resumeUpstream();
+    });
+  }
+
+  /** Start or stop sending the captured stream audio */
+  async #shareStreamAudio(room: Room, share: boolean) {
+    const audio = this.#streamAudio;
+    if (!audio || share === this.#streamAudioShared(room)) return;
+
+    if (share) {
+      await room.localParticipant.publishTrack(audio, {
+        ...STREAM_AUDIO_PUBLISH_OPTIONS,
+        source: Track.Source.ScreenShareAudio,
+      });
+      // it may have been held back while the stream was being set up
+      if (!this.#holdStreamAudio) await audio.resumeUpstream();
+    } else {
+      // keep capturing, so it can be turned back on
+      await room.localParticipant.unpublishTrack(audio, false);
+    }
+  }
+
+  /** Apply a resolution, frame rate and audio choice to our stream */
+  async #applyStreamOptions(room: Room, options: StreamOptions) {
+    const video = room.localParticipant.getTrackPublication(
+      Track.Source.ScreenShare,
+    )?.videoTrack;
+    if (!video) return;
+
+    const quality = this.#screenShareQuality(
+      options.resolution,
+      options.frameRate,
+      video.mediaStreamTrack,
+    );
+
+    await video.applyScreenShareConstraints(
+      {
+        resolution: {
+          frameRate: quality.resolution.frameRate,
+          width: quality.resolution.width,
+          height: quality.resolution.height,
+        },
+        contentHint: quality.contentHint,
+      },
+      quality.encoding,
+    );
+    await this.#shareStreamAudio(room, options.audio);
+
+    this.#setStreamOptions(options);
+  }
+
+  async #stopScreenshare(room: Room) {
+    const audio = this.#streamAudio;
+
+    await room.localParticipant.setScreenShareEnabled(false);
+
+    // the stream may have ended on its own, which leaves the audio behind
+    if (audio) {
+      if (this.#streamAudioShared(room)) {
+        await room.localParticipant.unpublishTrack(audio);
+      }
+      audio.stop();
+    }
+
+    if (this.#streamAudio === audio) this.#streamAudio = undefined;
+    this.#setStreamOptions();
+
+    this.#setScreenshare(room.localParticipant.isScreenShareEnabled);
+  }
+
   async toggleScreenshare() {
     const room = this.room();
     if (!room) throw "invalid state";
 
     if (this.screenshare()) {
-      await room.localParticipant.setScreenShareEnabled(false);
-
-      this.#setScreenshare(room.localParticipant.isScreenShareEnabled);
+      await this.#stopScreenshare(room);
 
       this.sound.playSound("streamEnd");
     } else {
-      const resolutions = this.getEnabledScreenShareResolutions().map(
-        (value) => ({ value, label: SCREEN_SHARE_RESOLUTION_LABELS[value] }),
-      );
-      let screenPicked:
-        | {
-            resolution: ScreenShareResolution;
-            frameRate: ScreenShareFrameRate;
-            audio: boolean;
-          }
-        | undefined;
-
-      // Register the modal on screen picker handler if it exists
-      if (window.native && window.native.onceScreenPicker) {
-        window.native.onceScreenPicker((sources) => {
-          this.openModal({
-            type: "screen_share_picker",
-            onCancel: () => {
-              window.native.screenPickerCallback(-1, false);
-            },
-            callback: (idx, resolution, frameRate, audio) => {
-              window.native.screenPickerCallback(idx, audio);
-              screenPicked = { resolution, frameRate, audio };
-            },
-            sources: sources,
-            resolutions,
-          });
-        });
-      }
+      const picked = this.#registerScreenPicker();
 
       try {
         const chosenQuality = this.#screenShareQuality(
@@ -759,136 +910,195 @@ class Voice {
           true,
           {
             resolution: chosenQuality?.resolution,
-            audio: {
-              autoGainControl: false,
-              echoCancellation: false,
-              noiseSuppression: false,
-              voiceIsolation: false,
-              restrictOwnAudio: true,
-            },
+            audio: STREAM_AUDIO_CAPTURE,
           },
           {
             screenShareEncoding: chosenQuality?.encoding,
             // Send only the full-size stream: a half-size simulcast copy makes
             // shared text unreadable for viewers showing the stream small
             simulcast: false,
-            // Stream audio is music and video sound rather than speech: send
-            // it in stereo at a music bitrate, and keep sending it through
-            // silence (DTX nearly stops sending while it's quiet)
-            audioPreset: AudioPresets.musicHighQualityStereo,
-            forceStereo: true,
-            dtx: false,
-            red: false,
+            ...STREAM_AUDIO_PUBLISH_OPTIONS,
           },
         );
 
-        const screenAudioTrack = room.localParticipant.getTrackPublication(
-          Track.Source.ScreenShareAudio,
+        this.#holdStreamAudio = false;
+        this.#keepStreamAudio(
+          room.localParticipant.getTrackPublication(
+            Track.Source.ScreenShareAudio,
+          )?.audioTrack,
         );
 
         this.#setScreenshare(room.localParticipant.isScreenShareEnabled);
-
-        // During quiet parts the browser can report the captured audio as
-        // muted, LiveKit then stops sending it until the capture reports
-        // sound again, which might never happen. Only we pause stream audio.
-        let holdScreenAudio = false;
-        const screenAudio = screenAudioTrack?.track;
-        screenAudio?.on(TrackEvent.UpstreamPaused, () => {
-          if (!holdScreenAudio) screenAudio.resumeUpstream();
-        });
 
         if (localTrack) {
           // This event is only fired if the screen share is ended by closing the window being streamed.
           // This catches the ending and disables screen sharing on our side. If this weren't here,
           // livekit would still share stream audio after closing the window being streamed.
           localTrack.on("ended", () => {
-            this.toggleScreenshare();
-            const oldAudioTrack = room.localParticipant.getTrackPublication(
-              Track.Source.ScreenShareAudio,
-            );
-            if (oldAudioTrack && oldAudioTrack.track) {
-              room.localParticipant.unpublishTrack(oldAudioTrack.track);
-            }
+            if (this.screenshare()) this.toggleScreenshare();
           });
 
-          const callback = async (
-            resolution: ScreenShareResolution,
-            frameRate: ScreenShareFrameRate,
-            audio: boolean,
-          ) => {
-            if (localTrack.videoTrack) {
-              const quality = this.#screenShareQuality(
-                resolution,
-                frameRate,
-                localTrack.videoTrack.mediaStreamTrack,
-              );
-
-              await localTrack.videoTrack.applyScreenShareConstraints(
-                {
-                  resolution: {
-                    frameRate: quality.resolution.frameRate,
-                    width: quality.resolution.width,
-                    height: quality.resolution.height,
-                  },
-                  contentHint: quality.contentHint,
-                },
-                quality.encoding,
-              );
-              if (!audio && screenAudioTrack?.track) {
-                room.localParticipant.unpublishTrack(screenAudioTrack.track);
-              }
-              this.sound.playSound("streamStart");
-            }
+          const start = async (options: StreamOptions) => {
+            await this.#applyStreamOptions(room, options);
+            this.sound.playSound("streamStart");
           };
 
-          if (screenPicked) {
-            callback(
-              screenPicked.resolution,
-              screenPicked.frameRate,
-              screenPicked.audio,
-            );
+          const pickedOptions = picked();
+          if (pickedOptions) {
+            await start(pickedOptions);
           } else if (this.#settings.screenShareQualityAsk) {
             localTrack.pauseUpstream();
-            holdScreenAudio = true;
-            screenAudioTrack?.pauseUpstream();
+            this.#holdStreamAudio = true;
+            this.#streamAudio?.pauseUpstream();
             this.openModal({
-              onCancel: async () => {
-                await room.localParticipant.setScreenShareEnabled(false);
-                this.#setScreenshare(
-                  room.localParticipant.isScreenShareEnabled,
-                );
-              },
+              onCancel: () => this.#stopScreenshare(room),
               type: "screen_share_settings",
               trackReference: {
                 participant: room.localParticipant,
                 publication: localTrack,
                 source: Track.Source.ScreenShare,
               },
-              resolutions,
-              audio: !!screenAudioTrack,
+              resolutions: this.#resolutionOptions(),
+              audio: !!this.#streamAudio,
               callback: async (resolution, frameRate, audio) => {
-                callback(resolution, frameRate, audio);
+                this.#holdStreamAudio = false;
+                await start({ resolution, frameRate, audio });
                 localTrack.resumeUpstream();
-                if (audio) {
-                  holdScreenAudio = false;
-                  screenAudioTrack?.resumeUpstream();
+                if (this.#streamAudioShared(room)) {
+                  this.#streamAudio?.resumeUpstream();
                 }
               },
             });
           } else {
             // Not asking: apply the saved choice, otherwise the capture stays
             // at the low startup constraints from getDisplayMedia
-            callback(
-              this.#settings.screenShareResolution,
-              this.#settings.screenShareFrameRate,
-              this.#settings.screenShareAudio,
-            );
+            await start({
+              resolution: this.#settings.screenShareResolution,
+              frameRate: this.#settings.screenShareFrameRate,
+              audio: this.#settings.screenShareAudio,
+            });
           }
         }
       } catch (e) {
         this.onErr(e);
       }
     }
+  }
+
+  /**
+   * Stream another screen or window. The stream itself keeps going, so
+   * whoever watches it keeps watching.
+   */
+  async switchScreenshareSource() {
+    const room = this.room();
+    const stream = this.streamOptions();
+    const video = room?.localParticipant.getTrackPublication(
+      Track.Source.ScreenShare,
+    )?.videoTrack;
+    if (!room || !stream || !video) return;
+
+    const picked = this.#registerScreenPicker();
+
+    let tracks: LocalTrack[];
+    try {
+      tracks = await room.localParticipant.createScreenTracks({
+        resolution: this.#screenShareQuality(
+          stream.resolution,
+          stream.frameRate,
+        ).resolution,
+        audio: STREAM_AUDIO_CAPTURE,
+      });
+    } catch (e) {
+      // closing the picker keeps streaming the current window
+      if (
+        e instanceof DOMException &&
+        (e.name === "NotAllowedError" || e.name === "AbortError")
+      ) {
+        return;
+      }
+      this.onErr(e);
+      return;
+    }
+
+    const newVideo = tracks.find((t) => t.kind === Track.Kind.Video)!;
+    const newAudio = tracks.find(
+      (t): t is LocalAudioTrack => t.kind === Track.Kind.Audio,
+    );
+
+    // the stream ended while picking
+    if (
+      this.streamOptions() !== stream ||
+      room.localParticipant.getTrackPublication(Track.Source.ScreenShare)
+        ?.videoTrack !== video
+    ) {
+      tracks.forEach((t) => t.stop());
+      return;
+    }
+
+    try {
+      const oldVideo = video.mediaStreamTrack;
+      await video.replaceTrack(newVideo.mediaStreamTrack, {
+        userProvidedTrack: false,
+      });
+      oldVideo.stop();
+
+      const oldAudio = this.#streamAudio;
+      if (newAudio && oldAudio && this.#streamAudioShared(room)) {
+        const oldAudioTrack = oldAudio.mediaStreamTrack;
+        await oldAudio.replaceTrack(newAudio.mediaStreamTrack, {
+          userProvidedTrack: false,
+        });
+        oldAudioTrack.stop();
+      } else {
+        if (oldAudio) {
+          if (this.#streamAudioShared(room)) {
+            await room.localParticipant.unpublishTrack(oldAudio);
+          }
+          oldAudio.stop();
+        }
+        this.#keepStreamAudio(newAudio);
+      }
+
+      // the picker is where audio gets chosen, so share whatever it captured
+      const pickedOptions = picked();
+      await this.#applyStreamOptions(room, {
+        resolution: pickedOptions?.resolution ?? stream.resolution,
+        frameRate: pickedOptions?.frameRate ?? stream.frameRate,
+        audio: !!newAudio,
+      });
+    } catch (e) {
+      this.onErr(e);
+    }
+  }
+
+  /**
+   * Change the resolution, frame rate or audio of our stream while it keeps
+   * going
+   */
+  openScreenshareSettings() {
+    const room = this.room();
+    const stream = this.streamOptions();
+    const publication = room?.localParticipant.getTrackPublication(
+      Track.Source.ScreenShare,
+    );
+    if (!room || !stream || !publication) return;
+
+    this.openModal({
+      type: "screen_share_settings",
+      live: stream,
+      trackReference: {
+        participant: room.localParticipant,
+        publication,
+        source: Track.Source.ScreenShare,
+      },
+      resolutions: this.#resolutionOptions(),
+      audio: !!this.#streamAudio,
+      onCancel: () => {},
+      callback: (resolution, frameRate, audio) =>
+        this.#applyStreamOptions(room, { resolution, frameRate, audio }).catch(
+          (e) => this.onErr(e),
+        ),
+    });
   }
 
   resetLayout() {

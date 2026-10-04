@@ -10,6 +10,8 @@ import { useState } from "@revolt/state";
 import { Button, IconButton } from "@revolt/ui/components/design";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
+import { ScreenShareButton } from "./ScreenShareButton";
+
 export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
   const voice = useVoice();
   const state = useState();
@@ -117,31 +119,7 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
       </IconButton>
       {/* Phone browsers can't share their screen */}
       <Show when={screenShareSupported}>
-        <IconButton
-          size={props.size}
-          variant={limits().video && voice.screenshare() ? "filled" : "tonal"}
-          onPress={() => {
-            if (limits().video) voice.toggleScreenshare();
-          }}
-          use:floating={{
-            tooltip: {
-              placement: "top",
-              content: limits().video
-                ? voice.screenshare()
-                  ? t`Stop sharing`
-                  : t`Share screen`
-                : t`Coming soon! 👀`,
-            },
-          }}
-          isDisabled={!limits().video}
-        >
-          <Show
-            when={!limits().video || voice.screenshare()}
-            fallback={<Symbol>stop_screen_share</Symbol>}
-          >
-            <Symbol>screen_share</Symbol>
-          </Show>
-        </IconButton>
+        <ScreenShareButton size={props.size} />
       </Show>
       <Show when={voice.watching.size}>
         <IconButton

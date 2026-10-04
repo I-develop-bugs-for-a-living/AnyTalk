@@ -333,6 +333,12 @@ export type Modals =
     }
   | {
       type: "screen_share_settings";
+      /** Current settings of a stream that is already going */
+      live?: {
+        resolution: ScreenShareResolution;
+        frameRate: ScreenShareFrameRate;
+        audio: boolean;
+      };
       trackReference: TrackReference;
       resolutions: { value: ScreenShareResolution; label: string }[];
       audio: boolean;
