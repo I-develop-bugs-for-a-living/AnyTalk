@@ -19,7 +19,8 @@ export const main = cva({
     margin: "0 var(--gap-md) var(--gap-md) 0",
     borderRadius: "var(--borderRadius-xl)",
     background: "var(--md-sys-color-surface-container-lowest)",
-    paddingBottom: "env(keyboard-inset-height)",
+    paddingBottom:
+      "max(env(keyboard-inset-height, 0px), var(--safe-area-bottom))",
 
     _tablet: {
       margin: 0,

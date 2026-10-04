@@ -61,6 +61,11 @@ export function LoadTheme() {
     const cssProps = getCssProps();
     for (const [key, value] of Object.entries(cssProps))
       document.body.style.setProperty(key, value);
+
+    // shows around #root, e.g. above the home indicator on iPhones, where
+    // mdui would otherwise paint its light background
+    document.documentElement.style.backgroundColor =
+      cssProps["--md-sys-color-surface-container-lowest"];
   });
 
   //Set PWA theme color

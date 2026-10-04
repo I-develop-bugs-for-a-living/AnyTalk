@@ -319,7 +319,7 @@ const ChannelList = styled("div", {
     position: "relative",
     flexGrow: 1,
     minHeight: 0,
-    marginBottom: "var(--gap-md)",
+    marginBottom: "calc(var(--gap-md) + var(--safe-area-bottom))",
   },
 });
 

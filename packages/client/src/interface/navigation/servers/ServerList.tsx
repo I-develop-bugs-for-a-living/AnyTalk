@@ -825,6 +825,7 @@ const ServerListBase = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
+    paddingBottom: "var(--safe-area-bottom)",
 
     fill: "var(--md-sys-color-on-surface)",
   },
