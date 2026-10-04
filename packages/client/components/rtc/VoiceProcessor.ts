@@ -1,9 +1,14 @@
 import { AudioProcessorOptions, Track, TrackProcessor } from "livekit-client";
-import { RNNoiseNode } from "livekit-rnnoise-processor";
 import { createEffect, createRoot, on } from "solid-js";
 
-import { CONFIGURATION } from "@revolt/common";
 import { Voice } from "@revolt/state/stores/Voice";
+
+import { RNNoiseNode } from "./rnnoise/RNNoiseNode";
+
+/**
+ * Q of two cascaded biquads forming a 4th order Butterworth filter
+ */
+const HIGHPASS_Q = [0.5412, 1.3066];
 
 export class VoiceProcessor implements TrackProcessor<
   Track.Kind.Audio,
@@ -17,7 +22,7 @@ export class VoiceProcessor implements TrackProcessor<
 
   private noiseSuppressionNode?: RNNoiseNode;
   private sourceNode?: MediaStreamAudioSourceNode;
-  private highpassNode?: BiquadFilterNode;
+  private highpassNodes: BiquadFilterNode[] = [];
   private compressorNode?: DynamicsCompressorNode;
   private gainNode?: GainNode;
   private destinationNode?: MediaStreamAudioDestinationNode;
@@ -63,6 +68,28 @@ export class VoiceProcessor implements TrackProcessor<
         ),
       );
 
+      // On high-pass filter setting change, retune or add/remove the filter
+      createEffect(
+        on(
+          () => this.getSettings().highpassFrequency,
+          (frequency, oldFrequency) => {
+            if (oldFrequency === undefined) return;
+            if (frequency > 0 && this.highpassNodes.length) {
+              this.highpassNodes.forEach(
+                (node) => (node.frequency.value = frequency),
+              );
+            } else if (frequency > 0 !== oldFrequency > 0) {
+              this.rebuild();
+            }
+          },
+        ),
+      );
+
+      // On speech gate setting change, tell RNNoise
+      createEffect(() => {
+        this.noiseSuppressionNode?.setGate(this.getSettings().speechGate);
+      });
+
       // This is needed to destroy the solid context on unload
       this.disposeSolidjsContext = dispose;
     });
@@ -93,15 +120,29 @@ export class VoiceProcessor implements TrackProcessor<
     }
   }
 
-  private rebuild() {
-    this.updateNoiseSuppression(this.audioContext!);
+  private async rebuild() {
+    const context = this.audioContext;
+    if (!context) return;
+    await this.loadNoiseSuppression(context);
+    // skip if the processor was rebuilt or destroyed in the meantime
+    if (context === this.audioContext && this.sourceNode) {
+      this.connectProcessing(context);
+    }
+  }
+
+  /**
+   * Download RNNoise if it's needed, only done once it's turned on
+   */
+  private async loadNoiseSuppression(context: AudioContext) {
+    if (this.settings.noiseSupression !== "enhanced") return;
+    try {
+      await RNNoiseNode.loadModule(context);
+    } catch (err) {
+      console.error("[rtc] could not load RNNoise", err);
+    }
   }
 
   async init(opts: AudioProcessorOptions): Promise<void> {
-    await RNNoiseNode.loadModule(
-      opts.audioContext,
-      CONFIGURATION.RNNOISE_WORKLET_CDN_URL,
-    );
     return this.build(opts);
   }
 
@@ -118,23 +159,46 @@ export class VoiceProcessor implements TrackProcessor<
     return this.teardown();
   }
 
-  private updateNoiseSuppression(context: AudioContext) {
-    if (this.noiseSuppressionNode) {
-      this.compressorNode?.disconnect();
-      this.noiseSuppressionNode.disconnect();
-      this.highpassNode?.disconnect();
-      this.sourceNode?.disconnect();
+  private disconnectProcessing() {
+    this.sourceNode?.disconnect();
+    this.highpassNodes.forEach((node) => node.disconnect());
+    this.noiseSuppressionNode?.destroy();
+    this.compressorNode?.disconnect();
+    this.highpassNodes = [];
+    this.noiseSuppressionNode = undefined;
+    this.compressorNode = undefined;
+  }
+
+  /**
+   * Connect source -> high-pass filter -> RNNoise -> compressor -> gain,
+   * leaving out what is turned off
+   */
+  private connectProcessing(context: AudioContext) {
+    this.disconnectProcessing();
+
+    let last: AudioNode = this.sourceNode!;
+
+    const frequency = this.settings.highpassFrequency;
+    if (frequency > 0) {
+      this.highpassNodes = HIGHPASS_Q.map((q) => {
+        const node = context.createBiquadFilter();
+        node.type = "highpass";
+        node.frequency.value = frequency;
+        node.Q.value = q;
+        last = last.connect(node);
+        return node;
+      });
     }
 
-    if (this.settings.noiseSupression === "enhanced") {
-      // Create a new highpass filter
-      this.highpassNode = context.createBiquadFilter();
-      this.highpassNode.type = "highpass";
-      this.highpassNode.frequency.value = 50;
-      this.highpassNode.Q.value = Math.SQRT1_2;
-
-      this.noiseSuppressionNode = new RNNoiseNode(this.audioContext!);
-      this.highpassNode.connect(this.noiseSuppressionNode);
+    if (
+      this.settings.noiseSupression === "enhanced" &&
+      RNNoiseNode.isLoaded(context)
+    ) {
+      this.noiseSuppressionNode = new RNNoiseNode(
+        context,
+        this.settings.speechGate,
+      );
+      last = last.connect(this.noiseSuppressionNode);
 
       // Create a new dynamics compressor
       this.compressorNode = context.createDynamicsCompressor();
@@ -143,19 +207,10 @@ export class VoiceProcessor implements TrackProcessor<
       this.compressorNode.ratio.value = 20;
       this.compressorNode.attack.value = 0.003;
       this.compressorNode.release.value = 0.05;
-      this.noiseSuppressionNode.connect(this.compressorNode);
-
-      // Connect the compressor to the output gain
-      this.compressorNode.connect(this.gainNode!);
-      // Lastly, connect the source to the highpass node to complete loop
-      this.sourceNode!.connect(this.highpassNode);
-    } else {
-      // Bypass noise suppression and remove all unused nodes
-      this.compressorNode = undefined;
-      this.noiseSuppressionNode = undefined;
-      this.highpassNode = undefined;
-      this.sourceNode!.connect(this.gainNode!);
+      last = last.connect(this.compressorNode);
     }
+
+    last.connect(this.gainNode!);
   }
 
   private async build(opts: AudioProcessorOptions): Promise<void> {
@@ -173,6 +228,8 @@ export class VoiceProcessor implements TrackProcessor<
     if (!context) {
       return;
     }
+    await this.loadNoiseSuppression(context);
+
     this.sourceNode = context.createMediaStreamSource(
       new MediaStream([opts.track]),
     );
@@ -181,7 +238,7 @@ export class VoiceProcessor implements TrackProcessor<
     this.gainNode = context.createGain();
     this.gainNode.gain.value = this.settings.inputVolume;
 
-    this.updateNoiseSuppression(context);
+    this.connectProcessing(context);
 
     // Create the destination node, connect the gain node and send it off to livekit
     this.destinationNode = context.createMediaStreamDestination();
@@ -193,16 +250,10 @@ export class VoiceProcessor implements TrackProcessor<
   }
 
   private async teardown() {
-    this.sourceNode?.disconnect();
-    this.highpassNode?.disconnect();
-    this.noiseSuppressionNode?.disconnect();
-    this.compressorNode?.disconnect();
+    this.disconnectProcessing();
     this.gainNode?.disconnect();
     this.destinationNode?.disconnect();
     this.sourceNode = undefined;
-    this.highpassNode = undefined;
-    this.noiseSuppressionNode = undefined;
-    this.compressorNode = undefined;
     this.gainNode = undefined;
     this.destinationNode = undefined;
   }

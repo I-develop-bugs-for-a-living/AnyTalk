@@ -1,7 +1,9 @@
 import { Trans } from "@lingui/solid/macro";
+import { Show } from "solid-js";
 
 import { useState } from "@revolt/state";
 import {
+  HighpassFrequency,
   NoiseSuppresionState,
   enhancedNoiseSuppressionSupported,
 } from "@revolt/state/stores/Voice";
@@ -44,6 +46,51 @@ export function VoiceProcessingOptions() {
           }
           value={voice.noiseSupression}
           onUpdate={(ns) => (voice.noiseSupression = ns)}
+        />
+        <Show when={voice.noiseSupression === "enhanced"}>
+          <CategoryButton
+            icon="blank"
+            action={<Checkbox checked={voice.speechGate} />}
+            onClick={() => (voice.speechGate = !voice.speechGate)}
+            description={
+              <Trans>
+                Silences your microphone while you aren't talking, so knocks and
+                background noise between sentences aren't heard.
+              </Trans>
+            }
+          >
+            <Trans>Mute when not speaking</Trans>
+          </CategoryButton>
+        </Show>
+        <CategoryButton.Select
+          icon="blank"
+          title={<Trans>Low-cut filter</Trans>}
+          options={
+            {
+              0: { title: <Trans>Off</Trans> },
+              60: {
+                title: <Trans>Light (60 Hz)</Trans>,
+                shortDesc: <Trans>Light (60 Hz)</Trans>,
+                description: <Trans>Removes deep rumble</Trans>,
+              },
+              90: {
+                title: <Trans>Medium (90 Hz)</Trans>,
+                shortDesc: <Trans>Medium (90 Hz)</Trans>,
+                description: (
+                  <Trans>Removes knocks on the desk or microphone</Trans>
+                ),
+              },
+              150: {
+                title: <Trans>Strong (150 Hz)</Trans>,
+                shortDesc: <Trans>Strong (150 Hz)</Trans>,
+                description: <Trans>Also thins out deep voices</Trans>,
+              },
+            } satisfies Record<HighpassFrequency, CategorySelectOption>
+          }
+          value={String(voice.highpassFrequency) as `${HighpassFrequency}`}
+          onUpdate={(frequency) =>
+            (voice.highpassFrequency = Number(frequency) as HighpassFrequency)
+          }
         />
         <CategoryButton
           icon="blank"

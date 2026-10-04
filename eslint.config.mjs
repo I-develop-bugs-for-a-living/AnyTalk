@@ -15,6 +15,7 @@ export default defineConfig([
       "**/coverage/**",
       "**/dist/**",
       "**/styled-system/**",
+      "**/rtc/rnnoise/wasm/**",
     ],
   },
   {

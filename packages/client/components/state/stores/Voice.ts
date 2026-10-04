@@ -27,6 +27,16 @@ export const enhancedNoiseSuppressionSupported =
   );
 
 /**
+ * Cut-off frequencies of the microphone high-pass filter in Hz, 0 is off.
+ */
+export type HighpassFrequency = 0 | 60 | 90 | 150;
+
+/**
+ * Available high-pass filter cut-off frequencies.
+ */
+export const HighpassFrequencies: HighpassFrequency[] = [0, 60, 90, 150];
+
+/**
  * Screen share resolutions. "source" is the native size of the shared screen or window.
  */
 export type ScreenShareResolution = "720p" | "1080p" | "1440p" | "source";
@@ -89,6 +99,9 @@ export interface TypeVoice {
 
   echoCancellation: boolean;
   noiseSupression: NoiseSuppresionState;
+  /** Mute the microphone away from speech, only with enhanced noise suppression */
+  speechGate: boolean;
+  highpassFrequency: HighpassFrequency;
   autoGainControl: boolean;
 
   screenShareResolution: ScreenShareResolution;
@@ -138,6 +151,8 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       noiseSupression: enhancedNoiseSuppressionSupported
         ? "enhanced"
         : "browser",
+      speechGate: true,
+      highpassFrequency: 90,
       autoGainControl: true,
       screenShareResolution: "1080p",
       screenShareFrameRate: 30,
@@ -195,6 +210,17 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       !enhancedNoiseSuppressionSupported
     ) {
       data.noiseSupression = "browser";
+    }
+
+    if (typeof input.speechGate === "boolean") {
+      data.speechGate = input.speechGate;
+    }
+
+    if (
+      input.highpassFrequency !== undefined &&
+      HighpassFrequencies.includes(input.highpassFrequency)
+    ) {
+      data.highpassFrequency = input.highpassFrequency;
     }
 
     if (typeof input.autoGainControl === "boolean") {
@@ -395,6 +421,20 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
   }
 
   /**
+   * Set muting the microphone away from speech
+   */
+  set speechGate(value: boolean) {
+    this.set("speechGate", value);
+  }
+
+  /**
+   * Set the high-pass filter cut-off frequency
+   */
+  set highpassFrequency(value: HighpassFrequency) {
+    this.set("highpassFrequency", value);
+  }
+
+  /**
    * Set auto gain control
    */
   set autoGainControl(value: boolean) {
@@ -497,6 +537,20 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
    */
   get noiseSupression(): NoiseSuppresionState | undefined {
     return this.get().noiseSupression;
+  }
+
+  /**
+   * Get muting the microphone away from speech
+   */
+  get speechGate(): boolean {
+    return this.get().speechGate;
+  }
+
+  /**
+   * Get the high-pass filter cut-off frequency
+   */
+  get highpassFrequency(): HighpassFrequency {
+    return this.get().highpassFrequency;
   }
 
   /**

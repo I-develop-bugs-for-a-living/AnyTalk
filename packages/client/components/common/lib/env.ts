@@ -62,10 +62,6 @@ export default {
   /** Gifbox server override for development */
   DEV_GIFBOX_URL: getEnv("VITE_DEV_GIFBOX_URL"),
   /**
-   * RNNoise worklet CDN host location. Defaults to blank, which uses the url provided by the livekit-rnnoise-processor package.
-   */
-  RNNOISE_WORKLET_CDN_URL: getEnv("VITE_RNNOISE_WORKLET_CDN_URL"),
-  /**
    * Session ID to set during development.
    */
   DEVELOPMENT_SESSION_ID: getEnv("VITE_SESSION_ID", true),
