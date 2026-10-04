@@ -112,15 +112,22 @@ export function CategoryContextMenu(props: {
         <ContextMenuButton icon={MdLibraryAdd} onClick={createCategory}>
           <Trans>Create category</Trans>
         </ContextMenuButton>
-        <ContextMenuButton
-          icon={<Symbol size={16}>edit</Symbol>}
-          onClick={editCategoryName}
-        >
-          <Trans>Rename category</Trans>
-        </ContextMenuButton>
-        <ContextMenuButton icon={MdDelete} onClick={deleteCategory} destructive>
-          <Trans>Delete category</Trans>
-        </ContextMenuButton>
+        {/* the default category only gathers channels no category claims */}
+        <Show when={props.category.id !== "default"}>
+          <ContextMenuButton
+            icon={<Symbol size={16}>edit</Symbol>}
+            onClick={editCategoryName}
+          >
+            <Trans>Rename category</Trans>
+          </ContextMenuButton>
+          <ContextMenuButton
+            icon={MdDelete}
+            onClick={deleteCategory}
+            destructive
+          >
+            <Trans>Delete category</Trans>
+          </ContextMenuButton>
+        </Show>
       </Show>
 
       <Show when={state.settings.getValue("advanced:copy_id")}>

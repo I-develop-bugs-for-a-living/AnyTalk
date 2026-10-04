@@ -1,6 +1,7 @@
 import { createFormControl, createFormGroup } from "solid-forms";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
+import { ulid } from "ulid";
 
 import { useNavigate } from "@revolt/routing";
 import { Column, Dialog, DialogProps, Form2 } from "@revolt/ui";
@@ -27,6 +28,22 @@ export function CreateServerModal(
       const server = await props.client.servers.createServer({
         name: group.controls.name.value,
       });
+
+      // every channel belongs to a category, so put the starter channels
+      // in one named after the server
+      await server
+        .edit({
+          categories: [
+            {
+              id: ulid(),
+              title: server.name,
+              channels: server.channels.map((channel) => channel.id),
+            },
+          ],
+        })
+        .catch((error) =>
+          console.error("[server] could not create default category", error),
+        );
 
       setTimeout(() => navigate(`/server/${server.id}`));
       props.onClose();

@@ -11,31 +11,32 @@ describe("orderedCategories", () => {
 
   test("keeps stored channels, including the ones we cannot see", () => {
     expect(
-      orderedCategories([category("news", ["a", "hidden"])], ["a"]),
+      orderedCategories([category("news", ["a", "hidden"])], ["a"], "Lounge"),
     ).toEqual([
-      { id: "default", title: "Default", channelIds: [] },
+      { id: "default", title: "Lounge", channelIds: [] },
       { id: "news", title: "news", channelIds: ["a", "hidden"] },
     ]);
   });
 
   test("collects channels no category claims into default", () => {
     expect(
-      orderedCategories([category("news", ["a"])], ["a", "b", "c"]),
+      orderedCategories([category("news", ["a"])], ["a", "b", "c"], "Lounge"),
     ).toEqual([
-      { id: "default", title: "Default", channelIds: ["b", "c"] },
+      { id: "default", title: "Lounge", channelIds: ["b", "c"] },
       { id: "news", title: "news", channelIds: ["a"] },
     ]);
   });
 
-  test("appends unclaimed channels to a stored default, keeping its place", () => {
+  test("appends unclaimed channels to a stored default, titled after the server", () => {
     expect(
       orderedCategories(
         [category("news", ["a"]), category("default", ["b"])],
         ["a", "b", "c"],
+        "Lounge",
       ),
     ).toEqual([
       { id: "news", title: "news", channelIds: ["a"] },
-      { id: "default", title: "default", channelIds: ["b", "c"] },
+      { id: "default", title: "Lounge", channelIds: ["b", "c"] },
     ]);
   });
 
@@ -44,16 +45,17 @@ describe("orderedCategories", () => {
       orderedCategories(
         [category("default", ["hidden"]), category("news", ["a"])],
         ["a"],
+        "Lounge",
       ),
     ).toEqual([
-      { id: "default", title: "Default", channelIds: [] },
+      { id: "default", title: "Lounge", channelIds: [] },
       { id: "news", title: "news", channelIds: ["a"] },
     ]);
   });
 
   test("always offers a default to drop channels into", () => {
-    expect(orderedCategories(undefined, [])).toEqual([
-      { id: "default", title: "Default", channelIds: [] },
+    expect(orderedCategories(undefined, [], "Lounge")).toEqual([
+      { id: "default", title: "Lounge", channelIds: [] },
     ]);
   });
 });

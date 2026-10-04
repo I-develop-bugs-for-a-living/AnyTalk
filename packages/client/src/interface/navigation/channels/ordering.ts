@@ -6,9 +6,15 @@ export interface OrderedCategory {
   channelIds: string[];
 }
 
+/**
+ * Order categories, collecting uncategorised channels into the "default"
+ * category so every channel belongs to one
+ * @param defaultTitle Title shown for the "default" category (the server's name)
+ */
 export function orderedCategories(
   categories: API.Category[] | undefined,
   knownChannelIds: string[],
+  defaultTitle: string,
 ): OrderedCategory[] {
   const known = new Set(knownChannelIds);
   const uncategorised = new Set(knownChannelIds);
@@ -21,7 +27,7 @@ export function orderedCategories(
 
       return {
         id: category.id,
-        title: category.title,
+        title: category.id === "default" ? defaultTitle : category.title,
         channelIds: category.channels,
       };
     })
@@ -42,7 +48,7 @@ export function orderedCategories(
   } else {
     ordered.unshift({
       id: "default",
-      title: "Default",
+      title: defaultTitle,
       channelIds: uncategorisedIds,
     });
   }

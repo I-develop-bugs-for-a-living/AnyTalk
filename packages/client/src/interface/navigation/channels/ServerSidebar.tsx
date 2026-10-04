@@ -126,6 +126,7 @@ export const ServerSidebar = (props: Props) => {
     return orderedCategories(
       props.server.categories,
       props.server.channels.map((channel) => channel.id),
+      props.server.name,
     ).map((category) => ({
       ...category,
       channels: category.channelIds
@@ -176,6 +177,18 @@ export const ServerSidebar = (props: Props) => {
   });
 
   const noOrdering = () => !props.server.havePermission("ManageChannel");
+
+  /**
+   * Category holding channels no other category claims, titled after the server.
+   * Hidden when empty, unless there's no other category to show.
+   */
+  const defaultCategory = () => {
+    const all = categories();
+    const category = all.find((category) => category.id === "default");
+    return category && (category.channels.length || all.length === 1)
+      ? category
+      : undefined;
+  };
 
   const [list, setList] = createSignal<HTMLDivElement>();
 
@@ -269,9 +282,7 @@ export const ServerSidebar = (props: Props) => {
           style={{ height: "100%" }}
           use:floating={props.menuGenerator(props.server)}
         >
-          <Show
-            when={categories().find((category) => category.id === "default")}
-          >
+          <Show when={defaultCategory()}>
             {(category) => (
               <Category
                 server={props.server}
@@ -405,33 +416,54 @@ function Category(
   const state = useState();
   const isOpen = () => state.layout.getSectionState(props.category.id, true);
   const { isMobile } = useDevice();
+  const { openModal } = useModals();
+  const { t } = useLingui();
+
+  const canCreateChannel = () => props.server.havePermission("ManageChannel");
 
   const channels = createMemo(() =>
     props.category.channels.filter(
-      (channel) =>
-        props.category.id === "default" ||
-        isOpen() ||
-        channel.unread ||
-        channel.id === props.channelId,
+      (channel) => isOpen() || channel.unread || channel.id === props.channelId,
     ),
   );
 
   return (
     <CategorySection>
-      <Show when={props.category.id !== "default"}>
-        <div use:floating={props.menuGenerator(props.category as never)}>
-          <CategoryBase
-            open={isOpen()}
-            onClick={() => {
-              state.layout.toggleSectionState(props.category.id, true);
-            }}
-            {...createDragHandle(props.dragDisabled, props.setDragDisabled)}
-          >
-            {props.category.title}
-            <MdChevronRight {...iconSize(12)} />
-          </CategoryBase>
-        </div>
-      </Show>
+      <div use:floating={props.menuGenerator(props.category as never)}>
+        <CategoryBase
+          open={isOpen()}
+          onClick={() => {
+            state.layout.toggleSectionState(props.category.id, true);
+          }}
+          {...createDragHandle(props.dragDisabled, props.setDragDisabled)}
+        >
+          <CategoryTitle>
+            <TextWithEmoji content={props.category.title} />
+          </CategoryTitle>
+          <MdChevronRight {...iconSize(12)} />
+          <Show when={canCreateChannel()}>
+            <CategoryAction
+              type="button"
+              aria-label={t`Create channel in ${props.category.title}`}
+              use:floating={{
+                tooltip: { placement: "top", content: t`Create Channel` },
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                openModal({
+                  type: "create_channel",
+                  server: props.server,
+                  categoryId: props.category.id,
+                });
+              }}
+              // keep Enter / Space from toggling the category's drag handle
+              onKeyDown={(e) => e.stopPropagation()}
+            >
+              <Symbol size={16}>add</Symbol>
+            </CategoryAction>
+          </Show>
+        </CategoryBase>
+      </div>
       <Draggable
         dropIndicator
         type="channels"
@@ -517,6 +549,44 @@ const CategoryBase = styled("div", {
           transform: "rotateZ(90deg)",
         },
       },
+    },
+  },
+});
+
+/**
+ * Category title, truncated when too long
+ */
+const CategoryTitle = styled("span", {
+  base: {
+    minWidth: 0,
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
+  },
+});
+
+/**
+ * Button shown at the end of a category title
+ */
+const CategoryAction = styled("button", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+    marginInlineStart: "auto",
+
+    padding: 0,
+    border: "none",
+    background: "transparent",
+    cursor: "pointer",
+    borderRadius: "var(--borderRadius-sm)",
+
+    color: "var(--md-sys-color-on-surface-variant)",
+    fill: "currentColor",
+
+    "&:hover, &:focus-visible": {
+      color: "var(--md-sys-color-on-surface)",
     },
   },
 });
