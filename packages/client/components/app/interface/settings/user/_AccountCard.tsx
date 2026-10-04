@@ -1,6 +1,9 @@
 import { Trans } from "@lingui/solid/macro";
 
+import { Show } from "solid-js";
+
 import { useClient } from "@revolt/client";
+import { useDevice } from "@revolt/common";
 import { Avatar, OverflowingText, Ripple, typography } from "@revolt/ui";
 
 import MdArrowBack from "@material-design-icons/svg/outlined/arrow_back.svg?component-solid";
@@ -22,6 +25,7 @@ export function AccountCard() {
 
   return (
     <SidebarButton
+      class="account"
       onClick={() => navigate("account")}
       aria-selected={page() === "account"}
     >
@@ -45,20 +49,25 @@ export function AccountCard() {
 }
 
 export function BackCard(props: { onClose?: () => void }) {
+  const device = useDevice();
+
   return (
-    <SidebarButton
-      class={"back " + mobileOnly}
-      onClick={props.onClose}
-      noDrawer
-    >
-      <Ripple />
-      <SidebarButtonTitle>
-        <MdArrowBack />
-        <SidebarButtonContent>
-          <Trans>Back</Trans>
-        </SidebarButtonContent>
-      </SidebarButtonTitle>
-    </SidebarButton>
+    // phones have a close button at the top instead
+    <Show when={device.layout() !== "phone"}>
+      <SidebarButton
+        class={"back " + mobileOnly}
+        onClick={props.onClose}
+        noDrawer
+      >
+        <Ripple />
+        <SidebarButtonTitle>
+          <MdArrowBack />
+          <SidebarButtonContent>
+            <Trans>Back</Trans>
+          </SidebarButtonContent>
+        </SidebarButtonTitle>
+      </SidebarButton>
+    </Show>
   );
 }
 

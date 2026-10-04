@@ -114,7 +114,12 @@ export function Settings(props: SettingsProps & SettingsConfiguration<never>) {
       >
         {(list) => (
           <>
-            <SettingsSidebar list={list} page={page} setPage={setPage} />
+            <SettingsSidebar
+              list={list}
+              page={page}
+              setPage={setPage}
+              onClose={props.onClose}
+            />
             <SettingsContent
               ref={props.contentRef}
               action={action}

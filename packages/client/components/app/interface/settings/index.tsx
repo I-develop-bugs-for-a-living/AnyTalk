@@ -57,6 +57,12 @@ export type SettingsEntry = {
 
   icon: JSX.Element;
   title: JSX.Element;
+
+  /**
+   * Settings on this page, so searching finds it by them too
+   * (also makes a hidden entry findable)
+   */
+  keywords?: string[];
 };
 
 // eslint-disable-next-line

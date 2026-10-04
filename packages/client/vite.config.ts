@@ -11,6 +11,7 @@ import solidSvg from "vite-plugin-solid-svg";
 
 import codegenPlugin from "./codegen.plugin";
 import { addFontPreload } from "./fontpreload.plugin";
+import settingsSearchPlugin from "./settingsSearch.plugin";
 
 const base = process.env.BASE_PATH ?? "/";
 const pwaScope = process.env.PWA_SCOPE || base;
@@ -21,6 +22,7 @@ export default defineConfig({
     Inspect(),
     devtools(),
     codegenPlugin(),
+    settingsSearchPlugin(),
     babelMacrosPlugin(),
     solidPlugin({
       babel: {

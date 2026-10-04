@@ -1,5 +1,6 @@
 import { Show } from "solid-js";
 
+import { i18n } from "@lingui/core";
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { Server } from "stoat.js";
 import { css } from "styled-system/css";
@@ -25,9 +26,11 @@ import MdSmartToy from "@material-design-icons/svg/outlined/smart_toy.svg?compon
 import MdVerifiedUser from "@material-design-icons/svg/outlined/verified_user.svg?component-solid";
 import MdWorkspacePremium from "@material-design-icons/svg/outlined/workspace_premium.svg?component-solid";
 
+import pageTexts from "virtual:settings-search";
+
 import pkg from "../../../../../../package.json";
 
-import { SettingsConfiguration } from ".";
+import { SettingsConfiguration, SettingsList } from ".";
 import { AccountCard, BackCard } from "./user/_AccountCard";
 import { MyAccount } from "./user/Account";
 import AdvancedSettings from "./user/Advanced";
@@ -136,7 +139,7 @@ const Config: SettingsConfiguration<{ server: Server }> = {
     const { limits, config } = useInstance();
     const { t } = useLingui();
 
-    return {
+    return withPageTexts({
       context: null!,
       prepend: (
         <Column gap="s">
@@ -249,8 +252,9 @@ const Config: SettingsConfiguration<{ server: Server }> = {
           entries: [
             {
               id: "account",
-              icon: <></>,
-              title: <></>,
+              icon: <MdAccountCircle {...iconSize(20)} />,
+              title: <Trans>My Account</Trans>,
+              // the account card opens it, only search lists it
               hidden: true,
             },
             {
@@ -304,6 +308,13 @@ const Config: SettingsConfiguration<{ server: Server }> = {
               ) : (
                 <Trans>Voice</Trans>
               ),
+              // words for it that aren't on the page
+              keywords: [
+                t`Microphone`,
+                t`Speaker`,
+                t`Camera`,
+                t`Noise suppression`,
+              ],
             },
             {
               id: "appearance",
@@ -408,8 +419,27 @@ const Config: SettingsConfiguration<{ server: Server }> = {
           ],
         },
       ],
-    };
+    });
   },
 };
+
+/**
+ * Let searching the settings find a page by the texts on it, translated
+ * @param list Settings list
+ * @returns List with each page's texts added to its keywords
+ */
+function withPageTexts<T>(list: SettingsList<T>): SettingsList<T> {
+  for (const category of list.entries)
+    for (const entry of category.entries) {
+      const texts = entry.id ? pageTexts[entry.id] : undefined;
+      if (texts)
+        entry.keywords = [
+          ...(entry.keywords ?? []),
+          ...texts.map((message) => i18n._(message)),
+        ];
+    }
+
+  return list;
+}
 
 export default Config;

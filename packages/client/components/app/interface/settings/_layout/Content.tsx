@@ -1,10 +1,14 @@
+import { useLingui } from "@lingui/solid/macro";
 import { Accessor, JSX, Setter, Show } from "solid-js";
 import { Motion, Presence } from "solid-motionone";
 
 import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
+import { useDevice } from "@revolt/common";
+import { useState } from "@revolt/state";
 import { Breadcrumbs, IconButton, Text } from "@revolt/ui";
+import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import MdClose from "@material-design-icons/svg/outlined/close.svg?component-solid";
 
@@ -24,6 +28,9 @@ export function SettingsContent(props: {
   action: Accessor<(() => JSX.Element) | undefined>;
 }) {
   const { navigate } = useSettingsNavigation();
+  const { diagDrawer } = useState();
+  const device = useDevice();
+  const { t } = useLingui();
   const reduceMotion =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -33,6 +40,27 @@ export function SettingsContent(props: {
       <Show when={props.page()}>
         <InnerContent class="settings_cont">
           <InnerColumn>
+            {/* pages fill the screen on phones, so say how to get out */}
+            <Show when={device.layout() === "phone"}>
+              <PageHeader>
+                <BackButton
+                  type="button"
+                  onClick={() => diagDrawer()?.setShown(false)}
+                >
+                  <Symbol size={22}>arrow_back_ios_new</Symbol>
+                  {t`Settings`}
+                </BackButton>
+                <Show when={props.onClose}>
+                  <IconButton
+                    variant="tonal"
+                    onPress={props.onClose}
+                    aria-label={t`Close`}
+                  >
+                    <Symbol>close</Symbol>
+                  </IconButton>
+                </Show>
+              </PageHeader>
+            </Show>
             <Show when={props.page() !== "account"}>
               <Text class="title" size="large">
                 <Breadcrumbs
@@ -190,6 +218,32 @@ const ActionRail = styled("div", {
 const FloatingActions = styled("div", {
   base: {
     height: "fit-content",
+  },
+});
+
+/**
+ * Back and close at the top of a page on phones
+ */
+const PageHeader = styled("div", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+});
+
+const BackButton = styled("button", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "2px",
+    minHeight: "44px",
+    padding: "0 8px 0 0",
+    border: "none",
+    background: "none",
+    cursor: "pointer",
+    fontSize: "17px",
+    color: "var(--md-sys-color-primary)",
   },
 });
 

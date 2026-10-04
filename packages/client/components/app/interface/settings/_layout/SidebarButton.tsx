@@ -65,11 +65,25 @@ const SidebarButtonBase = styled("a", {
     "& svg": {
       flexShrink: 0,
     },
+
+    // rows of a card in the phone layout
+    _phone: {
+      minHeight: "52px",
+      padding: "6px 14px",
+      marginInlineEnd: 0,
+      borderRadius: 0,
+      fontSize: "16px",
+    },
   },
   variants: {
     "aria-selected": {
       true: {
         background: "var(--md-sys-color-primary-container)",
+
+        // pages open full screen on phones, nothing is selected
+        _phone: {
+          background: "unset",
+        },
       },
     },
   },
