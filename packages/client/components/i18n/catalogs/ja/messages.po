@@ -47,6 +47,16 @@ msgstr "(変更を保存しています...)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0} 件のブロックしたメッセージ"
 
+#. placeholder {0}: r.summary.freezes
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
+msgstr "{0, plural, other {フリーズ # 回、{seconds} 秒}}"
+
+#. placeholder {0}: meta.summary.freezes
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "{0, plural, one {# freeze} other {# freezes}}"
+msgstr "{0, plural, other {フリーズ # 回}}"
+
 #. placeholder {0}: mentions()
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
@@ -89,6 +99,11 @@ msgstr "あと {0} 個追加可能"
 msgid "{0} files exceed the maximum size limit of {maxSizeFormatted} and were not uploaded."
 msgstr "{0} 個のファイルは、最大容量の {maxSizeFormatted} を超過していたためアップロードされませんでした。"
 
+#. placeholder {0}: s.participantName
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#~ msgid "{0} heard"
+#~ msgstr "{0} の音声"
+
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} is already at the bottom"
@@ -127,6 +142,17 @@ msgstr "{0} がこのグループの所有者を {1} に変更しました"
 msgid "{0} moved to position {1} of {2}"
 msgstr ""
 
+#. placeholder {0}: props.title
+#: components/app/interface/settings/user/developer/TimeChart.tsx
+#~ msgid "{0} over time"
+#~ msgstr "{0} の推移"
+
+#. placeholder {0}: props.title
+#. placeholder {1}: props.series.length
+#: components/app/interface/settings/user/developer/CompareChart.tsx
+#~ msgid "{0} over time, {1} recaps"
+#~ msgstr "{0} の推移、リキャップ {1} 件"
+
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} picked up, use the arrow keys to move it and space to drop it"
@@ -141,6 +167,11 @@ msgstr "{0} がメッセージをピン留めしました"
 #: components/client/NotificationsWorker.tsx
 msgid "{0} renamed the channel"
 msgstr "{0} がチャンネルの名前を変更しました"
+
+#. placeholder {0}: selected().length
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+#~ msgid "{0} selected"
+#~ msgstr "{0} 件を選択中"
 
 #. placeholder {0}: (message.systemMessage as MessagePinnedSystemMessage).by?.username
 #: components/client/NotificationsWorker.tsx
@@ -181,6 +212,17 @@ msgstr ""
 msgid "{0}-{1} of {2}"
 msgstr "{0}-{1} ({2}件中)"
 
+#. placeholder {0}: file.name
+#. placeholder {1}: (err as Error).message
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#~ msgid "{0}: can't be read as a zip ({1})."
+#~ msgstr "{0}：zip として読み込めませんでした（{1}）。"
+
+#. placeholder {0}: file.name
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#~ msgid "{0}: there are no CSV files inside."
+#~ msgstr "{0}：CSV ファイルが含まれていません。"
+
 #. placeholder {0}: props.member.displayName
 #: components/modal/modals/UserProfileRoles.tsx
 msgid "{0}'s roles"
@@ -193,7 +235,51 @@ msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
-msgstr ""
+msgstr "{combo} は別のホットキーですでに使われています。"
+
+#: components/app/interface/settings/user/developer/CompareChart.tsx
+msgid "{count, plural, one {{title} over time, # recap} other {{title} over time, # recaps}}"
+msgstr "{count, plural, other {{title} の推移、リキャップ # 件}}"
+
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+msgid "{count} selected"
+msgstr "{count} 件を選択中"
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "{fileName}: can't be read as a zip ({error})."
+msgstr "{fileName}：zip として読み込めませんでした（{error}）。"
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "{fileName}: there are no CSV files inside."
+msgstr "{fileName}：CSV ファイルが含まれていません。"
+
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+msgid "{n, plural, one {Delete # call recap?} other {Delete # call recaps?}}"
+msgstr "{n, plural, other {通話リキャップ # 件を削除しますか？}}"
+
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+msgid "{n, plural, one {Delete # stream recap?} other {Delete # stream recaps?}}"
+msgstr "{n, plural, other {配信リキャップ # 件を削除しますか？}}"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "{name}'s {source}"
+msgstr "{name} の{source}"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "{name}'s camera"
+msgstr "{name} のカメラ"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "{name}'s screen share"
+msgstr "{name} の画面共有"
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "{participant} heard"
+msgstr "{participant} の音声"
+
+#: components/app/interface/settings/user/developer/TimeChart.tsx
+msgid "{title} over time"
+msgstr "{title} の推移"
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
@@ -286,15 +372,15 @@ msgstr "24時間"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A message or notification arrives"
-msgstr ""
+msgstr "メッセージや通知が届いたとき"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream in your call ends"
-msgstr ""
+msgstr "通話中の配信が終了したとき"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream starts in your call"
-msgstr ""
+msgstr "通話中に配信が始まったとき"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Able to access channels on this server"
@@ -351,6 +437,10 @@ msgstr "フレンドをグループに追加"
 msgid "Add new members to the group"
 msgstr "新しいメンバーをグループに追加できます"
 
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Add one of my recaps"
+msgstr "自分のリキャップを追加"
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Add status text"
 msgstr "ステータスを設定"
@@ -376,7 +466,7 @@ msgstr "詳細設定"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Advanced sound settings"
-msgstr ""
+msgstr "詳細なサウンド設定"
 
 #~ msgid "Affects all roles and users"
 #~ msgstr "全てのロールとユーザーに影響します"
@@ -390,9 +480,14 @@ msgstr "全て"
 msgid "All Messages"
 msgstr "すべてのメッセージ"
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "All recaps"
+msgstr "すべてのリキャップ"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "All roles have overrides."
-msgstr ""
+msgstr "すべてのロールに上書きがあります。"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "All Systems Operational"
@@ -408,11 +503,11 @@ msgstr "第三者が発見からあなたのボットを追加できるように
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Allow others to invite your bot"
-msgstr ""
+msgstr "他のユーザーがボットを招待できるようにする"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Allow others to join your server from Discover"
-msgstr ""
+msgstr "他のユーザーが探索からサーバーに参加できるようにする"
 
 #: components/i18n/errors.tsx
 msgid "Already friends with this user."
@@ -420,7 +515,7 @@ msgstr "既にフレンドになっています。"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Also thins out deep voices"
-msgstr ""
+msgstr "低い声も細くなります"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Always Ask for Screen Share Quality"
@@ -445,7 +540,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "AnyTalk for Desktop"
-msgstr ""
+msgstr "デスクトップ版 AnyTalk"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "AnyTalk Founder"
@@ -457,15 +552,15 @@ msgstr ""
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "AnyTalk reloads to switch language, only the language you use is downloaded and kept offline."
-msgstr ""
+msgstr "言語を切り替えるため AnyTalk を再読み込みします。使用する言語のみダウンロードされ、オフラインで保存されます。"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "AnyTalk rocks!"
-msgstr ""
+msgstr "AnyTalk 最高！"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "AnyTalk will start in the system tray."
-msgstr ""
+msgstr "AnyTalk はシステムトレイで起動します。"
 
 #: src/AndroidNag.tsx
 msgid "AnyTalk works best as an app"
@@ -514,9 +609,25 @@ msgstr "この権限を持つメンバーは、自分よりも低い位置にあ
 msgid "Assign Roles"
 msgstr "ロールを付与"
 
+#. placeholder {0}: formatDuration(h().t)
+#. placeholder {0}: formatDuration(props.hover!)
+#: components/app/interface/settings/user/developer/CompareChart.tsx
+#: components/app/interface/settings/user/developer/TimeChart.tsx
+#~ msgid "at {0}"
+#~ msgstr "{0} 時点"
+
+#: components/app/interface/settings/user/developer/CompareChart.tsx
+#: components/app/interface/settings/user/developer/TimeChart.tsx
+msgid "at {time}"
+msgstr "{time} 時点"
+
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Audio disabled by browser"
 msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Audio level"
+msgstr "音声レベル"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/modal/modals/MFAFlow.tsx
@@ -525,11 +636,36 @@ msgstr "二段階認証アプリ"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Automatic Gain Control"
-msgstr ""
+msgstr "自動ゲイン制御"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Avatar"
 msgstr "アバター"
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Averages"
+msgstr "平均"
+
+#: components/app/interface/settings/user/developer/TimeChart.tsx
+#~ msgid "avg"
+#~ msgstr "平均"
+
+#: components/app/interface/settings/user/developer/TimeChart.tsx
+msgid "avg {value}"
+msgstr "平均 {value}"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Avg bitrate"
+msgstr "平均ビットレート"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Avg frame rate"
+msgstr "平均フレームレート"
+
+#: components/app/interface/settings/user/developer/CompareChart.tsx
+msgid "avg per recap"
+msgstr "リキャップごとの平均"
 
 #: components/app/interface/settings/user/_AccountCard.tsx
 #: components/auth/src/flows/FlowCheck.tsx
@@ -577,6 +713,10 @@ msgstr "ユーザーをBAN"
 msgid "Ban User"
 msgstr "ユーザーをBAN"
 
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Bandwidth"
+msgstr "帯域幅"
+
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Banner"
 msgstr "バナー"
@@ -584,6 +724,11 @@ msgstr "バナー"
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Bans"
 msgstr "BANされたユーザー"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Bitrate"
+msgstr "ビットレート"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Block user"
@@ -615,7 +760,7 @@ msgstr "バグトラッカー"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Built on <0>Stoat</0>"
-msgstr ""
+msgstr "<0>Stoat</0> をベースに作成"
 
 #: components/auth/src/AuthPage.tsx
 msgid "Built on Stoat"
@@ -643,14 +788,18 @@ msgstr "低速モードを回避"
 msgid "Bypasses slowmode in channels"
 msgstr "チャンネルの低速モードを回避"
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Call"
+msgstr "通話"
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Calls"
-msgstr ""
+msgstr "通話"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Camera"
-msgstr ""
+msgstr "カメラ"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
@@ -658,8 +807,9 @@ msgstr ""
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Can't get discover request status right now"
-msgstr ""
+msgstr "現在、探索リクエストの状況を取得できません"
 
+#: components/app/interface/settings/user/developer/RecapParts.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/BanMember.tsx
@@ -695,7 +845,7 @@ msgstr "キャンセル"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Cancel discover request"
-msgstr ""
+msgstr "探索リクエストをキャンセル"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Cancel friend request"
@@ -707,7 +857,7 @@ msgstr "メッセージを取り消す"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Cancel your discover request and remove it from the review queue"
-msgstr ""
+msgstr "探索リクエストをキャンセルし、審査待ちから削除します"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
@@ -769,7 +919,7 @@ msgstr "自分のニックネームを変更できます"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
-msgstr ""
+msgstr "このボットのユーザー名を変更"
 
 #: components/modal/modals/EditUsername.tsx
 msgid "Change username"
@@ -814,8 +964,16 @@ msgstr "チャット入力"
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
-msgid "Check back often to see if your {0} has been approved!"
-msgstr ""
+#~ msgid "Check back often to see if your {0} has been approved!"
+#~ msgstr "{0}が承認されたかどうか、ときどき確認してください！"
+
+#: components/app/interface/settings/shared/Discoverable.tsx
+msgid "Check back often to see if your bot has been approved!"
+msgstr "ボットが承認されたかどうか、ときどき確認してください！"
+
+#: components/app/interface/settings/shared/Discoverable.tsx
+msgid "Check back often to see if your server has been approved!"
+msgstr "サーバーが承認されたかどうか、ときどき確認してください！"
 
 #: components/auth/src/flows/FlowCheck.tsx
 msgid "Check your mail!"
@@ -901,14 +1059,43 @@ msgstr ""
 msgid "Code"
 msgstr "招待コード"
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Codec"
+msgstr "コーデック"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Collapse call window"
 msgstr ""
+
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Colours"
+msgstr "カラー"
 
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Coming soon! 👀"
 msgstr "近日公開! 👀"
+
+#: components/app/interface/settings/user/Advanced.tsx
+msgid "Compact mode"
+msgstr "コンパクトモード"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Compare recaps"
+msgstr "リキャップを比較"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Compare Recaps"
+msgstr "リキャップを比較"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Concealed audio"
+msgstr "補完された音声"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Concealed audio (made up to hide lost packets)"
+msgstr "補完された音声（失われたパケットを隠すために生成）"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Configure a way to get back into your account in case your 2FA is lost"
@@ -947,10 +1134,22 @@ msgstr "接続中"
 msgid "Connection lost"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Connection quality (rated by the server)"
+msgstr "接続品質（サーバーによる評価）"
+
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
-msgid "Contact support to remove this {0} from discover"
-msgstr ""
+#~ msgid "Contact support to remove this {0} from discover"
+#~ msgstr "この{0}を探索から削除するにはサポートに連絡してください"
+
+#: components/app/interface/settings/shared/Discoverable.tsx
+msgid "Contact support to remove this bot from discover"
+msgstr "このボットを探索から削除するにはサポートに連絡してください"
+
+#: components/app/interface/settings/shared/Discoverable.tsx
+msgid "Contact support to remove this server from discover"
+msgstr "このサーバーを探索から削除するにはサポートに連絡してください"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Content breaks one or more laws"
@@ -999,7 +1198,7 @@ msgstr "IDをコピー"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Copy invite link"
-msgstr ""
+msgstr "招待リンクをコピー"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Copy Invite URL"
@@ -1060,6 +1259,10 @@ msgstr ""
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Couldn't move them to {0}."
 msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "CPU"
+msgstr "CPU"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 #: components/modal/modals/CreateBot.tsx
@@ -1218,7 +1421,7 @@ msgstr "日付の形式"
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Deafen"
-msgstr ""
+msgstr "スピーカーミュート"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen lower-ranking members in voice call"
@@ -1227,6 +1430,10 @@ msgstr "自分よりも低い位置にいるメンバーのスピーカーをミ
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
 msgstr "メンバーのスピーカーをミュート"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Decoder"
+msgstr "デコーダー"
 
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
@@ -1238,12 +1445,13 @@ msgstr "デフォルト"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Default sound"
-msgstr ""
+msgstr "デフォルトのサウンド"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Degraded Performance"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/RecapParts.tsx
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -1273,6 +1481,18 @@ msgstr "{0} を削除しますか？"
 msgid "Delete Account"
 msgstr "アカウントを削除"
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Delete all call recaps on this device?"
+msgstr "この端末のすべての通話リキャップを削除しますか？"
+
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+msgid "Delete all recaps"
+msgstr "すべてのリキャップを削除"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Delete all stream recaps on this device?"
+msgstr "この端末のすべての配信リキャップを削除しますか？"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Delete and pin messages sent by other members"
 msgstr "他のメンバーが送信したメッセージを削除したり、ピン留めしたりすることができます"
@@ -1296,7 +1516,7 @@ msgstr "チャンネルを削除"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Delete Emoji"
-msgstr ""
+msgstr "絵文字を削除"
 
 #: components/app/menus/ServerFolderContextMenu.tsx
 msgid "Delete folder"
@@ -1316,6 +1536,11 @@ msgstr "メッセージを削除"
 msgid "Delete Message History"
 msgstr "メッセージの履歴を削除"
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Delete recap"
+msgstr "リキャップを削除"
+
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Delete Role"
 msgstr "ロールを削除"
@@ -1323,6 +1548,15 @@ msgstr "ロールを削除"
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Delete Server"
 msgstr "サーバーを削除"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Delete this recap?"
+msgstr "このリキャップを削除しますか？"
+
+#: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
+msgid "Delete webhook"
+msgstr "ウェブフックを削除"
 
 #: components/modal/modals/DeleteEmoji.tsx
 msgid "Deleting this emoji will disallow future use. All past uses will remain."
@@ -1339,11 +1573,15 @@ msgstr "デスクトップ"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Developer"
-msgstr ""
+msgstr "開発者"
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "Developer Documentation"
 msgstr "デベロッパードキュメント"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Developer modes measure call performance and keep statistics of previous calls and streams on this device. Turn on either or both."
+msgstr "開発者モードは通話のパフォーマンスを測定し、過去の通話と配信の統計をこの端末に保存します。片方または両方をオンにできます。"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Disable Account"
@@ -1369,7 +1607,7 @@ msgstr "Discord RPC"
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Discover"
-msgstr ""
+msgstr "探索"
 
 #: src/interface/Home.tsx
 msgid "Discover AnyTalk"
@@ -1385,7 +1623,7 @@ msgstr "表示名"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Display users with this role separately in the member list"
-msgstr ""
+msgstr "このロールのユーザーをメンバーリストで別に表示"
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Do Not Disturb"
@@ -1427,13 +1665,24 @@ msgstr "AnyTalkに寄付した"
 msgid "Done"
 msgstr "完了"
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Download CSV"
+msgstr "CSV をダウンロード"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Dropped frames per second"
+msgstr "1 秒あたりのドロップフレーム数"
+
 #: components/modal/modals/ReportContent.tsx
 msgid "Drugs or illegal goods"
 msgstr "薬物または違法物品"
 
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Duration"
-msgstr ""
+msgstr "時間"
 
 #. placeholder {0}: props.member.displayName
 #: components/modal/modals/UserProfileRoles.tsx
@@ -1454,7 +1703,7 @@ msgstr "チャンネルの権限設定を編集できます"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Edit Emoji"
-msgstr ""
+msgstr "絵文字を編集"
 
 #: components/app/menus/ServerFolderContextMenu.tsx
 #: components/modal/modals/EditServerFolder.tsx
@@ -1535,11 +1784,23 @@ msgstr "デスクトップ通知を有効にする"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Enable Push Notifications"
-msgstr ""
+msgstr "プッシュ通知を有効にする"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Enable the tools below"
+msgstr "以下のツールを有効にする"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Enable transparency glass/blur effects (slow on older machines)"
 msgstr "透明感のあるガラス・ブラー効果を有効にする (古いPCでは動作が重くなる場合があります)"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Encoder"
+msgstr "エンコーダー"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Encoder target bitrate"
+msgstr "エンコーダーの目標ビットレート"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "End call"
@@ -1547,11 +1808,11 @@ msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced"
-msgstr ""
+msgstr "強化"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced (RNNoise)"
-msgstr ""
+msgstr "強化（RNNoise）"
 
 #: components/modal/modals/RenameSession.tsx
 msgid "Enter a new name for this session"
@@ -1588,16 +1849,29 @@ msgstr ""
 msgid "Enter your preferred username."
 msgstr "好きなユーザー名を入力してください。"
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Estimated upload bandwidth"
+msgstr "推定アップロード帯域幅"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone"
-msgstr ""
+msgstr "全員"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Excellent"
+msgstr "非常に良い"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Excellent connection"
 msgstr ""
+
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+msgid "Export"
+msgstr "エクスポート"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "External links can be dangerous!"
@@ -1618,6 +1892,10 @@ msgstr ""
 #: components/client/NotificationsController.ts
 msgid "Failed to enable push notifications. Please try again later."
 msgstr ""
+
+#: components/app/interface/settings/user/bots/MyBots.tsx
+msgid "Failed to load bots..."
+msgstr "ボットの読み込みに失敗しました..."
 
 #: components/i18n/errors.tsx
 msgid "Failed to process the image you provided."
@@ -1688,6 +1966,14 @@ msgstr "3時間"
 msgid "For 8 hours"
 msgstr "8時間"
 
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Frame rate"
+msgstr "フレームレート"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Freezes"
+msgstr "フリーズ"
+
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Friends"
@@ -1696,6 +1982,10 @@ msgstr "フレンド"
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "from "
 msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Frozen"
+msgstr "フリーズ中"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Fruit Salad"
@@ -1724,6 +2014,10 @@ msgstr "現在のリカバリーコードを取得します"
 #: src/AndroidNag.tsx
 msgid "Get it on Google Play"
 msgstr ""
+
+#: components/state/stores/Experiments.ts
+msgid "GIF Picker Placeholder"
+msgstr "GIF ピッカー プレースホルダー"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Gifbox is our own GIF service, so you can keep sharing GIFs right here on AnyTalk."
@@ -1765,6 +2059,7 @@ msgstr "AnyTalk Loungeを開く"
 #~ msgid "Go to the testers server"
 #~ msgstr "テスターサーバーに移動する"
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/modal/modals/Onboarding.tsx
 msgid "Good"
 msgstr "決定"
@@ -1793,7 +2088,7 @@ msgstr "グループ名"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Guidelines"
-msgstr ""
+msgstr "ガイドライン"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Harassment or cyberbullying"
@@ -1834,11 +2129,11 @@ msgstr "コントラスト高め"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Hoist Role"
-msgstr ""
+msgstr "ロールを別表示"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hold Ctrl, Alt or Shift together with a letter or number."
-msgstr ""
+msgstr "Ctrl、Alt、Shift のいずれかを文字または数字と一緒に押してください。"
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -1848,11 +2143,24 @@ msgstr "ホーム"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Hotkeys"
-msgstr ""
+msgstr "ホットキー"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hotkeys work while AnyTalk is the focused window or tab. Click a hotkey to record new keys, press Escape to cancel."
-msgstr ""
+msgstr "ホットキーは AnyTalk のウィンドウまたはタブがアクティブなときに動作します。ホットキーをクリックして新しいキーを記録し、Esc でキャンセルします。"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Hover a chart (or focus it and use the arrow keys) to read all values at the same moment."
+msgstr "グラフにカーソルを合わせる（またはフォーカスして矢印キーを使う）と、すべての値を同じ時点で確認できます。"
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Hover a chart (or focus it and use the arrow keys) to read every recap at the same moment."
+msgstr "グラフにカーソルを合わせる（またはフォーカスして矢印キーを使う）と、すべてのリキャップを同じ時点で確認できます。"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "How everyone else's audio reached you."
+msgstr "他の人の音声があなたにどう届いたか。"
 
 #: src/interface/channels/AgeGate.tsx
 msgid "I confirm that I am at least 18 years old."
@@ -1864,7 +2172,7 @@ msgstr "危険を理解しています"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "ID copied to clipboard"
-msgstr ""
+msgstr "IDをクリップボードにコピーしました"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -1881,17 +2189,29 @@ msgstr "違法なハッキング"
 msgid "Impersonation"
 msgstr "なりすまし"
 
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Import CSV or zip"
+msgstr "CSV または zip をインポート"
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Imported"
+msgstr "インポート済み"
+
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Incoming"
+msgstr "受信"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Incoming call"
-msgstr ""
+msgstr "着信"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
-msgstr ""
+msgstr "入力音量"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Instead of closing, AnyTalk will hide in your tray."
@@ -1924,7 +2244,7 @@ msgstr "招待コードを作成"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Invite URL copied to clipboard"
-msgstr ""
+msgstr "招待URLをクリップボードにコピーしました"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Inviter"
@@ -1945,6 +2265,20 @@ msgstr "不適切なジョーク2"
 #: components/app/interface/settings/user/Language.tsx
 msgid "ISO Standard (YYYY-MM-DD)"
 msgstr "ISO標準 (西暦-月-日)"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Jitter"
+msgstr "ジッター"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Jitter avg / max"
+msgstr "ジッター 平均 / 最大"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Jitter buffer delay"
+msgstr "ジッターバッファ遅延"
 
 #: components/modal/modals/Invite.tsx
 #: components/modal/modals/JoinServer.tsx
@@ -1981,6 +2315,10 @@ msgstr "既読にする"
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Keep as is"
 msgstr "変更しない"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Keyframe requests per second (viewers asking for a full new picture)"
+msgstr "1 秒あたりのキーフレーム要求（視聴者が新しい完全な映像を要求）"
 
 #: components/modal/modals/KickMember.tsx
 msgid "Kick"
@@ -2070,7 +2408,7 @@ msgstr "ライト"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Light (60 Hz)"
-msgstr ""
+msgstr "ライト（60 Hz）"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Listen"
@@ -2080,6 +2418,18 @@ msgstr "会話を聞く"
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
 msgstr ""
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Live overlay, recording and recaps of previous calls"
+msgstr "ライブオーバーレイ、録画、過去の通話のリキャップ"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Live overlay, recording and recaps of previous streams"
+msgstr "ライブオーバーレイ、録画、過去の配信のリキャップ"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Live statistics overlay"
+msgstr "ライブ統計オーバーレイ"
 
 #. placeholder {0}: humanFileSize(props.file.size ?? 0)
 #: components/ui/components/features/messaging/elements/TextFile.tsx
@@ -2111,13 +2461,21 @@ msgstr "ログイン"
 msgid "Logs you out of all sessions except this device."
 msgstr "このデバイスを除く、全てのデバイスでログアウトされます。"
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Loss and jitter are what the server reports about the audio it got from you."
+msgstr "損失とジッターは、サーバーがあなたから受け取った音声について報告した値です。"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Lost"
+msgstr "途切れ"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Low-cut filter"
-msgstr ""
+msgstr "ローカットフィルター"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Lowercase letters, numbers and underscores only."
-msgstr ""
+msgstr "小文字の英字、数字、アンダースコアのみ使用できます。"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
@@ -2185,13 +2543,25 @@ msgstr "このチャンネルを成人向けとしてマークしますか？"
 msgid "Masquerade"
 msgstr "マスカレード"
 
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Max resolution"
+msgstr "最大解像度"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Maximize call window"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Measure camera and screen share video you send or watch"
+msgstr "送信または視聴するカメラと画面共有の映像を測定します"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Measure your microphone and everyone you hear in calls"
+msgstr "マイクと、通話で聞こえるすべての人を測定します"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Medium (90 Hz)"
-msgstr ""
+msgstr "中（90 Hz）"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -2252,7 +2622,7 @@ msgstr "メッセージが読み込まれていません、クリックすると
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Message received"
-msgstr ""
+msgstr "メッセージ受信"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #~ msgid "Message Received"
@@ -2272,11 +2642,11 @@ msgstr "別のプラットフォームで送信されたメッセージです"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Message, call and stream sounds"
-msgstr ""
+msgstr "メッセージ、通話、配信のサウンド"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Messages"
-msgstr ""
+msgstr "メッセージ"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Messaging"
@@ -2284,15 +2654,15 @@ msgstr "メッセージ"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "MFA setup canceled."
-msgstr ""
+msgstr "MFA の設定をキャンセルしました。"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Microphone"
-msgstr ""
+msgstr "マイク"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Microphone and headphones"
-msgstr ""
+msgstr "マイクとヘッドフォン"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Minimise to Tray"
@@ -2358,7 +2728,7 @@ msgstr "サーバーを通知オフ"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Mute when not speaking"
-msgstr ""
+msgstr "話していないときミュート"
 
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Muted"
@@ -2387,6 +2757,7 @@ msgstr "自分のアカウント"
 msgid "My Bots"
 msgstr "自分のボット"
 
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/RenameSession.tsx
@@ -2439,6 +2810,10 @@ msgstr "ニックネーム"
 msgid "No audio was captured, switch window to share audio"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/TimeChart.tsx
+msgid "no data"
+msgstr "データなし"
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "No GIFs found"
 msgstr ""
@@ -2447,13 +2822,25 @@ msgstr ""
 msgid "No permissions set yet"
 msgstr "権限の設定はまだありません"
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "No recaps yet. Turn on \"Record call recaps\", then join a call."
+msgstr "リキャップはまだありません。「通話リキャップを記録」をオンにして、通話に参加してください。"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "No recaps yet. Turn on \"Record stream recaps\", then join a call and start or watch a stream."
+msgstr "リキャップはまだありません。「配信リキャップを記録」をオンにして、通話に参加し、配信を開始または視聴してください。"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No role overrides have been configured."
-msgstr ""
+msgstr "ロールの上書きは設定されていません。"
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
-msgstr ""
+msgstr "設定が見つかりません"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "nobody else"
+msgstr "他に誰もいない"
 
 #: src/interface/Friends.tsx
 msgid "Nobody here right now!"
@@ -2461,7 +2848,7 @@ msgstr "ここにはまだ誰もいません!"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Noise suppression"
-msgstr ""
+msgstr "ノイズ抑制"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
@@ -2472,9 +2859,25 @@ msgstr "なし"
 msgid "Normal"
 msgstr "ノーマル"
 
+#: components/state/stores/Experiments.ts
+msgid "Not available yet."
+msgstr "まだ利用できません。"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Not limited"
+msgstr "制限なし"
+
 #: components/modal/modals/ReportContent.tsx
 msgid "Not of minimum age to use the platform"
 msgstr "このプラットフォームを使用できる最低年齢に達していない"
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Nothing to compare yet. Import a CSV or add one of your own call recaps."
+msgstr "比較できるものがまだありません。CSV をインポートするか、自分の通話リキャップを追加してください。"
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Nothing to compare yet. Import a CSV or add one of your own stream recaps."
+msgstr "比較できるものがまだありません。CSV をインポートするか、自分の配信リキャップを追加してください。"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/ServerContextMenu.tsx
@@ -2575,15 +2978,16 @@ msgstr "設定を開く"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Opening another stream while watching one shows them side by side. When off, it replaces the stream you were watching."
-msgstr ""
+msgstr "配信を視聴中に別の配信を開くと、並べて表示します。オフの場合は、視聴中の配信が置き換わります。"
 
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
 #: components/modal/modals/ReportContent.tsx
 msgid "Other"
 msgstr "その他"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Outgoing call"
-msgstr ""
+msgstr "発信中"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
@@ -2597,6 +3001,24 @@ msgstr "概要"
 #: components/ui/components/features/profiles/ProfileOwner.tsx
 msgid "Owner"
 msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Packet loss"
+msgstr "パケット損失"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Packets lost (server)"
+msgstr "損失パケット（サーバー）"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Packets lost per second"
+msgstr "1 秒あたりの損失パケット数"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Packets per second"
+msgstr "1 秒あたりのパケット数"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Pardon User"
@@ -2616,6 +3038,10 @@ msgstr "パスワード"
 msgid "Password changed successfully."
 msgstr ""
 
+#: components/app/interface/settings/user/subscriptions/EditSubscriptionJoinFlow.tsx
+msgid "Pay"
+msgstr "支払う"
+
 #: src/interface/Friends.tsx
 msgid "Pending"
 msgstr "待機中"
@@ -2626,11 +3052,11 @@ msgstr "権限"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Permissions available when no role overrides apply"
-msgstr ""
+msgstr "ロールの上書きが適用されないときに使える権限"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Permissions available without any role"
-msgstr ""
+msgstr "ロールがなくても使える権限"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Pick a Screen to Share"
@@ -2649,17 +3075,27 @@ msgstr ""
 msgid "Pin message"
 msgstr "メッセージをピン留め"
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Ping (round trip to the server)"
+msgstr "Ping（サーバーまでの往復）"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Ping avg / max"
+msgstr "Ping 平均 / 最大"
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Platform Moderator"
 msgstr "プラットフォームモデレーター"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Play sound"
-msgstr ""
+msgstr "サウンドを再生"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Play sounds"
-msgstr ""
+msgstr "サウンドを再生"
 
 #: components/modal/modals/MFAFlow.tsx
 msgid "Please confirm this action using the selected method."
@@ -2689,25 +3125,41 @@ msgstr "要求を認証する方法を選んでください。"
 msgid "Please select a reason"
 msgstr "理由を選択してください"
 
+#: components/app/interface/settings/shared/Discoverable.tsx
+msgid "Please try again later"
+msgstr "しばらくしてからもう一度お試しください"
+
+#: components/state/stores/Experiments.ts
+msgid "Plugins v2 Placeholder"
+msgstr "プラグイン v2 プレースホルダー"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Poor"
+msgstr "悪い"
+
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Poor connection"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Poor or lost connection"
+msgstr "接続が悪い、または途切れた"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
-msgstr ""
+msgstr "RNNoise を使用"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
-msgstr ""
+msgstr "キーを押してください…"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Preview"
-msgstr ""
+msgstr "プレビュー"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
-msgstr ""
+msgstr "プライバシー"
 
 #: components/auth/src/AuthPage.tsx
 #~ msgid "Privacy Policy"
@@ -2733,11 +3185,19 @@ msgstr "有害な行為の助長"
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Pronouns"
-msgstr ""
+msgstr "代名詞"
 
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
 msgstr "メールアドレス、またはパスワードが間違っています。"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Put your recaps next to CSV recaps from other people"
+msgstr "自分のリキャップを他の人の CSV リキャップと並べます"
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Put your recaps next to recaps from other people. They open a recap in Voice Call Stats or Stream Stats and use Download CSV, or select several recaps and export them as one zip, then send you the file, which you import here. Everything stays on this device, and imports are kept until you close the app."
+msgstr "自分のリキャップを他の人のリキャップと並べます。相手は「音声通話の統計」または「配信の統計」でリキャップを開いて「CSV をダウンロード」を使うか、複数のリキャップを選んで 1 つの zip としてエクスポートし、そのファイルをあなたに送ります。ここでそれをインポートしてください。すべてこの端末内にのみ保存され、インポートしたデータはアプリを閉じるまで保持されます。"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Raid or spam attack"
@@ -2777,12 +3237,20 @@ msgstr ""
 #. placeholder {0}: (dr.status as { Denied: string | null }) .Denied
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Reason: {0}"
-msgstr ""
+msgstr "理由：{0}"
 
 #. placeholder {0}: (dr.status as { Removed: string | null }) .Removed
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Reason: {0} Contact support for more information."
-msgstr ""
+msgstr "理由：{0} 詳しくはサポートにお問い合わせください。"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Recaps"
+msgstr "リキャップ"
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Recaps are lined up at the moment each one started."
+msgstr "リキャップは、それぞれが開始した時点で揃えて表示されます。"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Receive notifications while the app is open and in the background."
@@ -2790,15 +3258,31 @@ msgstr "アプリの使用中およびバックグラウンド実行中に通知
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Receive notifications while the tab is open."
-msgstr ""
+msgstr "タブを開いている間、通知を受け取ります。"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Receive push notifications while the app is closed."
-msgstr ""
+msgstr "アプリを閉じている間もプッシュ通知を受け取ります。"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Reconnecting"
 msgstr "再接続中"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Record call recaps"
+msgstr "通話リキャップを記録"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Record statistics of every call you are in, with or without the overlay"
+msgstr "オーバーレイの有無にかかわらず、参加するすべての通話の統計を記録します"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Record statistics of every stream you send or watch, with or without the overlay"
+msgstr "オーバーレイの有無にかかわらず、送信または視聴するすべての配信の統計を記録します"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Record stream recaps"
+msgstr "配信リキャップを記録"
 
 #: components/modal/modals/MFAFlow.tsx
 msgid "Recovery Code"
@@ -2830,11 +3314,11 @@ msgstr "関連性"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload and clear cache"
-msgstr ""
+msgstr "再読み込みしてキャッシュを消去"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload AnyTalk with fresh files from the server? This is the same as Ctrl+F5 and fixes most display problems after an update. You stay logged in and keep your settings."
-msgstr ""
+msgstr "サーバーから最新のファイルで AnyTalk を再読み込みしますか？ Ctrl+F5 と同じで、更新後の表示の問題の多くが解消します。ログイン状態と設定はそのままです。"
 
 #: components/markdown/plugins/anchors.tsx
 msgid "Remote Channel"
@@ -2844,9 +3328,10 @@ msgstr ""
 msgid "Remote Server"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
-msgstr ""
+msgstr "削除"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove all reactions"
@@ -2888,11 +3373,11 @@ msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Removes deep rumble"
-msgstr ""
+msgstr "低いゴロゴロ音を取り除きます"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Removes knocks on the desk or microphone"
-msgstr ""
+msgstr "机やマイクをたたく音を取り除きます"
 
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/modal/modals/EditCategory.tsx
@@ -2946,11 +3431,16 @@ msgstr "ユーザーを報告"
 msgid "Resend"
 msgstr "再送信"
 
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Resend requests per second (viewers asking for lost packets again)"
+msgstr "1 秒あたりの再送要求（視聴者が失われたパケットを再要求）"
+
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/auth/src/flows/FlowResend.tsx
 msgid "Resend verification"
 msgstr "認証コードを再送信"
 
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/auth/src/flows/FlowConfirmReset.tsx
 #: components/auth/src/flows/FlowReset.tsx
@@ -2967,7 +3457,7 @@ msgstr "{0}のトークンを元に返す？"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
-msgstr ""
+msgstr "すべてのサウンドをリセット"
 
 #: components/auth/src/flows/FlowConfirmReset.tsx
 #: components/auth/src/flows/FlowLogin.tsx
@@ -2982,11 +3472,15 @@ msgstr "リカバリーコードをリセット"
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
-msgstr ""
+msgstr "{0} にリセット"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Reset Token"
 msgstr "トークンをリセット"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Resolution"
+msgstr "解像度"
 
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 msgid "Resolution and FPS"
@@ -3009,6 +3503,10 @@ msgstr "再送信"
 msgid "Return to voice channel"
 msgstr ""
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Reveal"
+msgstr "表示"
+
 #: components/modal/modals/ReportContent.tsx
 msgid "Revenge or underage pornography"
 msgstr "リベンジポルノ、または児童ポルノ"
@@ -3019,11 +3517,11 @@ msgstr "規約の変更を確認"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Role Colour"
-msgstr ""
+msgstr "ロールカラー"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Role Icon"
-msgstr ""
+msgstr "ロールアイコン"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/modal/modals/CreateRole.tsx
@@ -3032,7 +3530,7 @@ msgstr "ロール名"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Role Overrides"
-msgstr ""
+msgstr "ロールの上書き"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
@@ -3041,7 +3539,15 @@ msgstr "ロール"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Roles with No Overrides"
-msgstr ""
+msgstr "上書きのないロール"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Running"
+msgstr "実行中"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Running or frozen"
+msgstr "実行中またはフリーズ"
 
 #: components/app/interface/settings/channel/Overview.tsx
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
@@ -3060,7 +3566,7 @@ msgstr "ファイルを保存"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Save permissions"
-msgstr ""
+msgstr "権限を保存"
 
 #: src/interface/channels/text/Composition.tsx
 msgid "Save to your notes"
@@ -3073,7 +3579,7 @@ msgstr "保存されたノート"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Saving…"
-msgstr ""
+msgstr "保存中…"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Scams or fraud"
@@ -3081,16 +3587,16 @@ msgstr "詐欺、または不正行為"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Screen share frame rate"
-msgstr ""
+msgstr "画面共有のフレームレート"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Screen share resolution"
-msgstr ""
+msgstr "画面共有の解像度"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Screen Share Settings"
-msgstr ""
+msgstr "画面共有の設定"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Screen Share Volume"
@@ -3111,7 +3617,19 @@ msgstr "ユーザーを検索…"
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
-msgstr ""
+msgstr "設定を検索"
+
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+msgid "Select"
+msgstr "選択"
+
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+msgid "Select all"
+msgstr "すべて選択"
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Select at least one line above to compare."
+msgstr "比較するには、上の線を 1 つ以上選択してください。"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Select audio input"
@@ -3127,7 +3645,11 @@ msgstr "追加するメンバーを選択"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Select noise suppression"
-msgstr ""
+msgstr "ノイズ抑制を選択"
+
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+msgid "Select none"
+msgstr "選択解除"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 #~ msgid "Select screen share quality"
@@ -3135,7 +3657,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Select video input"
-msgstr ""
+msgstr "ビデオ入力を選択"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Select your language"
@@ -3220,7 +3742,7 @@ msgstr "アイコン"
 
 #: components/app/interface/settings/user/profile/EditProfile.tsx
 msgid "Server Identities"
-msgstr ""
+msgstr "サーバー内プロフィール"
 
 #: components/app/interface/settings/server/Overview.tsx
 #: components/modal/modals/CreateServer.tsx
@@ -3229,7 +3751,7 @@ msgstr "サーバー名"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
-msgstr ""
+msgstr "サーバーロール"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -3245,7 +3767,7 @@ msgstr ""
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Set role colour to {colour}"
-msgstr ""
+msgstr "ロールカラーを {colour} に設定"
 
 #: components/modal/modals/CustomStatus.tsx
 msgid "Set your status"
@@ -3259,15 +3781,19 @@ msgstr "設定"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Setup one-time password authenticator"
-msgstr ""
+msgstr "ワンタイムパスワード認証アプリを設定"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Setup recovery codes"
-msgstr ""
+msgstr "リカバリーコードを設定"
 
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "Several people are typing…"
 msgstr "複数人が入力中…"
+
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+msgid "Several recaps are exported as one zip file with a CSV for each."
+msgstr "複数のリキャップは、それぞれの CSV を含む 1 つの zip ファイルとしてエクスポートされます。"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 #: components/modal/modals/ScreenShareSettings.tsx
@@ -3276,15 +3802,31 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Share camera or screen in voice call"
-msgstr ""
+msgstr "ボイスチャットでカメラまたは画面を共有"
 
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 msgid "Share screen"
 msgstr ""
 
+#: components/app/interface/settings/user/Advanced.tsx
+msgid "Show 'copy ID' in context menus"
+msgstr "コンテキストメニューに「IDをコピー」を表示"
+
+#: components/app/interface/settings/user/Advanced.tsx
+msgid "Show admin panel shortcuts in context menus"
+msgstr "コンテキストメニューに管理パネルのショートカットを表示"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
-msgstr ""
+msgstr "入力中に修正候補や提案を表示します。"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Show live microphone statistics on call tiles"
+msgstr "通話タイルにマイクのライブ統計を表示"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Show live statistics on call video tiles"
+msgstr "通話の映像タイルにライブ統計を表示"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Show Others"
@@ -3292,7 +3834,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Show send message button"
-msgstr ""
+msgstr "メッセージ送信ボタンを表示"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Sign into AnyTalk"
@@ -3304,7 +3846,7 @@ msgstr "登録"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Silences your microphone while you aren't talking, so knocks and background noise between sentences aren't heard."
-msgstr ""
+msgstr "話していない間はマイクを無音にして、文と文の間のたたく音や背景ノイズが聞こえないようにします。"
 
 #: components/app/interface/channels/text/Message.tsx
 msgid "Silent"
@@ -3324,31 +3866,31 @@ msgstr ""
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Slowmode off"
-msgstr ""
+msgstr "スローモードオフ"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone calls you in a DM or group"
-msgstr ""
+msgstr "DM またはグループで誰かから着信があったとき"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
-msgstr ""
+msgstr "誰かがボイスチャンネルに参加したとき"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone leaves your voice channel"
-msgstr ""
+msgstr "誰かがボイスチャンネルから退出したとき"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone moves into or out of your voice channel"
-msgstr ""
+msgstr "誰かがボイスチャンネルに移動して入ってきた、または出ていったとき"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone starts watching your stream"
-msgstr ""
+msgstr "誰かがあなたの配信の視聴を始めたとき"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone stops watching your stream"
-msgstr ""
+msgstr "誰かがあなたの配信の視聴をやめたとき"
 
 #: components/modal/modals/EditEmail.tsx
 msgid "someone@example.com"
@@ -3356,7 +3898,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Something cool about me..."
-msgstr ""
+msgstr "自分についての面白いこと..."
 
 #. placeholder {0}: err.error
 #: components/i18n/errors.tsx
@@ -3369,7 +3911,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
-msgstr ""
+msgstr "サウンドの音量"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sounds"
@@ -3377,7 +3919,7 @@ msgstr "サウンド"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sounds are turned off above, you can still preview them here."
-msgstr ""
+msgstr "上でサウンドがオフになっていますが、ここでプレビューできます。"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/auth/src/AuthPage.tsx
@@ -3394,11 +3936,11 @@ msgstr "発言する"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Speaker"
-msgstr ""
+msgstr "スピーカー"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Spellchecker"
-msgstr ""
+msgstr "スペルチェック"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Start camera"
@@ -3406,7 +3948,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Start Minimised to Tray"
-msgstr ""
+msgstr "トレイに最小化した状態で起動"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "Start the call"
@@ -3414,7 +3956,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Start with Computer"
-msgstr ""
+msgstr "コンピューターと一緒に起動"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 msgid "Status"
@@ -3428,13 +3970,17 @@ msgstr ""
 msgid "Stop sharing"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Stream developer mode"
+msgstr "配信の開発者モード"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #~ msgid "Stream End"
 #~ msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Stream ended"
-msgstr ""
+msgstr "配信終了"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Stream is still running."
@@ -3450,15 +3996,32 @@ msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Stream started"
-msgstr ""
+msgstr "配信開始"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Stream stats"
+msgstr "配信の統計"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Stream Stats"
+msgstr "配信の統計"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Streams"
-msgstr ""
+msgstr "配信"
+
+#. placeholder {0}: count("stream")
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#~ msgid "Streams ({0})"
+#~ msgstr "配信（{0}）"
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Streams ({streams})"
+msgstr "配信（{streams}）"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Strong (150 Hz)"
-msgstr ""
+msgstr "強（150 Hz）"
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
@@ -3470,15 +4033,15 @@ msgstr "フィードバックを送信する"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Submit to Discover"
-msgstr ""
+msgstr "探索に申請"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Subscriptions"
-msgstr ""
+msgstr "サブスクリプション"
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Suggest new AnyTalk features on GitHub discussions."
-msgstr ""
+msgstr "GitHub のディスカッションで AnyTalk の新機能を提案してください。"
 
 #: src/interface/Home.tsx
 #~ msgid "Support the project by donating - thank you!"
@@ -3494,15 +4057,15 @@ msgstr ""
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Sync appearance options, such as chosen emoji pack and message density."
-msgstr ""
+msgstr "選択した絵文字パックやメッセージ密度など、外観オプションを同期します。"
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Sync your chosen theme, colours, and any custom CSS."
-msgstr ""
+msgstr "選択したテーマ、カラー、カスタム CSS を同期します。"
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Sync your currently chosen language."
-msgstr ""
+msgstr "現在選択している言語を同期します。"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "System"
@@ -3510,7 +4073,7 @@ msgstr "システム"
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "System message channels"
-msgstr ""
+msgstr "システムメッセージチャンネル"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Tap to enable audio"
@@ -3530,11 +4093,11 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Temporarily prevent lower-ranking members from interacting"
-msgstr ""
+msgstr "下位のメンバーが一時的に操作できないようにします"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Terms"
-msgstr ""
+msgstr "利用規約"
 
 #: components/auth/src/AuthPage.tsx
 #~ msgid "Terms of Service"
@@ -3587,7 +4150,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "The sound couldn't be saved."
-msgstr ""
+msgstr "サウンドを保存できませんでした。"
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Theme"
@@ -3595,12 +4158,16 @@ msgstr "テーマ"
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
-msgid "This {0} is discoverable"
-msgstr ""
+#~ msgid "This {0} is discoverable"
+#~ msgstr "この{0}は探索で見つけられます"
 
 #: components/i18n/errors.tsx
 msgid "This account is not activated! Please check your account's inbox and try again."
 msgstr ""
+
+#: components/app/interface/settings/shared/Discoverable.tsx
+msgid "This bot is discoverable"
+msgstr "このボットは探索で見つけられます"
 
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
@@ -3608,7 +4175,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
-msgstr ""
+msgstr "このチャンネルについて..."
 
 #: src/interface/channels/AgeGate.tsx
 msgid "This channel is marked as mature."
@@ -3663,9 +4230,18 @@ msgstr ""
 msgid "This password has previously appeared in security leaks, please use another password."
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "This recap no longer exists."
+msgstr "このリキャップはもう存在しません。"
+
 #: components/app/interface/settings/server/Overview.tsx
 msgid "This server is about..."
-msgstr ""
+msgstr "このサーバーについて..."
+
+#: components/app/interface/settings/shared/Discoverable.tsx
+msgid "This server is discoverable"
+msgstr "このサーバーは探索で見つけられます"
 
 #: components/i18n/errors.tsx
 msgid "This sign up is marked as spam."
@@ -3697,7 +4273,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Time format"
-msgstr ""
+msgstr "時刻の形式"
 
 #. placeholder {0}: props.member!.timeout!.toLocaleString()
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -3724,7 +4300,7 @@ msgstr "メンバーをタイムアウト"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Toggle deafen"
-msgstr ""
+msgstr "スピーカーミュートを切り替え"
 
 #: src/interface/common/CommonHeader.tsx
 msgid "Toggle main sidebar"
@@ -3732,19 +4308,24 @@ msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Toggle mute"
-msgstr ""
+msgstr "ミュートを切り替え"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Token copied to clipboard"
-msgstr ""
+msgstr "トークンをクリップボードにコピーしました"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Tonal Spot"
-msgstr ""
+msgstr "トーナルスポット"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
-msgstr ""
+msgstr "従来型（DD/MM/YYYY）"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Transport"
+msgstr "トランスポート"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Trending GIFs"
@@ -3756,11 +4337,11 @@ msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn every sound on and reset their volumes and files?"
-msgstr ""
+msgstr "すべてのサウンドをオンに戻し、音量とファイルをリセットしますか？"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn single sounds off, change their volume or use your own"
-msgstr ""
+msgstr "サウンドを個別にオフにしたり、音量を変えたり、自分のサウンドを使えます"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
@@ -3774,7 +4355,7 @@ msgstr ""
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Undeafen"
-msgstr ""
+msgstr "スピーカーミュート解除"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Unknown"
@@ -3791,7 +4372,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Unmark as Mature"
-msgstr ""
+msgstr "成人向け指定を解除"
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Unmark this channel as mature?"
@@ -3800,7 +4381,7 @@ msgstr ""
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Unmute"
-msgstr ""
+msgstr "ミュート解除"
 
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Unmute Channel"
@@ -3836,6 +4417,19 @@ msgstr ""
 msgid "Until I turn it back on"
 msgstr ""
 
+#. placeholder {0}: percent(meta.worstIncomingLoss)
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#~ msgid "up to {0} loss"
+#~ msgstr "最大 {0} の損失"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "up to {loss} loss"
+msgstr "最大 {loss} の損失"
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Up to {MAX_LINES} lines at once, deselect one to add another."
+msgstr "一度に最大 {MAX_LINES} 本まで表示できます。別の線を追加するには、1 本選択を解除してください。"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Upload Files"
 msgstr "ファイルのアップロード"
@@ -3850,7 +4444,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Use the graphics card to improve performance."
-msgstr ""
+msgstr "グラフィックカードを使ってパフォーマンスを向上させます。"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "User"
@@ -3858,7 +4452,7 @@ msgstr "ユーザー"
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "User Banned"
-msgstr ""
+msgstr "ユーザーをBAN"
 
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
@@ -3867,11 +4461,11 @@ msgstr ""
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "User Joined"
-msgstr ""
+msgstr "ユーザー参加"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "User joined call"
-msgstr ""
+msgstr "ユーザーが通話に参加"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #~ msgid "User Joined Call"
@@ -3879,15 +4473,15 @@ msgstr ""
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "User Kicked"
-msgstr ""
+msgstr "ユーザーをキック"
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "User Left"
-msgstr ""
+msgstr "ユーザー退出"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "User left call"
-msgstr ""
+msgstr "ユーザーが通話から退出"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #~ msgid "User Left Call"
@@ -3899,7 +4493,7 @@ msgstr "ユーザー管理"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "User moved"
-msgstr ""
+msgstr "ユーザー移動"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "User Settings"
@@ -3929,7 +4523,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Users will be asked to confirm their age before opening this channel."
-msgstr ""
+msgstr "ユーザーはこのチャンネルを開く前に年齢の確認を求められます。"
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Users will no longer be asked to confirm their age before joining this channel.<0/> Please ensure the content is appropriate for all ages."
@@ -3951,6 +4545,10 @@ msgstr "バージョン:"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Video"
 msgstr "動画"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Video copies being sent (full / half / quarter size)"
+msgstr "送信中の映像コピー（フルサイズ / 半分 / 4 分の 1）"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"
@@ -3981,11 +4579,11 @@ msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Viewer joined"
-msgstr ""
+msgstr "視聴者参加"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Viewer left"
-msgstr ""
+msgstr "視聴者退出"
 
 #: components/ui/components/features/messaging/bars/JumpToBottom.tsx
 msgid "Viewing older messages"
@@ -3998,7 +4596,28 @@ msgstr "ボイス"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Voice & Video"
-msgstr ""
+msgstr "音声とビデオ"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Voice call developer mode"
+msgstr "音声通話の開発者モード"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Voice call stats"
+msgstr "音声通話の統計"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Voice Call Stats"
+msgstr "音声通話の統計"
+
+#. placeholder {0}: count("call")
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#~ msgid "Voice calls ({0})"
+#~ msgstr "音声通話（{0}）"
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Voice calls ({calls})"
+msgstr "音声通話（{calls}）"
 
 #: components/modal/modals/CreateChannel.tsx
 msgid "Voice Channel"
@@ -4006,20 +4625,20 @@ msgstr "ボイスチャンネル"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"
-msgstr ""
+msgstr "音声処理"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
 msgid "Volume"
-msgstr ""
+msgstr "音量"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Want to change username?"
-msgstr ""
+msgstr "ユーザー名を変更しますか？"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Watch multiple streams at once"
-msgstr ""
+msgstr "複数の配信を同時に視聴"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
@@ -4040,7 +4659,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
 msgid "Webhook Icon"
-msgstr ""
+msgstr "ウェブフックのアイコン"
 
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
 #: components/modal/modals/CreateWebhook.tsx
@@ -4054,9 +4673,17 @@ msgstr "ウェブフック"
 #~ msgid "Welcome to"
 #~ msgstr "ようこそ"
 
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Welcome to the new appearance menu, custom themes are not available just yet but we are looking for feedback on how to best implement them!"
+msgstr "新しい外観メニューへようこそ。カスタムテーマはまだ利用できませんが、最適な実装方法についてご意見をお待ちしています！"
+
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Welcome!"
 msgstr "ようこそ！"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "What limited the stream quality"
+msgstr "配信品質を制限した要因"
 
 #: components/modal/modals/Changelog.tsx
 msgid "What's new"
@@ -4068,12 +4695,20 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Whether other users can edit these settings"
-msgstr ""
+msgstr "他のユーザーがこれらの設定を編集できるかどうか"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "While stream developer mode and \"Record stream recaps\" are on, statistics for every video stream you send or watch in a call are recorded once per second. Recaps are stored on this device only; the newest 20 are kept."
+msgstr "配信の開発者モードと「配信リキャップを記録」がオンの間、通話で送信または視聴するすべての映像配信の統計が 1 秒ごとに記録されます。リキャップはこの端末にのみ保存され、最新の 20 件が保持されます。"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "While voice call developer mode and \"Record call recaps\" are on, your microphone and everyone you hear are measured once per second. Recaps are stored on this device only; the newest 20 calls are kept."
+msgstr "音声通話の開発者モードと「通話リキャップを記録」がオンの間、マイクと聞こえるすべての人が 1 秒ごとに測定されます。リキャップはこの端末にのみ保存され、最新の 20 件の通話が保持されます。"
 
 #. placeholder {0}: names.join(", ")
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "with {0}"
-msgstr ""
+msgstr "{0} と"
 
 #. placeholder {0}: names.join(", ")
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
@@ -4085,6 +4720,10 @@ msgstr ""
 msgid "with {0} others"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "with {participants}"
+msgstr "{participants} と"
+
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Would you like to create a new group or server?"
 msgstr ""
@@ -4095,7 +4734,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "You agree that your bot is subject to the Acceptable Usage Policy."
-msgstr ""
+msgstr "ボットが利用規約に従うことに同意します。"
 
 #. placeholder {0}: props.member.user?.username
 #. placeholder {0}: props.user?.username
@@ -4119,7 +4758,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "You call someone and wait for them to join"
-msgstr ""
+msgstr "誰かに発信して参加を待っているとき"
 
 #: src/interface/Home.tsx
 msgid "You can also click the gear icon in the bottom left."
@@ -4139,7 +4778,7 @@ msgstr "こちらで直接、問題の報告や改善点の相談ができます
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "You can request again below"
-msgstr ""
+msgstr "下からもう一度リクエストできます"
 
 #. placeholder {0}: err.max
 #: components/i18n/errors.tsx
@@ -4187,7 +4826,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "You deafen yourself"
-msgstr ""
+msgstr "自分でスピーカーミュートしたとき"
 
 #: components/i18n/errors.tsx
 msgid "You do not have permission to do this."
@@ -4206,6 +4845,14 @@ msgstr ""
 msgid "You have been locked out for entering a wrong password multiple times. Please wait a couple minutes and try again."
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "You have no call recaps yet."
+msgstr "通話リキャップはまだありません。"
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "You have no stream recaps yet."
+msgstr "配信リキャップはまだありません。"
+
 #: components/i18n/errors.tsx
 msgid "You have this user blocked."
 msgstr ""
@@ -4220,7 +4867,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "You mute your microphone"
-msgstr ""
+msgstr "自分でマイクをミュートしたとき"
 
 #: components/ui/components/features/voice/VoiceStatefulUserIcons.tsx
 msgid "You muted this user."
@@ -4228,11 +4875,11 @@ msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "You undeafen yourself"
-msgstr ""
+msgstr "自分でスピーカーミュートを解除したとき"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "You unmute your microphone"
-msgstr ""
+msgstr "自分でマイクのミュートを解除したとき"
 
 #: components/auth/src/flows/FlowHome.tsx
 msgid "You were logged out!"
@@ -4262,7 +4909,7 @@ msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "You're offline. Connect to the internet first, otherwise AnyTalk couldn't load again."
-msgstr ""
+msgstr "オフラインです。先にインターネットに接続してください。そうしないと AnyTalk を再読み込みできません。"
 
 #: components/i18n/errors.tsx
 msgid "You've already sent a request to this user."
@@ -4287,24 +4934,36 @@ msgstr ""
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
-msgid "Your {0} is under review"
-msgstr ""
+#~ msgid "Your {0} is under review"
+#~ msgstr "あなたの{0}は審査中です"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Your {source}"
+msgstr "あなたの{source}"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Your account and all of your data (including your messages and friends list) will be queued for deletion. A confirmation email will be sent - you can cancel this within 7 days by contacting support."
-msgstr ""
+msgstr "アカウントとすべてのデータ（メッセージやフレンドリストを含む）は削除待ちになります。確認メールが送信され、7 日以内にサポートへ連絡すればキャンセルできます。"
 
 #: components/auth/src/flows/FlowVerify.tsx
 msgid "Your account has been verified!"
 msgstr "あなたのアカウントが検証されました！"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
+msgid "Your bot is under review"
+msgstr "ボットは審査中です"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Your camera"
+msgstr "自分のカメラ"
+
+#: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your discover request has been denied"
-msgstr ""
+msgstr "探索リクエストは拒否されました"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your discover request has been removed"
-msgstr ""
+msgstr "探索リクエストは削除されました"
 
 #: components/i18n/errors.tsx
 msgid "Your discriminator change has been ratelimited, please try again later."
@@ -4313,11 +4972,19 @@ msgstr ""
 #. placeholder {0}: customFile()
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Your file: {0}"
-msgstr ""
+msgstr "ファイル：{0}"
 
 #: components/i18n/errors.tsx
 msgid "Your message is too long, please remove some characters and try again."
 msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Your microphone"
+msgstr "自分のマイク"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Your microphone (outgoing)"
+msgstr "自分のマイク（送信）"
 
 #: components/modal/modals/MFARecovery.tsx
 msgid "Your recovery codes"
@@ -4331,6 +4998,18 @@ msgstr ""
 msgid "Your role ranking is too low to take this action."
 msgstr ""
 
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Your screen share"
+msgstr "自分の画面共有"
+
+#: components/app/interface/settings/shared/Discoverable.tsx
+msgid "Your server is under review"
+msgstr "サーバーは審査中です"
+
 #: components/i18n/errors.tsx
 msgid "Your user has already been created? Try logging in again or refreshing the app."
 msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Yours"
+msgstr "自分"

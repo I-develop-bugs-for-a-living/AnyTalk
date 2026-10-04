@@ -47,6 +47,16 @@ msgstr ""
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr ""
 
+#. placeholder {0}: r.summary.freezes
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
+msgstr ""
+
+#. placeholder {0}: meta.summary.freezes
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "{0, plural, one {# freeze} other {# freezes}}"
+msgstr ""
+
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #~ msgid "{0, plural, one {# Member} other {# Members}}"
 #~ msgstr ""
@@ -93,6 +103,11 @@ msgstr ""
 msgid "{0} files exceed the maximum size limit of {maxSizeFormatted} and were not uploaded."
 msgstr ""
 
+#. placeholder {0}: s.participantName
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#~ msgid "{0} heard"
+#~ msgstr ""
+
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} is already at the bottom"
@@ -131,6 +146,17 @@ msgstr ""
 msgid "{0} moved to position {1} of {2}"
 msgstr ""
 
+#. placeholder {0}: props.title
+#: components/app/interface/settings/user/developer/TimeChart.tsx
+#~ msgid "{0} over time"
+#~ msgstr ""
+
+#. placeholder {0}: props.title
+#. placeholder {1}: props.series.length
+#: components/app/interface/settings/user/developer/CompareChart.tsx
+#~ msgid "{0} over time, {1} recaps"
+#~ msgstr ""
+
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} picked up, use the arrow keys to move it and space to drop it"
@@ -145,6 +171,11 @@ msgstr ""
 #: components/client/NotificationsWorker.tsx
 msgid "{0} renamed the channel"
 msgstr ""
+
+#. placeholder {0}: selected().length
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+#~ msgid "{0} selected"
+#~ msgstr ""
 
 #. placeholder {0}: (message.systemMessage as MessagePinnedSystemMessage).by?.username
 #: components/client/NotificationsWorker.tsx
@@ -185,6 +216,17 @@ msgstr ""
 msgid "{0}-{1} of {2}"
 msgstr ""
 
+#. placeholder {0}: file.name
+#. placeholder {1}: (err as Error).message
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#~ msgid "{0}: can't be read as a zip ({1})."
+#~ msgstr ""
+
+#. placeholder {0}: file.name
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#~ msgid "{0}: there are no CSV files inside."
+#~ msgstr ""
+
 #. placeholder {0}: props.member.displayName
 #: components/modal/modals/UserProfileRoles.tsx
 msgid "{0}'s roles"
@@ -199,6 +241,22 @@ msgstr ""
 msgid "{combo} is already used for another hotkey."
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CompareChart.tsx
+msgid "{count, plural, one {{title} over time, # recap} other {{title} over time, # recaps}}"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+msgid "{count} selected"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "{fileName}: can't be read as a zip ({error})."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "{fileName}: there are no CSV files inside."
+msgstr ""
+
 #: src/interface/channels/text/Composition.tsx
 #~ msgid "{h} hours"
 #~ msgstr ""
@@ -207,9 +265,37 @@ msgstr ""
 #~ msgid "{m} minutes"
 #~ msgstr ""
 
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+msgid "{n, plural, one {Delete # call recap?} other {Delete # call recaps?}}"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+msgid "{n, plural, one {Delete # stream recap?} other {Delete # stream recaps?}}"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "{name}'s {source}"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "{name}'s camera"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "{name}'s screen share"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "{participant} heard"
+msgstr ""
+
 #: src/interface/channels/text/Composition.tsx
 #~ msgid "{sec} seconds"
 #~ msgstr ""
+
+#: components/app/interface/settings/user/developer/TimeChart.tsx
+msgid "{title} over time"
+msgstr ""
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
@@ -427,6 +513,10 @@ msgstr ""
 msgid "Add new members to the group"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Add one of my recaps"
+msgstr ""
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Add status text"
 msgstr ""
@@ -467,6 +557,11 @@ msgstr ""
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "All Messages"
 msgstr "هەموو نامەکان"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "All recaps"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "All roles have overrides."
@@ -596,8 +691,24 @@ msgstr ""
 msgid "Assign Roles"
 msgstr "ڕۆڵەکان دیاری بکە"
 
+#. placeholder {0}: formatDuration(h().t)
+#. placeholder {0}: formatDuration(props.hover!)
+#: components/app/interface/settings/user/developer/CompareChart.tsx
+#: components/app/interface/settings/user/developer/TimeChart.tsx
+#~ msgid "at {0}"
+#~ msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareChart.tsx
+#: components/app/interface/settings/user/developer/TimeChart.tsx
+msgid "at {time}"
+msgstr ""
+
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Audio disabled by browser"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Audio level"
 msgstr ""
 
 #: components/app/interface/settings/user/Account.tsx
@@ -612,6 +723,31 @@ msgstr ""
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Avatar"
 msgstr "ئاڤاتار"
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Averages"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/TimeChart.tsx
+#~ msgid "avg"
+#~ msgstr ""
+
+#: components/app/interface/settings/user/developer/TimeChart.tsx
+msgid "avg {value}"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Avg bitrate"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Avg frame rate"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareChart.tsx
+msgid "avg per recap"
+msgstr ""
 
 #: components/app/interface/settings/user/_AccountCard.tsx
 #: components/auth/src/flows/FlowCheck.tsx
@@ -659,6 +795,10 @@ msgstr ""
 msgid "Ban User"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Bandwidth"
+msgstr ""
+
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Banner"
 msgstr ""
@@ -666,6 +806,11 @@ msgstr ""
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Bans"
 msgstr "بانەکان"
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Bitrate"
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Block user"
@@ -729,6 +874,10 @@ msgstr ""
 msgid "Bypasses slowmode in channels"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Call"
+msgstr ""
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Calls"
@@ -746,6 +895,7 @@ msgstr ""
 msgid "Can't get discover request status right now"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/RecapParts.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/BanMember.tsx
@@ -904,7 +1054,15 @@ msgstr ""
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
-msgid "Check back often to see if your {0} has been approved!"
+#~ msgid "Check back often to see if your {0} has been approved!"
+#~ msgstr ""
+
+#: components/app/interface/settings/shared/Discoverable.tsx
+msgid "Check back often to see if your bot has been approved!"
+msgstr ""
+
+#: components/app/interface/settings/shared/Discoverable.tsx
+msgid "Check back often to see if your server has been approved!"
 msgstr ""
 
 #: components/auth/src/flows/FlowCheck.tsx
@@ -991,13 +1149,42 @@ msgstr ""
 msgid "Code"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Codec"
+msgstr ""
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Collapse call window"
+msgstr ""
+
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Colours"
 msgstr ""
 
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Coming soon! 👀"
+msgstr ""
+
+#: components/app/interface/settings/user/Advanced.tsx
+msgid "Compact mode"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Compare recaps"
+msgstr ""
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Compare Recaps"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Concealed audio"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Concealed audio (made up to hide lost packets)"
 msgstr ""
 
 #: components/app/interface/settings/user/Account.tsx
@@ -1037,9 +1224,21 @@ msgstr ""
 msgid "Connection lost"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Connection quality (rated by the server)"
+msgstr ""
+
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
-msgid "Contact support to remove this {0} from discover"
+#~ msgid "Contact support to remove this {0} from discover"
+#~ msgstr ""
+
+#: components/app/interface/settings/shared/Discoverable.tsx
+msgid "Contact support to remove this bot from discover"
+msgstr ""
+
+#: components/app/interface/settings/shared/Discoverable.tsx
+msgid "Contact support to remove this server from discover"
 msgstr ""
 
 #: components/modal/modals/ReportContent.tsx
@@ -1149,6 +1348,10 @@ msgstr ""
 #. placeholder {0}: props.channel.name
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Couldn't move them to {0}."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "CPU"
 msgstr ""
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
@@ -1320,6 +1523,10 @@ msgstr ""
 msgid "Deafen Members"
 msgstr "ئەندام دێفنکردن"
 
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Decoder"
+msgstr ""
+
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Default"
@@ -1344,6 +1551,7 @@ msgstr ""
 msgid "Degraded Performance"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/RecapParts.tsx
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -1371,6 +1579,18 @@ msgstr ""
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Delete Account"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Delete all call recaps on this device?"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+msgid "Delete all recaps"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Delete all stream recaps on this device?"
 msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
@@ -1416,12 +1636,26 @@ msgstr "سڕینەوەی نامە"
 msgid "Delete Message History"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Delete recap"
+msgstr ""
+
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Delete Role"
 msgstr "سڕینەوەی ڕۆڵ"
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Delete Server"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Delete this recap?"
+msgstr ""
+
+#: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
+msgid "Delete webhook"
 msgstr ""
 
 #: components/modal/modals/DeleteEmoji.tsx
@@ -1443,6 +1677,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "Developer Documentation"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Developer modes measure call performance and keep statistics of previous calls and streams on this device. Turn on either or both."
 msgstr ""
 
 #: components/app/interface/settings/user/Account.tsx
@@ -1531,10 +1769,21 @@ msgstr ""
 msgid "Done"
 msgstr "تەواو"
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Download CSV"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Dropped frames per second"
+msgstr ""
+
 #: components/modal/modals/ReportContent.tsx
 msgid "Drugs or illegal goods"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Duration"
 msgstr ""
@@ -1641,8 +1890,20 @@ msgstr "چالاککردنی ئاگەداریەکانی دێسکتۆپ"
 msgid "Enable Push Notifications"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Enable the tools below"
+msgstr ""
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Enable transparency glass/blur effects (slow on older machines)"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Encoder"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Encoder target bitrate"
 msgstr ""
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
@@ -1692,6 +1953,11 @@ msgstr ""
 msgid "Enter your preferred username."
 msgstr "ناوی بەکارهێنەری دڵخوازی خۆت بنووسە."
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Estimated upload bandwidth"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
@@ -1699,8 +1965,16 @@ msgstr "ناوی بەکارهێنەری دڵخوازی خۆت بنووسە."
 msgid "Everyone"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Excellent"
+msgstr ""
+
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Excellent connection"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+msgid "Export"
 msgstr ""
 
 #: components/modal/modals/LinkWarning.tsx
@@ -1721,6 +1995,10 @@ msgstr ""
 
 #: components/client/NotificationsController.ts
 msgid "Failed to enable push notifications. Please try again later."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/MyBots.tsx
+msgid "Failed to load bots..."
 msgstr ""
 
 #: components/i18n/errors.tsx
@@ -1792,6 +2070,14 @@ msgstr ""
 msgid "For 8 hours"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Frame rate"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Freezes"
+msgstr ""
+
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Friends"
@@ -1799,6 +2085,10 @@ msgstr "هاوڕێکان"
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "from "
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Frozen"
 msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
@@ -1827,6 +2117,10 @@ msgstr ""
 
 #: src/AndroidNag.tsx
 msgid "Get it on Google Play"
+msgstr ""
+
+#: components/state/stores/Experiments.ts
+msgid "GIF Picker Placeholder"
 msgstr ""
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
@@ -1870,6 +2164,7 @@ msgstr ""
 #~ msgid "Go to the testers server"
 #~ msgstr "بڕۆ بۆ سێرڤەری تێستەرەکان"
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/modal/modals/Onboarding.tsx
 msgid "Good"
 msgstr ""
@@ -1959,6 +2254,19 @@ msgstr ""
 msgid "Hotkeys work while AnyTalk is the focused window or tab. Click a hotkey to record new keys, press Escape to cancel."
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Hover a chart (or focus it and use the arrow keys) to read all values at the same moment."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Hover a chart (or focus it and use the arrow keys) to read every recap at the same moment."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "How everyone else's audio reached you."
+msgstr ""
+
 #: src/interface/channels/AgeGate.tsx
 msgid "I confirm that I am at least 18 years old."
 msgstr "من دووپاتی دەکەمەوە کە من بەلایەنی کەمەوە ۱۸ ساڵم."
@@ -1990,8 +2298,20 @@ msgstr ""
 msgid "Impersonation"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Import CSV or zip"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Imported"
+msgstr ""
+
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Incoming"
 msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
@@ -2055,6 +2375,20 @@ msgstr ""
 msgid "ISO Standard (YYYY-MM-DD)"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Jitter"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Jitter avg / max"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Jitter buffer delay"
+msgstr ""
+
 #: components/modal/modals/Invite.tsx
 #: components/modal/modals/JoinServer.tsx
 msgid "Join"
@@ -2093,6 +2427,10 @@ msgstr "بازدان بۆ سەرەتا"
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Keep as is"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Keyframe requests per second (viewers asking for a full new picture)"
 msgstr ""
 
 #: components/modal/modals/KickMember.tsx
@@ -2194,6 +2532,18 @@ msgstr ""
 msgid "LIVE"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Live overlay, recording and recaps of previous calls"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Live overlay, recording and recaps of previous streams"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Live statistics overlay"
+msgstr ""
+
 #. placeholder {0}: humanFileSize(props.file.size ?? 0)
 #: components/ui/components/features/messaging/elements/TextFile.tsx
 msgid "Load file ({0})"
@@ -2222,6 +2572,14 @@ msgstr "چوونەژوورەوە"
 
 #: components/app/interface/settings/user/Sessions.tsx
 msgid "Logs you out of all sessions except this device."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Loss and jitter are what the server reports about the audio it got from you."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Lost"
 msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
@@ -2298,8 +2656,20 @@ msgstr ""
 msgid "Masquerade"
 msgstr "ماسکوڕاید"
 
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Max resolution"
+msgstr ""
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Maximize call window"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Measure camera and screen share video you send or watch"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Measure your microphone and everyone you hear in calls"
 msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
@@ -2500,6 +2870,7 @@ msgstr "هەژماری من"
 msgid "My Bots"
 msgstr "بۆتەکانم"
 
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/RenameSession.tsx
@@ -2552,6 +2923,10 @@ msgstr "نازناو"
 msgid "No audio was captured, switch window to share audio"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/TimeChart.tsx
+msgid "no data"
+msgstr ""
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "No GIFs found"
 msgstr ""
@@ -2560,12 +2935,24 @@ msgstr ""
 msgid "No permissions set yet"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "No recaps yet. Turn on \"Record call recaps\", then join a call."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "No recaps yet. Turn on \"Record stream recaps\", then join a call and start or watch a stream."
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No role overrides have been configured."
 msgstr ""
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "nobody else"
 msgstr ""
 
 #: src/interface/Friends.tsx
@@ -2585,8 +2972,24 @@ msgstr "هیچ"
 msgid "Normal"
 msgstr ""
 
+#: components/state/stores/Experiments.ts
+msgid "Not available yet."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Not limited"
+msgstr ""
+
 #: components/modal/modals/ReportContent.tsx
 msgid "Not of minimum age to use the platform"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Nothing to compare yet. Import a CSV or add one of your own call recaps."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Nothing to compare yet. Import a CSV or add one of your own stream recaps."
 msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
@@ -2690,6 +3093,7 @@ msgstr "کردنەوەی ڕێکخستنەکان"
 msgid "Opening another stream while watching one shows them side by side. When off, it replaces the stream you were watching."
 msgstr ""
 
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
 #: components/modal/modals/ReportContent.tsx
 msgid "Other"
 msgstr ""
@@ -2711,6 +3115,24 @@ msgstr "پوختە"
 msgid "Owner"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Packet loss"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Packets lost (server)"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Packets lost per second"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Packets per second"
+msgstr ""
+
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Pardon User"
 msgstr ""
@@ -2727,6 +3149,10 @@ msgstr "وشەی نهێنی"
 
 #: components/modal/modals/EditPassword.tsx
 msgid "Password changed successfully."
+msgstr ""
+
+#: components/app/interface/settings/user/subscriptions/EditSubscriptionJoinFlow.tsx
+msgid "Pay"
 msgstr ""
 
 #: src/interface/Friends.tsx
@@ -2760,6 +3186,16 @@ msgstr ""
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin message"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Ping (round trip to the server)"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Ping avg / max"
 msgstr ""
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
@@ -2802,8 +3238,24 @@ msgstr "تکایە ڕێگەیەک هەڵبژێرە بۆ ڕەسەنایەتی د�
 msgid "Please select a reason"
 msgstr ""
 
+#: components/app/interface/settings/shared/Discoverable.tsx
+msgid "Please try again later"
+msgstr ""
+
+#: components/state/stores/Experiments.ts
+msgid "Plugins v2 Placeholder"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Poor"
+msgstr ""
+
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Poor connection"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Poor or lost connection"
 msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
@@ -2850,6 +3302,14 @@ msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Put your recaps next to CSV recaps from other people"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Put your recaps next to recaps from other people. They open a recap in Voice Call Stats or Stream Stats and use Download CSV, or select several recaps and export them as one zip, then send you the file, which you import here. Everything stays on this device, and imports are kept until you close the app."
 msgstr ""
 
 #: components/modal/modals/ReportContent.tsx
@@ -2901,6 +3361,14 @@ msgstr ""
 msgid "Reason: {0} Contact support for more information."
 msgstr ""
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Recaps"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Recaps are lined up at the moment each one started."
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Receive notifications while the app is open and in the background."
 msgstr ""
@@ -2915,6 +3383,22 @@ msgstr ""
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Reconnecting"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Record call recaps"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Record statistics of every call you are in, with or without the overlay"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Record statistics of every stream you send or watch, with or without the overlay"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Record stream recaps"
 msgstr ""
 
 #: components/modal/modals/MFAFlow.tsx
@@ -2961,6 +3445,7 @@ msgstr ""
 msgid "Remote Server"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
 msgstr ""
@@ -3063,11 +3548,16 @@ msgstr "بەکارهێنەر ڕاپۆرت بکە"
 msgid "Resend"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Resend requests per second (viewers asking for lost packets again)"
+msgstr ""
+
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/auth/src/flows/FlowResend.tsx
 msgid "Resend verification"
 msgstr "ناردنەوەی دووپاتکردنەوە"
 
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/auth/src/flows/FlowConfirmReset.tsx
 #: components/auth/src/flows/FlowReset.tsx
@@ -3105,6 +3595,10 @@ msgstr ""
 msgid "Reset Token"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Resolution"
+msgstr ""
+
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 msgid "Resolution and FPS"
 msgstr ""
@@ -3124,6 +3618,10 @@ msgstr ""
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Return to voice channel"
+msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Reveal"
 msgstr ""
 
 #: components/modal/modals/ReportContent.tsx
@@ -3162,6 +3660,14 @@ msgstr "ڕۆڵەکان"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Roles with No Overrides"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Running"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Running or frozen"
 msgstr ""
 
 #: components/app/interface/settings/channel/Overview.tsx
@@ -3238,6 +3744,18 @@ msgstr ""
 #~ msgid "See what we're currently working on."
 #~ msgstr ""
 
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+msgid "Select"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+msgid "Select all"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Select at least one line above to compare."
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Select audio input"
 msgstr ""
@@ -3252,6 +3770,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Select noise suppression"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+msgid "Select none"
 msgstr ""
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
@@ -3394,6 +3916,10 @@ msgstr ""
 msgid "Several people are typing…"
 msgstr "چەند کەسێک خەریکی نووسینن…"
 
+#: components/app/interface/settings/user/developer/RecapParts.tsx
+msgid "Several recaps are exported as one zip file with a CSV for each."
+msgstr ""
+
 #: components/modal/modals/ScreenSharePicker.tsx
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Share audio"
@@ -3407,8 +3933,24 @@ msgstr ""
 msgid "Share screen"
 msgstr ""
 
+#: components/app/interface/settings/user/Advanced.tsx
+msgid "Show 'copy ID' in context menus"
+msgstr ""
+
+#: components/app/interface/settings/user/Advanced.tsx
+msgid "Show admin panel shortcuts in context menus"
+msgstr ""
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Show live microphone statistics on call tiles"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Show live statistics on call video tiles"
 msgstr ""
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
@@ -3561,6 +4103,10 @@ msgstr ""
 msgid "Stop sharing"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Stream developer mode"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #~ msgid "Stream End"
 #~ msgstr ""
@@ -3585,8 +4131,25 @@ msgstr ""
 msgid "Stream started"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Stream stats"
+msgstr ""
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Stream Stats"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Streams"
+msgstr ""
+
+#. placeholder {0}: count("stream")
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#~ msgid "Streams ({0})"
+#~ msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Streams ({streams})"
 msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
@@ -3728,11 +4291,15 @@ msgstr "ڕووکار"
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
-msgid "This {0} is discoverable"
-msgstr ""
+#~ msgid "This {0} is discoverable"
+#~ msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "This account is not activated! Please check your account's inbox and try again."
+msgstr ""
+
+#: components/app/interface/settings/shared/Discoverable.tsx
+msgid "This bot is discoverable"
 msgstr ""
 
 #: components/i18n/errors.tsx
@@ -3796,8 +4363,17 @@ msgstr ""
 msgid "This password has previously appeared in security leaks, please use another password."
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "This recap no longer exists."
+msgstr ""
+
 #: components/app/interface/settings/server/Overview.tsx
 msgid "This server is about..."
+msgstr ""
+
+#: components/app/interface/settings/shared/Discoverable.tsx
+msgid "This server is discoverable"
 msgstr ""
 
 #: components/i18n/errors.tsx
@@ -3877,6 +4453,11 @@ msgstr ""
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Transport"
 msgstr ""
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
@@ -3967,6 +4548,19 @@ msgstr ""
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Until I turn it back on"
+msgstr ""
+
+#. placeholder {0}: percent(meta.worstIncomingLoss)
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+#~ msgid "up to {0} loss"
+#~ msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "up to {loss} loss"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Up to {MAX_LINES} lines at once, deselect one to add another."
 msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
@@ -4093,6 +4687,10 @@ msgstr ""
 msgid "Video"
 msgstr "ڤیدیۆ"
 
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Video copies being sent (full / half / quarter size)"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"
 msgstr "بینینی کەناڵ"
@@ -4140,6 +4738,27 @@ msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Voice & Video"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Voice call developer mode"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Voice call stats"
+msgstr ""
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Voice Call Stats"
+msgstr ""
+
+#. placeholder {0}: count("call")
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#~ msgid "Voice calls ({0})"
+#~ msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Voice calls ({calls})"
 msgstr ""
 
 #: components/modal/modals/CreateChannel.tsx
@@ -4198,9 +4817,17 @@ msgstr "وێبهووکەکان"
 #~ msgid "Welcome to"
 #~ msgstr "بەخێربێیت بۆ"
 
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Welcome to the new appearance menu, custom themes are not available just yet but we are looking for feedback on how to best implement them!"
+msgstr ""
+
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Welcome!"
 msgstr "بەخێربێیت!"
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "What limited the stream quality"
+msgstr ""
 
 #: components/modal/modals/Changelog.tsx
 msgid "What's new"
@@ -4212,6 +4839,14 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Whether other users can edit these settings"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "While stream developer mode and \"Record stream recaps\" are on, statistics for every video stream you send or watch in a call are recorded once per second. Recaps are stored on this device only; the newest 20 are kept."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "While voice call developer mode and \"Record call recaps\" are on, your microphone and everyone you hear are measured once per second. Recaps are stored on this device only; the newest 20 calls are kept."
 msgstr ""
 
 #. placeholder {0}: names.join(", ")
@@ -4227,6 +4862,10 @@ msgstr ""
 #. placeholder {0}: names.length
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "with {0} others"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "with {participants}"
 msgstr ""
 
 #: components/modal/modals/CreateGroupOrServer.tsx
@@ -4351,6 +4990,14 @@ msgstr ""
 msgid "You have been locked out for entering a wrong password multiple times. Please wait a couple minutes and try again."
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "You have no call recaps yet."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "You have no stream recaps yet."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "You have this user blocked."
 msgstr ""
@@ -4432,7 +5079,11 @@ msgstr ""
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
-msgid "Your {0} is under review"
+#~ msgid "Your {0} is under review"
+#~ msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Your {source}"
 msgstr ""
 
 #: components/app/interface/settings/user/Account.tsx
@@ -4442,6 +5093,14 @@ msgstr ""
 #: components/auth/src/flows/FlowVerify.tsx
 msgid "Your account has been verified!"
 msgstr "هەژمارەکەت پشتڕاست کراوەتەوە!"
+
+#: components/app/interface/settings/shared/Discoverable.tsx
+msgid "Your bot is under review"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Your camera"
+msgstr ""
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your discover request has been denied"
@@ -4464,6 +5123,14 @@ msgstr ""
 msgid "Your message is too long, please remove some characters and try again."
 msgstr ""
 
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Your microphone"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CallRecaps.tsx
+msgid "Your microphone (outgoing)"
+msgstr ""
+
 #: components/modal/modals/MFARecovery.tsx
 msgid "Your recovery codes"
 msgstr "کۆدەکانی گەڕانەوەت"
@@ -4476,6 +5143,18 @@ msgstr ""
 msgid "Your role ranking is too low to take this action."
 msgstr ""
 
+#: components/app/interface/settings/user/developer/StreamRecaps.tsx
+msgid "Your screen share"
+msgstr ""
+
+#: components/app/interface/settings/shared/Discoverable.tsx
+msgid "Your server is under review"
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "Your user has already been created? Try logging in again or refreshing the app."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/CompareRecaps.tsx
+msgid "Yours"
 msgstr ""
