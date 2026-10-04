@@ -1,6 +1,6 @@
 import { createEffect, on, onCleanup } from "solid-js";
 
-import { RemoteParticipant, RoomEvent } from "livekit-client";
+import { RoomEvent } from "livekit-client";
 import { ProtocolV1 } from "stoat.js";
 
 import { useClient, useClientLifecycle, useSound } from "@revolt/client";
@@ -14,12 +14,6 @@ const RING_TIMEOUT_MS = 30_000;
 /** Vibration while ringing (Android): buzz, pause, buzz, then a break */
 const RING_VIBRATION = [400, 200, 400];
 const RING_VIBRATION_EVERY_MS = 2400;
-
-/** Data message topic for telling a streamer we're watching them */
-const WATCH_TOPIC = "anytalk:watching";
-
-const encoder = new TextEncoder();
-const decoder = new TextDecoder();
 
 /**
  * Sounds that need more than the call itself: people moving channels,
@@ -150,94 +144,29 @@ export function CallSounds() {
     });
   });
 
-  // ── stream viewers ──
+  // ── viewers of our stream (see StreamViewers) ──
 
-  // as a viewer: tell streamers when we start and stop watching them
-  let told = new Set<string>();
-  createEffect(
-    on(voice.room, () => {
-      told = new Set();
-    }),
-  );
-
+  let viewers = new Set<string>();
   createEffect(() => {
     const room = voice.room();
-    const watching = new Set(voice.watching);
-    if (!room || voice.state() !== "CONNECTED") return;
-
-    const tell = (identity: string, watching: boolean) =>
-      room.localParticipant
-        .publishData(encoder.encode(JSON.stringify({ watching })), {
-          reliable: true,
-          topic: WATCH_TOPIC,
-          destinationIdentities: [identity],
-        })
-        .catch(() => {});
-
-    for (const identity of watching) {
-      if (identity === room.localParticipant.identity || told.has(identity))
-        continue;
-      told.add(identity);
-      tell(identity, true);
-    }
-
-    for (const identity of told) {
-      if (watching.has(identity)) continue;
-      told.delete(identity);
-      // nothing to tell someone who left
-      if (room.getParticipantByIdentity(identity)) tell(identity, false);
-    }
-  });
-
-  // as a streamer: play a sound when people start and stop watching us
-  createEffect(() => {
-    const room = voice.room();
-    if (!room) return;
-
-    const viewers = new Set<string>();
-
-    const onData = (
-      payload: Uint8Array,
-      participant?: RemoteParticipant,
-      _kind?: unknown,
-      topic?: string,
-    ) => {
-      if (topic !== WATCH_TOPIC || !participant) return;
-
-      let watching: unknown;
-      try {
-        watching = JSON.parse(decoder.decode(payload)).watching;
-      } catch {
-        return;
-      }
-
-      if (watching === true && voice.screenshare()) {
-        if (viewers.has(participant.identity)) return;
-        viewers.add(participant.identity);
-        sound.playSound("streamViewerJoin");
-      } else if (watching === false && viewers.delete(participant.identity)) {
-        sound.playSound("streamViewerLeave");
-      }
-    };
-
-    // leaving the call already plays a sound of its own
-    const onLeave = (participant: RemoteParticipant) =>
-      viewers.delete(participant.identity);
-
-    room.on(RoomEvent.DataReceived, onData);
-    room.on(RoomEvent.ParticipantDisconnected, onLeave);
-
-    // a new stream starts without viewers
-    createEffect(
-      on(voice.screenshare, (sharing) => {
-        if (!sharing) viewers.clear();
-      }),
+    const sharing = voice.screenshare();
+    const now = new Set(
+      room && sharing ? voice.viewersOf(room.localParticipant.identity) : [],
     );
 
-    onCleanup(() => {
-      room.off(RoomEvent.DataReceived, onData);
-      room.off(RoomEvent.ParticipantDisconnected, onLeave);
-    });
+    // a stream ending or starting is a sound of its own
+    if (sharing) {
+      const joined = [...now].some((id) => !viewers.has(id));
+      // leaving the call already plays a sound of its own
+      const left = [...viewers].some(
+        (id) => !now.has(id) && room?.getParticipantByIdentity(id),
+      );
+
+      if (joined) sound.playSound("streamViewerJoin");
+      else if (left) sound.playSound("streamViewerLeave");
+    }
+
+    viewers = now;
   });
 
   onCleanup(stopRinging);

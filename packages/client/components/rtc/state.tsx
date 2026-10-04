@@ -15,6 +15,7 @@ import {
   useTracks,
 } from "solid-livekit-components";
 
+import { ReactiveMap } from "@solid-primitives/map";
 import { ReactiveSet } from "@solid-primitives/set";
 import {
   AudioPresets,
@@ -50,6 +51,7 @@ import { CallSounds } from "./components/CallSounds";
 import { InRoom } from "./components/InRoom";
 import { RoomAudioManager } from "./components/RoomAudioManager";
 import { StatsRecorder } from "./components/StatsRecorder";
+import { StreamViewers } from "./components/StreamViewers";
 import { VoiceKeybinds } from "./components/VoiceKeybinds";
 import { VoiceMoves } from "./components/VoiceMoves";
 import { VoiceProcessor } from "./VoiceProcessor";
@@ -160,6 +162,12 @@ class Voice {
    * not subscribed to, so they cost no bandwidth until someone opens them
    */
   watching = new ReactiveSet<string>();
+
+  /**
+   * Streams the other participants told us they watch, by viewer (see
+   * StreamViewers)
+   */
+  viewing = new ReactiveMap<string, string[]>();
 
   /** Participant whose stream should be focused once its tile shows up */
   pendingFocus: Accessor<string | undefined>;
@@ -544,6 +552,7 @@ class Voice {
 
       this.screenShareTracks = new Set();
       this.watching.clear();
+      this.viewing.clear();
       this.#setPendingFocus();
 
       this.sound.playSound("userLeaveVoice");
@@ -1002,6 +1011,15 @@ class Voice {
   }
 
   /**
+   * Participants watching the given participant's stream
+   */
+  viewersOf(identity: string) {
+    return [...this.viewing]
+      .filter(([, streams]) => streams.includes(identity))
+      .map(([viewer]) => viewer);
+  }
+
+  /**
    * Stop watching the given participant's stream, or every stream
    */
   leaveStream(identity?: string) {
@@ -1104,6 +1122,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
         <InRoom>
           <RoomAudioManager />
           <VoiceKeybinds />
+          <StreamViewers />
         </InRoom>
         <StatsRecorder />
         <CallSounds />
