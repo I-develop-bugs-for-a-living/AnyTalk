@@ -30,6 +30,7 @@ import {
 } from "@revolt/ui";
 
 import MdLogout from "@material-design-icons/svg/outlined/logout.svg?component-solid";
+import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 /**
  * Sessions
@@ -79,7 +80,7 @@ function ManageCurrentSession(props: { otherSessions: Accessor<Session[]> }) {
         icon={<SessionIcon session={currentSession()} />}
       >
         <CategoryButton
-          icon="blank"
+          icon={<Symbol>edit</Symbol>}
           action="chevron"
           onClick={() =>
             currentSession() &&
@@ -148,7 +149,7 @@ function ListOtherSessions(props: { otherSessions: Accessor<Session[]> }) {
                 }
               >
                 <CategoryButton
-                  icon="blank"
+                  icon={<Symbol>edit</Symbol>}
                   action="chevron"
                   onClick={() =>
                     openModal({
@@ -160,7 +161,7 @@ function ListOtherSessions(props: { otherSessions: Accessor<Session[]> }) {
                   <Trans>Rename</Trans>
                 </CategoryButton>
                 <CategoryButton
-                  icon="blank"
+                  icon={<Symbol>logout</Symbol>}
                   action="chevron"
                   onClick={() => {
                     (async () => {

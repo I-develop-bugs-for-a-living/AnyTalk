@@ -14,6 +14,7 @@ import {
   Column,
   Text,
 } from "@revolt/ui";
+import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 /**
  * Voice processing options
@@ -28,7 +29,7 @@ export function VoiceProcessingOptions() {
       </Text>
       <CategoryButton.Group>
         <CategoryButton.Select
-          icon={"blank"}
+          icon={<Symbol>noise_aware</Symbol>}
           title={<Trans>Select noise suppression</Trans>}
           options={
             {
@@ -49,7 +50,7 @@ export function VoiceProcessingOptions() {
         />
         <Show when={voice.noiseSupression === "enhanced"}>
           <CategoryButton
-            icon="blank"
+            icon={<Symbol>mic_off</Symbol>}
             action={<Checkbox checked={voice.speechGate} />}
             onClick={() => (voice.speechGate = !voice.speechGate)}
             description={
@@ -63,7 +64,7 @@ export function VoiceProcessingOptions() {
           </CategoryButton>
         </Show>
         <CategoryButton.Select
-          icon="blank"
+          icon={<Symbol>graphic_eq</Symbol>}
           title={<Trans>Low-cut filter</Trans>}
           options={
             {
@@ -93,14 +94,14 @@ export function VoiceProcessingOptions() {
           }
         />
         <CategoryButton
-          icon="blank"
+          icon={<Symbol>spatial_audio_off</Symbol>}
           action={<Checkbox checked={voice.echoCancellation} />}
           onClick={() => (voice.echoCancellation = !voice.echoCancellation)}
         >
           <Trans>Browser Echo Cancellation</Trans>
         </CategoryButton>
         <CategoryButton
-          icon="blank"
+          icon={<Symbol>tune</Symbol>}
           action={<Checkbox checked={voice.autoGainControl} />}
           onClick={() => (voice.autoGainControl = !voice.autoGainControl)}
         >

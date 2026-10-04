@@ -66,7 +66,7 @@ export function ScreenShareOptions() {
           }
         />
         <CategoryButton
-          icon="blank"
+          icon={<Symbol>high_quality</Symbol>}
           action={<Checkbox checked={voice.screenShareQualityAsk} />}
           onClick={() =>
             (voice.screenShareQualityAsk = !voice.screenShareQualityAsk)

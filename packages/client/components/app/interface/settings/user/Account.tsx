@@ -20,6 +20,7 @@ import MdVerifiedUser from "@material-design-icons/svg/outlined/verified_user.sv
 
 import { useSettingsNavigation } from "../Settings";
 
+import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { UserSummary } from "./account/index";
 
 /**
@@ -205,7 +206,7 @@ function MultiFactorAuth() {
         <Switch
           fallback={
             <CategoryButton
-              icon="blank"
+              icon={<Symbol>key</Symbol>}
               disabled={mfa.isLoading}
               onClick={generateRecoveryCodes}
               description={<Trans>Setup recovery codes</Trans>}
@@ -216,14 +217,14 @@ function MultiFactorAuth() {
         >
           <Match when={!mfa.isLoading && mfa.data?.recoveryEnabled}>
             <CategoryButton
-              icon="blank"
+              icon={<Symbol>visibility</Symbol>}
               description={<Trans>Get active recovery codes</Trans>}
               onClick={showRecoveryCodes}
             >
               <Trans>View Recovery Codes</Trans>
             </CategoryButton>
             <CategoryButton
-              icon="blank"
+              icon={<Symbol>lock_reset</Symbol>}
               description={<Trans>Get a new set of recovery codes</Trans>}
               onClick={generateRecoveryCodes}
             >
@@ -240,7 +241,7 @@ function MultiFactorAuth() {
         <Switch
           fallback={
             <CategoryButton
-              icon="blank"
+              icon={<Symbol>mobile_lock_portrait</Symbol>}
               disabled={mfa.isLoading}
               onClick={setupAuthenticatorApp}
               description={<Trans>Setup one-time password authenticator</Trans>}
@@ -251,7 +252,7 @@ function MultiFactorAuth() {
         >
           <Match when={!mfa.isLoading && mfa.data?.authenticatorEnabled}>
             <CategoryButton
-              icon="blank"
+              icon={<Symbol>remove_moderator</Symbol>}
               description={
                 <Trans>Disable one-time password authenticator</Trans>
               }
