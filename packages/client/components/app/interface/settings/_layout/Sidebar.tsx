@@ -123,7 +123,8 @@ const Content = styled("div", {
   base: {
     minWidth: "230px",
     maxWidth: "300px",
-    padding: "74px 0 8px",
+    // the end of the list stays clear of the home indicator on iPhones
+    padding: "74px 0 calc(8px + var(--safe-area-bottom))",
     display: "flex",
     gap: "2px",
 
@@ -134,10 +135,10 @@ const Content = styled("div", {
     },
 
     _tablet: {
-      padding: "8px 0",
+      padding: "8px 0 calc(8px + var(--safe-area-bottom))",
     },
     _phone: {
-      padding: "8px 0",
+      padding: "8px 0 calc(8px + var(--safe-area-bottom))",
       maxWidth: "unset",
     },
   },

@@ -130,7 +130,7 @@ const InnerContent = styled("div", {
     zIndex: 1,
 
     _tablet: { padding: "12px" },
-    _phone: { height: "100vh" },
+    _phone: { height: "100dvh" },
   },
 });
 
@@ -152,7 +152,7 @@ const InnerColumn = styled("div", {
  */
 const ActionRail = styled("div", {
   base: {
-    height: "100vh",
+    height: "100dvh",
     minWidth: "56px",
     padding: "80px 8px calc(var(--gap-xl) + env(safe-area-inset-bottom))",
 

@@ -41,10 +41,12 @@ export function SettingsModal(
         style={{
           "z-index": 100,
           position: "fixed",
-          width: "100%",
-          height: "100vh",
-          left: 0,
-          top: 0,
+          // the visible area clear of the notch (Safari's toolbar covers
+          // part of 100vh), the content keeps clear of the home indicator
+          top: "env(safe-area-inset-top)",
+          right: "env(safe-area-inset-right)",
+          bottom: 0,
+          left: "env(safe-area-inset-left)",
           "pointer-events": "none",
         }}
       >
