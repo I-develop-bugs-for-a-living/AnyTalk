@@ -128,7 +128,8 @@ export function ParticipantTile(props: TileProps) {
           if (isScreenShare() && !voice.isWatchedStream(track)) {
             // open the stream (our own one too, once it's out of view)
             voice.watchStream(participant.identity);
-          } else if (!props.fill) {
+          } else if (!props.fill && !(theater() && touchOnly())) {
+            // in the full screen stream a tap only shows the controls
             voice.toggleFocus(track);
           }
         }}
@@ -263,6 +264,11 @@ export function ParticipantTile(props: TileProps) {
 }
 
 /**
+ * Whether the device has no mouse to hover with, e.g. phones
+ */
+export const touchOnly = () => !matchMedia("(hover: hover)").matches;
+
+/**
  * Name and audio state of the participant in the current track context
  */
 export function ParticipantInfo(props: {
@@ -270,6 +276,8 @@ export function ParticipantInfo(props: {
   align?: "start" | "end";
   /** Leave out the icons, e.g. for the small tiles of a call window */
   nameOnly?: boolean;
+  /** Only the stream volume, e.g. in the crowded controls on phones */
+  controlsOnly?: boolean;
 }) {
   const state = useState();
   const participant = useEnsureParticipant();
@@ -300,12 +308,16 @@ export function ParticipantInfo(props: {
 
   return (
     <OverlayInner>
-      <OverflowingText>{user().username}</OverflowingText>
+      <Show when={!props.controlsOnly}>
+        <OverflowingText>{user().username}</OverflowingText>
+      </Show>
       <Show when={!props.nameOnly}>
         <Row gap="md">
-          <ConnectionQualityIcon />
+          <Show when={!props.controlsOnly}>
+            <ConnectionQualityIcon />
+          </Show>
           {/* the stream replaces the streamer's own tile, so keep their mic state */}
-          <Show when={isScreenShare()}>
+          <Show when={isScreenShare() && !props.controlsOnly}>
             <VoiceStatefulUserIcons
               userId={participant.identity}
               muted={isMuted()}
@@ -331,11 +343,13 @@ export function ParticipantInfo(props: {
               </Symbol>
             </Show>
           ) : (
-            <VoiceStatefulUserIcons
-              userId={participant.identity}
-              muted={isMuted()}
-              camera={!isVideoMuted()}
-            />
+            <Show when={!props.controlsOnly}>
+              <VoiceStatefulUserIcons
+                userId={participant.identity}
+                muted={isMuted()}
+                camera={!isVideoMuted()}
+              />
+            </Show>
           )}
         </Row>
       </Show>

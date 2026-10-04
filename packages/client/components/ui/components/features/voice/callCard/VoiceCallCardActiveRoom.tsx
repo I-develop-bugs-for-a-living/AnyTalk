@@ -20,7 +20,12 @@ import { IconButton } from "@revolt/ui/components/design";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { scrollableStyles } from "@revolt/ui/directives";
 
-import { ParticipantInfo, ParticipantTile, tile } from "./ParticipantTile";
+import {
+  ParticipantInfo,
+  ParticipantTile,
+  tile,
+  touchOnly,
+} from "./ParticipantTile";
 import { VoiceCallCardActions } from "./VoiceCallCardActions";
 import {
   VoiceCallCardEnableAudio,
@@ -78,8 +83,19 @@ export function VoiceCallCardActiveRoom() {
       collapsed={collapsed()}
       theater={theater()}
       hideCursor={theater() && idle()}
-      onPointerMove={() => theater() && wake()}
-      onPointerLeave={() => theater() && sleep()}
+      // a finger lifting also leaves, on touch only taps show or hide them
+      onPointerMove={(e) => theater() && e.pointerType !== "touch" && wake()}
+      // touch has no mouse moving to wake the controls: a tap on the stream
+      // or the bar shows or hides them, its buttons keep working
+      onClick={(e) => {
+        if (!theater() || !touchOnly()) return;
+        if ((e.target as Element).closest("button, a, input, [role=slider]"))
+          return;
+        if (idle()) wake();
+        else sleep();
+      }}
+      fullscreen={voice.layout() === "fullscreen" && !theater()}
+      onPointerLeave={(e) => theater() && e.pointerType !== "touch" && sleep()}
     >
       <Show when={!collapsed()}>
         <VoiceCallCardEnableAudio />
@@ -100,7 +116,13 @@ export function VoiceCallCardActiveRoom() {
           <Show when={theater() && voice.focusTrack()}>
             <FocusedInfo>
               <TrackLoop tracks={() => [voice.focusTrack()!]}>
-                {() => <ParticipantInfo align="start" />}
+                {() => (
+                  // on mobile the controls have no room for who's streaming
+                  <ParticipantInfo
+                    align="start"
+                    controlsOnly={device.layout() !== "desktop"}
+                  />
+                )}
               </TrackLoop>
             </FocusedInfo>
           </Show>
@@ -410,6 +432,12 @@ const View = styled("div", {
     hideCursor: {
       true: { cursor: "none" },
     },
+    // fills the screen: keep the controls clear of the home indicator
+    fullscreen: {
+      true: {
+        paddingBottom: "calc(var(--gap-md) + var(--safe-area-bottom))",
+      },
+    },
   },
 });
 
@@ -435,6 +463,9 @@ const VoiceCallControls = styled("div", {
         zIndex: 1,
         color: "white",
         background: "linear-gradient(transparent, #000a)",
+        // the gradient reaches the bottom edge, the buttons stay clear of
+        // the home indicator
+        paddingBottom: "var(--safe-area-bottom)",
         transition: "opacity var(--transitions-medium)",
       },
     },

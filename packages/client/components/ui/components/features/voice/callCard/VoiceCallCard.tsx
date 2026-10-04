@@ -225,7 +225,7 @@ const Float = styled("div", {
       true: {
         zIndex: 100,
         // the visible height below the notch, Safari's toolbar covers part
-        // of 100vh; the card keeps its controls clear of the home indicator
+        // of 100vh; the call keeps its controls clear of the home indicator
         top: "env(safe-area-inset-top)",
         height: "calc(100dvh - env(safe-area-inset-top))",
         // Width is set by floating logic in effect above
@@ -367,7 +367,6 @@ const Card = styled("div", {
     layout: {
       fullscreen: {
         borderRadius: 0,
-        paddingBottom: "var(--safe-area-bottom)",
       },
       expanded: {
         borderRadius: "var(--borderRadius-xl)",
