@@ -36,7 +36,7 @@ export const Header = styled("div", {
     placement: {
       primary: {
         margin: "var(--gap-md) var(--gap-md) var(--gap-md) 0",
-        _phone: { marginLeft: "var(--gap-lg)" },
+        _phone: { marginInlineStart: "var(--gap-lg)" },
       },
       secondary: {
         margin: "var(--gap-md)",
@@ -72,7 +72,7 @@ export const Header = styled("div", {
       placement: "secondary",
       image: false,
       css: {
-        marginLeft: "var(--gap-lg)",
+        marginInlineStart: "var(--gap-lg)",
       },
     },
   ],

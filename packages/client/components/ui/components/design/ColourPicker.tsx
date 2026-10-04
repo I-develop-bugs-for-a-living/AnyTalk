@@ -128,7 +128,7 @@ export function ColourPicker(props: {
               <Show
                 when={isCustom()}
                 fallback={
-                  <Symbol size={20} marginRight="var(--gap-sm)">
+                  <Symbol size={20} marginInlineEnd="var(--gap-sm)">
                     palette
                   </Symbol>
                 }
@@ -247,7 +247,7 @@ const ColourIndicator = styled("span", {
     height: "18px",
     flexShrink: 0,
     borderRadius: "50%",
-    marginRight: "var(--gap-sm)",
+    marginInlineEnd: "var(--gap-sm)",
   },
 });
 

@@ -8,6 +8,7 @@ import { useInstance } from "@revolt/instance";
 import { CustomEmoji, UnicodeEmoji } from "@revolt/markdown/emoji";
 import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
+import { iconSize } from "@revolt/ui";
 import { MediaPickerProps } from "@revolt/ui/components/features/messaging/composition/picker/CompositionMediaPicker";
 
 import MdBadge from "@material-design-icons/svg/outlined/badge.svg?component-solid";
@@ -192,7 +193,10 @@ export function MessageContextMenu(props: {
       </Show>
       <Show when={props.message}>
         <Show when={props.message!.channel?.havePermission("SendMessage")}>
-          <ContextMenuButton icon={MdReply} onClick={reply}>
+          <ContextMenuButton
+            icon={<MdReply {...iconSize(16)} class="rtl-mirror" />}
+            onClick={reply}
+          >
             <Trans>Reply</Trans>
           </ContextMenuButton>
         </Show>

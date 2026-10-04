@@ -26,10 +26,24 @@ export { Language, Languages } from "./Languages";
 export { timeLocale, useTime } from "./dayjs";
 export { useError } from "./errors";
 
+/**
+ * Set the page language and text direction, so right-to-left languages flip
+ * the layout and screen readers and fonts know the language
+ * @param key Language
+ * @param localeOptions Locale options, `rtl` overrides the language default
+ */
+function applyDocumentLocale(key: Language, localeOptions: LocaleOptions) {
+  const rtl = localeOptions.rtl ?? Languages[key].localeOptions?.rtl ?? false;
+  document.documentElement.lang = Languages[key].i18n;
+  document.documentElement.dir = rtl ? "rtl" : "ltr";
+}
+
 export async function loadAndSwitchLocale(
   key: Language,
   localeOptions: LocaleOptions,
 ) {
+  applyDocumentLocale(key, localeOptions);
+
   if (key !== i18n.locale) {
     const data =
       Languages[key].i18n === "en"

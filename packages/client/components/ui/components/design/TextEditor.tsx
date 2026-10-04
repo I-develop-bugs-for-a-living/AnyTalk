@@ -215,7 +215,7 @@ export function TextEditor(props: Props) {
     },
     "& ul": {
       listStylePosition: "outside",
-      paddingLeft: "1.5em",
+      paddingInlineStart: "1.5em",
 
       "& li": {
         listStyleType: "disc",
@@ -227,7 +227,7 @@ export function TextEditor(props: Props) {
     },
     "& ol": {
       listStylePosition: "outside",
-      paddingLeft: "1.5em",
+      paddingInlineStart: "1.5em",
 
       listStyleType: "decimal",
     },

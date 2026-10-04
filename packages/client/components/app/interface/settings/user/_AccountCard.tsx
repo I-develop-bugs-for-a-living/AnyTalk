@@ -61,7 +61,7 @@ export function BackCard(props: { onClose?: () => void }) {
       >
         <Ripple />
         <SidebarButtonTitle>
-          <MdArrowBack />
+          <MdArrowBack class="rtl-mirror" />
           <SidebarButtonContent>
             <Trans>Back</Trans>
           </SidebarButtonContent>

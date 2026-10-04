@@ -440,7 +440,7 @@ function Category(
           <CategoryTitle>
             <TextWithEmoji content={props.category.title} />
           </CategoryTitle>
-          <MdChevronRight {...iconSize(12)} />
+          <MdChevronRight class="rtl-mirror" {...iconSize(12)} />
           <Show when={canCreateChannel()}>
             <CategoryAction
               type="button"
@@ -520,7 +520,7 @@ const CategoryBase = styled("div", {
     gap: "var(--gap-sm)",
 
     padding: "0 var(--gap-sm)",
-    paddingLeft: "calc(var(--gap-lg) + 5px)",
+    paddingInlineStart: "calc(var(--gap-lg) + 5px)",
     paddingBlock: "var(--gap-sm)",
 
     cursor: "pointer",

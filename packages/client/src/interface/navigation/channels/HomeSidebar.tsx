@@ -209,7 +209,7 @@ export const Header = styled("div", {
     lineHeight: "48px",
     verticalAlign: "middle",
     margin: "var(--gap-md)",
-    marginLeft: "var(--gap-lg)",
+    marginInlineStart: "var(--gap-lg)",
     color: "var(--md-sys-color-on-surface)",
     backgroundColor: "var(--md-sys-color-surface-variant)",
   },

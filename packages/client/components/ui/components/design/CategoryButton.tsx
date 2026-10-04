@@ -101,7 +101,7 @@ export function CategoryButton(props: Props) {
           <Switch fallback={action}>
             <Match when={action === "chevron"}>
               <Action>
-                <MdChevronRight {...iconSize(18)} />
+                <MdChevronRight class="rtl-mirror" {...iconSize(18)} />
               </Action>
             </Match>
             <Match when={action === "collapse"}>

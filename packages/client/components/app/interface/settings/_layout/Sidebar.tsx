@@ -182,14 +182,14 @@ const Base = styled("div", {
   base: {
     display: "flex",
     flex: "1 0 218px",
-    paddingLeft: "8px",
+    paddingInlineStart: "8px",
     justifyContent: "flex-end",
     height: "100%",
 
     _phone: {
       position: "absolute",
       width: "100vw",
-      paddingLeft: "12px",
+      paddingInlineStart: "12px",
 
       "& > *": {
         width: "100%",

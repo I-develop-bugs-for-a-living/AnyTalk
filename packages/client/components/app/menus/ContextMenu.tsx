@@ -176,8 +176,11 @@ export function ContextMenuSubMenu(
     return show() === true || show() === "show";
   }
 
+  // submenus open towards the reading direction
+  const rtl = document.documentElement.dir === "rtl";
+
   const position = useFloating(anchor, ref, {
-    placement: "right-start",
+    placement: rtl ? "left-start" : "right-start",
     whileElementsMounted: autoUpdate,
     middleware: [offset(5), shift()],
   });
@@ -187,7 +190,7 @@ export function ContextMenuSubMenu(
       <ContextMenuButton
         ref={setAnchor}
         selected={isShowing()}
-        actionIcon={MdChevronRight}
+        actionIcon={<MdChevronRight {...iconSize(20)} class="rtl-mirror" />}
         onpointerdown={(e) => {
           e.stopImmediatePropagation();
         }}
@@ -215,7 +218,7 @@ export function ContextMenuSubMenu(
                 left: `${position.x ?? 0}px`,
                 "z-index": 1000,
               }}
-              initial={{ opacity: 0, x: -24 }}
+              initial={{ opacity: 0, x: rtl ? 24 : -24 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2, easing: [0.87, 0, 0.13, 1] }}
@@ -240,7 +243,8 @@ export function ContextMenuSubMenu(
                 style={{
                   position: "fixed",
                   top: 0,
-                  left: `-${(anchor()?.clientWidth ?? 0) + 5}px`,
+                  [rtl ? "right" : "left"]:
+                    `-${(anchor()?.clientWidth ?? 0) + 5}px`,
                   width: `${(anchor()?.clientWidth ?? 0) + 5}px`,
                   height: `${anchor()?.clientHeight ?? 0}px`,
                   cursor: "pointer",

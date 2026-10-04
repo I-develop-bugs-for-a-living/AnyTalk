@@ -404,7 +404,11 @@ const Config: SettingsConfiguration<{ server: Server }> = {
             {
               id: "logout",
               icon: (
-                <MdLogout {...iconSize(20)} fill="var(--md-sys-color-error)" />
+                <MdLogout
+                  class="rtl-mirror"
+                  {...iconSize(20)}
+                  fill="var(--md-sys-color-error)"
+                />
               ),
               title: (
                 <ColouredText colour="var(--md-sys-color-error)">

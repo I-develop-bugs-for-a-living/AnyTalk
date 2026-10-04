@@ -29,8 +29,8 @@ const internalLink = cva({
     verticalAlign: "bottom",
 
     gap: "4px",
-    paddingLeft: "2px",
-    paddingRight: "6px",
+    paddingInlineStart: "2px",
+    paddingInlineEnd: "6px",
     alignItems: "center",
     display: "inline-flex",
     textDecoration: "none !important",
@@ -163,7 +163,7 @@ export function RenderAnchor(
               {remote ? <Trans>Remote Channel</Trans> : channel()!.name}
               {params.exactMessage && (
                 <>
-                  <MdChevronRight {...iconSize("1em")} />
+                  <MdChevronRight class="rtl-mirror" {...iconSize("1em")} />
                   <MdChat {...iconSize("1em")} />
                 </>
               )}

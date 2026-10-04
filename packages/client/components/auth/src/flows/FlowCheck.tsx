@@ -44,7 +44,8 @@ export default function FlowCheck() {
       <Row align justify>
         <a href="..">
           <Button variant="text">
-            <MdArrowBack {...iconSize("1.2em")} /> <Trans>Back</Trans>
+            <MdArrowBack class="rtl-mirror" {...iconSize("1.2em")} />{" "}
+            <Trans>Back</Trans>
           </Button>
         </a>
         <Show when={email}>

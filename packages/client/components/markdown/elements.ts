@@ -97,7 +97,7 @@ export const listItem = styled("li", {
 export const unorderedList = styled("ul", {
   base: {
     listStylePosition: "outside",
-    paddingLeft: "1.5em",
+    paddingInlineStart: "1.5em",
 
     "& li": {
       listStyleType: "disc",
@@ -112,7 +112,7 @@ export const unorderedList = styled("ul", {
 export const orderedList = styled("ol", {
   base: {
     listStylePosition: "outside",
-    paddingLeft: "1.5em",
+    paddingInlineStart: "1.5em",
     listStyleType: "none",
     counterReset: "list-counter var(--start-number, 0)",
 

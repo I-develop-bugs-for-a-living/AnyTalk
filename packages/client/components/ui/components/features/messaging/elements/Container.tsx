@@ -290,7 +290,7 @@ const infoText = cva({
         overflowWrap: "none",
 
         display: "block",
-        textAlign: "right",
+        textAlign: "end",
         marginTop: "0.15em",
       },
     },

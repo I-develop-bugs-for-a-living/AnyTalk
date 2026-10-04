@@ -9,7 +9,7 @@ import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
 import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
-import { Column, Text, Time } from "@revolt/ui";
+import { Column, iconSize, Text, Time } from "@revolt/ui";
 
 import MdAlternateEmail from "@material-design-icons/svg/outlined/alternate_email.svg?component-solid";
 import MdBadge from "@material-design-icons/svg/outlined/badge.svg?component-solid";
@@ -350,7 +350,11 @@ export function ServerContextMenu(props: { server: Server }) {
         <Trans>Report server</Trans>
       </ContextMenuButton>
       <Show when={!props.server.owner?.self}>
-        <ContextMenuButton icon={MdLogout} onClick={leave} destructive>
+        <ContextMenuButton
+          icon={<MdLogout {...iconSize(16)} class="rtl-mirror" />}
+          onClick={leave}
+          destructive
+        >
           <Trans>Leave server</Trans>
         </ContextMenuButton>
       </Show>

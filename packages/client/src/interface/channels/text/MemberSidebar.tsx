@@ -266,7 +266,7 @@ export function GroupMemberSidebar(props: Props) {
  */
 const Container = styled("div", {
   base: {
-    paddingRight: "var(--gap-md)",
+    paddingInlineEnd: "var(--gap-md)",
     width: "var(--layout-width-channel-sidebar)",
   },
 });
@@ -301,7 +301,7 @@ const RoleIcon = styled("img", {
 const MemberTitle = styled("div", {
   base: {
     marginTop: "12px",
-    marginLeft: "14px",
+    marginInlineStart: "14px",
     color: "var(--md-sys-color-on-surface)",
 
     ...typography.raw({ class: "label", size: "small" }),

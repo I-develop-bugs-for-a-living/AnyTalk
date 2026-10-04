@@ -157,6 +157,6 @@ const itemIds = css({
   "& button": {
     display: "inline-block",
     verticalAlign: "middle",
-    marginLeft: "var(--gap-sm)",
+    marginInlineStart: "var(--gap-sm)",
   },
 });

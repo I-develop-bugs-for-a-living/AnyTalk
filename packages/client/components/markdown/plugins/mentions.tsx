@@ -183,8 +183,8 @@ export const mention = cva({
     verticalAlign: "bottom",
 
     gap: "4px",
-    paddingLeft: "2px",
-    paddingRight: "6px",
+    paddingInlineStart: "2px",
+    paddingInlineEnd: "6px",
     alignItems: "center",
     display: "inline-flex",
 
@@ -202,7 +202,7 @@ export const mention = cva({
     },
     valid: {
       false: {
-        paddingLeft: "6px",
+        paddingInlineStart: "6px",
         cursor: "not-allowed",
       },
     },

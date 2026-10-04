@@ -85,16 +85,16 @@ const EnableAudio = styled("button", {
 
 const FadeOut = styled("div", {
   base: {
-    paddingLeft: "var(--gap-md)",
+    paddingInlineStart: "var(--gap-md)",
   },
   variants: {
     fade: {
       true: {
         opacity: 0,
         fontSize: 0,
-        paddingLeft: 0,
+        paddingInlineStart: 0,
         transition:
-          "opacity .3s 5s ease, font-size .3s 6s, padding-left .3s 6s",
+          "opacity .3s 5s ease, font-size .3s 6s, padding-inline-start .3s 6s",
       },
     },
   },
@@ -112,8 +112,9 @@ const Status = styled("div", {
       "& div": {
         opacity: 1,
         fontSize: "inherit",
-        paddingLeft: "var(--gap-md)",
-        transition: "opacity 0s 0s, font-size 0s 0s, padding-left 0s 0s",
+        paddingInlineStart: "var(--gap-md)",
+        transition:
+          "opacity 0s 0s, font-size 0s 0s, padding-inline-start 0s 0s",
       },
     },
   },
@@ -136,7 +137,7 @@ const Status = styled("div", {
     pip: {
       true: {
         position: "absolute",
-        left: "var(--gap-md)",
+        insetInlineStart: "var(--gap-md)",
         top: "var(--gap-md)",
       },
     },

@@ -124,8 +124,8 @@ const widgetsTheme = EditorView.theme({
     "vertical-align": "bottom",
 
     gap: "4px",
-    "padding-left": "2px",
-    "padding-right": "6px",
+    "padding-inline-start": "2px",
+    "padding-inline-end": "6px",
     "align-items": "center",
     display: "inline-flex",
 

@@ -187,7 +187,7 @@ const SelectTrigger = styled("button", {
     color: "var(--md-sys-color-on-surface)",
     cursor: "pointer",
     position: "relative",
-    textAlign: "left",
+    textAlign: "start",
     fontSize: "16px",
     fontFamily: "inherit",
     transition: "border-color 0.2s",
@@ -222,7 +222,7 @@ const SelectLabel = styled("label", {
   base: {
     position: "absolute",
     transition: "ease-in-out 0.2s",
-    left: "16px",
+    insetInlineStart: "16px",
     color: "var(--md-sys-color-on-surface-variant)",
     pointerEvents: "none",
     transformOrigin: "left top",

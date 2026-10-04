@@ -42,6 +42,35 @@ interface Props {
   size?: number;
 }
 
+/**
+ * Symbols that point in the reading direction and are mirrored in
+ * right-to-left languages
+ */
+const DIRECTIONAL_SYMBOLS = new Set([
+  "arrow_back",
+  "arrow_forward",
+  "arrow_left",
+  "arrow_right",
+  "chevron_left",
+  "chevron_right",
+  "first_page",
+  "last_page",
+  "keyboard_arrow_left",
+  "keyboard_arrow_right",
+  "navigate_before",
+  "navigate_next",
+  "logout",
+  "login",
+  "reply",
+  "forward",
+  "send",
+  "undo",
+  "redo",
+]);
+
+/**
+ * Material Symbol icon
+ */
 export function Symbol(rawProps: Props & HTMLStyledProps<"span">) {
   const [local, props] = splitProps(rawProps, [
     "fill",
@@ -76,7 +105,12 @@ export function Symbol(rawProps: Props & HTMLStyledProps<"span">) {
 
   return (
     <styled.span
-      class={`material-symbols-${local.type ?? "outlined"} ${memoClassName()}`}
+      class={`material-symbols-${local.type ?? "outlined"} ${memoClassName()}${
+        typeof props.children === "string" &&
+        DIRECTIONAL_SYMBOLS.has(props.children)
+          ? " rtl-mirror"
+          : ""
+      }`}
       style={{
         display: "block",
         "font-variation-settings": memoFontVarSettings(),

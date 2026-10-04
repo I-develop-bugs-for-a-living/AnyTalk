@@ -48,7 +48,7 @@ export function MessageToolbar() {
           onClick={() => state.draft.addReply(message!, user()!.id)}
         >
           <Ripple />
-          <MdReply {...iconSize(20)} />
+          <MdReply class="rtl-mirror" {...iconSize(20)} />
         </div>
       </Show>
       <Show when={message?.channel?.havePermission("React")}>
@@ -100,7 +100,7 @@ export function MessageToolbar() {
 const Base = styled("div", {
   base: {
     top: "-18px",
-    right: "16px",
+    insetInlineEnd: "16px",
     position: "absolute",
 
     alignItems: "center",

@@ -34,7 +34,7 @@ export function JumpToBottom(props: Props) {
       <span>
         <Trans>Jump to present</Trans>
       </span>
-      <MdArrowForward {...iconSize(16)} />
+      <MdArrowForward class="rtl-mirror" {...iconSize(16)} />
     </FloatingIndicator>
   );
 }

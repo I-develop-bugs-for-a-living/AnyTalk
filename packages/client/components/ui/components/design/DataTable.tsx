@@ -101,28 +101,28 @@ export function DataTable(props: Props) {
                       isDisabled={page() === 0}
                       onPress={() => setPage(0)}
                     >
-                      <MdFirstPage />
+                      <MdFirstPage class="rtl-mirror" />
                     </Button>
                     <Button
                       shape="round"
                       isDisabled={page() === 0}
                       onPress={() => setPage((page) => page - 1)}
                     >
-                      <MdChevronLeft />
+                      <MdChevronLeft class="rtl-mirror" />
                     </Button>
                     <Button
                       shape="round"
                       isDisabled={page() === lastPage()}
                       onPress={() => setPage((page) => page + 1)}
                     >
-                      <MdChevronRight />
+                      <MdChevronRight class="rtl-mirror" />
                     </Button>
                     <Button
                       shape="round"
                       isDisabled={page() === lastPage()}
                       onPress={() => setPage(lastPage())}
                     >
-                      <MdLastPage />
+                      <MdLastPage class="rtl-mirror" />
                     </Button>
                   </Row>
                 </Pagination>

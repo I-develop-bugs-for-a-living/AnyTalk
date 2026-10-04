@@ -33,6 +33,12 @@ body {
   background: #191919;
 }
 
+/* directional icons (back, chevrons, reply...) point the other way in
+   right-to-left languages, `scale` keeps any `transform` rotation working */
+[dir="rtl"] .rtl-mirror {
+  scale: -1 1;
+}
+
 /* HighlightJs */
 /*!
   Theme: GitHub Dark

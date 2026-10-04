@@ -47,7 +47,7 @@ export function HeaderIcon(props: { children: JSX.Element }) {
         }
       >
         <Match when={state.appDrawer()}>
-          <MdArrowBack />
+          <MdArrowBack class="rtl-mirror" />
         </Match>
         <Match
           when={state.layout.getSectionState(

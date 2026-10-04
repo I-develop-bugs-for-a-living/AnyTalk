@@ -142,8 +142,8 @@ const Popover = styled("div", {
   },
   variants: {
     align: {
-      start: { left: 0 },
-      end: { right: 0 },
+      start: { insetInlineStart: 0 },
+      end: { insetInlineEnd: 0 },
     },
   },
 });

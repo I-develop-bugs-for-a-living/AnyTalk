@@ -313,7 +313,7 @@ const Divider = styled("div", {
   base: {
     height: "20px",
     margin: "0px 5px",
-    paddingLeft: "1px",
+    paddingInlineStart: "1px",
     backgroundColor: "var(--md-sys-color-outline-variant)",
   },
 });
