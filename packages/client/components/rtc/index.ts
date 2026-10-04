@@ -1,3 +1,4 @@
+import { screenCaptureLimit } from "./screenCapture";
 import { getVirtmic } from "./virtualMic";
 
 export { useVoice, VoiceContext } from "./state";
@@ -18,14 +19,15 @@ export const screenShareSupported = typeof originalMediaCall === "function";
 
 if (mediaDevices && originalMediaCall)
   mediaDevices.getDisplayMedia = async function (opts) {
-    // Hard overwrite the track constraints so that we -never ever- get a track
-    // that is over 720p when requesting a new video track
+    // Open the capture at the largest quality the server allows, the chosen
+    // quality is applied by scaling it down afterwards (see screenCapture)
     if (opts && opts.video && typeof opts.video === "object") {
+      const limit = screenCaptureLimit();
       opts.video = {
         ...opts.video,
-        frameRate: { ideal: 5, max: 5 },
-        width: { ideal: 640, max: 640 },
-        height: { ideal: 480, max: 480 },
+        frameRate: { ideal: limit.frameRate, max: limit.frameRate },
+        width: { ideal: limit.width, max: limit.width },
+        height: { ideal: limit.height, max: limit.height },
       };
     }
 

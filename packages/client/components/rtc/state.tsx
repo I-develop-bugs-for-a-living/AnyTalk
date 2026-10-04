@@ -44,6 +44,7 @@ import {
   closestScreenShareResolution,
   NoiseSuppresionState,
   ScreenShareFrameRate,
+  ScreenShareFrameRates,
   ScreenShareResolution,
   ScreenShareResolutions,
   Voice as VoiceSettings,
@@ -58,6 +59,7 @@ import { StatsRecorder } from "./components/StatsRecorder";
 import { StreamViewers } from "./components/StreamViewers";
 import { VoiceKeybinds } from "./components/VoiceKeybinds";
 import { VoiceMoves } from "./components/VoiceMoves";
+import { setScreenCaptureLimit } from "./screenCapture";
 import { VoiceProcessor } from "./VoiceProcessor";
 
 type State =
@@ -773,6 +775,29 @@ class Voice {
   }
 
   /**
+   * Let the next screen capture open at the best quality we may ask for, so
+   * changing quality never has to restart it
+   */
+  #prepareCapture() {
+    let [width, height] = SCREEN_SHARE_SIZES["720p"];
+    for (const resolution of this.getEnabledScreenShareResolutions()) {
+      const [w, h] =
+        resolution === "source"
+          ? // without a server limit, up to 4K
+            this.limits().video_resolution.map((n, i) => n || [3840, 2160][i])
+          : SCREEN_SHARE_SIZES[resolution];
+      width = Math.max(width, w);
+      height = Math.max(height, h);
+    }
+
+    setScreenCaptureLimit({
+      width,
+      height,
+      frameRate: Math.max(...ScreenShareFrameRates),
+    });
+  }
+
+  /**
    * Show our own picker once the desktop app asks which screen to capture
    *
    * @returns The choice made in it, once made
@@ -900,6 +925,7 @@ class Voice {
       this.sound.playSound("streamEnd");
     } else {
       const picked = this.#registerScreenPicker();
+      this.#prepareCapture();
 
       try {
         const chosenQuality = this.#screenShareQuality(
@@ -998,6 +1024,7 @@ class Voice {
     if (!room || !stream || !video) return;
 
     const picked = this.#registerScreenPicker();
+    this.#prepareCapture();
 
     let tracks: LocalTrack[];
     try {
