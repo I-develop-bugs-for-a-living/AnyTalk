@@ -173,6 +173,6 @@ const Pronouns = styled("div", {
     flexGrow: 1,
     lineHeight: "1rem",
     gap: "var(--gap-xs)",
-    textAlign: "right",
+    textAlign: "end",
   },
 });

@@ -45,11 +45,11 @@ const styles = cva({
     border: "1px solid var(--md-sys-color-on-surface)",
 
     "&:nth-child(1)": {
-      borderLeft: "1px solid var(--md-sys-color-on-surface)",
+      borderInlineStart: "1px solid var(--md-sys-color-on-surface)",
     },
 
     "&:not(:nth-child(1))": {
-      borderLeft: "none",
+      borderInlineStart: "none",
     },
 
     "&[selected]": {

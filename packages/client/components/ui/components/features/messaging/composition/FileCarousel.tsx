@@ -244,7 +244,7 @@ const ActionBox = styled("div", {
   base: {
     position: "absolute",
     top: "var(--gap-sm)",
-    right: "var(--gap-sm)",
+    insetInlineEnd: "var(--gap-sm)",
     zIndex: 3,
 
     display: "flex",
