@@ -84,7 +84,13 @@ export function useNotifications() {
    * worker
    */
   const restorePushSubscription = async () => {
-    if (IS_DEV || settings.pushNotificationsState !== "allowed") return;
+    // the desktop app has no service worker to hold a push subscription
+    if (
+      IS_DEV ||
+      window.native ||
+      settings.pushNotificationsState !== "allowed"
+    )
+      return;
     if (supportsNotification && Notification.permission !== "granted") return;
 
     try {

@@ -9,11 +9,20 @@ import {
   MODIFIER_KEYS,
   defaultSequence,
   formatSequence,
+  globalHotkeyStatus,
+  sequenceToGlobalAccelerator,
 } from "@revolt/keybinds";
 import { useState } from "@revolt/state";
 import { CustomKeybind } from "@revolt/state/stores/Settings";
 import { Button, CategoryButton, Checkbox, Column, Text } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
+
+/** Command that lists AnyTalk's global shortcuts on Hyprland. */
+const HYPRCTL_COMMAND = "hyprctl globalshortcuts";
+
+/** Example Hyprland config line that binds one AnyTalk shortcut. */
+const HYPRLAND_BIND_EXAMPLE =
+  "bind = CTRL ALT, M, global, tech.anyportal.AnyTalk:<id>";
 
 /**
  * Turn hotkeys on or off and change their keys
@@ -50,6 +59,17 @@ export function HotkeysSettings() {
         ),
       }
     );
+  }
+
+  /**
+   * Describe why a hotkey can't work outside AnyTalk (desktop only), if it can't
+   */
+  function globalProblem(action: KeybindAction) {
+    if (!window.native || !current(action).enabled) return;
+    if (!sequenceToGlobalAccelerator(current(action).keys))
+      return t`These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere.`;
+    if (globalHotkeyStatus()[action] === false)
+      return t`Another app is already using these keys, so they only work inside AnyTalk. Pick other keys.`;
   }
 
   function save(action: KeybindAction, value: CustomKeybind) {
@@ -141,78 +161,119 @@ export function HotkeysSettings() {
   return (
     <Column>
       <Text class="label">
-        <Trans>
-          Hotkeys work while AnyTalk is the focused window or tab. Click a
-          hotkey to record new keys, press Escape to cancel.
-        </Trans>
+        <Show
+          when={window.native}
+          fallback={
+            <Trans>
+              Hotkeys work while AnyTalk is the focused window or tab. Click a
+              hotkey to record new keys, press Escape to cancel.
+            </Trans>
+          }
+        >
+          <Trans>
+            Hotkeys work everywhere on your computer, even when AnyTalk isn't
+            focused. Click a hotkey to record new keys, press Escape to cancel.
+          </Trans>
+        </Show>
       </Text>
+      <Show when={window.native?.isWayland?.()}>
+        <Show
+          when={window.native?.desktopEnvironment?.includes("Hyprland")}
+          fallback={
+            <Text class="label">
+              <Trans>
+                Global hotkeys depend on your desktop environment. On KDE and
+                GNOME you may be asked for permission the first time.
+              </Trans>
+            </Text>
+          }
+        >
+          <Text class="label">
+            <Trans>
+              Hyprland doesn't assign keys to app shortcuts on its own. Run{" "}
+              <code>{HYPRCTL_COMMAND}</code> to see AnyTalk's entries, then bind
+              each one in your Hyprland config with the global dispatcher, for
+              example <code>{HYPRLAND_BIND_EXAMPLE}</code>.
+            </Trans>
+          </Text>
+        </Show>
+      </Show>
       <Text class="title">
         <Trans>Calls</Trans>
       </Text>
       <CategoryButton.Group>
         <For each={CUSTOMISABLE_ACTIONS}>
           {(action) => (
-            <CategoryButton
-              icon={<Symbol>{labels[action].icon}</Symbol>}
-              onClick={() =>
-                save(action, {
-                  ...current(action),
-                  enabled: !current(action).enabled,
-                })
-              }
-              description={
-                <Show when={recording() === action && error()}>
-                  <ErrorText>{error()}</ErrorText>
-                </Show>
-              }
-              action={[
-                <Combo
-                  onClick={(e) => e.stopPropagation()}
-                  aria-disabled={!current(action).enabled}
-                >
-                  <Button
-                    size="sm"
-                    variant={recording() === action ? "filled" : "tonal"}
-                    onPress={() =>
-                      recording() === action
-                        ? stopRecording()
-                        : startRecording(action)
-                    }
-                  >
-                    <Show
-                      when={recording() === action}
-                      fallback={formatSequence(current(action).keys)}
-                    >
-                      {held().length ? (
-                        `${formatSequence(held())} + …`
-                      ) : (
-                        <Trans>Press keys…</Trans>
-                      )}
+            <>
+              <CategoryButton
+                icon={<Symbol>{labels[action].icon}</Symbol>}
+                onClick={() =>
+                  save(action, {
+                    ...current(action),
+                    enabled: !current(action).enabled,
+                  })
+                }
+                description={
+                  <>
+                    <Show when={recording() === action && error()}>
+                      <ErrorText>{error()}</ErrorText>
                     </Show>
-                  </Button>
-                  <Show when={custom()[action]}>
+                    <Show when={globalProblem(action)}>
+                      <ErrorText role="alert">
+                        {globalProblem(action)}
+                      </ErrorText>
+                    </Show>
+                  </>
+                }
+                action={[
+                  <Combo
+                    onClick={(e) => e.stopPropagation()}
+                    aria-disabled={!current(action).enabled}
+                  >
                     <Button
                       size="sm"
-                      variant="text"
-                      onPress={() => reset(action)}
-                      use:floating={{
-                        tooltip: {
-                          placement: "top",
-                          content: t`Reset to ${formatSequence(
-                            defaultSequence(action),
-                          )}`,
-                        },
-                      }}
+                      variant={recording() === action ? "filled" : "tonal"}
+                      onPress={() =>
+                        recording() === action
+                          ? stopRecording()
+                          : startRecording(action)
+                      }
                     >
-                      <Symbol>restart_alt</Symbol>
+                      <Show
+                        when={recording() === action}
+                        fallback={formatSequence(current(action).keys)}
+                      >
+                        {held().length ? (
+                          `${formatSequence(held())} + …`
+                        ) : (
+                          <Trans>Press keys…</Trans>
+                        )}
+                      </Show>
                     </Button>
-                  </Show>
-                </Combo>,
-                <Checkbox checked={current(action).enabled} />,
-              ]}
-            >
-              {labels[action].title}
-            </CategoryButton>
+                    <Show when={custom()[action]}>
+                      <Button
+                        size="sm"
+                        variant="text"
+                        onPress={() => reset(action)}
+                        use:floating={{
+                          tooltip: {
+                            placement: "top",
+                            content: t`Reset to ${formatSequence(
+                              defaultSequence(action),
+                            )}`,
+                          },
+                        }}
+                      >
+                        <Symbol>restart_alt</Symbol>
+                      </Button>
+                    </Show>
+                  </Combo>,
+                  <Checkbox checked={current(action).enabled} />,
+                ]}
+              >
+                {labels[action].title}
+              </CategoryButton>
+            </>
           )}
         </For>
       </CategoryButton.Group>

@@ -1,5 +1,5 @@
 import { Trans } from "@lingui/solid/macro";
-import { Match, Show, Switch, createSignal } from "solid-js";
+import { Match, Show, Switch, createSignal, onCleanup } from "solid-js";
 import { Motion, Presence } from "solid-motionone";
 
 import { css } from "styled-system/css";
@@ -25,6 +25,11 @@ export function Titlebar() {
   const [isMaximised, setIsMaximised] = createSignal(
     isNative ? window.desktopConfig.get().windowState.isMaximised : false,
   );
+  if (isNative) {
+    // the shell tells us about every change, including double-clicks on the
+    // drag area and keyboard shortcuts
+    onCleanup(window.native.onMaximiseChange(setIsMaximised));
+  }
   const { lifecycle } = useClientLifecycle();
 
   function isDisconnected() {
@@ -36,9 +41,9 @@ export function Titlebar() {
     ].includes(lifecycle.state());
   }
 
+  /** Toggle between maximised and restored, the shell reports the result */
   function maximise() {
-    window.native.maximise();
-    setIsMaximised((t) => !t);
+    window.native.maximise().catch(() => {});
   }
 
   return (
@@ -135,7 +140,7 @@ export function Titlebar() {
               </Show>
             </DragHandle>
             <Show when={isNative && !isMacOS}>
-              <Action onClick={window.native.minimise}>
+              <Action onClick={() => window.native.minimise().catch(() => {})}>
                 <Ripple />
                 <MdMinimize {...symbolSize(20)} />
               </Action>
@@ -148,7 +153,7 @@ export function Titlebar() {
                   <MdCollapseContent {...symbolSize(20)} />
                 </Show>
               </Action>
-              <Action onClick={window.native.close}>
+              <Action onClick={() => window.native.close().catch(() => {})}>
                 <Ripple />
                 <MdClose {...symbolSize(20)} />
               </Action>

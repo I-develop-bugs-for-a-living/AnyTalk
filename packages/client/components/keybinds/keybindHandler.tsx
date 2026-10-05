@@ -26,6 +26,7 @@ import {
 
 type KeybindContext = {
   createKeybind: (keybind: KeybindAction, callback: () => void) => void;
+  triggerKeybind: (keybind: KeybindAction) => void;
 };
 
 const keybindContext = createContext<KeybindContext>(null! as KeybindContext);
@@ -56,6 +57,11 @@ export function KeybindContext(props: { children: JSXElement }) {
   const sequences = navigator.platform.startsWith("Mac")
     ? DEFAULT_MAC_SEQUENCES
     : DEFAULT_SEQUENCES;
+
+  /**
+   * Callbacks registered per keybind, so an action can be run without keys
+   */
+  const callbacks = new Map<KeybindAction, Set<() => void>>();
 
   const state = useState();
 
@@ -204,12 +210,23 @@ export function KeybindContext(props: { children: JSXElement }) {
           currentlyBound[keybind]++;
           onCleanup(() => currentlyBound[keybind]--);
 
+          const set = callbacks.get(keybind) ?? new Set();
+          callbacks.set(keybind, set);
+          set.add(callback);
+          onCleanup(() => set.delete(callback));
+
           createEffect(() => {
             const _ = [...activeKeys]; // track dependency
             if (isFired(keybind)) {
               untrack(callback);
             }
           });
+        },
+        triggerKeybind(keybind) {
+          // skip the key and focus filters, the caller already decided
+          for (const callback of [...(callbacks.get(keybind) ?? [])]) {
+            untrack(callback);
+          }
         },
       }}
     >
@@ -226,6 +243,15 @@ export function KeybindContext(props: { children: JSXElement }) {
 export function createKeybind(keybind: KeybindAction, callback: () => void) {
   const { createKeybind } = useContext(keybindContext);
   createKeybind(keybind, callback);
+}
+
+/**
+ * Get a function that runs a keybind's callbacks without its keys being
+ * pressed (e.g. when the desktop app reports a global hotkey). It does
+ * nothing if the keybind isn't bound at that moment.
+ */
+export function useTriggerKeybind() {
+  return useContext(keybindContext).triggerKeybind;
 }
 
 /**

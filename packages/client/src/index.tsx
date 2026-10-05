@@ -27,7 +27,7 @@ import { ClientContext, SoundContext, useClient } from "@revolt/client";
 import { DeviceContext } from "@revolt/common";
 import { I18nProvider } from "@revolt/i18n";
 import { InstanceContext } from "@revolt/instance";
-import { KeybindContext } from "@revolt/keybinds";
+import { GlobalKeybinds, KeybindContext } from "@revolt/keybinds";
 import { ModalContext, ModalRenderer, useModals } from "@revolt/modal";
 import { VoiceContext } from "@revolt/rtc";
 import { StateContext, SyncWorker, useState } from "@revolt/state";
@@ -123,6 +123,7 @@ function MountContext(props: { children?: JSX.Element }) {
   return (
     <StateContext>
       <KeybindContext>
+        <GlobalKeybinds />
         <ModalContext>
           <ClientContext>
             <LoadTheme />
