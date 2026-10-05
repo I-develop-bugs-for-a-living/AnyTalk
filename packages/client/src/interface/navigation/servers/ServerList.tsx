@@ -301,7 +301,17 @@ export const ServerList = (props: Props) => {
             <Column>
               <span>{props.user.username}</span>
               <Text class="label" size="small">
-                {props.user.presence}
+                {props.user.presence === "Online"
+                  ? t`Online`
+                  : props.user.presence === "Busy"
+                    ? t`Busy`
+                    : props.user.presence === "Focus"
+                      ? t`Focus`
+                      : props.user.presence === "Idle"
+                        ? t`Idle`
+                        : props.user.presence === "Invisible"
+                          ? t`Invisible`
+                          : t`Offline`}
               </Text>
             </Column>
           )}
