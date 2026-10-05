@@ -8,6 +8,7 @@ import type { State as ApplicationState } from "@revolt/state";
 import type { Session } from "@revolt/state/stores/Auth";
 
 import Instance from "../instance/Instance";
+import { autoAckCallNotices } from "./callNotices";
 import { killServiceWorkerSubscription } from "./NotificationsController";
 
 export enum State {
@@ -133,6 +134,7 @@ class Lifecycle {
     this.client.events.on("state", this.onState);
     this.client.on("ready", this.onReady);
     this.client.on("policyChanges", this.onPolicyChanges);
+    autoAckCallNotices(this.client);
   }
 
   #enter(nextState: State) {

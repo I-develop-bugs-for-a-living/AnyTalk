@@ -21,6 +21,7 @@ import { Channel, Message as MessageInterface } from "stoat.js";
 import { styled } from "styled-system/jsx";
 
 import { useClient, useClientLifecycle } from "@revolt/client";
+import { isHiddenCallNotice } from "@revolt/client/callNotices";
 import { State } from "@revolt/client/Controller";
 import { useTime } from "@revolt/i18n";
 import { useState } from "@revolt/state";
@@ -748,9 +749,7 @@ export function Messages(props: Props) {
 
     // "X started a call" notices are posted by the server whenever a call
     // starts in a voice channel; they only clutter its chat
-    const arr = messages().filter(
-      (message) => message.systemMessage?.type !== "call_started",
-    );
+    const arr = messages().filter((message) => !isHiddenCallNotice(message));
     arr.forEach((message, index) => {
       const next = arr[index + 1];
       let tail = true;
