@@ -145,9 +145,8 @@ function Entry(props: {
       : undefined;
 
   const visible = () =>
-    props.search
-      ? title().includes(props.search) || !!keyword()
-      : !props.entry.hidden;
+    !props.entry.hidden &&
+    (props.search ? title().includes(props.search) || !!keyword() : true);
 
   return (
     <div class="settings_entry" hidden={!visible()}>
