@@ -38,9 +38,19 @@ msgstr "[上]ddddLT"
 msgid "dddd [at] LT"
 msgstr "dddd [在] LT"
 
+#. placeholder {0}: emojiName()
+#. placeholder {1}: serverName()
+#: components/markdown/plugins/customEmoji.tsx
+msgid ":{0}: from {1}"
+msgstr ":{0}:（来自 {1}）"
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "(changes are being saved…)"
 msgstr "(正在保存更改...)"
+
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "(reconnect now)"
+msgstr "（立即重新连接）"
 
 #. placeholder {0}: props.count
 #: components/ui/components/features/messaging/elements/BlockedMessage.tsx
@@ -57,8 +67,20 @@ msgstr "{0, plural, other {# 次卡顿，{seconds} 秒}}"
 msgid "{0, plural, one {# freeze} other {# freezes}}"
 msgstr "{0, plural, other {# 次卡顿}}"
 
-#~ msgid "{0, plural, one {# Member} other {# Members}}"
-#~ msgstr ""
+#. placeholder {0}: onlineMembers()
+#: src/interface/channels/text/MemberSidebar.tsx
+msgid "{0, plural, one {# member online} other {# members online}}"
+msgstr "{0, plural, other {# 位成员在线}}"
+
+#. placeholder {0}: memberCount()
+#: components/ui/components/features/messaging/elements/Invite.tsx
+msgid "{0, plural, one {# member} other {# members}}"
+msgstr "{0, plural, other {# 位成员}}"
+
+#. placeholder {0}: local.channel.recipientIds.size
+#: src/interface/navigation/channels/HomeSidebar.tsx
+msgid "{0, plural, one {# Member} other {# Members}}"
+msgstr "{0, plural, other {# 位成员}}"
 
 #. placeholder {0}: mentions()
 #: components/ui/components/features/navigation/UnreadCallout.tsx
@@ -478,8 +500,13 @@ msgid "Accept"
 msgstr "接受"
 
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Accept friend request"
 msgstr "接受好友请求"
+
+#: components/auth/src/flows/FlowDelete.tsx
+msgid "Account has been queued for deletion!"
+msgstr "账户已进入删除队列！"
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Acknowledge"
@@ -501,6 +528,10 @@ msgstr "添加机器人"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Add friend"
+msgstr "添加好友"
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Add Friend"
 msgstr "添加好友"
 
 #: components/modal/modals/AddMembersToGroup.tsx
@@ -626,6 +657,10 @@ msgstr "AnyTalk 创始人"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "AnyTalk is one of the best ways to stay connected with your friends and community, anywhere, anytime."
 msgstr "AnyTalk 是随时随地与好友和社区保持联系的最佳方式之一。"
+
+#: src/AndroidNag.tsx
+msgid "AnyTalk on Android"
+msgstr "AnyTalk 安卓版"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "AnyTalk reloads to switch language, only the language you use is downloaded and kept offline."
@@ -756,6 +791,10 @@ msgstr "每条回顾的平均值"
 msgid "Back"
 msgstr "返回"
 
+#: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
+msgid "Back to categories"
+msgstr "返回分类"
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Badges"
 msgstr "徽章"
@@ -805,6 +844,10 @@ msgstr "横幅"
 msgid "Bans"
 msgstr "封禁"
 
+#: components/ui/components/features/profiles/ProfileBio.tsx
+msgid "Bio"
+msgstr "个人简介"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Bitrate"
@@ -825,6 +868,10 @@ msgstr "已屏蔽用户"
 #: components/app/interface/channels/text/Message.tsx
 msgid "Bot"
 msgstr "机器人"
+
+#: components/modal/modals/AddBot.tsx
+msgid "Bots are not verified by AnyTalk."
+msgstr "机器人未经 AnyTalk 验证。"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
@@ -932,6 +979,7 @@ msgid "Cancel discover request"
 msgstr "取消发现申请"
 
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Cancel friend request"
 msgstr "取消好友请求"
 
@@ -1214,6 +1262,7 @@ msgstr "连接到语音频道"
 msgid "Connected"
 msgstr "已连接"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Connecting"
 msgstr "正在连接"
@@ -1357,6 +1406,7 @@ msgstr "CPU"
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/CreateChannel.tsx
 #: components/modal/modals/CreateGroup.tsx
+#: components/modal/modals/CreateOrJoinServer.tsx
 #: components/modal/modals/CreateRole.tsx
 #: components/modal/modals/CreateServer.tsx
 #: components/modal/modals/CreateWebhook.tsx
@@ -1370,6 +1420,7 @@ msgstr "邀请他人之前请先创建一个频道！"
 #~ msgid "Create a group"
 #~ msgstr "创建一个群组"
 
+#: components/modal/modals/CreateGroupOrServer.tsx
 #: src/interface/Home.tsx
 msgid "Create a group or server"
 msgstr "创建群组或服务器"
@@ -1440,12 +1491,18 @@ msgid "Create invite"
 msgstr "创建邀请"
 
 #: components/modal/modals/CreateInvite.tsx
+#: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Create Invite"
 msgstr "创建邀请"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Create invites for others to use"
 msgstr "创建邀请供他人使用"
+
+#: components/modal/modals/CreateOrJoinServer.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Create or join a server"
+msgstr "创建或加入服务器"
 
 #: components/modal/modals/CreateRole.tsx
 msgid "Create Role"
@@ -1526,6 +1583,7 @@ msgstr "解码器"
 
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
+#: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Default"
 msgstr "默认"
 
@@ -1571,6 +1629,7 @@ msgid "Delete {0}?"
 msgstr "删除 {0}？"
 
 #: components/app/interface/settings/user/Account.tsx
+#: components/auth/src/flows/FlowDelete.tsx
 msgid "Delete Account"
 msgstr "删除账户"
 
@@ -1676,6 +1735,14 @@ msgstr "开发者文档"
 msgid "Developer modes measure call performance and keep statistics of previous calls and streams on this device. Turn on either or both."
 msgstr "开发者模式会测量通话性能，并在此设备上保存过往通话和直播的统计数据。可开启其中一项或两项。"
 
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "Device is offline"
+msgstr "设备已离线"
+
+#: src/interface/navigation/channels/HomeSidebar.tsx
+msgid "Direct Messages"
+msgstr "私信"
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Disable Account"
 msgstr "禁用账户"
@@ -1689,6 +1756,7 @@ msgstr "停用一次性密码验证器"
 msgid "Disabled"
 msgstr "已禁用"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Disconnected"
 msgstr "已断开连接"
@@ -1793,6 +1861,10 @@ msgstr "编辑和删除频道"
 msgid "Edit any permissions on the server"
 msgstr "编辑服务器上的任何权限"
 
+#: src/interface/navigation/channels/ServerSidebar.tsx
+msgid "Edit Channel"
+msgstr "编辑频道"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Edit channel-specific role and default permissions"
 msgstr "编辑频道专属的角色权限和默认权限"
@@ -1852,6 +1924,10 @@ msgstr "生效 <0/>（<1/>）"
 #: components/modal/modals/EditEmail.tsx
 msgid "Email"
 msgstr "电子邮件地址"
+
+#: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
+msgid "Emoji"
+msgstr "表情"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 #: components/modal/modals/EditEmoji.tsx
@@ -1945,6 +2021,14 @@ msgstr "输入你的邀请码。"
 msgid "Enter your preferred username."
 msgstr "输入您希望的用户名。"
 
+#: components/auth/src/flows/FlowDelete.tsx
+msgid "Error occurred, please email support."
+msgstr "发生错误，请发送邮件联系支持人员。"
+
+#: components/app/interface/channels/text/EditMessage.tsx
+msgid "escape to <0>cancel</0> · enter to <1>save</1>"
+msgstr "按 Esc <0>取消</0> · 按 Enter <1>保存</1>"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Estimated upload bandwidth"
@@ -2017,6 +2101,10 @@ msgstr "文件必须小于 {0}"
 #: src/interface/Home.tsx
 msgid "Find a community based on your hobbies or interests."
 msgstr "根据您的爱好和兴趣寻找社区。"
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Find new servers to join"
+msgstr "查找要加入的新服务器"
 
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
@@ -2119,6 +2207,10 @@ msgstr "GIF 选择器占位"
 msgid "Gifbox is our own GIF service, so you can keep sharing GIFs right here on AnyTalk."
 msgstr "Gifbox 是我们自己的 GIF 服务，你可以继续在 AnyTalk 上分享 GIF。"
 
+#: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
+msgid "GIFs"
+msgstr "GIF"
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "GIFs are now powered by Gifbox"
 msgstr "GIF 现由 Gifbox 提供支持"
@@ -2178,9 +2270,17 @@ msgstr "知道了"
 msgid "Grants {0} permissions and denies {1} permissions"
 msgstr "授予 {0} 项权限，拒绝 {1} 项权限"
 
+#: components/modal/modals/CreateGroupOrServer.tsx
+msgid "Group"
+msgstr "群组"
+
 #: components/modal/modals/CreateGroup.tsx
 msgid "Group Name"
 msgstr "群组名"
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Groups"
+msgstr "群组"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Guidelines"
@@ -2266,6 +2366,10 @@ msgstr "我确定我已成年。"
 msgid "I understand the consequences"
 msgstr "我了解后果"
 
+#: components/modal/modals/PolicyChange.tsx
+msgid "I've read and reviewed the changes."
+msgstr "我已阅读并查看了这些更改。"
+
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "ID copied to clipboard"
 msgstr "ID 已复制到剪贴板"
@@ -2302,6 +2406,7 @@ msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother 
 msgstr "在此期间，请从 Google Play 安装 AnyTalk，获得专为 Android 设计的更快、更流畅的体验。"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: src/interface/Friends.tsx
 msgid "Incoming"
 msgstr "收到"
 
@@ -2320,6 +2425,10 @@ msgstr "关闭时，AnyTalk 将隐藏到托盘中而不是退出。"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Interface Font"
 msgstr "界面字体"
+
+#: components/markdown/plugins/mentions.tsx
+msgid "Invalid Mention Element"
+msgstr "无效的提及元素"
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Invisible"
@@ -2380,8 +2489,10 @@ msgstr "抖动 平均 / 最大"
 msgid "Jitter buffer delay"
 msgstr "抖动缓冲延迟"
 
+#: components/modal/modals/CreateOrJoinServer.tsx
 #: components/modal/modals/Invite.tsx
 #: components/modal/modals/JoinServer.tsx
+#: components/ui/components/features/messaging/elements/Invite.tsx
 msgid "Join"
 msgstr "加入"
 
@@ -2706,6 +2817,7 @@ msgid "Mentions Only"
 msgstr "仅提及我的"
 
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Message"
 msgstr "消息"
 
@@ -2829,6 +2941,10 @@ msgstr "屏幕共享静音"
 msgid "Mute Server"
 msgstr "服务器静音"
 
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Mute stream"
+msgstr "将直播静音"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Mute when not speaking"
 msgstr "不说话时静音"
@@ -2850,6 +2966,10 @@ msgstr "共同好友"
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "共同群组"
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Mutuals"
+msgstr "共同"
 
 #: components/app/interface/settings/user/_AccountCard.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -2913,6 +3033,10 @@ msgstr "昵称"
 msgid "No audio was captured, switch window to share audio"
 msgstr "未捕获到音频，请切换窗口以共享音频"
 
+#: src/interface/ServerHome.tsx
+msgid "No channels!"
+msgstr "没有频道！"
+
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "no data"
 msgstr "无数据"
@@ -2963,6 +3087,7 @@ msgid "Normal"
 msgstr "正常"
 
 #: components/state/stores/Experiments.ts
+#: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Not available yet."
 msgstr "暂不可用。"
 
@@ -3088,6 +3213,10 @@ msgstr "观看直播时再打开另一个直播，会并排显示。关闭后，
 msgid "Other"
 msgstr "其他"
 
+#: src/interface/Friends.tsx
+msgid "Outgoing"
+msgstr "已发出"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Outgoing call"
 msgstr "呼出通话"
@@ -3188,6 +3317,10 @@ msgstr "延迟（到服务器的往返时间）"
 msgid "Ping avg / max"
 msgstr "延迟 平均 / 最大"
 
+#: src/interface/channels/text/TextChannel.tsx
+msgid "Pinned Messages"
+msgstr "置顶消息"
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Platform Moderator"
 msgstr "平台管理员"
@@ -3232,6 +3365,10 @@ msgstr "请选择原因"
 msgid "Please try again later"
 msgstr "请稍后再试"
 
+#: components/auth/src/flows/FlowDelete.tsx
+msgid "Please wait..."
+msgstr "请稍候..."
+
 #: components/state/stores/Experiments.ts
 msgid "Plugins v2 Placeholder"
 msgstr "插件 v2 占位"
@@ -3271,6 +3408,10 @@ msgstr "隐私"
 #: components/markdown/plugins/anchors.tsx
 msgid "Private Channel"
 msgstr "私密频道"
+
+#: components/markdown/plugins/customEmoji.tsx
+msgid "Private Server"
+msgstr "私密服务器"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/UserContextMenu.tsx
@@ -3371,6 +3512,7 @@ msgstr "标签页打开时接收通知。"
 msgid "Receive push notifications while the app is closed."
 msgstr "应用关闭时接收推送通知。"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Reconnecting"
 msgstr "正在重新连接"
@@ -3687,6 +3829,10 @@ msgstr "保存至笔记"
 msgid "Saved Notes"
 msgstr "保存的笔记"
 
+#: components/app/interface/channels/text/EditMessage.tsx
+msgid "Saving message..."
+msgstr "正在保存消息..."
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Saving…"
 msgstr "正在保存…"
@@ -3716,6 +3862,14 @@ msgstr "屏幕共享音量"
 msgid "Search"
 msgstr "搜索"
 
+#: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
+msgid "Search for emojis..."
+msgstr "搜索表情..."
+
+#: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
+msgid "Search for GIFs..."
+msgstr "搜索 GIF..."
+
 #: components/modal/modals/AddBot.tsx
 msgid "Search for groups..."
 msgstr "搜索群组..."
@@ -3724,6 +3878,14 @@ msgstr "搜索群组..."
 #: components/modal/modals/CreateGroup.tsx
 msgid "Search for users..."
 msgstr "搜索用户..."
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search messages..."
+msgstr "搜索消息..."
+
+#: src/interface/channels/text/TextChannel.tsx
+msgid "Search Results"
+msgstr "搜索结果"
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
@@ -3829,6 +3991,7 @@ msgstr "发送附件"
 msgid "Sent multiple attachments"
 msgstr "发送多个附件"
 
+#: components/modal/modals/CreateGroupOrServer.tsx
 #: src/interface/navigation/servers/railDrag.ts
 msgid "Server"
 msgstr "服务器"
@@ -3889,6 +4052,7 @@ msgstr "设置你的状态"
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
 #: components/modal/modals/ServerInfo.tsx
+#: src/interface/navigation/servers/ServerList.tsx
 msgid "Settings"
 msgstr "设置"
 
@@ -4057,6 +4221,11 @@ msgstr "扬声器"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Spellchecker"
 msgstr "拼写检查"
+
+#: components/app/interface/channels/text/DraftMessage.tsx
+#: components/ui/components/features/messaging/composition/FileCarousel.tsx
+msgid "Spoiler"
+msgstr "剧透"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Start camera"
@@ -4238,6 +4407,10 @@ msgstr "该机器人已被管理员从发现页面移除，用户必须联系支
 msgid "The bot is already on discover, the user must contact support to have it removed"
 msgstr "该机器人已在发现页面中，用户必须联系支持人员才能将其移除。"
 
+#: components/modal/modals/AddBot.tsx
+msgid "The bot will not be granted any permissions."
+msgstr "不会授予该机器人任何权限。"
+
 #: components/i18n/errors.tsx
 msgid "The Discover request is approved or the item has been removed from discover. In either case, the user must contact support."
 msgstr "发现申请已通过，或该项目已被从发现页面移除。无论哪种情况，用户都必须联系支持人员。"
@@ -4370,6 +4543,10 @@ msgstr "此注册已被标记为垃圾信息。"
 #~ msgid "This sign up is marked as spam. Please see <0>this support article.</0>"
 #~ msgstr ""
 
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "This stream has no audio"
+msgstr "此直播没有声音"
+
 #: components/i18n/errors.tsx
 msgid "This user has blocked you."
 msgstr "此用户已屏蔽您。"
@@ -4437,6 +4614,10 @@ msgstr "令牌已复制到剪贴板"
 msgid "Tonal Spot"
 msgstr "Tonal Spot"
 
+#: src/interface/channels/text/Composition.tsx
+msgid "Too Long"
+msgstr "过长"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
 msgstr "传统（DD/MM/YYYY）"
@@ -4480,10 +4661,27 @@ msgstr "取消拒听"
 msgid "Unknown"
 msgstr "未知"
 
+#: src/interface/channels/ChannelPage.tsx
+msgid "Unknown channel type!"
+msgstr "未知的频道类型！"
+
+#: components/markdown/plugins/customEmoji.tsx
+msgid "Unknown emote"
+msgstr "未知表情"
+
+#: components/markdown/plugins/mentions.tsx
+msgid "Unknown Role"
+msgstr "未知角色"
+
 #: components/markdown/plugins/anchors.tsx
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Unknown Server"
 msgstr "未知服务器"
+
+#: components/markdown/plugins/mentions.tsx
+#: components/markdown/users.ts
+msgid "Unknown User"
+msgstr "未知用户"
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Unmark as mature"
@@ -4509,6 +4707,10 @@ msgstr "取消频道静音"
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unmute Server"
 msgstr "取消服务器静音"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Unmute stream"
+msgstr "取消直播静音"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unnamed folder"
@@ -4549,6 +4751,10 @@ msgstr "丢包最高 {loss}"
 msgid "Up to {MAX_LINES} lines at once, deselect one to add another."
 msgstr "最多同时显示 {MAX_LINES} 条线，取消选择一条后才能添加新的。"
 
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "Update"
+msgstr "更新"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Upload Files"
 msgstr "上传文件"
@@ -4556,6 +4762,11 @@ msgstr "上传文件"
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Upload to Gifbox"
 msgstr "上传到 Gifbox"
+
+#. placeholder {0}: progress()
+#: components/app/interface/channels/text/DraftMessage.tsx
+msgid "Uploading file `{fileName}`... {0}%"
+msgstr "正在上传文件 `{fileName}`... {0}%"
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"

@@ -38,9 +38,19 @@ msgstr "[الماضي]dddd [في] LT"
 msgid "dddd [at] LT"
 msgstr "dddd [في] LT"
 
+#. placeholder {0}: emojiName()
+#. placeholder {1}: serverName()
+#: components/markdown/plugins/customEmoji.tsx
+msgid ":{0}: from {1}"
+msgstr ":{0}: من {1}"
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "(changes are being saved…)"
 msgstr "(يتم حفظ التعديلات…)"
+
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "(reconnect now)"
+msgstr "(أعد الاتصال الآن)"
 
 #. placeholder {0}: props.count
 #: components/ui/components/features/messaging/elements/BlockedMessage.tsx
@@ -57,8 +67,20 @@ msgstr "{0, plural, zero {# تجمّد، {seconds} ث} one {تجمّد واحد�
 msgid "{0, plural, one {# freeze} other {# freezes}}"
 msgstr "{0, plural, zero {# تجمّد} one {تجمّد واحد} two {تجمّدان} few {# تجمّدات} many {# تجمّدًا} other {# تجمّد}}"
 
-#~ msgid "{0, plural, one {# Member} other {# Members}}"
-#~ msgstr ""
+#. placeholder {0}: onlineMembers()
+#: src/interface/channels/text/MemberSidebar.tsx
+msgid "{0, plural, one {# member online} other {# members online}}"
+msgstr "{0, plural, zero {# عضو متصل} one {عضو واحد متصل} two {عضوان متصلان} few {# أعضاء متصلين} many {# عضوًا متصلًا} other {# عضو متصل}}"
+
+#. placeholder {0}: memberCount()
+#: components/ui/components/features/messaging/elements/Invite.tsx
+msgid "{0, plural, one {# member} other {# members}}"
+msgstr "{0, plural, zero {# عضو} one {عضو واحد} two {عضوان} few {# أعضاء} many {# عضوًا} other {# عضو}}"
+
+#. placeholder {0}: local.channel.recipientIds.size
+#: src/interface/navigation/channels/HomeSidebar.tsx
+msgid "{0, plural, one {# Member} other {# Members}}"
+msgstr "{0, plural, zero {# عضو} one {عضو واحد} two {عضوان} few {# أعضاء} many {# عضوًا} other {# عضو}}"
 
 #. placeholder {0}: mentions()
 #: components/ui/components/features/navigation/UnreadCallout.tsx
@@ -478,8 +500,13 @@ msgid "Accept"
 msgstr "قبول"
 
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Accept friend request"
 msgstr "قبول طلب الصداقة"
+
+#: components/auth/src/flows/FlowDelete.tsx
+msgid "Account has been queued for deletion!"
+msgstr "تمت إضافة الحساب إلى قائمة الحذف!"
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Acknowledge"
@@ -502,6 +529,10 @@ msgstr "إضافة بوت"
 #: components/app/menus/UserContextMenu.tsx
 msgid "Add friend"
 msgstr "إرسال طلب صداقة"
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Add Friend"
+msgstr "إضافة صديق"
 
 #: components/modal/modals/AddMembersToGroup.tsx
 #: src/interface/channels/ChannelHeader.tsx
@@ -626,6 +657,10 @@ msgstr "مؤسس AnyTalk"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "AnyTalk is one of the best ways to stay connected with your friends and community, anywhere, anytime."
 msgstr "AnyTalk هو واحد من الطرق المفضلة للبقاء على تواصل مع أصدقائك و مجتمعك، أين ما كنت، حين ما شئت."
+
+#: src/AndroidNag.tsx
+msgid "AnyTalk on Android"
+msgstr "AnyTalk على أندرويد"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "AnyTalk reloads to switch language, only the language you use is downloaded and kept offline."
@@ -756,6 +791,10 @@ msgstr "متوسط لكل ملخص"
 msgid "Back"
 msgstr "عودة"
 
+#: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
+msgid "Back to categories"
+msgstr "العودة إلى الفئات"
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Badges"
 msgstr "الشارات"
@@ -805,6 +844,10 @@ msgstr "غلاف"
 msgid "Bans"
 msgstr "المستخدمون المحظورون"
 
+#: components/ui/components/features/profiles/ProfileBio.tsx
+msgid "Bio"
+msgstr "نبذة"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Bitrate"
@@ -825,6 +868,10 @@ msgstr "مستخدم محظور"
 #: components/app/interface/channels/text/Message.tsx
 msgid "Bot"
 msgstr "بوت"
+
+#: components/modal/modals/AddBot.tsx
+msgid "Bots are not verified by AnyTalk."
+msgstr "البوتات غير موثّقة من AnyTalk."
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
@@ -931,6 +978,7 @@ msgid "Cancel discover request"
 msgstr "إلغاء طلب الاكتشاف"
 
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Cancel friend request"
 msgstr "إلغاء طلب الصداقه"
 
@@ -1212,6 +1260,7 @@ msgstr "اتصل بقناة صوتية"
 msgid "Connected"
 msgstr "متصل"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Connecting"
 msgstr "اتصال"
@@ -1355,6 +1404,7 @@ msgstr "المعالج"
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/CreateChannel.tsx
 #: components/modal/modals/CreateGroup.tsx
+#: components/modal/modals/CreateOrJoinServer.tsx
 #: components/modal/modals/CreateRole.tsx
 #: components/modal/modals/CreateServer.tsx
 #: components/modal/modals/CreateWebhook.tsx
@@ -1368,6 +1418,7 @@ msgstr "قم بإنشاء قناة قبل دعوة الاخرين!"
 #~ msgid "Create a group"
 #~ msgstr "أنشئ مجموعة"
 
+#: components/modal/modals/CreateGroupOrServer.tsx
 #: src/interface/Home.tsx
 msgid "Create a group or server"
 msgstr "قم بإنشاء مجموعة او سيرفر"
@@ -1438,12 +1489,18 @@ msgid "Create invite"
 msgstr "إنشاء دعوة"
 
 #: components/modal/modals/CreateInvite.tsx
+#: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Create Invite"
 msgstr "إنشاء دعوة"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Create invites for others to use"
 msgstr "قم بإنشاء دعوات ليستعملها الاخرين"
+
+#: components/modal/modals/CreateOrJoinServer.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Create or join a server"
+msgstr "إنشاء خادم أو الانضمام إليه"
 
 #: components/modal/modals/CreateRole.tsx
 msgid "Create Role"
@@ -1524,6 +1581,7 @@ msgstr "فك الترميز"
 
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
+#: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Default"
 msgstr "إفتراضي"
 
@@ -1572,6 +1630,7 @@ msgid "Delete {0}?"
 msgstr "حذف {0}؟"
 
 #: components/app/interface/settings/user/Account.tsx
+#: components/auth/src/flows/FlowDelete.tsx
 msgid "Delete Account"
 msgstr "حذف الحساب"
 
@@ -1677,6 +1736,14 @@ msgstr "وثيقة للمطورين"
 msgid "Developer modes measure call performance and keep statistics of previous calls and streams on this device. Turn on either or both."
 msgstr "أوضاع المطوّر تقيس أداء المكالمات وتحتفظ على هذا الجهاز بإحصاءات المكالمات والبثوث السابقة. فعّل أحدهما أو كليهما."
 
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "Device is offline"
+msgstr "الجهاز غير متصل بالإنترنت"
+
+#: src/interface/navigation/channels/HomeSidebar.tsx
+msgid "Direct Messages"
+msgstr "الرسائل المباشرة"
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Disable Account"
 msgstr "تعطيل الحساب"
@@ -1690,6 +1757,7 @@ msgstr "تعطيل موثق كلمة السر"
 msgid "Disabled"
 msgstr "معطل"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Disconnected"
 msgstr "مفصول"
@@ -1794,6 +1862,10 @@ msgstr "تعديل و حذف القناة"
 msgid "Edit any permissions on the server"
 msgstr "تعديل كل المستأذنات على السيرفر"
 
+#: src/interface/navigation/channels/ServerSidebar.tsx
+msgid "Edit Channel"
+msgstr "تعديل القناة"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Edit channel-specific role and default permissions"
 msgstr "تعديل الأدوار و المستأذنات الإفتراضية لقناة معينة"
@@ -1853,6 +1925,10 @@ msgstr "فعال <0/> (<1/>)"
 #: components/modal/modals/EditEmail.tsx
 msgid "Email"
 msgstr "البريد الإلكتروني"
+
+#: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
+msgid "Emoji"
+msgstr "رمز تعبيري"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 #: components/modal/modals/EditEmoji.tsx
@@ -1946,6 +2022,14 @@ msgstr "أدخل رمز الدعوة الخاص بك."
 msgid "Enter your preferred username."
 msgstr "أدخل اسم المستخدم الخاص بك."
 
+#: components/auth/src/flows/FlowDelete.tsx
+msgid "Error occurred, please email support."
+msgstr "حدث خطأ، يرجى مراسلة الدعم عبر البريد الإلكتروني."
+
+#: components/app/interface/channels/text/EditMessage.tsx
+msgid "escape to <0>cancel</0> · enter to <1>save</1>"
+msgstr "اضغط Esc لـ<0>الإلغاء</0> · اضغط Enter لـ<1>الحفظ</1>"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Estimated upload bandwidth"
@@ -2018,6 +2102,10 @@ msgstr "يجب أن يكون الملف أصغر من {0}"
 #: src/interface/Home.tsx
 msgid "Find a community based on your hobbies or interests."
 msgstr "ابحث عن مجتمع يحوي هواياتك أو اهتماماتك."
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Find new servers to join"
+msgstr "اعثر على خوادم جديدة للانضمام إليها"
 
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
@@ -2120,6 +2208,10 @@ msgstr "عنصر نائب لمنتقي GIF"
 msgid "Gifbox is our own GIF service, so you can keep sharing GIFs right here on AnyTalk."
 msgstr "Gifbox هي خدمة GIF الخاصة بنا، لذا يمكنك الاستمرار في مشاركة صور GIF هنا على AnyTalk."
 
+#: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
+msgid "GIFs"
+msgstr "صور GIF"
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "GIFs are now powered by Gifbox"
 msgstr "أصبحت صور GIF الآن مدعومة بواسطة Gifbox"
@@ -2179,9 +2271,17 @@ msgstr "حصلت عليه"
 msgid "Grants {0} permissions and denies {1} permissions"
 msgstr "يمنح {0} مستأذنات و يمنع {1} مستأذنات"
 
+#: components/modal/modals/CreateGroupOrServer.tsx
+msgid "Group"
+msgstr "مجموعة"
+
 #: components/modal/modals/CreateGroup.tsx
 msgid "Group Name"
 msgstr "اسم المجموعة"
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Groups"
+msgstr "المجموعات"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Guidelines"
@@ -2267,6 +2367,10 @@ msgstr "أنا أؤكد أن عمري لا يقل عن 18 عاماً."
 msgid "I understand the consequences"
 msgstr "أنا أتفهم العواقب"
 
+#: components/modal/modals/PolicyChange.tsx
+msgid "I've read and reviewed the changes."
+msgstr "لقد قرأت التغييرات وراجعتها."
+
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "ID copied to clipboard"
 msgstr "تم نسخ ID إلى الحافظة"
@@ -2302,6 +2406,7 @@ msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother 
 msgstr "في هذه الأثناء، قم بتثبيت AnyTalk من Google Play للحصول على تجربة أسرع وأكثر سلاسة مصممة لنظام Android."
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: src/interface/Friends.tsx
 msgid "Incoming"
 msgstr "الوارد"
 
@@ -2320,6 +2425,10 @@ msgstr "عوضا عن الإغلاق، AnyTalk ستكون في أسفل خانة
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Interface Font"
 msgstr "أسلوب الخط"
+
+#: components/markdown/plugins/mentions.tsx
+msgid "Invalid Mention Element"
+msgstr "عنصر إشارة غير صالح"
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Invisible"
@@ -2380,8 +2489,10 @@ msgstr "التذبذب متوسط / أقصى"
 msgid "Jitter buffer delay"
 msgstr "تأخير مخزن التذبذب"
 
+#: components/modal/modals/CreateOrJoinServer.tsx
 #: components/modal/modals/Invite.tsx
 #: components/modal/modals/JoinServer.tsx
+#: components/ui/components/features/messaging/elements/Invite.tsx
 msgid "Join"
 msgstr "انضمام"
 
@@ -2706,6 +2817,7 @@ msgid "Mentions Only"
 msgstr "عند ذكري فقط"
 
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Message"
 msgstr "راسِل"
 
@@ -2829,6 +2941,10 @@ msgstr "كتم مشاركة الشاشة"
 msgid "Mute Server"
 msgstr "كتم سيرفر"
 
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Mute stream"
+msgstr "كتم البث"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Mute when not speaking"
 msgstr "كتم الصوت عند عدم التحدث"
@@ -2850,6 +2966,10 @@ msgstr "الأصدقاء المُشتَركون"
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "المجموعات المُشتَركة"
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Mutuals"
+msgstr "المشتركة"
 
 #: components/app/interface/settings/user/_AccountCard.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -2913,6 +3033,10 @@ msgstr "لقب"
 msgid "No audio was captured, switch window to share audio"
 msgstr "لم يتم التقاط أي صوت، بدّل النافذة لمشاركة الصوت"
 
+#: src/interface/ServerHome.tsx
+msgid "No channels!"
+msgstr "لا توجد قنوات!"
+
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "no data"
 msgstr "لا توجد بيانات"
@@ -2963,6 +3087,7 @@ msgid "Normal"
 msgstr "طبيعي"
 
 #: components/state/stores/Experiments.ts
+#: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Not available yet."
 msgstr "غير متاح بعد."
 
@@ -3088,6 +3213,10 @@ msgstr "فتح بث آخر أثناء مشاهدة بث يعرضهما جنبً�
 msgid "Other"
 msgstr "اخرى"
 
+#: src/interface/Friends.tsx
+msgid "Outgoing"
+msgstr "الصادرة"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Outgoing call"
 msgstr "مكالمة صادرة"
@@ -3188,6 +3317,10 @@ msgstr "زمن الاستجابة (ذهابًا وإيابًا إلى الخاد
 msgid "Ping avg / max"
 msgstr "زمن الاستجابة متوسط / أقصى"
 
+#: src/interface/channels/text/TextChannel.tsx
+msgid "Pinned Messages"
+msgstr "الرسائل المثبتة"
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Platform Moderator"
 msgstr "مسؤول المنصة"
@@ -3232,6 +3365,10 @@ msgstr "يرجى اختيار سبب"
 msgid "Please try again later"
 msgstr "يرجى المحاولة مرة أخرى لاحقًا"
 
+#: components/auth/src/flows/FlowDelete.tsx
+msgid "Please wait..."
+msgstr "يرجى الانتظار..."
+
 #: components/state/stores/Experiments.ts
 msgid "Plugins v2 Placeholder"
 msgstr "عنصر نائب لإضافات الإصدار 2"
@@ -3271,6 +3408,10 @@ msgstr "الخصوصية"
 #: components/markdown/plugins/anchors.tsx
 msgid "Private Channel"
 msgstr "قناة خاصة"
+
+#: components/markdown/plugins/customEmoji.tsx
+msgid "Private Server"
+msgstr "خادم خاص"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/UserContextMenu.tsx
@@ -3370,6 +3511,7 @@ msgstr "تلقي الإشعارات أثناء فتح علامة التبويب.
 msgid "Receive push notifications while the app is closed."
 msgstr "تلقي إشعارات فورية أثناء إغلاق التطبيق."
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Reconnecting"
 msgstr "جار اعادة الاتصال"
@@ -3686,6 +3828,10 @@ msgstr "الحفظ في ملاحظاتك"
 msgid "Saved Notes"
 msgstr "الملاحظات المحفوظة"
 
+#: components/app/interface/channels/text/EditMessage.tsx
+msgid "Saving message..."
+msgstr "جارٍ حفظ الرسالة..."
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Saving…"
 msgstr "جارٍ الحفظ…"
@@ -3715,6 +3861,14 @@ msgstr "حجم مشاركة الشاشة"
 msgid "Search"
 msgstr "أبحث"
 
+#: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
+msgid "Search for emojis..."
+msgstr "ابحث عن رموز تعبيرية..."
+
+#: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
+msgid "Search for GIFs..."
+msgstr "ابحث عن صور GIF..."
+
 #: components/modal/modals/AddBot.tsx
 msgid "Search for groups..."
 msgstr "البحث عن مجموعات..."
@@ -3723,6 +3877,14 @@ msgstr "البحث عن مجموعات..."
 #: components/modal/modals/CreateGroup.tsx
 msgid "Search for users..."
 msgstr "البحث عن مستخدمين..."
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search messages..."
+msgstr "ابحث في الرسائل..."
+
+#: src/interface/channels/text/TextChannel.tsx
+msgid "Search Results"
+msgstr "نتائج البحث"
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
@@ -3828,6 +3990,7 @@ msgstr "أرسل مرفقًا"
 msgid "Sent multiple attachments"
 msgstr "أرسل عدة مرفقات"
 
+#: components/modal/modals/CreateGroupOrServer.tsx
 #: src/interface/navigation/servers/railDrag.ts
 msgid "Server"
 msgstr "خادم"
@@ -3888,6 +4051,7 @@ msgstr "وضع الحالة"
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
 #: components/modal/modals/ServerInfo.tsx
+#: src/interface/navigation/servers/ServerList.tsx
 msgid "Settings"
 msgstr "الإعدادات"
 
@@ -4056,6 +4220,11 @@ msgstr "السماعة"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Spellchecker"
 msgstr "مدقق الاملاء"
+
+#: components/app/interface/channels/text/DraftMessage.tsx
+#: components/ui/components/features/messaging/composition/FileCarousel.tsx
+msgid "Spoiler"
+msgstr "حرق للأحداث"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Start camera"
@@ -4237,6 +4406,10 @@ msgstr "أزال المشرفون البوت من الاكتشاف، ويجب ع
 msgid "The bot is already on discover, the user must contact support to have it removed"
 msgstr "البوت موجود بالفعل في الاكتشاف، ويجب على المستخدم التواصل مع الدعم لإزالته"
 
+#: components/modal/modals/AddBot.tsx
+msgid "The bot will not be granted any permissions."
+msgstr "لن يُمنح البوت أي أذونات."
+
 #: components/i18n/errors.tsx
 msgid "The Discover request is approved or the item has been removed from discover. In either case, the user must contact support."
 msgstr "تمت الموافقة على طلب الاكتشاف أو أُزيل العنصر من الاكتشاف. في كلتا الحالتين، يجب على المستخدم التواصل مع الدعم."
@@ -4369,6 +4542,10 @@ msgstr "تم وضع علامة سبام على هذا التسجيل."
 #~ msgid "This sign up is marked as spam. Please see <0>this support article.</0>"
 #~ msgstr "تم وضع علامة على هذا التسجيل على أنه بريد عشوائي. يرجى الاطلاع على <0>مقالة الدعم هذه.</0>"
 
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "This stream has no audio"
+msgstr "هذا البث بلا صوت"
+
 #: components/i18n/errors.tsx
 msgid "This user has blocked you."
 msgstr "لقد قام هذا المستخدم بحظرك."
@@ -4436,6 +4613,10 @@ msgstr "تم نسخ الرمز إلى الحافظة"
 msgid "Tonal Spot"
 msgstr "بقعة نغمة"
 
+#: src/interface/channels/text/Composition.tsx
+msgid "Too Long"
+msgstr "طويل جدًا"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
 msgstr "تقليدي (يوم/شهر/عام)"
@@ -4479,10 +4660,27 @@ msgstr "غير مافن"
 msgid "Unknown"
 msgstr "غير معرف"
 
+#: src/interface/channels/ChannelPage.tsx
+msgid "Unknown channel type!"
+msgstr "نوع قناة غير معروف!"
+
+#: components/markdown/plugins/customEmoji.tsx
+msgid "Unknown emote"
+msgstr "رمز تعبيري غير معروف"
+
+#: components/markdown/plugins/mentions.tsx
+msgid "Unknown Role"
+msgstr "رتبة غير معروفة"
+
 #: components/markdown/plugins/anchors.tsx
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Unknown Server"
 msgstr "سيرفر غير معرف"
+
+#: components/markdown/plugins/mentions.tsx
+#: components/markdown/users.ts
+msgid "Unknown User"
+msgstr "مستخدم غير معروف"
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Unmark as mature"
@@ -4508,6 +4706,10 @@ msgstr "إلغاء كتم القناة"
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unmute Server"
 msgstr "إلغاء كتم السيرفر"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Unmute stream"
+msgstr "إلغاء كتم البث"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unnamed folder"
@@ -4548,6 +4750,10 @@ msgstr "حتى {loss} فقد"
 msgid "Up to {MAX_LINES} lines at once, deselect one to add another."
 msgstr "حتى {MAX_LINES} خطوط في الوقت نفسه، ألغِ تحديد أحدها لإضافة آخر."
 
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "Update"
+msgstr "تحديث"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Upload Files"
 msgstr "رفع الملفات"
@@ -4555,6 +4761,11 @@ msgstr "رفع الملفات"
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Upload to Gifbox"
 msgstr "تحميل إلى Gifbox"
+
+#. placeholder {0}: progress()
+#: components/app/interface/channels/text/DraftMessage.tsx
+msgid "Uploading file `{fileName}`... {0}%"
+msgstr "جارٍ رفع الملف `{fileName}`... {0}%"
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"

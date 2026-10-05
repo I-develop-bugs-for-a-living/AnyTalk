@@ -38,9 +38,19 @@ msgstr "[지난] dddd LT"
 msgid "dddd [at] LT"
 msgstr "dddd LT"
 
+#. placeholder {0}: emojiName()
+#. placeholder {1}: serverName()
+#: components/markdown/plugins/customEmoji.tsx
+msgid ":{0}: from {1}"
+msgstr ":{0}: ({1} 출처)"
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "(changes are being saved…)"
 msgstr "(변경사항 저장 중...)"
+
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "(reconnect now)"
+msgstr "(지금 다시 연결)"
 
 #. placeholder {0}: props.count
 #: components/ui/components/features/messaging/elements/BlockedMessage.tsx
@@ -57,8 +67,20 @@ msgstr "{0, plural, other {# 번 멈춤, {seconds}초}}"
 msgid "{0, plural, one {# freeze} other {# freezes}}"
 msgstr "{0, plural, other {# 번 멈춤}}"
 
-#~ msgid "{0, plural, one {# Member} other {# Members}}"
-#~ msgstr ""
+#. placeholder {0}: onlineMembers()
+#: src/interface/channels/text/MemberSidebar.tsx
+msgid "{0, plural, one {# member online} other {# members online}}"
+msgstr "{0, plural, other {온라인 멤버 #명}}"
+
+#. placeholder {0}: memberCount()
+#: components/ui/components/features/messaging/elements/Invite.tsx
+msgid "{0, plural, one {# member} other {# members}}"
+msgstr "{0, plural, other {멤버 #명}}"
+
+#. placeholder {0}: local.channel.recipientIds.size
+#: src/interface/navigation/channels/HomeSidebar.tsx
+msgid "{0, plural, one {# Member} other {# Members}}"
+msgstr "{0, plural, other {멤버 #명}}"
 
 #. placeholder {0}: mentions()
 #: components/ui/components/features/navigation/UnreadCallout.tsx
@@ -478,8 +500,13 @@ msgid "Accept"
 msgstr "수락"
 
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Accept friend request"
 msgstr "친구 요청 수락"
+
+#: components/auth/src/flows/FlowDelete.tsx
+msgid "Account has been queued for deletion!"
+msgstr "계정이 삭제 대기열에 들어갔어요!"
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Acknowledge"
@@ -501,6 +528,10 @@ msgstr "봇 추가"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Add friend"
+msgstr "친구 추가"
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Add Friend"
 msgstr "친구 추가"
 
 #: components/modal/modals/AddMembersToGroup.tsx
@@ -626,6 +657,10 @@ msgstr "AnyTalk 창립자"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "AnyTalk is one of the best ways to stay connected with your friends and community, anywhere, anytime."
 msgstr "AnyTalk은 언제 어디서나 친구, 커뮤니티와 연결 상태를 유지하는 가장 좋은 방법 중 하나예요."
+
+#: src/AndroidNag.tsx
+msgid "AnyTalk on Android"
+msgstr "Android용 AnyTalk"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "AnyTalk reloads to switch language, only the language you use is downloaded and kept offline."
@@ -756,6 +791,10 @@ msgstr "요약당 평균"
 msgid "Back"
 msgstr "뒤로"
 
+#: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
+msgid "Back to categories"
+msgstr "카테고리로 돌아가기"
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Badges"
 msgstr "뱃지"
@@ -805,6 +844,10 @@ msgstr "배너"
 msgid "Bans"
 msgstr "차단"
 
+#: components/ui/components/features/profiles/ProfileBio.tsx
+msgid "Bio"
+msgstr "소개"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Bitrate"
@@ -825,6 +868,10 @@ msgstr "차단된 사용자"
 #: components/app/interface/channels/text/Message.tsx
 msgid "Bot"
 msgstr "봇"
+
+#: components/modal/modals/AddBot.tsx
+msgid "Bots are not verified by AnyTalk."
+msgstr "봇은 AnyTalk에서 인증하지 않아요."
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
@@ -932,6 +979,7 @@ msgid "Cancel discover request"
 msgstr "탐색 요청 취소"
 
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Cancel friend request"
 msgstr "요청 취소"
 
@@ -1214,6 +1262,7 @@ msgstr "음성 채널에 연결"
 msgid "Connected"
 msgstr "연결됨"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Connecting"
 msgstr "연결 중"
@@ -1357,6 +1406,7 @@ msgstr "CPU"
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/CreateChannel.tsx
 #: components/modal/modals/CreateGroup.tsx
+#: components/modal/modals/CreateOrJoinServer.tsx
 #: components/modal/modals/CreateRole.tsx
 #: components/modal/modals/CreateServer.tsx
 #: components/modal/modals/CreateWebhook.tsx
@@ -1370,6 +1420,7 @@ msgstr "다른 사람을 초대하기 전에 채널을 만들어 주세요!"
 #~ msgid "Create a group"
 #~ msgstr "그룹 만들기"
 
+#: components/modal/modals/CreateGroupOrServer.tsx
 #: src/interface/Home.tsx
 msgid "Create a group or server"
 msgstr "그룹 또는 서버 만들기"
@@ -1440,12 +1491,18 @@ msgid "Create invite"
 msgstr "초대 코드 만들기"
 
 #: components/modal/modals/CreateInvite.tsx
+#: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Create Invite"
 msgstr "초대 만들기"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Create invites for others to use"
 msgstr "다른 사람이 사용할 초대 만들기"
+
+#: components/modal/modals/CreateOrJoinServer.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Create or join a server"
+msgstr "서버 만들기 또는 참여"
 
 #: components/modal/modals/CreateRole.tsx
 msgid "Create Role"
@@ -1526,6 +1583,7 @@ msgstr "디코더"
 
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
+#: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Default"
 msgstr "기본 역할"
 
@@ -1575,6 +1633,7 @@ msgid "Delete {0}?"
 msgstr "{0}을(를) 삭제할까요?"
 
 #: components/app/interface/settings/user/Account.tsx
+#: components/auth/src/flows/FlowDelete.tsx
 msgid "Delete Account"
 msgstr "계정 삭제"
 
@@ -1680,6 +1739,14 @@ msgstr "개발자 문서"
 msgid "Developer modes measure call performance and keep statistics of previous calls and streams on this device. Turn on either or both."
 msgstr "개발자 모드는 통화 성능을 측정하고 이전 통화와 스트림의 통계를 이 기기에 저장해요. 하나 또는 둘 다 켤 수 있어요."
 
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "Device is offline"
+msgstr "기기가 오프라인이에요"
+
+#: src/interface/navigation/channels/HomeSidebar.tsx
+msgid "Direct Messages"
+msgstr "다이렉트 메시지"
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Disable Account"
 msgstr "계정 비활성화"
@@ -1693,6 +1760,7 @@ msgstr "일회용 비밀번호 인증기 끄기"
 msgid "Disabled"
 msgstr "사용 안 함"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Disconnected"
 msgstr "연결 끊김"
@@ -1797,6 +1865,10 @@ msgstr "채널 편집 및 삭제"
 msgid "Edit any permissions on the server"
 msgstr "서버의 모든 권한 편집"
 
+#: src/interface/navigation/channels/ServerSidebar.tsx
+msgid "Edit Channel"
+msgstr "채널 편집"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Edit channel-specific role and default permissions"
 msgstr "채널별 역할 및 기본 권한 편집"
@@ -1856,6 +1928,10 @@ msgstr "적용일 <0/> (<1/>)"
 #: components/modal/modals/EditEmail.tsx
 msgid "Email"
 msgstr "이메일"
+
+#: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
+msgid "Emoji"
+msgstr "이모지"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 #: components/modal/modals/EditEmoji.tsx
@@ -1949,6 +2025,14 @@ msgstr "초대 코드를 입력하세요."
 msgid "Enter your preferred username."
 msgstr "사용자명을 입력하세요."
 
+#: components/auth/src/flows/FlowDelete.tsx
+msgid "Error occurred, please email support."
+msgstr "오류가 발생했어요. 지원팀에 이메일로 문의하세요."
+
+#: components/app/interface/channels/text/EditMessage.tsx
+msgid "escape to <0>cancel</0> · enter to <1>save</1>"
+msgstr "Esc로 <0>취소</0> · Enter로 <1>저장</1>"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Estimated upload bandwidth"
@@ -2021,6 +2105,10 @@ msgstr "파일은 {0}보다 작아야 해요"
 #: src/interface/Home.tsx
 msgid "Find a community based on your hobbies or interests."
 msgstr "나의 취미와 흥미에 맞는 커뮤니티를 찾아보세요."
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Find new servers to join"
+msgstr "참여할 새 서버 찾기"
 
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
@@ -2123,6 +2211,10 @@ msgstr "GIF 선택기 자리 표시자"
 msgid "Gifbox is our own GIF service, so you can keep sharing GIFs right here on AnyTalk."
 msgstr "Gifbox는 AnyTalk 자체 GIF 서비스라서 여기서 계속 GIF를 공유할 수 있어요."
 
+#: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
+msgid "GIFs"
+msgstr "GIF"
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "GIFs are now powered by Gifbox"
 msgstr "이제 GIF는 Gifbox가 제공해요"
@@ -2182,9 +2274,17 @@ msgstr "확인했어요"
 msgid "Grants {0} permissions and denies {1} permissions"
 msgstr "권한 {0}개 허용, 권한 {1}개 거부"
 
+#: components/modal/modals/CreateGroupOrServer.tsx
+msgid "Group"
+msgstr "그룹"
+
 #: components/modal/modals/CreateGroup.tsx
 msgid "Group Name"
 msgstr "그룹 이름"
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Groups"
+msgstr "그룹"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Guidelines"
@@ -2270,6 +2370,10 @@ msgstr "전 18세 이상이에요!"
 msgid "I understand the consequences"
 msgstr "결과를 이해했어요"
 
+#: components/modal/modals/PolicyChange.tsx
+msgid "I've read and reviewed the changes."
+msgstr "변경 사항을 읽고 확인했어요."
+
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "ID copied to clipboard"
 msgstr "ID를 클립보드에 복사했어요"
@@ -2306,6 +2410,7 @@ msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother 
 msgstr "그동안은 Google Play에서 AnyTalk을 설치하면 Android에 맞춘 더 빠르고 부드러운 환경을 쓸 수 있어요."
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: src/interface/Friends.tsx
 msgid "Incoming"
 msgstr "수신"
 
@@ -2324,6 +2429,10 @@ msgstr "닫는 대신 AnyTalk이 트레이로 숨겨져요."
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Interface Font"
 msgstr "인터페이스 글꼴"
+
+#: components/markdown/plugins/mentions.tsx
+msgid "Invalid Mention Element"
+msgstr "잘못된 멘션 요소"
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Invisible"
@@ -2384,8 +2493,10 @@ msgstr "지터 평균 / 최대"
 msgid "Jitter buffer delay"
 msgstr "지터 버퍼 지연"
 
+#: components/modal/modals/CreateOrJoinServer.tsx
 #: components/modal/modals/Invite.tsx
 #: components/modal/modals/JoinServer.tsx
+#: components/ui/components/features/messaging/elements/Invite.tsx
 msgid "Join"
 msgstr "참여"
 
@@ -2710,6 +2821,7 @@ msgid "Mentions Only"
 msgstr "멘션만"
 
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Message"
 msgstr "메세지"
 
@@ -2833,6 +2945,10 @@ msgstr "화면 공유 음소거"
 msgid "Mute Server"
 msgstr "서버 음소거"
 
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Mute stream"
+msgstr "스트림 음소거"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Mute when not speaking"
 msgstr "말하지 않을 때 음소거"
@@ -2854,6 +2970,10 @@ msgstr "같이 아는 친구"
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "같이 있는 그룹"
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Mutuals"
+msgstr "공통"
 
 #: components/app/interface/settings/user/_AccountCard.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -2917,6 +3037,10 @@ msgstr "닉네임"
 msgid "No audio was captured, switch window to share audio"
 msgstr "캡처된 오디오가 없어요. 오디오를 공유하려면 창을 바꾸세요"
 
+#: src/interface/ServerHome.tsx
+msgid "No channels!"
+msgstr "채널이 없어요!"
+
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "no data"
 msgstr "데이터 없음"
@@ -2967,6 +3091,7 @@ msgid "Normal"
 msgstr "보통"
 
 #: components/state/stores/Experiments.ts
+#: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Not available yet."
 msgstr "아직 사용할 수 없어요."
 
@@ -3092,6 +3217,10 @@ msgstr "스트림을 보는 중에 다른 스트림을 열면 나란히 표시�
 msgid "Other"
 msgstr "기타"
 
+#: src/interface/Friends.tsx
+msgid "Outgoing"
+msgstr "보낸 요청"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Outgoing call"
 msgstr "발신 통화"
@@ -3192,6 +3321,10 @@ msgstr "핑 (서버까지 왕복)"
 msgid "Ping avg / max"
 msgstr "핑 평균 / 최대"
 
+#: src/interface/channels/text/TextChannel.tsx
+msgid "Pinned Messages"
+msgstr "고정된 메시지"
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Platform Moderator"
 msgstr "플랫폼 관리자"
@@ -3236,6 +3369,10 @@ msgstr "사유를 선택해 주세요"
 msgid "Please try again later"
 msgstr "나중에 다시 시도해 주세요"
 
+#: components/auth/src/flows/FlowDelete.tsx
+msgid "Please wait..."
+msgstr "잠시만 기다려 주세요..."
+
 #: components/state/stores/Experiments.ts
 msgid "Plugins v2 Placeholder"
 msgstr "플러그인 v2 자리 표시자"
@@ -3275,6 +3412,10 @@ msgstr "개인정보"
 #: components/markdown/plugins/anchors.tsx
 msgid "Private Channel"
 msgstr "비공개 채널"
+
+#: components/markdown/plugins/customEmoji.tsx
+msgid "Private Server"
+msgstr "비공개 서버"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/UserContextMenu.tsx
@@ -3375,6 +3516,7 @@ msgstr "탭이 열려 있는 동안 알림을 받아요."
 msgid "Receive push notifications while the app is closed."
 msgstr "앱이 닫혀 있어도 푸시 알림을 받아요."
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Reconnecting"
 msgstr "다시 연결 중"
@@ -3691,6 +3833,10 @@ msgstr "내 메모에 저장"
 msgid "Saved Notes"
 msgstr "저장된 메모"
 
+#: components/app/interface/channels/text/EditMessage.tsx
+msgid "Saving message..."
+msgstr "메시지 저장 중..."
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Saving…"
 msgstr "저장 중…"
@@ -3720,6 +3866,14 @@ msgstr "화면 공유 볼륨"
 msgid "Search"
 msgstr "검색"
 
+#: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
+msgid "Search for emojis..."
+msgstr "이모지 검색..."
+
+#: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
+msgid "Search for GIFs..."
+msgstr "GIF 검색..."
+
 #: components/modal/modals/AddBot.tsx
 msgid "Search for groups..."
 msgstr "그룹 검색..."
@@ -3728,6 +3882,14 @@ msgstr "그룹 검색..."
 #: components/modal/modals/CreateGroup.tsx
 msgid "Search for users..."
 msgstr "사용자 검색..."
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search messages..."
+msgstr "메시지 검색..."
+
+#: src/interface/channels/text/TextChannel.tsx
+msgid "Search Results"
+msgstr "검색 결과"
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
@@ -3833,6 +3995,7 @@ msgstr "첨부파일을 보냈어요"
 msgid "Sent multiple attachments"
 msgstr "여러 개의 첨부파일을 보냈어요"
 
+#: components/modal/modals/CreateGroupOrServer.tsx
 #: src/interface/navigation/servers/railDrag.ts
 msgid "Server"
 msgstr "서버"
@@ -3893,6 +4056,7 @@ msgstr "상태 설정"
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
 #: components/modal/modals/ServerInfo.tsx
+#: src/interface/navigation/servers/ServerList.tsx
 msgid "Settings"
 msgstr "설정"
 
@@ -4061,6 +4225,11 @@ msgstr "스피커"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Spellchecker"
 msgstr "맞춤법 검사"
+
+#: components/app/interface/channels/text/DraftMessage.tsx
+#: components/ui/components/features/messaging/composition/FileCarousel.tsx
+msgid "Spoiler"
+msgstr "스포일러"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Start camera"
@@ -4242,6 +4411,10 @@ msgstr "이 봇은 관리자에 의해 탐색에서 제거되었어요. 사용�
 msgid "The bot is already on discover, the user must contact support to have it removed"
 msgstr "이 봇은 이미 탐색에 있어요. 제거하려면 사용자가 지원팀에 문의해야 해요"
 
+#: components/modal/modals/AddBot.tsx
+msgid "The bot will not be granted any permissions."
+msgstr "봇에게는 어떤 권한도 부여되지 않아요."
+
 #: components/i18n/errors.tsx
 msgid "The Discover request is approved or the item has been removed from discover. In either case, the user must contact support."
 msgstr "탐색 요청이 승인되었거나 항목이 탐색에서 제거되었어요. 어느 쪽이든 사용자는 지원팀에 문의해야 해요."
@@ -4374,6 +4547,10 @@ msgstr "이 가입은 스팸으로 표시되었어요."
 #~ msgid "This sign up is marked as spam. Please see <0>this support article.</0>"
 #~ msgstr ""
 
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "This stream has no audio"
+msgstr "이 스트림에는 소리가 없어요"
+
 #: components/i18n/errors.tsx
 msgid "This user has blocked you."
 msgstr "이 사용자가 당신을 차단했습니다."
@@ -4441,6 +4618,10 @@ msgstr "토큰을 클립보드에 복사했어요"
 msgid "Tonal Spot"
 msgstr "토널 스팟"
 
+#: src/interface/channels/text/Composition.tsx
+msgid "Too Long"
+msgstr "너무 김"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
 msgstr "전통식 (DD/MM/YYYY)"
@@ -4484,10 +4665,27 @@ msgstr "헤드셋 음소거 해제"
 msgid "Unknown"
 msgstr "알 수 없음"
 
+#: src/interface/channels/ChannelPage.tsx
+msgid "Unknown channel type!"
+msgstr "알 수 없는 채널 유형이에요!"
+
+#: components/markdown/plugins/customEmoji.tsx
+msgid "Unknown emote"
+msgstr "알 수 없는 이모트"
+
+#: components/markdown/plugins/mentions.tsx
+msgid "Unknown Role"
+msgstr "알 수 없는 역할"
+
 #: components/markdown/plugins/anchors.tsx
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Unknown Server"
 msgstr "알 수 없는 서버"
+
+#: components/markdown/plugins/mentions.tsx
+#: components/markdown/users.ts
+msgid "Unknown User"
+msgstr "알 수 없는 사용자"
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Unmark as mature"
@@ -4513,6 +4711,10 @@ msgstr "채널 음소거 해제"
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unmute Server"
 msgstr "서버 음소거 해제"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Unmute stream"
+msgstr "스트림 음소거 해제"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unnamed folder"
@@ -4553,6 +4755,10 @@ msgstr "최대 {loss} 손실"
 msgid "Up to {MAX_LINES} lines at once, deselect one to add another."
 msgstr "한 번에 최대 {MAX_LINES}개의 선을 볼 수 있어요. 하나를 해제해야 다른 선을 추가할 수 있어요."
 
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "Update"
+msgstr "업데이트"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Upload Files"
 msgstr "파일 업로드"
@@ -4560,6 +4766,11 @@ msgstr "파일 업로드"
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Upload to Gifbox"
 msgstr "Gifbox에 업로드"
+
+#. placeholder {0}: progress()
+#: components/app/interface/channels/text/DraftMessage.tsx
+msgid "Uploading file `{fileName}`... {0}%"
+msgstr "파일 `{fileName}` 업로드 중... {0}%"
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
