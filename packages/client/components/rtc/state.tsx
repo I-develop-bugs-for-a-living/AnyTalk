@@ -801,16 +801,20 @@ class Voice {
   /**
    * Show our own picker once the desktop app asks which screen to capture
    *
-   * @returns The choice made in it, once made
+   * @returns The choice made in it, once made. Its `dismissed()` tells
+   * whether the user cancelled the picker without a choice, in which case
+   * the capture request fails on purpose and the failure is not an error.
    */
   #registerScreenPicker() {
     let picked: StreamOptions | undefined;
+    let cancelled = false;
 
     if (window.native && window.native.onceScreenPicker) {
       window.native.onceScreenPicker((sources) => {
         this.openModal({
           type: "screen_share_picker",
           onCancel: () => {
+            cancelled = true;
             window.native.screenPickerCallback(-1, false);
           },
           callback: (idx, resolution, frameRate, audio) => {
@@ -823,7 +827,9 @@ class Voice {
       });
     }
 
-    return () => picked;
+    return Object.assign(() => picked, {
+      dismissed: () => cancelled && !picked,
+    });
   }
 
   /** Whether the captured stream audio is currently sent */
@@ -1007,7 +1013,14 @@ class Voice {
           }
         }
       } catch (e) {
-        this.onErr(e);
+        if (picked.dismissed()) {
+          // Cancelling the picker makes the capture request fail, which is
+          // no error: drop anything half set up and stay silent
+          this.#setStreamOptions();
+          this.#setScreenshare(room.localParticipant.isScreenShareEnabled);
+        } else {
+          this.onErr(e);
+        }
       }
     }
   }
@@ -1039,8 +1052,9 @@ class Voice {
     } catch (e) {
       // closing the picker keeps streaming the current window
       if (
-        e instanceof DOMException &&
-        (e.name === "NotAllowedError" || e.name === "AbortError")
+        picked.dismissed() ||
+        (e instanceof DOMException &&
+          (e.name === "NotAllowedError" || e.name === "AbortError"))
       ) {
         return;
       }
