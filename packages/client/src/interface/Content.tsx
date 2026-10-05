@@ -39,7 +39,6 @@ export const Content: Component = () => {
         }
       />
       <Route path="/channel/:channel/*" component={ChannelPage} />
-      <Route path="/dev" component={DevelopmentPage} />
       <Route path="/friends" component={Friends} />
       <Route path="/app" component={HomePage} />
       <Route path="/" element={<Navigate href="/app" />} />

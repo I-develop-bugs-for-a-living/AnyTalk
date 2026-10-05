@@ -45,7 +45,6 @@ import { AndroidNag } from "./AndroidNag";
 import AuthPage from "./Auth";
 import Interface from "./Interface";
 import "./index.css";
-import { DevelopmentPage } from "./interface/Development";
 import { Discover } from "./interface/Discover";
 import { Friends } from "./interface/Friends";
 import { HomePage } from "./interface/Home";
@@ -161,7 +160,6 @@ const routes = () => (
     </Route>
     <Route path="/" component={Interface as never}>
       <Route path="/pwa" component={PWARedirect} />
-      <Route path="/dev" component={DevelopmentPage} />
       <Route path="/discover/*" component={Discover} />
       <Route path="/settings" component={SettingsRedirect} />
       <Route path="/invite/:code" component={InviteRedirect} />
