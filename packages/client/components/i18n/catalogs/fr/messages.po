@@ -91,6 +91,16 @@ msgstr "{0, plural, one {# membre} many {# membres} other {# membres}}"
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
 msgstr "{0, plural, one {# nouvelle mention} many {# nouvelles mentions} other {# nouvelles mentions}}"
 
+#. placeholder {0}: channel.voiceParticipants.size
+#: src/interface/home/FriendsOverview.tsx
+msgid "{0, plural, one {# person in the call} other {# people in the call}}"
+msgstr "{0, plural, one {# personne dans l'appel} many {# de personnes dans l'appel} other {# personnes dans l'appel}}"
+
+#. placeholder {0}: entry.others
+#: src/interface/home/FriendsOverview.tsx
+msgid "{0, plural, one {+# other} other {+# others}}"
+msgstr "{0, plural, one {+# autre} many {+# d'autres} other {+# autres}}"
+
 #. placeholder {0}: items().length
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
@@ -895,6 +905,7 @@ msgstr "Construit sur Stoat"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
+#: src/interface/home/FriendsOverview.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Busy"
@@ -1948,6 +1959,10 @@ msgstr "Pack d'émojis (affecte uniquement vos messages)"
 msgid "Emojis"
 msgstr "Émojis"
 
+#: src/interface/home/FriendsOverview.tsx
+msgid "Empty"
+msgstr "Vide"
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Enable Authenticator"
 msgstr "Activer l'authentificateur"
@@ -2122,6 +2137,7 @@ msgstr "Trouvez votre com<0/>munauté,<1/>connectez-vous avec le monde."
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
+#: src/interface/home/FriendsOverview.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2173,6 +2189,10 @@ msgstr "Gels"
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Friends"
 msgstr "Amis"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "Friends who are online or in a call show up here."
+msgstr "Les amis en ligne ou en appel apparaissent ici."
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "from "
@@ -2385,6 +2405,10 @@ msgstr "Survolez un graphique (ou donnez-lui le focus et utilisez les flèches) 
 msgid "How everyone else's audio reached you."
 msgstr "Comment l'audio des autres vous est parvenu."
 
+#: components/app/interface/settings/user/Advanced.tsx
+msgid "How many recently joined calls the Home page lists. 0 hides them."
+msgstr "Nombre d’appels récemment rejoints affichés sur la page d’accueil. 0 les masque."
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>{HYPRLAND_BIND_EXAMPLE}</1>."
 msgstr "Hyprland n'attribue pas de touches aux raccourcis des applications de lui-même. Exécutez <0>{HYPRCTL_COMMAND}</0> pour voir les entrées d'AnyTalk, puis associez chacune à une touche dans votre configuration Hyprland avec le dispatcher « global », par exemple <1>{HYPRLAND_BIND_EXAMPLE}</1>."
@@ -2415,6 +2439,7 @@ msgstr "ID copié dans le presse-papiers"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
+#: src/interface/home/FriendsOverview.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2436,6 +2461,19 @@ msgstr "Importer un CSV ou un zip"
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Imported"
 msgstr "Importé"
+
+#. placeholder {0}: inCall().length
+#: src/interface/home/FriendsOverview.tsx
+#~ msgid "In a call · {0}"
+#~ msgstr "En appel · {0}"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "In a call · {count}"
+msgstr "En appel · {count}"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "In call"
+msgstr "En appel"
 
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
@@ -2530,8 +2568,18 @@ msgstr "Délai du tampon de gigue"
 #: components/modal/modals/Invite.tsx
 #: components/modal/modals/JoinServer.tsx
 #: components/ui/components/features/messaging/elements/Invite.tsx
+#: src/interface/home/FriendsOverview.tsx
 msgid "Join"
 msgstr "Rejoindre"
+
+#. placeholder {0}: location(props.channel)
+#: src/interface/home/FriendsOverview.tsx
+#~ msgid "Join {0}"
+#~ msgstr "Rejoindre {0}"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "Join {label}"
+msgstr "Rejoindre {label}"
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Join a server"
@@ -3152,6 +3200,10 @@ msgstr "Suppression du bruit"
 msgid "None"
 msgstr "Aucun"
 
+#: src/interface/home/FriendsOverview.tsx
+msgid "None of your friends are online"
+msgstr "Aucun de vos amis n'est en ligne"
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Normal"
 msgstr "Normal"
@@ -3237,11 +3289,21 @@ msgstr "Maintenance en cours"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
+#: src/interface/home/FriendsOverview.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Online"
 msgstr "En ligne"
+
+#. placeholder {0}: online().length
+#: src/interface/home/FriendsOverview.tsx
+#~ msgid "Online · {0}"
+#~ msgstr "En ligne · {0}"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "Online · {count}"
+msgstr "En ligne · {count}"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Only change this if you run your own AnyTalk server."
@@ -3271,6 +3333,10 @@ msgstr "Ouvrir les paramètres du salon"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Open file"
 msgstr "Ouvrir le fichier"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "Open friends"
+msgstr "Ouvrir les amis"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Open server settings"
@@ -3351,8 +3417,8 @@ msgid "Password changed successfully."
 msgstr "Mot de passe modifié avec succès."
 
 #: components/app/interface/settings/user/subscriptions/EditSubscriptionJoinFlow.tsx
-msgid "Pay"
-msgstr "Payer"
+#~ msgid "Pay"
+#~ msgstr "Payer"
 
 #: src/interface/Friends.tsx
 msgid "Pending"
@@ -3587,6 +3653,14 @@ msgstr "Recevez des notifications tant que l'onglet est ouvert."
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Receive push notifications while the app is closed."
 msgstr "Recevez des notifications push lorsque l'application est fermée."
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "Recent calls"
+msgstr "Appels récents"
+
+#: components/app/interface/settings/user/Advanced.tsx
+msgid "Recent calls on Home"
+msgstr "Appels récents sur l’accueil"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
@@ -4017,6 +4091,10 @@ msgstr "Sélectionner l'entrée vidéo"
 msgid "Select your language"
 msgstr "Sélectionnez votre langue"
 
+#: src/interface/home/FriendsOverview.tsx
+msgid "Send a message to {name}"
+msgstr "Envoyer un message à {name}"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Send attachments to chat"
 msgstr "Envoyer des pièces jointes dans le chat"
@@ -4401,8 +4479,8 @@ msgid "Submit to Discover"
 msgstr "Soumettre à Découverte"
 
 #: components/app/interface/settings/UserSettings.tsx
-msgid "Subscriptions"
-msgstr "Abonnements"
+#~ msgid "Subscriptions"
+#~ msgstr "Abonnements"
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Suggest new AnyTalk features on GitHub discussions."
@@ -4412,6 +4490,10 @@ msgstr "Suggérez de nouvelles fonctionnalités pour AnyTalk sur les discussions
 #~ msgid "Support the project by donating - thank you!"
 #~ msgstr "Soutenez le projet en faisant un don, merci !"
 
+#: src/interface/home/FriendsOverview.tsx
+msgid "Switch"
+msgstr "Changer"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Switch and reload"
 msgstr "Changer et recharger"
@@ -4419,6 +4501,10 @@ msgstr "Changer et recharger"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Switch server?"
 msgstr "Changer de serveur ?"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "Switch to {label}"
+msgstr "Passer à {label}"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "Switch to this voice channel"

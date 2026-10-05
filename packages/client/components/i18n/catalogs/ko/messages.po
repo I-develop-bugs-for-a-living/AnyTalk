@@ -91,6 +91,16 @@ msgstr "{0, plural, other {멤버 #명}}"
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
 msgstr "{0, plural, other {새 멘션 #개}}"
 
+#. placeholder {0}: channel.voiceParticipants.size
+#: src/interface/home/FriendsOverview.tsx
+msgid "{0, plural, one {# person in the call} other {# people in the call}}"
+msgstr "{0, plural, other {#명이 통화 중}}"
+
+#. placeholder {0}: entry.others
+#: src/interface/home/FriendsOverview.tsx
+msgid "{0, plural, one {+# other} other {+# others}}"
+msgstr "{0, plural, other {외 #명}}"
+
 #. placeholder {0}: items().length
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
@@ -925,6 +935,7 @@ msgstr "Stoat 기반"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
+#: src/interface/home/FriendsOverview.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Busy"
@@ -1994,6 +2005,10 @@ msgstr "이모지 팩 (내 메시지에만 적용)"
 msgid "Emojis"
 msgstr "이모지"
 
+#: src/interface/home/FriendsOverview.tsx
+msgid "Empty"
+msgstr "비어 있음"
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Enable Authenticator"
 msgstr "인증기 켜기"
@@ -2168,6 +2183,7 @@ msgstr "나만의 커<0/>뮤니티를 찾고<1/>세상과 연결하세요."
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
+#: src/interface/home/FriendsOverview.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2219,6 +2235,10 @@ msgstr "멈춤 횟수"
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Friends"
 msgstr "친구"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "Friends who are online or in a call show up here."
+msgstr "온라인이거나 통화 중인 친구가 여기에 표시돼요."
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "from "
@@ -2431,6 +2451,10 @@ msgstr "차트 위에 마우스를 올리거나(또는 포커스한 뒤 방향�
 msgid "How everyone else's audio reached you."
 msgstr "다른 사람들의 오디오가 나에게 도착한 방식이에요."
 
+#: components/app/interface/settings/user/Advanced.tsx
+msgid "How many recently joined calls the Home page lists. 0 hides them."
+msgstr "홈 페이지에 표시할 최근 참여한 통화 수예요. 0이면 숨겨요."
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>{HYPRLAND_BIND_EXAMPLE}</1>."
 msgstr "Hyprland는 앱 단축키에 키를 자동으로 지정하지 않아요. <0>{HYPRCTL_COMMAND}</0>를 실행해 AnyTalk의 항목을 확인한 다음, Hyprland 설정에서 「global」 디스패처로 각 항목을 바인딩하세요. 예: <1>{HYPRLAND_BIND_EXAMPLE}</1>."
@@ -2461,6 +2485,7 @@ msgstr "ID를 클립보드에 복사했어요"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
+#: src/interface/home/FriendsOverview.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2486,6 +2511,19 @@ msgstr "CSV 또는 zip 가져오기"
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Imported"
 msgstr "가져옴"
+
+#. placeholder {0}: inCall().length
+#: src/interface/home/FriendsOverview.tsx
+#~ msgid "In a call · {0}"
+#~ msgstr "통화 중 · {0}"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "In a call · {count}"
+msgstr "통화 중 · {count}"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "In call"
+msgstr "통화 중"
 
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
@@ -2580,8 +2618,18 @@ msgstr "지터 버퍼 지연"
 #: components/modal/modals/Invite.tsx
 #: components/modal/modals/JoinServer.tsx
 #: components/ui/components/features/messaging/elements/Invite.tsx
+#: src/interface/home/FriendsOverview.tsx
 msgid "Join"
 msgstr "참여"
+
+#. placeholder {0}: location(props.channel)
+#: src/interface/home/FriendsOverview.tsx
+#~ msgid "Join {0}"
+#~ msgstr "{0} 참여"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "Join {label}"
+msgstr "{label} 참가"
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Join a server"
@@ -3205,6 +3253,10 @@ msgstr "노이즈 억제"
 msgid "None"
 msgstr "없음"
 
+#: src/interface/home/FriendsOverview.tsx
+msgid "None of your friends are online"
+msgstr "온라인인 친구가 없어요"
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Normal"
 msgstr "보통"
@@ -3290,11 +3342,21 @@ msgstr "점검 중"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
+#: src/interface/home/FriendsOverview.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Online"
 msgstr "온라인"
+
+#. placeholder {0}: online().length
+#: src/interface/home/FriendsOverview.tsx
+#~ msgid "Online · {0}"
+#~ msgstr "온라인 · {0}"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "Online · {count}"
+msgstr "온라인 · {count}"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Only change this if you run your own AnyTalk server."
@@ -3324,6 +3386,10 @@ msgstr "채널 설정 열기"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Open file"
 msgstr "파일 열기"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "Open friends"
+msgstr "친구 열기"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Open server settings"
@@ -3404,8 +3470,8 @@ msgid "Password changed successfully."
 msgstr "비밀번호를 변경했어요."
 
 #: components/app/interface/settings/user/subscriptions/EditSubscriptionJoinFlow.tsx
-msgid "Pay"
-msgstr "결제"
+#~ msgid "Pay"
+#~ msgstr "결제"
 
 #: src/interface/Friends.tsx
 msgid "Pending"
@@ -3644,6 +3710,14 @@ msgstr "탭이 열려 있는 동안 알림을 받아요."
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Receive push notifications while the app is closed."
 msgstr "앱이 닫혀 있어도 푸시 알림을 받아요."
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "Recent calls"
+msgstr "최근 통화"
+
+#: components/app/interface/settings/user/Advanced.tsx
+msgid "Recent calls on Home"
+msgstr "홈의 최근 통화"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
@@ -4080,6 +4154,10 @@ msgstr "비디오 입력 선택"
 msgid "Select your language"
 msgstr "언어 선택"
 
+#: src/interface/home/FriendsOverview.tsx
+msgid "Send a message to {name}"
+msgstr "{name}님에게 메시지 보내기"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Send attachments to chat"
 msgstr "채팅에 첨부 파일 보내기"
@@ -4470,8 +4548,8 @@ msgid "Submit to Discover"
 msgstr "탐색에 제출"
 
 #: components/app/interface/settings/UserSettings.tsx
-msgid "Subscriptions"
-msgstr "구독"
+#~ msgid "Subscriptions"
+#~ msgstr "구독"
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Suggest new AnyTalk features on GitHub discussions."
@@ -4481,6 +4559,10 @@ msgstr "GitHub 토론에서 AnyTalk의 새 기능을 제안해 주세요."
 #~ msgid "Support the project by donating - thank you!"
 #~ msgstr "기부로 프로젝트를 지원해 주세요. 감사드려요!"
 
+#: src/interface/home/FriendsOverview.tsx
+msgid "Switch"
+msgstr "전환"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Switch and reload"
 msgstr "전환 후 다시 로드"
@@ -4488,6 +4570,10 @@ msgstr "전환 후 다시 로드"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Switch server?"
 msgstr "서버를 전환할까요?"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "Switch to {label}"
+msgstr "{label}(으)로 전환"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "Switch to this voice channel"

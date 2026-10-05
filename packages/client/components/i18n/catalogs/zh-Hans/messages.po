@@ -91,6 +91,16 @@ msgstr "{0, plural, other {# 位成员}}"
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
 msgstr "{0, plural, other {# 条新提及}}"
 
+#. placeholder {0}: channel.voiceParticipants.size
+#: src/interface/home/FriendsOverview.tsx
+msgid "{0, plural, one {# person in the call} other {# people in the call}}"
+msgstr "{0, plural, other {# 人在通话中}}"
+
+#. placeholder {0}: entry.others
+#: src/interface/home/FriendsOverview.tsx
+msgid "{0, plural, one {+# other} other {+# others}}"
+msgstr "{0, plural, other {+# 人}}"
+
 #. placeholder {0}: items().length
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
@@ -925,6 +935,7 @@ msgstr "基于 Stoat 构建"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
+#: src/interface/home/FriendsOverview.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Busy"
@@ -1990,6 +2001,10 @@ msgstr "表情包（仅影响你的消息）"
 msgid "Emojis"
 msgstr "表情"
 
+#: src/interface/home/FriendsOverview.tsx
+msgid "Empty"
+msgstr "空"
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Enable Authenticator"
 msgstr "启用验证器"
@@ -2164,6 +2179,7 @@ msgstr "找到你的社<0/>区，<1/>连接世界。"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
+#: src/interface/home/FriendsOverview.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2215,6 +2231,10 @@ msgstr "卡顿次数"
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Friends"
 msgstr "好友"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "Friends who are online or in a call show up here."
+msgstr "在线或正在通话的好友会显示在这里。"
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "from "
@@ -2427,6 +2447,10 @@ msgstr "将鼠标悬停在图表上（或聚焦后使用方向键），即可同
 msgid "How everyone else's audio reached you."
 msgstr "其他人的音频是如何传到你这里的。"
 
+#: components/app/interface/settings/user/Advanced.tsx
+msgid "How many recently joined calls the Home page lists. 0 hides them."
+msgstr "主页显示最近加入的通话数量。设为 0 则隐藏。"
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>{HYPRLAND_BIND_EXAMPLE}</1>."
 msgstr "Hyprland 不会自动为应用快捷键分配按键。请运行 <0>{HYPRCTL_COMMAND}</0> 查看 AnyTalk 的条目，然后在 Hyprland 配置中使用“global”调度器绑定每一项，例如 <1>{HYPRLAND_BIND_EXAMPLE}</1>。"
@@ -2457,6 +2481,7 @@ msgstr "ID 已复制到剪贴板"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
+#: src/interface/home/FriendsOverview.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2482,6 +2507,19 @@ msgstr "导入 CSV 或 zip"
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Imported"
 msgstr "已导入"
+
+#. placeholder {0}: inCall().length
+#: src/interface/home/FriendsOverview.tsx
+#~ msgid "In a call · {0}"
+#~ msgstr "通话中 · {0}"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "In a call · {count}"
+msgstr "通话中 · {count}"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "In call"
+msgstr "通话中"
 
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
@@ -2576,8 +2614,18 @@ msgstr "抖动缓冲延迟"
 #: components/modal/modals/Invite.tsx
 #: components/modal/modals/JoinServer.tsx
 #: components/ui/components/features/messaging/elements/Invite.tsx
+#: src/interface/home/FriendsOverview.tsx
 msgid "Join"
 msgstr "加入"
+
+#. placeholder {0}: location(props.channel)
+#: src/interface/home/FriendsOverview.tsx
+#~ msgid "Join {0}"
+#~ msgstr "加入 {0}"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "Join {label}"
+msgstr "加入 {label}"
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Join a server"
@@ -3201,6 +3249,10 @@ msgstr "降噪"
 msgid "None"
 msgstr "不通知"
 
+#: src/interface/home/FriendsOverview.tsx
+msgid "None of your friends are online"
+msgstr "没有好友在线"
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Normal"
 msgstr "正常"
@@ -3286,11 +3338,21 @@ msgstr "正在维护"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
+#: src/interface/home/FriendsOverview.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Online"
 msgstr "在线"
+
+#. placeholder {0}: online().length
+#: src/interface/home/FriendsOverview.tsx
+#~ msgid "Online · {0}"
+#~ msgstr "在线 · {0}"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "Online · {count}"
+msgstr "在线 · {count}"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Only change this if you run your own AnyTalk server."
@@ -3320,6 +3382,10 @@ msgstr "打开频道设置"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Open file"
 msgstr "打开文件"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "Open friends"
+msgstr "打开好友"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Open server settings"
@@ -3400,8 +3466,8 @@ msgid "Password changed successfully."
 msgstr "密码修改成功。"
 
 #: components/app/interface/settings/user/subscriptions/EditSubscriptionJoinFlow.tsx
-msgid "Pay"
-msgstr "支付"
+#~ msgid "Pay"
+#~ msgstr "支付"
 
 #: src/interface/Friends.tsx
 msgid "Pending"
@@ -3640,6 +3706,14 @@ msgstr "标签页打开时接收通知。"
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Receive push notifications while the app is closed."
 msgstr "应用关闭时接收推送通知。"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "Recent calls"
+msgstr "最近通话"
+
+#: components/app/interface/settings/user/Advanced.tsx
+msgid "Recent calls on Home"
+msgstr "主页上的最近通话"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
@@ -4076,6 +4150,10 @@ msgstr "选择视频输入"
 msgid "Select your language"
 msgstr "选择语言"
 
+#: src/interface/home/FriendsOverview.tsx
+msgid "Send a message to {name}"
+msgstr "给 {name} 发送消息"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Send attachments to chat"
 msgstr "向聊天发送附件"
@@ -4466,8 +4544,8 @@ msgid "Submit to Discover"
 msgstr "提交到发现"
 
 #: components/app/interface/settings/UserSettings.tsx
-msgid "Subscriptions"
-msgstr "订阅"
+#~ msgid "Subscriptions"
+#~ msgstr "订阅"
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Suggest new AnyTalk features on GitHub discussions."
@@ -4477,6 +4555,10 @@ msgstr "在 GitHub 讨论区建议 AnyTalk 的新功能。"
 #~ msgid "Support the project by donating - thank you!"
 #~ msgstr "捐赠以支持此项目——谢谢！"
 
+#: src/interface/home/FriendsOverview.tsx
+msgid "Switch"
+msgstr "切换"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Switch and reload"
 msgstr "切换并重新加载"
@@ -4484,6 +4566,10 @@ msgstr "切换并重新加载"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Switch server?"
 msgstr "切换服务器？"
+
+#: src/interface/home/FriendsOverview.tsx
+msgid "Switch to {label}"
+msgstr "切换到 {label}"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "Switch to this voice channel"
