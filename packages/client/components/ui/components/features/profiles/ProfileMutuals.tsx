@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/solid/macro";
 import { For, Show } from "solid-js";
 
 import { useQuery } from "@tanstack/solid-query";
@@ -74,7 +75,7 @@ export function ProfileMutuals(props: { user: User; member?: ServerMember }) {
           <Ripple />
 
           <Text class="title" size="large">
-            Mutuals
+            <Trans>Mutuals</Trans>
           </Text>
           <Grid>
             <For each={query.data?.users}>
@@ -94,7 +95,7 @@ export function ProfileMutuals(props: { user: User; member?: ServerMember }) {
           <Ripple />
 
           <Text class="title" size="large">
-            Groups
+            <Trans>Groups</Trans>
           </Text>
           <Grid>
             <For each={query.data?.groups}>

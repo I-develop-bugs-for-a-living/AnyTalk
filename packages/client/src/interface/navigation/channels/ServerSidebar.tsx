@@ -713,7 +713,7 @@ function Entry(
             <Show when={canInvite()}>
               <a
                 use:floating={{
-                  tooltip: { placement: "top", content: "Create Invite" },
+                  tooltip: { placement: "top", content: t`Create Invite` },
                 }}
                 onClick={(e) => {
                   e.preventDefault();
@@ -731,7 +731,7 @@ function Entry(
             <Show when={canEditChannel()}>
               <a
                 use:floating={{
-                  tooltip: { placement: "top", content: "Edit Channel" },
+                  tooltip: { placement: "top", content: t`Edit Channel` },
                 }}
                 onClick={(e) => {
                   e.preventDefault();

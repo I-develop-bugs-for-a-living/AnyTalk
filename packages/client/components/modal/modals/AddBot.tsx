@@ -156,10 +156,10 @@ export function AddBotModal(props: DialogProps & Modals & { type: "add_bot" }) {
 
           <Column gap="sm" align>
             <Text class="label" size="small">
-              Bots are not verified by AnyTalk.
+              <Trans>Bots are not verified by AnyTalk.</Trans>
             </Text>
             <Text class="label" size="small">
-              The bot will not be granted any permissions.
+              <Trans>The bot will not be granted any permissions.</Trans>
             </Text>
           </Column>
         </Column>

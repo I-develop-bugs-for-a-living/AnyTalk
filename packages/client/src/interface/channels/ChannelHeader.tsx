@@ -277,7 +277,7 @@ export function ChannelHeader(props: Props) {
           }
         >
           <SearchBox
-            placeholder="Search messages..."
+            placeholder={t`Search messages...`}
             value={searchValue()!}
             onChange={(e) =>
               e.currentTarget.value

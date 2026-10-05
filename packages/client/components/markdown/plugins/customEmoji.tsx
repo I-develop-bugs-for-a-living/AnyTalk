@@ -1,3 +1,4 @@
+import { Trans, useLingui } from "@lingui/solid/macro";
 import { Match, Switch, createSignal, onMount } from "solid-js";
 
 import { Handler } from "mdast-util-to-hast";
@@ -17,6 +18,7 @@ import { CustomEmoji, Emoji } from "../emoji";
  * This will also display a tooltip and fallback to text if the emoji doesn't exist.
  */
 export function RenderCustomEmoji(props: { id: string }) {
+  const { t } = useLingui();
   const [exists, setExists] = createSignal(true);
 
   const client = useClient();
@@ -25,6 +27,16 @@ export function RenderCustomEmoji(props: { id: string }) {
    * Resolve emoji
    */
   const emoji = () => client()!.emojis.get(props.id);
+
+  /**
+   * Name of the emoji, used in the accessible label
+   */
+  const emojiName = () => emoji()?.name;
+
+  /**
+   * Name of the server the emoji belongs to, or a placeholder for private servers
+   */
+  const serverName = () => server()?.name ?? t`Private Server`;
 
   /**
    * Resolve server
@@ -50,7 +62,7 @@ export function RenderCustomEmoji(props: { id: string }) {
                   <Switch
                     fallback={
                       <>
-                        Unknown emote
+                        <Trans>Unknown emote</Trans>
                         <FetchEmote id={props.id} />
                       </>
                     }
@@ -58,7 +70,7 @@ export function RenderCustomEmoji(props: { id: string }) {
                     <Match when={emoji()?.parent.type === "Server"}>
                       <Column align>
                         <span>{`:${emoji()!.name}:`}</span>
-                        <Switch fallback="Private Server">
+                        <Switch fallback={<Trans>Private Server</Trans>}>
                           <Match when={server()}>
                             <Row align>
                               <Avatar
@@ -76,10 +88,8 @@ export function RenderCustomEmoji(props: { id: string }) {
               ),
               aria:
                 emoji()?.parent.type === "Server"
-                  ? `:${emoji()!.name}: from ${
-                      server()?.name ?? "Private Server"
-                    }`
-                  : "Unknown emote",
+                  ? t`:${emojiName()}: from ${serverName()}`
+                  : t`Unknown emote`,
             },
           }}
         >

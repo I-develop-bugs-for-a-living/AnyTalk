@@ -1,6 +1,6 @@
 import { Match, Show, Switch, createMemo, splitProps } from "solid-js";
 
-import { Trans, useLingui } from "@lingui/solid/macro";
+import { Plural, Trans, useLingui } from "@lingui/solid/macro";
 import { VirtualContainer } from "@minht11/solid-virtual-container";
 import { Channel } from "stoat.js";
 import { css } from "styled-system/css";
@@ -144,7 +144,7 @@ export const HomeSidebar = (props: Props) => {
           </Switch>
 
           <Category>
-            Direct Messages
+            <Trans>Direct Messages</Trans>
             <a
               class={css({ cursor: "pointer" })}
               onClick={() =>
@@ -356,13 +356,11 @@ function Entry(
               <TextWithEmoji content={local.channel.name!} />
             </OverflowingText>
             <span class={typography({ class: "_status" })}>
-              {/* <Plural
-                  value={local.channel.recipientIds.size}
-                  one="# Member"
-                  other="# Members"
-                /> */}
-              {local.channel.recipientIds.size}{" "}
-              {local.channel.recipientIds.size > 1 ? `Members` : "Member"}
+              <Plural
+                value={local.channel.recipientIds.size}
+                one="# Member"
+                other="# Members"
+              />
             </span>
           </Match>
           <Match when={local.channel.type === "DirectMessage"}>

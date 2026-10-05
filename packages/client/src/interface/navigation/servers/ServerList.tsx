@@ -432,7 +432,7 @@ export const ServerList = (props: Props) => {
             </div>
           )}
         </Show>
-        <Tooltip placement="right" content={"Create or join a server"}>
+        <Tooltip placement="right" content={t`Create or join a server`}>
           <a
             class={entryContainer()}
             onClick={() => props.onCreateOrJoinServer()}
@@ -441,7 +441,7 @@ export const ServerList = (props: Props) => {
           </a>
         </Tooltip>
         <Show when={instance.isStoat}>
-          <Tooltip placement="right" content={"Find new servers to join"}>
+          <Tooltip placement="right" content={t`Find new servers to join`}>
             <a
               href={state.layout.getLastActiveDiscoverPath()}
               class={entryContainer()}
@@ -454,7 +454,7 @@ export const ServerList = (props: Props) => {
       <Shadow>
         <div />
       </Shadow>
-      <Tooltip placement="right" content="Settings">
+      <Tooltip placement="right" content={t`Settings`}>
         <a
           class={entryContainer()}
           onClick={() => openModal({ type: "settings", config: "user" })}

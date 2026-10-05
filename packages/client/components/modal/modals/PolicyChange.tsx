@@ -77,7 +77,7 @@ export function PolicyChangeModal(
         checked={confirm()}
         onChange={() => setConfirm((checked) => !checked)}
       >
-        I've read and reviewed the changes.
+        <Trans>I've read and reviewed the changes.</Trans>
       </Checkbox>
     </Dialog>
   );

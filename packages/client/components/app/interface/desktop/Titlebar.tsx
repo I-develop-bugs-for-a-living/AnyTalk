@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/solid/macro";
 import { Match, Show, Switch, createSignal } from "solid-js";
 import { Motion, Presence } from "solid-motionone";
 
@@ -80,11 +81,11 @@ export function Titlebar() {
             >
               <Switch>
                 <Match when={lifecycle.state() === State.Connecting}>
-                  Connecting
+                  <Trans>Connecting</Trans>
                 </Match>
                 {/* <Match when={lifecycle.state() === State.Connected}>Connected</Match> */}
                 <Match when={lifecycle.state() === State.Disconnected}>
-                  Disconnected
+                  <Trans>Disconnected</Trans>
                   <a
                     onClick={() =>
                       lifecycle.transition({
@@ -92,14 +93,17 @@ export function Titlebar() {
                       })
                     }
                   >
-                    <strong> (reconnect now)</strong>
+                    <strong>
+                      {" "}
+                      <Trans>(reconnect now)</Trans>
+                    </strong>
                   </a>
                 </Match>
                 <Match when={lifecycle.state() === State.Reconnecting}>
-                  Reconnecting
+                  <Trans>Reconnecting</Trans>
                 </Match>
                 <Match when={lifecycle.state() === State.Offline}>
-                  Device is offline
+                  <Trans>Device is offline</Trans>
                   <a
                     onClick={() =>
                       lifecycle.transition({
@@ -110,7 +114,10 @@ export function Titlebar() {
                       "-webkit-app-region": "no-drag",
                     }}
                   >
-                    <strong> (reconnect now)</strong>
+                    <strong>
+                      {" "}
+                      <Trans>(reconnect now)</Trans>
+                    </strong>
                   </a>
                 </Match>
               </Switch>
@@ -122,7 +129,7 @@ export function Titlebar() {
                   }}
                 >
                   <Button size="sm" onPress={pendingUpdate()}>
-                    Update
+                    <Trans>Update</Trans>
                   </Button>
                 </div>
               </Show>

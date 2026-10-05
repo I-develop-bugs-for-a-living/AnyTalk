@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/solid/macro";
 import { Component, Match, Switch, createMemo } from "solid-js";
 
 import { useClient } from "@revolt/client";
@@ -13,7 +14,7 @@ export const ServerHome: Component = () => {
 
   return (
     // TODO: port the nice fallback
-    <Switch fallback="No channels!">
+    <Switch fallback={<Trans>No channels!</Trans>}>
       <Match when={!server()}>
         <Navigate href={"/"} />
       </Match>

@@ -1,6 +1,6 @@
-import { Match, Suspense, Switch } from "solid-js";
+import { Match, Show, Suspense, Switch } from "solid-js";
 
-import { Trans } from "@lingui/solid/macro";
+import { Plural, Trans } from "@lingui/solid/macro";
 import { useNavigate } from "@solidjs/router";
 import { useMutation, useQuery } from "@tanstack/solid-query";
 import { PublicChannelInvite, ServerPublicInvite } from "stoat.js";
@@ -46,6 +46,14 @@ export function Invite(props: Props) {
     onError: showError,
   }));
 
+  /**
+   * Number of members in the invited server, if the invite resolved
+   */
+  const memberCount = () =>
+    query.data instanceof ServerPublicInvite
+      ? query.data.memberCount
+      : undefined;
+
   return (
     <Base>
       <Suspense fallback={<CircularProgress />}>
@@ -69,13 +77,18 @@ export function Invite(props: Props) {
               : undefined}
           </Text>
           <Text class="label">
-            {query.data instanceof ServerPublicInvite
-              ? query.data.memberCount
-              : undefined}{" "}
-            members
+            <Show when={memberCount() !== undefined}>
+              <Plural value={memberCount()!} one="# member" other="# members" />
+            </Show>
           </Text>
         </Column>
-        <Switch fallback={<Button onPress={() => join.mutate()}>Join</Button>}>
+        <Switch
+          fallback={
+            <Button onPress={() => join.mutate()}>
+              <Trans>Join</Trans>
+            </Button>
+          }
+        >
           <Match
             when={
               query.data instanceof ServerPublicInvite &&

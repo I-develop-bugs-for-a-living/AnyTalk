@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/solid/macro";
 import { Match, Switch } from "solid-js";
 
 import { Handler } from "mdast-util-to-hast";
@@ -15,12 +16,21 @@ import MdAt from "@material-design-icons/svg/filled/alternate_email.svg?componen
 
 import { useUser } from "../users";
 
+/**
+ * Render a mention (user, role, everyone or online)
+ */
 export function RenderMention(props: {
   mentions?: string;
   disabled?: boolean;
 }) {
   return (
-    <Switch fallback={<span>Invalid Mention Element</span>}>
+    <Switch
+      fallback={
+        <span>
+          <Trans>Invalid Mention Element</Trans>
+        </span>
+      }
+    >
       <Match when={props.mentions?.startsWith("user:")}>
         <UserMention
           userId={props.mentions!.substring(5)}
@@ -51,7 +61,11 @@ export function UserMention(props: { userId: string; disabled?: boolean }) {
 
   return (
     <Switch
-      fallback={<span class={mention({ valid: false })}>Unknown User</span>}
+      fallback={
+        <span class={mention({ valid: false })}>
+          <Trans>Unknown User</Trans>
+        </span>
+      }
     >
       <Match when={user().user}>
         <div
@@ -92,7 +106,11 @@ export function RoleMention(props: { roleId: string }) {
 
   return (
     <Switch
-      fallback={<span class={mention({ valid: false })}>Unknown Role</span>}
+      fallback={
+        <span class={mention({ valid: false })}>
+          <Trans>Unknown Role</Trans>
+        </span>
+      }
     >
       <Match when={role()}>
         <div class={mention()}>

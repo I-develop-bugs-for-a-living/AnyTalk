@@ -1,3 +1,4 @@
+import { t } from "@lingui/core/macro";
 import { type Accessor, createMemo } from "solid-js";
 
 import { ServerMember, User } from "stoat.js";
@@ -117,5 +118,5 @@ export function useUser(
   id: string | Accessor<string>,
 ): Accessor<UserInformation> {
   const users = useUsers(typeof id === "function" ? () => [id()] : [id]);
-  return () => users()[0] ?? { username: "Unknown User" };
+  return () => users()[0] ?? { username: t`Unknown User` };
 }

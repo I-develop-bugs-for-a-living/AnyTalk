@@ -74,12 +74,15 @@ export function DraftMessage(props: Props) {
         {(id) => {
           const file = state.draft.getFile(id);
           const spoiler = () => state.draft.isFileSpoiler(id);
+          const fileName = file.file.name;
+          const progress = () => (file.uploadProgress[0]() * 100).toFixed();
 
           return (
             <>
               <Text class="label">
-                Uploading file `{file.file.name}`...{" "}
-                {(file.uploadProgress[0]() * 100).toFixed()}%
+                <Trans>
+                  Uploading file `{fileName}`... {progress()}%
+                </Trans>
               </Text>
               <Switch>
                 <Match when={file.dimensions}>
@@ -90,7 +93,9 @@ export function DraftMessage(props: Props) {
                     <PreviewWrapper>
                       <PreviewImage src={file.dataUri} spoiler={spoiler()} />
                       <Show when={spoiler()}>
-                        <SpoilerLabel>Spoiler</SpoilerLabel>
+                        <SpoilerLabel>
+                          <Trans>Spoiler</Trans>
+                        </SpoilerLabel>
                       </Show>
                     </PreviewWrapper>
                   </SizedContent>

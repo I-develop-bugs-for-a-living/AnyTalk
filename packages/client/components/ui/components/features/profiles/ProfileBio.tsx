@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/solid/macro";
 import { Show } from "solid-js";
 
 import { styled } from "styled-system/jsx";
@@ -31,7 +32,7 @@ export function ProfileBio(props: Props) {
         </Show>
 
         <Text class="title" size="large">
-          Bio
+          <Trans>Bio</Trans>
         </Text>
 
         <Bio>

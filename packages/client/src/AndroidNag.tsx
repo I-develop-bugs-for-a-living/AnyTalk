@@ -1,4 +1,4 @@
-import { Trans } from "@lingui/solid/macro";
+import { Trans, useLingui } from "@lingui/solid/macro";
 import { useState } from "@revolt/state";
 import { Button, Text } from "@revolt/ui";
 import { Show, createSignal } from "solid-js";
@@ -37,6 +37,7 @@ const isEligibleOrigin = () => {
  * Full screen nag encouraging Android users to install the native app
  */
 export function AndroidNag() {
+  const { t } = useLingui();
   const state = useState();
 
   const [dismissedThisSession, setDismissedThisSession] = createSignal(false);
@@ -54,7 +55,7 @@ export function AndroidNag() {
     <Show when={show()}>
       <Base>
         <Hero>
-          <img src={AndroidPromo} alt="AnyTalk on Android" />
+          <img src={AndroidPromo} alt={t`AnyTalk on Android`} />
 
           <Heading>
             <Text class="headline" size="large">

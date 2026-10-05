@@ -1,3 +1,4 @@
+import { useLingui } from "@lingui/solid/macro";
 import { Show } from "solid-js";
 
 import { styled } from "styled-system/jsx";
@@ -16,6 +17,7 @@ export function StreamVolumeButton(props: {
   /** Which edge of the button the slider lines up with */
   align?: "start" | "end";
 }) {
+  const { t } = useLingui();
   const state = useState();
 
   const muted = () => state.voice.getScreenShareMuted(props.userId);
@@ -41,10 +43,10 @@ export function StreamVolumeButton(props: {
         disabled={props.noAudio}
         title={
           props.noAudio
-            ? "This stream has no audio"
+            ? t`This stream has no audio`
             : muted()
-              ? "Unmute stream"
-              : "Mute stream"
+              ? t`Unmute stream`
+              : t`Mute stream`
         }
         aria-pressed={!props.noAudio && muted()}
         onClick={() => state.voice.setScreenShareMuted(props.userId, !muted())}

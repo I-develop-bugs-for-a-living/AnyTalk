@@ -11,7 +11,7 @@ import {
   useContext,
 } from "solid-js";
 
-import { Trans } from "@lingui/solid/macro";
+import { Trans, useLingui } from "@lingui/solid/macro";
 import { useQuery } from "@tanstack/solid-query";
 import { styled } from "styled-system/jsx";
 
@@ -56,6 +56,7 @@ type GifResult = {
 const FilterContext = createContext<(value: string) => void>();
 
 export function GifPicker() {
+  const { t } = useLingui();
   const [filter, setFilter] = createSignal("");
   const [debouncedFilter, setDebouncedFilter] = createSignal("");
 
@@ -84,7 +85,7 @@ export function GifPicker() {
           >
             <IconButton
               variant="standard"
-              aria-label="Back to categories"
+              aria-label={t`Back to categories`}
               onPress={clearFilter}
             >
               <Symbol>arrow_back</Symbol>
@@ -94,7 +95,7 @@ export function GifPicker() {
         <TextField
           autoFocus
           variant="outlined"
-          placeholder="Search for GIFs..."
+          placeholder={t`Search for GIFs...`}
           value={filter()}
           onInput={(e) => setFilter(e.currentTarget.value)}
         />

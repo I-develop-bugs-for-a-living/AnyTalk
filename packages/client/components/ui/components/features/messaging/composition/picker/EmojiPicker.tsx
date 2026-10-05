@@ -124,7 +124,7 @@ export function EmojiPicker() {
 
     items.push({
       t: 3,
-      title: "Default",
+      title: t`Default`,
     });
 
     while (items.length % COLUMNS) {
@@ -153,7 +153,7 @@ export function EmojiPicker() {
       <TextField
         autoFocus
         variant="outlined"
-        placeholder="Search for emojis..."
+        placeholder={t`Search for emojis...`}
         value={filter()}
         onInput={(e) => setFilter(e.currentTarget.value)}
         class={searchBar}

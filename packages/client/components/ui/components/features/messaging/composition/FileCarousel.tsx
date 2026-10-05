@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/solid/macro";
 import { For, Match, Show, Switch } from "solid-js";
 
 import { cva } from "styled-system/css";
@@ -128,7 +129,7 @@ export function FileCarousel(props: Props) {
 
                       <Show when={spoiler()}>
                         <SpoilerLabel onClick={onToggleSpoiler}>
-                          Spoiler
+                          <Trans>Spoiler</Trans>
                         </SpoilerLabel>
                       </Show>
 

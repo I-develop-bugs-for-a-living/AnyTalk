@@ -1,4 +1,4 @@
-import { Trans } from "@lingui/solid/macro";
+import { Trans, useLingui } from "@lingui/solid/macro";
 
 import { Dialog, DialogProps } from "@revolt/ui";
 
@@ -12,15 +12,16 @@ export function CreateOrJoinServerModal(
   props: DialogProps & Modals & { type: "create_or_join_server" },
 ) {
   const { openModal } = useModals();
+  const { t } = useLingui();
 
   return (
     <Dialog
       show={props.show}
       onClose={props.onClose}
-      title="Create or join a server"
+      title={t`Create or join a server`}
       actions={[
         {
-          text: "Create",
+          text: t`Create`,
           onClick: () => {
             openModal({
               type: "create_server",
@@ -29,7 +30,7 @@ export function CreateOrJoinServerModal(
           },
         },
         {
-          text: "Join",
+          text: t`Join`,
           onClick: () => {
             openModal({ type: "join_server", client: props.client });
           },
