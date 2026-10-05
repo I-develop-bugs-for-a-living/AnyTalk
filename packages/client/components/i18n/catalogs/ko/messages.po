@@ -566,6 +566,7 @@ msgstr "어드민"
 msgid "Admin Panel"
 msgstr "어드민 패널"
 
+#: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Advanced"
 msgstr "고급 모드"
@@ -625,6 +626,10 @@ msgstr "이미 이 사용자와 친구입니다."
 msgid "Also thins out deep voices"
 msgstr "낮은 목소리도 얇게 만들어요"
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "Also works when AnyTalk isn't focused"
+#~ msgstr "AnyTalk가 활성 상태가 아니어도 작동해요"
+
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Always Ask for Screen Share Quality"
 msgstr "화면 공유 품질을 항상 묻기"
@@ -641,6 +646,14 @@ msgstr "오류가 발생했어요."
 #: components/i18n/errors.tsx
 msgid "An internal error occurred. ({0})"
 msgstr "내부 오류가 발생했어요. ({0})"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Another app is already using these keys, so they only work inside AnyTalk. Pick other keys."
+msgstr "다른 앱이 이미 이 키를 사용하고 있어서 AnyTalk 안에서만 작동해요. 다른 키를 선택하세요."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "Another app is already using these keys. Pick other keys."
+#~ msgstr "다른 앱이 이미 이 키를 사용하고 있어요. 다른 키를 선택해 주세요."
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "AnyTalk Developer"
@@ -669,6 +682,15 @@ msgstr "언어를 바꾸려면 AnyTalk을 다시 불러와요. 사용하는 언�
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "AnyTalk rocks!"
 msgstr "AnyTalk 최고!"
+
+#. placeholder {0}: pendingServer()
+#: components/app/interface/settings/user/Native.tsx
+msgid "AnyTalk will reload and connect to {0}. You may need to sign in again."
+msgstr "AnyTalk가 다시 로드되고 {0}에 연결돼요. 다시 로그인해야 할 수도 있어요."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "AnyTalk will reload and use the default server. You may need to sign in again."
+msgstr "AnyTalk가 다시 로드되고 기본 서버를 사용해요. 다시 로그인해야 할 수도 있어요."
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "AnyTalk will start in the system tray."
@@ -942,6 +964,7 @@ msgid "Can't get discover request status right now"
 msgstr "지금은 탐색 요청 상태를 불러올 수 없어요"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
+#: components/app/interface/settings/user/Native.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/BanMember.tsx
@@ -1389,6 +1412,10 @@ msgstr "웹훅 URL 복사"
 msgid "Could not find what you requested."
 msgstr "요청한 항목을 찾을 수 없어요."
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Could not save this setting."
+msgstr "이 설정을 저장하지 못했어요."
+
 #: components/instance/index.tsx
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "{hStr}에서 AnyTalk 설정을 가져오지 못했어요."
@@ -1767,8 +1794,8 @@ msgid "Disconnected"
 msgstr "연결 끊김"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Discord RPC"
-msgstr "Discord RPC"
+#~ msgid "Discord RPC"
+#~ msgstr "Discord RPC"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -1990,6 +2017,10 @@ msgstr "향상"
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced (RNNoise)"
 msgstr "향상 (RNNoise)"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Enter a full address starting with http:// or https://"
+msgstr "http:// 또는 https://로 시작하는 전체 주소를 입력해 주세요"
 
 #: components/modal/modals/RenameSession.tsx
 msgid "Enter a new name for this session"
@@ -2229,6 +2260,10 @@ msgstr "이제 GIF는 Gifbox가 제공해요"
 msgid "Give us some detail"
 msgstr "자세한 내용을 알려 주세요"
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Global hotkeys depend on your desktop environment. On KDE and GNOME you may be asked for permission the first time."
+msgstr "전역 단축키는 데스크톱 환경에 따라 달라요. KDE와 GNOME에서는 처음에 권한을 요청할 수 있어요."
+
 #: components/modal/modals/ScreenSharePicker.tsx
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Go"
@@ -2348,6 +2383,10 @@ msgid "Hotkeys"
 msgstr "단축키"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Hotkeys work everywhere on your computer, even when AnyTalk isn't focused. Click a hotkey to record new keys, press Escape to cancel."
+msgstr "단축키는 AnyTalk이 선택되어 있지 않아도 컴퓨터 어디에서나 작동해요. 단축키를 클릭해 새 키를 입력하고, Esc를 눌러 취소하세요."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hotkeys work while AnyTalk is the focused window or tab. Click a hotkey to record new keys, press Escape to cancel."
 msgstr "단축키는 AnyTalk이 선택된 창이나 탭일 때만 작동해요. 단축키를 클릭해 새 키를 입력하고, Esc를 눌러 취소하세요."
 
@@ -2363,6 +2402,18 @@ msgstr "차트 위에 마우스를 올리거나(또는 포커스한 뒤 방향�
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "How everyone else's audio reached you."
 msgstr "다른 사람들의 오디오가 나에게 도착한 방식이에요."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>{HYPRLAND_BIND_EXAMPLE}</1>."
+msgstr "Hyprland는 앱 단축키에 키를 자동으로 지정하지 않아요. <0>{HYPRCTL_COMMAND}</0>를 실행해 AnyTalk의 항목을 확인한 다음, Hyprland 설정에서 「global」 디스패처로 각 항목을 바인딩하세요. 예: <1>{HYPRLAND_BIND_EXAMPLE}</1>."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>bind = CTRL ALT, M, global, tech.anyportal.AnyTalk:<id></1>."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>hyprctl globalshortcuts</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>bind = CTRL ALT, M, global, tech.anyportal.AnyTalk:<id></1>."
+#~ msgstr ""
 
 #: src/interface/channels/AgeGate.tsx
 msgid "I confirm that I am at least 18 years old."
@@ -2426,8 +2477,8 @@ msgid "Input Volume"
 msgstr "입력 볼륨"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Instead of closing, AnyTalk will hide in your tray."
-msgstr "닫는 대신 AnyTalk이 트레이로 숨겨져요."
+#~ msgid "Instead of closing, AnyTalk will hide in your tray."
+#~ msgstr "닫는 대신 AnyTalk이 트레이로 숨겨져요."
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Interface Font"
@@ -2534,6 +2585,10 @@ msgstr "최근으로 이동하기"
 msgid "Jump to the beginning"
 msgstr "처음으로 돌아가기"
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Keep AnyTalk running in the tray when closing the window"
+msgstr "창을 닫아도 AnyTalk를 트레이에서 계속 실행"
+
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Keep as is"
 msgstr "그대로 두기"
@@ -2603,6 +2658,10 @@ msgstr "{0}에서 나갈까요?"
 msgid "Leave all streams"
 msgstr "모든 스트림에서 나가기"
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Leave empty to use the default server. AnyTalk reloads when you save."
+msgstr "비워 두면 기본 서버를 사용해요. 저장하면 AnyTalk가 다시 로드돼요."
+
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Leave group"
 msgstr "그룹에서 나가기"
@@ -2616,8 +2675,12 @@ msgid "Leave stream"
 msgstr "스트림에서 나가기"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Let AnyTalk use its own custom titlebar."
-msgstr "AnyTalk이 자체 사용자 지정 제목 표시줄을 사용하도록 해요."
+#~ msgid "Let AnyTalk use its own custom titlebar."
+#~ msgstr "AnyTalk이 자체 사용자 지정 제목 표시줄을 사용하도록 해요."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Let AnyTalk use its own custom titlebar. Takes effect after you restart AnyTalk."
+msgstr "AnyTalk에서 자체 사용자 지정 제목 표시줄을 사용해요. AnyTalk을 다시 시작하면 적용돼요."
 
 #: src/interface/Home.tsx
 #~ msgid "Let us know how we can improve our app by giving us feedback."
@@ -2888,8 +2951,8 @@ msgid "Microphone and headphones"
 msgstr "마이크와 헤드폰"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Minimise to Tray"
-msgstr "트레이로 최소화"
+#~ msgid "Minimise to Tray"
+#~ msgstr "트레이로 최소화"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Missing permission"
@@ -3180,6 +3243,10 @@ msgstr "점검 중"
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Online"
 msgstr "온라인"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Only change this if you run your own AnyTalk server."
+msgstr "직접 AnyTalk 서버를 운영하는 경우에만 변경하세요."
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Only mentions will notify you"
@@ -3658,8 +3725,8 @@ msgid "Rename Session"
 msgstr "세션 이름 변경"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Rep AnyTalk using Discord rich presence."
-msgstr "Discord 리치 프레즌스로 AnyTalk을 알려요."
+#~ msgid "Rep AnyTalk using Discord rich presence."
+#~ msgstr "Discord 리치 프레즌스로 AnyTalk을 알려요."
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Reply"
@@ -3732,6 +3799,10 @@ msgstr "복구 코드 재설정"
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "{0}(으)로 초기화"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Reset to default"
+msgstr "기본값으로 재설정"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Reset Token"
@@ -3815,6 +3886,7 @@ msgstr "실행 중 또는 멈춤"
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
 #: components/app/interface/settings/server/Overview.tsx
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
+#: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 #: components/modal/modals/CustomStatus.tsx
 #: components/modal/modals/EditServerFolder.tsx
@@ -4005,6 +4077,10 @@ msgstr "여러 개의 첨부파일을 보냈어요"
 #: src/interface/navigation/servers/railDrag.ts
 msgid "Server"
 msgstr "서버"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Server address"
+msgstr "서버 주소"
 
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Server Avatar"
@@ -4345,6 +4421,14 @@ msgstr "GitHub 토론에서 AnyTalk의 새 기능을 제안해 주세요."
 #~ msgid "Support the project by donating - thank you!"
 #~ msgstr "기부로 프로젝트를 지원해 주세요. 감사드려요!"
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Switch and reload"
+msgstr "전환 후 다시 로드"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Switch server?"
+msgstr "서버를 전환할까요?"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "Switch to this voice channel"
 msgstr "이 음성 채널로 전환"
@@ -4457,6 +4541,14 @@ msgstr "소리를 저장하지 못했어요."
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Theme"
 msgstr "테마"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "These keys can't be used as a global hotkey."
+#~ msgstr "이 키는 전역 단축키로 사용할 수 없어요."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
+msgstr "이 키는 AnyTalk 안에서만 작동해요. 어디서나 사용하려면 Ctrl, Alt 또는 Shift와 글자나 숫자를 함께 쓰거나 F 키를 사용하세요."
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -4653,6 +4745,10 @@ msgstr "모든 소리를 켜고 볼륨과 파일을 초기화할까요?"
 msgid "Turn single sounds off, change their volume or use your own"
 msgstr "소리를 하나씩 끄거나, 볼륨을 바꾸거나, 직접 만든 소리를 사용하세요"
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Turn this off and closing the window quits AnyTalk right away."
+msgstr "이 옵션을 끄면 창을 닫을 때 AnyTalk가 바로 종료돼요."
+
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
 msgstr "사용자 차단 해제"
@@ -4783,8 +4879,12 @@ msgid "Use a code or invite link"
 msgstr "코드 또는 초대 링크 사용"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Use the graphics card to improve performance."
-msgstr "그래픽 카드를 사용해 성능을 높여요."
+#~ msgid "Use the graphics card to improve performance."
+#~ msgstr "그래픽 카드를 사용해 성능을 높여요."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Use the graphics card to improve performance. Takes effect after you restart AnyTalk."
+msgstr "그래픽 카드를 사용해 성능을 향상해요. AnyTalk를 다시 시작하면 적용돼요."
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "User"

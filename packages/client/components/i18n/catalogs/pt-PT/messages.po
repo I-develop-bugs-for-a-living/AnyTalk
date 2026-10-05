@@ -545,6 +545,7 @@ msgstr "Administrador"
 msgid "Admin Panel"
 msgstr "Painel de administrador"
 
+#: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Advanced"
 msgstr "Avançado"
@@ -602,6 +603,10 @@ msgstr "Já és amigo(a) deste utilizador."
 msgid "Also thins out deep voices"
 msgstr ""
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "Also works when AnyTalk isn't focused"
+#~ msgstr ""
+
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Always Ask for Screen Share Quality"
 msgstr "Perguntar sempre sobre a qualidade da transmissão"
@@ -618,6 +623,14 @@ msgstr "Ocorreu um erro."
 #: components/i18n/errors.tsx
 msgid "An internal error occurred. ({0})"
 msgstr "Ocorreu um erro interno. ({0})"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Another app is already using these keys, so they only work inside AnyTalk. Pick other keys."
+msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "Another app is already using these keys. Pick other keys."
+#~ msgstr ""
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "AnyTalk Developer"
@@ -646,6 +659,15 @@ msgstr ""
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "AnyTalk rocks!"
 msgstr "AnyTalk bate forte!"
+
+#. placeholder {0}: pendingServer()
+#: components/app/interface/settings/user/Native.tsx
+msgid "AnyTalk will reload and connect to {0}. You may need to sign in again."
+msgstr ""
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "AnyTalk will reload and use the default server. You may need to sign in again."
+msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "AnyTalk will start in the system tray."
@@ -918,6 +940,7 @@ msgid "Can't get discover request status right now"
 msgstr ""
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
+#: components/app/interface/settings/user/Native.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/BanMember.tsx
@@ -1364,6 +1387,10 @@ msgstr "Copiar URL do webhook"
 msgid "Could not find what you requested."
 msgstr "Não foi encontrado o teu pedido."
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Could not save this setting."
+msgstr ""
+
 #: components/instance/index.tsx
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "Não foi possível obter a configuração do AnyTalk a partir de {hStr}."
@@ -1733,8 +1760,8 @@ msgid "Disconnected"
 msgstr "Desconectado(a)"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Discord RPC"
-msgstr "RPC de Discord"
+#~ msgid "Discord RPC"
+#~ msgstr "RPC de Discord"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -1956,6 +1983,10 @@ msgstr "Aperfeiçoado"
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced (RNNoise)"
 msgstr "Aperfeiçoado (RNNoise)"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Enter a full address starting with http:// or https://"
+msgstr ""
 
 #: components/modal/modals/RenameSession.tsx
 msgid "Enter a new name for this session"
@@ -2195,6 +2226,10 @@ msgstr "GIFs agora funcionam através do GIFbox"
 msgid "Give us some detail"
 msgstr "Dá-nos alguns detalhes"
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Global hotkeys depend on your desktop environment. On KDE and GNOME you may be asked for permission the first time."
+msgstr ""
+
 #: components/modal/modals/ScreenSharePicker.tsx
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Go"
@@ -2314,6 +2349,10 @@ msgid "Hotkeys"
 msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Hotkeys work everywhere on your computer, even when AnyTalk isn't focused. Click a hotkey to record new keys, press Escape to cancel."
+msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hotkeys work while AnyTalk is the focused window or tab. Click a hotkey to record new keys, press Escape to cancel."
 msgstr ""
 
@@ -2329,6 +2368,18 @@ msgstr ""
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "How everyone else's audio reached you."
 msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>{HYPRLAND_BIND_EXAMPLE}</1>."
+msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>bind = CTRL ALT, M, global, tech.anyportal.AnyTalk:<id></1>."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>hyprctl globalshortcuts</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>bind = CTRL ALT, M, global, tech.anyportal.AnyTalk:<id></1>."
+#~ msgstr ""
 
 #: src/interface/channels/AgeGate.tsx
 msgid "I confirm that I am at least 18 years old."
@@ -2391,8 +2442,8 @@ msgid "Input Volume"
 msgstr "Volume de entrada"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Instead of closing, AnyTalk will hide in your tray."
-msgstr "Em vez de fechar, o AnyTalk ficará na tabela de sistema."
+#~ msgid "Instead of closing, AnyTalk will hide in your tray."
+#~ msgstr "Em vez de fechar, o AnyTalk ficará na tabela de sistema."
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Interface Font"
@@ -2499,6 +2550,10 @@ msgstr "Saltar para o presente"
 msgid "Jump to the beginning"
 msgstr "Saltar para o começo"
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Keep AnyTalk running in the tray when closing the window"
+msgstr ""
+
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Keep as is"
 msgstr "Manter como está"
@@ -2568,6 +2623,10 @@ msgstr "Sair {0}?"
 msgid "Leave all streams"
 msgstr ""
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Leave empty to use the default server. AnyTalk reloads when you save."
+msgstr ""
+
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Leave group"
 msgstr "Sair do grupo"
@@ -2581,8 +2640,12 @@ msgid "Leave stream"
 msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Let AnyTalk use its own custom titlebar."
-msgstr "Deixar o AnyTalk usar a sua própria janela de titulo."
+#~ msgid "Let AnyTalk use its own custom titlebar."
+#~ msgstr "Deixar o AnyTalk usar a sua própria janela de titulo."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Let AnyTalk use its own custom titlebar. Takes effect after you restart AnyTalk."
+msgstr ""
 
 #: src/interface/Home.tsx
 #~ msgid "Let us know how we can improve our app by giving us feedback."
@@ -2853,8 +2916,8 @@ msgid "Microphone and headphones"
 msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Minimise to Tray"
-msgstr "Minimizar para tabela"
+#~ msgid "Minimise to Tray"
+#~ msgstr "Minimizar para tabela"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Missing permission"
@@ -3145,6 +3208,10 @@ msgstr "Manutenção em progresso"
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Online"
 msgstr "Online"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Only change this if you run your own AnyTalk server."
+msgstr ""
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Only mentions will notify you"
@@ -3622,8 +3689,8 @@ msgid "Rename Session"
 msgstr "Renomear sessão"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Rep AnyTalk using Discord rich presence."
-msgstr "Representa o AnyTalk usando Discord 'rich presence'."
+#~ msgid "Rep AnyTalk using Discord rich presence."
+#~ msgstr "Representa o AnyTalk usando Discord 'rich presence'."
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Reply"
@@ -3695,6 +3762,10 @@ msgstr "Resetar códigos de recuperação"
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
+msgstr ""
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Reset to default"
 msgstr ""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
@@ -3779,6 +3850,7 @@ msgstr ""
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
 #: components/app/interface/settings/server/Overview.tsx
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
+#: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 #: components/modal/modals/CustomStatus.tsx
 #: components/modal/modals/EditServerFolder.tsx
@@ -3968,6 +4040,10 @@ msgstr "Enviou vários anexos"
 #: components/modal/modals/CreateGroupOrServer.tsx
 #: src/interface/navigation/servers/railDrag.ts
 msgid "Server"
+msgstr ""
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Server address"
 msgstr ""
 
 #: components/modal/modals/ServerIdentity.tsx
@@ -4309,6 +4385,14 @@ msgstr "Sugerir novas funções para o AnyTalk nas discussões do GitHub."
 #~ msgid "Support the project by donating - thank you!"
 #~ msgstr "Apoia o projecto doando - obrigado!"
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Switch and reload"
+msgstr ""
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Switch server?"
+msgstr ""
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "Switch to this voice channel"
 msgstr "Mudar para este canal de voz"
@@ -4421,6 +4505,14 @@ msgstr ""
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Theme"
 msgstr "Tema"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "These keys can't be used as a global hotkey."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
+msgstr ""
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -4617,6 +4709,10 @@ msgstr ""
 msgid "Turn single sounds off, change their volume or use your own"
 msgstr ""
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Turn this off and closing the window quits AnyTalk right away."
+msgstr ""
+
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
 msgstr "Desbloquear utilizador"
@@ -4747,8 +4843,12 @@ msgid "Use a code or invite link"
 msgstr "Usar um código ou 'link' de convite"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Use the graphics card to improve performance."
-msgstr "Utilizar placa gráfica para melhor desempenho."
+#~ msgid "Use the graphics card to improve performance."
+#~ msgstr "Utilizar placa gráfica para melhor desempenho."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Use the graphics card to improve performance. Takes effect after you restart AnyTalk."
+msgstr ""
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "User"

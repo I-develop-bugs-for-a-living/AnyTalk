@@ -566,6 +566,7 @@ msgstr "管理员"
 msgid "Admin Panel"
 msgstr "管理面板"
 
+#: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Advanced"
 msgstr "高级"
@@ -625,6 +626,10 @@ msgstr "已经与此用户成为好友。"
 msgid "Also thins out deep voices"
 msgstr "同时会削弱低沉的声音"
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "Also works when AnyTalk isn't focused"
+#~ msgstr "AnyTalk 不在前台时也能使用"
+
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Always Ask for Screen Share Quality"
 msgstr "总是询问屏幕共享画质"
@@ -641,6 +646,14 @@ msgstr "发生了错误。"
 #: components/i18n/errors.tsx
 msgid "An internal error occurred. ({0})"
 msgstr "发生内部错误。（{0}）"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Another app is already using these keys, so they only work inside AnyTalk. Pick other keys."
+msgstr "其他应用已在使用这些按键，因此它们仅在 AnyTalk 内有效。请选择其他按键。"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "Another app is already using these keys. Pick other keys."
+#~ msgstr "其他应用已在使用这些按键，请选择其他按键。"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "AnyTalk Developer"
@@ -669,6 +682,15 @@ msgstr "AnyTalk 会重新加载以切换语言，只会下载并离线保存你�
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "AnyTalk rocks!"
 msgstr "AnyTalk 太棒了！"
+
+#. placeholder {0}: pendingServer()
+#: components/app/interface/settings/user/Native.tsx
+msgid "AnyTalk will reload and connect to {0}. You may need to sign in again."
+msgstr "AnyTalk 将重新加载并连接到 {0}。你可能需要重新登录。"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "AnyTalk will reload and use the default server. You may need to sign in again."
+msgstr "AnyTalk 将重新加载并使用默认服务器。你可能需要重新登录。"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "AnyTalk will start in the system tray."
@@ -942,6 +964,7 @@ msgid "Can't get discover request status right now"
 msgstr "暂时无法获取发现申请状态"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
+#: components/app/interface/settings/user/Native.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/BanMember.tsx
@@ -1389,6 +1412,10 @@ msgstr "复制 Webhook 链接"
 msgid "Could not find what you requested."
 msgstr "找不到你请求的内容。"
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Could not save this setting."
+msgstr "无法保存此设置。"
+
 #: components/instance/index.tsx
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "无法从 {hStr} 获取 AnyTalk 配置。"
@@ -1763,8 +1790,8 @@ msgid "Disconnected"
 msgstr "已断开连接"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Discord RPC"
-msgstr "Discord RPC"
+#~ msgid "Discord RPC"
+#~ msgstr "Discord RPC"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -1986,6 +2013,10 @@ msgstr "增强"
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced (RNNoise)"
 msgstr "增强（RNNoise）"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Enter a full address starting with http:// or https://"
+msgstr "请输入以 http:// 或 https:// 开头的完整地址"
 
 #: components/modal/modals/RenameSession.tsx
 msgid "Enter a new name for this session"
@@ -2225,6 +2256,10 @@ msgstr "GIF 现由 Gifbox 提供支持"
 msgid "Give us some detail"
 msgstr "请告诉我们一些详情"
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Global hotkeys depend on your desktop environment. On KDE and GNOME you may be asked for permission the first time."
+msgstr "全局快捷键取决于你的桌面环境。在 KDE 和 GNOME 上，首次使用时可能会请求权限。"
+
 #: components/modal/modals/ScreenSharePicker.tsx
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Go"
@@ -2344,6 +2379,10 @@ msgid "Hotkeys"
 msgstr "快捷键"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Hotkeys work everywhere on your computer, even when AnyTalk isn't focused. Click a hotkey to record new keys, press Escape to cancel."
+msgstr "快捷键在你的电脑上随处可用，即使 AnyTalk 不是当前窗口。点击快捷键即可录制新按键，按 Esc 取消。"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hotkeys work while AnyTalk is the focused window or tab. Click a hotkey to record new keys, press Escape to cancel."
 msgstr "快捷键仅在 AnyTalk 为当前窗口或标签页时有效。点击快捷键即可录制新按键，按 Esc 取消。"
 
@@ -2359,6 +2398,18 @@ msgstr "将鼠标悬停在图表上（或聚焦后使用方向键），即可同
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "How everyone else's audio reached you."
 msgstr "其他人的音频是如何传到你这里的。"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>{HYPRLAND_BIND_EXAMPLE}</1>."
+msgstr "Hyprland 不会自动为应用快捷键分配按键。请运行 <0>{HYPRCTL_COMMAND}</0> 查看 AnyTalk 的条目，然后在 Hyprland 配置中使用“global”调度器绑定每一项，例如 <1>{HYPRLAND_BIND_EXAMPLE}</1>。"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>bind = CTRL ALT, M, global, tech.anyportal.AnyTalk:<id></1>."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>hyprctl globalshortcuts</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>bind = CTRL ALT, M, global, tech.anyportal.AnyTalk:<id></1>."
+#~ msgstr ""
 
 #: src/interface/channels/AgeGate.tsx
 msgid "I confirm that I am at least 18 years old."
@@ -2422,8 +2473,8 @@ msgid "Input Volume"
 msgstr "输入音量"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Instead of closing, AnyTalk will hide in your tray."
-msgstr "关闭时，AnyTalk 将隐藏到托盘中而不是退出。"
+#~ msgid "Instead of closing, AnyTalk will hide in your tray."
+#~ msgstr "关闭时，AnyTalk 将隐藏到托盘中而不是退出。"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Interface Font"
@@ -2530,6 +2581,10 @@ msgstr "跳转到现在"
 msgid "Jump to the beginning"
 msgstr "跳转到最早"
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Keep AnyTalk running in the tray when closing the window"
+msgstr "关闭窗口时让 AnyTalk 继续在托盘中运行"
+
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Keep as is"
 msgstr "保持原样"
@@ -2599,6 +2654,10 @@ msgstr "离开 {0}？"
 msgid "Leave all streams"
 msgstr "离开所有直播"
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Leave empty to use the default server. AnyTalk reloads when you save."
+msgstr "留空则使用默认服务器。保存后 AnyTalk 会重新加载。"
+
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Leave group"
 msgstr "离开群组"
@@ -2612,8 +2671,12 @@ msgid "Leave stream"
 msgstr "离开直播"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Let AnyTalk use its own custom titlebar."
-msgstr "让 AnyTalk 使用自己的自定义标题栏。"
+#~ msgid "Let AnyTalk use its own custom titlebar."
+#~ msgstr "让 AnyTalk 使用自己的自定义标题栏。"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Let AnyTalk use its own custom titlebar. Takes effect after you restart AnyTalk."
+msgstr "让 AnyTalk 使用自己的自定义标题栏。重启 AnyTalk 后生效。"
 
 #: src/interface/Home.tsx
 #~ msgid "Let us know how we can improve our app by giving us feedback."
@@ -2884,8 +2947,8 @@ msgid "Microphone and headphones"
 msgstr "麦克风和耳机"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Minimise to Tray"
-msgstr "最小化到托盘"
+#~ msgid "Minimise to Tray"
+#~ msgstr "最小化到托盘"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Missing permission"
@@ -3176,6 +3239,10 @@ msgstr "正在维护"
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Online"
 msgstr "在线"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Only change this if you run your own AnyTalk server."
+msgstr "仅当你运行自己的 AnyTalk 服务器时才需要更改。"
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Only mentions will notify you"
@@ -3654,8 +3721,8 @@ msgid "Rename Session"
 msgstr "重命名会话"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Rep AnyTalk using Discord rich presence."
-msgstr "使用 Discord 状态展示 AnyTalk。"
+#~ msgid "Rep AnyTalk using Discord rich presence."
+#~ msgstr "使用 Discord 状态展示 AnyTalk。"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Reply"
@@ -3728,6 +3795,10 @@ msgstr "重置恢复码"
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "重置为 {0}"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Reset to default"
+msgstr "恢复默认"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Reset Token"
@@ -3811,6 +3882,7 @@ msgstr "运行中或已卡住"
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
 #: components/app/interface/settings/server/Overview.tsx
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
+#: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 #: components/modal/modals/CustomStatus.tsx
 #: components/modal/modals/EditServerFolder.tsx
@@ -4001,6 +4073,10 @@ msgstr "发送多个附件"
 #: src/interface/navigation/servers/railDrag.ts
 msgid "Server"
 msgstr "服务器"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Server address"
+msgstr "服务器地址"
 
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Server Avatar"
@@ -4341,6 +4417,14 @@ msgstr "在 GitHub 讨论区建议 AnyTalk 的新功能。"
 #~ msgid "Support the project by donating - thank you!"
 #~ msgstr "捐赠以支持此项目——谢谢！"
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Switch and reload"
+msgstr "切换并重新加载"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Switch server?"
+msgstr "切换服务器？"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "Switch to this voice channel"
 msgstr "切换到此语音频道"
@@ -4453,6 +4537,14 @@ msgstr "无法保存该声音。"
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Theme"
 msgstr "主题"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "These keys can't be used as a global hotkey."
+#~ msgstr "这些按键不能用作全局快捷键。"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
+msgstr "这些按键仅在 AnyTalk 内有效。要在任何地方使用，请将 Ctrl、Alt 或 Shift 与字母或数字组合，或使用 F 键。"
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -4649,6 +4741,10 @@ msgstr "开启所有声音，并重置它们的音量和文件？"
 msgid "Turn single sounds off, change their volume or use your own"
 msgstr "单独关闭某些声音、调整音量或使用你自己的声音"
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Turn this off and closing the window quits AnyTalk right away."
+msgstr "关闭后，关闭窗口会立即退出 AnyTalk。"
+
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
 msgstr "取消屏蔽用户"
@@ -4779,8 +4875,12 @@ msgid "Use a code or invite link"
 msgstr "使用邀请码或邀请链接"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Use the graphics card to improve performance."
-msgstr "使用显卡来提升性能。"
+#~ msgid "Use the graphics card to improve performance."
+#~ msgstr "使用显卡来提升性能。"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Use the graphics card to improve performance. Takes effect after you restart AnyTalk."
+msgstr "使用显卡以提升性能。重启 AnyTalk 后生效。"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "User"
