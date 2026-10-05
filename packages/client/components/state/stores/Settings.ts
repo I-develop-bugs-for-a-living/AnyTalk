@@ -3,6 +3,7 @@ import {
   UnicodeEmojiPacks,
 } from "@revolt/markdown/emoji/UnicodeEmoji";
 import { batch } from "solid-js";
+import { reconcile } from "solid-js/store";
 
 import { State } from "..";
 
@@ -278,6 +279,12 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
    * @param value Value
    */
   setValue<T extends keyof TypeSettings>(key: T, value: TypeSettings[T]) {
+    // a plain object would be merged into the stored one, so keys missing from
+    // it (like a reset keybind) would stay; reconcile replaces it instead
+    if (typeof value === "object" && value !== null && !Array.isArray(value)) {
+      this.set(key, reconcile(value) as never);
+      return;
+    }
     this.set(key, value);
   }
 
