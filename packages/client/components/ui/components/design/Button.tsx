@@ -13,7 +13,7 @@ type Props = Omit<
     JSX.DirectiveAttributes &
     Pick<
       JSX.ButtonHTMLAttributes<HTMLButtonElement>,
-      "role" | "tabIndex" | "aria-selected"
+      "role" | "tabIndex" | "aria-selected" | "aria-pressed"
     >,
   "onClick" | "_permitAnimation" | "disabled"
 > & {
@@ -85,6 +85,7 @@ type Props = Omit<
 export function Button(props: Props) {
   const [passthrough, propsRest] = splitProps(props, [
     "aria-selected",
+    "aria-pressed",
     "tabIndex",
     "role",
   ]);

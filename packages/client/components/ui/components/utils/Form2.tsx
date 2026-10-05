@@ -313,6 +313,7 @@ const FormButtonGroup = (props: {
                     : "connected"
               }
               groupActive={props.control.value === buttonDef.value}
+              aria-pressed={props.control.value === buttonDef.value}
               onPress={() => {
                 props.control.setValue(buttonDef.value);
                 props.control.markDirty(true);
