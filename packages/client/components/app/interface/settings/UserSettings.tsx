@@ -25,7 +25,6 @@ import MdPalette from "@material-design-icons/svg/outlined/palette.svg?component
 import MdScience from "@material-design-icons/svg/outlined/science.svg?component-solid";
 import MdSmartToy from "@material-design-icons/svg/outlined/smart_toy.svg?component-solid";
 import MdVerifiedUser from "@material-design-icons/svg/outlined/verified_user.svg?component-solid";
-import MdWorkspacePremium from "@material-design-icons/svg/outlined/workspace_premium.svg?component-solid";
 
 import pageTexts from "virtual:settings-search";
 
@@ -51,7 +50,6 @@ import Native from "./user/Native";
 import Notifications from "./user/notifications/Notifications";
 import { EditProfile } from "./user/profile";
 import { Sessions } from "./user/Sessions";
-import { EditSubscription } from "./user/subscriptions";
 import { VoiceSettings } from "./user/voice/VoiceSettings";
 
 const Config: SettingsConfiguration<{ server: Server }> = {
@@ -114,8 +112,6 @@ const Config: SettingsConfiguration<{ server: Server }> = {
         return <LanguageSettings />;
       case "feedback":
         return <Feedback />;
-      case "subscribe":
-        return <EditSubscription />;
       case "native":
         return <Native />;
       case "desktop-download":
@@ -280,17 +276,6 @@ const Config: SettingsConfiguration<{ server: Server }> = {
               id: "bots",
               icon: <MdSmartToy {...iconSize(20)} />,
               title: <Trans>My Bots</Trans>,
-            },
-          ],
-        },
-        {
-          title: <Trans>Subscriptions</Trans>,
-          hidden: import.meta.env.PROD,
-          entries: [
-            {
-              id: "subscribe",
-              icon: <MdWorkspacePremium {...iconSize(20)} />,
-              title: "[premium]",
             },
           ],
         },

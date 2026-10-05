@@ -25,7 +25,6 @@ const PAGES: Record<string, string> = {
   profile: "profile/index.ts",
   sessions: "Sessions.tsx",
   bots: "bots/index.ts",
-  subscribe: "subscriptions/index.ts",
   voice: "voice/VoiceSettings.tsx",
   appearance: "appearance/index.ts",
   notifications: "notifications/Notifications.tsx",

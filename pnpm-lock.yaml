@@ -199,9 +199,6 @@ importers:
       '@solidjs/router':
         specifier: ^0.15.3
         version: 0.15.3(solid-js@1.9.14)
-      '@stripe/stripe-js':
-        specifier: ^7.3.1
-        version: 7.3.1
       '@tanstack/solid-query':
         specifier: ^5.76.0
         version: 5.76.0(solid-js@1.9.14)
@@ -358,9 +355,6 @@ importers:
       solid-qr-code:
         specifier: ^0.1.11
         version: 0.1.11(solid-js@1.9.14)
-      solid-stripe:
-        specifier: ^0.7.5
-        version: 0.7.5(@stripe/stripe-js@7.3.1)(solid-js@1.9.14)
       space-separated-tokens:
         specifier: ^2.0.2
         version: 2.0.2
@@ -3356,10 +3350,6 @@ packages:
     resolution: {integrity: sha512-iEbW8UKok2Oio7o6Y4VTzLj+KFCmQPGEpm1fS3xixwFBdclFVBvaQVeibl1jys4cujfAK5Kn6+uG2uBm3lxOMw==}
     peerDependencies:
       solid-js: 1.9.14
-
-  '@stripe/stripe-js@7.3.1':
-    resolution: {integrity: sha512-pTzb864TQWDRQBPLgSPFRoyjSDUqpCkbEgTzpsjiTjGz1Z5SxZNXJek28w1s6Dyry4CyW4/Izj5jHE/J9hCJYQ==}
-    engines: {node: '>=12.16'}
 
   '@surma/rollup-plugin-off-main-thread@2.2.3':
     resolution: {integrity: sha512-lR8q/9W7hZpMWweNiAKU7NQerBnzQQLvi8qnTDU/fxItPhtZVMbPV3lbCwjhIlNBe9Bbr5V+KHshvWmVSG9cxQ==}
@@ -6930,13 +6920,6 @@ packages:
   solid-refresh@0.6.3:
     resolution: {integrity: sha512-F3aPsX6hVw9ttm5LYlth8Q15x6MlI/J3Dn+o3EQyRTtTxidepSTwAYdozt01/YA+7ObcciagGEyXIopGZzQtbA==}
     peerDependencies:
-      solid-js: 1.9.14
-
-  solid-stripe@0.7.5:
-    resolution: {integrity: sha512-NlbOhe/GuStzrqy6R5PlEyKYmyn1CYVlQxLGw1tW89czZKpx747mlBtYr+VhYdBIiK2QubpbFwJOM7ziFjn9UQ==}
-    engines: {node: '>=20'}
-    peerDependencies:
-      '@stripe/stripe-js': ^1.44.1 || ^2.0.0 || ^3.0.0 || ^4.0.0
       solid-js: 1.9.14
 
   solid-use@0.6.2:
@@ -10939,8 +10922,6 @@ snapshots:
   '@solidjs/router@0.15.3(solid-js@1.9.14)':
     dependencies:
       solid-js: 1.9.14
-
-  '@stripe/stripe-js@7.3.1': {}
 
   '@surma/rollup-plugin-off-main-thread@2.2.3':
     dependencies:
@@ -15413,11 +15394,6 @@ snapshots:
       solid-js: 1.9.14
     transitivePeerDependencies:
       - supports-color
-
-  solid-stripe@0.7.5(@stripe/stripe-js@7.3.1)(solid-js@1.9.14):
-    dependencies:
-      '@stripe/stripe-js': 7.3.1
-      solid-js: 1.9.14
 
   solid-use@0.6.2(solid-js@1.9.14):
     dependencies:
