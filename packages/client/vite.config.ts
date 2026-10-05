@@ -18,6 +18,13 @@ const pwaScope = process.env.PWA_SCOPE || base;
 
 export default defineConfig({
   base,
+  // fixed port reachable from the local network, so phones can test the
+  // dev server at the same address every time
+  server: {
+    host: true,
+    port: 5173,
+    strictPort: true,
+  },
   plugins: [
     Inspect(),
     devtools(),
