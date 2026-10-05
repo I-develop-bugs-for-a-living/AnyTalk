@@ -5,18 +5,11 @@ import { PublicChannelInvite } from "stoat.js";
 import { css, cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
-import { IS_DEV, useClient } from "@revolt/client";
+import { useClient } from "@revolt/client";
 import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
-import {
-  Button,
-  CategoryButton,
-  Column,
-  Header,
-  iconSize,
-  main,
-} from "@revolt/ui";
+import { CategoryButton, Column, Header, iconSize, main } from "@revolt/ui";
 
 import MdAddCircle from "@material-design-icons/svg/filled/add_circle.svg?component-solid";
 import MdExplore from "@material-design-icons/svg/filled/explore.svg?component-solid";
@@ -27,6 +20,7 @@ import MdSettings from "@material-design-icons/svg/filled/settings.svg?component
 import Wordmark from "../../public/assets/web/wordmark.svg?component-solid";
 
 import { HeaderIcon } from "./common/CommonHeader";
+import { FriendsOverview } from "./home/FriendsOverview";
 
 /**
  * Base layout of the home page (i.e. the header/background)
@@ -118,6 +112,7 @@ export function HomePage() {
             })}
           />
         </Column>
+        <FriendsOverview />
         <Buttons>
           <SeparatedColumn>
             <CategoryButton
@@ -202,11 +197,6 @@ export function HomePage() {
             </CategoryButton>
           </SeparatedColumn>
         </Buttons>
-        <Show when={IS_DEV}>
-          <Button onPress={() => navigate("/dev")}>
-            Open Development Page
-          </Button>
-        </Show>
       </div>
     </Base>
   );

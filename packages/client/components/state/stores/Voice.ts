@@ -1,6 +1,7 @@
 import { State } from "..";
 
 import { AbstractStore } from ".";
+import { cleanRecentCalls, pushRecentCall } from "./recentCalls";
 
 /**
  * Possible noise suppresion states. Browser is browser noise suppresion and enhanced is machine learning suppression via RNNoise.
@@ -121,6 +122,9 @@ export interface TypeVoice {
 
   screenShareVolumes: Record<string, number>;
   screenShareMutes: Record<string, boolean>;
+
+  /** Channel ids of the last joined calls per user id, most recent first */
+  recentCalls: Record<string, string[]>;
 }
 
 /**
@@ -167,6 +171,7 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       userMutes: {},
       screenShareVolumes: {},
       screenShareMutes: {},
+      recentCalls: {},
     };
   }
 
@@ -310,7 +315,33 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
         .forEach(([k, v]) => (data.screenShareMutes[k] = v));
     }
 
+    data.recentCalls = cleanRecentCalls(input.recentCalls);
+
     return data;
+  }
+
+  /**
+   * Remember a joined call for the logged-in user
+   * @param channelId Channel that was joined
+   */
+  addRecentCall(channelId: string) {
+    const userId = this.state.auth.getSession()?.userId;
+    if (!userId) return;
+
+    this.set(
+      "recentCalls",
+      userId,
+      pushRecentCall(this.get().recentCalls[userId] ?? [], channelId),
+    );
+  }
+
+  /**
+   * Get the logged-in user's recently joined calls
+   * @returns Channel ids, most recent first
+   */
+  getRecentCalls(): string[] {
+    const userId = this.state.auth.getSession()?.userId;
+    return (userId && this.get().recentCalls[userId]) || [];
   }
 
   /**

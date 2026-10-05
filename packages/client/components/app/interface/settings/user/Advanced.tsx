@@ -7,7 +7,11 @@ import {
   AVAILABLE_EXPERIMENTS,
   EXPERIMENTS,
 } from "@revolt/state/stores/Experiments";
-import { CategoryButton, Checkbox, Column } from "@revolt/ui";
+import {
+  MAX_RECENT_CALLS,
+  clampRecentCallsShown,
+} from "@revolt/state/stores/recentCalls";
+import { CategoryButton, Checkbox, Column, Slider, Text } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 /**
@@ -50,6 +54,31 @@ export default function AdvancedSettings() {
         >
           <Trans>Show admin panel shortcuts in context menus</Trans>
         </Checkbox>
+      </Column>
+      <Column>
+        <Text class="label">
+          <Trans>Recent calls on Home</Trans>
+        </Text>
+        <Text class="body" size="small">
+          <Trans>
+            How many recently joined calls the Home page lists. 0 hides them.
+          </Trans>
+        </Text>
+        <Slider
+          min={0}
+          max={MAX_RECENT_CALLS}
+          step={1}
+          tickmarks
+          value={clampRecentCallsShown(
+            state.settings.getValue("advanced:recent_calls_shown"),
+          )}
+          onChange={(event) =>
+            state.settings.setValue(
+              "advanced:recent_calls_shown",
+              clampRecentCallsShown(event.currentTarget.value),
+            )
+          }
+        />
       </Column>
       <CategoryButton.Group>
         <For each={AVAILABLE_EXPERIMENTS}>

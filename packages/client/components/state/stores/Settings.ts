@@ -8,6 +8,10 @@ import { reconcile } from "solid-js/store";
 import { State } from "..";
 
 import { AbstractStore } from ".";
+import {
+  DEFAULT_RECENT_CALLS_SHOWN,
+  clampRecentCallsShown,
+} from "./recentCalls";
 
 /**
  * Possible notification permission states
@@ -114,6 +118,11 @@ interface SettingsDefinition {
   "advanced:developer_voice_record": boolean;
 
   /**
+   * How many recently joined calls the Home page lists, 0 hides them
+   */
+  "advanced:recent_calls_shown": number;
+
+  /**
    * User changes to keybinds, by keybind action
    */
   "keybinds:custom": Record<string, CustomKeybind>;
@@ -184,6 +193,7 @@ const EXPECTED_TYPES: { [K in keyof SettingsDefinition]: ValueType<K> } = {
   "advanced:developer_voice": "boolean",
   "advanced:developer_voice_overlay": "boolean",
   "advanced:developer_voice_record": "boolean",
+  "advanced:recent_calls_shown": "number",
   "keybinds:custom": cleanKeybinds,
 };
 
@@ -234,6 +244,7 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
       "advanced:developer_voice": false,
       "advanced:developer_voice_overlay": true,
       "advanced:developer_voice_record": true,
+      "advanced:recent_calls_shown": DEFAULT_RECENT_CALLS_SHOWN,
     };
   }
 
@@ -269,6 +280,10 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
         settings[key] = input[key] as never;
       }
     }
+
+    settings["advanced:recent_calls_shown"] = clampRecentCallsShown(
+      settings["advanced:recent_calls_shown"],
+    );
 
     return settings;
   }
