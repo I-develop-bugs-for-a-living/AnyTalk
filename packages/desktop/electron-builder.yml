@@ -1,0 +1,39 @@
+appId: tech.anyportal.AnyTalk
+productName: AnyTalk
+copyright: AnyTalk
+directories:
+  buildResources: build
+  output: release
+files:
+  - dist/**
+  - package.json
+asar: true
+afterPack: scripts/afterPack.mjs
+win:
+  icon: build/icon.ico
+  target:
+    - nsis
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  artifactName: AnyTalk-Setup-${version}.${ext}
+linux:
+  syncDesktopName: true
+  executableName: anytalk
+  icon: build/icon.png
+  category: Network;InstantMessaging
+  synopsis: AnyTalk chat client
+  maintainer: AnyTalk <noreply@anytalk.chat>
+  desktop:
+    entry:
+      Name: AnyTalk
+      Comment: AnyTalk chat client
+      Categories: Network;InstantMessaging;
+  artifactName: AnyTalk-${version}-${arch}.${ext}
+  target:
+    - AppImage
+    - deb
+    - rpm
+    - pacman

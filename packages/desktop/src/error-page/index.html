@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AnyTalk</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #1a1a1a;
+        color: #e6e6e6;
+        font-family:
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          sans-serif;
+      }
+      main {
+        max-width: 28rem;
+        padding: 2rem;
+      }
+      h1 {
+        font-size: 1.5rem;
+        margin: 0 0 0.5rem;
+      }
+      p {
+        color: #b5b5b5;
+        line-height: 1.5;
+      }
+      code {
+        word-break: break-all;
+        color: #e6e6e6;
+      }
+      .row {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-block: 1rem;
+      }
+      input {
+        flex: 1;
+        min-width: 12rem;
+        padding: 0.6rem 0.8rem;
+        border-radius: 0.5rem;
+        border: 1px solid #3a3a3a;
+        background: #262626;
+        color: inherit;
+        font: inherit;
+      }
+      button {
+        padding: 0.6rem 1rem;
+        border-radius: 0.5rem;
+        border: 0;
+        cursor: pointer;
+        background: #3a3a3a;
+        color: inherit;
+        font: inherit;
+      }
+      button.primary {
+        background: #8ab4f8;
+        color: #10161f;
+      }
+      button:focus-visible,
+      input:focus-visible {
+        outline: 2px solid #8ab4f8;
+        outline-offset: 2px;
+      }
+      #error {
+        color: #f28b82;
+        min-height: 1.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Can't reach AnyTalk</h1>
+      <p>
+        Couldn't load <code id="url"></code> <span id="reason"></span>. Check
+        your connection or the server address.
+      </p>
+      <div class="row">
+        <button class="primary" id="retry" type="button">Retry</button>
+      </div>
+      <form class="row" id="form">
+        <label for="server" hidden>Server URL</label>
+        <input
+          id="server"
+          type="url"
+          placeholder="https://chat.example.com"
+          required
+        />
+        <button type="submit">Use this server</button>
+      </form>
+      <div class="row">
+        <button id="reset" type="button">Reset to default server</button>
+      </div>
+      <p id="error" role="alert"></p>
+    </main>
+    <script>
+      const api = window.anytalkError;
+      const $ = (id) => document.getElementById(id);
+      api.getInfo().then((info) => {
+        $("url").textContent = info.url;
+        if (info.reason) $("reason").textContent = "(" + info.reason + ")";
+        $("server").value = info.url;
+      });
+      $("retry").addEventListener("click", () => api.retry());
+      $("reset").addEventListener("click", () => api.reset());
+      $("form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const ok = await api.setServerUrl($("server").value);
+        if (!ok)
+          $("error").textContent = "Enter a valid http:// or https:// address.";
+      });
+    </script>
+  </body>
+</html>

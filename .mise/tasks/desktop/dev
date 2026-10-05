@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#MISE description="Run the desktop app against the local dev server (ANYTALK_URL overrides)"
+set -e
+
+export ANYTALK_URL="${ANYTALK_URL:-http://localhost:5173}"
+pnpm --filter anytalk-desktop run dev

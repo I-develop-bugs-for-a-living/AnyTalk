@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#MISE description="Type-check the desktop app"
+set -e
+
+pnpm --filter anytalk-desktop run typecheck

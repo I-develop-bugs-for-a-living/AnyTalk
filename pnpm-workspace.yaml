@@ -2,9 +2,12 @@ packages:
   - packages/client
   - packages/stoat.js
   - packages/solid-livekit-components
+  - packages/desktop
 allowBuilds:
   "@swc/core": true
   esbuild: true
+  electron: true
+  electron-winstaller: true
 minimumReleaseAgeExclude:
   - stoat-api
 nodeLinker: isolated

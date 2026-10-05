@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#MISE description="Build the portable Windows zip (x64) locally on Linux"
+set -e
+
+pnpm --filter anytalk-desktop run package:win:zip

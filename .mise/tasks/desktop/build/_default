@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#MISE description="Build the Linux desktop packages (AppImage, deb, rpm, pacman)"
+set -e
+
+pnpm --filter anytalk-desktop run package:linux

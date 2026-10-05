@@ -1,0 +1,78 @@
+name: Desktop App
+
+# Builds the Electron desktop app (packages/desktop). It doesn't need the web
+# client build or any submodule: the app loads the server URL at runtime.
+# Set the repo variable ANYTALK_DEFAULT_URL to change the built-in server.
+
+on:
+  push:
+    tags:
+      - "desktop-v*"
+  workflow_dispatch:
+
+# A newer run for the same ref replaces a running one
+concurrency:
+  group: desktop-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            script: package:linux
+          - os: windows-latest
+            script: package:win
+    runs-on: ${{ matrix.os }}
+    env:
+      ANYTALK_DEFAULT_URL: ${{ vars.ANYTALK_DEFAULT_URL }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install packaging tools (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y rpm libarchive-tools
+
+      - run: pnpm install --frozen-lockfile --filter anytalk-desktop...
+
+      - run: pnpm --filter anytalk-desktop run typecheck
+
+      - run: pnpm --filter anytalk-desktop run ${{ matrix.script }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: anytalk-desktop-${{ matrix.os }}
+          path: |
+            packages/desktop/release/*.AppImage
+            packages/desktop/release/*.deb
+            packages/desktop/release/*.rpm
+            packages/desktop/release/*.pacman
+            packages/desktop/release/*.exe
+          if-no-files-found: error
+
+  release:
+    name: Attach to release
+    if: startsWith(github.ref, 'refs/tags/desktop-v')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/*
