@@ -37,6 +37,7 @@ import { MyAccount } from "./user/Account";
 import AdvancedSettings from "./user/Advanced";
 import { AppearanceMenu } from "./user/appearance";
 import { MyBots, ViewBot } from "./user/bots";
+import DesktopDownload from "./user/DesktopDownload";
 import { CompareRecaps } from "./user/developer/CompareRecaps";
 import {
   DeveloperSettings,
@@ -117,6 +118,8 @@ const Config: SettingsConfiguration<{ server: Server }> = {
         return <EditSubscription />;
       case "native":
         return <Native />;
+      case "desktop-download":
+        return <DesktopDownload />;
       case "voice":
         return <VoiceSettings />;
       case "keybinds":
@@ -358,6 +361,13 @@ const Config: SettingsConfiguration<{ server: Server }> = {
               hidden: !window.native,
               icon: <Symbol size={20}>desktop_windows</Symbol>,
               title: <Trans>Desktop</Trans>,
+            },
+            {
+              // web version only: the desktop app has its own "native" page
+              id: "desktop-download",
+              hidden: !!window.native,
+              icon: <Symbol size={20}>download</Symbol>,
+              title: <Trans>Desktop app</Trans>,
             },
             // {
             //   id: "experiments",

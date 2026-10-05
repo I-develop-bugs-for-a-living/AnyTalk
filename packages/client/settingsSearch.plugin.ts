@@ -32,6 +32,7 @@ const PAGES: Record<string, string> = {
   keybinds: "Hotkeys.tsx",
   language: "Language.tsx",
   native: "Native.tsx",
+  "desktop-download": "DesktopDownload.tsx",
   advanced: "Advanced.tsx",
   developer: "developer/Developer.tsx",
 };

@@ -48,11 +48,17 @@ const DEFAULT_API_URL =
 if (!isStoatOfficialAPI(DEFAULT_API_URL) && DEFAULT_HOST === STOAT_HOST)
   console.error("VITE_HOST required when VITE_API_URL is set!");
 
+/** GitHub repository (owner/name) that publishes the desktop app releases */
+const DESKTOP_RELEASES_REPO =
+  getEnv("VITE_DESKTOP_RELEASES_REPO") || "I-develop-bugs-for-a-living/AnyTalk";
+
 export default {
   /** Default instance (without the protocol) */
   DEFAULT_HOST,
   /** API URL of default instance */
   DEFAULT_API_URL,
+  /** GitHub repository (owner/name) that publishes the desktop app releases */
+  DESKTOP_RELEASES_REPO,
   /** WS server override for development */
   DEV_WS_URL: getEnv("VITE_DEV_WS_URL"),
   /** Media server override for development */
