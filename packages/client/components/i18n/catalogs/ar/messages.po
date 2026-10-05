@@ -63,7 +63,7 @@ msgstr "{0, plural, zero {# تجمّد} one {تجمّد واحد} two {تجمّ�
 #. placeholder {0}: mentions()
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
-msgstr ""
+msgstr "{0, plural, zero {# إشارة جديدة} one {إشارة جديدة واحدة} two {إشارتان جديدتان} few {# إشارات جديدة} many {# إشارة جديدة} other {# إشارة جديدة}}"
 
 #. placeholder {0}: items().length
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
@@ -90,7 +90,7 @@ msgstr "{0} غير شعار القناة"
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} dropped"
-msgstr ""
+msgstr "تم إفلات {0}"
 
 #. placeholder {0}: instance.globalLimits.server_emoji - props.server.emojis.length
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
@@ -110,12 +110,12 @@ msgstr "{0} ملفات تفوق الحجم الاقصى من {maxSizeFormatted} 
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} is already at the bottom"
-msgstr ""
+msgstr "{0} في الأسفل بالفعل"
 
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} is already at the top"
-msgstr ""
+msgstr "{0} في الأعلى بالفعل"
 
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -143,7 +143,7 @@ msgstr "{0} قام بجعل {1} المالك الجديد للمجموعة"
 #. placeholder {2}: list.length
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} moved to position {1} of {2}"
-msgstr ""
+msgstr "تم نقل {0} إلى الموضع {1} من {2}"
 
 #. placeholder {0}: props.title
 #: components/app/interface/settings/user/developer/TimeChart.tsx
@@ -159,7 +159,7 @@ msgstr ""
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} picked up, use the arrow keys to move it and space to drop it"
-msgstr ""
+msgstr "تم التقاط {0}، استخدم مفاتيح الأسهم لنقله والمسافة لإفلاته"
 
 #. placeholder {0}: (message.systemMessage as MessagePinnedSystemMessage).by?.username
 #: components/client/NotificationsWorker.tsx
@@ -206,7 +206,7 @@ msgstr "تمت إزالة {0} بواسطة {1}"
 #. placeholder {0}: props.member.user?.username
 #: components/modal/modals/TimeoutMember.tsx
 msgid "{0} will not be able to interact with the server until the timeout expires."
-msgstr ""
+msgstr "لن يتمكن {0} من التفاعل مع الخادم حتى ينتهي الحظر المؤقت."
 
 #. placeholder {0}: page() * itemsPerPage() + 1
 #. placeholder {1}: Math.min( props.itemCount!, page() * itemsPerPage() + itemsPerPage(), )
@@ -234,7 +234,7 @@ msgstr "رتب {0}"
 #. placeholder {0}: props.member.user?.username
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
-msgstr ""
+msgstr "ستتم إزالة الحظر المؤقت عن {0} وسيتمكن من التفاعل مع الخادم مجددًا."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
@@ -497,7 +497,7 @@ msgstr "إضافة صديق جديد"
 
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Add Bot"
-msgstr ""
+msgstr "إضافة بوت"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Add friend"
@@ -522,7 +522,7 @@ msgstr "إضافة نص الحالة"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Add to folder"
-msgstr ""
+msgstr "إضافة إلى مجلد"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Admin"
@@ -650,7 +650,7 @@ msgstr "المظهر"
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Apply"
-msgstr ""
+msgstr "تطبيق"
 
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Are you sure you want to clear your sessions?"
@@ -847,7 +847,7 @@ msgstr "مبني على <0>Stoat</0>"
 
 #: components/auth/src/AuthPage.tsx
 msgid "Built on Stoat"
-msgstr ""
+msgstr "مبني على Stoat"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -961,7 +961,7 @@ msgstr "تعديل"
 #. placeholder {0}: props.member.nickname ?? props.member.user?.displayName ?? props.member.user?.username
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Change {0}'s nickname"
-msgstr ""
+msgstr "تغيير لقب {0}"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change Avatar"
@@ -1139,7 +1139,7 @@ msgstr "قفل الدردشة مع {0}؟"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Close stream"
-msgstr ""
+msgstr "إغلاق البث"
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Code"
@@ -1152,7 +1152,7 @@ msgstr "الترميز"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Collapse call window"
-msgstr ""
+msgstr "طيّ نافذة المكالمة"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Colours"
@@ -1218,7 +1218,7 @@ msgstr "اتصال"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Connection lost"
-msgstr ""
+msgstr "انقطع الاتصال"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Connection quality (rated by the server)"
@@ -1339,12 +1339,12 @@ msgstr "لم يتم العثور على طلبك."
 
 #: components/instance/index.tsx
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
-msgstr ""
+msgstr "تعذّر جلب إعدادات AnyTalk من {hStr}."
 
 #. placeholder {0}: props.channel.name
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Couldn't move them to {0}."
-msgstr ""
+msgstr "تعذّر نقله إلى {0}."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "CPU"
@@ -1424,12 +1424,12 @@ msgstr "إنشاء قناة"
 
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Create Channel"
-msgstr ""
+msgstr "إنشاء قناة"
 
 #. placeholder {0}: props.category.title
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Create channel in {0}"
-msgstr ""
+msgstr "إنشاء قناة في {0}"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 #: components/app/menus/ChannelContextMenu.tsx
@@ -1477,7 +1477,7 @@ msgstr "الجلسة الحالية"
 
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Custom colour"
-msgstr ""
+msgstr "لون مخصص"
 
 #: components/modal/modals/CustomStatus.tsx
 msgid "Custom status"
@@ -1559,7 +1559,7 @@ msgstr "احذف"
 #. placeholder {0}: props.emoji.name
 #: components/modal/modals/DeleteEmoji.tsx
 msgid "Delete :{0}:?"
-msgstr ""
+msgstr "حذف :{0}:؟"
 
 #. placeholder {0}: props.bot.user?.displayName ?? props.bot.id
 #. placeholder {0}: props.channel.name
@@ -1614,7 +1614,7 @@ msgstr "حذف الرمز التعبيري"
 
 #: components/app/menus/ServerFolderContextMenu.tsx
 msgid "Delete folder"
-msgstr ""
+msgstr "حذف المجلد"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Delete Invite"
@@ -1654,7 +1654,7 @@ msgstr "حذف الويب هوك"
 
 #: components/modal/modals/DeleteEmoji.tsx
 msgid "Deleting this emoji will disallow future use. All past uses will remain."
-msgstr ""
+msgstr "حذف هذا الرمز التعبيري سيمنع استخدامه مستقبلًا. ستبقى الاستخدامات السابقة كما هي."
 
 #. placeholder {0}: props.invite.username
 #: components/modal/modals/AddBot.tsx
@@ -1805,7 +1805,7 @@ msgstr "تعديل الرمز التعبيري"
 #: components/app/menus/ServerFolderContextMenu.tsx
 #: components/modal/modals/EditServerFolder.tsx
 msgid "Edit folder"
-msgstr ""
+msgstr "تعديل المجلد"
 
 #: components/app/interface/settings/user/profile/EditProfile.tsx
 msgid "Edit Global Profile"
@@ -1964,7 +1964,7 @@ msgstr "ممتاز"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Excellent connection"
-msgstr ""
+msgstr "اتصال ممتاز"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
@@ -2032,11 +2032,11 @@ msgstr "مركز"
 
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Folder"
-msgstr ""
+msgstr "مجلد"
 
 #: components/modal/modals/EditServerFolder.tsx
 msgid "Folder colour"
-msgstr ""
+msgstr "لون المجلد"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
@@ -2078,7 +2078,7 @@ msgstr "الأصدقاء"
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "from "
-msgstr ""
+msgstr "من "
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frozen"
@@ -2163,7 +2163,7 @@ msgstr "حسن"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Good connection"
-msgstr ""
+msgstr "اتصال جيد"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Got a better GIF? Share it with everyone on Gifbox."
@@ -2482,7 +2482,7 @@ msgstr "مغادرة {0}؟"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Leave all streams"
-msgstr ""
+msgstr "مغادرة كل البثوث"
 
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Leave group"
@@ -2494,7 +2494,7 @@ msgstr "مغادرة السيرفر"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Leave stream"
-msgstr ""
+msgstr "مغادرة البث"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Let AnyTalk use its own custom titlebar."
@@ -2520,7 +2520,7 @@ msgstr "السماع"
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
-msgstr ""
+msgstr "مباشر"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Live overlay, recording and recaps of previous calls"
@@ -2652,7 +2652,7 @@ msgstr "أقصى دقة"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Maximize call window"
-msgstr ""
+msgstr "تكبير نافذة المكالمة"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Measure camera and screen share video you send or watch"
@@ -2801,7 +2801,7 @@ msgstr "المصادقة المتعددة العوامل مفعلة مسبقا."
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Multi-stream: opening a stream adds it next to the others"
-msgstr ""
+msgstr "بث متعدد: فتح بث يضيفه بجانب البقية"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
@@ -2877,7 +2877,7 @@ msgstr "جديد"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "New folder"
-msgstr ""
+msgstr "مجلد جديد"
 
 #. placeholder {0}: dayjs(decodeTime(props.lastId()!)).fromNow()
 #: components/ui/components/features/messaging/bars/NewMessages.tsx
@@ -2886,7 +2886,7 @@ msgstr "رسائل جديدة منذ {0}"
 
 #: components/modal/modals/EditCategory.tsx
 msgid "New name"
-msgstr ""
+msgstr "اسم جديد"
 
 #: components/auth/src/flows/Form.tsx
 #: components/modal/modals/EditPassword.tsx
@@ -2903,7 +2903,7 @@ msgstr "جديد على السيرفر"
 
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "New unreads"
-msgstr ""
+msgstr "غير مقروء جديد"
 
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
@@ -2911,7 +2911,7 @@ msgstr "لقب"
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "No audio was captured, switch window to share audio"
-msgstr ""
+msgstr "لم يتم التقاط أي صوت، بدّل النافذة لمشاركة الصوت"
 
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "no data"
@@ -3052,7 +3052,7 @@ msgstr "سيصل اشعار للمنشنات فقط"
 
 #: components/instance/index.tsx
 msgid "Oops, something went wrong! {e}"
-msgstr ""
+msgstr "عذرًا، حدث خطأ ما! {e}"
 
 #: components/modal/modals/Invite.tsx
 msgid "Open"
@@ -3103,7 +3103,7 @@ msgstr "نظرة عامة"
 
 #: components/ui/components/features/profiles/ProfileOwner.tsx
 msgid "Owner"
-msgstr ""
+msgstr "المالك"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
@@ -3171,7 +3171,7 @@ msgstr "اختر اسم مستخدم ليتمكن الآخرون من العثو
 
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin"
-msgstr ""
+msgstr "تثبيت"
 
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
@@ -3242,7 +3242,7 @@ msgstr "ضعيف"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Poor connection"
-msgstr ""
+msgstr "اتصال ضعيف"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor or lost connection"
@@ -3428,11 +3428,11 @@ msgstr "إعادة تحميل AnyTalk بملفات جديدة من الخادم�
 
 #: components/markdown/plugins/anchors.tsx
 msgid "Remote Channel"
-msgstr ""
+msgstr "قناة بعيدة"
 
 #: components/markdown/plugins/anchors.tsx
 msgid "Remote Server"
-msgstr ""
+msgstr "خادم بعيد"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
@@ -3457,7 +3457,7 @@ msgstr "إزالة الصديق"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Remove from folder"
-msgstr ""
+msgstr "إزالة من المجلد"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveMember.tsx
@@ -3475,7 +3475,7 @@ msgstr "حذف التفاعل"
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "Remove Timeout"
-msgstr ""
+msgstr "إزالة الحظر المؤقت"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Removes deep rumble"
@@ -3498,7 +3498,7 @@ msgstr "إعادة تسمية الفآت"
 
 #: components/modal/modals/EditEmoji.tsx
 msgid "Rename emoji"
-msgstr ""
+msgstr "إعادة تسمية الرمز التعبيري"
 
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename Session"
@@ -3590,7 +3590,7 @@ msgstr "الدقة"
 
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 msgid "Resolution and FPS"
-msgstr ""
+msgstr "الدقة ومعدل الإطارات"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Responsibly disclosed security issues"
@@ -3599,7 +3599,7 @@ msgstr "ثغرات امنية تم الابلاغ عنها"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Restore call window"
-msgstr ""
+msgstr "استعادة نافذة المكالمة"
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 msgid "Retry sending"
@@ -3830,7 +3830,7 @@ msgstr "أرسل عدة مرفقات"
 
 #: src/interface/navigation/servers/railDrag.ts
 msgid "Server"
-msgstr ""
+msgstr "خادم"
 
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Server Avatar"
@@ -3871,11 +3871,11 @@ msgstr "الجلسات"
 
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Set colour to {colour}"
-msgstr ""
+msgstr "تعيين اللون إلى {colour}"
 
 #: components/modal/modals/EditServerFolder.tsx
 msgid "Set folder colour to {value}"
-msgstr ""
+msgstr "تعيين لون المجلد إلى {value}"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Set role colour to {colour}"
@@ -3966,11 +3966,11 @@ msgstr "صامت"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Single stream: opening a stream replaces the current one"
-msgstr ""
+msgstr "بث واحد: فتح بث يستبدل البث الحالي"
 
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "Slowmode Immune"
-msgstr ""
+msgstr "معفى من الوضع البطيء"
 
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "Slowmode is enabled."
@@ -4102,11 +4102,11 @@ msgstr "انتهى البث"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Stream is still running."
-msgstr ""
+msgstr "البث لا يزال يعمل."
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Stream Settings"
-msgstr ""
+msgstr "إعدادات البث"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #~ msgid "Stream Start"
@@ -4171,7 +4171,7 @@ msgstr "التبديل إلى هذه القناة الصوتية"
 
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 msgid "Switch window"
-msgstr ""
+msgstr "تبديل النافذة"
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Sync appearance options, such as chosen emoji pack and message density."
@@ -4195,7 +4195,7 @@ msgstr "القنوات لرسائل النظام"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Tap to enable audio"
-msgstr ""
+msgstr "اضغط لتفعيل الصوت"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Tell us what's wrong with this message"
@@ -4231,19 +4231,19 @@ msgstr "لم يكن لهذا الإجراء أي تأثير."
 
 #: components/i18n/errors.tsx
 msgid "The bot has been removed from discover by moderators, the user must contact support."
-msgstr ""
+msgstr "أزال المشرفون البوت من الاكتشاف، ويجب على المستخدم التواصل مع الدعم."
 
 #: components/i18n/errors.tsx
 msgid "The bot is already on discover, the user must contact support to have it removed"
-msgstr ""
+msgstr "البوت موجود بالفعل في الاكتشاف، ويجب على المستخدم التواصل مع الدعم لإزالته"
 
 #: components/i18n/errors.tsx
 msgid "The Discover request is approved or the item has been removed from discover. In either case, the user must contact support."
-msgstr ""
+msgstr "تمت الموافقة على طلب الاكتشاف أو أُزيل العنصر من الاكتشاف. في كلتا الحالتين، يجب على المستخدم التواصل مع الدعم."
 
 #: components/i18n/errors.tsx
 msgid "The Discover request was declined. Declined requests cannot be removed, but the user may submit again."
-msgstr ""
+msgstr "تم رفض طلب الاكتشاف. لا يمكن إزالة الطلبات المرفوضة، لكن يمكن للمستخدم تقديم طلب جديد."
 
 #. placeholder {0}: file.name
 #: src/interface/channels/text/Composition.tsx
@@ -4252,7 +4252,7 @@ msgstr "الملف \"{0}\" ({fileSize}) يتعدى الحجم الأقصى ال�
 
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
-msgstr ""
+msgstr "أزال المشرفون العنصر، وبالتالي يُمنع تقديم طلبات مستقبلية. تواصل مع الدعم لمزيد من المعلومات."
 
 #: components/i18n/errors.tsx
 msgid "The password is too short."
@@ -4260,11 +4260,11 @@ msgstr "كلمة المرور أقصر من الحد الادنى."
 
 #: components/i18n/errors.tsx
 msgid "The server has been removed from discover by moderators, the user must contact support."
-msgstr ""
+msgstr "أزال المشرفون الخادم من الاكتشاف، ويجب على المستخدم التواصل مع الدعم."
 
 #: components/i18n/errors.tsx
 msgid "The server is already on discover, the user must contact support to have it removed."
-msgstr ""
+msgstr "الخادم موجود بالفعل في الاكتشاف، ويجب على المستخدم التواصل مع الدعم لإزالته."
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "The sound couldn't be saved."
@@ -4363,7 +4363,7 @@ msgstr "هذا الخادم قابل للاكتشاف"
 
 #: components/i18n/errors.tsx
 msgid "This sign up is marked as spam."
-msgstr ""
+msgstr "تم وضع علامة سبام على هذا التسجيل."
 
 #: components/i18n/errors.tsx
 #~ msgid "This sign up is marked as spam. Please see <0>this support article.</0>"
@@ -4396,21 +4396,21 @@ msgstr "تنسيق الوقت"
 #. placeholder {0}: props.member!.timeout!.toLocaleString()
 #: src/interface/channels/text/MemberSidebar.tsx
 msgid "Timed out until {0}"
-msgstr ""
+msgstr "محظور مؤقتًا حتى {0}"
 
 #. placeholder {0}: props.message.member!.timeout!.toLocaleString()
 #: components/app/interface/channels/text/Message.tsx
 msgid "Timed Out until {0}"
-msgstr ""
+msgstr "محظور مؤقتًا حتى {0}"
 
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
-msgstr ""
+msgstr "حظر مؤقت"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout Member"
-msgstr ""
+msgstr "حظر العضو مؤقتًا"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Timeout Members"
@@ -4511,7 +4511,7 @@ msgstr "إلغاء كتم السيرفر"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unnamed folder"
-msgstr ""
+msgstr "مجلد بدون اسم"
 
 #: components/modal/modals/PinMessage.tsx
 msgid "Unpin"
@@ -4767,7 +4767,7 @@ msgstr "مشاهدة عدة بثوث في وقت واحد"
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "Watch stream"
-msgstr ""
+msgstr "مشاهدة البث"
 
 #: src/AndroidNag.tsx
 msgid "We are working hard on optimising our web app for mobile."
@@ -4842,7 +4842,7 @@ msgstr "مع {0}"
 #. placeholder {0}: names.length
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "with {0} others"
-msgstr ""
+msgstr "مع {0} آخرين"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "with {participants}"
@@ -4878,7 +4878,7 @@ msgstr "تم حظرك من هذا السيرفر."
 
 #: components/ui/components/features/messaging/composition/MessageBox.tsx
 msgid "You are timed out and can't send messages right now."
-msgstr ""
+msgstr "أنت محظور مؤقتًا ولا يمكنك إرسال الرسائل الآن."
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "You call someone and wait for them to join"
@@ -4963,7 +4963,7 @@ msgstr "ليس لديك صلاحية لإرسال رسائل في هذه الق�
 #. placeholder {0}: homeNotifications()
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "You have {0} pending friend requests."
-msgstr ""
+msgstr "لديك {0} طلبات صداقة معلقة."
 
 #: components/i18n/errors.tsx
 msgid "You have been locked out for entering a wrong password multiple times. Please wait a couple minutes and try again."
@@ -4987,7 +4987,7 @@ msgstr "أنكا ربما تواجه مشكلات في الاتصال."
 
 #: components/i18n/errors.tsx
 msgid "You may not submit this item to discover."
-msgstr ""
+msgstr "لا يجوز لك تقديم هذا العنصر إلى الاكتشاف."
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "You mute your microphone"
@@ -5116,7 +5116,7 @@ msgstr "رموز الإسترجاع الخاصة بك"
 
 #: components/i18n/errors.tsx
 msgid "Your request failed. Please contact support."
-msgstr ""
+msgstr "فشل طلبك. يرجى التواصل مع الدعم."
 
 #: components/i18n/errors.tsx
 msgid "Your role ranking is too low to take this action."
