@@ -1,8 +1,10 @@
+import { plural } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/solid/macro";
 
 import { Language, Languages, browserPreferredLanguage } from "@revolt/i18n";
 import type { LanguageEntry } from "@revolt/i18n/Languages";
 import { timeLocale } from "@revolt/i18n/dayjs";
+import { languageMatchesQuery } from "@revolt/i18n/languageSearch";
 import { UnicodeEmoji } from "@revolt/markdown/emoji";
 import { useState } from "@revolt/state";
 import {
@@ -54,7 +56,7 @@ const RE_LANG = /_/g;
  */
 function PickLanguage() {
   const { locale } = useState();
-  const { i18n } = useLingui();
+  const { i18n, t } = useLingui();
 
   //@ts-expect-error unfilled object
   const langOpts: { [k in Language]: CategorySelectOption } = {};
@@ -103,6 +105,22 @@ function PickLanguage() {
       title={<Trans>Select your language</Trans>}
       value={i18n().locale as Language}
       options={langOpts}
+      search={{
+        label: t`Search languages`,
+        matches: (query, key) =>
+          languageMatchesQuery(
+            query,
+            key,
+            Languages[key].display,
+            i18n().locale,
+          ),
+        resultsLabel: (count) =>
+          count
+            ? plural(count, { one: "# language", other: "# languages" })
+            : t`No languages found`,
+        emptyTitle: <Trans>No languages found</Trans>,
+        emptyBody: <Trans>Try another name or language code.</Trans>,
+      }}
       onUpdate={(id) => locale.switch(id)}
     />
   );
