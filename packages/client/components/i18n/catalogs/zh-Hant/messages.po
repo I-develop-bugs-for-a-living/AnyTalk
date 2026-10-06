@@ -42,7 +42,7 @@ msgstr "dddd [在] LT"
 #. placeholder {1}: serverName()
 #: components/markdown/plugins/customEmoji.tsx
 msgid ":{0}: from {1}"
-msgstr ""
+msgstr ":{0}:，來自 {1}"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "(changes are being saved…)"
@@ -50,61 +50,61 @@ msgstr "(正在儲存變更…)"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "(opens in a new tab)"
-msgstr ""
+msgstr "（在新分頁中開啟）"
 
 #: components/app/interface/desktop/Titlebar.tsx
 msgid "(reconnect now)"
-msgstr ""
+msgstr "（立即重新連線）"
 
 #. placeholder {0}: props.count
 #: components/ui/components/features/messaging/elements/BlockedMessage.tsx
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
-msgstr ""
+msgstr "{0, plural, other {# 則已封鎖的訊息}}"
 
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
-msgstr ""
+msgstr "{0, plural, other {# 次凍結，{seconds} 秒}}"
 
 #. placeholder {0}: meta.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze} other {# freezes}}"
-msgstr ""
+msgstr "{0, plural, other {# 次凍結}}"
 
 #. placeholder {0}: onlineMembers()
 #: src/interface/channels/text/MemberSidebar.tsx
 msgid "{0, plural, one {# member online} other {# members online}}"
-msgstr ""
+msgstr "{0, plural, other {# 位成員在線上}}"
 
 #. placeholder {0}: memberCount()
 #: components/ui/components/features/messaging/elements/Invite.tsx
 msgid "{0, plural, one {# member} other {# members}}"
-msgstr ""
+msgstr "{0, plural, other {# 位成員}}"
 
 #. placeholder {0}: local.channel.recipientIds.size
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "{0, plural, one {# Member} other {# Members}}"
-msgstr ""
+msgstr "{0, plural, other {# 位成員}}"
 
 #. placeholder {0}: mentions()
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
-msgstr ""
+msgstr "{0, plural, other {# 則新提及}}"
 
 #. placeholder {0}: channel.voiceParticipants.size
 #: src/interface/home/FriendsOverview.tsx
 msgid "{0, plural, one {# person in the call} other {# people in the call}}"
-msgstr ""
+msgstr "{0, plural, other {通話中有 # 人}}"
 
 #. placeholder {0}: entry.others
 #: src/interface/home/FriendsOverview.tsx
 msgid "{0, plural, one {+# other} other {+# others}}"
-msgstr ""
+msgstr "{0, plural, other {+# 位其他人}}"
 
 #. placeholder {0}: items().length
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
-msgstr ""
+msgstr "{0, plural, other {放開以上傳 # 個檔案}}"
 
 #. placeholder {0}: users() .slice(0, -1) .map((user) => user!.username) .join(", ")
 #. placeholder {1}: users().slice(-1)[0]!.username
@@ -126,12 +126,12 @@ msgstr "{0} 更改了頻道圖標"
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} dropped"
-msgstr ""
+msgstr "已放下 {0}"
 
 #. placeholder {0}: instance.globalLimits.server_emoji - props.server.emojis.length
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "{0} emoji slots remaining"
-msgstr "剩餘 0 個表情符號槽位"
+msgstr "剩餘 {0} 個表情符號槽位"
 
 #. placeholder {0}: rejectedFiles.length
 #: src/interface/channels/text/Composition.tsx
@@ -146,12 +146,12 @@ msgstr "{0} 個檔案超過了 {maxSizeFormatted} 的大小限制，因此未上
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} is already at the bottom"
-msgstr ""
+msgstr "{0} 已在最下方"
 
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} is already at the top"
-msgstr ""
+msgstr "{0} 已在最上方"
 
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -179,7 +179,7 @@ msgstr "{0} 任命 {1} 為新的群組擁有者"
 #. placeholder {2}: list.length
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} moved to position {1} of {2}"
-msgstr ""
+msgstr "{0} 已移至第 {1} 個位置（共 {2} 個）"
 
 #. placeholder {0}: props.title
 #: components/app/interface/settings/user/developer/TimeChart.tsx
@@ -195,7 +195,7 @@ msgstr ""
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} picked up, use the arrow keys to move it and space to drop it"
-msgstr ""
+msgstr "已拿起 {0}，使用方向鍵移動，按空白鍵放下"
 
 #. placeholder {0}: (message.systemMessage as MessagePinnedSystemMessage).by?.username
 #: components/client/NotificationsWorker.tsx
@@ -221,12 +221,12 @@ msgstr "{0} 取消釘選了一則訊息"
 #. placeholder {1}: (message.systemMessage as UserModeratedSystemMessage).by?.username
 #: components/client/NotificationsWorker.tsx
 msgid "{0} was added by {1}"
-msgstr ""
+msgstr "{0} 已被 {1} 加入"
 
 #. placeholder {0}: (message.systemMessage as UserSystemMessage).user?.username
 #: components/client/NotificationsWorker.tsx
 msgid "{0} was banned"
-msgstr "{0} 被封禁"
+msgstr "{0} 已被停權"
 
 #. placeholder {0}: (message.systemMessage as UserSystemMessage).user?.username
 #: components/client/NotificationsWorker.tsx
@@ -242,14 +242,14 @@ msgstr "{0} 被 {1} 移除"
 #. placeholder {0}: props.member.user?.username
 #: components/modal/modals/TimeoutMember.tsx
 msgid "{0} will not be able to interact with the server until the timeout expires."
-msgstr ""
+msgstr "在暫時禁言結束前，{0} 將無法與伺服器互動。"
 
 #. placeholder {0}: page() * itemsPerPage() + 1
 #. placeholder {1}: Math.min( props.itemCount!, page() * itemsPerPage() + itemsPerPage(), )
 #. placeholder {2}: props.itemCount
 #: components/ui/components/design/DataTable.tsx
 msgid "{0}-{1} of {2}"
-msgstr ""
+msgstr "{0}-{1}/{2}"
 
 #. placeholder {0}: file.name
 #. placeholder {1}: (err as Error).message
@@ -265,32 +265,32 @@ msgstr ""
 #. placeholder {0}: props.member.displayName
 #: components/modal/modals/UserProfileRoles.tsx
 msgid "{0}'s roles"
-msgstr ""
+msgstr "{0} 的身分組"
 
 #. placeholder {0}: props.member.user?.username
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
-msgstr ""
+msgstr "{0} 的暫時禁言將被解除，對方可再次與伺服器互動。"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
-msgstr ""
+msgstr "{combo} 已被其他快速鍵使用。"
 
 #: components/app/interface/settings/user/developer/CompareChart.tsx
 msgid "{count, plural, one {{title} over time, # recap} other {{title} over time, # recaps}}"
-msgstr ""
+msgstr "{count, plural, other {{title} 趨勢，# 份回顧}}"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{count} selected"
-msgstr ""
+msgstr "已選取 {count} 項"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "{fileName}: can't be read as a zip ({error})."
-msgstr ""
+msgstr "{fileName}：無法讀取為 zip 檔（{error}）。"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "{fileName}: there are no CSV files inside."
-msgstr ""
+msgstr "{fileName}：裡面沒有 CSV 檔案。"
 
 #~ msgid "{h} hours"
 #~ msgstr ""
@@ -300,38 +300,38 @@ msgstr ""
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{n, plural, one {Delete # call recap?} other {Delete # call recaps?}}"
-msgstr ""
+msgstr "{n, plural, other {要刪除 # 份通話回顧嗎？}}"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{n, plural, one {Delete # stream recap?} other {Delete # stream recaps?}}"
-msgstr ""
+msgstr "{n, plural, other {要刪除 # 份直播回顧嗎？}}"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{name}'s {source}"
-msgstr ""
+msgstr "{name} 的{source}"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{name}'s camera"
-msgstr ""
+msgstr "{name} 的攝影機"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{name}'s screen share"
-msgstr ""
+msgstr "{name} 的螢幕分享"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "{participant} heard"
-msgstr ""
+msgstr "{participant} 聽到的內容"
 
 #~ msgid "{sec} seconds"
 #~ msgstr ""
 
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
-msgstr ""
+msgstr "{title}趨勢"
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
-msgstr ""
+msgstr "{unknown} 已回應"
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{usernames} and {unknown} others reacted"
@@ -339,19 +339,19 @@ msgstr "{usernames} 和其他 {unknown} 人做出了反應"
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{usernames} reacted"
-msgstr ""
+msgstr "{usernames} 已回應"
 
 #: components/ui/components/features/messaging/elements/SystemMessage.tsx
 msgid "<0/> has been added by <1/>"
-msgstr ""
+msgstr "<0/> 已被 <1/> 加入"
 
 #: components/ui/components/features/messaging/elements/SystemMessage.tsx
 msgid "<0/> has been banned from the server"
-msgstr ""
+msgstr "<0/> 已被伺服器停權"
 
 #: components/ui/components/features/messaging/elements/SystemMessage.tsx
 msgid "<0/> has been kicked from the server"
-msgstr ""
+msgstr "<0/> 已被踢出伺服器"
 
 #: components/ui/components/features/messaging/elements/SystemMessage.tsx
 msgid "<0/> has been removed by <1/>"
@@ -379,7 +379,7 @@ msgstr "<0/> 開始了通話"
 
 #: components/ui/components/features/messaging/elements/SystemMessage.tsx
 msgid "<0/> started a call that lasted "
-msgstr ""
+msgstr "<0/> 發起了一場通話，時長 "
 
 #: components/ui/components/features/messaging/elements/SystemMessage.tsx
 msgid "<0/> transferred group ownership to <1/>"
@@ -395,16 +395,16 @@ msgstr "<0/> 更新了群組描述"
 
 #: components/ui/components/features/messaging/elements/SystemMessage.tsx
 msgid "<0/> updated the group icon "
-msgstr ""
+msgstr "<0/> 更新了群組圖示 "
 
 #. placeholder {0}: (props.systemMessage as ChannelRenamedSystemMessage).name
 #: components/ui/components/features/messaging/elements/SystemMessage.tsx
 msgid "<0/> updated the group name to <1>{0}</1>"
-msgstr ""
+msgstr "<0/> 將群組名稱更新為 <1>{0}</1>"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "<0>Be careful!</0><1/>This is not the same as the link that was displayed:"
-msgstr ""
+msgstr "<0>請小心！</0><1/>這與顯示的連結不同："
 
 #~ msgid "1 day"
 #~ msgstr ""
@@ -462,23 +462,23 @@ msgstr "24 小時"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "A (bottom button)"
-msgstr ""
+msgstr "A（下方按鈕）"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "A controller is connected."
-msgstr ""
+msgstr "已連接控制器。"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A message or notification arrives"
-msgstr ""
+msgstr "收到訊息或通知時"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream in your call ends"
-msgstr ""
+msgstr "通話中的直播結束時"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream starts in your call"
-msgstr ""
+msgstr "通話中開始直播時"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Able to access channels on this server"
@@ -498,7 +498,7 @@ msgstr "能夠進行語音通話"
 
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Accept"
-msgstr ""
+msgstr "接受"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
@@ -507,15 +507,15 @@ msgstr "同意好友邀請"
 
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Account has been queued for deletion!"
-msgstr ""
+msgstr "帳號已排入刪除佇列！"
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Acknowledge"
-msgstr ""
+msgstr "確認"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Action"
-msgstr ""
+msgstr "動作"
 
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
@@ -525,11 +525,11 @@ msgstr "添加"
 #: components/modal/modals/AddFriend.tsx
 #: src/interface/Friends.tsx
 msgid "Add a new friend"
-msgstr ""
+msgstr "新增好友"
 
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Add Bot"
-msgstr ""
+msgstr "新增機器人"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Add friend"
@@ -537,24 +537,24 @@ msgstr "新增好友"
 
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Add Friend"
-msgstr ""
+msgstr "新增好友"
 
 #: components/modal/modals/AddMembersToGroup.tsx
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Add friends to group"
-msgstr ""
+msgstr "將好友加入群組"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Add new members to the group"
-msgstr ""
+msgstr "將新成員加入群組"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Add one of my recaps"
-msgstr ""
+msgstr "加入我的一份回顧"
 
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Add reaction"
-msgstr ""
+msgstr "新增表情回應"
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Add status text"
@@ -562,7 +562,7 @@ msgstr "添加狀態文字"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Add to folder"
-msgstr ""
+msgstr "加入資料夾"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Admin"
@@ -582,7 +582,7 @@ msgstr "進階"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Advanced sound settings"
-msgstr ""
+msgstr "進階音訊設定"
 
 #~ msgid "Affects all roles and users"
 #~ msgstr ""
@@ -593,7 +593,7 @@ msgstr "全部"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "All messages"
-msgstr ""
+msgstr "所有訊息"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
@@ -603,31 +603,31 @@ msgstr "所有訊息"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "All recaps"
-msgstr ""
+msgstr "所有回顧"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "All roles have overrides."
-msgstr ""
+msgstr "所有身分組都已有覆寫設定。"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "All Systems Operational"
-msgstr ""
+msgstr "所有系統運作正常"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Allow members to change name and avatar per-message"
-msgstr ""
+msgstr "允許成員逐則訊息變更名稱與大頭貼"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Allow others to add your bot to their servers from Discover"
-msgstr ""
+msgstr "允許他人從探索頁面將你的機器人加入其伺服器"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Allow others to invite your bot"
-msgstr ""
+msgstr "允許他人邀請你的機器人"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Allow others to join your server from Discover"
-msgstr ""
+msgstr "允許他人從探索頁面加入你的伺服器"
 
 #: components/i18n/errors.tsx
 msgid "Already friends with this user."
@@ -635,7 +635,7 @@ msgstr "已經與此使用者成為好友。"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Also thins out deep voices"
-msgstr ""
+msgstr "也會讓低沉的聲音變薄"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #~ msgid "Also works when AnyTalk isn't focused"
@@ -643,24 +643,24 @@ msgstr ""
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Always Ask for Screen Share Quality"
-msgstr ""
+msgstr "每次都詢問螢幕分享畫質"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "American (MM/DD/YYYY)"
-msgstr ""
+msgstr "美式（MM/DD/YYYY）"
 
 #: components/modal/modals/Error2.tsx
 msgid "An error occurred."
-msgstr ""
+msgstr "發生錯誤。"
 
 #. placeholder {0}: err.location
 #: components/i18n/errors.tsx
 msgid "An internal error occurred. ({0})"
-msgstr ""
+msgstr "發生內部錯誤。（{0}）"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Another app is already using these keys, so they only work inside AnyTalk. Pick other keys."
-msgstr ""
+msgstr "其他應用程式已在使用這些按鍵，因此只能在 AnyTalk 內運作。請改選其他按鍵。"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #~ msgid "Another app is already using these keys. Pick other keys."
@@ -669,56 +669,56 @@ msgstr ""
 #. placeholder {0}: installed()
 #: components/app/interface/settings/user/Updates.tsx
 msgid "AnyTalk Desktop {0}"
-msgstr ""
+msgstr "AnyTalk 桌面版 {0}"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "AnyTalk Developer"
-msgstr ""
+msgstr "AnyTalk 開發者"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "AnyTalk for Desktop"
-msgstr ""
+msgstr "AnyTalk 桌面版"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "AnyTalk Founder"
-msgstr ""
+msgstr "AnyTalk 創辦人"
 
 #: components/auth/src/flows/FlowHome.tsx
 msgid "AnyTalk is one of the best ways to stay connected with your friends and community, anywhere, anytime."
-msgstr ""
+msgstr "AnyTalk 是讓你隨時隨地與朋友和社群保持聯繫的最佳方式之一。"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "AnyTalk is up to date."
-msgstr ""
+msgstr "AnyTalk 已是最新版本。"
 
 #: src/AndroidNag.tsx
 msgid "AnyTalk on Android"
-msgstr ""
+msgstr "Android 版 AnyTalk"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "AnyTalk reloads to switch language, only the language you use is downloaded and kept offline."
-msgstr ""
+msgstr "切換語言時 AnyTalk 會重新載入，只會下載並離線保存你使用的語言。"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "AnyTalk rocks!"
-msgstr ""
+msgstr "AnyTalk 太棒了！"
 
 #. placeholder {0}: pendingServer()
 #: components/app/interface/settings/user/Native.tsx
 msgid "AnyTalk will reload and connect to {0}. You may need to sign in again."
-msgstr ""
+msgstr "AnyTalk 將重新載入並連線至 {0}。你可能需要重新登入。"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "AnyTalk will reload and use the default server. You may need to sign in again."
-msgstr ""
+msgstr "AnyTalk 將重新載入並使用預設伺服器。你可能需要重新登入。"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "AnyTalk will start in the system tray."
-msgstr ""
+msgstr "AnyTalk 將在系統匣中啟動。"
 
 #: src/AndroidNag.tsx
 msgid "AnyTalk works best as an app"
-msgstr ""
+msgstr "AnyTalk 以應用程式使用效果最佳"
 
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -727,27 +727,27 @@ msgstr "外觀"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Applies to servers you join or create from now on. Existing servers keep their level."
-msgstr ""
+msgstr "適用於你之後加入或建立的伺服器。現有伺服器維持原本的等級。"
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Apply"
-msgstr ""
+msgstr "套用"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Apps"
-msgstr ""
+msgstr "應用程式"
 
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Are you sure you want to clear your sessions?"
-msgstr ""
+msgstr "確定要清除你的所有工作階段嗎？"
 
 #: components/modal/modals/DeleteMessage.tsx
 msgid "Are you sure you want to delete this?"
-msgstr ""
+msgstr "確定要刪除嗎？"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "Are you sure you want to go to "
-msgstr ""
+msgstr "確定要前往 "
 
 #~ msgid "Are you sure you want to go to <0>{0}</0>?"
 #~ msgstr ""
@@ -768,7 +768,7 @@ msgstr "你確定要取消釘選這則訊息嗎？"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Assign lower-ranked roles to lower-ranking members"
-msgstr ""
+msgstr "將較低階的身分組指派給較低階的成員"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Assign Roles"
@@ -784,15 +784,15 @@ msgstr "分配身份組"
 #: components/app/interface/settings/user/developer/CompareChart.tsx
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "at {time}"
-msgstr ""
+msgstr "{time}"
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Audio disabled by browser"
-msgstr ""
+msgstr "音訊已被瀏覽器停用"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Audio level"
-msgstr ""
+msgstr "音量大小"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/modal/modals/MFAFlow.tsx
@@ -801,7 +801,7 @@ msgstr "二步驟驗證程式"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Automatic Gain Control"
-msgstr ""
+msgstr "自動增益控制"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Avatar"
@@ -809,7 +809,7 @@ msgstr "頭像"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Averages"
-msgstr ""
+msgstr "平均值"
 
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 #~ msgid "avg"
@@ -817,24 +817,24 @@ msgstr ""
 
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "avg {value}"
-msgstr ""
+msgstr "平均 {value}"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Avg bitrate"
-msgstr ""
+msgstr "平均位元率"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Avg frame rate"
-msgstr ""
+msgstr "平均畫面更新率"
 
 #: components/app/interface/settings/user/developer/CompareChart.tsx
 msgid "avg per recap"
-msgstr ""
+msgstr "每份回顧平均"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "B (right button)"
-msgstr ""
+msgstr "B（右側按鈕）"
 
 #: components/app/interface/settings/user/_AccountCard.tsx
 #: components/auth/src/flows/FlowCheck.tsx
@@ -847,7 +847,7 @@ msgstr "返回"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Back to categories"
-msgstr ""
+msgstr "返回分類"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Badges"
@@ -856,56 +856,56 @@ msgstr "徽章"
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
 msgid "Ban"
-msgstr "封鎖"
+msgstr "停權"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Ban evasion"
-msgstr ""
+msgstr "規避停權"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Ban lower-ranking members from the server"
-msgstr ""
+msgstr "將較低階的成員從伺服器停權"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Ban member"
-msgstr "封鎖成員"
+msgstr "停權成員"
 
 #: components/modal/modals/BanMember.tsx
 msgid "Ban Member"
-msgstr ""
+msgstr "停權成員"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Ban Members"
-msgstr "封鎖成員"
+msgstr "停權成員"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Ban user"
-msgstr ""
+msgstr "停權使用者"
 
 #: components/modal/modals/BanNonMember.tsx
 msgid "Ban User"
-msgstr ""
+msgstr "停權使用者"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Bandwidth"
-msgstr ""
+msgstr "頻寬"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Banner"
-msgstr ""
+msgstr "橫幅"
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Bans"
-msgstr "封鎖"
+msgstr "停權"
 
 #: components/ui/components/features/profiles/ProfileBio.tsx
 msgid "Bio"
-msgstr ""
+msgstr "自我介紹"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Bitrate"
-msgstr ""
+msgstr "位元率"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Block user"
@@ -925,7 +925,7 @@ msgstr "機器人"
 
 #: components/modal/modals/AddBot.tsx
 msgid "Bots are not verified by AnyTalk."
-msgstr ""
+msgstr "機器人未經 AnyTalk 驗證。"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
@@ -944,11 +944,11 @@ msgstr "追蹤錯誤"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Built on <0>Stoat</0>"
-msgstr ""
+msgstr "基於 <0>Stoat</0> 打造"
 
 #: components/auth/src/AuthPage.tsx
 msgid "Built on Stoat"
-msgstr ""
+msgstr "基於 Stoat 打造"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -956,15 +956,15 @@ msgstr ""
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Busy"
-msgstr ""
+msgstr "忙碌"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Button"
-msgstr ""
+msgstr "按鈕"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Buttons"
-msgstr ""
+msgstr "按鈕"
 
 #: components/modal/modals/CreateBot.tsx
 #~ msgid "By creating this bot, you agree to the <0>Acceptable Use Policy</0>."
@@ -976,32 +976,32 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Bypass Slowmode"
-msgstr ""
+msgstr "略過慢速模式"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Bypasses slowmode in channels"
-msgstr ""
+msgstr "在頻道中略過慢速模式"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Call"
-msgstr ""
+msgstr "通話"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Calls"
-msgstr ""
+msgstr "通話"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Camera"
-msgstr ""
+msgstr "攝影機"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
-msgstr ""
+msgstr "找不到合適的 GIF？前往 Gifbox 上傳你自己的，讓大家使用。"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Can't get discover request status right now"
-msgstr ""
+msgstr "目前無法取得探索申請狀態"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 #: components/app/interface/settings/user/Native.tsx
@@ -1040,7 +1040,7 @@ msgstr "取消"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Cancel discover request"
-msgstr ""
+msgstr "取消探索申請"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
@@ -1049,11 +1049,11 @@ msgstr "取消好友邀請"
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 msgid "Cancel message"
-msgstr ""
+msgstr "取消訊息"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Cancel your discover request and remove it from the review queue"
-msgstr ""
+msgstr "取消你的探索申請，並從審核佇列中移除"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
@@ -1061,7 +1061,7 @@ msgstr "在伺服器被刪除或轉移前無法刪除帳戶"
 
 #: components/i18n/errors.tsx
 msgid "Cannot edit this message."
-msgstr ""
+msgstr "無法編輯此訊息。"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/modal/modals/EditBotUsername.tsx
@@ -1074,7 +1074,7 @@ msgstr "變更"
 #. placeholder {0}: props.member.nickname ?? props.member.user?.displayName ?? props.member.user?.username
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Change {0}'s nickname"
-msgstr ""
+msgstr "變更 {0} 的暱稱"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change Avatar"
@@ -1082,20 +1082,20 @@ msgstr "更改頭貼"
 
 #: components/modal/modals/EditBotUsername.tsx
 msgid "Change bot username"
-msgstr ""
+msgstr "變更機器人使用者名稱"
 
 #. placeholder {0}: props.member.server!.name
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Change identity on {0}"
-msgstr ""
+msgstr "變更在 {0} 的身分"
 
 #: components/modal/modals/EditEmail.tsx
 msgid "Change login email"
-msgstr ""
+msgstr "變更登入電子郵件"
 
 #: components/modal/modals/EditPassword.tsx
 msgid "Change login password"
-msgstr ""
+msgstr "變更登入密碼"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change Nickname"
@@ -1103,31 +1103,31 @@ msgstr "更改暱稱"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change other members' nicknames"
-msgstr ""
+msgstr "變更其他成員的暱稱"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own avatar"
-msgstr ""
+msgstr "變更自己的大頭貼"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
-msgstr ""
+msgstr "變更自己的暱稱"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
-msgstr ""
+msgstr "變更此機器人的使用者名稱"
 
 #: components/modal/modals/EditUsername.tsx
 msgid "Change username"
-msgstr ""
+msgstr "變更使用者名稱"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change Username"
-msgstr ""
+msgstr "變更使用者名稱"
 
 #: components/app/interface/settings/user/profile/EditProfile.tsx
 msgid "Change your profile per-server"
-msgstr ""
+msgstr "依伺服器變更你的個人檔案"
 
 #~ msgid "Changelog"
 #~ msgstr ""
@@ -1138,7 +1138,7 @@ msgstr "頻道簡介"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Channel Info"
-msgstr ""
+msgstr "頻道資訊"
 
 #: components/app/interface/settings/channel/Overview.tsx
 #: components/modal/modals/CreateChannel.tsx
@@ -1147,11 +1147,11 @@ msgstr "頻道名稱"
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Channel Settings"
-msgstr ""
+msgstr "頻道設定"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Channel Slowmode"
-msgstr ""
+msgstr "頻道慢速模式"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -1161,7 +1161,7 @@ msgstr "頻道"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Chat Input"
-msgstr ""
+msgstr "聊天輸入"
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -1170,19 +1170,19 @@ msgstr ""
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Check back often to see if your bot has been approved!"
-msgstr ""
+msgstr "請經常回來查看你的機器人是否已通過審核！"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Check back often to see if your server has been approved!"
-msgstr ""
+msgstr "請經常回來查看你的伺服器是否已通過審核！"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Check for updates"
-msgstr ""
+msgstr "檢查更新"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Check for updates to see if there is a new version."
-msgstr ""
+msgstr "檢查更新以確認是否有新版本。"
 
 #: components/auth/src/flows/FlowCheck.tsx
 msgid "Check your mail!"
@@ -1190,15 +1190,15 @@ msgstr "請檢查您的電子郵件！"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Checking for updates…"
-msgstr ""
+msgstr "正在檢查更新…"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
-msgstr ""
+msgstr "選擇使用者名稱"
 
 #: components/modal/modals/Onboarding.tsx
 msgid "Choose username"
-msgstr ""
+msgstr "選擇使用者名稱"
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
@@ -1206,19 +1206,19 @@ msgstr "清除狀態"
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
-msgstr ""
+msgstr "點擊下方項目，了解更多不同的變更！"
 
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Click to copy username"
-msgstr ""
+msgstr "點擊以複製使用者名稱"
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Click to show full description"
-msgstr ""
+msgstr "點擊以顯示完整說明"
 
 #: components/ui/components/utils/Spoiler.tsx
 msgid "Click to show spoiler"
-msgstr ""
+msgstr "點擊以顯示劇透內容"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Client Settings"
@@ -1257,66 +1257,66 @@ msgstr "關閉"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Close chat"
-msgstr ""
+msgstr "關閉聊天"
 
 #. placeholder {0}: props.channel.recipient?.displayName
 #: components/modal/modals/DeleteChannel.tsx
 msgid "Close conversation with {0}?"
-msgstr ""
+msgstr "要關閉與 {0} 的對話嗎？"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Close stream"
-msgstr ""
+msgstr "關閉直播"
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Code"
-msgstr ""
+msgstr "代碼"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Codec"
-msgstr ""
+msgstr "編解碼器"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Collapse call window"
-msgstr ""
+msgstr "收合通話視窗"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Colours"
-msgstr ""
+msgstr "顏色"
 
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Coming soon! 👀"
-msgstr ""
+msgstr "即將推出！👀"
 
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Compact mode"
-msgstr ""
+msgstr "精簡模式"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
-msgstr ""
+msgstr "比較回顧"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Compare Recaps"
-msgstr ""
+msgstr "比較回顧"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Concealed audio"
-msgstr ""
+msgstr "補償音訊"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Concealed audio (made up to hide lost packets)"
-msgstr ""
+msgstr "補償音訊（用來掩蓋遺失封包而生成）"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Configure a way to get back into your account in case your 2FA is lost"
-msgstr ""
+msgstr "設定在遺失雙重驗證時找回帳號的方式"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Configure one-time password authentication"
-msgstr ""
+msgstr "設定一次性密碼驗證"
 
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
@@ -1333,24 +1333,24 @@ msgstr "連接"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Connect to voice channel"
-msgstr ""
+msgstr "連線至語音頻道"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Connected"
-msgstr ""
+msgstr "已連線"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Connecting"
-msgstr ""
+msgstr "連線中"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Connection lost"
-msgstr ""
+msgstr "連線中斷"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Connection quality (rated by the server)"
-msgstr ""
+msgstr "連線品質（由伺服器評定）"
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -1359,11 +1359,11 @@ msgstr ""
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Contact support to remove this bot from discover"
-msgstr ""
+msgstr "請聯絡支援團隊以將此機器人從探索頁面移除"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Contact support to remove this server from discover"
-msgstr ""
+msgstr "請聯絡支援團隊以將此伺服器從探索頁面移除"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Content breaks one or more laws"
@@ -1376,11 +1376,11 @@ msgstr "繼續"
 
 #: src/AndroidNag.tsx
 msgid "Continue in browser"
-msgstr ""
+msgstr "在瀏覽器中繼續"
 
 #: components/auth/src/flows/FlowVerify.tsx
 msgid "Continue to app"
-msgstr ""
+msgstr "前往應用程式"
 
 #: components/app/interface/settings/user/Language.tsx
 #~ msgid "Contribute a language"
@@ -1388,11 +1388,11 @@ msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Controller"
-msgstr ""
+msgstr "控制器"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Controller support"
-msgstr ""
+msgstr "控制器支援"
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Conversations"
@@ -1400,11 +1400,11 @@ msgstr "對話"
 
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
-msgstr ""
+msgstr "已複製！"
 
 #: components/app/menus/CategoryContextMenu.tsx
 msgid "Copy category ID"
-msgstr ""
+msgstr "複製分類 ID"
 
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Copy channel ID"
@@ -1412,7 +1412,7 @@ msgstr "複製頻道 ID"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Copy file link"
-msgstr ""
+msgstr "複製檔案連結"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Copy ID"
@@ -1420,11 +1420,11 @@ msgstr "複製 ID"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Copy invite link"
-msgstr ""
+msgstr "複製邀請連結"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Copy Invite URL"
-msgstr ""
+msgstr "複製邀請網址"
 
 #: components/app/menus/ChannelContextMenu.tsx
 #: components/app/menus/MessageContextMenu.tsx
@@ -1433,7 +1433,7 @@ msgstr "複製連結"
 
 #: components/modal/modals/CreateInvite.tsx
 msgid "Copy Link"
-msgstr ""
+msgstr "複製連結"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Copy message ID"
@@ -1441,11 +1441,11 @@ msgstr "複製訊息 ID"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Copy message link"
-msgstr ""
+msgstr "複製訊息連結"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Copy role ID"
-msgstr ""
+msgstr "複製身分組 ID"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Copy server ID"
@@ -1458,7 +1458,7 @@ msgstr "複製文字"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Copy Token"
-msgstr ""
+msgstr "複製權杖"
 
 #: components/app/menus/UserContextMenu.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -1467,7 +1467,7 @@ msgstr "複製使用者 ID"
 
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
 msgid "Copy webhook URL"
-msgstr ""
+msgstr "複製 Webhook 網址"
 
 #: components/app/interface/settings/user/Updates.tsx
 #~ msgid "Could not check for updates."
@@ -1475,37 +1475,37 @@ msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "Could not find what you requested."
-msgstr ""
+msgstr "找不到你要求的內容。"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not load the patch notes right now."
-msgstr ""
+msgstr "目前無法載入更新說明。"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
-msgstr ""
+msgstr "無法連線至更新程式。請再試一次。"
 
 #: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not save this setting."
-msgstr ""
+msgstr "無法儲存此設定。"
 
 #: components/instance/index.tsx
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
-msgstr ""
+msgstr "無法從 {hStr} 取得 AnyTalk 設定。"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Couldn't load downloads"
-msgstr ""
+msgstr "無法載入下載項目"
 
 #. placeholder {0}: to.name
 #: components/ui/components/features/voice/useMoveVoiceUser.ts
 msgid "Couldn't move them to {0}."
-msgstr ""
+msgstr "無法將其移至 {0}。"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "CPU"
-msgstr ""
+msgstr "CPU"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 #: components/modal/modals/CreateBot.tsx
@@ -1521,7 +1521,7 @@ msgstr "創建"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Create a channel before inviting others!"
-msgstr ""
+msgstr "邀請他人之前請先建立頻道！"
 
 #~ msgid "Create a group"
 #~ msgstr "建立群組"
@@ -1529,7 +1529,7 @@ msgstr ""
 #: components/modal/modals/CreateGroupOrServer.tsx
 #: src/interface/Home.tsx
 msgid "Create a group or server"
-msgstr ""
+msgstr "建立群組或伺服器"
 
 #: components/modal/modals/CreateBot.tsx
 msgid "Create a new bot"
@@ -1537,19 +1537,19 @@ msgstr "新建機器人"
 
 #: components/modal/modals/CreateCategory.tsx
 msgid "Create a new category"
-msgstr ""
+msgstr "建立新分類"
 
 #: components/modal/modals/CreateGroup.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Create a new group"
-msgstr ""
+msgstr "建立新群組"
 
 #~ msgid "Create a new role"
 #~ msgstr "新建身份組"
 
 #: components/modal/modals/CreateWebhook.tsx
 msgid "Create a webhook"
-msgstr ""
+msgstr "建立 Webhook"
 
 #: components/auth/src/flows/FlowCreate.tsx
 msgid "Create an account"
@@ -1557,15 +1557,15 @@ msgstr "建立帳號"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Create and edit server roles"
-msgstr ""
+msgstr "建立與編輯伺服器身分組"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Create and edit webhooks"
-msgstr ""
+msgstr "建立與編輯 Webhook"
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "Create Bot"
-msgstr ""
+msgstr "建立機器人"
 
 #: components/app/menus/CategoryContextMenu.tsx
 #: components/app/menus/ChannelContextMenu.tsx
@@ -1582,12 +1582,12 @@ msgstr "建立頻道"
 
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Create Channel"
-msgstr ""
+msgstr "建立頻道"
 
 #. placeholder {0}: props.category.title
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Create channel in {0}"
-msgstr ""
+msgstr "在 {0} 中建立頻道"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 #: components/app/menus/ChannelContextMenu.tsx
@@ -1598,36 +1598,36 @@ msgstr "新建邀請"
 #: components/modal/modals/CreateInvite.tsx
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Create Invite"
-msgstr ""
+msgstr "建立邀請"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Create invites for others to use"
-msgstr ""
+msgstr "建立邀請供他人使用"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Create or join a server"
-msgstr ""
+msgstr "建立或加入伺服器"
 
 #: components/modal/modals/CreateRole.tsx
 msgid "Create Role"
-msgstr ""
+msgstr "建立身分組"
 
 #: components/modal/modals/CreateServer.tsx
 msgid "Create server"
-msgstr ""
+msgstr "建立伺服器"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Create server emoji"
-msgstr ""
+msgstr "建立伺服器表情符號"
 
 #: components/app/interface/settings/channel/webhooks/WebhooksList.tsx
 msgid "Create Webhook"
-msgstr ""
+msgstr "建立 Webhook"
 
 #: components/app/interface/settings/user/Sessions.tsx
 msgid "Created <0/>"
-msgstr ""
+msgstr "建立於 <0/>"
 
 #: components/modal/modals/EditEmail.tsx
 #: components/modal/modals/EditPassword.tsx
@@ -1637,11 +1637,11 @@ msgstr "目前密碼"
 
 #: components/app/interface/settings/user/Sessions.tsx
 msgid "Current Session"
-msgstr ""
+msgstr "目前的工作階段"
 
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Custom colour"
-msgstr ""
+msgstr "自訂顏色"
 
 #: components/modal/modals/CustomStatus.tsx
 msgid "Custom status"
@@ -1649,7 +1649,7 @@ msgstr "自訂狀態"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Custom window frame"
-msgstr ""
+msgstr "自訂視窗邊框"
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Customisation"
@@ -1657,38 +1657,38 @@ msgstr "自訂"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad or left stick"
-msgstr ""
+msgstr "方向鍵或左搖桿"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Dark"
-msgstr ""
+msgstr "深色"
 
 #. placeholder {0}: err.location
 #: components/i18n/errors.tsx
 msgid "Database error, please contact support. ({0})"
-msgstr ""
+msgstr "資料庫錯誤，請聯絡支援團隊。（{0}）"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Date format"
-msgstr ""
+msgstr "日期格式"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Deafen"
-msgstr ""
+msgstr "拒聽"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen lower-ranking members in voice call"
-msgstr ""
+msgstr "在語音通話中讓較低階的成員拒聽"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
-msgstr "靜音成員"
+msgstr "拒聽成員"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
-msgstr ""
+msgstr "解碼器"
 
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
@@ -1698,18 +1698,18 @@ msgstr "預設"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Default notifications for new servers"
-msgstr ""
+msgstr "新伺服器的預設通知"
 
 #~ msgid "Default Permissions"
 #~ msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Default sound"
-msgstr ""
+msgstr "預設音效"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Degraded Performance"
-msgstr ""
+msgstr "效能下降"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 #: components/modal/modals/DeleteBot.tsx
@@ -1725,7 +1725,7 @@ msgstr "移除"
 #. placeholder {0}: props.emoji.name
 #: components/modal/modals/DeleteEmoji.tsx
 msgid "Delete :{0}:?"
-msgstr ""
+msgstr "要刪除 :{0}: 嗎？"
 
 #. placeholder {0}: props.bot.user?.displayName ?? props.bot.id
 #. placeholder {0}: props.channel.name
@@ -1735,37 +1735,37 @@ msgstr ""
 #: components/modal/modals/DeleteRole.tsx
 #: components/modal/modals/DeleteServer.tsx
 msgid "Delete {0}?"
-msgstr ""
+msgstr "要刪除 {0} 嗎？"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Delete Account"
-msgstr ""
+msgstr "刪除帳號"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Delete all call recaps on this device?"
-msgstr ""
+msgstr "要刪除此裝置上的所有通話回顧嗎？"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Delete all recaps"
-msgstr ""
+msgstr "刪除所有回顧"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Delete all stream recaps on this device?"
-msgstr ""
+msgstr "要刪除此裝置上的所有直播回顧嗎？"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Delete and pin messages sent by other members"
-msgstr ""
+msgstr "刪除並釘選其他成員傳送的訊息"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Delete Bot"
-msgstr ""
+msgstr "刪除機器人"
 
 #: components/app/menus/CategoryContextMenu.tsx
 #: components/modal/modals/DeleteCategory.tsx
 msgid "Delete category"
-msgstr ""
+msgstr "刪除分類"
 
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Delete channel"
@@ -1773,19 +1773,19 @@ msgstr "刪除頻道"
 
 #: components/app/interface/settings/ChannelSettings.tsx
 msgid "Delete Channel"
-msgstr ""
+msgstr "刪除頻道"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Delete Emoji"
-msgstr ""
+msgstr "刪除表情符號"
 
 #: components/app/menus/ServerFolderContextMenu.tsx
 msgid "Delete folder"
-msgstr ""
+msgstr "刪除資料夾"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Delete Invite"
-msgstr ""
+msgstr "刪除邀請"
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 #: components/app/menus/MessageContextMenu.tsx
@@ -1796,12 +1796,12 @@ msgstr "刪除訊息"
 
 #: components/modal/modals/BanMember.tsx
 msgid "Delete Message History"
-msgstr ""
+msgstr "刪除訊息記錄"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Delete recap"
-msgstr ""
+msgstr "刪除回顧"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Delete Role"
@@ -1809,53 +1809,53 @@ msgstr "刪除身份組"
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Delete Server"
-msgstr ""
+msgstr "刪除伺服器"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Delete this recap?"
-msgstr ""
+msgstr "要刪除此回顧嗎？"
 
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
 msgid "Delete webhook"
-msgstr ""
+msgstr "刪除 Webhook"
 
 #: components/modal/modals/DeleteEmoji.tsx
 msgid "Deleting this emoji will disallow future use. All past uses will remain."
-msgstr ""
+msgstr "刪除此表情符號後將無法再使用，過去的使用紀錄會保留。"
 
 #. placeholder {0}: props.invite.username
 #: components/modal/modals/AddBot.tsx
 msgid "Description provided by {0}"
-msgstr ""
+msgstr "說明由 {0} 提供"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop"
-msgstr ""
+msgstr "桌面"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
-msgstr ""
+msgstr "桌面應用程式"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Developer"
-msgstr ""
+msgstr "開發者"
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "Developer Documentation"
-msgstr ""
+msgstr "開發者文件"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Developer modes measure call performance and keep statistics of previous calls and streams on this device. Turn on either or both."
-msgstr ""
+msgstr "開發者模式會測量通話效能，並在此裝置上保留先前通話與直播的統計資料。可開啟其中一項或兩項。"
 
 #: components/app/interface/desktop/Titlebar.tsx
 msgid "Device is offline"
-msgstr ""
+msgstr "裝置已離線"
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Direct Messages"
-msgstr ""
+msgstr "私訊"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Disable Account"
@@ -1863,17 +1863,17 @@ msgstr "凍結帳號"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Disable one-time password authenticator"
-msgstr ""
+msgstr "停用一次性密碼驗證器"
 
 #: components/app/interface/settings/server/Overview.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Disabled"
-msgstr ""
+msgstr "已停用"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Disconnected"
-msgstr ""
+msgstr "已中斷連線"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Discord RPC"
@@ -1882,23 +1882,23 @@ msgstr ""
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Discover"
-msgstr ""
+msgstr "探索"
 
 #: src/interface/Home.tsx
 msgid "Discover AnyTalk"
-msgstr ""
+msgstr "探索 AnyTalk"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Display & Text"
-msgstr ""
+msgstr "顯示與文字"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Display Name"
-msgstr ""
+msgstr "顯示名稱"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Display users with this role separately in the member list"
-msgstr ""
+msgstr "在成員列表中將擁有此身分組的使用者分開顯示"
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Do Not Disturb"
@@ -1906,26 +1906,26 @@ msgstr "請勿打擾"
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Don't ask me again"
-msgstr ""
+msgstr "不要再詢問"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "Don't ask me again for "
-msgstr ""
+msgstr "不要再詢問 "
 
 #~ msgid "Don't ask me again for <0>{0}</0>"
 #~ msgstr ""
 
 #: components/modal/modals/BanMember.tsx
 msgid "Don't delete messages"
-msgstr ""
+msgstr "不要刪除訊息"
 
 #: components/modal/modals/LeaveServer.tsx
 msgid "Don't notify others that you've left"
-msgstr ""
+msgstr "不要通知其他人你已離開"
 
 #: src/AndroidNag.tsx
 msgid "Don't show this again"
-msgstr ""
+msgstr "不要再顯示"
 
 #: components/app/interface/settings/UserSettings.tsx
 #~ msgid "Donate"
@@ -1937,7 +1937,7 @@ msgstr ""
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Donated to AnyTalk"
-msgstr ""
+msgstr "已捐款給 AnyTalk"
 
 #: components/modal/modals/MFARecovery.tsx
 msgid "Done"
@@ -1945,81 +1945,81 @@ msgstr "完成"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Download"
-msgstr ""
+msgstr "下載"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Download again"
-msgstr ""
+msgstr "重新下載"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Download CSV"
-msgstr ""
+msgstr "下載 CSV"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Download for Linux (AppImage)"
-msgstr ""
+msgstr "下載 Linux 版（AppImage）"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Download for Windows (.exe)"
-msgstr ""
+msgstr "下載 Windows 版（.exe）"
 
 #. placeholder {0}: Math.round(updaterState()?.percent ?? 0)
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Downloading {0}%"
-msgstr ""
+msgstr "正在下載 {0}%"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Dropped frames per second"
-msgstr ""
+msgstr "每秒丟失的畫格數"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Drugs or illegal goods"
-msgstr ""
+msgstr "毒品或違禁品"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Duration"
-msgstr ""
+msgstr "時長"
 
 #. placeholder {0}: props.member.displayName
 #: components/modal/modals/UserProfileRoles.tsx
 msgid "Edit {0}'s roles"
-msgstr ""
+msgstr "編輯 {0} 的身分組"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Edit and delete channel"
-msgstr ""
+msgstr "編輯與刪除頻道"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Edit any permissions on the server"
-msgstr ""
+msgstr "編輯伺服器上的任何權限"
 
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Edit Channel"
-msgstr ""
+msgstr "編輯頻道"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Edit channel-specific role and default permissions"
-msgstr ""
+msgstr "編輯頻道專屬身分組與預設權限"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Edit Emoji"
-msgstr ""
+msgstr "編輯表情符號"
 
 #: components/app/menus/ServerFolderContextMenu.tsx
 #: components/modal/modals/EditServerFolder.tsx
 msgid "Edit folder"
-msgstr ""
+msgstr "編輯資料夾"
 
 #: components/app/interface/settings/user/profile/EditProfile.tsx
 msgid "Edit Global Profile"
-msgstr ""
+msgstr "編輯全域個人檔案"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Edit group name and description"
-msgstr ""
+msgstr "編輯群組名稱與說明"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit identity"
@@ -2027,7 +2027,7 @@ msgstr "編輯身份"
 
 #: components/modal/modals/ServerInfo.tsx
 msgid "Edit Identity"
-msgstr ""
+msgstr "編輯身分"
 
 #: components/app/menus/MessageContextMenu.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
@@ -2036,11 +2036,11 @@ msgstr "編輯訊息"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
-msgstr ""
+msgstr "編輯身分組"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Edit the server's information and settings"
-msgstr ""
+msgstr "編輯伺服器的資訊與設定"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/UserContextMenu.tsx
@@ -2049,11 +2049,11 @@ msgstr "編輯身分"
 
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Edited"
-msgstr ""
+msgstr "已編輯"
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Effective <0/> (<1/>)"
-msgstr ""
+msgstr "實際 <0/>(<1/>)"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
@@ -2063,16 +2063,16 @@ msgstr "電子郵件"
 
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Emoji"
-msgstr ""
+msgstr "表情符號"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 #: components/modal/modals/EditEmoji.tsx
 msgid "Emoji Name"
-msgstr ""
+msgstr "表情符號名稱"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Emoji Pack (affects your messages only)"
-msgstr ""
+msgstr "表情符號包（僅影響你的訊息）"
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Emojis"
@@ -2080,11 +2080,11 @@ msgstr "表情符號"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Empty"
-msgstr ""
+msgstr "空"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Enable Authenticator"
-msgstr ""
+msgstr "啟用驗證器"
 
 #: components/modal/modals/MFAEnableTOTP.tsx
 msgid "Enable authenticator app"
@@ -2096,43 +2096,43 @@ msgstr "開啟桌面通知"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Enable Push Notifications"
-msgstr ""
+msgstr "啟用推播通知"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Enable the tools below"
-msgstr ""
+msgstr "啟用下方工具"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Enable transparency glass/blur effects (slow on older machines)"
-msgstr ""
+msgstr "啟用透明毛玻璃/模糊效果（在較舊的電腦上會變慢）"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Encoder"
-msgstr ""
+msgstr "編碼器"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Encoder target bitrate"
-msgstr ""
+msgstr "編碼器目標位元率"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "End call"
-msgstr ""
+msgstr "結束通話"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced"
-msgstr ""
+msgstr "增強"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced (RNNoise)"
-msgstr ""
+msgstr "增強（RNNoise）"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Enter a full address starting with http:// or https://"
-msgstr ""
+msgstr "請輸入以 http:// 或 https:// 開頭的完整網址"
 
 #: components/modal/modals/RenameSession.tsx
 msgid "Enter a new name for this session"
-msgstr ""
+msgstr "輸入此工作階段的新名稱"
 
 #: components/auth/src/flows/Form.tsx
 #: components/modal/modals/EditPassword.tsx
@@ -2155,11 +2155,11 @@ msgstr "輸入目前的密碼。"
 #: components/modal/modals/EditPassword.tsx
 #: components/modal/modals/EditUsername.tsx
 msgid "Enter your current password..."
-msgstr ""
+msgstr "輸入你目前的密碼..."
 
 #: components/auth/src/flows/Form.tsx
 msgid "Enter your invite code."
-msgstr ""
+msgstr "輸入你的邀請碼。"
 
 #: components/auth/src/flows/Form.tsx
 msgid "Enter your preferred username."
@@ -2167,39 +2167,39 @@ msgstr "輸入您的用戶名。"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Entire screen"
-msgstr ""
+msgstr "整個螢幕"
 
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Error occurred, please email support."
-msgstr ""
+msgstr "發生錯誤，請寄電子郵件給支援團隊。"
 
 #: components/app/interface/channels/text/EditMessage.tsx
 msgid "escape to <0>cancel</0> · enter to <1>save</1>"
-msgstr ""
+msgstr "按 Esc <0>取消</0> · 按 Enter <1>儲存</1>"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Estimated upload bandwidth"
-msgstr ""
+msgstr "預估上傳頻寬"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone"
-msgstr ""
+msgstr "所有人"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Excellent"
-msgstr ""
+msgstr "極佳"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Excellent connection"
-msgstr ""
+msgstr "連線極佳"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
-msgstr ""
+msgstr "匯出"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "External links can be dangerous!"
@@ -2207,31 +2207,31 @@ msgstr "外部連結可能有危險！"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Extortion or blackmail"
-msgstr ""
+msgstr "勒索或恐嚇"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Extreme violence, gore or animal cruelty"
-msgstr ""
+msgstr "極端暴力、血腥或虐待動物"
 
 #: components/client/NotificationsController.ts
 msgid "Failed to enable notifications. AnyTalk does not have notification permission."
-msgstr ""
+msgstr "無法啟用通知。AnyTalk 沒有通知權限。"
 
 #: components/client/NotificationsController.ts
 msgid "Failed to enable push notifications. Please try again later."
-msgstr ""
+msgstr "無法啟用推播通知。請稍後再試。"
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "Failed to load bots..."
-msgstr ""
+msgstr "無法載入機器人..."
 
 #: components/i18n/errors.tsx
 msgid "Failed to process the image you provided."
-msgstr ""
+msgstr "無法處理你提供的圖片。"
 
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Failed to send"
-msgstr ""
+msgstr "傳送失敗"
 
 #: components/auth/src/flows/FlowVerify.tsx
 msgid "Failed to verify!"
@@ -2244,7 +2244,7 @@ msgstr "意見回饋"
 #. placeholder {0}: humanFileSize(local.maxSize)
 #: components/ui/components/utils/Form2.tsx
 msgid "File must be smaller than {0}"
-msgstr ""
+msgstr "檔案必須小於 {0}"
 
 #: src/interface/Home.tsx
 msgid "Find a community based on your hobbies or interests."
@@ -2252,11 +2252,11 @@ msgstr "根據您的愛好或興趣尋找社群。"
 
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Find new servers to join"
-msgstr ""
+msgstr "尋找可加入的新伺服器"
 
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
-msgstr ""
+msgstr "尋找你的社<0/>群，<1/>與世界連結。"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2269,44 +2269,44 @@ msgstr "專注"
 
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Folder"
-msgstr ""
+msgstr "資料夾"
 
 #: components/modal/modals/EditServerFolder.tsx
 msgid "Folder colour"
-msgstr ""
+msgstr "資料夾顏色"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "For 1 hour"
-msgstr ""
+msgstr "1 小時"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "For 15 minutes"
-msgstr ""
+msgstr "15 分鐘"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "For 24 hours"
-msgstr ""
+msgstr "24 小時"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "For 3 hours"
-msgstr ""
+msgstr "3 小時"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "For 8 hours"
-msgstr ""
+msgstr "8 小時"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frame rate"
-msgstr ""
+msgstr "畫面更新率"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Freezes"
-msgstr ""
+msgstr "凍結次數"
 
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -2315,23 +2315,23 @@ msgstr "好友"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Friends who are online or in a call show up here."
-msgstr ""
+msgstr "在線上或通話中的好友會顯示在這裡。"
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "from "
-msgstr ""
+msgstr "來自 "
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frozen"
-msgstr ""
+msgstr "已凍結"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Fruit Salad"
-msgstr ""
+msgstr "水果沙拉"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Generate a new token if it gets lost or compromised"
-msgstr ""
+msgstr "若權杖遺失或外洩，請產生新的權杖"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Generate Recovery Codes"
@@ -2343,39 +2343,39 @@ msgstr "正在建立邀請…"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Get a new set of recovery codes"
-msgstr ""
+msgstr "取得一組新的復原碼"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Get active recovery codes"
-msgstr ""
+msgstr "取得有效的復原碼"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Get AnyTalk for your desktop"
-msgstr ""
+msgstr "取得桌面版 AnyTalk"
 
 #: src/AndroidNag.tsx
 msgid "Get it on Google Play"
-msgstr ""
+msgstr "在 Google Play 下載"
 
 #: components/state/stores/Experiments.ts
 msgid "GIF Picker Placeholder"
-msgstr ""
+msgstr "GIF 選擇器預留位置"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Gifbox is our own GIF service, so you can keep sharing GIFs right here on AnyTalk."
-msgstr ""
+msgstr "Gifbox 是我們自己的 GIF 服務，讓你可以繼續在 AnyTalk 上分享 GIF。"
 
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "GIFs"
-msgstr ""
+msgstr "GIF"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "GIFs are now powered by Gifbox"
-msgstr ""
+msgstr "GIF 現在由 Gifbox 提供"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "GitHub didn't answer, or too many requests were made. Try again later, or get the app from the <0>releases page</0>."
-msgstr ""
+msgstr "GitHub 沒有回應，或請求次數過多。請稍後再試，或從<0>發佈頁面</0>取得應用程式。"
 
 #: src/interface/Home.tsx
 #~ msgid "Give feedback on AnyTalk"
@@ -2383,16 +2383,16 @@ msgstr ""
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Give us some detail"
-msgstr ""
+msgstr "請提供一些細節"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Global hotkeys depend on your desktop environment. On KDE and GNOME you may be asked for permission the first time."
-msgstr ""
+msgstr "全域快速鍵取決於你的桌面環境。在 KDE 與 GNOME 上，第一次可能會詢問權限。"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Go"
-msgstr ""
+msgstr "前往"
 
 #: components/auth/src/flows/FlowConfirmReset.tsx
 #: components/auth/src/flows/FlowResend.tsx
@@ -2403,16 +2403,16 @@ msgstr "返回登入頁面"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Go back: close a menu or dialog, leave the message box"
-msgstr ""
+msgstr "返回：關閉選單或對話框、離開訊息輸入框"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Go to account settings to edit your username"
-msgstr ""
+msgstr "前往帳號設定以編輯你的使用者名稱"
 
 #: components/app/interface/settings/user/Feedback.tsx
 #: src/interface/Home.tsx
 msgid "Go to the AnyTalk Lounge"
-msgstr ""
+msgstr "前往 AnyTalk 交流區"
 
 #~ msgid "Go to the testers server"
 #~ msgstr "前往測試者伺服器"
@@ -2420,29 +2420,29 @@ msgstr ""
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/modal/modals/Onboarding.tsx
 msgid "Good"
-msgstr ""
+msgstr "良好"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Good connection"
-msgstr ""
+msgstr "連線良好"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Got a better GIF? Share it with everyone on Gifbox."
-msgstr ""
+msgstr "有更好的 GIF 嗎？在 Gifbox 與大家分享。"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Got it"
-msgstr ""
+msgstr "知道了"
 
 #. placeholder {0}: countBits(props.context.rolePermissions![role.id].a)
 #. placeholder {1}: countBits(props.context.rolePermissions![role.id].d)
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Grants {0} permissions and denies {1} permissions"
-msgstr ""
+msgstr "授予 {0} 項權限並拒絕 {1} 項權限"
 
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Group"
-msgstr ""
+msgstr "群組"
 
 #: components/modal/modals/CreateGroup.tsx
 msgid "Group Name"
@@ -2450,23 +2450,23 @@ msgstr "群組名稱"
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Groups"
-msgstr ""
+msgstr "群組"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Guidelines"
-msgstr ""
+msgstr "守則"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Harassment or cyberbullying"
-msgstr ""
+msgstr "騷擾或網路霸凌"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Hardware Acceleration"
-msgstr ""
+msgstr "硬體加速"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Hear other people and see their video"
-msgstr ""
+msgstr "聽到其他人並看到他們的影片"
 
 #: components/auth/src/flows/FlowCreate.tsx
 msgid "Hello!"
@@ -2478,28 +2478,28 @@ msgstr "您好！"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Helped translate AnyTalk"
-msgstr ""
+msgstr "協助翻譯 AnyTalk"
 
 #. placeholder {0}: link()
 #: components/modal/modals/CreateInvite.tsx
 msgid "Here is your new invite code: <0>{0}</0>"
-msgstr ""
+msgstr "這是你的新邀請碼：<0>{0}</0>"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
-msgstr ""
+msgstr "隱藏其他"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "High Contrast"
-msgstr ""
+msgstr "高對比"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Hoist Role"
-msgstr ""
+msgstr "分開顯示身分組"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hold Ctrl, Alt or Shift together with a letter or number."
-msgstr ""
+msgstr "請同時按住 Ctrl、Alt 或 Shift 加上一個字母或數字。"
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -2509,36 +2509,36 @@ msgstr "首頁"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Hotkeys"
-msgstr ""
+msgstr "快速鍵"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hotkeys work everywhere on your computer, even when AnyTalk isn't focused. Click a hotkey to record new keys, press Escape to cancel."
-msgstr ""
+msgstr "快速鍵在電腦上的任何地方都有效，即使 AnyTalk 不在焦點。點擊快速鍵以錄製新按鍵，按 Esc 取消。"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hotkeys work while AnyTalk is the focused window or tab. Click a hotkey to record new keys, press Escape to cancel."
-msgstr ""
+msgstr "快速鍵僅在 AnyTalk 為目前焦點視窗或分頁時有效。點擊快速鍵以錄製新按鍵，按 Esc 取消。"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Hover a chart (or focus it and use the arrow keys) to read all values at the same moment."
-msgstr ""
+msgstr "將游標移到圖表上（或聚焦後使用方向鍵），即可同時讀取所有數值。"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Hover a chart (or focus it and use the arrow keys) to read every recap at the same moment."
-msgstr ""
+msgstr "將游標移到圖表上（或聚焦後使用方向鍵），即可同時讀取每份回顧。"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "How everyone else's audio reached you."
-msgstr ""
+msgstr "其他人的音訊是如何傳到你這邊的。"
 
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "How many recently joined calls the Home page lists. 0 hides them."
-msgstr ""
+msgstr "首頁列出最近加入的通話數量。設為 0 則隱藏。"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>{HYPRLAND_BIND_EXAMPLE}</1>."
-msgstr ""
+msgstr "Hyprland 不會自行為應用程式捷徑指派按鍵。請執行 <0>{HYPRCTL_COMMAND}</0> 查看 AnyTalk 的項目，再於 Hyprland 設定中以 global dispatcher 逐一綁定，例如 <1>{HYPRLAND_BIND_EXAMPLE}</1>。"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #~ msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>bind = CTRL ALT, M, global, tech.anyportal.AnyTalk:<id></1>."
@@ -2554,15 +2554,15 @@ msgstr "我確認我已滿18歲。"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "I understand the consequences"
-msgstr ""
+msgstr "我了解後果"
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "I've read and reviewed the changes."
-msgstr ""
+msgstr "我已閱讀並檢視這些變更。"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "ID copied to clipboard"
-msgstr ""
+msgstr "已將 ID 複製到剪貼簿"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2575,22 +2575,22 @@ msgstr "閒置"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Illegal hacking or cracking"
-msgstr ""
+msgstr "非法駭客或破解行為"
 
 #~ msgid "Image by @fakurian"
 #~ msgstr ""
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Impersonation"
-msgstr ""
+msgstr "冒充他人"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Import CSV or zip"
-msgstr ""
+msgstr "匯入 CSV 或 zip"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Imported"
-msgstr ""
+msgstr "已匯入"
 
 #. placeholder {0}: inCall().length
 #: src/interface/home/FriendsOverview.tsx
@@ -2599,36 +2599,36 @@ msgstr ""
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "In a call · {count}"
-msgstr ""
+msgstr "通話中 · {count}"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "In call"
-msgstr ""
+msgstr "通話中"
 
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
-msgstr ""
+msgstr "在此之前，請從 Google Play 安裝 AnyTalk，享受專為 Android 設計、更快更流暢的體驗。"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
-msgstr ""
+msgstr "來電"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Incoming call"
-msgstr ""
+msgstr "來電"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
-msgstr ""
+msgstr "輸入音量"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Install updates automatically"
-msgstr ""
+msgstr "自動安裝更新"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Installed version"
-msgstr ""
+msgstr "已安裝版本"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Instead of closing, AnyTalk will hide in your tray."
@@ -2636,11 +2636,11 @@ msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Interface Font"
-msgstr ""
+msgstr "介面字型"
 
 #: components/markdown/plugins/mentions.tsx
 msgid "Invalid Mention Element"
-msgstr ""
+msgstr "無效的提及元素"
 
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2653,7 +2653,7 @@ msgstr "邀請您所有的朋友，一些很酷的機器人，並舉辦一個盛
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Invite Bot"
-msgstr ""
+msgstr "邀請機器人"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 #: components/auth/src/flows/Form.tsx
@@ -2666,7 +2666,7 @@ msgstr "邀請其他人"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Invite URL copied to clipboard"
-msgstr ""
+msgstr "已將邀請網址複製到剪貼簿"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Inviter"
@@ -2678,29 +2678,29 @@ msgstr "邀請"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "irrelevant joke badge 1"
-msgstr ""
+msgstr "無關緊要的搞笑徽章 1"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "irrelevant joke badge 2"
-msgstr ""
+msgstr "無關緊要的搞笑徽章 2"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "ISO Standard (YYYY-MM-DD)"
-msgstr ""
+msgstr "ISO 標準（YYYY-MM-DD）"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Jitter"
-msgstr ""
+msgstr "抖動"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Jitter avg / max"
-msgstr ""
+msgstr "抖動 平均 / 最大"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Jitter buffer delay"
-msgstr ""
+msgstr "抖動緩衝延遲"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
 #: components/modal/modals/Invite.tsx
@@ -2708,7 +2708,7 @@ msgstr ""
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: src/interface/home/FriendsOverview.tsx
 msgid "Join"
-msgstr ""
+msgstr "加入"
 
 #. placeholder {0}: location(props.channel)
 #: src/interface/home/FriendsOverview.tsx
@@ -2717,11 +2717,11 @@ msgstr ""
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Join {label}"
-msgstr ""
+msgstr "加入 {label}"
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Join a server"
-msgstr ""
+msgstr "加入伺服器"
 
 #~ msgid "Join call"
 #~ msgstr ""
@@ -2729,21 +2729,21 @@ msgstr ""
 #: components/app/interface/settings/user/Feedback.tsx
 #: src/interface/Home.tsx
 msgid "Join the AnyTalk Lounge"
-msgstr ""
+msgstr "加入 AnyTalk 交流區"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Join the voice channel"
-msgstr ""
+msgstr "加入語音頻道"
 
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: components/ui/components/features/profiles/ProfileJoined.tsx
 msgid "Joined"
-msgstr ""
+msgstr "已加入"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Jump between servers, channels, messages and members"
-msgstr ""
+msgstr "在伺服器、頻道、訊息與成員之間跳轉"
 
 #: components/ui/components/features/messaging/bars/JumpToBottom.tsx
 msgid "Jump to present"
@@ -2755,15 +2755,15 @@ msgstr "跳回開頭"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Keep AnyTalk running in the tray when closing the window"
-msgstr ""
+msgstr "關閉視窗時讓 AnyTalk 繼續在系統匣中執行"
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Keep as is"
-msgstr ""
+msgstr "保持原樣"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Keyframe requests per second (viewers asking for a full new picture)"
-msgstr ""
+msgstr "每秒關鍵影格請求數（觀看者要求完整的新畫面）"
 
 #: components/modal/modals/KickMember.tsx
 msgid "Kick"
@@ -2771,7 +2771,7 @@ msgstr "踢出"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Kick lower-ranking members from the server"
-msgstr ""
+msgstr "將較低階的成員踢出伺服器"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Kick member"
@@ -2779,7 +2779,7 @@ msgstr "踢出成員"
 
 #: components/modal/modals/KickMember.tsx
 msgid "Kick Member"
-msgstr ""
+msgstr "踢出成員"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Kick Members"
@@ -2792,7 +2792,7 @@ msgstr "語言"
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Last sync <0/>"
-msgstr ""
+msgstr "上次同步 <0/>"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Latest"
@@ -2800,15 +2800,15 @@ msgstr "最新"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Launch AnyTalk when you log into your computer."
-msgstr ""
+msgstr "登入電腦時啟動 AnyTalk。"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Learn more"
-msgstr ""
+msgstr "了解更多"
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "Learn more about how to create bots on AnyTalk."
-msgstr ""
+msgstr "進一步了解如何在 AnyTalk 上建立機器人。"
 
 #: components/modal/modals/DeleteChannel.tsx
 #: components/modal/modals/LeaveServer.tsx
@@ -2820,15 +2820,15 @@ msgstr "離開"
 #: components/modal/modals/DeleteChannel.tsx
 #: components/modal/modals/LeaveServer.tsx
 msgid "Leave {0}?"
-msgstr ""
+msgstr "要離開 {0} 嗎？"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Leave all streams"
-msgstr ""
+msgstr "離開所有直播"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Leave empty to use the default server. AnyTalk reloads when you save."
-msgstr ""
+msgstr "留空以使用預設伺服器。儲存時 AnyTalk 會重新載入。"
 
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Leave group"
@@ -2840,15 +2840,15 @@ msgstr "離開伺服器"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Leave stream"
-msgstr ""
+msgstr "離開直播"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Left and right bumper"
-msgstr ""
+msgstr "左右肩鍵"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Left and right trigger"
-msgstr ""
+msgstr "左右扳機鍵"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Let AnyTalk use its own custom titlebar."
@@ -2856,7 +2856,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Let AnyTalk use its own custom titlebar. Takes effect after you restart AnyTalk."
-msgstr ""
+msgstr "讓 AnyTalk 使用自己的自訂標題列。重新啟動 AnyTalk 後生效。"
 
 #: src/interface/Home.tsx
 #~ msgid "Let us know how we can improve our app by giving us feedback."
@@ -2865,57 +2865,57 @@ msgstr ""
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Light"
-msgstr ""
+msgstr "淺色"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Light (60 Hz)"
-msgstr ""
+msgstr "輕度（60 Hz）"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Linux .deb (Debian/Ubuntu)"
-msgstr ""
+msgstr "Linux .deb(Debian/Ubuntu)"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Linux .rpm (Fedora)"
-msgstr ""
+msgstr "Linux .rpm(Fedora)"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Linux AppImage"
-msgstr ""
+msgstr "Linux AppImage"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Linux pacman (Arch)"
-msgstr ""
+msgstr "Linux pacman(Arch)"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Listen"
-msgstr ""
+msgstr "聆聽"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
-msgstr ""
+msgstr "直播中"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Live overlay, recording and recaps of previous calls"
-msgstr ""
+msgstr "即時浮層、錄製與先前通話的回顧"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Live overlay, recording and recaps of previous streams"
-msgstr ""
+msgstr "即時浮層、錄製與先前直播的回顧"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Live statistics overlay"
-msgstr ""
+msgstr "即時統計浮層"
 
 #. placeholder {0}: humanFileSize(props.file.size ?? 0)
 #: components/ui/components/features/messaging/elements/TextFile.tsx
 msgid "Load file ({0})"
-msgstr ""
+msgstr "載入檔案（{0}）"
 
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
-msgstr ""
+msgstr "登入"
 
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -2928,7 +2928,7 @@ msgstr "從所有其他裝置登出"
 
 #: components/app/interface/settings/user/Sessions.tsx
 msgid "Log Out Other Sessions"
-msgstr ""
+msgstr "登出其他工作階段"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Login"
@@ -2936,39 +2936,39 @@ msgstr "登入"
 
 #: components/app/interface/settings/user/Sessions.tsx
 msgid "Logs you out of all sessions except this device."
-msgstr ""
+msgstr "登出除此裝置以外的所有工作階段。"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Looking for the latest version..."
-msgstr ""
+msgstr "正在尋找最新版本..."
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Loss and jitter are what the server reports about the audio it got from you."
-msgstr ""
+msgstr "遺失與抖動是伺服器回報它從你這邊收到的音訊的狀況。"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Lost"
-msgstr ""
+msgstr "已遺失"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Low-cut filter"
-msgstr ""
+msgstr "低切濾波器"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Lowercase letters, numbers and underscores only."
-msgstr ""
+msgstr "僅限小寫字母、數字與底線。"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
-msgstr ""
+msgstr "嚴重中斷"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Malware or phishing"
-msgstr ""
+msgstr "惡意軟體或釣魚"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Manage Channel"
-msgstr ""
+msgstr "管理頻道"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Manage Customisation"
@@ -3000,11 +3000,11 @@ msgstr "管理 Webhook"
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
-msgstr ""
+msgstr "標記為成人內容"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Mark as Mature"
-msgstr ""
+msgstr "標記為成人內容"
 
 #: components/app/menus/CategoryContextMenu.tsx
 #: components/app/menus/ChannelContextMenu.tsx
@@ -3018,7 +3018,7 @@ msgstr "標記為未讀"
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark this channel as mature?"
-msgstr ""
+msgstr "要將此頻道標記為成人內容嗎？"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Masquerade"
@@ -3026,23 +3026,23 @@ msgstr "偽裝身份"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Max resolution"
-msgstr ""
+msgstr "最高解析度"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Maximize call window"
-msgstr ""
+msgstr "最大化通話視窗"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Measure camera and screen share video you send or watch"
-msgstr ""
+msgstr "測量你傳送或觀看的攝影機與螢幕分享影片"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Measure your microphone and everyone you hear in calls"
-msgstr ""
+msgstr "測量你的麥克風以及通話中你聽到的所有人"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Medium (90 Hz)"
-msgstr ""
+msgstr "中度（90 Hz）"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -3053,7 +3053,7 @@ msgstr "成員"
 #. placeholder {0}: slowmodeWaitTime()
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "Members can send one message every {0}."
-msgstr ""
+msgstr "成員每 {0} 可傳送一則訊息。"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Mention"
@@ -3061,27 +3061,27 @@ msgstr "提及"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mention Everyone"
-msgstr ""
+msgstr "提及所有人"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mention everyone and online members inside the server"
-msgstr ""
+msgstr "在伺服器內提及所有人與線上成員"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mention Roles"
-msgstr ""
+msgstr "提及身分組"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mention specific roles"
-msgstr ""
+msgstr "提及特定身分組"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
-msgstr ""
+msgstr "提及"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
-msgstr ""
+msgstr "僅限提及"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
@@ -3090,7 +3090,7 @@ msgstr "只限標註"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Menu (start) button"
-msgstr ""
+msgstr "選單（開始）按鈕"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
@@ -3101,15 +3101,15 @@ msgstr "訊息"
 #. placeholder {0}: props.channel.recipient?.username
 #: src/interface/channels/text/Composition.tsx
 msgid "Message {0}"
-msgstr ""
+msgstr "傳送訊息給 {0}"
 
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Message from {name}, {time}"
-msgstr ""
+msgstr "{name} 的訊息，{time}"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Message Group Spacing"
-msgstr ""
+msgstr "訊息群組間距"
 
 #: components/ui/components/features/messaging/elements/MessageReply.tsx
 msgid "Message not loaded, click to jump"
@@ -3117,7 +3117,7 @@ msgstr "訊息未載入，點擊跳轉"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Message received"
-msgstr ""
+msgstr "收到訊息"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #~ msgid "Message Received"
@@ -3129,7 +3129,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Message Size"
-msgstr ""
+msgstr "訊息大小"
 
 #: components/app/interface/channels/text/Message.tsx
 msgid "Message was sent on another platform"
@@ -3137,16 +3137,16 @@ msgstr "訊息傳送自其他平台"
 
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Message, {time}"
-msgstr ""
+msgstr "訊息，{time}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Message, call and stream sounds"
-msgstr ""
+msgstr "訊息、通話與直播音效"
 
 #: components/app/interface/channels/text/Messages.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Messages"
-msgstr ""
+msgstr "訊息"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Messaging"
@@ -3154,15 +3154,15 @@ msgstr "訊息"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "MFA setup canceled."
-msgstr ""
+msgstr "已取消多重要素驗證設定。"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Microphone"
-msgstr ""
+msgstr "麥克風"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Microphone and headphones"
-msgstr ""
+msgstr "麥克風與耳機"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Minimise to Tray"
@@ -3170,27 +3170,27 @@ msgstr ""
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Missing permission"
-msgstr ""
+msgstr "缺少權限"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Monochrome"
-msgstr ""
+msgstr "單色"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Monospace Font"
-msgstr ""
+msgstr "等寬字型"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "More Contrast"
-msgstr ""
+msgstr "更高對比"
 
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "More options"
-msgstr ""
+msgstr "更多選項"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Move between buttons, menus and messages"
-msgstr ""
+msgstr "在按鈕、選單與訊息之間移動"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Move Members"
@@ -3198,57 +3198,57 @@ msgstr "移動成員"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Move members between voice channels"
-msgstr ""
+msgstr "在語音頻道之間移動成員"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Move to channel"
-msgstr ""
+msgstr "移至頻道"
 
 #: components/i18n/errors.tsx
 msgid "Multi-factor authentication is already enabled for this account."
-msgstr ""
+msgstr "此帳號已啟用多重要素驗證。"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Multi-stream: opening a stream adds it next to the others"
-msgstr ""
+msgstr "多重直播：開啟直播時會與其他直播並排顯示"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Mute"
-msgstr ""
+msgstr "靜音"
 
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Mute Channel"
-msgstr ""
+msgstr "將頻道靜音"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mute lower-ranking members in voice call"
-msgstr ""
+msgstr "在語音通話中將較低階的成員靜音"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mute Members"
-msgstr "禁言成員"
+msgstr "靜音成員"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Mute or unmute in a call"
-msgstr ""
+msgstr "在通話中靜音或取消靜音"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Mute Screen Share"
-msgstr ""
+msgstr "將螢幕分享靜音"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Mute Server"
-msgstr ""
+msgstr "將伺服器靜音"
 
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Mute stream"
-msgstr ""
+msgstr "將直播靜音"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Mute when not speaking"
-msgstr ""
+msgstr "不說話時靜音"
 
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Muted"
@@ -3258,7 +3258,7 @@ msgstr "靜音"
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Muted until <0/>"
-msgstr ""
+msgstr "靜音至 <0/>"
 
 #: components/modal/modals/UserProfileMutualFriends.tsx
 msgid "Mutual Friends"
@@ -3270,7 +3270,7 @@ msgstr "共同群組"
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Mutuals"
-msgstr ""
+msgstr "共同好友"
 
 #: components/app/interface/settings/user/_AccountCard.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -3286,28 +3286,28 @@ msgstr "我的機器人"
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Name"
-msgstr ""
+msgstr "名稱"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
-msgstr ""
+msgstr "中性"
 
 #: components/ui/components/features/messaging/elements/MessageDivider.tsx
 msgid "NEW"
-msgstr ""
+msgstr "新"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "New folder"
-msgstr ""
+msgstr "新資料夾"
 
 #. placeholder {0}: dayjs(decodeTime(props.lastId()!)).fromNow()
 #: components/ui/components/features/messaging/bars/NewMessages.tsx
 msgid "New messages since {0}"
-msgstr ""
+msgstr "自 {0} 以來的新訊息"
 
 #: components/modal/modals/EditCategory.tsx
 msgid "New name"
-msgstr ""
+msgstr "新名稱"
 
 #: components/auth/src/flows/Form.tsx
 #: components/modal/modals/EditPassword.tsx
@@ -3316,15 +3316,15 @@ msgstr "新密碼"
 
 #: components/app/interface/channels/text/Message.tsx
 msgid "New to AnyTalk"
-msgstr ""
+msgstr "AnyTalk 新手"
 
 #: components/app/interface/channels/text/Message.tsx
 msgid "New to the server"
-msgstr ""
+msgstr "伺服器新成員"
 
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "New unreads"
-msgstr ""
+msgstr "新的未讀"
 
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
@@ -3332,71 +3332,71 @@ msgstr "暱稱"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No apps found"
-msgstr ""
+msgstr "找不到應用程式"
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "No audio was captured, switch window to share audio"
-msgstr ""
+msgstr "未擷取到音訊，請切換視窗以分享音訊"
 
 #: src/interface/ServerHome.tsx
 msgid "No channels!"
-msgstr ""
+msgstr "沒有頻道！"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "No controller found. Connect one and press any button on it."
-msgstr ""
+msgstr "找不到控制器。請連接一個並按下任意按鈕。"
 
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "no data"
-msgstr ""
+msgstr "無資料"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "No desktop app available yet"
-msgstr ""
+msgstr "尚無桌面應用程式"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "No GIFs found"
-msgstr ""
+msgstr "找不到 GIF"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "No patch notes for this version."
-msgstr ""
+msgstr "此版本沒有更新說明。"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No permissions set yet"
-msgstr ""
+msgstr "尚未設定任何權限"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "No recaps yet. Turn on \"Record call recaps\", then join a call."
-msgstr ""
+msgstr "尚無回顧。請開啟「錄製通話回顧」，然後加入通話。"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "No recaps yet. Turn on \"Record stream recaps\", then join a call and start or watch a stream."
-msgstr ""
+msgstr "尚無回顧。請開啟「錄製直播回顧」，然後加入通話並開始或觀看直播。"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No role overrides have been configured."
-msgstr ""
+msgstr "尚未設定任何身分組覆寫。"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No screens found"
-msgstr ""
+msgstr "找不到螢幕"
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
-msgstr ""
+msgstr "找不到設定"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "nobody else"
-msgstr ""
+msgstr "沒有其他人"
 
 #: src/interface/Friends.tsx
 msgid "Nobody here right now!"
-msgstr ""
+msgstr "目前這裡沒有人！"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Noise suppression"
-msgstr ""
+msgstr "噪音抑制"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
@@ -3405,36 +3405,36 @@ msgstr "無"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "None of your friends are online"
-msgstr ""
+msgstr "你的好友都不在線上"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Normal"
-msgstr ""
+msgstr "正常"
 
 #: components/state/stores/Experiments.ts
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Not available yet."
-msgstr ""
+msgstr "尚未開放。"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Not limited"
-msgstr ""
+msgstr "不限制"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Not of minimum age to use the platform"
-msgstr ""
+msgstr "未達使用本平台的最低年齡"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
-msgstr ""
+msgstr "無"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own call recaps."
-msgstr ""
+msgstr "尚無可比較的內容。請匯入 CSV 或加入你自己的一份通話回顧。"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own stream recaps."
-msgstr ""
+msgstr "尚無可比較的內容。請匯入 CSV 或加入你自己的一份直播回顧。"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/ServerContextMenu.tsx
@@ -3487,11 +3487,11 @@ msgstr "刪除之後，將無法復原。"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "One of the first 1000 users!"
-msgstr ""
+msgstr "前 1000 位使用者之一！"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Ongoing Maintenance"
-msgstr ""
+msgstr "維護進行中"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -3510,52 +3510,52 @@ msgstr "線上"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Online · {count}"
-msgstr ""
+msgstr "線上 · {count}"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Only change this if you run your own AnyTalk server."
-msgstr ""
+msgstr "僅在你自行架設 AnyTalk 伺服器時才需要變更。"
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Only mentions will notify you"
-msgstr ""
+msgstr "只有提及才會通知你"
 
 #: components/instance/index.tsx
 msgid "Oops, something went wrong! {e}"
-msgstr ""
+msgstr "哎呀，出了點問題！{e}"
 
 #: components/modal/modals/Invite.tsx
 msgid "Open"
-msgstr ""
+msgstr "開啟"
 
 #. placeholder {0}: provider()![0]
 #: components/auth/src/flows/MailProvider.tsx
 msgid "Open {0}"
-msgstr ""
+msgstr "開啟 {0}"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Open an app or switch to Entire screen."
-msgstr ""
+msgstr "請開啟一個應用程式，或切換到「整個螢幕」。"
 
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Open channel settings"
-msgstr ""
+msgstr "開啟頻道設定"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Open file"
-msgstr ""
+msgstr "開啟檔案"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
-msgstr ""
+msgstr "開啟好友"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
-msgstr ""
+msgstr "開啟發佈頁面"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Open server settings"
-msgstr ""
+msgstr "開啟伺服器設定"
 
 #: src/interface/Home.tsx
 msgid "Open settings"
@@ -3563,32 +3563,32 @@ msgstr "開啟設定"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Open the context menu of the selected item"
-msgstr ""
+msgstr "開啟所選項目的右鍵選單"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Opening another stream while watching one shows them side by side. When off, it replaces the stream you were watching."
-msgstr ""
+msgstr "觀看直播時再開啟另一個直播會並排顯示。關閉時，則會取代你正在觀看的直播。"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 #: components/modal/modals/ReportContent.tsx
 msgid "Other"
-msgstr ""
+msgstr "其他"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Other downloads"
-msgstr ""
+msgstr "其他下載"
 
 #: src/interface/Friends.tsx
 msgid "Outgoing"
-msgstr ""
+msgstr "撥出"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Outgoing call"
-msgstr ""
+msgstr "撥出通話"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
-msgstr ""
+msgstr "輸出音量"
 
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -3597,33 +3597,33 @@ msgstr "概述"
 
 #: components/ui/components/features/profiles/ProfileOwner.tsx
 msgid "Owner"
-msgstr ""
+msgstr "擁有者"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Packet loss"
-msgstr ""
+msgstr "封包遺失"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Packets lost (server)"
-msgstr ""
+msgstr "遺失封包（伺服器）"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Packets lost per second"
-msgstr ""
+msgstr "每秒遺失封包數"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Packets per second"
-msgstr ""
+msgstr "每秒封包數"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Pardon User"
-msgstr ""
+msgstr "解除使用者停權"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Partial Outage"
-msgstr ""
+msgstr "部分中斷"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
@@ -3633,7 +3633,7 @@ msgstr "密碼"
 
 #: components/modal/modals/EditPassword.tsx
 msgid "Password changed successfully."
-msgstr ""
+msgstr "密碼已成功變更。"
 
 #: components/app/interface/settings/user/subscriptions/EditSubscriptionJoinFlow.tsx
 #~ msgid "Pay"
@@ -3641,7 +3641,7 @@ msgstr ""
 
 #: src/interface/Friends.tsx
 msgid "Pending"
-msgstr ""
+msgstr "待處理"
 
 #: components/app/interface/settings/ChannelSettings.tsx
 msgid "Permissions"
@@ -3649,15 +3649,15 @@ msgstr "權限"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Permissions available when no role overrides apply"
-msgstr ""
+msgstr "沒有任何身分組覆寫生效時的可用權限"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Permissions available without any role"
-msgstr ""
+msgstr "沒有任何身分組時的可用權限"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Pick a Screen to Share"
-msgstr ""
+msgstr "選擇要分享的螢幕"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Pick a username that you want people to be able to find you by. This can be changed later in your user settings."
@@ -3665,38 +3665,38 @@ msgstr "請選擇一個使用者名稱以便其他人尋找，您隨後可以在
 
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin"
-msgstr ""
+msgstr "釘選"
 
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin message"
-msgstr ""
+msgstr "釘選訊息"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Ping (round trip to the server)"
-msgstr ""
+msgstr "Ping（往返伺服器）"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Ping avg / max"
-msgstr ""
+msgstr "Ping 平均 / 最大"
 
 #: src/interface/channels/text/TextChannel.tsx
 msgid "Pinned Messages"
-msgstr ""
+msgstr "已釘選的訊息"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Platform Moderator"
-msgstr ""
+msgstr "平台管理員"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Play sound"
-msgstr ""
+msgstr "播放音效"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Play sounds"
-msgstr ""
+msgstr "播放音效"
 
 #: components/modal/modals/MFAFlow.tsx
 msgid "Please confirm this action using the selected method."
@@ -3708,7 +3708,7 @@ msgstr "請輸入您的電子郵件。"
 
 #: components/i18n/errors.tsx
 msgid "Please log in again."
-msgstr ""
+msgstr "請重新登入。"
 
 #: components/modal/modals/MFARecovery.tsx
 msgid "Please save these to a safe location."
@@ -3724,59 +3724,59 @@ msgstr "請選擇一種方式驗證您的要求。"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Please select a reason"
-msgstr ""
+msgstr "請選擇原因"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Please try again later"
-msgstr ""
+msgstr "請稍後再試"
 
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Please wait..."
-msgstr ""
+msgstr "請稍候..."
 
 #: components/state/stores/Experiments.ts
 msgid "Plugins v2 Placeholder"
-msgstr ""
+msgstr "外掛 v2 預留位置"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor"
-msgstr ""
+msgstr "不佳"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Poor connection"
-msgstr ""
+msgstr "連線不佳"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor or lost connection"
-msgstr ""
+msgstr "連線不佳或中斷"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
-msgstr ""
+msgstr "由 RNNoise 提供技術"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
-msgstr ""
+msgstr "請按下按鍵…"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Press the selected item, or send in the message box"
-msgstr ""
+msgstr "按下所選項目，或在訊息輸入框中傳送"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Preview"
-msgstr ""
+msgstr "預覽"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Previous and next channel"
-msgstr ""
+msgstr "上一個與下一個頻道"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Previous and next server"
-msgstr ""
+msgstr "上一個與下一個伺服器"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
-msgstr ""
+msgstr "隱私"
 
 #: components/auth/src/AuthPage.tsx
 #~ msgid "Privacy Policy"
@@ -3784,11 +3784,11 @@ msgstr ""
 
 #: components/markdown/plugins/anchors.tsx
 msgid "Private Channel"
-msgstr ""
+msgstr "私人頻道"
 
 #: components/markdown/plugins/customEmoji.tsx
 msgid "Private Server"
-msgstr ""
+msgstr "私人伺服器"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/UserContextMenu.tsx
@@ -3797,41 +3797,41 @@ msgstr "個人資料"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Profile Bio"
-msgstr ""
+msgstr "個人檔案簡介"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Promotes harm"
-msgstr ""
+msgstr "助長傷害"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Pronouns"
-msgstr ""
+msgstr "代稱"
 
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
-msgstr ""
+msgstr "提供的電子郵件或密碼有誤。"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Put your recaps next to CSV recaps from other people"
-msgstr ""
+msgstr "將你的回顧與其他人的 CSV 回顧並列比較"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Put your recaps next to recaps from other people. They open a recap in Voice Call Stats or Stream Stats and use Download CSV, or select several recaps and export them as one zip, then send you the file, which you import here. Everything stays on this device, and imports are kept until you close the app."
-msgstr ""
+msgstr "將你的回顧與其他人的回顧並列比較。對方在「語音通話統計」或「直播統計」中開啟回顧並使用「下載 CSV」，或選取多份回顧匯出為一個 zip，再把檔案傳給你，你在此匯入。所有資料都只保留在此裝置上，匯入的內容會保留到你關閉應用程式為止。"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Raid or spam attack"
-msgstr ""
+msgstr "突襲或垃圾訊息攻擊"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
 msgid "React"
-msgstr ""
+msgstr "回應"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "React to messages with emoji"
-msgstr ""
+msgstr "用表情符號回應訊息"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Read Message History"
@@ -3842,16 +3842,16 @@ msgstr "閱讀訊息歷史"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Read past messages sent in channel"
-msgstr ""
+msgstr "讀取頻道中過去的訊息"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Read past messages sent in channels"
-msgstr ""
+msgstr "讀取各頻道中過去的訊息"
 
 #. placeholder {0}: updaterState()?.version
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Ready to install: {0}"
-msgstr ""
+msgstr "可安裝：{0}"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 #: components/modal/modals/BanMember.tsx
@@ -3861,66 +3861,66 @@ msgstr "原因"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Reason for report"
-msgstr ""
+msgstr "檢舉原因"
 
 #. placeholder {0}: (dr.status as { Denied: string | null }) .Denied
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Reason: {0}"
-msgstr ""
+msgstr "原因：{0}"
 
 #. placeholder {0}: (dr.status as { Removed: string | null }) .Removed
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Reason: {0} Contact support for more information."
-msgstr ""
+msgstr "原因：{0} 請聯絡支援團隊以取得更多資訊。"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Recaps"
-msgstr ""
+msgstr "回顧"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Recaps are lined up at the moment each one started."
-msgstr ""
+msgstr "各份回顧會依各自開始的時間點對齊。"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Receive notifications while the app is open and in the background."
-msgstr ""
+msgstr "應用程式開啟與在背景執行時接收通知。"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Receive notifications while the tab is open."
-msgstr ""
+msgstr "分頁開啟時接收通知。"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Receive push notifications while the app is closed."
-msgstr ""
+msgstr "應用程式關閉時接收推播通知。"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Recent calls"
-msgstr ""
+msgstr "最近的通話"
 
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Recent calls on Home"
-msgstr ""
+msgstr "首頁顯示最近的通話"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Reconnecting"
-msgstr ""
+msgstr "重新連線中"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record call recaps"
-msgstr ""
+msgstr "錄製通話回顧"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record statistics of every call you are in, with or without the overlay"
-msgstr ""
+msgstr "記錄你參與的每場通話的統計資料，無論是否顯示浮層"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record statistics of every stream you send or watch, with or without the overlay"
-msgstr ""
+msgstr "記錄你傳送或觀看的每個直播的統計資料，無論是否顯示浮層"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record stream recaps"
-msgstr ""
+msgstr "錄製直播回顧"
 
 #: components/modal/modals/MFAFlow.tsx
 msgid "Recovery Code"
@@ -3928,11 +3928,11 @@ msgstr "備份安全碼"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Recovery Codes"
-msgstr ""
+msgstr "復原碼"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Reduced"
-msgstr ""
+msgstr "減弱"
 
 #: components/auth/src/flows/FlowCreate.tsx
 msgid "Register"
@@ -3940,7 +3940,7 @@ msgstr "註冊"
 
 #: components/modal/modals/AddBot.tsx
 msgid "Registered since <0/>"
-msgstr ""
+msgstr "註冊於 <0/>"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Reject friend request"
@@ -3948,7 +3948,7 @@ msgstr "拒絕好友邀請"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Release notes"
-msgstr ""
+msgstr "版本說明"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Relevance"
@@ -3956,28 +3956,28 @@ msgstr "最佳"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload and clear cache"
-msgstr ""
+msgstr "重新載入並清除快取"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload AnyTalk with fresh files from the server? This is the same as Ctrl+F5 and fixes most display problems after an update. You stay logged in and keep your settings."
-msgstr ""
+msgstr "要從伺服器重新載入最新檔案並重啟 AnyTalk 嗎？這等同於 Ctrl+F5，可解決更新後的大多數顯示問題。你會維持登入狀態並保留設定。"
 
 #: components/markdown/plugins/anchors.tsx
 msgid "Remote Channel"
-msgstr ""
+msgstr "遠端頻道"
 
 #: components/markdown/plugins/anchors.tsx
 msgid "Remote Server"
-msgstr ""
+msgstr "遠端伺服器"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
-msgstr ""
+msgstr "移除"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove all reactions"
-msgstr ""
+msgstr "移除所有表情回應"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Remove Authenticator"
@@ -3993,52 +3993,52 @@ msgstr "刪除好友"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Remove from folder"
-msgstr ""
+msgstr "從資料夾中移除"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove Member"
-msgstr ""
+msgstr "移除成員"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove other members' avatars"
-msgstr ""
+msgstr "移除其他成員的大頭貼"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
-msgstr ""
+msgstr "移除表情回應"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "Remove Timeout"
-msgstr ""
+msgstr "解除暫時禁言"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Removes deep rumble"
-msgstr ""
+msgstr "消除低頻隆隆聲"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Removes knocks on the desk or microphone"
-msgstr ""
+msgstr "消除敲擊桌面或麥克風的聲音"
 
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/modal/modals/EditCategory.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename"
-msgstr ""
+msgstr "重新命名"
 
 #: components/app/menus/CategoryContextMenu.tsx
 #: components/modal/modals/EditCategory.tsx
 msgid "Rename category"
-msgstr ""
+msgstr "重新命名分類"
 
 #: components/modal/modals/EditEmoji.tsx
 msgid "Rename emoji"
-msgstr ""
+msgstr "重新命名表情符號"
 
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename Session"
-msgstr ""
+msgstr "重新命名工作階段"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Rep AnyTalk using Discord rich presence."
@@ -4072,11 +4072,11 @@ msgstr "檢舉使用者"
 
 #: components/auth/src/flows/FlowResend.tsx
 msgid "Resend"
-msgstr ""
+msgstr "重新傳送"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Resend requests per second (viewers asking for lost packets again)"
-msgstr ""
+msgstr "每秒重送請求數（觀看者再次要求遺失的封包）"
 
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/auth/src/flows/FlowResend.tsx
@@ -4096,11 +4096,11 @@ msgstr "重置"
 #. placeholder {0}: props.bot.user!.username
 #: components/modal/modals/ResetBotToken.tsx
 msgid "Reset {0}'s token?"
-msgstr ""
+msgstr "要重設 {0} 的權杖嗎？"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
-msgstr ""
+msgstr "重設所有音效"
 
 #: components/auth/src/flows/FlowConfirmReset.tsx
 #: components/auth/src/flows/FlowLogin.tsx
@@ -4110,76 +4110,76 @@ msgstr "重設密碼"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Reset Recovery Codes"
-msgstr ""
+msgstr "重設復原碼"
 
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
-msgstr ""
+msgstr "重設為 {0}"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
-msgstr ""
+msgstr "重設為預設值"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Reset Token"
-msgstr ""
+msgstr "重設權杖"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Resolution"
-msgstr ""
+msgstr "解析度"
 
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 msgid "Resolution and FPS"
-msgstr ""
+msgstr "解析度與 FPS"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Responsibly disclosed security issues"
-msgstr ""
+msgstr "已負責任揭露的安全性問題"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Restart to install"
-msgstr ""
+msgstr "重新啟動以安裝"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Restore call window"
-msgstr ""
+msgstr "還原通話視窗"
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 msgid "Retry sending"
-msgstr ""
+msgstr "重試傳送"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Return to voice channel"
-msgstr ""
+msgstr "返回語音頻道"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Reveal"
-msgstr ""
+msgstr "顯示"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Revenge or underage pornography"
-msgstr ""
+msgstr "報復式色情或未成年色情內容"
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Review policy changes"
-msgstr ""
+msgstr "檢視政策變更"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Right stick"
-msgstr ""
+msgstr "右搖桿"
 
 #~ msgid "Roadmap"
 #~ msgstr ""
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Role Colour"
-msgstr ""
+msgstr "身分組顏色"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Role Icon"
-msgstr ""
+msgstr "身分組圖示"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/modal/modals/CreateRole.tsx
@@ -4188,7 +4188,7 @@ msgstr "身份組名稱"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Role Overrides"
-msgstr ""
+msgstr "身分組覆寫"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
@@ -4197,15 +4197,15 @@ msgstr "身份組"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Roles with No Overrides"
-msgstr ""
+msgstr "沒有覆寫的身分組"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Running"
-msgstr ""
+msgstr "執行中"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Running or frozen"
-msgstr ""
+msgstr "執行中或已凍結"
 
 #: components/app/interface/settings/channel/Overview.tsx
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
@@ -4221,11 +4221,11 @@ msgstr "儲存"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Save file"
-msgstr ""
+msgstr "儲存檔案"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Save permissions"
-msgstr ""
+msgstr "儲存權限"
 
 #: src/interface/channels/text/Composition.tsx
 msgid "Save to your notes"
@@ -4238,104 +4238,104 @@ msgstr "記事本"
 
 #: components/app/interface/channels/text/EditMessage.tsx
 msgid "Saving message..."
-msgstr ""
+msgstr "正在儲存訊息..."
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Saving…"
-msgstr ""
+msgstr "正在儲存…"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Scams or fraud"
-msgstr ""
+msgstr "詐騙或欺詐"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Screen share frame rate"
-msgstr ""
+msgstr "螢幕分享畫面更新率"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Screen share resolution"
-msgstr ""
+msgstr "螢幕分享解析度"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Screen Share Settings"
-msgstr ""
+msgstr "螢幕分享設定"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Screen Share Volume"
-msgstr ""
+msgstr "螢幕分享音量"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Scroll"
-msgstr ""
+msgstr "捲動"
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search"
-msgstr ""
+msgstr "搜尋"
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Search for emojis..."
-msgstr ""
+msgstr "搜尋表情符號..."
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Search for GIFs..."
-msgstr ""
+msgstr "搜尋 GIF..."
 
 #: components/modal/modals/AddBot.tsx
 msgid "Search for groups..."
-msgstr ""
+msgstr "搜尋群組..."
 
 #: components/modal/modals/AddMembersToGroup.tsx
 #: components/modal/modals/CreateGroup.tsx
 msgid "Search for users..."
-msgstr ""
+msgstr "搜尋使用者..."
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search messages..."
-msgstr ""
+msgstr "搜尋訊息..."
 
 #: src/interface/channels/text/TextChannel.tsx
 msgid "Search Results"
-msgstr ""
+msgstr "搜尋結果"
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
-msgstr ""
+msgstr "搜尋設定"
 
 #~ msgid "See what we're currently working on."
 #~ msgstr ""
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select"
-msgstr ""
+msgstr "選取"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select all"
-msgstr ""
+msgstr "全選"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Select at least one line above to compare."
-msgstr ""
+msgstr "請至少選取上方的一條線以進行比較。"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Select audio input"
-msgstr ""
+msgstr "選擇音訊輸入"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Select audio output"
-msgstr ""
+msgstr "選擇音訊輸出"
 
 #: components/modal/modals/CreateGroup.tsx
 msgid "Select members to add"
-msgstr ""
+msgstr "選擇要加入的成員"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Select noise suppression"
-msgstr ""
+msgstr "選擇噪音抑制"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select none"
-msgstr ""
+msgstr "全不選"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 #~ msgid "Select screen share quality"
@@ -4343,7 +4343,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Select video input"
-msgstr ""
+msgstr "選擇影片輸入"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Select your language"
@@ -4351,19 +4351,19 @@ msgstr "選擇語言"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Send a message to {name}"
-msgstr ""
+msgstr "傳送訊息給 {name}"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Send attachments to chat"
-msgstr ""
+msgstr "在聊天中傳送附件"
 
 #: components/modal/modals/EditEmail.tsx
 msgid "Send email"
-msgstr ""
+msgstr "傳送電子郵件"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Send embedded content such as link embeds or custom embeds"
-msgstr ""
+msgstr "傳送嵌入內容，例如連結嵌入或自訂嵌入"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Send Embeds"
@@ -4375,28 +4375,28 @@ msgstr "發送訊息"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Send messages in channel"
-msgstr ""
+msgstr "在頻道中傳送訊息"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Send messages in channels"
-msgstr ""
+msgstr "在各頻道中傳送訊息"
 
 #: components/modal/modals/AddFriend.tsx
 msgid "Send Request"
-msgstr ""
+msgstr "傳送請求"
 
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Sending..."
-msgstr ""
+msgstr "傳送中..."
 
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Sent"
-msgstr ""
+msgstr "已傳送"
 
 #. placeholder {0}: message.attachments!.length
 #: components/client/NotificationsWorker.tsx
 msgid "Sent {0} attachments"
-msgstr ""
+msgstr "已傳送 {0} 個附件"
 
 #: components/ui/components/features/messaging/elements/MessageReply.tsx
 msgid "Sent an attachment"
@@ -4409,23 +4409,23 @@ msgstr "上傳多個附件"
 #: components/modal/modals/CreateGroupOrServer.tsx
 #: src/interface/navigation/servers/railDrag.ts
 msgid "Server"
-msgstr ""
+msgstr "伺服器"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Server address"
-msgstr ""
+msgstr "伺服器位址"
 
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Server Avatar"
-msgstr ""
+msgstr "伺服器大頭貼"
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "Server Banner"
-msgstr ""
+msgstr "伺服器橫幅"
 
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Server Default"
-msgstr ""
+msgstr "伺服器預設"
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "Server Description"
@@ -4433,11 +4433,11 @@ msgstr "伺服器簡介"
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "Server Icon"
-msgstr ""
+msgstr "伺服器圖示"
 
 #: components/app/interface/settings/user/profile/EditProfile.tsx
 msgid "Server Identities"
-msgstr ""
+msgstr "伺服器身分"
 
 #: components/app/interface/settings/server/Overview.tsx
 #: components/modal/modals/CreateServer.tsx
@@ -4446,11 +4446,11 @@ msgstr "伺服器名稱"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
-msgstr ""
+msgstr "伺服器身分組"
 
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Servers"
-msgstr ""
+msgstr "伺服器"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -4458,19 +4458,19 @@ msgstr "裝置"
 
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Set colour to {colour}"
-msgstr ""
+msgstr "將顏色設為 {colour}"
 
 #: components/modal/modals/EditServerFolder.tsx
 msgid "Set folder colour to {value}"
-msgstr ""
+msgstr "將資料夾顏色設為 {value}"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Set role colour to {colour}"
-msgstr ""
+msgstr "將身分組顏色設為 {colour}"
 
 #: components/modal/modals/CustomStatus.tsx
 msgid "Set your status"
-msgstr ""
+msgstr "設定你的狀態"
 
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
@@ -4481,11 +4481,11 @@ msgstr "設定"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Setup one-time password authenticator"
-msgstr ""
+msgstr "設定一次性密碼驗證器"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Setup recovery codes"
-msgstr ""
+msgstr "設定復原碼"
 
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "Several people are typing…"
@@ -4493,128 +4493,128 @@ msgstr "有好幾個人正在輸入…"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Several recaps are exported as one zip file with a CSV for each."
-msgstr ""
+msgstr "多份回顧會匯出為一個 zip 檔，每份回顧對應一個 CSV。"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Share audio"
-msgstr ""
+msgstr "分享音訊"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Share camera or screen in voice call"
-msgstr ""
+msgstr "在語音通話中分享攝影機或螢幕"
 
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 msgid "Share screen"
-msgstr ""
+msgstr "分享螢幕"
 
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show 'copy ID' in context menus"
-msgstr ""
+msgstr "在右鍵選單中顯示「複製 ID」"
 
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show admin panel shortcuts in context menus"
-msgstr ""
+msgstr "在右鍵選單中顯示管理面板捷徑"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
-msgstr ""
+msgstr "輸入時顯示更正與建議。"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Show live microphone statistics on call tiles"
-msgstr ""
+msgstr "在通話磁貼上顯示即時麥克風統計資料"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Show live statistics on call video tiles"
-msgstr ""
+msgstr "在通話影片磁貼上顯示即時統計資料"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Show Others"
-msgstr ""
+msgstr "顯示其他"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Show send message button"
-msgstr ""
+msgstr "顯示傳送訊息按鈕"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Sign into AnyTalk"
-msgstr ""
+msgstr "登入 AnyTalk"
 
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Sign Up"
-msgstr ""
+msgstr "註冊"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Silences your microphone while you aren't talking, so knocks and background noise between sentences aren't heard."
-msgstr ""
+msgstr "你不說話時會讓麥克風靜音，因此句子之間的敲擊聲與背景噪音不會被聽到。"
 
 #: components/app/interface/channels/text/Message.tsx
 msgid "Silent"
-msgstr ""
+msgstr "靜音"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Single stream: opening a stream replaces the current one"
-msgstr ""
+msgstr "單一直播：開啟直播時會取代目前的直播"
 
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "Slowmode Immune"
-msgstr ""
+msgstr "不受慢速模式限制"
 
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "Slowmode is enabled."
-msgstr ""
+msgstr "已啟用慢速模式。"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Slowmode off"
-msgstr ""
+msgstr "慢速模式已關閉"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone calls you in a DM or group"
-msgstr ""
+msgstr "有人在私訊或群組中打給你"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
-msgstr ""
+msgstr "有人加入你的語音頻道"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone leaves your voice channel"
-msgstr ""
+msgstr "有人離開你的語音頻道"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone moves into or out of your voice channel"
-msgstr ""
+msgstr "有人移入或移出你的語音頻道"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone starts watching your stream"
-msgstr ""
+msgstr "有人開始觀看你的直播"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone stops watching your stream"
-msgstr ""
+msgstr "有人停止觀看你的直播"
 
 #: components/modal/modals/EditEmail.tsx
 msgid "someone@example.com"
-msgstr ""
+msgstr "someone@example.com"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Something cool about me..."
-msgstr ""
+msgstr "關於我的一些酷事..."
 
 #. placeholder {0}: err.error
 #: components/i18n/errors.tsx
 msgid "Something is wrong with your request, {0}."
-msgstr ""
+msgstr "你的請求有問題，{0}。"
 
 #: components/i18n/errors.tsx
 msgid "Something went wrong! {error}"
-msgstr ""
+msgstr "出了點問題！{error}"
 
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
-msgstr ""
+msgstr "音效音量"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sounds"
@@ -4622,7 +4622,7 @@ msgstr "聲音"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sounds are turned off above, you can still preview them here."
-msgstr ""
+msgstr "上方已關閉音效，你仍可在此預覽。"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/auth/src/AuthPage.tsx
@@ -4631,11 +4631,11 @@ msgstr "原始碼"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Source type"
-msgstr ""
+msgstr "來源類型"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Spam or similar platform abuse"
-msgstr ""
+msgstr "垃圾訊息或類似的平台濫用"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Speak"
@@ -4643,51 +4643,51 @@ msgstr "發言"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Speaker"
-msgstr ""
+msgstr "喇叭"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Spellchecker"
-msgstr ""
+msgstr "拼字檢查"
 
 #: components/app/interface/channels/text/DraftMessage.tsx
 #: components/ui/components/features/messaging/composition/FileCarousel.tsx
 msgid "Spoiler"
-msgstr ""
+msgstr "劇透"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Start camera"
-msgstr ""
+msgstr "開啟攝影機"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Start Minimised to Tray"
-msgstr ""
+msgstr "啟動時最小化到系統匣"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "Start the call"
-msgstr ""
+msgstr "開始通話"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Start with Computer"
-msgstr ""
+msgstr "隨電腦啟動"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 msgid "Status"
-msgstr ""
+msgstr "狀態"
 
 #~ msgid "Stoat Desktop"
 #~ msgstr ""
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Stop camera"
-msgstr ""
+msgstr "關閉攝影機"
 
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 msgid "Stop sharing"
-msgstr ""
+msgstr "停止分享"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Stream developer mode"
-msgstr ""
+msgstr "直播開發者模式"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #~ msgid "Stream End"
@@ -4695,15 +4695,15 @@ msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Stream ended"
-msgstr ""
+msgstr "直播已結束"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Stream is still running."
-msgstr ""
+msgstr "直播仍在進行中。"
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Stream Settings"
-msgstr ""
+msgstr "直播設定"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #~ msgid "Stream Start"
@@ -4711,19 +4711,19 @@ msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Stream started"
-msgstr ""
+msgstr "直播已開始"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Stream stats"
-msgstr ""
+msgstr "直播統計"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Stream Stats"
-msgstr ""
+msgstr "直播統計"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Streams"
-msgstr ""
+msgstr "直播"
 
 #. placeholder {0}: count("stream")
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
@@ -4732,11 +4732,11 @@ msgstr ""
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Streams ({streams})"
-msgstr ""
+msgstr "直播（{streams}）"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Strong (150 Hz)"
-msgstr ""
+msgstr "強（150 Hz）"
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
@@ -4748,7 +4748,7 @@ msgstr "提供反應"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Submit to Discover"
-msgstr ""
+msgstr "提交至探索頁面"
 
 #: components/app/interface/settings/UserSettings.tsx
 #~ msgid "Subscriptions"
@@ -4756,7 +4756,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Suggest new AnyTalk features on GitHub discussions."
-msgstr ""
+msgstr "在 GitHub 討論區建議 AnyTalk 的新功能。"
 
 #: src/interface/Home.tsx
 #~ msgid "Support the project by donating - thank you!"
@@ -4764,75 +4764,75 @@ msgstr ""
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Switch"
-msgstr ""
+msgstr "切換"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Switch and reload"
-msgstr ""
+msgstr "切換並重新載入"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Switch server?"
-msgstr ""
+msgstr "要切換伺服器嗎？"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Switch to {label}"
-msgstr ""
+msgstr "切換至 {label}"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Switch to Apps to share a single window."
-msgstr ""
+msgstr "切換到「應用程式」以分享單一視窗。"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "Switch to this voice channel"
-msgstr ""
+msgstr "切換至此語音頻道"
 
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 msgid "Switch window"
-msgstr ""
+msgstr "切換視窗"
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Sync appearance options, such as chosen emoji pack and message density."
-msgstr ""
+msgstr "同步外觀選項，例如所選的表情符號包與訊息密度。"
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Sync your chosen theme, colours, and any custom CSS."
-msgstr ""
+msgstr "同步你選擇的主題、顏色與任何自訂 CSS。"
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Sync your currently chosen language."
-msgstr ""
+msgstr "同步你目前選擇的語言。"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "System"
-msgstr ""
+msgstr "系統"
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "System message channels"
-msgstr ""
+msgstr "系統訊息頻道"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Tap to enable audio"
-msgstr ""
+msgstr "點一下以啟用音訊"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Tell us what's wrong with this message"
-msgstr ""
+msgstr "請告訴我們此訊息有什麼問題"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Tell us what's wrong with this server"
-msgstr ""
+msgstr "請告訴我們此伺服器有什麼問題"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Tell us what's wrong with this user"
-msgstr ""
+msgstr "請告訴我們此使用者有什麼問題"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Temporarily prevent lower-ranking members from interacting"
-msgstr ""
+msgstr "暫時禁止較低階的成員互動"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Terms"
-msgstr ""
+msgstr "條款"
 
 #: components/auth/src/AuthPage.tsx
 #~ msgid "Terms of Service"
@@ -4844,60 +4844,60 @@ msgstr "文字頻道"
 
 #: components/i18n/errors.tsx
 msgid "That action had no effect."
-msgstr ""
+msgstr "該操作沒有任何效果。"
 
 #: components/i18n/errors.tsx
 msgid "The bot has been removed from discover by moderators, the user must contact support."
-msgstr ""
+msgstr "此機器人已被管理員從探索頁面移除，使用者必須聯絡支援團隊。"
 
 #: components/i18n/errors.tsx
 msgid "The bot is already on discover, the user must contact support to have it removed"
-msgstr ""
+msgstr "此機器人已在探索頁面上，使用者必須聯絡支援團隊才能移除"
 
 #: components/modal/modals/AddBot.tsx
 msgid "The bot will not be granted any permissions."
-msgstr ""
+msgstr "此機器人不會被授予任何權限。"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
-msgstr ""
+msgstr "桌面應用程式提供 Windows 與 Linux 版本。"
 
 #: components/i18n/errors.tsx
 msgid "The Discover request is approved or the item has been removed from discover. In either case, the user must contact support."
-msgstr ""
+msgstr "探索申請已通過，或該項目已從探索頁面移除。無論哪種情況，使用者都必須聯絡支援團隊。"
 
 #: components/i18n/errors.tsx
 msgid "The Discover request was declined. Declined requests cannot be removed, but the user may submit again."
-msgstr ""
+msgstr "探索申請已被拒絕。被拒絕的申請無法移除，但使用者可以重新提交。"
 
 #. placeholder {0}: file.name
 #: src/interface/channels/text/Composition.tsx
 msgid "The file \"{0}\" ({fileSize}) exceeds the maximum size limit of {maxSizeFormatted}."
-msgstr ""
+msgstr "檔案「{0}」（{fileSize}）超過了 {maxSizeFormatted} 的大小上限。"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The first version hasn't been published. Check back soon."
-msgstr ""
+msgstr "第一個版本尚未發佈。請稍後再來看看。"
 
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
-msgstr ""
+msgstr "該項目已被管理員移除，因此禁止日後再次申請。請聯絡支援團隊以取得更多資訊。"
 
 #: components/i18n/errors.tsx
 msgid "The password is too short."
-msgstr ""
+msgstr "密碼太短。"
 
 #: components/i18n/errors.tsx
 msgid "The server has been removed from discover by moderators, the user must contact support."
-msgstr ""
+msgstr "此伺服器已被管理員從探索頁面移除，使用者必須聯絡支援團隊。"
 
 #: components/i18n/errors.tsx
 msgid "The server is already on discover, the user must contact support to have it removed."
-msgstr ""
+msgstr "此伺服器已在探索頁面上，使用者必須聯絡支援團隊才能移除。"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "The sound couldn't be saved."
-msgstr ""
+msgstr "無法儲存此音效。"
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Theme"
@@ -4909,7 +4909,7 @@ msgstr "主題"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
-msgstr ""
+msgstr "這些按鍵只能在 AnyTalk 內運作。使用 Ctrl、Alt 或 Shift 加上字母或數字，或使用 F 鍵，即可在任何地方使用。"
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -4918,52 +4918,52 @@ msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "This account is not activated! Please check your account's inbox and try again."
-msgstr ""
+msgstr "此帳號尚未啟用！請查看你的收件匣後再試一次。"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "This bot is discoverable"
-msgstr ""
+msgstr "此機器人可被探索"
 
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
-msgstr ""
+msgstr "此機器人為私人機器人，只有建立者可以新增。"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
-msgstr ""
+msgstr "這個頻道是關於..."
 
 #: src/interface/channels/AgeGate.tsx
 msgid "This channel is marked as mature."
-msgstr ""
+msgstr "此頻道已標記為成人內容。"
 
 #: src/interface/channels/AgeGate.tsx
 msgid "This channel is not available in your region while we review options on legal compliance."
-msgstr ""
+msgstr "在我們審查法規遵循的選項期間，此頻道在你的地區無法使用。"
 
 #: src/interface/channels/AgeGate.tsx
 msgid "This content is not available in your region."
-msgstr ""
+msgstr "此內容在你的地區無法使用。"
 
 #: components/i18n/errors.tsx
 msgid "This feature is currently disabled."
-msgstr ""
+msgstr "此功能目前已停用。"
 
 #: components/i18n/errors.tsx
 msgid "This file type is not allowed."
-msgstr ""
+msgstr "不允許此檔案類型。"
 
 #. placeholder {0}: err.max
 #: components/i18n/errors.tsx
 msgid "This group is too large, you can have up to {0} users."
-msgstr ""
+msgstr "此群組太大，最多只能有 {0} 位使用者。"
 
 #: components/i18n/errors.tsx
 msgid "This has already been sent."
-msgstr ""
+msgstr "此內容已傳送過了。"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "This is taking longer than usual."
-msgstr ""
+msgstr "這比平常花費更久的時間。"
 
 #: components/ui/components/features/messaging/elements/ConversationStart.tsx
 msgid "This is the start of your conversation."
@@ -4975,32 +4975,32 @@ msgstr "這裡是您筆記的開始。"
 
 #: components/i18n/errors.tsx
 msgid "This message is already pinned."
-msgstr ""
+msgstr "此訊息已被釘選。"
 
 #: components/i18n/errors.tsx
 msgid "This message is empty and has not been sent."
-msgstr ""
+msgstr "此訊息為空，尚未傳送。"
 
 #: components/i18n/errors.tsx
 msgid "This password has previously appeared in security leaks, please use another password."
-msgstr ""
+msgstr "此密碼曾出現在資安外洩事件中，請改用其他密碼。"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "This recap no longer exists."
-msgstr ""
+msgstr "此回顧已不存在。"
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "This server is about..."
-msgstr ""
+msgstr "這個伺服器是關於..."
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "This server is discoverable"
-msgstr ""
+msgstr "此伺服器可被探索"
 
 #: components/i18n/errors.tsx
 msgid "This sign up is marked as spam."
-msgstr ""
+msgstr "此註冊被標記為垃圾訊息。"
 
 #: components/i18n/errors.tsx
 #~ msgid "This sign up is marked as spam. Please see <0>this support article.</0>"
@@ -5008,50 +5008,50 @@ msgstr ""
 
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "This stream has no audio"
-msgstr ""
+msgstr "此直播沒有音訊"
 
 #: components/i18n/errors.tsx
 msgid "This user has blocked you."
-msgstr "此使用者已封鎖您。"
+msgstr "此使用者已封鎖你。"
 
 #: components/modal/modals/BanNonMember.tsx
 msgid "This user is not part of the server and may already be banned"
-msgstr ""
+msgstr "此使用者不在伺服器中，可能已被停權"
 
 #: components/i18n/errors.tsx
 msgid "This username is already taken."
-msgstr ""
+msgstr "此使用者名稱已被使用。"
 
 #: components/i18n/errors.tsx
 msgid "This username is not allowed."
-msgstr ""
+msgstr "不允許使用此使用者名稱。"
 
 #: components/modal/modals/ResetBotToken.tsx
 msgid "This will invalidate the current token and stop any existing instances of the bot from running."
-msgstr ""
+msgstr "這會使目前的權杖失效，並停止該機器人所有現有的執行個體。"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Time format"
-msgstr ""
+msgstr "時間格式"
 
 #. placeholder {0}: props.member!.timeout!.toLocaleString()
 #: src/interface/channels/text/MemberSidebar.tsx
 msgid "Timed out until {0}"
-msgstr ""
+msgstr "暫時禁言至 {0}"
 
 #. placeholder {0}: props.message.member!.timeout!.toLocaleString()
 #: components/app/interface/channels/text/Message.tsx
 msgid "Timed Out until {0}"
-msgstr ""
+msgstr "暫時禁言至 {0}"
 
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
-msgstr ""
+msgstr "暫時禁言"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout Member"
-msgstr ""
+msgstr "暫時禁言成員"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Timeout Members"
@@ -5059,61 +5059,61 @@ msgstr "暫時禁言成員"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Toggle deafen"
-msgstr ""
+msgstr "切換拒聽"
 
 #: src/interface/common/CommonHeader.tsx
 msgid "Toggle main sidebar"
-msgstr ""
+msgstr "切換主側邊欄"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Toggle mute"
-msgstr ""
+msgstr "切換靜音"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Token copied to clipboard"
-msgstr ""
+msgstr "已將權杖複製到剪貼簿"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Tonal Spot"
-msgstr ""
+msgstr "Tonal Spot"
 
 #: src/interface/channels/text/Composition.tsx
 msgid "Too Long"
-msgstr ""
+msgstr "太長"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
-msgstr ""
+msgstr "傳統（DD/MM/YYYY）"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Transport"
-msgstr ""
+msgstr "傳輸"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Trending GIFs"
-msgstr ""
+msgstr "熱門 GIF"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Troubleshooting"
-msgstr ""
+msgstr "疑難排解"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Try again"
-msgstr ""
+msgstr "再試一次"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn every sound on and reset their volumes and files?"
-msgstr ""
+msgstr "要開啟所有音效並重設其音量與檔案嗎？"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn single sounds off, change their volume or use your own"
-msgstr ""
+msgstr "關閉個別音效、調整音量或使用你自己的音效"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
-msgstr ""
+msgstr "關閉此選項後，關閉視窗會直接結束 AnyTalk。"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
@@ -5122,93 +5122,93 @@ msgstr "解除封鎖使用者"
 #. placeholder {0}: err.type
 #: components/i18n/errors.tsx
 msgid "Uncaught AnyTalk error: {0}"
-msgstr ""
+msgstr "未捕捉的 AnyTalk 錯誤：{0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Undeafen"
-msgstr ""
+msgstr "取消拒聽"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: src/interface/channels/ChannelPage.tsx
 msgid "Unknown channel type!"
-msgstr ""
+msgstr "未知的頻道類型！"
 
 #: components/markdown/plugins/customEmoji.tsx
 msgid "Unknown emote"
-msgstr ""
+msgstr "未知的表情符號"
 
 #: components/markdown/plugins/mentions.tsx
 msgid "Unknown Role"
-msgstr ""
+msgstr "未知的身分組"
 
 #: components/markdown/plugins/anchors.tsx
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Unknown Server"
-msgstr ""
+msgstr "未知的伺服器"
 
 #: components/markdown/plugins/mentions.tsx
 #: components/markdown/users.ts
 msgid "Unknown User"
-msgstr ""
+msgstr "未知的使用者"
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Unmark as mature"
-msgstr ""
+msgstr "取消標記為成人內容"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Unmark as Mature"
-msgstr ""
+msgstr "取消標記為成人內容"
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Unmark this channel as mature?"
-msgstr ""
+msgstr "要取消將此頻道標記為成人內容嗎？"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Unmute"
-msgstr ""
+msgstr "取消靜音"
 
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Unmute Channel"
-msgstr ""
+msgstr "取消頻道靜音"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unmute Server"
-msgstr ""
+msgstr "取消伺服器靜音"
 
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Unmute stream"
-msgstr ""
+msgstr "取消直播靜音"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unnamed folder"
-msgstr ""
+msgstr "未命名的資料夾"
 
 #: components/modal/modals/PinMessage.tsx
 msgid "Unpin"
-msgstr ""
+msgstr "取消釘選"
 
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Unpin message"
-msgstr ""
+msgstr "取消釘選訊息"
 
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Unsent message"
-msgstr ""
+msgstr "未傳送的訊息"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Unsolicited advertising or spam"
-msgstr ""
+msgstr "未經請求的廣告或垃圾訊息"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Until I turn it back on"
-msgstr ""
+msgstr "直到我重新開啟"
 
 #. placeholder {0}: percent(meta.worstIncomingLoss)
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
@@ -5217,41 +5217,41 @@ msgstr ""
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "up to {loss} loss"
-msgstr ""
+msgstr "最高遺失 {loss}"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Up to {MAX_LINES} lines at once, deselect one to add another."
-msgstr ""
+msgstr "一次最多 {MAX_LINES} 條線，取消選取一條才能再加入另一條。"
 
 #: components/app/interface/desktop/Titlebar.tsx
 msgid "Update"
-msgstr ""
+msgstr "更新"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Update available"
-msgstr ""
+msgstr "有可用更新"
 
 #. placeholder {0}: releaseVersion(release())
 #. placeholder {0}: updaterState()?.version
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Update available: {0}"
-msgstr ""
+msgstr "有可用更新：{0}"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Update download progress"
-msgstr ""
+msgstr "更新下載進度"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Update failed"
-msgstr ""
+msgstr "更新失敗"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Updates"
-msgstr ""
+msgstr "更新"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Updates download in the background and install when you restart AnyTalk. Turn off to decide yourself when to update."
-msgstr ""
+msgstr "更新會在背景下載，並在你重新啟動 AnyTalk 時安裝。關閉後可自行決定何時更新。"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Upload Files"
@@ -5259,24 +5259,24 @@ msgstr "上傳檔案"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Upload to Gifbox"
-msgstr ""
+msgstr "上傳至 Gifbox"
 
 #. placeholder {0}: progress()
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Uploading file `{fileName}`... {0}%"
-msgstr ""
+msgstr "正在上傳檔案 `{fileName}`... {0}%"
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
-msgstr ""
+msgstr "使用邀請碼或邀請連結"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Use a game controller to move around AnyTalk. Works with Xbox, PlayStation, Switch and Steam Deck controllers."
-msgstr ""
+msgstr "使用遊戲控制器在 AnyTalk 中操作。支援 Xbox、PlayStation、Switch 與 Steam Deck 控制器。"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Use hotkeys that work even while AnyTalk isn't focused, and keep AnyTalk running in the system tray."
-msgstr ""
+msgstr "使用即使 AnyTalk 不在焦點也能運作的快速鍵，並讓 AnyTalk 持續在系統匣中執行。"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Use the graphics card to improve performance."
@@ -5284,7 +5284,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Use the graphics card to improve performance. Takes effect after you restart AnyTalk."
-msgstr ""
+msgstr "使用顯示卡來提升效能。重新啟動 AnyTalk 後生效。"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "User"
@@ -5292,20 +5292,20 @@ msgstr "使用者"
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "User Banned"
-msgstr ""
+msgstr "使用者已被停權"
 
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
 msgid "User broke a certain rule…"
-msgstr ""
+msgstr "使用者違反了某項規則…"
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "User Joined"
-msgstr ""
+msgstr "使用者已加入"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "User joined call"
-msgstr ""
+msgstr "使用者已加入通話"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #~ msgid "User Joined Call"
@@ -5313,15 +5313,15 @@ msgstr ""
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "User Kicked"
-msgstr ""
+msgstr "使用者已被踢出"
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "User Left"
-msgstr ""
+msgstr "使用者已離開"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "User left call"
-msgstr ""
+msgstr "使用者已離開通話"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #~ msgid "User Left Call"
@@ -5333,7 +5333,7 @@ msgstr "使用者管理"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "User moved"
-msgstr ""
+msgstr "使用者已移動"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "User Settings"
@@ -5341,7 +5341,7 @@ msgstr "使用者設定"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "User's profile has inappropriate content"
-msgstr ""
+msgstr "使用者的個人檔案含有不當內容"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
@@ -5355,19 +5355,19 @@ msgstr "使用者名稱"
 
 #: components/modal/modals/AddFriend.tsx
 msgid "username#1234"
-msgstr ""
+msgstr "username#1234"
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Users will be asked to confirm their age before joining this channel."
-msgstr ""
+msgstr "使用者在加入此頻道之前會被要求確認年齡。"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Users will be asked to confirm their age before opening this channel."
-msgstr ""
+msgstr "使用者在開啟此頻道之前會被要求確認年齡。"
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Users will no longer be asked to confirm their age before joining this channel.<0/> Please ensure the content is appropriate for all ages."
-msgstr ""
+msgstr "使用者在加入此頻道之前將不再被要求確認年齡。<0/>請確保內容適合所有年齡層。"
 
 #~ msgid "Using default microphone"
 #~ msgstr ""
@@ -5377,7 +5377,7 @@ msgstr ""
 
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Verified"
-msgstr ""
+msgstr "已驗證"
 
 #: components/auth/src/flows/FlowVerify.tsx
 msgid "Verifying your account…"
@@ -5388,12 +5388,12 @@ msgstr "驗證您的帳號…"
 #: components/app/interface/settings/user/DesktopDownload.tsx
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Version {0}"
-msgstr ""
+msgstr "版本 {0}"
 
 #: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Version:"
-msgstr ""
+msgstr "版本："
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Video"
@@ -5401,11 +5401,11 @@ msgstr "影片"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Video copies being sent (full / half / quarter size)"
-msgstr ""
+msgstr "正在傳送的影片副本（完整 / 一半 / 四分之一大小）"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "View (back) button"
-msgstr ""
+msgstr "檢視（返回）按鈕"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"
@@ -5417,14 +5417,14 @@ msgstr "查看當前活躍的錯誤回報。"
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "View members"
-msgstr ""
+msgstr "檢視成員"
 
 #~ msgid "View older updates"
 #~ msgstr "查看以前的更新"
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "View pinned messages"
-msgstr ""
+msgstr "檢視已釘選的訊息"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "View Recovery Codes"
@@ -5432,15 +5432,15 @@ msgstr "查看恢復代碼"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "View status page"
-msgstr ""
+msgstr "檢視狀態頁面"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Viewer joined"
-msgstr ""
+msgstr "觀看者已加入"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Viewer left"
-msgstr ""
+msgstr "觀看者已離開"
 
 #: components/ui/components/features/messaging/bars/JumpToBottom.tsx
 msgid "Viewing older messages"
@@ -5449,23 +5449,23 @@ msgstr "查看歷史訊息"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Voice"
-msgstr ""
+msgstr "語音"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Voice & Video"
-msgstr ""
+msgstr "語音與影片"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Voice call developer mode"
-msgstr ""
+msgstr "語音通話開發者模式"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Voice call stats"
-msgstr ""
+msgstr "語音通話統計"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Voice Call Stats"
-msgstr ""
+msgstr "語音通話統計"
 
 #. placeholder {0}: count("call")
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
@@ -5474,7 +5474,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Voice calls ({calls})"
-msgstr ""
+msgstr "語音通話（{calls}）"
 
 #: components/modal/modals/CreateChannel.tsx
 msgid "Voice Channel"
@@ -5482,29 +5482,29 @@ msgstr "語音頻道"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"
-msgstr ""
+msgstr "語音處理"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
 msgid "Volume"
-msgstr ""
+msgstr "音量"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Want to change username?"
-msgstr ""
+msgstr "想要變更使用者名稱嗎？"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Watch multiple streams at once"
-msgstr ""
+msgstr "同時觀看多個直播"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "Watch stream"
-msgstr ""
+msgstr "觀看直播"
 
 #: src/AndroidNag.tsx
 msgid "We are working hard on optimising our web app for mobile."
-msgstr ""
+msgstr "我們正努力為行動裝置最佳化我們的網頁應用程式。"
 
 #: components/auth/src/flows/FlowCheck.tsx
 msgid "We've sent you a verification email. Please allow up to 10 minutes for it to arrive."
@@ -5512,16 +5512,16 @@ msgstr "請等待電子郵件送達，最多可能會需要 10 分鐘。"
 
 #: components/app/interface/channels/text/Message.tsx
 msgid "Webhook"
-msgstr ""
+msgstr "Webhook"
 
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
 msgid "Webhook Icon"
-msgstr ""
+msgstr "Webhook 圖示"
 
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
 #: components/modal/modals/CreateWebhook.tsx
 msgid "Webhook Name"
-msgstr ""
+msgstr "Webhook 名稱"
 
 #: components/app/interface/settings/ChannelSettings.tsx
 msgid "Webhooks"
@@ -5532,7 +5532,7 @@ msgstr "Webhooks"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Welcome to the new appearance menu, custom themes are not available just yet but we are looking for feedback on how to best implement them!"
-msgstr ""
+msgstr "歡迎使用全新的外觀選單，自訂主題尚未開放，但我們正在徵求意見，看看如何做得最好！"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Welcome!"
@@ -5540,16 +5540,16 @@ msgstr "歡迎！"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "What each controller button does"
-msgstr ""
+msgstr "控制器各按鈕的功能"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"
-msgstr ""
+msgstr "限制直播品質的因素"
 
 #: components/app/interface/settings/user/Updates.tsx
 #: components/modal/modals/Changelog.tsx
 msgid "What's new"
-msgstr ""
+msgstr "新功能"
 
 #: components/app/interface/settings/UserSettings.tsx
 #~ msgid "What's New"
@@ -5557,24 +5557,24 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Whether other users can edit these settings"
-msgstr ""
+msgstr "其他使用者是否可以編輯這些設定"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "While stream developer mode and \"Record stream recaps\" are on, statistics for every video stream you send or watch in a call are recorded once per second. Recaps are stored on this device only; the newest 20 are kept."
-msgstr ""
+msgstr "開啟直播開發者模式與「錄製直播回顧」時，你在通話中傳送或觀看的每個影片直播的統計資料會每秒記錄一次。回顧僅儲存在此裝置上，只保留最新的 20 份。"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "While voice call developer mode and \"Record call recaps\" are on, your microphone and everyone you hear are measured once per second. Recaps are stored on this device only; the newest 20 calls are kept."
-msgstr ""
+msgstr "開啟語音通話開發者模式與「錄製通話回顧」時，你的麥克風與你聽到的所有人會每秒測量一次。回顧僅儲存在此裝置上，只保留最新的 20 場通話。"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
-msgstr ""
+msgstr "Windows 安裝程式"
 
 #. placeholder {0}: names.join(", ")
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "with {0}"
-msgstr ""
+msgstr "與 {0}"
 
 #~ msgid "With {0}"
 #~ msgstr ""
@@ -5582,63 +5582,63 @@ msgstr ""
 #. placeholder {0}: names.length
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "with {0} others"
-msgstr ""
+msgstr "與其他 {0} 人"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "with {participants}"
-msgstr ""
+msgstr "與 {participants}"
 
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Would you like to create a new group or server?"
-msgstr ""
+msgstr "你想建立新的群組或伺服器嗎？"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
 msgid "Would you like to create a new server or join an existing one?"
-msgstr ""
+msgstr "你想建立新的伺服器或加入現有的伺服器嗎？"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Write a message"
-msgstr ""
+msgstr "撰寫訊息"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "X (left button)"
-msgstr ""
+msgstr "X（左側按鈕）"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Y (top button)"
-msgstr ""
+msgstr "Y（上方按鈕）"
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "You agree that your bot is subject to the Acceptable Usage Policy."
-msgstr ""
+msgstr "你同意你的機器人須遵守可接受使用政策。"
 
 #. placeholder {0}: props.member.user?.username
 #. placeholder {0}: props.user?.username
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
 msgid "You are about to ban {0}"
-msgstr ""
+msgstr "你即將停權 {0}"
 
 #. placeholder {0}: props.member.user?.username
 #: components/modal/modals/KickMember.tsx
 msgid "You are about to kick {0}"
-msgstr ""
+msgstr "你即將踢出 {0}"
 
 #: components/i18n/errors.tsx
 msgid "You are banned from this server."
-msgstr ""
+msgstr "你已被此伺服器停權。"
 
 #: components/ui/components/features/messaging/composition/MessageBox.tsx
 msgid "You are timed out and can't send messages right now."
-msgstr ""
+msgstr "你被暫時禁言，目前無法傳送訊息。"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "You call someone and wait for them to join"
-msgstr ""
+msgstr "你打給某人並等待對方加入時"
 
 #: src/interface/Home.tsx
 msgid "You can also click the gear icon in the bottom left."
-msgstr ""
+msgstr "你也可以點擊左下角的齒輪圖示。"
 
 #~ msgid "You can also right-click the user icon in the top left, or left click it if you're already home."
 #~ msgstr "您也可以右鍵點擊左上角的使用者頭像，或是在首頁點擊左鍵。"
@@ -5654,42 +5654,42 @@ msgstr "您可以直接在此處報告問題並與我們討論改進。"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "You can request again below"
-msgstr ""
+msgstr "你可以在下方重新申請"
 
 #. placeholder {0}: err.max
 #: components/i18n/errors.tsx
 msgid "You can't be in more than {0} servers, please leave one and try again."
-msgstr ""
+msgstr "你最多只能加入 {0} 個伺服器，請先離開一個後再試一次。"
 
 #. placeholder {0}: err.max
 #: components/i18n/errors.tsx
 msgid "You can't have more than {0} channels on this server."
-msgstr ""
+msgstr "此伺服器最多只能有 {0} 個頻道。"
 
 #. placeholder {0}: err.max
 #: components/i18n/errors.tsx
 msgid "You can't have more than {0} emojis on this server."
-msgstr ""
+msgstr "此伺服器最多只能有 {0} 個表情符號。"
 
 #: components/i18n/errors.tsx
 msgid "You cannot give yourself missing permissions."
-msgstr ""
+msgstr "你無法授予自己缺少的權限。"
 
 #: components/i18n/errors.tsx
 msgid "You cannot join this call."
-msgstr ""
+msgstr "你無法加入此通話。"
 
 #: components/i18n/errors.tsx
 msgid "You cannot remove yourself."
-msgstr ""
+msgstr "你無法移除自己。"
 
 #: components/i18n/errors.tsx
 msgid "You cannot report yourself."
-msgstr ""
+msgstr "你無法檢舉自己。"
 
 #: components/i18n/errors.tsx
 msgid "You cannot timeout yourself."
-msgstr ""
+msgstr "你無法暫時禁言自己。"
 
 #: components/modal/modals/SignOutSessions.tsx
 msgid "You cannot undo this action."
@@ -5698,15 +5698,15 @@ msgstr "您無法撤銷此操作。"
 #. placeholder {0}: props.display
 #: components/modal/modals/LinkWarning.tsx
 msgid "You clicked on \"{0}\""
-msgstr ""
+msgstr "你點擊了「{0}」"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "You deafen yourself"
-msgstr ""
+msgstr "你讓自己拒聽時"
 
 #: components/i18n/errors.tsx
 msgid "You do not have permission to do this."
-msgstr ""
+msgstr "你沒有執行此操作的權限。"
 
 #: components/ui/components/features/messaging/composition/MessageBox.tsx
 msgid "You don't have permission to send messages in this channel."
@@ -5715,55 +5715,55 @@ msgstr "您沒有權限在此頻道發言。"
 #. placeholder {0}: homeNotifications()
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "You have {0} pending friend requests."
-msgstr ""
+msgstr "你有 {0} 個待處理的好友邀請。"
 
 #: components/i18n/errors.tsx
 msgid "You have been locked out for entering a wrong password multiple times. Please wait a couple minutes and try again."
-msgstr ""
+msgstr "由於多次輸入錯誤密碼，你已被鎖定。請等待幾分鐘後再試一次。"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "You have no call recaps yet."
-msgstr ""
+msgstr "你還沒有任何通話回顧。"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "You have no stream recaps yet."
-msgstr ""
+msgstr "你還沒有任何直播回顧。"
 
 #: components/i18n/errors.tsx
 msgid "You have this user blocked."
-msgstr ""
+msgstr "你已封鎖此使用者。"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "You may be experiencing connection issues."
-msgstr ""
+msgstr "你可能遇到了連線問題。"
 
 #: components/i18n/errors.tsx
 msgid "You may not submit this item to discover."
-msgstr ""
+msgstr "你不能將此項目提交至探索頁面。"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "You mute your microphone"
-msgstr ""
+msgstr "你將麥克風靜音時"
 
 #: components/ui/components/features/voice/VoiceStatefulUserIcons.tsx
 msgid "You muted this user."
-msgstr ""
+msgstr "你已將此使用者靜音。"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "You undeafen yourself"
-msgstr ""
+msgstr "你取消自己的拒聽時"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "You unmute your microphone"
-msgstr ""
+msgstr "你取消麥克風靜音時"
 
 #: components/auth/src/flows/FlowHome.tsx
 msgid "You were logged out!"
-msgstr ""
+msgstr "你已被登出！"
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "You will not receive any notifications"
-msgstr ""
+msgstr "你將不會收到任何通知"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "You won't be able to access your account unless you contact support - however, your data will not be deleted."
@@ -5785,7 +5785,7 @@ msgstr "您已加入此伺服器。"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "You're offline. Connect to the internet first, otherwise AnyTalk couldn't load again."
-msgstr ""
+msgstr "你目前離線。請先連上網際網路，否則 AnyTalk 將無法再次載入。"
 
 #: components/i18n/errors.tsx
 msgid "You've already sent a request to this user."
@@ -5793,7 +5793,7 @@ msgstr "您已經向此使用者傳送過請求。"
 
 #: components/modal/modals/Invite.tsx
 msgid "You've been invited to join this server.<0/>Would you like to join?"
-msgstr ""
+msgstr "你已受邀加入此伺服器。<0/>要加入嗎？"
 
 #: components/modal/modals/SignedOut.tsx
 msgid "You've been signed out of AnyTalk!"
@@ -5801,12 +5801,12 @@ msgstr "您已登出AnyTalk!"
 
 #: components/i18n/errors.tsx
 msgid "You've reached your personal bot limit."
-msgstr ""
+msgstr "你已達到個人機器人數量上限。"
 
 #. placeholder {0}: err.max
 #: components/i18n/errors.tsx
 msgid "You've sent too many friend requests, the maximum is {0}"
-msgstr ""
+msgstr "你傳送了太多好友邀請，上限為 {0} 個"
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -5815,11 +5815,11 @@ msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Your {source}"
-msgstr ""
+msgstr "你的{source}"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Your account and all of your data (including your messages and friends list) will be queued for deletion. A confirmation email will be sent - you can cancel this within 7 days by contacting support."
-msgstr ""
+msgstr "你的帳號與所有資料（包括訊息與好友列表）將排入刪除佇列。系統會寄出一封確認電子郵件，你可以在 7 天內聯絡支援團隊取消。"
 
 #: components/auth/src/flows/FlowVerify.tsx
 msgid "Your account has been verified!"
@@ -5827,28 +5827,28 @@ msgstr "您的帳號已驗證！"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your bot is under review"
-msgstr ""
+msgstr "你的機器人正在審核中"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Your camera"
-msgstr ""
+msgstr "你的攝影機"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your discover request has been denied"
-msgstr ""
+msgstr "你的探索申請已被拒絕"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your discover request has been removed"
-msgstr ""
+msgstr "你的探索申請已被移除"
 
 #: components/i18n/errors.tsx
 msgid "Your discriminator change has been ratelimited, please try again later."
-msgstr ""
+msgstr "你的識別碼變更已被限制頻率，請稍後再試。"
 
 #. placeholder {0}: customFile()
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Your file: {0}"
-msgstr ""
+msgstr "你的檔案：{0}"
 
 #: components/i18n/errors.tsx
 msgid "Your message is too long, please remove some characters and try again."
@@ -5856,11 +5856,11 @@ msgstr "您的訊息太長了，請減少字數後重試。"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Your microphone"
-msgstr ""
+msgstr "你的麥克風"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Your microphone (outgoing)"
-msgstr ""
+msgstr "你的麥克風（送出）"
 
 #: components/modal/modals/MFARecovery.tsx
 msgid "Your recovery codes"
@@ -5868,24 +5868,24 @@ msgstr "您的恢復代碼"
 
 #: components/i18n/errors.tsx
 msgid "Your request failed. Please contact support."
-msgstr ""
+msgstr "你的請求失敗。請聯絡支援團隊。"
 
 #: components/i18n/errors.tsx
 msgid "Your role ranking is too low to take this action."
-msgstr ""
+msgstr "你的身分組階級太低，無法執行此操作。"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Your screen share"
-msgstr ""
+msgstr "你的螢幕分享"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your server is under review"
-msgstr ""
+msgstr "你的伺服器正在審核中"
 
 #: components/i18n/errors.tsx
 msgid "Your user has already been created? Try logging in again or refreshing the app."
-msgstr ""
+msgstr "你的使用者已經建立了？請嘗試重新登入或重新整理應用程式。"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Yours"
-msgstr ""
+msgstr "你的"
