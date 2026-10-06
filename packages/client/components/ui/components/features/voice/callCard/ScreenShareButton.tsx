@@ -12,8 +12,9 @@ import { useInstance } from "@revolt/instance";
 import { useVoice } from "@revolt/rtc";
 import { SCREEN_SHARE_RESOLUTION_LABELS } from "@revolt/rtc/state";
 import { IconButton } from "@revolt/ui/components/design";
+import { isContextMenuKey } from "@revolt/ui/components/floating/contextMenuKeyboard";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
-import { floatingElements, isContextMenuKey } from "@revolt/ui/directives";
+import { floatingElements } from "@revolt/ui/directives";
 
 /** How long the menu stays open after the pointer leaves it */
 const CLOSE_DELAY_MS = 200;
