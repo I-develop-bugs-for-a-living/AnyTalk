@@ -43,6 +43,24 @@ export function canMoveTo(from: Channel, to: Channel) {
 }
 
 /**
+ * Voice channel of a server that someone is currently in, if any
+ * @param channels Channels of the server
+ * @param userId User id
+ */
+export function findVoiceChannelOf(channels: Channel[], userId: string) {
+  return channels.find((c) => c.isVoice && c.voiceParticipants.has(userId));
+}
+
+/**
+ * Voice channels someone can be moved to from the channel they are in
+ * @param from Their channel
+ * @param channels Channels of the server
+ */
+export function moveTargets(from: Channel, channels: Channel[]) {
+  return channels.filter((to) => canMoveTo(from, to));
+}
+
+/**
  * Move someone into another voice channel of the same server; the server
  * then tells everyone (VoiceChannelMove), see VoiceMoves
  * @param client Client

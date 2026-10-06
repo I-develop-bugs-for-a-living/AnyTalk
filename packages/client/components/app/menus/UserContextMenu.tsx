@@ -4,8 +4,14 @@ import { useModals } from "@revolt/modal";
 import { useSmartParams } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { Slider, Symbol, Text } from "@revolt/ui";
+import { useMoveVoiceUser } from "@revolt/ui/components/features/voice/useMoveVoiceUser";
+import {
+  canMoveFrom,
+  findVoiceChannelOf,
+  moveTargets,
+} from "@revolt/ui/components/features/voice/voiceMove";
 import { useNavigate } from "@solidjs/router";
-import { type JSX, Match, Show, Switch } from "solid-js";
+import { type JSX, For, Match, Show, Switch, createMemo } from "solid-js";
 import type { Channel, Message, ServerMember, User } from "stoat.js";
 import { styled } from "styled-system/jsx";
 
@@ -13,6 +19,7 @@ import {
   ContextMenu,
   ContextMenuButton,
   ContextMenuDivider,
+  ContextMenuSubMenu,
 } from "./ContextMenu";
 import { NotificationContextMenu } from "./shared/NotificationContextMenu";
 
@@ -317,6 +324,27 @@ export function UserContextMenu(props: {
     );
   }
 
+  const moveUser = useMoveVoiceUser();
+
+  /**
+   * Voice channel of the current server this user is in, if they can be moved
+   * out of it (needs the Move Members permission)
+   */
+  function voiceChannelToMoveFrom() {
+    const server = props.member?.server ?? props.channel?.server;
+    if (!server) return undefined;
+    const from = findVoiceChannelOf(server.channels, props.user.id);
+    return from && canMoveFrom(from) ? from : undefined;
+  }
+
+  /**
+   * Voice channels the user can be moved to
+   */
+  const moveChannels = createMemo(() => {
+    const from = voiceChannelToMoveFrom();
+    return from ? moveTargets(from, from.server!.channels) : [];
+  });
+
   return (
     <ContextMenu class="UserContextMenu">
       {/* Voice controls */}
@@ -424,6 +452,32 @@ export function UserContextMenu(props: {
           <Trans>Mute Screen Share</Trans>
         </ContextMenuButton>
 
+        <ContextMenuDivider />
+      </Show>
+
+      {/* Move to another voice channel (also the keyboard / phone way to drag) */}
+      <Show when={moveChannels().length}>
+        <ContextMenuSubMenu
+          symbol={
+            <IconSlot>
+              <Symbol size={16}>move_up</Symbol>
+            </IconSlot>
+          }
+          buttonContent={<Trans>Move to channel</Trans>}
+          aria-haspopup="menu"
+        >
+          <For each={moveChannels()}>
+            {(channel) => (
+              <ContextMenuButton
+                role="menuitem"
+                _titleCase={false}
+                onClick={() => moveUser(props.user.id, channel)}
+              >
+                {channel.name}
+              </ContextMenuButton>
+            )}
+          </For>
+        </ContextMenuSubMenu>
         <ContextMenuDivider />
       </Show>
 

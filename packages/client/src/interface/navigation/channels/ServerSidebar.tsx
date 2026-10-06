@@ -13,7 +13,6 @@ import { useLingui } from "@lingui/solid/macro";
 import type { Channel, Server, ServerFlags } from "stoat.js";
 import { styled } from "styled-system/jsx";
 
-import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
 import { KeybindAction, createKeybind } from "@revolt/keybinds";
 import { TextWithEmoji } from "@revolt/markdown";
@@ -33,15 +32,14 @@ import {
   iconSize,
   symbolSize,
   typography,
-  useSnackbar,
 } from "@revolt/ui";
 import { UnreadCallout } from "@revolt/ui/components/features/navigation/UnreadCallout";
+import { useMoveVoiceUser } from "@revolt/ui/components/features/voice/useMoveVoiceUser";
 import { VoiceChannelPreview } from "@revolt/ui/components/features/voice/VoiceChannelPreview";
 import {
   VOICE_USER_DRAG_TYPE,
   canMoveTo,
   draggedVoiceUser,
-  moveVoiceUser,
   setDraggedVoiceUser,
 } from "@revolt/ui/components/features/voice/voiceMove";
 import { createDragHandle } from "@revolt/ui/components/utils/Draggable";
@@ -622,19 +620,18 @@ function Entry(
   const inCall = () => props.channel.id === voice.channel()?.id;
 
   // someone dragged from another voice channel can be dropped here
-  const client = useClient();
-  const snackbar = useSnackbar();
+  const moveUser = useMoveVoiceUser();
   const { t } = useLingui();
   const [dropping, setDropping] = createSignal(false);
   const canDrop = () => {
     const dragged = draggedVoiceUser();
     return !!dragged && canMoveTo(dragged.from, props.channel);
-    // same check as dragover: leave file drops and other drags alone
-    if (!e.dataTransfer?.types.includes(VOICE_USER_DRAG_TYPE)) return;
-
   };
 
   async function drop(e: DragEvent) {
+    // same check as dragover: leave file drops and other drags alone
+    if (!e.dataTransfer?.types.includes(VOICE_USER_DRAG_TYPE)) return;
+
     const dragged = draggedVoiceUser();
     setDropping(false);
     setDraggedVoiceUser(undefined);
@@ -643,14 +640,7 @@ function Entry(
     // not a file drop, keep it away from the file drop collector
     e.stopPropagation();
 
-    try {
-      await moveVoiceUser(client(), dragged.userId, props.channel);
-    } catch (err) {
-      console.error("[voice] could not move user", err);
-      snackbar.show({
-        message: t`Couldn't move them to ${props.channel.name}.`,
-      });
-    }
+    await moveUser(dragged.userId, props.channel);
   }
 
   const attentionState = createMemo(() =>
