@@ -4,6 +4,7 @@ import { Channel, Server } from "stoat.js";
 
 import { AbstractStore } from ".";
 import { State } from "..";
+import { resolveNewServerState } from "./notificationDefaults";
 
 /**
  * Possible notification states
@@ -37,6 +38,11 @@ export interface MuteState {
 }
 
 export interface TypeNotificationOptions {
+  /**
+   * Level applied to servers the user joins or creates from now on
+   */
+  default_server: NotificationState;
+
   /**
    * Per-server settings
    */
@@ -98,6 +104,7 @@ export class NotificationOptions extends AbstractStore<
    */
   default(): TypeNotificationOptions {
     return {
+      default_server: DEFAULT_SERVER_STATE,
       server: {},
       channel: {},
       server_mutes: {},
@@ -172,7 +179,13 @@ export class NotificationOptions extends AbstractStore<
       }
     }
 
+    const default_server =
+      input.default_server && NotificationStates.includes(input.default_server)
+        ? input.default_server
+        : DEFAULT_SERVER_STATE;
+
     return {
+      default_server,
       server,
       channel,
       server_mutes,
@@ -211,6 +224,31 @@ export class NotificationOptions extends AbstractStore<
    */
   setServer(server: Server, state: NotificationState | undefined) {
     this.set("server", server.id, state);
+  }
+
+  /**
+   * Set the level applied to servers joined or created from now on
+   * @param state State
+   */
+  setDefaultServer(state: NotificationState) {
+    this.set("default_server", state);
+  }
+
+  /**
+   * Store the default level for a server the user just joined or created,
+   * unless that server already has an explicit setting
+   * @param serverId Server ID
+   */
+  applyDefaultForNewServer(serverId: string) {
+    const state = resolveNewServerState(
+      this.get().server[serverId],
+      this.get().default_server,
+      DEFAULT_SERVER_STATE,
+    );
+
+    if (state) {
+      this.set("server", serverId, state);
+    }
   }
 
   /**
