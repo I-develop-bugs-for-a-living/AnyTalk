@@ -637,6 +637,8 @@ function Entry(
     setDraggedVoiceUser(undefined);
     if (!dragged || !canMoveTo(dragged.from, props.channel)) return;
     e.preventDefault();
+    // not a file drop, keep it away from the file drop collector
+    e.stopPropagation();
 
     try {
       await moveVoiceUser(client(), dragged.userId, props.channel);
@@ -668,6 +670,9 @@ function Entry(
         if (!canDrop() || !e.dataTransfer?.types.includes(VOICE_USER_DRAG_TYPE))
           return;
         e.preventDefault();
+        // the app layout and the file drop collector further up would
+        // overwrite the drop effect ("none" / "copy") and refuse the drop
+        e.stopPropagation();
         e.dataTransfer.dropEffect = "move";
         setDropping(true);
       }}

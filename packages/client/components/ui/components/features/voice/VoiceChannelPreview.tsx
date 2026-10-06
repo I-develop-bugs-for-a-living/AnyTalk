@@ -180,6 +180,32 @@ function ParticipantPreview(props: {
 }
 
 /**
+ * Use only the participant row as drag image: the browser may otherwise
+ * snapshot the surrounding sidebar layer. Renders an opaque clone off-screen.
+ * @param e Drag start event, fired on the row
+ */
+function setRowDragImage(e: DragEvent & { currentTarget: HTMLElement }) {
+  const row = e.currentTarget;
+  const rect = row.getBoundingClientRect();
+  const clone = row.cloneNode(true) as HTMLElement;
+  clone.style.position = "fixed";
+  clone.style.insetBlockStart = "-1000px";
+  clone.style.insetInlineStart = "0";
+  clone.style.width = `${rect.width}px`;
+  clone.style.pointerEvents = "none";
+  clone.style.background = "var(--md-sys-color-surface-container-high)";
+  clone.style.borderRadius = "var(--borderRadius-md)";
+  document.body.appendChild(clone);
+  e.dataTransfer?.setDragImage(
+    clone,
+    e.clientX - rect.left,
+    e.clientY - rect.top,
+  );
+  // the browser has captured the image by the next task
+  setTimeout(() => clone.remove(), 0);
+}
+
+/**
  * Component used for both variants
  */
 function CommonUser(props: {
@@ -210,13 +236,15 @@ function CommonUser(props: {
       class={previewUser({ speaking: rest.speaking, watchable: canWatch() })}
       onClick={() => canWatch() && rest.onWatch!()}
       draggable={canDrag()}
-      // keep the channel list from starting to reorder channels instead
-      onMouseDown={(e) => canDrag() && e.stopPropagation()}
+      // the channel list's drag zones ignore presses here (see Draggable), so
+      // they can't start reordering channels instead of this native drag
+      data-no-reorder
       onDragStart={(e) => {
         if (!canDrag() || !e.dataTransfer) return;
         e.stopPropagation();
         e.dataTransfer.setData(VOICE_USER_DRAG_TYPE, rest.userId);
         e.dataTransfer.effectAllowed = "move";
+        setRowDragImage(e);
         setDraggedVoiceUser({ userId: rest.userId, from: rest.channel });
       }}
       onDragEnd={() => setDraggedVoiceUser(undefined)}

@@ -7,6 +7,8 @@ import {
   createEffect,
   createSignal,
   on,
+  onCleanup,
+  onMount,
 } from "solid-js";
 
 import { css } from "styled-system/css";
@@ -148,6 +150,33 @@ export function Draggable<T>(props: Props<T>) {
   }
 
   const transformDraggedElement = () => styleDraggedElement;
+
+  /**
+   * Keep presses on `[data-no-reorder]` content (e.g. voice participants,
+   * which start their own HTML5 drag) away from the library. It listens for
+   * mousedown / touchstart on the row elements (bubble phase) and calls
+   * preventDefault, which would also cancel the native drag; stopping the
+   * event in the capture phase at the zone means no row of this zone or of
+   * an enclosing zone ever sees it.
+   */
+  function guardNoReorder(e: Event) {
+    if ((e.target as Element | null)?.closest?.("[data-no-reorder]")) {
+      e.stopPropagation();
+    }
+  }
+
+  onMount(() => {
+    zone?.addEventListener("mousedown", guardNoReorder, { capture: true });
+    zone?.addEventListener("touchstart", guardNoReorder, {
+      capture: true,
+      passive: true,
+    });
+  });
+
+  onCleanup(() => {
+    zone?.removeEventListener("mousedown", guardNoReorder, { capture: true });
+    zone?.removeEventListener("touchstart", guardNoReorder, { capture: true });
+  });
 
   return (
     <div
