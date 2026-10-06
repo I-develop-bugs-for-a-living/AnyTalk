@@ -13,6 +13,8 @@ publish:
   owner: I-develop-bugs-for-a-living
   repo: AnyTalk
   releaseType: release
+  # Must match the `desktop-v<version>` tags the workflow and the download page use
+  tagNamePrefix: desktop-v
 afterPack: scripts/afterPack.mjs
 win:
   icon: build/icon.ico
