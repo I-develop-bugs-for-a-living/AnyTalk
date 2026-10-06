@@ -22,6 +22,7 @@ import {
   symbolSize,
   Text,
 } from "@revolt/ui";
+import { useOpenedByKeyboard } from "@revolt/ui/directives";
 
 import MdChevronRight from "@material-design-icons/svg/outlined/chevron_right.svg?component-solid";
 
@@ -102,6 +103,9 @@ export function ContextMenu(props: MenuProps) {
     "onRequestClose",
     "menuRef",
   ]);
+
+  // menus opened with Shift+F10 / the ContextMenu key start on their first item
+  const openedByKeyboard = useOpenedByKeyboard();
 
   // remembered before the menu takes focus, restored when it closes
   const previouslyFocused = document.activeElement;
@@ -233,7 +237,9 @@ export function ContextMenu(props: MenuProps) {
   }
 
   onMount(() => {
-    const mode = local.initialFocus ?? (local.submenu ? "none" : "container");
+    const mode =
+      local.initialFocus ??
+      (local.submenu ? "none" : openedByKeyboard ? "first" : "container");
     if (!menu) return;
     // keep focus (and the on-screen keyboard) in a text field being typed in
     const typing =

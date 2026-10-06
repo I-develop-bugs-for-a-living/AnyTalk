@@ -106,6 +106,7 @@ type OrderingEvent =
 export const ServerSidebar = (props: Props) => {
   const navigate = useNavigate();
   const { isMobile } = useDevice();
+  const { t } = useLingui();
 
   // Users can manage certain parts of the server individually, regardless of their ManageServer Permission
   const canManageServer = () =>
@@ -241,6 +242,7 @@ export const ServerSidebar = (props: Props) => {
   return (
     <SidebarBase
       class="channel_bar server"
+      aria-label={t`Channels`}
       use:floating={props.menuGenerator(props.server)}
     >
       <Switch
@@ -434,6 +436,8 @@ function Category(
             state.layout.toggleSectionState(props.category.id, true);
           }}
           {...createDragHandle(props.dragDisabled, props.setDragDisabled)}
+          // name the category instead of the generic drag handle label
+          aria-label={props.category.title}
         >
           <CategoryTitle>
             <TextWithEmoji content={props.category.title} />
@@ -531,6 +535,11 @@ const CategoryBase = styled("div", {
 
     ...typography.raw({ class: "label", size: "small" }),
     fontSize: "13px",
+
+    _focusVisible: {
+      outline: "2px solid var(--md-sys-color-primary)",
+      outlineOffset: "-2px",
+    },
 
     "&:hover": {
       "--color": "var(--md-sys-color-on-surface-variant)",

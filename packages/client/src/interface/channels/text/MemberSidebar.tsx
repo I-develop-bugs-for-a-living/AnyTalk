@@ -177,7 +177,7 @@ export function ServerMemberSidebar(props: Props) {
   );
 
   return (
-    <Container>
+    <Container aria-label={t`Members`}>
       <Show when={!props.isLargeServer}>
         <MemberTitle bottomMargin="yes">
           <Row align>
@@ -236,8 +236,10 @@ export function ServerMemberSidebar(props: Props) {
  * Group Member Sidebar
  */
 export function GroupMemberSidebar(props: Props) {
+  const { t } = useLingui();
+
   return (
-    <Container>
+    <Container aria-label={t`Members`}>
       <MemberTitle>
         <Row align>{props.channel.recipientIds.size} members</Row>
       </MemberTitle>
@@ -269,7 +271,7 @@ export function GroupMemberSidebar(props: Props) {
 /**
  * Container styles
  */
-const Container = styled("div", {
+const Container = styled("aside", {
   base: {
     paddingInlineEnd: "var(--gap-md)",
     width: "var(--layout-width-channel-sidebar)",
@@ -379,6 +381,17 @@ function Member(props: {
       )}
     >
       <MenuButton
+        // reachable by keyboard: Enter / Space open the profile card,
+        // Shift+F10 opens the context menu
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e: KeyboardEvent & { currentTarget: HTMLElement }) => {
+          if (e.target !== e.currentTarget) return;
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            e.currentTarget.click();
+          }
+        }}
         size="normal"
         attention={
           (props.user ?? props.member?.user)?.online ? "active" : "muted"

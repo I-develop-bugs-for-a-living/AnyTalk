@@ -1,5 +1,6 @@
 import { Show } from "solid-js";
 
+import { useLingui } from "@lingui/solid/macro";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
@@ -21,10 +22,9 @@ export function MessageToolbar() {
   const state = useState();
   const { openModal } = useModals();
   const { message, reactPicker } = useMessage();
+  const { t } = useLingui();
 
   let reactRef;
-
-  // todo: a11y for buttons; tabindex
 
   /**
    * Delete the message
@@ -43,32 +43,38 @@ export function MessageToolbar() {
   return (
     <Base class="Toolbar">
       <Show when={message?.channel?.havePermission("SendMessage")}>
-        <div
+        <button
+          type="button"
           class={tool()}
+          aria-label={t`Reply`}
           onClick={() => state.draft.addReply(message!, user()!.id)}
         >
           <Ripple />
           <MdReply class="rtl-mirror" {...iconSize(20)} />
-        </div>
+        </button>
       </Show>
       <Show when={message?.channel?.havePermission("React")}>
-        <div
+        <button
+          type="button"
           ref={reactRef}
           class={tool()}
+          aria-label={t`Add reaction`}
           onClick={(e) => reactPicker!()?.onClickEmoji(e, reactRef)}
         >
           <Ripple />
           <MdEmojiEmotions {...iconSize(20)} />
-        </div>
+        </button>
       </Show>
       <Show when={message?.author?.self}>
-        <div
+        <button
+          type="button"
           class={tool()}
+          aria-label={t`Edit message`}
           onClick={() => state.draft.setEditingMessage(message)}
         >
           <Ripple />
           <MdEdit {...iconSize(20)} />
-        </div>
+        </button>
       </Show>
       <Show
         when={
@@ -76,13 +82,21 @@ export function MessageToolbar() {
           message?.channel?.havePermission("ManageMessages")
         }
       >
-        <div class={tool()} onClick={deleteMessage}>
+        <button
+          type="button"
+          class={tool()}
+          aria-label={t`Delete message`}
+          onClick={deleteMessage}
+        >
           <Ripple />
           <MdDelete {...iconSize(20)} />
-        </div>
+        </button>
       </Show>
-      <div
+      <button
+        type="button"
         class={tool()}
+        aria-label={t`More options`}
+        aria-haspopup="menu"
         use:floating={{
           contextMenu: () => (
             <MessageContextMenu message={message!} reactPicker={reactPicker} />
@@ -92,7 +106,7 @@ export function MessageToolbar() {
       >
         <Ripple />
         <MdMoreVert {...iconSize(20)} />
-      </div>
+      </button>
     </Base>
   );
 }
@@ -120,5 +134,17 @@ const tool = cva({
     cursor: "pointer",
     position: "relative",
     padding: "var(--gap-sm)",
+
+    // plain button, looks like the old div
+    margin: 0,
+    border: "none",
+    background: "transparent",
+    color: "inherit",
+    font: "inherit",
+
+    _focusVisible: {
+      outline: "2px solid var(--md-sys-color-primary)",
+      outlineOffset: "-2px",
+    },
   },
 });

@@ -240,6 +240,17 @@ function CommonUser(props: {
   return (
     <div
       class={previewUser({ speaking: rest.speaking, watchable: canWatch() })}
+      // reachable by keyboard: Enter / Space act like a click (opening the
+      // profile card or the stream), Shift+F10 opens the context menu
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.target !== e.currentTarget) return;
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          e.currentTarget.click();
+        }
+      }}
       onClick={() => canWatch() && rest.onWatch!()}
       draggable={canDrag()}
       // the channel list's drag zones ignore presses here (see Draggable), so
@@ -316,6 +327,11 @@ const previewUser = cva({
     gap: "var(--gap-md)",
     alignItems: "center",
     borderRadius: "var(--borderRadius-md)",
+
+    _focusVisible: {
+      outline: "2px solid var(--md-sys-color-primary)",
+      outlineOffset: "-2px",
+    },
   },
   variants: {
     watchable: {

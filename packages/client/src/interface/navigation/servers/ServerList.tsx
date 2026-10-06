@@ -264,7 +264,7 @@ export const ServerList = (props: Props) => {
   };
 
   return (
-    <ServerListBase>
+    <ServerListBase aria-label={t`Servers`}>
       <div use:invisibleScrollable={{ direction: "y", class: listBase() }}>
         <a
           class={entryContainer({
@@ -831,7 +831,7 @@ const FolderPreviewBase = styled("div", {
   },
 });
 
-const ServerListBase = styled("div", {
+const ServerListBase = styled("nav", {
   base: {
     display: "flex",
     flexDirection: "column",

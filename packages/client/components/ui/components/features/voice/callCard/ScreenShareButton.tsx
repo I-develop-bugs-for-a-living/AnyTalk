@@ -13,7 +13,7 @@ import { useVoice } from "@revolt/rtc";
 import { SCREEN_SHARE_RESOLUTION_LABELS } from "@revolt/rtc/state";
 import { IconButton } from "@revolt/ui/components/design";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
-import { floatingElements } from "@revolt/ui/directives";
+import { floatingElements, isContextMenuKey } from "@revolt/ui/directives";
 
 /** How long the menu stays open after the pointer leaves it */
 const CLOSE_DELAY_MS = 200;
@@ -31,6 +31,8 @@ export function ScreenShareButton(props: { size: "xs" | "sm" }) {
   const [anchor, setAnchor] = createSignal<HTMLDivElement>();
   const [menu, setMenu] = createSignal<HTMLDivElement>();
   const [open, setOpen] = createSignal(false);
+  // whether the menu was opened with Shift+F10 / the ContextMenu key
+  const [byKeyboard, setByKeyboard] = createSignal(false);
 
   let closeTimer: ReturnType<typeof setTimeout> | undefined;
   onCleanup(() => clearTimeout(closeTimer));
@@ -45,6 +47,7 @@ export function ScreenShareButton(props: { size: "xs" | "sm" }) {
     clearTimeout(closeTimer);
     if (!voice.streamOptions()) return;
 
+    setByKeyboard(false);
     setOpen(true);
 
     // the menu takes the place of the button's tooltip; it is shown by the
@@ -56,8 +59,43 @@ export function ScreenShareButton(props: { size: "xs" | "sm" }) {
     );
   }
 
+  /**
+   * Open the menu from the keyboard (Shift+F10 / ContextMenu key on the
+   * button), focusing its first item. A key press on the button itself still
+   * starts or stops sharing.
+   */
+  function onKeyDown(event: KeyboardEvent) {
+    if (!isContextMenuKey(event) || !voice.streamOptions()) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    clearTimeout(closeTimer);
+    setByKeyboard(true);
+
+    if (open()) {
+      // already open from hovering: move focus into it
+      menu()
+        ?.querySelector<HTMLElement>('[role="menuitem"]')
+        ?.focus({ preventScroll: true });
+    } else {
+      setOpen(true);
+    }
+  }
+
+  /**
+   * Swallow the release of the menu key, because some browsers open their own
+   * context menu on keyup
+   */
+  function onKeyUp(event: KeyboardEvent) {
+    if (isContextMenuKey(event) && voice.streamOptions()) {
+      event.preventDefault();
+    }
+  }
+
   function hide() {
     clearTimeout(closeTimer);
+    // a menu in use from the keyboard stays open when the mouse leaves
+    if (byKeyboard() && menu()?.contains(document.activeElement)) return;
     closeTimer = setTimeout(() => setOpen(false), CLOSE_DELAY_MS);
   }
 
@@ -75,7 +113,13 @@ export function ScreenShareButton(props: { size: "xs" | "sm" }) {
   };
 
   return (
-    <div ref={setAnchor} onMouseEnter={show} onMouseLeave={hide}>
+    <div
+      ref={setAnchor}
+      onMouseEnter={show}
+      onMouseLeave={hide}
+      onKeyDown={onKeyDown}
+      onKeyUp={onKeyUp}
+    >
       <IconButton
         size={props.size}
         variant={limits().video && voice.screenshare() ? "filled" : "tonal"}
@@ -116,6 +160,8 @@ export function ScreenShareButton(props: { size: "xs" | "sm" }) {
                 ref={setMenu}
                 onMouseEnter={show}
                 onMouseLeave={hide}
+                // keyboard focus in the menu keeps it open
+                onFocusIn={() => clearTimeout(closeTimer)}
                 style={{
                   position: position.strategy,
                   top: `${position.y ?? 0}px`,
@@ -124,7 +170,7 @@ export function ScreenShareButton(props: { size: "xs" | "sm" }) {
                 }}
               >
                 <ContextMenu
-                  initialFocus="none"
+                  initialFocus={byKeyboard() ? "first" : "none"}
                   onRequestClose={() => setOpen(false)}
                 >
                   <ContextMenuButton

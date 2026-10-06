@@ -123,6 +123,20 @@ export function ParticipantTile(props: TileProps) {
             theater: theater(),
           }) + (isScreenShare() ? " vc_tile group" : " vc_tile")
         }
+        // reachable by keyboard: Enter / Space act like a click, Shift+F10
+        // opens the context menu. Known limitation: the tile also holds its
+        // own buttons (stream controls), so screen readers see nested
+        // interactive elements; the name comes from the tile's content.
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          // keys on buttons inside the tile are theirs
+          if (e.target !== e.currentTarget) return;
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            e.currentTarget.click();
+          }
+        }}
         onClick={() => {
           if (isScreenShare() && !voice.isWatchedStream(track)) {
             // open the stream (our own one too, once it's out of view)
@@ -374,6 +388,12 @@ export const tile = cva({
     outlineStyle: "solid",
     outlineOffset: "-3px",
     outlineColor: "transparent",
+
+    // keyboard focus: the inner band tells it apart from the speaking ring
+    _focusVisible: {
+      outlineColor: "var(--md-sys-color-primary)",
+      boxShadow: "inset 0 0 0 5px var(--md-sys-color-on-primary)",
+    },
   },
   variants: {
     speaking: {

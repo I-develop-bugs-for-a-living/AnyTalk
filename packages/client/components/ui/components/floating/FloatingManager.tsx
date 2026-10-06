@@ -16,7 +16,13 @@ import { autoUpdate, flip, offset, shift } from "@floating-ui/dom";
 
 import { Keybind, KeybindAction } from "@revolt/keybinds";
 
-import { FloatingElement, floatingElements } from "../../directives";
+import {
+  FloatingElement,
+  OpenedByKeyboardContext,
+  floatingElements,
+  onContextMenuKeyDown,
+  onContextMenuKeyUp,
+} from "../../directives";
 
 import { dismissFloatingElements } from ".";
 import { AutoComplete } from "./AutoComplete";
@@ -41,8 +47,13 @@ export function FloatingManager() {
   onMount(() => {
     document.addEventListener("pointermove", onMouseMove);
     document.addEventListener("pointerdown", onMouseMove);
+    // capture, so the menu key is handled before the keybinds on body see it
+    document.addEventListener("keydown", onContextMenuKeyDown, true);
+    document.addEventListener("keyup", onContextMenuKeyUp, true);
   });
   onCleanup(() => {
+    document.removeEventListener("keydown", onContextMenuKeyDown, true);
+    document.removeEventListener("keyup", onContextMenuKeyUp, true);
     document.removeEventListener("pointermove", onMouseMove);
     document.removeEventListener("pointerdown", onMouseMove);
   });
@@ -82,6 +93,10 @@ export function FloatingManager() {
 function Floating(props: FloatingElement & { mouseX: number; mouseY: number }) {
   const [floating, setFloating] = createSignal<HTMLDivElement>();
 
+  // set when the context menu was opened from the keyboard: the menu then
+  // attaches to the element instead of the mouse and focuses its first item
+  const keyboardAnchor = props.anchor?.();
+
   /**
    * Figure out placement of the floating element
    */
@@ -94,7 +109,7 @@ function Floating(props: FloatingElement & { mouseX: number; mouseY: number }) {
     } else if (current.userCard) {
       return "right-start";
     } else if (current.contextMenu) {
-      return "right-start";
+      return keyboardAnchor?.placement ?? "right-start";
     } else if (current.autoComplete) {
       return "top-start";
     }
@@ -106,7 +121,9 @@ function Floating(props: FloatingElement & { mouseX: number; mouseY: number }) {
   const element = () => {
     const current = props.show();
 
-    if (current?.contextMenu) {
+    if (current?.contextMenu && keyboardAnchor) {
+      return { getBoundingClientRect: () => keyboardAnchor.rect };
+    } else if (current?.contextMenu) {
       return {
         /**
          * Determine client rectangle for virtual element
@@ -202,7 +219,9 @@ function Floating(props: FloatingElement & { mouseX: number; mouseY: number }) {
             />
           </Match>
           <Match when={props.show()?.contextMenu}>
-            {props.show()!.contextMenu!({})}
+            <OpenedByKeyboardContext.Provider value={!!keyboardAnchor}>
+              {props.show()!.contextMenu!({})}
+            </OpenedByKeyboardContext.Provider>
           </Match>
           <Match when={props.show()?.autoComplete}>
             <AutoComplete {...props.show()!.autoComplete!} />

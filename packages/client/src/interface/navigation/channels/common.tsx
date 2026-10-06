@@ -1,9 +1,9 @@
 import { styled } from "styled-system/jsx";
 
 /**
- * Common styles for sidebar
+ * Common styles for sidebar, a navigation landmark (give it an aria-label)
  */
-export const SidebarBase = styled("div", {
+export const SidebarBase = styled("nav", {
   base: {
     display: "flex",
     flexShrink: 0,

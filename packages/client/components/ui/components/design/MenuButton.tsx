@@ -170,6 +170,12 @@ const base = cva({
       alignSelf: "center",
     },
 
+    // keyboard focus only, mouse clicks don't show it
+    _focusVisible: {
+      outline: "2px solid var(--md-sys-color-primary)",
+      outlineOffset: "-2px",
+    },
+
     // swap `.hover-hide` elements w/  `.hover-show` elements on hover
     "&:hover .hover-hide, &:not(:hover) .hover-show": {
       display: "none",
