@@ -3,10 +3,13 @@ import { describe, expect, it } from "vitest";
 import {
   type GithubRelease,
   classifyAsset,
+  compareVersions,
   detectPlatform,
+  isNewerVersion,
   pickDesktopRelease,
   pickPrimaryDownload,
   releaseDownloads,
+  releaseNotesFor,
   releaseVersion,
 } from "./desktopRelease";
 
@@ -140,5 +143,63 @@ describe("detectPlatform", () => {
         maxTouchPoints: 5,
       }),
     ).toBe("mobile");
+  });
+});
+
+describe("compareVersions", () => {
+  it("compares numbers, not text", () => {
+    expect(compareVersions("1.10.0", "1.9.0")).toBeGreaterThan(0);
+    expect(compareVersions("1.2.3", "1.2.3")).toBe(0);
+    expect(compareVersions("0.9.9", "1.0.0")).toBeLessThan(0);
+  });
+
+  it("ranks pre-releases below their release", () => {
+    expect(compareVersions("1.0.0-beta.1", "1.0.0")).toBeLessThan(0);
+    expect(compareVersions("1.0.0", "1.0.0-rc.1")).toBeGreaterThan(0);
+    expect(compareVersions("1.0.0-beta.2", "1.0.0-beta.10")).toBeLessThan(0);
+    expect(compareVersions("1.0.0-alpha", "1.0.0-beta")).toBeLessThan(0);
+    expect(compareVersions("1.0.0-1", "1.0.0-alpha")).toBeLessThan(0);
+    expect(compareVersions("1.0.0-beta", "1.0.0-beta.1")).toBeLessThan(0);
+  });
+
+  it("returns undefined for garbage", () => {
+    expect(compareVersions("abc", "1.0.0")).toBeUndefined();
+    expect(compareVersions("1.0", "1.0.0")).toBeUndefined();
+    expect(compareVersions("", "")).toBeUndefined();
+    expect(isNewerVersion("abc", "1.0.0")).toBe(false);
+  });
+});
+
+describe("releaseNotesFor", () => {
+  const list = [
+    release("desktop-v1.3.0"),
+    release("desktop-v1.2.0"),
+    release("desktop-v1.1.0-beta.1", { prerelease: true }),
+    release("desktop-v1.1.0"),
+    release("desktop-vgarbage"),
+    release("v9.9.9"),
+    release("desktop-v1.0.0", { draft: true }),
+    release("desktop-v1.0.0"),
+  ];
+
+  it("lists newer releases, newest first", () => {
+    expect(releaseNotesFor(list, "1.1.0").map(releaseVersion)).toEqual([
+      "1.3.0",
+      "1.2.0",
+    ]);
+  });
+
+  it("caps the list", () => {
+    expect(releaseNotesFor(list, "1.0.0", 2)).toHaveLength(2);
+  });
+
+  it("falls back to the installed release", () => {
+    expect(releaseNotesFor(list, "1.3.0").map(releaseVersion)).toEqual([
+      "1.3.0",
+    ]);
+  });
+
+  it("copes with a missing list", () => {
+    expect(releaseNotesFor(undefined as never, "1.0.0")).toEqual([]);
   });
 });

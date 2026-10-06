@@ -1,4 +1,4 @@
-import { Show } from "solid-js";
+import { Show, onMount } from "solid-js";
 
 import { i18n } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
@@ -50,6 +50,8 @@ import Native from "./user/Native";
 import Notifications from "./user/notifications/Notifications";
 import { EditProfile } from "./user/profile";
 import { Sessions } from "./user/Sessions";
+import { updateWaiting, watchUpdater } from "./user/updaterState";
+import Updates from "./user/Updates";
 import { VoiceSettings } from "./user/voice/VoiceSettings";
 
 const Config: SettingsConfiguration<{ server: Server }> = {
@@ -114,6 +116,8 @@ const Config: SettingsConfiguration<{ server: Server }> = {
         return <Feedback />;
       case "native":
         return <Native />;
+      case "updates":
+        return <Updates />;
       case "desktop-download":
         return <DesktopDownload />;
       case "voice":
@@ -348,6 +352,12 @@ const Config: SettingsConfiguration<{ server: Server }> = {
               title: <Trans>Desktop</Trans>,
             },
             {
+              id: "updates",
+              hidden: !window.native,
+              icon: <Symbol size={20}>system_update</Symbol>,
+              title: <UpdatesTitle />,
+            },
+            {
               // web version only: the desktop app has its own "native" page
               id: "desktop-download",
               hidden: !!window.native,
@@ -443,3 +453,31 @@ function withPageTexts<T>(list: SettingsList<T>): SettingsList<T> {
 }
 
 export default Config;
+
+/**
+ * Sidebar title of the Updates page, with a dot while an update is waiting
+ */
+function UpdatesTitle() {
+  const { t } = useLingui();
+  onMount(watchUpdater);
+
+  return (
+    <>
+      <Trans>Updates</Trans>
+      <Show when={updateWaiting()}>
+        <span
+          role="img"
+          aria-label={t`Update available`}
+          class={css({
+            display: "inline-block",
+            width: "8px",
+            height: "8px",
+            marginInlineStart: "8px",
+            borderRadius: "var(--borderRadius-full)",
+            background: "var(--md-sys-color-primary)",
+          })}
+        />
+      </Show>
+    </>
+  );
+}

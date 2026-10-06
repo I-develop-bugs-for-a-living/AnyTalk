@@ -15,6 +15,12 @@ export interface GithubRelease {
   prerelease: boolean;
   html_url: string;
   assets: GithubAsset[];
+  /** Release title */
+  name?: string | null;
+  /** Patch notes as markdown */
+  body?: string | null;
+  /** ISO date the release was published */
+  published_at?: string | null;
 }
 
 /** Operating systems the desktop app is built for */
@@ -71,6 +77,118 @@ export function pickDesktopRelease(
  */
 export function releaseVersion(release: GithubRelease): string {
   return release.tag_name.slice(DESKTOP_TAG_PREFIX.length);
+}
+
+/** A version split into its parts */
+interface ParsedVersion {
+  core: [number, number, number];
+  /** Pre-release identifiers, empty for a normal release */
+  pre: string[];
+}
+
+/**
+ * Split a semver string like "1.2.0" or "v1.2.0-beta.1" into its parts
+ * @param value Version text
+ * @returns The parts, or undefined when it isn't a version
+ */
+export function parseVersion(value: unknown): ParsedVersion | undefined {
+  if (typeof value !== "string") return undefined;
+  const match =
+    /^v?(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Za-z.-]+))?(?:\+[0-9A-Za-z.-]+)?$/.exec(
+      value.trim(),
+    );
+  if (!match) return undefined;
+  return {
+    core: [Number(match[1]), Number(match[2]), Number(match[3])],
+    pre: match[4] ? match[4].split(".") : [],
+  };
+}
+
+/**
+ * Compare two versions by semver rules (a pre-release is older than its release)
+ * @param a First version text
+ * @param b Second version text
+ * @returns Negative when a is older, positive when newer, 0 when equal, undefined when either isn't a version
+ */
+export function compareVersions(a: string, b: string): number | undefined {
+  const pa = parseVersion(a);
+  const pb = parseVersion(b);
+  if (!pa || !pb) return undefined;
+
+  for (let i = 0; i < 3; i++) {
+    if (pa.core[i] !== pb.core[i]) return pa.core[i] < pb.core[i] ? -1 : 1;
+  }
+
+  // no pre-release means a release, which is newer than any pre-release
+  if (!pa.pre.length || !pb.pre.length) {
+    return Number(!pa.pre.length) - Number(!pb.pre.length);
+  }
+
+  for (let i = 0; i < Math.max(pa.pre.length, pb.pre.length); i++) {
+    const x = pa.pre[i];
+    const y = pb.pre[i];
+    // the shorter list is older when everything before is equal
+    if (x === undefined) return -1;
+    if (y === undefined) return 1;
+    if (x === y) continue;
+    const xNum = /^\d+$/.test(x);
+    const yNum = /^\d+$/.test(y);
+    // numbers are older than words, numbers compare as numbers
+    if (xNum && yNum) return Number(x) < Number(y) ? -1 : 1;
+    if (xNum !== yNum) return xNum ? -1 : 1;
+    return x < y ? -1 : 1;
+  }
+  return 0;
+}
+
+/**
+ * Whether a version is newer than another
+ * @returns False when either isn't a valid version
+ */
+export function isNewerVersion(candidate: string, installed: string): boolean {
+  return (compareVersions(candidate, installed) ?? 0) > 0;
+}
+
+/**
+ * All published desktop releases with a valid version, newest version first
+ * @param releases Releases as returned by the API
+ */
+export function publishedDesktopReleases(
+  releases: GithubRelease[],
+): GithubRelease[] {
+  return (Array.isArray(releases) ? releases : [])
+    .filter(
+      (r) =>
+        r &&
+        !r.draft &&
+        !r.prerelease &&
+        typeof r.tag_name === "string" &&
+        r.tag_name.startsWith(DESKTOP_TAG_PREFIX) &&
+        !!parseVersion(releaseVersion(r)),
+    )
+    .sort((a, b) => compareVersions(releaseVersion(b), releaseVersion(a)) ?? 0);
+}
+
+/**
+ * Releases to show as patch notes: those newer than the installed version
+ * (newest first, capped), or the installed version's own release if none is newer
+ * @param releases Releases as returned by the API
+ * @param installed Installed desktop version
+ * @param cap Most releases to return
+ */
+export function releaseNotesFor(
+  releases: GithubRelease[],
+  installed: string,
+  cap = 10,
+): GithubRelease[] {
+  const published = publishedDesktopReleases(releases);
+  const newer = published.filter((r) =>
+    isNewerVersion(releaseVersion(r), installed),
+  );
+  if (newer.length) return newer.slice(0, cap);
+  return published.filter(
+    (r) => compareVersions(releaseVersion(r), installed) === 0,
+  );
 }
 
 /**

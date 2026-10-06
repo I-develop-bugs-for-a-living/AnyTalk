@@ -16,12 +16,35 @@ declare global {
     spellchecker: boolean;
     hardwareAcceleration: boolean;
     discordRpc: boolean;
+    /** Download and install updates automatically, on when missing */
+    autoUpdate?: boolean;
     /** Server the app loads, empty for the default */
     serverUrl: string;
     windowState: {
       isMaximised: boolean;
     };
   };
+
+  /** Where the desktop auto-updater is */
+  type UpdaterStatus =
+    | "unsupported"
+    | "idle"
+    | "checking"
+    | "up-to-date"
+    | "available"
+    | "downloading"
+    | "downloaded"
+    | "error";
+
+  /** State reported by the desktop auto-updater */
+  interface UpdaterState {
+    status: UpdaterStatus;
+    /** Version of the update, when there is one */
+    version?: string;
+    /** Download progress, 0 to 100 */
+    percent?: number;
+    error?: string;
+  }
 
   interface Window {
     __TAURI__: object;
@@ -79,6 +102,19 @@ declare global {
       setAutostart(value: boolean): Promise<boolean>;
       /** Server the app loads when serverUrl is empty */
       getDefaultServerUrl(): Promise<string>;
+    };
+
+    /**
+     * Auto-updater of the desktop app, missing in older desktop versions
+     */
+    desktopUpdater?: {
+      getState(): Promise<UpdaterState>;
+      check(): Promise<void>;
+      download(): Promise<void>;
+      /** Quits AnyTalk and installs the downloaded update */
+      install(): void;
+      /** Listen for state changes, returns a function to stop listening */
+      onState(cb: (state: UpdaterState) => void): () => void;
     };
   }
 }
