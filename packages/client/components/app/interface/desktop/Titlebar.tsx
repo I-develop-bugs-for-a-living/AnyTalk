@@ -23,12 +23,15 @@ const isNative = !!window.native;
 
 export function Titlebar() {
   const [isMaximised, setIsMaximised] = createSignal(
-    isNative ? window.desktopConfig.get().windowState.isMaximised : false,
+    isNative
+      ? (window.desktopConfig?.get?.().windowState?.isMaximised ?? false)
+      : false,
   );
   if (isNative) {
     // the shell tells us about every change, including double-clicks on the
     // drag area and keyboard shortcuts
-    onCleanup(window.native.onMaximiseChange(setIsMaximised));
+    const stop = window.native.onMaximiseChange?.(setIsMaximised);
+    if (stop) onCleanup(stop);
   }
   const { lifecycle } = useClientLifecycle();
 
@@ -43,14 +46,14 @@ export function Titlebar() {
 
   /** Toggle between maximised and restored, the shell reports the result */
   function maximise() {
-    window.native.maximise().catch(() => {});
+    window.native.maximise?.()?.catch(() => {});
   }
 
   return (
     <Presence>
       <Show
         when={
-          (isNative && window.desktopConfig?.get().customFrame) ||
+          (isNative && window.desktopConfig?.get?.().customFrame) ||
           isDisconnected()
         }
       >
@@ -140,7 +143,9 @@ export function Titlebar() {
               </Show>
             </DragHandle>
             <Show when={isNative && !isMacOS}>
-              <Action onClick={() => window.native.minimise().catch(() => {})}>
+              <Action
+                onClick={() => window.native.minimise?.()?.catch(() => {})}
+              >
                 <Ripple />
                 <MdMinimize {...symbolSize(20)} />
               </Action>
@@ -153,7 +158,7 @@ export function Titlebar() {
                   <MdCollapseContent {...symbolSize(20)} />
                 </Show>
               </Action>
-              <Action onClick={() => window.native.close().catch(() => {})}>
+              <Action onClick={() => window.native.close?.()?.catch(() => {})}>
                 <Ripple />
                 <MdClose {...symbolSize(20)} />
               </Action>

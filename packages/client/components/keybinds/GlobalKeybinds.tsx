@@ -61,11 +61,11 @@ export function GlobalKeybinds() {
         });
     });
 
-    const stop = window.native.onGlobalHotkey((action) => {
+    const stop = window.native.onGlobalHotkey?.((action) => {
       if ((CUSTOMISABLE_ACTIONS as string[]).includes(action))
         trigger(action as KeybindAction);
     });
-    onCleanup(stop);
+    if (stop) onCleanup(stop);
   }
 
   return null;

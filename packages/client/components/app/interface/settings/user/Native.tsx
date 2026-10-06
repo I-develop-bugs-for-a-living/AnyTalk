@@ -20,6 +20,7 @@ export default function Native() {
   const { t } = useLingui();
   const [autostart, setAutostart] = createSignal(false);
   const [config, setConfig] = createSignal(window.desktopConfig.get());
+  // older shells may lack some methods, so each call below is guarded
 
   /** Problem saving a setting, shown under the list */
   const [saveError, setSaveError] = createSignal<string>();
@@ -42,14 +43,21 @@ export default function Native() {
   }
 
   onMount(async () => {
-    const value = await window.desktopConfig.getAutostart();
-    setAutostart(value);
+    try {
+      setAutostart((await window.desktopConfig.getAutostart?.()) ?? false);
+    } catch (err) {
+      console.error("[desktop] could not read autostart", err);
+    }
   });
 
   async function toggleAutostart() {
     const newValue = !autostart();
-    const savedValue = await window.desktopConfig.setAutostart(newValue);
-    setAutostart(savedValue);
+    try {
+      const savedValue = await window.desktopConfig.setAutostart?.(newValue);
+      setAutostart(savedValue ?? autostart());
+    } catch (err) {
+      console.error("[desktop] could not save autostart", err);
+    }
   }
 
   /** Server address being typed in the advanced section */
@@ -61,7 +69,9 @@ export default function Native() {
 
   onMount(async () => {
     try {
-      setDefaultServer(await window.desktopConfig.getDefaultServerUrl());
+      setDefaultServer(
+        (await window.desktopConfig.getDefaultServerUrl?.()) ?? "",
+      );
     } catch (err) {
       console.error("[desktop] could not read the default server", err);
     }
@@ -234,7 +244,7 @@ export default function Native() {
           icon={<Symbol>desktop_windows</Symbol>}
           description={
             <>
-              <Trans>Version:</Trans> {window.native.versions.desktop()}
+              <Trans>Version:</Trans> {window.native.versions?.desktop?.()}
             </>
           }
         >

@@ -185,7 +185,7 @@ const Config: SettingsConfiguration<{ server: Server }> = {
           </Text>
           <Show when={window.native}>
             <Text class="label">
-              AnyTalk for Desktop {window.native.versions.desktop()}
+              AnyTalk for Desktop {window.native.versions?.desktop?.()}
             </Text>
             <Text class="label">
               <span
@@ -195,9 +195,9 @@ const Config: SettingsConfiguration<{ server: Server }> = {
                   opacity: "0.5",
                 })}
               >
-                {window.native.versions.electron()},{" "}
-                {window.native.versions.node()},{" "}
-                {window.native.versions.chrome()}
+                {window.native.versions?.electron?.()},{" "}
+                {window.native.versions?.node?.()},{" "}
+                {window.native.versions?.chrome?.()}
               </span>
             </Text>
           </Show>

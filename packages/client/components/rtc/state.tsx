@@ -815,10 +815,10 @@ class Voice {
           type: "screen_share_picker",
           onCancel: () => {
             cancelled = true;
-            window.native.screenPickerCallback(-1, false);
+            window.native.screenPickerCallback?.(-1, false);
           },
           callback: (idx, resolution, frameRate, audio) => {
-            window.native.screenPickerCallback(idx, audio);
+            window.native.screenPickerCallback?.(idx, audio);
             picked = { resolution, frameRate, audio };
           },
           sources: sources,
