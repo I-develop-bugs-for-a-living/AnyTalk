@@ -29,6 +29,7 @@ const PAGES: Record<string, string> = {
   appearance: "appearance/index.ts",
   notifications: "notifications/Notifications.tsx",
   keybinds: "Hotkeys.tsx",
+  controller: "Controller.tsx",
   language: "Language.tsx",
   native: "Native.tsx",
   "desktop-download": "DesktopDownload.tsx",

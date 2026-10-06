@@ -243,6 +243,7 @@ export const ServerSidebar = (props: Props) => {
     <SidebarBase
       class="channel_bar server"
       aria-label={t`Channels`}
+      data-region="channels"
       use:floating={props.menuGenerator(props.server)}
     >
       <Switch

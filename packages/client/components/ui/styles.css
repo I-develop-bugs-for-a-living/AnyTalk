@@ -39,6 +39,36 @@ body {
   scale: -1 1;
 }
 
+/* focus rings while a game controller is in use: elements focused by the
+   controller don't always match :focus-visible, so :focus shows the ring
+   (data-input is set by components/gamepad and cleared on mouse, touch or
+   keyboard use) */
+html[data-input="gamepad"] :focus {
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
+}
+
+/* the message box is a CodeMirror editor: its inner content has no box of its
+   own, so the ring goes around the whole editor instead */
+html[data-input="gamepad"] .cm-editor:focus-within {
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
+}
+
+html[data-input="gamepad"] .cm-editor :focus {
+  outline: none;
+}
+
+/* menu items sit flush inside their menu, a ring outside would be clipped,
+   and the menu itself is only focused so keys reach it */
+html[data-input="gamepad"] [role="menuitem"]:focus {
+  outline-offset: -2px;
+}
+
+html[data-input="gamepad"] [role="menu"]:focus {
+  outline: none;
+}
+
 /* HighlightJs */
 /*!
   Theme: GitHub Dark

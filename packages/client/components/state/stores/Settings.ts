@@ -123,6 +123,11 @@ interface SettingsDefinition {
   "advanced:recent_calls_shown": number;
 
   /**
+   * Whether a game controller can drive the app
+   */
+  "controller:enabled": boolean;
+
+  /**
    * User changes to keybinds, by keybind action
    */
   "keybinds:custom": Record<string, CustomKeybind>;
@@ -194,6 +199,7 @@ const EXPECTED_TYPES: { [K in keyof SettingsDefinition]: ValueType<K> } = {
   "advanced:developer_voice_overlay": "boolean",
   "advanced:developer_voice_record": "boolean",
   "advanced:recent_calls_shown": "number",
+  "controller:enabled": "boolean",
   "keybinds:custom": cleanKeybinds,
 };
 
@@ -245,6 +251,7 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
       "advanced:developer_voice_overlay": true,
       "advanced:developer_voice_record": true,
       "advanced:recent_calls_shown": DEFAULT_RECENT_CALLS_SHOWN,
+      "controller:enabled": true,
     };
   }
 

@@ -177,7 +177,7 @@ export function ServerMemberSidebar(props: Props) {
   );
 
   return (
-    <Container aria-label={t`Members`}>
+    <Container aria-label={t`Members`} data-region="members">
       <Show when={!props.isLargeServer}>
         <MemberTitle bottomMargin="yes">
           <Row align>
@@ -239,7 +239,7 @@ export function GroupMemberSidebar(props: Props) {
   const { t } = useLingui();
 
   return (
-    <Container aria-label={t`Members`}>
+    <Container aria-label={t`Members`} data-region="members">
       <MemberTitle>
         <Row align>{props.channel.recipientIds.size} members</Row>
       </MemberTitle>

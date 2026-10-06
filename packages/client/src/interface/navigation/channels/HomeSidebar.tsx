@@ -66,7 +66,11 @@ export const HomeSidebar = (props: Props) => {
   });
 
   return (
-    <SidebarBase class="channel_bar home" aria-label={t`Channels`}>
+    <SidebarBase
+      class="channel_bar home"
+      aria-label={t`Channels`}
+      data-region="channels"
+    >
       <div ref={scrollTargetElement} use:invisibleScrollable>
         <List>
           <Header>

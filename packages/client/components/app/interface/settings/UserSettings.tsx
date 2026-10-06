@@ -36,6 +36,7 @@ import { MyAccount } from "./user/Account";
 import AdvancedSettings from "./user/Advanced";
 import { AppearanceMenu } from "./user/appearance";
 import { MyBots, ViewBot } from "./user/bots";
+import { ControllerSettings } from "./user/Controller";
 import DesktopDownload from "./user/DesktopDownload";
 import { CompareRecaps } from "./user/developer/CompareRecaps";
 import {
@@ -124,6 +125,8 @@ const Config: SettingsConfiguration<{ server: Server }> = {
         return <VoiceSettings />;
       case "keybinds":
         return <HotkeysSettings />;
+      case "controller":
+        return <ControllerSettings />;
       case "notifications":
         return <Notifications isDesktop={!!window.native} />;
       default:
@@ -334,6 +337,11 @@ const Config: SettingsConfiguration<{ server: Server }> = {
               id: "keybinds",
               icon: <Symbol size={20}>keyboard</Symbol>,
               title: <Trans>Hotkeys</Trans>,
+            },
+            {
+              id: "controller",
+              icon: <Symbol size={20}>sports_esports</Symbol>,
+              title: <Trans>Controller</Trans>,
             },
             {
               id: "language",

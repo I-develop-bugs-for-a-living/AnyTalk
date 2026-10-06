@@ -25,6 +25,7 @@ import FlowReset from "@revolt/auth/src/flows/FlowReset";
 import FlowVerify from "@revolt/auth/src/flows/FlowVerify";
 import { ClientContext, SoundContext, useClient } from "@revolt/client";
 import { DeviceContext } from "@revolt/common";
+import { GamepadControls } from "@revolt/gamepad";
 import { I18nProvider } from "@revolt/i18n";
 import { InstanceContext } from "@revolt/instance";
 import { GlobalKeybinds, KeybindContext } from "@revolt/keybinds";
@@ -123,6 +124,7 @@ function MountContext(props: { children?: JSX.Element }) {
     <StateContext>
       <KeybindContext>
         <GlobalKeybinds />
+        <GamepadControls />
         <ModalContext>
           <ClientContext>
             <LoadTheme />

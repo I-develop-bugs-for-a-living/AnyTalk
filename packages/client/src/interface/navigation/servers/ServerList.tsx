@@ -264,7 +264,7 @@ export const ServerList = (props: Props) => {
   };
 
   return (
-    <ServerListBase aria-label={t`Servers`}>
+    <ServerListBase aria-label={t`Servers`} data-region="servers">
       <div use:invisibleScrollable={{ direction: "y", class: listBase() }}>
         <a
           class={entryContainer({
