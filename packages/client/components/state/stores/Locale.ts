@@ -59,7 +59,11 @@ export class Locale extends AbstractStore<"locale", TypeLocale> {
   clean(input: Partial<TypeLocale>): TypeLocale {
     let lang: Language = input.lang!;
     if (!(lang in Languages)) {
-      lang = this.default().lang;
+      // Removed or regional codes (e.g. the old "en-US") fall back to their
+      // base language, anything else to the browser's preferred language
+      const base = typeof lang === "string" ? lang.split("-")[0] : undefined;
+      lang =
+        base && base in Languages ? (base as Language) : this.default().lang;
     }
 
     const options: LocaleOptions = {};
