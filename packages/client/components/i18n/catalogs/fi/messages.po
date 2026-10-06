@@ -42,7 +42,7 @@ msgstr "dddd [klo] LT"
 #. placeholder {1}: serverName()
 #: components/markdown/plugins/customEmoji.tsx
 msgid ":{0}: from {1}"
-msgstr ""
+msgstr ":{0}: palvelimelta {1}"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "(changes are being saved…)"
@@ -50,11 +50,11 @@ msgstr "(muutoksia tallennetaan...)"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "(opens in a new tab)"
-msgstr ""
+msgstr "(avautuu uudelle välilehdelle)"
 
 #: components/app/interface/desktop/Titlebar.tsx
 msgid "(reconnect now)"
-msgstr ""
+msgstr "(yhdistä uudelleen nyt)"
 
 #. placeholder {0}: props.count
 #: components/ui/components/features/messaging/elements/BlockedMessage.tsx
@@ -64,42 +64,42 @@ msgstr "{0, plural, one {# estetty viesti} other {# estettyä viestiä}}"
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
-msgstr ""
+msgstr "{0, plural, one {# jäätyminen, {seconds} s} other {# jäätymistä, {seconds} s}}"
 
 #. placeholder {0}: meta.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze} other {# freezes}}"
-msgstr ""
+msgstr "{0, plural, one {# jäätyminen} other {# jäätymistä}}"
 
 #. placeholder {0}: onlineMembers()
 #: src/interface/channels/text/MemberSidebar.tsx
 msgid "{0, plural, one {# member online} other {# members online}}"
-msgstr ""
+msgstr "{0, plural, one {# jäsen paikalla} other {# jäsentä paikalla}}"
 
 #. placeholder {0}: memberCount()
 #: components/ui/components/features/messaging/elements/Invite.tsx
 msgid "{0, plural, one {# member} other {# members}}"
-msgstr ""
+msgstr "{0, plural, one {# jäsen} other {# jäsentä}}"
 
 #. placeholder {0}: local.channel.recipientIds.size
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "{0, plural, one {# Member} other {# Members}}"
-msgstr ""
+msgstr "{0, plural, one {# jäsen} other {# jäsentä}}"
 
 #. placeholder {0}: mentions()
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
-msgstr ""
+msgstr "{0, plural, one {# uusi maininta} other {# uutta mainintaa}}"
 
 #. placeholder {0}: channel.voiceParticipants.size
 #: src/interface/home/FriendsOverview.tsx
 msgid "{0, plural, one {# person in the call} other {# people in the call}}"
-msgstr ""
+msgstr "{0, plural, one {# henkilö puhelussa} other {# henkilöä puhelussa}}"
 
 #. placeholder {0}: entry.others
 #: src/interface/home/FriendsOverview.tsx
 msgid "{0, plural, one {+# other} other {+# others}}"
-msgstr ""
+msgstr "{0, plural, one {+# muu} other {+# muuta}}"
 
 #. placeholder {0}: items().length
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
@@ -126,7 +126,7 @@ msgstr "{0} muutti kanavan kuvakkeen"
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} dropped"
-msgstr ""
+msgstr "{0} pudotettu"
 
 #. placeholder {0}: instance.globalLimits.server_emoji - props.server.emojis.length
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
@@ -146,12 +146,12 @@ msgstr "{0} tiedostoa ylittivät {maxSizeFormatted} enimmäiskokorajan eikä nii
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} is already at the bottom"
-msgstr ""
+msgstr "{0} on jo alimpana"
 
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} is already at the top"
-msgstr ""
+msgstr "{0} on jo ylimpänä"
 
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -179,7 +179,7 @@ msgstr "{0} siirsi kanavan omistajuuden {1}lle"
 #. placeholder {2}: list.length
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} moved to position {1} of {2}"
-msgstr ""
+msgstr "{0} siirretty paikalle {1} / {2}"
 
 #. placeholder {0}: props.title
 #: components/app/interface/settings/user/developer/TimeChart.tsx
@@ -195,7 +195,7 @@ msgstr ""
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} picked up, use the arrow keys to move it and space to drop it"
-msgstr ""
+msgstr "{0} nostettu, siirrä nuolinäppäimillä ja pudota välilyönnillä"
 
 #. placeholder {0}: (message.systemMessage as MessagePinnedSystemMessage).by?.username
 #: components/client/NotificationsWorker.tsx
@@ -242,7 +242,7 @@ msgstr "{1} poisti {0}n"
 #. placeholder {0}: props.member.user?.username
 #: components/modal/modals/TimeoutMember.tsx
 msgid "{0} will not be able to interact with the server until the timeout expires."
-msgstr ""
+msgstr "{0} ei voi toimia palvelimella, ennen kuin jäähy päättyy."
 
 #. placeholder {0}: page() * itemsPerPage() + 1
 #. placeholder {1}: Math.min( props.itemCount!, page() * itemsPerPage() + itemsPerPage(), )
@@ -270,27 +270,27 @@ msgstr "{0}n roolit"
 #. placeholder {0}: props.member.user?.username
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
-msgstr ""
+msgstr "Käyttäjän {0} jäähy poistetaan, ja hän voi taas toimia palvelimella."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
-msgstr ""
+msgstr "{combo} on jo toisen pikanäppäimen käytössä."
 
 #: components/app/interface/settings/user/developer/CompareChart.tsx
 msgid "{count, plural, one {{title} over time, # recap} other {{title} over time, # recaps}}"
-msgstr ""
+msgstr "{count, plural, one {{title} ajan yli, # yhteenveto} other {{title} ajan yli, # yhteenvetoa}}"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{count} selected"
-msgstr ""
+msgstr "{count} valittu"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "{fileName}: can't be read as a zip ({error})."
-msgstr ""
+msgstr "{fileName}: ei voi lukea zip-tiedostona ({error})."
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "{fileName}: there are no CSV files inside."
-msgstr ""
+msgstr "{fileName}: sisällä ei ole CSV-tiedostoja."
 
 #~ msgid "{h} hours"
 #~ msgstr ""
@@ -300,34 +300,34 @@ msgstr ""
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{n, plural, one {Delete # call recap?} other {Delete # call recaps?}}"
-msgstr ""
+msgstr "{n, plural, one {Poistetaanko # puhelun yhteenveto?} other {Poistetaanko # puhelun yhteenvetoa?}}"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{n, plural, one {Delete # stream recap?} other {Delete # stream recaps?}}"
-msgstr ""
+msgstr "{n, plural, one {Poistetaanko # striimin yhteenveto?} other {Poistetaanko # striimin yhteenvetoa?}}"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{name}'s {source}"
-msgstr ""
+msgstr "{source} ({name})"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{name}'s camera"
-msgstr ""
+msgstr "Kamera ({name})"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{name}'s screen share"
-msgstr ""
+msgstr "Näytönjako ({name})"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "{participant} heard"
-msgstr ""
+msgstr "{participant} kuultu"
 
 #~ msgid "{sec} seconds"
 #~ msgstr ""
 
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
-msgstr ""
+msgstr "{title} ajan yli"
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
@@ -462,15 +462,15 @@ msgstr "24 tuntia"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A message or notification arrives"
-msgstr ""
+msgstr "Viesti tai ilmoitus saapuu"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream in your call ends"
-msgstr ""
+msgstr "Striimi puhelussasi päättyy"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream starts in your call"
-msgstr ""
+msgstr "Striimi alkaa puhelussasi"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Able to access channels on this server"
@@ -499,7 +499,7 @@ msgstr "Hyväksy kaveripyyntö"
 
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Account has been queued for deletion!"
-msgstr ""
+msgstr "Tili on asetettu poistojonoon!"
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Acknowledge"
@@ -525,7 +525,7 @@ msgstr "Lisää kaveri"
 
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Add Friend"
-msgstr ""
+msgstr "Lisää kaveri"
 
 #: components/modal/modals/AddMembersToGroup.tsx
 #: src/interface/channels/ChannelHeader.tsx
@@ -538,7 +538,7 @@ msgstr "Lisätä uusia jäseniä ryhmään"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Add one of my recaps"
-msgstr ""
+msgstr "Lisää jokin yhteenvedoistani"
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Add status text"
@@ -546,7 +546,7 @@ msgstr "Lisää statusteksti"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Add to folder"
-msgstr ""
+msgstr "Lisää kansioon"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Admin"
@@ -566,7 +566,7 @@ msgstr "Edistynyt"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Advanced sound settings"
-msgstr ""
+msgstr "Äänen lisäasetukset"
 
 #~ msgid "Affects all roles and users"
 #~ msgstr "Vaikuttaa kaikkiin rooleihin ja käyttäjiin"
@@ -577,7 +577,7 @@ msgstr "Kaikki"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "All messages"
-msgstr ""
+msgstr "Kaikki viestit"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
@@ -587,15 +587,15 @@ msgstr "Kaikki viestit"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "All recaps"
-msgstr ""
+msgstr "Kaikki yhteenvedot"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "All roles have overrides."
-msgstr ""
+msgstr "Kaikilla rooleilla on ohitukset."
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "All Systems Operational"
-msgstr ""
+msgstr "Kaikki järjestelmät toimivat"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Allow members to change name and avatar per-message"
@@ -607,11 +607,11 @@ msgstr "Anna muiden lisätä bottisi Discover-tabista"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Allow others to invite your bot"
-msgstr ""
+msgstr "Salli muiden kutsua bottisi"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Allow others to join your server from Discover"
-msgstr ""
+msgstr "Salli muiden liittyä palvelimellesi Löydä-osiosta"
 
 #: components/i18n/errors.tsx
 msgid "Already friends with this user."
@@ -619,7 +619,7 @@ msgstr "Olet jo ystäviä tämän käyttäjän kanssa."
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Also thins out deep voices"
-msgstr ""
+msgstr "Ohentaa myös syviä ääniä"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #~ msgid "Also works when AnyTalk isn't focused"
@@ -627,7 +627,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Always Ask for Screen Share Quality"
-msgstr ""
+msgstr "Kysy aina näytönjaon laatua"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "American (MM/DD/YYYY)"
@@ -644,7 +644,7 @@ msgstr "Sisäinen virhe tapahtui. ({0})"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Another app is already using these keys, so they only work inside AnyTalk. Pick other keys."
-msgstr ""
+msgstr "Toinen sovellus käyttää jo näitä näppäimiä, joten ne toimivat vain AnyTalkin sisällä. Valitse muut näppäimet."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #~ msgid "Another app is already using these keys. Pick other keys."
@@ -653,7 +653,7 @@ msgstr ""
 #. placeholder {0}: installed()
 #: components/app/interface/settings/user/Updates.tsx
 msgid "AnyTalk Desktop {0}"
-msgstr ""
+msgstr "AnyTalk Desktop {0}"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "AnyTalk Developer"
@@ -673,36 +673,36 @@ msgstr "AnyTalk on yksi parhaista tavoista pysyä yhteydessä ystäviisi ja yhte
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "AnyTalk is up to date."
-msgstr ""
+msgstr "AnyTalk on ajan tasalla."
 
 #: src/AndroidNag.tsx
 msgid "AnyTalk on Android"
-msgstr ""
+msgstr "AnyTalk Androidille"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "AnyTalk reloads to switch language, only the language you use is downloaded and kept offline."
-msgstr ""
+msgstr "AnyTalk latautuu uudelleen kielen vaihtamiseksi. Vain käyttämäsi kieli ladataan ja säilytetään offline-tilassa."
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "AnyTalk rocks!"
-msgstr ""
+msgstr "AnyTalk on mahtava!"
 
 #. placeholder {0}: pendingServer()
 #: components/app/interface/settings/user/Native.tsx
 msgid "AnyTalk will reload and connect to {0}. You may need to sign in again."
-msgstr ""
+msgstr "AnyTalk latautuu uudelleen ja yhdistää palvelimeen {0}. Sinun on ehkä kirjauduttava uudelleen sisään."
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "AnyTalk will reload and use the default server. You may need to sign in again."
-msgstr ""
+msgstr "AnyTalk latautuu uudelleen ja käyttää oletuspalvelinta. Sinun on ehkä kirjauduttava uudelleen sisään."
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "AnyTalk will start in the system tray."
-msgstr ""
+msgstr "AnyTalk käynnistyy ilmoitusalueelle."
 
 #: src/AndroidNag.tsx
 msgid "AnyTalk works best as an app"
-msgstr ""
+msgstr "AnyTalk toimii parhaiten sovelluksena"
 
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -711,15 +711,15 @@ msgstr "Ulkoasu"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Applies to servers you join or create from now on. Existing servers keep their level."
-msgstr ""
+msgstr "Koskee palvelimia, joihin liityt tai joita luot tästä lähtien. Nykyiset palvelimet säilyttävät tasonsa."
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Apply"
-msgstr ""
+msgstr "Käytä"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Apps"
-msgstr ""
+msgstr "Sovellukset"
 
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Are you sure you want to clear your sessions?"
@@ -738,17 +738,17 @@ msgstr "Haluatko varmasti mennä "
 
 #: components/modal/modals/PinMessage.tsx
 msgid "Are you sure you want to pin this message?"
-msgstr ""
+msgstr "Haluatko varmasti kiinnittää tämän viestin?"
 
 #. placeholder {0}: props.user?.displayName ?? props.user.username
 #. placeholder {1}: props.group.name
 #: components/modal/modals/RemoveMember.tsx
 msgid "Are you sure you want to remove {0} from {1}?"
-msgstr ""
+msgstr "Haluatko varmasti poistaa käyttäjän {0} palvelimelta {1}?"
 
 #: components/modal/modals/PinMessage.tsx
 msgid "Are you sure you want to unpin this message?"
-msgstr ""
+msgstr "Haluatko varmasti irrottaa tämän viestin?"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Assign lower-ranked roles to lower-ranking members"
@@ -768,15 +768,15 @@ msgstr "Roolien asettaminen"
 #: components/app/interface/settings/user/developer/CompareChart.tsx
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "at {time}"
-msgstr ""
+msgstr "klo {time}"
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Audio disabled by browser"
-msgstr ""
+msgstr "Selain on poistanut äänen käytöstä"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Audio level"
-msgstr ""
+msgstr "Äänitaso"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/modal/modals/MFAFlow.tsx
@@ -785,7 +785,7 @@ msgstr "Valtuutussovellus"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Automatic Gain Control"
-msgstr ""
+msgstr "Automaattinen vahvistuksen säätö"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Avatar"
@@ -793,7 +793,7 @@ msgstr "Kuva"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Averages"
-msgstr ""
+msgstr "Keskiarvot"
 
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 #~ msgid "avg"
@@ -801,20 +801,20 @@ msgstr ""
 
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "avg {value}"
-msgstr ""
+msgstr "ka. {value}"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Avg bitrate"
-msgstr ""
+msgstr "Bittinopeus ka."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Avg frame rate"
-msgstr ""
+msgstr "Kuvataajuus ka."
 
 #: components/app/interface/settings/user/developer/CompareChart.tsx
 msgid "avg per recap"
-msgstr ""
+msgstr "ka. yhteenvetoa kohden"
 
 #: components/app/interface/settings/user/_AccountCard.tsx
 #: components/auth/src/flows/FlowCheck.tsx
@@ -827,7 +827,7 @@ msgstr "Takaisin"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Back to categories"
-msgstr ""
+msgstr "Takaisin luokkiin"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Badges"
@@ -868,7 +868,7 @@ msgstr "Bannaa Käyttäjä"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Bandwidth"
-msgstr ""
+msgstr "Kaistanleveys"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Banner"
@@ -880,12 +880,12 @@ msgstr "Bannit"
 
 #: components/ui/components/features/profiles/ProfileBio.tsx
 msgid "Bio"
-msgstr ""
+msgstr "Esittely"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Bitrate"
-msgstr ""
+msgstr "Bittinopeus"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Block user"
@@ -905,11 +905,11 @@ msgstr "Botti"
 
 #: components/modal/modals/AddBot.tsx
 msgid "Bots are not verified by AnyTalk."
-msgstr ""
+msgstr "AnyTalk ei vahvista botteja."
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
-msgstr ""
+msgstr "Selain"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser Echo Cancellation"
@@ -924,11 +924,11 @@ msgstr "Bugiseuranta"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Built on <0>Stoat</0>"
-msgstr ""
+msgstr "Rakennettu <0>Stoatin</0> pohjalle"
 
 #: components/auth/src/AuthPage.tsx
 msgid "Built on Stoat"
-msgstr ""
+msgstr "Rakennettu Stoatin pohjalle"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -948,32 +948,32 @@ msgstr "Kiireinen"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Bypass Slowmode"
-msgstr ""
+msgstr "Ohita hidastustila"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Bypasses slowmode in channels"
-msgstr ""
+msgstr "Ohittaa hidastustilan kanavilla"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Call"
-msgstr ""
+msgstr "Soita"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Calls"
-msgstr ""
+msgstr "Puhelut"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
-msgstr ""
+msgstr "Etkö löydä täydellistä GIFiä? Siirry Gifboxiin ja lataa oma kaikkien käyttöön."
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Can't get discover request status right now"
-msgstr ""
+msgstr "Löydä-pyynnön tilaa ei voi hakea juuri nyt"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 #: components/app/interface/settings/user/Native.tsx
@@ -1012,7 +1012,7 @@ msgstr "Peruuta"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Cancel discover request"
-msgstr ""
+msgstr "Peru Löydä-pyyntö"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
@@ -1025,7 +1025,7 @@ msgstr "Peru viesti"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Cancel your discover request and remove it from the review queue"
-msgstr ""
+msgstr "Peru Löydä-pyyntösi ja poista se tarkistusjonosta"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
@@ -1046,7 +1046,7 @@ msgstr "Muuta"
 #. placeholder {0}: props.member.nickname ?? props.member.user?.displayName ?? props.member.user?.username
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Change {0}'s nickname"
-msgstr ""
+msgstr "Vaihda käyttäjän {0} lempinimi"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change Avatar"
@@ -1054,7 +1054,7 @@ msgstr "Profiilikuvan vaihtaminen"
 
 #: components/modal/modals/EditBotUsername.tsx
 msgid "Change bot username"
-msgstr ""
+msgstr "Vaihda botin käyttäjänimi"
 
 #. placeholder {0}: props.member.server!.name
 #: components/modal/modals/ServerIdentity.tsx
@@ -1087,7 +1087,7 @@ msgstr "Voi vaihtaa oman nimimerkkinsä"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
-msgstr ""
+msgstr "Vaihda tämän botin käyttäjänimi"
 
 #: components/modal/modals/EditUsername.tsx
 msgid "Change username"
@@ -1095,7 +1095,7 @@ msgstr "Vaihda käyttäjänimi"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change Username"
-msgstr ""
+msgstr "Vaihda käyttäjänimi"
 
 #: components/app/interface/settings/user/profile/EditProfile.tsx
 msgid "Change your profile per-server"
@@ -1123,7 +1123,7 @@ msgstr "Kanavan Asetukset"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Channel Slowmode"
-msgstr ""
+msgstr "Kanavan hidastustila"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Channels"
@@ -1140,19 +1140,19 @@ msgstr "Keskustelusyöte"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Check back often to see if your bot has been approved!"
-msgstr ""
+msgstr "Käy usein katsomassa, onko bottisi hyväksytty!"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Check back often to see if your server has been approved!"
-msgstr ""
+msgstr "Käy usein katsomassa, onko palvelimesi hyväksytty!"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Check for updates"
-msgstr ""
+msgstr "Tarkista päivitykset"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Check for updates to see if there is a new version."
-msgstr ""
+msgstr "Tarkista päivitykset nähdäksesi, onko uutta versiota."
 
 #: components/auth/src/flows/FlowCheck.tsx
 msgid "Check your mail!"
@@ -1160,7 +1160,7 @@ msgstr "Tarkista sähköpostisi!"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Checking for updates…"
-msgstr ""
+msgstr "Tarkistetaan päivityksiä…"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
@@ -1180,7 +1180,7 @@ msgstr "Klikkaa alla olevista linkeistä saadaksesi lisätietoa eri muutoksista!
 
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Click to copy username"
-msgstr ""
+msgstr "Kopioi käyttäjänimi napsauttamalla"
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Click to show full description"
@@ -1236,7 +1236,7 @@ msgstr "Sulje keskustelu {0}n kanssa?"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Close stream"
-msgstr ""
+msgstr "Sulje striimi"
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Code"
@@ -1245,40 +1245,40 @@ msgstr "Koodi"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Codec"
-msgstr ""
+msgstr "Koodekki"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Collapse call window"
-msgstr ""
+msgstr "Tiivistä puheluikkuna"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Colours"
-msgstr ""
+msgstr "Värit"
 
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Coming soon! 👀"
-msgstr ""
+msgstr "Tulossa pian! 👀"
 
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Compact mode"
-msgstr ""
+msgstr "Kompakti tila"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
-msgstr ""
+msgstr "Vertaa yhteenvetoja"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Compare Recaps"
-msgstr ""
+msgstr "Vertaa yhteenvetoja"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Concealed audio"
-msgstr ""
+msgstr "Peitetty ääni"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Concealed audio (made up to hide lost packets)"
-msgstr ""
+msgstr "Peitetty ääni (keksitty piilottamaan kadonneet paketit)"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Configure a way to get back into your account in case your 2FA is lost"
@@ -1316,11 +1316,11 @@ msgstr "Yhdistää"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Connection lost"
-msgstr ""
+msgstr "Yhteys katkesi"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Connection quality (rated by the server)"
-msgstr ""
+msgstr "Yhteyden laatu (palvelimen arvioima)"
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -1329,11 +1329,11 @@ msgstr ""
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Contact support to remove this bot from discover"
-msgstr ""
+msgstr "Ota yhteyttä tukeen poistaaksesi tämän botin Löydä-osiosta"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Contact support to remove this server from discover"
-msgstr ""
+msgstr "Ota yhteyttä tukeen poistaaksesi tämän palvelimen Löydä-osiosta"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Content breaks one or more laws"
@@ -1346,7 +1346,7 @@ msgstr "Jatka"
 
 #: src/AndroidNag.tsx
 msgid "Continue in browser"
-msgstr ""
+msgstr "Jatka selaimessa"
 
 #: components/auth/src/flows/FlowVerify.tsx
 msgid "Continue to app"
@@ -1362,7 +1362,7 @@ msgstr "Keskustelut"
 
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
-msgstr ""
+msgstr "Kopioitu!"
 
 #: components/app/menus/CategoryContextMenu.tsx
 msgid "Copy category ID"
@@ -1374,7 +1374,7 @@ msgstr "Kopioi kanavan tunniste"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Copy file link"
-msgstr ""
+msgstr "Kopioi tiedoston linkki"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Copy ID"
@@ -1382,7 +1382,7 @@ msgstr "Kopioi tunniste"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Copy invite link"
-msgstr ""
+msgstr "Kopioi kutsulinkki"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Copy Invite URL"
@@ -1403,7 +1403,7 @@ msgstr "Kopioi viestin tunniste"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Copy message link"
-msgstr ""
+msgstr "Kopioi viestin linkki"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Copy role ID"
@@ -1441,33 +1441,33 @@ msgstr "Etsittyä tietoa ei löytynyt."
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not load the patch notes right now."
-msgstr ""
+msgstr "Päivitysmuistiinpanoja ei voitu ladata juuri nyt."
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
-msgstr ""
+msgstr "Päivittäjään ei saatu yhteyttä. Yritä uudelleen."
 
 #: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not save this setting."
-msgstr ""
+msgstr "Tätä asetusta ei voitu tallentaa."
 
 #: components/instance/index.tsx
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
-msgstr ""
+msgstr "AnyTalkin määrityksiä ei voitu hakea osoitteesta {hStr}."
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Couldn't load downloads"
-msgstr ""
+msgstr "Latauksia ei voitu ladata"
 
 #. placeholder {0}: to.name
 #: components/ui/components/features/voice/useMoveVoiceUser.ts
 msgid "Couldn't move them to {0}."
-msgstr ""
+msgstr "Niitä ei voitu siirtää kohteeseen {0}."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "CPU"
-msgstr ""
+msgstr "Suoritin"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 #: components/modal/modals/CreateBot.tsx
@@ -1544,12 +1544,12 @@ msgstr "Luo kanava"
 
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Create Channel"
-msgstr ""
+msgstr "Luo kanava"
 
 #. placeholder {0}: props.category.title
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Create channel in {0}"
-msgstr ""
+msgstr "Luo kanava luokkaan {0}"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 #: components/app/menus/ChannelContextMenu.tsx
@@ -1569,7 +1569,7 @@ msgstr "Voi luoda kutsuja muiden käytettäviksi"
 #: components/modal/modals/CreateOrJoinServer.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Create or join a server"
-msgstr ""
+msgstr "Luo palvelin tai liity palvelimeen"
 
 #: components/modal/modals/CreateRole.tsx
 msgid "Create Role"
@@ -1603,7 +1603,7 @@ msgstr "Nykyinen istunto"
 
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Custom colour"
-msgstr ""
+msgstr "Mukautettu väri"
 
 #: components/modal/modals/CustomStatus.tsx
 msgid "Custom status"
@@ -1629,12 +1629,12 @@ msgstr "Tietokantavirhe, ota yhteyttä tukeen. ({0})"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Date format"
-msgstr ""
+msgstr "Päivämäärän muoto"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Deafen"
-msgstr ""
+msgstr "Kuurouta"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen lower-ranking members in voice call"
@@ -1646,7 +1646,7 @@ msgstr "Jäsenien kuurouttaminen"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
-msgstr ""
+msgstr "Dekooderi"
 
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
@@ -1656,21 +1656,21 @@ msgstr "Oletus"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Default notifications for new servers"
-msgstr ""
+msgstr "Oletusilmoitukset uusille palvelimille"
 
 #~ msgid "Default Permissions"
 #~ msgstr "Oletusarvoiset valtuudet"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Default sound"
-msgstr ""
+msgstr "Oletusääni"
 
 #~ msgid "Defean"
 #~ msgstr ""
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Degraded Performance"
-msgstr ""
+msgstr "Heikentynyt suorituskyky"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 #: components/modal/modals/DeleteBot.tsx
@@ -1686,7 +1686,7 @@ msgstr "Poista"
 #. placeholder {0}: props.emoji.name
 #: components/modal/modals/DeleteEmoji.tsx
 msgid "Delete :{0}:?"
-msgstr ""
+msgstr "Poistetaanko :{0}:?"
 
 #. placeholder {0}: props.bot.user?.displayName ?? props.bot.id
 #. placeholder {0}: props.channel.name
@@ -1705,15 +1705,15 @@ msgstr "Poista tili"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Delete all call recaps on this device?"
-msgstr ""
+msgstr "Poistetaanko kaikki puhelun yhteenvedot tältä laitteelta?"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Delete all recaps"
-msgstr ""
+msgstr "Poista kaikki yhteenvedot"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Delete all stream recaps on this device?"
-msgstr ""
+msgstr "Poistetaanko kaikki striimin yhteenvedot tältä laitteelta?"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Delete and pin messages sent by other members"
@@ -1738,11 +1738,11 @@ msgstr "Poista kanava"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Delete Emoji"
-msgstr ""
+msgstr "Poista emoji"
 
 #: components/app/menus/ServerFolderContextMenu.tsx
 msgid "Delete folder"
-msgstr ""
+msgstr "Poista kansio"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Delete Invite"
@@ -1756,12 +1756,12 @@ msgstr "Poista viesti"
 
 #: components/modal/modals/BanMember.tsx
 msgid "Delete Message History"
-msgstr ""
+msgstr "Poista viestihistoria"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Delete recap"
-msgstr ""
+msgstr "Poista yhteenveto"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Delete Role"
@@ -1774,15 +1774,15 @@ msgstr "Poista palvelin"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Delete this recap?"
-msgstr ""
+msgstr "Poistetaanko tämä yhteenveto?"
 
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
 msgid "Delete webhook"
-msgstr ""
+msgstr "Poista webhook"
 
 #: components/modal/modals/DeleteEmoji.tsx
 msgid "Deleting this emoji will disallow future use. All past uses will remain."
-msgstr ""
+msgstr "Emojin poistaminen estää sen käytön jatkossa. Aiemmat käytöt säilyvät."
 
 #. placeholder {0}: props.invite.username
 #: components/modal/modals/AddBot.tsx
@@ -1795,11 +1795,11 @@ msgstr "Työpöytä"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
-msgstr ""
+msgstr "Työpöytäsovellus"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Developer"
-msgstr ""
+msgstr "Kehittäjä"
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "Developer Documentation"
@@ -1807,15 +1807,15 @@ msgstr "Kehittäjätiedot"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Developer modes measure call performance and keep statistics of previous calls and streams on this device. Turn on either or both."
-msgstr ""
+msgstr "Kehittäjätilat mittaavat puhelun suorituskykyä ja tallentavat tilastoja aiemmista puheluista ja striimeistä tälle laitteelle. Ota käyttöön toinen tai molemmat."
 
 #: components/app/interface/desktop/Titlebar.tsx
 msgid "Device is offline"
-msgstr ""
+msgstr "Laite on offline-tilassa"
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Direct Messages"
-msgstr ""
+msgstr "Yksityisviestit"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Disable Account"
@@ -1842,7 +1842,7 @@ msgstr "Yhteys katkaistu"
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Discover"
-msgstr ""
+msgstr "Löydä"
 
 #: src/interface/Home.tsx
 msgid "Discover AnyTalk"
@@ -1858,7 +1858,7 @@ msgstr "Näyttönimi"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Display users with this role separately in the member list"
-msgstr ""
+msgstr "Näytä tämän roolin käyttäjät erikseen jäsenluettelossa"
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Do Not Disturb"
@@ -1866,7 +1866,7 @@ msgstr "Älä häiritse"
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Don't ask me again"
-msgstr ""
+msgstr "Älä kysy uudelleen"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "Don't ask me again for "
@@ -1877,7 +1877,7 @@ msgstr "Älä pyydä enää "
 
 #: components/modal/modals/BanMember.tsx
 msgid "Don't delete messages"
-msgstr ""
+msgstr "Älä poista viestejä"
 
 #: components/modal/modals/LeaveServer.tsx
 msgid "Don't notify others that you've left"
@@ -1885,7 +1885,7 @@ msgstr "Älä ilmoita muille, että olet lähtenyt"
 
 #: src/AndroidNag.tsx
 msgid "Don't show this again"
-msgstr ""
+msgstr "Älä näytä tätä uudelleen"
 
 #: components/app/interface/settings/UserSettings.tsx
 #~ msgid "Donate"
@@ -1905,33 +1905,33 @@ msgstr "Valmis"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Download"
-msgstr ""
+msgstr "Lataa"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Download again"
-msgstr ""
+msgstr "Lataa uudelleen"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Download CSV"
-msgstr ""
+msgstr "Lataa CSV"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Download for Linux (AppImage)"
-msgstr ""
+msgstr "Lataa Linuxille (AppImage)"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Download for Windows (.exe)"
-msgstr ""
+msgstr "Lataa Windowsille (.exe)"
 
 #. placeholder {0}: Math.round(updaterState()?.percent ?? 0)
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Downloading {0}%"
-msgstr ""
+msgstr "Ladataan {0} %"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Dropped frames per second"
-msgstr ""
+msgstr "Pudonneita kuvia sekunnissa"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Drugs or illegal goods"
@@ -1941,7 +1941,7 @@ msgstr "Huumeet tai laittomat tavarat"
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Duration"
-msgstr ""
+msgstr "Kesto"
 
 #. placeholder {0}: props.member.displayName
 #: components/modal/modals/UserProfileRoles.tsx
@@ -1958,7 +1958,7 @@ msgstr "Voi muokata mitä vain palvelimen valtuuksia"
 
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Edit Channel"
-msgstr ""
+msgstr "Muokkaa kanavaa"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Edit channel-specific role and default permissions"
@@ -1966,12 +1966,12 @@ msgstr "Voi muokata kanavakohtaista roolia ja oletusvaltuuksia"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Edit Emoji"
-msgstr ""
+msgstr "Muokkaa emojia"
 
 #: components/app/menus/ServerFolderContextMenu.tsx
 #: components/modal/modals/EditServerFolder.tsx
 msgid "Edit folder"
-msgstr ""
+msgstr "Muokkaa kansiota"
 
 #: components/app/interface/settings/user/profile/EditProfile.tsx
 msgid "Edit Global Profile"
@@ -2012,7 +2012,7 @@ msgstr "Muokattu"
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Effective <0/> (<1/>)"
-msgstr ""
+msgstr "Voimassa oleva <0/> (<1/>)"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
@@ -2022,7 +2022,7 @@ msgstr "Sähköpostiosoite"
 
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Emoji"
-msgstr ""
+msgstr "Emoji"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 #: components/modal/modals/EditEmoji.tsx
@@ -2039,7 +2039,7 @@ msgstr "Emojit"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Empty"
-msgstr ""
+msgstr "Tyhjä"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Enable Authenticator"
@@ -2055,11 +2055,11 @@ msgstr "Ota työpöytäilmoitukset käyttöön"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Enable Push Notifications"
-msgstr ""
+msgstr "Ota push-ilmoitukset käyttöön"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Enable the tools below"
-msgstr ""
+msgstr "Ota alla olevat työkalut käyttöön"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Enable transparency glass/blur effects (slow on older machines)"
@@ -2067,27 +2067,27 @@ msgstr "Ota käyttöön läpinäkyvyyslasi / sumennustehosteet (toimii hitaammin
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Encoder"
-msgstr ""
+msgstr "Enkooderi"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Encoder target bitrate"
-msgstr ""
+msgstr "Enkooderin tavoitebittinopeus"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "End call"
-msgstr ""
+msgstr "Lopeta puhelu"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced"
-msgstr ""
+msgstr "Parannettu"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced (RNNoise)"
-msgstr ""
+msgstr "Parannettu (RNNoise)"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Enter a full address starting with http:// or https://"
-msgstr ""
+msgstr "Anna täydellinen osoite, joka alkaa http:// tai https://"
 
 #: components/modal/modals/RenameSession.tsx
 msgid "Enter a new name for this session"
@@ -2118,7 +2118,7 @@ msgstr "Syötä nykyinen salasanasi..."
 
 #: components/auth/src/flows/Form.tsx
 msgid "Enter your invite code."
-msgstr ""
+msgstr "Anna kutsukoodisi."
 
 #: components/auth/src/flows/Form.tsx
 msgid "Enter your preferred username."
@@ -2126,39 +2126,39 @@ msgstr "Syötä haluamasi käyttäjätunnuksesi."
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Entire screen"
-msgstr ""
+msgstr "Koko näyttö"
 
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Error occurred, please email support."
-msgstr ""
+msgstr "Tapahtui virhe, lähetä sähköpostia tukeen."
 
 #: components/app/interface/channels/text/EditMessage.tsx
 msgid "escape to <0>cancel</0> · enter to <1>save</1>"
-msgstr ""
+msgstr "escape <0>peruuttaa</0> · enter <1>tallentaa</1>"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Estimated upload bandwidth"
-msgstr ""
+msgstr "Arvioitu lähetyskaistanleveys"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone"
-msgstr ""
+msgstr "Kaikki"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Excellent"
-msgstr ""
+msgstr "Erinomainen"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Excellent connection"
-msgstr ""
+msgstr "Erinomainen yhteys"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
-msgstr ""
+msgstr "Vie"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "External links can be dangerous!"
@@ -2174,15 +2174,15 @@ msgstr "Äärimmäistä väkivaltaa, raakaa/veristä kuvastoa tai eläinrääkk�
 
 #: components/client/NotificationsController.ts
 msgid "Failed to enable notifications. AnyTalk does not have notification permission."
-msgstr ""
+msgstr "Ilmoitusten käyttöönotto epäonnistui. AnyTalkilla ei ole ilmoitusoikeutta."
 
 #: components/client/NotificationsController.ts
 msgid "Failed to enable push notifications. Please try again later."
-msgstr ""
+msgstr "Push-ilmoitusten käyttöönotto epäonnistui. Yritä myöhemmin uudelleen."
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "Failed to load bots..."
-msgstr ""
+msgstr "Bottien lataus epäonnistui..."
 
 #: components/i18n/errors.tsx
 msgid "Failed to process the image you provided."
@@ -2203,7 +2203,7 @@ msgstr "Palaute"
 #. placeholder {0}: humanFileSize(local.maxSize)
 #: components/ui/components/utils/Form2.tsx
 msgid "File must be smaller than {0}"
-msgstr ""
+msgstr "Tiedoston on oltava pienempi kuin {0}"
 
 #: src/interface/Home.tsx
 msgid "Find a community based on your hobbies or interests."
@@ -2211,11 +2211,11 @@ msgstr "Löydä harrastuksiisi tai kiinnostuksen kohteisiisi pohjautuva yhteisö
 
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Find new servers to join"
-msgstr ""
+msgstr "Löydä uusia palvelimia, joihin liittyä"
 
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
-msgstr ""
+msgstr "Löydä yhtei<0/>sösi,<1/>ota yhteys maailmaan."
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2228,11 +2228,11 @@ msgstr "Keskity"
 
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Folder"
-msgstr ""
+msgstr "Kansio"
 
 #: components/modal/modals/EditServerFolder.tsx
 msgid "Folder colour"
-msgstr ""
+msgstr "Kansion väri"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
@@ -2261,11 +2261,11 @@ msgstr "8 tunnin ajan"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frame rate"
-msgstr ""
+msgstr "Kuvataajuus"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Freezes"
-msgstr ""
+msgstr "Jäätymiset"
 
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -2274,15 +2274,15 @@ msgstr "Kaverit"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Friends who are online or in a call show up here."
-msgstr ""
+msgstr "Verkossa olevat tai puhelussa olevat kaverit näkyvät täällä."
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "from "
-msgstr ""
+msgstr "palvelimelta "
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frozen"
-msgstr ""
+msgstr "Jäätynyt"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Fruit Salad"
@@ -2310,31 +2310,31 @@ msgstr "Hanki käytössä olevat palautuskoodit"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Get AnyTalk for your desktop"
-msgstr ""
+msgstr "Hanki AnyTalk työpöydällesi"
 
 #: src/AndroidNag.tsx
 msgid "Get it on Google Play"
-msgstr ""
+msgstr "Hanki Google Playsta"
 
 #: components/state/stores/Experiments.ts
 msgid "GIF Picker Placeholder"
-msgstr ""
+msgstr "GIF-valitsimen paikkamerkki"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Gifbox is our own GIF service, so you can keep sharing GIFs right here on AnyTalk."
-msgstr ""
+msgstr "Gifbox on oma GIF-palvelumme, joten voit jatkaa GIFien jakamista suoraan AnyTalkissa."
 
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "GIFs"
-msgstr ""
+msgstr "GIFit"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "GIFs are now powered by Gifbox"
-msgstr ""
+msgstr "GIFejä tarjoaa nyt Gifbox"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "GitHub didn't answer, or too many requests were made. Try again later, or get the app from the <0>releases page</0>."
-msgstr ""
+msgstr "GitHub ei vastannut tai pyyntöjä tehtiin liikaa. Yritä myöhemmin uudelleen tai hanki sovellus <0>julkaisusivulta</0>."
 
 #: src/interface/Home.tsx
 #~ msgid "Give feedback on AnyTalk"
@@ -2346,12 +2346,12 @@ msgstr "Anna meille tarkempaa tietoa"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Global hotkeys depend on your desktop environment. On KDE and GNOME you may be asked for permission the first time."
-msgstr ""
+msgstr "Yleiset pikanäppäimet riippuvat työpöytäympäristöstäsi. KDE:ssä ja GNOMEssa sinulta voidaan pyytää lupaa ensimmäisellä kerralla."
 
 #: components/modal/modals/ScreenSharePicker.tsx
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Go"
-msgstr ""
+msgstr "Siirry"
 
 #: components/auth/src/flows/FlowConfirmReset.tsx
 #: components/auth/src/flows/FlowResend.tsx
@@ -2379,15 +2379,15 @@ msgstr "Hyvä"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Good connection"
-msgstr ""
+msgstr "Hyvä yhteys"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Got a better GIF? Share it with everyone on Gifbox."
-msgstr ""
+msgstr "Onko sinulla parempi GIF? Jaa se kaikille Gifboxissa."
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Got it"
-msgstr ""
+msgstr "Selvä"
 
 #. placeholder {0}: countBits(props.context.rolePermissions![role.id].a)
 #. placeholder {1}: countBits(props.context.rolePermissions![role.id].d)
@@ -2397,7 +2397,7 @@ msgstr "Antaa {0} valtuutta ja evää {1} valtuutta"
 
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Group"
-msgstr ""
+msgstr "Ryhmä"
 
 #: components/modal/modals/CreateGroup.tsx
 msgid "Group Name"
@@ -2405,11 +2405,11 @@ msgstr "Ryhmän nimi"
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Groups"
-msgstr ""
+msgstr "Ryhmät"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Guidelines"
-msgstr ""
+msgstr "Ohjeet"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Harassment or cyberbullying"
@@ -2442,7 +2442,7 @@ msgstr "Tässä on uusi kutsukoodisi: <0>{0}</0>"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
-msgstr ""
+msgstr "Piilota muut"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "High Contrast"
@@ -2450,11 +2450,11 @@ msgstr "Suuri Kontrasti"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Hoist Role"
-msgstr ""
+msgstr "Nosta rooli esiin"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hold Ctrl, Alt or Shift together with a letter or number."
-msgstr ""
+msgstr "Pidä Ctrl, Alt tai Shift painettuna yhdessä kirjaimen tai numeron kanssa."
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -2464,36 +2464,36 @@ msgstr "Koti"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Hotkeys"
-msgstr ""
+msgstr "Pikanäppäimet"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hotkeys work everywhere on your computer, even when AnyTalk isn't focused. Click a hotkey to record new keys, press Escape to cancel."
-msgstr ""
+msgstr "Pikanäppäimet toimivat kaikkialla tietokoneellasi, vaikka AnyTalk ei olisi aktiivisena. Tallenna uudet näppäimet napsauttamalla pikanäppäintä, peruuta painamalla Escape."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hotkeys work while AnyTalk is the focused window or tab. Click a hotkey to record new keys, press Escape to cancel."
-msgstr ""
+msgstr "Pikanäppäimet toimivat, kun AnyTalk on aktiivinen ikkuna tai välilehti. Tallenna uudet näppäimet napsauttamalla pikanäppäintä, peruuta painamalla Escape."
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Hover a chart (or focus it and use the arrow keys) to read all values at the same moment."
-msgstr ""
+msgstr "Vie hiiri kaavion päälle (tai kohdista siihen ja käytä nuolinäppäimiä) lukeaksesi kaikki arvot samalta hetkeltä."
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Hover a chart (or focus it and use the arrow keys) to read every recap at the same moment."
-msgstr ""
+msgstr "Vie hiiri kaavion päälle (tai kohdista siihen ja käytä nuolinäppäimiä) lukeaksesi kaikki yhteenvedot samalta hetkeltä."
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "How everyone else's audio reached you."
-msgstr ""
+msgstr "Miten muiden ääni saavutti sinut."
 
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "How many recently joined calls the Home page lists. 0 hides them."
-msgstr ""
+msgstr "Kuinka monta viimeksi liittymääsi puhelua etusivu listaa. 0 piilottaa ne."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>{HYPRLAND_BIND_EXAMPLE}</1>."
-msgstr ""
+msgstr "Hyprland ei määritä näppäimiä sovellusten pikakomennoille itsestään. Suorita <0>{HYPRCTL_COMMAND}</0> nähdäksesi AnyTalkin merkinnät ja sido sitten jokainen Hyprland-asetuksissasi global dispatcherilla, esimerkiksi <1>{HYPRLAND_BIND_EXAMPLE}</1>."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #~ msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>bind = CTRL ALT, M, global, tech.anyportal.AnyTalk:<id></1>."
@@ -2513,11 +2513,11 @@ msgstr "Ymmärrän seuraamukset"
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "I've read and reviewed the changes."
-msgstr ""
+msgstr "Olen lukenut ja tarkistanut muutokset."
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "ID copied to clipboard"
-msgstr ""
+msgstr "Tunnus kopioitu leikepöydälle"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2541,11 +2541,11 @@ msgstr "Esiintyminen toisena henkilönä"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Import CSV or zip"
-msgstr ""
+msgstr "Tuo CSV tai zip"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Imported"
-msgstr ""
+msgstr "Tuotu"
 
 #. placeholder {0}: inCall().length
 #: src/interface/home/FriendsOverview.tsx
@@ -2554,36 +2554,36 @@ msgstr ""
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "In a call · {count}"
-msgstr ""
+msgstr "Puhelussa · {count}"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "In call"
-msgstr ""
+msgstr "Puhelussa"
 
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
-msgstr ""
+msgstr "Asenna sillä välin AnyTalk Google Playsta nopeampaa ja sujuvampaa Androidille suunniteltua kokemusta varten."
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
-msgstr ""
+msgstr "Saapuva"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Incoming call"
-msgstr ""
+msgstr "Saapuva puhelu"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
-msgstr ""
+msgstr "Tulon äänenvoimakkuus"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Install updates automatically"
-msgstr ""
+msgstr "Asenna päivitykset automaattisesti"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Installed version"
-msgstr ""
+msgstr "Asennettu versio"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Instead of closing, AnyTalk will hide in your tray."
@@ -2595,7 +2595,7 @@ msgstr "Käyttöliittymän fontti"
 
 #: components/markdown/plugins/mentions.tsx
 msgid "Invalid Mention Element"
-msgstr ""
+msgstr "Virheellinen mainintaelementti"
 
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2621,7 +2621,7 @@ msgstr "Muiden kutsuminen"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Invite URL copied to clipboard"
-msgstr ""
+msgstr "Kutsulinkki kopioitu leikepöydälle"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Inviter"
@@ -2646,16 +2646,16 @@ msgstr "ISO-Standardi (YYYY-MM-DD)"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Jitter"
-msgstr ""
+msgstr "Värinä"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Jitter avg / max"
-msgstr ""
+msgstr "Värinä ka. / maks."
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Jitter buffer delay"
-msgstr ""
+msgstr "Värinäpuskurin viive"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
 #: components/modal/modals/Invite.tsx
@@ -2672,7 +2672,7 @@ msgstr "Liity"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Join {label}"
-msgstr ""
+msgstr "Liity: {label}"
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Join a server"
@@ -2706,7 +2706,7 @@ msgstr "Hyppää alkuun"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Keep AnyTalk running in the tray when closing the window"
-msgstr ""
+msgstr "Pidä AnyTalk käynnissä ilmoitusalueella ikkunaa suljettaessa"
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Keep as is"
@@ -2714,7 +2714,7 @@ msgstr "Säilytä sellaisenaan"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Keyframe requests per second (viewers asking for a full new picture)"
-msgstr ""
+msgstr "Avainkehyspyyntöjä sekunnissa (katsojat pyytävät kokonaan uutta kuvaa)"
 
 #: components/modal/modals/KickMember.tsx
 msgid "Kick"
@@ -2755,7 +2755,7 @@ msgstr "Käynnistä AnyTalk kun kirjaudut tietokoneellesi."
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Learn more"
-msgstr ""
+msgstr "Lue lisää"
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "Learn more about how to create bots on AnyTalk."
@@ -2775,11 +2775,11 @@ msgstr "Jätä {0}?"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Leave all streams"
-msgstr ""
+msgstr "Poistu kaikista striimeistä"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Leave empty to use the default server. AnyTalk reloads when you save."
-msgstr ""
+msgstr "Jätä tyhjäksi käyttääksesi oletuspalvelinta. AnyTalk latautuu uudelleen, kun tallennat."
 
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Leave group"
@@ -2791,7 +2791,7 @@ msgstr "Poistu palvelimelta"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Leave stream"
-msgstr ""
+msgstr "Poistu striimistä"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Let AnyTalk use its own custom titlebar."
@@ -2799,7 +2799,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Let AnyTalk use its own custom titlebar. Takes effect after you restart AnyTalk."
-msgstr ""
+msgstr "Anna AnyTalkin käyttää omaa otsikkopalkkiaan. Tulee voimaan, kun käynnistät AnyTalkin uudelleen."
 
 #: src/interface/Home.tsx
 #~ msgid "Let us know how we can improve our app by giving us feedback."
@@ -2812,23 +2812,23 @@ msgstr "Vaalea"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Light (60 Hz)"
-msgstr ""
+msgstr "Kevyt (60 Hz)"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Linux .deb (Debian/Ubuntu)"
-msgstr ""
+msgstr "Linux .deb (Debian/Ubuntu)"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Linux .rpm (Fedora)"
-msgstr ""
+msgstr "Linux .rpm (Fedora)"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Linux AppImage"
-msgstr ""
+msgstr "Linux AppImage"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Linux pacman (Arch)"
-msgstr ""
+msgstr "Linux pacman (Arch)"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Listen"
@@ -2837,19 +2837,19 @@ msgstr "Kuuntelu"
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
-msgstr ""
+msgstr "LIVE"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Live overlay, recording and recaps of previous calls"
-msgstr ""
+msgstr "Live-peittokuva, tallennus ja yhteenvedot aiemmista puheluista"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Live overlay, recording and recaps of previous streams"
-msgstr ""
+msgstr "Live-peittokuva, tallennus ja yhteenvedot aiemmista striimeistä"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Live statistics overlay"
-msgstr ""
+msgstr "Live-tilastojen peittokuva"
 
 #. placeholder {0}: humanFileSize(props.file.size ?? 0)
 #: components/ui/components/features/messaging/elements/TextFile.tsx
@@ -2883,27 +2883,27 @@ msgstr "Kirjaa sinut ulos kaikista muista istunnoista paitsi tästä laitteesta.
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Looking for the latest version..."
-msgstr ""
+msgstr "Etsitään uusinta versiota..."
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Loss and jitter are what the server reports about the audio it got from you."
-msgstr ""
+msgstr "Katoaminen ja värinä ovat sitä, mitä palvelin raportoi sinulta saamastaan äänestä."
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Lost"
-msgstr ""
+msgstr "Kadonnut"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Low-cut filter"
-msgstr ""
+msgstr "Alipäästösuodatin"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Lowercase letters, numbers and underscores only."
-msgstr ""
+msgstr "Vain pieniä kirjaimia, numeroita ja alaviivoja."
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
-msgstr ""
+msgstr "Laaja katkos"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Malware or phishing"
@@ -2947,7 +2947,7 @@ msgstr "Merkitse aikuisille tarkoitetuksi"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Mark as Mature"
-msgstr ""
+msgstr "Merkitse aikuisille"
 
 #: components/app/menus/CategoryContextMenu.tsx
 #: components/app/menus/ChannelContextMenu.tsx
@@ -2969,23 +2969,23 @@ msgstr "Naamio"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Max resolution"
-msgstr ""
+msgstr "Enimmäistarkkuus"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Maximize call window"
-msgstr ""
+msgstr "Suurenna puheluikkuna"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Measure camera and screen share video you send or watch"
-msgstr ""
+msgstr "Mittaa lähettämääsi tai katsomaasi kamera- ja näytönjakovideota"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Measure your microphone and everyone you hear in calls"
-msgstr ""
+msgstr "Mittaa mikrofoniasi ja kaikkia, joita kuulet puheluissa"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Medium (90 Hz)"
-msgstr ""
+msgstr "Keskitaso (90 Hz)"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -2995,7 +2995,7 @@ msgstr "Jäsenet"
 #. placeholder {0}: slowmodeWaitTime()
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "Members can send one message every {0}."
-msgstr ""
+msgstr "Jäsenet voivat lähettää yhden viestin {0} välein."
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Mention"
@@ -3023,7 +3023,7 @@ msgstr "Maininnat"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
-msgstr ""
+msgstr "Vain maininnat"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
@@ -3051,7 +3051,7 @@ msgstr "Viestiä ei ole ladattu, klikkaa hypätäksesi"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Message received"
-msgstr ""
+msgstr "Viesti vastaanotettu"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #~ msgid "Message Received"
@@ -3071,11 +3071,11 @@ msgstr "Viesti on lähetetty toisella alustalla"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Message, call and stream sounds"
-msgstr ""
+msgstr "Viestien, puhelujen ja striimien äänet"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Messages"
-msgstr ""
+msgstr "Viestit"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Messaging"
@@ -3083,15 +3083,15 @@ msgstr "Viestintä"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "MFA setup canceled."
-msgstr ""
+msgstr "MFA:n käyttöönotto peruttu."
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Microphone"
-msgstr ""
+msgstr "Mikrofoni"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Microphone and headphones"
-msgstr ""
+msgstr "Mikrofoni ja kuulokkeet"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Minimise to Tray"
@@ -3123,7 +3123,7 @@ msgstr "Voi siirtää jäseniä äänikanavien välillä"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Move to channel"
-msgstr ""
+msgstr "Siirrä kanavalle"
 
 #: components/i18n/errors.tsx
 msgid "Multi-factor authentication is already enabled for this account."
@@ -3131,7 +3131,7 @@ msgstr "Monivaiheinen todennus on käytössä jo tälle tilille."
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Multi-stream: opening a stream adds it next to the others"
-msgstr ""
+msgstr "Useita striimejä: avattu striimi lisätään muiden viereen"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
@@ -3153,7 +3153,7 @@ msgstr "Jäsenien hiljentäminen"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Mute Screen Share"
-msgstr ""
+msgstr "Mykistä näytönjako"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Mute Server"
@@ -3161,11 +3161,11 @@ msgstr "Mykistä palvelin"
 
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Mute stream"
-msgstr ""
+msgstr "Mykistä striimi"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Mute when not speaking"
-msgstr ""
+msgstr "Mykistä, kun et puhu"
 
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Muted"
@@ -3187,7 +3187,7 @@ msgstr "Yhteiset ryhmät"
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Mutuals"
-msgstr ""
+msgstr "Yhteiset"
 
 #: components/app/interface/settings/user/_AccountCard.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -3215,7 +3215,7 @@ msgstr "UUSI"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "New folder"
-msgstr ""
+msgstr "Uusi kansio"
 
 #. placeholder {0}: dayjs(decodeTime(props.lastId()!)).fromNow()
 #: components/ui/components/features/messaging/bars/NewMessages.tsx
@@ -3224,7 +3224,7 @@ msgstr "Uusia viestejä alkaen {0}"
 
 #: components/modal/modals/EditCategory.tsx
 msgid "New name"
-msgstr ""
+msgstr "Uusi nimi"
 
 #: components/auth/src/flows/Form.tsx
 #: components/modal/modals/EditPassword.tsx
@@ -3241,7 +3241,7 @@ msgstr "Uusi palvelimelle"
 
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "New unreads"
-msgstr ""
+msgstr "Uudet lukemattomat"
 
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
@@ -3249,31 +3249,31 @@ msgstr "Nimimerkki"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No apps found"
-msgstr ""
+msgstr "Sovelluksia ei löytynyt"
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "No audio was captured, switch window to share audio"
-msgstr ""
+msgstr "Ääntä ei tallennettu, vaihda ikkunaa jakaaksesi äänen"
 
 #: src/interface/ServerHome.tsx
 msgid "No channels!"
-msgstr ""
+msgstr "Ei kanavia!"
 
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "no data"
-msgstr ""
+msgstr "ei tietoja"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "No desktop app available yet"
-msgstr ""
+msgstr "Työpöytäsovellusta ei ole vielä saatavilla"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "No GIFs found"
-msgstr ""
+msgstr "GIFejä ei löytynyt"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "No patch notes for this version."
-msgstr ""
+msgstr "Tälle versiolle ei ole päivitysmuistiinpanoja."
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No permissions set yet"
@@ -3281,27 +3281,27 @@ msgstr "Valtuuksia ei vielä asetettu"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "No recaps yet. Turn on \"Record call recaps\", then join a call."
-msgstr ""
+msgstr "Ei vielä yhteenvetoja. Ota käyttöön \"Tallenna puhelun yhteenvedot\" ja liity sitten puheluun."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "No recaps yet. Turn on \"Record stream recaps\", then join a call and start or watch a stream."
-msgstr ""
+msgstr "Ei vielä yhteenvetoja. Ota käyttöön \"Tallenna striimin yhteenvedot\", liity puheluun ja aloita tai katso striimiä."
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No role overrides have been configured."
-msgstr ""
+msgstr "Roolien ohituksia ei ole määritetty."
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No screens found"
-msgstr ""
+msgstr "Näyttöjä ei löytynyt"
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
-msgstr ""
+msgstr "Asetuksia ei löytynyt"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "nobody else"
-msgstr ""
+msgstr "ei kukaan muu"
 
 #: src/interface/Friends.tsx
 msgid "Nobody here right now!"
@@ -3309,7 +3309,7 @@ msgstr "Ketään ei ole täällä tällä hetkellä!"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Noise suppression"
-msgstr ""
+msgstr "Kohinanvaimennus"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
@@ -3318,7 +3318,7 @@ msgstr "Ei mitään"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "None of your friends are online"
-msgstr ""
+msgstr "Yksikään kavereistasi ei ole paikalla"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Normal"
@@ -3327,11 +3327,11 @@ msgstr "Normaali"
 #: components/state/stores/Experiments.ts
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Not available yet."
-msgstr ""
+msgstr "Ei vielä saatavilla."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Not limited"
-msgstr ""
+msgstr "Ei rajoitettu"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Not of minimum age to use the platform"
@@ -3339,15 +3339,15 @@ msgstr "Ei tarpeeksi ikää käyttääkseen alustaa"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
-msgstr ""
+msgstr "Ei mitään"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own call recaps."
-msgstr ""
+msgstr "Ei vielä mitään vertailtavaa. Tuo CSV tai lisää jokin omista puhelun yhteenvedoistasi."
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own stream recaps."
-msgstr ""
+msgstr "Ei vielä mitään vertailtavaa. Tuo CSV tai lisää jokin omista striimin yhteenvedoistasi."
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/ServerContextMenu.tsx
@@ -3404,7 +3404,7 @@ msgstr "Yksi ensimmäisistä 1000 käyttäjästä!"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Ongoing Maintenance"
-msgstr ""
+msgstr "Huolto käynnissä"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -3423,11 +3423,11 @@ msgstr "Paikalla"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Online · {count}"
-msgstr ""
+msgstr "Paikalla · {count}"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Only change this if you run your own AnyTalk server."
-msgstr ""
+msgstr "Muuta tätä vain, jos ylläpidät omaa AnyTalk-palvelinta."
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Only mentions will notify you"
@@ -3435,7 +3435,7 @@ msgstr "Vain maininnat ilmoittavat sinulle"
 
 #: components/instance/index.tsx
 msgid "Oops, something went wrong! {e}"
-msgstr ""
+msgstr "Hups, jokin meni pieleen! {e}"
 
 #: components/modal/modals/Invite.tsx
 msgid "Open"
@@ -3448,7 +3448,7 @@ msgstr "Avaa {0}"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Open an app or switch to Entire screen."
-msgstr ""
+msgstr "Avaa sovellus tai vaihda kohtaan Koko näyttö."
 
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Open channel settings"
@@ -3460,11 +3460,11 @@ msgstr "Avaa tiedosto"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
-msgstr ""
+msgstr "Avaa kaverit"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
-msgstr ""
+msgstr "Avaa julkaisusivu"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Open server settings"
@@ -3476,7 +3476,7 @@ msgstr "Avaa asetukset"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Opening another stream while watching one shows them side by side. When off, it replaces the stream you were watching."
-msgstr ""
+msgstr "Kun avaat toisen striimin katsoessasi yhtä, ne näytetään vierekkäin. Kun asetus on pois päältä, se korvaa katsomasi striimin."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 #: components/modal/modals/ReportContent.tsx
@@ -3485,15 +3485,15 @@ msgstr "Muu"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Other downloads"
-msgstr ""
+msgstr "Muut lataukset"
 
 #: src/interface/Friends.tsx
 msgid "Outgoing"
-msgstr ""
+msgstr "Lähtevä"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Outgoing call"
-msgstr ""
+msgstr "Lähtevä puhelu"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
@@ -3506,25 +3506,25 @@ msgstr "Yleiskatsaus"
 
 #: components/ui/components/features/profiles/ProfileOwner.tsx
 msgid "Owner"
-msgstr ""
+msgstr "Omistaja"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Packet loss"
-msgstr ""
+msgstr "Pakettihäviö"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Packets lost (server)"
-msgstr ""
+msgstr "Kadonneet paketit (palvelin)"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Packets lost per second"
-msgstr ""
+msgstr "Kadonneita paketteja sekunnissa"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Packets per second"
-msgstr ""
+msgstr "Paketteja sekunnissa"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Pardon User"
@@ -3532,7 +3532,7 @@ msgstr "Armahda käyttäjä"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Partial Outage"
-msgstr ""
+msgstr "Osittainen katkos"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
@@ -3542,7 +3542,7 @@ msgstr "Salasana"
 
 #: components/modal/modals/EditPassword.tsx
 msgid "Password changed successfully."
-msgstr ""
+msgstr "Salasana vaihdettu."
 
 #: components/app/interface/settings/user/subscriptions/EditSubscriptionJoinFlow.tsx
 #~ msgid "Pay"
@@ -3558,15 +3558,15 @@ msgstr "Oikeudet"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Permissions available when no role overrides apply"
-msgstr ""
+msgstr "Oikeudet, jotka ovat käytössä, kun roolien ohituksia ei ole voimassa"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Permissions available without any role"
-msgstr ""
+msgstr "Oikeudet, jotka ovat käytössä ilman roolia"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Pick a Screen to Share"
-msgstr ""
+msgstr "Valitse jaettava näyttö"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Pick a username that you want people to be able to find you by. This can be changed later in your user settings."
@@ -3574,7 +3574,7 @@ msgstr "Valitse käyttäjätunnus, jolla haluat ihmisten löytävän sinut. Tät
 
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin"
-msgstr ""
+msgstr "Kiinnitä"
 
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
@@ -3584,16 +3584,16 @@ msgstr "Kiinnitä viesti"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Ping (round trip to the server)"
-msgstr ""
+msgstr "Ping (edestakainen matka palvelimelle)"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Ping avg / max"
-msgstr ""
+msgstr "Ping ka. / maks."
 
 #: src/interface/channels/text/TextChannel.tsx
 msgid "Pinned Messages"
-msgstr ""
+msgstr "Kiinnitetyt viestit"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Platform Moderator"
@@ -3601,11 +3601,11 @@ msgstr "Alustan moderaattori"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Play sound"
-msgstr ""
+msgstr "Toista ääni"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Play sounds"
-msgstr ""
+msgstr "Toista äänet"
 
 #: components/modal/modals/MFAFlow.tsx
 msgid "Please confirm this action using the selected method."
@@ -3637,43 +3637,43 @@ msgstr "Valitse syy"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Please try again later"
-msgstr ""
+msgstr "Yritä myöhemmin uudelleen"
 
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Please wait..."
-msgstr ""
+msgstr "Odota..."
 
 #: components/state/stores/Experiments.ts
 msgid "Plugins v2 Placeholder"
-msgstr ""
+msgstr "Plugins v2 -paikkamerkki"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor"
-msgstr ""
+msgstr "Huono"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Poor connection"
-msgstr ""
+msgstr "Huono yhteys"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor or lost connection"
-msgstr ""
+msgstr "Huono tai katkennut yhteys"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
-msgstr ""
+msgstr "RNNoisen voimin"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
-msgstr ""
+msgstr "Paina näppäimiä…"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Preview"
-msgstr ""
+msgstr "Esikatselu"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
-msgstr ""
+msgstr "Yksityisyys"
 
 #: components/auth/src/AuthPage.tsx
 #~ msgid "Privacy Policy"
@@ -3685,7 +3685,7 @@ msgstr "Yksityinen kanava"
 
 #: components/markdown/plugins/customEmoji.tsx
 msgid "Private Server"
-msgstr ""
+msgstr "Yksityinen palvelin"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/UserContextMenu.tsx
@@ -3703,7 +3703,7 @@ msgstr "Edistää haittaa"
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Pronouns"
-msgstr ""
+msgstr "Pronominit"
 
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
@@ -3711,15 +3711,15 @@ msgstr "Annettu sähköposti tai salasana on väärä."
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Put your recaps next to CSV recaps from other people"
-msgstr ""
+msgstr "Aseta yhteenvetosi muiden CSV-yhteenvetojen viereen"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Put your recaps next to recaps from other people. They open a recap in Voice Call Stats or Stream Stats and use Download CSV, or select several recaps and export them as one zip, then send you the file, which you import here. Everything stays on this device, and imports are kept until you close the app."
-msgstr ""
+msgstr "Aseta yhteenvetosi muiden yhteenvetojen viereen. He avaavat yhteenvedon kohdassa Äänipuhelun tilastot tai Striimin tilastot ja käyttävät Lataa CSV -toimintoa tai valitsevat useita yhteenvetoja ja vievät ne yhtenä zip-tiedostona ja lähettävät tiedoston sinulle, minkä tuot tänne. Kaikki pysyy tällä laitteella, ja tuonnit säilyvät, kunnes suljet sovelluksen."
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Raid or spam attack"
-msgstr ""
+msgstr "Raidi tai roskapostihyökkäys"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
@@ -3748,7 +3748,7 @@ msgstr "Voi lukea kaikilla kanavilla aiemmin lähetettyjä viestejä"
 #. placeholder {0}: updaterState()?.version
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Ready to install: {0}"
-msgstr ""
+msgstr "Valmis asennettavaksi: {0}"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 #: components/modal/modals/BanMember.tsx
@@ -3758,25 +3758,25 @@ msgstr "Syy"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Reason for report"
-msgstr ""
+msgstr "Ilmoituksen syy"
 
 #. placeholder {0}: (dr.status as { Denied: string | null }) .Denied
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Reason: {0}"
-msgstr ""
+msgstr "Syy: {0}"
 
 #. placeholder {0}: (dr.status as { Removed: string | null }) .Removed
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Reason: {0} Contact support for more information."
-msgstr ""
+msgstr "Syy: {0} Ota yhteyttä tukeen saadaksesi lisätietoja."
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Recaps"
-msgstr ""
+msgstr "Yhteenvedot"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Recaps are lined up at the moment each one started."
-msgstr ""
+msgstr "Yhteenvedot kohdistetaan hetkeen, jolloin kukin alkoi."
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Receive notifications while the app is open and in the background."
@@ -3784,19 +3784,19 @@ msgstr "Vastaanota ilmoituksia kun sovellus on auki ja taustalla."
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Receive notifications while the tab is open."
-msgstr ""
+msgstr "Vastaanota ilmoituksia, kun välilehti on auki."
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Receive push notifications while the app is closed."
-msgstr ""
+msgstr "Vastaanota push-ilmoituksia, kun sovellus on suljettu."
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Recent calls"
-msgstr ""
+msgstr "Viimeisimmät puhelut"
 
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Recent calls on Home"
-msgstr ""
+msgstr "Viimeisimmät puhelut etusivulla"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
@@ -3805,19 +3805,19 @@ msgstr "Yhdistetään uudelleen"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record call recaps"
-msgstr ""
+msgstr "Tallenna puhelun yhteenvedot"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record statistics of every call you are in, with or without the overlay"
-msgstr ""
+msgstr "Tallenna tilastot jokaisesta puhelusta, jossa olet, peittokuvan kanssa tai ilman"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record statistics of every stream you send or watch, with or without the overlay"
-msgstr ""
+msgstr "Tallenna tilastot jokaisesta lähettämästäsi tai katsomastasi striimistä, peittokuvan kanssa tai ilman"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record stream recaps"
-msgstr ""
+msgstr "Tallenna striimin yhteenvedot"
 
 #: components/modal/modals/MFAFlow.tsx
 msgid "Recovery Code"
@@ -3845,7 +3845,7 @@ msgstr "Hylkää kaveripyyntö"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Release notes"
-msgstr ""
+msgstr "Julkaisutiedot"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Relevance"
@@ -3853,24 +3853,24 @@ msgstr "Relevanssi"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload and clear cache"
-msgstr ""
+msgstr "Lataa uudelleen ja tyhjennä välimuisti"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload AnyTalk with fresh files from the server? This is the same as Ctrl+F5 and fixes most display problems after an update. You stay logged in and keep your settings."
-msgstr ""
+msgstr "Ladataanko AnyTalk uudelleen tuoreilla tiedostoilla palvelimelta? Tämä on sama kuin Ctrl+F5 ja korjaa useimmat näyttöongelmat päivityksen jälkeen. Pysyt kirjautuneena ja asetuksesi säilyvät."
 
 #: components/markdown/plugins/anchors.tsx
 msgid "Remote Channel"
-msgstr ""
+msgstr "Etäkanava"
 
 #: components/markdown/plugins/anchors.tsx
 msgid "Remote Server"
-msgstr ""
+msgstr "Etäpalvelin"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
-msgstr ""
+msgstr "Poista"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove all reactions"
@@ -3890,12 +3890,12 @@ msgstr "Poista kaveri"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Remove from folder"
-msgstr ""
+msgstr "Poista kansiosta"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove Member"
-msgstr ""
+msgstr "Poista jäsen"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove other members' avatars"
@@ -3908,15 +3908,15 @@ msgstr "Poista reaktio"
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "Remove Timeout"
-msgstr ""
+msgstr "Poista jäähy"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Removes deep rumble"
-msgstr ""
+msgstr "Poistaa syvän jyrinän"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Removes knocks on the desk or microphone"
-msgstr ""
+msgstr "Poistaa pöydän tai mikrofonin kolahdukset"
 
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/modal/modals/EditCategory.tsx
@@ -3931,7 +3931,7 @@ msgstr "Nimeä kategoria uudelleen"
 
 #: components/modal/modals/EditEmoji.tsx
 msgid "Rename emoji"
-msgstr ""
+msgstr "Nimeä emoji uudelleen"
 
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename Session"
@@ -3972,7 +3972,7 @@ msgstr "Lähetä uudelleen"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Resend requests per second (viewers asking for lost packets again)"
-msgstr ""
+msgstr "Uudelleenlähetyspyyntöjä sekunnissa (katsojat pyytävät kadonneita paketteja uudelleen)"
 
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/auth/src/flows/FlowResend.tsx
@@ -3992,11 +3992,11 @@ msgstr "Nollaa"
 #. placeholder {0}: props.bot.user!.username
 #: components/modal/modals/ResetBotToken.tsx
 msgid "Reset {0}'s token?"
-msgstr ""
+msgstr "Nollataanko botin {0} tunnus?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
-msgstr ""
+msgstr "Nollaa kaikki äänet"
 
 #: components/auth/src/flows/FlowConfirmReset.tsx
 #: components/auth/src/flows/FlowLogin.tsx
@@ -4011,11 +4011,11 @@ msgstr "Nollaa palautuskoodit"
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
-msgstr ""
+msgstr "Palauta arvoon {0}"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
-msgstr ""
+msgstr "Palauta oletus"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Reset Token"
@@ -4023,11 +4023,11 @@ msgstr "Nollaa todennustunnus"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Resolution"
-msgstr ""
+msgstr "Tarkkuus"
 
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 msgid "Resolution and FPS"
-msgstr ""
+msgstr "Tarkkuus ja FPS"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Responsibly disclosed security issues"
@@ -4035,12 +4035,12 @@ msgstr "Vastuullisesti paljastetut tietoturvaongelmat"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Restart to install"
-msgstr ""
+msgstr "Käynnistä uudelleen asentaaksesi"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Restore call window"
-msgstr ""
+msgstr "Palauta puheluikkuna"
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 msgid "Retry sending"
@@ -4048,11 +4048,11 @@ msgstr "Yritä lähettämistä uudelleen"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Return to voice channel"
-msgstr ""
+msgstr "Palaa äänikanavalle"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Reveal"
-msgstr ""
+msgstr "Paljasta"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Revenge or underage pornography"
@@ -4067,11 +4067,11 @@ msgstr "Tarkista käytäntömuutokset"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Role Colour"
-msgstr ""
+msgstr "Roolin väri"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Role Icon"
-msgstr ""
+msgstr "Roolin kuvake"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/modal/modals/CreateRole.tsx
@@ -4080,7 +4080,7 @@ msgstr "Roolin nimi"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Role Overrides"
-msgstr ""
+msgstr "Roolien ohitukset"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
@@ -4089,15 +4089,15 @@ msgstr "Roolit"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Roles with No Overrides"
-msgstr ""
+msgstr "Roolit ilman ohituksia"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Running"
-msgstr ""
+msgstr "Käynnissä"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Running or frozen"
-msgstr ""
+msgstr "Käynnissä tai jäätynyt"
 
 #: components/app/interface/settings/channel/Overview.tsx
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
@@ -4117,7 +4117,7 @@ msgstr "Tallenna tiedosto"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Save permissions"
-msgstr ""
+msgstr "Tallenna oikeudet"
 
 #: src/interface/channels/text/Composition.tsx
 msgid "Save to your notes"
@@ -4130,11 +4130,11 @@ msgstr "Tallennetut muistiinpanot"
 
 #: components/app/interface/channels/text/EditMessage.tsx
 msgid "Saving message..."
-msgstr ""
+msgstr "Tallennetaan viestiä..."
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Saving…"
-msgstr ""
+msgstr "Tallennetaan…"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Scams or fraud"
@@ -4142,32 +4142,32 @@ msgstr "Huijaukset tai petokset"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Screen share frame rate"
-msgstr ""
+msgstr "Näytönjaon kuvataajuus"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Screen share resolution"
-msgstr ""
+msgstr "Näytönjaon tarkkuus"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Screen Share Settings"
-msgstr ""
+msgstr "Näytönjaon asetukset"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Screen Share Volume"
-msgstr ""
+msgstr "Näytönjaon äänenvoimakkuus"
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search"
-msgstr ""
+msgstr "Haku"
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Search for emojis..."
-msgstr ""
+msgstr "Hae emojeita..."
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Search for GIFs..."
-msgstr ""
+msgstr "Hae GIFejä..."
 
 #: components/modal/modals/AddBot.tsx
 msgid "Search for groups..."
@@ -4180,30 +4180,30 @@ msgstr "Etsi käyttäjiä..."
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search messages..."
-msgstr ""
+msgstr "Hae viestejä..."
 
 #: src/interface/channels/text/TextChannel.tsx
 msgid "Search Results"
-msgstr ""
+msgstr "Hakutulokset"
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
-msgstr ""
+msgstr "Hae asetuksia"
 
 #~ msgid "See what we're currently working on."
 #~ msgstr ""
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select"
-msgstr ""
+msgstr "Valitse"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select all"
-msgstr ""
+msgstr "Valitse kaikki"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Select at least one line above to compare."
-msgstr ""
+msgstr "Valitse vähintään yksi yllä oleva viiva vertailua varten."
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Select audio input"
@@ -4219,11 +4219,11 @@ msgstr "Valitse lisättävät jäsenet"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Select noise suppression"
-msgstr ""
+msgstr "Valitse kohinanvaimennus"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select none"
-msgstr ""
+msgstr "Poista valinnat"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 #~ msgid "Select screen share quality"
@@ -4231,7 +4231,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Select video input"
-msgstr ""
+msgstr "Valitse videotulo"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Select your language"
@@ -4239,7 +4239,7 @@ msgstr "Valitse kieli"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Send a message to {name}"
-msgstr ""
+msgstr "Lähetä viesti käyttäjälle {name}"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Send attachments to chat"
@@ -4297,11 +4297,11 @@ msgstr "Liitä monta tiedostoa"
 #: components/modal/modals/CreateGroupOrServer.tsx
 #: src/interface/navigation/servers/railDrag.ts
 msgid "Server"
-msgstr ""
+msgstr "Palvelin"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Server address"
-msgstr ""
+msgstr "Palvelimen osoite"
 
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Server Avatar"
@@ -4342,15 +4342,15 @@ msgstr "Istunnot"
 
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Set colour to {colour}"
-msgstr ""
+msgstr "Aseta väriksi {colour}"
 
 #: components/modal/modals/EditServerFolder.tsx
 msgid "Set folder colour to {value}"
-msgstr ""
+msgstr "Aseta kansion väriksi {value}"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Set role colour to {colour}"
-msgstr ""
+msgstr "Aseta roolin väriksi {colour}"
 
 #: components/modal/modals/CustomStatus.tsx
 msgid "Set your status"
@@ -4377,12 +4377,12 @@ msgstr "Useat ihmiset kirjoittavat…"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Several recaps are exported as one zip file with a CSV for each."
-msgstr ""
+msgstr "Useat yhteenvedot viedään yhtenä zip-tiedostona, jossa on CSV jokaiselle."
 
 #: components/modal/modals/ScreenSharePicker.tsx
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Share audio"
-msgstr ""
+msgstr "Jaa ääni"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Share camera or screen in voice call"
@@ -4390,15 +4390,15 @@ msgstr "Voi jakaa kameran tai näytön puhelussa"
 
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 msgid "Share screen"
-msgstr ""
+msgstr "Jaa näyttö"
 
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show 'copy ID' in context menus"
-msgstr ""
+msgstr "Näytä \"Kopioi tunnus\" kontekstivalikoissa"
 
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show admin panel shortcuts in context menus"
-msgstr ""
+msgstr "Näytä ylläpitopaneelin pikakuvakkeet kontekstivalikoissa"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
@@ -4406,15 +4406,15 @@ msgstr "Näytä korjauksia ja ehdotuksia kun kirjoitat."
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Show live microphone statistics on call tiles"
-msgstr ""
+msgstr "Näytä mikrofonin live-tilastot puhelulaatoissa"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Show live statistics on call video tiles"
-msgstr ""
+msgstr "Näytä live-tilastot puhelun videolaatoissa"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Show Others"
-msgstr ""
+msgstr "Näytä muut"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Show send message button"
@@ -4430,7 +4430,7 @@ msgstr "Rekisteröidy"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Silences your microphone while you aren't talking, so knocks and background noise between sentences aren't heard."
-msgstr ""
+msgstr "Mykistää mikrofonisi, kun et puhu, jolloin kolahduksia ja taustakohinaa lauseiden välillä ei kuulu."
 
 #: components/app/interface/channels/text/Message.tsx
 msgid "Silent"
@@ -4438,43 +4438,43 @@ msgstr "Hiljainen"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Single stream: opening a stream replaces the current one"
-msgstr ""
+msgstr "Yksi striimi: avattu striimi korvaa nykyisen"
 
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "Slowmode Immune"
-msgstr ""
+msgstr "Immuuni hidastustilalle"
 
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "Slowmode is enabled."
-msgstr ""
+msgstr "Hidastustila on käytössä."
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Slowmode off"
-msgstr ""
+msgstr "Hidastustila pois"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone calls you in a DM or group"
-msgstr ""
+msgstr "Joku soittaa sinulle yksityisviestissä tai ryhmässä"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
-msgstr ""
+msgstr "Joku liittyy äänikanavallesi"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone leaves your voice channel"
-msgstr ""
+msgstr "Joku poistuu äänikanavaltasi"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone moves into or out of your voice channel"
-msgstr ""
+msgstr "Joku siirtyy äänikanavallesi tai pois siitä"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone starts watching your stream"
-msgstr ""
+msgstr "Joku alkaa katsoa striimiäsi"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone stops watching your stream"
-msgstr ""
+msgstr "Joku lopettaa striimisi katsomisen"
 
 #: components/modal/modals/EditEmail.tsx
 msgid "someone@example.com"
@@ -4498,7 +4498,7 @@ msgstr "Jotain meni pieleen! {error}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
-msgstr ""
+msgstr "Äänenvoimakkuus"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sounds"
@@ -4506,7 +4506,7 @@ msgstr "Äänet"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sounds are turned off above, you can still preview them here."
-msgstr ""
+msgstr "Äänet on poistettu käytöstä yllä, mutta voit silti esikuunnella niitä täällä."
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/auth/src/AuthPage.tsx
@@ -4515,7 +4515,7 @@ msgstr "Lähdekoodi"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Source type"
-msgstr ""
+msgstr "Lähteen tyyppi"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Spam or similar platform abuse"
@@ -4527,7 +4527,7 @@ msgstr "Puhe"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Speaker"
-msgstr ""
+msgstr "Kaiutin"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Spellchecker"
@@ -4536,15 +4536,15 @@ msgstr "Oikoluku"
 #: components/app/interface/channels/text/DraftMessage.tsx
 #: components/ui/components/features/messaging/composition/FileCarousel.tsx
 msgid "Spoiler"
-msgstr ""
+msgstr "Spoileri"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Start camera"
-msgstr ""
+msgstr "Käynnistä kamera"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Start Minimised to Tray"
-msgstr ""
+msgstr "Käynnistä pienennettynä ilmoitusalueelle"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "Start the call"
@@ -4563,15 +4563,15 @@ msgstr "Tila"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Stop camera"
-msgstr ""
+msgstr "Pysäytä kamera"
 
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 msgid "Stop sharing"
-msgstr ""
+msgstr "Lopeta jakaminen"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Stream developer mode"
-msgstr ""
+msgstr "Striimin kehittäjätila"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #~ msgid "Stream End"
@@ -4579,15 +4579,15 @@ msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Stream ended"
-msgstr ""
+msgstr "Striimi päättyi"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Stream is still running."
-msgstr ""
+msgstr "Striimi on yhä käynnissä."
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Stream Settings"
-msgstr ""
+msgstr "Striimin asetukset"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #~ msgid "Stream Start"
@@ -4595,19 +4595,19 @@ msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Stream started"
-msgstr ""
+msgstr "Striimi alkoi"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Stream stats"
-msgstr ""
+msgstr "Striimin tilastot"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Stream Stats"
-msgstr ""
+msgstr "Striimin tilastot"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Streams"
-msgstr ""
+msgstr "Striimit"
 
 #. placeholder {0}: count("stream")
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
@@ -4616,11 +4616,11 @@ msgstr ""
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Streams ({streams})"
-msgstr ""
+msgstr "Striimit ({streams})"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Strong (150 Hz)"
-msgstr ""
+msgstr "Voimakas (150 Hz)"
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
@@ -4648,23 +4648,23 @@ msgstr "Ehdota uusia toimintoja AnyTalkiin Github-keskusteluissa."
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Switch"
-msgstr ""
+msgstr "Vaihda"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Switch and reload"
-msgstr ""
+msgstr "Vaihda ja lataa uudelleen"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Switch server?"
-msgstr ""
+msgstr "Vaihdetaanko palvelinta?"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Switch to {label}"
-msgstr ""
+msgstr "Vaihda: {label}"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Switch to Apps to share a single window."
-msgstr ""
+msgstr "Vaihda kohtaan Sovellukset jakaaksesi yksittäisen ikkunan."
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "Switch to this voice channel"
@@ -4672,7 +4672,7 @@ msgstr "Vaihda tähän puhekanavaan"
 
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 msgid "Switch window"
-msgstr ""
+msgstr "Vaihda ikkunaa"
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Sync appearance options, such as chosen emoji pack and message density."
@@ -4696,7 +4696,7 @@ msgstr "Järjestelmän viestikanavat"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Tap to enable audio"
-msgstr ""
+msgstr "Ota ääni käyttöön napauttamalla"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Tell us what's wrong with this message"
@@ -4716,7 +4716,7 @@ msgstr "Voi estää alempiasemaisten jäsenten vuorovaikutuksen väliaikaisesti"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Terms"
-msgstr ""
+msgstr "Ehdot"
 
 #: components/auth/src/AuthPage.tsx
 #~ msgid "Terms of Service"
@@ -4732,27 +4732,27 @@ msgstr "Toimenpiteellä ei ollut vaikutusta."
 
 #: components/i18n/errors.tsx
 msgid "The bot has been removed from discover by moderators, the user must contact support."
-msgstr ""
+msgstr "Moderaattorit ovat poistaneet botin Löydä-osiosta, käyttäjän on otettava yhteyttä tukeen."
 
 #: components/i18n/errors.tsx
 msgid "The bot is already on discover, the user must contact support to have it removed"
-msgstr ""
+msgstr "Botti on jo Löydä-osiossa, käyttäjän on otettava yhteyttä tukeen sen poistamiseksi"
 
 #: components/modal/modals/AddBot.tsx
 msgid "The bot will not be granted any permissions."
-msgstr ""
+msgstr "Botille ei myönnetä mitään oikeuksia."
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
-msgstr ""
+msgstr "Työpöytäsovellus on saatavilla Windowsille ja Linuxille."
 
 #: components/i18n/errors.tsx
 msgid "The Discover request is approved or the item has been removed from discover. In either case, the user must contact support."
-msgstr ""
+msgstr "Löydä-pyyntö on hyväksytty tai kohde on poistettu Löydä-osiosta. Kummassakin tapauksessa käyttäjän on otettava yhteyttä tukeen."
 
 #: components/i18n/errors.tsx
 msgid "The Discover request was declined. Declined requests cannot be removed, but the user may submit again."
-msgstr ""
+msgstr "Löydä-pyyntö hylättiin. Hylättyjä pyyntöjä ei voi poistaa, mutta käyttäjä voi lähettää uuden."
 
 #. placeholder {0}: file.name
 #: src/interface/channels/text/Composition.tsx
@@ -4761,11 +4761,11 @@ msgstr "Tiedosto \"{0} ({fileSize}) ylittää {maxSizeFormatted}n enimmäiskokor
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The first version hasn't been published. Check back soon."
-msgstr ""
+msgstr "Ensimmäistä versiota ei ole vielä julkaistu. Käy pian uudelleen."
 
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
-msgstr ""
+msgstr "Moderaattorit poistivat kohteen, joten tulevat hakemukset on kielletty. Ota yhteyttä tukeen saadaksesi lisätietoja."
 
 #: components/i18n/errors.tsx
 msgid "The password is too short."
@@ -4773,15 +4773,15 @@ msgstr "Salasana on liian lyhyt."
 
 #: components/i18n/errors.tsx
 msgid "The server has been removed from discover by moderators, the user must contact support."
-msgstr ""
+msgstr "Moderaattorit ovat poistaneet palvelimen Löydä-osiosta, käyttäjän on otettava yhteyttä tukeen."
 
 #: components/i18n/errors.tsx
 msgid "The server is already on discover, the user must contact support to have it removed."
-msgstr ""
+msgstr "Palvelin on jo Löydä-osiossa, käyttäjän on otettava yhteyttä tukeen sen poistamiseksi."
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "The sound couldn't be saved."
-msgstr ""
+msgstr "Ääntä ei voitu tallentaa."
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Theme"
@@ -4793,7 +4793,7 @@ msgstr "Teema"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
-msgstr ""
+msgstr "Nämä näppäimet toimivat vain AnyTalkin sisällä. Käytä Ctrl-, Alt- tai Shift-näppäintä kirjaimen tai numeron kanssa tai F-näppäintä käyttääksesi niitä kaikkialla."
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -4806,7 +4806,7 @@ msgstr "Tätä käyttäjää ei ole aktivoitu! Tarkista tilisi viestit ja yritä
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "This bot is discoverable"
-msgstr ""
+msgstr "Tämä botti on löydettävissä"
 
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
@@ -4847,7 +4847,7 @@ msgstr "Tämä on jo lähetetty."
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "This is taking longer than usual."
-msgstr ""
+msgstr "Tämä kestää tavallista kauemmin."
 
 #: components/ui/components/features/messaging/elements/ConversationStart.tsx
 msgid "This is the start of your conversation."
@@ -4872,7 +4872,7 @@ msgstr "Tämä salasana on aiemmin esiintynyt tietoturvavuodoissa, käytä toist
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "This recap no longer exists."
-msgstr ""
+msgstr "Tätä yhteenvetoa ei ole enää olemassa."
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "This server is about..."
@@ -4880,11 +4880,11 @@ msgstr "Tämä palvelin käsittelee..."
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "This server is discoverable"
-msgstr ""
+msgstr "Tämä palvelin on löydettävissä"
 
 #: components/i18n/errors.tsx
 msgid "This sign up is marked as spam."
-msgstr ""
+msgstr "Tämä rekisteröityminen on merkitty roskapostiksi."
 
 #: components/i18n/errors.tsx
 #~ msgid "This sign up is marked as spam. Please see <0>this support article.</0>"
@@ -4892,7 +4892,7 @@ msgstr ""
 
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "This stream has no audio"
-msgstr ""
+msgstr "Tässä striimissä ei ole ääntä"
 
 #: components/i18n/errors.tsx
 msgid "This user has blocked you."
@@ -4916,26 +4916,26 @@ msgstr "Tämä mitätöi botin nykyisen tokenin ja pysäyttää kaikki olemassa 
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Time format"
-msgstr ""
+msgstr "Ajan muoto"
 
 #. placeholder {0}: props.member!.timeout!.toLocaleString()
 #: src/interface/channels/text/MemberSidebar.tsx
 msgid "Timed out until {0}"
-msgstr ""
+msgstr "Jäähyllä {0} asti"
 
 #. placeholder {0}: props.message.member!.timeout!.toLocaleString()
 #: components/app/interface/channels/text/Message.tsx
 msgid "Timed Out until {0}"
-msgstr ""
+msgstr "Jäähyllä {0} asti"
 
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
-msgstr ""
+msgstr "Jäähy"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout Member"
-msgstr ""
+msgstr "Anna jäsenelle jäähy"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Timeout Members"
@@ -4943,7 +4943,7 @@ msgstr "Jäsenien mykistäminen"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Toggle deafen"
-msgstr ""
+msgstr "Kuuroutus päälle/pois"
 
 #: src/interface/common/CommonHeader.tsx
 msgid "Toggle main sidebar"
@@ -4951,11 +4951,11 @@ msgstr "Näytä/piilota pääsivupalkki"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Toggle mute"
-msgstr ""
+msgstr "Mykistys päälle/pois"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Token copied to clipboard"
-msgstr ""
+msgstr "Tunniste kopioitu leikepöydälle"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Tonal Spot"
@@ -4963,7 +4963,7 @@ msgstr "Tonaalinen Kohta"
 
 #: src/interface/channels/text/Composition.tsx
 msgid "Too Long"
-msgstr ""
+msgstr "Liian pitkä"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
@@ -4972,7 +4972,7 @@ msgstr "Traditionaalinen (PP/KK/VVVV)"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Transport"
-msgstr ""
+msgstr "Siirto"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Trending GIFs"
@@ -4980,24 +4980,24 @@ msgstr "Trendaavat GIFit"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Troubleshooting"
-msgstr ""
+msgstr "Vianmääritys"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Try again"
-msgstr ""
+msgstr "Yritä uudelleen"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn every sound on and reset their volumes and files?"
-msgstr ""
+msgstr "Otetaanko kaikki äänet käyttöön ja nollataanko niiden äänenvoimakkuudet ja tiedostot?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn single sounds off, change their volume or use your own"
-msgstr ""
+msgstr "Poista yksittäisiä ääniä käytöstä, muuta niiden äänenvoimakkuutta tai käytä omia"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
-msgstr ""
+msgstr "Poista tämä käytöstä, niin ikkunan sulkeminen sulkee AnyTalkin heti."
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
@@ -5011,23 +5011,23 @@ msgstr "Käsittelemätön AnyTalk virhe: {0}"
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Undeafen"
-msgstr ""
+msgstr "Poista kuuroutus"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Unknown"
-msgstr ""
+msgstr "Tuntematon"
 
 #: src/interface/channels/ChannelPage.tsx
 msgid "Unknown channel type!"
-msgstr ""
+msgstr "Tuntematon kanavatyyppi!"
 
 #: components/markdown/plugins/customEmoji.tsx
 msgid "Unknown emote"
-msgstr ""
+msgstr "Tuntematon emote"
 
 #: components/markdown/plugins/mentions.tsx
 msgid "Unknown Role"
-msgstr ""
+msgstr "Tuntematon rooli"
 
 #: components/markdown/plugins/anchors.tsx
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
@@ -5037,7 +5037,7 @@ msgstr "Tuntematon Palvelin"
 #: components/markdown/plugins/mentions.tsx
 #: components/markdown/users.ts
 msgid "Unknown User"
-msgstr ""
+msgstr "Tuntematon käyttäjä"
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Unmark as mature"
@@ -5054,7 +5054,7 @@ msgstr "Poista aikuisille suunnattu -merkintä?"
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Unmute"
-msgstr ""
+msgstr "Poista mykistys"
 
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Unmute Channel"
@@ -5066,15 +5066,15 @@ msgstr "Poista palvelimen mykistys"
 
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Unmute stream"
-msgstr ""
+msgstr "Poista striimin mykistys"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unnamed folder"
-msgstr ""
+msgstr "Nimeämätön kansio"
 
 #: components/modal/modals/PinMessage.tsx
 msgid "Unpin"
-msgstr ""
+msgstr "Irrota"
 
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
@@ -5101,41 +5101,41 @@ msgstr "Kunnes laitan sen takaisin päälle"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "up to {loss} loss"
-msgstr ""
+msgstr "enintään {loss} häviö"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Up to {MAX_LINES} lines at once, deselect one to add another."
-msgstr ""
+msgstr "Enintään {MAX_LINES} viivaa kerralla, poista yhden valinta lisätäksesi toisen."
 
 #: components/app/interface/desktop/Titlebar.tsx
 msgid "Update"
-msgstr ""
+msgstr "Päivitä"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Update available"
-msgstr ""
+msgstr "Päivitys saatavilla"
 
 #. placeholder {0}: releaseVersion(release())
 #. placeholder {0}: updaterState()?.version
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Update available: {0}"
-msgstr ""
+msgstr "Päivitys saatavilla: {0}"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Update download progress"
-msgstr ""
+msgstr "Päivityksen latauksen edistyminen"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Update failed"
-msgstr ""
+msgstr "Päivitys epäonnistui"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Updates"
-msgstr ""
+msgstr "Päivitykset"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Updates download in the background and install when you restart AnyTalk. Turn off to decide yourself when to update."
-msgstr ""
+msgstr "Päivitykset ladataan taustalla ja asennetaan, kun käynnistät AnyTalkin uudelleen. Poista käytöstä päättääksesi itse, milloin päivität."
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Upload Files"
@@ -5143,12 +5143,12 @@ msgstr "Tiedostojen lähettäminen"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Upload to Gifbox"
-msgstr ""
+msgstr "Lähetä Gifboxiin"
 
 #. placeholder {0}: progress()
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Uploading file `{fileName}`... {0}%"
-msgstr ""
+msgstr "Lähetetään tiedostoa `{fileName}`... {0} %"
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
@@ -5156,7 +5156,7 @@ msgstr "Käytä koodi tai kutsunta linkki"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Use hotkeys that work even while AnyTalk isn't focused, and keep AnyTalk running in the system tray."
-msgstr ""
+msgstr "Käytä pikanäppäimiä, jotka toimivat, vaikka AnyTalk ei olisi aktiivisena, ja pidä AnyTalk käynnissä ilmoitusalueella."
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Use the graphics card to improve performance."
@@ -5164,7 +5164,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Use the graphics card to improve performance. Takes effect after you restart AnyTalk."
-msgstr ""
+msgstr "Käytä näytönohjainta suorituskyvyn parantamiseen. Tulee voimaan, kun käynnistät AnyTalkin uudelleen."
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "User"
@@ -5185,7 +5185,7 @@ msgstr "Käyttäjä Liittyi"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "User joined call"
-msgstr ""
+msgstr "Käyttäjä liittyi puheluun"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #~ msgid "User Joined Call"
@@ -5201,7 +5201,7 @@ msgstr "Käyttäjä poistui"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "User left call"
-msgstr ""
+msgstr "Käyttäjä poistui puhelusta"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #~ msgid "User Left Call"
@@ -5213,7 +5213,7 @@ msgstr "Käyttäjien hallinta"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "User moved"
-msgstr ""
+msgstr "Käyttäjä siirtyi"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "User Settings"
@@ -5268,7 +5268,7 @@ msgstr "Vahvistetaan tiliäsi…"
 #: components/app/interface/settings/user/DesktopDownload.tsx
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Version {0}"
-msgstr ""
+msgstr "Versio {0}"
 
 #: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -5281,7 +5281,7 @@ msgstr "Video"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Video copies being sent (full / half / quarter size)"
-msgstr ""
+msgstr "Lähetettävät videokopiot (täysi / puolikas / neljännes koko)"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"
@@ -5308,15 +5308,15 @@ msgstr "Näytä palautuskoodit"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "View status page"
-msgstr ""
+msgstr "Näytä tilasivu"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Viewer joined"
-msgstr ""
+msgstr "Katsoja liittyi"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Viewer left"
-msgstr ""
+msgstr "Katsoja poistui"
 
 #: components/ui/components/features/messaging/bars/JumpToBottom.tsx
 msgid "Viewing older messages"
@@ -5329,19 +5329,19 @@ msgstr "Ääni"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Voice & Video"
-msgstr ""
+msgstr "Ääni ja video"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Voice call developer mode"
-msgstr ""
+msgstr "Äänipuhelun kehittäjätila"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Voice call stats"
-msgstr ""
+msgstr "Äänipuhelun tilastot"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Voice Call Stats"
-msgstr ""
+msgstr "Äänipuhelun tilastot"
 
 #. placeholder {0}: count("call")
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
@@ -5350,7 +5350,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Voice calls ({calls})"
-msgstr ""
+msgstr "Äänipuhelut ({calls})"
 
 #: components/modal/modals/CreateChannel.tsx
 msgid "Voice Channel"
@@ -5371,16 +5371,16 @@ msgstr "Haluatko vaihtaa käyttäjänimeä?"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Watch multiple streams at once"
-msgstr ""
+msgstr "Katso useita striimejä samanaikaisesti"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "Watch stream"
-msgstr ""
+msgstr "Katso striimi"
 
 #: src/AndroidNag.tsx
 msgid "We are working hard on optimising our web app for mobile."
-msgstr ""
+msgstr "Työskentelemme kovasti verkkosovelluksemme optimoimiseksi mobiilille."
 
 #: components/auth/src/flows/FlowCheck.tsx
 msgid "We've sent you a verification email. Please allow up to 10 minutes for it to arrive."
@@ -5408,7 +5408,7 @@ msgstr "Webhookit"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Welcome to the new appearance menu, custom themes are not available just yet but we are looking for feedback on how to best implement them!"
-msgstr ""
+msgstr "Tervetuloa uuteen ulkoasuvalikkoon. Mukautetut teemat eivät ole vielä saatavilla, mutta kaipaamme palautetta siitä, miten ne voisi parhaiten toteuttaa!"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Welcome!"
@@ -5416,12 +5416,12 @@ msgstr "Tervetuloa!"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"
-msgstr ""
+msgstr "Mikä rajoitti striimin laatua"
 
 #: components/app/interface/settings/user/Updates.tsx
 #: components/modal/modals/Changelog.tsx
 msgid "What's new"
-msgstr ""
+msgstr "Uutta"
 
 #: components/app/interface/settings/UserSettings.tsx
 #~ msgid "What's New"
@@ -5433,20 +5433,20 @@ msgstr "Voivatko muut käyttäjät muokata näitä asetuksia"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "While stream developer mode and \"Record stream recaps\" are on, statistics for every video stream you send or watch in a call are recorded once per second. Recaps are stored on this device only; the newest 20 are kept."
-msgstr ""
+msgstr "Kun striimin kehittäjätila ja \"Tallenna striimin yhteenvedot\" ovat päällä, jokaisesta puhelussa lähettämästäsi tai katsomastasi videostriimistä tallennetaan tilastot kerran sekunnissa. Yhteenvedot tallennetaan vain tälle laitteelle; uusimmat 20 säilytetään."
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "While voice call developer mode and \"Record call recaps\" are on, your microphone and everyone you hear are measured once per second. Recaps are stored on this device only; the newest 20 calls are kept."
-msgstr ""
+msgstr "Kun äänipuhelun kehittäjätila ja \"Tallenna puhelun yhteenvedot\" ovat päällä, mikrofoniasi ja kaikkia kuulemiasi mitataan kerran sekunnissa. Yhteenvedot tallennetaan vain tälle laitteelle; uusimmat 20 puhelua säilytetään."
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
-msgstr ""
+msgstr "Windows-asennusohjelma"
 
 #. placeholder {0}: names.join(", ")
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "with {0}"
-msgstr ""
+msgstr "seurassa {0}"
 
 #. placeholder {0}: names.join(", ")
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
@@ -5456,11 +5456,11 @@ msgstr ""
 #. placeholder {0}: names.length
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "with {0} others"
-msgstr ""
+msgstr "seurassa {0} muuta"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "with {participants}"
-msgstr ""
+msgstr "seurassa {participants}"
 
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Would you like to create a new group or server?"
@@ -5492,11 +5492,11 @@ msgstr "Sinut on bannattu palvelimelta."
 
 #: components/ui/components/features/messaging/composition/MessageBox.tsx
 msgid "You are timed out and can't send messages right now."
-msgstr ""
+msgstr "Olet jäähyllä etkä voi lähettää viestejä juuri nyt."
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "You call someone and wait for them to join"
-msgstr ""
+msgstr "Soitat jollekulle ja odotat hänen liittyvän"
 
 #: src/interface/Home.tsx
 msgid "You can also click the gear icon in the bottom left."
@@ -5516,7 +5516,7 @@ msgstr "Voit ilmoittaa ongelmia ja keskustella kanssamme parannuksista täällä
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "You can request again below"
-msgstr ""
+msgstr "Voit tehdä pyynnön uudelleen alla"
 
 #. placeholder {0}: err.max
 #: components/i18n/errors.tsx
@@ -5564,7 +5564,7 @@ msgstr "Klikkasit kohtaa \"{0}\""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "You deafen yourself"
-msgstr ""
+msgstr "Kuuroutat itsesi"
 
 #: components/i18n/errors.tsx
 msgid "You do not have permission to do this."
@@ -5577,7 +5577,7 @@ msgstr "Sinulla ei ole oikeuksia lähettää viestejä tällä kanavalla."
 #. placeholder {0}: homeNotifications()
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "You have {0} pending friend requests."
-msgstr ""
+msgstr "Sinulla on {0} odottavaa kaveripyyntöä."
 
 #: components/i18n/errors.tsx
 msgid "You have been locked out for entering a wrong password multiple times. Please wait a couple minutes and try again."
@@ -5585,11 +5585,11 @@ msgstr "Sinut on lukittu ulos, koska syötit väärän salasanan liian monta ker
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "You have no call recaps yet."
-msgstr ""
+msgstr "Sinulla ei ole vielä puhelun yhteenvetoja."
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "You have no stream recaps yet."
-msgstr ""
+msgstr "Sinulla ei ole vielä striimin yhteenvetoja."
 
 #: components/i18n/errors.tsx
 msgid "You have this user blocked."
@@ -5597,15 +5597,15 @@ msgstr "Tämä käyttäjä on estetty."
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "You may be experiencing connection issues."
-msgstr ""
+msgstr "Saatat kohdata yhteysongelmia."
 
 #: components/i18n/errors.tsx
 msgid "You may not submit this item to discover."
-msgstr ""
+msgstr "Et voi lähettää tätä kohdetta Löydä-osioon."
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "You mute your microphone"
-msgstr ""
+msgstr "Mykistät mikrofonisi"
 
 #: components/ui/components/features/voice/VoiceStatefulUserIcons.tsx
 msgid "You muted this user."
@@ -5613,11 +5613,11 @@ msgstr "Tämä käyttäjä on mykistetty."
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "You undeafen yourself"
-msgstr ""
+msgstr "Poistat oman kuuroutuksesi"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "You unmute your microphone"
-msgstr ""
+msgstr "Poistat mikrofonisi mykistyksen"
 
 #: components/auth/src/flows/FlowHome.tsx
 msgid "You were logged out!"
@@ -5647,7 +5647,7 @@ msgstr "Olet jo tämän palvelimen jäsen."
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "You're offline. Connect to the internet first, otherwise AnyTalk couldn't load again."
-msgstr ""
+msgstr "Olet offline-tilassa. Yhdistä ensin internetiin, muuten AnyTalkia ei voi ladata uudelleen."
 
 #: components/i18n/errors.tsx
 msgid "You've already sent a request to this user."
@@ -5677,7 +5677,7 @@ msgstr "Olet lähettänyt liian monta kaveripyyntöä, maksimi on {0}"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Your {source}"
-msgstr ""
+msgstr "Oma {source}"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Your account and all of your data (including your messages and friends list) will be queued for deletion. A confirmation email will be sent - you can cancel this within 7 days by contacting support."
@@ -5689,28 +5689,28 @@ msgstr "Tilisi on vahvistettu!"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your bot is under review"
-msgstr ""
+msgstr "Bottisi on tarkistettavana"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Your camera"
-msgstr ""
+msgstr "Kamerasi"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your discover request has been denied"
-msgstr ""
+msgstr "Löydä-pyyntösi on hylätty"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your discover request has been removed"
-msgstr ""
+msgstr "Löydä-pyyntösi on poistettu"
 
 #: components/i18n/errors.tsx
 msgid "Your discriminator change has been ratelimited, please try again later."
-msgstr ""
+msgstr "Erottimen vaihtoasi on rajoitettu, yritä myöhemmin uudelleen."
 
 #. placeholder {0}: customFile()
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Your file: {0}"
-msgstr ""
+msgstr "Tiedostosi: {0}"
 
 #: components/i18n/errors.tsx
 msgid "Your message is too long, please remove some characters and try again."
@@ -5718,11 +5718,11 @@ msgstr "Viestisi on liian pitkä, poista joitain merkkejä ja yritä uudelleen."
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Your microphone"
-msgstr ""
+msgstr "Mikrofonisi"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Your microphone (outgoing)"
-msgstr ""
+msgstr "Mikrofonisi (lähtevä)"
 
 #: components/modal/modals/MFARecovery.tsx
 msgid "Your recovery codes"
@@ -5730,7 +5730,7 @@ msgstr "Palautuskoodisi"
 
 #: components/i18n/errors.tsx
 msgid "Your request failed. Please contact support."
-msgstr ""
+msgstr "Pyyntösi epäonnistui. Ota yhteyttä tukeen."
 
 #: components/i18n/errors.tsx
 msgid "Your role ranking is too low to take this action."
@@ -5738,11 +5738,11 @@ msgstr "Roolisijoituksesi on liian alhainen tämän toiminnon suorittamiseksi."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Your screen share"
-msgstr ""
+msgstr "Näytönjakosi"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your server is under review"
-msgstr ""
+msgstr "Palvelimesi on tarkistettavana"
 
 #: components/i18n/errors.tsx
 msgid "Your user has already been created? Try logging in again or refreshing the app."
@@ -5750,4 +5750,4 @@ msgstr "Käyttäjäsi on jo luotu? Yritä kirjautua sisään uudelleen tai päiv
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Yours"
-msgstr ""
+msgstr "Omasi"

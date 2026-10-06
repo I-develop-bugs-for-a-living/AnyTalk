@@ -42,7 +42,7 @@ msgstr "dddd [la tenpo] LT"
 #. placeholder {1}: serverName()
 #: components/markdown/plugins/customEmoji.tsx
 msgid ":{0}: from {1}"
-msgstr ""
+msgstr ":{0}: tan {1}"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "(changes are being saved…)"
@@ -50,61 +50,61 @@ msgstr "(ante li kama awen...)"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "(opens in a new tab)"
-msgstr ""
+msgstr "(ni li open e lipu sin)"
 
 #: components/app/interface/desktop/Titlebar.tsx
 msgid "(reconnect now)"
-msgstr ""
+msgstr "(o kama sin tawa ilo ni)"
 
 #. placeholder {0}: props.count
 #: components/ui/components/features/messaging/elements/BlockedMessage.tsx
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
-msgstr ""
+msgstr "{0, plural, one {toki weka #} other {toki weka #}}"
 
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
-msgstr ""
+msgstr "{0, plural, one {tawa ala #, tenpo lili {seconds}} other {tawa ala #, tenpo lili {seconds}}}"
 
 #. placeholder {0}: meta.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze} other {# freezes}}"
-msgstr ""
+msgstr "{0, plural, one {tawa ala #} other {tawa ala #}}"
 
 #. placeholder {0}: onlineMembers()
 #: src/interface/channels/text/MemberSidebar.tsx
 msgid "{0, plural, one {# member online} other {# members online}}"
-msgstr ""
+msgstr "{0, plural, one {jan # li lon} other {jan # li lon}}"
 
 #. placeholder {0}: memberCount()
 #: components/ui/components/features/messaging/elements/Invite.tsx
 msgid "{0, plural, one {# member} other {# members}}"
-msgstr ""
+msgstr "{0, plural, one {jan #} other {jan #}}"
 
 #. placeholder {0}: local.channel.recipientIds.size
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "{0, plural, one {# Member} other {# Members}}"
-msgstr ""
+msgstr "{0, plural, one {jan #} other {jan #}}"
 
 #. placeholder {0}: mentions()
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
-msgstr ""
+msgstr "{0, plural, one {kalama sin #} other {kalama sin #}}"
 
 #. placeholder {0}: channel.voiceParticipants.size
 #: src/interface/home/FriendsOverview.tsx
 msgid "{0, plural, one {# person in the call} other {# people in the call}}"
-msgstr ""
+msgstr "{0, plural, one {jan # li lon toki kalama} other {jan # li lon toki kalama}}"
 
 #. placeholder {0}: entry.others
 #: src/interface/home/FriendsOverview.tsx
 msgid "{0, plural, one {+# other} other {+# others}}"
-msgstr ""
+msgstr "{0, plural, one {+# ante} other {+# ante}}"
 
 #. placeholder {0}: items().length
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
-msgstr ""
+msgstr "{0, plural, one {o pana e lipu} other {o pana e lipu #}}"
 
 #. placeholder {0}: users() .slice(0, -1) .map((user) => user!.username) .join(", ")
 #. placeholder {1}: users().slice(-1)[0]!.username
@@ -126,7 +126,7 @@ msgstr "{0} li ante e sitelen pi poki ni"
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} dropped"
-msgstr ""
+msgstr "{0} li pana"
 
 #. placeholder {0}: instance.globalLimits.server_emoji - props.server.emojis.length
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
@@ -146,12 +146,12 @@ msgstr "suli ijo pi nanpa {maxSizeFormatted} la ijo {0} li suli mute li pana ala
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} is already at the bottom"
-msgstr ""
+msgstr "{0} li lon anpa ale a"
 
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} is already at the top"
-msgstr ""
+msgstr "{0} li lon sewi ale a"
 
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -179,7 +179,7 @@ msgstr "{0} li pana e lawa pi kulupu ni tawa {1}"
 #. placeholder {2}: list.length
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} moved to position {1} of {2}"
-msgstr ""
+msgstr "{0} li tawa ma nanpa {1} pi ma {2}"
 
 #. placeholder {0}: props.title
 #: components/app/interface/settings/user/developer/TimeChart.tsx
@@ -195,7 +195,7 @@ msgstr ""
 #. placeholder {0}: name(id)
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} picked up, use the arrow keys to move it and space to drop it"
-msgstr ""
+msgstr "{0} li open tawa. o kepeken nena sinpin pi ilo nanpa tawa ona. o kepeken nena suli tawa pini"
 
 #. placeholder {0}: (message.systemMessage as MessagePinnedSystemMessage).by?.username
 #: components/client/NotificationsWorker.tsx
@@ -242,7 +242,7 @@ msgstr "{1} li weka e {0}"
 #. placeholder {0}: props.member.user?.username
 #: components/modal/modals/TimeoutMember.tsx
 msgid "{0} will not be able to interact with the server until the timeout expires."
-msgstr ""
+msgstr "{0} li ken ala pali lon ma ni lon tenpo pini ala."
 
 #. placeholder {0}: page() * itemsPerPage() + 1
 #. placeholder {1}: Math.min( props.itemCount!, page() * itemsPerPage() + itemsPerPage(), )
@@ -270,27 +270,27 @@ msgstr "nimi {0}"
 #. placeholder {0}: props.member.user?.username
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
-msgstr ""
+msgstr "tenpo pi pali ala pi {0} li pini. ona li ken pali lon ma ni sin."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
-msgstr ""
+msgstr "ilo {combo} li pali e nasin ante. ni li pona ala."
 
 #: components/app/interface/settings/user/developer/CompareChart.tsx
 msgid "{count, plural, one {{title} over time, # recap} other {{title} over time, # recaps}}"
-msgstr ""
+msgstr "{count, plural, one {{title} lon tenpo, lipu # pi tenpo pini} other {{title} lon tenpo, lipu # pi tenpo pini}}"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{count} selected"
-msgstr ""
+msgstr "{count} li pona tawa mi"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "{fileName}: can't be read as a zip ({error})."
-msgstr ""
+msgstr "{fileName}: mi ken ala lukin e lipu zip ({error})."
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "{fileName}: there are no CSV files inside."
-msgstr ""
+msgstr "{fileName}: lipu CSV li lon ala."
 
 #: src/interface/channels/text/Composition.tsx
 #~ msgid "{h} hours"
@@ -302,27 +302,27 @@ msgstr ""
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{n, plural, one {Delete # call recap?} other {Delete # call recaps?}}"
-msgstr ""
+msgstr "{n, plural, one {o weka e lipu # pi toki kalama?} other {o weka e lipu # pi toki kalama?}}"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{n, plural, one {Delete # stream recap?} other {Delete # stream recaps?}}"
-msgstr ""
+msgstr "{n, plural, one {o weka e lipu # pi sitelen pana?} other {o weka e lipu # pi sitelen pana?}}"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{name}'s {source}"
-msgstr ""
+msgstr "{source} pi {name}"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{name}'s camera"
-msgstr ""
+msgstr "oko pi {name}"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{name}'s screen share"
-msgstr ""
+msgstr "sitelen ilo pi {name}"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "{participant} heard"
-msgstr ""
+msgstr "{participant} li kute e ni"
 
 #: src/interface/channels/text/Composition.tsx
 #~ msgid "{sec} seconds"
@@ -330,7 +330,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
-msgstr ""
+msgstr "{title} lon tenpo"
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
@@ -346,7 +346,7 @@ msgstr "{usernames} li pana e sitelen"
 
 #: components/ui/components/features/messaging/elements/SystemMessage.tsx
 msgid "<0/> has been added by <1/>"
-msgstr ""
+msgstr "<1/> li kama e <0/>"
 
 #: components/ui/components/features/messaging/elements/SystemMessage.tsx
 msgid "<0/> has been banned from the server"
@@ -382,32 +382,32 @@ msgstr "<0/> li kama e toki kalama"
 
 #: components/ui/components/features/messaging/elements/SystemMessage.tsx
 msgid "<0/> started a call that lasted "
-msgstr ""
+msgstr "<0/> li kama e toki kalama. ona li lon "
 
 #: components/ui/components/features/messaging/elements/SystemMessage.tsx
 msgid "<0/> transferred group ownership to <1/>"
-msgstr ""
+msgstr "<0/> li pana e lawa pi kulupu tawa <1/>"
 
 #: components/ui/components/features/messaging/elements/SystemMessage.tsx
 msgid "<0/> unpinned <1/>"
-msgstr ""
+msgstr "<0/> li pini awen e <1/>"
 
 #: components/ui/components/features/messaging/elements/SystemMessage.tsx
 msgid "<0/> updated the group description"
-msgstr ""
+msgstr "<0/> li ante e sona pi kulupu"
 
 #: components/ui/components/features/messaging/elements/SystemMessage.tsx
 msgid "<0/> updated the group icon "
-msgstr ""
+msgstr "<0/> li ante e sitelen pi kulupu "
 
 #. placeholder {0}: (props.systemMessage as ChannelRenamedSystemMessage).name
 #: components/ui/components/features/messaging/elements/SystemMessage.tsx
 msgid "<0/> updated the group name to <1>{0}</1>"
-msgstr ""
+msgstr "<0/> li ante e nimi pi kulupu tawa <1>{0}</1>"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "<0>Be careful!</0><1/>This is not the same as the link that was displayed:"
-msgstr ""
+msgstr "<0>o pilin ike!</0><1/>nimi nasin ni li sama ala nimi nasin pi lukin:"
 
 #: components/modal/modals/BanMember.tsx
 #~ msgid "1 day"
@@ -426,7 +426,7 @@ msgstr ""
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "1 person reacted"
-msgstr ""
+msgstr "jan wan li pana e sitelen"
 
 #: src/interface/channels/text/Composition.tsx
 #~ msgid "1 second"
@@ -442,7 +442,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "12 hours"
-msgstr ""
+msgstr "tenpo suno 12 (tenpo lili 12)"
 
 #: components/app/interface/settings/channel/Overview.tsx
 #~ msgid "2 hours"
@@ -450,7 +450,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "24 hours"
-msgstr ""
+msgstr "tenpo suno wan"
 
 #: components/modal/modals/BanMember.tsx
 #~ msgid "3 days"
@@ -483,27 +483,27 @@ msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A message or notification arrives"
-msgstr ""
+msgstr "toki anu mu li kama"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream in your call ends"
-msgstr ""
+msgstr "sitelen pana lon toki kalama sina li pini"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream starts in your call"
-msgstr ""
+msgstr "sitelen pana lon toki kalama sina li open"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Able to access channels on this server"
-msgstr ""
+msgstr "ken tawa poki toki pi ma ni"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Able to access this channel"
-msgstr ""
+msgstr "ken tawa poki toki ni"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Able to speak in voice call"
-msgstr ""
+msgstr "ken toki lon toki kalama"
 
 #: components/auth/src/AuthPage.tsx
 #~ msgid "About"
@@ -511,34 +511,34 @@ msgstr ""
 
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Accept"
-msgstr ""
+msgstr "pona"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Accept friend request"
-msgstr ""
+msgstr "o pona e wile pi jan pona"
 
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Account has been queued for deletion!"
-msgstr ""
+msgstr "sijelo sina li kama weka!"
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Acknowledge"
-msgstr ""
+msgstr "mi sona"
 
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
 msgid "Add"
-msgstr ""
+msgstr "o pana"
 
 #: components/modal/modals/AddFriend.tsx
 #: src/interface/Friends.tsx
 msgid "Add a new friend"
-msgstr ""
+msgstr "o pana e jan pona sin"
 
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Add Bot"
-msgstr ""
+msgstr "o pana e jan ilo"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Add friend"
@@ -546,48 +546,48 @@ msgstr "o pana e ona tawa lipu pi jan pona"
 
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Add Friend"
-msgstr ""
+msgstr "o pana e jan pona"
 
 #: components/modal/modals/AddMembersToGroup.tsx
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Add friends to group"
-msgstr ""
+msgstr "o pana e jan pona tawa kulupu"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Add new members to the group"
-msgstr ""
+msgstr "o pana e jan sin tawa kulupu"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Add one of my recaps"
-msgstr ""
+msgstr "o pana e wan pi lipu pi tenpo pini mi"
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Add status text"
-msgstr ""
+msgstr "o pana e toki lili"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Add to folder"
-msgstr ""
+msgstr "o pana tawa poki lipu"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Admin"
-msgstr ""
+msgstr "jan lawa"
 
 #: components/app/menus/ChannelContextMenu.tsx
 #: components/app/menus/MessageContextMenu.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/UserContextMenu.tsx
 msgid "Admin Panel"
-msgstr ""
+msgstr "lipu pi jan lawa"
 
 #: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Advanced"
-msgstr ""
+msgstr "nasin sona"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Advanced sound settings"
-msgstr ""
+msgstr "nasin sona pi kalama"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
@@ -596,11 +596,11 @@ msgstr ""
 
 #: src/interface/Friends.tsx
 msgid "All"
-msgstr ""
+msgstr "ale"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "All messages"
-msgstr ""
+msgstr "toki ale"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
@@ -610,39 +610,39 @@ msgstr "toki ale"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "All recaps"
-msgstr ""
+msgstr "lipu ale pi tenpo pini"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "All roles have overrides."
-msgstr ""
+msgstr "poki jan ale li jo e nasin ante."
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "All Systems Operational"
-msgstr ""
+msgstr "ilo ale li pona"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Allow members to change name and avatar per-message"
-msgstr ""
+msgstr "o ken e ante nimi en sitelen jan lon toki ale"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Allow others to add your bot to their servers from Discover"
-msgstr ""
+msgstr "o ken e jan ante li pana e jan ilo sina tawa ma ona tan lipu alasa"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Allow others to invite your bot"
-msgstr ""
+msgstr "o ken e jan ante li kama e jan ilo sina"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Allow others to join your server from Discover"
-msgstr ""
+msgstr "o ken e jan ante li kama tawa ma sina tan lipu alasa"
 
 #: components/i18n/errors.tsx
 msgid "Already friends with this user."
-msgstr ""
+msgstr "sina en jan ni li jan pona."
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Also thins out deep voices"
-msgstr ""
+msgstr "ni li lili e kalama anpa kin"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #~ msgid "Also works when AnyTalk isn't focused"
@@ -650,24 +650,24 @@ msgstr ""
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Always Ask for Screen Share Quality"
-msgstr ""
+msgstr "o wile sona e pona pi sitelen ilo tenpo ale"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "American (MM/DD/YYYY)"
-msgstr ""
+msgstr "nasin Amelika (MM/DD/YYYY)"
 
 #: components/modal/modals/Error2.tsx
 msgid "An error occurred."
-msgstr ""
+msgstr "pakala li kama."
 
 #. placeholder {0}: err.location
 #: components/i18n/errors.tsx
 msgid "An internal error occurred. ({0})"
-msgstr ""
+msgstr "pakala insa li kama. ({0})"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Another app is already using these keys, so they only work inside AnyTalk. Pick other keys."
-msgstr ""
+msgstr "ilo ante li kepeken e nena ni. ni la nena li pali lon AnyTalk taso. o pana e nena ante."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #~ msgid "Another app is already using these keys. Pick other keys."
@@ -676,56 +676,56 @@ msgstr ""
 #. placeholder {0}: installed()
 #: components/app/interface/settings/user/Updates.tsx
 msgid "AnyTalk Desktop {0}"
-msgstr ""
+msgstr "AnyTalk pi ilo suli {0}"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "AnyTalk Developer"
-msgstr ""
+msgstr "jan pali pi AnyTalk"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "AnyTalk for Desktop"
-msgstr ""
+msgstr "AnyTalk pi ilo suli"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "AnyTalk Founder"
-msgstr ""
+msgstr "jan open pi AnyTalk"
 
 #: components/auth/src/flows/FlowHome.tsx
 msgid "AnyTalk is one of the best ways to stay connected with your friends and community, anywhere, anytime."
-msgstr ""
+msgstr "AnyTalk li nasin pona tawa kama pi jan pona en kulupu sina, lon ma ale, lon tenpo ale."
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "AnyTalk is up to date."
-msgstr ""
+msgstr "AnyTalk li sin."
 
 #: src/AndroidNag.tsx
 msgid "AnyTalk on Android"
-msgstr ""
+msgstr "AnyTalk lon Android"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "AnyTalk reloads to switch language, only the language you use is downloaded and kept offline."
-msgstr ""
+msgstr "AnyTalk li kama sin tawa ante toki. toki sina taso li kama tawa ilo sina."
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "AnyTalk rocks!"
-msgstr ""
+msgstr "AnyTalk li pona a!"
 
 #. placeholder {0}: pendingServer()
 #: components/app/interface/settings/user/Native.tsx
 msgid "AnyTalk will reload and connect to {0}. You may need to sign in again."
-msgstr ""
+msgstr "AnyTalk li kama sin li kama tawa {0}. sina ken wile open sin."
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "AnyTalk will reload and use the default server. You may need to sign in again."
-msgstr ""
+msgstr "AnyTalk li kama sin li kepeken ma open. sina ken wile open sin."
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "AnyTalk will start in the system tray."
-msgstr ""
+msgstr "AnyTalk li open lon poki ilo."
 
 #: src/AndroidNag.tsx
 msgid "AnyTalk works best as an app"
-msgstr ""
+msgstr "AnyTalk li pona mute lon ilo"
 
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -734,52 +734,52 @@ msgstr "selo ilo"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Applies to servers you join or create from now on. Existing servers keep their level."
-msgstr ""
+msgstr "ni li pali lon ma sin ale. ma pi tenpo pini li awen sama."
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Apply"
-msgstr ""
+msgstr "o pali"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Apps"
-msgstr ""
+msgstr "ilo"
 
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Are you sure you want to clear your sessions?"
-msgstr ""
+msgstr "sina wile weka ala weka e tenpo open sina?"
 
 #: components/modal/modals/DeleteMessage.tsx
 msgid "Are you sure you want to delete this?"
-msgstr ""
+msgstr "sina wile weka ala weka e ni?"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "Are you sure you want to go to "
-msgstr ""
+msgstr "sina wile ala wile tawa "
 
 #~ msgid "Are you sure you want to go to <0>{0}</0>?"
 #~ msgstr ""
 
 #: components/modal/modals/PinMessage.tsx
 msgid "Are you sure you want to pin this message?"
-msgstr ""
+msgstr "sina wile ala wile awen e toki ni?"
 
 #. placeholder {0}: props.user?.displayName ?? props.user.username
 #. placeholder {1}: props.group.name
 #: components/modal/modals/RemoveMember.tsx
 msgid "Are you sure you want to remove {0} from {1}?"
-msgstr ""
+msgstr "sina wile ala wile weka e {0} tan {1}?"
 
 #: components/modal/modals/PinMessage.tsx
 msgid "Are you sure you want to unpin this message?"
-msgstr ""
+msgstr "sina wile ala wile pini awen e toki ni?"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Assign lower-ranked roles to lower-ranking members"
-msgstr ""
+msgstr "o pana e poki jan anpa tawa jan anpa"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Assign Roles"
-msgstr ""
+msgstr "o pana e poki jan"
 
 #. placeholder {0}: formatDuration(h().t)
 #. placeholder {0}: formatDuration(props.hover!)
@@ -791,15 +791,15 @@ msgstr ""
 #: components/app/interface/settings/user/developer/CompareChart.tsx
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "at {time}"
-msgstr ""
+msgstr "lon {time}"
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Audio disabled by browser"
-msgstr ""
+msgstr "ilo lukin li pini e kalama"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Audio level"
-msgstr ""
+msgstr "suli kalama"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/modal/modals/MFAFlow.tsx
@@ -808,7 +808,7 @@ msgstr "lipu open"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Automatic Gain Control"
-msgstr ""
+msgstr "ilo li lawa e suli kalama"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Avatar"
@@ -816,7 +816,7 @@ msgstr "sitelen jan"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Averages"
-msgstr ""
+msgstr "nanpa pi ale"
 
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 #~ msgid "avg"
@@ -824,20 +824,20 @@ msgstr ""
 
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "avg {value}"
-msgstr ""
+msgstr "nanpa pi ale {value}"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Avg bitrate"
-msgstr ""
+msgstr "nanpa pi ale pi suli pana"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Avg frame rate"
-msgstr ""
+msgstr "nanpa pi ale pi sitelen tawa"
 
 #: components/app/interface/settings/user/developer/CompareChart.tsx
 msgid "avg per recap"
-msgstr ""
+msgstr "nanpa pi ale lon lipu wan"
 
 #: components/app/interface/settings/user/_AccountCard.tsx
 #: components/auth/src/flows/FlowCheck.tsx
@@ -846,11 +846,11 @@ msgstr ""
 #: components/modal/modals/MFAFlow.tsx
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
-msgstr ""
+msgstr "o tawa monsi"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Back to categories"
-msgstr ""
+msgstr "o tawa kulupu pi poki toki"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Badges"
@@ -863,11 +863,11 @@ msgstr "o weka suli e jan"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Ban evasion"
-msgstr ""
+msgstr "weka tan weka suli"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Ban lower-ranking members from the server"
-msgstr ""
+msgstr "o weka suli e jan anpa tan ma ni"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Ban member"
@@ -875,27 +875,27 @@ msgstr "o weka suli e jan"
 
 #: components/modal/modals/BanMember.tsx
 msgid "Ban Member"
-msgstr ""
+msgstr "o weka suli e jan"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Ban Members"
-msgstr ""
+msgstr "o weka suli e jan mute"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Ban user"
-msgstr ""
+msgstr "o weka suli e jan"
 
 #: components/modal/modals/BanNonMember.tsx
 msgid "Ban User"
-msgstr ""
+msgstr "o weka suli e jan"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Bandwidth"
-msgstr ""
+msgstr "suli nasin pana"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Banner"
-msgstr ""
+msgstr "sitelen suli"
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Bans"
@@ -903,12 +903,12 @@ msgstr "jan pi weka suli"
 
 #: components/ui/components/features/profiles/ProfileBio.tsx
 msgid "Bio"
-msgstr ""
+msgstr "sona jan"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Bitrate"
-msgstr ""
+msgstr "suli pana"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Block user"
@@ -928,15 +928,15 @@ msgstr "ilo"
 
 #: components/modal/modals/AddBot.tsx
 msgid "Bots are not verified by AnyTalk."
-msgstr ""
+msgstr "AnyTalk li lukin ala e jan ilo."
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
-msgstr ""
+msgstr "ilo lukin"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser Echo Cancellation"
-msgstr ""
+msgstr "ilo lukin li weka e kalama sin"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #~ msgid "Browser Noise Supression"
@@ -948,11 +948,11 @@ msgstr "lipu pi ike ilo"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Built on <0>Stoat</0>"
-msgstr ""
+msgstr "ni li tan <0>Stoat</0>"
 
 #: components/auth/src/AuthPage.tsx
 msgid "Built on Stoat"
-msgstr ""
+msgstr "ni li tan Stoat"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -960,7 +960,7 @@ msgstr ""
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Busy"
-msgstr ""
+msgstr "mi pali"
 
 #: components/modal/modals/CreateBot.tsx
 #~ msgid "By creating this bot, you agree to the <0>Acceptable Use Policy</0>."
@@ -972,32 +972,32 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Bypass Slowmode"
-msgstr ""
+msgstr "o weka e tenpo awen toki"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Bypasses slowmode in channels"
-msgstr ""
+msgstr "ni li weka e tenpo awen toki lon poki toki"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Call"
-msgstr ""
+msgstr "toki kalama"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Calls"
-msgstr ""
+msgstr "toki kalama"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Camera"
-msgstr ""
+msgstr "oko ilo"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
-msgstr ""
+msgstr "sina alasa ala e GIF pona? o tawa Gifbox o pana e GIF sina tawa jan ale."
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Can't get discover request status right now"
-msgstr ""
+msgstr "mi ken ala sona e wile alasa lon tenpo ni"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 #: components/app/interface/settings/user/Native.tsx
@@ -1036,7 +1036,7 @@ msgstr "mi wile ala"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Cancel discover request"
-msgstr ""
+msgstr "o weka e wile alasa"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
@@ -1045,19 +1045,19 @@ msgstr "o weka e wile pi jan pona"
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 msgid "Cancel message"
-msgstr ""
+msgstr "o weka e toki"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Cancel your discover request and remove it from the review queue"
-msgstr ""
+msgstr "o weka e wile alasa sina tan kulupu lukin"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
-msgstr ""
+msgstr "mi ken ala weka e sijelo. o weka e ma anu pana e ma tawa jan ante."
 
 #: components/i18n/errors.tsx
 msgid "Cannot edit this message."
-msgstr ""
+msgstr "sina ken ala ante e toki ni."
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/modal/modals/EditBotUsername.tsx
@@ -1070,60 +1070,60 @@ msgstr "ante"
 #. placeholder {0}: props.member.nickname ?? props.member.user?.displayName ?? props.member.user?.username
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Change {0}'s nickname"
-msgstr ""
+msgstr "o ante e nimi pi {0}"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change Avatar"
-msgstr ""
+msgstr "o ante e sitelen jan"
 
 #: components/modal/modals/EditBotUsername.tsx
 msgid "Change bot username"
-msgstr ""
+msgstr "o ante e nimi pi jan ilo"
 
 #. placeholder {0}: props.member.server!.name
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Change identity on {0}"
-msgstr ""
+msgstr "o ante e nimi lon {0}"
 
 #: components/modal/modals/EditEmail.tsx
 msgid "Change login email"
-msgstr ""
+msgstr "o ante e ilo Email open"
 
 #: components/modal/modals/EditPassword.tsx
 msgid "Change login password"
-msgstr ""
+msgstr "o ante e nimi open"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change Nickname"
-msgstr ""
+msgstr "o ante e nimi"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change other members' nicknames"
-msgstr ""
+msgstr "o ante e nimi pi jan ante"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own avatar"
-msgstr ""
+msgstr "o ante e sitelen jan sina"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
-msgstr ""
+msgstr "o ante e nimi sina"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
-msgstr ""
+msgstr "o ante e nimi pi jan ilo ni"
 
 #: components/modal/modals/EditUsername.tsx
 msgid "Change username"
-msgstr ""
+msgstr "o ante e nimi ilo"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change Username"
-msgstr ""
+msgstr "o ante e nimi ilo"
 
 #: components/app/interface/settings/user/profile/EditProfile.tsx
 msgid "Change your profile per-server"
-msgstr ""
+msgstr "o ante e lipu sina lon ma wan"
 
 #: components/modal/modals/Changelog.tsx
 #~ msgid "Changelog"
@@ -1135,7 +1135,7 @@ msgstr "lipu pi poki toki"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Channel Info"
-msgstr ""
+msgstr "sona pi poki toki"
 
 #: components/app/interface/settings/channel/Overview.tsx
 #: components/modal/modals/CreateChannel.tsx
@@ -1144,11 +1144,11 @@ msgstr "nimi pi poki toki"
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Channel Settings"
-msgstr ""
+msgstr "nasin pi poki toki"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Channel Slowmode"
-msgstr ""
+msgstr "tenpo awen toki pi poki toki"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Channels"
@@ -1156,7 +1156,7 @@ msgstr "poki toki"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Chat Input"
-msgstr ""
+msgstr "ma pi sitelen toki"
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -1165,19 +1165,19 @@ msgstr ""
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Check back often to see if your bot has been approved!"
-msgstr ""
+msgstr "o lukin sin tan ni: jan ilo sina li pona ala pona tawa mi!"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Check back often to see if your server has been approved!"
-msgstr ""
+msgstr "o lukin sin tan ni: ma sina li pona ala pona tawa mi!"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Check for updates"
-msgstr ""
+msgstr "o alasa e sin"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Check for updates to see if there is a new version."
-msgstr ""
+msgstr "o alasa e sin. ken la ilo sin li lon."
 
 #: components/auth/src/flows/FlowCheck.tsx
 msgid "Check your mail!"
@@ -1185,15 +1185,15 @@ msgstr "o lukin e ilo Email sina!"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Checking for updates…"
-msgstr ""
+msgstr "mi alasa e sin…"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
-msgstr ""
+msgstr "o pana e nimi ilo"
 
 #: components/modal/modals/Onboarding.tsx
 msgid "Choose username"
-msgstr ""
+msgstr "o pana e nimi ilo"
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
@@ -1201,19 +1201,19 @@ msgstr "o weka e toki lili"
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
-msgstr ""
+msgstr "o luka e ijo anpa o sona e ante mute!"
 
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Click to copy username"
-msgstr ""
+msgstr "o luka tawa jo e nimi ilo"
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Click to show full description"
-msgstr ""
+msgstr "o luka tawa lukin e lipu ale"
 
 #: components/ui/components/utils/Spoiler.tsx
 msgid "Click to show spoiler"
-msgstr ""
+msgstr "o luka tawa lukin e ijo len"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Client Settings"
@@ -1252,100 +1252,100 @@ msgstr "pona"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Close chat"
-msgstr ""
+msgstr "o pini e toki"
 
 #. placeholder {0}: props.channel.recipient?.displayName
 #: components/modal/modals/DeleteChannel.tsx
 msgid "Close conversation with {0}?"
-msgstr ""
+msgstr "o pini e toki tawa {0}?"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Close stream"
-msgstr ""
+msgstr "o pini e sitelen pana"
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Code"
-msgstr ""
+msgstr "nimi nanpa"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Codec"
-msgstr ""
+msgstr "nasin pi ilo kalama"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Collapse call window"
-msgstr ""
+msgstr "o lili e lipu pi toki kalama"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Colours"
-msgstr ""
+msgstr "kule"
 
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Coming soon! 👀"
-msgstr ""
+msgstr "ni li kama! 👀"
 
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Compact mode"
-msgstr ""
+msgstr "nasin lili"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
-msgstr ""
+msgstr "o lukin sama e lipu pi tenpo pini"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Compare Recaps"
-msgstr ""
+msgstr "o lukin sama e lipu pi tenpo pini"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Concealed audio"
-msgstr ""
+msgstr "kalama len"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Concealed audio (made up to hide lost packets)"
-msgstr ""
+msgstr "kalama len (ni li pali tawa len e pana weka)"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Configure a way to get back into your account in case your 2FA is lost"
-msgstr ""
+msgstr "o pali e nasin tawa sijelo sina tan tenpo weka pi nimi open nanpa tu"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Configure one-time password authentication"
-msgstr ""
+msgstr "o pali e nimi open pi tenpo wan"
 
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
 msgid "Confirm"
-msgstr ""
+msgstr "pona"
 
 #: components/modal/modals/MFAFlow.tsx
 msgid "Confirm action"
-msgstr ""
+msgstr "o pona e ni"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Connect"
-msgstr ""
+msgstr "o kama"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Connect to voice channel"
-msgstr ""
+msgstr "o kama tawa poki toki kalama"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Connected"
-msgstr ""
+msgstr "li kama"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Connecting"
-msgstr ""
+msgstr "li kama..."
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Connection lost"
-msgstr ""
+msgstr "nasin li weka"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Connection quality (rated by the server)"
-msgstr ""
+msgstr "pona pi nasin (ma li pana e nanpa)"
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -1354,15 +1354,15 @@ msgstr ""
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Contact support to remove this bot from discover"
-msgstr ""
+msgstr "o toki tawa jan pi pona ilo tawa weka e jan ilo ni tan lipu alasa"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Contact support to remove this server from discover"
-msgstr ""
+msgstr "o toki tawa jan pi pona ilo tawa weka e ma ni tan lipu alasa"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Content breaks one or more laws"
-msgstr ""
+msgstr "ijo ni li ike tawa lawa"
 
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
@@ -1371,11 +1371,11 @@ msgstr "pona"
 
 #: src/AndroidNag.tsx
 msgid "Continue in browser"
-msgstr ""
+msgstr "o awen lon ilo lukin"
 
 #: components/auth/src/flows/FlowVerify.tsx
 msgid "Continue to app"
-msgstr ""
+msgstr "o tawa ilo"
 
 #: components/app/interface/settings/user/Language.tsx
 #~ msgid "Contribute a language"
@@ -1387,11 +1387,11 @@ msgstr "toki"
 
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
-msgstr ""
+msgstr "mi jo e ni!"
 
 #: components/app/menus/CategoryContextMenu.tsx
 msgid "Copy category ID"
-msgstr ""
+msgstr "o jo e nanpa pi kulupu poki toki"
 
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Copy channel ID"
@@ -1399,7 +1399,7 @@ msgstr "o jo e nanpa pi poki ni lon ilo sama"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Copy file link"
-msgstr ""
+msgstr "o jo e nasin pi lipu"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Copy ID"
@@ -1407,11 +1407,11 @@ msgstr "o jo e nanpa ijo lon ilo sama"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Copy invite link"
-msgstr ""
+msgstr "o jo e nasin kama"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Copy Invite URL"
-msgstr ""
+msgstr "o jo e nasin kama"
 
 #: components/app/menus/ChannelContextMenu.tsx
 #: components/app/menus/MessageContextMenu.tsx
@@ -1420,7 +1420,7 @@ msgstr "o jo e linja lon ilo sama"
 
 #: components/modal/modals/CreateInvite.tsx
 msgid "Copy Link"
-msgstr ""
+msgstr "o jo e nasin"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Copy message ID"
@@ -1428,11 +1428,11 @@ msgstr "o jo e nanpa pi toki ni lon ilo sama"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Copy message link"
-msgstr ""
+msgstr "o jo e nasin pi toki"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Copy role ID"
-msgstr ""
+msgstr "o jo e nanpa pi poki jan"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Copy server ID"
@@ -1445,7 +1445,7 @@ msgstr "o jo e sitelen toki lon ilo sama"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Copy Token"
-msgstr ""
+msgstr "o jo e nimi len"
 
 #: components/app/menus/UserContextMenu.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -1454,7 +1454,7 @@ msgstr "o jo e nanpa pi jan ni lon ilo sama"
 
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
 msgid "Copy webhook URL"
-msgstr ""
+msgstr "o jo e nasin pi webhook"
 
 #: components/app/interface/settings/user/Updates.tsx
 #~ msgid "Could not check for updates."
@@ -1462,37 +1462,37 @@ msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "Could not find what you requested."
-msgstr ""
+msgstr "mi alasa e ni la mi ken ala lukin."
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not load the patch notes right now."
-msgstr ""
+msgstr "mi ken ala lukin e lipu pi ante lon tenpo ni."
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
-msgstr ""
+msgstr "mi ken ala tawa ilo pi sin. o alasa sin."
 
 #: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not save this setting."
-msgstr ""
+msgstr "mi ken ala awen e nasin ni."
 
 #: components/instance/index.tsx
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
-msgstr ""
+msgstr "mi ken ala jo e nasin AnyTalk tan {hStr}."
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Couldn't load downloads"
-msgstr ""
+msgstr "mi ken ala lukin e lipu pana"
 
 #. placeholder {0}: to.name
 #: components/ui/components/features/voice/useMoveVoiceUser.ts
 msgid "Couldn't move them to {0}."
-msgstr ""
+msgstr "mi ken ala tawa e ona tawa {0}."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "CPU"
-msgstr ""
+msgstr "CPU"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 #: components/modal/modals/CreateBot.tsx
@@ -1508,7 +1508,7 @@ msgstr "o pali"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Create a channel before inviting others!"
-msgstr ""
+msgstr "o pali e poki toki. kin la o kama e jan ante!"
 
 #~ msgid "Create a group"
 #~ msgstr "o pali e kulupu sin"
@@ -1516,7 +1516,7 @@ msgstr ""
 #: components/modal/modals/CreateGroupOrServer.tsx
 #: src/interface/Home.tsx
 msgid "Create a group or server"
-msgstr ""
+msgstr "o pali e kulupu anu ma"
 
 #: components/modal/modals/CreateBot.tsx
 msgid "Create a new bot"
@@ -1524,12 +1524,12 @@ msgstr "o pali e jan ilo sin"
 
 #: components/modal/modals/CreateCategory.tsx
 msgid "Create a new category"
-msgstr ""
+msgstr "o pali e kulupu sin pi poki toki"
 
 #: components/modal/modals/CreateGroup.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Create a new group"
-msgstr ""
+msgstr "o pali e kulupu sin"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #~ msgid "Create a new role"
@@ -1537,7 +1537,7 @@ msgstr ""
 
 #: components/modal/modals/CreateWebhook.tsx
 msgid "Create a webhook"
-msgstr ""
+msgstr "o pali e webhook"
 
 #: components/auth/src/flows/FlowCreate.tsx
 msgid "Create an account"
@@ -1545,15 +1545,15 @@ msgstr "o pali e sijelo"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Create and edit server roles"
-msgstr ""
+msgstr "o pali o ante e poki jan pi ma"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Create and edit webhooks"
-msgstr ""
+msgstr "o pali o ante e webhook"
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "Create Bot"
-msgstr ""
+msgstr "o pali e jan ilo"
 
 #: components/app/menus/CategoryContextMenu.tsx
 #: components/app/menus/ChannelContextMenu.tsx
@@ -1570,12 +1570,12 @@ msgstr "o pali e poki toki"
 
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Create Channel"
-msgstr ""
+msgstr "o pali e poki toki"
 
 #. placeholder {0}: props.category.title
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Create channel in {0}"
-msgstr ""
+msgstr "o pali e poki toki lon {0}"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 #: components/app/menus/ChannelContextMenu.tsx
@@ -1586,36 +1586,36 @@ msgstr "o pali e nimi kama"
 #: components/modal/modals/CreateInvite.tsx
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Create Invite"
-msgstr ""
+msgstr "o pali e nimi kama"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Create invites for others to use"
-msgstr ""
+msgstr "o pali e nimi kama tawa jan ante"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Create or join a server"
-msgstr ""
+msgstr "o pali anu kama tawa ma"
 
 #: components/modal/modals/CreateRole.tsx
 msgid "Create Role"
-msgstr ""
+msgstr "o pali e poki jan"
 
 #: components/modal/modals/CreateServer.tsx
 msgid "Create server"
-msgstr ""
+msgstr "o pali e ma"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Create server emoji"
-msgstr ""
+msgstr "o pali e sitelen lili pi ma"
 
 #: components/app/interface/settings/channel/webhooks/WebhooksList.tsx
 msgid "Create Webhook"
-msgstr ""
+msgstr "o pali e webhook"
 
 #: components/app/interface/settings/user/Sessions.tsx
 msgid "Created <0/>"
-msgstr ""
+msgstr "pali tan <0/>"
 
 #: components/modal/modals/EditEmail.tsx
 #: components/modal/modals/EditPassword.tsx
@@ -1625,11 +1625,11 @@ msgstr "nimi open pi tenpo ni"
 
 #: components/app/interface/settings/user/Sessions.tsx
 msgid "Current Session"
-msgstr ""
+msgstr "tenpo open pi tenpo ni"
 
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Custom colour"
-msgstr ""
+msgstr "kule sina"
 
 #: components/modal/modals/CustomStatus.tsx
 msgid "Custom status"
@@ -1637,42 +1637,42 @@ msgstr "toki ante pi lon sina"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Custom window frame"
-msgstr ""
+msgstr "sike pi lipu sina"
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Customisation"
-msgstr ""
+msgstr "ante pi ilo"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Dark"
-msgstr ""
+msgstr "pimeja"
 
 #. placeholder {0}: err.location
 #: components/i18n/errors.tsx
 msgid "Database error, please contact support. ({0})"
-msgstr ""
+msgstr "pakala pi poki sona. o toki tawa jan pi pona ilo. ({0})"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Date format"
-msgstr ""
+msgstr "nasin pi suno"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Deafen"
-msgstr ""
+msgstr "o pini kute"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen lower-ranking members in voice call"
-msgstr ""
+msgstr "o pini kute pi jan anpa lon toki kalama"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
-msgstr ""
+msgstr "o pini kute pi jan"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
-msgstr ""
+msgstr "ilo pi sona kalama"
 
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
@@ -1682,7 +1682,7 @@ msgstr "jan ale"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Default notifications for new servers"
-msgstr ""
+msgstr "mu open lon ma sin"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
@@ -1693,7 +1693,7 @@ msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Default sound"
-msgstr ""
+msgstr "kalama open"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 #~ msgid "Defean"
@@ -1701,7 +1701,7 @@ msgstr ""
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Degraded Performance"
-msgstr ""
+msgstr "pali li ike lili"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 #: components/modal/modals/DeleteBot.tsx
@@ -1717,7 +1717,7 @@ msgstr "o weka e ni"
 #. placeholder {0}: props.emoji.name
 #: components/modal/modals/DeleteEmoji.tsx
 msgid "Delete :{0}:?"
-msgstr ""
+msgstr "o weka e :{0}:?"
 
 #. placeholder {0}: props.bot.user?.displayName ?? props.bot.id
 #. placeholder {0}: props.channel.name
@@ -1727,37 +1727,37 @@ msgstr ""
 #: components/modal/modals/DeleteRole.tsx
 #: components/modal/modals/DeleteServer.tsx
 msgid "Delete {0}?"
-msgstr ""
+msgstr "o weka e {0}?"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Delete Account"
-msgstr ""
+msgstr "o weka e sijelo"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Delete all call recaps on this device?"
-msgstr ""
+msgstr "o weka e lipu ale pi toki kalama lon ilo ni?"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Delete all recaps"
-msgstr ""
+msgstr "o weka e lipu ale pi tenpo pini"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Delete all stream recaps on this device?"
-msgstr ""
+msgstr "o weka e lipu ale pi sitelen pana lon ilo ni?"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Delete and pin messages sent by other members"
-msgstr ""
+msgstr "o weka o awen e toki pi jan ante"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Delete Bot"
-msgstr ""
+msgstr "o weka e jan ilo"
 
 #: components/app/menus/CategoryContextMenu.tsx
 #: components/modal/modals/DeleteCategory.tsx
 msgid "Delete category"
-msgstr ""
+msgstr "o weka e kulupu pi poki toki"
 
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Delete channel"
@@ -1765,19 +1765,19 @@ msgstr "o weka e poki toki"
 
 #: components/app/interface/settings/ChannelSettings.tsx
 msgid "Delete Channel"
-msgstr ""
+msgstr "o weka e poki toki"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Delete Emoji"
-msgstr ""
+msgstr "o weka e sitelen lili"
 
 #: components/app/menus/ServerFolderContextMenu.tsx
 msgid "Delete folder"
-msgstr ""
+msgstr "o weka e poki lipu"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Delete Invite"
-msgstr ""
+msgstr "o weka e nimi kama"
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 #: components/app/menus/MessageContextMenu.tsx
@@ -1787,66 +1787,66 @@ msgstr "o weka e toki"
 
 #: components/modal/modals/BanMember.tsx
 msgid "Delete Message History"
-msgstr ""
+msgstr "o weka e toki pini"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Delete recap"
-msgstr ""
+msgstr "o weka e lipu pi tenpo pini"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Delete Role"
-msgstr ""
+msgstr "o weka e poki jan"
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Delete Server"
-msgstr ""
+msgstr "o weka e ma"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Delete this recap?"
-msgstr ""
+msgstr "o weka e lipu ni pi tenpo pini?"
 
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
 msgid "Delete webhook"
-msgstr ""
+msgstr "o weka e webhook"
 
 #: components/modal/modals/DeleteEmoji.tsx
 msgid "Deleting this emoji will disallow future use. All past uses will remain."
-msgstr ""
+msgstr "sina weka e sitelen lili ni la jan li ken ala kepeken ona. tenpo pini la ona li awen."
 
 #. placeholder {0}: props.invite.username
 #: components/modal/modals/AddBot.tsx
 msgid "Description provided by {0}"
-msgstr ""
+msgstr "lipu sona tan {0}"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop"
-msgstr ""
+msgstr "ilo suli"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
-msgstr ""
+msgstr "ilo pi ilo suli"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Developer"
-msgstr ""
+msgstr "jan pali"
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "Developer Documentation"
-msgstr ""
+msgstr "lipu pi jan pali"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Developer modes measure call performance and keep statistics of previous calls and streams on this device. Turn on either or both."
-msgstr ""
+msgstr "nasin pi jan pali li lukin e pona pi toki kalama. li awen e nanpa pi toki kalama pi tenpo pini lon ilo ni. o open e wan anu tu."
 
 #: components/app/interface/desktop/Titlebar.tsx
 msgid "Device is offline"
-msgstr ""
+msgstr "ilo li lon ala nasin"
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Direct Messages"
-msgstr ""
+msgstr "toki pi jan wan"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Disable Account"
@@ -1854,17 +1854,17 @@ msgstr "o pini e sijelo sina"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Disable one-time password authenticator"
-msgstr ""
+msgstr "o pini e nimi open pi tenpo wan"
 
 #: components/app/interface/settings/server/Overview.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Disabled"
-msgstr ""
+msgstr "li pini"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Disconnected"
-msgstr ""
+msgstr "li weka tan nasin"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Discord RPC"
@@ -1873,23 +1873,23 @@ msgstr ""
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Discover"
-msgstr ""
+msgstr "alasa"
 
 #: src/interface/Home.tsx
 msgid "Discover AnyTalk"
-msgstr ""
+msgstr "o alasa e AnyTalk"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Display & Text"
-msgstr ""
+msgstr "lukin en sitelen"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Display Name"
-msgstr ""
+msgstr "nimi pi lukin"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Display users with this role separately in the member list"
-msgstr ""
+msgstr "o lukin e jan pi poki ni lon ma ante lon lipu jan"
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Do Not Disturb"
@@ -1897,26 +1897,26 @@ msgstr "o toki ala"
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Don't ask me again"
-msgstr ""
+msgstr "o wile sona ala sin"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "Don't ask me again for "
-msgstr ""
+msgstr "o wile sona ala sin tan "
 
 #~ msgid "Don't ask me again for <0>{0}</0>"
 #~ msgstr ""
 
 #: components/modal/modals/BanMember.tsx
 msgid "Don't delete messages"
-msgstr ""
+msgstr "o weka ala e toki"
 
 #: components/modal/modals/LeaveServer.tsx
 msgid "Don't notify others that you've left"
-msgstr ""
+msgstr "o mu ala tawa jan ante tan weka sina"
 
 #: src/AndroidNag.tsx
 msgid "Don't show this again"
-msgstr ""
+msgstr "o lukin ala e ni sin"
 
 #: components/app/interface/settings/UserSettings.tsx
 #~ msgid "Donate"
@@ -1928,89 +1928,89 @@ msgstr ""
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Donated to AnyTalk"
-msgstr ""
+msgstr "li pana e mani tawa AnyTalk"
 
 #: components/modal/modals/MFARecovery.tsx
 msgid "Done"
-msgstr ""
+msgstr "pini"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Download"
-msgstr ""
+msgstr "o kama jo"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Download again"
-msgstr ""
+msgstr "o kama jo sin"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Download CSV"
-msgstr ""
+msgstr "o kama jo e CSV"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Download for Linux (AppImage)"
-msgstr ""
+msgstr "o kama jo tawa Linux (AppImage)"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Download for Windows (.exe)"
-msgstr ""
+msgstr "o kama jo tawa Windows (.exe)"
 
 #. placeholder {0}: Math.round(updaterState()?.percent ?? 0)
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Downloading {0}%"
-msgstr ""
+msgstr "mi kama jo {0}%"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Dropped frames per second"
-msgstr ""
+msgstr "sitelen weka lon tenpo lili wan"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Drugs or illegal goods"
-msgstr ""
+msgstr "telo nasa anu ijo ike tawa lawa"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Duration"
-msgstr ""
+msgstr "suli tenpo"
 
 #. placeholder {0}: props.member.displayName
 #: components/modal/modals/UserProfileRoles.tsx
 msgid "Edit {0}'s roles"
-msgstr ""
+msgstr "o ante e poki jan pi {0}"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Edit and delete channel"
-msgstr ""
+msgstr "o ante o weka e poki toki"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Edit any permissions on the server"
-msgstr ""
+msgstr "o ante e ken ale lon ma"
 
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Edit Channel"
-msgstr ""
+msgstr "o ante e poki toki"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Edit channel-specific role and default permissions"
-msgstr ""
+msgstr "o ante e poki jan en ken open pi poki toki"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Edit Emoji"
-msgstr ""
+msgstr "o ante e sitelen lili"
 
 #: components/app/menus/ServerFolderContextMenu.tsx
 #: components/modal/modals/EditServerFolder.tsx
 msgid "Edit folder"
-msgstr ""
+msgstr "o ante e poki lipu"
 
 #: components/app/interface/settings/user/profile/EditProfile.tsx
 msgid "Edit Global Profile"
-msgstr ""
+msgstr "o ante e lipu jan pi ma ale"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Edit group name and description"
-msgstr ""
+msgstr "o ante e nimi en lipu sona pi kulupu"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit identity"
@@ -2018,7 +2018,7 @@ msgstr "o ante e nimi lon ma"
 
 #: components/modal/modals/ServerInfo.tsx
 msgid "Edit Identity"
-msgstr ""
+msgstr "o ante e nimi lon ma"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Edit message"
@@ -2026,24 +2026,24 @@ msgstr "o ante e toki"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
-msgstr ""
+msgstr "o ante e poki jan"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Edit the server's information and settings"
-msgstr ""
+msgstr "o ante e sona en nasin pi ma"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit your identity"
-msgstr ""
+msgstr "o ante e nimi sina lon ma"
 
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Edited"
-msgstr ""
+msgstr "ante"
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Effective <0/> (<1/>)"
-msgstr ""
+msgstr "pali tan <0/> (<1/>)"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
@@ -2053,32 +2053,32 @@ msgstr "ilo Email"
 
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Emoji"
-msgstr ""
+msgstr "sitelen lili"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 #: components/modal/modals/EditEmoji.tsx
 msgid "Emoji Name"
-msgstr ""
+msgstr "nimi pi sitelen lili"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Emoji Pack (affects your messages only)"
-msgstr ""
+msgstr "kulupu pi sitelen lili (toki sina taso li ante)"
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Emojis"
-msgstr ""
+msgstr "sitelen lili"
 
 #: src/interface/home/FriendsOverview.tsx
 msgid "Empty"
-msgstr ""
+msgstr "ala"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Enable Authenticator"
-msgstr ""
+msgstr "o open e ilo open"
 
 #: components/modal/modals/MFAEnableTOTP.tsx
 msgid "Enable authenticator app"
-msgstr ""
+msgstr "o open e ilo open"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Enable Desktop Notifications"
@@ -2086,43 +2086,43 @@ msgstr "o mu lon ilo ale"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Enable Push Notifications"
-msgstr ""
+msgstr "o open e mu pi ilo"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Enable the tools below"
-msgstr ""
+msgstr "o open e ilo anpa"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Enable transparency glass/blur effects (slow on older machines)"
-msgstr ""
+msgstr "o open e kule pi lukin len (ilo pi tenpo pini li kama kon ala)"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Encoder"
-msgstr ""
+msgstr "ilo pi pali sona kalama"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Encoder target bitrate"
-msgstr ""
+msgstr "suli pana pi ilo pi pali sona kalama"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "End call"
-msgstr ""
+msgstr "o pini e toki kalama"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced"
-msgstr ""
+msgstr "pona mute"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced (RNNoise)"
-msgstr ""
+msgstr "pona mute (RNNoise)"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Enter a full address starting with http:// or https://"
-msgstr ""
+msgstr "o sitelen e nasin ale. nasin li open kepeken http:// anu https://"
 
 #: components/modal/modals/RenameSession.tsx
 msgid "Enter a new name for this session"
-msgstr ""
+msgstr "o pana e nimi sin tawa tenpo open ni"
 
 #: components/auth/src/flows/Form.tsx
 #: components/modal/modals/EditPassword.tsx
@@ -2135,7 +2135,7 @@ msgstr "ni li pona tawa mi"
 
 #: components/modal/modals/MFAEnableTOTP.tsx
 msgid "Enter Code"
-msgstr ""
+msgstr "o pana e nimi nanpa"
 
 #: components/auth/src/flows/Form.tsx
 msgid "Enter your current password."
@@ -2145,11 +2145,11 @@ msgstr "o sitelen e nimi open pi tenpo ni."
 #: components/modal/modals/EditPassword.tsx
 #: components/modal/modals/EditUsername.tsx
 msgid "Enter your current password..."
-msgstr ""
+msgstr "o pana e nimi open pi tenpo ni..."
 
 #: components/auth/src/flows/Form.tsx
 msgid "Enter your invite code."
-msgstr ""
+msgstr "o pana e nimi kama sina."
 
 #: components/auth/src/flows/Form.tsx
 msgid "Enter your preferred username."
@@ -2157,39 +2157,39 @@ msgstr "o sitelen e nimi ilo sina."
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Entire screen"
-msgstr ""
+msgstr "sitelen ilo ale"
 
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Error occurred, please email support."
-msgstr ""
+msgstr "pakala li kama. o toki tawa jan pi pona ilo kepeken ilo Email."
 
 #: components/app/interface/channels/text/EditMessage.tsx
 msgid "escape to <0>cancel</0> · enter to <1>save</1>"
-msgstr ""
+msgstr "nena escape la <0>weka</0> · nena enter la <1>awen</1>"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Estimated upload bandwidth"
-msgstr ""
+msgstr "suli pi nasin pana (ken)"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone"
-msgstr ""
+msgstr "jan ale"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Excellent"
-msgstr ""
+msgstr "pona a"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Excellent connection"
-msgstr ""
+msgstr "nasin pona a"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
-msgstr ""
+msgstr "o pana tawa ma ante"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "External links can be dangerous!"
@@ -2197,31 +2197,31 @@ msgstr "nimi nasin li ken tawa lipu ike!"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Extortion or blackmail"
-msgstr ""
+msgstr "wile mani kepeken ike"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Extreme violence, gore or animal cruelty"
-msgstr ""
+msgstr "utala suli, kiwen kon loje, ike tawa soweli"
 
 #: components/client/NotificationsController.ts
 msgid "Failed to enable notifications. AnyTalk does not have notification permission."
-msgstr ""
+msgstr "mi ken ala open e mu. AnyTalk li ken ala pana e mu."
 
 #: components/client/NotificationsController.ts
 msgid "Failed to enable push notifications. Please try again later."
-msgstr ""
+msgstr "mi ken ala open e mu. o alasa sin lon tenpo kama."
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "Failed to load bots..."
-msgstr ""
+msgstr "mi ken ala lukin e jan ilo..."
 
 #: components/i18n/errors.tsx
 msgid "Failed to process the image you provided."
-msgstr ""
+msgstr "mi ken ala pali e sitelen sina."
 
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Failed to send"
-msgstr ""
+msgstr "mi ken ala pana"
 
 #: components/auth/src/flows/FlowVerify.tsx
 msgid "Failed to verify!"
@@ -2234,7 +2234,7 @@ msgstr "toki wile"
 #. placeholder {0}: humanFileSize(local.maxSize)
 #: components/ui/components/utils/Form2.tsx
 msgid "File must be smaller than {0}"
-msgstr ""
+msgstr "suli lipu li wile lili tawa {0}"
 
 #: src/interface/Home.tsx
 msgid "Find a community based on your hobbies or interests."
@@ -2242,7 +2242,7 @@ msgstr "o alasa e kulupu pi ijo musi sina."
 
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Find new servers to join"
-msgstr ""
+msgstr "o alasa e ma sin tawa kama"
 
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
@@ -2259,36 +2259,36 @@ msgstr "kute"
 
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Folder"
-msgstr ""
+msgstr "poki lipu"
 
 #: components/modal/modals/EditServerFolder.tsx
 msgid "Folder colour"
-msgstr ""
+msgstr "kule pi poki lipu"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "For 1 hour"
-msgstr ""
+msgstr "tenpo wan (tenpo suno lili)"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "For 15 minutes"
-msgstr ""
+msgstr "tenpo lili mute (15)"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "For 24 hours"
-msgstr ""
+msgstr "tenpo suno wan"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "For 3 hours"
-msgstr ""
+msgstr "tenpo suno lili (3)"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "For 8 hours"
-msgstr ""
+msgstr "tenpo suno lili (8)"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frame rate"
