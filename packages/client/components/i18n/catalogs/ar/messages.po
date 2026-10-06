@@ -598,6 +598,10 @@ msgstr "إعدادات الصوت المتقدمة"
 msgid "All"
 msgstr "كل"
 
+#: components/app/interface/settings/user/notifications/Notifications.tsx
+msgid "All messages"
+msgstr "كل الرسائل"
+
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "All Messages"
@@ -669,6 +673,11 @@ msgstr "يستخدم تطبيق آخر هذه المفاتيح بالفعل، ل
 #~ msgid "Another app is already using these keys. Pick other keys."
 #~ msgstr "يستخدم تطبيق آخر هذه المفاتيح بالفعل. اختر مفاتيح أخرى."
 
+#. placeholder {0}: installed()
+#: components/app/interface/settings/user/Updates.tsx
+msgid "AnyTalk Desktop {0}"
+msgstr "AnyTalk Desktop {0}"
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "AnyTalk Developer"
 msgstr "مطور AnyTalk"
@@ -684,6 +693,10 @@ msgstr "مؤسس AnyTalk"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "AnyTalk is one of the best ways to stay connected with your friends and community, anywhere, anytime."
 msgstr "AnyTalk هو واحد من الطرق المفضلة للبقاء على تواصل مع أصدقائك و مجتمعك، أين ما كنت، حين ما شئت."
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "AnyTalk is up to date."
+msgstr "AnyTalk محدَّث إلى أحدث إصدار."
 
 #: src/AndroidNag.tsx
 msgid "AnyTalk on Android"
@@ -718,6 +731,10 @@ msgstr "يعمل AnyTalk بشكل أفضل كتطبيق"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Appearance"
 msgstr "المظهر"
+
+#: components/app/interface/settings/user/notifications/Notifications.tsx
+msgid "Applies to servers you join or create from now on. Existing servers keep their level."
+msgstr "ينطبق على الخوادم التي تنضم إليها أو تنشئها من الآن فصاعدًا. تحتفظ الخوادم الحالية بمستواها."
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Apply"
@@ -1152,9 +1169,21 @@ msgstr "تحقق من وقت لآخر ما إذا تمت الموافقة على
 msgid "Check back often to see if your server has been approved!"
 msgstr "تحقق من وقت لآخر ما إذا تمت الموافقة على الخادم الخاص بك!"
 
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Check for updates"
+msgstr "التحقق من التحديثات"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Check for updates to see if there is a new version."
+msgstr "تحقّق من التحديثات لمعرفة ما إذا كان هناك إصدار جديد."
+
 #: components/auth/src/flows/FlowCheck.tsx
 msgid "Check your mail!"
 msgstr "راجع بريدك الإلكتروني!"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Checking for updates…"
+msgstr "جارٍ التحقق من التحديثات…"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
@@ -1425,11 +1454,24 @@ msgstr "انسخ معرّف المستخدم"
 msgid "Copy webhook URL"
 msgstr "نسخ رابط الوبهوك"
 
+#: components/app/interface/settings/user/Updates.tsx
+#~ msgid "Could not check for updates."
+#~ msgstr "تعذّر التحقق من التحديثات."
+
 #: components/i18n/errors.tsx
 msgid "Could not find what you requested."
 msgstr "لم يتم العثور على طلبك."
 
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Could not load the patch notes right now."
+msgstr "تعذّر تحميل ملاحظات التحديث حاليًا."
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Could not reach the updater. Try again."
+msgstr "تعذّر الوصول إلى المحدِّث. حاول مرة أخرى."
+
 #: components/app/interface/settings/user/Native.tsx
+#: components/app/interface/settings/user/Updates.tsx
 msgid "Could not save this setting."
 msgstr "تعذّر حفظ هذا الإعداد."
 
@@ -1635,6 +1677,10 @@ msgstr "فك الترميز"
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Default"
 msgstr "إفتراضي"
+
+#: components/app/interface/settings/user/notifications/Notifications.tsx
+msgid "Default notifications for new servers"
+msgstr "الإشعارات الافتراضية للخوادم الجديدة"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
@@ -1885,6 +1931,14 @@ msgstr "قمت بالتبرع لستوت"
 msgid "Done"
 msgstr "تم إنجازه"
 
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Download"
+msgstr "تنزيل"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Download again"
+msgstr "إعادة التنزيل"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Download CSV"
@@ -1897,6 +1951,11 @@ msgstr "تنزيل لنظام Linux (AppImage)"
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Download for Windows (.exe)"
 msgstr "تنزيل لنظام Windows (.exe)"
+
+#. placeholder {0}: Math.round(updaterState()?.percent ?? 0)
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Downloading {0}%"
+msgstr "جارٍ التنزيل {0}%"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Dropped frames per second"
@@ -2546,6 +2605,14 @@ msgstr "مكالمة واردة"
 msgid "Input Volume"
 msgstr "مستوى صوت الإدخال"
 
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Install updates automatically"
+msgstr "تثبيت التحديثات تلقائيًا"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Installed version"
+msgstr "الإصدار المثبّت"
+
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Instead of closing, AnyTalk will hide in your tray."
 #~ msgstr "عوضا عن الإغلاق، AnyTalk ستكون في أسفل خانة البرامج."
@@ -2982,6 +3049,10 @@ msgstr "منشن رتب محددة"
 msgid "Mentions"
 msgstr "المنشنات"
 
+#: components/app/interface/settings/user/notifications/Notifications.tsx
+msgid "Mentions only"
+msgstr "عند ذكري فقط"
+
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Mentions Only"
@@ -3224,6 +3295,10 @@ msgstr "لا يتوفر تطبيق لسطح المكتب بعد"
 msgid "No GIFs found"
 msgstr "لم يتم العثور على صور GIF"
 
+#: components/app/interface/settings/user/Updates.tsx
+msgid "No patch notes for this version."
+msgstr "لا توجد ملاحظات تحديث لهذا الإصدار."
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No permissions set yet"
 msgstr "لا يوجد صلاحيات محددة بعد"
@@ -3285,6 +3360,10 @@ msgstr "بلا حد"
 #: components/modal/modals/ReportContent.tsx
 msgid "Not of minimum age to use the platform"
 msgstr "غير مستوف للحد الادنى العمري لهذه المنصة"
+
+#: components/app/interface/settings/user/notifications/Notifications.tsx
+msgid "Nothing"
+msgstr "لا شيء"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own call recaps."
@@ -3406,6 +3485,10 @@ msgstr "فتح الملف"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "فتح الأصدقاء"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Open release page"
+msgstr "فتح صفحة الإصدار"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Open server settings"
@@ -3685,6 +3768,11 @@ msgstr "قراءة الرسائل المرسلة سابقا في القناة"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Read past messages sent in channels"
 msgstr "قراءة الرسائل المرسلة سابقا في القنوات"
+
+#. placeholder {0}: updaterState()?.version
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Ready to install: {0}"
+msgstr "جاهز للتثبيت: {0}"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 #: components/modal/modals/BanMember.tsx
@@ -3968,6 +4056,10 @@ msgstr "الدقة ومعدل الإطارات"
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Responsibly disclosed security issues"
 msgstr "ثغرات امنية تم الابلاغ عنها"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Restart to install"
+msgstr "أعد التشغيل للتثبيت"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
@@ -4915,6 +5007,7 @@ msgid "Troubleshooting"
 msgstr "استكشاف الأخطاء وإصلاحها"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
+#: components/app/interface/settings/user/Updates.tsx
 msgid "Try again"
 msgstr "حاول مرة أخرى"
 
@@ -5042,6 +5135,32 @@ msgstr "حتى {MAX_LINES} خطوط في الوقت نفسه، ألغِ تحدي
 msgid "Update"
 msgstr "تحديث"
 
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Update available"
+msgstr "تحديث متاح"
+
+#. placeholder {0}: releaseVersion(release())
+#. placeholder {0}: updaterState()?.version
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Update available: {0}"
+msgstr "تحديث متاح: {0}"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Update download progress"
+msgstr "تقدّم تنزيل التحديث"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Update failed"
+msgstr "فشل التحديث"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Updates"
+msgstr "التحديثات"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Updates download in the background and install when you restart AnyTalk. Turn off to decide yourself when to update."
+msgstr "تُنزَّل التحديثات في الخلفية وتُثبَّت عند إعادة تشغيل AnyTalk. أوقف هذا الخيار لتقرر بنفسك متى تُحدِّث."
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Upload Files"
 msgstr "رفع الملفات"
@@ -5168,8 +5287,10 @@ msgstr "تم التحقق منه"
 msgid "Verifying your account…"
 msgstr "جار التحقق من حسابك…"
 
+#. placeholder {0}: releaseVersion(release)
 #. placeholder {0}: version()
 #: components/app/interface/settings/user/DesktopDownload.tsx
+#: components/app/interface/settings/user/Updates.tsx
 msgid "Version {0}"
 msgstr "الإصدار {0}"
 
@@ -5321,6 +5442,7 @@ msgstr "أهلًا!"
 msgid "What limited the stream quality"
 msgstr "ما الذي حدّ من جودة البث"
 
+#: components/app/interface/settings/user/Updates.tsx
 #: components/modal/modals/Changelog.tsx
 msgid "What's new"
 msgstr "ما الجديد"

@@ -524,6 +524,10 @@ msgstr "詳細なサウンド設定"
 msgid "All"
 msgstr "全て"
 
+#: components/app/interface/settings/user/notifications/Notifications.tsx
+msgid "All messages"
+msgstr "すべてのメッセージ"
+
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "All Messages"
@@ -595,6 +599,11 @@ msgstr "別のアプリがすでにこれらのキーを使っているため、
 #~ msgid "Another app is already using these keys. Pick other keys."
 #~ msgstr "別のアプリがすでにこのキーを使用しています。別のキーを選んでください。"
 
+#. placeholder {0}: installed()
+#: components/app/interface/settings/user/Updates.tsx
+msgid "AnyTalk Desktop {0}"
+msgstr "AnyTalk Desktop {0}"
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "AnyTalk Developer"
 msgstr "AnyTalk 開発者"
@@ -610,6 +619,10 @@ msgstr "AnyTalk 創設者"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "AnyTalk is one of the best ways to stay connected with your friends and community, anywhere, anytime."
 msgstr "AnyTalk は、いつでもどこでも友達やコミュニティとつながり続けるための最適な方法のひとつです。"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "AnyTalk is up to date."
+msgstr "AnyTalk は最新です。"
 
 #: src/AndroidNag.tsx
 msgid "AnyTalk on Android"
@@ -644,6 +657,10 @@ msgstr "AnyTalk はアプリで使うのが最適です"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Appearance"
 msgstr "外観"
+
+#: components/app/interface/settings/user/notifications/Notifications.tsx
+msgid "Applies to servers you join or create from now on. Existing servers keep their level."
+msgstr "今後参加または作成するサーバーに適用されます。既存のサーバーは現在の設定のままです。"
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Apply"
@@ -1069,9 +1086,21 @@ msgstr "ボットが承認されたかどうか、ときどき確認してくだ
 msgid "Check back often to see if your server has been approved!"
 msgstr "サーバーが承認されたかどうか、ときどき確認してください！"
 
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Check for updates"
+msgstr "アップデートを確認"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Check for updates to see if there is a new version."
+msgstr "アップデートを確認して、新しいバージョンがあるか調べます。"
+
 #: components/auth/src/flows/FlowCheck.tsx
 msgid "Check your mail!"
 msgstr "メールをご確認ください!"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Checking for updates…"
+msgstr "アップデートを確認中…"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
@@ -1342,11 +1371,24 @@ msgstr "ユーザーIDをコピー"
 msgid "Copy webhook URL"
 msgstr "ウェブフックURLをコピー"
 
+#: components/app/interface/settings/user/Updates.tsx
+#~ msgid "Could not check for updates."
+#~ msgstr "アップデートを確認できませんでした。"
+
 #: components/i18n/errors.tsx
 msgid "Could not find what you requested."
 msgstr "指定されたリクエスト先が見つかりませんでした。"
 
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Could not load the patch notes right now."
+msgstr "現在パッチノートを読み込めません。"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Could not reach the updater. Try again."
+msgstr "アップデーターに接続できませんでした。もう一度お試しください。"
+
 #: components/app/interface/settings/user/Native.tsx
+#: components/app/interface/settings/user/Updates.tsx
 msgid "Could not save this setting."
 msgstr "この設定を保存できませんでした。"
 
@@ -1551,6 +1593,10 @@ msgstr "デコーダー"
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Default"
 msgstr "デフォルト"
+
+#: components/app/interface/settings/user/notifications/Notifications.tsx
+msgid "Default notifications for new servers"
+msgstr "新しいサーバーのデフォルト通知"
 
 #~ msgid "Default Permissions"
 #~ msgstr "デフォルトの権限"
@@ -1791,6 +1837,14 @@ msgstr "AnyTalkに寄付した"
 msgid "Done"
 msgstr "完了"
 
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Download"
+msgstr "ダウンロード"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Download again"
+msgstr "もう一度ダウンロード"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Download CSV"
@@ -1803,6 +1857,11 @@ msgstr "Linux 版をダウンロード（AppImage）"
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Download for Windows (.exe)"
 msgstr "Windows 版をダウンロード（.exe）"
+
+#. placeholder {0}: Math.round(updaterState()?.percent ?? 0)
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Downloading {0}%"
+msgstr "ダウンロード中 {0}%"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Dropped frames per second"
@@ -2449,6 +2508,14 @@ msgstr "着信"
 msgid "Input Volume"
 msgstr "入力音量"
 
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Install updates automatically"
+msgstr "アップデートを自動でインストール"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Installed version"
+msgstr "インストール済みのバージョン"
+
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Instead of closing, AnyTalk will hide in your tray."
 #~ msgstr "AnyTalkを終了する代わりに、システムトレイに格納します。"
@@ -2882,6 +2949,10 @@ msgstr "全てのロールにメンションできます"
 msgid "Mentions"
 msgstr "メンション"
 
+#: components/app/interface/settings/user/notifications/Notifications.tsx
+msgid "Mentions only"
+msgstr "メンションのみ"
+
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Mentions Only"
@@ -3124,6 +3195,10 @@ msgstr "デスクトップアプリはまだありません"
 msgid "No GIFs found"
 msgstr "GIF が見つかりません"
 
+#: components/app/interface/settings/user/Updates.tsx
+msgid "No patch notes for this version."
+msgstr "このバージョンのパッチノートはありません。"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No permissions set yet"
 msgstr "権限の設定はまだありません"
@@ -3185,6 +3260,10 @@ msgstr "制限なし"
 #: components/modal/modals/ReportContent.tsx
 msgid "Not of minimum age to use the platform"
 msgstr "このプラットフォームを使用できる最低年齢に達していない"
+
+#: components/app/interface/settings/user/notifications/Notifications.tsx
+msgid "Nothing"
+msgstr "なし"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own call recaps."
@@ -3306,6 +3385,10 @@ msgstr "ファイルを開く"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "フレンドを開く"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Open release page"
+msgstr "リリースページを開く"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Open server settings"
@@ -3582,6 +3665,11 @@ msgstr "チャンネルで過去に送信されたメッセージを読むこと
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Read past messages sent in channels"
 msgstr "各チャンネルで過去に送信されたメッセージを読むことができます"
+
+#. placeholder {0}: updaterState()?.version
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Ready to install: {0}"
+msgstr "インストール準備完了: {0}"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 #: components/modal/modals/BanMember.tsx
@@ -3865,6 +3953,10 @@ msgstr "解像度と FPS"
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Responsibly disclosed security issues"
 msgstr "脆弱性を報告した"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Restart to install"
+msgstr "再起動してインストール"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
@@ -4800,6 +4892,7 @@ msgid "Troubleshooting"
 msgstr "トラブルシューティング"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
+#: components/app/interface/settings/user/Updates.tsx
 msgid "Try again"
 msgstr "もう一度試す"
 
@@ -4927,6 +5020,32 @@ msgstr "一度に最大 {MAX_LINES} 本まで表示できます。別の線を�
 msgid "Update"
 msgstr "更新"
 
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Update available"
+msgstr "アップデートあり"
+
+#. placeholder {0}: releaseVersion(release())
+#. placeholder {0}: updaterState()?.version
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Update available: {0}"
+msgstr "アップデートあり: {0}"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Update download progress"
+msgstr "アップデートのダウンロード進行状況"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Update failed"
+msgstr "アップデートに失敗しました"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Updates"
+msgstr "アップデート"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Updates download in the background and install when you restart AnyTalk. Turn off to decide yourself when to update."
+msgstr "アップデートはバックグラウンドでダウンロードされ、AnyTalk の再起動時にインストールされます。オフにすると、更新するタイミングを自分で決められます。"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Upload Files"
 msgstr "ファイルのアップロード"
@@ -5047,8 +5166,10 @@ msgstr "認証済み"
 msgid "Verifying your account…"
 msgstr "アカウントを検証中…"
 
+#. placeholder {0}: releaseVersion(release)
 #. placeholder {0}: version()
 #: components/app/interface/settings/user/DesktopDownload.tsx
+#: components/app/interface/settings/user/Updates.tsx
 msgid "Version {0}"
 msgstr "バージョン {0}"
 
@@ -5200,6 +5321,7 @@ msgstr "ようこそ！"
 msgid "What limited the stream quality"
 msgstr "配信品質を制限した要因"
 
+#: components/app/interface/settings/user/Updates.tsx
 #: components/modal/modals/Changelog.tsx
 msgid "What's new"
 msgstr "新着情報"

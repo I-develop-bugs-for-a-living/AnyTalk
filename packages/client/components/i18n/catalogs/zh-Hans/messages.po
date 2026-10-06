@@ -598,6 +598,10 @@ msgstr "高级声音设置"
 msgid "All"
 msgstr "全部"
 
+#: components/app/interface/settings/user/notifications/Notifications.tsx
+msgid "All messages"
+msgstr "所有消息"
+
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "All Messages"
@@ -669,6 +673,11 @@ msgstr "其他应用已在使用这些按键，因此它们仅在 AnyTalk 内有
 #~ msgid "Another app is already using these keys. Pick other keys."
 #~ msgstr "其他应用已在使用这些按键，请选择其他按键。"
 
+#. placeholder {0}: installed()
+#: components/app/interface/settings/user/Updates.tsx
+msgid "AnyTalk Desktop {0}"
+msgstr "AnyTalk Desktop {0}"
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "AnyTalk Developer"
 msgstr "AnyTalk 开发者"
@@ -684,6 +693,10 @@ msgstr "AnyTalk 创始人"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "AnyTalk is one of the best ways to stay connected with your friends and community, anywhere, anytime."
 msgstr "AnyTalk 是随时随地与好友和社区保持联系的最佳方式之一。"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "AnyTalk is up to date."
+msgstr "AnyTalk 已是最新版本。"
 
 #: src/AndroidNag.tsx
 msgid "AnyTalk on Android"
@@ -718,6 +731,10 @@ msgstr "AnyTalk 作为应用体验最佳"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Appearance"
 msgstr "外观"
+
+#: components/app/interface/settings/user/notifications/Notifications.tsx
+msgid "Applies to servers you join or create from now on. Existing servers keep their level."
+msgstr "适用于你之后加入或创建的服务器。现有服务器保持原有级别。"
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Apply"
@@ -1154,9 +1171,21 @@ msgstr "请经常回来查看你的机器人是否已通过审核！"
 msgid "Check back often to see if your server has been approved!"
 msgstr "请经常回来查看你的服务器是否已通过审核！"
 
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Check for updates"
+msgstr "检查更新"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Check for updates to see if there is a new version."
+msgstr "检查更新，看看是否有新版本。"
+
 #: components/auth/src/flows/FlowCheck.tsx
 msgid "Check your mail!"
 msgstr "请检查您的邮件！"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Checking for updates…"
+msgstr "正在检查更新…"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
@@ -1427,11 +1456,24 @@ msgstr "复制用户 ID"
 msgid "Copy webhook URL"
 msgstr "复制 Webhook 链接"
 
+#: components/app/interface/settings/user/Updates.tsx
+#~ msgid "Could not check for updates."
+#~ msgstr "无法检查更新。"
+
 #: components/i18n/errors.tsx
 msgid "Could not find what you requested."
 msgstr "找不到你请求的内容。"
 
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Could not load the patch notes right now."
+msgstr "暂时无法加载更新日志。"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Could not reach the updater. Try again."
+msgstr "无法连接到更新程序，请重试。"
+
 #: components/app/interface/settings/user/Native.tsx
+#: components/app/interface/settings/user/Updates.tsx
 msgid "Could not save this setting."
 msgstr "无法保存此设置。"
 
@@ -1637,6 +1679,10 @@ msgstr "解码器"
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Default"
 msgstr "默认"
+
+#: components/app/interface/settings/user/notifications/Notifications.tsx
+msgid "Default notifications for new servers"
+msgstr "新服务器的默认通知"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
@@ -1884,6 +1930,14 @@ msgstr "已向 AnyTalk 捐赠"
 msgid "Done"
 msgstr "完成"
 
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Download"
+msgstr "下载"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Download again"
+msgstr "重新下载"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Download CSV"
@@ -1896,6 +1950,11 @@ msgstr "下载 Linux 版（AppImage）"
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Download for Windows (.exe)"
 msgstr "下载 Windows 版（.exe）"
+
+#. placeholder {0}: Math.round(updaterState()?.percent ?? 0)
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Downloading {0}%"
+msgstr "正在下载 {0}%"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Dropped frames per second"
@@ -2546,6 +2605,14 @@ msgstr "来电"
 msgid "Input Volume"
 msgstr "输入音量"
 
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Install updates automatically"
+msgstr "自动安装更新"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Installed version"
+msgstr "已安装版本"
+
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Instead of closing, AnyTalk will hide in your tray."
 #~ msgstr "关闭时，AnyTalk 将隐藏到托盘中而不是退出。"
@@ -2982,6 +3049,10 @@ msgstr "提及特定角色"
 msgid "Mentions"
 msgstr "提及"
 
+#: components/app/interface/settings/user/notifications/Notifications.tsx
+msgid "Mentions only"
+msgstr "仅提及我的"
+
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Mentions Only"
@@ -3224,6 +3295,10 @@ msgstr "暂无桌面应用"
 msgid "No GIFs found"
 msgstr "未找到 GIF"
 
+#: components/app/interface/settings/user/Updates.tsx
+msgid "No patch notes for this version."
+msgstr "此版本没有更新日志。"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No permissions set yet"
 msgstr "尚未设置权限"
@@ -3285,6 +3360,10 @@ msgstr "不限制"
 #: components/modal/modals/ReportContent.tsx
 msgid "Not of minimum age to use the platform"
 msgstr "未达到使用本平台的最低年龄"
+
+#: components/app/interface/settings/user/notifications/Notifications.tsx
+msgid "Nothing"
+msgstr "不通知"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own call recaps."
@@ -3406,6 +3485,10 @@ msgstr "打开文件"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "打开好友"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Open release page"
+msgstr "打开发布页面"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Open server settings"
@@ -3686,6 +3769,11 @@ msgstr "阅读频道中发送过的历史消息"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Read past messages sent in channels"
 msgstr "阅读频道中发送过的历史消息"
+
+#. placeholder {0}: updaterState()?.version
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Ready to install: {0}"
+msgstr "可以安装：{0}"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 #: components/modal/modals/BanMember.tsx
@@ -3969,6 +4057,10 @@ msgstr "分辨率和帧率"
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Responsibly disclosed security issues"
 msgstr "负责任地披露了安全问题"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Restart to install"
+msgstr "重启以安装"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
@@ -4916,6 +5008,7 @@ msgid "Troubleshooting"
 msgstr "故障排查"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
+#: components/app/interface/settings/user/Updates.tsx
 msgid "Try again"
 msgstr "重试"
 
@@ -5042,6 +5135,32 @@ msgstr "最多同时显示 {MAX_LINES} 条线，取消选择一条后才能添�
 #: components/app/interface/desktop/Titlebar.tsx
 msgid "Update"
 msgstr "更新"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Update available"
+msgstr "有可用更新"
+
+#. placeholder {0}: releaseVersion(release())
+#. placeholder {0}: updaterState()?.version
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Update available: {0}"
+msgstr "有可用更新：{0}"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Update download progress"
+msgstr "更新下载进度"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Update failed"
+msgstr "更新失败"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Updates"
+msgstr "更新"
+
+#: components/app/interface/settings/user/Updates.tsx
+msgid "Updates download in the background and install when you restart AnyTalk. Turn off to decide yourself when to update."
+msgstr "更新会在后台下载，并在重启 AnyTalk 时安装。关闭后可自行决定何时更新。"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Upload Files"
@@ -5171,8 +5290,10 @@ msgstr "已认证"
 msgid "Verifying your account…"
 msgstr "验证您的账户…"
 
+#. placeholder {0}: releaseVersion(release)
 #. placeholder {0}: version()
 #: components/app/interface/settings/user/DesktopDownload.tsx
+#: components/app/interface/settings/user/Updates.tsx
 msgid "Version {0}"
 msgstr "版本 {0}"
 
@@ -5324,6 +5445,7 @@ msgstr "欢迎！"
 msgid "What limited the stream quality"
 msgstr "限制直播画质的因素"
 
+#: components/app/interface/settings/user/Updates.tsx
 #: components/modal/modals/Changelog.tsx
 msgid "What's new"
 msgstr "新功能"
