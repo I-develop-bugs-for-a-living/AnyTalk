@@ -6,6 +6,7 @@ import { styled } from "styled-system/jsx";
 
 import { useMessage } from "@revolt/app";
 import { useDevice } from "@revolt/common";
+import { useTime } from "@revolt/i18n";
 import { Ripple, typography } from "@revolt/ui/components/design";
 import { Column, Row } from "@revolt/ui/components/layout";
 import {
@@ -143,6 +144,21 @@ const base = cva({
 
     "&:hover .Toolbar": {
       display: "flex",
+    },
+
+    // keyboard focus on the message or on a toolbar button (:focus-visible,
+    // not :focus-within, so a click or an editor doesn't pin the toolbar open)
+    "&:focus-visible .Toolbar, &:has(.Toolbar :focus-visible) .Toolbar": {
+      display: "flex",
+    },
+
+    // keep a keyboard-focused message clear of the composer overlay
+    scrollMarginBlock: "8px 32px",
+
+    // focus ring for messages reached with the keyboard
+    "&:focus-visible": {
+      outline: "2px solid var(--md-sys-color-primary)",
+      outlineOffset: "-2px",
     },
   },
   variants: {
@@ -331,12 +347,40 @@ const CompactInfo = styled(Row, {
  */
 export function MessageContainer(props: Props) {
   const { t } = useLingui();
+  const dayjs = useTime();
   const { message } = useMessage();
   const { isMobile, isIOSTouch } = useDevice();
+
+  /**
+   * Whether this is a message in a list (not a link-style preview), so it
+   * can be moved to with the keyboard (see Messages.tsx) and gets a name
+   */
+  const navigable = () => !!message && !props.isLink;
+
+  /**
+   * Short accessible name: who wrote the message and when. The content is not
+   * repeated, screen readers read it from inside the article.
+   */
+  const accessibleName = () => {
+    if (!navigable()) return undefined;
+    const name =
+      message!.masquerade?.name ??
+      message!.member?.nickname ??
+      message!.author?.displayName ??
+      message!.author?.username ??
+      message!.username ??
+      "";
+    const time = dayjs(message!.createdAt).format("LLL");
+    return name ? t`Message from ${name}, ${time}` : t`Message, ${time}`;
+  };
 
   return (
     <div
       id={message?.id}
+      role={navigable() ? "article" : undefined}
+      aria-label={accessibleName()}
+      data-message-item={navigable() ? "" : undefined}
+      tabIndex={navigable() ? -1 : undefined}
       ref={props.ref}
       onMouseEnter={() => props.onHover && props.onHover(true)}
       onMouseLeave={() => props.onHover && props.onHover(false)}

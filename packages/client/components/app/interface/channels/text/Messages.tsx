@@ -16,6 +16,7 @@ import {
   splitProps,
 } from "solid-js";
 
+import { useLingui } from "@lingui/solid/macro";
 import isEqual from "lodash.isequal";
 import { Channel, Message as MessageInterface } from "stoat.js";
 import { styled } from "styled-system/jsx";
@@ -38,8 +39,19 @@ import {
 } from "@revolt/ui/components/utils/ListView2";
 
 import { CompositionInfo } from "./CompositionInfo";
+import {
+  focusMessageList,
+  isPointerFocus,
+  setPointerFocus,
+} from "./focusMessageList";
 import { Message } from "./Message";
 import { useMessageCache } from "./MessageCache";
+import {
+  isMessageNavKey,
+  messagePageSize,
+  nextMessageIndex,
+  tabStopIndex,
+} from "./messageListNavigation";
 
 /**
  * Initial fetch limit
@@ -100,6 +112,7 @@ export function Messages(props: Props) {
   const client = useClient();
   const state = useState();
   const dayjs = useTime();
+  const { t } = useLingui();
 
   /**
    * Loaded messages
@@ -601,6 +614,205 @@ export function Messages(props: Props) {
     }
   }
 
+  /**
+   * Id of the message that was focused last (the keyboard tab stop)
+   */
+  const [activeId, setActiveId] = createSignal<string>();
+
+  /**
+   * Messages in the list as elements, oldest first (same as screen order)
+   * @returns Message elements
+   */
+  function messageItems(): HTMLElement[] {
+    return Array.from(
+      listRef()?.querySelectorAll<HTMLElement>("[data-message-item]") ?? [],
+    );
+  }
+
+  /**
+   * Message element that had focus last, to notice when it is removed
+   */
+  let focusedItem: HTMLElement | undefined;
+
+  /**
+   * Position of that element in the list, to pick its neighbour
+   */
+  let focusedIndex = 0;
+
+  /**
+   * Roving focus: exactly one message is in the tab order (the one focused
+   * last, or the newest), the others are -1 (set by the message container).
+   * Only the tab stop is promoted to 0 here. If the focused message was
+   * removed and focus fell back to the page, focus moves to the same message
+   * (re-created) or its neighbour.
+   */
+  function applyTabStops() {
+    const items = messageItems();
+    const stop = tabStopIndex(
+      items.map((item) => item.id),
+      activeId(),
+    );
+    items.forEach((item, index) => {
+      item.tabIndex = index === stop ? 0 : -1;
+    });
+
+    if (
+      focusedItem &&
+      !focusedItem.isConnected &&
+      (!document.activeElement || document.activeElement === document.body)
+    ) {
+      const id = focusedItem.id;
+      const replacement =
+        items.find((item) => item.id === id) ??
+        items[Math.min(focusedIndex, items.length - 1)];
+      focusedItem = undefined;
+      if (replacement && !isPointerFocus()) focusMessage(replacement);
+    }
+  }
+
+  createEffect(() => {
+    // the list itself is created inside <Deferred>, so track it too
+    const list = listRef();
+    messagesWithTail();
+    activeId();
+    atEnd();
+
+    // wait until the new elements are in the DOM
+    queueMicrotask(applyTabStops);
+
+    // pending messages and other changes below the list's children
+    if (list) {
+      const observer = new MutationObserver(() => applyTabStops());
+      observer.observe(list, { childList: true });
+      onCleanup(() => observer.disconnect());
+    }
+  });
+
+  /**
+   * Track whether focus came from a pointer press (see focusMessageList.ts):
+   * a press inside the list says yes, a press elsewhere or Tab says no
+   */
+  onMount(() => {
+    const onPointerDown = (event: PointerEvent) =>
+      setPointerFocus(
+        event.target instanceof Node && !!listRef()?.contains(event.target),
+      );
+    const onTab = (event: KeyboardEvent) => {
+      if (event.key === "Tab") setPointerFocus(false);
+    };
+    document.addEventListener("pointerdown", onPointerDown, true);
+    document.addEventListener("keydown", onTab, true);
+    onCleanup(() => {
+      document.removeEventListener("pointerdown", onPointerDown, true);
+      document.removeEventListener("keydown", onTab, true);
+    });
+  });
+
+  /**
+   * Move focus to a message and keep it in view
+   * @param item Message element
+   */
+  function focusMessage(item: HTMLElement) {
+    setPointerFocus(false);
+    setActiveId(item.id);
+    item.tabIndex = 0;
+    item.focus({ preventScroll: true });
+    item.scrollIntoView({ block: "nearest" });
+  }
+
+  /**
+   * Remember which message holds focus (or contains the focused element)
+   * @param event Focus event
+   */
+  function onListFocusIn(event: FocusEvent) {
+    if (!(event.target instanceof Element)) return;
+    const item = event.target.closest<HTMLElement>("[data-message-item]");
+    if (item && item.id) {
+      setActiveId(item.id);
+      focusedItem = item;
+      focusedIndex = messageItems().indexOf(item);
+      applyTabStops();
+    }
+  }
+
+  /**
+   * Forget the remembered message when focus moves away from a message that is
+   * still in the page (a removed message loses focus without this event)
+   * @param event Focus event
+   */
+  function onListFocusOut(event: FocusEvent) {
+    if (event.target === focusedItem && focusedItem?.isConnected) {
+      focusedItem = undefined;
+    }
+  }
+
+  /**
+   * Pending Escape focus fallback, cleared on unmount so a channel switch
+   * within the delay can't focus a message in the next list
+   */
+  let escapeFallback: ReturnType<typeof setTimeout> | undefined;
+
+  /**
+   * Arrow keys, Home, End, PageUp and PageDown move between messages. Only
+   * when the message itself has focus: inside the editor, on a link or on a
+   * toolbar button the keys keep their normal meaning.
+   * @param event Keyboard event
+   */
+  function onListKeyDown(event: KeyboardEvent) {
+    // Escape: the global keybind jumps to the end and focuses the composer;
+    // if focus ends up nowhere, put it back on a message
+    if (event.key === "Escape") {
+      clearTimeout(escapeFallback);
+      escapeFallback = setTimeout(() => {
+        if (!document.activeElement || document.activeElement === document.body)
+          focusMessageList();
+      }, 50);
+      return;
+    }
+
+    // after a click the keys keep scrolling the pane natively
+    if (isPointerFocus()) return;
+    if (event.defaultPrevented || !isMessageNavKey(event)) return;
+
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+    if (!target.hasAttribute("data-message-item")) return;
+
+    const items = messageItems();
+    const current = items.indexOf(target);
+    const scroller = findScrollContainer(listRef());
+    const list = listRef();
+    const pageSize = messagePageSize(
+      scroller?.clientHeight ?? 0,
+      list && items.length ? list.offsetHeight / items.length : 0,
+    );
+
+    const next = nextMessageIndex(items.length, current, event.key, pageSize);
+    if (next < 0) return;
+
+    // keys have been taken, don't scroll the page as well
+    event.preventDefault();
+
+    if (next !== current) {
+      focusMessage(items[next]);
+      return;
+    }
+
+    // At the edge of what is loaded: scroll a bit so the placeholder for
+    // older (or newer) messages becomes visible, which loads them the same way
+    // scrolling does. The next key press then moves into them.
+    const step = (scroller?.clientHeight ?? 200) / 2;
+    if (current === 0 && !atStart() && event.key !== "ArrowDown") {
+      scroller?.scrollBy({ top: -step });
+    } else if (
+      current === items.length - 1 &&
+      !atEnd() &&
+      event.key !== "ArrowUp"
+    ) {
+      scroller?.scrollBy({ top: step });
+    }
+  }
+
   // Setup references if they exists
   onMount(() => {
     props.jumpToBottomRef?.(jumpToBottom);
@@ -699,6 +911,7 @@ export function Messages(props: Props) {
   });
 
   onCleanup(() => {
+    clearTimeout(escapeFallback);
     const c = client();
     c.removeListener("messageCreate", onMessage);
     c.removeListener("messageDeleteBulk", onMessageDeleteBulk);
@@ -930,7 +1143,16 @@ export function Messages(props: Props) {
         permitFetching={() => typeof fetching() !== "string"}
       >
         <Deferred>
-          <div ref={setListRef}>
+          <div
+            ref={setListRef}
+            role="feed"
+            aria-label={t`Messages`}
+            aria-busy={typeof fetching() === "string"}
+            data-message-list=""
+            onKeyDown={onListKeyDown}
+            onFocusIn={onListFocusIn}
+            onFocusOut={onListFocusOut}
+          >
             <Show when={atStart()}>
               <ConversationStart channel={props.channel} />
             </Show>
