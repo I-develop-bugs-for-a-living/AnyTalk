@@ -123,7 +123,10 @@ export function ScreenShareButton(props: { size: "xs" | "sm" }) {
                   "z-index": "999",
                 }}
               >
-                <ContextMenu>
+                <ContextMenu
+                  initialFocus="none"
+                  onRequestClose={() => setOpen(false)}
+                >
                   <ContextMenuButton
                     symbol={<Symbol size={16}>swap_horiz</Symbol>}
                     onClick={() => pick(() => voice.switchScreenshareSource())}

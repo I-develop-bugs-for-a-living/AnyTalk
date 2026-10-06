@@ -120,7 +120,7 @@ export function UserMenu(props: Props) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2, easing: [0.87, 0, 0.13, 1] }}
           >
-            <ContextMenu>
+            <ContextMenu onRequestClose={close}>
               <ContextMenuItem
                 onClick={() => openModal({ type: "settings", config: "user" })}
                 action

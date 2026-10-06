@@ -464,12 +464,10 @@ export function UserContextMenu(props: {
             </IconSlot>
           }
           buttonContent={<Trans>Move to channel</Trans>}
-          aria-haspopup="menu"
         >
           <For each={moveChannels()}>
             {(channel) => (
               <ContextMenuButton
-                role="menuitem"
                 _titleCase={false}
                 onClick={() => moveUser(props.user.id, channel)}
               >
