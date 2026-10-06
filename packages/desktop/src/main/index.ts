@@ -28,6 +28,14 @@ import { resetGlobalHotkeys, setGlobalHotkeys } from "./hotkeys";
 import { APP_ID, desktopEnvironment, isWayland } from "./platform";
 import { installScreenShare } from "./screen";
 import {
+  checkForUpdates,
+  downloadUpdate,
+  getUpdaterState,
+  installUpdate,
+  setAutoUpdate,
+  startUpdater,
+} from "./updater";
+import {
   DEFAULT_URL,
   effectiveUrl,
   isServerUrl,
@@ -57,6 +65,8 @@ let quitting = false;
 /** Whether a StatusNotifier host (system tray) exists, see `detectTray`. */
 let trayAvailable = true;
 let lastFailure: ErrorInfo | undefined;
+/** Whether a downloaded update waits for a restart, see `startUpdater`. */
+let updateReady = false;
 
 // Chromium switches must be set before the app is ready
 if (!getConfig().hardwareAcceleration) app.disableHardwareAcceleration();
@@ -183,6 +193,18 @@ function showErrorPage() {
 function quitApp() {
   quitting = true;
   app.quit();
+}
+
+/** Restart into the downloaded update (tray menu, app menu). */
+function restartToUpdate() {
+  // Set first so the close handler doesn't hide the window instead of quitting
+  quitting = true;
+  try {
+    installUpdate();
+  } catch (error) {
+    quitting = false;
+    console.error("[updater] could not restart to update:", error);
+  }
 }
 
 /** Create the main window with the saved size and frame style. */
@@ -329,6 +351,26 @@ function createWindow() {
   return win;
 }
 
+/** Build the tray menu, with "Restart to update" once an update is ready. */
+function buildTrayMenu() {
+  return Menu.buildFromTemplate([
+    { label: "Show AnyTalk", click: showWindow },
+    ...(updateReady
+      ? [{ label: "Restart to update", click: restartToUpdate }]
+      : []),
+    {
+      label: "Reset server URL",
+      click: () => {
+        updateConfig({ serverUrl: "" });
+        showWindow();
+        loadApp();
+      },
+    },
+    { type: "separator" as const },
+    { label: "Quit", click: quitApp },
+  ]);
+}
+
 /** Create the tray icon and its menu. */
 function createTray() {
   const icon = nativeImage
@@ -336,21 +378,7 @@ function createTray() {
     .resize({ width: 32, height: 32 });
   tray = new Tray(icon);
   tray.setToolTip("AnyTalk");
-  tray.setContextMenu(
-    Menu.buildFromTemplate([
-      { label: "Show AnyTalk", click: showWindow },
-      {
-        label: "Reset server URL",
-        click: () => {
-          updateConfig({ serverUrl: "" });
-          showWindow();
-          loadApp();
-        },
-      },
-      { type: "separator" },
-      { label: "Quit", click: quitApp },
-    ]),
-  );
+  tray.setContextMenu(buildTrayMenu());
   tray.on("click", () => {
     if (mainWindow?.isVisible() && mainWindow.isFocused()) mainWindow.hide();
     else showWindow();
@@ -364,6 +392,9 @@ function createMenu() {
       {
         label: "File",
         submenu: [
+          ...(updateReady
+            ? [{ label: "Restart to update", click: restartToUpdate }]
+            : []),
           { label: "Quit", accelerator: "CmdOrCtrl+Q", click: quitApp },
         ],
       },
@@ -419,8 +450,16 @@ function registerIpc() {
     }
     const next = updateConfig(update as Partial<DesktopConfig>);
     mainWindow?.webContents.session.setSpellCheckerEnabled(next.spellchecker);
+    setAutoUpdate(next.autoUpdate);
     if (next.serverUrl !== previousUrl) loadApp();
     return next;
+  });
+  handleApp(IPC.updaterGetState, () => getUpdaterState());
+  handleApp(IPC.updaterCheck, () => checkForUpdates());
+  handleApp(IPC.updaterDownload, () => downloadUpdate());
+  handleApp(IPC.updaterInstall, () => {
+    // Only once downloaded, same path as the tray item
+    if (getUpdaterState().status === "downloaded") restartToUpdate();
   });
   handleApp(IPC.autostartGet, () => getAutostart());
   handleApp(IPC.autostartSet, (value: boolean) => setAutostart(value === true));
@@ -522,6 +561,12 @@ if (!app.requestSingleInstanceLock()) {
     createMenu();
     if (trayAvailable) createTray();
     createWindow();
+    startUpdater(getConfig().autoUpdate, () => {
+      // Menus are static, so rebuild them with the restart item
+      updateReady = true;
+      tray?.setContextMenu(buildTrayMenu());
+      createMenu();
+    });
     if (getConfig().firstLaunch) updateConfig({ firstLaunch: false });
   });
 }

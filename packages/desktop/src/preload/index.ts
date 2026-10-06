@@ -8,6 +8,7 @@ import {
   type HotkeyResult,
   type PickerRequest,
   type PickerSource,
+  type UpdaterState,
   IPC,
 } from "../shared/ipc";
 
@@ -49,6 +50,12 @@ ipcRenderer.on(IPC.windowMaximised, (_event, maximised: boolean) => {
 const hotkeyListeners = new Set<(action: string) => void>();
 ipcRenderer.on(IPC.hotkeyFired, (_event, action: string) => {
   hotkeyListeners.forEach((listener) => listener(action));
+});
+
+/** Subscribers to updater state changes. */
+const updaterListeners = new Set<(state: UpdaterState) => void>();
+ipcRenderer.on(IPC.updaterState, (_event, state: UpdaterState) => {
+  updaterListeners.forEach((listener) => listener(state));
 });
 
 /** Expose the bridge the web client switches on. */
@@ -101,6 +108,22 @@ function exposeNative() {
     getAutostart: () => invoke<boolean>(IPC.autostartGet),
     setAutostart: (value: boolean) => invoke<boolean>(IPC.autostartSet, value),
     getDefaultServerUrl: () => invoke<string>(IPC.defaultUrl),
+  });
+
+  // Separate from `native` so the client can tell shells without updater
+  contextBridge.exposeInMainWorld("desktopUpdater", {
+    getState: () => invoke<UpdaterState>(IPC.updaterGetState),
+    check: () => invoke<void>(IPC.updaterCheck),
+    download: () => invoke<void>(IPC.updaterDownload),
+    install: () => {
+      invoke<void>(IPC.updaterInstall).catch(() => {});
+    },
+    onState: (callback: (state: UpdaterState) => void) => {
+      updaterListeners.add(callback);
+      return () => {
+        updaterListeners.delete(callback);
+      };
+    },
   });
 }
 

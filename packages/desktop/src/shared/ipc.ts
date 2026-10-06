@@ -20,6 +20,11 @@ export const IPC = {
   errorRetry: "error:retry",
   errorSetUrl: "error:set-url",
   errorReset: "error:reset",
+  updaterGetState: "updater:get-state",
+  updaterCheck: "updater:check",
+  updaterDownload: "updater:download",
+  updaterInstall: "updater:install",
+  updaterState: "updater:state",
 } as const;
 
 /** Settings persisted by the desktop shell. */
@@ -31,6 +36,8 @@ export type DesktopConfig = {
   spellchecker: boolean;
   hardwareAcceleration: boolean;
   discordRpc: boolean;
+  /** Download updates automatically and install them on quit */
+  autoUpdate: boolean;
   /** Custom server URL, empty string means the default */
   serverUrl: string;
   windowState: {
@@ -50,6 +57,7 @@ export const CLIENT_WRITABLE_KEYS = [
   "spellchecker",
   "hardwareAcceleration",
   "discordRpc",
+  "autoUpdate",
   "serverUrl",
 ] as const;
 
@@ -86,3 +94,25 @@ export type ErrorInfo = {
   reason: string;
   defaultUrl: string;
 };
+
+/** Where the self-updater currently is, see `UpdaterState`. */
+export type UpdaterStatus =
+  | "unsupported"
+  | "idle"
+  | "checking"
+  | "up-to-date"
+  | "available"
+  | "downloading"
+  | "downloaded"
+  | "error";
+
+/** Updater state shared with the client through `window.desktopUpdater`. */
+export interface UpdaterState {
+  status: UpdaterStatus;
+  /** Available or downloaded version */
+  version?: string;
+  /** Download progress, 0-100, only while downloading */
+  percent?: number;
+  /** Short message, only for the "error" status */
+  error?: string;
+}

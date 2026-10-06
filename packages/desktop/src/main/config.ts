@@ -13,6 +13,7 @@ const DEFAULTS: DesktopConfig = {
   spellchecker: true,
   hardwareAcceleration: true,
   discordRpc: false,
+  autoUpdate: true,
   serverUrl: "",
   windowState: { isMaximised: false, width: 1280, height: 800 },
 };

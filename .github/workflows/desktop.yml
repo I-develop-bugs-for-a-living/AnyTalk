@@ -2,6 +2,9 @@ name: Desktop App
 
 # Builds the Electron desktop app (packages/desktop). It doesn't need the web
 # client build or any submodule: the app loads the server URL at runtime.
+# Pushing a `desktop-v<version>` tag publishes the installers and the
+# electron-updater metadata (latest*.yml) to a GitHub Release, which installed
+# apps poll for updates. A manual run only builds and uploads artifacts.
 # Set the repo variable ANYTALK_DEFAULT_URL to change the built-in server.
 
 on:
@@ -13,20 +16,60 @@ on:
 # A newer run for the same ref replaces a running one
 concurrency:
   group: desktop-${{ github.ref }}
-  cancel-in-progress: true
+  # A tag publish is never cancelled midway
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
+
+permissions:
+  contents: read
 
 jobs:
+  # Creates the release first so both build jobs upload to the same one
+  prepare:
+    name: Prepare release
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/desktop-v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the tag matches the package version
+        run: |
+          version=$(node -p "require('./packages/desktop/package.json').version")
+          if [ "desktop-v$version" != "$GITHUB_REF_NAME" ]; then
+            echo "Tag $GITHUB_REF_NAME does not match packages/desktop version $version (expected desktop-v$version)"
+            exit 1
+          fi
+
+      - name: Create the release if it does not exist
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Versions with a "-" (e.g. 1.0.0-beta.1) are pre-releases
+          flags=""
+          case "${GITHUB_REF_NAME#desktop-v}" in *-*) flags="--prerelease" ;; esac
+          gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 \
+            || gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" \
+                 --verify-tag $flags \
+                 --title "AnyTalk Desktop ${GITHUB_REF_NAME#desktop-v}" --generate-notes
+
   build:
     name: Build (${{ matrix.os }})
+    needs: prepare
+    # Run on manual dispatch too, where prepare is skipped
+    if: ${{ !cancelled() && (needs.prepare.result == 'success' || needs.prepare.result == 'skipped') }}
     strategy:
       fail-fast: false
       matrix:
         include:
           - os: ubuntu-latest
-            script: package:linux
+            script: linux
           - os: windows-latest
-            script: package:win
+            script: win
     runs-on: ${{ matrix.os }}
+    # Publishing uploads assets to the release
+    permissions:
+      contents: write
     env:
       ANYTALK_DEFAULT_URL: ${{ vars.ANYTALK_DEFAULT_URL }}
 
@@ -48,9 +91,20 @@ jobs:
 
       - run: pnpm --filter anytalk-desktop run typecheck
 
-      - run: pnpm --filter anytalk-desktop run ${{ matrix.script }}
+      # Tag push: build and publish to the release
+      - name: Build and publish
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/desktop-v')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm --filter anytalk-desktop run release:${{ matrix.script }}
+
+      # Manual run: build only
+      - name: Build
+        if: ${{ !(github.event_name == 'push' && startsWith(github.ref, 'refs/tags/desktop-v')) }}
+        run: pnpm --filter anytalk-desktop run package:${{ matrix.script }}
 
       - uses: actions/upload-artifact@v4
+        if: ${{ !(github.event_name == 'push' && startsWith(github.ref, 'refs/tags/desktop-v')) }}
         with:
           name: anytalk-desktop-${{ matrix.os }}
           path: |
@@ -60,19 +114,3 @@ jobs:
             packages/desktop/release/*.pacman
             packages/desktop/release/*.exe
           if-no-files-found: error
-
-  release:
-    name: Attach to release
-    if: startsWith(github.ref, 'refs/tags/desktop-v')
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          path: artifacts
-          merge-multiple: true
-      - uses: softprops/action-gh-release@v2
-        with:
-          files: artifacts/*

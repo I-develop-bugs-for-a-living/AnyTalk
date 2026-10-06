@@ -15,12 +15,15 @@
     "package:linux": "node scripts/build.mjs && electron-builder --linux AppImage deb rpm pacman --publish never",
     "package:win": "node scripts/build.mjs && electron-builder --win nsis --publish never",
     "package:win:cross": "node scripts/build.mjs && electron-builder --win nsis --publish never -c.win.signAndEditExecutable=false",
+    "release:linux": "node scripts/build.mjs && electron-builder --linux AppImage deb rpm pacman --publish always",
+    "release:win": "node scripts/build.mjs && electron-builder --win nsis --publish always",
     "package:win:zip": "node scripts/build.mjs && electron-builder --win zip --x64 --publish never -c.win.signAndEditExecutable=false"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
     "electron": "^44.5.1",
     "electron-builder": "^26.15.3",
+    "electron-updater": "^6.8.9",
     "esbuild": "^0.28.2",
     "resedit": "^3.1.0",
     "typescript": "^6.0.3"
