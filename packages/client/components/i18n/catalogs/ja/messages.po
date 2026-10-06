@@ -489,6 +489,10 @@ msgstr "新しいメンバーをグループに追加できます"
 msgid "Add one of my recaps"
 msgstr "自分のリキャップを追加"
 
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+msgid "Add reaction"
+msgstr "リアクションを追加"
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Add status text"
 msgstr "ステータスを設定"
@@ -1066,6 +1070,8 @@ msgid "Channel Slowmode"
 msgstr "チャンネルの低速モード"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Channels"
 msgstr "チャンネル"
 
@@ -1688,6 +1694,7 @@ msgstr "招待コードを削除"
 #: components/app/menus/DraftMessageContextMenu.tsx
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/DeleteMessage.tsx
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Delete message"
 msgstr "メッセージを削除"
 
@@ -1924,6 +1931,7 @@ msgid "Edit Identity"
 msgstr "概要を編集"
 
 #: components/app/menus/MessageContextMenu.tsx
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Edit message"
 msgstr "メッセージを編集"
 
@@ -2917,6 +2925,7 @@ msgstr "中（90 Hz）"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/ServerSettings.tsx
+#: src/interface/channels/text/MemberSidebar.tsx
 msgid "Members"
 msgstr "メンバー"
 
@@ -2969,6 +2978,10 @@ msgstr "メッセージ"
 msgid "Message {0}"
 msgstr "{0} へメッセージを送信"
 
+#: components/ui/components/features/messaging/elements/Container.tsx
+msgid "Message from {name}, {time}"
+msgstr "{name}からのメッセージ、{time}"
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Message Group Spacing"
 msgstr "メッセージグループの間隔"
@@ -2997,10 +3010,15 @@ msgstr "メッセージの文字サイズ"
 msgid "Message was sent on another platform"
 msgstr "別のプラットフォームで送信されたメッセージです"
 
+#: components/ui/components/features/messaging/elements/Container.tsx
+msgid "Message, {time}"
+msgstr "メッセージ、{time}"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Message, call and stream sounds"
 msgstr "メッセージ、通話、配信のサウンド"
 
+#: components/app/interface/channels/text/Messages.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Messages"
 msgstr "メッセージ"
@@ -3040,6 +3058,10 @@ msgstr "等幅フォント"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "More Contrast"
 msgstr "更にコントラスト"
+
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+msgid "More options"
+msgstr "その他のオプション"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Move Members"
@@ -3867,6 +3889,7 @@ msgstr "セッション名を変更"
 #~ msgstr "Discord Rich Presenceを通じて、AnyTalkをみんなに伝えよう。"
 
 #: components/app/menus/MessageContextMenu.tsx
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Reply"
 msgstr "返信"
 
@@ -4254,6 +4277,10 @@ msgstr "サーバー名"
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
 msgstr "サーバーロール"
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Servers"
+msgstr "サーバー"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"

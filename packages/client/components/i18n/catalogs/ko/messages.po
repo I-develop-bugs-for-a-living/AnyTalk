@@ -561,6 +561,10 @@ msgstr "그룹에 새 멤버들 추가"
 msgid "Add one of my recaps"
 msgstr "내 요약 추가"
 
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+msgid "Add reaction"
+msgstr "반응 추가하기"
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Add status text"
 msgstr "상태 메시지 추가"
@@ -1151,6 +1155,8 @@ msgid "Channel Slowmode"
 msgstr "채널 슬로우 모드"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Channels"
 msgstr "채널"
 
@@ -1782,6 +1788,7 @@ msgstr "초대 삭제"
 #: components/app/menus/DraftMessageContextMenu.tsx
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/DeleteMessage.tsx
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Delete message"
 msgstr "메시지 삭제하기"
 
@@ -2021,6 +2028,7 @@ msgid "Edit Identity"
 msgstr "프로필 편집"
 
 #: components/app/menus/MessageContextMenu.tsx
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Edit message"
 msgstr "메시지 수정하기"
 
@@ -3021,6 +3029,7 @@ msgstr "중간 (90 Hz)"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/ServerSettings.tsx
+#: src/interface/channels/text/MemberSidebar.tsx
 msgid "Members"
 msgstr "멤버"
 
@@ -3073,6 +3082,10 @@ msgstr "메세지"
 msgid "Message {0}"
 msgstr "{0}에 메시지 보내기"
 
+#: components/ui/components/features/messaging/elements/Container.tsx
+msgid "Message from {name}, {time}"
+msgstr "{name}님의 메시지, {time}"
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Message Group Spacing"
 msgstr "메시지 그룹 간격"
@@ -3101,10 +3114,15 @@ msgstr "메시지 크기"
 msgid "Message was sent on another platform"
 msgstr "다른 플랫폼에서 전송된 메시지"
 
+#: components/ui/components/features/messaging/elements/Container.tsx
+msgid "Message, {time}"
+msgstr "메시지, {time}"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Message, call and stream sounds"
 msgstr "메시지, 통화, 스트림 소리"
 
+#: components/app/interface/channels/text/Messages.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Messages"
 msgstr "메시지"
@@ -3144,6 +3162,10 @@ msgstr "고정폭 글꼴"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "More Contrast"
 msgstr "대비 높게"
+
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+msgid "More options"
+msgstr "더 보기"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Move Members"
@@ -3975,6 +3997,7 @@ msgstr "세션 이름 변경"
 #~ msgstr "Discord 리치 프레즌스로 AnyTalk을 알려요."
 
 #: components/app/menus/MessageContextMenu.tsx
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Reply"
 msgstr "답장"
 
@@ -4368,6 +4391,10 @@ msgstr "서버 이름"
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
 msgstr "서버 역할"
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Servers"
+msgstr "서버"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
