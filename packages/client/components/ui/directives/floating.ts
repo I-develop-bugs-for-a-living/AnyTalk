@@ -15,7 +15,7 @@ import {
   findContextMenuElement,
   isContextMenuKey,
   keyboardMenuAnchor,
-} from "./contextMenuKeyboard";
+} from "../components/floating/contextMenuKeyboard";
 
 type Props = JSX.Directives["floating"] & object;
 

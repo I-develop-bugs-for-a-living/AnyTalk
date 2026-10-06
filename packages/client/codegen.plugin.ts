@@ -3,7 +3,9 @@ import { readdirSync } from "node:fs";
 const fileRegex = /\.tsx$/;
 const codegenRegex = /\/\/ @codegen (.*)/g;
 
+// every directive is its own file here; keep other modules (and tests) out
 const DIRECTIVES = readdirSync("./components/ui/directives")
+  .filter((x) => x.endsWith(".ts") && !x.endsWith(".test.ts"))
   .filter((x) => x !== "index.ts")
   .map((x) => x.substring(0, x.length - 3));
 
