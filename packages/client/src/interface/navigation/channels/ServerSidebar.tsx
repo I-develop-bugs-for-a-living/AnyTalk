@@ -629,6 +629,9 @@ function Entry(
   const canDrop = () => {
     const dragged = draggedVoiceUser();
     return !!dragged && canMoveTo(dragged.from, props.channel);
+    // same check as dragover: leave file drops and other drags alone
+    if (!e.dataTransfer?.types.includes(VOICE_USER_DRAG_TYPE)) return;
+
   };
 
   async function drop(e: DragEvent) {

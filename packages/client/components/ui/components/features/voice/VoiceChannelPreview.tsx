@@ -195,6 +195,11 @@ function setRowDragImage(e: DragEvent & { currentTarget: HTMLElement }) {
   clone.style.pointerEvents = "none";
   clone.style.background = "var(--md-sys-color-surface-container-high)";
   clone.style.borderRadius = "var(--borderRadius-md)";
+  // the clone leaves the sidebar, so it no longer inherits its text style
+  const style = getComputedStyle(row);
+  clone.style.color = style.color;
+  clone.style.font = style.font;
+  clone.style.lineHeight = style.lineHeight;
   document.body.appendChild(clone);
   e.dataTransfer?.setDragImage(
     clone,
@@ -228,7 +233,8 @@ function CommonUser(props: {
   const { isMobile } = useDevice();
   const canWatch = () => rest.screenshare && !!rest.onWatch;
 
-  // drag people into another voice channel to move them (desktop only)
+  // drag people into another voice channel to move them (desktop only: phones
+  // and keyboards use "Move to channel" in the user context menu)
   const canDrag = () => !isMobile && canMoveFrom(rest.channel);
 
   return (
@@ -238,7 +244,7 @@ function CommonUser(props: {
       draggable={canDrag()}
       // the channel list's drag zones ignore presses here (see Draggable), so
       // they can't start reordering channels instead of this native drag
-      data-no-reorder
+      data-no-reorder={canDrag() ? "" : undefined}
       onDragStart={(e) => {
         if (!canDrag() || !e.dataTransfer) return;
         e.stopPropagation();

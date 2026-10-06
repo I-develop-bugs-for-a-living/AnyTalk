@@ -152,22 +152,27 @@ export function Draggable<T>(props: Props<T>) {
   const transformDraggedElement = () => styleDraggedElement;
 
   /**
-   * Keep presses on `[data-no-reorder]` content (e.g. voice participants,
-   * which start their own HTML5 drag) away from the library. It listens for
-   * mousedown / touchstart on the row elements (bubble phase) and calls
-   * preventDefault, which would also cancel the native drag; stopping the
-   * event in the capture phase at the zone means no row of this zone or of
-   * an enclosing zone ever sees it.
+   * Keep presses on draggable `[data-no-reorder]` content (voice participants,
+   * which start their own HTML5 drag) away from the library. The library
+   * listens for mousedown / touchstart on the row elements and calls
+   * preventDefault, which also cancels native drags, so this only exists to
+   * stop those events before they get there: it runs in the capture phase at
+   * the zone, so no row of this zone or of an enclosing zone ever sees them.
+   * Rows that can't be dragged (no `draggable`) are left to the library.
    */
   function guardNoReorder(e: Event) {
-    if ((e.target as Element | null)?.closest?.("[data-no-reorder]")) {
+    if (
+      (e.target as Element | null)?.closest?.(
+        '[data-no-reorder][draggable="true"]',
+      )
+    ) {
       e.stopPropagation();
     }
   }
 
   onMount(() => {
-    zone?.addEventListener("mousedown", guardNoReorder, { capture: true });
-    zone?.addEventListener("touchstart", guardNoReorder, {
+    zone!.addEventListener("mousedown", guardNoReorder, { capture: true });
+    zone!.addEventListener("touchstart", guardNoReorder, {
       capture: true,
       passive: true,
     });
