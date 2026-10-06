@@ -390,6 +390,9 @@ const Config: SettingsConfiguration<{ server: Server }> = {
             },
             {
               id: "reload",
+              // the desktop app has no service worker to clear and updates
+              // through the Updates page instead
+              hidden: !!window.native,
               icon: <Symbol size={20}>refresh</Symbol>,
               title: <Trans>Reload and clear cache</Trans>,
               onClick() {
