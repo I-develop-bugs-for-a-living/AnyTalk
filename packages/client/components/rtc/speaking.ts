@@ -3,6 +3,8 @@ import { useIsSpeaking } from "solid-livekit-components";
 
 import { LocalTrack, Participant, RemoteTrack, Track } from "livekit-client";
 
+import { sourceAge } from "./sourceAge";
+
 /**
  * Speaking detection from audio levels in the client
  *
@@ -58,11 +60,16 @@ async function readLevel(
     const sources = track.receiver?.getSynchronizationSources?.();
     if (!sources) return undefined;
 
-    const now = performance.timeOrigin + performance.now();
-    let level = 0;
+    const perfNow = performance.now();
+    const epochNow = performance.timeOrigin + perfNow;
+
+    // Without a fresh level (silence with DTX, or no audio level header)
+    // the server's speaking state is used
+    let level: number | undefined;
     for (const source of sources) {
-      if (now - source.timestamp > STALE_MS) continue;
-      level = Math.max(level, source.audioLevel ?? 0);
+      if (sourceAge(source.timestamp, perfNow, epochNow) > STALE_MS) continue;
+      if (typeof source.audioLevel !== "number") continue;
+      level = Math.max(level ?? 0, source.audioLevel);
     }
     return level;
   }
