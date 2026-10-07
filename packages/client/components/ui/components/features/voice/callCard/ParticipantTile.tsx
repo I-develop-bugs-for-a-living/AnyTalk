@@ -199,32 +199,30 @@ export function ParticipantTile(props: TileProps) {
               </StreamInvite>
             }
           >
-            <Show
-              when={!hideOwnStream()}
-              fallback={
-                <OwnStreamHidden>
-                  <Trans>Stream is still running.</Trans>
-                </OwnStreamHidden>
-              }
-            >
-              <VideoTrack
-                style={{
-                  "grid-area": "1/1",
-                  "object-fit": "contain",
-                  width: "100%",
-                  height: "100%",
-                  overflow: "hidden",
-                }}
-                trackRef={track as TrackReference}
-                manageSubscription={true}
-                ref={videoRef}
-                on:resize={() => {
-                  setVideoDims({
-                    height: videoRef?.videoHeight || 0,
-                    width: videoRef?.videoWidth || 0,
-                  });
-                }}
-              />
+            {/* The video stays mounted while hidden so the tile keeps its size */}
+            <VideoTrack
+              style={{
+                "grid-area": "1/1",
+                "object-fit": "contain",
+                width: "100%",
+                height: "100%",
+                overflow: "hidden",
+                visibility: hideOwnStream() ? "hidden" : "visible",
+              }}
+              trackRef={track as TrackReference}
+              manageSubscription={true}
+              ref={videoRef}
+              on:resize={() => {
+                setVideoDims({
+                  height: videoRef?.videoHeight || 0,
+                  width: videoRef?.videoWidth || 0,
+                });
+              }}
+            />
+            <Show when={hideOwnStream()}>
+              <OwnStreamHidden role="status">
+                <Trans>Stream is still running.</Trans>
+              </OwnStreamHidden>
             </Show>
           </Show>
         </Show>
@@ -557,6 +555,8 @@ const OwnStreamHidden = styled("div", {
     textAlign: "center",
     background: "#000",
     color: "#fff",
+    // sits above the hidden video that keeps the tile's size
+    zIndex: 1,
   },
 });
 
