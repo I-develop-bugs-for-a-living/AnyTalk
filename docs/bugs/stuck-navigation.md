@@ -8,10 +8,25 @@ Seen on the live web build (chat.any-portal.tech), not in the desktop app so far
 - Clicking Home or another server does nothing. The server description tooltip
   still appears, but no new console output when clicking.
 - The server rail renders garbled: icons and names of servers overlap.
-- The address bar and the screen disagree. In the recorded case the URL pointed
-  to the Test server's voice channel `Test` (`/server/01M34MGC337WBG0J9H5Y1YKVMD/channel/01M34MJ0ZRQAR20WKQMN5WHVRR`),
-  while the channel header still showed `Talkie1` and the sidebar showed the
-  Test server's channels.
+- The address bar and the screen disagree: the URL follows the clicks, the
+  screen stays frozen. Recorded case: the URL first pointed to MöwenDiscord
+  (server `M`, `/server/01M34MGC337WBG0J9H5Y1YKVMD/channel/01M34MJ0ZRQAR20WKQMN5WHVRR`,
+  the channel the call was in), later to `/app` (Home), while the screen kept
+  showing the Test server's sidebar (`01M44A2C...`) with the `Test` voice channel
+  selected, plus the `Talkie1` header, messages and composer. The member list
+  was stale too ("3 online" with only 2 listed).
+
+## Confirmed in the stuck tab (2026-10-08, via Claude in Chrome)
+
+- Clicks reach the app: a capturing click listener logged the Home icon's span.
+- Nothing covers the rail: `elementsFromPoint` on the Home icon hits the icon
+  first; no app overlay or popup was open.
+- The rail is rendered once (one `nav[aria-label="Server"]`, no duplicate links).
+- The router state changed (`location.href` = `/app`) but the view didn't.
+- All four exceptions below were logged at the same second (7:31:09 PM).
+
+So the cause is a frozen view after a crash inside a Solid update, not lost
+clicks or an overlay.
 
 ## How it happened
 
@@ -43,12 +58,12 @@ While leaving a call or switching servers, the current server or channel
 briefly resolves to `undefined` (`client.servers.get(...)` /
 `client.channels.get(...)`). Several places used `!` and read from it anyway:
 
-| Error    | Where                                                                                   |
-| -------- | --------------------------------------------------------------------------------------- |
-| `member` | `FloatingManager.tsx`: `props.show()!.userCard!.member` after `show` changed kind        |
-| `mature` | `ChannelPage.tsx`: `channel().mature` passed to `AgeGate`                                |
-| `id`     | `ServerSidebar.tsx`: channel up/down keybind reading `props.server.id`                   |
-| `unread` | `ServerSidebar.tsx` mark-server-read keybind, `TextChannel.tsx` jump-to-end keybind     |
+| Error    | Where                                                                               |
+| -------- | ----------------------------------------------------------------------------------- |
+| `member` | `FloatingManager.tsx`: `props.show()!.userCard!.member` after `show` changed kind   |
+| `mature` | `ChannelPage.tsx`: `channel().mature` passed to `AgeGate`                           |
+| `id`     | `ServerSidebar.tsx`: channel up/down keybind reading `props.server.id`              |
+| `unread` | `ServerSidebar.tsx` mark-server-read keybind, `TextChannel.tsx` jump-to-end keybind |
 
 A throw inside a Solid update aborts the rest of that update, so the router
 and sidebar are left half-updated: the URL changes, the screen does not.
@@ -69,7 +84,8 @@ and sidebar are left half-updated: the URL changes, the screen does not.
 
 1. Copy the full console log, especially the first `Uncaught TypeError` and
    what was logged right before it.
-2. In the stuck tab, check whether clicking Home changes the URL.
+2. In the stuck tab, check whether clicking Home changes the URL (the
+   Claude in Chrome extension can run these checks on the open tab).
    - URL changes, screen doesn't: another unguarded read crashed an update.
      Look for the property name in the error and search for `!`-asserted
      `servers.get` / `channels.get` / `props.server.` / `props.channel.` reads.
