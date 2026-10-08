@@ -15,6 +15,7 @@ import { decodeTime, ulid } from "ulid";
 
 import { DraftMessages, Messages } from "@revolt/app";
 import { useClient } from "@revolt/client";
+import { ackNow } from "@revolt/common";
 import { Keybind, KeybindAction, createKeybind } from "@revolt/keybinds";
 import { useNavigate, useSmartParams } from "@revolt/routing";
 import { useState } from "@revolt/state";
@@ -133,15 +134,47 @@ export function TextChannel(props: ChannelPageProps) {
     ),
   );
 
-  // Mark as read on re-focus
+  /**
+   * Mark as read when returning to the app
+   */
   function onFocus() {
     if (props.channel.unread && atEnd()) {
       props.channel.ack();
     }
   }
 
-  document.addEventListener("focus", onFocus);
-  onCleanup(() => document.removeEventListener("focus", onFocus));
+  /**
+   * Send a pending (debounced) read position to the server right now,
+   * so it is not lost when the page is closed or backgrounded. It only
+   * re-sends a read position that is already local, it never marks anything
+   * new as read.
+   */
+  function flushAck() {
+    const channel = props.channel;
+    const readId = client().channelUnreads.get(channel.id)?.lastMessageId;
+
+    // only when the local read position is at the latest message
+    if (readId && !channel.unread && readId === channel.lastMessageId) {
+      ackNow(channel, readId);
+    }
+  }
+
+  /**
+   * Re-ack when the page becomes visible, flush when it gets hidden
+   */
+  function onVisibilityChange() {
+    if (document.visibilityState === "visible") onFocus();
+    else if (document.visibilityState === "hidden") flushAck();
+  }
+
+  window.addEventListener("focus", onFocus);
+  document.addEventListener("visibilitychange", onVisibilityChange);
+  window.addEventListener("pagehide", flushAck);
+  onCleanup(() => {
+    window.removeEventListener("focus", onFocus);
+    document.removeEventListener("visibilitychange", onVisibilityChange);
+    window.removeEventListener("pagehide", flushAck);
+  });
 
   // Register ack/jump latest
   createKeybind(KeybindAction.CHAT_JUMP_END, () => {

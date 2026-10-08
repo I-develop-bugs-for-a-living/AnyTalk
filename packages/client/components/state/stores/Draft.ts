@@ -3,7 +3,7 @@ import { Accessor, Setter, batch, createSignal } from "solid-js";
 import { API, Channel, Client, Message } from "stoat.js";
 import { ulid } from "ulid";
 
-import { insecureUniqueId } from "@revolt/common";
+import { ackNow, insecureUniqueId } from "@revolt/common";
 import { useInstance } from "@revolt/instance";
 
 import { AbstractStore } from ".";
@@ -377,7 +377,11 @@ export class Draft extends AbstractStore<"draft", TypeDraft> {
 
     // Send the message and clear the draft
     try {
-      await channel.sendMessage(data, idempotencyKey);
+      // only ack our own message if nothing unseen came before it
+      const wasRead = !channel.unread;
+      const sent = await channel.sendMessage(data, idempotencyKey);
+
+      if (wasRead) ackNow(channel, sent);
 
       if (files) {
         for (const file of files) {

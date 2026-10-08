@@ -12,7 +12,7 @@ import { useLingui } from "@lingui/solid/macro";
 import { Channel } from "stoat.js";
 
 import { useClient } from "@revolt/client";
-import { debounce } from "@revolt/common";
+import { ackNow, debounce } from "@revolt/common";
 import { createIsTimedOut } from "@revolt/common/lib/createIsTimedOut";
 import { useInstance } from "@revolt/instance";
 import { createKeybind, Keybind, KeybindAction } from "@revolt/keybinds";
@@ -208,7 +208,12 @@ export function MessageComposition(props: Props) {
         });
         return state.draft.sendDraft(client(), props.channel);
       }
-      return props.channel.sendMessage(useContent);
+      // only ack our own message if nothing unseen came before it
+      const wasRead = !props.channel.unread;
+      const sent = await props.channel.sendMessage(useContent);
+
+      if (wasRead) ackNow(props.channel, sent);
+      return sent;
     }
 
     state.draft.sendDraft(client(), props.channel);
