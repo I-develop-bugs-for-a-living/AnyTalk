@@ -1,5 +1,5 @@
 import { Trans } from "@lingui/solid/macro";
-import { Component, Match, Switch, createMemo } from "solid-js";
+import { Component, Match, Show, Switch, createMemo } from "solid-js";
 
 import { Channel } from "stoat.js";
 import { styled } from "styled-system/jsx";
@@ -40,7 +40,9 @@ const TEXT_CHANNEL_TYPES: Channel["type"][] = [
 export const ChannelPage: Component = () => {
   const params = useParams();
   const client = useClient();
-  const channel = createMemo(() => client()!.channels.get(params.channel)!);
+  const channel = createMemo<Channel | undefined>(() =>
+    client()?.channels.get(params.channel),
+  );
 
   return (
     <Base>
@@ -48,15 +50,22 @@ export const ChannelPage: Component = () => {
         <Match when={!channel()}>
           <Navigate href={"../.."} />
         </Match>
-        <Match when={TEXT_CHANNEL_TYPES.includes(channel()!.type)}>
-          <AgeGate
-            enabled={channel().mature}
-            contentId={channel().id}
-            contentName={"#" + channel().name}
-            contentType="channel"
-          >
-            <TextChannel channel={channel()} />
-          </AgeGate>
+        <Match
+          when={!!channel() && TEXT_CHANNEL_TYPES.includes(channel()!.type)}
+        >
+          {/* Not keyed, so TextChannel stays mounted across channel switches */}
+          <Show when={channel()}>
+            {(ch) => (
+              <AgeGate
+                enabled={!!ch().mature}
+                contentId={ch().id}
+                contentName={"#" + ch().name}
+                contentType="channel"
+              >
+                <TextChannel channel={ch()} />
+              </AgeGate>
+            )}
+          </Show>
         </Match>
         {/* <Match when={channel()!.type === "VoiceChannel"}>
             <Header placement="primary">

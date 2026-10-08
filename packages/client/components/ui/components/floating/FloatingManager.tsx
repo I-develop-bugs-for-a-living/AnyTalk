@@ -203,28 +203,34 @@ function Floating(props: FloatingElement & { mouseX: number; mouseY: number }) {
         }}
       >
         <Switch>
-          <Match when={props.show()?.tooltip}>
-            <TooltipBase>
-              {typeof props.show()!.tooltip!.content === "function"
-                ? (props.show()!.tooltip!.content as (arg1: object) => void)({})
-                : props.show()!.tooltip!.content}
-            </TooltipBase>
+          <Match when={props.show()?.tooltip} keyed>
+            {(tooltip) => (
+              <TooltipBase>
+                {typeof tooltip.content === "function"
+                  ? (tooltip.content as (arg1: object) => void)({})
+                  : tooltip.content}
+              </TooltipBase>
+            )}
           </Match>
-          <Match when={props.show()?.userCard}>
-            <UserCard
-              user={props.show()!.userCard!.user}
-              member={props.show()!.userCard!.member}
-              bot={props.show()!.userCard!.bot}
-              onClose={props.hide}
-            />
+          <Match when={props.show()?.userCard} keyed>
+            {(userCard) => (
+              <UserCard
+                user={userCard.user}
+                member={userCard.member}
+                bot={userCard.bot}
+                onClose={props.hide}
+              />
+            )}
           </Match>
-          <Match when={props.show()?.contextMenu}>
-            <OpenedByKeyboardContext.Provider value={!!keyboardAnchor}>
-              {props.show()!.contextMenu!({})}
-            </OpenedByKeyboardContext.Provider>
+          <Match when={props.show()?.contextMenu} keyed>
+            {(contextMenu) => (
+              <OpenedByKeyboardContext.Provider value={!!keyboardAnchor}>
+                {contextMenu({})}
+              </OpenedByKeyboardContext.Provider>
+            )}
           </Match>
-          <Match when={props.show()?.autoComplete}>
-            <AutoComplete {...props.show()!.autoComplete!} />
+          <Match when={props.show()?.autoComplete} keyed>
+            {(autoComplete) => <AutoComplete {...autoComplete} />}
           </Match>
         </Switch>
       </div>

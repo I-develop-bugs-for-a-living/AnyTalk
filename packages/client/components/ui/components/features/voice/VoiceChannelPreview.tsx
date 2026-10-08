@@ -267,19 +267,22 @@ function CommonUser(props: {
       onDragEnd={() => setDraggedVoiceUser(undefined)}
       use:floating={{
         // while streaming, a click opens the stream instead
-        userCard: canWatch()
-          ? undefined
-          : {
-              user: user().user!,
-              member: user().member,
-            },
-        contextMenu: () => (
-          <UserContextMenu
-            user={user().user!}
-            member={user().member}
-            inVoice={rest.isLive}
-          />
-        ),
+        userCard:
+          canWatch() || !user().user
+            ? undefined
+            : {
+                user: user().user!,
+                member: user().member,
+              },
+        contextMenu: user().user
+          ? () => (
+              <UserContextMenu
+                user={user().user!}
+                member={user().member}
+                inVoice={rest.isLive}
+              />
+            )
+          : undefined,
       }}
     >
       <Ripple />

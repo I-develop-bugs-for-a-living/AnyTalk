@@ -118,6 +118,9 @@ export const ServerSidebar = (props: Props) => {
     );
 
   const categories = createMemo<CategoryData[]>(() => {
+    // the server can briefly be undefined while switching servers
+    if (!props.server) return [];
+
     const channels = new Map(
       props.server.channels.map((channel) => [channel.id, channel]),
     );
@@ -145,7 +148,7 @@ export const ServerSidebar = (props: Props) => {
   // TODO: we want it to feel smooth when navigating through channels, so we'll want to select channels immediately but not actually navigate until we're done moving through them
   /** Navigates to the channel offset from the current one, wrapping around if needed */
   const navigateChannel = (byOffset: number) => {
-    if (props.channelId == null) return;
+    if (props.channelId == null || !props.server) return;
 
     const channels = visibleChannels();
 
@@ -170,7 +173,7 @@ export const ServerSidebar = (props: Props) => {
   );
 
   createKeybind(KeybindAction.CHAT_MARK_SERVER_AS_READ, () => {
-    if (props.server.unread) {
+    if (props.server?.unread) {
       props.server.ack();
     }
   });

@@ -179,7 +179,7 @@ export function TextChannel(props: ChannelPageProps) {
   // Register ack/jump latest
   createKeybind(KeybindAction.CHAT_JUMP_END, () => {
     // Mark channel as read if not already
-    if (props.channel.unread) {
+    if (props.channel?.unread) {
       props.channel.ack();
     }
 

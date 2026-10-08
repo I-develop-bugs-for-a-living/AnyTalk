@@ -137,15 +137,18 @@ const Server: Component = () => {
    * Resolve the server
    * @returns Server
    */
-  const server = () => client()!.servers.get(params().serverId!)!;
+  const server = () => client()?.servers.get(params().serverId!);
 
   /**
    * Open the server information modal
    */
   function openServerInfo() {
+    const current = server();
+    if (!current) return;
+
     openModal({
       type: "server_info",
-      server: server(),
+      server: current,
     });
   }
 
@@ -153,17 +156,20 @@ const Server: Component = () => {
    * Open the server settings modal
    */
   function openServerSettings() {
+    const current = server();
+    if (!current) return;
+
     openModal({
       type: "settings",
       config: "server",
-      context: server(),
+      context: current,
     });
   }
 
   return (
     <Show when={server()}>
       <ServerSidebar
-        server={server()}
+        server={server()!}
         channelId={params().channelId}
         openServerInfo={openServerInfo}
         openServerSettings={openServerSettings}
@@ -174,7 +180,11 @@ const Server: Component = () => {
             ) : target instanceof ServerI ? (
               <ServerSidebarContextMenu server={target} />
             ) : (
-              <CategoryContextMenu server={server()} category={target} />
+              <Show when={server()}>
+                {(current) => (
+                  <CategoryContextMenu server={current()} category={target} />
+                )}
+              </Show>
             ),
         })}
       />

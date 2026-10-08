@@ -38,7 +38,7 @@ export function CategoryContextMenu(props: {
    */
   function markAsRead() {
     props.category.channels
-      .filter((channel) => channel.unread)
+      .filter((channel) => channel?.unread)
       .forEach((channel) => channel.ack());
   }
 
