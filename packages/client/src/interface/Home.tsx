@@ -1,6 +1,6 @@
-import { Match, Show, Switch } from "solid-js";
+import { Match, Show, Switch, createSignal } from "solid-js";
 
-import { Trans } from "@lingui/solid/macro";
+import { Trans, useLingui } from "@lingui/solid/macro";
 import { PublicChannelInvite } from "stoat.js";
 import { css, cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
@@ -9,7 +9,18 @@ import { useClient } from "@revolt/client";
 import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
-import { CategoryButton, Column, Header, iconSize, main } from "@revolt/ui";
+import { useState } from "@revolt/state";
+import {
+  Button,
+  CategoryButton,
+  Column,
+  Header,
+  IconButton,
+  Text,
+  iconSize,
+  main,
+} from "@revolt/ui";
+import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import MdAddCircle from "@material-design-icons/svg/filled/add_circle.svg?component-solid";
 import MdExplore from "@material-design-icons/svg/filled/explore.svg?component-solid";
@@ -18,8 +29,14 @@ import MdHome from "@material-design-icons/svg/filled/home.svg?component-solid";
 import MdSettings from "@material-design-icons/svg/filled/settings.svg?component-solid";
 
 import Wordmark from "../../public/assets/web/wordmark.svg?component-solid";
-
+import {
+  applyUpdate,
+  dismissUpdateNotice,
+  noticeDismissed,
+  updateAvailable,
+} from "../serviceWorkerInterface";
 import { HeaderIcon } from "./common/CommonHeader";
+
 import { FriendsOverview } from "./home/FriendsOverview";
 
 /**
@@ -82,6 +99,39 @@ const SeparatedColumn = styled(Column, {
 });
 
 /**
+ * Highlighted card announcing a new version of the app
+ */
+const UpdateNotice = styled("div", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    flexWrap: "wrap",
+    gap: "8px 12px",
+    padding: "12px 12px 12px 16px",
+    alignSelf: "center",
+    boxSizing: "border-box",
+    width: "min(560px, calc(100% - 32px))",
+    borderRadius: "var(--borderRadius-lg)",
+
+    color: "var(--md-sys-color-on-primary-container)",
+    background: "var(--md-sys-color-primary-container)",
+  },
+});
+
+/**
+ * Text part of the update notice, takes the free space
+ */
+const UpdateNoticeText = styled("div", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    flex: "1 1 200px",
+    minWidth: 0,
+  },
+});
+
+/**
  * Home page
  */
 export function HomePage() {
@@ -89,6 +139,9 @@ export function HomePage() {
   const navigate = useNavigate();
   const client = useClient();
   const instance = useInstance();
+  const state = useState();
+  const { t } = useLingui();
+  const [updating, setUpdating] = createSignal(false);
 
   // check if we're stoat.chat; if so, check if the user is in the Lounge
   const showLoungeButton = instance.isStoat;
@@ -104,6 +157,43 @@ export function HomePage() {
         <Trans>Home</Trans>
       </Header>
       <div use:scrollable={{ class: content() }}>
+        <Show
+          when={
+            updateAvailable() &&
+            !noticeDismissed() &&
+            state.settings.getValue("advanced:update_notice")
+          }
+        >
+          <UpdateNotice role="alert">
+            <UpdateNoticeText>
+              <Symbol aria-hidden="true">system_update</Symbol>
+              <Text class="body" size="large">
+                <Trans>A new version of AnyTalk is available</Trans>
+              </Text>
+            </UpdateNoticeText>
+            <Button
+              variant="filled"
+              isDisabled={updating()}
+              onPress={() => {
+                setUpdating(true);
+                applyUpdate();
+                // if nothing reloaded after a while, allow another try
+                setTimeout(() => setUpdating(false), 10000);
+              }}
+            >
+              <Show when={updating()} fallback={<Trans>Update now</Trans>}>
+                <Trans>Updating...</Trans>
+              </Show>
+            </Button>
+            <IconButton
+              variant="standard"
+              aria-label={t`Dismiss`}
+              onPress={dismissUpdateNotice}
+            >
+              <Symbol aria-hidden="true">close</Symbol>
+            </IconButton>
+          </UpdateNotice>
+        </Show>
         <Column>
           <Wordmark
             class={css({

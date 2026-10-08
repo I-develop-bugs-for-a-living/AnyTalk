@@ -54,6 +54,17 @@ export default function AdvancedSettings() {
         >
           <Trans>Show admin panel shortcuts in context menus</Trans>
         </Checkbox>
+        <Checkbox
+          checked={state.settings.getValue("advanced:update_notice")}
+          onChange={(e) =>
+            state.settings.setValue(
+              "advanced:update_notice",
+              e.currentTarget.checked,
+            )
+          }
+        >
+          <Trans>Show a notice when a new version is available</Trans>
+        </Checkbox>
       </Column>
       <Column>
         <Text class="label">

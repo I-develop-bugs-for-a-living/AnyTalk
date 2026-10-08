@@ -87,6 +87,12 @@ interface SettingsDefinition {
   "advanced:admin_panel": boolean;
 
   /**
+   * Whether to show a notice on the home page when a new version of the
+   * app is available
+   */
+  "advanced:update_notice": boolean;
+
+  /**
    * Whether stream developer tools are on (live video statistics and
    * stream recaps); named before voice developer tools existed
    */
@@ -192,6 +198,7 @@ const EXPECTED_TYPES: { [K in keyof SettingsDefinition]: ValueType<K> } = {
   "appearance:compact_mode": "boolean",
   "advanced:copy_id": "boolean",
   "advanced:admin_panel": "boolean",
+  "advanced:update_notice": "boolean",
   "advanced:developer_mode": "boolean",
   "advanced:developer_overlay": "boolean",
   "advanced:developer_record": "boolean",
@@ -244,6 +251,7 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
       "appearance:compact_mode": false,
       "advanced:copy_id": false,
       "advanced:admin_panel": false,
+      "advanced:update_notice": true,
       "advanced:developer_mode": false,
       "advanced:developer_overlay": true,
       "advanced:developer_record": true,
