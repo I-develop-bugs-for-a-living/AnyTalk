@@ -560,6 +560,13 @@ if (!app.requestSingleInstanceLock()) {
     installScreenShare(fromApp);
     createMenu();
     if (trayAvailable) createTray();
+    // On every launch, before the first page load: a service worker from an
+    // older web build would keep serving its old cached code, so start from
+    // none. The HTTP cache, cookies and local
+    // storage stay, so login and settings survive.
+    await session.defaultSession
+      .clearStorageData({ storages: ["serviceworkers", "cachestorage"] })
+      .catch(() => {});
     createWindow();
     startUpdater(getConfig().autoUpdate, () => {
       // Menus are static, so rebuild them with the restart item
