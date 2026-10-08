@@ -292,7 +292,20 @@ function Participants(props: { theater: boolean }) {
 
   // Clear out any focus when the track that was focused is no longer available.
   createEffect(() => {
-    if (!voice.focusTrack()) voice.toggleFocus();
+    if (voice.focusId() && !voice.focusTrack()) voice.settleAfterStreamGone();
+  });
+
+  // A stream that ended on its own (streamer stopped or left) never went
+  // through leaveStream, so bring the grid back once nothing is left to see
+  createEffect(() => {
+    if (
+      voice.watching.size === 0 &&
+      !voice.focusTrack() &&
+      !voice.pendingFocus() &&
+      !voice.showBar()
+    ) {
+      voice.restoreBar();
+    }
   });
 
   // Focus a stream we just started watching, once its track is listed

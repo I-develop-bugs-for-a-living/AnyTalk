@@ -462,7 +462,7 @@ class Voice {
 
     room.addListener("participantDisconnected", (participant) => {
       this.#announce(room, participant.identity, "userLeaveVoice");
-      this.watching.delete(participant.identity);
+      this.#unwatch(participant.identity);
     });
 
     room.addListener("trackPublished", (pub) => {
@@ -475,7 +475,7 @@ class Voice {
 
     room.addListener("localTrackUnpublished", (unpub) => {
       if (unpub.source === Track.Source.ScreenShare) {
-        this.watching.delete(room.localParticipant.identity);
+        this.#unwatch(room.localParticipant.identity);
       }
     });
 
@@ -485,7 +485,7 @@ class Voice {
         this.screenShareTracks.delete(unpub.trackSid);
       }
       if (unpub.source === Track.Source.ScreenShare) {
-        this.watching.delete(participant.identity);
+        this.#unwatch(participant.identity);
       }
     });
 
@@ -1156,12 +1156,25 @@ class Voice {
   }
 
   toggleFocus(t?: TrackReferenceOrPlaceholder) {
-    const id = t ? this.trackId(t) : undefined;
+    // nothing to focus: just make sure no focus is left behind
+    if (!t) return this.clearFocus();
+
+    const id = this.trackId(t);
     if (this.focusId() === id || this.vidTracks().length < 2) {
       this.#setFocus(undefined);
     } else {
       this.#focus(t!);
     }
+  }
+
+  /**
+   * Drop the focus and bring the participant grid back
+   */
+  clearFocus() {
+    batch(() => {
+      this.#setFocus(undefined);
+      this.#setShowBar(true);
+    });
   }
 
   /**
@@ -1280,13 +1293,44 @@ class Voice {
     }
 
     // down to a single stream again: show it on its own
-    if (this.watching.size === 1) {
-      this.#setPendingFocus([...this.watching][0]);
-    }
+    this.settleAfterStreamGone();
+  }
+
+  /**
+   * Forget a watched stream, along with any focus still waiting for it
+   */
+  #unwatch(identity: string) {
+    batch(() => {
+      this.watching.delete(identity);
+      if (this.pendingFocus() === identity) this.#setPendingFocus();
+    });
+  }
+
+  /**
+   * Settle the layout after a watched stream went away: a single remaining
+   * stream is shown on its own (bar stays hidden), otherwise a stale focus is
+   * dropped and the participant grid returns
+   */
+  settleAfterStreamGone() {
+    batch(() => {
+      if (this.watching.size === 1) {
+        this.#setPendingFocus([...this.watching][0]);
+        if (!this.focusTrack()) this.#setFocus(undefined);
+      } else if (this.watching.size === 0 || !this.focusTrack()) {
+        this.clearFocus();
+      }
+    });
+  }
+
+  /**
+   * Show the participant grid again
+   */
+  restoreBar() {
+    this.#setShowBar(true);
   }
 
   #stopWatching(identity: string) {
-    this.watching.delete(identity);
+    this.#unwatch(identity);
 
     const participant = this.room()?.getParticipantByIdentity(identity);
     for (const source of [
@@ -1304,6 +1348,9 @@ class Voice {
     ) {
       this.#setFocus(undefined);
     }
+
+    // last stream left: the grid was collapsed for it, so bring it back
+    if (this.watching.size === 0) this.#setShowBar(true);
   }
 
   isFocus(t: TrackReferenceOrPlaceholder) {
