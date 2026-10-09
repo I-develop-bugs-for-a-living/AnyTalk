@@ -5,11 +5,13 @@ import { useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
 import { useInstance } from "@revolt/instance";
-import { screenShareSupported, useVoice } from "@revolt/rtc";
+import { isIOSBusMode, screenShareSupported, useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
 import { Button, IconButton } from "@revolt/ui/components/design";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
+import { AudioDevicesButton } from "./AudioDevicesButton";
+import { EarpieceToggleButton } from "./EarpieceToggleButton";
 import { ScreenShareButton } from "./ScreenShareButton";
 
 export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
@@ -97,6 +99,12 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
           <Symbol>headset_off</Symbol>
         </Show>
       </IconButton>
+      <Show
+        when={isIOSBusMode()}
+        fallback={<AudioDevicesButton size={props.size} />}
+      >
+        <EarpieceToggleButton size={props.size} />
+      </Show>
       <IconButton
         size={props.size}
         variant={limits().video && voice.video() ? "filled" : "tonal"}

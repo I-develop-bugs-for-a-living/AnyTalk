@@ -4,7 +4,7 @@ import { useMediaDeviceSelect } from "solid-livekit-components";
 import { Trans } from "@lingui/solid/macro";
 
 import { useInstance } from "@revolt/instance";
-import { stoatSinkName } from "@revolt/rtc";
+import { stoatSinkName, useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
 import {
   CategoryButton,
@@ -40,6 +40,7 @@ export function VoiceInputOptions() {
  */
 function SelectInput(props: { kind: MediaDeviceKind }) {
   const state = useState();
+  const voice = useVoice();
   const media = createMemo(() => useMediaDeviceSelect({ kind: props.kind }));
 
   const setKey = () =>
@@ -97,6 +98,16 @@ function SelectInput(props: { kind: MediaDeviceKind }) {
           id === "default" ||
           mMedia.devices().find((d) => d.deviceId === id)
         ) {
+          if (props.kind === "audiooutput") {
+            // also works on Safari, where LiveKit can't switch the output
+            voice.setAudioOutput(id);
+            return;
+          }
+          if (props.kind === "audioinput") {
+            voice.setAudioInput(id);
+            return;
+          }
+
           //Can't setActiveMediaDevice to "default" for video, only audio
           //But it can be applied on livekit init, so this choice will be remembered
           if (props.kind !== "videoinput" || id !== "default")

@@ -59,6 +59,7 @@ import { StatsRecorder } from "./components/StatsRecorder";
 import { StreamViewers } from "./components/StreamViewers";
 import { VoiceKeybinds } from "./components/VoiceKeybinds";
 import { VoiceMoves } from "./components/VoiceMoves";
+import * as outputBus from "./outputBus";
 import { setScreenCaptureLimit } from "./screenCapture";
 import { VoiceProcessor } from "./VoiceProcessor";
 
@@ -146,6 +147,12 @@ const STREAM_AUDIO_PUBLISH_OPTIONS: TrackPublishOptions = {
  * so a move only plays the moved sound
  */
 const MOVE_GRACE_MS = 750;
+
+/** How long to watch for the microphone going silent after an output switch */
+const MIC_RECOVERY_WATCH_MS = 3000;
+
+/** How long a system mute may last before the microphone is restarted */
+const MIC_RECOVERY_SETTLE_MS = 1000;
 
 class Voice {
   #settings: VoiceSettings;
@@ -352,6 +359,12 @@ class Voice {
 
   async connect(channel: Channel, auth?: { url: string; token: string }) {
     this.disconnect();
+
+    // Safari: start the audio output bus while still inside the tap that
+    // joined the call (before the first await), it needs a gesture
+    if (outputBus.isBusMode()) {
+      outputBus.prime(this.#settings.preferredAudioOutputDevice);
+    }
 
     this.device.setWakeLocked();
 
@@ -573,6 +586,141 @@ class Voice {
   }
 
   /**
+   * Choose where call audio plays. Must be called from within a user gesture
+   * (e.g. a click handler) because Safari only lets pages switch the output
+   * device then. On Safari the device is switched on the output bus; anywhere
+   * else LiveKit does it.
+   * @param deviceId Output device (undefined or "default" for the system default)
+   */
+  setAudioOutput(deviceId?: string) {
+    const id = !deviceId || deviceId === "default" ? undefined : deviceId;
+    this.#settings.preferredAudioOutputDevice = id;
+
+    if (outputBus.isBusMode()) {
+      if (this.room()) {
+        // started synchronously, still inside the gesture
+        outputBus.setOutput(id);
+        this.#recoverMicrophone();
+      }
+      return;
+    }
+
+    this.room()
+      ?.switchActiveDevice("audiooutput", id ?? "default")
+      .catch((err) => console.error("[rtc] could not switch output", err));
+  }
+
+  /**
+   * Choose the microphone. Call it from within a user gesture. Switches the
+   * live microphone. On Safari the output is applied again in the same
+   * gesture, because iOS may move the output route when the input changes,
+   * and the microphone is then checked like after an output switch.
+   * @param deviceId Input device (undefined or "default" for the system default)
+   */
+  setAudioInput(deviceId?: string) {
+    const id = !deviceId || deviceId === "default" ? undefined : deviceId;
+    this.#settings.preferredAudioInputDevice = id;
+
+    const bus = outputBus.isBusMode() && !!this.room();
+    // synchronously, still inside the gesture
+    if (bus) outputBus.setOutput(this.#settings.preferredAudioOutputDevice);
+
+    this.room()
+      ?.switchActiveDevice("audioinput", id ?? "default")
+      // check the microphone only once the track has been replaced
+      .then(() => bus && this.#recoverMicrophone())
+      .catch((err) => console.error("[rtc] could not switch microphone", err));
+  }
+
+  /**
+   * Switching the output (to AirPods in particular) can leave the iPhone's
+   * microphone silent until it is toggled. If we aren't muted and the
+   * microphone track is muted by the system or ended, restart it. The track
+   * is checked right away, and for a few seconds afterwards for the system
+   * muting it.
+   */
+  #recoverMicrophone() {
+    this.#cancelMicRecovery();
+    if (!this.#micShouldWork()) return;
+
+    const local = this.getMicrophoneTrack()?.audioTrack;
+    if (!local) return;
+
+    // the captured track and, with voice processing, the processed one
+    const tracks = new Set<MediaStreamTrack>([
+      local.mediaStreamTrack,
+      ...(local.mediaStream?.getAudioTracks() ?? []),
+    ]);
+    const broken = () =>
+      [...tracks].some((t) => t.muted || t.readyState === "ended");
+
+    const restart = () => {
+      // the user may have muted or left meanwhile
+      if (
+        !this.#micShouldWork() ||
+        this.getMicrophoneTrack()?.audioTrack !== local
+      ) {
+        return;
+      }
+      local
+        .restartTrack()
+        .catch((err) =>
+          console.error("[rtc] could not restart the microphone", err),
+        );
+    };
+
+    if (broken()) {
+      restart();
+      return;
+    }
+
+    // otherwise watch for the system muting it for a moment; a short mute
+    // that ends on its own needs no restart
+    let settle: ReturnType<typeof setTimeout> | undefined;
+    const onMute = () => {
+      clearTimeout(settle);
+      settle = setTimeout(() => {
+        if (broken()) restart();
+      }, MIC_RECOVERY_SETTLE_MS);
+    };
+    const onUnmute = () => clearTimeout(settle);
+    const timer = setTimeout(() => {
+      // stop watching, a pending settle check still runs
+      cancel();
+    }, MIC_RECOVERY_WATCH_MS);
+    const cancel = () => {
+      clearTimeout(timer);
+      tracks.forEach((t) => {
+        t.removeEventListener("mute", onMute);
+        t.removeEventListener("unmute", onUnmute);
+      });
+    };
+
+    tracks.forEach((t) => {
+      t.addEventListener("mute", onMute);
+      t.addEventListener("unmute", onUnmute);
+    });
+    this.#cancelMicRecovery = () => {
+      cancel();
+      clearTimeout(settle);
+    };
+  }
+
+  /** Whether our microphone is meant to be sending */
+  #micShouldWork() {
+    const local = this.getMicrophoneTrack()?.audioTrack;
+    return (
+      this.#settings.micOn &&
+      !this.#settings.deafen &&
+      !!local &&
+      !local.isMuted
+    );
+  }
+
+  /** Stop watching the microphone after an output switch */
+  #cancelMicRecovery: () => void = () => {};
+
+  /**
    * Retry starting call audio, must be called from a user gesture
    */
   startAudio() {
@@ -584,6 +732,8 @@ class Voice {
   }
 
   disconnect() {
+    this.#cancelMicRecovery();
+    outputBus.teardown();
     this.device.releaseWakeLock();
     this.#releaseAudioUnlock?.();
     this.#releaseAudioUnlock = undefined;

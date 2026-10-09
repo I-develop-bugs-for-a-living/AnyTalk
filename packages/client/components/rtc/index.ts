@@ -5,6 +5,7 @@ export { useVoice, VoiceContext } from "./state";
 
 export { InRoom } from "./components/InRoom";
 export { RoomAudioManager } from "./components/RoomAudioManager";
+export { findEarpiece, isIOSBusMode } from "./outputBus";
 export { useFastIsSpeaking } from "./speaking";
 export { stoatSinkName } from "./virtualMic";
 
