@@ -59,7 +59,7 @@ msgstr "(religar agora)"
 #. placeholder {0}: props.count
 #: components/ui/components/features/messaging/elements/BlockedMessage.tsx
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
-msgstr "{0, plural, one {# mensagem bloqueada} other {# mensagens bloqueadas}}"
+msgstr "{0, plural, one {# mensagem bloqueada} many {# mensagens bloqueadas} other {# mensagens bloqueadas}}"
 
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
@@ -104,7 +104,7 @@ msgstr "{0, plural, one {+# outro} many {+# de outros} other {+# outros}}"
 #. placeholder {0}: items().length
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
-msgstr "{0, plural, one {Largar ficheiro} other {Largar # ficheiros}}"
+msgstr "{0, plural, one {Largar ficheiro} many {Largar # ficheiros} other {Largar # ficheiros}}"
 
 #. placeholder {0}: users() .slice(0, -1) .map((user) => user!.username) .join(", ")
 #. placeholder {1}: users().slice(-1)[0]!.username
@@ -2078,7 +2078,7 @@ msgstr "Editado(a)"
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Effective <0/> (<1/>)"
-msgstr "Efetivo(a)"
+msgstr "Efetivo <0/> (<1/>)"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
@@ -2817,7 +2817,7 @@ msgstr "Idioma"
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Last sync <0/>"
-msgstr "Última sincronização"
+msgstr "Última sincronização <0/>"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Latest"
@@ -2936,7 +2936,7 @@ msgstr "Sobreposição de estatísticas em direto"
 #. placeholder {0}: humanFileSize(props.file.size ?? 0)
 #: components/ui/components/features/messaging/elements/TextFile.tsx
 msgid "Load file ({0})"
-msgstr "Carregar ficheiro"
+msgstr "Carregar ficheiro ({0})"
 
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"

@@ -59,7 +59,7 @@ msgstr "(znova sa pripojiť)"
 #. placeholder {0}: props.count
 #: components/ui/components/features/messaging/elements/BlockedMessage.tsx
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
-msgstr "{0, plural, one {# zablokovaná správa} few {# zablokované správy} other {# zablokovaných správ}}"
+msgstr "{0, plural, one {# zablokovaná správa} few {# zablokované správy} many {# zablokovanej správy} other {# zablokovaných správ}}"
 
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
@@ -104,7 +104,7 @@ msgstr "{0, plural, one {+# ďalší} few {+# ďalší} many {+# ďalšieho} oth
 #. placeholder {0}: items().length
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
-msgstr "{0, plural, one {Vložiť súbor} few {Vložiť # súbory} other {Vložiť # súborov}}"
+msgstr "{0, plural, one {Vložiť súbor} few {Vložiť # súbory} many {Vložiť # súboru} other {Vložiť # súborov}}"
 
 #. placeholder {0}: users() .slice(0, -1) .map((user) => user!.username) .join(", ")
 #. placeholder {1}: users().slice(-1)[0]!.username
@@ -131,12 +131,12 @@ msgstr "{0} pustené"
 #. placeholder {0}: instance.globalLimits.server_emoji - props.server.emojis.length
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "{0} emoji slots remaining"
-msgstr "{0, plural, one {# zostávajúce miesto pre emoji} few {# zostávajúce miesta pre emoji} other {# zostávajúcich miest pre emoji}}"
+msgstr "Zostáva {0} miest pre emoji"
 
 #. placeholder {0}: rejectedFiles.length
 #: src/interface/channels/text/Composition.tsx
 msgid "{0} files exceed the maximum size limit of {maxSizeFormatted} and were not uploaded."
-msgstr "Súbory neboli odoslané, lebo presiahli maximálnu veľkosť súborov ({maxSizeFormatted})."
+msgstr "{0} súborov presahuje maximálnu veľkosť {maxSizeFormatted} a nebolo nahraných."
 
 #. placeholder {0}: s.participantName
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
