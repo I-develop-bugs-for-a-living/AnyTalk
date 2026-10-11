@@ -85,15 +85,41 @@ export function ScreenShareSettingsModal(
         },
       ]}
     >
-      <VideoTrack
-        trackRef={props.trackReference}
-        style={{
-          padding: "var(--gap-md)",
-          "border-radius": "var(--borderRadius-lg)",
-          "max-height": "400px",
-          "justify-self": "center",
-        }}
-      />
+      <Show
+        when={props.previewStream}
+        fallback={
+          <Show when={props.trackReference}>
+            {(trackReference) => (
+              <VideoTrack
+                trackRef={trackReference()}
+                style={{
+                  padding: "var(--gap-md)",
+                  "border-radius": "var(--borderRadius-lg)",
+                  "max-height": "400px",
+                  "justify-self": "center",
+                }}
+              />
+            )}
+          </Show>
+        }
+      >
+        {(stream) => (
+          <video
+            ref={(el) => (el.srcObject = stream())}
+            aria-hidden="true"
+            autoplay
+            muted
+            playsinline
+            style={{
+              padding: "var(--gap-md)",
+              "border-radius": "var(--borderRadius-lg)",
+              "max-height": "400px",
+              "max-width": "100%",
+              "justify-self": "center",
+            }}
+          />
+        )}
+      </Show>
       <form onSubmit={submit}>
         <Column>
           <Form2.ButtonGroup

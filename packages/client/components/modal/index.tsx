@@ -59,8 +59,9 @@ export class ModalController {
   /**
    * Add a modal to the stack
    * @param props Modal parameters
+   * @returns The id of the modal, to close it with `remove`
    */
-  openModal(props: Modals) {
+  openModal(props: Modals): string {
     //Unique ID from clock that can't run backwards
     const id = performance.now().toString();
     this.setModals((modals) => [
@@ -72,6 +73,7 @@ export class ModalController {
       },
     ]);
     dismissFloatingElements();
+    return id;
     // after modal commits to DOM,
     // we can begin animations!
     // setTimeout(

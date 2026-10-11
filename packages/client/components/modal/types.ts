@@ -331,7 +331,7 @@ export type Modals =
       group: Channel;
       user: User;
     }
-  | {
+  | ({
       type: "screen_share_settings";
       /** Current settings of a stream that is already going */
       live?: {
@@ -339,7 +339,6 @@ export type Modals =
         frameRate: ScreenShareFrameRate;
         audio: boolean;
       };
-      trackReference: TrackReference;
       resolutions: { value: ScreenShareResolution; label: string }[];
       audio: boolean;
       callback: (
@@ -348,7 +347,18 @@ export type Modals =
         audio: boolean,
       ) => void;
       onCancel: () => void;
-    }
+    } & (
+      | {
+          /** Track of a stream that is going, shown as the preview */
+          trackReference: TrackReference;
+          previewStream?: undefined;
+        }
+      | {
+          /** Capture that is not published yet, shown as the preview */
+          previewStream: MediaStream;
+          trackReference?: undefined;
+        }
+    ))
   | {
       type: "screen_share_picker";
       callback: (

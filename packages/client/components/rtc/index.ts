@@ -1,4 +1,7 @@
-import { screenCaptureLimit } from "./screenCapture";
+import {
+  screenCaptureLimit,
+  takeScreenCaptureKeepFocus,
+} from "./screenCapture";
 import { getVirtmic } from "./virtualMic";
 
 export { useVoice, VoiceContext } from "./state";
@@ -12,6 +15,19 @@ export { stoatSinkName } from "./virtualMic";
 // missing outside secure contexts (e.g. a dev server opened over http)
 const mediaDevices = navigator.mediaDevices as MediaDevices | undefined;
 const originalMediaCall = mediaDevices?.getDisplayMedia;
+
+/** Capture Controller API (Chromium), not in the TypeScript DOM types */
+type CaptureControllerLike = {
+  setFocusBehavior(
+    behavior: "focus-captured-surface" | "no-focus-change",
+  ): void;
+};
+type WindowWithController = Window & {
+  CaptureController?: new () => CaptureControllerLike;
+};
+type DisplayMediaWithController = DisplayMediaStreamOptions & {
+  controller?: CaptureControllerLike;
+};
 
 /**
  * Whether this browser can share its screen, iOS and Android browsers can't
@@ -32,7 +48,35 @@ if (mediaDevices && originalMediaCall)
       };
     }
 
+    // Chromium focuses the captured tab or window as soon as it is picked.
+    // The Capture Controller lets us decline that (feature detected, it
+    // doesn't exist in Firefox and Safari).
+    const keepFocus = takeScreenCaptureKeepFocus();
+    let controller: CaptureControllerLike | undefined;
+    if (
+      opts &&
+      keepFocus &&
+      typeof (window as WindowWithController).CaptureController === "function"
+    ) {
+      controller = new (window as WindowWithController).CaptureController!();
+      (opts as DisplayMediaWithController).controller = controller;
+    }
+
     const stream: MediaStream = await originalMediaCall.call(this, opts);
+
+    // This has to happen right after the request resolves: the browser
+    // rejects the call once it has applied its own focus choice. There is no
+    // way to focus the captured surface later on.
+    if (controller) {
+      const surface = stream.getVideoTracks()[0]?.getSettings().displaySurface;
+      if (surface === "browser" || surface === "window") {
+        try {
+          controller.setFocusBehavior("no-focus-change");
+        } catch (e) {
+          console.debug("Could not keep the focus on this tab:", e);
+        }
+      }
+    }
 
     if (opts && opts.audio && window.native?.isWayland?.()) {
       const id = await getVirtmic();

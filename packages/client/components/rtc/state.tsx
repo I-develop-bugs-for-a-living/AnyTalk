@@ -23,6 +23,7 @@ import {
   LocalAudioTrack,
   LocalTrack,
   LocalTrackPublication,
+  LocalVideoTrack,
   RemoteTrackPublication,
   Room,
   RoomEvent,
@@ -60,7 +61,10 @@ import { StreamViewers } from "./components/StreamViewers";
 import { VoiceKeybinds } from "./components/VoiceKeybinds";
 import { VoiceMoves } from "./components/VoiceMoves";
 import * as outputBus from "./outputBus";
-import { setScreenCaptureLimit } from "./screenCapture";
+import {
+  setScreenCaptureKeepFocus,
+  setScreenCaptureLimit,
+} from "./screenCapture";
 import { VoiceProcessor } from "./VoiceProcessor";
 
 type State =
@@ -119,6 +123,16 @@ export type StreamOptions = {
   resolution: ScreenShareResolution;
   frameRate: ScreenShareFrameRate;
   audio: boolean;
+};
+
+/** A screen share that is being started, not published yet */
+type ScreenCapture = {
+  /** What the browser captured, empty until the picker is done */
+  tracks: LocalTrack[];
+  /** The settings dialog, while it is shown */
+  modalId?: string;
+  /** Set once the tracks go out, they then can't just be stopped */
+  publishing: boolean;
 };
 
 /** Stream audio is captured as is, without the processing meant for voices */
@@ -231,6 +245,7 @@ class Voice {
   private device: Device;
 
   private openModal;
+  #closeModal: (id: string) => void;
   private config;
   private limits;
   private screenShareTracks: Set<string>;
@@ -301,6 +316,7 @@ class Voice {
     this.config = inst.config;
     this.limits = inst.limits;
     this.openModal = modals.openModal;
+    this.#closeModal = modals.remove;
 
     this.screenShareTracks = new Set();
 
@@ -732,6 +748,7 @@ class Voice {
   }
 
   disconnect() {
+    this.#cancelCapture();
     this.#cancelMicRecovery();
     outputBus.teardown();
     this.device.releaseWakeLock();
@@ -1080,99 +1097,206 @@ class Voice {
       await this.#stopScreenshare(room);
 
       this.sound.playSound("streamEnd");
+    } else if (this.#capture) {
+      // Toggled again while a start is going on. While the settings are
+      // shown that calls the start off, otherwise it is not interrupted.
+      if (!this.#capture.publishing && this.#capture.tracks.length) {
+        this.#cancelCapture();
+      }
     } else {
+      const capture: ScreenCapture = { tracks: [], publishing: false };
+      this.#capture = capture;
+
       const picked = this.#registerScreenPicker();
       this.#prepareCapture();
+      const asking = this.#settings.screenShareQualityAsk;
 
       try {
         const chosenQuality = this.#screenShareQuality(
           this.#settings.screenShareResolution,
           this.#settings.screenShareFrameRate,
         );
-        const localTrack = await room.localParticipant.setScreenShareEnabled(
-          true,
-          {
+
+        // Capture only. Nothing is published, so nobody sees the stream,
+        // until the settings are confirmed.
+        //
+        // Stay in this tab. The browser would otherwise jump to the captured
+        // tab right after the picker, before the settings are confirmed, and
+        // there is no way to switch to it later on.
+        setScreenCaptureKeepFocus(true);
+        let tracks: LocalTrack[];
+        try {
+          tracks = await room.localParticipant.createScreenTracks({
             resolution: chosenQuality?.resolution,
             audio: STREAM_AUDIO_CAPTURE,
-          },
-          {
-            screenShareEncoding: chosenQuality?.encoding,
-            // Send only the full-size stream: a half-size simulcast copy makes
-            // shared text unreadable for viewers showing the stream small
-            simulcast: false,
-            ...STREAM_AUDIO_PUBLISH_OPTIONS,
-          },
-        );
-
-        this.#holdStreamAudio = false;
-        this.#keepStreamAudio(
-          room.localParticipant.getTrackPublication(
-            Track.Source.ScreenShareAudio,
-          )?.audioTrack,
-        );
-
-        this.#setScreenshare(room.localParticipant.isScreenShareEnabled);
-
-        if (localTrack) {
-          // This event is only fired if the screen share is ended by closing the window being streamed.
-          // This catches the ending and disables screen sharing on our side. If this weren't here,
-          // livekit would still share stream audio after closing the window being streamed.
-          localTrack.on("ended", () => {
-            if (this.screenshare()) this.toggleScreenshare();
           });
+        } finally {
+          setScreenCaptureKeepFocus(false);
+        }
+        capture.tracks = tracks;
 
-          const start = async (options: StreamOptions) => {
-            await this.#applyStreamOptions(room, options);
-            this.sound.playSound("streamStart");
-          };
+        const video = tracks.find(
+          (t): t is LocalVideoTrack => t.kind === Track.Kind.Video,
+        )!;
+        const audio = tracks.find(
+          (t): t is LocalAudioTrack => t.kind === Track.Kind.Audio,
+        );
 
-          const pickedOptions = picked();
-          if (pickedOptions) {
-            await start(pickedOptions);
-          } else if (this.#settings.screenShareQualityAsk) {
-            localTrack.pauseUpstream();
-            this.#holdStreamAudio = true;
-            this.#streamAudio?.pauseUpstream();
-            this.openModal({
-              onCancel: () => this.#stopScreenshare(room),
-              type: "screen_share_settings",
-              trackReference: {
-                participant: room.localParticipant,
-                publication: localTrack,
-                source: Track.Source.ScreenShare,
-              },
-              resolutions: this.#resolutionOptions(),
-              audio: !!this.#streamAudio,
-              callback: async (resolution, frameRate, audio) => {
-                this.#holdStreamAudio = false;
-                await start({ resolution, frameRate, audio });
-                localTrack.resumeUpstream();
-                if (this.#streamAudioShared(room)) {
-                  this.#streamAudio?.resumeUpstream();
-                }
-              },
-            });
-          } else {
-            // Not asking: apply the saved choice, otherwise the capture stays
-            // at the low startup constraints from getDisplayMedia
-            await start({
-              resolution: this.#settings.screenShareResolution,
-              frameRate: this.#settings.screenShareFrameRate,
-              audio: this.#settings.screenShareAudio,
-            });
-          }
+        // gone while picking
+        if (this.#capture !== capture || this.room() !== room) {
+          this.#cancelCapture(capture);
+          return;
+        }
+
+        const pickedOptions = picked();
+        if (pickedOptions) {
+          capture.publishing = true;
+          await this.#publishScreenshare(room, video, audio, pickedOptions);
+        } else if (asking) {
+          // the capture can end (stopped from the browser) while waiting
+          video.mediaStreamTrack.addEventListener(
+            "ended",
+            () => {
+              if (this.#capture === capture && !capture.publishing) {
+                this.#cancelCapture(capture);
+              }
+            },
+            { once: true },
+          );
+
+          capture.modalId = this.openModal({
+            onCancel: () => this.#cancelCapture(capture),
+            type: "screen_share_settings",
+            previewStream: new MediaStream([video.mediaStreamTrack]),
+            resolutions: this.#resolutionOptions(),
+            audio: !!audio,
+            callback: async (resolution, frameRate, shareAudio) => {
+              // cancelled meanwhile, or we left the call
+              if (this.#capture !== capture || this.room() !== room) {
+                this.#cancelCapture(capture);
+                return;
+              }
+              capture.publishing = true;
+              try {
+                await this.#publishScreenshare(room, video, audio, {
+                  resolution,
+                  frameRate,
+                  audio: shareAudio,
+                });
+              } catch (e) {
+                await this.#abortScreenshare(room, tracks);
+                this.onErr(e);
+              } finally {
+                if (this.#capture === capture) this.#capture = undefined;
+              }
+            },
+          });
+        } else {
+          // Not asking: apply the saved choice, otherwise the capture stays
+          // at the low startup constraints from getDisplayMedia
+          capture.publishing = true;
+          await this.#publishScreenshare(room, video, audio, {
+            resolution: this.#settings.screenShareResolution,
+            frameRate: this.#settings.screenShareFrameRate,
+            audio: this.#settings.screenShareAudio,
+          });
         }
       } catch (e) {
-        if (picked.dismissed()) {
-          // Cancelling the picker makes the capture request fail, which is
-          // no error: drop anything half set up and stay silent
-          this.#setStreamOptions();
-          this.#setScreenshare(room.localParticipant.isScreenShareEnabled);
-        } else {
-          this.onErr(e);
+        this.#cancelCapture(capture);
+        await this.#abortScreenshare(room, capture.tracks);
+        // Cancelling the picker makes the capture request fail, which is
+        // no error: stay silent
+        if (!picked.dismissed()) this.onErr(e);
+      } finally {
+        // with the settings shown the start goes on in their callback
+        if (this.#capture === capture && capture.modalId === undefined) {
+          this.#capture = undefined;
         }
       }
     }
+  }
+
+  /** The screen share that is being started, until it's published or off */
+  #capture?: ScreenCapture;
+
+  /**
+   * Call off the screen share that is being started: close its settings and
+   * stop the captured tracks that were never published
+   */
+  #cancelCapture(capture = this.#capture) {
+    if (!capture) return;
+    if (this.#capture === capture) this.#capture = undefined;
+    if (capture.modalId !== undefined) this.#closeModal(capture.modalId);
+    capture.modalId = undefined;
+    if (!capture.publishing) capture.tracks.forEach((t) => t.stop());
+  }
+
+  /**
+   * Undo a screen share that failed to start. When part of it was already
+   * published, stopping the tracks isn't enough to take it down again.
+   */
+  async #abortScreenshare(room: Room, tracks: LocalTrack[]) {
+    if (room.localParticipant.getTrackPublication(Track.Source.ScreenShare)) {
+      try {
+        await this.#stopScreenshare(room);
+      } catch (e) {
+        console.debug("Could not stop the failed screen share:", e);
+      }
+    }
+
+    tracks.forEach((t) => t.stop());
+    if (this.#streamAudio && tracks.includes(this.#streamAudio)) {
+      this.#streamAudio = undefined;
+    }
+    this.#setStreamOptions();
+    this.#setScreenshare(room.localParticipant.isScreenShareEnabled);
+  }
+
+  /**
+   * Publish a captured screen (and its audio) with the confirmed settings,
+   * this is the moment other participants get to see the stream
+   */
+  async #publishScreenshare(
+    room: Room,
+    video: LocalVideoTrack,
+    audio: LocalAudioTrack | undefined,
+    options: StreamOptions,
+  ) {
+    const quality = this.#screenShareQuality(
+      options.resolution,
+      options.frameRate,
+    );
+
+    this.#holdStreamAudio = false;
+    this.#keepStreamAudio(audio);
+
+    // This event is only fired if the screen share is ended by closing the window being streamed.
+    // This catches the ending and disables screen sharing on our side. If this weren't here,
+    // livekit would still share stream audio after closing the window being streamed.
+    // Listening before publishing, so an end during it isn't missed.
+    let ended = false;
+    video.once(TrackEvent.Ended, () => {
+      ended = true;
+      if (this.screenshare()) this.toggleScreenshare();
+    });
+
+    await room.localParticipant.publishTrack(video, {
+      screenShareEncoding: quality.encoding,
+      // Send only the full-size stream: a half-size simulcast copy makes
+      // shared text unreadable for viewers showing the stream small
+      simulcast: false,
+    });
+
+    this.#setScreenshare(room.localParticipant.isScreenShareEnabled);
+
+    if (ended) {
+      await this.#stopScreenshare(room);
+      return;
+    }
+
+    // also shares the audio when chosen
+    await this.#applyStreamOptions(room, options);
+    this.sound.playSound("streamStart");
   }
 
   /**
