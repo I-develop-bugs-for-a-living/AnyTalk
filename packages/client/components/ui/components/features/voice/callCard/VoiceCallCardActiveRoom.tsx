@@ -5,6 +5,7 @@ import {
   createMemo,
   createSignal,
   For,
+  Index,
   onCleanup,
   onMount,
   Show,
@@ -415,15 +416,15 @@ function StreamTiling() {
 
   return (
     <Tiling>
-      <For each={rows()}>
+      {/* Index, not For: rows() builds new arrays on every track update, and
+          For would treat each as a new row and re-create every video */}
+      <Index each={rows()}>
         {(row) => (
           <TilingRow>
-            <TrackLoop tracks={() => row}>
-              {() => <ParticipantTile fill />}
-            </TrackLoop>
+            <TrackLoop tracks={row}>{() => <ParticipantTile fill />}</TrackLoop>
           </TilingRow>
         )}
-      </For>
+      </Index>
     </Tiling>
   );
 }
