@@ -349,7 +349,14 @@ function Participants(props: { theater: boolean }) {
         >
           <StreamTiling />
         </Show>
-        <Show when={hasMain() && !props.theater && others().length}>
+        <Show
+          when={
+            hasMain() &&
+            !props.theater &&
+            voice.layout() !== "collapsed" &&
+            others().length
+          }
+        >
           <ShowBarButtonHolder>
             <IconButton
               size="xs"
