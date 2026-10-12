@@ -5,44 +5,32 @@ import { styled } from "styled-system/jsx";
 import { useVoice } from "@revolt/rtc";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
+/**
+ * Connection hint, only shown while the call is reconnecting or has dropped
+ * and is gone again once it is connected
+ */
 export function VoiceCallCardStatus(props: { pip?: boolean }) {
   const voice = useVoice();
 
-  const symbol = () => {
-    switch (voice.state()) {
-      case "CONNECTED":
-        return "wifi_tethering";
-      case "CONNECTING":
-        return "wifi_tethering";
-      case "DISCONNECTED":
-        return "wifi_tethering_error";
-      case "RECONNECTING":
-        return "wifi_tethering";
-      default:
-        return "";
-    }
-  };
-
-  const text = () => {
-    switch (voice.state()) {
-      case "CONNECTED":
-        return <Trans>Connected</Trans>;
-      case "CONNECTING":
-        return <Trans>Connecting</Trans>;
-      case "DISCONNECTED":
-        return <Trans>Disconnected</Trans>;
-      case "RECONNECTING":
-        return <Trans>Reconnecting</Trans>;
-      default:
-        return null;
-    }
-  };
+  const trouble = () =>
+    voice.state() === "RECONNECTING" || voice.state() === "DISCONNECTED";
 
   return (
-    <Status status={voice.state()} pip={props.pip}>
-      <Symbol>{symbol()}</Symbol>{" "}
-      <FadeOut fade={voice.state() === "CONNECTED"}>{text()}</FadeOut>
-    </Status>
+    <Show when={trouble()}>
+      <Status role="status" aria-live="polite" pip={props.pip}>
+        <Symbol>
+          {voice.state() === "DISCONNECTED"
+            ? "wifi_tethering_error"
+            : "wifi_tethering"}
+        </Symbol>
+        <Show
+          when={voice.state() === "DISCONNECTED"}
+          fallback={<Trans>Reconnecting</Trans>}
+        >
+          <Trans>Disconnected</Trans>
+        </Show>
+      </Status>
+    </Show>
   );
 }
 
@@ -83,57 +71,16 @@ const EnableAudio = styled("button", {
   },
 });
 
-const FadeOut = styled("div", {
-  base: {
-    paddingInlineStart: "var(--gap-md)",
-  },
-  variants: {
-    fade: {
-      true: {
-        opacity: 0,
-        fontSize: 0,
-        paddingInlineStart: 0,
-        transition:
-          "opacity .3s 5s ease, font-size .3s 6s, padding-inline-start .3s 6s",
-      },
-    },
-  },
-});
-
 const Status = styled("div", {
   base: {
     flexShrink: 0,
-
-    display: "flex",
-    justifyContent: "center",
     zIndex: 1,
-
-    _hover: {
-      "& div": {
-        opacity: 1,
-        fontSize: "inherit",
-        paddingInlineStart: "var(--gap-md)",
-        transition:
-          "opacity 0s 0s, font-size 0s 0s, padding-inline-start 0s 0s",
-      },
-    },
+    display: "flex",
+    alignItems: "center",
+    gap: "var(--gap-sm)",
+    color: "var(--md-sys-color-outline)",
   },
   variants: {
-    status: {
-      READY: {},
-      CONNECTED: {
-        color: "var(--md-sys-color-primary)",
-      },
-      CONNECTING: {
-        color: "var(--md-sys-color-outline)",
-      },
-      DISCONNECTED: {
-        color: "var(--md-sys-color-outline)",
-      },
-      RECONNECTING: {
-        color: "var(--md-sys-color-outline)",
-      },
-    },
     pip: {
       true: {
         position: "absolute",
