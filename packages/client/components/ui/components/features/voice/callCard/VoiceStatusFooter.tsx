@@ -3,12 +3,15 @@ import { Match, Show, Switch } from "solid-js";
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
+import { useDevice } from "@revolt/common";
 import { useNavigate } from "@revolt/routing";
-import { useVoice } from "@revolt/rtc";
+import { screenShareSupported, useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
 import { typography } from "@revolt/ui/components/design/Text";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
+import { AudioDeviceChevron } from "./AudioDeviceChevron";
+import { ScreenShareButton } from "./ScreenShareButton";
 import { DeafenButton, LeaveCallButton, MuteButton } from "./VoiceCallButtons";
 
 /**
@@ -21,6 +24,8 @@ export function VoiceStatusFooter() {
   const state = useState();
   const navigate = useNavigate();
   const { t } = useLingui();
+  // Phones keep plain mute, deafen and leave buttons: no device chevrons
+  const { isMobile } = useDevice();
 
   return (
     <Show when={voice.channel()}>
@@ -66,8 +71,32 @@ export function VoiceStatusFooter() {
             </ChannelLink>
           </Info>
           <Buttons>
-            <MuteButton size="sm" />
-            <DeafenButton size="sm" />
+            <Split>
+              <MuteButton size="sm" />
+              <Show when={!isMobile}>
+                <AudioDeviceChevron
+                  kind="audioinput"
+                  variant={voice.microphone() ? "filled" : "tonal"}
+                />
+              </Show>
+            </Split>
+            <Split>
+              <DeafenButton size="sm" />
+              <Show when={!isMobile}>
+                <AudioDeviceChevron
+                  kind="audiooutput"
+                  variant={
+                    voice.deafen() || !voice.listenPermission
+                      ? "tonal"
+                      : "filled"
+                  }
+                />
+              </Show>
+            </Split>
+            {/* Phone browsers can't share their screen */}
+            <Show when={screenShareSupported}>
+              <ScreenShareButton size="sm" />
+            </Show>
             <LeaveCallButton size="sm" />
           </Buttons>
         </Footer>
@@ -148,5 +177,21 @@ const Buttons = styled("div", {
     gap: "8px",
     justifyContent: "center",
     flexWrap: "wrap",
+  },
+});
+
+/**
+ * A mute or deafen button with its device chevron attached (split button):
+ * the touching corners are squared off
+ */
+const Split = styled("div", {
+  base: {
+    display: "flex",
+    gap: "2px",
+
+    "& > button:not(:last-child)": {
+      borderStartEndRadius: "var(--borderRadius-xs)",
+      borderEndEndRadius: "var(--borderRadius-xs)",
+    },
   },
 });
