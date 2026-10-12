@@ -1380,11 +1380,12 @@ msgstr "Միացնել"
 msgid "Connect to voice channel"
 msgstr "Միանալ ձայնային ալիքին"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
-#~ msgid "Connected"
-#~ msgstr "Միացած է"
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Connected"
+msgstr "Միացած է"
 
 #: components/app/interface/desktop/Titlebar.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "Միանում է"
 
@@ -1719,7 +1720,7 @@ msgid "Date format"
 msgstr "Ամսաթվի ձևաչափ"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "Անջատել ձայնը (խուլ)"
 
@@ -1926,6 +1927,7 @@ msgstr "Անջատված է"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "Անջատված է կապից"
 
@@ -2172,7 +2174,7 @@ msgstr "Կոդավորիչ"
 msgid "Encoder target bitrate"
 msgstr "Կոդավորիչի թիրախային բիթրեյթ"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "Ավարտել զանգը"
 
@@ -3232,7 +3234,7 @@ msgstr "Միկրոֆոն և ականջակալներ"
 #~ msgid "Minimise to Tray"
 #~ msgstr ""
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "Թույլտվությունը բացակայում է"
 
@@ -3278,7 +3280,7 @@ msgstr "Բազմահեռարձակում. հեռարձակում բացելը ա
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "Անջատել միկրոֆոնը"
 
@@ -3984,6 +3986,7 @@ msgstr "Վերջին զանգերը գլխավոր էջում"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "Նորից միանում է"
 
@@ -5219,7 +5222,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "AnyTalk-ի չբռնված սխալ՝ {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "Վերականգնել ձայնը (խուլից)"
 
@@ -5262,7 +5265,7 @@ msgid "Unmark this channel as mature?"
 msgstr "Հանե՞լ այս ալիքի չափահասների համար նշումը։"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "Միացնել միկրոֆոնը"
 
@@ -5587,6 +5590,10 @@ msgstr "Ձայնային զանգեր ({calls})"
 #: components/modal/modals/CreateChannel.tsx
 msgid "Voice Channel"
 msgstr "Ձայնային ալիք"
+
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"

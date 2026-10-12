@@ -1352,11 +1352,12 @@ msgstr "Conectar"
 msgid "Connect to voice channel"
 msgstr "Conectar ao canal de voz"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
-#~ msgid "Connected"
-#~ msgstr "Conectado"
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Connected"
+msgstr "Conectado"
 
 #: components/app/interface/desktop/Titlebar.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "Conectando"
 
@@ -1690,7 +1691,7 @@ msgid "Date format"
 msgstr "Formato de data"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "Ensurdecer"
 
@@ -1889,6 +1890,7 @@ msgstr "Desativado"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "Desconectado"
 
@@ -2132,7 +2134,7 @@ msgstr "Codificador"
 msgid "Encoder target bitrate"
 msgstr "Bitrate alvo do codificador"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "Encerrar ligação"
 
@@ -3188,7 +3190,7 @@ msgstr "Microfone e fones de ouvido"
 #~ msgid "Minimise to Tray"
 #~ msgstr "Minimizar para a Bandeja"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "Permissão faltando"
 
@@ -3234,7 +3236,7 @@ msgstr "Várias transmissões: abrir uma transmissão a adiciona ao lado das out
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "Silenciar"
 
@@ -3939,6 +3941,7 @@ msgstr "Chamadas recentes na página inicial"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "Reconectando"
 
@@ -5162,7 +5165,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "Erro de AnyTalk Não Capturado: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "Reativar Áudio"
 
@@ -5205,7 +5208,7 @@ msgid "Unmark this channel as mature?"
 msgstr "Desmarcar este canal como conteúdo adulto?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "Desmutar"
 
@@ -5522,6 +5525,10 @@ msgstr "Chamadas de voz ({calls})"
 #: components/modal/modals/CreateChannel.tsx
 msgid "Voice Channel"
 msgstr "Canal de voz"
+
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"

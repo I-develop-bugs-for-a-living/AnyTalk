@@ -1381,11 +1381,12 @@ msgstr "بەستن"
 msgid "Connect to voice channel"
 msgstr "پەیوەندی بە کەناڵی دەنگییەوە بکە"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
-#~ msgid "Connected"
-#~ msgstr "بەستراوە"
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Connected"
+msgstr "بەستراوە"
 
 #: components/app/interface/desktop/Titlebar.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "پەیوەندی دەکرێت"
 
@@ -1721,7 +1722,7 @@ msgid "Date format"
 msgstr "فۆرماتی بەروار"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "گوێ داخستن"
 
@@ -1928,6 +1929,7 @@ msgstr "ناچالاککراو"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "پچڕاوە"
 
@@ -2175,7 +2177,7 @@ msgstr "کۆدکەر"
 msgid "Encoder target bitrate"
 msgstr "بیت‌ڕەیتی ئامانجی کۆدکەر"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "کۆتاییهێنان بە پەیوەندی"
 
@@ -3237,7 +3239,7 @@ msgstr "مایکرۆفۆن و هێدفۆن"
 #~ msgid "Minimise to Tray"
 #~ msgstr ""
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "مۆڵەت نییە"
 
@@ -3283,7 +3285,7 @@ msgstr "فرە-ستریم: کردنەوەی ستریمێک دەیخاتە تەن
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "بێدەنگکردن"
 
@@ -3989,6 +3991,7 @@ msgstr "پەیوەندییە تازەکان لە پەڕەی سەرەکی"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "دووبارە پەیوەندی دەکرێت"
 
@@ -5228,7 +5231,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "هەڵەی نەگیراوی AnyTalk: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "کردنەوەی گوێ"
 
@@ -5271,7 +5274,7 @@ msgid "Unmark this channel as mature?"
 msgstr "نیشانەی ناوەڕۆکی گەورەسالان لەسەر ئەم کەناڵە لابرێت؟"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "لابردنی بێدەنگی"
 
@@ -5597,6 +5600,10 @@ msgstr "پەیوەندی دەنگییەکان ({calls})"
 #: components/modal/modals/CreateChannel.tsx
 msgid "Voice Channel"
 msgstr "کەناڵی دەنگ"
+
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"

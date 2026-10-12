@@ -1381,11 +1381,12 @@ msgstr "Повежи се"
 msgid "Connect to voice channel"
 msgstr "Повежи се на гласовни канал"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
-#~ msgid "Connected"
-#~ msgstr "Повезано"
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Connected"
+msgstr "Повезано"
 
 #: components/app/interface/desktop/Titlebar.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "Повезивање"
 
@@ -1721,7 +1722,7 @@ msgid "Date format"
 msgstr "Формат датума"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "Оглуши"
 
@@ -1928,6 +1929,7 @@ msgstr "Искључено"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "Прекинута веза"
 
@@ -2175,7 +2177,7 @@ msgstr "Енкодер"
 msgid "Encoder target bitrate"
 msgstr "Циљни битрејт енкодера"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "Заврши позив"
 
@@ -3237,7 +3239,7 @@ msgstr "Микрофон и слушалице"
 #~ msgid "Minimise to Tray"
 #~ msgstr ""
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "Недостаје дозвола"
 
@@ -3283,7 +3285,7 @@ msgstr "Више преноса: отварањем преноса додаје 
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "Заглуши"
 
@@ -3989,6 +3991,7 @@ msgstr "Недавни позиви на Почетној"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "Поновно повезивање"
 
@@ -5228,7 +5231,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "Необрађена AnyTalk грешка: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "Врати слух"
 
@@ -5271,7 +5274,7 @@ msgid "Unmark this channel as mature?"
 msgstr "Скинути ознаку за одрасле са овог канала?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "Укључи звук"
 
@@ -5597,6 +5600,10 @@ msgstr "Гласовни позиви ({calls})"
 #: components/modal/modals/CreateChannel.tsx
 msgid "Voice Channel"
 msgstr "Гласни Канал"
+
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"

@@ -1381,11 +1381,12 @@ msgstr "Sambung"
 msgid "Connect to voice channel"
 msgstr "Sambung ke saluran suara"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
-#~ msgid "Connected"
-#~ msgstr "Bersambung"
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Connected"
+msgstr "Bersambung"
 
 #: components/app/interface/desktop/Titlebar.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "Menyambung"
 
@@ -1721,7 +1722,7 @@ msgid "Date format"
 msgstr "Format tarikh"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "Pekak"
 
@@ -1928,6 +1929,7 @@ msgstr "Dilumpuhkan"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "Terputus"
 
@@ -2175,7 +2177,7 @@ msgstr "Pengekod"
 msgid "Encoder target bitrate"
 msgstr "Bitrate sasaran pengekod"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "Tamatkan panggilan"
 
@@ -3237,7 +3239,7 @@ msgstr "Mikrofon dan fon kepala"
 #~ msgid "Minimise to Tray"
 #~ msgstr ""
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "Kebenaran tiada"
 
@@ -3283,7 +3285,7 @@ msgstr "Berbilang strim: membuka strim menambahkannya di sebelah yang lain"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "Bisukan"
 
@@ -3989,6 +3991,7 @@ msgstr "Panggilan terkini di Utama"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "Menyambung semula"
 
@@ -5228,7 +5231,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "Ralat AnyTalk tidak ditangkap: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "Nyahpekak"
 
@@ -5271,7 +5274,7 @@ msgid "Unmark this channel as mature?"
 msgstr "Nyahtanda saluran ini sebagai dewasa?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "Nyahbisu"
 
@@ -5597,6 +5600,10 @@ msgstr "Panggilan suara ({calls})"
 #: components/modal/modals/CreateChannel.tsx
 msgid "Voice Channel"
 msgstr "Saluran Suara"
+
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"

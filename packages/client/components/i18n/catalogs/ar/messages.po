@@ -1378,11 +1378,12 @@ msgstr "الإتصال"
 msgid "Connect to voice channel"
 msgstr "اتصل بقناة صوتية"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
-#~ msgid "Connected"
-#~ msgstr "متصل"
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Connected"
+msgstr "متصل"
 
 #: components/app/interface/desktop/Titlebar.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "اتصال"
 
@@ -1717,7 +1718,7 @@ msgid "Date format"
 msgstr "تنسيق التاريخ"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "تعطيل الصوت"
 
@@ -1923,6 +1924,7 @@ msgstr "معطل"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "مفصول"
 
@@ -2169,7 +2171,7 @@ msgstr "المرمِّز"
 msgid "Encoder target bitrate"
 msgstr "معدل البت المستهدف للمرمِّز"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "إنهاء المكالمة"
 
@@ -3228,7 +3230,7 @@ msgstr "الميكروفون وسماعات الرأس"
 #~ msgid "Minimise to Tray"
 #~ msgstr "تصغير البرنامج"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "صلاحية غير موجودة"
 
@@ -3274,7 +3276,7 @@ msgstr "بث متعدد: فتح بث يضيفه بجانب البقية"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "كتم"
 
@@ -3979,6 +3981,7 @@ msgstr "المكالمات الأخيرة في الصفحة الرئيسية"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "جار اعادة الاتصال"
 
@@ -5214,7 +5217,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "خطأ Staot غير مراقب: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "غير مافن"
 
@@ -5257,7 +5260,7 @@ msgid "Unmark this channel as mature?"
 msgstr "هل تريد إلغاء علامة البالغين لهذه القناة؟"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "إلغاء كتم الصوت"
 
@@ -5580,6 +5583,10 @@ msgstr "المكالمات الصوتية ({calls})"
 #: components/modal/modals/CreateChannel.tsx
 msgid "Voice Channel"
 msgstr "قناة صوتية"
+
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr "الاتصال الصوتي"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"

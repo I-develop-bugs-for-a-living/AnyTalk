@@ -1380,11 +1380,12 @@ msgstr "연결"
 msgid "Connect to voice channel"
 msgstr "음성 채널에 연결"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
-#~ msgid "Connected"
-#~ msgstr "연결됨"
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Connected"
+msgstr "연결됨"
 
 #: components/app/interface/desktop/Titlebar.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "연결 중"
 
@@ -1719,7 +1720,7 @@ msgid "Date format"
 msgstr "날짜 형식"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "헤드셋 음소거"
 
@@ -1926,6 +1927,7 @@ msgstr "사용 안 함"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "연결 끊김"
 
@@ -2172,7 +2174,7 @@ msgstr "인코더"
 msgid "Encoder target bitrate"
 msgstr "인코더 목표 비트레이트"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "통화 종료"
 
@@ -3232,7 +3234,7 @@ msgstr "마이크와 헤드폰"
 #~ msgid "Minimise to Tray"
 #~ msgstr "트레이로 최소화"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "권한 없음"
 
@@ -3278,7 +3280,7 @@ msgstr "멀티 스트림: 스트림을 열면 다른 스트림 옆에 추가돼�
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "음소거"
 
@@ -3984,6 +3986,7 @@ msgstr "홈의 최근 통화"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "다시 연결 중"
 
@@ -5219,7 +5222,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "처리되지 않은 AnyTalk 오류: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "헤드셋 음소거 해제"
 
@@ -5262,7 +5265,7 @@ msgid "Unmark this channel as mature?"
 msgstr "이 채널의 성인 콘텐츠 표시를 해제할까요?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "음소거 해제"
 
@@ -5587,6 +5590,10 @@ msgstr "음성 통화 ({calls})"
 #: components/modal/modals/CreateChannel.tsx
 msgid "Voice Channel"
 msgstr "음성 채널"
+
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr "음성 연결"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"

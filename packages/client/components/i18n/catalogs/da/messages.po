@@ -1380,11 +1380,12 @@ msgstr "Forbind"
 msgid "Connect to voice channel"
 msgstr "Opret forbindelse til stemmekanal"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
-#~ msgid "Connected"
-#~ msgstr "Forbundet"
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Connected"
+msgstr "Forbundet"
 
 #: components/app/interface/desktop/Titlebar.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "Opretter forbindelse"
 
@@ -1719,7 +1720,7 @@ msgid "Date format"
 msgstr "Datoformat"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "Gør døv"
 
@@ -1926,6 +1927,7 @@ msgstr "Deaktiveret"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "Afbrudt"
 
@@ -2172,7 +2174,7 @@ msgstr "Encoder"
 msgid "Encoder target bitrate"
 msgstr "Encoderens målbitrate"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "Afslut opkald"
 
@@ -3232,7 +3234,7 @@ msgstr "Mikrofon og hovedtelefoner"
 #~ msgid "Minimise to Tray"
 #~ msgstr ""
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "Manglende tilladelse"
 
@@ -3278,7 +3280,7 @@ msgstr "Flere streams: en åbnet stream tilføjes ved siden af de andre"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "Slå lyd fra"
 
@@ -3984,6 +3986,7 @@ msgstr "Seneste opkald på startsiden"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "Opretter forbindelse igen"
 
@@ -5219,7 +5222,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "Ufanget AnyTalk-fejl: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "Ophæv døv"
 
@@ -5262,7 +5265,7 @@ msgid "Unmark this channel as mature?"
 msgstr "Fjern markeringen som for voksne på denne kanal?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "Slå lyd til"
 
@@ -5587,6 +5590,10 @@ msgstr "Stemmeopkald ({calls})"
 #: components/modal/modals/CreateChannel.tsx
 msgid "Voice Channel"
 msgstr "Stemmekanal"
+
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"

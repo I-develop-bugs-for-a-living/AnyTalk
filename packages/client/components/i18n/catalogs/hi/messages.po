@@ -1380,11 +1380,12 @@ msgstr "जोड़ना"
 msgid "Connect to voice channel"
 msgstr "वॉइस चैनल से जुड़ें"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
-#~ msgid "Connected"
-#~ msgstr "कनेक्टेड"
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Connected"
+msgstr "कनेक्टेड"
 
 #: components/app/interface/desktop/Titlebar.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "कनेक्ट हो रहा है"
 
@@ -1719,7 +1720,7 @@ msgid "Date format"
 msgstr "तारीख़ का प्रारूप"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "डीफ़न"
 
@@ -1926,6 +1927,7 @@ msgstr "बंद"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "डिस्कनेक्ट हो गया"
 
@@ -2172,7 +2174,7 @@ msgstr "एन्कोडर"
 msgid "Encoder target bitrate"
 msgstr "एन्कोडर का लक्षित बिटरेट"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "कॉल खत्म करें"
 
@@ -3232,7 +3234,7 @@ msgstr "माइक्रोफ़ोन और हेडफ़ोन"
 #~ msgid "Minimise to Tray"
 #~ msgstr ""
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "अनुमति नहीं है"
 
@@ -3278,7 +3280,7 @@ msgstr "मल्टी-स्ट्रीम: स्ट्रीम खोल�
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "म्यूट"
 
@@ -3984,6 +3986,7 @@ msgstr "होम पर हाल की कॉल"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "दोबारा कनेक्ट हो रहा है"
 
@@ -5219,7 +5222,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "अनहैंडल्ड AnyTalk त्रुटि: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "डीफ़न हटाएँ"
 
@@ -5262,7 +5265,7 @@ msgid "Unmark this channel as mature?"
 msgstr "इस चैनल से वयस्क का निशान हटाएँ?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "अनम्यूट"
 
@@ -5587,6 +5590,10 @@ msgstr "वॉइस कॉल ({calls})"
 #: components/modal/modals/CreateChannel.tsx
 msgid "Voice Channel"
 msgstr "आवाज चैनल"
+
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"

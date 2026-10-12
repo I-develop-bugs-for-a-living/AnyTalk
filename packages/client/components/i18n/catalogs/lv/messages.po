@@ -1381,11 +1381,12 @@ msgstr "Savienot"
 msgid "Connect to voice channel"
 msgstr "Pievienoties balss kanālam"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
-#~ msgid "Connected"
-#~ msgstr "Savienots"
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Connected"
+msgstr "Savienots"
 
 #: components/app/interface/desktop/Titlebar.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "Savienojas"
 
@@ -1721,7 +1722,7 @@ msgid "Date format"
 msgstr "Datuma formāts"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "Izslēgt klausules"
 
@@ -1928,6 +1929,7 @@ msgstr "Atslēgts"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "Atvienots"
 
@@ -2175,7 +2177,7 @@ msgstr "Kodētājs"
 msgid "Encoder target bitrate"
 msgstr "Kodētāja mērķa bitu ātrums"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "Beigt zvanu"
 
@@ -3237,7 +3239,7 @@ msgstr "Mikrofons un austiņas"
 #~ msgid "Minimise to Tray"
 #~ msgstr ""
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "Trūkst atļaujas"
 
@@ -3283,7 +3285,7 @@ msgstr "Vairākas straumes: atverot straumi, tā tiek pievienota blakus pārēj�
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "Izslēgt mikrofonu"
 
@@ -3989,6 +3991,7 @@ msgstr "Nesenie zvani sākumlapā"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "Atkārtoti savienojas"
 
@@ -5228,7 +5231,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "Neapstrādāta AnyTalk kļūda: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "Ieslēgt klausules"
 
@@ -5271,7 +5274,7 @@ msgid "Unmark this channel as mature?"
 msgstr "Noņemt šim kanālam atzīmi kā pieaugušajiem?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "Ieslēgt mikrofonu"
 
@@ -5597,6 +5600,10 @@ msgstr "Balss zvani ({calls})"
 #: components/modal/modals/CreateChannel.tsx
 msgid "Voice Channel"
 msgstr "Balss kanāls"
+
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"
