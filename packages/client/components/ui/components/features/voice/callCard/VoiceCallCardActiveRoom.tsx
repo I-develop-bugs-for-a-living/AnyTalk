@@ -350,26 +350,24 @@ function Participants(props: { theater: boolean }) {
         </Show>
         <Show when={hasMain() && !props.theater && others().length}>
           <ShowBarButtonHolder>
-            <div style={{ "margin-bottom": "10px" }}>
-              <IconButton
-                size="xs"
-                variant={"tonal"}
-                onPress={() => voice.toggleShowBar()}
-                use:floating={{
-                  tooltip: {
-                    placement: "top",
-                    content: voice.showBar() ? t`Hide Others` : t`Show Others`,
-                  },
-                }}
+            <IconButton
+              size="xs"
+              variant={"tonal"}
+              onPress={() => voice.toggleShowBar()}
+              use:floating={{
+                tooltip: {
+                  placement: "top",
+                  content: voice.showBar() ? t`Hide Others` : t`Show Others`,
+                },
+              }}
+            >
+              <Show
+                when={voice.showBar()}
+                fallback={<Symbol>keyboard_arrow_up</Symbol>}
               >
-                <Show
-                  when={voice.showBar()}
-                  fallback={<Symbol>keyboard_arrow_up</Symbol>}
-                >
-                  <Symbol>keyboard_arrow_down</Symbol>
-                </Show>
-              </IconButton>
-            </div>
+                <Symbol>keyboard_arrow_down</Symbol>
+              </Show>
+            </IconButton>
           </ShowBarButtonHolder>
         </Show>
         <Grid
@@ -590,13 +588,12 @@ const FocusedInfo = styled("div", {
   },
 });
 
+/** Small row between the focused stream and the others, never over the stream */
 const ShowBarButtonHolder = styled("div", {
   base: {
-    height: 0,
-    alignSelf: "center",
-    overflow: "visible",
+    flexShrink: 0,
     display: "flex",
-    flexDirection: "column-reverse",
+    justifyContent: "center",
   },
 });
 
