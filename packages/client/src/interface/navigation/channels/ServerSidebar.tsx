@@ -34,6 +34,7 @@ import {
   typography,
 } from "@revolt/ui";
 import { UnreadCallout } from "@revolt/ui/components/features/navigation/UnreadCallout";
+import { VoiceStatusFooter } from "@revolt/ui/components/features/voice/callCard/VoiceStatusFooter";
 import { useMoveVoiceUser } from "@revolt/ui/components/features/voice/useMoveVoiceUser";
 import { VoiceChannelPreview } from "@revolt/ui/components/features/voice/VoiceChannelPreview";
 import {
@@ -107,6 +108,7 @@ export const ServerSidebar = (props: Props) => {
   const navigate = useNavigate();
   const { isMobile } = useDevice();
   const { t } = useLingui();
+  const voice = useVoice();
 
   // Users can manage certain parts of the server individually, regardless of their ManageServer Permission
   const canManageServer = () =>
@@ -278,7 +280,7 @@ export const ServerSidebar = (props: Props) => {
           </Header>
         </Match>
       </Switch>
-      <ChannelList>
+      <ChannelList inCall={!!voice.channel()}>
         <UnreadCallout list={list} />
         <div
           ref={setList}
@@ -325,6 +327,7 @@ export const ServerSidebar = (props: Props) => {
           </Draggable>
         </div>
       </ChannelList>
+      <VoiceStatusFooter />
     </SidebarBase>
   );
 };
@@ -335,6 +338,12 @@ const ChannelList = styled("div", {
     flexGrow: 1,
     minHeight: 0,
     marginBottom: "calc(var(--gap-md) + var(--safe-area-bottom))",
+  },
+  variants: {
+    // The voice footer holds the safe area inset instead
+    inCall: {
+      true: { marginBottom: "var(--gap-md)" },
+    },
   },
 });
 
