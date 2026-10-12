@@ -105,51 +105,55 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
       >
         <EarpieceToggleButton size={props.size} />
       </Show>
-      <IconButton
-        size={props.size}
-        variant={limits().video && voice.video() ? "filled" : "tonal"}
-        onPress={() => {
-          if (limits().video) voice.toggleCamera();
-        }}
-        use:floating={{
-          tooltip: {
-            placement: "top",
-            content: limits().video
-              ? voice.video()
-                ? t`Stop camera`
-                : t`Start camera`
-              : t`Coming soon! 👀`,
-          },
-        }}
-        isDisabled={!limits().video}
-      >
-        <Symbol>camera_video</Symbol>
-      </IconButton>
+      <Show when={props.size !== "xs"}>
+        <IconButton
+          size={props.size}
+          variant={limits().video && voice.video() ? "filled" : "tonal"}
+          onPress={() => {
+            if (limits().video) voice.toggleCamera();
+          }}
+          use:floating={{
+            tooltip: {
+              placement: "top",
+              content: limits().video
+                ? voice.video()
+                  ? t`Stop camera`
+                  : t`Start camera`
+                : t`Coming soon! 👀`,
+            },
+          }}
+          isDisabled={!limits().video}
+        >
+          <Symbol>camera_video</Symbol>
+        </IconButton>
+      </Show>
       {/* Phone browsers can't share their screen */}
       <Show when={screenShareSupported}>
         <ScreenShareButton size={props.size} />
       </Show>
       <Show when={voice.watching.size}>
-        <IconButton
-          size={props.size}
-          variant={voice.multiStream() ? "filled" : "tonal"}
-          onPress={() => voice.setMultiStream(!voice.multiStream())}
-          use:floating={{
-            tooltip: {
-              placement: "top",
-              content: voice.multiStream()
-                ? t`Multi-stream: opening a stream adds it next to the others`
-                : t`Single stream: opening a stream replaces the current one`,
-            },
-          }}
-        >
-          <Show
-            when={voice.multiStream()}
-            fallback={<Symbol>crop_square</Symbol>}
+        <Show when={props.size !== "xs"}>
+          <IconButton
+            size={props.size}
+            variant={voice.multiStream() ? "filled" : "tonal"}
+            onPress={() => voice.setMultiStream(!voice.multiStream())}
+            use:floating={{
+              tooltip: {
+                placement: "top",
+                content: voice.multiStream()
+                  ? t`Multi-stream: opening a stream adds it next to the others`
+                  : t`Single stream: opening a stream replaces the current one`,
+              },
+            }}
           >
-            <Symbol>grid_view</Symbol>
-          </Show>
-        </IconButton>
+            <Show
+              when={voice.multiStream()}
+              fallback={<Symbol>crop_square</Symbol>}
+            >
+              <Symbol>grid_view</Symbol>
+            </Show>
+          </IconButton>
+        </Show>
         <IconButton
           size={props.size}
           variant="tonal"
