@@ -20,18 +20,14 @@ import { IconButton } from "@revolt/ui/components/design";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { scrollableStyles } from "@revolt/ui/directives";
 
-import {
-  ParticipantInfo,
-  ParticipantTile,
-  tile,
-  touchOnly,
-} from "./ParticipantTile";
+import { ParticipantInfo, ParticipantTile, tile } from "./ParticipantTile";
 import { StreamViewerList } from "./StreamViewerList";
 import { VoiceCallCardActions } from "./VoiceCallCardActions";
 import {
   VoiceCallCardEnableAudio,
   VoiceCallCardStatus,
 } from "./VoiceCallCardStatus";
+import { touchOnly, volumePanelOpen } from "./volumePanelState";
 
 /**
  * Call card (active)
@@ -55,17 +51,23 @@ export function VoiceCallCardActiveRoom() {
   function wake() {
     setIdle(false);
     clearTimeout(idleTimer);
-    idleTimer = setTimeout(() => setIdle(true), THEATER_IDLE_MS);
+    idleTimer = setTimeout(() => {
+      // a volume panel floats outside the card: keep the controls it hangs on
+      if (volumePanelOpen()) wake();
+      else setIdle(true);
+    }, THEATER_IDLE_MS);
   }
 
   /** Hide the controls right away, e.g. when the window loses focus */
   function sleep() {
+    if (volumePanelOpen()) return;
     clearTimeout(idleTimer);
     setIdle(true);
   }
 
+  // also restarts the idle timer once a volume panel closes
   createEffect(() => {
-    if (theater()) wake();
+    if (theater() && !volumePanelOpen()) wake();
   });
 
   onMount(() => {
@@ -117,32 +119,34 @@ export function VoiceCallCardActiveRoom() {
       </Show>
       <VoiceCallControls theater={theater()} hidden={theater() && idle()}>
         <VoiceCallControlHolder left collapsed={collapsed()}>
-          {/* on mobile only problems are worth the space next to the controls */}
+          <VoiceCallCardStatus />
+          {/* on mobile the controls have no room for who's streaming */}
           <Show
             when={
-              device.layout() === "desktop" ||
-              voice.state() === "RECONNECTING" ||
-              voice.state() === "DISCONNECTED"
+              theater() && voice.focusTrack() && device.layout() === "desktop"
             }
           >
-            <VoiceCallCardStatus />
-          </Show>
-          <Show when={theater() && voice.focusTrack()}>
             <FocusedInfo>
               <TrackLoop tracks={() => [voice.focusTrack()!]}>
-                {() => (
-                  // on mobile the controls have no room for who's streaming
-                  <ParticipantInfo
-                    align="start"
-                    controlsOnly={device.layout() !== "desktop"}
-                  />
-                )}
+                {() => <ParticipantInfo part="info" />}
               </TrackLoop>
             </FocusedInfo>
           </Show>
         </VoiceCallControlHolder>
         <VoiceCallCardActions size="sm" />
         <VoiceCallControlHolder right collapsed={collapsed()}>
+          {/* the volume sits at the far end of the bar, on phones too */}
+          <Show
+            when={
+              theater() &&
+              voice.focusTrack() &&
+              !voice.focusTrack()!.participant.isLocal
+            }
+          >
+            <TrackLoop tracks={() => [voice.focusTrack()!]}>
+              {() => <ParticipantInfo part="volume" align="end" />}
+            </TrackLoop>
+          </Show>
           <LayoutButtons />
         </VoiceCallControlHolder>
       </VoiceCallControls>
@@ -372,6 +376,8 @@ function Participants(props: { theater: boolean }) {
           ref={gridRef}
           focus={hasMain()}
           show={voice.showBar() && !props.theater}
+          // the theater bar shows who it is, the other tiles aren't drawn
+          hidden={props.theater}
           class={hasMain() ? scrollableStyles({ direction: "x" }) : ""}
           style={{ "--vc-tile-width": tileWidth() }}
         >
@@ -577,6 +583,8 @@ const VoiceCallControlHolder = styled("div", {
 const FocusedInfo = styled("div", {
   base: {
     minWidth: 0,
+    flex: "1 1 0",
+    display: "flex",
     alignSelf: "center",
     fontWeight: 600,
   },
@@ -638,6 +646,11 @@ const Grid = styled("div", {
     show: {
       false: {
         height: 0,
+      },
+    },
+    hidden: {
+      true: {
+        display: "none",
       },
     },
   },
