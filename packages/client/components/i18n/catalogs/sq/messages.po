@@ -1378,12 +1378,12 @@ msgstr "Lidhu"
 msgid "Connect to voice channel"
 msgstr "Lidhu me kanalin zanor"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connected"
 msgstr "I lidhur"
 
 #: components/app/interface/desktop/Titlebar.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "Po lidhet"
 
@@ -1718,7 +1718,7 @@ msgid "Date format"
 msgstr "Formati i datës"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "Shurdho"
 
@@ -1737,7 +1737,7 @@ msgstr "Dekoduesi"
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
-#: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceMenu.tsx
 msgid "Default"
 msgstr "E paracaktuar"
 
@@ -1924,6 +1924,7 @@ msgstr "I çaktivizuar"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "I shkëputur"
 
@@ -2170,7 +2171,7 @@ msgstr "Kodimi"
 msgid "Encoder target bitrate"
 msgstr "Bitrate i synuar i kodimit"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "Mbyll thirrjen"
 
@@ -2673,6 +2674,10 @@ msgstr "Hyrëse"
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Incoming call"
 msgstr "Thirrje hyrëse"
+
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Input device"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -3217,6 +3222,7 @@ msgid "MFA setup canceled."
 msgstr "Konfigurimi i MFA u anulua."
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Microphone"
 msgstr "Mikrofoni"
@@ -3229,7 +3235,7 @@ msgstr "Mikrofoni dhe kufjet"
 #~ msgid "Minimise to Tray"
 #~ msgstr ""
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "Mungon leja"
 
@@ -3275,7 +3281,7 @@ msgstr "Shumë-transmetim: hapja e një transmetimi e shton pranë të tjerëve"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "Hesht"
 
@@ -3306,6 +3312,10 @@ msgstr "Hesht serverin"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Mute stream"
 msgstr "Hesht transmetimin"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Mute user"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Mute when not speaking"
@@ -3651,6 +3661,10 @@ msgstr "Dalëse"
 msgid "Outgoing call"
 msgstr "Thirrje dalëse"
 
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Output device"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "Volumi i daljes"
@@ -3976,6 +3990,7 @@ msgstr "Thirrjet e fundit në Home"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "Po rilidhet"
 
@@ -4723,6 +4738,7 @@ msgid "Speak"
 msgstr "Fol"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Speaker"
 msgstr "Altoparlanti"
@@ -5211,7 +5227,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "Gabim i pakapur i AnyTalk: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "Hiq shurdhimin"
 
@@ -5254,7 +5270,7 @@ msgid "Unmark this channel as mature?"
 msgstr "Ta heqësh shënimin si për të rritur nga ky kanal?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "Hiq heshtjen"
 
@@ -5269,6 +5285,10 @@ msgstr "Hiq heshtjen e serverit"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Unmute stream"
 msgstr "Hiq heshtjen e transmetimit"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Unmute user"
+msgstr ""
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unnamed folder"
@@ -5574,12 +5594,17 @@ msgstr "Thirrje zanore ({calls})"
 msgid "Voice Channel"
 msgstr "Kanal prej zëri"
 
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"
 msgstr "Përpunimi i zërit"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Volume"
 msgstr "Volumi"
 

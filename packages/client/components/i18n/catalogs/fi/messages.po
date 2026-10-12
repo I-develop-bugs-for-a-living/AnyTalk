@@ -1355,12 +1355,12 @@ msgstr "Yhdistäminen"
 msgid "Connect to voice channel"
 msgstr "Voi yhdistää puhekanavalle"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connected"
 msgstr "Yhdistetty"
 
 #: components/app/interface/desktop/Titlebar.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "Yhdistää"
 
@@ -1694,7 +1694,7 @@ msgid "Date format"
 msgstr "Päivämäärän muoto"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "Kuurouta"
 
@@ -1713,7 +1713,7 @@ msgstr "Dekooderi"
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
-#: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceMenu.tsx
 msgid "Default"
 msgstr "Oletus"
 
@@ -1896,6 +1896,7 @@ msgstr "Poistettu käytöstä"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "Yhteys katkaistu"
 
@@ -2142,7 +2143,7 @@ msgstr "Enkooderi"
 msgid "Encoder target bitrate"
 msgstr "Enkooderin tavoitebittinopeus"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "Lopeta puhelu"
 
@@ -2645,6 +2646,10 @@ msgstr "Saapuva"
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Incoming call"
 msgstr "Saapuva puhelu"
+
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Input device"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -3189,6 +3194,7 @@ msgid "MFA setup canceled."
 msgstr "MFA:n käyttöönotto peruttu."
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Microphone"
 msgstr "Mikrofoni"
@@ -3201,7 +3207,7 @@ msgstr "Mikrofoni ja kuulokkeet"
 #~ msgid "Minimise to Tray"
 #~ msgstr ""
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "Puuttuva käyttöoikeus"
 
@@ -3247,7 +3253,7 @@ msgstr "Useita striimejä: avattu striimi lisätään muiden viereen"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "Mykistä"
 
@@ -3278,6 +3284,10 @@ msgstr "Mykistä palvelin"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Mute stream"
 msgstr "Mykistä striimi"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Mute user"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Mute when not speaking"
@@ -3623,6 +3633,10 @@ msgstr "Lähtevä"
 msgid "Outgoing call"
 msgstr "Lähtevä puhelu"
 
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Output device"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "Lähteen äänenvoimakkuus"
@@ -3948,6 +3962,7 @@ msgstr "Viimeisimmät puhelut etusivulla"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "Yhdistetään uudelleen"
 
@@ -4695,6 +4710,7 @@ msgid "Speak"
 msgstr "Puhe"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Speaker"
 msgstr "Kaiutin"
@@ -5183,7 +5199,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "Käsittelemätön AnyTalk virhe: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "Poista kuuroutus"
 
@@ -5226,7 +5242,7 @@ msgid "Unmark this channel as mature?"
 msgstr "Poista aikuisille suunnattu -merkintä?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "Poista mykistys"
 
@@ -5241,6 +5257,10 @@ msgstr "Poista palvelimen mykistys"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Unmute stream"
 msgstr "Poista striimin mykistys"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Unmute user"
+msgstr ""
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unnamed folder"
@@ -5546,12 +5566,17 @@ msgstr "Äänipuhelut ({calls})"
 msgid "Voice Channel"
 msgstr "Puhekanava"
 
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"
 msgstr "Äänenkäsittely"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Volume"
 msgstr "Äänenvoimakkuus"
 

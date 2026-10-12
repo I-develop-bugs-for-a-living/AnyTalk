@@ -7,13 +7,18 @@ import { styled } from "styled-system/jsx";
 import { useInstance } from "@revolt/instance";
 import { isIOSBusMode, screenShareSupported, useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
-import { Button, IconButton } from "@revolt/ui/components/design";
+import { IconButton } from "@revolt/ui/components/design";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import { AudioDevicesButton } from "./AudioDevicesButton";
 import { EarpieceToggleButton } from "./EarpieceToggleButton";
 import { ScreenShareButton } from "./ScreenShareButton";
+import { DeafenButton, LeaveCallButton, MuteButton } from "./VoiceCallButtons";
 
+/**
+ * Control bar of the call card. The "xs" size is the floating mini window,
+ * where there is no room for the camera and multi-stream buttons.
+ */
 export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
   const voice = useVoice();
   const state = useState();
@@ -56,100 +61,63 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
           <Symbol>unfold_more</Symbol>
         </IconButton>
       </Show>
-      <IconButton
-        size={props.size}
-        variant={voice.microphone() ? "filled" : "tonal"}
-        onPress={() => voice.toggleMute()}
-        use:floating={{
-          tooltip: {
-            placement: "top",
-            content: voice.speakingPermission
-              ? voice.microphone()
-                ? t`Mute`
-                : t`Unmute`
-              : t`Missing permission`,
-          },
-        }}
-        isDisabled={!voice.speakingPermission}
-      >
-        <Show when={voice.microphone()} fallback={<Symbol>mic_off</Symbol>}>
-          <Symbol>mic</Symbol>
-        </Show>
-      </IconButton>
-      <IconButton
-        size={props.size}
-        variant={voice.deafen() || !voice.listenPermission ? "tonal" : "filled"}
-        onPress={() => voice.toggleDeafen()}
-        use:floating={{
-          tooltip: {
-            placement: "top",
-            content: voice.listenPermission
-              ? voice.deafen()
-                ? t`Undeafen`
-                : t`Deafen`
-              : t`Missing permission`,
-          },
-        }}
-        isDisabled={!voice.listenPermission}
-      >
-        <Show
-          when={voice.deafen() || !voice.listenPermission}
-          fallback={<Symbol>headset</Symbol>}
-        >
-          <Symbol>headset_off</Symbol>
-        </Show>
-      </IconButton>
+      <MuteButton size={props.size} />
+      <DeafenButton size={props.size} />
       <Show
         when={isIOSBusMode()}
         fallback={<AudioDevicesButton size={props.size} />}
       >
         <EarpieceToggleButton size={props.size} />
       </Show>
-      <IconButton
-        size={props.size}
-        variant={limits().video && voice.video() ? "filled" : "tonal"}
-        onPress={() => {
-          if (limits().video) voice.toggleCamera();
-        }}
-        use:floating={{
-          tooltip: {
-            placement: "top",
-            content: limits().video
-              ? voice.video()
-                ? t`Stop camera`
-                : t`Start camera`
-              : t`Coming soon! 👀`,
-          },
-        }}
-        isDisabled={!limits().video}
-      >
-        <Symbol>camera_video</Symbol>
-      </IconButton>
+      <Show when={props.size !== "xs"}>
+        <IconButton
+          size={props.size}
+          variant={limits().video && voice.video() ? "filled" : "tonal"}
+          onPress={() => {
+            if (limits().video) voice.toggleCamera();
+          }}
+          use:floating={{
+            tooltip: {
+              placement: "top",
+              content: limits().video
+                ? voice.video()
+                  ? t`Stop camera`
+                  : t`Start camera`
+                : t`Coming soon! 👀`,
+            },
+          }}
+          isDisabled={!limits().video}
+        >
+          <Symbol>camera_video</Symbol>
+        </IconButton>
+      </Show>
       {/* Phone browsers can't share their screen */}
       <Show when={screenShareSupported}>
         <ScreenShareButton size={props.size} />
       </Show>
       <Show when={voice.watching.size}>
-        <IconButton
-          size={props.size}
-          variant={voice.multiStream() ? "filled" : "tonal"}
-          onPress={() => voice.setMultiStream(!voice.multiStream())}
-          use:floating={{
-            tooltip: {
-              placement: "top",
-              content: voice.multiStream()
-                ? t`Multi-stream: opening a stream adds it next to the others`
-                : t`Single stream: opening a stream replaces the current one`,
-            },
-          }}
-        >
-          <Show
-            when={voice.multiStream()}
-            fallback={<Symbol>crop_square</Symbol>}
+        <Show when={props.size !== "xs"}>
+          <IconButton
+            size={props.size}
+            variant={voice.multiStream() ? "filled" : "tonal"}
+            onPress={() => voice.setMultiStream(!voice.multiStream())}
+            use:floating={{
+              tooltip: {
+                placement: "top",
+                content: voice.multiStream()
+                  ? t`Multi-stream: opening a stream adds it next to the others`
+                  : t`Single stream: opening a stream replaces the current one`,
+              },
+            }}
           >
-            <Symbol>grid_view</Symbol>
-          </Show>
-        </IconButton>
+            <Show
+              when={voice.multiStream()}
+              fallback={<Symbol>crop_square</Symbol>}
+            >
+              <Symbol>grid_view</Symbol>
+            </Show>
+          </IconButton>
+        </Show>
         <IconButton
           size={props.size}
           variant="tonal"
@@ -167,19 +135,7 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
           <Symbol>cancel_presentation</Symbol>
         </IconButton>
       </Show>
-      <Button
-        size={props.size}
-        variant="_error"
-        onPress={() => voice.disconnect()}
-        use:floating={{
-          tooltip: {
-            placement: "top",
-            content: t`End call`,
-          },
-        }}
-      >
-        <Symbol>call_end</Symbol>
-      </Button>
+      <LeaveCallButton size={props.size} />
     </Actions>
   );
 }

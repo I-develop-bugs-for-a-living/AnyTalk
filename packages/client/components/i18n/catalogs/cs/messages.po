@@ -1295,12 +1295,12 @@ msgstr "Připojit se"
 msgid "Connect to voice channel"
 msgstr "Připojit se do hovoru"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connected"
 msgstr "Připojeno"
 
 #: components/app/interface/desktop/Titlebar.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "Připojuje se"
 
@@ -1634,7 +1634,7 @@ msgid "Date format"
 msgstr "Formát datumu"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "Ztlumen"
 
@@ -1653,7 +1653,7 @@ msgstr "Dekodér"
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
-#: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceMenu.tsx
 msgid "Default"
 msgstr "Výchozí"
 
@@ -1833,6 +1833,7 @@ msgstr "Vypnuto"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "Odpojeno"
 
@@ -2076,7 +2077,7 @@ msgstr "Kodér"
 msgid "Encoder target bitrate"
 msgstr "Cílový bitrate kodéru"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "Ukončit hovor"
 
@@ -2576,6 +2577,10 @@ msgstr "Příchozí"
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Incoming call"
 msgstr "Příchozí hovor"
+
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Input device"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -3117,6 +3122,7 @@ msgid "MFA setup canceled."
 msgstr "Nastavení MFA bylo zrušeno."
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Microphone"
 msgstr "Mikrofon"
@@ -3129,7 +3135,7 @@ msgstr "Mikrofon a sluchátka"
 #~ msgid "Minimise to Tray"
 #~ msgstr ""
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "Chybějící oprávnění"
 
@@ -3175,7 +3181,7 @@ msgstr "Více streamů: otevřený stream se přidá vedle ostatních"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "Ztlumit"
 
@@ -3206,6 +3212,10 @@ msgstr "Ztlumit Server"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Mute stream"
 msgstr "Ztišit stream"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Mute user"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Mute when not speaking"
@@ -3551,6 +3561,10 @@ msgstr "Odchozí"
 msgid "Outgoing call"
 msgstr "Odchozí hovor"
 
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Output device"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "Hlasitost výstupu"
@@ -3873,6 +3887,7 @@ msgstr "Nedávné hovory na domovské stránce"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "Opětovné připojování"
 
@@ -4611,6 +4626,7 @@ msgid "Speak"
 msgstr "Mluvit"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Speaker"
 msgstr "Reproduktor"
@@ -5096,7 +5112,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "Neošetřená chyba AnyTalk: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "Zrušit ztlumení"
 
@@ -5139,7 +5155,7 @@ msgid "Unmark this channel as mature?"
 msgstr "Odznačit tento kanál jako obsah pro dospělé?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "Zrušit ztišení"
 
@@ -5154,6 +5170,10 @@ msgstr "Zrušit Ztlumení Serveru"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Unmute stream"
 msgstr "Zrušit ztišení streamu"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Unmute user"
+msgstr ""
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unnamed folder"
@@ -5453,12 +5473,17 @@ msgstr "Hlasové hovory ({calls})"
 msgid "Voice Channel"
 msgstr "Hlasový kanál"
 
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"
 msgstr "Zpracování Hlasu"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Volume"
 msgstr "Hlasitost"
 

@@ -1355,12 +1355,12 @@ msgstr "Підключитися"
 msgid "Connect to voice channel"
 msgstr "Приєднатися до голосового каналу"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connected"
 msgstr "Підключено"
 
 #: components/app/interface/desktop/Titlebar.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "Підключаємо"
 
@@ -1694,7 +1694,7 @@ msgid "Date format"
 msgstr "Формат дати"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "Заглушити"
 
@@ -1713,7 +1713,7 @@ msgstr "Декодер"
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
-#: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceMenu.tsx
 msgid "Default"
 msgstr "За замовчуванням"
 
@@ -1896,6 +1896,7 @@ msgstr "Вимкнено"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "Відключено"
 
@@ -2142,7 +2143,7 @@ msgstr "Кодувальник"
 msgid "Encoder target bitrate"
 msgstr "Цільовий бітрейт кодувальника"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "Завершити дзвінок"
 
@@ -2645,6 +2646,10 @@ msgstr "Вхідні"
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Incoming call"
 msgstr "Вхідний дзвінок"
+
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Input device"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -3189,6 +3194,7 @@ msgid "MFA setup canceled."
 msgstr "Налаштування багатофакторної аутентифікації скасовано."
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Microphone"
 msgstr "Мікрофон"
@@ -3201,7 +3207,7 @@ msgstr "Мікрофон і навушники"
 #~ msgid "Minimise to Tray"
 #~ msgstr "Згорнути"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "Потрібен дозвіл"
 
@@ -3247,7 +3253,7 @@ msgstr "Кілька трансляцій: нова трансляція від�
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "Заглушити"
 
@@ -3278,6 +3284,10 @@ msgstr "Заглушити Сервер"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Mute stream"
 msgstr "Вимкнути звук трансляції"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Mute user"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Mute when not speaking"
@@ -3623,6 +3633,10 @@ msgstr "Вихідні"
 msgid "Outgoing call"
 msgstr "Вихідний дзвінок"
 
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Output device"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "Гучність аудіовиходу"
@@ -3948,6 +3962,7 @@ msgstr "Недавні дзвінки на головній"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "Повторне з'єднання"
 
@@ -4695,6 +4710,7 @@ msgid "Speak"
 msgstr "Говорити"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Speaker"
 msgstr "Динамік"
@@ -5183,7 +5199,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "Невиявлена помилка AnyTalk: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "Розглушений"
 
@@ -5226,7 +5242,7 @@ msgid "Unmark this channel as mature?"
 msgstr "Зняти позначку 18+ з цього каналу?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "Розмутити"
 
@@ -5241,6 +5257,10 @@ msgstr "Увімнути звук сервера"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Unmute stream"
 msgstr "Увімкнути звук трансляції"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Unmute user"
+msgstr ""
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unnamed folder"
@@ -5546,12 +5566,17 @@ msgstr "Голосові дзвінки ({calls})"
 msgid "Voice Channel"
 msgstr "Голосовий канал"
 
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"
 msgstr "Обробка голосу"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Volume"
 msgstr "Гучність"
 

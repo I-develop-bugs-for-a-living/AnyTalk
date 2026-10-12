@@ -5,6 +5,7 @@ import {
   createMemo,
   createSignal,
   For,
+  Index,
   onCleanup,
   onMount,
   Show,
@@ -20,18 +21,14 @@ import { IconButton } from "@revolt/ui/components/design";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { scrollableStyles } from "@revolt/ui/directives";
 
-import {
-  ParticipantInfo,
-  ParticipantTile,
-  tile,
-  touchOnly,
-} from "./ParticipantTile";
+import { ParticipantInfo, ParticipantTile, tile } from "./ParticipantTile";
 import { StreamViewerList } from "./StreamViewerList";
 import { VoiceCallCardActions } from "./VoiceCallCardActions";
 import {
   VoiceCallCardEnableAudio,
   VoiceCallCardStatus,
 } from "./VoiceCallCardStatus";
+import { touchOnly, volumePanelOpen } from "./volumePanelState";
 
 /**
  * Call card (active)
@@ -55,17 +52,23 @@ export function VoiceCallCardActiveRoom() {
   function wake() {
     setIdle(false);
     clearTimeout(idleTimer);
-    idleTimer = setTimeout(() => setIdle(true), THEATER_IDLE_MS);
+    idleTimer = setTimeout(() => {
+      // a volume panel floats outside the card: keep the controls it hangs on
+      if (volumePanelOpen()) wake();
+      else setIdle(true);
+    }, THEATER_IDLE_MS);
   }
 
   /** Hide the controls right away, e.g. when the window loses focus */
   function sleep() {
+    if (volumePanelOpen()) return;
     clearTimeout(idleTimer);
     setIdle(true);
   }
 
+  // also restarts the idle timer once a volume panel closes
   createEffect(() => {
-    if (theater()) wake();
+    if (theater() && !volumePanelOpen()) wake();
   });
 
   onMount(() => {
@@ -117,32 +120,34 @@ export function VoiceCallCardActiveRoom() {
       </Show>
       <VoiceCallControls theater={theater()} hidden={theater() && idle()}>
         <VoiceCallControlHolder left collapsed={collapsed()}>
-          {/* on mobile only problems are worth the space next to the controls */}
+          <VoiceCallCardStatus />
+          {/* on mobile the controls have no room for who's streaming */}
           <Show
             when={
-              device.layout() === "desktop" ||
-              voice.state() === "RECONNECTING" ||
-              voice.state() === "DISCONNECTED"
+              theater() && voice.focusTrack() && device.layout() === "desktop"
             }
           >
-            <VoiceCallCardStatus />
-          </Show>
-          <Show when={theater() && voice.focusTrack()}>
             <FocusedInfo>
               <TrackLoop tracks={() => [voice.focusTrack()!]}>
-                {() => (
-                  // on mobile the controls have no room for who's streaming
-                  <ParticipantInfo
-                    align="start"
-                    controlsOnly={device.layout() !== "desktop"}
-                  />
-                )}
+                {() => <ParticipantInfo part="info" />}
               </TrackLoop>
             </FocusedInfo>
           </Show>
         </VoiceCallControlHolder>
         <VoiceCallCardActions size="sm" />
         <VoiceCallControlHolder right collapsed={collapsed()}>
+          {/* the volume sits at the far end of the bar, on phones too */}
+          <Show
+            when={
+              theater() &&
+              voice.focusTrack() &&
+              !voice.focusTrack()!.participant.isLocal
+            }
+          >
+            <TrackLoop tracks={() => [voice.focusTrack()!]}>
+              {() => <ParticipantInfo part="volume" align="end" />}
+            </TrackLoop>
+          </Show>
           <LayoutButtons />
         </VoiceCallControlHolder>
       </VoiceCallControls>
@@ -344,34 +349,41 @@ function Participants(props: { theater: boolean }) {
         >
           <StreamTiling />
         </Show>
-        <Show when={hasMain() && !props.theater && others().length}>
+        <Show
+          when={
+            hasMain() &&
+            !props.theater &&
+            voice.layout() !== "collapsed" &&
+            others().length
+          }
+        >
           <ShowBarButtonHolder>
-            <div style={{ "margin-bottom": "10px" }}>
-              <IconButton
-                size="xs"
-                variant={"tonal"}
-                onPress={() => voice.toggleShowBar()}
-                use:floating={{
-                  tooltip: {
-                    placement: "top",
-                    content: voice.showBar() ? t`Hide Others` : t`Show Others`,
-                  },
-                }}
+            <IconButton
+              size="xs"
+              variant={"tonal"}
+              onPress={() => voice.toggleShowBar()}
+              use:floating={{
+                tooltip: {
+                  placement: "top",
+                  content: voice.showBar() ? t`Hide Others` : t`Show Others`,
+                },
+              }}
+            >
+              <Show
+                when={voice.showBar()}
+                fallback={<Symbol>keyboard_arrow_up</Symbol>}
               >
-                <Show
-                  when={voice.showBar()}
-                  fallback={<Symbol>keyboard_arrow_up</Symbol>}
-                >
-                  <Symbol>keyboard_arrow_down</Symbol>
-                </Show>
-              </IconButton>
-            </div>
+                <Symbol>keyboard_arrow_down</Symbol>
+              </Show>
+            </IconButton>
           </ShowBarButtonHolder>
         </Show>
         <Grid
           ref={gridRef}
           focus={hasMain()}
           show={voice.showBar() && !props.theater}
+          // the theater bar shows who it is, the other tiles aren't drawn
+          hidden={props.theater}
           class={hasMain() ? scrollableStyles({ direction: "x" }) : ""}
           style={{ "--vc-tile-width": tileWidth() }}
         >
@@ -411,15 +423,15 @@ function StreamTiling() {
 
   return (
     <Tiling>
-      <For each={rows()}>
+      {/* Index, not For: rows() builds new arrays on every track update, and
+          For would treat each as a new row and re-create every video */}
+      <Index each={rows()}>
         {(row) => (
           <TilingRow>
-            <TrackLoop tracks={() => row}>
-              {() => <ParticipantTile fill />}
-            </TrackLoop>
+            <TrackLoop tracks={row}>{() => <ParticipantTile fill />}</TrackLoop>
           </TilingRow>
         )}
-      </For>
+      </Index>
     </Tiling>
   );
 }
@@ -577,18 +589,19 @@ const VoiceCallControlHolder = styled("div", {
 const FocusedInfo = styled("div", {
   base: {
     minWidth: 0,
+    flex: "1 1 0",
+    display: "flex",
     alignSelf: "center",
     fontWeight: 600,
   },
 });
 
+/** Small row between the focused stream and the others, never over the stream */
 const ShowBarButtonHolder = styled("div", {
   base: {
-    height: 0,
-    alignSelf: "center",
-    overflow: "visible",
+    flexShrink: 0,
     display: "flex",
-    flexDirection: "column-reverse",
+    justifyContent: "center",
   },
 });
 
@@ -638,6 +651,11 @@ const Grid = styled("div", {
     show: {
       false: {
         height: 0,
+      },
+    },
+    hidden: {
+      true: {
+        display: "none",
       },
     },
   },

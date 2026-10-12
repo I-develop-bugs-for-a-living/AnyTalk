@@ -1378,12 +1378,12 @@ msgstr "الإتصال"
 msgid "Connect to voice channel"
 msgstr "اتصل بقناة صوتية"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connected"
 msgstr "متصل"
 
 #: components/app/interface/desktop/Titlebar.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "اتصال"
 
@@ -1718,7 +1718,7 @@ msgid "Date format"
 msgstr "تنسيق التاريخ"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "تعطيل الصوت"
 
@@ -1737,7 +1737,7 @@ msgstr "فك الترميز"
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
-#: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceMenu.tsx
 msgid "Default"
 msgstr "إفتراضي"
 
@@ -1924,6 +1924,7 @@ msgstr "معطل"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "مفصول"
 
@@ -2170,7 +2171,7 @@ msgstr "المرمِّز"
 msgid "Encoder target bitrate"
 msgstr "معدل البت المستهدف للمرمِّز"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "إنهاء المكالمة"
 
@@ -2673,6 +2674,10 @@ msgstr "الوارد"
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Incoming call"
 msgstr "مكالمة واردة"
+
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Input device"
+msgstr "جهاز الإدخال"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -3217,6 +3222,7 @@ msgid "MFA setup canceled."
 msgstr "تم إلغاء إعداد MFA."
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Microphone"
 msgstr "الميكروفون"
@@ -3229,7 +3235,7 @@ msgstr "الميكروفون وسماعات الرأس"
 #~ msgid "Minimise to Tray"
 #~ msgstr "تصغير البرنامج"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "صلاحية غير موجودة"
 
@@ -3275,7 +3281,7 @@ msgstr "بث متعدد: فتح بث يضيفه بجانب البقية"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "كتم"
 
@@ -3306,6 +3312,10 @@ msgstr "كتم سيرفر"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Mute stream"
 msgstr "كتم البث"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Mute user"
+msgstr "كتم المستخدم"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Mute when not speaking"
@@ -3651,6 +3661,10 @@ msgstr "الصادرة"
 msgid "Outgoing call"
 msgstr "مكالمة صادرة"
 
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Output device"
+msgstr "جهاز الإخراج"
+
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "صوت السماعة"
@@ -3976,6 +3990,7 @@ msgstr "المكالمات الأخيرة في الصفحة الرئيسية"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "جار اعادة الاتصال"
 
@@ -4723,6 +4738,7 @@ msgid "Speak"
 msgstr "تحدث"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Speaker"
 msgstr "السماعة"
@@ -5211,7 +5227,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "خطأ Staot غير مراقب: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "غير مافن"
 
@@ -5254,7 +5270,7 @@ msgid "Unmark this channel as mature?"
 msgstr "هل تريد إلغاء علامة البالغين لهذه القناة؟"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "إلغاء كتم الصوت"
 
@@ -5269,6 +5285,10 @@ msgstr "إلغاء كتم السيرفر"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Unmute stream"
 msgstr "إلغاء كتم البث"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Unmute user"
+msgstr "إلغاء كتم المستخدم"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unnamed folder"
@@ -5574,12 +5594,17 @@ msgstr "المكالمات الصوتية ({calls})"
 msgid "Voice Channel"
 msgstr "قناة صوتية"
 
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr "الاتصال الصوتي"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"
 msgstr "معالجة الصوت"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Volume"
 msgstr "مستوى الصوت"
 

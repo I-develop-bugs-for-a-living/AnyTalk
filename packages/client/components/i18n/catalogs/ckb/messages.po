@@ -1381,12 +1381,12 @@ msgstr "بەستن"
 msgid "Connect to voice channel"
 msgstr "پەیوەندی بە کەناڵی دەنگییەوە بکە"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connected"
 msgstr "بەستراوە"
 
 #: components/app/interface/desktop/Titlebar.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "پەیوەندی دەکرێت"
 
@@ -1722,7 +1722,7 @@ msgid "Date format"
 msgstr "فۆرماتی بەروار"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "گوێ داخستن"
 
@@ -1741,7 +1741,7 @@ msgstr "کۆدشکێن"
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
-#: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceMenu.tsx
 msgid "Default"
 msgstr "بنەڕەت"
 
@@ -1929,6 +1929,7 @@ msgstr "ناچالاککراو"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "پچڕاوە"
 
@@ -2176,7 +2177,7 @@ msgstr "کۆدکەر"
 msgid "Encoder target bitrate"
 msgstr "بیت‌ڕەیتی ئامانجی کۆدکەر"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "کۆتاییهێنان بە پەیوەندی"
 
@@ -2681,6 +2682,10 @@ msgstr "هاتوو"
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Incoming call"
 msgstr "پەیوەندیی هاتوو"
+
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Input device"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -3226,6 +3231,7 @@ msgid "MFA setup canceled."
 msgstr "ڕێکخستنی MFA هەڵوەشێنرایەوە."
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Microphone"
 msgstr "مایکرۆفۆن"
@@ -3238,7 +3244,7 @@ msgstr "مایکرۆفۆن و هێدفۆن"
 #~ msgid "Minimise to Tray"
 #~ msgstr ""
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "مۆڵەت نییە"
 
@@ -3284,7 +3290,7 @@ msgstr "فرە-ستریم: کردنەوەی ستریمێک دەیخاتە تەن
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "بێدەنگکردن"
 
@@ -3315,6 +3321,10 @@ msgstr "بێدەنگکردنی سێرڤەر"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Mute stream"
 msgstr "بێدەنگکردنی ستریم"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Mute user"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Mute when not speaking"
@@ -3660,6 +3670,10 @@ msgstr "چوو"
 msgid "Outgoing call"
 msgstr "پەیوەندیی چوو"
 
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Output device"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "بەرزی دەنگی دەرچوون"
@@ -3986,6 +4000,7 @@ msgstr "پەیوەندییە تازەکان لە پەڕەی سەرەکی"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "دووبارە پەیوەندی دەکرێت"
 
@@ -4736,6 +4751,7 @@ msgid "Speak"
 msgstr "قسەکردن"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Speaker"
 msgstr "بەرزکەرەوە"
@@ -5225,7 +5241,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "هەڵەی نەگیراوی AnyTalk: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "کردنەوەی گوێ"
 
@@ -5268,7 +5284,7 @@ msgid "Unmark this channel as mature?"
 msgstr "نیشانەی ناوەڕۆکی گەورەسالان لەسەر ئەم کەناڵە لابرێت؟"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "لابردنی بێدەنگی"
 
@@ -5283,6 +5299,10 @@ msgstr "لابردنی بێدەنگیی سێرڤەر"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Unmute stream"
 msgstr "لابردنی بێدەنگیی ستریم"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Unmute user"
+msgstr ""
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unnamed folder"
@@ -5591,12 +5611,17 @@ msgstr "پەیوەندی دەنگییەکان ({calls})"
 msgid "Voice Channel"
 msgstr "کەناڵی دەنگ"
 
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"
 msgstr "پرۆسێسکردنی دەنگ"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Volume"
 msgstr "بەرزی دەنگ"
 

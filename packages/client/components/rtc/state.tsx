@@ -62,6 +62,14 @@ import { VoiceKeybinds } from "./components/VoiceKeybinds";
 import { VoiceMoves } from "./components/VoiceMoves";
 import * as outputBus from "./outputBus";
 import {
+  allowMicRestart,
+  isPermanentJoinError,
+  rejoinDelayMs,
+  sdkRetryDelayMs,
+  shouldKeepRejoining,
+  shouldRejoin,
+} from "./reconnect";
+import {
   setScreenCaptureKeepFocus,
   setScreenCaptureLimit,
 } from "./screenCapture";
@@ -168,6 +176,20 @@ const MIC_RECOVERY_WATCH_MS = 3000;
 /** How long a system mute may last before the microphone is restarted */
 const MIC_RECOVERY_SETTLE_MS = 1000;
 
+/** How long one attempt to open a connection may take before the SDK gives up */
+const PEER_CONNECTION_TIMEOUT_MS = 20_000;
+
+/** How long one LiveKit node may take to answer the latency check */
+const NODE_PING_TIMEOUT_MS = 3000;
+
+/** A running attempt to get back into the call after the connection dropped */
+type Rejoin = {
+  /** Set once the user left or joined another call */
+  cancelled: boolean;
+  /** Wakes up whatever the attempt is waiting for, so it can stop */
+  wake: Set<() => void>;
+};
+
 class Voice {
   #settings: VoiceSettings;
 
@@ -236,6 +258,13 @@ class Voice {
    * StreamViewers)
    */
   viewing = new ReactiveMap<string, string[]>();
+
+  /**
+   * Counts how often the connection came back, so state that other
+   * participants may have lost (see StreamViewers) is sent again
+   */
+  resyncs: Accessor<number>;
+  #setResyncs: Setter<number>;
 
   /** Participant whose stream should be focused once its tile shows up */
   pendingFocus: Accessor<string | undefined>;
@@ -308,6 +337,10 @@ class Voice {
     this.#setPlaybackBlocked = setPlaybackBlocked;
     this.#setMicBlocked = setMicBlocked;
 
+    const [resyncs, setResyncs] = createSignal(0);
+    this.resyncs = resyncs;
+    this.#setResyncs = setResyncs;
+
     const [pendingFocus, setPendingFocus] = createSignal<string>();
     this.pendingFocus = pendingFocus;
     this.#setPendingFocus = setPendingFocus;
@@ -374,7 +407,25 @@ class Voice {
   }
 
   async connect(channel: Channel, auth?: { url: string; token: string }) {
-    this.disconnect();
+    this.#cancelRejoin();
+    return this.#open(channel, auth, false);
+  }
+
+  /**
+   * Open the room of a channel
+   * @param channel Channel
+   * @param auth Token and url, fetched when left out
+   * @param rejoining Whether this is an attempt to get back into the call
+   * after the connection dropped, which keeps the call's screen in place
+   */
+  async #open(
+    channel: Channel,
+    auth: { url: string; token: string } | undefined,
+    rejoining: boolean,
+  ) {
+    const rejoin = rejoining ? this.#rejoin : undefined;
+    if (!rejoining) this.#micRestarts = [];
+    this.#teardown(rejoining);
 
     // Safari: start the audio output bus while still inside the tap that
     // joined the call (before the first await), it needs a gesture
@@ -389,6 +440,11 @@ class Voice {
       adaptiveStream: true,
       // Stop sending simulcast layers that nobody is subscribed to
       dynacast: true,
+      // Keep trying for about a minute, so a switch from wifi to mobile or a
+      // phone waking up recovers inside the SDK before we have to rejoin
+      reconnectPolicy: {
+        nextRetryDelayInMs: (context) => sdkRetryDelayMs(context),
+      },
       audioCaptureDefaults: {
         deviceId: this.#settings.preferredAudioInputDevice,
         echoCancellation: this.#settings.echoCancellation,
@@ -439,20 +495,38 @@ class Voice {
     batch(() => {
       this.#setRoom(room);
       this.#setChannel(channel);
-      this.#setState("CONNECTING");
+      this.#setState(rejoining ? "RECONNECTING" : "CONNECTING");
       this.#setVideo(false);
       this.#setScreenshare(false);
     });
 
+    // Whether we got into the call, a failed attempt isn't worth rejoining
+    let joined = false;
+
     room.addListener("connected", () => {
+      joined = true;
       this.#setState("CONNECTED");
       this.#settings.addRecentCall(channel.id);
       if (this.speakingPermission)
+        // the microphone state the user had (muted or not) is in the settings
         room.localParticipant
           .setMicrophoneEnabled(this.#settings.micOn)
           .then((track) => {
             this.#settings.micOn = track != null;
-          });
+          })
+          // MediaDevicesError tells what went wrong
+          .catch((err) => console.warn("[rtc] could not start the mic", err));
+      if (rejoining) {
+        // streams of people who left meanwhile can't be watched any more
+        for (const id of [...this.watching]) {
+          if (
+            id !== room.localParticipant.identity &&
+            !room.remoteParticipants.has(id)
+          ) {
+            this.#unwatch(id);
+          }
+        }
+      }
       for (const p of room.remoteParticipants.values()) {
         const screenShareTrack = p.getTrackPublication(
           Track.Source.ScreenShare,
@@ -465,23 +539,67 @@ class Voice {
       this.#shareDeafen(room);
     });
 
-    room.addListener("disconnected", () => this.#setState("DISCONNECTED"));
+    room.addListener("disconnected", (reason) => {
+      // a rejoin that is going on handles its own failures, except being
+      // sent away from the new room (e.g. joined on another device)
+      if (this.#rejoin) {
+        if (!shouldRejoin(reason)) {
+          this.#cancelRejoin();
+          this.#setState("DISCONNECTED");
+        }
+        return;
+      }
+
+      if (joined && shouldRejoin(reason)) {
+        this.#startRejoin(channel);
+      } else {
+        this.#setState("DISCONNECTED");
+      }
+    });
+
+    room.addListener("reconnecting", () => this.#setState("RECONNECTING"));
+    room.addListener("signalReconnecting", () =>
+      this.#setState("RECONNECTING"),
+    );
+    room.addListener("reconnected", () => {
+      this.#setState("CONNECTED");
+      // a full reconnect forgets what we told the others
+      this.#shareDeafen(room);
+      this.#setResyncs((n) => n + 1);
+    });
+
+    room.addListener("mediaDevicesError", (error, kind) =>
+      this.#onMediaDevicesError(room, error, kind),
+    );
 
     room.addListener("localTrackPublished", (pub) => {
-      if (pub.audioTrack && pub.audioTrack.source === Track.Source.Microphone) {
-        if (!pub.audioTrack.getProcessor()) {
-          pub.audioTrack
-            ?.setProcessor(
+      const mic = pub.audioTrack;
+      // only watch the track of the room we are in, not one of a dead room
+      const watch = () => {
+        if (
+          this.room() === room &&
+          this.getMicrophoneTrack()?.audioTrack === mic
+        ) {
+          this.#watchMicrophone(mic!);
+        }
+      };
+      if (mic && mic.source === Track.Source.Microphone) {
+        if (!mic.getProcessor()) {
+          mic
+            .setProcessor(
               (this.voiceProcessor = new VoiceProcessor(
                 this.#settings,
                 this.#setMicBlocked,
               )),
             )
             // without it the unprocessed microphone is sent, which still works
-            ?.catch((err) =>
+            .catch((err) =>
               console.error("[rtc] could not set up voice processing", err),
-            );
+            )
+            // the track to watch may have changed
+            .finally(watch);
         }
+        watch();
       }
     });
 
@@ -518,22 +636,154 @@ class Voice {
       }
     });
 
-    // Gather latency
+    // Gather latency, a slow or unreachable node must not block the join
+    const nodes = this.config.features.livekit.nodes;
     const selected = await Promise.any(
-      this.config.features.livekit.nodes.map(async (node) => {
-        return fetch(node.public_url.replace("wss", "https")).then(() => {
+      nodes.map(async (node) => {
+        return fetch(node.public_url.replace("wss", "https"), {
+          signal: AbortSignal.timeout(NODE_PING_TIMEOUT_MS),
+        }).then(() => {
           return node.name;
         });
       }),
-    );
+    ).catch(() => nodes[0]?.name);
+
+    // left or joined elsewhere while picking, don't ask for a token
+    if (this.room() !== room || (rejoin && rejoin.cancelled)) {
+      room.removeAllListeners();
+      room.disconnect();
+      return;
+    }
 
     if (!auth) {
       auth = await channel.joinCall(selected);
     }
 
+    // left or joined elsewhere while waiting
+    if (this.room() !== room || (rejoin && rejoin.cancelled)) {
+      room.removeAllListeners();
+      room.disconnect();
+      return;
+    }
+
     await room.connect(auth.url, auth.token, {
       autoSubscribe: false,
+      maxRetries: 3,
+      peerConnectionTimeout: PEER_CONNECTION_TIMEOUT_MS,
     });
+  }
+
+  /** The attempt to get back into the call, while there is one */
+  #rejoin?: Rejoin;
+
+  /** Stop trying to get back into the call */
+  #cancelRejoin() {
+    const rejoin = this.#rejoin;
+    this.#rejoin = undefined;
+    if (!rejoin) return;
+    rejoin.cancelled = true;
+    rejoin.wake.forEach((wake) => wake());
+  }
+
+  /**
+   * Wait for a while or until the attempt is cancelled
+   * @param rejoin Attempt that waits
+   * @param ms Milliseconds to wait
+   */
+  #rejoinSleep(rejoin: Rejoin, ms: number) {
+    return new Promise<void>((resolve) => {
+      const done = () => {
+        clearTimeout(timer);
+        rejoin.wake.delete(done);
+        resolve();
+      };
+      const timer = setTimeout(done, ms);
+      rejoin.wake.add(done);
+    });
+  }
+
+  /**
+   * Wait for the browser to be online again, or until the attempt is
+   * cancelled
+   * @param rejoin Attempt that waits
+   */
+  #rejoinOnline(rejoin: Rejoin) {
+    return new Promise<void>((resolve) => {
+      const done = () => {
+        window.removeEventListener("online", done);
+        rejoin.wake.delete(done);
+        resolve();
+      };
+      window.addEventListener("online", done);
+      rejoin.wake.add(done);
+    });
+  }
+
+  /**
+   * The connection dropped for good: clean up the room and join the same
+   * channel again with growing waits in between, through the normal join so
+   * the token is fresh. Gives up after a while, and stops when the user
+   * leaves or joins another call (see disconnect).
+   * @param channel Channel of the call
+   */
+  #startRejoin(channel: Channel) {
+    this.#cancelRejoin();
+    const rejoin: Rejoin = { cancelled: false, wake: new Set() };
+    this.#rejoin = rejoin;
+
+    // Drop the dead room, the call's screen stays. Camera, screen share and
+    // stream audio are not brought back on purpose: a screen share needs a
+    // user gesture, so the user starts them again.
+    this.#teardown(true);
+    this.#setState("RECONNECTING");
+
+    const run = async () => {
+      let started = Date.now();
+      let attempt = 0;
+
+      while (!rejoin.cancelled && shouldKeepRejoining(Date.now() - started)) {
+        // offline attempts would only fail: wait, and start counting anew
+        if (!navigator.onLine) {
+          await this.#rejoinOnline(rejoin);
+          started = Date.now();
+          attempt = 0;
+          continue;
+        }
+
+        await this.#rejoinSleep(rejoin, rejoinDelayMs(attempt++));
+        if (rejoin.cancelled) return;
+
+        try {
+          await this.#open(channel, undefined, true);
+          if (rejoin.cancelled) return;
+          if (this.state() === "CONNECTED") {
+            this.#rejoin = undefined;
+            return;
+          }
+        } catch (e) {
+          if (rejoin.cancelled) return;
+          console.warn("[rtc] could not rejoin the call", e);
+          // no permission, channel gone: trying again won't help
+          if (isPermanentJoinError(e)) {
+            this.#teardown(true);
+            this.#rejoin = undefined;
+            this.#setState("DISCONNECTED");
+            return;
+          }
+        }
+
+        // this attempt left a room behind that never got in
+        this.#teardown(true);
+        this.#setState("RECONNECTING");
+      }
+
+      if (!rejoin.cancelled) {
+        this.#rejoin = undefined;
+        this.#setState("DISCONNECTED");
+      }
+    };
+
+    run();
   }
 
   /**
@@ -655,7 +905,7 @@ class Voice {
    * is checked right away, and for a few seconds afterwards for the system
    * muting it.
    */
-  #recoverMicrophone() {
+  #recoverMicrophone(limited = false) {
     this.#cancelMicRecovery();
     if (!this.#micShouldWork()) return;
 
@@ -678,11 +928,22 @@ class Voice {
       ) {
         return;
       }
-      local
-        .restartTrack()
-        .catch((err) =>
-          console.error("[rtc] could not restart the microphone", err),
-        );
+      if (limited) {
+        const restarts = allowMicRestart(this.#micRestarts, Date.now());
+        if (!restarts) return;
+        this.#micRestarts = restarts;
+      }
+      local.restartTrack().catch((err) => {
+        console.error("[rtc] could not restart the microphone", err);
+        // the chosen microphone may be gone (unplugged), use the default
+        if (this.#settings.preferredAudioInputDevice) {
+          this.room()
+            ?.switchActiveDevice("audioinput", "default")
+            .catch((e) =>
+              console.error("[rtc] could not switch to the default mic", e),
+            );
+        }
+      });
     };
 
     if (broken()) {
@@ -736,6 +997,103 @@ class Voice {
   /** Stop watching the microphone after an output switch */
   #cancelMicRecovery: () => void = () => {};
 
+  /** When the microphone was restarted lately, to not restart in a loop */
+  #micRestarts: number[] = [];
+
+  /** Stop watching the microphone for ending or being muted by the system */
+  #stopWatchingMic: () => void = () => {};
+
+  /**
+   * Restart the microphone when it ends or the system mutes it for good (USB
+   * microphone unplugged, a phone call taking the microphone), as long as the
+   * user wants to be heard. Restarts are limited to a few per half minute.
+   *
+   * This watches the microphone all call long. The timed watch in
+   * #recoverMicrophone only follows an output switch for a few seconds, and
+   * is what this calls to do the actual check and restart.
+   * @param local Microphone track
+   */
+  #watchMicrophone(local: LocalAudioTrack) {
+    this.#stopWatchingMic();
+
+    let watched: MediaStreamTrack[] = [];
+    let settle: ReturnType<typeof setTimeout> | undefined;
+
+    const recover = () => {
+      this.#recoverMicrophone(true);
+    };
+    // a short mute that ends on its own needs no restart
+    const onMute = () => {
+      clearTimeout(settle);
+      settle = setTimeout(recover, MIC_RECOVERY_SETTLE_MS);
+    };
+    const onUnmute = () => clearTimeout(settle);
+    const onEnded = () => {
+      clearTimeout(settle);
+      recover();
+    };
+
+    const detach = () =>
+      watched.forEach((t) => {
+        t.removeEventListener("mute", onMute);
+        t.removeEventListener("unmute", onUnmute);
+        t.removeEventListener("ended", onEnded);
+      });
+    // the track is replaced whenever the microphone restarts
+    const attach = () => {
+      detach();
+      watched = [
+        ...new Set([
+          local.mediaStreamTrack,
+          ...(local.mediaStream?.getAudioTracks() ?? []),
+        ]),
+      ];
+      watched.forEach((t) => {
+        t.addEventListener("mute", onMute);
+        t.addEventListener("unmute", onUnmute);
+        t.addEventListener("ended", onEnded);
+      });
+    };
+
+    local.on(TrackEvent.Restarted, attach);
+    attach();
+    this.#stopWatchingMic = () => {
+      clearTimeout(settle);
+      detach();
+      local.off(TrackEvent.Restarted, attach);
+    };
+  }
+
+  /**
+   * A device could not be opened. When the chosen microphone is gone (not
+   * found), carry on with the default one instead of staying silent.
+   * @param room Room
+   * @param error What went wrong
+   * @param kind Kind of device
+   */
+  #onMediaDevicesError(room: Room, error: Error, kind?: MediaDeviceKind) {
+    console.warn("[rtc] device error", kind, error);
+    if (
+      kind !== "audioinput" ||
+      !this.#settings.preferredAudioInputDevice ||
+      !["NotFoundError", "OverconstrainedError"].includes(error.name)
+    ) {
+      return;
+    }
+
+    room
+      .switchActiveDevice("audioinput", "default")
+      .then(() => {
+        if (this.room() !== room || !this.#settings.micOn) return;
+        if (this.#settings.deafen || room.localParticipant.isMicrophoneEnabled)
+          return;
+        return room.localParticipant.setMicrophoneEnabled(true);
+      })
+      .catch((err) =>
+        console.error("[rtc] could not fall back to the default mic", err),
+      );
+  }
+
   /**
    * Retry starting call audio, must be called from a user gesture
    */
@@ -747,9 +1105,22 @@ class Voice {
       .finally(() => this.#setPlaybackBlocked(!this.room()?.canPlaybackAudio));
   }
 
+  /** Leave the call (also stops any attempt to get back into it) */
   disconnect() {
+    this.#cancelRejoin();
+    this.#micRestarts = [];
+    this.#teardown(false);
+  }
+
+  /**
+   * Clean up the room
+   * @param forRejoin Keep the channel and what is watched, to get back into
+   * the call; nothing is told to the user
+   */
+  #teardown(forRejoin: boolean) {
     this.#cancelCapture();
     this.#cancelMicRecovery();
+    this.#stopWatchingMic();
     outputBus.teardown();
     this.device.releaseWakeLock();
     this.#releaseAudioUnlock?.();
@@ -766,6 +1137,11 @@ class Voice {
       this.#streamAudio = undefined;
       this.#setStreamOptions();
 
+      this.screenShareTracks = new Set();
+      this.viewing.clear();
+
+      if (forRejoin) return;
+
       batch(() => {
         this.#setState("READY");
         this.#setRoom();
@@ -774,9 +1150,7 @@ class Voice {
         this.vidTracks = () => [];
       });
 
-      this.screenShareTracks = new Set();
       this.watching.clear();
-      this.viewing.clear();
       this.#setPendingFocus();
 
       this.sound.playSound("userLeaveVoice");

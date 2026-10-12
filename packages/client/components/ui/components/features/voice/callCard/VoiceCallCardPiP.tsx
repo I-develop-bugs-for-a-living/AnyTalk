@@ -42,14 +42,16 @@ export function VoiceCallCardPiP() {
   };
 
   return (
-    <MiniCard>
+    <MiniCard data-mini-card>
       <VoiceCallCardStatus pip />
       <Show when={!hasFocusVideo()} fallback={<MiniVideoTile />}>
         <Row align justify grow wrap>
           <TrackLoop tracks={audTracks}>{() => <ConnectedUser />}</TrackLoop>
         </Row>
       </Show>
-      <VoiceCallCardActions size="xs" />
+      <MiniActions>
+        <VoiceCallCardActions size="xs" />
+      </MiniActions>
     </MiniCard>
   );
 }
@@ -134,8 +136,46 @@ const UserIcon = styled("div", {
   },
 });
 
+/**
+ * Holds the control bar of the mini tile. With a mouse the bar overlays the
+ * bottom of the tile (no reflow) and only shows on hover or keyboard focus.
+ * It stays in the tab order, so focusing a button reveals it. Touch devices
+ * can't hover, so there the bar stays always visible in the normal flow.
+ */
+const MiniActions = styled("div", {
+  base: {
+    display: "contents",
+
+    "@media (hover: hover)": {
+      display: "flex",
+      justifyContent: "center",
+      position: "absolute",
+      insetInline: "var(--gap-md)",
+      insetBlockEnd: "var(--gap-md)",
+      zIndex: 2,
+      // let drags/clicks reach the tile around the bar
+      pointerEvents: "none",
+
+      opacity: 0,
+      transition: "var(--transitions-fast) opacity",
+
+      "@media (prefers-reduced-motion: reduce)": {
+        transition: "none",
+      },
+
+      "& > *": { pointerEvents: "none" },
+
+      "[data-mini-card]:hover > &, [data-mini-card]:focus-within > &": {
+        opacity: 1,
+        "& > *": { pointerEvents: "auto" },
+      },
+    },
+  },
+});
+
 const MiniCard = styled("div", {
   base: {
+    position: "relative",
     userSelect: "none",
 
     pointerEvents: "all",

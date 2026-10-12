@@ -1346,12 +1346,12 @@ msgstr "Se connecter"
 msgid "Connect to voice channel"
 msgstr "Se connecter au salon vocal"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connected"
 msgstr "Connecté"
 
 #: components/app/interface/desktop/Titlebar.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "Connexion en cours"
 
@@ -1685,7 +1685,7 @@ msgid "Date format"
 msgstr "Format de la date"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "Mettre en sourdine"
 
@@ -1704,7 +1704,7 @@ msgstr "Décodeur"
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
-#: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceMenu.tsx
 msgid "Default"
 msgstr "Défaut"
 
@@ -1884,6 +1884,7 @@ msgstr "Désactivé"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "Déconnecté"
 
@@ -2127,7 +2128,7 @@ msgstr "Encodeur"
 msgid "Encoder target bitrate"
 msgstr "Débit cible de l'encodeur"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "Terminer l'appel"
 
@@ -2627,6 +2628,10 @@ msgstr "Entrant"
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Incoming call"
 msgstr "Appel entrant"
+
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Input device"
+msgstr "Périphérique d'entrée"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -3168,6 +3173,7 @@ msgid "MFA setup canceled."
 msgstr "Réglage de l'authentification multifacteur annulé."
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Microphone"
 msgstr "Microphone"
@@ -3180,7 +3186,7 @@ msgstr "Microphone et casque"
 #~ msgid "Minimise to Tray"
 #~ msgstr "Réduire dans la barre d'état système"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "Permission manquante"
 
@@ -3226,7 +3232,7 @@ msgstr "Multi-stream : ouvrir un stream l'ajoute à côté des autres"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "Rendre muet"
 
@@ -3257,6 +3263,10 @@ msgstr "Rendre le serveur muet"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Mute stream"
 msgstr "Couper le son du stream"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Mute user"
+msgstr "Rendre l’utilisateur muet"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Mute when not speaking"
@@ -3602,6 +3612,10 @@ msgstr "Sortantes"
 msgid "Outgoing call"
 msgstr "Appel sortant"
 
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Output device"
+msgstr "Périphérique de sortie"
+
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "Volume de sortie"
@@ -3924,6 +3938,7 @@ msgstr "Appels récents sur l’accueil"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "Reconnecter"
 
@@ -4662,6 +4677,7 @@ msgid "Speak"
 msgstr "Parler"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Speaker"
 msgstr "Haut-parleur"
@@ -5147,7 +5163,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "Erreur non interceptée AnyTalk : {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "Activer le son"
 
@@ -5190,7 +5206,7 @@ msgid "Unmark this channel as mature?"
 msgstr "Supprimer la mention de ce salon comme réservé aux adultes ?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "Réactiver le son"
 
@@ -5205,6 +5221,10 @@ msgstr "Rétablir les notifications du serveur"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Unmute stream"
 msgstr "Réactiver le son du stream"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Unmute user"
+msgstr "Réactiver le son de l’utilisateur"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unnamed folder"
@@ -5504,12 +5524,17 @@ msgstr "Appels vocaux ({calls})"
 msgid "Voice Channel"
 msgstr "Salon vocal"
 
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr "Connexion vocale"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"
 msgstr "Traitement de la voix"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Volume"
 msgstr "Volume"
 

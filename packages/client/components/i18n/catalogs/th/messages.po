@@ -1380,12 +1380,12 @@ msgstr "เชื่อมต่อ"
 msgid "Connect to voice channel"
 msgstr "เชื่อมต่อช่องเสียง"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connected"
 msgstr "เชื่อมต่อแล้ว"
 
 #: components/app/interface/desktop/Titlebar.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "กำลังเชื่อมต่อ"
 
@@ -1720,7 +1720,7 @@ msgid "Date format"
 msgstr "รูปแบบวันที่"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "ปิดเสียงการฟัง"
 
@@ -1739,7 +1739,7 @@ msgstr "ตัวถอดรหัส"
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
-#: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceMenu.tsx
 msgid "Default"
 msgstr "ค่าตั้งต้น"
 
@@ -1927,6 +1927,7 @@ msgstr "ปิดใช้งาน"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "ตัดการเชื่อมต่อแล้ว"
 
@@ -2173,7 +2174,7 @@ msgstr "ตัวเข้ารหัส"
 msgid "Encoder target bitrate"
 msgstr "บิตเรตเป้าหมายของตัวเข้ารหัส"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "วางสาย"
 
@@ -2677,6 +2678,10 @@ msgstr "ขาเข้า"
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Incoming call"
 msgstr "สายเรียกเข้า"
+
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Input device"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -3221,6 +3226,7 @@ msgid "MFA setup canceled."
 msgstr "ยกเลิกการตั้งค่า MFA แล้ว"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Microphone"
 msgstr "ไมโครโฟน"
@@ -3233,7 +3239,7 @@ msgstr "ไมโครโฟนและหูฟัง"
 #~ msgid "Minimise to Tray"
 #~ msgstr ""
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "ไม่มีสิทธิ์"
 
@@ -3279,7 +3285,7 @@ msgstr "หลายสตรีม: การเปิดสตรีมจะ�
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "ปิดเสียง"
 
@@ -3310,6 +3316,10 @@ msgstr "ปิดเสียงเซิร์ฟเวอร์"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Mute stream"
 msgstr "ปิดเสียงสตรีม"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Mute user"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Mute when not speaking"
@@ -3655,6 +3665,10 @@ msgstr "ขาออก"
 msgid "Outgoing call"
 msgstr "สายโทรออก"
 
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Output device"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "ระดับเสียงเอาต์พุต"
@@ -3981,6 +3995,7 @@ msgstr "การโทรล่าสุดในหน้าหลัก"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "กำลังเชื่อมต่อใหม่"
 
@@ -4728,6 +4743,7 @@ msgid "Speak"
 msgstr "พูด"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Speaker"
 msgstr "ลำโพง"
@@ -5216,7 +5232,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "ข้อผิดพลาด AnyTalk ที่ไม่ได้จัดการ: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "เปิดเสียงการฟัง"
 
@@ -5259,7 +5275,7 @@ msgid "Unmark this channel as mature?"
 msgstr "ยกเลิกการทำเครื่องหมายช่องนี้ว่าเป็นเนื้อหาสำหรับผู้ใหญ่หรือไม่?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "เปิดเสียง"
 
@@ -5274,6 +5290,10 @@ msgstr "เปิดเสียงเซิร์ฟเวอร์"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Unmute stream"
 msgstr "เปิดเสียงสตรีม"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Unmute user"
+msgstr ""
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unnamed folder"
@@ -5581,12 +5601,17 @@ msgstr "การโทรด้วยเสียง ({calls})"
 msgid "Voice Channel"
 msgstr "ช่องเสียง"
 
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"
 msgstr "การประมวลผลเสียง"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Volume"
 msgstr "ระดับเสียง"
 

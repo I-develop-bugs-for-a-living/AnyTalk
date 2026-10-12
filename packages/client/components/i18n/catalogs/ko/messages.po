@@ -1380,12 +1380,12 @@ msgstr "연결"
 msgid "Connect to voice channel"
 msgstr "음성 채널에 연결"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connected"
 msgstr "연결됨"
 
 #: components/app/interface/desktop/Titlebar.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "연결 중"
 
@@ -1720,7 +1720,7 @@ msgid "Date format"
 msgstr "날짜 형식"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "헤드셋 음소거"
 
@@ -1739,7 +1739,7 @@ msgstr "디코더"
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
-#: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceMenu.tsx
 msgid "Default"
 msgstr "기본 역할"
 
@@ -1927,6 +1927,7 @@ msgstr "사용 안 함"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "연결 끊김"
 
@@ -2173,7 +2174,7 @@ msgstr "인코더"
 msgid "Encoder target bitrate"
 msgstr "인코더 목표 비트레이트"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "통화 종료"
 
@@ -2677,6 +2678,10 @@ msgstr "수신"
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Incoming call"
 msgstr "걸려 오는 통화"
+
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Input device"
+msgstr "입력 장치"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -3221,6 +3226,7 @@ msgid "MFA setup canceled."
 msgstr "MFA 설정이 취소되었어요."
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Microphone"
 msgstr "마이크"
@@ -3233,7 +3239,7 @@ msgstr "마이크와 헤드폰"
 #~ msgid "Minimise to Tray"
 #~ msgstr "트레이로 최소화"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "권한 없음"
 
@@ -3279,7 +3285,7 @@ msgstr "멀티 스트림: 스트림을 열면 다른 스트림 옆에 추가돼�
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "음소거"
 
@@ -3310,6 +3316,10 @@ msgstr "서버 음소거"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Mute stream"
 msgstr "스트림 음소거"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Mute user"
+msgstr "사용자 음소거"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Mute when not speaking"
@@ -3655,6 +3665,10 @@ msgstr "보낸 요청"
 msgid "Outgoing call"
 msgstr "발신 통화"
 
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Output device"
+msgstr "출력 장치"
+
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "출력 볼륨"
@@ -3981,6 +3995,7 @@ msgstr "홈의 최근 통화"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "다시 연결 중"
 
@@ -4728,6 +4743,7 @@ msgid "Speak"
 msgstr "말하기"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Speaker"
 msgstr "스피커"
@@ -5216,7 +5232,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "처리되지 않은 AnyTalk 오류: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "헤드셋 음소거 해제"
 
@@ -5259,7 +5275,7 @@ msgid "Unmark this channel as mature?"
 msgstr "이 채널의 성인 콘텐츠 표시를 해제할까요?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "음소거 해제"
 
@@ -5274,6 +5290,10 @@ msgstr "서버 음소거 해제"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Unmute stream"
 msgstr "스트림 음소거 해제"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Unmute user"
+msgstr "사용자 음소거 해제"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unnamed folder"
@@ -5581,12 +5601,17 @@ msgstr "음성 통화 ({calls})"
 msgid "Voice Channel"
 msgstr "음성 채널"
 
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr "음성 연결"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"
 msgstr "음성 처리"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Volume"
 msgstr "볼륨"
 

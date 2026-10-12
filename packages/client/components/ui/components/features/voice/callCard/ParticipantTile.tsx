@@ -27,6 +27,7 @@ import { AudioStats } from "./AudioStats";
 import { ConnectionQualityIcon } from "./ConnectionQualityIcon";
 import { StreamVolumeButton } from "./StreamVolumeButton";
 import { TrackStats } from "./TrackStats";
+import { touchOnly } from "./volumePanelState";
 
 /**
  * Whether this window is focused and visible
@@ -121,7 +122,7 @@ export function ParticipantTile(props: TileProps) {
             fullscreen: voice.layout() === "fullscreen",
             ...props,
             theater: theater(),
-          }) + (isScreenShare() ? " vc_tile group" : " vc_tile")
+          }) + " vc_tile group"
         }
         // reachable by keyboard: Enter / Space act like a click, Shift+F10
         // opens the context menu. Known limitation: the tile also holds its
@@ -263,10 +264,11 @@ export function ParticipantTile(props: TileProps) {
         {/* In fullscreen the name moves to the floating call controls */}
         <Show when={!theater()}>
           <Overlay
-            showOnHover={isScreenShare() && !unwatched()}
+            // touch has no hover, there the volume button must always be in reach
+            showOnHover={isScreenShare() && !unwatched() && !touchOnly()}
             compact={compact()}
           >
-            <ParticipantInfo nameOnly={compact()} />
+            <ParticipantInfo compact={compact()} />
           </Overlay>
         </Show>
       </div>
@@ -275,22 +277,24 @@ export function ParticipantTile(props: TileProps) {
 }
 
 /**
- * Whether the device has no mouse to hover with, e.g. phones
- */
-export const touchOnly = () => !matchMedia("(hover: hover)").matches;
-
-/**
- * Name and audio state of the participant in the current track context
+ * Name and audio state of the participant in the current track context.
+ *
+ * Laid out the same in every call view: the name with the connection and mic
+ * state right after it on the start side, the volume button at the far end.
  */
 export function ParticipantInfo(props: {
   /** Which edge the stream volume slider lines up with */
   align?: "start" | "end";
-  /** Leave out the icons, e.g. for the small tiles of a call window */
-  nameOnly?: boolean;
-  /** Only the stream volume, e.g. in the crowded controls on phones */
-  controlsOnly?: boolean;
+  /** Smaller icons for the small tiles of a call window */
+  compact?: boolean;
+  /**
+   * Only part of it: the name and states, or the volume button. The theater
+   * puts the two in different places of its control bar.
+   */
+  part?: "all" | "info" | "volume";
 }) {
   const state = useState();
+  const voice = useVoice();
   const participant = useEnsureParticipant();
   const track = useTrackRefContext();
   const user = useUser(participant.identity);
@@ -311,6 +315,11 @@ export function ParticipantInfo(props: {
   });
 
   const isScreenShare = () => track.source === Track.Source.ScreenShare;
+  const unwatched = () => voice.isUnwatchedStream(track);
+  // an unwatched stream stands in for its streamer's voice tile
+  const voiceKind = () => !isScreenShare() || unwatched();
+  const showInfo = () => props.part !== "volume";
+  const showVolume = () => props.part !== "info";
 
   const isScreenShareAudioUserMuted = () =>
     !user().user!.self && state.voice.getScreenShareMuted(user().user!.id)
@@ -319,29 +328,32 @@ export function ParticipantInfo(props: {
 
   return (
     <OverlayInner>
-      <Show when={!props.controlsOnly}>
-        <OverflowingText>{user().username}</OverflowingText>
-      </Show>
-      <Show when={!props.nameOnly}>
-        <Row gap="md">
-          <Show when={!props.controlsOnly}>
+      <Show when={showInfo()}>
+        <InfoGroup compact={props.compact}>
+          <OverflowingText>{user().username}</OverflowingText>
+          <States compact={props.compact}>
             <ConnectionQualityIcon />
-          </Show>
-          {/* the stream replaces the streamer's own tile, so keep their mic state */}
-          <Show when={isScreenShare() && !props.controlsOnly}>
-            <VoiceStatefulUserIcons
-              userId={participant.identity}
-              muted={isMuted()}
-            />
-          </Show>
-          {isScreenShare() && !user().user!.self ? (
-            <StreamVolumeButton
-              userId={participant.identity}
-              noAudio={isScreenShareAudioMuted()}
-              align={props.align}
-            />
-          ) : isScreenShare() ? (
-            <Show when={isScreenShareAudioUserMuted()}>
+            {/* the stream replaces the streamer's own tile, so keep their mic state */}
+            <Show when={isScreenShare()}>
+              <VoiceStatefulUserIcons
+                userId={participant.identity}
+                muted={isMuted()}
+              />
+            </Show>
+            <Show when={!isScreenShare()}>
+              <VoiceStatefulUserIcons
+                userId={participant.identity}
+                muted={isMuted()}
+                camera={!isVideoMuted()}
+              />
+            </Show>
+            <Show
+              when={
+                user().user!.self &&
+                isScreenShare() &&
+                isScreenShareAudioUserMuted()
+              }
+            >
               <Symbol
                 size={18}
                 color={
@@ -353,16 +365,20 @@ export function ParticipantInfo(props: {
                 no_sound
               </Symbol>
             </Show>
-          ) : (
-            <Show when={!props.controlsOnly}>
-              <VoiceStatefulUserIcons
-                userId={participant.identity}
-                muted={isMuted()}
-                camera={!isVideoMuted()}
-              />
-            </Show>
-          )}
-        </Row>
+          </States>
+        </InfoGroup>
+      </Show>
+      <Show when={showVolume() && !user().user!.self}>
+        <VolumeSlot hoverOnly={voiceKind() && props.part !== "volume"}>
+          {/* an unwatched stream stands in for its streamer's voice tile */}
+          <StreamVolumeButton
+            userId={participant.identity}
+            kind={voiceKind() ? "voice" : "stream"}
+            noAudio={isScreenShareAudioMuted()}
+            align={props.align}
+            compact={props.compact}
+          />
+        </VolumeSlot>
       </Show>
     </OverlayInner>
   );
@@ -518,10 +534,6 @@ const Overlay = styled("div", {
       true: {
         padding: "var(--gap-xs) var(--gap-sm)",
         fontSize: "12px",
-
-        "& > *": {
-          justifyContent: "center",
-        },
       },
     },
   },
@@ -541,6 +553,63 @@ const OverlayInner = styled("div", {
 
     _first: {
       flexGrow: 1,
+    },
+  },
+});
+
+/** Name and states on the start side, the name shrinks first */
+const InfoGroup = styled("div", {
+  base: {
+    flex: "1 1 0",
+    minWidth: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    gap: "8px",
+  },
+  variants: {
+    compact: {
+      true: { gap: "4px" },
+    },
+  },
+});
+
+/** Connection and mic icons, never squeezed by a long name */
+const States = styled("div", {
+  base: {
+    flexShrink: 0,
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+  },
+  variants: {
+    compact: {
+      true: { gap: "4px" },
+    },
+  },
+});
+
+/** The volume button at the far end */
+const VolumeSlot = styled("div", {
+  base: {
+    flexShrink: 0,
+    marginInlineStart: "auto",
+    paddingInlineStart: "4px",
+    display: "flex",
+  },
+  variants: {
+    // desktop only: a voice volume button on the tile shows on hover, focus
+    // or while its panel is open (touch has no hover and always shows it)
+    hoverOnly: {
+      true: {
+        "@media (hover: hover)": {
+          opacity: 0,
+          transition: "var(--transitions-fast) opacity",
+          _groupHover: { opacity: 1 },
+          _groupFocusWithin: { opacity: 1 },
+          "&:has([data-open])": { opacity: 1 },
+        },
+      },
     },
   },
 });

@@ -1356,12 +1356,12 @@ msgstr "Bağlan"
 msgid "Connect to voice channel"
 msgstr "Sesli sohbete bağlan"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connected"
 msgstr "Bağlanıldı"
 
 #: components/app/interface/desktop/Titlebar.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "Bağlanıyor"
 
@@ -1695,7 +1695,7 @@ msgid "Date format"
 msgstr "Tarih formatı"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "Sağırlaştır"
 
@@ -1714,7 +1714,7 @@ msgstr "Kod çözücü"
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
-#: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceMenu.tsx
 msgid "Default"
 msgstr "Varsayılan"
 
@@ -1898,6 +1898,7 @@ msgstr "Devre dışı"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "Bağlantı kesildi"
 
@@ -2145,7 +2146,7 @@ msgstr "Kodlayıcı"
 msgid "Encoder target bitrate"
 msgstr "Kodlayıcı hedef bit hızı"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "Aramayı bitir"
 
@@ -2648,6 +2649,10 @@ msgstr "Gelen"
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Incoming call"
 msgstr "Gelen arama"
+
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Input device"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -3192,6 +3197,7 @@ msgid "MFA setup canceled."
 msgstr "Çok faktörlü kimlik doğrulama (MFA) kurulumu iptal edildi."
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Microphone"
 msgstr "Mikrofon"
@@ -3204,7 +3210,7 @@ msgstr "Mikrofon ve kulaklık"
 #~ msgid "Minimise to Tray"
 #~ msgstr "Simge Durumuna Küçült"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "Kayıp İzinler"
 
@@ -3250,7 +3256,7 @@ msgstr "Çoklu yayın: bir yayını açmak onu diğerlerinin yanına ekler"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "Sustur"
 
@@ -3281,6 +3287,10 @@ msgstr "Sunucuyu Sessize Al"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Mute stream"
 msgstr "Yayını sessize al"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Mute user"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Mute when not speaking"
@@ -3626,6 +3636,10 @@ msgstr "Giden"
 msgid "Outgoing call"
 msgstr "Giden arama"
 
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Output device"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "Çıkış Ses Düzeyi"
@@ -3951,6 +3965,7 @@ msgstr "Ana Sayfa'daki son aramalar"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "Tekrardan Bağlanılıyor"
 
@@ -4699,6 +4714,7 @@ msgid "Speak"
 msgstr "Konuşabilme"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Speaker"
 msgstr "Hoparlör"
@@ -5187,7 +5203,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "AnyTalk'ta gözden kaçan hata: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "Sağırlaştırmayı Kaldır"
 
@@ -5230,7 +5246,7 @@ msgid "Unmark this channel as mature?"
 msgstr "Bu kanalın yetişkin ibaresini kaldır?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "Susturmayı Aç"
 
@@ -5245,6 +5261,10 @@ msgstr "Sunucunun Susturmasını Kaldır"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Unmute stream"
 msgstr "Yayının sesini aç"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Unmute user"
+msgstr ""
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unnamed folder"
@@ -5550,12 +5570,17 @@ msgstr "Sesli aramalar ({calls})"
 msgid "Voice Channel"
 msgstr "Ses Kanalı"
 
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"
 msgstr "Ses İşleme Biçimi"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Volume"
 msgstr "Ses düzeyi"
 

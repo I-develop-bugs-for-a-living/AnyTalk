@@ -54,6 +54,18 @@ export function StreamViewers() {
         }),
       );
 
+      // after the connection came back (a full reconnect forgets what we
+      // sent), unless there is nothing to tell
+      createEffect(
+        on(
+          voice.resyncs,
+          () => {
+            if (streams().length) tell();
+          },
+          { defer: true },
+        ),
+      );
+
       // anyone joining later missed it
       const onJoin = (participant: RemoteParticipant) => {
         if (streams().length) tell(participant.identity);

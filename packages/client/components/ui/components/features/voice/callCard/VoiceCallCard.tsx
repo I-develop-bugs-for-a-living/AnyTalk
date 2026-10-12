@@ -236,8 +236,11 @@ const Float = styled("div", {
     {
       mode: ["floating", "moving"],
       css: {
-        "--flt-w": "300px",
-        "--flt-h": "170px",
+        // Wide enough for the mini control bar (7 buttons: 6x32px + the
+        // 48px hang-up, 6x8px gaps, 8px bar padding, 8px card padding),
+        // clamped to the viewport with a 16px gutter
+        "--flt-w": "min(328px, calc(100vw - 32px))",
+        "--flt-h": "calc(var(--flt-w) * 0.57)",
         width: "var(--flt-w)",
         height: "var(--flt-h)",
       },

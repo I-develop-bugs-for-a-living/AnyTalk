@@ -1381,12 +1381,12 @@ msgstr "Onnectcay"
 msgid "Connect to voice channel"
 msgstr "Onnectcay otay oicevay annelchay"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connected"
 msgstr "Onnectedcay"
 
 #: components/app/interface/desktop/Titlebar.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "Onnectingcay"
 
@@ -1722,7 +1722,7 @@ msgid "Date format"
 msgstr "Ateday ormatfay"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "Eafenday"
 
@@ -1741,7 +1741,7 @@ msgstr "Ecoderday"
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
-#: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceMenu.tsx
 msgid "Default"
 msgstr "Efaultday"
 
@@ -1929,6 +1929,7 @@ msgstr "Isabledday"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "Isconnectedday"
 
@@ -2176,7 +2177,7 @@ msgstr "Encoderyay"
 msgid "Encoder target bitrate"
 msgstr "Encoderyay argettay itratebay"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "Endyay allcay"
 
@@ -2681,6 +2682,10 @@ msgstr "Incomingyay"
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Incoming call"
 msgstr "Incomingyay allcay"
+
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Input device"
+msgstr "Inputyay eviceday"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -3226,6 +3231,7 @@ msgid "MFA setup canceled."
 msgstr "AMFAY etupsay anceledcay."
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Microphone"
 msgstr "Icrophonemay"
@@ -3238,7 +3244,7 @@ msgstr "Icrophonemay andyay eadphoneshay"
 #~ msgid "Minimise to Tray"
 #~ msgstr ""
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "Issingmay ermissionpay"
 
@@ -3284,7 +3290,7 @@ msgstr "Ultimay-eamstray: openingyay ayay eamstray addsyay ityay extnay otay eth
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "Utemay"
 
@@ -3315,6 +3321,10 @@ msgstr "Utemay Erversay"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Mute stream"
 msgstr "Utemay eamstray"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Mute user"
+msgstr "Utemay useryay"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Mute when not speaking"
@@ -3660,6 +3670,10 @@ msgstr "Outgoingyay"
 msgid "Outgoing call"
 msgstr "Outgoingyay allcay"
 
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Output device"
+msgstr "Outputyay eviceday"
+
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "Outputyay Olumevay"
@@ -3986,6 +4000,7 @@ msgstr "Ecentray allscay onyay Omehay"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "Econnectingray"
 
@@ -4736,6 +4751,7 @@ msgid "Speak"
 msgstr "Eakspay"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Speaker"
 msgstr "Eakerspay"
@@ -5225,7 +5241,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "Uncaughtyay AnyTalk erroryay: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "Undeafenyay"
 
@@ -5268,7 +5284,7 @@ msgid "Unmark this channel as mature?"
 msgstr "Unmarkyay isthay annelchay asyay aturemay?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "Unmuteyay"
 
@@ -5283,6 +5299,10 @@ msgstr "Unmuteyay Erversay"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Unmute stream"
 msgstr "Unmuteyay eamstray"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Unmute user"
+msgstr "Unmuteyay useryay"
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unnamed folder"
@@ -5591,12 +5611,17 @@ msgstr "Oicevay allscay ({calls})"
 msgid "Voice Channel"
 msgstr "Oicevay Hannelcay"
 
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr "Oicevay onnectioncay"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"
 msgstr "Oicevay Ocessingpray"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Volume"
 msgstr "Olumevay"
 

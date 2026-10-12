@@ -1381,12 +1381,12 @@ msgstr "இணை"
 msgid "Connect to voice channel"
 msgstr "குரல் சேனலுடன் இணை"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connected"
 msgstr "இணைக்கப்பட்டது"
 
 #: components/app/interface/desktop/Titlebar.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "இணைக்கப்படுகிறது"
 
@@ -1722,7 +1722,7 @@ msgid "Date format"
 msgstr "தேதி வடிவம்"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Deafen"
 msgstr "ஒலி கேட்பதை நிறுத்து"
 
@@ -1741,7 +1741,7 @@ msgstr "டிகோடர்"
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
-#: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceMenu.tsx
 msgid "Default"
 msgstr "இயல்புநிலை"
 
@@ -1929,6 +1929,7 @@ msgstr "முடக்கப்பட்டது"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Disconnected"
 msgstr "துண்டிக்கப்பட்டது"
 
@@ -2176,7 +2177,7 @@ msgstr "என்கோடர்"
 msgid "Encoder target bitrate"
 msgstr "என்கோடர் இலக்கு பிட்ரேட்"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "End call"
 msgstr "அழைப்பை முடி"
 
@@ -2681,6 +2682,10 @@ msgstr "உள்வரும்"
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Incoming call"
 msgstr "உள்வரும் அழைப்பு"
+
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Input device"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -3226,6 +3231,7 @@ msgid "MFA setup canceled."
 msgstr "MFA அமைப்பு ரத்து செய்யப்பட்டது."
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Microphone"
 msgstr "மைக்ரோஃபோன்"
@@ -3238,7 +3244,7 @@ msgstr "மைக்ரோஃபோன் மற்றும் ஹெட்ஃ�
 #~ msgid "Minimise to Tray"
 #~ msgstr ""
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Missing permission"
 msgstr "அனுமதி இல்லை"
 
@@ -3284,7 +3290,7 @@ msgstr "பல ஸ்ட்ரீம்: ஸ்ட்ரீமைத் தி�
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Mute"
 msgstr "முடக்கு"
 
@@ -3315,6 +3321,10 @@ msgstr "சர்வரை முடக்கு"
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Mute stream"
 msgstr "ஸ்ட்ரீமை முடக்கு"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Mute user"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Mute when not speaking"
@@ -3660,6 +3670,10 @@ msgstr "வெளிச்செல்லும்"
 msgid "Outgoing call"
 msgstr "வெளிச்செல்லும் அழைப்பு"
 
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
+msgid "Output device"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "வெளியீட்டு ஒலியளவு"
@@ -3986,6 +4000,7 @@ msgstr "முகப்பில் சமீபத்திய அழைப்�
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Reconnecting"
 msgstr "மீண்டும் இணைக்கிறது"
 
@@ -4736,6 +4751,7 @@ msgid "Speak"
 msgstr "பேசு"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Speaker"
 msgstr "ஸ்பீக்கர்"
@@ -5225,7 +5241,7 @@ msgid "Uncaught AnyTalk error: {0}"
 msgstr "கையாளப்படாத AnyTalk பிழை: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
 msgstr "ஒலி கேட்கத் தொடங்கு"
 
@@ -5268,7 +5284,7 @@ msgid "Unmark this channel as mature?"
 msgstr "இந்தச் சேனலின் முதிர்ந்தோர் குறியை நீக்கவா?"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Unmute"
 msgstr "முடக்கத்தை நீக்கு"
 
@@ -5283,6 +5299,10 @@ msgstr "சர்வரின் முடக்கத்தை நீக்க�
 #: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Unmute stream"
 msgstr "ஸ்ட்ரீமின் முடக்கத்தை நீக்கு"
+
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
+msgid "Unmute user"
+msgstr ""
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unnamed folder"
@@ -5591,12 +5611,17 @@ msgstr "குரல் அழைப்புகள் ({calls})"
 msgid "Voice Channel"
 msgstr "குரல் சேனல்"
 
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Voice connection"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Voice Processing"
 msgstr "குரல் செயலாக்கம்"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/voice/callCard/StreamVolumeButton.tsx
 msgid "Volume"
 msgstr "ஒலியளவு"
 

@@ -6,6 +6,7 @@ import {
   createEffect,
   createMemo,
   createSignal,
+  onCleanup,
   onMount,
   useContext,
 } from "solid-js";
@@ -46,6 +47,13 @@ export { SyncWorker } from "./SyncWorker";
  * Introduce some delay before writing state to disk
  */
 const DISK_WRITE_WAIT_MS = 1200;
+
+/**
+ * Longer write delay for stores that change on every keystroke
+ */
+const DISK_WRITE_WAIT_OVERRIDES_MS: Record<string, number> = {
+  draft: 3000,
+};
 
 /**
  * Stores for which we don't want to wait to write to
@@ -178,7 +186,9 @@ export class State {
           console.info("[store.save] Wrote state to disk.");
         }
       },
-      IGNORE_WRITE_DELAY.includes(key) ? 0 : DISK_WRITE_WAIT_MS,
+      IGNORE_WRITE_DELAY.includes(key)
+        ? 0
+        : (DISK_WRITE_WAIT_OVERRIDES_MS[key] ?? DISK_WRITE_WAIT_MS),
     ) as unknown as number;
   };
 
@@ -197,6 +207,18 @@ export class State {
       key,
       JSON.parse(JSON.stringify((this.store as Record<string, unknown>)[key])),
     );
+  }
+
+  /**
+   * Write every store with a pending delayed write to disk right away,
+   * e.g. when the page is closed or hidden
+   */
+  flushPending() {
+    for (const key of Object.keys(this.writeQueue)) {
+      this.flush(key as keyof Store).catch((err) =>
+        console.error("[store.save] Failed to flush", key, err),
+      );
+    }
   }
 
   /**
@@ -262,6 +284,20 @@ export function StateContext(props: { children: JSX.Element }) {
   const [ready, setReady] = createSignal(false);
 
   onMount(() => stateLocal.hydrate().then(() => setReady(true)));
+
+  // save pending writes before the tab closes or the phone switches apps
+  /** Flush pending writes when the tab becomes hidden */
+  const flushOnHide = () => {
+    if (document.visibilityState === "hidden") stateLocal.flushPending();
+  };
+  /** Flush pending writes when the page is being closed */
+  const flushOnPageHide = () => stateLocal.flushPending();
+  window.addEventListener("pagehide", flushOnPageHide);
+  document.addEventListener("visibilitychange", flushOnHide);
+  onCleanup(() => {
+    window.removeEventListener("pagehide", flushOnPageHide);
+    document.removeEventListener("visibilitychange", flushOnHide);
+  });
 
   return (
     <stateContext.Provider value={stateLocal}>

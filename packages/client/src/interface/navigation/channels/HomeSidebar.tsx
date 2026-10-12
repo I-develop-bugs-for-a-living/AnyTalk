@@ -22,6 +22,7 @@ import {
   UserStatus,
   typography,
 } from "@revolt/ui";
+import { VoiceStatusFooter } from "@revolt/ui/components/features/voice/callCard/VoiceStatusFooter";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import { SidebarBase } from "./common";
@@ -71,7 +72,7 @@ export const HomeSidebar = (props: Props) => {
       aria-label={t`Channels`}
       data-region="channels"
     >
-      <div ref={scrollTargetElement} use:invisibleScrollable>
+      <div ref={scrollTargetElement} use:invisibleScrollable class={scrollArea}>
         <List>
           <Header>
             <Trans>Conversations</Trans>
@@ -198,9 +199,13 @@ export const HomeSidebar = (props: Props) => {
           </Deferred>
         </List>
       </div>
+      <VoiceStatusFooter />
     </SidebarBase>
   );
 };
+
+/** Scroll area that fills the space above the voice footer */
+const scrollArea = css({ flexGrow: 1, minHeight: 0 });
 
 export const Header = styled("div", {
   base: {
