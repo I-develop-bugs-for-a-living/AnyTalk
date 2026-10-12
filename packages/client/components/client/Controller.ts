@@ -9,6 +9,11 @@ import type { Session } from "@revolt/state/stores/Auth";
 
 import Instance from "../instance/Instance";
 import { autoAckCallNotices } from "./callNotices";
+import {
+  actionOnOffline,
+  actionOnVisible,
+  actionOnWake,
+} from "./lifecycleWake";
 import { killServiceWorkerSubscription } from "./NotificationsController";
 
 export enum State {
@@ -349,6 +354,32 @@ class Lifecycle {
     }
   }
 
+  /**
+   * Reconnect right away if we were waiting (backoff or offline) and the
+   * network is available. Called when the browser goes online and when the
+   * tab becomes visible.
+   */
+  wake() {
+    const action = actionOnWake(this.state(), navigator.onLine);
+
+    if (action === "retry") {
+      this.transition({ type: TransitionType.Retry });
+    } else if (action === "deviceOnline") {
+      this.transition({ type: TransitionType.DeviceOnline });
+    }
+  }
+
+  /**
+   * Handle the browser reporting no network. A connected socket is closed so
+   * the dead connection is dropped early; the close event then walks the
+   * usual Disconnected -> Offline path.
+   */
+  deviceOffline() {
+    if (actionOnOffline(this.state()) === "dropSocket") {
+      this.client.events.disconnect();
+    }
+  }
+
   private onReady() {
     this.transition({
       type: TransitionType.SocketConnected,
@@ -420,6 +451,9 @@ export default class ClientController {
 
   isLoggedIn: Accessor<boolean>;
 
+  /** Timestamp (ms) of when the tab was last hidden */
+  #hiddenAt: number | undefined;
+
   /** Stoat instance the client belongs to. Also accessible via `useInstance()` */
   readonly instance: Instance;
 
@@ -451,7 +485,44 @@ export default class ClientController {
       ].includes(this.lifecycle.state()),
     );
 
+    this.onOnline = this.onOnline.bind(this);
+    this.onOffline = this.onOffline.bind(this);
+    this.onVisibilityChange = this.onVisibilityChange.bind(this);
+    window.addEventListener("online", this.onOnline);
+    window.addEventListener("offline", this.onOffline);
+    document.addEventListener("visibilitychange", this.onVisibilityChange);
+
     this.loginCached();
+  }
+
+  /** Browser regained its network connection */
+  private onOnline() {
+    this.lifecycle.wake();
+  }
+
+  /** Browser lost its network connection */
+  private onOffline() {
+    this.lifecycle.deviceOffline();
+  }
+
+  /**
+   * Remember when the tab was hidden. On return, drop a possibly frozen
+   * socket if it was hidden long enough, otherwise reconnect without waiting.
+   */
+  private onVisibilityChange() {
+    if (document.visibilityState === "hidden") {
+      this.#hiddenAt = Date.now();
+      return;
+    }
+
+    const hiddenFor = this.#hiddenAt ? Date.now() - this.#hiddenAt : 0;
+    this.#hiddenAt = undefined;
+
+    if (actionOnVisible(this.lifecycle.state(), hiddenFor) === "dropSocket") {
+      this.lifecycle.client.events.disconnect();
+    } else {
+      this.lifecycle.wake();
+    }
   }
 
   isError() {
@@ -573,6 +644,10 @@ export default class ClientController {
   }
 
   dispose() {
+    window.removeEventListener("online", this.onOnline);
+    window.removeEventListener("offline", this.onOffline);
+    document.removeEventListener("visibilitychange", this.onVisibilityChange);
+
     this.lifecycle.transition({
       type: TransitionType.DisposeOnly,
     });

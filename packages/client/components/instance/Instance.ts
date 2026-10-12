@@ -117,6 +117,11 @@ export function _newClient(apiUrl: string) {
   const cli = new Client({
     baseURL: apiUrl,
     autoReconnect: false,
+    // detect dead sockets sooner than the 30s default; the pong timeout stays
+    // generous so a lossy mobile link doesn't cause needless reconnects
+    // (both in seconds; the pong timeout also bounds the connect attempt)
+    heartbeatInterval: 15,
+    pongTimeout: 15,
     syncUnreads: true,
     debug: import.meta.env.DEV,
   });
