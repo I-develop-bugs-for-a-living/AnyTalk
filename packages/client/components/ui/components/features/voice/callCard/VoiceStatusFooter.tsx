@@ -5,13 +5,12 @@ import { styled } from "styled-system/jsx";
 
 import { useDevice } from "@revolt/common";
 import { useNavigate } from "@revolt/routing";
-import { screenShareSupported, useVoice } from "@revolt/rtc";
+import { useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
 import { typography } from "@revolt/ui/components/design/Text";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import { AudioDeviceChevron } from "./AudioDeviceChevron";
-import { ScreenShareButton } from "./ScreenShareButton";
 import { DeafenButton, LeaveCallButton, MuteButton } from "./VoiceCallButtons";
 
 /**
@@ -93,10 +92,6 @@ export function VoiceStatusFooter() {
                 />
               </Show>
             </Split>
-            {/* Phone browsers can't share their screen */}
-            <Show when={screenShareSupported}>
-              <ScreenShareButton size="sm" />
-            </Show>
             <LeaveCallButton size="sm" />
           </Buttons>
         </Footer>
