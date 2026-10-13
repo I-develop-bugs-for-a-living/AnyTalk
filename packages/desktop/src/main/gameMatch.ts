@@ -113,21 +113,51 @@ export function roleFor(
 }
 
 /**
+ * Display name of a matched entry: the `gameNames` entry of a running
+ * process if there is one, otherwise the entry's own name.
+ *
+ * @param match The matched entry with the names of its running processes
+ * @param platform The OS the shell runs on
+ * @returns The name to show
+ */
+export function displayNameFor(
+  match: GameMatch,
+  platform: "win32" | "linux",
+): string {
+  const map = match.entry.gameNames;
+  if (!map) return match.entry.name;
+  const byKey = new Map(
+    Object.entries(map).map(([exe, name]) => [
+      matchKey(exe.toLowerCase(), platform),
+      name,
+    ]),
+  );
+  for (const name of match.names) {
+    const found = byKey.get(matchKey(name, platform));
+    if (found) return found;
+  }
+  return match.entry.name;
+}
+
+/**
  * Turn matches and the windows of their processes into the list the page
  * gets. Windows of other processes are dropped.
  *
  * @param matches Running entries
  * @param procs All running processes, to look up names by pid
  * @param windows Windows with a known owner
+ * @param platform The OS the shell runs on, for matching `gameNames`
  * @returns Games with windows ordered game first, then client
  */
 export function buildRunningGames(
   matches: GameMatch[],
   procs: ProcInfo[],
   windows: WindowInfo[],
+  platform: "win32" | "linux" = "win32",
 ): RunningGame[] {
   const namesByPid = new Map(procs.map((proc) => [proc.pid, proc.names]));
-  return matches.map(({ entry, pids }) => {
+  return matches.map((match) => {
+    const { entry, pids } = match;
     const own: RunningGameWindow[] = [];
     for (const window of windows) {
       if (window.pid === undefined || !pids.includes(window.pid)) continue;
@@ -142,7 +172,11 @@ export function buildRunningGames(
     own.sort(
       (a, b) => Number(a.role === "client") - Number(b.role === "client"),
     );
-    return { id: entry.id, name: entry.name, windows: own };
+    return {
+      id: entry.id,
+      name: displayNameFor(match, platform),
+      windows: own,
+    };
   });
 }
 

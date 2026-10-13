@@ -74,7 +74,19 @@ function isGameEntry(value: unknown): value is GameEntry {
     !Array.isArray(exes) &&
     strings((exes as Record<string, unknown>).win32) &&
     strings((exes as Record<string, unknown>).linux) &&
-    strings(entry.clients)
+    strings(entry.clients) &&
+    (entry.gameNames === undefined ||
+      (typeof entry.gameNames === "object" &&
+        entry.gameNames !== null &&
+        !Array.isArray(entry.gameNames) &&
+        Object.entries(entry.gameNames).length <= 50 &&
+        Object.entries(entry.gameNames).every(
+          ([exe, name]) =>
+            exe.length <= 260 &&
+            typeof name === "string" &&
+            name.length > 0 &&
+            name.length <= 100,
+        )))
   );
 }
 
@@ -333,7 +345,7 @@ async function detect(): Promise<RunningGame[]> {
       console.error("Game window lookup failed", error);
     }
   }
-  return buildRunningGames(matches, procs, windows);
+  return buildRunningGames(matches, procs, windows, platform);
 }
 
 /**
