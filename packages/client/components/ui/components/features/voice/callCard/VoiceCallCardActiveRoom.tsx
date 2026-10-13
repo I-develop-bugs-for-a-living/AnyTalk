@@ -1,4 +1,4 @@
-import { useLingui } from "@lingui/solid/macro";
+import { Trans, useLingui } from "@lingui/solid/macro";
 import { createResizeObserver } from "@solid-primitives/resize-observer";
 import {
   createEffect,
@@ -17,7 +17,11 @@ import { styled } from "styled-system/jsx";
 
 import { useDevice } from "@revolt/common";
 import { InRoom, useVoice } from "@revolt/rtc";
-import { IconButton } from "@revolt/ui/components/design";
+import {
+  CircularProgress,
+  IconButton,
+  Text,
+} from "@revolt/ui/components/design";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { scrollableStyles } from "@revolt/ui/directives";
 
@@ -449,7 +453,22 @@ function FocusedParticipant(props: { theater: boolean }) {
   const voice = useVoice();
 
   return (
-    <Show when={voice.focusTrack()}>
+    <Show
+      when={voice.focusTrack()}
+      fallback={
+        // the streamer is switching source, the stream is waited for
+        <Show when={voice.focusedStreamEnding()}>
+          <FocusBox theater={props.theater}>
+            <SwitchingNotice role="status" aria-live="polite">
+              <CircularProgress />
+              <Text class="label" size="medium">
+                <Trans>Switching stream…</Trans>
+              </Text>
+            </SwitchingNotice>
+          </FocusBox>
+        </Show>
+      }
+    >
       <TrackLoop tracks={() => [voice.focusTrack()!]}>
         {() => (
           <FocusBox theater={props.theater}>
@@ -689,6 +708,20 @@ const TilingRow = styled("div", {
   },
 });
 
+/** Centered note shown where the focused stream will return */
+const SwitchingNotice = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "var(--gap-md)",
+    color: "var(--md-sys-color-on-surface-variant)",
+    textAlign: "center",
+  },
+});
+
+/** Holds the focused tile (or its placeholder) in the main area */
 const FocusBox = styled("div", {
   base: {
     height: 0,
