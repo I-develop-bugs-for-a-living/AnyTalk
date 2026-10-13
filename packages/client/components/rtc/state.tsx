@@ -60,7 +60,14 @@ import { StatsRecorder } from "./components/StatsRecorder";
 import { StreamViewers } from "./components/StreamViewers";
 import { VoiceKeybinds } from "./components/VoiceKeybinds";
 import { VoiceMoves } from "./components/VoiceMoves";
-import { FOLLOW_GRACE_MS, followDecision, graceWindow } from "./gameFollow";
+import {
+  type FrameSample,
+  FOLLOW_GRACE_MS,
+  followDecision,
+  graceWindow,
+  isStalled,
+  STALL_POLL_MS,
+} from "./gameFollow";
 import * as outputBus from "./outputBus";
 import {
   allowMicRestart,
@@ -198,6 +205,44 @@ type Rejoin = {
  */
 type CaptureResult = "done" | "cancelled" | "failed";
 
+/** How long a capture or a track swap may take before it counts as hung */
+const SWAP_TIMEOUT_MS = 10_000;
+
+/** A capture step took too long */
+class CaptureTimeout extends Error {}
+
+/**
+ * Give a step a time limit, so a hang can't block the swap queue
+ * @param promise The step
+ * @param what Name of the step, for the error
+ * @param onLate Cleans up the result when the step finishes after the limit
+ */
+function withTimeout<T>(
+  promise: Promise<T>,
+  what: string,
+  onLate?: (value: T) => void,
+): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    let timedOut = false;
+    const timer = setTimeout(() => {
+      timedOut = true;
+      reject(new CaptureTimeout(`${what} timed out`));
+    }, SWAP_TIMEOUT_MS);
+
+    promise.then(
+      (value) => {
+        clearTimeout(timer);
+        if (timedOut) onLate?.(value);
+        else resolve(value);
+      },
+      (e) => {
+        clearTimeout(timer);
+        if (!timedOut) reject(e);
+      },
+    );
+  });
+}
+
 /**
  * Whether an error is the browser's way of saying the capture was dismissed
  */
@@ -262,6 +307,9 @@ class Voice {
    * captured now, and the stop function of its running games listener
    */
   #follow?: Follow;
+
+  /** Polls the stream's frame counter while following, see #watchStall */
+  #stallTimer?: ReturnType<typeof setInterval>;
 
   /** Latest running games reported while following */
   #followGames: RunningGame[] = [];
@@ -1729,6 +1777,7 @@ class Voice {
       // way, so it is treated like a window closing: the stream lingers for
       // up to the grace period before it stops.
       if (this.#follow) {
+        console.debug("[follow] capture ended", this.#follow.gameId);
         this.#followGrace(room, video.mediaStreamTrack);
         return;
       }
@@ -1842,6 +1891,8 @@ class Voice {
     this.#follow = follow;
     this.#followGames = [];
     this.#setFollowedGameId(gameId);
+    console.debug("[follow] begin", gameId, sourceId);
+    this.#watchStall(follow);
     fetchRunningGames().then((games) => {
       if (this.#follow !== follow || updated) return;
       this.#followGames = games;
@@ -1851,6 +1902,9 @@ class Voice {
 
   /** Stop following a game, the stream itself is left alone */
   #endFollow() {
+    if (this.#follow) console.debug("[follow] end", this.#follow.gameId);
+    clearInterval(this.#stallTimer);
+    this.#stallTimer = undefined;
     this.#follow?.wake?.();
     this.#follow?.stop();
     this.#follow = undefined;
@@ -1869,13 +1923,84 @@ class Voice {
       if (!follow || !this.screenshare()) return;
 
       const decision = followDecision(this.#followGames, follow);
+      console.debug(
+        "[follow] sync",
+        decision,
+        "current",
+        follow.sourceId,
+        "windows",
+        this.#followGames
+          .find((g) => g.id === follow.gameId)
+          ?.windows.map((w) => `${w.sourceId}/${w.role}`),
+      );
       if (decision.type === "release") {
         // the game stopped, the stream goes on
         this.#endFollow();
       } else if (decision.type === "switch") {
-        await this.#followSwap(follow, decision.sourceId);
+        const result = await this.#followSwap(follow, decision.sourceId);
+
+        // the window was gone already: read the games again and retry once
+        if (result === "cancelled" && this.#follow === follow) {
+          this.#followGames = await fetchRunningGames();
+          const again = followDecision(this.#followGames, follow);
+          if (this.#follow === follow && again.type === "switch") {
+            await this.#followSwap(follow, again.sourceId);
+          }
+        }
       }
     });
+  }
+
+  /**
+   * While following, watch whether the stream still sends frames. A window
+   * that gets hidden instead of closed keeps the capture running without
+   * frames and never ends it, so look at the games again when it stalls.
+   */
+  #watchStall(follow: Follow) {
+    clearInterval(this.#stallTimer);
+    let samples: FrameSample[] = [];
+
+    // a slow getStats must not pile up
+    let inFlight = false;
+
+    /** One reading of the frame counter */
+    const check = async () => {
+      const video = this.room()?.localParticipant.getTrackPublication(
+        Track.Source.ScreenShare,
+      )?.videoTrack;
+      const report = await video?.sender?.getStats().catch(() => undefined);
+      if (!report || this.#follow !== follow) return;
+
+      let frames: number | undefined;
+      for (const stats of report.values()) {
+        if (stats.type === "outbound-rtp" && stats.kind === "video") {
+          frames = stats.framesSent ?? stats.framesEncoded;
+        }
+      }
+      if (typeof frames !== "number") return;
+
+      samples = [...samples, { at: Date.now(), frames }].slice(-8);
+      if (!isStalled(samples)) return;
+
+      // look again only after another full stall time
+      samples = [];
+      console.debug("[follow] no frames sent, checking the games");
+      const games = await fetchRunningGames();
+      if (this.#follow !== follow) return;
+      this.#followGames = games;
+      // nothing changes when the best window is still the captured one
+      this.#syncFollow();
+    };
+
+    this.#stallTimer = setInterval(async () => {
+      if (this.#follow !== follow || inFlight) return;
+      inFlight = true;
+      try {
+        await check();
+      } finally {
+        inFlight = false;
+      }
+    }, STALL_POLL_MS);
   }
 
   /**
@@ -1885,6 +2010,7 @@ class Voice {
   async #followSwap(follow: Follow, sourceId: string): Promise<CaptureResult> {
     if (this.#follow !== follow) return "failed";
     const result = await this.#replaceSource(sourceId);
+    console.debug("[follow] swap to", sourceId, result);
     if (result === "done") follow.sourceId = sourceId;
     return result;
   }
@@ -1897,6 +2023,7 @@ class Voice {
   #followGrace(room: Room, endedTrack: MediaStreamTrack) {
     const follow = this.#follow;
     if (!follow) return;
+    console.debug("[follow] grace period starts");
 
     // A swap to another window may have run before this task, then the
     // stream shows a live window and has to be left alone
@@ -1927,6 +2054,7 @@ class Voice {
       // stopped or switched by hand meanwhile
       if (outdated()) return;
 
+      console.debug("[follow] grace period over, stopping the stream");
       this.#endFollow();
       if (this.room() === room && this.screenshare()) {
         await this.toggleScreenshare();
@@ -2010,13 +2138,21 @@ class Voice {
     try {
       try {
         if (preselected) await window.native.setNextScreenSource?.(sourceId);
-        tracks = await room.localParticipant.createScreenTracks({
+        const capturing = room.localParticipant.createScreenTracks({
           resolution: this.#screenShareQuality(
             stream.resolution,
             stream.frameRate,
           ).resolution,
           audio: STREAM_AUDIO_CAPTURE,
         });
+        // Only a preselected capture is time limited: with the picker or
+        // portal open, the user may take as long as they like
+        tracks = preselected
+          ? await withTimeout(capturing, "screen capture", (late) =>
+              // arrived after we gave up
+              late.forEach((t) => t.stop()),
+            )
+          : await capturing;
       } finally {
         // the chosen source is used once, drop it if it wasn't
         if (preselected) window.native.setNextScreenSource?.(null);
@@ -2024,6 +2160,10 @@ class Voice {
     } catch (e) {
       // closing the picker keeps streaming the current window
       if (picked.dismissed() || isCaptureCancelled(e)) return "cancelled";
+      if (e instanceof CaptureTimeout) {
+        console.debug("[follow]", e.message);
+        return "failed";
+      }
       this.onErr(e);
       return "failed";
     }
@@ -2047,6 +2187,8 @@ class Voice {
 
     try {
       const oldVideo = video.mediaStreamTrack;
+      // no time limit: a swap that finishes late would leave the new tracks
+      // in use, the stale() checks below deal with a stream that went away
       await video.replaceTrack(newVideo.mediaStreamTrack, {
         userProvidedTrack: false,
       });

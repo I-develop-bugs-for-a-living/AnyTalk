@@ -23,7 +23,7 @@ const MAX_GAMES = 3;
 export function GameStreamPrompt() {
   const voice = useVoice();
   const { t } = useLingui();
-  const games = createRunningGames();
+  const games = createRunningGames(() => voice.followedGameId());
 
   const offered = createMemo(() =>
     games()

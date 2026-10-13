@@ -13,6 +13,18 @@ export type GameEntry = {
    * Every other process of the entry counts as the game itself.
    */
   clients?: string[];
+  /**
+   * Display name by executable (case-insensitive), used instead of `name`
+   * while such a process runs. Lets one entry be shown as another game, e.g.
+   * Teamfight Tactics started from the League client.
+   */
+  gameNames?: Record<string, string>;
+  /**
+   * Fallback when a window can't be matched to its process: exact,
+   * case-insensitive window titles per role. Only used for roles that have
+   * no window yet, and only while the entry is running.
+   */
+  windowTitles?: { game?: string[]; client?: string[] };
 };
 
 /** Shorthand for an entry that only has Windows (and Proton) executables. */
@@ -31,8 +43,24 @@ export const GAME_LIST: GameEntry[] = [
   {
     id: "league-of-legends",
     name: "League of Legends",
-    executables: { win32: ["League of Legends.exe", "LeagueClientUx.exe"] },
+    executables: {
+      win32: [
+        "League of Legends.exe",
+        "LeagueClientUx.exe",
+        // Teamfight Tactics (Unreal Engine 5): launcher stub and the game
+        "TFTClient.exe",
+        "TFTClient-Win64-Shipping.exe",
+      ],
+    },
     clients: ["LeagueClientUx.exe"],
+    windowTitles: {
+      game: ["League of Legends (TM) Client"],
+      client: ["League of Legends"],
+    },
+    gameNames: {
+      "TFTClient-Win64-Shipping.exe": "Teamfight Tactics",
+      "TFTClient.exe": "Teamfight Tactics",
+    },
   },
   win("valorant", "VALORANT", "VALORANT-Win64-Shipping.exe"),
   {
@@ -132,4 +160,21 @@ export const GAME_LIST: GameEntry[] = [
   ),
   win("monster-hunter-wilds", "Monster Hunter Wilds", "MonsterHunterWilds.exe"),
   win("ready-or-not", "Ready or Not", "ReadyOrNot-Win64-Shipping.exe"),
+  {
+    id: "stellaris",
+    name: "Stellaris",
+    executables: { win32: ["stellaris.exe"], linux: ["stellaris"] },
+  },
+  win("divinity-original-sin-2", "Divinity: Original Sin 2", "EoCApp.exe"),
+  win("binding-of-isaac", "The Binding of Isaac", "isaac-ng.exe"),
+  win("gunfire-reborn", "Gunfire Reborn", "Gunfire Reborn.exe"),
+  win("world-of-tanks", "World of Tanks", "WorldOfTanks.exe"),
+  win("world-of-tanks-blitz", "World of Tanks Blitz", "wotblitz.exe"),
+  win(
+    "world-of-warships",
+    "World of Warships",
+    "WorldOfWarships64.exe",
+    "WorldOfWarships32.exe",
+  ),
+  win("world-of-warplanes", "World of Warplanes", "worldofwarplanes.exe"),
 ];

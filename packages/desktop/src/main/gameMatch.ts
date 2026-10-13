@@ -113,22 +113,110 @@ export function roleFor(
 }
 
 /**
- * Turn matches and the windows of their processes into the list the page
- * gets. Windows of other processes are dropped.
+ * Display name of a matched entry: the `gameNames` entry of a running
+ * process if there is one, otherwise the entry's own name.
+ *
+ * @param match The matched entry with the names of its running processes
+ * @param platform The OS the shell runs on
+ * @returns The name to show
+ */
+export function displayNameFor(
+  match: GameMatch,
+  platform: "win32" | "linux",
+): string {
+  const map = match.entry.gameNames;
+  if (!map) return match.entry.name;
+  const byKey = new Map(
+    Object.entries(map).map(([exe, name]) => [
+      matchKey(exe.toLowerCase(), platform),
+      name,
+    ]),
+  );
+  for (const name of match.names) {
+    const found = byKey.get(matchKey(name, platform));
+    if (found) return found;
+  }
+  return match.entry.name;
+}
+
+/** A window of a game and how it was assigned. */
+export type AssignedWindow = RunningGameWindow & { via: "handle" | "title" };
+
+/** Retry bookkeeping for a process whose window handle is not known yet. */
+export type HandleTry = { since: number; lastTry: number };
+
+/** After this long without a handle a process is retried less often. */
+const HANDLE_BACKOFF_AFTER_MS = 30_000;
+/** Retry interval for a process that just started. */
+const HANDLE_RETRY_MS = 4_000;
+/** Retry interval for a process that stays windowless (stubs, helpers). */
+const HANDLE_SLOW_RETRY_MS = 15_000;
+
+/**
+ * Decide whether the window handles should be asked for again. Per process:
+ * any matched pid without a handle is retried, throttled, and backed off
+ * once it has been windowless for a long time.
+ *
+ * @param pids Matched pids
+ * @param mapped Pids that already have a handle
+ * @param state Retry bookkeeping, pruned here
+ * @param now Current time in ms
+ * @returns Whether a query is due
+ */
+export function needsHandleQuery(
+  pids: number[],
+  mapped: Set<number>,
+  state: Map<number, HandleTry>,
+  now: number,
+): boolean {
+  for (const pid of [...state.keys()]) {
+    if (!pids.includes(pid) || mapped.has(pid)) state.delete(pid);
+  }
+  let due = false;
+  for (const pid of pids) {
+    if (mapped.has(pid)) continue;
+    const entry = state.get(pid) ?? { since: now, lastTry: 0 };
+    state.set(pid, entry);
+    const interval =
+      now - entry.since > HANDLE_BACKOFF_AFTER_MS
+        ? HANDLE_SLOW_RETRY_MS
+        : HANDLE_RETRY_MS;
+    if (now - entry.lastTry >= interval) due = true;
+  }
+  return due;
+}
+
+/**
+ * Record that the handles were just asked for.
+ *
+ * @param state Retry bookkeeping from `needsHandleQuery`
+ * @param now Current time in ms
+ */
+export function noteHandleQuery(state: Map<number, HandleTry>, now: number) {
+  for (const entry of state.values()) entry.lastTry = now;
+}
+
+/**
+ * Assign windows to running games: first by owning process, then, for roles
+ * that still have no window, by the entry's exact window titles. Windows
+ * that fit no running game are dropped here, so they never leave the shell.
  *
  * @param matches Running entries
  * @param procs All running processes, to look up names by pid
- * @param windows Windows with a known owner
- * @returns Games with windows ordered game first, then client
+ * @param windows All capturable windows, `pid` set when the owner is known
+ * @param platform The OS the shell runs on, for matching `gameNames`
+ * @returns Games with windows ordered game first, then client, then id
  */
-export function buildRunningGames(
+export function assignWindows(
   matches: GameMatch[],
   procs: ProcInfo[],
   windows: WindowInfo[],
-): RunningGame[] {
+  platform: "win32" | "linux" = "win32",
+): { id: string; name: string; windows: AssignedWindow[] }[] {
   const namesByPid = new Map(procs.map((proc) => [proc.pid, proc.names]));
-  return matches.map(({ entry, pids }) => {
-    const own: RunningGameWindow[] = [];
+  return matches.map((match) => {
+    const { entry, pids } = match;
+    const own: AssignedWindow[] = [];
     for (const window of windows) {
       if (window.pid === undefined || !pids.includes(window.pid)) continue;
       if (own.some((item) => item.sourceId === window.sourceId)) continue;
@@ -136,14 +224,69 @@ export function buildRunningGames(
         sourceId: window.sourceId,
         title: window.title,
         role: roleFor(entry, namesByPid.get(window.pid) ?? []),
+        via: "handle",
       });
     }
-    // Stable sort: game windows first, scan order kept inside each role
+    for (const role of ["game", "client"] as const) {
+      const titles = (entry.windowTitles?.[role] ?? []).map((t) =>
+        t.toLowerCase(),
+      );
+      if (titles.length === 0 || own.some((item) => item.role === role))
+        continue;
+      // Only windows with no known owner. On Windows that includes every
+      // unrelated window (only matched processes are mapped), so this matches
+      // any unowned window with exactly this title.
+      for (const window of windows) {
+        if (window.pid !== undefined) continue;
+        if (!titles.includes(window.title.toLowerCase())) continue;
+        if (own.some((item) => item.sourceId === window.sourceId)) continue;
+        own.push({
+          sourceId: window.sourceId,
+          title: window.title,
+          role,
+          via: "title",
+        });
+      }
+    }
+    // Game windows first, then by source id inside each role, so z-order
+    // changes in the scan don't look like a change of the list
     own.sort(
-      (a, b) => Number(a.role === "client") - Number(b.role === "client"),
+      (a, b) =>
+        Number(a.role === "client") - Number(b.role === "client") ||
+        a.sourceId.localeCompare(b.sourceId),
     );
-    return { id: entry.id, name: entry.name, windows: own };
+    return {
+      id: entry.id,
+      name: displayNameFor(match, platform),
+      windows: own,
+    };
   });
+}
+
+/**
+ * Turn matches and the windows of their processes into the list the page
+ * gets, see `assignWindows`.
+ *
+ * @param matches Running entries
+ * @param procs All running processes, to look up names by pid
+ * @param windows All capturable windows
+ * @param platform The OS the shell runs on, for matching `gameNames`
+ * @returns The games as the page sees them
+ */
+export function buildRunningGames(
+  matches: GameMatch[],
+  procs: ProcInfo[],
+  windows: WindowInfo[],
+  platform: "win32" | "linux" = "win32",
+): RunningGame[] {
+  return assignWindows(matches, procs, windows, platform).map((game) => ({
+    ...game,
+    windows: game.windows.map(({ sourceId, title, role }) => ({
+      sourceId,
+      title,
+      role,
+    })),
+  }));
 }
 
 /**
@@ -242,4 +385,30 @@ export function windowIdOf(sourceId: string): string | undefined {
 export function parseXpropPid(output: string): number | undefined {
   const match = /_NET_WM_PID\(CARDINAL\)\s*=\s*(\d+)/.exec(output);
   return match ? Number(match[1]) : undefined;
+}
+
+/**
+ * Reject if a promise doesn't settle in time, so a hung system call can't
+ * stall the scan loop.
+ *
+ * @param promise What to wait for
+ * @param ms Time limit in milliseconds
+ * @param what Name used in the error
+ * @returns The promise result
+ */
+export function withTimeout<T>(
+  promise: Promise<T>,
+  ms: number,
+  what: string,
+): Promise<T> {
+  let timeout: ReturnType<typeof setTimeout>;
+  return Promise.race([
+    promise,
+    new Promise<never>((_resolve, reject) => {
+      timeout = setTimeout(
+        () => reject(new Error(`${what} timed out after ${ms} ms`)),
+        ms,
+      );
+    }),
+  ]).finally(() => clearTimeout(timeout));
 }

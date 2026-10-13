@@ -1,6 +1,7 @@
 import { desktopCapturer, ipcMain, session, webContents } from "electron";
 
 import { type PickerRequest, type PickerSource, IPC } from "../shared/ipc";
+import { gameLog } from "./gameLog";
 import { isGameWindow } from "./games";
 import { isWayland } from "./platform";
 import { isServerUrl } from "./url";
@@ -129,6 +130,10 @@ export function installScreenShare(
           const preset = isGameWindow(wanted.sourceId)
             ? sources.find((source) => source.id === wanted.sourceId)
             : undefined;
+          gameLog(
+            `Preselect ${wanted.sourceId}: isGameWindow ${isGameWindow(wanted.sourceId)}, found ${!!preset}, ` +
+              (preset ? "captured" : "cancelled"),
+          );
           if (!preset) return callback({});
           return callback({
             video: preset,
@@ -158,6 +163,7 @@ export function installScreenShare(
         });
       } catch (error) {
         console.error("Screen share failed", error);
+        gameLog(`Screen share failed: ${String(error)}`);
         callback({});
       }
     },
