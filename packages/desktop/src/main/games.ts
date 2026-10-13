@@ -155,18 +155,22 @@ function run(
 /**
  * List the running processes.
  *
- * @returns Pids with their names, empty on failure
+ * @returns Pids with their names, or undefined if the list couldn't be read
  */
-async function listProcesses(): Promise<ProcInfo[]> {
+async function listProcesses(): Promise<ProcInfo[] | undefined> {
   if (platform === "win32") {
-    return parseTasklist((await run("tasklist", ["/fo", "csv", "/nh"])) ?? "");
+    const list = parseTasklist(
+      (await run("tasklist", ["/fo", "csv", "/nh"])) ?? "",
+    );
+    // A real system always has processes, so none means the call failed
+    return list.length > 0 ? list : undefined;
   }
 
   let dirs: string[];
   try {
     dirs = (await readdir("/proc")).filter((name) => /^\d+$/.test(name));
   } catch {
-    return [];
+    return undefined;
   }
   const procs = await Promise.all(
     dirs.map(async (dir): Promise<ProcInfo | undefined> => {
@@ -252,12 +256,14 @@ async function queryWindowHandles(
  * per process (see `needsHandleQuery`).
  *
  * @param matches Matched games
+ * @param procs All running processes, for the log
  * @param sources All capturable windows
  * @param gen The scan's generation
  * @returns All windows, with the owner where known
  */
 async function mapWindowsWin32(
   matches: GameMatch[],
+  procs: ProcInfo[],
   sources: Electron.DesktopCapturerSource[],
   gen: number,
 ): Promise<WindowInfo[]> {
@@ -298,6 +304,27 @@ async function mapWindowsWin32(
     // On failure keep what we knew, it is corrected on the next run
     if (result) handlePids = result;
   }
+
+  // Does Chromium list the windows PowerShell found for matched processes?
+  const nameOf = (pid: number) =>
+    procs.find((proc) => proc.pid === pid)?.names[0] ?? "?";
+  logChange(
+    "handles",
+    "Handles vs sources: " +
+      (pids
+        .map((pid) => {
+          const handle = [...handlePids].find(
+            ([, owner]) => owner === pid,
+          )?.[0];
+          const state = handle
+            ? open.has(handle)
+              ? `handle ${handle} found in sources`
+              : `handle ${handle} NOT in sources`
+            : "no handle";
+          return `${pid} ${nameOf(pid)}: ${state}`;
+        })
+        .join("; ") || "none"),
+  );
 
   return sources.map((source) => {
     const handle = windowIdOf(source.id);
@@ -410,14 +437,19 @@ function logLimited(topic: string, text: string) {
 /**
  * Look at the processes and windows once.
  *
- * @returns The detected games, windows included
+ * @returns The detected games, windows included, or undefined when the
+ *   process list could not be read (the last list then stays)
  */
-async function detect(gen: number): Promise<RunningGame[]> {
+async function detect(gen: number): Promise<RunningGame[] | undefined> {
   if (!platform) return [];
   scanCount++;
   entries ??= loadEntries();
   const procs = await listProcesses();
   assertCurrent(gen);
+  if (!procs) {
+    logLimited("procs", "Process list failed, keeping the last result");
+    return undefined;
+  }
   const matches = matchGames(entries, procs, platform);
   logChange(
     "matches",
@@ -453,7 +485,7 @@ async function detect(gen: number): Promise<RunningGame[]> {
       assertCurrent(gen);
       windows =
         platform === "win32"
-          ? await mapWindowsWin32(matches, sources, gen)
+          ? await mapWindowsWin32(matches, procs, sources, gen)
           : await mapWindowsX11(sources, gen);
     } catch (error) {
       if (error instanceof Superseded) throw error;
@@ -462,6 +494,41 @@ async function detect(gen: number): Promise<RunningGame[]> {
     }
   }
   const assigned = assignWindows(matches, procs, windows, platform);
+  // Every window considered for a game: owned by one of its processes, or
+  // matching its fallback titles. Other windows are not logged.
+  logChange(
+    "considered",
+    "Considered: " +
+      matches
+        .map((match) => {
+          const titles = [
+            ...(match.entry.windowTitles?.game ?? []),
+            ...(match.entry.windowTitles?.client ?? []),
+          ].map((title) => title.toLowerCase());
+          const kept = assigned.find((game) => game.id === match.entry.id);
+          const lines = windows
+            .filter(
+              (w) =>
+                (w.pid !== undefined && match.pids.includes(w.pid)) ||
+                (w.pid === undefined && titles.includes(w.title.toLowerCase())),
+            )
+            .map((w) => {
+              const owner =
+                w.pid === undefined
+                  ? "no owner"
+                  : `${procs.find((proc) => proc.pid === w.pid)?.names[0] ?? "?"} pid ${w.pid}`;
+              const hit = kept?.windows.find((k) => k.sourceId === w.sourceId);
+              const verdict = hit
+                ? `${hit.role} by ${hit.via}`
+                : w.pid === undefined
+                  ? "dropped: title matches but that role already has a window"
+                  : "dropped: duplicate";
+              return `${w.sourceId} "${w.title}" (${owner}) -> ${verdict}`;
+            });
+          return `${match.entry.id} [${lines.join(", ")}]`;
+        })
+        .join("; "),
+  );
   logChange(
     "windows",
     "Windows: " +
@@ -511,7 +578,7 @@ function scan() {
       if (took > 2_000)
         logLimited("slow", `Slow scan: over ${Math.floor(took / 1000)} s`);
       // Detection may have been switched off while we were scanning
-      if (enabled && !sameRunningGames(games, latest)) {
+      if (games && enabled && !sameRunningGames(games, latest)) {
         latest = games;
         publish(games);
       }

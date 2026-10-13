@@ -463,15 +463,26 @@ function registerIpc() {
     return next;
   });
   handleApp(IPC.gamesGet, () => getRunningGames());
-  handleApp(IPC.screenSourceSet, (sourceId: unknown) =>
+  // Not through handleApp: it needs the sender to grant user activation
+  ipcMain.handle(IPC.screenSourceSet, async (event, sourceId: unknown) => {
+    if (!fromApp(event)) throw new Error("Untrusted sender");
     // Only windows of detected games, never a screen or any other window
-    {
-      const allowed = typeof sourceId === "string" && isGameWindow(sourceId);
-      if (typeof sourceId === "string")
-        gameLog(`Preselect requested ${sourceId}: allowed ${allowed}`);
-      setNextScreenSource(allowed ? sourceId : null);
-    },
-  );
+    const allowed = typeof sourceId === "string" && isGameWindow(sourceId);
+    if (typeof sourceId === "string")
+      gameLog(`Preselect requested ${sourceId}: allowed ${allowed}`);
+    setNextScreenSource(allowed ? sourceId : null);
+    if (allowed) {
+      // getDisplayMedia() needs transient activation, and an automatic
+      // follow swap has no click. Running a no-op script as a user gesture
+      // in the app's main frame grants it, only for an approved game window.
+      try {
+        await event.sender.executeJavaScript("void 0", true);
+        gameLog(`Activation granted for ${sourceId}`);
+      } catch (error) {
+        gameLog(`Activation failed for ${sourceId}: ${String(error)}`);
+      }
+    }
+  });
   handleApp(IPC.updaterGetState, () => getUpdaterState());
   handleApp(IPC.updaterCheck, () => checkForUpdates());
   handleApp(IPC.updaterDownload, () => downloadUpdate());
