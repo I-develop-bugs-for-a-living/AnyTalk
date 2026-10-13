@@ -19,6 +19,12 @@ export type GameEntry = {
    * Teamfight Tactics started from the League client.
    */
   gameNames?: Record<string, string>;
+  /**
+   * Fallback when a window can't be matched to its process: exact,
+   * case-insensitive window titles per role. Only used for roles that have
+   * no window yet, and only while the entry is running.
+   */
+  windowTitles?: { game?: string[]; client?: string[] };
 };
 
 /** Shorthand for an entry that only has Windows (and Proton) executables. */
@@ -47,6 +53,10 @@ export const GAME_LIST: GameEntry[] = [
       ],
     },
     clients: ["LeagueClientUx.exe"],
+    windowTitles: {
+      game: ["League of Legends (TM) Client"],
+      client: ["League of Legends"],
+    },
     gameNames: {
       "TFTClient-Win64-Shipping.exe": "Teamfight Tactics",
       "TFTClient.exe": "Teamfight Tactics",

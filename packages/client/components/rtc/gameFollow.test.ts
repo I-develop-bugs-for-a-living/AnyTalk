@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { bestWindow, followDecision, graceWindow } from "./gameFollow";
+import {
+  bestWindow,
+  followDecision,
+  graceWindow,
+  isStalled,
+} from "./gameFollow";
 
 const win = (sourceId: string, role: "game" | "client" = "game") => ({
   sourceId,
@@ -65,5 +70,49 @@ describe("graceWindow", () => {
   });
   it("reports a game that stopped", () => {
     expect(graceWindow([], "a", "1")).toEqual({ gone: true });
+  });
+});
+
+describe("isStalled", () => {
+  it("is not stalled without readings", () => {
+    expect(isStalled([])).toBe(false);
+  });
+  it("is not stalled while frames grow", () => {
+    expect(
+      isStalled([
+        { at: 0, frames: 1 },
+        { at: 2000, frames: 5 },
+        { at: 4000, frames: 9 },
+        { at: 6000, frames: 14 },
+      ]),
+    ).toBe(false);
+  });
+  it("is stalled when the counter stood still long enough", () => {
+    expect(
+      isStalled([
+        { at: 0, frames: 9 },
+        { at: 2000, frames: 9 },
+        { at: 4000, frames: 9 },
+        { at: 6000, frames: 9 },
+      ]),
+    ).toBe(true);
+  });
+  it("waits for the full time", () => {
+    expect(
+      isStalled([
+        { at: 0, frames: 5 },
+        { at: 2000, frames: 9 },
+        { at: 4000, frames: 9 },
+      ]),
+    ).toBe(false);
+  });
+  it("recovers when frames flow again", () => {
+    expect(
+      isStalled([
+        { at: 0, frames: 9 },
+        { at: 6000, frames: 9 },
+        { at: 8000, frames: 12 },
+      ]),
+    ).toBe(false);
   });
 });

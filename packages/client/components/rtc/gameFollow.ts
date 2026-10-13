@@ -58,3 +58,35 @@ export function graceWindow(
   const next = game.windows.find((w) => w.sourceId !== endedSourceId);
   return { sourceId: next?.sourceId, gone: false };
 }
+
+/** How often the stream's frame counter is read while following a game */
+export const STALL_POLL_MS = 2000;
+
+/** How long the frame counter may stand still before the stream is stalled */
+export const STALL_MS = 5000;
+
+/** A reading of the number of frames the stream sent */
+export type FrameSample = { at: number; frames: number };
+
+/**
+ * Tell whether a stream stopped sending frames, e.g. because the captured
+ * window got hidden without being closed
+ * @param samples Readings of the frame counter, oldest first
+ * @param stallMs How long the counter must have stood still
+ * @returns Whether the newest value was already there for at least `stallMs`
+ */
+export function isStalled(
+  samples: FrameSample[],
+  stallMs: number = STALL_MS,
+): boolean {
+  const newest = samples.at(-1);
+  if (!newest) return false;
+
+  // walk back to where the counter reached its current value
+  let since = newest.at;
+  for (let i = samples.length - 2; i >= 0; i--) {
+    if (samples[i].frames !== newest.frames) break;
+    since = samples[i].at;
+  }
+  return newest.at - since >= stallMs;
+}

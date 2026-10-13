@@ -52,29 +52,62 @@ export function subscribeRunningGames(
   return window.native.onRunningGamesChanged!(cb);
 }
 
+/** How often the list is read again, in case an update was missed */
+const REFRESH_MS = 30_000;
+
 /**
  * Games running on this computer, kept up to date while the calling component
  * lives. Empty outside the desktop app and while detection is off.
+ * @param refreshOn Read the list again whenever this changes (e.g. when a
+ * followed game is released), so a missed update can't leave it stale
  */
-export function createRunningGames(): Accessor<RunningGame[]> {
+export function createRunningGames(
+  refreshOn?: Accessor<unknown>,
+): Accessor<RunningGame[]> {
   const [games, setGames] = createSignal<RunningGame[]>([]);
 
+  /** Keep the list, logging when it actually changed */
+  let lastKey = "";
+  const update = (list: RunningGame[]) => {
+    const key = JSON.stringify(
+      list.map((g) => [g.id, g.windows.map((w) => w.sourceId)]),
+    );
+    if (key !== lastKey) {
+      lastKey = key;
+      console.debug(
+        "[games]",
+        list.map((g) => `${g.name} (${g.windows.length} windows)`),
+      );
+    }
+    setGames(list);
+  };
+
   createEffect(() => {
+    refreshOn?.();
     if (!gameDetectionAvailable()) {
-      setGames([]);
+      update([]);
       return;
     }
 
     let active = true;
     // a slow first read must not overwrite a newer update
     let updated = false;
-    fetchRunningGames().then((list) => active && !updated && setGames(list));
+    const read = () =>
+      fetchRunningGames().then((list) => {
+        if (active && !updated) update(list);
+      });
+    read();
     const stop = subscribeRunningGames((list) => {
       updated = true;
-      if (active) setGames(list);
+      if (active) update(list);
     });
+    const timer = setInterval(() => {
+      updated = false;
+      read();
+    }, REFRESH_MS);
     onCleanup(() => {
       active = false;
+      clearInterval(timer);
       stop();
     });
   });

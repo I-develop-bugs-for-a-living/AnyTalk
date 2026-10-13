@@ -24,6 +24,7 @@ import {
 import { getAutostart, setAutostart } from "./autostart";
 import { getConfig, updateConfig } from "./config";
 import { ensureLinuxDesktopFile } from "./desktopFile";
+import { gameLog } from "./gameLog";
 import {
   getRunningGames,
   installGameDetection,
@@ -464,9 +465,12 @@ function registerIpc() {
   handleApp(IPC.gamesGet, () => getRunningGames());
   handleApp(IPC.screenSourceSet, (sourceId: unknown) =>
     // Only windows of detected games, never a screen or any other window
-    setNextScreenSource(
-      typeof sourceId === "string" && isGameWindow(sourceId) ? sourceId : null,
-    ),
+    {
+      const allowed = typeof sourceId === "string" && isGameWindow(sourceId);
+      if (typeof sourceId === "string")
+        gameLog(`Preselect requested ${sourceId}: allowed ${allowed}`);
+      setNextScreenSource(allowed ? sourceId : null);
+    },
   );
   handleApp(IPC.updaterGetState, () => getUpdaterState());
   handleApp(IPC.updaterCheck, () => checkForUpdates());

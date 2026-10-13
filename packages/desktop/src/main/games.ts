@@ -6,17 +6,22 @@ import { join } from "node:path";
 
 import { type GameEntry, GAME_LIST } from "../shared/games";
 import { type RunningGame, IPC } from "../shared/ipc";
+import { gameLog } from "./gameLog";
 import {
   type GameMatch,
+  type HandleTry,
   type ProcInfo,
   type WindowInfo,
-  buildRunningGames,
+  assignWindows,
   linuxNames,
   matchGames,
+  needsHandleQuery,
+  noteHandleQuery,
   parseTasklist,
   parseXpropPid,
   sameRunningGames,
   windowIdOf,
+  withTimeout,
 } from "./gameMatch";
 import { isWayland } from "./platform";
 import { isServerUrl } from "./url";
@@ -25,8 +30,8 @@ import { isServerUrl } from "./url";
 const IDLE_INTERVAL_MS = 5_000;
 /** Poll interval while a game runs, kept slow to leave the CPU to the game. */
 const ACTIVE_INTERVAL_MS = 3_000;
-/** Least time between two PowerShell runs when only a window is missing. */
-const POWERSHELL_RETRY_MS = 4_000;
+/** A scan taking longer than this is abandoned. */
+const SCAN_TIMEOUT_MS = 25_000;
 
 /** The platforms detection works on, anything else does nothing. */
 const platform: "win32" | "linux" | undefined =
@@ -75,6 +80,12 @@ function isGameEntry(value: unknown): value is GameEntry {
     strings((exes as Record<string, unknown>).win32) &&
     strings((exes as Record<string, unknown>).linux) &&
     strings(entry.clients) &&
+    (entry.windowTitles === undefined ||
+      (typeof entry.windowTitles === "object" &&
+        entry.windowTitles !== null &&
+        !Array.isArray(entry.windowTitles) &&
+        strings((entry.windowTitles as Record<string, unknown>).game) &&
+        strings((entry.windowTitles as Record<string, unknown>).client))) &&
     (entry.gameNames === undefined ||
       (typeof entry.gameNames === "object" &&
         entry.gameNames !== null &&
@@ -174,10 +185,30 @@ async function listProcesses(): Promise<ProcInfo[]> {
   return procs.filter((proc): proc is ProcInfo => !!proc);
 }
 
+/** Number of the newest scan, older scans must not touch shared state. */
+let generation = 0;
+
+/** Thrown inside a scan that a newer scan has replaced. */
+class Superseded extends Error {}
+
+/**
+ * Stop a scan that was abandoned (timed out or replaced) before it writes
+ * any shared state or log.
+ *
+ * @param gen The scan's own generation
+ */
+function assertCurrent(gen: number) {
+  if (gen !== generation) throw new Superseded();
+}
+
 /** Window handle to pid, kept between scans so PowerShell runs rarely. */
 let handlePids = new Map<string, number>();
+/** Handles already re-queried once after they left the window list. */
+const vanishedSeen = new Set<string>();
+/** The matched pids the handles were asked for last. */
 let handlePidsKey = "";
-let lastPowerShell = 0;
+/** Per pid retry bookkeeping for processes without a window handle. */
+const handleTries = new Map<number, HandleTry>();
 
 /**
  * Find which window handles belong to the given processes with
@@ -186,11 +217,11 @@ let lastPowerShell = 0;
  * window of each process is reported.
  *
  * @param pids Processes of matched games
- * @returns Handle (as a string) to pid
+ * @returns Handle (as a string) to pid, or undefined if PowerShell failed
  */
 async function queryWindowHandles(
   pids: number[],
-): Promise<Map<string, number>> {
+): Promise<Map<string, number> | undefined> {
   const script =
     `ConvertTo-Json -Compress -InputObject @(Get-Process -Id ${pids.join(",")} ` +
     "-ErrorAction SilentlyContinue | Where-Object { $_.MainWindowHandle -ne 0 } " +
@@ -198,59 +229,83 @@ async function queryWindowHandles(
   const output = await run(
     "powershell.exe",
     ["-NoProfile", "-NonInteractive", "-Command", script],
-    4_000,
+    8_000,
   );
+  if (output === undefined) return undefined;
   const result = new Map<string, number>();
   try {
-    const parsed: unknown = JSON.parse(output?.trim() || "[]");
+    const parsed: unknown = JSON.parse(output.trim() || "[]");
     for (const item of Array.isArray(parsed) ? parsed : [parsed]) {
       if (typeof item?.Id === "number" && typeof item?.H === "string")
         result.set(item.H, item.Id);
     }
   } catch {
-    // Unusable output, windows stay unmapped this round
+    return undefined;
   }
   return result;
 }
 
 /**
- * Map windows to processes on Windows. PowerShell only runs when the
- * matched processes changed, a known window vanished, or a game still has
- * no window (at most every few seconds).
+ * Map windows to processes on Windows. PowerShell runs when the matched
+ * processes changed, a known window vanished (e.g. the client was
+ * recreated), or any matched process still has no window handle, throttled
+ * per process (see `needsHandleQuery`).
  *
  * @param matches Matched games
  * @param sources All capturable windows
- * @returns Windows with owners
+ * @param gen The scan's generation
+ * @returns All windows, with the owner where known
  */
 async function mapWindowsWin32(
   matches: GameMatch[],
   sources: Electron.DesktopCapturerSource[],
+  gen: number,
 ): Promise<WindowInfo[]> {
   const pids = matches.flatMap((match) => match.pids).sort((a, b) => a - b);
   const key = pids.join(",");
   const open = new Set(sources.map((source) => windowIdOf(source.id)));
-  const now = Date.now();
 
   const changed = key !== handlePidsKey;
-  const vanished = [...handlePids.keys()].some((handle) => !open.has(handle));
-  const missing =
-    now - lastPowerShell > POWERSHELL_RETRY_MS &&
-    matches.some(
-      (match) =>
-        ![...handlePids.values()].some((pid) => match.pids.includes(pid)),
-    );
-  if (changed || vanished || missing) {
-    handlePids = await queryWindowHandles(pids);
+  // A handle that is mapped but not listed is only re-queried once: a
+  // client hidden to the tray keeps its handle without being capturable
+  const missingHandles = [...handlePids.keys()].filter(
+    (handle) => !open.has(handle),
+  );
+  for (const handle of [...vanishedSeen]) {
+    if (open.has(handle) || !handlePids.has(handle))
+      vanishedSeen.delete(handle);
+  }
+  const vanished = missingHandles.some((handle) => !vanishedSeen.has(handle));
+  const retry = needsHandleQuery(
+    pids,
+    new Set(handlePids.values()),
+    handleTries,
+    Date.now(),
+  );
+  if (changed || vanished || retry) {
+    const result = await queryWindowHandles(pids);
+    assertCurrent(gen);
+    for (const handle of missingHandles) vanishedSeen.add(handle);
+    noteHandleQuery(handleTries, Date.now());
     handlePidsKey = key;
-    lastPowerShell = Date.now();
+    logChange(
+      "powershell",
+      `PowerShell asked pids [${key}]: ` +
+        (result
+          ? `handles ${JSON.stringify([...result])}`
+          : "failed or timed out"),
+    );
+    // On failure keep what we knew, it is corrected on the next run
+    if (result) handlePids = result;
   }
 
-  return sources.flatMap((source) => {
+  return sources.map((source) => {
     const handle = windowIdOf(source.id);
-    const pid = handle ? handlePids.get(handle) : undefined;
-    return pid === undefined
-      ? []
-      : [{ sourceId: source.id, title: source.name, pid }];
+    return {
+      sourceId: source.id,
+      title: source.name,
+      pid: handle ? handlePids.get(handle) : undefined,
+    };
   });
 }
 
@@ -270,15 +325,19 @@ let xpropAvailable: Promise<boolean> | undefined;
  * if xprop isn't installed.
  *
  * @param sources All capturable windows
- * @returns Windows with owners
+ * @param gen The scan's generation
+ * @returns All windows, with the owner where known
  */
 async function mapWindowsX11(
   sources: Electron.DesktopCapturerSource[],
+  gen: number,
 ): Promise<WindowInfo[]> {
   xpropAvailable ??= run("xprop", ["-version"]).then(
     (out) => out !== undefined,
   );
-  if (!(await xpropAvailable)) return [];
+  const available = await xpropAvailable;
+  assertCurrent(gen);
+  if (!available) return [];
 
   const ids = sources.map((source) => windowIdOf(source.id));
   // Forget windows that closed, so a reused id is looked up again
@@ -296,35 +355,85 @@ async function mapWindowsX11(
       )
         return;
       const output = await run("xprop", ["-id", id, "_NET_WM_PID"]);
+      if (gen !== generation) return;
       xidPids.set(id, {
         pid: output ? (parseXpropPid(output) ?? null) : null,
         scan: scanCount,
       });
     }),
   );
+  assertCurrent(gen);
 
-  return sources.flatMap((source, index) => {
+  return sources.map((source, index) => {
     const pid = xidPids.get(ids[index] ?? "")?.pid;
-    return typeof pid === "number"
-      ? [{ sourceId: source.id, title: source.name, pid }]
-      : [];
+    return {
+      sourceId: source.id,
+      title: source.name,
+      pid: typeof pid === "number" ? pid : undefined,
+    };
   });
+}
+
+/** Last logged text per topic, so only changes reach the log. */
+const lastLogged = new Map<string, string>();
+
+/**
+ * Write a line to the game log unless this topic already logged the same.
+ *
+ * @param topic What the line is about
+ * @param text The line
+ */
+function logChange(topic: string, text: string) {
+  if (lastLogged.get(topic) === text) return;
+  lastLogged.set(topic, text);
+  gameLog(text);
+}
+
+/** When and what each limited topic last logged. */
+const limitedLog = new Map<string, { text: string; at: number }>();
+
+/**
+ * Log a repeating problem: again only when the message changes, or after a
+ * minute.
+ *
+ * @param topic What the line is about
+ * @param text The line
+ */
+function logLimited(topic: string, text: string) {
+  const last = limitedLog.get(topic);
+  const now = Date.now();
+  if (last && last.text === text && now - last.at < 60_000) return;
+  limitedLog.set(topic, { text, at: now });
+  gameLog(text);
 }
 
 /**
  * Look at the processes and windows once.
  *
- * @returns The detected games and whether any game runs
+ * @returns The detected games, windows included
  */
-async function detect(): Promise<RunningGame[]> {
+async function detect(gen: number): Promise<RunningGame[]> {
   if (!platform) return [];
   scanCount++;
   entries ??= loadEntries();
   const procs = await listProcesses();
+  assertCurrent(gen);
   const matches = matchGames(entries, procs, platform);
+  logChange(
+    "matches",
+    "Running: " +
+      (matches
+        .map(
+          (match) =>
+            `${match.entry.id} pids [${match.pids}] names [${match.names}]`,
+        )
+        .join("; ") || "none"),
+  );
   if (matches.length === 0) {
     handlePids.clear();
     handlePidsKey = "";
+    handleTries.clear();
+    vanishedSeen.clear();
     xidPids.clear();
     return [];
   }
@@ -333,19 +442,48 @@ async function detect(): Promise<RunningGame[]> {
   // On Wayland getSources() opens the portal picker, so never call it
   if (!isWayland) {
     try {
-      const sources = await desktopCapturer.getSources({
-        types: ["window"],
-        thumbnailSize: { width: 0, height: 0 },
-      });
+      const sources = await withTimeout(
+        desktopCapturer.getSources({
+          types: ["window"],
+          thumbnailSize: { width: 0, height: 0 },
+        }),
+        10_000,
+        "getSources",
+      );
+      assertCurrent(gen);
       windows =
         platform === "win32"
-          ? await mapWindowsWin32(matches, sources)
-          : await mapWindowsX11(sources);
+          ? await mapWindowsWin32(matches, sources, gen)
+          : await mapWindowsX11(sources, gen);
     } catch (error) {
+      if (error instanceof Superseded) throw error;
       console.error("Game window lookup failed", error);
+      logLimited("lookup", `Window lookup failed: ${String(error)}`);
     }
   }
-  return buildRunningGames(matches, procs, windows, platform);
+  const assigned = assignWindows(matches, procs, windows, platform);
+  logChange(
+    "windows",
+    "Windows: " +
+      assigned
+        .map(
+          (game) =>
+            `${game.id} [` +
+            game.windows
+              .map((w) => `${w.sourceId} "${w.title}" ${w.role} by ${w.via}`)
+              .join(", ") +
+            "]",
+        )
+        .join("; "),
+  );
+  return assigned.map((game) => ({
+    ...game,
+    windows: game.windows.map(({ sourceId, title, role }) => ({
+      sourceId,
+      title,
+      role,
+    })),
+  }));
 }
 
 /**
@@ -363,16 +501,26 @@ function publish(games: RunningGame[]) {
 /** Scan, publish if something changed, and plan the next scan. */
 function scan() {
   if (scanning || !enabled) return;
+  const gen = ++generation;
   scanning = (async () => {
     try {
-      const games = await detect();
+      const started = Date.now();
+      // A scan that hangs is abandoned after 25 s, or polling would stop
+      const games = await withTimeout(detect(gen), SCAN_TIMEOUT_MS, "scan");
+      const took = Date.now() - started;
+      if (took > 2_000)
+        logLimited("slow", `Slow scan: over ${Math.floor(took / 1000)} s`);
       // Detection may have been switched off while we were scanning
       if (enabled && !sameRunningGames(games, latest)) {
         latest = games;
         publish(games);
       }
     } catch (error) {
+      // Make the abandoned scan stop before it writes anything
+      generation++;
+      if (error instanceof Superseded) return;
       console.error("Game detection failed", error);
+      logLimited("scan", `Scan failed: ${String(error)}`);
     }
   })().finally(() => {
     scanning = undefined;
