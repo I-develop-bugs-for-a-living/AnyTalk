@@ -90,6 +90,12 @@ import {
   setScreenCaptureKeepFocus,
   setScreenCaptureLimit,
 } from "./screenCapture";
+import {
+  FOLLOW_ATTRIBUTE,
+  followCleared,
+  isFollowing,
+  republishWaitMs,
+} from "./streamFollow";
 import { VoiceProcessor } from "./VoiceProcessor";
 
 type State =
@@ -215,6 +221,9 @@ type CaptureResult = "done" | "cancelled" | "failed";
 
 /** How long an unpublished stream may stay away before it counts as ended */
 const STREAM_REPUBLISH_WAIT_MS = 4000;
+
+/** How long setting the follow attribute may delay what waits for it */
+const FOLLOW_ATTRIBUTE_TIMEOUT_MS = 1500;
 
 /** How long a capture or a track swap may take before it counts as hung */
 const SWAP_TIMEOUT_MS = 10_000;
@@ -353,6 +362,17 @@ class Voice {
   /** The screen share video track that is published now */
   #currentVideo?: LocalVideoTrack;
 
+  /** The clearing of the follow attribute that is under way, if any */
+  #followClear?: Promise<void>;
+
+  /**
+   * Set once the server turned out not to let us set attributes (plain
+   * Stoat), the follow attribute is then left alone for this call. Any
+   * rejection counts, even a transient timeout: that disables follow sharing
+   * for the rest of the call on purpose, so a stop is never delayed again.
+   */
+  #followUnsupported = false;
+
   /**
    * People whose stream was unpublished a moment ago: a window swap
    * republishes it, which must not look like the stream ended
@@ -364,6 +384,8 @@ class Voice {
       sound: boolean;
       since: number;
       focused: boolean;
+      /** Ends the stream now instead of when the timer fires */
+      end: () => void;
     }
   >();
 
@@ -409,6 +431,12 @@ class Voice {
    * not subscribed to, so they cost no bandwidth until someone opens them
    */
   watching = new ReactiveSet<string>();
+
+  /**
+   * People whose stream was unpublished a moment ago and is waited for, see
+   * #pendingEnds (this one is reactive, for showing a placeholder)
+   */
+  endingStreams = new ReactiveSet<string>();
 
   /**
    * Streams the other participants told us they watch, by viewer (see
@@ -804,6 +832,20 @@ class Voice {
       if (unpub.source === Track.Source.ScreenShare) {
         this.#deferStreamEnd(participant.identity, known);
       }
+    });
+
+    // The streamer says follow mode is over: a pending end is final
+    room.addListener("participantAttributesChanged", (changed, participant) => {
+      const pending = this.#pendingEnds.get(participant.identity);
+      if (!pending || !followCleared(changed, participant.attributes)) return;
+      console.debug(
+        "[rtc] follow attribute cleared for",
+        participant.identity,
+        ", ending the stream now after",
+        Date.now() - pending.since,
+        "ms",
+      );
+      pending.end();
     });
 
     // Gather latency, a slow or unreachable node must not block the join
@@ -1300,32 +1342,45 @@ class Voice {
     const focused = previous
       ? previous.focused
       : this.#isFocusedStream(identity);
+    // a streamer in follow mode swaps sources slowly, wait longer for it
+    const waitMs = republishWaitMs(
+      this.room()?.getParticipantByIdentity(identity)?.attributes,
+      STREAM_REPUBLISH_WAIT_MS,
+    );
+    const end = () => {
+      const pending = this.#pendingEnds.get(identity);
+      if (!pending) return;
+      clearTimeout(pending.timer);
+      this.#pendingEnds.delete(identity);
+      this.endingStreams.delete(identity);
+      console.debug(
+        "[rtc] stream end fired for",
+        identity,
+        "unpublished for",
+        Date.now() - since,
+        "ms, watched:",
+        this.watching.has(identity),
+        waitMs === STREAM_REPUBLISH_WAIT_MS ? "" : "(follow wait used)",
+      );
+      if (this.watching.has(identity)) {
+        const now = Date.now();
+        // forget entries that are too old to be used
+        for (const [id, entry] of this.#endedWatches) {
+          if (!shouldRewatch(entry.at, now)) this.#endedWatches.delete(id);
+        }
+        this.#endedWatches.set(identity, { at: now, focused });
+      }
+      if (withSound) this.sound.playSound("streamEnd");
+      this.#unwatch(identity);
+      this.settleAfterStreamGone();
+    };
+    this.endingStreams.add(identity);
     this.#pendingEnds.set(identity, {
       sound: withSound,
       since,
       focused,
-      timer: setTimeout(() => {
-        this.#pendingEnds.delete(identity);
-        console.debug(
-          "[rtc] stream end fired for",
-          identity,
-          "unpublished for",
-          Date.now() - since,
-          "ms, watched:",
-          this.watching.has(identity),
-        );
-        if (this.watching.has(identity)) {
-          const now = Date.now();
-          // forget entries that are too old to be used
-          for (const [id, entry] of this.#endedWatches) {
-            if (!shouldRewatch(entry.at, now)) this.#endedWatches.delete(id);
-          }
-          this.#endedWatches.set(identity, { at: now, focused });
-        }
-        if (withSound) this.sound.playSound("streamEnd");
-        this.#unwatch(identity);
-        this.settleAfterStreamGone();
-      }, STREAM_REPUBLISH_WAIT_MS),
+      end,
+      timer: setTimeout(end, waitMs),
     });
   }
 
@@ -1357,6 +1412,14 @@ class Voice {
   }
 
   /**
+   * Whether the focused stream is one that was unpublished a moment ago and
+   * is waited for, its tile is missing meanwhile
+   */
+  focusedStreamEnding() {
+    return [...this.endingStreams].some((id) => this.#isFocusedStream(id));
+  }
+
+  /**
    * Whether the participant's screen share is the focused tile
    * @param identity Who streams
    */
@@ -1374,6 +1437,9 @@ class Voice {
     if (!pending) return false;
     clearTimeout(pending.timer);
     this.#pendingEnds.delete(identity);
+    this.endingStreams.delete(identity);
+    // an end that was held back by this one no longer has to wait
+    if (!this.#pendingEnds.size) this.settleAfterStreamGone();
     return true;
   }
 
@@ -1383,12 +1449,15 @@ class Voice {
    * the call; nothing is told to the user
    */
   #teardown(forRejoin: boolean) {
-    this.#endFollow();
+    // the room goes away, nobody needs to be told
+    this.#endFollow(false);
     this.#shareToken = undefined;
     this.#currentVideo = undefined;
     this.#pendingEnds.forEach((p) => clearTimeout(p.timer));
     this.#pendingEnds.clear();
+    this.endingStreams.clear();
     this.#endedWatches.clear();
+    this.#followUnsupported = false;
     this.#cancelCapture();
     this.#cancelMicRecovery();
     this.#stopWatchingMic();
@@ -1719,7 +1788,8 @@ class Voice {
 
   async #stopScreenshare(room: Room) {
     const audio = this.#streamAudio;
-    this.#endFollow();
+    // viewers must know it is over before the track goes away
+    await this.#endFollow();
     this.#shareToken = undefined;
     this.#currentVideo = undefined;
 
@@ -2043,7 +2113,7 @@ class Voice {
    * whoever watches it keeps watching. Picking it by hand ends follow mode.
    */
   async switchScreenshareSource() {
-    this.#endFollow();
+    await this.#endFollow();
     await this.#swap(() => this.#replaceSource());
   }
 
@@ -2120,7 +2190,8 @@ class Voice {
 
   /** Start following a game with the stream showing the given window */
   #beginFollow(gameId: string, sourceId: string) {
-    this.#endFollow();
+    // the attribute is set right after, no need to clear it in between
+    this.#endFollow(false);
 
     // a slow first read must not overwrite a newer update
     let updated = false;
@@ -2136,6 +2207,7 @@ class Voice {
     this.#follow = follow;
     this.#followGames = [];
     this.#setFollowedGameId(gameId);
+    this.#shareFollow(true);
     console.debug("[follow] begin", gameId, sourceId);
     this.#watchStall(follow);
     fetchRunningGames().then((games) => {
@@ -2162,8 +2234,50 @@ class Voice {
     this.#syncFollow();
   }
 
-  /** Stop following a game, the stream itself is left alone */
-  #endFollow() {
+  /**
+   * Tell the viewers that follow mode is on or off, so they wait for the
+   * next source instead of counting the stream as ended. Never rejects and
+   * gives up after a moment, stopping a stream must not hang on it.
+   * @param on Whether follow mode is on
+   */
+  async #shareFollow(on: boolean) {
+    const room = this.room();
+    if (!room || this.#followUnsupported) return;
+    // plain Stoat gives no right to set attributes: don't even try
+    if (room.localParticipant.permissions?.canUpdateMetadata === false) {
+      this.#followUnsupported = true;
+      console.debug("[rtc] not allowed to set attributes, follow not shared");
+      return;
+    }
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    try {
+      await Promise.race([
+        room.localParticipant.setAttributes({
+          [FOLLOW_ATTRIBUTE]: on ? "1" : "",
+        }),
+        new Promise<void>((resolve) => {
+          timer = setTimeout(resolve, FOLLOW_ATTRIBUTE_TIMEOUT_MS);
+        }),
+      ]);
+    } catch (err) {
+      // the server rejected it: stop asking for the rest of the call
+      this.#followUnsupported = true;
+      console.debug(
+        "[rtc] could not share follow state, not trying again",
+        err,
+      );
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  /**
+   * Stop following a game, the stream itself is left alone
+   * @param tell Tell the viewers, false when the room goes away anyway
+   * @returns Resolves once the viewers were told (or it took too long)
+   */
+  #endFollow(tell = true): Promise<void> {
+    const wasFollowing = !!this.#follow;
     if (this.#follow) console.debug("[follow] end", this.#follow.gameId);
     clearInterval(this.#stallTimer);
     this.#stallTimer = undefined;
@@ -2172,6 +2286,22 @@ class Voice {
     this.#follow = undefined;
     this.#followGames = [];
     this.#setFollowedGameId();
+    if (!tell) {
+      this.#followClear = undefined;
+      return Promise.resolve();
+    }
+    if (this.#followUnsupported) return Promise.resolve();
+    // a clear under way is waited for too; the attribute still being set
+    // means an earlier clear failed, so it is tried again
+    const stillSet = isFollowing(this.room()?.localParticipant.attributes);
+    if (wasFollowing || stillSet) {
+      const clear = this.#shareFollow(false).finally(() => {
+        if (this.#followClear === clear) this.#followClear = undefined;
+      });
+      this.#followClear = clear;
+      return clear;
+    }
+    return this.#followClear ?? Promise.resolve();
   }
 
   /**
@@ -2404,7 +2534,7 @@ class Voice {
           .find((g) => g.id === follow.gameId)
           ?.windows.map((w) => `${w.sourceId}/${w.role}`),
       );
-      this.#endFollow();
+      await this.#endFollow();
       if (this.room() === room && this.screenshare()) {
         await this.toggleScreenshare();
       }
