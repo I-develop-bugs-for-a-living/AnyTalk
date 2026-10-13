@@ -1,5 +1,5 @@
 import { app, desktopCapturer } from "electron";
-import { execFile } from "node:child_process";
+import { type ChildProcess, execFile, spawn } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
@@ -18,6 +18,7 @@ import {
   needsHandleQuery,
   noteHandleQuery,
   parseTasklist,
+  parseXpropActiveWindow,
   parseXpropPid,
   sameRunningGames,
   windowIdOf,
@@ -660,4 +661,164 @@ export function installGameDetection(
 ) {
   getTarget = target;
   setGameDetection(initiallyEnabled);
+}
+
+/**
+ * Reads the foreground window handle: compiled once (a failure prints
+ * `error`), then it answers one line per request line.
+ */
+const FOREGROUND_SCRIPT =
+  "try { Add-Type -Name W -Namespace F -MemberDefinition " +
+  "'[DllImport(\"user32.dll\")] public static extern System.IntPtr GetForegroundWindow();' " +
+  "-ErrorAction Stop; [Console]::Out.WriteLine('ready') } " +
+  "catch { [Console]::Out.WriteLine('error'); exit 1 }; " +
+  "while ($null -ne [Console]::In.ReadLine()) { " +
+  "[Console]::Out.WriteLine([string][int64][F.W]::GetForegroundWindow()) }";
+
+/** How long the helper may take to compile and report `ready`. */
+const FOREGROUND_READY_MS = 10_000;
+/** How long one answer may take. */
+const FOREGROUND_ANSWER_MS = 2_000;
+/** After a failure the helper is not started again for this long. */
+const FOREGROUND_RETRY_MS = 5 * 60_000;
+
+/** One PowerShell helper that answers foreground lookups. */
+type ForegroundHelper = {
+  child: ChildProcess;
+  /** Resolves true once compiled, false if it failed */
+  ready: Promise<boolean>;
+  /** Waiting requests, answered in order by the lines the helper prints */
+  pending: ((id: string | undefined) => void)[];
+};
+
+/** The helper in use, started on first use. */
+let foregroundHelper: ForegroundHelper | undefined;
+/** Until when a failed helper is not retried. */
+let foregroundFailedUntil = 0;
+
+/**
+ * Start the persistent PowerShell helper. Compiling `Add-Type` on every
+ * press would take about a second, so it is compiled once and then asked
+ * one line at a time.
+ *
+ * @returns The helper
+ */
+function startForegroundHelper(): ForegroundHelper {
+  const child = spawn(
+    "powershell.exe",
+    ["-NoProfile", "-NonInteractive", "-Command", FOREGROUND_SCRIPT],
+    { windowsHide: true, stdio: ["pipe", "pipe", "ignore"] },
+  );
+  let markReady: (ok: boolean) => void = () => {};
+  const helper: ForegroundHelper = {
+    child,
+    ready: new Promise<boolean>((resolve) => (markReady = resolve)),
+    pending: [],
+  };
+  let buffer = "";
+  child.stdout?.on("data", (chunk: Buffer) => {
+    buffer += chunk.toString();
+    const parts = buffer.split(/\r?\n/);
+    buffer = parts.pop() ?? "";
+    for (const raw of parts) {
+      const line = raw.trim();
+      if (line === "ready") markReady(true);
+      else if (line === "error") markReady(false);
+      else {
+        const id = /^\d+$/.test(line) && line !== "0" ? line : undefined;
+        helper.pending.shift()?.(id);
+      }
+    }
+  });
+  // Writing after PowerShell died raises EPIPE, which must not escape
+  child.stdin?.on("error", () => {});
+  const fail = () => {
+    markReady(false);
+    if (foregroundHelper === helper) {
+      foregroundHelper = undefined;
+      foregroundFailedUntil = Date.now() + FOREGROUND_RETRY_MS;
+    }
+    for (const waiting of helper.pending.splice(0)) waiting(undefined);
+  };
+  child.on("exit", fail);
+  child.on("error", fail);
+  return helper;
+}
+
+// The helper must not outlive the app
+app.once("will-quit", () => foregroundHelper?.child.kill());
+
+/**
+ * Ask the helper for the foreground window on Windows. Concurrent calls are
+ * answered in order. A failing helper is not retried for a few minutes.
+ *
+ * @returns The window handle as a decimal string, or undefined
+ */
+async function foregroundWin32(): Promise<string | undefined> {
+  if (!foregroundHelper && Date.now() < foregroundFailedUntil) return undefined;
+  foregroundHelper ??= startForegroundHelper();
+  const helper = foregroundHelper;
+
+  let readyTimer: ReturnType<typeof setTimeout> | undefined;
+  const ok = await Promise.race([
+    helper.ready,
+    new Promise<boolean>((resolve) => {
+      readyTimer = setTimeout(() => resolve(false), FOREGROUND_READY_MS);
+    }),
+  ]);
+  clearTimeout(readyTimer);
+  if (!ok) {
+    // Never became ready: stop it, the exit marks the failure
+    helper.child.kill();
+    return undefined;
+  }
+  if (!helper.child.stdin?.writable) return undefined;
+
+  return new Promise<string | undefined>((resolve) => {
+    const timer = setTimeout(() => resolve(undefined), FOREGROUND_ANSWER_MS);
+    // Stays queued after a timeout, so a late answer isn't given to
+    // the next request
+    helper.pending.push((id) => {
+      clearTimeout(timer);
+      resolve(id);
+    });
+    helper.child.stdin?.write("\n");
+  });
+}
+
+/**
+ * Find the window in front, on demand (never polled).
+ *
+ * @returns The window id in the form of `windowIdOf`, or undefined where
+ *   unsupported (Wayland, other systems) or when the lookup fails
+ */
+async function foregroundWindowId(): Promise<string | undefined> {
+  if (isWayland) return undefined;
+  if (platform === "win32") return foregroundWin32();
+  if (platform === "linux") {
+    const out = await run("xprop", ["-root", "_NET_ACTIVE_WINDOW"], 2_000);
+    return out ? parseXpropActiveWindow(out) : undefined;
+  }
+  return undefined;
+}
+
+/**
+ * The detected game that owns the window in front. A focused launcher
+ * window counts as its game.
+ *
+ * @returns The game id and the focused window's source id, or null when
+ *   none of the game windows is in front
+ */
+export async function getFocusedGame(): Promise<{
+  id: string;
+  sourceId: string;
+} | null> {
+  if (!enabled || latest.length === 0) return null;
+  const id = await foregroundWindowId();
+  if (!id) return null;
+  for (const game of latest) {
+    const hit = game.windows.find((w) => windowIdOf(w.sourceId) === id);
+    if (hit) return { id: game.id, sourceId: hit.sourceId };
+  }
+  return null;
 }

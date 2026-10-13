@@ -1,5 +1,6 @@
 import { createEffect, createSignal, onCleanup } from "solid-js";
 
+import { gameDetectionAvailable } from "@revolt/rtc/runningGames";
 import { useState } from "@revolt/state";
 
 import { sequenceToGlobalAccelerator } from "./accelerator";
@@ -30,7 +31,11 @@ export function GlobalKeybinds() {
     const custom = state.settings.getValue("keybinds:custom") ?? {};
 
     return CUSTOMISABLE_ACTIONS.filter(
-      (action) => custom[action]?.enabled ?? true,
+      (action) =>
+        (custom[action]?.enabled ?? true) &&
+        // the game stream hotkey is hidden in settings without detection
+        (action !== KeybindAction.VOICE_TOGGLE_GAME_STREAM ||
+          gameDetectionAvailable()),
     ).flatMap((action) => {
       const accelerator = sequenceToGlobalAccelerator(
         custom[action]?.keys ?? defaultSequence(action),

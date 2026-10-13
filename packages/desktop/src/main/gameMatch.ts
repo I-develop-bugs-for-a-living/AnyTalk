@@ -377,6 +377,19 @@ export function windowIdOf(sourceId: string): string | undefined {
 }
 
 /**
+ * Read the window id out of `xprop -root _NET_ACTIVE_WINDOW` output.
+ *
+ * @param output e.g. `_NET_ACTIVE_WINDOW(WINDOW): window id # 0x4a00007`
+ * @returns The id in decimal (as in `windowIdOf`), undefined if none is active
+ */
+export function parseXpropActiveWindow(output: string): string | undefined {
+  const match = /#\s*0x([0-9a-f]+)/i.exec(output);
+  if (!match) return undefined;
+  const id = BigInt("0x" + match[1]);
+  return id === 0n ? undefined : id.toString();
+}
+
+/**
  * Read the pid out of `xprop _NET_WM_PID` output.
  *
  * @param output e.g. `_NET_WM_PID(CARDINAL) = 1234`

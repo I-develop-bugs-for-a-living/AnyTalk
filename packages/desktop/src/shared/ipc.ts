@@ -18,6 +18,7 @@ export const IPC = {
   pickerCancel: "picker:cancel",
   gamesGet: "games:get",
   gamesChanged: "games:changed",
+  gamesFocused: "games:focused",
   screenSourceSet: "screen:source-set",
   errorInfo: "error:info",
   errorRetry: "error:retry",

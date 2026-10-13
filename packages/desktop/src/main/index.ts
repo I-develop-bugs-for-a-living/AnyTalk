@@ -26,6 +26,7 @@ import { getConfig, updateConfig } from "./config";
 import { ensureLinuxDesktopFile } from "./desktopFile";
 import { gameLog } from "./gameLog";
 import {
+  getFocusedGame,
   getRunningGames,
   installGameDetection,
   isGameWindow,
@@ -463,6 +464,7 @@ function registerIpc() {
     return next;
   });
   handleApp(IPC.gamesGet, () => getRunningGames());
+  handleApp(IPC.gamesFocused, () => getFocusedGame());
   // Not through handleApp: it needs the sender to grant user activation
   ipcMain.handle(IPC.screenSourceSet, async (event, sourceId: unknown) => {
     if (!fromApp(event)) throw new Error("Untrusted sender");

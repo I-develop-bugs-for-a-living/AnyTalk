@@ -18,6 +18,7 @@ export const DEFAULT_SEQUENCES: Record<KeybindAction, (string | RegExp)[]> = {
   [KeybindAction.CLOSE_SIDEBAR]: ["Escape"],
   [KeybindAction.VOICE_TOGGLE_MUTE]: ["Control", "Shift", "m"],
   [KeybindAction.VOICE_TOGGLE_DEAFEN]: ["Control", "Shift", "d"],
+  [KeybindAction.VOICE_TOGGLE_GAME_STREAM]: ["Control", "Shift", "g"],
 };
 
 /**
@@ -48,6 +49,7 @@ export const DEFAULT_MAC_SEQUENCES: Record<KeybindAction, (string | RegExp)[]> =
     [KeybindAction.CLOSE_SIDEBAR]: ["Escape"],
     [KeybindAction.VOICE_TOGGLE_MUTE]: ["Control", "Shift", "m"],
     [KeybindAction.VOICE_TOGGLE_DEAFEN]: ["Control", "Shift", "d"],
+    [KeybindAction.VOICE_TOGGLE_GAME_STREAM]: ["Control", "Shift", "g"],
   };
 
 /** Modifier keys, in display order */

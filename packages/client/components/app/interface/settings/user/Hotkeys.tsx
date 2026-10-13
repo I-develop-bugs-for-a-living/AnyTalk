@@ -12,6 +12,7 @@ import {
   globalHotkeyStatus,
   sequenceToGlobalAccelerator,
 } from "@revolt/keybinds";
+import { gameDetectionAvailable } from "@revolt/rtc";
 import { useState } from "@revolt/state";
 import { CustomKeybind } from "@revolt/state/stores/Settings";
 import { Button, CategoryButton, Checkbox, Column, Text } from "@revolt/ui";
@@ -40,7 +41,19 @@ export function HotkeysSettings() {
       title: <Trans>Toggle deafen</Trans>,
       icon: "headset_off",
     },
+    [KeybindAction.VOICE_TOGGLE_GAME_STREAM]: {
+      title: <Trans>Stream focused game</Trans>,
+      icon: "sports_esports",
+    },
   };
+
+  /** Hotkeys to list: the game stream one needs the desktop app's game detection */
+  const visibleActions = () =>
+    CUSTOMISABLE_ACTIONS.filter(
+      (action) =>
+        action !== KeybindAction.VOICE_TOGGLE_GAME_STREAM ||
+        gameDetectionAvailable(),
+    );
 
   /** Keybind currently waiting for keys */
   const [recording, setRecording] = createSignal<KeybindAction>();
@@ -202,7 +215,7 @@ export function HotkeysSettings() {
         <Trans>Calls</Trans>
       </Text>
       <CategoryButton.Group>
-        <For each={CUSTOMISABLE_ACTIONS}>
+        <For each={visibleActions()}>
           {(action) => (
             <>
               <CategoryButton
