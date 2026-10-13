@@ -9,6 +9,11 @@ export { useVoice, VoiceContext } from "./state";
 export { InRoom } from "./components/InRoom";
 export { RoomAudioManager } from "./components/RoomAudioManager";
 export { findEarpiece, isIOSBusMode } from "./outputBus";
+export {
+  createRunningGames,
+  gameDetectionAvailable,
+  setGameDetection,
+} from "./runningGames";
 export { useFastIsSpeaking } from "./speaking";
 export { stoatSinkName } from "./virtualMic";
 

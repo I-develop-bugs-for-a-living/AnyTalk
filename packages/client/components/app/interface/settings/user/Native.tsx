@@ -2,6 +2,7 @@ import { Show, createSignal, onMount } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 
+import { setGameDetection } from "@revolt/rtc";
 import {
   Button,
   CategoryButton,
@@ -109,6 +110,12 @@ export default function Native() {
     if (await set({ serverUrl: value })) setServerDraft(value);
   }
 
+  /** Turn game detection on or off, the call footer follows right away */
+  async function toggleGameDetection() {
+    const next = config().gameDetection === false;
+    if (await set({ gameDetection: next })) setGameDetection(next);
+  }
+
   const toggles: Partial<Record<keyof DesktopConfig, () => void>> = {
     minimiseToTray: () => set({ minimiseToTray: !config().minimiseToTray }),
     startMinimisedToTray: () =>
@@ -188,6 +195,22 @@ export default function Native() {
           t`Hardware Acceleration`,
           t`Use the graphics card to improve performance. Takes effect after you restart AnyTalk.`,
         )}
+      </CategoryButton.Group>
+
+      <CategoryButton.Group>
+        <CategoryButton
+          action={<Checkbox checked={config().gameDetection !== false} />}
+          onClick={toggleGameDetection}
+          icon={<Symbol>sports_esports</Symbol>}
+          description={
+            <Trans>
+              Offers to stream the games you play during a call. Detection
+              happens only on this computer and nothing is sent.
+            </Trans>
+          }
+        >
+          <Trans>Detect running games</Trans>
+        </CategoryButton>
       </CategoryButton.Group>
 
       <CategoryButton.Group>

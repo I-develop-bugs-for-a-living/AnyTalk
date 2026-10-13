@@ -8,6 +8,7 @@ import {
   type HotkeyResult,
   type PickerRequest,
   type PickerSource,
+  type RunningGame,
   type UpdaterState,
   IPC,
 } from "../shared/ipc";
@@ -58,6 +59,12 @@ ipcRenderer.on(IPC.updaterState, (_event, state: UpdaterState) => {
   updaterListeners.forEach((listener) => listener(state));
 });
 
+/** Subscribers to changes of the detected games. */
+const gamesListeners = new Set<(games: RunningGame[]) => void>();
+ipcRenderer.on(IPC.gamesChanged, (_event, games: RunningGame[]) => {
+  gamesListeners.forEach((listener) => listener(games));
+});
+
 /** Expose the bridge the web client switches on. */
 function exposeNative() {
   contextBridge.exposeInMainWorld("native", {
@@ -96,6 +103,15 @@ function exposeNative() {
         hotkeyListeners.delete(callback);
       };
     },
+    getRunningGames: () => invoke<RunningGame[]>(IPC.gamesGet),
+    onRunningGamesChanged: (callback: (games: RunningGame[]) => void) => {
+      gamesListeners.add(callback);
+      return () => {
+        gamesListeners.delete(callback);
+      };
+    },
+    setNextScreenSource: (sourceId: string | null) =>
+      invoke<void>(IPC.screenSourceSet, sourceId),
   });
 
   contextBridge.exposeInMainWorld("desktopConfig", {

@@ -14,6 +14,7 @@ const DEFAULTS: DesktopConfig = {
   hardwareAcceleration: true,
   discordRpc: false,
   autoUpdate: true,
+  gameDetection: true,
   serverUrl: "",
   windowState: { isMaximised: false, width: 1280, height: 800 },
 };

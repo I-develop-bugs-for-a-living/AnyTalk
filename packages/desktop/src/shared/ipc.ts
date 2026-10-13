@@ -16,6 +16,9 @@ export const IPC = {
   pickerSources: "picker:sources",
   pickerResult: "picker:result",
   pickerCancel: "picker:cancel",
+  gamesGet: "games:get",
+  gamesChanged: "games:changed",
+  screenSourceSet: "screen:source-set",
   errorInfo: "error:info",
   errorRetry: "error:retry",
   errorSetUrl: "error:set-url",
@@ -38,6 +41,8 @@ export type DesktopConfig = {
   discordRpc: boolean;
   /** Download updates automatically and install them on quit */
   autoUpdate: boolean;
+  /** Look for running games, see `RunningGame` */
+  gameDetection: boolean;
   /** Custom server URL, empty string means the default */
   serverUrl: string;
   windowState: {
@@ -58,6 +63,7 @@ export const CLIENT_WRITABLE_KEYS = [
   "hardwareAcceleration",
   "discordRpc",
   "autoUpdate",
+  "gameDetection",
   "serverUrl",
 ] as const;
 
@@ -81,6 +87,25 @@ export type PickerSource = {
 
 /** A screen picker request sent to the page. */
 export type PickerRequest = { id: number; sources: PickerSource[] };
+
+/** A capturable window that belongs to a detected game. */
+export type RunningGameWindow = {
+  /** The `desktopCapturer` source id, `window:...` */
+  sourceId: string;
+  title: string;
+  role: "game" | "client";
+};
+
+/**
+ * A detected game. Only matched games cross the bridge, never the raw
+ * process or window list. `windows` is ordered by priority (role "game"
+ * first) and may be empty.
+ */
+export type RunningGame = {
+  id: string;
+  name: string;
+  windows: RunningGameWindow[];
+};
 
 /** A global shortcut binding requested by the client. */
 export type HotkeyBinding = { action: string; accelerator: string };
