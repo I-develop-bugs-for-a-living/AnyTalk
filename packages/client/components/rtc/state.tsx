@@ -2407,9 +2407,11 @@ class Voice {
     const preselected = sourceId !== undefined;
     const room = this.room();
     const stream = this.streamOptions();
-    const video = room?.localParticipant.getTrackPublication(
-      Track.Source.ScreenShare,
-    )?.videoTrack;
+    // When the captured window closes, LiveKit unpublishes the ended track
+    // by itself, so the publication can be gone while the share goes on
+    const video =
+      room?.localParticipant.getTrackPublication(Track.Source.ScreenShare)
+        ?.videoTrack ?? this.#currentVideo;
     const token = this.#shareToken;
     if (!room || !stream || !video || !token) {
       const missing = [
@@ -2490,7 +2492,16 @@ class Voice {
       // share is: take down the old one first. The new tracks are captured
       // already, so a cancelled picker never gets here.
       const oldAudio = this.#streamAudio;
-      await room.localParticipant.unpublishTrack(video, false);
+      const stillPublished =
+        room.localParticipant.getTrackPublication(Track.Source.ScreenShare)
+          ?.track === video;
+      if (stillPublished) {
+        await room.localParticipant.unpublishTrack(video, false);
+      } else {
+        console.debug(
+          "[follow] old capture was already unpublished, publishing the new one",
+        );
+      }
       video.stop();
       if (oldAudio) {
         if (this.#streamAudioShared(room)) {
