@@ -24,9 +24,15 @@ import {
 import { getAutostart, setAutostart } from "./autostart";
 import { getConfig, updateConfig } from "./config";
 import { ensureLinuxDesktopFile } from "./desktopFile";
+import {
+  getRunningGames,
+  installGameDetection,
+  isGameWindow,
+  setGameDetection,
+} from "./games";
 import { resetGlobalHotkeys, setGlobalHotkeys } from "./hotkeys";
 import { APP_ID, desktopEnvironment, isWayland } from "./platform";
-import { installScreenShare } from "./screen";
+import { installScreenShare, setNextScreenSource } from "./screen";
 import {
   checkForUpdates,
   downloadUpdate,
@@ -451,9 +457,17 @@ function registerIpc() {
     const next = updateConfig(update as Partial<DesktopConfig>);
     mainWindow?.webContents.session.setSpellCheckerEnabled(next.spellchecker);
     setAutoUpdate(next.autoUpdate);
+    setGameDetection(next.gameDetection);
     if (next.serverUrl !== previousUrl) loadApp();
     return next;
   });
+  handleApp(IPC.gamesGet, () => getRunningGames());
+  handleApp(IPC.screenSourceSet, (sourceId: unknown) =>
+    // Only windows of detected games, never a screen or any other window
+    setNextScreenSource(
+      typeof sourceId === "string" && isGameWindow(sourceId) ? sourceId : null,
+    ),
+  );
   handleApp(IPC.updaterGetState, () => getUpdaterState());
   handleApp(IPC.updaterCheck, () => checkForUpdates());
   handleApp(IPC.updaterDownload, () => downloadUpdate());
@@ -558,6 +572,10 @@ if (!app.requestSingleInstanceLock()) {
     registerIpc();
     installPermissions();
     installScreenShare(fromApp);
+    installGameDetection(
+      () => mainWindow?.webContents,
+      getConfig().gameDetection,
+    );
     createMenu();
     if (trayAvailable) createTray();
     // On every launch, before the first page load: a service worker from an

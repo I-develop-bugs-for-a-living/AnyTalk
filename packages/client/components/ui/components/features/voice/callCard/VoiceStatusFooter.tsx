@@ -11,6 +11,7 @@ import { typography } from "@revolt/ui/components/design/Text";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import { AudioDeviceChevron } from "./AudioDeviceChevron";
+import { GameStreamPrompt } from "./GameStreamPrompt";
 import { DeafenButton, LeaveCallButton, MuteButton } from "./VoiceCallButtons";
 
 /**
@@ -30,6 +31,7 @@ export function VoiceStatusFooter() {
     <Show when={voice.channel()}>
       {(channel) => (
         <Footer role="region" aria-label={t`Voice connection`}>
+          <GameStreamPrompt />
           <Info>
             <Status
               role="status"

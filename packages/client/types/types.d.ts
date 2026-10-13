@@ -18,11 +18,29 @@ declare global {
     discordRpc: boolean;
     /** Download and install updates automatically, on when missing */
     autoUpdate?: boolean;
+    /** Look for running games to offer streaming them, on when missing */
+    gameDetection?: boolean;
     /** Server the app loads, empty for the default */
     serverUrl: string;
     windowState: {
       isMaximised: boolean;
     };
+  };
+
+  /** A window of a running game that can be captured */
+  type RunningGameWindow = {
+    /** Capture source id to pass to setNextScreenSource */
+    sourceId: string;
+    title: string;
+    role: "game" | "client";
+  };
+
+  /** A game the desktop app found running on this computer */
+  type RunningGame = {
+    id: string;
+    name: string;
+    /** Ordered by priority (game before client), can be empty */
+    windows: RunningGameWindow[];
   };
 
   /** Where the desktop auto-updater is */
@@ -85,6 +103,15 @@ declare global {
       ): Promise<{ action: string; registered: boolean }[]>;
       /** Listen for global hotkeys, returns a function to stop listening */
       onGlobalHotkey(cb: (action: string) => void): () => void;
+      /** Games running now, missing in older desktop versions */
+      getRunningGames?(): Promise<RunningGame[]>;
+      /** Listen for changes of the running games, returns a function to stop listening */
+      onRunningGamesChanged?(cb: (games: RunningGame[]) => void): () => void;
+      /**
+       * One-shot: the next screen capture skips the picker and captures this
+       * source (falls back to the picker if it is gone). null clears it.
+       */
+      setNextScreenSource?(sourceId: string | null): Promise<void>;
     };
 
     /**

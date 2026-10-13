@@ -60,6 +60,7 @@ import { StatsRecorder } from "./components/StatsRecorder";
 import { StreamViewers } from "./components/StreamViewers";
 import { VoiceKeybinds } from "./components/VoiceKeybinds";
 import { VoiceMoves } from "./components/VoiceMoves";
+import { FOLLOW_GRACE_MS, followDecision, graceWindow } from "./gameFollow";
 import * as outputBus from "./outputBus";
 import {
   allowMicRestart,
@@ -69,6 +70,7 @@ import {
   shouldKeepRejoining,
   shouldRejoin,
 } from "./reconnect";
+import { fetchRunningGames, subscribeRunningGames } from "./runningGames";
 import {
   setScreenCaptureKeepFocus,
   setScreenCaptureLimit,
@@ -190,6 +192,31 @@ type Rejoin = {
   wake: Set<() => void>;
 };
 
+/**
+ * How a screen capture ended: `cancelled` when the capture request was
+ * dismissed (or the preselected source was gone), which is no error
+ */
+type CaptureResult = "done" | "cancelled" | "failed";
+
+/**
+ * Whether an error is the browser's way of saying the capture was dismissed
+ */
+function isCaptureCancelled(e: unknown) {
+  return (
+    e instanceof DOMException &&
+    (e.name === "NotAllowedError" || e.name === "AbortError")
+  );
+}
+
+/** A stream that follows a game, see Voice.startGameStream */
+type Follow = {
+  gameId: string;
+  sourceId: string;
+  stop: () => void;
+  /** Ends the wait for a window after the capture ended, if one is going on */
+  wake?: () => void;
+};
+
 class Voice {
   #settings: VoiceSettings;
 
@@ -225,6 +252,22 @@ class Voice {
    * on without capturing again
    */
   #streamAudio?: LocalAudioTrack;
+
+  /** Game id our stream follows, for the game section of the call footer */
+  followedGameId: Accessor<string | undefined>;
+  #setFollowedGameId: Setter<string | undefined>;
+
+  /**
+   * Follow mode: the game whose window our stream shows, with the window
+   * captured now, and the stop function of its running games listener
+   */
+  #follow?: Follow;
+
+  /** Latest running games reported while following */
+  #followGames: RunningGame[] = [];
+
+  /** Window swaps run one after the other, this is the end of the queue */
+  #swapQueue: Promise<unknown> = Promise.resolve();
 
   /** Stream audio is held back while the stream is being set up */
   #holdStreamAudio = false;
@@ -318,6 +361,10 @@ class Voice {
     const [streamOptions, setStreamOptions] = createSignal<StreamOptions>();
     this.streamOptions = streamOptions;
     this.#setStreamOptions = setStreamOptions;
+
+    const [followedGameId, setFollowedGameId] = createSignal<string>();
+    this.followedGameId = followedGameId;
+    this.#setFollowedGameId = setFollowedGameId;
 
     const [layout, setLayout] = createSignal<VoiceLayout>();
     this.layout = layout;
@@ -1118,6 +1165,7 @@ class Voice {
    * the call; nothing is told to the user
    */
   #teardown(forRejoin: boolean) {
+    this.#endFollow();
     this.#cancelCapture();
     this.#cancelMicRecovery();
     this.#stopWatchingMic();
@@ -1346,11 +1394,12 @@ class Voice {
    * whether the user cancelled the picker without a choice, in which case
    * the capture request fails on purpose and the failure is not an error.
    */
-  #registerScreenPicker() {
+  #registerScreenPicker(skip = false) {
     let picked: StreamOptions | undefined;
     let cancelled = false;
 
-    if (window.native && window.native.onceScreenPicker) {
+    // with a preselected source the desktop app answers by itself
+    if (!skip && window.native && window.native.onceScreenPicker) {
       window.native.onceScreenPicker((sources) => {
         this.openModal({
           type: "screen_share_picker",
@@ -1446,6 +1495,7 @@ class Voice {
 
   async #stopScreenshare(room: Room) {
     const audio = this.#streamAudio;
+    this.#endFollow();
 
     await room.localParticipant.setScreenShareEnabled(false);
 
@@ -1478,116 +1528,140 @@ class Voice {
         this.#cancelCapture();
       }
     } else {
-      const capture: ScreenCapture = { tracks: [], publishing: false };
-      this.#capture = capture;
+      await this.#startScreenshare(room, false);
+    }
+  }
 
-      const picked = this.#registerScreenPicker();
-      this.#prepareCapture();
-      const asking = this.#settings.screenShareQualityAsk;
+  /**
+   * Capture and publish a screen share
+   * @param room The room to share in
+   * @param preselected The capture source was chosen beforehand (a game
+   * stream, see setNextScreenSource): the saved quality is used without
+   * asking. If the desktop app can't use the source, the capture is cancelled.
+   * @returns How the start ended
+   */
+  async #startScreenshare(
+    room: Room,
+    preselected: boolean,
+  ): Promise<CaptureResult> {
+    let result: CaptureResult = "done";
+    const capture: ScreenCapture = { tracks: [], publishing: false };
+    this.#capture = capture;
 
+    const picked = this.#registerScreenPicker(preselected);
+    this.#prepareCapture();
+    const asking = !preselected && this.#settings.screenShareQualityAsk;
+
+    try {
+      const chosenQuality = this.#screenShareQuality(
+        this.#settings.screenShareResolution,
+        this.#settings.screenShareFrameRate,
+      );
+
+      // Capture only. Nothing is published, so nobody sees the stream,
+      // until the settings are confirmed.
+      //
+      // Stay in this tab. The browser would otherwise jump to the captured
+      // tab right after the picker, before the settings are confirmed, and
+      // there is no way to switch to it later on.
+      setScreenCaptureKeepFocus(true);
+      let tracks: LocalTrack[];
       try {
-        const chosenQuality = this.#screenShareQuality(
-          this.#settings.screenShareResolution,
-          this.#settings.screenShareFrameRate,
-        );
-
-        // Capture only. Nothing is published, so nobody sees the stream,
-        // until the settings are confirmed.
-        //
-        // Stay in this tab. The browser would otherwise jump to the captured
-        // tab right after the picker, before the settings are confirmed, and
-        // there is no way to switch to it later on.
-        setScreenCaptureKeepFocus(true);
-        let tracks: LocalTrack[];
-        try {
-          tracks = await room.localParticipant.createScreenTracks({
-            resolution: chosenQuality?.resolution,
-            audio: STREAM_AUDIO_CAPTURE,
-          });
-        } finally {
-          setScreenCaptureKeepFocus(false);
-        }
-        capture.tracks = tracks;
-
-        const video = tracks.find(
-          (t): t is LocalVideoTrack => t.kind === Track.Kind.Video,
-        )!;
-        const audio = tracks.find(
-          (t): t is LocalAudioTrack => t.kind === Track.Kind.Audio,
-        );
-
-        // gone while picking
-        if (this.#capture !== capture || this.room() !== room) {
-          this.#cancelCapture(capture);
-          return;
-        }
-
-        const pickedOptions = picked();
-        if (pickedOptions) {
-          capture.publishing = true;
-          await this.#publishScreenshare(room, video, audio, pickedOptions);
-        } else if (asking) {
-          // the capture can end (stopped from the browser) while waiting
-          video.mediaStreamTrack.addEventListener(
-            "ended",
-            () => {
-              if (this.#capture === capture && !capture.publishing) {
-                this.#cancelCapture(capture);
-              }
-            },
-            { once: true },
-          );
-
-          capture.modalId = this.openModal({
-            onCancel: () => this.#cancelCapture(capture),
-            type: "screen_share_settings",
-            previewStream: new MediaStream([video.mediaStreamTrack]),
-            resolutions: this.#resolutionOptions(),
-            audio: !!audio,
-            callback: async (resolution, frameRate, shareAudio) => {
-              // cancelled meanwhile, or we left the call
-              if (this.#capture !== capture || this.room() !== room) {
-                this.#cancelCapture(capture);
-                return;
-              }
-              capture.publishing = true;
-              try {
-                await this.#publishScreenshare(room, video, audio, {
-                  resolution,
-                  frameRate,
-                  audio: shareAudio,
-                });
-              } catch (e) {
-                await this.#abortScreenshare(room, tracks);
-                this.onErr(e);
-              } finally {
-                if (this.#capture === capture) this.#capture = undefined;
-              }
-            },
-          });
-        } else {
-          // Not asking: apply the saved choice, otherwise the capture stays
-          // at the low startup constraints from getDisplayMedia
-          capture.publishing = true;
-          await this.#publishScreenshare(room, video, audio, {
-            resolution: this.#settings.screenShareResolution,
-            frameRate: this.#settings.screenShareFrameRate,
-            audio: this.#settings.screenShareAudio,
-          });
-        }
-      } catch (e) {
-        this.#cancelCapture(capture);
-        await this.#abortScreenshare(room, capture.tracks);
-        // Cancelling the picker makes the capture request fail, which is
-        // no error: stay silent
-        if (!picked.dismissed()) this.onErr(e);
+        tracks = await room.localParticipant.createScreenTracks({
+          resolution: chosenQuality?.resolution,
+          audio: STREAM_AUDIO_CAPTURE,
+        });
       } finally {
-        // with the settings shown the start goes on in their callback
-        if (this.#capture === capture && capture.modalId === undefined) {
-          this.#capture = undefined;
-        }
+        setScreenCaptureKeepFocus(false);
+        // the chosen source is used once, drop it if it wasn't
+        if (preselected) window.native.setNextScreenSource?.(null);
+      }
+      capture.tracks = tracks;
+
+      const video = tracks.find(
+        (t): t is LocalVideoTrack => t.kind === Track.Kind.Video,
+      )!;
+      const audio = tracks.find(
+        (t): t is LocalAudioTrack => t.kind === Track.Kind.Audio,
+      );
+
+      // gone while picking
+      if (this.#capture !== capture || this.room() !== room) {
+        this.#cancelCapture(capture);
+        return "failed";
+      }
+
+      const pickedOptions = picked();
+      if (pickedOptions) {
+        capture.publishing = true;
+        await this.#publishScreenshare(room, video, audio, pickedOptions);
+      } else if (asking) {
+        // the capture can end (stopped from the browser) while waiting
+        video.mediaStreamTrack.addEventListener(
+          "ended",
+          () => {
+            if (this.#capture === capture && !capture.publishing) {
+              this.#cancelCapture(capture);
+            }
+          },
+          { once: true },
+        );
+
+        capture.modalId = this.openModal({
+          onCancel: () => this.#cancelCapture(capture),
+          type: "screen_share_settings",
+          previewStream: new MediaStream([video.mediaStreamTrack]),
+          resolutions: this.#resolutionOptions(),
+          audio: !!audio,
+          callback: async (resolution, frameRate, shareAudio) => {
+            // cancelled meanwhile, or we left the call
+            if (this.#capture !== capture || this.room() !== room) {
+              this.#cancelCapture(capture);
+              return;
+            }
+            capture.publishing = true;
+            try {
+              await this.#publishScreenshare(room, video, audio, {
+                resolution,
+                frameRate,
+                audio: shareAudio,
+              });
+            } catch (e) {
+              await this.#abortScreenshare(room, tracks);
+              this.onErr(e);
+            } finally {
+              if (this.#capture === capture) this.#capture = undefined;
+            }
+          },
+        });
+      } else {
+        // Not asking: apply the saved choice, otherwise the capture stays
+        // at the low startup constraints from getDisplayMedia
+        capture.publishing = true;
+        await this.#publishScreenshare(room, video, audio, {
+          resolution: this.#settings.screenShareResolution,
+          frameRate: this.#settings.screenShareFrameRate,
+          audio: this.#settings.screenShareAudio,
+        });
+      }
+    } catch (e) {
+      this.#cancelCapture(capture);
+      await this.#abortScreenshare(room, capture.tracks);
+      // Cancelling the picker makes the capture request fail, which is
+      // no error: stay silent
+      if (picked.dismissed() || (preselected && isCaptureCancelled(e))) {
+        result = "cancelled";
+      } else {
+        result = "failed";
+        this.onErr(e);
+      }
+    } finally {
+      // with the settings shown the start goes on in their callback
+      if (this.#capture === capture && capture.modalId === undefined) {
+        this.#capture = undefined;
       }
     }
+    return result;
   }
 
   /** The screen share that is being started, until it's published or off */
@@ -1649,7 +1723,15 @@ class Voice {
     // livekit would still share stream audio after closing the window being streamed.
     // Listening before publishing, so an end during it isn't missed.
     let ended = false;
-    video.once(TrackEvent.Ended, () => {
+    video.on(TrackEvent.Ended, () => {
+      // Following a game: its window may be replaced by another one soon.
+      // Note the browser's own "stop sharing" button ends the track the same
+      // way, so it is treated like a window closing: the stream lingers for
+      // up to the grace period before it stops.
+      if (this.#follow) {
+        this.#followGrace(room, video.mediaStreamTrack);
+        return;
+      }
       ended = true;
       if (this.screenshare()) this.toggleScreenshare();
     });
@@ -1675,39 +1757,275 @@ class Voice {
 
   /**
    * Stream another screen or window. The stream itself keeps going, so
-   * whoever watches it keeps watching.
+   * whoever watches it keeps watching. Picking it by hand ends follow mode.
    */
   async switchScreenshareSource() {
+    this.#endFollow();
+    await this.#swap(() => this.#replaceSource());
+  }
+
+  /**
+   * Stream a detected game (desktop app). The game's best window is captured
+   * without the picker and the saved quality is used without asking. The
+   * stream then follows the game: when its best window changes, or the
+   * captured window closes and another one shows up within a few seconds,
+   * the stream moves over to it and viewers keep watching. Stopping the
+   * stream or switching window by hand ends that.
+   * @param gameId Id of the game, as reported by getRunningGames
+   */
+  async startGameStream(gameId: string) {
+    const room = this.room();
+    if (!room) return;
+    if (this.#capture || !window.native?.setNextScreenSource) return;
+
+    let best: RunningGameWindow | undefined;
+    let result: CaptureResult = "failed";
+
+    try {
+      // A preselected window that is gone cancels the capture: look at the
+      // games again and retry once with the new best window
+      for (let attempt = 0; attempt < 2; attempt++) {
+        // use what is running right now, the list shown may be a moment old
+        const game = (await fetchRunningGames()).find((g) => g.id === gameId);
+        if (!game) return;
+        best = game.windows[0];
+
+        const target = best;
+        // Queued with the other swaps, the chosen source is set right before
+        // capturing so no earlier swap can take or clear it. No window
+        // (Wayland): null shows the normal picker or portal.
+        result = await this.#swap(async () => {
+          if (this.screenshare()) {
+            // already streaming something else: move that stream over
+            this.#endFollow();
+            return this.#replaceSource(target?.sourceId);
+          }
+          await window.native.setNextScreenSource?.(target?.sourceId ?? null);
+          return this.#startScreenshare(room, !!target);
+        });
+        if (result !== "cancelled" || !best) break;
+      }
+    } catch (e) {
+      this.onErr(e);
+      return;
+    } finally {
+      // in case nothing took it
+      window.native.setNextScreenSource?.(null);
+    }
+
+    // follow only when the window was chosen for the user, not picked by hand
+    if (
+      result === "done" &&
+      best &&
+      this.screenshare() &&
+      this.room() === room
+    ) {
+      this.#beginFollow(gameId, best.sourceId);
+    }
+  }
+
+  /** Start following a game with the stream showing the given window */
+  #beginFollow(gameId: string, sourceId: string) {
+    this.#endFollow();
+
+    // a slow first read must not overwrite a newer update
+    let updated = false;
+    const follow: Follow = {
+      gameId,
+      sourceId,
+      stop: subscribeRunningGames((games) => {
+        updated = true;
+        this.#followGames = games;
+        this.#syncFollow();
+      }),
+    };
+    this.#follow = follow;
+    this.#followGames = [];
+    this.#setFollowedGameId(gameId);
+    fetchRunningGames().then((games) => {
+      if (this.#follow !== follow || updated) return;
+      this.#followGames = games;
+      this.#syncFollow();
+    });
+  }
+
+  /** Stop following a game, the stream itself is left alone */
+  #endFollow() {
+    this.#follow?.wake?.();
+    this.#follow?.stop();
+    this.#follow = undefined;
+    this.#followGames = [];
+    this.#setFollowedGameId();
+  }
+
+  /**
+   * Move the stream to the followed game's best window if it is another one
+   * than the captured one. Swaps are queued and look at the newest list
+   * when their turn comes, so quick changes end up with a single swap.
+   */
+  #syncFollow() {
+    return this.#swap(async () => {
+      const follow = this.#follow;
+      if (!follow || !this.screenshare()) return;
+
+      const decision = followDecision(this.#followGames, follow);
+      if (decision.type === "release") {
+        // the game stopped, the stream goes on
+        this.#endFollow();
+      } else if (decision.type === "switch") {
+        await this.#followSwap(follow, decision.sourceId);
+      }
+    });
+  }
+
+  /**
+   * Capture a window of the followed game and move the stream to it
+   * @returns `cancelled` when the window was gone, the stream is left as is
+   */
+  async #followSwap(follow: Follow, sourceId: string): Promise<CaptureResult> {
+    if (this.#follow !== follow) return "failed";
+    const result = await this.#replaceSource(sourceId);
+    if (result === "done") follow.sourceId = sourceId;
+    return result;
+  }
+
+  /**
+   * The captured window of the followed game ended. Wait a few seconds for
+   * another window of the game, move the stream to it if one shows up and
+   * stop the stream if none does (or the game stopped).
+   */
+  #followGrace(room: Room, endedTrack: MediaStreamTrack) {
+    const follow = this.#follow;
+    if (!follow) return;
+
+    // A swap to another window may have run before this task, then the
+    // stream shows a live window and has to be left alone
+    const outdated = () =>
+      this.#follow !== follow ||
+      endedTrack.readyState === "live" ||
+      room.localParticipant.getTrackPublication(Track.Source.ScreenShare)
+        ?.videoTrack?.mediaStreamTrack !== endedTrack;
+
+    this.#swap(async () => {
+      if (outdated()) return;
+      const deadline = Date.now() + FOLLOW_GRACE_MS;
+      let fresh = false;
+
+      while (!outdated()) {
+        const sourceId = await this.#waitForWindow(follow, deadline, fresh);
+        if (outdated()) return;
+        if (!sourceId) break;
+
+        const result = await this.#followSwap(follow, sourceId);
+        if (result === "done" || outdated()) return;
+        if (result === "failed") break;
+
+        // the window was gone already: wait for the games to change
+        fresh = true;
+      }
+
+      // stopped or switched by hand meanwhile
+      if (outdated()) return;
+
+      this.#endFollow();
+      if (this.room() === room && this.screenshare()) {
+        await this.toggleScreenshare();
+      }
+    });
+  }
+
+  /**
+   * Wait for a window of the followed game other than the one that ended
+   * @param deadline When to give up (Date.now() time)
+   * @param fresh Only react to new updates, not to the games known now
+   * @returns The source to capture, undefined when the game stopped or time
+   * ran out
+   */
+  #waitForWindow(follow: Follow, deadline: number, fresh: boolean) {
+    return new Promise<string | undefined>((resolve) => {
+      let done = false;
+      let stop = () => {};
+
+      const finish = (value: string | undefined) => {
+        if (done) return;
+        done = true;
+        follow.wake = undefined;
+        clearTimeout(timer);
+        stop();
+        resolve(value);
+      };
+      const check = (games: RunningGame[]) => {
+        if (this.#follow !== follow) return finish(undefined);
+        const result = graceWindow(games, follow.gameId, follow.sourceId);
+        if (result.gone) finish(undefined);
+        else if (result.sourceId) finish(result.sourceId);
+      };
+
+      const timer = setTimeout(
+        () => finish(undefined),
+        Math.max(0, deadline - Date.now()),
+      );
+      stop = subscribeRunningGames(check);
+      // ending follow mode ends the wait at once
+      follow.wake = () => finish(undefined);
+      if (!fresh) fetchRunningGames().then(check);
+    });
+  }
+
+  /** Run a window swap once the ones before it are done */
+  #swap<T>(task: () => Promise<T>): Promise<T> {
+    const result = this.#swapQueue.then(task, task);
+    this.#swapQueue = result.catch(() => {});
+    return result;
+  }
+
+  /**
+   * Replace the captured screen of the running stream with a new capture
+   * (from the picker, or the source set with setNextScreenSource) and keep
+   * the stream going
+   * @param sourceId Capture this source without the picker, undefined shows
+   * the picker (or the portal)
+   * @returns How it ended, `done` when the stream shows the new capture
+   */
+  async #replaceSource(sourceId?: string): Promise<CaptureResult> {
+    const preselected = sourceId !== undefined;
     const room = this.room();
     const stream = this.streamOptions();
     const video = room?.localParticipant.getTrackPublication(
       Track.Source.ScreenShare,
     )?.videoTrack;
-    if (!room || !stream || !video) return;
+    if (!room || !stream || !video) return "failed";
 
-    const picked = this.#registerScreenPicker();
+    const picked = this.#registerScreenPicker(preselected);
     this.#prepareCapture();
+
+    // whether the stream we were asked to change is gone or another one
+    const stale = () =>
+      this.streamOptions() !== stream ||
+      this.room() !== room ||
+      room.localParticipant.getTrackPublication(Track.Source.ScreenShare)
+        ?.videoTrack !== video;
 
     let tracks: LocalTrack[];
     try {
-      tracks = await room.localParticipant.createScreenTracks({
-        resolution: this.#screenShareQuality(
-          stream.resolution,
-          stream.frameRate,
-        ).resolution,
-        audio: STREAM_AUDIO_CAPTURE,
-      });
+      try {
+        if (preselected) await window.native.setNextScreenSource?.(sourceId);
+        tracks = await room.localParticipant.createScreenTracks({
+          resolution: this.#screenShareQuality(
+            stream.resolution,
+            stream.frameRate,
+          ).resolution,
+          audio: STREAM_AUDIO_CAPTURE,
+        });
+      } finally {
+        // the chosen source is used once, drop it if it wasn't
+        if (preselected) window.native.setNextScreenSource?.(null);
+      }
     } catch (e) {
       // closing the picker keeps streaming the current window
-      if (
-        picked.dismissed() ||
-        (e instanceof DOMException &&
-          (e.name === "NotAllowedError" || e.name === "AbortError"))
-      ) {
-        return;
-      }
+      if (picked.dismissed() || isCaptureCancelled(e)) return "cancelled";
       this.onErr(e);
-      return;
+      return "failed";
     }
 
     const newVideo = tracks.find((t) => t.kind === Track.Kind.Video)!;
@@ -1716,14 +2034,16 @@ class Voice {
     );
 
     // the stream ended while picking
-    if (
-      this.streamOptions() !== stream ||
-      room.localParticipant.getTrackPublication(Track.Source.ScreenShare)
-        ?.videoTrack !== video
-    ) {
+    if (stale()) {
       tracks.forEach((t) => t.stop());
-      return;
+      return "failed";
     }
+
+    // the stream was stopped meanwhile: drop what we captured, quietly
+    const abandon = () => {
+      tracks.forEach((t) => t.stop());
+      return "failed" as const;
+    };
 
     try {
       const oldVideo = video.mediaStreamTrack;
@@ -1731,6 +2051,7 @@ class Voice {
         userProvidedTrack: false,
       });
       oldVideo.stop();
+      if (stale()) return abandon();
 
       const oldAudio = this.#streamAudio;
       if (newAudio && oldAudio && this.#streamAudioShared(room)) {
@@ -1739,6 +2060,7 @@ class Voice {
           userProvidedTrack: false,
         });
         oldAudioTrack.stop();
+        if (stale()) return abandon();
       } else {
         if (oldAudio) {
           if (this.#streamAudioShared(room)) {
@@ -1746,6 +2068,7 @@ class Voice {
           }
           oldAudio.stop();
         }
+        if (stale()) return abandon();
         this.#keepStreamAudio(newAudio);
       }
 
@@ -1756,8 +2079,11 @@ class Voice {
         frameRate: pickedOptions?.frameRate ?? stream.frameRate,
         audio: !!newAudio,
       });
+      return stale() ? abandon() : "done";
     } catch (e) {
-      this.onErr(e);
+      // errors from a stream that was stopped meanwhile are expected
+      if (!stale()) this.onErr(e);
+      return "failed";
     }
   }
 

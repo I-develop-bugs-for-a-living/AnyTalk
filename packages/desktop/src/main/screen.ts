@@ -1,6 +1,7 @@
 import { desktopCapturer, ipcMain, session, webContents } from "electron";
 
 import { type PickerRequest, type PickerSource, IPC } from "../shared/ipc";
+import { isGameWindow } from "./games";
 import { isWayland } from "./platform";
 import { isServerUrl } from "./url";
 
@@ -13,6 +14,25 @@ type PendingPicker = {
   sender: Electron.WebContents;
   finish: (value?: { idx: number; audio: boolean }) => void;
 };
+
+/** How long a preselected source stays valid. */
+const PRESELECT_TTL_MS = 10_000;
+
+/** One-shot source chosen ahead of the next capture request. */
+let preselected: { sourceId: string; expires: number } | undefined;
+
+/**
+ * Remember a source for the next display-media request, which then skips
+ * the picker. It is used once and expires after a few seconds.
+ *
+ * @param sourceId A `desktopCapturer` source id, or null to clear
+ */
+export function setNextScreenSource(sourceId: string | null) {
+  preselected =
+    typeof sourceId === "string" && sourceId !== ""
+      ? { sourceId, expires: Date.now() + PRESELECT_TTL_MS }
+      : undefined;
+}
 
 let pending: PendingPicker | undefined;
 let nextId = 1;
@@ -96,6 +116,22 @@ export function installScreenShare(
         if (isWayland) {
           return callback({
             video: sources[0],
+            audio: audioFor(request.audioRequested),
+          });
+        }
+
+        // A preselection is consumed by this request. If its window is gone
+        // the request is cancelled, never answered with the picker, so a
+        // follow swap mid-game can't pop it up. An expired one is ignored.
+        const wanted = preselected;
+        preselected = undefined;
+        if (wanted && wanted.expires > Date.now()) {
+          const preset = isGameWindow(wanted.sourceId)
+            ? sources.find((source) => source.id === wanted.sourceId)
+            : undefined;
+          if (!preset) return callback({});
+          return callback({
+            video: preset,
             audio: audioFor(request.audioRequested),
           });
         }
