@@ -296,8 +296,17 @@ function Participants(props: { theater: boolean }) {
   const scrolls = () => !hasMain() && fit() < TILE_MIN_FIT_WIDTH;
 
   // Clear out any focus when the track that was focused is no longer available.
+  // Checked again a tick later: the track list can change before the voice
+  // state heard that the stream is only being republished.
   createEffect(() => {
-    if (voice.focusId() && !voice.focusTrack()) voice.settleAfterStreamGone();
+    if (voice.focusId() && !voice.focusTrack()) {
+      const timer = setTimeout(() => {
+        if (voice.focusId() && !voice.focusTrack()) {
+          voice.settleAfterStreamGone();
+        }
+      });
+      onCleanup(() => clearTimeout(timer));
+    }
   });
 
   // A stream that ended on its own (streamer stopped or left) never went

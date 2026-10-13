@@ -1,5 +1,50 @@
-/** How long to wait for a window of the followed game after the capture ended */
-export const FOLLOW_GRACE_MS = 4000;
+/**
+ * How long to wait for a window of the followed game after the capture
+ * ended while the game still runs (e.g. its window is not shown yet while a
+ * match loads)
+ */
+export const FOLLOW_GRACE_MAX_MS = 90_000;
+
+/** How long to wait when the captured window is still listed */
+export const FOLLOW_GRACE_SHORT_MS = 4000;
+
+/**
+ * How long to wait for a window after the captured one ended
+ * @param games Games running now
+ * @param gameId The followed game
+ * @param sourceId The window that was captured
+ * @returns The long wait when the game no longer lists that window (it was
+ * closed or hidden), the short one when it still does (ended by hand)
+ */
+export function graceWaitMs(
+  games: RunningGame[],
+  gameId: string,
+  sourceId: string,
+): number {
+  const listed = games
+    .find((g) => g.id === gameId)
+    ?.windows.some((w) => w.sourceId === sourceId);
+  return listed ? FOLLOW_GRACE_SHORT_MS : FOLLOW_GRACE_MAX_MS;
+}
+
+/** Updates in a row without the game before it counts as stopped */
+export const GONE_AFTER_UPDATES = 2;
+
+/**
+ * Count the updates in a row that lack a game, so one failed scan doesn't
+ * end follow mode
+ * @param games Games running now
+ * @param gameId The followed game
+ * @param missedBefore Updates in a row lacking it so far
+ * @returns The new count, 0 when the game is there
+ */
+export function countMissed(
+  games: RunningGame[],
+  gameId: string,
+  missedBefore: number,
+): number {
+  return games.some((g) => g.id === gameId) ? 0 : missedBefore + 1;
+}
 
 /**
  * The window of a game worth streaming
@@ -28,10 +73,15 @@ export type FollowDecision =
  */
 export function followDecision(
   games: RunningGame[],
-  followed: { gameId: string; sourceId: string },
+  followed: { gameId: string; sourceId: string; missed?: number },
 ): FollowDecision {
   const game = games.find((g) => g.id === followed.gameId);
-  if (!game) return { type: "release" };
+  if (!game) {
+    // one missing update may be a failed scan
+    return (followed.missed ?? GONE_AFTER_UPDATES) >= GONE_AFTER_UPDATES
+      ? { type: "release" }
+      : { type: "keep" };
+  }
 
   const best = bestWindow(game);
   if (!best || best.sourceId === followed.sourceId) return { type: "keep" };
@@ -43,20 +93,26 @@ export function followDecision(
  * @param games Games running now
  * @param gameId The followed game
  * @param endedSourceId The window that was captured, which is gone
- * @returns The source to capture, or undefined when there is none (yet) and
- * `gone` telling whether the game stopped running altogether
+ * @param missedBefore Updates in a row lacking the game so far
+ * @returns The source to capture, or undefined when there is none (yet),
+ * `missed` (updates in a row lacking the game) and `gone` telling whether
+ * the game stopped running altogether (missing in enough updates)
  */
 export function graceWindow(
   games: RunningGame[],
   gameId: string,
   endedSourceId: string,
-): { sourceId?: string; gone: boolean } {
+  missedBefore = GONE_AFTER_UPDATES - 1,
+): { sourceId?: string; gone: boolean; missed: number } {
   const game = games.find((g) => g.id === gameId);
-  if (!game) return { gone: true };
+  if (!game) {
+    const missed = missedBefore + 1;
+    return { gone: missed >= GONE_AFTER_UPDATES, missed };
+  }
 
   // the list can still hold the window that just closed
   const next = game.windows.find((w) => w.sourceId !== endedSourceId);
-  return { sourceId: next?.sourceId, gone: false };
+  return { sourceId: next?.sourceId, gone: false, missed: 0 };
 }
 
 /** How often the stream's frame counter is read while following a game */

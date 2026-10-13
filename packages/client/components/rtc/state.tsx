@@ -62,8 +62,9 @@ import { VoiceKeybinds } from "./components/VoiceKeybinds";
 import { VoiceMoves } from "./components/VoiceMoves";
 import {
   type FrameSample,
-  FOLLOW_GRACE_MS,
+  countMissed,
   followDecision,
+  graceWaitMs,
   graceWindow,
   isStalled,
   STALL_POLL_MS,
@@ -205,6 +206,9 @@ type Rejoin = {
  */
 type CaptureResult = "done" | "cancelled" | "failed";
 
+/** How long an unpublished stream may stay away before it counts as ended */
+const STREAM_REPUBLISH_WAIT_MS = 4000;
+
 /** How long a capture or a track swap may take before it counts as hung */
 const SWAP_TIMEOUT_MS = 10_000;
 
@@ -253,11 +257,24 @@ function isCaptureCancelled(e: unknown) {
   );
 }
 
+/**
+ * Log why a capture or swap step did not work, for finding out why automatic
+ * swaps fail (e.g. no user activation for getDisplayMedia)
+ * @param step Which step failed
+ * @param e The error
+ */
+function logCaptureFailure(step: string, e: unknown) {
+  const err = e as Error | undefined;
+  console.debug("[follow] failed at", step, err?.name, err?.message);
+}
+
 /** A stream that follows a game, see Voice.startGameStream */
 type Follow = {
   gameId: string;
   sourceId: string;
   stop: () => void;
+  /** Updates in a row that lacked the game, one may be a failed scan */
+  missed: number;
   /** Ends the wait for a window after the capture ended, if one is going on */
   wake?: () => void;
 };
@@ -307,6 +324,27 @@ class Voice {
    * captured now, and the stop function of its running games listener
    */
   #follow?: Follow;
+
+  /**
+   * Identifies the running screen share across window swaps (a swap
+   * publishes a new track), undefined when nothing is shared
+   */
+  #shareToken?: object;
+
+  /** Counts published screen share tracks, a swap makes it go up */
+  #trackGen = 0;
+
+  /** The screen share video track that is published now */
+  #currentVideo?: LocalVideoTrack;
+
+  /**
+   * People whose stream was unpublished a moment ago: a window swap
+   * republishes it, which must not look like the stream ended
+   */
+  #pendingEnds = new Map<
+    string,
+    { timer: ReturnType<typeof setTimeout>; sound: boolean }
+  >();
 
   /** Polls the stream's frame counter while following, see #watchStall */
   #stallTimer?: ReturnType<typeof setInterval>;
@@ -707,27 +745,34 @@ class Voice {
       this.#unwatch(participant.identity);
     });
 
-    room.addListener("trackPublished", (pub) => {
+    room.addListener("trackPublished", (pub, participant) => {
       // streams aren't watched automatically, so announce them right away
       if (pub.source === Track.Source.ScreenShare) {
-        this.sound.playSound("streamStart");
+        // back after a window swap: not a new stream
+        if (!this.#cancelPendingEnd(participant.identity)) {
+          this.sound.playSound("streamStart");
+        }
         this.screenShareTracks.add(pub.trackSid);
+      }
+    });
+
+    room.addListener("localTrackPublished", (pub) => {
+      // back after a window swap: our own view stays
+      if (pub.source === Track.Source.ScreenShare) {
+        this.#cancelPendingEnd(room.localParticipant.identity);
       }
     });
 
     room.addListener("localTrackUnpublished", (unpub) => {
       if (unpub.source === Track.Source.ScreenShare) {
-        this.#unwatch(room.localParticipant.identity);
+        this.#deferStreamEnd(room.localParticipant.identity);
       }
     });
 
     room.addListener("trackUnpublished", (unpub, participant) => {
-      if (this.screenShareTracks.has(unpub.trackSid)) {
-        this.sound.playSound("streamEnd");
-        this.screenShareTracks.delete(unpub.trackSid);
-      }
+      const known = this.screenShareTracks.delete(unpub.trackSid);
       if (unpub.source === Track.Source.ScreenShare) {
-        this.#unwatch(participant.identity);
+        this.#deferStreamEnd(participant.identity, known);
       }
     });
 
@@ -1208,12 +1253,50 @@ class Voice {
   }
 
   /**
+   * Treat a stream as ended after a short wait. A window swap unpublishes
+   * and publishes the stream again within a moment, and whoever watches it
+   * (and has it focused) should stay on it.
+   * @param identity Who streamed
+   * @param sound Play the stream end sound when it really ended
+   */
+  #deferStreamEnd(identity: string, sound = false) {
+    const previous = this.#pendingEnds.get(identity);
+    if (previous) clearTimeout(previous.timer);
+    const withSound = sound || !!previous?.sound;
+    this.#pendingEnds.set(identity, {
+      sound: withSound,
+      timer: setTimeout(() => {
+        this.#pendingEnds.delete(identity);
+        if (withSound) this.sound.playSound("streamEnd");
+        this.#unwatch(identity);
+        this.settleAfterStreamGone();
+      }, STREAM_REPUBLISH_WAIT_MS),
+    });
+  }
+
+  /**
+   * A stream came back before it counted as ended
+   * @returns Whether it was waiting to end
+   */
+  #cancelPendingEnd(identity: string) {
+    const pending = this.#pendingEnds.get(identity);
+    if (!pending) return false;
+    clearTimeout(pending.timer);
+    this.#pendingEnds.delete(identity);
+    return true;
+  }
+
+  /**
    * Clean up the room
    * @param forRejoin Keep the channel and what is watched, to get back into
    * the call; nothing is told to the user
    */
   #teardown(forRejoin: boolean) {
     this.#endFollow();
+    this.#shareToken = undefined;
+    this.#currentVideo = undefined;
+    this.#pendingEnds.forEach((p) => clearTimeout(p.timer));
+    this.#pendingEnds.clear();
     this.#cancelCapture();
     this.#cancelMicRecovery();
     this.#stopWatchingMic();
@@ -1544,6 +1627,8 @@ class Voice {
   async #stopScreenshare(room: Room) {
     const audio = this.#streamAudio;
     this.#endFollow();
+    this.#shareToken = undefined;
+    this.#currentVideo = undefined;
 
     await room.localParticipant.setScreenShareEnabled(false);
 
@@ -1697,6 +1782,7 @@ class Voice {
       await this.#abortScreenshare(room, capture.tracks);
       // Cancelling the picker makes the capture request fail, which is
       // no error: stay silent
+      logCaptureFailure("start", e);
       if (picked.dismissed() || (preselected && isCaptureCancelled(e))) {
         result = "cancelled";
       } else {
@@ -1757,6 +1843,7 @@ class Voice {
     video: LocalVideoTrack,
     audio: LocalAudioTrack | undefined,
     options: StreamOptions,
+    swap = false,
   ) {
     const quality = this.#screenShareQuality(
       options.resolution,
@@ -1765,6 +1852,16 @@ class Voice {
 
     this.#holdStreamAudio = false;
     this.#keepStreamAudio(audio);
+    // a window swap keeps the share it belongs to; stopped meanwhile, the
+    // new capture must not go live
+    if (swap && !this.#shareToken) {
+      video.stop();
+      audio?.stop();
+      return;
+    }
+    if (!swap) this.#shareToken = {};
+    this.#currentVideo = video;
+    const gen = ++this.#trackGen;
 
     // This event is only fired if the screen share is ended by closing the window being streamed.
     // This catches the ending and disables screen sharing on our side. If this weren't here,
@@ -1772,13 +1869,15 @@ class Voice {
     // Listening before publishing, so an end during it isn't missed.
     let ended = false;
     video.on(TrackEvent.Ended, () => {
+      // a track that was swapped out
+      if (this.#currentVideo !== video) return;
       // Following a game: its window may be replaced by another one soon.
       // Note the browser's own "stop sharing" button ends the track the same
       // way, so it is treated like a window closing: the stream lingers for
       // up to the grace period before it stops.
       if (this.#follow) {
         console.debug("[follow] capture ended", this.#follow.gameId);
-        this.#followGrace(room, video.mediaStreamTrack);
+        this.#followGrace(room, gen);
         return;
       }
       ended = true;
@@ -1799,9 +1898,50 @@ class Voice {
       return;
     }
 
+    this.#logPublished(video);
+
     // also shares the audio when chosen
     await this.#applyStreamOptions(room, options);
-    this.sound.playSound("streamStart");
+    if (!swap) this.sound.playSound("streamStart");
+  }
+
+  /** Log what the published capture delivers, to find out why one is black */
+  #logPublished(video: LocalVideoTrack) {
+    const track = video.mediaStreamTrack;
+    const { width, height, frameRate } = track.getSettings();
+    console.debug("[follow] published", {
+      readyState: track.readyState,
+      muted: track.muted,
+      width,
+      height,
+      frameRate,
+    });
+    // one log per event, and none once the track is swapped out
+    const onMute = () => console.debug("[follow] track muted");
+    const onUnmute = () => console.debug("[follow] track unmuted");
+    track.addEventListener("mute", onMute, { once: true });
+    track.addEventListener("unmute", onUnmute, { once: true });
+    video.once(TrackEvent.Ended, () => {
+      track.removeEventListener("mute", onMute);
+      track.removeEventListener("unmute", onUnmute);
+    });
+
+    setTimeout(async () => {
+      track.removeEventListener("mute", onMute);
+      track.removeEventListener("unmute", onUnmute);
+      if (this.#currentVideo !== video) return;
+      const report = await video.sender?.getStats().catch(() => undefined);
+      if (!report) return;
+      for (const stats of report.values()) {
+        if (stats.type === "outbound-rtp" && stats.kind === "video") {
+          console.debug("[follow] sending after 3 s", {
+            framesSent: stats.framesSent,
+            bytesSent: stats.bytesSent,
+            qualityLimitationReason: stats.qualityLimitationReason,
+          });
+        }
+      }
+    }, 3000);
   }
 
   /**
@@ -1845,9 +1985,13 @@ class Voice {
         // (Wayland): null shows the normal picker or portal.
         result = await this.#swap(async () => {
           if (this.screenshare()) {
-            // already streaming something else: move that stream over
-            this.#endFollow();
-            return this.#replaceSource(target?.sourceId);
+            // Already streaming: move that stream over. Follow mode stays
+            // as it is until the swap worked, so a failed swap loses nothing.
+            const swapped = await this.#replaceSource(target?.sourceId);
+            if (swapped === "done" && target && this.room() === room) {
+              this.#beginFollow(gameId, target.sourceId);
+            }
+            return swapped;
           }
           await window.native.setNextScreenSource?.(target?.sourceId ?? null);
           return this.#startScreenshare(room, !!target);
@@ -1862,14 +2006,21 @@ class Voice {
       window.native.setNextScreenSource?.(null);
     }
 
+    if (!best || !this.screenshare() || this.room() !== room) return;
+
     // follow only when the window was chosen for the user, not picked by hand
-    if (
-      result === "done" &&
-      best &&
-      this.screenshare() &&
-      this.room() === room
-    ) {
-      this.#beginFollow(gameId, best.sourceId);
+    if (result === "done") {
+      if (
+        this.#follow?.gameId !== gameId ||
+        this.#follow.sourceId !== best.sourceId
+      ) {
+        this.#beginFollow(gameId, best.sourceId);
+      }
+    } else if (this.#follow?.gameId !== gameId) {
+      // The swap did not work and the old stream goes on, maybe black.
+      // Follow the game anyway, the window may show up later. The captured
+      // source is unknown, so any best window counts as a change.
+      this.#beginFollow(gameId, "");
     }
   }
 
@@ -1882,10 +2033,10 @@ class Voice {
     const follow: Follow = {
       gameId,
       sourceId,
+      missed: 0,
       stop: subscribeRunningGames((games) => {
         updated = true;
-        this.#followGames = games;
-        this.#syncFollow();
+        this.#updateFollowGames(follow, games);
       }),
     };
     this.#follow = follow;
@@ -1895,9 +2046,26 @@ class Voice {
     this.#watchStall(follow);
     fetchRunningGames().then((games) => {
       if (this.#follow !== follow || updated) return;
-      this.#followGames = games;
-      this.#syncFollow();
+      this.#updateFollowGames(follow, games);
     });
+  }
+
+  /**
+   * Take a new list of running games while following and act on it. A list
+   * without the game once may be a failed scan, so it is read again soon.
+   */
+  #updateFollowGames(follow: Follow, games: RunningGame[]) {
+    if (this.#follow !== follow) return;
+    this.#followGames = games;
+    follow.missed = countMissed(games, follow.gameId, follow.missed);
+
+    if (follow.missed === 1) {
+      setTimeout(async () => {
+        if (this.#follow !== follow || follow.missed !== 1) return;
+        this.#updateFollowGames(follow, await fetchRunningGames());
+      }, 2000);
+    }
+    this.#syncFollow();
   }
 
   /** Stop following a game, the stream itself is left alone */
@@ -1986,10 +2154,8 @@ class Voice {
       samples = [];
       console.debug("[follow] no frames sent, checking the games");
       const games = await fetchRunningGames();
-      if (this.#follow !== follow) return;
-      this.#followGames = games;
       // nothing changes when the best window is still the captured one
-      this.#syncFollow();
+      this.#updateFollowGames(follow, games);
     };
 
     this.#stallTimer = setInterval(async () => {
@@ -2020,22 +2186,24 @@ class Voice {
    * another window of the game, move the stream to it if one shows up and
    * stop the stream if none does (or the game stopped).
    */
-  #followGrace(room: Room, endedTrack: MediaStreamTrack) {
+  #followGrace(room: Room, gen: number) {
     const follow = this.#follow;
     if (!follow) return;
     console.debug("[follow] grace period starts");
 
     // A swap to another window may have run before this task, then the
     // stream shows a live window and has to be left alone
-    const outdated = () =>
-      this.#follow !== follow ||
-      endedTrack.readyState === "live" ||
-      room.localParticipant.getTrackPublication(Track.Source.ScreenShare)
-        ?.videoTrack?.mediaStreamTrack !== endedTrack;
+    const outdated = () => this.#follow !== follow || this.#trackGen !== gen;
 
     this.#swap(async () => {
       if (outdated()) return;
-      const deadline = Date.now() + FOLLOW_GRACE_MS;
+      // Wait long only when the game took its window away. If the window is
+      // still listed, the capture was ended by hand (the browser's stop
+      // sharing), so there is little to wait for.
+      const games = await fetchRunningGames();
+      if (outdated()) return;
+      const deadline =
+        Date.now() + graceWaitMs(games, follow.gameId, follow.sourceId);
       let fresh = false;
 
       while (!outdated()) {
@@ -2082,11 +2250,26 @@ class Voice {
         stop();
         resolve(value);
       };
+      // A game that is still running without a window keeps the wait going
+      // up to the deadline; a missing game must be missing twice in a row
+      let missed = 0;
       const check = (games: RunningGame[]) => {
         if (this.#follow !== follow) return finish(undefined);
-        const result = graceWindow(games, follow.gameId, follow.sourceId);
+        const result = graceWindow(
+          games,
+          follow.gameId,
+          follow.sourceId,
+          missed,
+        );
+        missed = result.missed;
         if (result.gone) finish(undefined);
         else if (result.sourceId) finish(result.sourceId);
+        else if (missed === 1) {
+          // read again to be sure it stopped
+          setTimeout(() => {
+            if (!done) fetchRunningGames().then(check);
+          }, 2000);
+        }
       };
 
       const timer = setTimeout(
@@ -2122,22 +2305,21 @@ class Voice {
     const video = room?.localParticipant.getTrackPublication(
       Track.Source.ScreenShare,
     )?.videoTrack;
-    if (!room || !stream || !video) return "failed";
+    const token = this.#shareToken;
+    if (!room || !stream || !video || !token) return "failed";
 
     const picked = this.#registerScreenPicker(preselected);
     this.#prepareCapture();
 
     // whether the stream we were asked to change is gone or another one
-    const stale = () =>
-      this.streamOptions() !== stream ||
-      this.room() !== room ||
-      room.localParticipant.getTrackPublication(Track.Source.ScreenShare)
-        ?.videoTrack !== video;
+    const stale = () => this.#shareToken !== token || this.room() !== room;
 
     let tracks: LocalTrack[];
     try {
       try {
         if (preselected) await window.native.setNextScreenSource?.(sourceId);
+        // stay in this tab, as when starting a share
+        setScreenCaptureKeepFocus(true);
         const capturing = room.localParticipant.createScreenTracks({
           resolution: this.#screenShareQuality(
             stream.resolution,
@@ -2154,11 +2336,13 @@ class Voice {
             )
           : await capturing;
       } finally {
+        setScreenCaptureKeepFocus(false);
         // the chosen source is used once, drop it if it wasn't
         if (preselected) window.native.setNextScreenSource?.(null);
       }
     } catch (e) {
       // closing the picker keeps streaming the current window
+      logCaptureFailure("capture", e);
       if (picked.dismissed() || isCaptureCancelled(e)) return "cancelled";
       if (e instanceof CaptureTimeout) {
         console.debug("[follow]", e.message);
@@ -2168,7 +2352,9 @@ class Voice {
       return "failed";
     }
 
-    const newVideo = tracks.find((t) => t.kind === Track.Kind.Video)!;
+    const newVideo = tracks.find(
+      (t): t is LocalVideoTrack => t.kind === Track.Kind.Video,
+    )!;
     const newAudio = tracks.find(
       (t): t is LocalAudioTrack => t.kind === Track.Kind.Audio,
     );
@@ -2179,52 +2365,61 @@ class Voice {
       return "failed";
     }
 
-    // the stream was stopped meanwhile: drop what we captured, quietly
-    const abandon = () => {
-      tracks.forEach((t) => t.stop());
-      return "failed" as const;
-    };
-
+    let step = "unpublish";
     try {
-      const oldVideo = video.mediaStreamTrack;
-      // no time limit: a swap that finishes late would leave the new tracks
-      // in use, the stale() checks below deal with a stream that went away
-      await video.replaceTrack(newVideo.mediaStreamTrack, {
-        userProvidedTrack: false,
-      });
-      oldVideo.stop();
-      if (stale()) return abandon();
-
+      // Replacing the track of the running sender stays black with some
+      // captures (game windows), so publish the new capture the way a fresh
+      // share is: take down the old one first. The new tracks are captured
+      // already, so a cancelled picker never gets here.
       const oldAudio = this.#streamAudio;
-      if (newAudio && oldAudio && this.#streamAudioShared(room)) {
-        const oldAudioTrack = oldAudio.mediaStreamTrack;
-        await oldAudio.replaceTrack(newAudio.mediaStreamTrack, {
-          userProvidedTrack: false,
-        });
-        oldAudioTrack.stop();
-        if (stale()) return abandon();
-      } else {
-        if (oldAudio) {
-          if (this.#streamAudioShared(room)) {
-            await room.localParticipant.unpublishTrack(oldAudio);
-          }
-          oldAudio.stop();
+      await room.localParticipant.unpublishTrack(video, false);
+      video.stop();
+      if (oldAudio) {
+        if (this.#streamAudioShared(room)) {
+          await room.localParticipant.unpublishTrack(oldAudio);
         }
-        if (stale()) return abandon();
-        this.#keepStreamAudio(newAudio);
+        oldAudio.stop();
+        if (this.#streamAudio === oldAudio) this.#streamAudio = undefined;
+      }
+
+      // the stream was stopped meanwhile: drop what we captured, quietly
+      if (stale()) {
+        tracks.forEach((t) => t.stop());
+        return "failed";
       }
 
       // the picker is where audio gets chosen, so share whatever it captured
+      step = "publish";
       const pickedOptions = picked();
-      await this.#applyStreamOptions(room, {
-        resolution: pickedOptions?.resolution ?? stream.resolution,
-        frameRate: pickedOptions?.frameRate ?? stream.frameRate,
-        audio: !!newAudio,
-      });
-      return stale() ? abandon() : "done";
+      await this.#publishScreenshare(
+        room,
+        newVideo,
+        newAudio,
+        {
+          resolution: pickedOptions?.resolution ?? stream.resolution,
+          frameRate: pickedOptions?.frameRate ?? stream.frameRate,
+          audio: !!newAudio,
+        },
+        true,
+      );
+
+      if (stale()) {
+        // stopped while publishing, make sure nothing is left published
+        await this.#stopScreenshare(room);
+        tracks.forEach((t) => t.stop());
+        return "failed";
+      }
+      return "done";
     } catch (e) {
       // errors from a stream that was stopped meanwhile are expected
-      if (!stale()) this.onErr(e);
+      logCaptureFailure(step, e);
+      // never leave the capture running (the OS shows it as active)
+      tracks.forEach((t) => t.stop());
+      if (!stale()) {
+        // the old stream is down already, so the share is over
+        await this.#stopScreenshare(room).catch(() => {});
+        this.onErr(e);
+      }
       return "failed";
     }
   }
@@ -2428,6 +2623,8 @@ class Voice {
    * dropped and the participant grid returns
    */
   settleAfterStreamGone() {
+    // a stream that is being republished is not gone, keep its view
+    if (this.#pendingEnds.size) return;
     batch(() => {
       if (this.watching.size === 1) {
         this.#setPendingFocus([...this.watching][0]);
