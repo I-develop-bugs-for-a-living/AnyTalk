@@ -84,6 +84,7 @@ import {
   shouldKeepRejoining,
   shouldRejoin,
 } from "./reconnect";
+import { shouldRewatch } from "./rewatch";
 import { fetchRunningGames, subscribeRunningGames } from "./runningGames";
 import {
   setScreenCaptureKeepFocus,
@@ -358,8 +359,20 @@ class Voice {
    */
   #pendingEnds = new Map<
     string,
-    { timer: ReturnType<typeof setTimeout>; sound: boolean }
+    {
+      timer: ReturnType<typeof setTimeout>;
+      sound: boolean;
+      since: number;
+      focused: boolean;
+    }
   >();
+
+  /**
+   * Viewed streams that counted as ended (not stopped by the viewer): who
+   * streamed, the time it ended and whether it was focused. A stream that
+   * comes back soon after is watched again, see shouldRewatch
+   */
+  #endedWatches = new Map<string, { at: number; focused: boolean }>();
 
   /** Polls the stream's frame counter while following, see #watchStall */
   #stallTimer?: ReturnType<typeof setInterval>;
@@ -758,6 +771,7 @@ class Voice {
     room.addListener("participantDisconnected", (participant) => {
       this.#announce(room, participant.identity, "userLeaveVoice");
       this.#unwatch(participant.identity);
+      this.#endedWatches.delete(participant.identity);
     });
 
     room.addListener("trackPublished", (pub, participant) => {
@@ -766,6 +780,7 @@ class Voice {
         // back after a window swap: not a new stream
         if (!this.#cancelPendingEnd(participant.identity)) {
           this.sound.playSound("streamStart");
+          this.#rewatchEnded(participant.identity);
         }
         this.screenShareTracks.add(pub.trackSid);
       }
@@ -1278,15 +1293,76 @@ class Voice {
     const previous = this.#pendingEnds.get(identity);
     if (previous) clearTimeout(previous.timer);
     const withSound = sound || !!previous?.sound;
+    // when the stream first went away, kept over repeated unpublishes
+    const since = previous?.since ?? Date.now();
+    // whether the stream was focused when it went away: the track is
+    // already gone from vidTracks() when the end fires
+    const focused = previous
+      ? previous.focused
+      : this.#isFocusedStream(identity);
     this.#pendingEnds.set(identity, {
       sound: withSound,
+      since,
+      focused,
       timer: setTimeout(() => {
         this.#pendingEnds.delete(identity);
+        console.debug(
+          "[rtc] stream end fired for",
+          identity,
+          "unpublished for",
+          Date.now() - since,
+          "ms, watched:",
+          this.watching.has(identity),
+        );
+        if (this.watching.has(identity)) {
+          const now = Date.now();
+          // forget entries that are too old to be used
+          for (const [id, entry] of this.#endedWatches) {
+            if (!shouldRewatch(entry.at, now)) this.#endedWatches.delete(id);
+          }
+          this.#endedWatches.set(identity, { at: now, focused });
+        }
         if (withSound) this.sound.playSound("streamEnd");
         this.#unwatch(identity);
         this.settleAfterStreamGone();
       }, STREAM_REPUBLISH_WAIT_MS),
     });
+  }
+
+  /**
+   * Watch a stream again that ended a short while ago and is now published
+   * again (the streamer's swap took longer than we waited)
+   * @param identity Who started streaming
+   */
+  #rewatchEnded(identity: string) {
+    const ended = this.#endedWatches.get(identity);
+    this.#endedWatches.delete(identity);
+    if (!ended || !shouldRewatch(ended.at, Date.now())) return;
+    const othersWatched = [...this.watching].some((id) => id !== identity);
+    // never pull the viewer off another stream they picked meanwhile
+    if (othersWatched && !this.#settings.multiStream) return;
+    console.debug(
+      "[rtc] watching",
+      identity,
+      "again, stream came back after",
+      Date.now() - ended.at,
+      "ms, focused:",
+      ended.focused,
+    );
+    if (ended.focused && !othersWatched && !this.focusId()) {
+      this.watchStream(identity);
+    } else {
+      this.watching.add(identity);
+    }
+  }
+
+  /**
+   * Whether the participant's screen share is the focused tile
+   * @param identity Who streams
+   */
+  #isFocusedStream(identity: string) {
+    const sid = this.room()?.getParticipantByIdentity(identity)?.sid;
+    return !!sid && this.focusId() === `${Track.Source.ScreenShare}_${sid}`;
   }
 
   /**
@@ -1312,6 +1388,7 @@ class Voice {
     this.#currentVideo = undefined;
     this.#pendingEnds.forEach((p) => clearTimeout(p.timer));
     this.#pendingEnds.clear();
+    this.#endedWatches.clear();
     this.#cancelCapture();
     this.#cancelMicRecovery();
     this.#stopWatchingMic();
@@ -1345,6 +1422,7 @@ class Voice {
       });
 
       this.watching.clear();
+      this.#endedWatches.clear();
       this.#setPendingFocus();
 
       this.sound.playSound("userLeaveVoice");
@@ -2643,6 +2721,8 @@ class Voice {
    * aren't streaming get out of the way
    */
   watchStream(identity: string) {
+    // an older end timer must not undo this
+    this.#cancelPendingEnd(identity);
     if (!this.#settings.multiStream) {
       for (const id of [...this.watching]) {
         if (id !== identity) this.#stopWatching(id);
@@ -2774,8 +2854,15 @@ class Voice {
     this.#setShowBar(true);
   }
 
+  /**
+   * Stop watching a stream for good: unsubscribe it, drop its focus and
+   * forget any pending end or re-watch for it
+   * @param identity Who streamed
+   */
   #stopWatching(identity: string) {
+    this.#cancelPendingEnd(identity);
     this.#unwatch(identity);
+    this.#endedWatches.delete(identity);
 
     const participant = this.room()?.getParticipantByIdentity(identity);
     for (const source of [
