@@ -150,4 +150,12 @@ export const GAME_LIST: GameEntry[] = [
   ),
   win("monster-hunter-wilds", "Monster Hunter Wilds", "MonsterHunterWilds.exe"),
   win("ready-or-not", "Ready or Not", "ReadyOrNot-Win64-Shipping.exe"),
+  {
+    id: "stellaris",
+    name: "Stellaris",
+    executables: { win32: ["stellaris.exe"], linux: ["stellaris"] },
+  },
+  win("divinity-original-sin-2", "Divinity: Original Sin 2", "EoCApp.exe"),
+  win("binding-of-isaac", "The Binding of Isaac", "isaac-ng.exe"),
+  win("gunfire-reborn", "Gunfire Reborn", "Gunfire Reborn.exe"),
 ];
