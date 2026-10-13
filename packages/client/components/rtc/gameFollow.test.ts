@@ -3,10 +3,19 @@ import { describe, expect, it } from "vitest";
 import {
   bestWindow,
   countMissed,
+  FOLLOW_GRACE_MAX_MS,
+  FOLLOW_GRACE_SHORT_MS,
   followDecision,
   graceWaitMs,
   graceWindow,
+  isFlowing,
   isStalled,
+  REFRESH_MAX_ATTEMPTS,
+  REFRESH_SPACING_MS,
+  refreshAllowed,
+  SWAP_TO_GAME_DELAY_MS,
+  swapDelayMs,
+  windowListed,
 } from "./gameFollow";
 
 const win = (sourceId: string, role: "game" | "client" = "game") => ({
@@ -153,6 +162,106 @@ describe("graceWaitMs", () => {
     expect(graceWaitMs([game("a", [])], "a", "1")).toBe(90_000);
   });
   it("waits briefly when the window is still listed", () => {
-    expect(graceWaitMs([game("a", [win("1")])], "a", "1")).toBe(4000);
+    expect(graceWaitMs([game("a", [win("1")])], "a", "1")).toBe(
+      FOLLOW_GRACE_SHORT_MS,
+    );
+  });
+});
+
+describe("windowListed", () => {
+  it("finds a listed window", () => {
+    const games = [game("a", [win("1")])];
+    expect(windowListed(games, "a", "1")).toBe(true);
+    expect(windowListed(games, "a", "2")).toBe(false);
+    expect(windowListed(games, "b", "1")).toBe(false);
+  });
+  it("picks the wait by whether the window is listed", () => {
+    const games = [game("a", [win("1")])];
+    expect(graceWaitMs(games, "a", "1")).toBe(FOLLOW_GRACE_SHORT_MS);
+    expect(graceWaitMs([], "a", "1")).toBe(FOLLOW_GRACE_MAX_MS);
+  });
+});
+
+describe("refreshAllowed", () => {
+  it("allows the first attempt", () => {
+    expect(refreshAllowed(undefined, "1", 0)).toBe(true);
+  });
+  it("waits for the spacing", () => {
+    const state = { sourceId: "1", attempts: 1, lastAt: 1000 };
+    expect(refreshAllowed(state, "1", 1000 + REFRESH_SPACING_MS - 1)).toBe(
+      false,
+    );
+    expect(refreshAllowed(state, "1", 1000 + REFRESH_SPACING_MS)).toBe(true);
+  });
+  it("stops after the maximum attempts", () => {
+    const state = { sourceId: "1", attempts: REFRESH_MAX_ATTEMPTS, lastAt: 0 };
+    expect(refreshAllowed(state, "1", 1e9)).toBe(false);
+  });
+  it("starts anew for another window", () => {
+    const state = { sourceId: "1", attempts: REFRESH_MAX_ATTEMPTS, lastAt: 0 };
+    expect(refreshAllowed(state, "2", 1)).toBe(true);
+  });
+});
+
+describe("followDecision refresh", () => {
+  const games = [game("a", [win("1")])];
+
+  it("refreshes a stalled best window", () => {
+    expect(
+      followDecision(games, {
+        gameId: "a",
+        sourceId: "1",
+        stalled: true,
+        now: 1,
+      }),
+    ).toEqual({ type: "refresh" });
+  });
+  it("keeps when not stalled or not allowed", () => {
+    expect(followDecision(games, { gameId: "a", sourceId: "1" })).toEqual({
+      type: "keep",
+    });
+    expect(
+      followDecision(games, {
+        gameId: "a",
+        sourceId: "1",
+        stalled: true,
+        refresh: { sourceId: "1", attempts: 1, lastAt: 0 },
+        now: 100,
+      }),
+    ).toEqual({ type: "keep" });
+  });
+});
+
+describe("swapDelayMs", () => {
+  const games = [game("a", [win("g"), win("c", "client")])];
+
+  it("delays the move from the client to a game window", () => {
+    expect(swapDelayMs(games, { gameId: "a", sourceId: "c" }, "g")).toBe(
+      SWAP_TO_GAME_DELAY_MS,
+    );
+  });
+  it("does not delay other moves", () => {
+    expect(swapDelayMs(games, { gameId: "a", sourceId: "g" }, "c")).toBe(0);
+    expect(swapDelayMs(games, { gameId: "a", sourceId: "x" }, "g")).toBe(0);
+  });
+});
+
+describe("isFlowing", () => {
+  it("needs a long enough rise", () => {
+    const rising = [0, 2000, 4000, 6000, 8000, 10000].map((at, i) => ({
+      at,
+      frames: i * 30,
+    }));
+    expect(isFlowing(rising, 10000)).toBe(true);
+    expect(isFlowing(rising.slice(-3), 10000)).toBe(false);
+  });
+  it("breaks when the counter stands still or drops", () => {
+    const still = [0, 2000, 4000, 6000, 8000, 10000].map((at, i) => ({
+      at,
+      frames: i === 5 ? 120 : i * 30,
+    }));
+    still[5].frames = still[4].frames;
+    expect(isFlowing(still, 10000)).toBe(false);
+    expect(isFlowing([])).toBe(false);
   });
 });
