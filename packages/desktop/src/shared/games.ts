@@ -168,4 +168,13 @@ export const GAME_LIST: GameEntry[] = [
   win("divinity-original-sin-2", "Divinity: Original Sin 2", "EoCApp.exe"),
   win("binding-of-isaac", "The Binding of Isaac", "isaac-ng.exe"),
   win("gunfire-reborn", "Gunfire Reborn", "Gunfire Reborn.exe"),
+  win("world-of-tanks", "World of Tanks", "WorldOfTanks.exe"),
+  win("world-of-tanks-blitz", "World of Tanks Blitz", "wotblitz.exe"),
+  win(
+    "world-of-warships",
+    "World of Warships",
+    "WorldOfWarships64.exe",
+    "WorldOfWarships32.exe",
+  ),
+  win("world-of-warplanes", "World of Warplanes", "worldofwarplanes.exe"),
 ];
