@@ -1,5 +1,6 @@
 import { createEffect, createSignal, onCleanup } from "solid-js";
 
+import { overlayAvailable } from "@revolt/rtc/overlayConfig";
 import { gameDetectionAvailable } from "@revolt/rtc/runningGames";
 import { useState } from "@revolt/state";
 
@@ -35,7 +36,9 @@ export function GlobalKeybinds() {
         (custom[action]?.enabled ?? true) &&
         // the game stream hotkey is hidden in settings without detection
         (action !== KeybindAction.VOICE_TOGGLE_GAME_STREAM ||
-          gameDetectionAvailable()),
+          gameDetectionAvailable()) &&
+        // the overlay hotkey needs a desktop build that has the overlay
+        (action !== KeybindAction.TOGGLE_OVERLAY || overlayAvailable()),
     ).flatMap((action) => {
       const accelerator = sequenceToGlobalAccelerator(
         custom[action]?.keys ?? defaultSequence(action),

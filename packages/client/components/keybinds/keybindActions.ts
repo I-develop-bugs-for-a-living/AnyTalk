@@ -75,6 +75,11 @@ export enum KeybindAction {
    * Stream the game in front, swap to it, or stop the stream (desktop app)
    */
   VOICE_TOGGLE_GAME_STREAM = "voice_toggle_game_stream",
+
+  /**
+   * Show or hide the in-game voice overlay (desktop app)
+   */
+  TOGGLE_OVERLAY = "toggle_overlay",
 }
 
 /**
@@ -84,6 +89,7 @@ export const CUSTOMISABLE_ACTIONS: KeybindAction[] = [
   KeybindAction.VOICE_TOGGLE_MUTE,
   KeybindAction.VOICE_TOGGLE_DEAFEN,
   KeybindAction.VOICE_TOGGLE_GAME_STREAM,
+  KeybindAction.TOGGLE_OVERLAY,
 ];
 
 /**
@@ -93,6 +99,7 @@ export const CUSTOMISABLE_ACTIONS: KeybindAction[] = [
 export const PREVENT_DEFAULT_ACTIONS = new Set<KeybindAction>([
   KeybindAction.VOICE_TOGGLE_MUTE,
   KeybindAction.VOICE_TOGGLE_DEAFEN,
+  KeybindAction.TOGGLE_OVERLAY,
 ]);
 
 /**
@@ -118,8 +125,23 @@ export const ACTION_PRIORITY: KeybindAction[] = [
   KeybindAction.VOICE_TOGGLE_MUTE,
   KeybindAction.VOICE_TOGGLE_DEAFEN,
   KeybindAction.VOICE_TOGGLE_GAME_STREAM,
+  KeybindAction.TOGGLE_OVERLAY,
   KeybindAction.CHAT_FOCUS_COMPOSITION,
 ];
+
+/**
+ * Whether an element is something the user types text into, where keys
+ * without Ctrl, Alt or Meta produce characters
+ * @param target Event target
+ */
+export function isTypingTarget(target: EventTarget | null): boolean {
+  return (
+    target instanceof HTMLInputElement ||
+    target instanceof HTMLTextAreaElement ||
+    (target instanceof HTMLElement && target.isContentEditable) ||
+    (target instanceof Element && target.nodeName === "MDUI-TEXT-FIELD")
+  );
+}
 
 /**
  * Filter keybinds with special logic
@@ -144,12 +166,7 @@ export function keybindFilter(
       return false;
 
     // don't allow focusing if another input element is currently being typed into
-    if (
-      target instanceof HTMLInputElement ||
-      target instanceof HTMLTextAreaElement ||
-      target?.nodeName === "MDUI-TEXT-FIELD"
-    )
-      return false;
+    if (isTypingTarget(target)) return false;
 
     // don't allow focusing if modifier key is pressed... except for paste
     if (

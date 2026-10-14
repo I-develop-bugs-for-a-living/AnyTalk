@@ -55,6 +55,7 @@ import { VoiceCallCardContext } from "@revolt/ui/components/features/voice/callC
 import { Device, useDevice } from "@revolt/common";
 import { CallSounds } from "./components/CallSounds";
 import { InRoom } from "./components/InRoom";
+import { OverlayPublisher } from "./components/OverlayPublisher";
 import { RoomAudioManager } from "./components/RoomAudioManager";
 import { StatsRecorder } from "./components/StatsRecorder";
 import { StreamViewers } from "./components/StreamViewers";
@@ -3145,6 +3146,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
           <StreamViewers />
         </InRoom>
         <StatsRecorder />
+        <OverlayPublisher />
         <CallSounds />
         <VoiceMoves />
       </RoomContext.Provider>

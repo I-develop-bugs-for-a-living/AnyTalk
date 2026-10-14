@@ -20,6 +20,14 @@ declare global {
     autoUpdate?: boolean;
     /** Look for running games to offer streaming them, on when missing */
     gameDetection?: boolean;
+    /** Show the in-game voice overlay, off when missing */
+    overlayEnabled?: boolean;
+    /** Screen corner of the overlay, top left when missing */
+    overlayCorner?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
+    /** When the overlay shows, only with a detected game when missing */
+    overlayMode?: "always" | "games";
+    /** How much the overlay shows, detailed when missing */
+    overlayStyle?: "compact" | "detailed";
     /** Server the app loads, empty for the default */
     serverUrl: string;
     windowState: {
@@ -114,6 +122,19 @@ declare global {
        * source (falls back to the picker if it is gone). null clears it.
        */
       setNextScreenSource?(sourceId: string | null): Promise<void>;
+      /** Sends the call snapshot to the in-game overlay, missing in older desktop versions */
+      setOverlayState?(state: {
+        inCall: boolean;
+        /** Translated text of the LIVE tag */
+        liveLabel?: string;
+        participants: {
+          id: string;
+          name: string;
+          avatar?: string;
+          speaking: boolean;
+          streaming: boolean;
+        }[];
+      }): Promise<void>;
     };
 
     /**

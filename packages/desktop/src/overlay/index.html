@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Local page: only its own script, inline styles and remote avatars -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; base-uri 'none'; form-action 'none'; script-src file:; style-src 'unsafe-inline'; img-src https: http: data:"
+    />
+    <title>AnyTalk overlay</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        background: transparent;
+        font-family:
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          sans-serif;
+        user-select: none;
+      }
+      #list {
+        box-sizing: border-box;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 4px;
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+      body[data-corner^="bottom"] #list {
+        justify-content: flex-end;
+      }
+      body[data-corner$="right"] #list {
+        align-items: flex-end;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        max-width: 100%;
+      }
+      body[data-corner$="right"] .row {
+        flex-direction: row-reverse;
+      }
+      .avatar {
+        position: relative;
+        flex: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        box-sizing: border-box;
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-weight: 600;
+        font-size: 16px;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+        opacity: 0.4;
+        border: 2px solid transparent;
+        transition:
+          opacity 0.15s ease,
+          border-color 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+      .avatar img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .row.speaking .avatar {
+        opacity: 1;
+        border-color: #3ba55d;
+        box-shadow: 0 0 6px rgba(59, 165, 93, 0.8);
+      }
+      .name {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: 3px 10px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        font-size: 14px;
+        line-height: 20px;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+      body[data-style="compact"] .name,
+      body[data-style="compact"] .live {
+        display: none;
+      }
+      .row.speaking .name {
+        opacity: 1;
+      }
+      .live {
+        flex: none;
+        padding: 1px 5px;
+        border-radius: 4px;
+        background: #e5384a;
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        line-height: 14px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .avatar,
+        .name {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body data-corner="top-left" data-style="detailed">
+    <main id="list" aria-hidden="true"></main>
+    <script src="overlay.js"></script>
+  </body>
+</html>

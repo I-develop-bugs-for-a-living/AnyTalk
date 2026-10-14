@@ -970,6 +970,14 @@ msgstr "机器人"
 msgid "Bots are not verified by AnyTalk."
 msgstr "机器人未经 AnyTalk 验证。"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Bottom left"
+msgstr "左下角"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Bottom right"
+msgstr "右下角"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "浏览器"
@@ -1339,6 +1347,10 @@ msgstr "敬请期待！👀"
 msgid "Compact mode"
 msgstr "紧凑模式"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Compact: only the avatars"
+msgstr "简洁：仅显示头像"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
 msgstr "对比回顾"
@@ -1531,6 +1543,7 @@ msgid "Could not reach the updater. Try again."
 msgstr "无法连接到更新程序，请重试。"
 
 #: components/app/interface/settings/user/Native.tsx
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not save this setting."
 msgstr "无法保存此设置。"
@@ -1887,6 +1900,10 @@ msgstr "桌面"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
 msgstr "桌面应用"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+msgstr "详细：说话时显示名称，直播显示“直播中”标签"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2558,8 +2575,8 @@ msgid "Hoist Role"
 msgstr "单独显示角色"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Hold Ctrl, Alt or Shift together with a letter or number."
-msgstr "请同时按住 Ctrl、Alt 或 Shift 和一个字母或数字。"
+#~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
+#~ msgstr "请同时按住 Ctrl、Alt 或 Shift 和一个字母或数字。"
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -2956,6 +2973,7 @@ msgstr "Linux pacman（Arch）"
 msgid "Listen"
 msgstr "收听"
 
+#: components/rtc/components/OverlayPublisher.tsx
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
@@ -3560,6 +3578,10 @@ msgstr "最旧"
 msgid "On"
 msgstr "开"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "On Wayland your desktop decides where windows go, so the overlay may not stay on top of games or in the chosen corner."
+msgstr "在 Wayland 上，窗口位置由桌面环境决定，因此悬浮窗可能无法保持在游戏上方或所选角落。"
+
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -3602,6 +3624,10 @@ msgstr "仅当你运行自己的 AnyTalk 服务器时才需要更改。"
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Only mentions will notify you"
 msgstr "只有提及才会通知你"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Only while a detected game is running"
+msgstr "仅在检测到游戏运行时"
 
 #: components/instance/index.tsx
 msgid "Oops, something went wrong! {e}"
@@ -3676,6 +3702,10 @@ msgstr "输出设备"
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "输出音量"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Overlay"
+msgstr "悬浮窗"
 
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -3844,6 +3874,10 @@ msgstr "连接较差"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor or lost connection"
 msgstr "连接较差或已断开"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Position"
+msgstr "位置"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
@@ -4641,9 +4675,17 @@ msgstr "在通话视频磁贴上显示实时统计"
 msgid "Show Others"
 msgstr "显示其他人"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Show overlay"
+msgstr "显示悬浮窗"
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Show send message button"
 msgstr "显示发送消息按钮"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
+msgstr "在游戏画面上方显示通话中谁在说话。适用于无边框和窗口化游戏，不适用于独占全屏。"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Sign into AnyTalk"
@@ -4862,6 +4904,10 @@ msgstr "直播（{streams}）"
 msgid "Strong (150 Hz)"
 msgstr "强（150 Hz）"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Style"
+msgstr "样式"
+
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
 msgstr "提交功能建议"
@@ -5036,8 +5082,16 @@ msgstr "主题"
 #~ msgstr "这些按键不能用作全局快捷键。"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
-msgstr "这些按键仅在 AnyTalk 内有效。要在任何地方使用，请将 Ctrl、Alt 或 Shift 与字母或数字组合，或使用 F 键。"
+#~ msgid "These keys only work inside AnyTalk. A numpad key or an F key on its own, or any key with Ctrl, Alt or Shift, works everywhere."
+#~ msgstr "这些按键仅在 AnyTalk 内有效。单独的小键盘按键或 F 键，以及与 Ctrl、Alt 或 Shift 组合的按键，在任何地方都有效。"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "These keys only work inside AnyTalk. Numpad keys (except Enter), F keys, Insert, Home, End, Page Up and Page Down also work everywhere on their own."
+msgstr "这些按键仅在 AnyTalk 内有效。小键盘按键（Enter 除外）、F 键、Insert、Home、End、Page Up 和 Page Down 单独使用时在任何地方也有效。"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
+#~ msgstr "这些按键仅在 AnyTalk 内有效。要在任何地方使用，请将 Ctrl、Alt 或 Shift 与字母或数字组合，或使用 F 键。"
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -5101,6 +5155,10 @@ msgstr "这里是您对话的开始。"
 msgid "This is the start of your notes."
 msgstr "这里是您笔记的开始。"
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
+msgstr "此按键不能单独使用。请加上 Ctrl、Alt 或 Shift，或选择其他按键。"
+
 #: components/i18n/errors.tsx
 msgid "This message is already pinned."
 msgstr "这条消息已被置顶。"
@@ -5108,6 +5166,10 @@ msgstr "这条消息已被置顶。"
 #: components/i18n/errors.tsx
 msgid "This message is empty and has not been sent."
 msgstr "这条消息为空，未发送。"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "This option needs game detection. Turn on \"Detect running games\" in the Desktop settings."
+msgstr "此选项需要游戏检测。请在桌面设置中开启“检测正在运行的游戏”。"
 
 #: components/i18n/errors.tsx
 msgid "This password has previously appeared in security leaks, please use another password."
@@ -5197,6 +5259,10 @@ msgstr "切换主侧边栏"
 msgid "Toggle mute"
 msgstr "切换静音"
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Toggle overlay"
+msgstr "切换悬浮窗"
+
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Token copied to clipboard"
 msgstr "令牌已复制到剪贴板"
@@ -5208,6 +5274,14 @@ msgstr "Tonal Spot"
 #: src/interface/channels/text/Composition.tsx
 msgid "Too Long"
 msgstr "过长"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Top left"
+msgstr "左上角"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Top right"
+msgstr "右上角"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
@@ -5706,6 +5780,14 @@ msgstr "新功能"
 #~ msgid "What's New"
 #~ msgstr ""
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "When to show"
+msgstr "显示时机"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Whenever I'm in a call"
+msgstr "只要我在通话中"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Whether other users can edit these settings"
 msgstr "其他用户是否可以编辑这些设置"
@@ -5795,6 +5877,10 @@ msgstr "你也可以点击左下角的齿轮图标。"
 
 #~ msgid "You can also right-click the user icon in the top left, or left click it if you're already home."
 #~ msgstr "您也可以右键点击左上角的用户图标，或者在主页时直接左键点击。"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "You can also switch it on and off with the Toggle overlay hotkey in Hotkeys."
+msgstr "你也可以通过快捷键中的“切换悬浮窗”来开关它。"
 
 #: components/modal/modals/DeleteChannel.tsx
 msgid "You can re-open it later, but it will disappear on both sides."

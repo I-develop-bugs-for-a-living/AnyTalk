@@ -27,6 +27,18 @@ describe("sequenceToAccelerator", () => {
     expect(sequenceToAccelerator(["Control", "+"])).toBe("Ctrl+Plus");
   });
 
+  it("converts numpad keys", () => {
+    expect(sequenceToAccelerator(["Numpad9"])).toBe("num9");
+    expect(sequenceToAccelerator(["Control", "Numpad0"])).toBe("Ctrl+num0");
+    expect(sequenceToAccelerator(["NumpadAdd"])).toBe("numadd");
+    expect(sequenceToAccelerator(["NumpadSubtract"])).toBe("numsub");
+    expect(sequenceToAccelerator(["NumpadMultiply"])).toBe("nummult");
+    expect(sequenceToAccelerator(["NumpadDivide"])).toBe("numdiv");
+    expect(sequenceToAccelerator(["NumpadDecimal"])).toBe("numdec");
+    expect(sequenceToAccelerator(["NumpadEnter"])).toBe("Enter");
+    expect(sequenceToAccelerator(["Numpad9", "9"])).toBeNull();
+  });
+
   it("rejects RegExp entries", () => {
     expect(sequenceToAccelerator([/^[^ ]$/])).toBeNull();
     expect(sequenceToAccelerator(["Control", /a/])).toBeNull();
@@ -52,6 +64,20 @@ describe("sequenceToGlobalAccelerator", () => {
 
   it("accepts a bare function key", () => {
     expect(sequenceToGlobalAccelerator(["F12"])).toBe("F12");
+  });
+
+  it("accepts bare numpad and navigation keys", () => {
+    expect(sequenceToGlobalAccelerator(["Numpad9"])).toBe("num9");
+    expect(sequenceToGlobalAccelerator(["NumpadAdd"])).toBe("numadd");
+    expect(sequenceToGlobalAccelerator(["Insert"])).toBe("Insert");
+    expect(sequenceToGlobalAccelerator(["PageDown"])).toBe("PageDown");
+    expect(sequenceToGlobalAccelerator(["ScrollLock"])).toBe("Scrolllock");
+  });
+
+  it("rejects bare numpad Enter and other typing keys", () => {
+    expect(sequenceToGlobalAccelerator(["NumpadEnter"])).toBeNull();
+    expect(sequenceToGlobalAccelerator(["Enter"])).toBeNull();
+    expect(sequenceToGlobalAccelerator(["Delete"])).toBeNull();
   });
 
   it("rejects keys without a modifier", () => {

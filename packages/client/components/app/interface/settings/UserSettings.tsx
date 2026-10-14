@@ -12,6 +12,7 @@ import { hardReload } from "@revolt/common/lib/hardReload";
 import { useInstance } from "@revolt/instance";
 import { useUser } from "@revolt/markdown/users";
 import { useModals } from "@revolt/modal";
+import { overlayAvailable } from "@revolt/rtc";
 import { ColouredText, Column, Text, iconSize } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
@@ -49,6 +50,7 @@ import { HotkeysSettings } from "./user/Hotkeys";
 import { LanguageSettings } from "./user/Language";
 import Native from "./user/Native";
 import Notifications from "./user/notifications/Notifications";
+import Overlay from "./user/Overlay";
 import { EditProfile } from "./user/profile";
 import { Sessions } from "./user/Sessions";
 import { updateWaiting, watchUpdater } from "./user/updaterState";
@@ -117,6 +119,8 @@ const Config: SettingsConfiguration<{ server: Server }> = {
         return <Feedback />;
       case "native":
         return <Native />;
+      case "overlay":
+        return <Overlay />;
       case "updates":
         return <Updates />;
       case "desktop-download":
@@ -358,6 +362,13 @@ const Config: SettingsConfiguration<{ server: Server }> = {
               hidden: !window.native,
               icon: <Symbol size={20}>desktop_windows</Symbol>,
               title: <Trans>Desktop</Trans>,
+            },
+            {
+              id: "overlay",
+              // older desktop builds lack the overlay bridge
+              hidden: !window.native || !overlayAvailable(),
+              icon: <Symbol size={20}>picture_in_picture</Symbol>,
+              title: <Trans>Overlay</Trans>,
             },
             {
               id: "updates",

@@ -947,6 +947,14 @@ msgstr "বট"
 msgid "Bots are not verified by AnyTalk."
 msgstr "বটগুলো AnyTalk দ্বারা যাচাই করা নয়।"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Bottom left"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Bottom right"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "ব্রাউজার"
@@ -1314,6 +1322,10 @@ msgstr "শীঘ্রই আসছে! 👀"
 msgid "Compact mode"
 msgstr "কমপ্যাক্ট মোড"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Compact: only the avatars"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
 msgstr "রিক্যাপ তুলনা করুন"
@@ -1506,6 +1518,7 @@ msgid "Could not reach the updater. Try again."
 msgstr "আপডেটারের সাথে যোগাযোগ করা যায়নি। আবার চেষ্টা করুন।"
 
 #: components/app/interface/settings/user/Native.tsx
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not save this setting."
 msgstr "এই সেটিংটি সেভ করা যায়নি।"
@@ -1860,6 +1873,10 @@ msgstr "ডেস্কটপ"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
 msgstr "ডেস্কটপ অ্যাপ"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2531,8 +2548,8 @@ msgid "Hoist Role"
 msgstr "রোল আলাদা করে দেখান"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Hold Ctrl, Alt or Shift together with a letter or number."
-msgstr "একটি অক্ষর বা সংখ্যার সাথে Ctrl, Alt বা Shift চেপে ধরুন।"
+#~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
+#~ msgstr "একটি অক্ষর বা সংখ্যার সাথে Ctrl, Alt বা Shift চেপে ধরুন।"
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -2928,6 +2945,7 @@ msgstr "Linux pacman (Arch)"
 msgid "Listen"
 msgstr "শুনুন"
 
+#: components/rtc/components/OverlayPublisher.tsx
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
@@ -3532,6 +3550,10 @@ msgstr "সবথেকে পুরনো"
 msgid "On"
 msgstr "চালু করুন"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "On Wayland your desktop decides where windows go, so the overlay may not stay on top of games or in the chosen corner."
+msgstr ""
+
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -3574,6 +3596,10 @@ msgstr "আপনি নিজের AnyTalk সার্ভার চালা�
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Only mentions will notify you"
 msgstr "শুধু মেনশন হলে আপনাকে নোটিফাই করা হবে"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Only while a detected game is running"
+msgstr ""
 
 #: components/instance/index.tsx
 msgid "Oops, something went wrong! {e}"
@@ -3648,6 +3674,10 @@ msgstr ""
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "আউটপুট ভলিউম"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Overlay"
+msgstr ""
 
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -3816,6 +3846,10 @@ msgstr "খারাপ সংযোগ"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor or lost connection"
 msgstr "খারাপ বা হারানো সংযোগ"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Position"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
@@ -4612,9 +4646,17 @@ msgstr "কল ভিডিও টাইলে লাইভ পরিসংখ�
 msgid "Show Others"
 msgstr "অন্যদের দেখান"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Show overlay"
+msgstr ""
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Show send message button"
 msgstr "মেসেজ পাঠানোর বোতাম দেখান"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
+msgstr ""
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Sign into AnyTalk"
@@ -4833,6 +4875,10 @@ msgstr "স্ট্রিম ({streams})"
 msgid "Strong (150 Hz)"
 msgstr "শক্তিশালী (150 Hz)"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Style"
+msgstr ""
+
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
 msgstr "ফিচার সম্পর্কে আপনার মতামত জানান"
@@ -5007,8 +5053,16 @@ msgstr "থিম"
 #~ msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
-msgstr "এই কী-গুলো শুধু AnyTalk -এর ভেতরে কাজ করে। সবখানে ব্যবহার করতে একটি অক্ষর বা সংখ্যার সাথে Ctrl, Alt বা Shift, অথবা একটি F কী ব্যবহার করুন।"
+#~ msgid "These keys only work inside AnyTalk. A numpad key or an F key on its own, or any key with Ctrl, Alt or Shift, works everywhere."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "These keys only work inside AnyTalk. Numpad keys (except Enter), F keys, Insert, Home, End, Page Up and Page Down also work everywhere on their own."
+msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
+#~ msgstr "এই কী-গুলো শুধু AnyTalk -এর ভেতরে কাজ করে। সবখানে ব্যবহার করতে একটি অক্ষর বা সংখ্যার সাথে Ctrl, Alt বা Shift, অথবা একটি F কী ব্যবহার করুন।"
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -5072,6 +5126,10 @@ msgstr "এটি আপনার কথোপকথনের সূচনা।
 msgid "This is the start of your notes."
 msgstr "এটি আপনার নোটসের সূচনা।"
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "This message is already pinned."
 msgstr "এই মেসেজটি ইতিমধ্যে পিন করা আছে।"
@@ -5079,6 +5137,10 @@ msgstr "এই মেসেজটি ইতিমধ্যে পিন কর�
 #: components/i18n/errors.tsx
 msgid "This message is empty and has not been sent."
 msgstr "এই মেসেজটি খালি এবং পাঠানো হয়নি।"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "This option needs game detection. Turn on \"Detect running games\" in the Desktop settings."
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "This password has previously appeared in security leaks, please use another password."
@@ -5168,6 +5230,10 @@ msgstr "প্রধান সাইডবার দেখান/লুকান
 msgid "Toggle mute"
 msgstr "মিউট চালু/বন্ধ করুন"
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Toggle overlay"
+msgstr ""
+
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Token copied to clipboard"
 msgstr "টোকেন ক্লিপবোর্ডে কপি হয়েছে"
@@ -5179,6 +5245,14 @@ msgstr "টোনাল স্পট"
 #: src/interface/channels/text/Composition.tsx
 msgid "Too Long"
 msgstr "খুব দীর্ঘ"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Top left"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Top right"
+msgstr ""
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
@@ -5675,6 +5749,14 @@ msgstr "নতুন কী"
 #~ msgid "What's New"
 #~ msgstr ""
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "When to show"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Whenever I'm in a call"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Whether other users can edit these settings"
 msgstr "অন্য ইউজাররা এই সেটিংস এডিট করতে পারবেন কি না"
@@ -5762,6 +5844,10 @@ msgstr "আপনি নিচে বাঁ দিকের গিয়ার �
 
 #~ msgid "You can also right-click the user icon in the top left, or left click it if you're already home."
 #~ msgstr "আপনি বাম দিকে থাকা ইউজার আইকনে-ক্লিক করতে পারেন, অথবা আপনি যদি বাড়িতেই থাকেন তবে আপনি বাম ক্লিকও করতে পারেন।"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "You can also switch it on and off with the Toggle overlay hotkey in Hotkeys."
+msgstr ""
 
 #: components/modal/modals/DeleteChannel.tsx
 msgid "You can re-open it later, but it will disappear on both sides."

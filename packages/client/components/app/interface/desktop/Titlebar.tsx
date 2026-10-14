@@ -7,6 +7,7 @@ import { styled } from "styled-system/jsx";
 
 import { useClientLifecycle } from "@revolt/client";
 import { State, TransitionType } from "@revolt/client/Controller";
+import { createDisconnectedIndicator } from "@revolt/client/disconnectedIndicator";
 import { Button, Ripple, symbolSize, typography } from "@revolt/ui";
 
 import MdBuild from "@material-symbols/svg-400/outlined/build.svg?component-solid";
@@ -38,14 +39,8 @@ export function Titlebar() {
   }
   const { lifecycle } = useClientLifecycle();
 
-  function isDisconnected() {
-    return [
-      State.Connecting,
-      State.Disconnected,
-      State.Reconnecting,
-      State.Offline,
-    ].includes(lifecycle.state());
-  }
+  /** Whether to show the disconnected look (after a short grace period) */
+  const isDisconnected = createDisconnectedIndicator(() => lifecycle.state());
 
   /** Toggle between maximised and restored, the shell reports the result */
   function maximise() {

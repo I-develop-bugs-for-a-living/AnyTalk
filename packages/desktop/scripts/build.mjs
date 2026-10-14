@@ -48,6 +48,22 @@ await build({
   outfile: resolve(dist, "preload.js"),
 });
 
+// The overlay page script runs in a browser window, not in node
+await build({
+  bundle: true,
+  platform: "browser",
+  format: "iife",
+  target: "chrome120",
+  sourcemap: false,
+  logLevel: "info",
+  entryPoints: [resolve(root, "src/overlay/overlay.ts")],
+  outfile: resolve(dist, "overlay/overlay.js"),
+});
+cpSync(
+  resolve(root, "src/overlay/index.html"),
+  resolve(dist, "overlay/index.html"),
+);
+
 cpSync(resolve(root, "src/error-page"), resolve(dist, "error-page"), {
   recursive: true,
 });

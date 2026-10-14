@@ -554,12 +554,38 @@ async function detect(gen: number): Promise<RunningGame[] | undefined> {
   }));
 }
 
+/** Main-process subscribers to the detected games, see `onGamesChange`. */
+const gameListeners = new Set<(games: RunningGame[]) => void>();
+
+/**
+ * Subscribe to changes of the detected games inside the main process.
+ *
+ * @param listener Called with the new list
+ * @returns A function that unsubscribes
+ */
+export function onGamesChange(listener: (games: RunningGame[]) => void) {
+  gameListeners.add(listener);
+  return () => {
+    gameListeners.delete(listener);
+  };
+}
+
+/**
+ * The games found by the last scan, without waiting for a running one.
+ *
+ * @returns Matched games, empty when detection is off
+ */
+export function getLatestGames(): RunningGame[] {
+  return enabled ? latest : [];
+}
+
 /**
  * Send a list to the app window.
  *
  * @param games Detected games
  */
 function publish(games: RunningGame[]) {
+  gameListeners.forEach((listener) => listener(games));
   const target = getTarget();
   // Not to the error page, nor after the window navigated away
   if (target && !target.isDestroyed() && isServerUrl(target.getURL()))

@@ -14,7 +14,7 @@ import { ChannelContextMenu, ServerContextMenu } from "@revolt/app";
 import { MessageCache } from "@revolt/app/interface/channels/text/MessageCache";
 import { Titlebar } from "@revolt/app/interface/desktop/Titlebar";
 import { useClient, useClientLifecycle } from "@revolt/client";
-import { State } from "@revolt/client/Controller";
+import { createDisconnectedIndicator } from "@revolt/client/disconnectedIndicator";
 import { NotificationsWorker } from "@revolt/client/NotificationsWorker";
 import { useModals } from "@revolt/modal";
 import { Navigate, useBeforeLeave, useLocation } from "@revolt/routing";
@@ -53,14 +53,8 @@ const Interface = (props: { children: JSX.Element }) => {
     }
   });
 
-  function isDisconnected() {
-    return [
-      State.Connecting,
-      State.Disconnected,
-      State.Reconnecting,
-      State.Offline,
-    ].includes(lifecycle.state());
-  }
+  /** Whether to show the disconnected look (after a short grace period) */
+  const isDisconnected = createDisconnectedIndicator(() => lifecycle.state());
 
   //Drawer slider for mobile
   let rootRef, sDrawer: SlideDrawer | undefined;

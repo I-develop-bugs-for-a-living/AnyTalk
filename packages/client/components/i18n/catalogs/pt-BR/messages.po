@@ -944,6 +944,14 @@ msgstr "Bot"
 msgid "Bots are not verified by AnyTalk."
 msgstr "Os bots não são verificados pelo AnyTalk."
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Bottom left"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Bottom right"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "Navegador"
@@ -1311,6 +1319,10 @@ msgstr "Em breve! 👀"
 msgid "Compact mode"
 msgstr "Modo compacto"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Compact: only the avatars"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
 msgstr "Comparar resumos"
@@ -1503,6 +1515,7 @@ msgid "Could not reach the updater. Try again."
 msgstr "Não foi possível contatar o atualizador. Tente novamente."
 
 #: components/app/interface/settings/user/Native.tsx
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not save this setting."
 msgstr "Não foi possível salvar esta configuração."
@@ -1854,6 +1867,10 @@ msgstr "Área de trabalho"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
 msgstr "App para desktop"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2522,8 +2539,8 @@ msgid "Hoist Role"
 msgstr "Exibir cargo separadamente"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Hold Ctrl, Alt or Shift together with a letter or number."
-msgstr "Segure Ctrl, Alt ou Shift junto com uma letra ou número."
+#~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
+#~ msgstr "Segure Ctrl, Alt ou Shift junto com uma letra ou número."
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -2916,6 +2933,7 @@ msgstr "Linux pacman (Arch)"
 msgid "Listen"
 msgstr "Escutar"
 
+#: components/rtc/components/OverlayPublisher.tsx
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
@@ -3520,6 +3538,10 @@ msgstr "Antigo"
 msgid "On"
 msgstr "Ligado"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "On Wayland your desktop decides where windows go, so the overlay may not stay on top of games or in the chosen corner."
+msgstr ""
+
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -3562,6 +3584,10 @@ msgstr "Altere isto apenas se você usa seu próprio servidor AnyTalk."
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Only mentions will notify you"
 msgstr "Apenas menções vão te notificar"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Only while a detected game is running"
+msgstr ""
 
 #: components/instance/index.tsx
 msgid "Oops, something went wrong! {e}"
@@ -3636,6 +3662,10 @@ msgstr ""
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "Volume de Saída"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Overlay"
+msgstr ""
 
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -3804,6 +3834,10 @@ msgstr "Conexão ruim"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor or lost connection"
 msgstr "Conexão ruim ou perdida"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Position"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
@@ -4594,9 +4628,17 @@ msgstr "Mostrar estatísticas ao vivo nos blocos de vídeo da chamada"
 msgid "Show Others"
 msgstr "Mostrar Outros"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Show overlay"
+msgstr ""
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Show send message button"
 msgstr "Mostrar botão de enviar mensagem"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
+msgstr ""
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Sign into AnyTalk"
@@ -4809,6 +4851,10 @@ msgstr "Transmissões ({streams})"
 msgid "Strong (150 Hz)"
 msgstr "Forte (150 Hz)"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Style"
+msgstr ""
+
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
 msgstr "Enviar sugestão de funcionalidade"
@@ -4983,8 +5029,16 @@ msgstr "Tema"
 #~ msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
-msgstr "Estas teclas só funcionam dentro do AnyTalk. Use Ctrl, Alt ou Shift com uma letra ou número, ou uma tecla F, para usá-las em qualquer lugar."
+#~ msgid "These keys only work inside AnyTalk. A numpad key or an F key on its own, or any key with Ctrl, Alt or Shift, works everywhere."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "These keys only work inside AnyTalk. Numpad keys (except Enter), F keys, Insert, Home, End, Page Up and Page Down also work everywhere on their own."
+msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
+#~ msgstr "Estas teclas só funcionam dentro do AnyTalk. Use Ctrl, Alt ou Shift com uma letra ou número, ou uma tecla F, para usá-las em qualquer lugar."
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -5048,6 +5102,10 @@ msgstr "Este é o começo da sua conversa."
 msgid "This is the start of your notes."
 msgstr "Este é o começo das suas notas."
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "This message is already pinned."
 msgstr "Essa mensagem já está fixada."
@@ -5055,6 +5113,10 @@ msgstr "Essa mensagem já está fixada."
 #: components/i18n/errors.tsx
 msgid "This message is empty and has not been sent."
 msgstr "Essa mensagem está vazia e não foi enviada."
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "This option needs game detection. Turn on \"Detect running games\" in the Desktop settings."
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "This password has previously appeared in security leaks, please use another password."
@@ -5144,6 +5206,10 @@ msgstr "Alternar barra lateral principal"
 msgid "Toggle mute"
 msgstr "Alternar silêncio"
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Toggle overlay"
+msgstr ""
+
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Token copied to clipboard"
 msgstr "Token copiado para a área de transferência"
@@ -5155,6 +5221,14 @@ msgstr "Ponto tonal"
 #: src/interface/channels/text/Composition.tsx
 msgid "Too Long"
 msgstr "Longo demais"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Top left"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Top right"
+msgstr ""
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
@@ -5645,6 +5719,14 @@ msgstr "Novidades"
 #~ msgid "What's New"
 #~ msgstr "Coisas novas"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "When to show"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Whenever I'm in a call"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Whether other users can edit these settings"
 msgstr "Permitir que outros usuários editem estas configurações"
@@ -5732,6 +5814,10 @@ msgstr "Você também pode clicar no ícone de engrenagem no canto inferior esqu
 
 #~ msgid "You can also right-click the user icon in the top left, or left click it if you're already home."
 #~ msgstr "Você também pode clicar com o botão direito no ícone do usuário no canto superior esquerdo ou clicar com o botão esquerdo se já estiver no início."
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "You can also switch it on and off with the Toggle overlay hotkey in Hotkeys."
+msgstr ""
 
 #: components/modal/modals/DeleteChannel.tsx
 msgid "You can re-open it later, but it will disappear on both sides."

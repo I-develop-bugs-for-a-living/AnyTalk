@@ -947,6 +947,14 @@ msgstr "Бот"
 msgid "Bots are not verified by AnyTalk."
 msgstr "Боти не перевіряються AnyTalk."
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Bottom left"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Bottom right"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "Браузер"
@@ -1314,6 +1322,10 @@ msgstr "Скоро буде! 👀"
 msgid "Compact mode"
 msgstr "Компактний режим"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Compact: only the avatars"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
 msgstr "Порівняти підсумки"
@@ -1506,6 +1518,7 @@ msgid "Could not reach the updater. Try again."
 msgstr "Не вдалося зв'язатися із засобом оновлення. Спробуйте ще раз."
 
 #: components/app/interface/settings/user/Native.tsx
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not save this setting."
 msgstr "Не вдалося зберегти це налаштування."
@@ -1860,6 +1873,10 @@ msgstr "ПК"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
 msgstr "Застосунок для ПК"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2531,8 +2548,8 @@ msgid "Hoist Role"
 msgstr "Виділяти учасників з цією роллю окремо"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Hold Ctrl, Alt or Shift together with a letter or number."
-msgstr "Утримуйте Ctrl, Alt або Shift разом з літерою чи цифрою."
+#~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
+#~ msgstr "Утримуйте Ctrl, Alt або Shift разом з літерою чи цифрою."
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -2928,6 +2945,7 @@ msgstr "Linux pacman (Arch)"
 msgid "Listen"
 msgstr "Слухати"
 
+#: components/rtc/components/OverlayPublisher.tsx
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
@@ -3532,6 +3550,10 @@ msgstr "Старі"
 msgid "On"
 msgstr "Ввімкнене"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "On Wayland your desktop decides where windows go, so the overlay may not stay on top of games or in the chosen corner."
+msgstr ""
+
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -3574,6 +3596,10 @@ msgstr "Змінюйте це, лише якщо маєте власний се�
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Only mentions will notify you"
 msgstr "Сповіщення тільки за згадкою"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Only while a detected game is running"
+msgstr ""
 
 #: components/instance/index.tsx
 msgid "Oops, something went wrong! {e}"
@@ -3648,6 +3674,10 @@ msgstr ""
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "Гучність аудіовиходу"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Overlay"
+msgstr ""
 
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -3816,6 +3846,10 @@ msgstr "Погане з'єднання"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor or lost connection"
 msgstr "Погане або втрачене з'єднання"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Position"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
@@ -4612,9 +4646,17 @@ msgstr "Показувати статистику в реальному часі
 msgid "Show Others"
 msgstr "Показати інших"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Show overlay"
+msgstr ""
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Show send message button"
 msgstr "Показати кнопку надсилання повідомлення"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
+msgstr ""
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Sign into AnyTalk"
@@ -4833,6 +4875,10 @@ msgstr "Трансляції ({streams})"
 msgid "Strong (150 Hz)"
 msgstr "Сильний (150 Гц)"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Style"
+msgstr ""
+
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
 msgstr "Надіслати запропоновані функції"
@@ -5007,8 +5053,16 @@ msgstr "Тема"
 #~ msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
-msgstr "Ці клавіші працюють лише всередині AnyTalk. Використовуйте Ctrl, Alt або Shift з літерою чи цифрою або клавішу F, щоб вони працювали всюди."
+#~ msgid "These keys only work inside AnyTalk. A numpad key or an F key on its own, or any key with Ctrl, Alt or Shift, works everywhere."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "These keys only work inside AnyTalk. Numpad keys (except Enter), F keys, Insert, Home, End, Page Up and Page Down also work everywhere on their own."
+msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
+#~ msgstr "Ці клавіші працюють лише всередині AnyTalk. Використовуйте Ctrl, Alt або Shift з літерою чи цифрою або клавішу F, щоб вони працювали всюди."
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -5072,6 +5126,10 @@ msgstr "Це початок вашої розмови."
 msgid "This is the start of your notes."
 msgstr "Це початок ваших нотаток."
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "This message is already pinned."
 msgstr "Це повідомлення вже закріплено."
@@ -5079,6 +5137,10 @@ msgstr "Це повідомлення вже закріплено."
 #: components/i18n/errors.tsx
 msgid "This message is empty and has not been sent."
 msgstr "Це повідомлення порожнє, і тому не було надіслано."
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "This option needs game detection. Turn on \"Detect running games\" in the Desktop settings."
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "This password has previously appeared in security leaks, please use another password."
@@ -5168,6 +5230,10 @@ msgstr "Показати/сховати головну бічну панель"
 msgid "Toggle mute"
 msgstr "Увімк./вимк. мікрофон"
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Toggle overlay"
+msgstr ""
+
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Token copied to clipboard"
 msgstr "Токен скопійовано у буфер обміну"
@@ -5179,6 +5245,14 @@ msgstr "Tonal Spot"
 #: src/interface/channels/text/Composition.tsx
 msgid "Too Long"
 msgstr "Задовго"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Top left"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Top right"
+msgstr ""
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
@@ -5675,6 +5749,14 @@ msgstr "Що нового"
 #~ msgid "What's New"
 #~ msgstr "Нове"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "When to show"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Whenever I'm in a call"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Whether other users can edit these settings"
 msgstr "Чи можуть інші користувачі змінювати ці налаштування"
@@ -5762,6 +5844,10 @@ msgstr "Ви також можете натиснути на значок шес
 
 #~ msgid "You can also right-click the user icon in the top left, or left click it if you're already home."
 #~ msgstr "Також ви можете натиснути правою кнопкою миші по іконці користувача в верхньому лівому куті, або настинути лівою кнопкою миші, якщо ви на домашній сторінці."
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "You can also switch it on and off with the Toggle overlay hotkey in Hotkeys."
+msgstr ""
 
 #: components/modal/modals/DeleteChannel.tsx
 msgid "You can re-open it later, but it will disappear on both sides."

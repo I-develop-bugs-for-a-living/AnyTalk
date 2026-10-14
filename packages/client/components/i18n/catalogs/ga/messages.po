@@ -971,6 +971,14 @@ msgstr "Róbat"
 msgid "Bots are not verified by AnyTalk."
 msgstr "Ní dhearbhaíonn AnyTalk bots."
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Bottom left"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Bottom right"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "Brabhsálaí"
@@ -1340,6 +1348,10 @@ msgstr "Ag teacht go luath! 👀"
 msgid "Compact mode"
 msgstr "Mód dlúth"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Compact: only the avatars"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
 msgstr "Compáraigh athchláir"
@@ -1532,6 +1544,7 @@ msgid "Could not reach the updater. Try again."
 msgstr "Níorbh fhéidir teacht ar an nuashonraitheoir. Bain triail eile as."
 
 #: components/app/interface/settings/user/Native.tsx
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not save this setting."
 msgstr "Níorbh fhéidir an socrú seo a shábháil."
@@ -1893,6 +1906,10 @@ msgstr "Deasc"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
 msgstr "Aip deisce"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2566,8 +2583,8 @@ msgid "Hoist Role"
 msgstr "Ardaigh Ról"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Hold Ctrl, Alt or Shift together with a letter or number."
-msgstr "Coinnigh Ctrl, Alt nó Shift síos in éineacht le litir nó uimhir."
+#~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
+#~ msgstr "Coinnigh Ctrl, Alt nó Shift síos in éineacht le litir nó uimhir."
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -2965,6 +2982,7 @@ msgstr "Linux pacman (Arch)"
 msgid "Listen"
 msgstr "Éist"
 
+#: components/rtc/components/OverlayPublisher.tsx
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
@@ -3569,6 +3587,10 @@ msgstr "Is sine"
 msgid "On"
 msgstr "Ar Siúl"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "On Wayland your desktop decides where windows go, so the overlay may not stay on top of games or in the chosen corner."
+msgstr ""
+
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -3611,6 +3633,10 @@ msgstr "Ná hathraigh é seo ach amháin má ritheann tú d'fhreastalaí AnyTalk
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Only mentions will notify you"
 msgstr "Ní chuirfidh ach luanna fógra ort"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Only while a detected game is running"
+msgstr ""
 
 #: components/instance/index.tsx
 msgid "Oops, something went wrong! {e}"
@@ -3685,6 +3711,10 @@ msgstr ""
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "Airde Aschuir"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Overlay"
+msgstr ""
 
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -3853,6 +3883,10 @@ msgstr "Ceangal lag"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor or lost connection"
 msgstr "Ceangal lag nó caillte"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Position"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
@@ -4652,9 +4686,17 @@ msgstr "Taispeáin staitisticí beo ar leacáin físe glaonna"
 msgid "Show Others"
 msgstr "Taispeáin Daoine Eile"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Show overlay"
+msgstr ""
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Show send message button"
 msgstr "Taispeáin cnaipe seol teachtaireachta"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
+msgstr ""
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Sign into AnyTalk"
@@ -4875,6 +4917,10 @@ msgstr "Sruthanna ({streams})"
 msgid "Strong (150 Hz)"
 msgstr "Láidir (150 Hz)"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Style"
+msgstr ""
+
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
 msgstr "Tabhair moladh ceannaithe"
@@ -5049,8 +5095,16 @@ msgstr "Téama"
 #~ msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
-msgstr "Ní oibríonn na heochracha seo ach laistigh d'AnyTalk. Úsáid Ctrl, Alt nó Shift le litir nó uimhir, nó eochair F, chun iad a úsáid i ngach áit."
+#~ msgid "These keys only work inside AnyTalk. A numpad key or an F key on its own, or any key with Ctrl, Alt or Shift, works everywhere."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "These keys only work inside AnyTalk. Numpad keys (except Enter), F keys, Insert, Home, End, Page Up and Page Down also work everywhere on their own."
+msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
+#~ msgstr "Ní oibríonn na heochracha seo ach laistigh d'AnyTalk. Úsáid Ctrl, Alt nó Shift le litir nó uimhir, nó eochair F, chun iad a úsáid i ngach áit."
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -5114,6 +5168,10 @@ msgstr "Seo tús do chomhrá."
 msgid "This is the start of your notes."
 msgstr "Seo tús le do chuid nótaí."
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "This message is already pinned."
 msgstr "Tá an teachtaireacht seo pionnáilte cheana féin."
@@ -5121,6 +5179,10 @@ msgstr "Tá an teachtaireacht seo pionnáilte cheana féin."
 #: components/i18n/errors.tsx
 msgid "This message is empty and has not been sent."
 msgstr "Tá an teachtaireacht seo folamh agus níor seoladh í."
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "This option needs game detection. Turn on \"Detect running games\" in the Desktop settings."
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "This password has previously appeared in security leaks, please use another password."
@@ -5210,6 +5272,10 @@ msgstr "Scoránaigh príomhthaobhbharra"
 msgid "Toggle mute"
 msgstr "Scoránaigh balbhú"
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Toggle overlay"
+msgstr ""
+
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Token copied to clipboard"
 msgstr "Comhartha cóipeáilte chuig an ghearrthaisce"
@@ -5221,6 +5287,14 @@ msgstr "Spota Tonúil"
 #: src/interface/channels/text/Composition.tsx
 msgid "Too Long"
 msgstr "Rófhada"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Top left"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Top right"
+msgstr ""
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
@@ -5722,6 +5796,14 @@ msgstr "Cad atá nua"
 #~ msgid "What's New"
 #~ msgstr ""
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "When to show"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Whenever I'm in a call"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Whether other users can edit these settings"
 msgstr "An bhfuil cead ag úsáideoirí eile na socruithe seo a chur in eagar"
@@ -5812,6 +5894,10 @@ msgstr "Is féidir leat cliceáil ar dheilbhín na socruithe sa chúinne íochta
 #: src/interface/Home.tsx
 #~ msgid "You can also right-click the user icon in the top left, or left click it if you're already home."
 #~ msgstr "Is féidir leat cliceáil ar dheis freisin ar an deilbhín úsáideora ar thaobh na láimhe clé barr, nó cliceáil ar chlé má tá tú sa bhaile cheana féin."
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "You can also switch it on and off with the Toggle overlay hotkey in Hotkeys."
+msgstr ""
 
 #: components/modal/modals/DeleteChannel.tsx
 msgid "You can re-open it later, but it will disappear on both sides."

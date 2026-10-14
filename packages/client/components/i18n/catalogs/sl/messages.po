@@ -971,6 +971,14 @@ msgstr "Robot"
 msgid "Bots are not verified by AnyTalk."
 msgstr "AnyTalk ne preverja botov."
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Bottom left"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Bottom right"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "Brskalnik"
@@ -1340,6 +1348,10 @@ msgstr "Kmalu! 👀"
 msgid "Compact mode"
 msgstr "Kompaktni način"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Compact: only the avatars"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
 msgstr "Primerjaj povzetke"
@@ -1532,6 +1544,7 @@ msgid "Could not reach the updater. Try again."
 msgstr "Posodobitvenega programa ni bilo mogoče doseči. Poskusite znova."
 
 #: components/app/interface/settings/user/Native.tsx
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not save this setting."
 msgstr "Te nastavitve ni bilo mogoče shraniti."
@@ -1893,6 +1906,10 @@ msgstr "Namizje"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
 msgstr "Namizna aplikacija"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2566,8 +2583,8 @@ msgid "Hoist Role"
 msgstr "Ločen prikaz vloge"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Hold Ctrl, Alt or Shift together with a letter or number."
-msgstr "Držite Ctrl, Alt ali Shift skupaj s črko ali številko."
+#~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
+#~ msgstr "Držite Ctrl, Alt ali Shift skupaj s črko ali številko."
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -2965,6 +2982,7 @@ msgstr "Linux pacman (Arch)"
 msgid "Listen"
 msgstr "Poslušaj"
 
+#: components/rtc/components/OverlayPublisher.tsx
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
@@ -3569,6 +3587,10 @@ msgstr "Najstarejši"
 msgid "On"
 msgstr "Vklopljeno"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "On Wayland your desktop decides where windows go, so the overlay may not stay on top of games or in the chosen corner."
+msgstr ""
+
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -3611,6 +3633,10 @@ msgstr "To spremenite samo, če upravljate lasten strežnik AnyTalk."
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Only mentions will notify you"
 msgstr "Obveščale vas bodo samo omembe"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Only while a detected game is running"
+msgstr ""
 
 #: components/instance/index.tsx
 msgid "Oops, something went wrong! {e}"
@@ -3685,6 +3711,10 @@ msgstr ""
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "Glasnost izhoda"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Overlay"
+msgstr ""
 
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -3853,6 +3883,10 @@ msgstr "Slaba povezava"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor or lost connection"
 msgstr "Slaba ali izgubljena povezava"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Position"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
@@ -4652,9 +4686,17 @@ msgstr "Prikaži statistiko v živo na video ploščicah klica"
 msgid "Show Others"
 msgstr "Pokaži druge"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Show overlay"
+msgstr ""
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Show send message button"
 msgstr "Prikaži gumb za pošiljanje sporočila"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
+msgstr ""
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Sign into AnyTalk"
@@ -4875,6 +4917,10 @@ msgstr "Prenosi ({streams})"
 msgid "Strong (150 Hz)"
 msgstr "Močno (150 Hz)"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Style"
+msgstr ""
+
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
 msgstr "Predložite predlog funkcije"
@@ -5049,8 +5095,16 @@ msgstr "Tema"
 #~ msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
-msgstr "Te tipke delujejo samo znotraj AnyTalk. Uporabite Ctrl, Alt ali Shift s črko ali številko oziroma tipko F, da bodo delovale povsod."
+#~ msgid "These keys only work inside AnyTalk. A numpad key or an F key on its own, or any key with Ctrl, Alt or Shift, works everywhere."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "These keys only work inside AnyTalk. Numpad keys (except Enter), F keys, Insert, Home, End, Page Up and Page Down also work everywhere on their own."
+msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
+#~ msgstr "Te tipke delujejo samo znotraj AnyTalk. Uporabite Ctrl, Alt ali Shift s črko ali številko oziroma tipko F, da bodo delovale povsod."
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -5114,6 +5168,10 @@ msgstr "To je začetek vašega pogovora."
 msgid "This is the start of your notes."
 msgstr "To je začetek vaših zapiskov."
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "This message is already pinned."
 msgstr "To sporočilo je že pripeto."
@@ -5121,6 +5179,10 @@ msgstr "To sporočilo je že pripeto."
 #: components/i18n/errors.tsx
 msgid "This message is empty and has not been sent."
 msgstr "To sporočilo je prazno in ni bilo poslano."
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "This option needs game detection. Turn on \"Detect running games\" in the Desktop settings."
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "This password has previously appeared in security leaks, please use another password."
@@ -5210,6 +5272,10 @@ msgstr "Preklopi glavno stransko vrstico"
 msgid "Toggle mute"
 msgstr "Preklopi utišanje"
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Toggle overlay"
+msgstr ""
+
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Token copied to clipboard"
 msgstr "Žeton kopiran v odložišče"
@@ -5221,6 +5287,14 @@ msgstr "Tonal Spot"
 #: src/interface/channels/text/Composition.tsx
 msgid "Too Long"
 msgstr "Predolgo"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Top left"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Top right"
+msgstr ""
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
@@ -5722,6 +5796,14 @@ msgstr "Novosti"
 #~ msgid "What's New"
 #~ msgstr ""
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "When to show"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Whenever I'm in a call"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Whether other users can edit these settings"
 msgstr "Ali lahko drugi uporabniki urejajo te nastavitve"
@@ -5812,6 +5894,10 @@ msgstr "Lahko tudi kliknete ikono zobnika spodaj levo."
 #: src/interface/Home.tsx
 #~ msgid "You can also right-click the user icon in the top left, or left click it if you're already home."
 #~ msgstr "Lahko tudi kliknete z desnim klikom na uporabniško ikono v zgornjem levem kotu, ali pa jo kliknite z levim klikom če ste že na domu."
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "You can also switch it on and off with the Toggle overlay hotkey in Hotkeys."
+msgstr ""
 
 #: components/modal/modals/DeleteChannel.tsx
 msgid "You can re-open it later, but it will disappear on both sides."

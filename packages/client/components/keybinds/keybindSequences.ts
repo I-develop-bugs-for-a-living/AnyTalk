@@ -19,6 +19,7 @@ export const DEFAULT_SEQUENCES: Record<KeybindAction, (string | RegExp)[]> = {
   [KeybindAction.VOICE_TOGGLE_MUTE]: ["Control", "Shift", "m"],
   [KeybindAction.VOICE_TOGGLE_DEAFEN]: ["Control", "Shift", "d"],
   [KeybindAction.VOICE_TOGGLE_GAME_STREAM]: ["Control", "Shift", "g"],
+  [KeybindAction.TOGGLE_OVERLAY]: ["Control", "Shift", "o"],
 };
 
 /**
@@ -50,6 +51,7 @@ export const DEFAULT_MAC_SEQUENCES: Record<KeybindAction, (string | RegExp)[]> =
     [KeybindAction.VOICE_TOGGLE_MUTE]: ["Control", "Shift", "m"],
     [KeybindAction.VOICE_TOGGLE_DEAFEN]: ["Control", "Shift", "d"],
     [KeybindAction.VOICE_TOGGLE_GAME_STREAM]: ["Control", "Shift", "g"],
+    [KeybindAction.TOGGLE_OVERLAY]: ["Control", "Shift", "o"],
   };
 
 /** Modifier keys, in display order */
@@ -65,9 +67,95 @@ export function defaultSequence(action: KeybindAction) {
 }
 
 /**
+ * Key name used to track and store a key press. Numpad keys use their
+ * `event.code` ("Numpad9") so they differ from the main row and from arrows
+ while NumLock is on; letters are lower case so releasing Shift before the
+ * letter (which changes event.key) can't leave the key stuck as pressed.
+ * @param event Keyboard event
+ */
+export function keyOfEvent(event: KeyboardEvent): string {
+  // with NumLock off the numpad acts as arrows, Home, PageUp...: those keep
+  // their event.key so navigation hotkeys still work
+  if (
+    event.code.startsWith("Numpad") &&
+    (event.getModifierState("NumLock") ||
+      event.key.length === 1 ||
+      event.key === "Enter")
+  )
+    return event.code;
+  return event.key.length === 1 ? event.key.toLowerCase() : event.key;
+}
+
+/**
+ * Whether a key can't be used on its own as a hotkey because it is needed
+ * for navigation, typing or cancelling the recording
+ * @param key Key as returned by keyOfEvent
+ */
+export function isReservedBareKey(key: string): boolean {
+  return [
+    "Escape",
+    "Tab",
+    "Enter",
+    "Backspace",
+    "Delete",
+    " ",
+    "ArrowUp",
+    "ArrowDown",
+    "ArrowLeft",
+    "ArrowRight",
+  ].includes(key);
+}
+
+/**
+ * Whether a hotkey must be ignored while the user types in a text field:
+ * without Ctrl, Alt or Meta its key would also produce a character. This
+ * in-app rule is deliberate; global shortcuts (triggerKeybind) bypass it.
+ * @param keys Keys of the hotkey
+ */
+export function ignoredWhileTyping(keys: (string | RegExp)[]): boolean {
+  return !keys.some(
+    (key) =>
+      key === "Control" ||
+      key === "Alt" ||
+      key === "Meta" ||
+      // function keys don't type anything
+      (typeof key === "string" && /^F\d+$/.test(key)),
+  );
+}
+
+/** Symbols shown for numpad keys that aren't digits */
+const NUMPAD_NAMES: Record<string, string> = {
+  Add: "+",
+  Subtract: "-",
+  Multiply: "*",
+  Divide: "/",
+  Decimal: ".",
+  Enter: "Enter",
+  Equal: "=",
+  Comma: ",",
+};
+
+/**
+ * Character a tracked key types, so pattern keybinds (like "any character
+ * focuses the composer") still match numpad keys stored by their code
+ * @param key Key as returned by keyOfEvent
+ */
+export function typedCharOf(key: string): string {
+  if (!key.startsWith("Numpad")) return key;
+  const rest = key.slice("Numpad".length);
+  if (/^\d$/.test(rest)) return rest;
+  return rest !== "Enter" && NUMPAD_NAMES[rest] ? NUMPAD_NAMES[rest] : key;
+}
+
+/**
  * Human readable name of a key
  */
 export function formatKey(key: string) {
+  if (key.startsWith("Numpad")) {
+    const rest = key.slice("Numpad".length);
+    return `Num ${NUMPAD_NAMES[rest] ?? rest}`;
+  }
+
   switch (key) {
     case "Control":
       return "Ctrl";

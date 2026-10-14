@@ -2,7 +2,12 @@ import { app } from "electron";
 import { mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
-import type { DesktopConfig } from "../shared/ipc";
+import {
+  type DesktopConfig,
+  OVERLAY_CORNERS,
+  OVERLAY_MODES,
+  OVERLAY_STYLES,
+} from "../shared/ipc";
 
 /** Defaults used for every key missing from the stored file. */
 const DEFAULTS: DesktopConfig = {
@@ -15,6 +20,10 @@ const DEFAULTS: DesktopConfig = {
   discordRpc: false,
   autoUpdate: true,
   gameDetection: true,
+  overlayEnabled: false,
+  overlayCorner: "top-left",
+  overlayMode: "games",
+  overlayStyle: "detailed",
   serverUrl: "",
   windowState: { isMaximised: false, width: 1280, height: 800 },
 };
@@ -43,6 +52,22 @@ function normalise(stored: unknown): DesktopConfig {
     if (typeof source[key] === typeof DEFAULTS[key]) {
       (result as Record<string, unknown>)[key] = source[key];
     }
+  }
+
+  // Enum keys must hold one of the known values, else the default stays
+  const enums: Record<string, readonly string[]> = {
+    overlayCorner: OVERLAY_CORNERS,
+    overlayMode: OVERLAY_MODES,
+    overlayStyle: OVERLAY_STYLES,
+  };
+  for (const [key, allowed] of Object.entries(enums)) {
+    const value = source[key];
+    if (typeof value === "string" && allowed.includes(value))
+      (result as Record<string, unknown>)[key] = value;
+    else
+      (result as Record<string, unknown>)[key] = (
+        DEFAULTS as Record<string, unknown>
+      )[key];
   }
 
   const ws = source.windowState;

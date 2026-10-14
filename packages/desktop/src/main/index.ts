@@ -30,9 +30,18 @@ import {
   getRunningGames,
   installGameDetection,
   isGameWindow,
+  onGamesChange,
   setGameDetection,
 } from "./games";
 import { resetGlobalHotkeys, setGlobalHotkeys } from "./hotkeys";
+import {
+  destroyOverlay,
+  installOverlay,
+  overlayPageUrl,
+  refreshOverlay,
+  resetOverlay,
+  setOverlayState,
+} from "./overlay";
 import { APP_ID, desktopEnvironment, isWayland } from "./platform";
 import { installScreenShare, setNextScreenSource } from "./screen";
 import {
@@ -103,6 +112,7 @@ function appInfo(): AppInfo {
     desktopEnvironment,
     desktopVersion: app.getVersion(),
     errorPageUrl,
+    overlayPageUrl,
   };
 }
 
@@ -299,6 +309,7 @@ function createWindow() {
   });
   win.on("closed", () => {
     mainWindow = undefined;
+    destroyOverlay();
   });
 
   const wc = win.webContents;
@@ -317,6 +328,8 @@ function createWindow() {
     if (details.isMainFrame && !details.isSameDocument) {
       globalShortcut.unregisterAll();
       resetGlobalHotkeys();
+      // The new page knows nothing of the old call
+      resetOverlay();
     }
   });
   wc.setWindowOpenHandler(({ url }) => {
@@ -460,6 +473,7 @@ function registerIpc() {
     mainWindow?.webContents.session.setSpellCheckerEnabled(next.spellchecker);
     setAutoUpdate(next.autoUpdate);
     setGameDetection(next.gameDetection);
+    refreshOverlay();
     if (next.serverUrl !== previousUrl) loadApp();
     return next;
   });
@@ -485,6 +499,7 @@ function registerIpc() {
       }
     }
   });
+  handleApp(IPC.overlaySet, (value: unknown) => setOverlayState(value));
   handleApp(IPC.updaterGetState, () => getUpdaterState());
   handleApp(IPC.updaterCheck, () => checkForUpdates());
   handleApp(IPC.updaterDownload, () => downloadUpdate());
@@ -593,6 +608,8 @@ if (!app.requestSingleInstanceLock()) {
       () => mainWindow?.webContents,
       getConfig().gameDetection,
     );
+    installOverlay(() => mainWindow);
+    onGamesChange(() => refreshOverlay());
     createMenu();
     if (trayAvailable) createTray();
     // On every launch, before the first page load: a service worker from an
