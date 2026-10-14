@@ -10,9 +10,11 @@ import type { Session } from "@revolt/state/stores/Auth";
 import Instance from "../instance/Instance";
 import { autoAckCallNotices } from "./callNotices";
 import {
+  type ProbeTarget,
   actionOnOffline,
   actionOnVisible,
   actionOnWake,
+  probeSocket,
 } from "./lifecycleWake";
 import { killServiceWorkerSubscription } from "./NotificationsController";
 
@@ -126,6 +128,7 @@ class Lifecycle {
   }
 
   private dispose(logout = false) {
+    this.#controller.cancelProbe();
     if (logout) this.client.logout();
 
     this.client = this.#controller.instance.newClient();
@@ -397,6 +400,8 @@ class Lifecycle {
   }
 
   private onState(state: ConnectionState) {
+    // any socket state change makes a pending probe stale
+    this.#controller.cancelProbe();
     switch (state) {
       case ConnectionState.Disconnected:
         if (this.client.events.lastError) {
@@ -454,6 +459,15 @@ export default class ClientController {
   /** Timestamp (ms) of when the tab was last hidden */
   #hiddenAt: number | undefined;
 
+  /** Cancels the running liveness probe, if any */
+  #cancelProbe: (() => void) | undefined;
+
+  /** Cancel the running liveness probe, if any */
+  cancelProbe() {
+    this.#cancelProbe?.();
+    this.#cancelProbe = undefined;
+  }
+
   /** Stoat instance the client belongs to. Also accessible via `useInstance()` */
   readonly instance: Instance;
 
@@ -506,7 +520,7 @@ export default class ClientController {
   }
 
   /**
-   * Remember when the tab was hidden. On return, drop a possibly frozen
+   * Remember when the tab was hidden. On return, probe a possibly frozen
    * socket if it was hidden long enough, otherwise reconnect without waiting.
    */
   private onVisibilityChange() {
@@ -518,8 +532,12 @@ export default class ClientController {
     const hiddenFor = this.#hiddenAt ? Date.now() - this.#hiddenAt : 0;
     this.#hiddenAt = undefined;
 
-    if (actionOnVisible(this.lifecycle.state(), hiddenFor) === "dropSocket") {
-      this.lifecycle.client.events.disconnect();
+    if (actionOnVisible(this.lifecycle.state(), hiddenFor) === "probeSocket") {
+      // only reconnect if the socket does not answer a Ping
+      this.cancelProbe();
+      this.#cancelProbe = probeSocket(
+        this.lifecycle.client.events as unknown as ProbeTarget,
+      );
     } else {
       this.lifecycle.wake();
     }
