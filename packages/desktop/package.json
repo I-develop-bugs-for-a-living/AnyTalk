@@ -7,10 +7,17 @@
   "homepage": "https://anytalk.chat",
   "license": "AGPL-3.0-only",
   "private": true,
+  "engines": {
+    "node": ">=22.18"
+  },
   "main": "dist/main.js",
   "scripts": {
     "build:code": "node scripts/build.mjs",
     "typecheck": "tsc --noEmit",
+    "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/main/updateSignature.test.ts",
+    "sign-release": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/sign-release.mjs",
+    "sign-update": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/sign-update.mjs",
+    "gen-update-key": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/gen-update-key.mjs",
     "dev": "node scripts/build.mjs && electron .",
     "package:linux": "node scripts/build.mjs && electron-builder --linux AppImage deb rpm pacman --publish never",
     "package:win": "node scripts/build.mjs && electron-builder --win nsis --publish never",
