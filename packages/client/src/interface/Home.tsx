@@ -1,10 +1,24 @@
-import { Match, Show, Switch, createSignal } from "solid-js";
+import {
+  Match,
+  Show,
+  Switch,
+  createMemo,
+  createSignal,
+  onMount,
+} from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { PublicChannelInvite } from "stoat.js";
 import { css, cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
+import {
+  desktopNoticeDismissed,
+  desktopUpdateDownloaded,
+  dismissDesktopNotice,
+  pickUpdateNotice,
+  watchUpdater,
+} from "@revolt/app/interface/settings/user/updaterState";
 import { useClient } from "@revolt/client";
 import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
@@ -143,6 +157,18 @@ export function HomePage() {
   const { t } = useLingui();
   const [updating, setUpdating] = createSignal(false);
 
+  // follow the desktop updater (safe to call repeatedly, no-op in the browser)
+  onMount(watchUpdater);
+
+  // which update card to show, if any (respects the setting and dismissals)
+  const notice = createMemo(() => {
+    if (!state.settings.getValue("advanced:update_notice")) return undefined;
+    return pickUpdateNotice(
+      desktopUpdateDownloaded() && !desktopNoticeDismissed(),
+      updateAvailable() && !noticeDismissed(),
+    );
+  });
+
   // check if we're stoat.chat; if so, check if the user is in the Lounge
   const showLoungeButton = instance.isStoat;
   const isInLounge =
@@ -157,18 +183,19 @@ export function HomePage() {
         <Trans>Home</Trans>
       </Header>
       <div use:scrollable={{ class: content() }}>
-        <Show
-          when={
-            updateAvailable() &&
-            !noticeDismissed() &&
-            state.settings.getValue("advanced:update_notice")
-          }
-        >
+        <Show when={notice()}>
           <UpdateNotice role="alert">
             <UpdateNoticeText>
               <Symbol aria-hidden="true">system_update</Symbol>
               <Text class="body" size="large">
-                <Trans>A new version of AnyTalk is available</Trans>
+                <Show
+                  when={notice() === "desktop"}
+                  fallback={
+                    <Trans>A new version of AnyTalk is available</Trans>
+                  }
+                >
+                  <Trans>An AnyTalk desktop update is ready</Trans>
+                </Show>
               </Text>
             </UpdateNoticeText>
             <Button
@@ -176,19 +203,33 @@ export function HomePage() {
               isDisabled={updating()}
               onPress={() => {
                 setUpdating(true);
-                applyUpdate();
+                if (notice() === "desktop") {
+                  // quits, installs and relaunches the app
+                  window.desktopUpdater?.install();
+                } else {
+                  applyUpdate();
+                }
                 // if nothing reloaded after a while, allow another try
                 setTimeout(() => setUpdating(false), 10000);
               }}
             >
-              <Show when={updating()} fallback={<Trans>Update now</Trans>}>
-                <Trans>Updating...</Trans>
-              </Show>
+              <Switch fallback={<Trans>Update now</Trans>}>
+                <Match when={updating()}>
+                  <Trans>Updating...</Trans>
+                </Match>
+                <Match when={notice() === "desktop"}>
+                  <Trans>Restart to update</Trans>
+                </Match>
+              </Switch>
             </Button>
             <IconButton
               variant="standard"
               aria-label={t`Dismiss`}
-              onPress={dismissUpdateNotice}
+              onPress={() =>
+                notice() === "desktop"
+                  ? dismissDesktopNotice()
+                  : dismissUpdateNotice()
+              }
             >
               <Symbol aria-hidden="true">close</Symbol>
             </IconButton>
