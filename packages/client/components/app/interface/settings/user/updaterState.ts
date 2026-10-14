@@ -36,3 +36,38 @@ export function updateWaiting() {
   const status = updaterState()?.status;
   return status === "available" || status === "downloaded";
 }
+
+/** Whether the user closed the desktop update card on the start page this session */
+const [desktopNoticeDismissed, setDesktopNoticeDismissed] = createSignal(false);
+
+export { desktopNoticeDismissed };
+
+/**
+ * Hide the desktop update card on the start page until the app restarts
+ */
+export function dismissDesktopNotice() {
+  setDesktopNoticeDismissed(true);
+}
+
+/**
+ * Whether a desktop update is fully downloaded and only needs a restart
+ */
+export function desktopUpdateDownloaded() {
+  return updaterState()?.status === "downloaded";
+}
+
+/**
+ * Pick which update card the start page shows. A downloaded desktop update
+ * wins over a web update, because the restart loads the new web content too.
+ *
+ * @param desktop A desktop update is downloaded and not dismissed
+ * @param web A web update is waiting and not dismissed
+ */
+export function pickUpdateNotice(
+  desktop: boolean,
+  web: boolean,
+): "desktop" | "web" | undefined {
+  if (desktop) return "desktop";
+  if (web) return "web";
+  return undefined;
+}
