@@ -18,7 +18,8 @@ import { fileURLToPath } from "node:url";
 import { sha512OfFile } from "../src/main/updateSignature.ts";
 
 const REPO = "I-develop-bugs-for-a-living/AnyTalk";
-const args = process.argv.slice(2);
+// pnpm passes the "--" separator through to the script, so drop it.
+const args = process.argv.slice(2).filter((arg) => arg !== "--");
 const keyFlag = args.indexOf("--key");
 const keyPath = keyFlag >= 0 ? args[keyFlag + 1] : undefined;
 const version = args.find((_, i) => i !== keyFlag && i !== keyFlag + 1);

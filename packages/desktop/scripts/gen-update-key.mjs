@@ -27,7 +27,8 @@ import { fileURLToPath } from "node:url";
 
 import { keyIdOf } from "../src/main/updateSignature.ts";
 
-const args = process.argv.slice(2);
+// pnpm passes the "--" separator through to the script, so drop it.
+const args = process.argv.slice(2).filter((arg) => arg !== "--");
 let owner = "Your Name <you@example.com>";
 let target = resolve(homedir(), ".config/anytalk-release/update-key.pem");
 for (let i = 0; i < args.length; i++) {
