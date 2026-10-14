@@ -41,6 +41,15 @@ jobs:
             exit 1
           fi
 
+      # Apps with an empty key list reject every update, so a release built
+      # from one could never update itself
+      - name: Check there is at least one trusted update key
+        run: |
+          if ! grep -v '^[[:space:]]*//' packages/desktop/src/main/trustedUpdateKeys.ts | grep -q 'BEGIN PUBLIC KEY'; then
+            echo "TRUSTED_UPDATE_KEYS in packages/desktop/src/main/trustedUpdateKeys.ts is empty"
+            exit 1
+          fi
+
       - name: Create the release if it does not exist
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -90,6 +99,8 @@ jobs:
       - run: pnpm install --frozen-lockfile --filter anytalk-desktop...
 
       - run: pnpm --filter anytalk-desktop run typecheck
+
+      - run: pnpm --filter anytalk-desktop run test
 
       # Tag push: build and publish to the release
       - name: Build and publish
