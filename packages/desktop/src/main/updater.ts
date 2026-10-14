@@ -142,7 +142,9 @@ export function setAutoUpdate(enabled: boolean) {
  */
 export function installUpdate() {
   if (!active || state.status !== "downloaded") return;
-  autoUpdater.quitAndInstall();
+  // Silent (/S) so Windows doesn't walk through the setup wizard again; the
+  // installer keeps the existing install location and relaunches the app.
+  autoUpdater.quitAndInstall(true, true);
 }
 
 /**
