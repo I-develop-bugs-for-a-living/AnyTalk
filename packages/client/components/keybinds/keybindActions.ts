@@ -122,6 +122,20 @@ export const ACTION_PRIORITY: KeybindAction[] = [
 ];
 
 /**
+ * Whether an element is something the user types text into, where keys
+ * without Ctrl, Alt or Meta produce characters
+ * @param target Event target
+ */
+export function isTypingTarget(target: EventTarget | null): boolean {
+  return (
+    target instanceof HTMLInputElement ||
+    target instanceof HTMLTextAreaElement ||
+    (target instanceof HTMLElement && target.isContentEditable) ||
+    (target instanceof Element && target.nodeName === "MDUI-TEXT-FIELD")
+  );
+}
+
+/**
  * Filter keybinds with special logic
  * @param keybind Keybind to filter
  * @param currentlyBound Other keybinds currently bound
@@ -144,12 +158,7 @@ export function keybindFilter(
       return false;
 
     // don't allow focusing if another input element is currently being typed into
-    if (
-      target instanceof HTMLInputElement ||
-      target instanceof HTMLTextAreaElement ||
-      target?.nodeName === "MDUI-TEXT-FIELD"
-    )
-      return false;
+    if (isTypingTarget(target)) return false;
 
     // don't allow focusing if modifier key is pressed... except for paste
     if (

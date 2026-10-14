@@ -14,4 +14,6 @@ export {
   MODIFIER_KEYS,
   defaultSequence,
   formatSequence,
+  isReservedBareKey,
+  keyOfEvent,
 } from "./keybindSequences";

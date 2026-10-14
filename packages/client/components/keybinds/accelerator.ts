@@ -28,6 +28,20 @@ const NAMED_KEYS: Record<string, string> = {
   PageUp: "PageUp",
   PageDown: "PageDown",
   "+": "Plus",
+  ScrollLock: "Scrolllock",
+};
+
+/**
+ * Numpad keys as tracked by the keybind handler (event.code), and their
+ * Electron names
+ */
+const NUMPAD_KEYS: Record<string, string> = {
+  NumpadAdd: "numadd",
+  NumpadSubtract: "numsub",
+  NumpadMultiply: "nummult",
+  NumpadDivide: "numdiv",
+  NumpadDecimal: "numdec",
+  NumpadEnter: "Enter",
 };
 
 /**
@@ -42,6 +56,8 @@ const PUNCTUATION = new Set("-=;,./`[]\\'".split(""));
  */
 function convertKey(key: string): string | null {
   if (key in NAMED_KEYS) return NAMED_KEYS[key];
+  if (key in NUMPAD_KEYS) return NUMPAD_KEYS[key];
+  if (/^Numpad\d$/.test(key)) return `num${key.slice("Numpad".length)}`;
   if (/^F([1-9]|1\d|2[0-4])$/.test(key)) return key;
   if (/^[a-z0-9]$/i.test(key)) return key.toUpperCase();
   if (PUNCTUATION.has(key)) return key;
@@ -81,9 +97,25 @@ export function sequenceToAccelerator(
 }
 
 /**
+ * Keys that can be registered system-wide without a modifier: they don't
+ * type anything, so they don't steal normal typing (numpad Enter is left
+ * out, it would take over Enter everywhere)
+ */
+function isSafeBareAccelerator(accelerator: string): boolean {
+  return (
+    /^F\d+$/.test(accelerator) ||
+    /^num(\d|add|sub|mult|div|dec)$/.test(accelerator) ||
+    ["Insert", "Home", "End", "PageUp", "PageDown", "Scrolllock"].includes(
+      accelerator,
+    )
+  );
+}
+
+/**
  * Convert a keybind sequence to an accelerator that is safe to register
  * system-wide: a bare letter or digit would steal normal typing everywhere,
- * so it needs at least one modifier, unless it is a function key
+ * so it needs at least one modifier, unless it is a function, numpad or
+ * navigation key
  * @param keys Keys held together
  * @returns Accelerator, or null if it can't be a global hotkey
  */
@@ -96,7 +128,6 @@ export function sequenceToGlobalAccelerator(
   const hasModifier = keys.some(
     (key) => typeof key === "string" && key in MODIFIERS,
   );
-  const isFunctionKey = /^F\d+$/.test(accelerator);
 
-  return hasModifier || isFunctionKey ? accelerator : null;
+  return hasModifier || isSafeBareAccelerator(accelerator) ? accelerator : null;
 }

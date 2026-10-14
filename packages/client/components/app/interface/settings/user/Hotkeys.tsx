@@ -10,6 +10,8 @@ import {
   defaultSequence,
   formatSequence,
   globalHotkeyStatus,
+  isReservedBareKey,
+  keyOfEvent,
   sequenceToGlobalAccelerator,
 } from "@revolt/keybinds";
 import { gameDetectionAvailable } from "@revolt/rtc";
@@ -80,7 +82,7 @@ export function HotkeysSettings() {
   function globalProblem(action: KeybindAction) {
     if (!window.native || !current(action).enabled) return;
     if (!sequenceToGlobalAccelerator(current(action).keys))
-      return t`These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere.`;
+      return t`These keys only work inside AnyTalk. Numpad keys (except Enter), F keys, Insert, Home, End, Page Up and Page Down also work everywhere on their own.`;
     if (globalHotkeyStatus()[action] === false)
       return t`Another app is already using these keys, so they only work inside AnyTalk. Pick other keys.`;
   }
@@ -121,11 +123,13 @@ export function HotkeysSettings() {
       return;
     }
 
-    const key = event.key.length === 1 ? event.key.toLowerCase() : event.key;
+    const key = keyOfEvent(event);
 
-    // a bare letter would fire while typing messages
-    if (key.length === 1 && !modifiers.length) {
-      setError(t`Hold Ctrl, Alt or Shift together with a letter or number.`);
+    // these keys are needed for navigation and typing
+    if (isReservedBareKey(key) && !modifiers.length) {
+      setError(
+        t`This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key.`,
+      );
       return;
     }
 

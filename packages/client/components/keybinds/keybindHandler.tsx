@@ -16,12 +16,16 @@ import {
   CUSTOMISABLE_ACTIONS,
   KeybindAction,
   PREVENT_DEFAULT_ACTIONS,
+  isTypingTarget,
   keybindFilter,
 } from "./keybindActions";
 import {
   DEFAULT_MAC_SEQUENCES,
   DEFAULT_SEQUENCES,
   MODIFIER_KEYS,
+  ignoredWhileTyping,
+  keyOfEvent,
+  typedCharOf,
 } from "./keybindSequences";
 
 type KeybindContext = {
@@ -92,9 +96,18 @@ export function KeybindContext(props: { children: JSXElement }) {
     )
       return false;
 
+    // keys that would also type a character don't fire inside text fields
+    if (
+      CUSTOMISABLE_ACTIONS.includes(keybind) &&
+      ignoredWhileTyping(keys) &&
+      isTypingTarget(target)
+    )
+      return false;
+
     return keys.every((key) =>
       key instanceof RegExp
-        ? [...activeKeys].findIndex((item) => key.test(item)) !== -1
+        ? [...activeKeys].findIndex((item) => key.test(typedCharOf(item))) !==
+          -1
         : activeKeys.has(key),
     );
   }
@@ -154,13 +167,6 @@ export function KeybindContext(props: { children: JSXElement }) {
     return firing() === keybind;
   }
 
-  /**
-   * Letters in lower case, so releasing Shift before the letter (which
-   * changes event.key) can't leave the key stuck as pressed
-   */
-  const keyOf = (event: KeyboardEvent) =>
-    event.key.length === 1 ? event.key.toLowerCase() : event.key;
-
   /** Key each physical key added to activeKeys */
   const heldByCode = new Map<string, string>();
 
@@ -169,7 +175,7 @@ export function KeybindContext(props: { children: JSXElement }) {
    */
   function onKeyDown(event: KeyboardEvent) {
     target = event.target as HTMLElement;
-    const key = keyOf(event);
+    const key = keyOfEvent(event);
     heldByCode.set(event.code, key);
     activeKeys.add(key);
 
@@ -184,7 +190,7 @@ export function KeybindContext(props: { children: JSXElement }) {
     target = event.target as HTMLElement;
     // release whatever this physical key pressed, even if Shift has since
     // changed what it types
-    activeKeys.delete(heldByCode.get(event.code) ?? keyOf(event));
+    activeKeys.delete(heldByCode.get(event.code) ?? keyOfEvent(event));
     heldByCode.delete(event.code);
   }
 
