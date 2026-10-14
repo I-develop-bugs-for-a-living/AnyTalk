@@ -944,6 +944,14 @@ msgstr "Бот"
 msgid "Bots are not verified by AnyTalk."
 msgstr "Боты не проверяются AnyTalk."
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Bottom left"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Bottom right"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "Браузер"
@@ -1311,6 +1319,10 @@ msgstr "Скоро появится! 👀"
 msgid "Compact mode"
 msgstr "Компактный режим"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Compact: only the avatars"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
 msgstr "Сравнить итоги"
@@ -1503,6 +1515,7 @@ msgid "Could not reach the updater. Try again."
 msgstr "Не удалось связаться с обновлятором. Попробуйте снова."
 
 #: components/app/interface/settings/user/Native.tsx
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not save this setting."
 msgstr "Не удалось сохранить эту настройку."
@@ -1857,6 +1870,10 @@ msgstr "ПК"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
 msgstr "Приложение для ПК"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2919,6 +2936,7 @@ msgstr "Linux pacman (Arch)"
 msgid "Listen"
 msgstr "Слушать"
 
+#: components/rtc/components/OverlayPublisher.tsx
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
@@ -3523,6 +3541,10 @@ msgstr "Старые"
 msgid "On"
 msgstr "Вкл"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "On Wayland your desktop decides where windows go, so the overlay may not stay on top of games or in the chosen corner."
+msgstr ""
+
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -3565,6 +3587,10 @@ msgstr "Меняйте это, только если у вас собствен�
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Only mentions will notify you"
 msgstr "Только упоминания будут уведомлять вас"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Only while a detected game is running"
+msgstr ""
 
 #: components/instance/index.tsx
 msgid "Oops, something went wrong! {e}"
@@ -3639,6 +3665,10 @@ msgstr ""
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "Громкость Вывода"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Overlay"
+msgstr ""
 
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -3807,6 +3837,10 @@ msgstr "Плохое соединение"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor or lost connection"
 msgstr "Плохое или потерянное соединение"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Position"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
@@ -4597,9 +4631,17 @@ msgstr "Показывать статистику в реальном време
 msgid "Show Others"
 msgstr "Показывать остальных"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Show overlay"
+msgstr ""
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Show send message button"
 msgstr "Показывать кнопку отправки сообщения"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
+msgstr ""
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Sign into AnyTalk"
@@ -4814,6 +4856,10 @@ msgstr "Трансляции ({streams})"
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Strong (150 Hz)"
 msgstr "Сильный (150 Гц)"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Style"
+msgstr ""
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
@@ -5074,6 +5120,10 @@ msgstr "Это сообщение уже закреплено."
 msgid "This message is empty and has not been sent."
 msgstr "Это сообщение пустое и не было отправлено."
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "This option needs game detection. Turn on \"Detect running games\" in the Desktop settings."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "This password has previously appeared in security leaks, please use another password."
 msgstr "Этот пароль был замечен в утечке, поменяйте его на другой пароль."
@@ -5162,6 +5212,10 @@ msgstr "Переключить главную боковую панель"
 msgid "Toggle mute"
 msgstr "Вкл./выкл. микрофон"
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Toggle overlay"
+msgstr ""
+
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Token copied to clipboard"
 msgstr "Token скопирован в буфер обмена"
@@ -5173,6 +5227,14 @@ msgstr "Тональное Пятно"
 #: src/interface/channels/text/Composition.tsx
 msgid "Too Long"
 msgstr "Слишком длинно"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Top left"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Top right"
+msgstr ""
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
@@ -5669,6 +5731,14 @@ msgstr "Что нового"
 #~ msgid "What's New"
 #~ msgstr "Узнай, что нового"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "When to show"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Whenever I'm in a call"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Whether other users can edit these settings"
 msgstr "Могут ли пользователи менять эти настройки"
@@ -5756,6 +5826,10 @@ msgstr "Вы также можете нажать на иконку шестер
 
 #~ msgid "You can also right-click the user icon in the top left, or left click it if you're already home."
 #~ msgstr "Также вы можете кликнуть правой кнопкой мыши по иконке пользователя в левом верхнем углу, или кликнуть левой кнопкой мыши, если вы на домашней странице."
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "You can also switch it on and off with the Toggle overlay hotkey in Hotkeys."
+msgstr ""
 
 #: components/modal/modals/DeleteChannel.tsx
 msgid "You can re-open it later, but it will disappear on both sides."

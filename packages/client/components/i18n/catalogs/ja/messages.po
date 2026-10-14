@@ -893,6 +893,14 @@ msgstr "ボット"
 msgid "Bots are not verified by AnyTalk."
 msgstr "ボットは AnyTalk による認証を受けていません。"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Bottom left"
+msgstr "左下"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Bottom right"
+msgstr "右下"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "ブラウザ"
@@ -1254,6 +1262,10 @@ msgstr "近日公開! 👀"
 msgid "Compact mode"
 msgstr "コンパクトモード"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Compact: only the avatars"
+msgstr "コンパクト：アバターのみ"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
 msgstr "リキャップを比較"
@@ -1446,6 +1458,7 @@ msgid "Could not reach the updater. Try again."
 msgstr "アップデーターに接続できませんでした。もう一度お試しください。"
 
 #: components/app/interface/settings/user/Native.tsx
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not save this setting."
 msgstr "この設定を保存できませんでした。"
@@ -1797,6 +1810,10 @@ msgstr "デスクトップ"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
 msgstr "デスクトップアプリ"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+msgstr "詳細：話している間は名前を表示し、配信にはLIVEタグを表示"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2856,6 +2873,7 @@ msgstr "Linux pacman（Arch）"
 msgid "Listen"
 msgstr "会話を聞く"
 
+#: components/rtc/components/OverlayPublisher.tsx
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
@@ -3460,6 +3478,10 @@ msgstr "古い順"
 msgid "On"
 msgstr "オン"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "On Wayland your desktop decides where windows go, so the overlay may not stay on top of games or in the chosen corner."
+msgstr "Waylandではウィンドウの配置をデスクトップが決めるため、オーバーレイがゲームの前面や選択した隅に留まらない場合があります。"
+
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -3502,6 +3524,10 @@ msgstr "独自の AnyTalk サーバーを運用している場合のみ変更し
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Only mentions will notify you"
 msgstr "あなたへのメンションのみ通知されます"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Only while a detected game is running"
+msgstr "検出されたゲームの実行中のみ"
 
 #: components/instance/index.tsx
 msgid "Oops, something went wrong! {e}"
@@ -3576,6 +3602,10 @@ msgstr "出力デバイス"
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "出力音量"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Overlay"
+msgstr "オーバーレイ"
 
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -3744,6 +3774,10 @@ msgstr "接続品質: 悪い"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor or lost connection"
 msgstr "接続が悪い、または途切れた"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Position"
+msgstr "位置"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
@@ -4531,9 +4565,17 @@ msgstr "通話の映像タイルにライブ統計を表示"
 msgid "Show Others"
 msgstr "他の人を表示"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Show overlay"
+msgstr "オーバーレイを表示"
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Show send message button"
 msgstr "メッセージ送信ボタンを表示"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
+msgstr "通話で誰が話しているかをゲームの上に表示します。ボーダーレスとウィンドウモードのゲームで動作し、排他的フルスクリーンでは動作しません。"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Sign into AnyTalk"
@@ -4745,6 +4787,10 @@ msgstr "配信（{streams}）"
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Strong (150 Hz)"
 msgstr "強（150 Hz）"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Style"
+msgstr "スタイル"
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
@@ -5005,6 +5051,10 @@ msgstr "このメッセージはすでにピン留めされています。"
 msgid "This message is empty and has not been sent."
 msgstr "このメッセージは空のため送信されませんでした。"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "This option needs game detection. Turn on \"Detect running games\" in the Desktop settings."
+msgstr "このオプションにはゲーム検出が必要です。デスクトップ設定で「実行中のゲームを検出」をオンにしてください。"
+
 #: components/i18n/errors.tsx
 msgid "This password has previously appeared in security leaks, please use another password."
 msgstr "このパスワードは過去のセキュリティ漏えいで確認されています。別のパスワードを使用してください。"
@@ -5093,6 +5143,10 @@ msgstr "メインサイドバーを切り替え"
 msgid "Toggle mute"
 msgstr "ミュートを切り替え"
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Toggle overlay"
+msgstr "オーバーレイを切り替え"
+
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Token copied to clipboard"
 msgstr "トークンをクリップボードにコピーしました"
@@ -5104,6 +5158,14 @@ msgstr "トーナルスポット"
 #: src/interface/channels/text/Composition.tsx
 msgid "Too Long"
 msgstr "長すぎます"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Top left"
+msgstr "左上"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Top right"
+msgstr "右上"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
@@ -5594,6 +5656,14 @@ msgstr "新着情報"
 #~ msgid "What's New"
 #~ msgstr ""
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "When to show"
+msgstr "表示するタイミング"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Whenever I'm in a call"
+msgstr "通話中は常に"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Whether other users can edit these settings"
 msgstr "他のユーザーがこれらの設定を編集できるかどうか"
@@ -5683,6 +5753,10 @@ msgstr "左下の歯車アイコンをクリックしても開けます。"
 
 #~ msgid "You can also right-click the user icon in the top left, or left click it if you're already home."
 #~ msgstr "左上のユーザーアイコンを右クリックするか、すでにホームにいる場合は左クリックしてください。"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "You can also switch it on and off with the Toggle overlay hotkey in Hotkeys."
+msgstr "ホットキーの「オーバーレイを切り替え」でもオン・オフを切り替えられます。"
 
 #: components/modal/modals/DeleteChannel.tsx
 msgid "You can re-open it later, but it will disappear on both sides."

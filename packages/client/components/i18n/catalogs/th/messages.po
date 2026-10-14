@@ -970,6 +970,14 @@ msgstr "บอท"
 msgid "Bots are not verified by AnyTalk."
 msgstr "AnyTalk ไม่ได้ตรวจสอบบอท"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Bottom left"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Bottom right"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "เบราว์เซอร์"
@@ -1339,6 +1347,10 @@ msgstr "เร็ว ๆ นี้! 👀"
 msgid "Compact mode"
 msgstr "โหมดกะทัดรัด"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Compact: only the avatars"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
 msgstr "เปรียบเทียบสรุป"
@@ -1531,6 +1543,7 @@ msgid "Could not reach the updater. Try again."
 msgstr "ติดต่อตัวอัปเดตไม่ได้ ลองอีกครั้ง"
 
 #: components/app/interface/settings/user/Native.tsx
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not save this setting."
 msgstr "ไม่สามารถบันทึกการตั้งค่านี้ได้"
@@ -1891,6 +1904,10 @@ msgstr "เดสก์ท็อป"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
 msgstr "แอปเดสก์ท็อป"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2960,6 +2977,7 @@ msgstr "Linux pacman (Arch)"
 msgid "Listen"
 msgstr "ฟัง"
 
+#: components/rtc/components/OverlayPublisher.tsx
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
@@ -3564,6 +3582,10 @@ msgstr "เก่าสุด"
 msgid "On"
 msgstr "เปิด"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "On Wayland your desktop decides where windows go, so the overlay may not stay on top of games or in the chosen corner."
+msgstr ""
+
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -3606,6 +3628,10 @@ msgstr "เปลี่ยนสิ่งนี้เมื่อคุณรั
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Only mentions will notify you"
 msgstr "จะแจ้งเตือนเฉพาะเมื่อมีการกล่าวถึง"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Only while a detected game is running"
+msgstr ""
 
 #: components/instance/index.tsx
 msgid "Oops, something went wrong! {e}"
@@ -3680,6 +3706,10 @@ msgstr ""
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output Volume"
 msgstr "ระดับเสียงเอาต์พุต"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Overlay"
+msgstr ""
 
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -3848,6 +3878,10 @@ msgstr "การเชื่อมต่อแย่"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor or lost connection"
 msgstr "การเชื่อมต่อแย่หรือขาดหาย"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Position"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
@@ -4645,9 +4679,17 @@ msgstr "แสดงสถิติสดบนช่องวิดีโอข
 msgid "Show Others"
 msgstr "แสดงผู้อื่น"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Show overlay"
+msgstr ""
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Show send message button"
 msgstr "แสดงปุ่มส่งข้อความ"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
+msgstr ""
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Sign into AnyTalk"
@@ -4865,6 +4907,10 @@ msgstr "สตรีม ({streams})"
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Strong (150 Hz)"
 msgstr "แรง (150 Hz)"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Style"
+msgstr ""
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
@@ -5125,6 +5171,10 @@ msgstr "ข้อความนี้ถูกปักหมุดแล้ว
 msgid "This message is empty and has not been sent."
 msgstr "ข้อความนี้ว่างเปล่าและไม่ได้ถูกส่ง"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "This option needs game detection. Turn on \"Detect running games\" in the Desktop settings."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "This password has previously appeared in security leaks, please use another password."
 msgstr "รหัสผ่านนี้เคยปรากฏในข้อมูลรั่วไหลด้านความปลอดภัย โปรดใช้รหัสผ่านอื่น"
@@ -5213,6 +5263,10 @@ msgstr "สลับแถบด้านข้างหลัก"
 msgid "Toggle mute"
 msgstr "สลับปิดเสียง"
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Toggle overlay"
+msgstr ""
+
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Token copied to clipboard"
 msgstr "คัดลอกโทเค็นไปยังคลิปบอร์ดแล้ว"
@@ -5224,6 +5278,14 @@ msgstr "โทนัลสปอต"
 #: src/interface/channels/text/Composition.tsx
 msgid "Too Long"
 msgstr "ยาวเกินไป"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Top left"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Top right"
+msgstr ""
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
@@ -5722,6 +5784,14 @@ msgstr "มีอะไรใหม่"
 #~ msgid "What's New"
 #~ msgstr ""
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "When to show"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Whenever I'm in a call"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Whether other users can edit these settings"
 msgstr "ผู้ใช้อื่นแก้ไขการตั้งค่าเหล่านี้ได้หรือไม่"
@@ -5811,6 +5881,10 @@ msgstr "คุณยังคลิกไอคอนเฟืองที่ม
 
 #~ msgid "You can also right-click the user icon in the top left, or left click it if you're already home."
 #~ msgstr "นอกจากนี้คุณยังสามารถเปิดหน้าตั้งค่าได้ด้วยการคลิกขวาที่ไอคอนผู้ใช้มุมซ้ายบน หรือคลิกซ้ายหากอยู่หน้าจอหลัก"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "You can also switch it on and off with the Toggle overlay hotkey in Hotkeys."
+msgstr ""
 
 #: components/modal/modals/DeleteChannel.tsx
 msgid "You can re-open it later, but it will disappear on both sides."
