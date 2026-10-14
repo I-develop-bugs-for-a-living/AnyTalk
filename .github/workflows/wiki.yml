@@ -1,0 +1,63 @@
+name: Wiki
+
+# Publishes docs/wiki to the GitHub Wiki (the separate AnyTalk.wiki.git repo).
+# docs/wiki is the source of truth: pages edited in the browser's wiki editor
+# are overwritten, and pages removed from docs/wiki are removed from the wiki.
+#
+# The wiki repo only exists after the Wiki feature is enabled and a first page
+# was created in the browser. Until then this workflow skips with a notice.
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/wiki/**"
+  workflow_dispatch:
+
+concurrency:
+  group: wiki
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Sync wiki
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      WIKI_URL: https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check that the wiki exists
+        id: wiki
+        run: |
+          if git ls-remote "$WIKI_URL" > /dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::No wiki repository yet. Enable the wiki and create a first page in the browser, then re-run this workflow."
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Clone wiki
+        if: steps.wiki.outputs.exists == 'true'
+        run: git clone --depth 1 "$WIKI_URL" wiki
+
+      - name: Copy pages
+        if: steps.wiki.outputs.exists == 'true'
+        run: rsync -a --delete --exclude .git docs/wiki/ wiki/
+
+      - name: Commit and push
+        if: steps.wiki.outputs.exists == 'true'
+        working-directory: wiki
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Wiki is already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "docs: sync wiki from ${GITHUB_SHA::7}"
+          git push
