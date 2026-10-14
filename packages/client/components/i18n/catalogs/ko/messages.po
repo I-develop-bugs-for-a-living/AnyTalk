@@ -2562,8 +2562,8 @@ msgid "Hoist Role"
 msgstr "역할 따로 표시"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Hold Ctrl, Alt or Shift together with a letter or number."
-msgstr "Ctrl, Alt 또는 Shift를 문자나 숫자와 함께 누르세요."
+#~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
+#~ msgstr "Ctrl, Alt 또는 Shift를 문자나 숫자와 함께 누르세요."
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -5040,8 +5040,16 @@ msgstr "테마"
 #~ msgstr "이 키는 전역 단축키로 사용할 수 없어요."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
-msgstr "이 키는 AnyTalk 안에서만 작동해요. 어디서나 사용하려면 Ctrl, Alt 또는 Shift와 글자나 숫자를 함께 쓰거나 F 키를 사용하세요."
+#~ msgid "These keys only work inside AnyTalk. A numpad key or an F key on its own, or any key with Ctrl, Alt or Shift, works everywhere."
+#~ msgstr "이 키는 AnyTalk 안에서만 작동해요. 숫자 키패드 키나 단독 F 키, 또는 Ctrl, Alt, Shift와 함께 누르는 키는 어디서든 작동해요."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "These keys only work inside AnyTalk. Numpad keys (except Enter), F keys, Insert, Home, End, Page Up and Page Down also work everywhere on their own."
+msgstr "이 키는 AnyTalk 안에서만 작동해요. 숫자 키패드 키(Enter 제외), F 키, Insert, Home, End, Page Up, Page Down은 단독으로도 어디서든 작동해요."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
+#~ msgstr "이 키는 AnyTalk 안에서만 작동해요. 어디서나 사용하려면 Ctrl, Alt 또는 Shift와 글자나 숫자를 함께 쓰거나 F 키를 사용하세요."
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -5104,6 +5112,10 @@ msgstr "내 대화의 시작이에요."
 #: components/ui/components/features/messaging/elements/ConversationStart.tsx
 msgid "This is the start of your notes."
 msgstr "내 노트의 시작이에요."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
+msgstr "이 키는 단독으로 사용할 수 없어요. Ctrl, Alt 또는 Shift를 추가하거나 다른 키를 선택하세요."
 
 #: components/i18n/errors.tsx
 msgid "This message is already pinned."

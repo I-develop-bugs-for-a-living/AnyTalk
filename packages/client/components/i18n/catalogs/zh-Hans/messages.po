@@ -2558,8 +2558,8 @@ msgid "Hoist Role"
 msgstr "单独显示角色"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Hold Ctrl, Alt or Shift together with a letter or number."
-msgstr "请同时按住 Ctrl、Alt 或 Shift 和一个字母或数字。"
+#~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
+#~ msgstr "请同时按住 Ctrl、Alt 或 Shift 和一个字母或数字。"
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -5036,8 +5036,16 @@ msgstr "主题"
 #~ msgstr "这些按键不能用作全局快捷键。"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
-msgstr "这些按键仅在 AnyTalk 内有效。要在任何地方使用，请将 Ctrl、Alt 或 Shift 与字母或数字组合，或使用 F 键。"
+#~ msgid "These keys only work inside AnyTalk. A numpad key or an F key on its own, or any key with Ctrl, Alt or Shift, works everywhere."
+#~ msgstr "这些按键仅在 AnyTalk 内有效。单独的小键盘按键或 F 键，以及与 Ctrl、Alt 或 Shift 组合的按键，在任何地方都有效。"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "These keys only work inside AnyTalk. Numpad keys (except Enter), F keys, Insert, Home, End, Page Up and Page Down also work everywhere on their own."
+msgstr "这些按键仅在 AnyTalk 内有效。小键盘按键（Enter 除外）、F 键、Insert、Home、End、Page Up 和 Page Down 单独使用时在任何地方也有效。"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
+#~ msgstr "这些按键仅在 AnyTalk 内有效。要在任何地方使用，请将 Ctrl、Alt 或 Shift 与字母或数字组合，或使用 F 键。"
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -5100,6 +5108,10 @@ msgstr "这里是您对话的开始。"
 #: components/ui/components/features/messaging/elements/ConversationStart.tsx
 msgid "This is the start of your notes."
 msgstr "这里是您笔记的开始。"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
+msgstr "此按键不能单独使用。请加上 Ctrl、Alt 或 Shift，或选择其他按键。"
 
 #: components/i18n/errors.tsx
 msgid "This message is already pinned."

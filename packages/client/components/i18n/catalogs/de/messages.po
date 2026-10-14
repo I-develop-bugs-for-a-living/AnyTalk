@@ -2516,8 +2516,8 @@ msgid "Hoist Role"
 msgstr "Rolle hervorheben"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Hold Ctrl, Alt or Shift together with a letter or number."
-msgstr "Halte Strg, Alt oder Umschalt zusammen mit einem Buchstaben oder einer Zahl gedrückt."
+#~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
+#~ msgstr "Halte Strg, Alt oder Umschalt zusammen mit einem Buchstaben oder einer Zahl gedrückt."
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -4971,8 +4971,16 @@ msgstr "Thema"
 #~ msgstr "Diese Tasten können nicht als globales Tastenkürzel verwendet werden."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
-msgstr "Diese Tasten funktionieren nur in AnyTalk. Verwende Strg, Alt oder Umschalt mit einem Buchstaben oder einer Zahl oder eine F-Taste, damit sie überall funktionieren."
+#~ msgid "These keys only work inside AnyTalk. A numpad key or an F key on its own, or any key with Ctrl, Alt or Shift, works everywhere."
+#~ msgstr "Diese Tastenkürzel funktionieren nur innerhalb von AnyTalk. Eine Ziffernblock-Taste oder eine F-Taste allein oder jede Taste mit Strg, Alt oder Umschalt funktioniert überall."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "These keys only work inside AnyTalk. Numpad keys (except Enter), F keys, Insert, Home, End, Page Up and Page Down also work everywhere on their own."
+msgstr "Diese Tasten funktionieren nur innerhalb von AnyTalk. Ziffernblock-Tasten (außer Enter), F-Tasten, Einfg, Pos1, Ende, Bild auf und Bild ab funktionieren auch allein überall."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
+#~ msgstr "Diese Tasten funktionieren nur in AnyTalk. Verwende Strg, Alt oder Umschalt mit einem Buchstaben oder einer Zahl oder eine F-Taste, damit sie überall funktionieren."
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -5035,6 +5043,10 @@ msgstr "Das ist der Anfang deiner Unterhaltung."
 #: components/ui/components/features/messaging/elements/ConversationStart.tsx
 msgid "This is the start of your notes."
 msgstr "Dies ist der Anfang deiner Notizen."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
+msgstr "Diese Taste kann nicht allein verwendet werden. Füge Strg, Alt oder Umschalt hinzu oder wähle eine andere Taste."
 
 #: components/i18n/errors.tsx
 msgid "This message is already pinned."

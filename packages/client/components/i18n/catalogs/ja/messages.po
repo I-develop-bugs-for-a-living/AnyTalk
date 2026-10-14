@@ -2465,8 +2465,8 @@ msgid "Hoist Role"
 msgstr "ロールを別表示"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Hold Ctrl, Alt or Shift together with a letter or number."
-msgstr "Ctrl、Alt、Shift のいずれかを文字または数字と一緒に押してください。"
+#~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
+#~ msgstr "Ctrl、Alt、Shift のいずれかを文字または数字と一緒に押してください。"
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -4920,8 +4920,16 @@ msgstr "テーマ"
 #~ msgstr "これらのキーはグローバルホットキーとして使用できません。"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
-msgstr "これらのキーは AnyTalk の中でのみ動作します。どこでも使うには、Ctrl、Alt、Shift のいずれかと文字または数字を組み合わせるか、F キーを使ってください。"
+#~ msgid "These keys only work inside AnyTalk. A numpad key or an F key on its own, or any key with Ctrl, Alt or Shift, works everywhere."
+#~ msgstr "これらのキーは AnyTalk の中でのみ動作します。テンキーのキーや単独の F キー、または Ctrl・Alt・Shift と組み合わせたキーはどこでも動作します。"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "These keys only work inside AnyTalk. Numpad keys (except Enter), F keys, Insert, Home, End, Page Up and Page Down also work everywhere on their own."
+msgstr "これらのキーは AnyTalk の中でのみ動作します。テンキー（Enter を除く）、F キー、Insert、Home、End、Page Up、Page Down は、単独でもどこでも動作します。"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#~ msgid "These keys only work inside AnyTalk. Use Ctrl, Alt or Shift with a letter or number, or an F key, to use them everywhere."
+#~ msgstr "これらのキーは AnyTalk の中でのみ動作します。どこでも使うには、Ctrl、Alt、Shift のいずれかと文字または数字を組み合わせるか、F キーを使ってください。"
 
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -4984,6 +4992,10 @@ msgstr "これが会話の始まりです。"
 #: components/ui/components/features/messaging/elements/ConversationStart.tsx
 msgid "This is the start of your notes."
 msgstr "これがノートの始まりです。"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
+msgstr "このキーは単独では使えません。Ctrl、Alt、Shift のいずれかを加えるか、別のキーを選んでください。"
 
 #: components/i18n/errors.tsx
 msgid "This message is already pinned."
