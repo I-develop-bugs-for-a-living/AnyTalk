@@ -3,6 +3,11 @@ import { createEffect, on, onCleanup } from "solid-js";
 import { RemoteParticipant, RoomEvent } from "livekit-client";
 
 import { useVoice } from "../state";
+import {
+  WATCH_MIN_INTERVAL_MS,
+  createKeyedThrottle,
+  sanitizeWatching,
+} from "../viewerThrottle";
 
 /** Data message topic for telling everyone which streams we watch */
 const WATCH_TOPIC = "anytalk:watching";
@@ -68,8 +73,38 @@ export function StreamViewers() {
 
       // anyone joining later missed it
       const onJoin = (participant: RemoteParticipant) => {
+        // lists naming someone who just connected were cut short before
+        for (const identity of lastLists.keys()) store(identity);
         if (streams().length) tell(participant.identity);
       };
+
+      // at most ~4 messages per second and sender, the latest one still lands
+      // once a burst stops; the room is checked when it is applied
+      const lastLists = new Map<string, unknown[]>();
+
+      /** Store what a sender watches, checked against who is here now */
+      const store = (identity: string) => {
+        const list = lastLists.get(identity);
+        // sender left while the message was held back
+        if (!list || !room.remoteParticipants.has(identity)) return;
+        voice.viewing.set(
+          identity,
+          sanitizeWatching(
+            list,
+            (id) =>
+              id === room.localParticipant.identity ||
+              room.remoteParticipants.has(id),
+          ),
+        );
+      };
+
+      const throttle = createKeyedThrottle<unknown[]>(
+        WATCH_MIN_INTERVAL_MS,
+        (identity, list) => {
+          lastLists.set(identity, list);
+          store(identity);
+        },
+      );
 
       const onData = (
         payload: Uint8Array,
@@ -87,20 +122,21 @@ export function StreamViewers() {
         }
 
         if (!Array.isArray(watching)) return;
-        voice.viewing.set(
-          participant.identity,
-          watching.filter((identity) => typeof identity === "string"),
-        );
+        throttle.push(participant.identity, watching);
       };
 
-      const onLeave = (participant: RemoteParticipant) =>
+      const onLeave = (participant: RemoteParticipant) => {
+        throttle.clear(participant.identity);
+        lastLists.delete(participant.identity);
         voice.viewing.delete(participant.identity);
+      };
 
       room.on(RoomEvent.ParticipantConnected, onJoin);
       room.on(RoomEvent.DataReceived, onData);
       room.on(RoomEvent.ParticipantDisconnected, onLeave);
 
       onCleanup(() => {
+        throttle.dispose();
         room.off(RoomEvent.ParticipantConnected, onJoin);
         room.off(RoomEvent.DataReceived, onData);
         room.off(RoomEvent.ParticipantDisconnected, onLeave);

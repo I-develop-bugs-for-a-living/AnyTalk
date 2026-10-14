@@ -7,6 +7,7 @@ import { useClient, useClientLifecycle, useSound } from "@revolt/client";
 import { State } from "@revolt/client/Controller";
 
 import { useVoice } from "../state";
+import { createViewerSoundGate } from "../viewerThrottle";
 
 /** Stop ringing after this long */
 const RING_TIMEOUT_MS = 30_000;
@@ -146,30 +147,31 @@ export function CallSounds() {
 
   // ── viewers of our stream (see StreamViewers) ──
 
-  let viewers = new Set<string>();
+  // sounds only for settled changes, so a flood of messages can't spam them
+  const viewerGate = createViewerSoundGate({
+    onSound: (kind) =>
+      sound.playSound(
+        kind === "join" ? "streamViewerJoin" : "streamViewerLeave",
+      ),
+    // leaving the call already plays a sound of its own
+    shouldAnnounceLeave: (id) => !!voice.room()?.getParticipantByIdentity(id),
+  });
+
   createEffect(() => {
     const room = voice.room();
     const sharing = voice.screenshare();
-    const now = new Set(
-      room && sharing ? voice.viewersOf(room.localParticipant.identity) : [],
-    );
+    const now =
+      room && sharing ? voice.viewersOf(room.localParticipant.identity) : [];
 
     // a stream ending or starting is a sound of its own
-    if (sharing) {
-      const joined = [...now].some((id) => !viewers.has(id));
-      // leaving the call already plays a sound of its own
-      const left = [...viewers].some(
-        (id) => !now.has(id) && room?.getParticipantByIdentity(id),
-      );
-
-      if (joined) sound.playSound("streamViewerJoin");
-      else if (left) sound.playSound("streamViewerLeave");
-    }
-
-    viewers = now;
+    if (sharing) viewerGate.update(now);
+    else viewerGate.reset();
   });
 
-  onCleanup(stopRinging);
+  onCleanup(() => {
+    viewerGate.dispose();
+    stopRinging();
+  });
 
   return null;
 }
