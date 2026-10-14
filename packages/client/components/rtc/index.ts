@@ -10,6 +10,14 @@ export { InRoom } from "./components/InRoom";
 export { RoomAudioManager } from "./components/RoomAudioManager";
 export { findEarpiece, isIOSBusMode } from "./outputBus";
 export {
+  overlayAvailable,
+  overlayCorner,
+  overlayEnabled,
+  overlayMode,
+  overlayStyle,
+  saveOverlaySettings,
+} from "./overlayConfig";
+export {
   createRunningGames,
   gameDetectionAvailable,
   setGameDetection,

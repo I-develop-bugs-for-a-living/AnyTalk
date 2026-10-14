@@ -6,6 +6,8 @@ import {
   type ErrorInfo,
   type HotkeyBinding,
   type HotkeyResult,
+  type OverlayRender,
+  type OverlayState,
   type PickerRequest,
   type PickerSource,
   type RunningGame,
@@ -112,6 +114,9 @@ function exposeNative() {
         gamesListeners.delete(callback);
       };
     },
+    // Present only in shells that have the overlay, the client checks for it
+    setOverlayState: (state: OverlayState) =>
+      invoke<void>(IPC.overlaySet, state),
     setNextScreenSource: (sourceId: string | null) =>
       invoke<void>(IPC.screenSourceSet, sourceId),
   });
@@ -155,8 +160,29 @@ function exposeErrorPage() {
   });
 }
 
+/**
+ * Expose the minimal bridge for the overlay page. The newest state is kept,
+ * so a page that subscribes after it arrived still gets it.
+ */
+function exposeOverlayPage() {
+  let latest: OverlayRender | undefined;
+  const listeners = new Set<(state: OverlayRender) => void>();
+  ipcRenderer.on(IPC.overlayState, (_event, state: OverlayRender) => {
+    latest = state;
+    listeners.forEach((listener) => listener(state));
+  });
+  contextBridge.exposeInMainWorld("anytalkOverlay", {
+    onState: (callback: (state: OverlayRender) => void) => {
+      listeners.add(callback);
+      if (latest) callback(latest);
+    },
+  });
+}
+
 if (location.href.split(/[?#]/)[0] === info.errorPageUrl) {
   exposeErrorPage();
+} else if (location.href.split(/[?#]/)[0] === info.overlayPageUrl) {
+  exposeOverlayPage();
 } else if (location.origin === info.origin) {
   // Without the synchronous config the page can't tell it runs in the app
   if (configCache) exposeNative();

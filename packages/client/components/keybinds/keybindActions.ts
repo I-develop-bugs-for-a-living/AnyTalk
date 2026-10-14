@@ -75,6 +75,11 @@ export enum KeybindAction {
    * Stream the game in front, swap to it, or stop the stream (desktop app)
    */
   VOICE_TOGGLE_GAME_STREAM = "voice_toggle_game_stream",
+
+  /**
+   * Show or hide the in-game voice overlay (desktop app)
+   */
+  TOGGLE_OVERLAY = "toggle_overlay",
 }
 
 /**
@@ -84,6 +89,7 @@ export const CUSTOMISABLE_ACTIONS: KeybindAction[] = [
   KeybindAction.VOICE_TOGGLE_MUTE,
   KeybindAction.VOICE_TOGGLE_DEAFEN,
   KeybindAction.VOICE_TOGGLE_GAME_STREAM,
+  KeybindAction.TOGGLE_OVERLAY,
 ];
 
 /**
@@ -93,6 +99,7 @@ export const CUSTOMISABLE_ACTIONS: KeybindAction[] = [
 export const PREVENT_DEFAULT_ACTIONS = new Set<KeybindAction>([
   KeybindAction.VOICE_TOGGLE_MUTE,
   KeybindAction.VOICE_TOGGLE_DEAFEN,
+  KeybindAction.TOGGLE_OVERLAY,
 ]);
 
 /**
@@ -118,6 +125,7 @@ export const ACTION_PRIORITY: KeybindAction[] = [
   KeybindAction.VOICE_TOGGLE_MUTE,
   KeybindAction.VOICE_TOGGLE_DEAFEN,
   KeybindAction.VOICE_TOGGLE_GAME_STREAM,
+  KeybindAction.TOGGLE_OVERLAY,
   KeybindAction.CHAT_FOCUS_COMPOSITION,
 ];
 

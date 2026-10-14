@@ -134,7 +134,14 @@ export default function Native() {
    * @param description Row subtitle
    */
   function CheckboxButton<
-    K extends Exclude<keyof DesktopConfig, "windowState" | "serverUrl">,
+    K extends Exclude<
+      keyof DesktopConfig,
+      | "windowState"
+      | "serverUrl"
+      | "overlayCorner"
+      | "overlayMode"
+      | "overlayStyle"
+    >,
   >(key: K, icon: string, label: string, description: string) {
     return (
       <CategoryButton

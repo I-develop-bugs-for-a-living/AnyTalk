@@ -29,7 +29,53 @@ export const IPC = {
   updaterDownload: "updater:download",
   updaterInstall: "updater:install",
   updaterState: "updater:state",
+  overlaySet: "overlay:set",
+  overlayState: "overlay:state",
 } as const;
+
+/** Screen corners the overlay can sit in. */
+export const OVERLAY_CORNERS = [
+  "top-left",
+  "top-right",
+  "bottom-left",
+  "bottom-right",
+] as const;
+/** A corner of the screen. */
+export type OverlayCorner = (typeof OVERLAY_CORNERS)[number];
+
+/** When the overlay shows: in every call, or only next to a detected game. */
+export const OVERLAY_MODES = ["always", "games"] as const;
+/** See `OVERLAY_MODES`. */
+export type OverlayMode = (typeof OVERLAY_MODES)[number];
+
+/** Overlay looks: avatars only, or with names and the LIVE tag. */
+export const OVERLAY_STYLES = ["compact", "detailed"] as const;
+/** See `OVERLAY_STYLES`. */
+export type OverlayStyle = (typeof OVERLAY_STYLES)[number];
+
+/** One call participant as drawn by the overlay. */
+export type OverlayParticipant = {
+  id: string;
+  name: string;
+  /** Remote image URL */
+  avatar?: string;
+  speaking: boolean;
+  streaming: boolean;
+};
+
+/** Call snapshot the main window sends and the overlay draws. */
+export type OverlayState = {
+  inCall: boolean;
+  /** Translated text of the LIVE tag, the page falls back to "LIVE" */
+  liveLabel?: string;
+  participants: OverlayParticipant[];
+};
+
+/** What the overlay page receives: the call snapshot plus the look. */
+export type OverlayRender = OverlayState & {
+  style: OverlayStyle;
+  corner: OverlayCorner;
+};
 
 /** Settings persisted by the desktop shell. */
 export type DesktopConfig = {
@@ -44,6 +90,14 @@ export type DesktopConfig = {
   autoUpdate: boolean;
   /** Look for running games, see `RunningGame` */
   gameDetection: boolean;
+  /** Show the in-game voice overlay */
+  overlayEnabled: boolean;
+  /** Screen corner of the overlay */
+  overlayCorner: OverlayCorner;
+  /** When the overlay shows */
+  overlayMode: OverlayMode;
+  /** How much the overlay shows */
+  overlayStyle: OverlayStyle;
   /** Custom server URL, empty string means the default */
   serverUrl: string;
   windowState: {
@@ -65,6 +119,10 @@ export const CLIENT_WRITABLE_KEYS = [
   "discordRpc",
   "autoUpdate",
   "gameDetection",
+  "overlayEnabled",
+  "overlayCorner",
+  "overlayMode",
+  "overlayStyle",
   "serverUrl",
 ] as const;
 
@@ -76,6 +134,7 @@ export type AppInfo = {
   desktopEnvironment: string;
   desktopVersion: string;
   errorPageUrl: string;
+  overlayPageUrl: string;
 };
 
 /** A screen or window offered in the client's picker. */

@@ -32,6 +32,7 @@ const PAGES: Record<string, string> = {
   controller: "Controller.tsx",
   language: "Language.tsx",
   native: "Native.tsx",
+  overlay: "Overlay.tsx",
   "desktop-download": "DesktopDownload.tsx",
   advanced: "Advanced.tsx",
   developer: "developer/Developer.tsx",
