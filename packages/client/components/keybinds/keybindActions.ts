@@ -70,6 +70,11 @@ export enum KeybindAction {
    * Deafen or undeafen while in a call
    */
   VOICE_TOGGLE_DEAFEN = "voice_toggle_deafen",
+
+  /**
+   * Stream the game in front, swap to it, or stop the stream (desktop app)
+   */
+  VOICE_TOGGLE_GAME_STREAM = "voice_toggle_game_stream",
 }
 
 /**
@@ -78,6 +83,7 @@ export enum KeybindAction {
 export const CUSTOMISABLE_ACTIONS: KeybindAction[] = [
   KeybindAction.VOICE_TOGGLE_MUTE,
   KeybindAction.VOICE_TOGGLE_DEAFEN,
+  KeybindAction.VOICE_TOGGLE_GAME_STREAM,
 ];
 
 /**
@@ -111,6 +117,7 @@ export const ACTION_PRIORITY: KeybindAction[] = [
   // ... all others
   KeybindAction.VOICE_TOGGLE_MUTE,
   KeybindAction.VOICE_TOGGLE_DEAFEN,
+  KeybindAction.VOICE_TOGGLE_GAME_STREAM,
   KeybindAction.CHAT_FOCUS_COMPOSITION,
 ];
 

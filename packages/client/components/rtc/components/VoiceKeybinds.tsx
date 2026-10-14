@@ -16,5 +16,9 @@ export function VoiceKeybinds() {
     if (voice.listenPermission) voice.toggleDeafen();
   });
 
+  createKeybind(KeybindAction.VOICE_TOGGLE_GAME_STREAM, () => {
+    voice.toggleFocusedGameStream();
+  });
+
   return null;
 }

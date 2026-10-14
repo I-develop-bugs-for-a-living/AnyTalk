@@ -105,6 +105,8 @@ declare global {
       onGlobalHotkey(cb: (action: string) => void): () => void;
       /** Games running now, missing in older desktop versions */
       getRunningGames?(): Promise<RunningGame[]>;
+      /** The detected game that owns the window in front, missing in older desktop versions */
+      getFocusedGame?(): Promise<{ id: string; sourceId: string } | null>;
       /** Listen for changes of the running games, returns a function to stop listening */
       onRunningGamesChanged?(cb: (games: RunningGame[]) => void): () => void;
       /**

@@ -60,6 +60,7 @@ import { StatsRecorder } from "./components/StatsRecorder";
 import { StreamViewers } from "./components/StreamViewers";
 import { VoiceKeybinds } from "./components/VoiceKeybinds";
 import { VoiceMoves } from "./components/VoiceMoves";
+import { decideFocusedGameStream } from "./focusedGame";
 import {
   type FrameSample,
   type RefreshState,
@@ -85,7 +86,11 @@ import {
   shouldRejoin,
 } from "./reconnect";
 import { shouldRewatch } from "./rewatch";
-import { fetchRunningGames, subscribeRunningGames } from "./runningGames";
+import {
+  fetchRunningGames,
+  gameDetectionAvailable,
+  subscribeRunningGames,
+} from "./runningGames";
 import {
   setScreenCaptureKeepFocus,
   setScreenCaptureLimit,
@@ -364,6 +369,9 @@ class Voice {
 
   /** The clearing of the follow attribute that is under way, if any */
   #followClear?: Promise<void>;
+
+  /** Whether a "stream focused game" press is still being handled */
+  #focusedGameBusy = false;
 
   /**
    * Set once the server turned out not to let us set attributes (plain
@@ -2185,6 +2193,57 @@ class Voice {
       // Follow the game anyway, the window may show up later. The captured
       // source is unknown, so any best window counts as a change.
       this.#beginFollow(gameId, "");
+    }
+  }
+
+  /**
+   * The "stream focused game" hotkey: starts a stream of the game in front,
+   * swaps to it when another game is streamed, or stops the stream. Does
+   * nothing outside a call, without game detection or without a game.
+   * Pressing it while AnyTalk is in front and a stream runs stops the
+   * stream, since no game is focused then. A press while the previous one
+   * is still being handled is ignored.
+   */
+  async toggleFocusedGameStream() {
+    if (this.#focusedGameBusy) return;
+    if (!this.room() || !gameDetectionAvailable()) return;
+    this.#focusedGameBusy = true;
+    try {
+      await this.#toggleFocusedGameStream();
+    } finally {
+      this.#focusedGameBusy = false;
+    }
+  }
+
+  /** The work of toggleFocusedGameStream, one press at a time */
+  async #toggleFocusedGameStream() {
+    const games = await fetchRunningGames();
+    if (games.length === 0) return;
+
+    let focusedGameId: string | undefined;
+    try {
+      // missing in older desktop builds: then no game counts as focused
+      focusedGameId = (await window.native.getFocusedGame?.())?.id;
+    } catch (e) {
+      console.debug("[games] could not read the focused game:", e);
+    }
+    // a game that is no longer detected can't be streamed
+    if (!games.some((g) => g.id === focusedGameId)) focusedGameId = undefined;
+
+    const decision = decideFocusedGameStream(
+      this.screenshare(),
+      this.followedGameId(),
+      games.map((g) => g.id),
+      focusedGameId,
+    );
+    try {
+      if (decision.action === "stop") {
+        await this.toggleScreenshare();
+      } else if (decision.action !== "none") {
+        await this.startGameStream(decision.gameId);
+      }
+    } catch (e) {
+      this.onErr(e);
     }
   }
 
