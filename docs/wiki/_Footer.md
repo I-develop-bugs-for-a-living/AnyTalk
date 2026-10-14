@@ -1,0 +1,1 @@
+AnyTalk is based on [Stoat](https://github.com/stoatchat) · [Source](https://github.com/I-develop-bugs-for-a-living/AnyTalk) · [Issues](https://github.com/I-develop-bugs-for-a-living/AnyTalk/issues) · AGPL-3.0

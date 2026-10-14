@@ -1,105 +1,141 @@
 <div align="center">
-<h1>
-  Stoat Frontend
-  
-  [![Stars](https://img.shields.io/github/stars/stoatchat/for-web?style=flat-square&logoColor=white)](https://github.com/stoatchat/for-web/stargazers)
-  [![Forks](https://img.shields.io/github/forks/stoatchat/for-web?style=flat-square&logoColor=white)](https://github.com/stoatchat/for-web/network/members)
-  [![Pull Requests](https://img.shields.io/github/issues-pr/stoatchat/for-web?style=flat-square&logoColor=white)](https://github.com/stoatchat/for-web/pulls)
-  [![Issues](https://img.shields.io/github/issues/stoatchat/for-web?style=flat-square&logoColor=white)](https://github.com/stoatchat/for-web/issues)
-  [![Contributors](https://img.shields.io/github/contributors/stoatchat/for-web?style=flat-square&logoColor=white)](https://github.com/stoatchat/for-web/graphs/contributors)
-  [![License](https://img.shields.io/github/license/stoatchat/for-web?style=flat-square&logoColor=white)](https://github.com/stoatchat/for-web/blob/main/LICENSE)
-</h1>
-The official web client powering https://stoat.chat/app, built with <a href="https://www.solidjs.com/">Solid.js</a> 💖. <br/>
-Track the project roadmap on <a href="https://op.stoatinternal.com/projects/revolt-for-web/roadmap">OpenProject</a>.
+<h1>AnyTalk</h1>
+
+A chat and voice client for self-hosted <a href="https://stoat.chat">Stoat</a> servers, built with <a href="https://www.solidjs.com/">Solid.js</a>.<br/>
+AnyTalk is a personal fork of the Stoat web client (<a href="https://github.com/stoatchat/for-web">stoatchat/for-web</a>).
+
 </div>
 <br/>
 
-## Development Guide
+## What's different from Stoat
 
-Before contributing, make yourself familiar with [our contribution guidelines](https://developers.stoat.chat/developing/contrib/), the [code style guidelines](./GUIDELINES.md), and the [technical documentation for this project](https://stoatchat.github.io/for-web/).
+AnyTalk keeps Stoat's chat features and adds its own work on top, mostly around calls, mobile and a desktop app:
 
-Before getting started, you'll want to install:
+- **Calls and screen share**: RNNoise noise suppression with a speech gate, stream quality up to 1440p60, fullscreen focused streams, mic and speaker picker in the call footer, automatic reconnect after a network drop, and a developer mode with call stats.
+- **Mobile and iPhone**: safe areas, call controls sized for small screens, Safari audio fixes and a loudspeaker/earpiece switch.
+- **Desktop app** (Windows and Linux, Electron): global hotkeys, "stream your game" with automatic game detection, an in-game voice overlay, and signed self-updates.
+- **Input**: game controller navigation and keyboard support for context menus.
+- **Sounds**: message bell, ringtones, notification volumes, vibration on incoming calls.
+- **Languages**: maintained translations for German, French, Spanish, Japanese, Korean, Simplified Chinese and Arabic, right-to-left layouts, and language switching without a reload.
+- **Deployment**: one Docker image for any Stoat instance, with backend URLs set at container start.
 
-- [Git](https://git-scm.com/install/)
-- [mise-en-place](https://mise.jdx.dev/getting-started.html)
+Some call features (stream viewer lists, deafen state) need the patched Stoat API from [anytalk-server](https://github.com/Neparshath-coder/anytalk-server). Against a stock Stoat server they don't work.
 
-Then proceed to setup:
+## Repository layout
+
+| Path | Contents |
+|---|---|
+| `packages/client` | The web app (SolidJS, PandaCSS, Vite, Lingui, LiveKit) |
+| `packages/desktop` | The Electron desktop app, see [RELEASING.md](packages/desktop/RELEASING.md) |
+| `packages/stoat.js` | Stoat API SDK (git submodule) |
+| `packages/solid-livekit-components` | Solid bindings for LiveKit (git submodule) |
+| `patches/` | pnpm patch for `livekit-client` (runtime screen-share constraints) |
+| `docker/`, `Dockerfile` | Container image with runtime config injection |
+| `doc/` | mdbook with technical documentation (`mise mdbook`) |
+
+## Development
+
+You need [Git](https://git-scm.com/install/) and [mise-en-place](https://mise.jdx.dev/getting-started.html). mise installs the right Node.js and pnpm versions.
 
 ```bash
-# clone the repository
-git clone --recursive https://github.com/stoatchat/for-web client
-cd client
+# clone with submodules
+git clone --recursive git@github.com:I-develop-bugs-for-a-living/AnyTalk.git
+cd AnyTalk
 
-# update submodules if you pull new changes
-# git submodule init && git submodule update
+# after pulling changes to the submodules
+# git submodule update --init
 
-# install all packages
+# install packages and build the submodule dependencies
 mise install:frozen
-
-# build deps:
 mise build:deps
 
-# or build a specific dep (e.g. stoat.js updates):
-# pnpm --filter stoat.js run build
-
-# customise the .env
+# point the client at your Stoat instance
 cp packages/client/.env.example packages/client/.env
 
-# run dev server
+# start the dev server
 mise dev
-
-# run all CI checks locally
-mise check
 ```
 
-Finally, navigate to http://local.revolt.chat:5173.
+The dev server runs on port 5173 on all network interfaces: http://localhost:5173 on the same machine, or `http://<LAN IP>:5173` from another device. Over plain `http` on a LAN address, browsers block the microphone, camera, screen sharing and the service worker, so test calls on `localhost` or over HTTPS.
 
-### Using the official backend
+`packages/client/assets` is a private submodule with brand assets. Without it, `mise dev` falls back to placeholder assets.
 
-By default, the client connects to a backend running on the same host (localhost).
+### Configuration
 
-If you want the client to connect to the official hosted backend instead, open the .env file at /packages/client/.env and comment out the local URL varaibles like this:
+`packages/client/.env` sets the backend:
 
 ```env
-# connect to local Stoat instance
-#VITE_API_URL=http://localhost:14702
+VITE_API_URL=http://localhost:14702
+
+# optional overrides, otherwise discovered from the API
+# VITE_DEV_WS_URL=ws://localhost:14703
+# VITE_DEV_MEDIA_URL=http://localhost:14704
+# VITE_DEV_PROXY_URL=http://localhost:14705
+# VITE_DEV_GIFBOX_URL=http://localhost:14706
 ```
 
-When these variables are not set, the client automatically falls back to the official backend. (See https://github.com/stoatchat/for-web/blob/main/packages/client/components/common/lib/env.ts)
+Without `VITE_API_URL`, the client falls back to the official Stoat backend (see `packages/client/components/common/lib/env.ts`).
 
-## Deployment Guide
+### Checks
 
-### Build the app
+Run these after a change:
 
 ```bash
-# install packages
-mise install:frozen
-
-# build dependencies
-mise build:deps
-
-# build for web
-mise build
-
-# ... when building for Stoat production
-mise build:prod
+mise lint          # eslint (mise lint:fix to fix)
+mise build:check   # type check
+mise test:unit     # vitest
+mise format        # prettier (mise format:fix to fix)
 ```
 
-You can now deploy the directory `packages/client/dist`.
+`mise check` runs everything including the Playwright end-to-end tests. It reinstalls dependencies and takes a while.
 
-### Routing Information
+Code rules are in [GUIDELINES.md](GUIDELINES.md), UI design rules in [DESIGN.md](packages/client/components/ui/DESIGN.md).
 
-The app currently needs the following routes:
+### Translations
 
-- `/login`
-- `/pwa`
-- `/dev`
-- `/discover`
-- `/settings`
-- `/invite`
-- `/bot`
-- `/friends`
-- `/server`
-- `/channel`
+All user-facing text goes through Lingui macros. After adding or changing text, regenerate the catalogs with `mise lingui`. Don't edit the files in `packages/client/components/i18n/catalogs` by hand.
 
-This corresponds to [Content.tsx#L33](packages/client/src/index.tsx).
+## Deployment
+
+### Docker
+
+Pushes to `main` build an image and publish it to GitHub Container Registry:
+
+- `ghcr.io/i-develop-bugs-for-a-living/anytalk:latest` (latest `main`)
+- `ghcr.io/i-develop-bugs-for-a-living/anytalk:<commit sha>` (for pinning and rollback)
+- `ghcr.io/i-develop-bugs-for-a-living/anytalk:<version>` (for `v*` tags)
+
+The backend URLs aren't baked into the image. Set them as environment variables on the container and they're injected at startup, so one image works for any Stoat instance:
+
+```bash
+docker run -p 5000:5000 \
+  -e VITE_API_URL=https://chat.example.com/api \
+  -e VITE_HOST=chat.example.com \
+  ghcr.io/i-develop-bugs-for-a-living/anytalk:latest
+```
+
+Also supported: `VITE_DEV_WS_URL`, `VITE_DEV_MEDIA_URL`, `VITE_DEV_PROXY_URL`, `VITE_DEV_GIFBOX_URL`, and `VITE_DESKTOP_RELEASES_REPO` (the GitHub repo whose releases the "Desktop app" settings page lists).
+
+### Static build
+
+```bash
+mise install:frozen
+mise build:deps
+mise build
+```
+
+Then serve `packages/client/dist`. It's a single-page app, so the server has to answer every app route with `index.html`: `/login`, `/pwa`, `/dev`, `/discover`, `/settings`, `/invite`, `/bot`, `/friends`, `/server` and `/channel` (defined in `packages/client/src/index.tsx`).
+
+### Desktop app
+
+```bash
+mise desktop:dev         # run against the configured server
+mise desktop:build       # Linux packages
+mise desktop:build:win   # Windows installer
+```
+
+The desktop app loads a hosted AnyTalk server instead of bundling the client. Releases are tagged `desktop-v<version>`; CI builds them and publishes them to GitHub Releases. Installers must be signed before the app accepts them as updates, see [packages/desktop/RELEASING.md](packages/desktop/RELEASING.md).
+
+## License
+
+AnyTalk is licensed under the [GNU Affero General Public License v3.0](LICENSE), like Stoat, which it's based on.

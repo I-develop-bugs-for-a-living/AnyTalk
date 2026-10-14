@@ -18,7 +18,8 @@ import {
   signedMessage,
 } from "../src/main/updateSignature.ts";
 
-const args = process.argv.slice(2);
+// pnpm passes the "--" separator through to the script, so drop it.
+const args = process.argv.slice(2).filter((arg) => arg !== "--");
 /** Value of a `--flag value` pair, and the indexes it uses. */
 function flag(name) {
   const i = args.indexOf(name);
