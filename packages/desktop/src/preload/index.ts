@@ -183,7 +183,12 @@ if (location.href.split(/[?#]/)[0] === info.errorPageUrl) {
   exposeErrorPage();
 } else if (location.href.split(/[?#]/)[0] === info.overlayPageUrl) {
   exposeOverlayPage();
-} else if (location.origin === info.origin) {
+} else if (
+  // a stream popout inherits the opener's origin but never gets the bridge
+  !window.opener &&
+  !window.name.startsWith("anytalk-stream-popout") &&
+  location.origin === info.origin
+) {
   // Without the synchronous config the page can't tell it runs in the app
   if (configCache) exposeNative();
 }

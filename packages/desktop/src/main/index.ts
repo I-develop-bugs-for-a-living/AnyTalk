@@ -225,6 +225,9 @@ function restartToUpdate() {
   }
 }
 
+/** Frame name prefix of the stream popout window (see rtc/streamPopout.ts) */
+const STREAM_POPOUT_FRAME = "anytalk-stream-popout";
+
 /** Create the main window with the saved size and frame style. */
 function createWindow() {
   const config = getConfig();
@@ -332,9 +335,55 @@ function createWindow() {
       resetOverlay();
     }
   });
-  wc.setWindowOpenHandler(({ url }) => {
+  wc.setWindowOpenHandler(({ url, frameName, referrer }) => {
+    // A stream popped out of the call: a normal app window (taskbar, alt-tab,
+    // resizable, fullscreen) that the page fills itself. Only the blank page
+    // under our frame name, opened from a page of the app's own server (this
+    // handler belongs to the main window, and its top page and the opening
+    // page's referrer must both be on the server origin). Everything else is
+    // handled below.
+    if (
+      url === "about:blank" &&
+      frameName.startsWith(STREAM_POPOUT_FRAME) &&
+      isServerUrl(wc.getURL()) &&
+      isServerUrl(referrer.url)
+    ) {
+      return {
+        action: "allow",
+        overrideBrowserWindowOptions: {
+          minWidth: 320,
+          minHeight: 180,
+          resizable: true,
+          fullscreenable: true,
+          autoHideMenuBar: true,
+          backgroundColor: "#000000",
+          title: "AnyTalk",
+          icon: nativeImage.createFromPath(
+            join(
+              __dirname,
+              process.platform === "win32" ? "icon.ico" : "icon.png",
+            ),
+          ),
+          // No preload: the native bridge is for the main window only (the
+          // preload also refuses to expose it in a popout, see its end)
+          webPreferences: {
+            preload: undefined,
+            contextIsolation: true,
+            sandbox: true,
+            nodeIntegration: false,
+          },
+        },
+      };
+    }
     if (parseHttpUrl(url)) shell.openExternal(url);
     return { action: "deny" };
+  });
+  // The popout page is drawn by the app, it never navigates or opens windows
+  wc.on("did-create-window", (child) => {
+    const lock = (event: Electron.Event) => event.preventDefault();
+    child.webContents.on("will-navigate", lock);
+    child.webContents.on("will-redirect", lock);
+    child.webContents.setWindowOpenHandler(() => ({ action: "deny" }));
   });
 
   wc.on("did-fail-load", (_event, code, description, url, isMainFrame) => {
