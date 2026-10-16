@@ -28,9 +28,20 @@ import {
   typedCharOf,
 } from "./keybindSequences";
 
+/**
+ * Keybind callback; `global` is true when the desktop shell reported a global
+ * hotkey, false when the keys were pressed in the app
+ */
+type KeybindCallback = (global: boolean) => void;
+
 type KeybindContext = {
-  createKeybind: (keybind: KeybindAction, callback: () => void) => void;
+  createKeybind: (
+    keybind: KeybindAction,
+    callback: KeybindCallback,
+    onRelease?: KeybindCallback,
+  ) => void;
   triggerKeybind: (keybind: KeybindAction) => void;
+  triggerKeybindRelease: (keybind: KeybindAction) => void;
 };
 
 const keybindContext = createContext<KeybindContext>(null! as KeybindContext);
@@ -65,7 +76,12 @@ export function KeybindContext(props: { children: JSXElement }) {
   /**
    * Callbacks registered per keybind, so an action can be run without keys
    */
-  const callbacks = new Map<KeybindAction, Set<() => void>>();
+  const callbacks = new Map<KeybindAction, Set<KeybindCallback>>();
+
+  /**
+   * Release callbacks registered per keybind
+   */
+  const releaseCallbacks = new Map<KeybindAction, Set<KeybindCallback>>();
 
   const state = useState();
 
@@ -212,7 +228,7 @@ export function KeybindContext(props: { children: JSXElement }) {
   return (
     <keybindContext.Provider
       value={{
-        createKeybind(keybind, callback) {
+        createKeybind(keybind, callback, onRelease) {
           currentlyBound[keybind]++;
           onCleanup(() => currentlyBound[keybind]--);
 
@@ -221,17 +237,35 @@ export function KeybindContext(props: { children: JSXElement }) {
           set.add(callback);
           onCleanup(() => set.delete(callback));
 
+          if (onRelease) {
+            const releases = releaseCallbacks.get(keybind) ?? new Set();
+            releaseCallbacks.set(keybind, releases);
+            releases.add(onRelease);
+            onCleanup(() => releases.delete(onRelease));
+          }
+
+          // whether the keybind fired last time, to spot the release
+          let wasFired = false;
           createEffect(() => {
             const _ = [...activeKeys]; // track dependency
-            if (isFired(keybind)) {
-              untrack(callback);
+            const fired = isFired(keybind);
+            if (fired) {
+              untrack(() => callback(false));
+            } else if (wasFired && onRelease) {
+              untrack(() => onRelease(false));
             }
+            wasFired = fired;
           });
         },
         triggerKeybind(keybind) {
           // skip the key and focus filters, the caller already decided
           for (const callback of [...(callbacks.get(keybind) ?? [])]) {
-            untrack(callback);
+            untrack(() => callback(true));
+          }
+        },
+        triggerKeybindRelease(keybind) {
+          for (const callback of [...(releaseCallbacks.get(keybind) ?? [])]) {
+            untrack(() => callback(true));
           }
         },
       }}
@@ -244,11 +278,16 @@ export function KeybindContext(props: { children: JSXElement }) {
 /**
  * Wrapper for contextual createKeybind function
  * @param keybind Keybind
- * @param callback Callback
+ * @param callback Callback, runs while the keys are held
+ * @param onRelease Optional callback, runs when the keys stop firing
  */
-export function createKeybind(keybind: KeybindAction, callback: () => void) {
+export function createKeybind(
+  keybind: KeybindAction,
+  callback: KeybindCallback,
+  onRelease?: KeybindCallback,
+) {
   const { createKeybind } = useContext(keybindContext);
-  createKeybind(keybind, callback);
+  createKeybind(keybind, callback, onRelease);
 }
 
 /**
@@ -258,6 +297,14 @@ export function createKeybind(keybind: KeybindAction, callback: () => void) {
  */
 export function useTriggerKeybind() {
   return useContext(keybindContext).triggerKeybind;
+}
+
+/**
+ * Get a function that runs a keybind's release callbacks without its keys
+ * being let go (when the desktop app reports a global hotkey release)
+ */
+export function useTriggerKeybindRelease() {
+  return useContext(keybindContext).triggerKeybindRelease;
 }
 
 /**

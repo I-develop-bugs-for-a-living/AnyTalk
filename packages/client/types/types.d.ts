@@ -107,10 +107,21 @@ declare global {
       screenPickerCallback(idx: number, audio: boolean): Promise<void>;
       /** Replaces all global hotkeys, resolves with which ones registered */
       setGlobalHotkeys(
-        bindings: { action: string; accelerator: string }[],
+        bindings: { action: string; accelerator: string; code?: string }[],
       ): Promise<{ action: string; registered: boolean }[]>;
       /** Listen for global hotkeys, returns a function to stop listening */
       onGlobalHotkey(cb: (action: string) => void): () => void;
+      /** Listen for global hotkey releases, missing in older desktop versions */
+      onGlobalHotkeyRelease?(cb: (action: string) => void): () => void;
+      /** What global hotkeys can do, missing in older desktop versions */
+      getHotkeyCapabilities?(): Promise<{ release: boolean; gamepad: boolean }>;
+      /**
+       * Use a controller button as push to talk (null for none), resolves
+       * with whether it is active; missing in older desktop versions
+       */
+      setGamepadPushToTalk?(button: string | null): Promise<boolean>;
+      /** Listen for the push to talk controller button, returns a function to stop listening */
+      onGamepadPushToTalk?(cb: (down: boolean) => void): () => void;
       /** Games running now, missing in older desktop versions */
       getRunningGames?(): Promise<RunningGame[]>;
       /** The detected game that owns the window in front, missing in older desktop versions */

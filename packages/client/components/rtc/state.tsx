@@ -54,6 +54,7 @@ import { VoiceCallCardContext } from "@revolt/ui/components/features/voice/callC
 
 import { Device, useDevice } from "@revolt/common";
 import { CallSounds } from "./components/CallSounds";
+import { GamepadPushToTalk } from "./components/GamepadPushToTalk";
 import { InRoom } from "./components/InRoom";
 import { OverlayPublisher } from "./components/OverlayPublisher";
 import { RoomAudioManager } from "./components/RoomAudioManager";
@@ -79,6 +80,12 @@ import {
   windowListed,
 } from "./gameFollow";
 import * as outputBus from "./outputBus";
+import {
+  type PttSource,
+  micShouldBeOn,
+  PTT_RELEASE_DELAY_MS,
+  pttHeld,
+} from "./pushToTalk";
 import {
   allowMicRestart,
   isPermanentJoinError,
@@ -723,7 +730,11 @@ class Voice {
       joined = true;
       this.#setState("CONNECTED");
       this.#settings.addRecentCall(channel.id);
-      if (this.speakingPermission)
+      if (this.speakingPermission && this.#settings.inputMode === "ptt") {
+        // push to talk starts with the mic closed, the key opens it. micOn is
+        // the user's mute choice and stays as it is.
+        this.#publishMutedMicrophone(room);
+      } else if (this.speakingPermission)
         // the microphone state the user had (muted or not) is in the settings
         room.localParticipant
           .setMicrophoneEnabled(this.#settings.micOn)
@@ -1222,15 +1233,151 @@ class Voice {
     };
   }
 
+  /**
+   * Whether each push to talk source (keyboard, controller) holds it, or let
+   * go a moment ago. The mic stays open while any source holds it.
+   */
+  #pttSources: Record<PttSource, boolean> = { keys: false, pad: false };
+
+  /** Closes the mic shortly after a source let go */
+  #pttTimers: Partial<
+    Record<PttSource, ReturnType<typeof setTimeout> | undefined>
+  > = {};
+
+  /** Whether the settings and push to talk key say the mic should send */
+  #micWanted() {
+    return micShouldBeOn({
+      speak: this.speakingPermission,
+      deafen: this.#settings.deafen,
+      micOn: this.#settings.micOn,
+      mode: this.#settings.inputMode,
+      pttOpen: pttHeld(this.#pttSources),
+    });
+  }
+
+  /**
+   * Open or close the microphone to match the input mode, the mute and deafen
+   * state and the push to talk key. Never changes the persisted mute choice.
+   */
+  syncMicrophone() {
+    // a push to talk key can't be held in the other mode
+    if (this.#settings.inputMode !== "ptt") this.#releasePushToTalk();
+    if (this.#micSyncing) return; // the running sync checks again when done
+    this.#micSyncing = true;
+
+    (async () => {
+      try {
+        // a few rounds at most, in case the state keeps changing
+        for (let round = 0; round < 5; round++) {
+          const room = this.room();
+          if (!room) return;
+          const wanted = this.#micWanted();
+          if (room.localParticipant.isMicrophoneEnabled === wanted) return;
+          try {
+            await room.localParticipant.setMicrophoneEnabled(wanted);
+          } catch (err) {
+            console.warn("[rtc] could not switch the mic", err);
+            // repeat only if the wish changed meanwhile, not to retry a failure
+            if (this.#micWanted() === wanted) return;
+          }
+        }
+      } finally {
+        // cleared in the same tick as the last check, so no call is lost
+        this.#micSyncing = false;
+      }
+      // out of rounds: look once more in case it still differs
+      const room = this.room();
+      if (
+        room &&
+        room.localParticipant.isMicrophoneEnabled !== this.#micWanted()
+      )
+        setTimeout(() => this.syncMicrophone(), 250);
+    })();
+  }
+
+  /** Whether a syncMicrophone run is in flight */
+  #micSyncing = false;
+
+  /**
+   * Push to talk join: capture the microphone and publish it already muted,
+   * so the permission prompt comes now and the key opens it without delay.
+   * The track is muted before publishing, so no audio is sent.
+   */
+  #publishMutedMicrophone(room: Room) {
+    if (!this.#settings.micOn) return;
+    this.#micSyncing = true;
+    (async () => {
+      const [track] = await room.localParticipant.createTracks({
+        audio: true,
+        video: false,
+      });
+      if (!track) return;
+      await track.mute();
+      if (this.room() !== room || room.state !== "connected") {
+        track.stop();
+        return;
+      }
+      await room.localParticipant.publishTrack(track, {
+        source: Track.Source.Microphone,
+      });
+    })()
+      .catch((err) => console.warn("[rtc] could not start the mic", err))
+      .finally(() => {
+        this.#micSyncing = false;
+        // the key may have been pressed or the mode changed meanwhile
+        this.syncMicrophone();
+      });
+  }
+
+  /**
+   * A push to talk source went down (true) or up (false). Releasing keeps the
+   * mic on for a moment so the end of the word isn't cut off. Does nothing
+   * unless the input mode is push to talk.
+   * @param down Whether it is held
+   * @param source Keyboard (default) or controller; they work independently
+   */
+  pushToTalk(down: boolean, source: PttSource = "keys") {
+    clearTimeout(this.#pttTimers[source]);
+    this.#pttTimers[source] = undefined;
+    if (this.#settings.inputMode !== "ptt") return;
+
+    if (down) {
+      this.#pttSources[source] = true;
+      this.syncMicrophone();
+    } else if (this.#pttSources[source]) {
+      this.#pttTimers[source] = setTimeout(() => {
+        this.#pttTimers[source] = undefined;
+        this.#pttSources[source] = false;
+        this.syncMicrophone();
+      }, PTT_RELEASE_DELAY_MS);
+    }
+  }
+
+  /**
+   * Let go of one push to talk source at once, without the tail (the
+   * controller button was changed, or its shell support went away)
+   */
+  releasePushToTalkSource(source: PttSource) {
+    clearTimeout(this.#pttTimers[source]);
+    this.#pttTimers[source] = undefined;
+    if (!this.#pttSources[source]) return;
+    this.#pttSources[source] = false;
+    this.syncMicrophone();
+  }
+
+  /** Close every push to talk source at once (leaving the call, mode change) */
+  #releasePushToTalk() {
+    for (const source of ["keys", "pad"] as const) {
+      clearTimeout(this.#pttTimers[source]);
+      this.#pttTimers[source] = undefined;
+      this.#pttSources[source] = false;
+    }
+  }
+
   /** Whether our microphone is meant to be sending */
   #micShouldWork() {
     const local = this.getMicrophoneTrack()?.audioTrack;
-    return (
-      this.#settings.micOn &&
-      !this.#settings.deafen &&
-      !!local &&
-      !local.isMuted
-    );
+    return this.#micWanted() && !!local && !local.isMuted;
   }
 
   /** Stop watching the microphone after an output switch */
@@ -1323,10 +1470,10 @@ class Voice {
     room
       .switchActiveDevice("audioinput", "default")
       .then(() => {
-        if (this.room() !== room || !this.#settings.micOn) return;
-        if (this.#settings.deafen || room.localParticipant.isMicrophoneEnabled)
-          return;
-        return room.localParticipant.setMicrophoneEnabled(true);
+        if (this.room() !== room || !this.#micWanted()) return;
+        if (room.localParticipant.isMicrophoneEnabled) return;
+        // through the serialised sync, so it can't double publish
+        this.syncMicrophone();
       })
       .catch((err) =>
         console.error("[rtc] could not fall back to the default mic", err),
@@ -1490,6 +1637,7 @@ class Voice {
     this.#cancelCapture();
     this.#cancelMicRecovery();
     this.#stopWatchingMic();
+    this.#releasePushToTalk();
     outputBus.teardown();
     this.device.releaseWakeLock();
     this.#releaseAudioUnlock?.();
@@ -1546,6 +1694,15 @@ class Voice {
     try {
       const room = this.room();
       if (!room) throw "invalid state";
+      if (this.#settings.inputMode === "ptt") {
+        // the key decides whether the mic is open, so only the flags change
+        this.#settings.deafen = !this.#settings.deafen;
+        if (fromMute) this.#settings.micOn = true;
+        this.syncMicrophone();
+        this.#shareDeafen(room);
+        this.sound.playSound(this.#settings.deafen ? "deafen" : "undeafen");
+        return;
+      }
       await room.localParticipant.setMicrophoneEnabled(
         (this.#settings.micOn || !!fromMute) &&
           !room.localParticipant.isMicrophoneEnabled,
@@ -1574,11 +1731,17 @@ class Voice {
     try {
       const room = this.room();
       if (!room) throw "invalid state";
-      await room.localParticipant.setMicrophoneEnabled(
-        !room.localParticipant.isMicrophoneEnabled,
-      );
+      if (this.#settings.inputMode === "ptt") {
+        // in push to talk, mute is a hard mute the key can't override
+        this.#settings.micOn = !this.#settings.micOn;
+        this.syncMicrophone();
+      } else {
+        await room.localParticipant.setMicrophoneEnabled(
+          !room.localParticipant.isMicrophoneEnabled,
+        );
 
-      this.#settings.micOn = room.localParticipant.isMicrophoneEnabled;
+        this.#settings.micOn = room.localParticipant.isMicrophoneEnabled;
+      }
 
       if (this.#settings.micOn) {
         this.sound.playSound("unmute");
@@ -3396,6 +3559,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
         </InRoom>
         <StatsRecorder />
         <OverlayPublisher />
+        <GamepadPushToTalk />
         <CallSounds />
         <VoiceMoves />
       </RoomContext.Provider>

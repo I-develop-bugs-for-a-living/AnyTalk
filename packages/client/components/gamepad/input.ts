@@ -352,3 +352,22 @@ export class PadTracker {
     return events;
   }
 }
+
+/**
+ * Hide a button from the app's own controller handling, because it is the
+ * push to talk button and must not also navigate or toggle mute
+ * @param snapshot Controller state
+ * @param button Name of the push to talk button, if any (see pushToTalkButton)
+ * @returns Snapshot where that button is not held
+ */
+export function maskButton(
+  snapshot: PadSnapshot,
+  button?: string,
+): PadSnapshot {
+  if (!button) return snapshot;
+  const pressed = { ...snapshot.pressed };
+  const dpad = { ...snapshot.dpad };
+  if (button in pressed) pressed[button as PressButton] = false;
+  if (button in dpad) dpad[button as Direction] = false;
+  return { ...snapshot, pressed, dpad };
+}

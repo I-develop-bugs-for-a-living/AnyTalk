@@ -134,6 +134,11 @@ interface SettingsDefinition {
   "controller:enabled": boolean;
 
   /**
+   * Controller button that works as push to talk (desktop app), empty for none
+   */
+  "controller:ptt_button": string;
+
+  /**
    * User changes to keybinds, by keybind action
    */
   "keybinds:custom": Record<string, CustomKeybind>;
@@ -207,6 +212,7 @@ const EXPECTED_TYPES: { [K in keyof SettingsDefinition]: ValueType<K> } = {
   "advanced:developer_voice_record": "boolean",
   "advanced:recent_calls_shown": "number",
   "controller:enabled": "boolean",
+  "controller:ptt_button": "string",
   "keybinds:custom": cleanKeybinds,
 };
 
@@ -260,6 +266,7 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
       "advanced:developer_voice_record": true,
       "advanced:recent_calls_shown": DEFAULT_RECENT_CALLS_SHOWN,
       "controller:enabled": true,
+      "controller:ptt_button": "",
     };
   }
 

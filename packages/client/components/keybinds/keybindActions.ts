@@ -77,6 +77,11 @@ export enum KeybindAction {
   VOICE_TOGGLE_GAME_STREAM = "voice_toggle_game_stream",
 
   /**
+   * Hold to talk while in a call with the push to talk input mode
+   */
+  VOICE_PUSH_TO_TALK = "voice_push_to_talk",
+
+  /**
    * Show or hide the in-game voice overlay (desktop app)
    */
   TOGGLE_OVERLAY = "toggle_overlay",
@@ -88,6 +93,7 @@ export enum KeybindAction {
 export const CUSTOMISABLE_ACTIONS: KeybindAction[] = [
   KeybindAction.VOICE_TOGGLE_MUTE,
   KeybindAction.VOICE_TOGGLE_DEAFEN,
+  KeybindAction.VOICE_PUSH_TO_TALK,
   KeybindAction.VOICE_TOGGLE_GAME_STREAM,
   KeybindAction.TOGGLE_OVERLAY,
 ];
@@ -99,6 +105,7 @@ export const CUSTOMISABLE_ACTIONS: KeybindAction[] = [
 export const PREVENT_DEFAULT_ACTIONS = new Set<KeybindAction>([
   KeybindAction.VOICE_TOGGLE_MUTE,
   KeybindAction.VOICE_TOGGLE_DEAFEN,
+  KeybindAction.VOICE_PUSH_TO_TALK,
   KeybindAction.TOGGLE_OVERLAY,
 ]);
 
@@ -124,6 +131,7 @@ export const ACTION_PRIORITY: KeybindAction[] = [
   // ... all others
   KeybindAction.VOICE_TOGGLE_MUTE,
   KeybindAction.VOICE_TOGGLE_DEAFEN,
+  KeybindAction.VOICE_PUSH_TO_TALK,
   KeybindAction.VOICE_TOGGLE_GAME_STREAM,
   KeybindAction.TOGGLE_OVERLAY,
   KeybindAction.CHAT_FOCUS_COMPOSITION,

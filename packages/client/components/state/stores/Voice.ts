@@ -116,6 +116,8 @@ export interface TypeVoice {
   outputVolume: number;
   deafen: boolean;
   micOn: boolean;
+  /** Open the mic by voice activity, or only while the push to talk key is held */
+  inputMode: "voice" | "ptt";
 
   userVolumes: Record<string, number>;
   userMutes: Record<string, boolean>;
@@ -167,6 +169,7 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       outputVolume: 1.0,
       deafen: false,
       micOn: true,
+      inputMode: "voice",
       userVolumes: {},
       userMutes: {},
       screenShareVolumes: {},
@@ -275,6 +278,10 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
 
     if (typeof input.deafen === "boolean") {
       data.deafen = input.deafen;
+    }
+
+    if (input.inputMode === "voice" || input.inputMode === "ptt") {
+      data.inputMode = input.inputMode;
     }
 
     if (typeof input.micOn === "boolean") {
@@ -529,6 +536,13 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
   }
 
   /**
+   * Set the input mode
+   */
+  set inputMode(value: "voice" | "ptt") {
+    this.set("inputMode", value);
+  }
+
+  /**
    * Set deafen status
    */
   set deafen(value: boolean) {
@@ -638,6 +652,13 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
    */
   get outputVolume(): number {
     return this.get().outputVolume;
+  }
+
+  /**
+   * Get the input mode
+   */
+  get inputMode(): "voice" | "ptt" {
+    return this.get().inputMode;
   }
 
   /**

@@ -14,7 +14,14 @@ import {
   topLayer,
   watchLayers,
 } from "./dom";
-import { type InputEvent, PadTracker, isUsablePad, snapshotPad } from "./input";
+import {
+  type InputEvent,
+  PadTracker,
+  isUsablePad,
+  maskButton,
+  snapshotPad,
+} from "./input";
+import { gamepadPushToTalkAvailable } from "./pushToTalkButton";
 
 /** Number of controllers that are connected right now */
 const [padCount, setPadCount] = createSignal(0);
@@ -55,6 +62,12 @@ export function GamepadControls() {
 
   /** Whether the user left controller support on */
   const enabled = () => state.settings.getValue("controller:enabled") ?? true;
+
+  /** The push to talk button, which the app must leave alone */
+  const pttButton = () =>
+    gamepadPushToTalkAvailable() === true
+      ? (state.settings.getValue("controller:ptt_button") ?? undefined)
+      : undefined;
 
   /** Position tracking per controller, by its index */
   const trackers = new Map<number, PadTracker>();
@@ -149,7 +162,10 @@ export function GamepadControls() {
         trackers.set(pad.index, tracker);
       }
 
-      const events = tracker.poll(snapshotPad(pad), now);
+      const events = tracker.poll(
+        maskButton(snapshotPad(pad), pttButton()),
+        now,
+      );
       if (events.length) setGamepadInputMode(true);
 
       for (const event of events) {
