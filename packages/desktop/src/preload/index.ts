@@ -5,6 +5,7 @@ import {
   type DesktopConfig,
   type ErrorInfo,
   type HotkeyBinding,
+  type HotkeyCapabilities,
   type HotkeyResult,
   type OverlayRender,
   type OverlayState,
@@ -53,6 +54,18 @@ ipcRenderer.on(IPC.windowMaximised, (_event, maximised: boolean) => {
 const hotkeyListeners = new Set<(action: string) => void>();
 ipcRenderer.on(IPC.hotkeyFired, (_event, action: string) => {
   hotkeyListeners.forEach((listener) => listener(action));
+});
+
+/** Subscribers to global shortcut releases. */
+const hotkeyReleaseListeners = new Set<(action: string) => void>();
+ipcRenderer.on(IPC.hotkeyReleased, (_event, action: string) => {
+  hotkeyReleaseListeners.forEach((listener) => listener(action));
+});
+
+/** Subscribers to controller push-to-talk presses (true) and releases. */
+const gamepadListeners = new Set<(down: boolean) => void>();
+ipcRenderer.on(IPC.gamepadPtt, (_event, down: boolean) => {
+  gamepadListeners.forEach((listener) => listener(down));
 });
 
 /** Subscribers to updater state changes. */
@@ -105,6 +118,22 @@ function exposeNative() {
         hotkeyListeners.delete(callback);
       };
     },
+    onGlobalHotkeyRelease: (callback: (action: string) => void) => {
+      hotkeyReleaseListeners.add(callback);
+      return () => {
+        hotkeyReleaseListeners.delete(callback);
+      };
+    },
+    setGamepadPushToTalk: (button: string | null) =>
+      invoke<boolean>(IPC.gamepadSet, button),
+    onGamepadPushToTalk: (callback: (down: boolean) => void) => {
+      gamepadListeners.add(callback);
+      return () => {
+        gamepadListeners.delete(callback);
+      };
+    },
+    getHotkeyCapabilities: () =>
+      invoke<HotkeyCapabilities>(IPC.hotkeyCapabilities),
     getRunningGames: () => invoke<RunningGame[]>(IPC.gamesGet),
     getFocusedGame: () =>
       invoke<{ id: string; sourceId: string } | null>(IPC.gamesFocused),

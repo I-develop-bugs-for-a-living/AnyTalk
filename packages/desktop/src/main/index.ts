@@ -18,6 +18,8 @@ import {
   type AppInfo,
   type DesktopConfig,
   type ErrorInfo,
+  type HotkeyBinding,
+  type HotkeyCapabilities,
   CLIENT_WRITABLE_KEYS,
   IPC,
 } from "../shared/ipc";
@@ -25,6 +27,7 @@ import { getAutostart, setAutostart } from "./autostart";
 import { getConfig, updateConfig } from "./config";
 import { ensureLinuxDesktopFile } from "./desktopFile";
 import { gameLog } from "./gameLog";
+import { gamepadSupported, setGamepadPushToTalk, stopGamepad } from "./gamepad";
 import {
   getFocusedGame,
   getRunningGames,
@@ -33,7 +36,11 @@ import {
   onGamesChange,
   setGameDetection,
 } from "./games";
-import { resetGlobalHotkeys, setGlobalHotkeys } from "./hotkeys";
+import {
+  hookReleaseSupported,
+  resetGlobalHotkeys,
+  setGlobalHotkeys,
+} from "./hotkeys";
 import {
   destroyOverlay,
   installOverlay,
@@ -331,6 +338,7 @@ function createWindow() {
     if (details.isMainFrame && !details.isSameDocument) {
       globalShortcut.unregisterAll();
       resetGlobalHotkeys();
+      stopGamepad();
       // The new page knows nothing of the old call
       resetOverlay();
     }
@@ -569,13 +577,32 @@ function registerIpc() {
 
   handleApp(IPC.hotkeysSet, (bindings: unknown) => {
     const list = (Array.isArray(bindings) ? bindings : []).filter(
-      (b): b is { action: string; accelerator: string } =>
-        typeof b?.action === "string" && typeof b?.accelerator === "string",
+      (b): b is HotkeyBinding =>
+        typeof b?.action === "string" &&
+        typeof b?.accelerator === "string" &&
+        (b.code === undefined || typeof b.code === "string"),
     );
-    return setGlobalHotkeys(list, (action) =>
-      mainWindow?.webContents.send(IPC.hotkeyFired, action),
+    return setGlobalHotkeys(list, (action, edge) =>
+      mainWindow?.webContents.send(
+        edge === "down" ? IPC.hotkeyFired : IPC.hotkeyReleased,
+        action,
+      ),
     );
   });
+
+  handleApp(IPC.gamepadSet, (button: unknown) =>
+    setGamepadPushToTalk(typeof button === "string" ? button : null, (down) =>
+      mainWindow?.webContents.send(IPC.gamepadPtt, down),
+    ),
+  );
+
+  handleApp(
+    IPC.hotkeyCapabilities,
+    (): HotkeyCapabilities => ({
+      release: hookReleaseSupported(),
+      gamepad: gamepadSupported(),
+    }),
+  );
 
   /** Register an error page handler. */
   const handleError = <A extends unknown[], R>(

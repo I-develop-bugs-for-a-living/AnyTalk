@@ -13,6 +13,10 @@ export const IPC = {
   windowMaximised: "window:maximised",
   hotkeysSet: "hotkeys:set",
   hotkeyFired: "hotkeys:fired",
+  hotkeyReleased: "hotkeys:released",
+  hotkeyCapabilities: "hotkeys:capabilities",
+  gamepadSet: "gamepad:set",
+  gamepadPtt: "gamepad:ptt",
   pickerSources: "picker:sources",
   pickerResult: "picker:result",
   pickerCancel: "picker:cancel",
@@ -168,10 +172,23 @@ export type RunningGame = {
 };
 
 /** A global shortcut binding requested by the client. */
-export type HotkeyBinding = { action: string; accelerator: string };
+export type HotkeyBinding = {
+  action: string;
+  accelerator: string;
+  /** `KeyboardEvent.code` of the main key, layout independent */
+  code?: string;
+};
 
 /** Outcome of registering a global shortcut. */
 export type HotkeyResult = { action: string; registered: boolean };
+
+/** What the hotkey backend can do, see `getHotkeyCapabilities`. */
+export type HotkeyCapabilities = {
+  /** Key releases are reported (keyboard hook), for push-to-talk */
+  release: boolean;
+  /** A controller button can act as push-to-talk (Windows, XInput) */
+  gamepad: boolean;
+};
 
 /** What the error page shows. */
 export type ErrorInfo = {

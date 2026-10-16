@@ -7,7 +7,24 @@ directories:
 files:
   - dist/**
   - package.json
+  - node_modules/uiohook-napi/**
+  - node_modules/node-gyp-build/**
+  - node_modules/koffi/**
+  # koffi bundles prebuilds for every platform, keep win32_x64 only (the only
+  # target). An arm64 target would need the matching prebuild kept as well.
+  - "!node_modules/koffi/{doc,src,vendor,lib}"
+  - "!node_modules/koffi/build/koffi/{darwin_*,freebsd_*,openbsd_*,musl_*,linux_*,win32_arm64,win32_ia32}"
 asar: true
+# uiohook-napi ships N-API prebuilds for every platform; a rebuild would
+# compile a host-platform binary into the shared module folder, and
+# node-gyp-build prefers that over the right prebuild
+npmRebuild: false
+# The native hook is loaded from disk, not from inside the archive. Its loader
+# (node-gyp-build) must sit next to it, or `require` can't find it from there.
+asarUnpack:
+  - node_modules/uiohook-napi/**
+  - node_modules/node-gyp-build/**
+  - node_modules/koffi/**
 publish:
   provider: github
   owner: I-develop-bugs-for-a-living
