@@ -9,7 +9,7 @@
  */
 import type { Direction } from "./spatial";
 
-/** Face and shoulder buttons that act once per press */
+/** Face, shoulder and stick-click buttons that act once per press */
 export type PressButton =
   | "a"
   | "b"
@@ -20,7 +20,9 @@ export type PressButton =
   | "lt"
   | "rt"
   | "select"
-  | "start";
+  | "start"
+  | "l3"
+  | "r3";
 
 /** What a controller did during one poll */
 export type InputEvent =
@@ -82,6 +84,8 @@ const STANDARD_BUTTONS: Record<PressButton, number> = {
   rt: 7,
   select: 8,
   start: 9,
+  l3: 10,
+  r3: 11,
 };
 
 /** D-pad button index on the standard layout for each direction */
