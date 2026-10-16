@@ -26,8 +26,12 @@ declare global {
     overlayCorner?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
     /** When the overlay shows, only with a detected game when missing */
     overlayMode?: "always" | "games";
-    /** How much the overlay shows, detailed when missing */
-    overlayStyle?: "compact" | "detailed";
+    /** When each overlay element shows, see the Detailed preset for defaults */
+    overlayAvatar?: "always" | "speaking" | "off";
+    overlayName?: "always" | "speaking" | "off";
+    overlayLive?: "always" | "speaking" | "off";
+    overlayStatus?: "always" | "speaking" | "off";
+    overlayWatching?: "always" | "speaking" | "off";
     /** Server the app loads, empty for the default */
     serverUrl: string;
     windowState: {
@@ -142,6 +146,8 @@ declare global {
         mutedLabel?: string;
         /** Translated text of the deafened badge */
         deafenedLabel?: string;
+        /** Translated text of the "watching your stream" eye */
+        watchingLabel?: string;
         participants: {
           id: string;
           name: string;
@@ -150,6 +156,7 @@ declare global {
           muted: boolean;
           deafened: boolean;
           streaming: boolean;
+          watchingYou: boolean;
         }[];
       }): Promise<void>;
     };

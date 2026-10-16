@@ -98,6 +98,7 @@ export function sanitiseOverlayState(value: unknown): OverlayState {
       streaming: p.streaming === true,
       muted: p.muted === true,
       deafened: p.deafened === true,
+      watchingYou: p.watchingYou === true,
     });
   }
   const label = typeof source.liveLabel === "string" ? source.liveLabel : "";
@@ -110,6 +111,7 @@ export function sanitiseOverlayState(value: unknown): OverlayState {
     liveLabel: label.trim().slice(0, 16) || undefined,
     mutedLabel: text(source.mutedLabel),
     deafenedLabel: text(source.deafenedLabel),
+    watchingLabel: text(source.watchingLabel),
     participants,
   };
 }
@@ -192,7 +194,13 @@ function push() {
   const config = getConfig();
   const payload: OverlayRender = {
     ...state,
-    style: config.overlayStyle,
+    elements: {
+      overlayAvatar: config.overlayAvatar,
+      overlayName: config.overlayName,
+      overlayLive: config.overlayLive,
+      overlayStatus: config.overlayStatus,
+      overlayWatching: config.overlayWatching,
+    },
     corner: config.overlayCorner,
   };
   overlay.webContents.send(IPC.overlayState, payload);

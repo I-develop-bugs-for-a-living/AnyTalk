@@ -127,6 +127,7 @@ function SnapshotSender() {
         liveLabel: t`LIVE`,
         mutedLabel: t`Muted`,
         deafenedLabel: t`Deafened`,
+        watchingLabel: t`Watching your stream`,
       })
       ?.catch(() => {});
   };
@@ -248,6 +249,13 @@ function ParticipantReporter(props: {
     );
   });
 
+  /** Whether this participant is among the viewers of our own stream */
+  const watchingYou = () => {
+    const room = voice.room();
+    if (participant.isLocal || !room || !voice.screenshare()) return false;
+    return voice.viewersOf(room.localParticipant.identity).includes(id());
+  };
+
   createEffect(() => {
     const current = id();
     props.onReport(current, {
@@ -258,6 +266,7 @@ function ParticipantReporter(props: {
       streaming: streaming(),
       muted: muted(),
       deafened: deafened(),
+      watchingYou: watchingYou(),
     });
     // drop the entry of the old id if the identity ever changes
     onCleanup(() => props.onReport(current, undefined));

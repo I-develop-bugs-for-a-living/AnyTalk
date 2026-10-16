@@ -1,6 +1,11 @@
 // Draws the voice overlay. Plain DOM, no framework: the page only receives
 // snapshots from the shell through `window.anytalkOverlay`.
-import type { OverlayParticipant, OverlayRender } from "../shared/ipc";
+import type {
+  OverlayElements,
+  OverlayParticipant,
+  OverlayRender,
+  OverlayVisibility,
+} from "../shared/ipc";
 
 declare global {
   interface Window {
@@ -30,6 +35,43 @@ const MIC_OFF_PATH =
 /** Material "headset" icon path (24x24); a slash is drawn over it */
 const HEADSET_PATH =
   "M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z";
+
+/** Material "visibility" (eye) icon path (24x24) */
+const EYE_PATH =
+  "M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z";
+
+/**
+ * Build the SVG of the "watching your stream" eye.
+ *
+ * @returns The icon element
+ */
+function eyeIcon(): SVGElement {
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("aria-hidden", "true");
+  const path = document.createElementNS(ns, "path");
+  path.setAttribute("d", EYE_PATH);
+  path.setAttribute("fill", "currentColor");
+  svg.append(path);
+  return svg;
+}
+
+/**
+ * Whether an element shows, given its setting.
+ *
+ * @param mode The element's visibility setting
+ * @param applies Whether the element has something to show for this person
+ * @param speaking Whether the person is speaking
+ * @returns True when the element is drawn
+ */
+function visible(
+  mode: OverlayVisibility,
+  applies: boolean,
+  speaking: boolean,
+): boolean {
+  return applies && (mode === "always" || (mode === "speaking" && speaking));
+}
 
 /**
  * Build the SVG of a status badge icon.
@@ -93,7 +135,12 @@ function createRow(person: OverlayParticipant): HTMLElement {
   status.className = "status";
   status.setAttribute("role", "img");
 
-  row.append(avatar, name, live, status);
+  const watching = document.createElement("span");
+  watching.className = "watching";
+  watching.setAttribute("role", "img");
+  watching.append(eyeIcon());
+
+  row.append(avatar, name, live, watching, status);
   return row;
 }
 
@@ -107,17 +154,22 @@ function updateRow(
   row: HTMLElement,
   person: OverlayParticipant,
   liveLabel: string,
-  labels: { muted: string; deafened: string },
+  labels: { muted: string; deafened: string; watching: string },
+  elements: OverlayElements,
 ) {
-  const avatar = row.children[0] as HTMLElement;
-  const name = row.children[1] as HTMLElement;
-  const live = row.children[2] as HTMLElement;
-  const status = row.children[3] as HTMLElement;
+  const part = (className: string) =>
+    row.querySelector(`:scope > .${className}`) as HTMLElement;
+  const avatar = part("avatar");
+  const name = part("name");
+  const live = part("live");
+  const watching = part("watching");
+  const status = part("status");
 
   row.classList.toggle("speaking", person.speaking);
   name.textContent = person.name;
   live.textContent = liveLabel;
-  live.hidden = !person.streaming;
+  watching.setAttribute("aria-label", labels.watching);
+  watching.title = labels.watching;
 
   // deafened wins: it implies muted
   const state = person.deafened ? "deafened" : person.muted ? "muted" : "";
@@ -126,8 +178,27 @@ function updateRow(
     status.replaceChildren();
     if (state) status.append(statusIcon(state === "deafened"));
   }
-  status.hidden = !state;
   if (state) status.setAttribute("aria-label", labels[state]);
+
+  // Each element follows its own setting; a row with nothing left is hidden
+  // whole, so it leaves no empty padded line or gap in the list
+  const shows = {
+    avatar: visible(elements.overlayAvatar, true, person.speaking),
+    name: visible(elements.overlayName, true, person.speaking),
+    live: visible(elements.overlayLive, person.streaming, person.speaking),
+    watching: visible(
+      elements.overlayWatching,
+      person.watchingYou,
+      person.speaking,
+    ),
+    status: visible(elements.overlayStatus, !!state, person.speaking),
+  };
+  avatar.hidden = !shows.avatar;
+  name.hidden = !shows.name;
+  live.hidden = !shows.live;
+  watching.hidden = !shows.watching;
+  status.hidden = !shows.status;
+  row.hidden = !Object.values(shows).some(Boolean);
   (avatar.firstElementChild as HTMLElement).textContent = (
     Array.from(person.name)[0] ?? "?"
   ).toUpperCase();
@@ -152,7 +223,6 @@ function updateRow(
  */
 function render(state: OverlayRender) {
   document.body.dataset.corner = state.corner;
-  document.body.dataset.style = state.style;
 
   const seen = new Set<string>();
   state.participants.forEach((person, index) => {
@@ -162,10 +232,17 @@ function render(state: OverlayRender) {
       row = createRow(person);
       rows.set(person.id, row);
     }
-    updateRow(row, person, state.liveLabel || "LIVE", {
-      muted: state.mutedLabel || "Muted",
-      deafened: state.deafenedLabel || "Deafened",
-    });
+    updateRow(
+      row,
+      person,
+      state.liveLabel || "LIVE",
+      {
+        muted: state.mutedLabel || "Muted",
+        deafened: state.deafenedLabel || "Deafened",
+        watching: state.watchingLabel || "Watching your stream",
+      },
+      state.elements,
+    );
     // Keeps order without touching rows that are already in place
     if (list.children[index] !== row)
       list.insertBefore(row, list.children[index] ?? null);

@@ -1,13 +1,21 @@
-import { Show, createSignal } from "solid-js";
+import { For, Show, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 
 import {
+  type OverlayVisibility,
+  COMPACT_ELEMENTS,
+  DETAILED_ELEMENTS,
   gameDetectionAvailable,
+  overlayAvatar,
   overlayCorner,
   overlayEnabled,
+  overlayLive,
   overlayMode,
-  overlayStyle,
+  overlayName,
+  overlayPreset,
+  overlayStatus,
+  overlayWatching,
   saveOverlaySettings,
 } from "@revolt/rtc";
 import { CategoryButton, Checkbox, Column, Radio2, Text } from "@revolt/ui";
@@ -30,6 +38,32 @@ export default function Overlay() {
     const ok = await saveOverlaySettings(partial);
     setSaveError(ok ? undefined : t`Could not save this setting.`);
   }
+
+  /** The elements with their own visibility setting, in overlay order */
+  const elements = () => [
+    {
+      key: "overlayAvatar" as const,
+      title: t`Avatar`,
+      value: overlayAvatar,
+    },
+    { key: "overlayName" as const, title: t`Name`, value: overlayName },
+    {
+      key: "overlayLive" as const,
+      title: t`LIVE indicator`,
+      value: overlayLive,
+    },
+    {
+      key: "overlayStatus" as const,
+      title: t`Mute and deafen`,
+      value: overlayStatus,
+    },
+    {
+      key: "overlayWatching" as const,
+      title: t`Stream viewers`,
+      value: overlayWatching,
+      hint: t`Needs a server that supports stream viewers.`,
+    },
+  ];
 
   return (
     <Column gap="lg">
@@ -128,28 +162,66 @@ export default function Overlay() {
 
       <Column>
         <Text class="title">
-          <Trans>Style</Trans>
+          <Trans>Preset</Trans>
         </Text>
         <Radio2
-          aria-label={t`Style`}
-          value={overlayStyle()}
-          onChange={(event) =>
-            save({
-              overlayStyle: event.currentTarget
-                .value as DesktopConfig["overlayStyle"],
-            })
-          }
+          aria-label={t`Preset`}
+          value={overlayPreset()}
+          onChange={(event) => {
+            // Custom is only a state, picking a preset writes all five keys
+            const value = event.currentTarget.value;
+            if (value === "compact") save({ ...COMPACT_ELEMENTS });
+            else if (value === "detailed") save({ ...DETAILED_ELEMENTS });
+          }}
         >
           <Radio2.Option value="compact">
-            <Trans>Compact: only the avatars</Trans>
+            <Trans>Compact</Trans>
           </Radio2.Option>
           <Radio2.Option value="detailed">
-            <Trans>
-              Detailed: names while someone speaks, and a LIVE tag for streams
-            </Trans>
+            <Trans>Detailed</Trans>
           </Radio2.Option>
+          <Show when={overlayPreset() === "custom"}>
+            <Radio2.Option value="custom">
+              <Trans>Custom</Trans>
+            </Radio2.Option>
+          </Show>
         </Radio2>
       </Column>
+
+      <For each={elements()}>
+        {(element) => (
+          <Column>
+            <Text class="title">{element.title}</Text>
+            <Radio2
+              aria-label={element.title}
+              aria-describedby={
+                element.hint ? `${element.key}-hint` : undefined
+              }
+              value={element.value()}
+              onChange={(event) =>
+                save({
+                  [element.key]: event.currentTarget.value as OverlayVisibility,
+                })
+              }
+            >
+              <Radio2.Option value="always">
+                <Trans>Always show</Trans>
+              </Radio2.Option>
+              <Radio2.Option value="speaking">
+                <Trans>Show when speaking</Trans>
+              </Radio2.Option>
+              <Radio2.Option value="off">
+                <Trans>Off</Trans>
+              </Radio2.Option>
+            </Radio2>
+            <Show when={element.hint}>
+              <div id={`${element.key}-hint`}>
+                <Text class="label">{element.hint}</Text>
+              </div>
+            </Show>
+          </Column>
+        )}
+      </For>
 
       <Show when={saveError()}>
         <div role="alert">

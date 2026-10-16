@@ -140,7 +140,11 @@ export default function Native() {
       | "serverUrl"
       | "overlayCorner"
       | "overlayMode"
-      | "overlayStyle"
+      | "overlayAvatar"
+      | "overlayName"
+      | "overlayLive"
+      | "overlayStatus"
+      | "overlayWatching"
     >,
   >(key: K, icon: string, label: string, description: string) {
     return (

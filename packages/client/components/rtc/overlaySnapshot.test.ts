@@ -13,6 +13,7 @@ const alice: OverlayParticipantState = {
   streaming: false,
   muted: false,
   deafened: false,
+  watchingYou: false,
 };
 const bob: OverlayParticipantState = { ...alice, id: "b", name: "Bob" };
 
@@ -49,6 +50,7 @@ describe("sameOverlayState", () => {
     expect(changed([{ ...alice, streaming: true }, bob])).toBe(false);
     expect(changed([{ ...alice, avatar: "https://x/y.png" }, bob])).toBe(false);
     expect(changed([{ ...alice, name: "Al" }, bob])).toBe(false);
+    expect(changed([{ ...alice, watchingYou: true }, bob])).toBe(false);
     expect(changed([bob, alice])).toBe(false);
     expect(changed([alice])).toBe(false);
   });

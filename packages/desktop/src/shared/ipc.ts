@@ -52,10 +52,24 @@ export const OVERLAY_MODES = ["always", "games"] as const;
 /** See `OVERLAY_MODES`. */
 export type OverlayMode = (typeof OVERLAY_MODES)[number];
 
-/** Overlay looks: avatars only, or with names and the LIVE tag. */
-export const OVERLAY_STYLES = ["compact", "detailed"] as const;
-/** See `OVERLAY_STYLES`. */
-export type OverlayStyle = (typeof OVERLAY_STYLES)[number];
+/** When one overlay element shows: always, only while speaking, or never. */
+export const OVERLAY_VISIBILITIES = ["always", "speaking", "off"] as const;
+/** See `OVERLAY_VISIBILITIES`. */
+export type OverlayVisibility = (typeof OVERLAY_VISIBILITIES)[number];
+
+/** The overlay elements the user can set a visibility for. */
+export const OVERLAY_ELEMENT_KEYS = [
+  "overlayAvatar",
+  "overlayName",
+  "overlayLive",
+  "overlayStatus",
+  "overlayWatching",
+] as const;
+/** Config key of one overlay element. */
+export type OverlayElementKey = (typeof OVERLAY_ELEMENT_KEYS)[number];
+
+/** Visibility of every overlay element. */
+export type OverlayElements = Record<OverlayElementKey, OverlayVisibility>;
 
 /** One call participant as drawn by the overlay. */
 export type OverlayParticipant = {
@@ -69,6 +83,8 @@ export type OverlayParticipant = {
   muted: boolean;
   /** Deafened, shown instead of the muted badge */
   deafened: boolean;
+  /** Watching the local user's stream */
+  watchingYou: boolean;
 };
 
 /** Call snapshot the main window sends and the overlay draws. */
@@ -79,17 +95,19 @@ export type OverlayState = {
   /** Translated labels of the muted and deafened badges */
   mutedLabel?: string;
   deafenedLabel?: string;
+  /** Translated text of the "watching your stream" eye */
+  watchingLabel?: string;
   participants: OverlayParticipant[];
 };
 
 /** What the overlay page receives: the call snapshot plus the look. */
 export type OverlayRender = OverlayState & {
-  style: OverlayStyle;
+  elements: OverlayElements;
   corner: OverlayCorner;
 };
 
 /** Settings persisted by the desktop shell. */
-export type DesktopConfig = {
+export type DesktopConfig = OverlayElements & {
   firstLaunch: boolean;
   customFrame: boolean;
   minimiseToTray: boolean;
@@ -107,8 +125,6 @@ export type DesktopConfig = {
   overlayCorner: OverlayCorner;
   /** When the overlay shows */
   overlayMode: OverlayMode;
-  /** How much the overlay shows */
-  overlayStyle: OverlayStyle;
   /** Custom server URL, empty string means the default */
   serverUrl: string;
   windowState: {
@@ -133,7 +149,7 @@ export const CLIENT_WRITABLE_KEYS = [
   "overlayEnabled",
   "overlayCorner",
   "overlayMode",
-  "overlayStyle",
+  ...OVERLAY_ELEMENT_KEYS,
   "serverUrl",
 ] as const;
 

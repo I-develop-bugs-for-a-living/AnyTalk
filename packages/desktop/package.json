@@ -14,7 +14,7 @@
   "scripts": {
     "build:code": "node scripts/build.mjs",
     "typecheck": "tsc --noEmit",
-    "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/main/updateSignature.test.ts src/main/hotkeyKeys.test.ts src/main/gamepadLogic.test.ts",
+    "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/main/updateSignature.test.ts src/main/hotkeyKeys.test.ts src/main/gamepadLogic.test.ts src/main/overlayLooks.test.ts",
     "sign-release": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/sign-release.mjs",
     "sign-update": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/sign-update.mjs",
     "gen-update-key": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/gen-update-key.mjs",
