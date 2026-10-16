@@ -96,12 +96,20 @@ export function sanitiseOverlayState(value: unknown): OverlayState {
       avatar,
       speaking: p.speaking === true,
       streaming: p.streaming === true,
+      muted: p.muted === true,
+      deafened: p.deafened === true,
     });
   }
   const label = typeof source.liveLabel === "string" ? source.liveLabel : "";
+  const text = (value: unknown) =>
+    typeof value === "string"
+      ? value.trim().slice(0, 32) || undefined
+      : undefined;
   return {
     inCall: true,
     liveLabel: label.trim().slice(0, 16) || undefined,
+    mutedLabel: text(source.mutedLabel),
+    deafenedLabel: text(source.deafenedLabel),
     participants,
   };
 }

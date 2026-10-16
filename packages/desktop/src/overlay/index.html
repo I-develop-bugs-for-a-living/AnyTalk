@@ -102,6 +102,28 @@
       .row.speaking .name {
         opacity: 1;
       }
+      /* A name that isn't shown takes no space, so the gap collapses */
+      .row:not(.speaking) .name {
+        display: none;
+      }
+      .status {
+        flex: none;
+        display: grid;
+        place-items: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.65);
+        color: #ff6b78;
+      }
+      .status[hidden],
+      .live[hidden] {
+        display: none;
+      }
+      .status svg {
+        width: 14px;
+        height: 14px;
+      }
       .live {
         flex: none;
         padding: 1px 5px;

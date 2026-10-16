@@ -138,11 +138,17 @@ declare global {
         inCall: boolean;
         /** Translated text of the LIVE tag */
         liveLabel?: string;
+        /** Translated text of the muted badge */
+        mutedLabel?: string;
+        /** Translated text of the deafened badge */
+        deafenedLabel?: string;
         participants: {
           id: string;
           name: string;
           avatar?: string;
           speaking: boolean;
+          muted: boolean;
+          deafened: boolean;
           streaming: boolean;
         }[];
       }): Promise<void>;

@@ -10,6 +10,10 @@ export type OverlayParticipantState = {
   avatar?: string;
   speaking: boolean;
   streaming: boolean;
+  /** Microphone off (muted, or no microphone track published) */
+  muted: boolean;
+  /** Deafened; implies muted for the overlay's badge */
+  deafened: boolean;
 };
 
 /** Call snapshot sent to the desktop shell */
@@ -65,7 +69,9 @@ export function sameOverlayState(
       p.name === q.name &&
       p.avatar === q.avatar &&
       p.speaking === q.speaking &&
-      p.streaming === q.streaming
+      p.streaming === q.streaming &&
+      p.muted === q.muted &&
+      p.deafened === q.deafened
     );
   });
 }

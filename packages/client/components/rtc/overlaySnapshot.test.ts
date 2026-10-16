@@ -11,6 +11,8 @@ const alice: OverlayParticipantState = {
   name: "Alice",
   speaking: false,
   streaming: false,
+  muted: false,
+  deafened: false,
 };
 const bob: OverlayParticipantState = { ...alice, id: "b", name: "Bob" };
 

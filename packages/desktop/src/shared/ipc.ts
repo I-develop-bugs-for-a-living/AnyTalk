@@ -65,6 +65,10 @@ export type OverlayParticipant = {
   avatar?: string;
   speaking: boolean;
   streaming: boolean;
+  /** Microphone off */
+  muted: boolean;
+  /** Deafened, shown instead of the muted badge */
+  deafened: boolean;
 };
 
 /** Call snapshot the main window sends and the overlay draws. */
@@ -72,6 +76,9 @@ export type OverlayState = {
   inCall: boolean;
   /** Translated text of the LIVE tag, the page falls back to "LIVE" */
   liveLabel?: string;
+  /** Translated labels of the muted and deafened badges */
+  mutedLabel?: string;
+  deafenedLabel?: string;
   participants: OverlayParticipant[];
 };
 
