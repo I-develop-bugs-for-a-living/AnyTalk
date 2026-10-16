@@ -106,6 +106,11 @@ msgstr "{0, plural, zero {+# آخرين} one {+# آخر} two {+# آخران} few
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, zero {تنزيل # ملف} one {تنزيل ملف} two {تنزيل ملفين} few {تنزيل # ملفات} many {تنزيل # ملفًا} other {تنزيل # ملف}}"
 
+#. placeholder {0}: user().username
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "{0} – AnyTalk"
+msgstr "{0} – AnyTalk"
+
 #. placeholder {0}: users() .slice(0, -1) .map((user) => user!.username) .join(", ")
 #. placeholder {1}: users().slice(-1)[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -892,6 +897,10 @@ msgstr "B (الزر الأيمن)"
 msgid "Back"
 msgstr "عودة"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Back to AnyTalk"
+msgstr "العودة إلى AnyTalk"
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Back to categories"
 msgstr "العودة إلى الفئات"
@@ -982,6 +991,10 @@ msgstr "أسفل اليسار"
 msgid "Bottom right"
 msgstr "أسفل اليمين"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Bring back"
+msgstr "إعادة"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "متصفح"
@@ -1049,6 +1062,10 @@ msgstr "المكالمات"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Camera"
 msgstr "الكاميرا"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Camera is off"
+msgstr "الكاميرا متوقفة"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
@@ -1539,6 +1556,15 @@ msgstr "لم يتم العثور على طلبك."
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not load the patch notes right now."
 msgstr "تعذّر تحميل ملاحظات التحديث حاليًا."
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window."
+msgstr "تعذّر فتح البث في نافذة منفصلة."
+
+#: components/rtc/components/StreamPopouts.tsx
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
+msgstr "تعذّر فتح البث في نافذة منفصلة. تأكد من السماح بالنوافذ المنبثقة."
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
@@ -2279,6 +2305,10 @@ msgstr "ممتاز"
 msgid "Excellent connection"
 msgstr "اتصال ممتاز"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Exit fullscreen"
+msgstr "الخروج من ملء الشاشة"
+
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "تصدير"
@@ -2410,6 +2440,10 @@ msgstr "متجمّد"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Fruit Salad"
 msgstr "سلطة فاكهة"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Fullscreen"
+msgstr "ملء الشاشة"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Generate a new token if it gets lost or compromised"
@@ -3650,6 +3684,10 @@ msgstr "إفتح {0}"
 msgid "Open an app or switch to Entire screen."
 msgstr "افتح تطبيقًا أو انتقل إلى «الشاشة بالكامل»."
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Open as window"
+msgstr "فتح في نافذة"
+
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Open channel settings"
 msgstr "فتح اعدادات القناة"
@@ -3878,6 +3916,10 @@ msgstr "اتصال ضعيف"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor or lost connection"
 msgstr "اتصال ضعيف أو مفقود"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Pop out into a separate window"
+msgstr "فتح في نافذة منفصلة"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Position"
@@ -4689,6 +4731,10 @@ msgstr "إظهار الطبقة العلوية"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Show send message button"
 msgstr "عرض زر إرسال الرسالة"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Showing in a separate window"
+msgstr "يُعرض في نافذة منفصلة"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."

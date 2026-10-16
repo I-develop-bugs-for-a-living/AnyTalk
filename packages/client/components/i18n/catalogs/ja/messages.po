@@ -106,6 +106,11 @@ msgstr "{0, plural, other {他 # 人}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {ファイルをドロップ} other {# 個のファイルをドロップ}}"
 
+#. placeholder {0}: user().username
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "{0} – AnyTalk"
+msgstr "{0} – AnyTalk"
+
 #. placeholder {0}: users() .slice(0, -1) .map((user) => user!.username) .join(", ")
 #. placeholder {1}: users().slice(-1)[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -815,6 +820,10 @@ msgstr "B(右のボタン)"
 msgid "Back"
 msgstr "戻る"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Back to AnyTalk"
+msgstr "AnyTalk に戻る"
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Back to categories"
 msgstr "カテゴリーに戻る"
@@ -905,6 +914,10 @@ msgstr "左下"
 msgid "Bottom right"
 msgstr "右下"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Bring back"
+msgstr "戻す"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "ブラウザ"
@@ -969,6 +982,10 @@ msgstr "通話"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Camera"
 msgstr "カメラ"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Camera is off"
+msgstr "カメラはオフです"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
@@ -1456,6 +1473,15 @@ msgstr "指定されたリクエスト先が見つかりませんでした。"
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not load the patch notes right now."
 msgstr "現在パッチノートを読み込めません。"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window."
+msgstr "配信を別ウィンドウで開けませんでした。"
+
+#: components/rtc/components/StreamPopouts.tsx
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
+msgstr "配信を別ウィンドウで開けませんでした。ポップアップが許可されているか確認してください。"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
@@ -2185,6 +2211,10 @@ msgstr "非常に良い"
 msgid "Excellent connection"
 msgstr "接続品質: 非常に良い"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Exit fullscreen"
+msgstr "全画面表示を終了"
+
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "エクスポート"
@@ -2316,6 +2346,10 @@ msgstr "フリーズ中"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Fruit Salad"
 msgstr "フルーツサラダ"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Fullscreen"
+msgstr "全画面表示"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Generate a new token if it gets lost or compromised"
@@ -3550,6 +3584,10 @@ msgstr "{0} を開く"
 msgid "Open an app or switch to Entire screen."
 msgstr "アプリを開くか、「画面全体」に切り替えてください。"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Open as window"
+msgstr "ウィンドウで開く"
+
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Open channel settings"
 msgstr "チャンネルの編集"
@@ -3778,6 +3816,10 @@ msgstr "接続品質: 悪い"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor or lost connection"
 msgstr "接続が悪い、または途切れた"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Pop out into a separate window"
+msgstr "別ウィンドウで開く"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Position"
@@ -4580,6 +4622,10 @@ msgstr "オーバーレイを表示"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Show send message button"
 msgstr "メッセージ送信ボタンを表示"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Showing in a separate window"
+msgstr "別ウィンドウで表示中"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."

@@ -106,6 +106,11 @@ msgstr "{0, plural, other {+# 人}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, other {拖入 # 个文件}}"
 
+#. placeholder {0}: user().username
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "{0} – AnyTalk"
+msgstr "{0} – AnyTalk"
+
 #. placeholder {0}: users() .slice(0, -1) .map((user) => user!.username) .join(", ")
 #. placeholder {1}: users().slice(-1)[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -892,6 +897,10 @@ msgstr "B(右侧按钮)"
 msgid "Back"
 msgstr "返回"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Back to AnyTalk"
+msgstr "返回 AnyTalk"
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Back to categories"
 msgstr "返回分类"
@@ -982,6 +991,10 @@ msgstr "左下角"
 msgid "Bottom right"
 msgstr "右下角"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Bring back"
+msgstr "放回"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "浏览器"
@@ -1050,6 +1063,10 @@ msgstr "通话"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Camera"
 msgstr "摄像头"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Camera is off"
+msgstr "摄像头已关闭"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
@@ -1541,6 +1558,15 @@ msgstr "找不到你请求的内容。"
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not load the patch notes right now."
 msgstr "暂时无法加载更新日志。"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window."
+msgstr "无法在单独窗口中打开该直播。"
+
+#: components/rtc/components/StreamPopouts.tsx
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
+msgstr "无法在单独窗口中打开该直播。请检查是否允许弹出窗口。"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
@@ -2278,6 +2304,10 @@ msgstr "极好"
 msgid "Excellent connection"
 msgstr "连接极佳"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Exit fullscreen"
+msgstr "退出全屏"
+
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "导出"
@@ -2409,6 +2439,10 @@ msgstr "已卡住"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Fruit Salad"
 msgstr "水果沙拉"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Fullscreen"
+msgstr "全屏"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Generate a new token if it gets lost or compromised"
@@ -3650,6 +3684,10 @@ msgstr "打开 {0}"
 msgid "Open an app or switch to Entire screen."
 msgstr "请打开一个应用，或切换到“整个屏幕”。"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Open as window"
+msgstr "在窗口中打开"
+
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Open channel settings"
 msgstr "打开频道设置"
@@ -3878,6 +3916,10 @@ msgstr "连接较差"
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor or lost connection"
 msgstr "连接较差或已断开"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Pop out into a separate window"
+msgstr "在单独窗口中打开"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Position"
@@ -4690,6 +4732,10 @@ msgstr "显示悬浮窗"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Show send message button"
 msgstr "显示发送消息按钮"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Showing in a separate window"
+msgstr "正在单独窗口中显示"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
