@@ -36,7 +36,7 @@ Each `@revolt/*` alias maps to `components/*`:
 | `@revolt/ui` | shared components, themes, directives, call UI, composer |
 | `@revolt/markdown` | message markdown pipeline |
 | `@revolt/i18n` | Lingui setup and language loading |
-| `@revolt/keybinds` | keyboard shortcuts; hotkeys can be a single key, and numpad keys are told apart from the main row (`keybindSequences.ts`). `GlobalKeybinds` registers desktop-app global hotkeys through `window.native` for every enabled hotkey (`accelerator.ts` converts key sequences) |
+| `@revolt/keybinds` | keyboard shortcuts; hotkeys can be a single key, and numpad keys are told apart from the main row (`keybindSequences.ts`). Keybinds can also run on release (`useTriggerKeybindRelease`, used by push to talk). `GlobalKeybinds` registers desktop-app global hotkeys through `window.native` for every enabled hotkey (`accelerator.ts` converts key sequences), sends each binding's physical `code` (`keyCodes.ts`), and reads the shell's capabilities to know whether releases arrive |
 | `@revolt/gamepad` | game controller support (see Game controller) |
 | `@revolt/common` | shared utilities, env config |
 
@@ -66,10 +66,10 @@ Every store extends `AbstractStore` (`stores/index.ts`), validates its data in `
 |---|---|
 | `Auth` | session token, user id |
 | `Draft` | unsent message text, staged files and replies per channel |
-| `Settings` | generic key/value app settings (`appearance:*`, `notifications:*`, `controller:enabled`, ...) |
+| `Settings` | generic key/value app settings (`appearance:*`, `notifications:*`, `controller:enabled`, `controller:ptt_button`, ...) |
 | `Layout` | open sections, sidebar visibility, active interface |
 | `Ordering`, `ServerFolders` | server/channel/conversation order, server folders |
-| `Voice` | devices, noise suppression mode, screen-share quality, volumes |
+| `Voice` | devices, input mode (voice activity or push to talk), noise suppression mode, screen-share quality, volumes |
 | `Sounds`, `NotificationOptions` | sound/ringtone choices, notification preferences |
 | `Theme`, `Locale` | theme preset and fonts, language |
 | `Keybinds`, `LinkSafety`, `Experiments`, `ReleaseNotes`, `Sync` | shortcuts, trusted links, feature flags, seen changelog, cross-device sync |
@@ -109,6 +109,7 @@ Every store extends `AbstractStore` (`stores/index.ts`), validates its data in `
 - Join flow: `voice.connect(channel)` picks a LiveKit node by latency, then `channel.joinCall()` (stoat.js) returns a URL and token. A LiveKit `Room` is created with defaults from the `Voice` store, room events update the `Voice` signals, and the UI reads them through `useVoice()` and the solid-livekit contexts.
 - Streams are subscribed only while someone watches them: `StreamViewers` announces watched streams over LiveKit data messages. Quality (up to 1440p60) comes from the `Voice` store and the livekit patch.
 - iOS/mobile: audio needs a user gesture (the `audioBlocked` signal plus an unlock prompt), volume goes through an AudioContext gain because iOS ignores element volume, and there's no screen share on phones. None of this can be tested over the plain-http phone link.
+- Push to talk (`inputMode` "ptt" in the `Voice` store, picked under voice input options): the mic stays closed until a source holds the key. Two sources, keyboard and controller, are tracked separately in `state.tsx` (`pushToTalk(down, source)`, `syncMicrophone()`), and the mic stays open while either holds it. Releasing keeps it open for 200 ms. A mute choice is never changed by push to talk. Pure rules and tests: `rtc/pushToTalk.ts`. The key is the `VOICE_PUSH_TO_TALK` keybind (`components/rtc/components/VoiceKeybinds.tsx`). On the desktop app it is also a global hotkey, and `GlobalKeybinds` only uses the global press and release when the shell reports releases. Otherwise the in-app key counts and losing focus releases it. `rtc/components/GamepadPushToTalk.tsx` (mounted for the whole session) tells the shell the controller button and feeds its presses in as source `pad`.
 - Join, leave and stream sounds: `@revolt/client` SoundController. Settings pages for voice live in user settings.
 
 ### Stream popout
@@ -162,6 +163,7 @@ Every store extends `AbstractStore` (`stores/index.ts`), validates its data in `
 - Reuses existing pieces: `useTriggerKeybind()` for channel/server navigation, composer focus and mute; `openContextMenuFor`; `focusMessageList`; context-menu and message-list arrow-key handlers. Regions are marked with `data-region` (servers, channels, members) on the sidebars; `main` and `[data-message-list]` cover the rest.
 - Layout (by position): D-pad/left stick move, A press, B back (Escape), X context menu, Y composer, LB/RB channel up/down, LT/RT server up/down, right stick scrolls, View toggles mute, Start cycles Servers -> Channels -> Messages -> Members.
 - `data-input="gamepad"` on `<html>` (set on controller use, cleared on trusted mouse/touch/keyboard use) turns on `:focus` rings in `components/ui/styles.css`.
+- Push to talk button: `gamepad/pushToTalkButton.ts` (button names, saved in `controller:ptt_button`, and whether the desktop shell accepted it). The chosen button is hidden from navigation with `maskButton` in `input.ts`, so it only acts as push to talk. Its presses come from the desktop shell (see Desktop shell), not from `GamepadControls`, and only work on Windows.
 - Settings page: `components/app/interface/settings/user/Controller.tsx` (page id `controller`, also listed in `settingsSearch.plugin.ts`).
 
 ### PWA and notifications
@@ -178,7 +180,7 @@ There's no upstream remote. The fork carries its own commits on top of Stoat's h
 - **Sound**: message bell, ringtones, notification volumes, vibration on incoming calls (`Sounds` store, SoundController).
 - **i18n**: fork-maintained translations (de, fr, es, ja, ko, zh-Hans, ar), right-to-left mirroring, language switching without a full reload.
 - **UI**: settings icons, creating channels from a category header, voice channel drag and drop (desktop), language search in the picker.
-- **Input**: game controller support (`components/gamepad`, see Game controller) and keyboard use of context menus.
+- **Input**: game controller support (`components/gamepad`, see Game controller), keyboard use of context menus, and push to talk for keys and controller (see Voice, calls and screen share). Windows global hotkeys use a passive keyboard hook, so releases work.
 - **Desktop app**: Electron wrapper with its own updater and a "Restart to update" item (see Desktop shell). Game stream detection with follow mode and a stream hotkey (see Stream your game).
 - **Performance**: lazy code highlighting, outlined icon font only.
 - **Build/branding**: renamed from Stoat to AnyTalk, a single GHCR image with runtime config injection, a fixed dev port reachable from the LAN.
@@ -198,6 +200,9 @@ There's no upstream remote. The fork carries its own commits on top of Stoat's h
 | Call footer or device picker | `ui/components/features/voice/callCard/VoiceStatusFooter.tsx`, `AudioDeviceMenu.tsx` | `rtc/state.tsx` (`setAudioOutput`, `setAudioInput`) |
 | Overlay look, position or rules | `packages/desktop/src/overlay/`, `src/main/overlay.ts` | `rtc/components/OverlayPublisher.tsx`, `rtc/overlayConfig.ts`, `settings/user/Overlay.tsx` |
 | Game detection or game stream follow | `packages/desktop/src/main/games.ts`, `gameMatch.ts`, `rtc/gameFollow.ts` | `shared/games.ts` (game list), `main/screen.ts`, `rtc/state.tsx` (`startGameStream`), `rtc/focusedGame.ts` (hotkey), `rtc/streamFollow.ts` (viewers) |
+| Push to talk (mode, release delay, sources) | `components/rtc/pushToTalk.ts`, `rtc/state.tsx` (`pushToTalk`, `syncMicrophone`) | `keybinds/keybindHandler.tsx` (release callbacks), `GlobalKeybinds.tsx`, `Voice` store |
+| Global hotkey or key matching | `packages/desktop/src/main/hotkeys.ts`, `hotkeyHook.ts`, `hotkeyKeys.ts` | `keybinds/GlobalKeybinds.tsx` (renderer side), `keybinds/keyCodes.ts`, `shared/ipc.ts` |
+| Controller push to talk (button, XInput) | `packages/desktop/src/main/gamepad.ts`, `gamepadLogic.ts` | `gamepad/pushToTalkButton.ts`, `gamepad/input.ts` (`maskButton`), `settings/user/Controller.tsx` |
 | Reconnect or rejoin after a drop | `components/rtc/reconnect.ts`, `rtc/state.tsx` | `components/client/lifecycleWake.ts` (app-level wake handling) |
 | Sounds | `@revolt/client` SoundController | `Sounds` store, sound settings page |
 | Context menu entry | `components/app/menus/` | a modal, if the entry opens one |
@@ -214,5 +219,7 @@ Any new user-facing text needs `mise lingui` and the `translator` afterwards. Ca
 ## Desktop shell (`packages/desktop`)
 
 Electron app for Windows and Linux that loads the hosted AnyTalk server in a window; it does not depend on the client build. `src/main` holds the main process (window, tray, config in userData, autostart, global hotkeys, screen-share handler with its one-shot preselection, game detection in `games.ts` and `gameMatch.ts`, permissions, error page routing), `src/preload` exposes `window.native` / `window.desktopConfig` to the page only on the server origin, and `src/error-page` is the offline fallback page. The default server URL is baked in at build time from `ANYTALK_DEFAULT_URL` (`scripts/build.mjs`); `ANYTALK_URL` overrides at runtime. Mise tasks: `desktop:dev`, `desktop:build`, `desktop:build:win`, `desktop:build:win:zip`; cross-built Windows exes get their icon and version info from `scripts/afterPack.mjs` (resedit) since rcedit needs Wine; CI in `.github/workflows/desktop.yml` (a `desktop-v<version>` tag publishes to GitHub Releases). `src/main/updater.ts` self-updates NSIS and AppImage installs from those releases through electron-updater (bundled into `dist/main.js`); deb, rpm, pacman and dev runs skip it. Once an update is downloaded, the tray and File menus get a "Restart to update" item (the app normally stays in the tray). The updater is an explicit state machine (`UpdaterState` in `src/shared/ipc.ts`) broadcast to the page as `window.desktopUpdater` (`getState`, `check`, `download`, `install`, `onState`); the `autoUpdate` config key (default on, client-writable) controls auto-download and install-on-quit live. Downloads are only marked ready after an ed25519 signature check (`updateSignature.ts`, trusted keys in `trustedUpdateKeys.ts`, `<installer>.sig` release assets made by `scripts/sign-release.mjs`); see `packages/desktop/RELEASING.md`.
+
+Global input has two parts. Keyboard hotkeys: `src/main/hotkeys.ts` is the facade. On Windows it uses `hotkeyHook.ts`, a passive `uiohook-napi` keyboard hook that reports press and release without swallowing keys (so another app can use the same combo). Other platforms use Electron `globalShortcut`, which only reports presses. `hotkeyKeys.ts` (pure, tested) parses accelerators and matches key events, and prefers each binding's physical `code` over the typed character. IPC `hotkeys:released` and `hotkeys:capabilities` tell the page whether releases arrive. Controller push to talk on Windows: `gamepad.ts` polls XInput through `koffi` only while a button is set, and `gamepadLogic.ts` (pure, tested) holds the button map, trigger hysteresis and edge detection. IPC `gamepad:set` (page to shell) and `gamepad:ptt` (shell to page) carry the presses. Both native modules (`uiohook-napi`, `koffi`) are external in the esbuild bundle, unpacked from asar, and not rebuilt (`npmRebuild: false`).
 
 The app id is `tech.anyportal.AnyTalk` (`APP_ID` in `src/main/platform.ts`, also the electron-builder `appId` and `desktopName`). On Wayland, Chromium's global shortcuts go through the xdg GlobalShortcuts portal, which refuses apps without a valid reverse-DNS id and a matching `<appId>.desktop` file. Packages install that file themselves; `src/main/desktopFile.ts` writes one to `~/.local/share/applications` for AppImage and dev runs. `hotkeys.ts` only applies the difference between binding sets, since every change recreates the portal session. The client gets `window.native.desktopEnvironment` to show Hyprland-specific setup help (Hyprland needs the `global` dispatcher bound by the user).
