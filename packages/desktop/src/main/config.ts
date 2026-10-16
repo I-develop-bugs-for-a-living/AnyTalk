@@ -5,9 +5,11 @@ import { dirname, join } from "node:path";
 import {
   type DesktopConfig,
   OVERLAY_CORNERS,
+  OVERLAY_ELEMENT_KEYS,
   OVERLAY_MODES,
-  OVERLAY_STYLES,
+  OVERLAY_VISIBILITIES,
 } from "../shared/ipc";
+import { overlayElementsFromStyle } from "./overlayLooks";
 
 /** Defaults used for every key missing from the stored file. */
 const DEFAULTS: DesktopConfig = {
@@ -23,7 +25,7 @@ const DEFAULTS: DesktopConfig = {
   overlayEnabled: false,
   overlayCorner: "top-left",
   overlayMode: "games",
-  overlayStyle: "detailed",
+  ...overlayElementsFromStyle(undefined),
   serverUrl: "",
   windowState: { isMaximised: false, width: 1280, height: 800 },
 };
@@ -58,16 +60,20 @@ function normalise(stored: unknown): DesktopConfig {
   const enums: Record<string, readonly string[]> = {
     overlayCorner: OVERLAY_CORNERS,
     overlayMode: OVERLAY_MODES,
-    overlayStyle: OVERLAY_STYLES,
   };
+  for (const key of OVERLAY_ELEMENT_KEYS) enums[key] = OVERLAY_VISIBILITIES;
+  // Files from before the per-element keys only have `overlayStyle`: the
+  // missing keys come from the preset it named
+  const migrated = overlayElementsFromStyle(source.overlayStyle);
   for (const [key, allowed] of Object.entries(enums)) {
     const value = source[key];
     if (typeof value === "string" && allowed.includes(value))
       (result as Record<string, unknown>)[key] = value;
     else
-      (result as Record<string, unknown>)[key] = (
-        DEFAULTS as Record<string, unknown>
-      )[key];
+      (result as Record<string, unknown>)[key] =
+        key in migrated
+          ? (migrated as Record<string, unknown>)[key]
+          : (DEFAULTS as Record<string, unknown>)[key];
   }
 
   const ws = source.windowState;

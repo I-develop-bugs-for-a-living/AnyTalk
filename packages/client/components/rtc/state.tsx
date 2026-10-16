@@ -54,10 +54,12 @@ import { VoiceCallCardContext } from "@revolt/ui/components/features/voice/callC
 
 import { Device, useDevice } from "@revolt/common";
 import { CallSounds } from "./components/CallSounds";
+import { GamepadPushToTalk } from "./components/GamepadPushToTalk";
 import { InRoom } from "./components/InRoom";
 import { OverlayPublisher } from "./components/OverlayPublisher";
 import { RoomAudioManager } from "./components/RoomAudioManager";
 import { StatsRecorder } from "./components/StatsRecorder";
+import { StreamPopouts } from "./components/StreamPopouts";
 import { StreamViewers } from "./components/StreamViewers";
 import { VoiceKeybinds } from "./components/VoiceKeybinds";
 import { VoiceMoves } from "./components/VoiceMoves";
@@ -78,6 +80,12 @@ import {
   windowListed,
 } from "./gameFollow";
 import * as outputBus from "./outputBus";
+import {
+  type PttSource,
+  micShouldBeOn,
+  PTT_RELEASE_DELAY_MS,
+  pttHeld,
+} from "./pushToTalk";
 import {
   allowMicRestart,
   isPermanentJoinError,
@@ -102,6 +110,12 @@ import {
   isFollowing,
   republishWaitMs,
 } from "./streamFollow";
+import {
+  type PopoutKind,
+  openPopoutWindow,
+  pickPopoutApi,
+  popoutSize,
+} from "./streamPopout";
 import { VoiceProcessor } from "./VoiceProcessor";
 
 type State =
@@ -383,6 +397,12 @@ class Voice {
   #followUnsupported = false;
 
   /**
+   * Streams shown in a window of their own, by track id (see trackId). Each
+   * entry holds the window; it never changes what is watched or focused.
+   */
+  popouts = new ReactiveMap<string, StreamPopout>();
+
+  /**
    * People whose stream was unpublished a moment ago: a window swap
    * republishes it, which must not look like the stream ended
    */
@@ -481,6 +501,8 @@ class Voice {
     device: Device,
   ) {
     this.#settings = voiceSettings;
+    // the windows belong to this page, don't leave them behind when it goes
+    window.addEventListener("pagehide", () => this.closeAllPopouts());
     this.sound = sound;
     this.device = device;
 
@@ -634,8 +656,11 @@ class Voice {
     this.device.setWakeLocked();
 
     const room = new Room({
-      // Only receive video at the size it is displayed, and pause it when hidden
-      adaptiveStream: true,
+      // Only receive video at the size it is displayed. Not paused while this
+      // page is in the background: a stream popup window (the fallback for
+      // Document Picture-in-Picture) would freeze when AnyTalk is minimized.
+      // The trade-off is that a hidden tab keeps receiving its video.
+      adaptiveStream: { pauseVideoInBackground: false },
       // Stop sending simulcast layers that nobody is subscribed to
       dynacast: true,
       // Keep trying for about a minute, so a switch from wifi to mobile or a
@@ -705,7 +730,11 @@ class Voice {
       joined = true;
       this.#setState("CONNECTED");
       this.#settings.addRecentCall(channel.id);
-      if (this.speakingPermission)
+      if (this.speakingPermission && this.#settings.inputMode === "ptt") {
+        // push to talk starts with the mic closed, the key opens it. micOn is
+        // the user's mute choice and stays as it is.
+        this.#publishMutedMicrophone(room);
+      } else if (this.speakingPermission)
         // the microphone state the user had (muted or not) is in the settings
         room.localParticipant
           .setMicrophoneEnabled(this.#settings.micOn)
@@ -1204,15 +1233,151 @@ class Voice {
     };
   }
 
+  /**
+   * Whether each push to talk source (keyboard, controller) holds it, or let
+   * go a moment ago. The mic stays open while any source holds it.
+   */
+  #pttSources: Record<PttSource, boolean> = { keys: false, pad: false };
+
+  /** Closes the mic shortly after a source let go */
+  #pttTimers: Partial<
+    Record<PttSource, ReturnType<typeof setTimeout> | undefined>
+  > = {};
+
+  /** Whether the settings and push to talk key say the mic should send */
+  #micWanted() {
+    return micShouldBeOn({
+      speak: this.speakingPermission,
+      deafen: this.#settings.deafen,
+      micOn: this.#settings.micOn,
+      mode: this.#settings.inputMode,
+      pttOpen: pttHeld(this.#pttSources),
+    });
+  }
+
+  /**
+   * Open or close the microphone to match the input mode, the mute and deafen
+   * state and the push to talk key. Never changes the persisted mute choice.
+   */
+  syncMicrophone() {
+    // a push to talk key can't be held in the other mode
+    if (this.#settings.inputMode !== "ptt") this.#releasePushToTalk();
+    if (this.#micSyncing) return; // the running sync checks again when done
+    this.#micSyncing = true;
+
+    (async () => {
+      try {
+        // a few rounds at most, in case the state keeps changing
+        for (let round = 0; round < 5; round++) {
+          const room = this.room();
+          if (!room) return;
+          const wanted = this.#micWanted();
+          if (room.localParticipant.isMicrophoneEnabled === wanted) return;
+          try {
+            await room.localParticipant.setMicrophoneEnabled(wanted);
+          } catch (err) {
+            console.warn("[rtc] could not switch the mic", err);
+            // repeat only if the wish changed meanwhile, not to retry a failure
+            if (this.#micWanted() === wanted) return;
+          }
+        }
+      } finally {
+        // cleared in the same tick as the last check, so no call is lost
+        this.#micSyncing = false;
+      }
+      // out of rounds: look once more in case it still differs
+      const room = this.room();
+      if (
+        room &&
+        room.localParticipant.isMicrophoneEnabled !== this.#micWanted()
+      )
+        setTimeout(() => this.syncMicrophone(), 250);
+    })();
+  }
+
+  /** Whether a syncMicrophone run is in flight */
+  #micSyncing = false;
+
+  /**
+   * Push to talk join: capture the microphone and publish it already muted,
+   * so the permission prompt comes now and the key opens it without delay.
+   * The track is muted before publishing, so no audio is sent.
+   */
+  #publishMutedMicrophone(room: Room) {
+    if (!this.#settings.micOn) return;
+    this.#micSyncing = true;
+    (async () => {
+      const [track] = await room.localParticipant.createTracks({
+        audio: true,
+        video: false,
+      });
+      if (!track) return;
+      await track.mute();
+      if (this.room() !== room || room.state !== "connected") {
+        track.stop();
+        return;
+      }
+      await room.localParticipant.publishTrack(track, {
+        source: Track.Source.Microphone,
+      });
+    })()
+      .catch((err) => console.warn("[rtc] could not start the mic", err))
+      .finally(() => {
+        this.#micSyncing = false;
+        // the key may have been pressed or the mode changed meanwhile
+        this.syncMicrophone();
+      });
+  }
+
+  /**
+   * A push to talk source went down (true) or up (false). Releasing keeps the
+   * mic on for a moment so the end of the word isn't cut off. Does nothing
+   * unless the input mode is push to talk.
+   * @param down Whether it is held
+   * @param source Keyboard (default) or controller; they work independently
+   */
+  pushToTalk(down: boolean, source: PttSource = "keys") {
+    clearTimeout(this.#pttTimers[source]);
+    this.#pttTimers[source] = undefined;
+    if (this.#settings.inputMode !== "ptt") return;
+
+    if (down) {
+      this.#pttSources[source] = true;
+      this.syncMicrophone();
+    } else if (this.#pttSources[source]) {
+      this.#pttTimers[source] = setTimeout(() => {
+        this.#pttTimers[source] = undefined;
+        this.#pttSources[source] = false;
+        this.syncMicrophone();
+      }, PTT_RELEASE_DELAY_MS);
+    }
+  }
+
+  /**
+   * Let go of one push to talk source at once, without the tail (the
+   * controller button was changed, or its shell support went away)
+   */
+  releasePushToTalkSource(source: PttSource) {
+    clearTimeout(this.#pttTimers[source]);
+    this.#pttTimers[source] = undefined;
+    if (!this.#pttSources[source]) return;
+    this.#pttSources[source] = false;
+    this.syncMicrophone();
+  }
+
+  /** Close every push to talk source at once (leaving the call, mode change) */
+  #releasePushToTalk() {
+    for (const source of ["keys", "pad"] as const) {
+      clearTimeout(this.#pttTimers[source]);
+      this.#pttTimers[source] = undefined;
+      this.#pttSources[source] = false;
+    }
+  }
+
   /** Whether our microphone is meant to be sending */
   #micShouldWork() {
     const local = this.getMicrophoneTrack()?.audioTrack;
-    return (
-      this.#settings.micOn &&
-      !this.#settings.deafen &&
-      !!local &&
-      !local.isMuted
-    );
+    return this.#micWanted() && !!local && !local.isMuted;
   }
 
   /** Stop watching the microphone after an output switch */
@@ -1305,10 +1470,10 @@ class Voice {
     room
       .switchActiveDevice("audioinput", "default")
       .then(() => {
-        if (this.room() !== room || !this.#settings.micOn) return;
-        if (this.#settings.deafen || room.localParticipant.isMicrophoneEnabled)
-          return;
-        return room.localParticipant.setMicrophoneEnabled(true);
+        if (this.room() !== room || !this.#micWanted()) return;
+        if (room.localParticipant.isMicrophoneEnabled) return;
+        // through the serialised sync, so it can't double publish
+        this.syncMicrophone();
       })
       .catch((err) =>
         console.error("[rtc] could not fall back to the default mic", err),
@@ -1458,6 +1623,8 @@ class Voice {
    * the call; nothing is told to the user
    */
   #teardown(forRejoin: boolean) {
+    // the tracks of the old room are gone
+    this.closeAllPopouts();
     // the room goes away, nobody needs to be told
     this.#endFollow(false);
     this.#shareToken = undefined;
@@ -1470,6 +1637,7 @@ class Voice {
     this.#cancelCapture();
     this.#cancelMicRecovery();
     this.#stopWatchingMic();
+    this.#releasePushToTalk();
     outputBus.teardown();
     this.device.releaseWakeLock();
     this.#releaseAudioUnlock?.();
@@ -1526,6 +1694,15 @@ class Voice {
     try {
       const room = this.room();
       if (!room) throw "invalid state";
+      if (this.#settings.inputMode === "ptt") {
+        // the key decides whether the mic is open, so only the flags change
+        this.#settings.deafen = !this.#settings.deafen;
+        if (fromMute) this.#settings.micOn = true;
+        this.syncMicrophone();
+        this.#shareDeafen(room);
+        this.sound.playSound(this.#settings.deafen ? "deafen" : "undeafen");
+        return;
+      }
       await room.localParticipant.setMicrophoneEnabled(
         (this.#settings.micOn || !!fromMute) &&
           !room.localParticipant.isMicrophoneEnabled,
@@ -1554,11 +1731,17 @@ class Voice {
     try {
       const room = this.room();
       if (!room) throw "invalid state";
-      await room.localParticipant.setMicrophoneEnabled(
-        !room.localParticipant.isMicrophoneEnabled,
-      );
+      if (this.#settings.inputMode === "ptt") {
+        // in push to talk, mute is a hard mute the key can't override
+        this.#settings.micOn = !this.#settings.micOn;
+        this.syncMicrophone();
+      } else {
+        await room.localParticipant.setMicrophoneEnabled(
+          !room.localParticipant.isMicrophoneEnabled,
+        );
 
-      this.#settings.micOn = room.localParticipant.isMicrophoneEnabled;
+        this.#settings.micOn = room.localParticipant.isMicrophoneEnabled;
+      }
 
       if (this.#settings.micOn) {
         this.sound.playSound("unmute");
@@ -2879,6 +3062,33 @@ class Voice {
   }
 
   /**
+   * The watched stream filling the multi-stream view, if one is focused.
+   * The other streams stay watched and subscribed underneath it.
+   */
+  multiFocusTrack() {
+    if (!this.isMultiStream()) return undefined;
+    const track = this.focusTrack();
+    return track && this.isWatchedStream(track) ? track : undefined;
+  }
+
+  /**
+   * Enlarge a stream of the multi-stream view, or go back to the grid when
+   * it is already enlarged. Only the focus changes: no stream is stopped and
+   * the bar of other participants keeps its state.
+   */
+  toggleMultiFocus(t: TrackReferenceOrPlaceholder) {
+    const id = this.trackId(t);
+    this.#setFocus(this.focusId() === id ? undefined : id);
+  }
+
+  /**
+   * Go back to the multi-stream grid, leaving the bar as it is
+   */
+  clearMultiFocus() {
+    if (this.focusId()) this.#setFocus(undefined);
+  }
+
+  /**
    * Drop the focus and bring the participant grid back
    */
   clearFocus() {
@@ -2943,6 +3153,9 @@ class Voice {
       }
       this.#setPendingFocus(last);
     }
+    // defensive: the stream window also clears a focus left over when a
+    // second stream opens, this covers 2+ streams already being watched
+    if (value && this.isMultiStream()) this.clearMultiFocus();
   }
 
   /**
@@ -3079,6 +3292,194 @@ class Voice {
     return this.trackId(t) === this.focusId();
   }
 
+  /**
+   * How a stream can be popped out on this device, undefined if it can't
+   */
+  get popoutKind(): PopoutKind | undefined {
+    return pickPopoutApi(
+      window,
+      // touch-only means no mouse or trackpad at all: a touchscreen on a
+      // laptop still has a fine pointer
+      !matchMedia("(any-pointer: fine)").matches,
+      typeof window.open === "function",
+      // the desktop app opens a normal window of its own, never a floating one
+      !!window.native,
+    );
+  }
+
+  /**
+   * Whether the track is shown in a window of its own
+   */
+  isPoppedOut(t: TrackReferenceOrPlaceholder) {
+    return this.popouts.has(this.trackId(t));
+  }
+
+  /**
+   * Show a track in a window of its own that can be moved to another screen.
+   * Has to be called from a click or key press, browsers refuse windows
+   * otherwise. Watching and focus stay as they are.
+   * @param t The track
+   * @param title Name shown in the title of the window
+   * @param dimensions Size of the video, for the starting size of the window
+   * @returns Whether a window is open for the track now
+   */
+  async popOut(
+    t: TrackReferenceOrPlaceholder,
+    title: string,
+    dimensions?: { width: number; height: number },
+  ) {
+    const id = this.trackId(t);
+    if (this.popouts.has(id)) return true;
+
+    const kind = this.popoutKind;
+    if (!kind) return false;
+
+    // Document Picture-in-Picture allows a single window: the stream that was
+    // in it goes back to its tile. (Opening a new one would end it anyway, but
+    // this keeps the state in step without waiting for the old window's event.)
+    if (kind === "pip") {
+      for (const [other, popout] of [...this.popouts]) {
+        if (popout.kind === "pip") this.closePopout(other);
+      }
+    }
+
+    // a track we stopped receiving would show black in the window
+    if (t.publication instanceof RemoteTrackPublication)
+      t.publication.setSubscribed(true);
+
+    // no second try with another API: a failed request has used up the user
+    // activation a popup needs
+    try {
+      const { win, stopFollowing } = await openPopoutWindow(kind, {
+        title,
+        ...popoutSize(dimensions),
+        name: id.replace(/[^a-zA-Z0-9]/g, "_"),
+      });
+
+      // the track may have been popped out or the call left meanwhile
+      if (this.popouts.has(id) || !this.room()) {
+        stopFollowing();
+        win.close();
+        return this.popouts.has(id);
+      }
+
+      this.#registerPopout(id, kind, win, stopFollowing);
+      return true;
+    } catch (e) {
+      console.debug("[rtc] could not pop out the stream with", kind, e);
+    }
+
+    return false;
+  }
+
+  /**
+   * Keep track of an opened window: forget it when it is closed
+   */
+  #registerPopout(
+    id: string,
+    kind: PopoutKind,
+    win: Window,
+    stopFollowing: () => void,
+  ) {
+    const onGone = () => this.#dropPopout(id, win);
+    win.addEventListener("pagehide", onGone);
+    // a popup can't always tell that it was closed, so look for it too
+    const poll =
+      kind === "popup" ? setInterval(() => win.closed && onGone(), 500) : 0;
+
+    this.popouts.set(id, {
+      win,
+      kind,
+      dispose: () => {
+        stopFollowing();
+        win.removeEventListener("pagehide", onGone);
+        if (poll) clearInterval(poll);
+      },
+    });
+  }
+
+  /**
+   * Move a stream from its Document Picture-in-Picture window (which Chrome
+   * doesn't let go fullscreen) into a normal popup window. The stream never
+   * goes back to its tile in between and watching and focus stay as they are.
+   *
+   * Call it straight from a click, with nothing awaited before: the popup
+   * is opened synchronously, while the user activation is still there.
+   * @param id Track id (see trackId)
+   * @returns Whether the stream is in a popup now, on failure the old window
+   * stays open
+   */
+  async reopenPopoutAsWindow(id: string) {
+    const old = this.popouts.get(id);
+    if (!old || old.kind === "popup" || typeof window.open !== "function")
+      return false;
+
+    try {
+      // synchronous up to the window.open inside
+      const opening = openPopoutWindow("popup", {
+        title: old.win.document.title,
+        width: old.win.innerWidth || popoutSize().width,
+        height: old.win.innerHeight || popoutSize().height,
+        name: id.replace(/[^a-zA-Z0-9]/g, "_"),
+      });
+      const { win, stopFollowing } = await opening;
+
+      // the old window went away meanwhile (track ended, call left)
+      if (this.popouts.get(id) !== old) {
+        stopFollowing();
+        win.close();
+        return false;
+      }
+
+      // replacing the entry swaps the content over without the tile showing
+      // the video in between
+      old.dispose();
+      this.#registerPopout(id, "popup", win, stopFollowing);
+      try {
+        old.win.close();
+      } catch {
+        // already gone
+      }
+      return true;
+    } catch (e) {
+      console.debug("[rtc] could not move the stream to a popup", e);
+      return false;
+    }
+  }
+
+  /**
+   * Forget the window of a track that was closed by the user
+   */
+  #dropPopout(id: string, win: Window) {
+    const popout = this.popouts.get(id);
+    if (!popout || popout.win !== win) return;
+    popout.dispose();
+    this.popouts.delete(id);
+  }
+
+  /**
+   * Close the window of a track, if it has one
+   * @param id Track id (see trackId)
+   */
+  closePopout(id: string) {
+    const popout = this.popouts.get(id);
+    if (!popout) return;
+    popout.dispose();
+    this.popouts.delete(id);
+    try {
+      popout.win.close();
+    } catch {
+      // already gone
+    }
+  }
+
+  /**
+   * Close every stream window
+   */
+  closeAllPopouts() {
+    for (const id of [...this.popouts.keys()]) this.closePopout(id);
+  }
+
   focusTrack() {
     const id = this.focusId();
     return id
@@ -3124,6 +3525,16 @@ class Voice {
   }
 }
 
+/** A stream shown in a window of its own */
+export type StreamPopout = {
+  /** The window the stream is shown in */
+  win: Window;
+  /** Which API opened it */
+  kind: PopoutKind;
+  /** Stop following the window, called when it goes away */
+  dispose: () => void;
+};
+
 const voiceContext = createContext<Voice>(null as unknown as Voice);
 
 /**
@@ -3144,9 +3555,11 @@ export function VoiceContext(props: { children: JSX.Element }) {
           <RoomAudioManager />
           <VoiceKeybinds />
           <StreamViewers />
+          <StreamPopouts />
         </InRoom>
         <StatsRecorder />
         <OverlayPublisher />
+        <GamepadPushToTalk />
         <CallSounds />
         <VoiceMoves />
       </RoomContext.Provider>

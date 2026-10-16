@@ -1,4 +1,4 @@
-import { createSignal, onCleanup, Show } from "solid-js";
+import { createMemo, createSignal, onCleanup, Show } from "solid-js";
 import {
   TrackReference,
   useEnsureParticipant,
@@ -16,7 +16,12 @@ import { UserContextMenu } from "@revolt/app";
 import { useUser } from "@revolt/markdown/users";
 import { useFastIsSpeaking, useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
-import { Avatar, IconButton } from "@revolt/ui/components/design";
+import {
+  Avatar,
+  Button,
+  IconButton,
+  useSnackbar,
+} from "@revolt/ui/components/design";
 import { Row } from "@revolt/ui/components/layout";
 import { OverflowingText } from "@revolt/ui/components/utils";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
@@ -27,7 +32,7 @@ import { AudioStats } from "./AudioStats";
 import { ConnectionQualityIcon } from "./ConnectionQualityIcon";
 import { StreamVolumeButton } from "./StreamVolumeButton";
 import { TrackStats } from "./TrackStats";
-import { touchOnly } from "./volumePanelState";
+import { theaterControlsHidden, touchOnly } from "./volumePanelState";
 
 /**
  * Whether this window is focused and visible
@@ -62,6 +67,7 @@ export function ParticipantTile(props: TileProps) {
   const { t } = useLingui();
   const voice = useVoice();
   const state = useState();
+  const snackbar = useSnackbar();
   const participant = useEnsureParticipant();
   const track = useTrackRefContext();
   const user = useUser(participant.identity);
@@ -101,6 +107,41 @@ export function ParticipantTile(props: TileProps) {
   // Streams only play once we choose to watch them
   const unwatched = () => voice.isUnwatchedStream(track);
 
+  // Shown in a window of its own: this window doesn't draw the video then
+  const poppedOut = () => voice.isPoppedOut(track);
+  // Popping out is for devices with a mouse (touch-only devices get no button,
+  // see Voice.popoutKind). Our own screen share stays here, in its own window it would mirror itself
+  const canPopOut = () =>
+    !!voice.popoutKind &&
+    !poppedOut() &&
+    (isScreenShare()
+      ? !participant.isLocal && !unwatched()
+      : isVideo() && !isVideoMuted());
+
+  /** Open the stream in its own window, tell the user when that fails */
+  const popOut = async () => {
+    const opened = await voice.popOut(
+      track,
+      t`${user().username} – AnyTalk`,
+      videoDims().width ? videoDims() : undefined,
+    );
+    if (!opened) {
+      snackbar.show({
+        // only a popup can be blocked, Picture-in-Picture just fails
+        message:
+          voice.popoutKind === "popup"
+            ? t`Could not open the stream in a separate window. Check that pop-ups are allowed.`
+            : t`Could not open the stream in a separate window.`,
+      });
+    }
+  };
+
+  // Multi-stream view: this tile fills the whole stream area, the other tiles
+  // stay mounted (and subscribed) underneath it
+  const multiFocused = createMemo(() => !!voice.multiFocusTrack());
+  const enlarged = () => !!props.fill && multiFocused() && voice.isFocus(track);
+  const covered = () => !!props.fill && multiFocused() && !enlarged();
+
   const getHeight = () => {
     if (!props.focus || theater() || videoDims().height == 0) return {};
     // Calculate the aspect ratio
@@ -122,8 +163,13 @@ export function ParticipantTile(props: TileProps) {
             fullscreen: voice.layout() === "fullscreen",
             ...props,
             theater: theater(),
+            enlarged: enlarged(),
           }) + " vc_tile group"
         }
+        data-stream-tile={props.fill ? "" : undefined}
+        aria-pressed={props.fill ? enlarged() : undefined}
+        // out of reach while covered, so keyboard and screen readers skip it
+        inert={covered()}
         // reachable by keyboard: Enter / Space act like a click, Shift+F10
         // opens the context menu. Known limitation: the tile also holds its
         // own buttons (stream controls), so screen readers see nested
@@ -142,7 +188,14 @@ export function ParticipantTile(props: TileProps) {
           if (isScreenShare() && !voice.isWatchedStream(track)) {
             // open the stream (our own one too, once it's out of view)
             voice.watchStream(participant.identity);
-          } else if (!props.fill && !(theater() && touchOnly())) {
+          } else if (props.fill) {
+            // multi-stream view: enlarge this stream or go back to the grid.
+            // On touch in the full screen view a tap first shows the hidden
+            // controls (the call card handles that tap), then toggles
+            if (!(touchOnly() && theaterControlsHidden())) {
+              voice.toggleMultiFocus(track);
+            }
+          } else if (!(theater() && touchOnly())) {
             // in the full screen stream a tap only shows the controls
             voice.toggleFocus(track);
           }
@@ -200,26 +253,41 @@ export function ParticipantTile(props: TileProps) {
               </StreamInvite>
             }
           >
-            {/* The video stays mounted while hidden so the tile keeps its size */}
-            <VideoTrack
-              style={{
-                "grid-area": "1/1",
-                "object-fit": "contain",
-                width: "100%",
-                height: "100%",
-                overflow: "hidden",
-                visibility: hideOwnStream() ? "hidden" : "visible",
-              }}
-              trackRef={track as TrackReference}
-              manageSubscription={true}
-              ref={videoRef}
-              on:resize={() => {
-                setVideoDims({
-                  height: videoRef?.videoHeight || 0,
-                  width: videoRef?.videoWidth || 0,
-                });
-              }}
-            />
+            <Show when={poppedOut()}>
+              <PoppedOut onClick={(e) => e.stopPropagation()}>
+                <Trans>Showing in a separate window</Trans>
+                <Button
+                  size="sm"
+                  variant="tonal"
+                  onPress={() => voice.closePopout(voice.trackId(track))}
+                >
+                  <Trans>Bring back</Trans>
+                </Button>
+              </PoppedOut>
+            </Show>
+            {/* The video stays mounted while hidden so the tile keeps its size.
+                A popped out stream is drawn in its own window instead. */}
+            <Show when={!poppedOut()}>
+              <VideoTrack
+                style={{
+                  "grid-area": "1/1",
+                  "object-fit": "contain",
+                  width: "100%",
+                  height: "100%",
+                  overflow: "hidden",
+                  visibility: hideOwnStream() ? "hidden" : "visible",
+                }}
+                trackRef={track as TrackReference}
+                manageSubscription={true}
+                ref={videoRef}
+                on:resize={() => {
+                  setVideoDims({
+                    height: videoRef?.videoHeight || 0,
+                    width: videoRef?.videoWidth || 0,
+                  });
+                }}
+              />
+            </Show>
             <Show when={hideOwnStream()}>
               <OwnStreamHidden role="status">
                 <Trans>Stream is still running.</Trans>
@@ -260,6 +328,30 @@ export function ParticipantTile(props: TileProps) {
               <Symbol>close</Symbol>
             </IconButton>
           </CloseStream>
+        </Show>
+        {/* Always visible, above the name row so it never covers the volume button */}
+        <Show when={canPopOut()}>
+          <PopOutSlot
+            // a click here must not focus or enlarge the tile
+            onClick={(e) => e.stopPropagation()}
+            onKeyDown={(e) => e.stopPropagation()}
+            clearOverlay={!theater()}
+            compact={compact()}
+          >
+            <PopOutButton
+              type="button"
+              aria-label={t`Pop out into a separate window`}
+              onClick={popOut}
+              use:floating={{
+                tooltip: {
+                  placement: "top",
+                  content: t`Pop out into a separate window`,
+                },
+              }}
+            >
+              <Symbol size={18}>pip</Symbol>
+            </PopOutButton>
+          </PopOutSlot>
         </Show>
         {/* In fullscreen the name moves to the floating call controls */}
         <Show when={!theater()}>
@@ -429,8 +521,16 @@ export const tile = cva({
         height: "100%",
         maxWidth: "none",
         aspectRatio: "auto",
-        cursor: "default",
         background: "black",
+      },
+    },
+    // fills the stream area of the multi-stream view, over the other tiles
+    enlarged: {
+      true: {
+        position: "absolute",
+        inset: 0,
+        zIndex: 1,
+        width: "100%",
       },
     },
     video: {
@@ -672,8 +772,71 @@ const WatchButton = styled("span", {
   },
 });
 
+/**
+ * Placeholder of a stream that is shown in a window of its own. It stands in
+ * for the video area, so it keeps the video's black.
+ */
+const PoppedOut = styled("div", {
+  base: {
+    gridArea: "1/1",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "var(--gap-md)",
+    padding: "var(--gap-md)",
+    textAlign: "center",
+    background: "black",
+    color: "var(--md-sys-color-inverse-on-surface, white)",
+  },
+});
+
+/** Bottom corner of a tile (end side), clear of the name row when it shows */
+const PopOutSlot = styled("div", {
+  base: {
+    gridArea: "1/1",
+    justifySelf: "end",
+    alignSelf: "end",
+    zIndex: 1,
+    padding: "var(--gap-sm)",
+  },
+  variants: {
+    clearOverlay: { true: { marginBlockEnd: "40px" } },
+    compact: { true: {} },
+  },
+  compoundVariants: [
+    { clearOverlay: true, compact: true, css: { marginBlockEnd: "20px" } },
+  ],
+});
+
+/** Small round button on a translucent dark background */
+const PopOutButton = styled("button", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "28px",
+    height: "28px",
+    padding: 0,
+    border: "none",
+    borderRadius: "var(--borderRadius-full)",
+    cursor: "pointer",
+    background: "rgb(0 0 0 / 0.55)",
+    color: "white",
+
+    _hover: { background: "rgb(0 0 0 / 0.75)" },
+    _focusVisible: {
+      outline: "2px solid var(--md-sys-color-primary)",
+      outlineOffset: "2px",
+    },
+  },
+});
+
+/** Buttons in the top corner of a tile, shown on hover */
 const CloseStream = styled("div", {
   base: {
+    display: "flex",
+    gap: "var(--gap-xs)",
     gridArea: "1/1",
     justifySelf: "end",
     alignSelf: "start",
@@ -682,5 +845,6 @@ const CloseStream = styled("div", {
     opacity: 0,
     transition: "var(--transitions-fast) opacity",
     _groupHover: { opacity: 1 },
+    _focusWithin: { opacity: 1 },
   },
 });

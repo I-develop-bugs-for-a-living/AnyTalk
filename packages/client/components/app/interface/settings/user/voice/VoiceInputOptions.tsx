@@ -30,7 +30,38 @@ export function VoiceInputOptions() {
           <SelectInput kind="videoinput" />
         </Show>
       </CategoryButton.Group>
+      <InputModeSelect />
       <VolumeSliders />
+    </Column>
+  );
+}
+
+/**
+ * Choose between voice activity and push to talk
+ */
+function InputModeSelect() {
+  const state = useState();
+
+  return (
+    <Column>
+      <CategoryButton.Group>
+        <CategoryButton.Select
+          icon={<Symbol>keyboard_keys</Symbol>}
+          title={<Trans>Input mode</Trans>}
+          value={state.voice.inputMode}
+          options={{
+            voice: { title: <Trans>Voice activity</Trans> },
+            ptt: { title: <Trans>Push to talk</Trans> },
+          }}
+          onUpdate={(mode) => (state.voice.inputMode = mode as "voice" | "ptt")}
+        />
+      </CategoryButton.Group>
+      <Text class="label">
+        <Trans>
+          Push to talk keeps your microphone off until you hold its hotkey. Set
+          the hotkey under Hotkeys.
+        </Trans>
+      </Text>
     </Column>
   );
 }

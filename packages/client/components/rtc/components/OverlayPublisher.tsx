@@ -122,7 +122,13 @@ function SnapshotSender() {
     lastSent = next;
     lastSentAt = Date.now();
     window.native
-      .setOverlayState?.({ ...next, liveLabel: t`LIVE` })
+      .setOverlayState?.({
+        ...next,
+        liveLabel: t`LIVE`,
+        mutedLabel: t`Muted`,
+        deafenedLabel: t`Deafened`,
+        watchingLabel: t`Watching your stream`,
+      })
       ?.catch(() => {});
   };
 
@@ -188,6 +194,42 @@ function ParticipantReporter(props: {
     events.forEach((event) => participant.off(event, updateStreaming)),
   );
 
+  /** Whether the microphone track is missing or muted */
+  const [trackMuted, setTrackMuted] = createSignal(true);
+  /** Deafen state other clients share as a participant attribute */
+  const [sharedDeafen, setSharedDeafen] = createSignal(false);
+  const updateMedia = () => {
+    const publication = participant.getTrackPublication(
+      Track.Source.Microphone,
+    );
+    setTrackMuted(!publication || publication.isMuted);
+    // only read for remote participants, we know our own state
+    if (!participant.isLocal)
+      setSharedDeafen(participant.attributes?.deafened === "true");
+  };
+  updateMedia();
+  const mediaEvents = [
+    ParticipantEvent.TrackPublished,
+    ParticipantEvent.TrackUnpublished,
+    ParticipantEvent.LocalTrackPublished,
+    ParticipantEvent.LocalTrackUnpublished,
+    ParticipantEvent.TrackMuted,
+    ParticipantEvent.TrackUnmuted,
+    ParticipantEvent.AttributesChanged,
+  ] as const;
+  mediaEvents.forEach((event) => participant.on(event, updateMedia));
+  onCleanup(() =>
+    mediaEvents.forEach((event) => participant.off(event, updateMedia)),
+  );
+  // our own state is known locally, the attribute only serves the others
+  const deafened = () =>
+    participant.isLocal ? voice.deafen() : sharedDeafen();
+  // Push to talk closes the mic track while the key is up, so for ourselves
+  // the mute setting is used. A remote push to talk user shows as muted while
+  // idle, as nothing tells it apart from a real mute.
+  const muted = () =>
+    participant.isLocal ? !voice.microphone() : trackMuted();
+
   /** Name and avatar: server nickname and avatar before the account's */
   let requested = false;
   const info = createMemo(() => {
@@ -207,6 +249,13 @@ function ParticipantReporter(props: {
     );
   });
 
+  /** Whether this participant is among the viewers of our own stream */
+  const watchingYou = () => {
+    const room = voice.room();
+    if (participant.isLocal || !room || !voice.screenshare()) return false;
+    return voice.viewersOf(room.localParticipant.identity).includes(id());
+  };
+
   createEffect(() => {
     const current = id();
     props.onReport(current, {
@@ -215,6 +264,9 @@ function ParticipantReporter(props: {
       avatar: info().avatar,
       speaking: speaking(),
       streaming: streaming(),
+      muted: muted(),
+      deafened: deafened(),
+      watchingYou: watchingYou(),
     });
     // drop the entry of the old id if the identity ever changes
     onCleanup(() => props.onReport(current, undefined));

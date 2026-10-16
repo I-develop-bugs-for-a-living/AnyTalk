@@ -18,6 +18,8 @@ import {
   type AppInfo,
   type DesktopConfig,
   type ErrorInfo,
+  type HotkeyBinding,
+  type HotkeyCapabilities,
   CLIENT_WRITABLE_KEYS,
   IPC,
 } from "../shared/ipc";
@@ -25,6 +27,7 @@ import { getAutostart, setAutostart } from "./autostart";
 import { getConfig, updateConfig } from "./config";
 import { ensureLinuxDesktopFile } from "./desktopFile";
 import { gameLog } from "./gameLog";
+import { gamepadSupported, setGamepadPushToTalk, stopGamepad } from "./gamepad";
 import {
   getFocusedGame,
   getRunningGames,
@@ -33,7 +36,11 @@ import {
   onGamesChange,
   setGameDetection,
 } from "./games";
-import { resetGlobalHotkeys, setGlobalHotkeys } from "./hotkeys";
+import {
+  hookReleaseSupported,
+  resetGlobalHotkeys,
+  setGlobalHotkeys,
+} from "./hotkeys";
 import {
   destroyOverlay,
   installOverlay,
@@ -225,6 +232,9 @@ function restartToUpdate() {
   }
 }
 
+/** Frame name prefix of the stream popout window (see rtc/streamPopout.ts) */
+const STREAM_POPOUT_FRAME = "anytalk-stream-popout";
+
 /** Create the main window with the saved size and frame style. */
 function createWindow() {
   const config = getConfig();
@@ -328,13 +338,60 @@ function createWindow() {
     if (details.isMainFrame && !details.isSameDocument) {
       globalShortcut.unregisterAll();
       resetGlobalHotkeys();
+      stopGamepad();
       // The new page knows nothing of the old call
       resetOverlay();
     }
   });
-  wc.setWindowOpenHandler(({ url }) => {
+  wc.setWindowOpenHandler(({ url, frameName, referrer }) => {
+    // A stream popped out of the call: a normal app window (taskbar, alt-tab,
+    // resizable, fullscreen) that the page fills itself. Only the blank page
+    // under our frame name, opened from a page of the app's own server (this
+    // handler belongs to the main window, and its top page and the opening
+    // page's referrer must both be on the server origin). Everything else is
+    // handled below.
+    if (
+      url === "about:blank" &&
+      frameName.startsWith(STREAM_POPOUT_FRAME) &&
+      isServerUrl(wc.getURL()) &&
+      isServerUrl(referrer.url)
+    ) {
+      return {
+        action: "allow",
+        overrideBrowserWindowOptions: {
+          minWidth: 320,
+          minHeight: 180,
+          resizable: true,
+          fullscreenable: true,
+          autoHideMenuBar: true,
+          backgroundColor: "#000000",
+          title: "AnyTalk",
+          icon: nativeImage.createFromPath(
+            join(
+              __dirname,
+              process.platform === "win32" ? "icon.ico" : "icon.png",
+            ),
+          ),
+          // No preload: the native bridge is for the main window only (the
+          // preload also refuses to expose it in a popout, see its end)
+          webPreferences: {
+            preload: undefined,
+            contextIsolation: true,
+            sandbox: true,
+            nodeIntegration: false,
+          },
+        },
+      };
+    }
     if (parseHttpUrl(url)) shell.openExternal(url);
     return { action: "deny" };
+  });
+  // The popout page is drawn by the app, it never navigates or opens windows
+  wc.on("did-create-window", (child) => {
+    const lock = (event: Electron.Event) => event.preventDefault();
+    child.webContents.on("will-navigate", lock);
+    child.webContents.on("will-redirect", lock);
+    child.webContents.setWindowOpenHandler(() => ({ action: "deny" }));
   });
 
   wc.on("did-fail-load", (_event, code, description, url, isMainFrame) => {
@@ -520,13 +577,32 @@ function registerIpc() {
 
   handleApp(IPC.hotkeysSet, (bindings: unknown) => {
     const list = (Array.isArray(bindings) ? bindings : []).filter(
-      (b): b is { action: string; accelerator: string } =>
-        typeof b?.action === "string" && typeof b?.accelerator === "string",
+      (b): b is HotkeyBinding =>
+        typeof b?.action === "string" &&
+        typeof b?.accelerator === "string" &&
+        (b.code === undefined || typeof b.code === "string"),
     );
-    return setGlobalHotkeys(list, (action) =>
-      mainWindow?.webContents.send(IPC.hotkeyFired, action),
+    return setGlobalHotkeys(list, (action, edge) =>
+      mainWindow?.webContents.send(
+        edge === "down" ? IPC.hotkeyFired : IPC.hotkeyReleased,
+        action,
+      ),
     );
   });
+
+  handleApp(IPC.gamepadSet, (button: unknown) =>
+    setGamepadPushToTalk(typeof button === "string" ? button : null, (down) =>
+      mainWindow?.webContents.send(IPC.gamepadPtt, down),
+    ),
+  );
+
+  handleApp(
+    IPC.hotkeyCapabilities,
+    (): HotkeyCapabilities => ({
+      release: hookReleaseSupported(),
+      gamepad: gamepadSupported(),
+    }),
+  );
 
   /** Register an error page handler. */
   const handleError = <A extends unknown[], R>(

@@ -106,6 +106,11 @@ msgstr "{0, plural, one {+# další} few {+# další} many {+# dalšího} other 
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {Přetáhnout soubor} few {Přetáhnout # soubory} many {Přetáhnout # souboru} other {Přetáhnout # souborů}}"
 
+#. placeholder {0}: user().username
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "{0} – AnyTalk"
+msgstr ""
+
 #. placeholder {0}: users() .slice(0, -1) .map((user) => user!.username) .join(", ")
 #. placeholder {1}: users().slice(-1)[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -152,6 +157,18 @@ msgstr "{0} je již dole"
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} is already at the top"
 msgstr "{0} je již nahoře"
+
+#. placeholder {0}: buttonLabels()[button]
+#. placeholder {1}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is needed for \"{1}\". Pick another button."
+#~ msgstr ""
+
+#. placeholder {0}: actionLabels()[action]
+#. placeholder {1}: buttonLabels()[button]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is now {1}."
+#~ msgstr ""
 
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -271,6 +288,14 @@ msgstr "{0} role"
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
 msgstr "Časový limit uživatele {0} bude zrušen a bude moci na serveru opět něco dělat."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{actionName} is now {buttonName}."
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{buttonName} is needed for \"{actionName}\". Pick another button."
+msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
@@ -606,6 +631,10 @@ msgstr "Také zeslabuje hluboké hlasy"
 msgid "Always Ask for Screen Share Quality"
 msgstr "Vždy se ptát o kvalitě sdílení obrazovky"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Always show"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "American (MM/DD/YYYY)"
 msgstr "Americký formát (MM/DD/YYYY)"
@@ -773,6 +802,7 @@ msgstr "Ověřovací aplikace"
 msgid "Automatic Gain Control"
 msgstr "Automatická regulace mikrofonu"
 
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Avatar"
 msgstr "Avatar"
@@ -814,6 +844,10 @@ msgstr "B (pravé tlačítko)"
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "Zpět"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Back to AnyTalk"
+msgstr ""
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Back to categories"
@@ -905,6 +939,10 @@ msgstr ""
 msgid "Bottom right"
 msgstr ""
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Bring back"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "Prohlížeč"
@@ -970,6 +1008,10 @@ msgstr "Hovory"
 msgid "Camera"
 msgstr "Kamera"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Camera is off"
+msgstr ""
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
 msgstr "Nemůžete najít dokonalý GIF? Miřte na Gifboxu a nahrávejte své vlastní pro všechny k využití."
@@ -1030,6 +1072,10 @@ msgstr "Zrušit zprávu"
 msgid "Cancel your discover request and remove it from the review queue"
 msgstr "Zrušit žádost o Objevování a odstranit ji z fronty ke kontrole"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Cancelled."
+msgstr ""
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
 msgstr "Účet nemůžete smazat, dokud neodstraníte nebo nepřevedete servery"
@@ -1087,6 +1133,15 @@ msgstr "Změnit vlastní avatar"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
 msgstr "Změnit vlastní přezdívku"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Change the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Change the button for \"{actionName}\""
+msgstr ""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
@@ -1176,6 +1231,10 @@ msgstr "Zvolte uživatelské jméno"
 msgid "Clear status"
 msgstr "Vymazat status"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Click a button to give its action another controller button, then press the new button. Press Escape to cancel. If the new button already has an action, the two swap. Controllers without the standard layout only support A, B, X and Y."
+msgstr ""
+
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
 msgstr "Klikněte na možnosti níže pro víc informací o různých změnách!"
@@ -1262,13 +1321,17 @@ msgstr "Barvy"
 msgid "Coming soon! 👀"
 msgstr "Již brzy! 👀"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Compact"
+msgstr ""
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Compact mode"
 msgstr "Kompaktní režim"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Compact: only the avatars"
-msgstr ""
+#~ msgid "Compact: only the avatars"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
@@ -1370,6 +1433,10 @@ msgstr "Ovladač"
 msgid "Controller support"
 msgstr "Podpora ovladače"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Controls that can't be changed"
+msgstr ""
+
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Conversations"
 msgstr "Konverzace"
@@ -1456,6 +1523,15 @@ msgstr "Žádaný obsah nebyl nalezen."
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not load the patch notes right now."
 msgstr "Poznámky k verzi se teď nepodařilo načíst."
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window."
+msgstr ""
+
+#: components/rtc/components/StreamPopouts.tsx
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
+msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
@@ -1616,6 +1692,10 @@ msgstr "Současné heslo"
 msgid "Current Session"
 msgstr "Tato Relace"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Custom"
+msgstr ""
+
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Custom colour"
 msgstr "Vlastní barva"
@@ -1633,8 +1713,24 @@ msgid "Customisation"
 msgstr "Přizpůsobení"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad down"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad left"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad or left stick"
 msgstr "D-pad nebo levá páčka"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad right"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad up"
+msgstr ""
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
@@ -1662,6 +1758,14 @@ msgstr "Ztlumit členy s nižší hodností v hlasovém hovoru"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
 msgstr "Vypnout členům zvuk"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Deafen or undeafen in a call"
+msgstr ""
+
+#: components/rtc/components/OverlayPublisher.tsx
+msgid "Deafened"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -1816,8 +1920,12 @@ msgid "Desktop app"
 msgstr "Aplikace pro počítač"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+msgid "Detailed"
 msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+#~ msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2185,6 +2293,10 @@ msgstr "Výborné"
 msgid "Excellent connection"
 msgstr "Výborné spojení"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Exit fullscreen"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "Exportovat"
@@ -2245,6 +2357,10 @@ msgstr "Najděte nové servery, ke kterým se připojíte"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "Najděte svou ko<0/>munitu,<1/>spojte se se světem."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Fixed controls"
+msgstr ""
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2316,6 +2432,10 @@ msgstr "Zamrzlé"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Fruit Salad"
 msgstr "Ovocný salát"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Fullscreen"
+msgstr ""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Generate a new token if it gets lost or compromised"
@@ -2489,6 +2609,10 @@ msgstr "Zobrazovat roli odděleně"
 #~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
 #~ msgstr "Podržte Ctrl, Alt nebo Shift spolu s písmenem nebo číslicí."
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Hold this button to talk, even while a game is in front. It only applies when the input mode is Push to talk. The game also sees the button, so pick one it doesn't use. Works with Xbox controllers; PlayStation controllers need Steam Input or DS4Windows."
+msgstr ""
+
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
@@ -2605,6 +2729,10 @@ msgstr "Příchozí hovor"
 
 #: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 msgid "Input device"
+msgstr ""
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Input mode"
 msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
@@ -2829,12 +2957,24 @@ msgid "Leave stream"
 msgstr "Opustit stream"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right bumper"
-msgstr "Levý a pravý bumper"
+#~ msgid "Left and right bumper"
+#~ msgstr "Levý a pravý bumper"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right trigger"
-msgstr "Levá a pravá spoušť"
+#~ msgid "Left and right trigger"
+#~ msgstr "Levá a pravá spoušť"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left bumper (LB)"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left stick click (L3)"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left trigger (LT)"
+msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Let AnyTalk use its own custom titlebar."
@@ -2882,6 +3022,10 @@ msgstr "Poslouchejte"
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
 msgstr "ŽIVĚ"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "LIVE indicator"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Live overlay, recording and recaps of previous calls"
@@ -3211,6 +3355,10 @@ msgstr "Více streamů: otevřený stream se přidá vedle ostatních"
 msgid "Mute"
 msgstr "Ztlumit"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Mute and deafen"
+msgstr ""
+
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Mute Channel"
 msgstr "Ztlumit Kanál"
@@ -3247,6 +3395,7 @@ msgstr ""
 msgid "Mute when not speaking"
 msgstr "Ztišit, když nemluvíte"
 
+#: components/rtc/components/OverlayPublisher.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Muted"
 msgstr "Ztlumeno"
@@ -3279,11 +3428,16 @@ msgid "My Bots"
 msgstr "Moji boti"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Name"
 msgstr "Jméno"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Needs a server that supports stream viewers."
+msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
@@ -3322,6 +3476,14 @@ msgstr "Nový na tomto serveru"
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "New unreads"
 msgstr "Nové nepřečtené"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next channel"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next server"
+msgstr ""
 
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
@@ -3399,6 +3561,7 @@ msgstr "Právě tu nikdo není!"
 msgid "Noise suppression"
 msgstr "Potlačení šumu"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "None"
@@ -3425,6 +3588,10 @@ msgstr "Bez omezení"
 msgid "Not of minimum age to use the platform"
 msgstr "Nedosahuje minimálního věku pro používání platformy"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Not set"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
 msgstr "Nic"
@@ -3443,6 +3610,7 @@ msgstr "Zatím není co porovnávat. Importujte CSV nebo přidejte jeden z vlast
 msgid "Notifications"
 msgstr "Oznámení"
 
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "Off"
@@ -3549,6 +3717,10 @@ msgstr "Otevřít {0}"
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Open an app or switch to Entire screen."
 msgstr "Otevřete aplikaci nebo přepněte na Celou obrazovku."
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Open as window"
+msgstr ""
 
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Open channel settings"
@@ -3779,6 +3951,10 @@ msgstr "Slabé spojení"
 msgid "Poor or lost connection"
 msgstr "Slabé nebo ztracené spojení"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Pop out into a separate window"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Position"
 msgstr ""
@@ -3786,6 +3962,23 @@ msgstr ""
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
 msgstr "Využívá RNNoise"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Preset"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a button…"
+msgstr ""
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Press a controller button for \"{0}\". Press Escape to cancel."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a controller button for \"{actionName}\". Press Escape to cancel."
+msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
@@ -3800,12 +3993,20 @@ msgid "Preview"
 msgstr "Náhled"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next channel"
-msgstr "Předchozí a další kanál"
+#~ msgid "Previous and next channel"
+#~ msgstr "Předchozí a další kanál"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next server"
-msgstr "Předchozí a další server"
+#~ msgid "Previous and next server"
+#~ msgstr "Předchozí a další server"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous channel"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous server"
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
@@ -3844,6 +4045,23 @@ msgstr "Zájmena"
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
 msgstr "Zadaný e-mail nebo heslo je nesprávné."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk"
+msgstr ""
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk keeps your microphone off until you hold its hotkey. Set the hotkey under Hotkeys."
+msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Push to talk only works while AnyTalk is focused on this computer."
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Push-to-talk button"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Put your recaps next to CSV recaps from other people"
@@ -4001,6 +4219,7 @@ msgstr "Vzdálený kanál"
 msgid "Remote Server"
 msgstr "Vzdálený server"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
@@ -4038,6 +4257,15 @@ msgstr "Odebrat avatary ostatních členů"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "Odebrat reakci"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Remove the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Remove the button for \"{actionName}\""
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -4129,6 +4357,10 @@ msgstr "Obnovit"
 msgid "Reset {0}'s token?"
 msgstr "Obnovit token uživatele {0}?"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset all buttons"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
 msgstr "Obnovit všechny zvuky"
@@ -4143,11 +4375,21 @@ msgstr "Obnovit heslo"
 msgid "Reset Recovery Codes"
 msgstr "Resetovat obnovovací kódy"
 
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Reset the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset the button for \"{actionName}\""
+msgstr ""
+
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "Obnovit na {0}"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
 msgstr "Obnovit výchozí"
@@ -4202,8 +4444,20 @@ msgid "Review policy changes"
 msgstr "Zkontrolovat změny zásad"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "Right bumper (RB)"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "Right stick"
 msgstr "Pravá páčka"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right stick click (R3)"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right trigger (RT)"
+msgstr ""
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Role Colour"
@@ -4582,6 +4836,14 @@ msgid "Show send message button"
 msgstr "Zobrazit tlačítko pro odeslání zprávy"
 
 #: components/app/interface/settings/user/Overlay.tsx
+msgid "Show when speaking"
+msgstr ""
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Showing in a separate window"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr ""
 
@@ -4779,6 +5041,10 @@ msgstr "Statistiky streamu"
 msgid "Stream Stats"
 msgstr "Statistiky streamu"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Stream viewers"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Streams"
 msgstr "Streamy"
@@ -4797,8 +5063,8 @@ msgid "Strong (150 Hz)"
 msgstr "Silný (150 Hz)"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Style"
-msgstr ""
+#~ msgid "Style"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
@@ -4924,6 +5190,15 @@ msgstr "Bot už je v Objevování, uživatel musí kontaktovat podporu, aby jej 
 msgid "The bot will not be granted any permissions."
 msgstr "Botovi nebudou uděleny žádná oprávnění."
 
+#. placeholder {0}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "The default button is needed for \"{0}\". Reset that one first."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The default button is needed for \"{actionName}\". Reset that one first."
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
 msgstr "Aplikace pro počítač je dostupná pro Windows a Linux."
@@ -4952,6 +5227,10 @@ msgstr "Položka byla odebrána moderátory, a proto jsou budoucí žádosti zak
 #: components/i18n/errors.tsx
 msgid "The password is too short."
 msgstr "Heslo je příliš krátké."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The push-to-talk button isn't available on this computer."
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "The server has been removed from discover by moderators, the user must contact support."
@@ -5001,6 +5280,10 @@ msgstr "Tento bot je viditelný v Objevování"
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
 msgstr "Tento bot je soukromý a může jej přidat pouze tvůrce."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr ""
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
@@ -5125,6 +5408,10 @@ msgstr "Časový limit do {0}"
 #: components/app/interface/channels/text/Message.tsx
 msgid "Timed Out until {0}"
 msgstr "Časový limit do {0}"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Timed out."
+msgstr ""
 
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
@@ -5559,6 +5846,10 @@ msgstr "Hlas"
 msgid "Voice & Video"
 msgstr "Hlas a video"
 
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Voice activity"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Voice call developer mode"
 msgstr "Vývojářský režim hlasového hovoru"
@@ -5611,6 +5902,10 @@ msgstr "Sledovat více streamů najednou"
 msgid "Watch stream"
 msgstr "Sledovat stream"
 
+#: components/rtc/components/OverlayPublisher.tsx
+msgid "Watching your stream"
+msgstr ""
+
 #: src/AndroidNag.tsx
 msgid "We are working hard on optimising our web app for mobile."
 msgstr "Usilovně pracujeme na optimalizaci naší webové aplikace pro mobilní zařízení."
@@ -5648,8 +5943,8 @@ msgid "Welcome!"
 msgstr "Vítejte!"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "What each controller button does"
-msgstr "Co dělá které tlačítko ovladače"
+#~ msgid "What each controller button does"
+#~ msgstr "Co dělá které tlačítko ovladače"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"

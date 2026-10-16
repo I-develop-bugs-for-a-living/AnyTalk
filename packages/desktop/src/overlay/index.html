@@ -92,15 +92,34 @@
         font-size: 14px;
         line-height: 20px;
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-        opacity: 0;
-        transition: opacity 0.2s ease;
       }
-      body[data-style="compact"] .name,
-      body[data-style="compact"] .live {
+      .status,
+      .watching {
+        flex: none;
+        display: grid;
+        place-items: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.65);
+        color: #ff6b78;
+      }
+      /* Hidden parts take no space, so the row's gap collapses */
+      .row[hidden],
+      .avatar[hidden],
+      .name[hidden],
+      .status[hidden],
+      .watching[hidden],
+      .live[hidden] {
         display: none;
       }
-      .row.speaking .name {
-        opacity: 1;
+      .watching {
+        color: #fff;
+      }
+      .status svg,
+      .watching svg {
+        width: 14px;
+        height: 14px;
       }
       .live {
         flex: none;
@@ -115,14 +134,13 @@
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
       }
       @media (prefers-reduced-motion: reduce) {
-        .avatar,
-        .name {
+        .avatar {
           transition: none;
         }
       }
     </style>
   </head>
-  <body data-corner="top-left" data-style="detailed">
+  <body data-corner="top-left">
     <main id="list" aria-hidden="true"></main>
     <script src="overlay.js"></script>
   </body>

@@ -106,6 +106,11 @@ msgstr "{0, plural, other {+# 人}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, other {拖入 # 个文件}}"
 
+#. placeholder {0}: user().username
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "{0} – AnyTalk"
+msgstr "{0} – AnyTalk"
+
 #. placeholder {0}: users() .slice(0, -1) .map((user) => user!.username) .join(", ")
 #. placeholder {1}: users().slice(-1)[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -152,6 +157,18 @@ msgstr "{0} 已在最底部"
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} is already at the top"
 msgstr "{0} 已在最顶部"
+
+#. placeholder {0}: buttonLabels()[button]
+#. placeholder {1}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is needed for \"{1}\". Pick another button."
+#~ msgstr "“{1}”需要使用{0}。请选择其他按钮。"
+
+#. placeholder {0}: actionLabels()[action]
+#. placeholder {1}: buttonLabels()[button]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is now {1}."
+#~ msgstr "{0}现在是{1}。"
 
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -271,6 +288,14 @@ msgstr "{0} 的角色"
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
 msgstr "将解除 {0} 的静默，对方可以再次与服务器互动。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{actionName} is now {buttonName}."
+msgstr "{actionName}现在是{buttonName}。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{buttonName} is needed for \"{actionName}\". Pick another button."
+msgstr "“{actionName}”需要使用{buttonName}。请选择其他按钮。"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
@@ -680,6 +705,10 @@ msgstr "同时会削弱低沉的声音"
 msgid "Always Ask for Screen Share Quality"
 msgstr "总是询问屏幕共享画质"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Always show"
+msgstr "始终显示"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "American (MM/DD/YYYY)"
 msgstr "美式（MM/DD/YYYY）"
@@ -850,6 +879,7 @@ msgstr "身份验证器应用"
 msgid "Automatic Gain Control"
 msgstr "自动增益控制"
 
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Avatar"
 msgstr "头像"
@@ -891,6 +921,10 @@ msgstr "B(右侧按钮)"
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "返回"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Back to AnyTalk"
+msgstr "返回 AnyTalk"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Back to categories"
@@ -982,6 +1016,10 @@ msgstr "左下角"
 msgid "Bottom right"
 msgstr "右下角"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Bring back"
+msgstr "放回"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "浏览器"
@@ -1051,6 +1089,10 @@ msgstr "通话"
 msgid "Camera"
 msgstr "摄像头"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Camera is off"
+msgstr "摄像头已关闭"
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
 msgstr "找不到合适的 GIF？前往 Gifbox 上传你自己的，让大家都能使用。"
@@ -1111,6 +1153,10 @@ msgstr "取消消息"
 msgid "Cancel your discover request and remove it from the review queue"
 msgstr "取消你的发现申请，并将其从审核队列中移除"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Cancelled."
+msgstr "已取消。"
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
 msgstr "在服务器被删除或转移之前无法删除账户"
@@ -1168,6 +1214,15 @@ msgstr "更改自己的头像"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
 msgstr "更改自己的昵称"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Change the button for \"{0}\""
+#~ msgstr "更改“{0}”的按钮"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Change the button for \"{actionName}\""
+msgstr "更改“{actionName}”的按钮"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
@@ -1261,6 +1316,10 @@ msgstr "选择用户名"
 msgid "Clear status"
 msgstr "清除状态"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Click a button to give its action another controller button, then press the new button. Press Escape to cancel. If the new button already has an action, the two swap. Controllers without the standard layout only support A, B, X and Y."
+msgstr "点击某个操作，为其指定另一个控制器按钮，然后按下新按钮。按 Escape 可取消。如果新按钮已有操作，两者将互换。非标准布局的控制器仅支持 A、B、X 和 Y。"
+
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
 msgstr "点击下面的项目，了解不同的更改！"
@@ -1347,13 +1406,17 @@ msgstr "颜色"
 msgid "Coming soon! 👀"
 msgstr "敬请期待！👀"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Compact"
+msgstr "精简"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Compact mode"
 msgstr "紧凑模式"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Compact: only the avatars"
-msgstr "简洁：仅显示头像"
+#~ msgid "Compact: only the avatars"
+#~ msgstr "简洁：仅显示头像"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
@@ -1455,6 +1518,10 @@ msgstr "控制器"
 msgid "Controller support"
 msgstr "控制器支持"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Controls that can't be changed"
+msgstr "无法更改的操作"
+
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Conversations"
 msgstr "对话"
@@ -1541,6 +1608,15 @@ msgstr "找不到你请求的内容。"
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not load the patch notes right now."
 msgstr "暂时无法加载更新日志。"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window."
+msgstr "无法在单独窗口中打开该直播。"
+
+#: components/rtc/components/StreamPopouts.tsx
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
+msgstr "无法在单独窗口中打开该直播。请检查是否允许弹出窗口。"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
@@ -1702,6 +1778,10 @@ msgstr "当前密码"
 msgid "Current Session"
 msgstr "当前会话"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Custom"
+msgstr "自定义"
+
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Custom colour"
 msgstr "自定义颜色"
@@ -1719,8 +1799,24 @@ msgid "Customisation"
 msgstr "自定义"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad down"
+msgstr "方向键 下"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad left"
+msgstr "方向键 左"
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad or left stick"
 msgstr "方向键或左摇杆"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad right"
+msgstr "方向键 右"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad up"
+msgstr "方向键 上"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
@@ -1748,6 +1844,14 @@ msgstr "在语音通话中让较低级别的成员拒听"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
 msgstr "隔音成员"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Deafen or undeafen in a call"
+msgstr "在通话中拒听或取消拒听"
+
+#: components/rtc/components/OverlayPublisher.tsx
+msgid "Deafened"
+msgstr "已拒听"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -1906,8 +2010,12 @@ msgid "Desktop app"
 msgstr "桌面应用"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
-msgstr "详细：说话时显示名称，直播显示“直播中”标签"
+msgid "Detailed"
+msgstr "详细"
+
+#: components/app/interface/settings/user/Overlay.tsx
+#~ msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+#~ msgstr "详细：说话时显示名称，直播显示“直播中”标签"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2278,6 +2386,10 @@ msgstr "极好"
 msgid "Excellent connection"
 msgstr "连接极佳"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Exit fullscreen"
+msgstr "退出全屏"
+
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "导出"
@@ -2338,6 +2450,10 @@ msgstr "查找要加入的新服务器"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "找到你的社<0/>区，<1/>连接世界。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Fixed controls"
+msgstr "固定操作"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2409,6 +2525,10 @@ msgstr "已卡住"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Fruit Salad"
 msgstr "水果沙拉"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Fullscreen"
+msgstr "全屏"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Generate a new token if it gets lost or compromised"
@@ -2582,6 +2702,10 @@ msgstr "单独显示角色"
 #~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
 #~ msgstr "请同时按住 Ctrl、Alt 或 Shift 和一个字母或数字。"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Hold this button to talk, even while a game is in front. It only applies when the input mode is Push to talk. The game also sees the button, so pick one it doesn't use. Works with Xbox controllers; PlayStation controllers need Steam Input or DS4Windows."
+msgstr "按住此按钮即可说话，即使游戏在前台也有效。仅在输入模式为按键说话时生效。游戏也会收到此按钮的输入，请选择游戏未使用的按钮。支持 Xbox 手柄；PlayStation 手柄需要 Steam Input 或 DS4Windows。"
+
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
@@ -2703,6 +2827,10 @@ msgstr "来电"
 #: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 msgid "Input device"
 msgstr "输入设备"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Input mode"
+msgstr "输入模式"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -2929,12 +3057,24 @@ msgid "Leave stream"
 msgstr "离开直播"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right bumper"
-msgstr "左右肩键"
+#~ msgid "Left and right bumper"
+#~ msgstr "左右肩键"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right trigger"
-msgstr "左右扳机键"
+#~ msgid "Left and right trigger"
+#~ msgstr "左右扳机键"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left bumper (LB)"
+msgstr "左肩键 (LB)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left stick click (L3)"
+msgstr "左摇杆按下 (L3)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left trigger (LT)"
+msgstr "左扳机 (LT)"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Let AnyTalk use its own custom titlebar."
@@ -2982,6 +3122,10 @@ msgstr "收听"
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
 msgstr "直播中"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "LIVE indicator"
+msgstr "直播中标识"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Live overlay, recording and recaps of previous calls"
@@ -3311,6 +3455,10 @@ msgstr "多路直播：打开直播会将其添加到其他直播旁边"
 msgid "Mute"
 msgstr "静音"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Mute and deafen"
+msgstr "静音和拒听"
+
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Mute Channel"
 msgstr "频道静音"
@@ -3347,6 +3495,7 @@ msgstr "将用户静音"
 msgid "Mute when not speaking"
 msgstr "不说话时静音"
 
+#: components/rtc/components/OverlayPublisher.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Muted"
 msgstr "静音"
@@ -3379,11 +3528,16 @@ msgid "My Bots"
 msgstr "我的机器人"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Name"
 msgstr "名称"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Needs a server that supports stream viewers."
+msgstr "需要支持直播观众的服务器。"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
@@ -3422,6 +3576,14 @@ msgstr "服务器新人"
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "New unreads"
 msgstr "新的未读"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next channel"
+msgstr "下一个频道"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next server"
+msgstr "下一个服务器"
 
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
@@ -3499,6 +3661,7 @@ msgstr "现在这里没有人！"
 msgid "Noise suppression"
 msgstr "降噪"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "None"
@@ -3525,6 +3688,10 @@ msgstr "不限制"
 msgid "Not of minimum age to use the platform"
 msgstr "未达到使用本平台的最低年龄"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Not set"
+msgstr "未设置"
+
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
 msgstr "不通知"
@@ -3543,6 +3710,7 @@ msgstr "暂无可对比的内容。请导入 CSV 或添加你自己的直播回�
 msgid "Notifications"
 msgstr "通知"
 
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "Off"
@@ -3649,6 +3817,10 @@ msgstr "打开 {0}"
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Open an app or switch to Entire screen."
 msgstr "请打开一个应用，或切换到“整个屏幕”。"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Open as window"
+msgstr "在窗口中打开"
 
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Open channel settings"
@@ -3879,6 +4051,10 @@ msgstr "连接较差"
 msgid "Poor or lost connection"
 msgstr "连接较差或已断开"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Pop out into a separate window"
+msgstr "在单独窗口中打开"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Position"
 msgstr "位置"
@@ -3886,6 +4062,23 @@ msgstr "位置"
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
 msgstr "由 RNNoise 提供支持"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Preset"
+msgstr "预设"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a button…"
+msgstr "请按下按钮…"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Press a controller button for \"{0}\". Press Escape to cancel."
+#~ msgstr "请按下“{0}”的控制器按钮。按 Escape 可取消。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a controller button for \"{actionName}\". Press Escape to cancel."
+msgstr "请按下“{actionName}”的控制器按钮。按 Escape 可取消。"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
@@ -3900,12 +4093,20 @@ msgid "Preview"
 msgstr "预览"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next channel"
-msgstr "上一个和下一个频道"
+#~ msgid "Previous and next channel"
+#~ msgstr "上一个和下一个频道"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next server"
-msgstr "上一个和下一个服务器"
+#~ msgid "Previous and next server"
+#~ msgstr "上一个和下一个服务器"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous channel"
+msgstr "上一个频道"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous server"
+msgstr "上一个服务器"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
@@ -3944,6 +4145,23 @@ msgstr "代词"
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
 msgstr "提供的邮箱或密码有误。"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk"
+msgstr "按键说话"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk keeps your microphone off until you hold its hotkey. Set the hotkey under Hotkeys."
+msgstr "按键说话会让麦克风保持关闭，直到你按住对应的快捷键。请在“快捷键”中设置快捷键。"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Push to talk only works while AnyTalk is focused on this computer."
+msgstr "按键说话仅在此电脑上 AnyTalk 处于焦点时有效。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Push-to-talk button"
+msgstr "按键说话按钮"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Put your recaps next to CSV recaps from other people"
@@ -4105,6 +4323,7 @@ msgstr "远程频道"
 msgid "Remote Server"
 msgstr "远程服务器"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
@@ -4142,6 +4361,15 @@ msgstr "移除其他成员的头像"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "移除回应"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Remove the button for \"{0}\""
+#~ msgstr "移除“{0}”的按钮"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Remove the button for \"{actionName}\""
+msgstr "移除“{actionName}”的按钮"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -4233,6 +4461,10 @@ msgstr "重置"
 msgid "Reset {0}'s token?"
 msgstr "重置 {0} 的令牌？"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset all buttons"
+msgstr "重置所有按钮"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
 msgstr "重置所有声音"
@@ -4247,11 +4479,21 @@ msgstr "重置密码"
 msgid "Reset Recovery Codes"
 msgstr "重置恢复码"
 
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Reset the button for \"{0}\""
+#~ msgstr "重置“{0}”的按钮"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset the button for \"{actionName}\""
+msgstr "重置“{actionName}”的按钮"
+
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "重置为 {0}"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
 msgstr "恢复默认"
@@ -4306,8 +4548,20 @@ msgid "Review policy changes"
 msgstr "查看政策变更"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "Right bumper (RB)"
+msgstr "右肩键 (RB)"
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "Right stick"
 msgstr "右摇杆"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right stick click (R3)"
+msgstr "右摇杆按下 (R3)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right trigger (RT)"
+msgstr "右扳机 (RT)"
 
 #~ msgid "Roadmap"
 #~ msgstr ""
@@ -4692,6 +4946,14 @@ msgid "Show send message button"
 msgstr "显示发送消息按钮"
 
 #: components/app/interface/settings/user/Overlay.tsx
+msgid "Show when speaking"
+msgstr "说话时显示"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Showing in a separate window"
+msgstr "正在单独窗口中显示"
+
+#: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr "在游戏画面上方显示通话中谁在说话。适用于无边框和窗口化游戏，不适用于独占全屏。"
 
@@ -4895,6 +5157,10 @@ msgstr "直播统计"
 msgid "Stream Stats"
 msgstr "直播统计"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Stream viewers"
+msgstr "直播观众"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Streams"
 msgstr "直播"
@@ -4913,8 +5179,8 @@ msgid "Strong (150 Hz)"
 msgstr "强（150 Hz）"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Style"
-msgstr "样式"
+#~ msgid "Style"
+#~ msgstr "样式"
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
@@ -5040,6 +5306,15 @@ msgstr "该机器人已在发现页面中，用户必须联系支持人员才能
 msgid "The bot will not be granted any permissions."
 msgstr "不会授予该机器人任何权限。"
 
+#. placeholder {0}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "The default button is needed for \"{0}\". Reset that one first."
+#~ msgstr "“{0}”需要使用默认按钮。请先重置该按钮。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The default button is needed for \"{actionName}\". Reset that one first."
+msgstr "“{actionName}”需要使用默认按钮。请先重置该按钮。"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
 msgstr "桌面应用支持 Windows 和 Linux。"
@@ -5068,6 +5343,10 @@ msgstr "该项目已被管理员移除，因此禁止再次申请。请联系支
 #: components/i18n/errors.tsx
 msgid "The password is too short."
 msgstr "密码太短。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The push-to-talk button isn't available on this computer."
+msgstr "此电脑上无法使用按键说话按钮。"
 
 #: components/i18n/errors.tsx
 msgid "The server has been removed from discover by moderators, the user must contact support."
@@ -5117,6 +5396,10 @@ msgstr "此机器人已可被发现"
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
 msgstr "此机器人是私有的，只有创建者可以添加。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr "此按钮是按键说话按钮，开启按键说话时不能用于其他操作。请选择其他按钮。"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
@@ -5241,6 +5524,10 @@ msgstr "已静默至 {0}"
 #: components/app/interface/channels/text/Message.tsx
 msgid "Timed Out until {0}"
 msgstr "已静默至 {0}"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Timed out."
+msgstr "已超时。"
 
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
@@ -5683,6 +5970,10 @@ msgstr "语音"
 msgid "Voice & Video"
 msgstr "语音和视频"
 
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Voice activity"
+msgstr "语音激活"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Voice call developer mode"
 msgstr "语音通话开发者模式"
@@ -5735,6 +6026,10 @@ msgstr "同时观看多个直播"
 msgid "Watch stream"
 msgstr "观看直播"
 
+#: components/rtc/components/OverlayPublisher.tsx
+msgid "Watching your stream"
+msgstr "正在观看你的直播"
+
 #: src/AndroidNag.tsx
 msgid "We are working hard on optimising our web app for mobile."
 msgstr "我们正在努力为移动设备优化我们的网页应用。"
@@ -5772,8 +6067,8 @@ msgid "Welcome!"
 msgstr "欢迎！"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "What each controller button does"
-msgstr "每个控制器按钮的功能"
+#~ msgid "What each controller button does"
+#~ msgstr "每个控制器按钮的功能"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"

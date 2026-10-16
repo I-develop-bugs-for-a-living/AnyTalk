@@ -13,6 +13,10 @@ export const IPC = {
   windowMaximised: "window:maximised",
   hotkeysSet: "hotkeys:set",
   hotkeyFired: "hotkeys:fired",
+  hotkeyReleased: "hotkeys:released",
+  hotkeyCapabilities: "hotkeys:capabilities",
+  gamepadSet: "gamepad:set",
+  gamepadPtt: "gamepad:ptt",
   pickerSources: "picker:sources",
   pickerResult: "picker:result",
   pickerCancel: "picker:cancel",
@@ -48,10 +52,24 @@ export const OVERLAY_MODES = ["always", "games"] as const;
 /** See `OVERLAY_MODES`. */
 export type OverlayMode = (typeof OVERLAY_MODES)[number];
 
-/** Overlay looks: avatars only, or with names and the LIVE tag. */
-export const OVERLAY_STYLES = ["compact", "detailed"] as const;
-/** See `OVERLAY_STYLES`. */
-export type OverlayStyle = (typeof OVERLAY_STYLES)[number];
+/** When one overlay element shows: always, only while speaking, or never. */
+export const OVERLAY_VISIBILITIES = ["always", "speaking", "off"] as const;
+/** See `OVERLAY_VISIBILITIES`. */
+export type OverlayVisibility = (typeof OVERLAY_VISIBILITIES)[number];
+
+/** The overlay elements the user can set a visibility for. */
+export const OVERLAY_ELEMENT_KEYS = [
+  "overlayAvatar",
+  "overlayName",
+  "overlayLive",
+  "overlayStatus",
+  "overlayWatching",
+] as const;
+/** Config key of one overlay element. */
+export type OverlayElementKey = (typeof OVERLAY_ELEMENT_KEYS)[number];
+
+/** Visibility of every overlay element. */
+export type OverlayElements = Record<OverlayElementKey, OverlayVisibility>;
 
 /** One call participant as drawn by the overlay. */
 export type OverlayParticipant = {
@@ -61,6 +79,12 @@ export type OverlayParticipant = {
   avatar?: string;
   speaking: boolean;
   streaming: boolean;
+  /** Microphone off */
+  muted: boolean;
+  /** Deafened, shown instead of the muted badge */
+  deafened: boolean;
+  /** Watching the local user's stream */
+  watchingYou: boolean;
 };
 
 /** Call snapshot the main window sends and the overlay draws. */
@@ -68,17 +92,22 @@ export type OverlayState = {
   inCall: boolean;
   /** Translated text of the LIVE tag, the page falls back to "LIVE" */
   liveLabel?: string;
+  /** Translated labels of the muted and deafened badges */
+  mutedLabel?: string;
+  deafenedLabel?: string;
+  /** Translated text of the "watching your stream" eye */
+  watchingLabel?: string;
   participants: OverlayParticipant[];
 };
 
 /** What the overlay page receives: the call snapshot plus the look. */
 export type OverlayRender = OverlayState & {
-  style: OverlayStyle;
+  elements: OverlayElements;
   corner: OverlayCorner;
 };
 
 /** Settings persisted by the desktop shell. */
-export type DesktopConfig = {
+export type DesktopConfig = OverlayElements & {
   firstLaunch: boolean;
   customFrame: boolean;
   minimiseToTray: boolean;
@@ -96,8 +125,6 @@ export type DesktopConfig = {
   overlayCorner: OverlayCorner;
   /** When the overlay shows */
   overlayMode: OverlayMode;
-  /** How much the overlay shows */
-  overlayStyle: OverlayStyle;
   /** Custom server URL, empty string means the default */
   serverUrl: string;
   windowState: {
@@ -122,7 +149,7 @@ export const CLIENT_WRITABLE_KEYS = [
   "overlayEnabled",
   "overlayCorner",
   "overlayMode",
-  "overlayStyle",
+  ...OVERLAY_ELEMENT_KEYS,
   "serverUrl",
 ] as const;
 
@@ -168,10 +195,23 @@ export type RunningGame = {
 };
 
 /** A global shortcut binding requested by the client. */
-export type HotkeyBinding = { action: string; accelerator: string };
+export type HotkeyBinding = {
+  action: string;
+  accelerator: string;
+  /** `KeyboardEvent.code` of the main key, layout independent */
+  code?: string;
+};
 
 /** Outcome of registering a global shortcut. */
 export type HotkeyResult = { action: string; registered: boolean };
+
+/** What the hotkey backend can do, see `getHotkeyCapabilities`. */
+export type HotkeyCapabilities = {
+  /** Key releases are reported (keyboard hook), for push-to-talk */
+  release: boolean;
+  /** A controller button can act as push-to-talk (Windows, XInput) */
+  gamepad: boolean;
+};
 
 /** What the error page shows. */
 export type ErrorInfo = {

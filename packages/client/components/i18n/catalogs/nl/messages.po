@@ -106,6 +106,11 @@ msgstr "{0, plural, one {+# andere} other {+# anderen}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {Sleep een bestand} other {Sleep # bestanden}}"
 
+#. placeholder {0}: user().username
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "{0} – AnyTalk"
+msgstr ""
+
 #. placeholder {0}: users() .slice(0, -1) .map((user) => user!.username) .join(", ")
 #. placeholder {1}: users().slice(-1)[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -152,6 +157,18 @@ msgstr "{0} staat al onderaan"
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} is already at the top"
 msgstr "{0} staat al bovenaan"
+
+#. placeholder {0}: buttonLabels()[button]
+#. placeholder {1}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is needed for \"{1}\". Pick another button."
+#~ msgstr ""
+
+#. placeholder {0}: actionLabels()[action]
+#. placeholder {1}: buttonLabels()[button]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is now {1}."
+#~ msgstr ""
 
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -271,6 +288,14 @@ msgstr "{0}'s rollen"
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
 msgstr "De time-out van {0} wordt opgeheven en diegene kan weer met de server communiceren."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{actionName} is now {buttonName}."
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{buttonName} is needed for \"{actionName}\". Pick another button."
+msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
@@ -680,6 +705,10 @@ msgstr "Maakt ook diepe stemmen dunner"
 msgid "Always Ask for Screen Share Quality"
 msgstr "Altijd vragen naar schermdelingskwaliteit"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Always show"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "American (MM/DD/YYYY)"
 msgstr "Amerikaans (MM/DD/JJJJ)"
@@ -850,6 +879,7 @@ msgstr "Authenticatie-app"
 msgid "Automatic Gain Control"
 msgstr "Automatische versterkingsregeling"
 
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Avatar"
 msgstr "Profielfoto"
@@ -891,6 +921,10 @@ msgstr "B (rechterknop)"
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "Terug"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Back to AnyTalk"
+msgstr ""
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Back to categories"
@@ -982,6 +1016,10 @@ msgstr ""
 msgid "Bottom right"
 msgstr ""
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Bring back"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "Browser"
@@ -1051,6 +1089,10 @@ msgstr "Gesprekken"
 msgid "Camera"
 msgstr "Camera"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Camera is off"
+msgstr ""
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
 msgstr "Geen perfecte GIF gevonden? Ga naar Gifbox en upload je eigen GIF voor iedereen."
@@ -1111,6 +1153,10 @@ msgstr "Bericht annuleren"
 msgid "Cancel your discover request and remove it from the review queue"
 msgstr "Annuleer je ontdekverzoek en verwijder het uit de beoordelingswachtrij"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Cancelled."
+msgstr ""
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
 msgstr "Account kan niet worden verwijderd totdat servers zijn verwijderd of overgedragen"
@@ -1168,6 +1214,15 @@ msgstr "Eigen avatar aanpassen"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
 msgstr "Eigen bijnaam aanpassen"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Change the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Change the button for \"{actionName}\""
+msgstr ""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
@@ -1261,6 +1316,10 @@ msgstr "Kies gebruikersnaam"
 msgid "Clear status"
 msgstr "Status wissen"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Click a button to give its action another controller button, then press the new button. Press Escape to cancel. If the new button already has an action, the two swap. Controllers without the standard layout only support A, B, X and Y."
+msgstr ""
+
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
 msgstr "Klik op de onderstaande items om meer te leren over andere veranderingen!"
@@ -1347,13 +1406,17 @@ msgstr "Kleuren"
 msgid "Coming soon! 👀"
 msgstr "Binnenkort beschikbaar! 👀"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Compact"
+msgstr ""
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Compact mode"
 msgstr "Compacte modus"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Compact: only the avatars"
-msgstr ""
+#~ msgid "Compact: only the avatars"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
@@ -1455,6 +1518,10 @@ msgstr "Controller"
 msgid "Controller support"
 msgstr "Controllerondersteuning"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Controls that can't be changed"
+msgstr ""
+
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Conversations"
 msgstr "Gesprekken"
@@ -1541,6 +1608,15 @@ msgstr "Kan het opgevraagde niet vinden."
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not load the patch notes right now."
 msgstr "Kan de patchnotities nu niet laden."
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window."
+msgstr ""
+
+#: components/rtc/components/StreamPopouts.tsx
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
+msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
@@ -1702,6 +1778,10 @@ msgstr "Huidig wachtwoord"
 msgid "Current Session"
 msgstr "Huidige Sessie"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Custom"
+msgstr ""
+
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Custom colour"
 msgstr "Aangepaste kleur"
@@ -1719,8 +1799,24 @@ msgid "Customisation"
 msgstr "Aanpassingen"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad down"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad left"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad or left stick"
 msgstr "D-pad of linkerstick"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad right"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad up"
+msgstr ""
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
@@ -1748,6 +1844,14 @@ msgstr "Lager gerangschikte leden in gesprek dempen"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
 msgstr "Geluid van leden onhoorbaar maken"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Deafen or undeafen in a call"
+msgstr ""
+
+#: components/rtc/components/OverlayPublisher.tsx
+msgid "Deafened"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -1910,8 +2014,12 @@ msgid "Desktop app"
 msgstr "Desktop-app"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+msgid "Detailed"
 msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+#~ msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2282,6 +2390,10 @@ msgstr "Uitstekend"
 msgid "Excellent connection"
 msgstr "Uitstekende verbinding"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Exit fullscreen"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "Exporteren"
@@ -2342,6 +2454,10 @@ msgstr "Vind nieuwe servers om lid van te worden"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "Vind je ge<0/>meen<1/>schap, verbind met de wereld."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Fixed controls"
+msgstr ""
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2413,6 +2529,10 @@ msgstr "Bevroren"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Fruit Salad"
 msgstr "Fruitsalade"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Fullscreen"
+msgstr ""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Generate a new token if it gets lost or compromised"
@@ -2586,6 +2706,10 @@ msgstr "Rol uitlichten"
 #~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
 #~ msgstr "Houd Ctrl, Alt of Shift ingedrukt samen met een letter of cijfer."
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Hold this button to talk, even while a game is in front. It only applies when the input mode is Push to talk. The game also sees the button, so pick one it doesn't use. Works with Xbox controllers; PlayStation controllers need Steam Input or DS4Windows."
+msgstr ""
+
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
@@ -2706,6 +2830,10 @@ msgstr "Inkomend gesprek"
 
 #: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 msgid "Input device"
+msgstr ""
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Input mode"
 msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
@@ -2933,12 +3061,24 @@ msgid "Leave stream"
 msgstr "Stream verlaten"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right bumper"
-msgstr "Linker- en rechterbumper"
+#~ msgid "Left and right bumper"
+#~ msgstr "Linker- en rechterbumper"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right trigger"
-msgstr "Linker- en rechtertrigger"
+#~ msgid "Left and right trigger"
+#~ msgstr "Linker- en rechtertrigger"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left bumper (LB)"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left stick click (L3)"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left trigger (LT)"
+msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Let AnyTalk use its own custom titlebar."
@@ -2986,6 +3126,10 @@ msgstr "Luisteren"
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
 msgstr "LIVE"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "LIVE indicator"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Live overlay, recording and recaps of previous calls"
@@ -3315,6 +3459,10 @@ msgstr "Multistream: een stream openen voegt die naast de andere toe"
 msgid "Mute"
 msgstr "Dempen"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Mute and deafen"
+msgstr ""
+
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Mute Channel"
 msgstr "Kanaal dempen"
@@ -3351,6 +3499,7 @@ msgstr ""
 msgid "Mute when not speaking"
 msgstr "Dempen wanneer je niet praat"
 
+#: components/rtc/components/OverlayPublisher.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Muted"
 msgstr "Gedempt"
@@ -3383,11 +3532,16 @@ msgid "My Bots"
 msgstr "Mijn bots"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Name"
 msgstr "Naam"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Needs a server that supports stream viewers."
+msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
@@ -3426,6 +3580,14 @@ msgstr "Nieuw op de server"
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "New unreads"
 msgstr "Nieuwe ongelezen"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next channel"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next server"
+msgstr ""
 
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
@@ -3503,6 +3665,7 @@ msgstr "Er is nu niemand aanwezig!"
 msgid "Noise suppression"
 msgstr "Ruisonderdrukking"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "None"
@@ -3529,6 +3692,10 @@ msgstr "Niet beperkt"
 msgid "Not of minimum age to use the platform"
 msgstr "Niet de minimumleeftijd om het platform te gebruiken"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Not set"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
 msgstr "Niets"
@@ -3547,6 +3714,7 @@ msgstr "Nog niets om te vergelijken. Importeer een CSV of voeg een van je eigen 
 msgid "Notifications"
 msgstr "Meldingen"
 
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "Off"
@@ -3653,6 +3821,10 @@ msgstr "Open {0}"
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Open an app or switch to Entire screen."
 msgstr "Open een app of schakel over naar Volledig scherm."
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Open as window"
+msgstr ""
 
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Open channel settings"
@@ -3883,6 +4055,10 @@ msgstr "Slechte verbinding"
 msgid "Poor or lost connection"
 msgstr "Slechte of verbroken verbinding"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Pop out into a separate window"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Position"
 msgstr ""
@@ -3890,6 +4066,23 @@ msgstr ""
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
 msgstr "Mogelijk gemaakt door RNNoise"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Preset"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a button…"
+msgstr ""
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Press a controller button for \"{0}\". Press Escape to cancel."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a controller button for \"{actionName}\". Press Escape to cancel."
+msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
@@ -3904,12 +4097,20 @@ msgid "Preview"
 msgstr "Voorbeeld"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next channel"
-msgstr "Vorig en volgend kanaal"
+#~ msgid "Previous and next channel"
+#~ msgstr "Vorig en volgend kanaal"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next server"
-msgstr "Vorige en volgende server"
+#~ msgid "Previous and next server"
+#~ msgstr "Vorige en volgende server"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous channel"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous server"
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
@@ -3948,6 +4149,23 @@ msgstr "Voornaamwoorden"
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
 msgstr "Het opgegeven e-mailadres of wachtwoord is onjuist."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk"
+msgstr ""
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk keeps your microphone off until you hold its hotkey. Set the hotkey under Hotkeys."
+msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Push to talk only works while AnyTalk is focused on this computer."
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Push-to-talk button"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Put your recaps next to CSV recaps from other people"
@@ -4109,6 +4327,7 @@ msgstr "Extern kanaal"
 msgid "Remote Server"
 msgstr "Externe server"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
@@ -4146,6 +4365,15 @@ msgstr "Avatars van andere leden verwijderen"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "Reactie verwijderen"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Remove the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Remove the button for \"{actionName}\""
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -4237,6 +4465,10 @@ msgstr "Resetten"
 msgid "Reset {0}'s token?"
 msgstr "Token van {0} opnieuw instellen?"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset all buttons"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
 msgstr "Alle geluiden resetten"
@@ -4251,11 +4483,21 @@ msgstr "Reset wachtwoord"
 msgid "Reset Recovery Codes"
 msgstr "Herstelcodes opnieuw instellen"
 
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Reset the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset the button for \"{actionName}\""
+msgstr ""
+
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "Resetten naar {0}"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
 msgstr "Resetten naar standaard"
@@ -4310,8 +4552,20 @@ msgid "Review policy changes"
 msgstr "Beleidswijzigingen bekijken"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "Right bumper (RB)"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "Right stick"
 msgstr "Rechterstick"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right stick click (R3)"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right trigger (RT)"
+msgstr ""
 
 #~ msgid "Roadmap"
 #~ msgstr ""
@@ -4696,6 +4950,14 @@ msgid "Show send message button"
 msgstr "Toon de knop ‘Bericht verzenden’"
 
 #: components/app/interface/settings/user/Overlay.tsx
+msgid "Show when speaking"
+msgstr ""
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Showing in a separate window"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr ""
 
@@ -4899,6 +5161,10 @@ msgstr "Streamstatistieken"
 msgid "Stream Stats"
 msgstr "Streamstatistieken"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Stream viewers"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Streams"
 msgstr "Streams"
@@ -4917,8 +5183,8 @@ msgid "Strong (150 Hz)"
 msgstr "Sterk (150 Hz)"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Style"
-msgstr ""
+#~ msgid "Style"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
@@ -5044,6 +5310,15 @@ msgstr "De bot staat al op Ontdekken, de gebruiker moet contact opnemen met supp
 msgid "The bot will not be granted any permissions."
 msgstr "De bot krijgt geen enkele machtiging."
 
+#. placeholder {0}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "The default button is needed for \"{0}\". Reset that one first."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The default button is needed for \"{actionName}\". Reset that one first."
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
 msgstr "De desktop-app is beschikbaar voor Windows en Linux."
@@ -5072,6 +5347,10 @@ msgstr "Het item is door moderators verwijderd, waardoor toekomstige aanvragen n
 #: components/i18n/errors.tsx
 msgid "The password is too short."
 msgstr "Het wachtwoord is te kort."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The push-to-talk button isn't available on this computer."
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "The server has been removed from discover by moderators, the user must contact support."
@@ -5121,6 +5400,10 @@ msgstr "Deze bot is vindbaar"
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
 msgstr "Deze bot is privé en kan alleen door de maker worden toegevoegd."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr ""
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
@@ -5245,6 +5528,10 @@ msgstr "Time-out tot {0}"
 #: components/app/interface/channels/text/Message.tsx
 msgid "Timed Out until {0}"
 msgstr "Time-out tot {0}"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Timed out."
+msgstr ""
 
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
@@ -5687,6 +5974,10 @@ msgstr "Spraak"
 msgid "Voice & Video"
 msgstr "Spraak en video"
 
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Voice activity"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Voice call developer mode"
 msgstr "Ontwikkelaarsmodus voor spraakgesprekken"
@@ -5739,6 +6030,10 @@ msgstr "Meerdere streams tegelijk bekijken"
 msgid "Watch stream"
 msgstr "Stream bekijken"
 
+#: components/rtc/components/OverlayPublisher.tsx
+msgid "Watching your stream"
+msgstr ""
+
 #: src/AndroidNag.tsx
 msgid "We are working hard on optimising our web app for mobile."
 msgstr "We werken hard aan het optimaliseren van onze webapp voor mobiel."
@@ -5776,8 +6071,8 @@ msgid "Welcome!"
 msgstr "Welkom terug!"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "What each controller button does"
-msgstr "Wat elke knop van de controller doet"
+#~ msgid "What each controller button does"
+#~ msgstr "Wat elke knop van de controller doet"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"

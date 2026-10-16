@@ -106,6 +106,11 @@ msgstr "{0, plural, one {+# 07H32} other {+# 07H325}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {D20P 4 F1L3} other {D20P # F1L35}}"
 
+#. placeholder {0}: user().username
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "{0} – AnyTalk"
+msgstr "{0} – 4NY74LK"
+
 #. placeholder {0}: users() .slice(0, -1) .map((user) => user!.username) .join(", ")
 #. placeholder {1}: users().slice(-1)[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -152,6 +157,18 @@ msgstr "{0} 15 4L234DY 47 7H3 80770M"
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} is already at the top"
 msgstr "{0} 15 4L234DY 47 7H3 70P"
+
+#. placeholder {0}: buttonLabels()[button]
+#. placeholder {1}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is needed for \"{1}\". Pick another button."
+#~ msgstr "{0} 15 N33D3D F02 \"{1}\". P1CK 4N07H32 8U770N."
+
+#. placeholder {0}: actionLabels()[action]
+#. placeholder {1}: buttonLabels()[button]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is now {1}."
+#~ msgstr "{0} 15 N0W {1}."
 
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -271,6 +288,14 @@ msgstr "{0}'5 20L35"
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
 msgstr "{0}'5 71M30U7 W1LL 83 23M0V3D 4ND 7H3Y W1LL 83 48L3 70 1N7324C7 W17H 7H3 532V32 4641N."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{actionName} is now {buttonName}."
+msgstr "{actionName} 15 N0W {buttonName}."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{buttonName} is needed for \"{actionName}\". Pick another button."
+msgstr "{buttonName} 15 N33D3D F02 \"{actionName}\". P1CK 4N07H32 8U770N."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
@@ -680,6 +705,10 @@ msgstr "4L50 7H1N5 0U7 D33P V01C35"
 msgid "Always Ask for Screen Share Quality"
 msgstr "4LW4Y5 45K F02 5C233N 5H423 QU4L17Y"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Always show"
+msgstr "4LW4Y5 5H0W"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "American (MM/DD/YYYY)"
 msgstr "4M321C4N (MM/DD/YYYY)"
@@ -851,6 +880,7 @@ msgstr "4U7H3N71C4702 4PP"
 msgid "Automatic Gain Control"
 msgstr "4U70M471C 641N C0N720L"
 
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Avatar"
 msgstr "4V4742"
@@ -892,6 +922,10 @@ msgstr "8 (216H7 8U770N)"
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "84CK"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Back to AnyTalk"
+msgstr "84CK 70 4NY74LK"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Back to categories"
@@ -983,6 +1017,10 @@ msgstr "80770M L3F7"
 msgid "Bottom right"
 msgstr "80770M 216H7"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Bring back"
+msgstr "821N6 84CK"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "820W532"
@@ -1052,6 +1090,10 @@ msgstr "C4LL5"
 msgid "Camera"
 msgstr "C4M324"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Camera is off"
+msgstr "C4M324 15 0FF"
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
 msgstr "C4N'7 F1ND 7H3 P32F3C7 61F? H34D 70 61F80X 4ND UPL04D Y0U2 0WN F02 3V32Y0N3 70 U53."
@@ -1112,6 +1154,10 @@ msgstr "C4NC3L M355463"
 msgid "Cancel your discover request and remove it from the review queue"
 msgstr "C4NC3L Y0U2 D15C0V32 23QU357 4ND 23M0V3 17 F20M 7H3 23V13W QU3U3"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Cancelled."
+msgstr "C4NC3LL3D."
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
 msgstr "C4NN07 D3L373 4CC0UN7 UN71L 532V325 423 D3L373D 02 724N5F3223D"
@@ -1169,6 +1215,15 @@ msgstr "CH4N63 0WN 4V4742"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
 msgstr "CH4N63 0WN N1CKN4M3"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Change the button for \"{0}\""
+#~ msgstr "CH4N63 7H3 8U770N F02 \"{0}\""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Change the button for \"{actionName}\""
+msgstr "CH4N63 7H3 8U770N F02 \"{actionName}\""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
@@ -1262,6 +1317,10 @@ msgstr "CH0053 U532N4M3"
 msgid "Clear status"
 msgstr "CL342 5747U5"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Click a button to give its action another controller button, then press the new button. Press Escape to cancel. If the new button already has an action, the two swap. Controllers without the standard layout only support A, B, X and Y."
+msgstr "CL1CK 4 8U770N 70 61V3 175 4C710N 4N07H32 C0N720LL32 8U770N, 7H3N P2355 7H3 N3W 8U770N. P2355 35C4P3 70 C4NC3L. 1F 7H3 N3W 8U770N 4L234DY H45 4N 4C710N, 7H3 7W0 5W4P. C0N720LL325 W17H0U7 7H3 574ND42D L4Y0U7 0NLY 5UPP027 4, 8, X 4ND Y."
+
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
 msgstr "CL1CK 0N 7H3 173M5 83L0W 70 L342N M023 480U7 D1FF323N7 CH4N635!"
@@ -1348,13 +1407,17 @@ msgstr "C0L0U25"
 msgid "Coming soon! 👀"
 msgstr "C0M1N6 500N! 👀"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Compact"
+msgstr "C0MP4C7"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Compact mode"
 msgstr "C0MP4C7 M0D3"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Compact: only the avatars"
-msgstr "C0MP4C7: 0NLY 7H3 4V47425"
+#~ msgid "Compact: only the avatars"
+#~ msgstr "C0MP4C7: 0NLY 7H3 4V47425"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
@@ -1456,6 +1519,10 @@ msgstr "C0N720LL32"
 msgid "Controller support"
 msgstr "C0N720LL32 5UPP027"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Controls that can't be changed"
+msgstr "C0N720L5 7H47 C4N'7 83 CH4N63D"
+
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Conversations"
 msgstr "C0NV3254710N5"
@@ -1542,6 +1609,15 @@ msgstr "C0ULD N07 F1ND WH47 Y0U 23QU3573D."
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not load the patch notes right now."
 msgstr "C0ULD N07 L04D 7H3 P47CH N0735 216H7 N0W."
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window."
+msgstr "C0ULD N07 0P3N 7H3 57234M 1N 4 53P42473 W1ND0W."
+
+#: components/rtc/components/StreamPopouts.tsx
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
+msgstr "C0ULD N07 0P3N 7H3 57234M 1N 4 53P42473 W1ND0W. CH3CK 7H47 P0P-UP5 423 4LL0W3D."
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
@@ -1704,6 +1780,10 @@ msgstr "CU223N7 P455W02D"
 msgid "Current Session"
 msgstr "CU223N7 535510N"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Custom"
+msgstr "CU570M"
+
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Custom colour"
 msgstr "CU570M C0L0U2"
@@ -1721,8 +1801,24 @@ msgid "Customisation"
 msgstr "CU570M154710N"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad down"
+msgstr "D-P4D D0WN"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad left"
+msgstr "D-P4D L3F7"
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad or left stick"
 msgstr "D-P4D 02 L3F7 571CK"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad right"
+msgstr "D-P4D 216H7"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad up"
+msgstr "D-P4D UP"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
@@ -1750,6 +1846,14 @@ msgstr "D34F3N L0W32-24NK1N6 M3M8325 1N V01C3 C4LL"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
 msgstr "D34F3N M3M8325"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Deafen or undeafen in a call"
+msgstr "D34F3N 02 UND34F3N 1N 4 C4LL"
+
+#: components/rtc/components/OverlayPublisher.tsx
+msgid "Deafened"
+msgstr "D34F3N3D"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -1912,8 +2016,12 @@ msgid "Desktop app"
 msgstr "D35K70P 4PP"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
-msgstr "D3741L3D: N4M35 WH1L3 50M30N3 5P34K5, 4ND 4 L1V3 746 F02 57234M5"
+msgid "Detailed"
+msgstr "D3741L3D"
+
+#: components/app/interface/settings/user/Overlay.tsx
+#~ msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+#~ msgstr "D3741L3D: N4M35 WH1L3 50M30N3 5P34K5, 4ND 4 L1V3 746 F02 57234M5"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2285,6 +2393,10 @@ msgstr "3XC3LL3N7"
 msgid "Excellent connection"
 msgstr "3XC3LL3N7 C0NN3C710N"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Exit fullscreen"
+msgstr "3X17 FULL5C233N"
+
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "3XP027"
@@ -2345,6 +2457,10 @@ msgstr "F1ND N3W 532V325 70 J01N"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "F1ND Y0U2 C0M<0/>MUN17Y,<1/>C0NN3C7 W17H 7H3 W02LD."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Fixed controls"
+msgstr "F1X3D C0N720L5"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2416,6 +2532,10 @@ msgstr "F20Z3N"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Fruit Salad"
 msgstr "F2U17 54L4D"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Fullscreen"
+msgstr "FULL5C233N"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Generate a new token if it gets lost or compromised"
@@ -2590,6 +2710,10 @@ msgstr "H0157 20L3"
 #~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
 #~ msgstr "H0LD C72L, 4L7 02 5H1F7 70637H32 W17H 4 L37732 02 NUM832."
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Hold this button to talk, even while a game is in front. It only applies when the input mode is Push to talk. The game also sees the button, so pick one it doesn't use. Works with Xbox controllers; PlayStation controllers need Steam Input or DS4Windows."
+msgstr "H0LD 7H15 8U770N 70 74LK, 3V3N WH1L3 4 64M3 15 1N F20N7. 17 0NLY 4PPL135 WH3N 7H3 1NPU7 M0D3 15 PU5H 70 74LK. 7H3 64M3 4L50 5335 7H3 8U770N, 50 P1CK 0N3 17 D035N'7 U53. W02K5 W17H X80X C0N720LL325; PL4Y574710N C0N720LL325 N33D 5734M 1NPU7 02 D54W1ND0W5."
+
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
@@ -2711,6 +2835,10 @@ msgstr "1NC0M1N6 C4LL"
 #: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 msgid "Input device"
 msgstr "1NPU7 D3V1C3"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Input mode"
+msgstr "1NPU7 M0D3"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -2938,12 +3066,24 @@ msgid "Leave stream"
 msgstr "L34V3 57234M"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right bumper"
-msgstr "L3F7 4ND 216H7 8UMP32"
+#~ msgid "Left and right bumper"
+#~ msgstr "L3F7 4ND 216H7 8UMP32"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right trigger"
-msgstr "L3F7 4ND 216H7 7216632"
+#~ msgid "Left and right trigger"
+#~ msgstr "L3F7 4ND 216H7 7216632"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left bumper (LB)"
+msgstr "L3F7 8UMP32 (L8)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left stick click (L3)"
+msgstr "L3F7 571CK CL1CK (L3)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left trigger (LT)"
+msgstr "L3F7 7216632 (L7)"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Let AnyTalk use its own custom titlebar."
@@ -2991,6 +3131,10 @@ msgstr "L1573N"
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
 msgstr "L1V3"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "LIVE indicator"
+msgstr "L1V3 1ND1C4702"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Live overlay, recording and recaps of previous calls"
@@ -3320,6 +3464,10 @@ msgstr "MUL71-57234M: 0P3N1N6 4 57234M 4DD5 17 N3X7 70 7H3 07H325"
 msgid "Mute"
 msgstr "MU73"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Mute and deafen"
+msgstr "MU73 4ND D34F3N"
+
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Mute Channel"
 msgstr "MU73 CH4NN3L"
@@ -3356,6 +3504,7 @@ msgstr "MU73 U532"
 msgid "Mute when not speaking"
 msgstr "MU73 WH3N N07 5P34K1N6"
 
+#: components/rtc/components/OverlayPublisher.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Muted"
 msgstr "MU73D"
@@ -3388,11 +3537,16 @@ msgid "My Bots"
 msgstr "MY 8075"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Name"
 msgstr "N4M3"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Needs a server that supports stream viewers."
+msgstr "N33D5 4 532V32 7H47 5UPP0275 57234M V13W325."
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
@@ -3431,6 +3585,14 @@ msgstr "N3W 70 7H3 532V32"
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "New unreads"
 msgstr "N3W UN234D5"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next channel"
+msgstr "N3X7 CH4NN3L"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next server"
+msgstr "N3X7 532V32"
 
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
@@ -3508,6 +3670,7 @@ msgstr "N080DY H323 216H7 N0W!"
 msgid "Noise suppression"
 msgstr "N0153 5UPP235510N"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "None"
@@ -3534,6 +3697,10 @@ msgstr "N07 L1M173D"
 msgid "Not of minimum age to use the platform"
 msgstr "N07 0F M1N1MUM 463 70 U53 7H3 PL47F02M"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Not set"
+msgstr "N07 537"
+
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
 msgstr "N07H1N6"
@@ -3552,6 +3719,7 @@ msgstr "N07H1N6 70 C0MP423 Y37. 1MP027 4 C5V 02 4DD 0N3 0F Y0U2 0WN 57234M 23C4P
 msgid "Notifications"
 msgstr "N071F1C4710N5"
 
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "Off"
@@ -3658,6 +3826,10 @@ msgstr "0P3N {0}"
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Open an app or switch to Entire screen."
 msgstr "0P3N 4N 4PP 02 5W17CH 70 3N7123 5C233N."
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Open as window"
+msgstr "0P3N 45 W1ND0W"
 
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Open channel settings"
@@ -3888,6 +4060,10 @@ msgstr "P002 C0NN3C710N"
 msgid "Poor or lost connection"
 msgstr "P002 02 L057 C0NN3C710N"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Pop out into a separate window"
+msgstr "P0P 0U7 1N70 4 53P42473 W1ND0W"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Position"
 msgstr "P051710N"
@@ -3895,6 +4071,23 @@ msgstr "P051710N"
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
 msgstr "P0W323D 8Y 2NN0153"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Preset"
+msgstr "P23537"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a button…"
+msgstr "P2355 4 8U770N…"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Press a controller button for \"{0}\". Press Escape to cancel."
+#~ msgstr "P2355 4 C0N720LL32 8U770N F02 \"{0}\". P2355 35C4P3 70 C4NC3L."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a controller button for \"{actionName}\". Press Escape to cancel."
+msgstr "P2355 4 C0N720LL32 8U770N F02 \"{actionName}\". P2355 35C4P3 70 C4NC3L."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
@@ -3909,12 +4102,20 @@ msgid "Preview"
 msgstr "P23V13W"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next channel"
-msgstr "P23V10U5 4ND N3X7 CH4NN3L"
+#~ msgid "Previous and next channel"
+#~ msgstr "P23V10U5 4ND N3X7 CH4NN3L"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next server"
-msgstr "P23V10U5 4ND N3X7 532V32"
+#~ msgid "Previous and next server"
+#~ msgstr "P23V10U5 4ND N3X7 532V32"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous channel"
+msgstr "P23V10U5 CH4NN3L"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous server"
+msgstr "P23V10U5 532V32"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
@@ -3953,6 +4154,23 @@ msgstr "P20N0UN5"
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
 msgstr "P20V1D3D 3M41L 02 P455W02D 15 W20N6."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk"
+msgstr "PU5H 70 74LK"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk keeps your microphone off until you hold its hotkey. Set the hotkey under Hotkeys."
+msgstr "PU5H 70 74LK K33P5 Y0U2 M1C20PH0N3 0FF UN71L Y0U H0LD 175 H07K3Y. 537 7H3 H07K3Y UND32 H07K3Y5."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Push to talk only works while AnyTalk is focused on this computer."
+msgstr "PU5H 70 74LK 0NLY W02K5 WH1L3 4NY74LK 15 F0CU53D 0N 7H15 C0MPU732."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Push-to-talk button"
+msgstr "PU5H-70-74LK 8U770N"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Put your recaps next to CSV recaps from other people"
@@ -4114,6 +4332,7 @@ msgstr "23M073 CH4NN3L"
 msgid "Remote Server"
 msgstr "23M073 532V32"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
@@ -4151,6 +4370,15 @@ msgstr "23M0V3 07H32 M3M8325' 4V47425"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "23M0V3 234C710N"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Remove the button for \"{0}\""
+#~ msgstr "23M0V3 7H3 8U770N F02 \"{0}\""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Remove the button for \"{actionName}\""
+msgstr "23M0V3 7H3 8U770N F02 \"{actionName}\""
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -4242,6 +4470,10 @@ msgstr "23537"
 msgid "Reset {0}'s token?"
 msgstr "23537 {0}'5 70K3N?"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset all buttons"
+msgstr "23537 4LL 8U770N5"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
 msgstr "23537 4LL 50UND5"
@@ -4256,11 +4488,21 @@ msgstr "23537 P455W02D"
 msgid "Reset Recovery Codes"
 msgstr "23537 23C0V32Y C0D35"
 
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Reset the button for \"{0}\""
+#~ msgstr "23537 7H3 8U770N F02 \"{0}\""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset the button for \"{actionName}\""
+msgstr "23537 7H3 8U770N F02 \"{actionName}\""
+
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "23537 70 {0}"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
 msgstr "23537 70 D3F4UL7"
@@ -4315,8 +4557,20 @@ msgid "Review policy changes"
 msgstr "23V13W P0L1CY CH4N635"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "Right bumper (RB)"
+msgstr "216H7 8UMP32 (28)"
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "Right stick"
 msgstr "216H7 571CK"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right stick click (R3)"
+msgstr "216H7 571CK CL1CK (23)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right trigger (RT)"
+msgstr "216H7 7216632 (27)"
 
 #: components/app/interface/settings/user/Feedback.tsx
 #~ msgid "Roadmap"
@@ -4703,6 +4957,14 @@ msgid "Show send message button"
 msgstr "5H0W 53ND M355463 8U770N"
 
 #: components/app/interface/settings/user/Overlay.tsx
+msgid "Show when speaking"
+msgstr "5H0W WH3N 5P34K1N6"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Showing in a separate window"
+msgstr "5H0W1N6 1N 4 53P42473 W1ND0W"
+
+#: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr "5H0W5 WH0 15 74LK1N6 1N Y0U2 C4LL 0N 70P 0F Y0U2 64M3. 17 W02K5 0V32 802D32L355 4ND W1ND0W3D 64M35, N07 0V32 3XCLU51V3 FULL5C233N."
 
@@ -4908,6 +5170,10 @@ msgstr "57234M 57475"
 msgid "Stream Stats"
 msgstr "57234M 57475"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Stream viewers"
+msgstr "57234M V13W325"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Streams"
 msgstr "57234M5"
@@ -4926,8 +5192,8 @@ msgid "Strong (150 Hz)"
 msgstr "5720N6 (150 HZ)"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Style"
-msgstr "57YL3"
+#~ msgid "Style"
+#~ msgstr "57YL3"
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
@@ -5053,6 +5319,15 @@ msgstr "7H3 807 15 4L234DY 0N D15C0V32, 7H3 U532 MU57 C0N74C7 5UPP027 70 H4V3 17
 msgid "The bot will not be granted any permissions."
 msgstr "7H3 807 W1LL N07 83 624N73D 4NY P32M15510N5."
 
+#. placeholder {0}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "The default button is needed for \"{0}\". Reset that one first."
+#~ msgstr "7H3 D3F4UL7 8U770N 15 N33D3D F02 \"{0}\". 23537 7H47 0N3 F1257."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The default button is needed for \"{actionName}\". Reset that one first."
+msgstr "7H3 D3F4UL7 8U770N 15 N33D3D F02 \"{actionName}\". 23537 7H47 0N3 F1257."
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
 msgstr "7H3 D35K70P 4PP 15 4V41L48L3 F02 W1ND0W5 4ND L1NUX."
@@ -5081,6 +5356,10 @@ msgstr "7H3 173M W45 23M0V3D 8Y M0D3247025, 4ND 45 5UCH FU7U23 4PPL1C4710N5 423 
 #: components/i18n/errors.tsx
 msgid "The password is too short."
 msgstr "7H3 P455W02D 15 700 5H027."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The push-to-talk button isn't available on this computer."
+msgstr "7H3 PU5H-70-74LK 8U770N 15N'7 4V41L48L3 0N 7H15 C0MPU732."
 
 #: components/i18n/errors.tsx
 msgid "The server has been removed from discover by moderators, the user must contact support."
@@ -5130,6 +5409,10 @@ msgstr "7H15 807 15 D15C0V3248L3"
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
 msgstr "7H15 807 15 P21V473 4ND C4N 0NLY 83 4DD3D 8Y 7H3 C234702."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr "7H15 8U770N 15 7H3 PU5H-70-74LK 8U770N, 50 17 D035 N07H1N6 3L53 WH1L3 PU5H 70 74LK 15 0N. P1CK 4N07H32 8U770N."
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
@@ -5254,6 +5537,10 @@ msgstr "71M3D 0U7 UN71L {0}"
 #: components/app/interface/channels/text/Message.tsx
 msgid "Timed Out until {0}"
 msgstr "71M3D 0U7 UN71L {0}"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Timed out."
+msgstr "71M3D 0U7."
 
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
@@ -5697,6 +5984,10 @@ msgstr "V01C3"
 msgid "Voice & Video"
 msgstr "V01C3 & V1D30"
 
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Voice activity"
+msgstr "V01C3 4C71V17Y"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Voice call developer mode"
 msgstr "V01C3 C4LL D3V3L0P32 M0D3"
@@ -5749,6 +6040,10 @@ msgstr "W47CH MUL71PL3 57234M5 47 0NC3"
 msgid "Watch stream"
 msgstr "W47CH 57234M"
 
+#: components/rtc/components/OverlayPublisher.tsx
+msgid "Watching your stream"
+msgstr "W47CH1N6 Y0U2 57234M"
+
 #: src/AndroidNag.tsx
 msgid "We are working hard on optimising our web app for mobile."
 msgstr "W3 423 W02K1N6 H42D 0N 0P71M151N6 0U2 W38 4PP F02 M081L3."
@@ -5788,8 +6083,8 @@ msgid "Welcome!"
 msgstr "W3LC0M3!"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "What each controller button does"
-msgstr "WH47 34CH C0N720LL32 8U770N D035"
+#~ msgid "What each controller button does"
+#~ msgstr "WH47 34CH C0N720LL32 8U770N D035"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"

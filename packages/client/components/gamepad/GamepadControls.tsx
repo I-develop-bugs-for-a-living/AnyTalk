@@ -1,8 +1,17 @@
-import { createEffect, createSignal, on, onCleanup, onMount } from "solid-js";
+import {
+  createEffect,
+  createMemo,
+  createSignal,
+  on,
+  onCleanup,
+  onMount,
+} from "solid-js";
 
 import { KeybindAction, useTriggerKeybind } from "@revolt/keybinds";
 import { useState } from "@revolt/state";
 
+import { ControllerAction, actionForButton, resolveBindings } from "./bindings";
+import { gamepadCapturing } from "./capture";
 import {
   activate,
   cycleRegion,
@@ -14,7 +23,14 @@ import {
   topLayer,
   watchLayers,
 } from "./dom";
-import { type InputEvent, PadTracker, isUsablePad, snapshotPad } from "./input";
+import {
+  type InputEvent,
+  PadTracker,
+  isUsablePad,
+  maskButton,
+  snapshotPad,
+} from "./input";
+import { gamepadPushToTalkAvailable } from "./pushToTalkButton";
 
 /** Number of controllers that are connected right now */
 const [padCount, setPadCount] = createSignal(0);
@@ -56,6 +72,17 @@ export function GamepadControls() {
   /** Whether the user left controller support on */
   const enabled = () => state.settings.getValue("controller:enabled") ?? true;
 
+  /** The push to talk button, which the app must leave alone */
+  const pttButton = () =>
+    gamepadPushToTalkAvailable() === true
+      ? (state.settings.getValue("controller:ptt_button") ?? undefined)
+      : undefined;
+
+  /** The button of every action: defaults with the user's changes */
+  const bindings = createMemo(() =>
+    resolveBindings(state.settings.getValue("controller:bindings")),
+  );
+
   /** Position tracking per controller, by its index */
   const trackers = new Map<number, PadTracker>();
 
@@ -87,35 +114,38 @@ export function GamepadControls() {
         break;
     }
 
-    switch (event.button) {
-      case "a":
+    switch (actionForButton(bindings(), event.button)) {
+      case ControllerAction.ACTIVATE:
         activate();
         return;
-      case "b":
+      case ControllerAction.BACK:
         goBack();
         return;
-      case "x":
+      case ControllerAction.CONTEXT_MENU:
         openContextMenu();
         return;
-      case "y":
+      case ControllerAction.FOCUS_COMPOSER:
         if (!overlayOpen) trigger(KeybindAction.CHAT_FOCUS_COMPOSITION);
         return;
-      case "lb":
+      case ControllerAction.CHANNEL_UP:
         if (!overlayOpen) trigger(KeybindAction.NAVIGATION_CHANNEL_UP);
         return;
-      case "rb":
+      case ControllerAction.CHANNEL_DOWN:
         if (!overlayOpen) trigger(KeybindAction.NAVIGATION_CHANNEL_DOWN);
         return;
-      case "lt":
+      case ControllerAction.SERVER_UP:
         if (!overlayOpen) trigger(KeybindAction.NAVIGATION_SERVER_UP);
         return;
-      case "rt":
+      case ControllerAction.SERVER_DOWN:
         if (!overlayOpen) trigger(KeybindAction.NAVIGATION_SERVER_DOWN);
         return;
-      case "select":
+      case ControllerAction.TOGGLE_MUTE:
         trigger(KeybindAction.VOICE_TOGGLE_MUTE);
         return;
-      case "start":
+      case ControllerAction.TOGGLE_DEAFEN:
+        trigger(KeybindAction.VOICE_TOGGLE_DEAFEN);
+        return;
+      case ControllerAction.CYCLE_REGION:
         cycleRegion();
         return;
     }
@@ -134,6 +164,13 @@ export function GamepadControls() {
       layerWatch?.tick();
     }
 
+    // the settings page is waiting for a button to rebind: nothing may act,
+    // and the trackers start over afterwards so a button held then is ignored
+    if (gamepadCapturing()) {
+      trackers.clear();
+      return;
+    }
+
     const pads = connectedPads();
 
     // forget controllers that went away
@@ -149,7 +186,10 @@ export function GamepadControls() {
         trackers.set(pad.index, tracker);
       }
 
-      const events = tracker.poll(snapshotPad(pad), now);
+      const events = tracker.poll(
+        maskButton(snapshotPad(pad), pttButton()),
+        now,
+      );
       if (events.length) setGamepadInputMode(true);
 
       for (const event of events) {

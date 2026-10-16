@@ -106,6 +106,11 @@ msgstr "{0, plural, other {외 #명}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, other {파일 #개 놓기}}"
 
+#. placeholder {0}: user().username
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "{0} – AnyTalk"
+msgstr "{0} – AnyTalk"
+
 #. placeholder {0}: users() .slice(0, -1) .map((user) => user!.username) .join(", ")
 #. placeholder {1}: users().slice(-1)[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -152,6 +157,18 @@ msgstr "{0}은(는) 이미 맨 아래에 있어요"
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} is already at the top"
 msgstr "{0}은(는) 이미 맨 위에 있어요"
+
+#. placeholder {0}: buttonLabels()[button]
+#. placeholder {1}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is needed for \"{1}\". Pick another button."
+#~ msgstr "{0} 버튼은 \"{1}\"에 필요해요. 다른 버튼을 선택하세요."
+
+#. placeholder {0}: actionLabels()[action]
+#. placeholder {1}: buttonLabels()[button]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is now {1}."
+#~ msgstr "{0}의 버튼이 이제 {1}이에요."
 
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -271,6 +288,14 @@ msgstr "{0} 의 역할"
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
 msgstr "{0}님의 타임아웃이 해제되어 다시 서버에서 활동할 수 있어요."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{actionName} is now {buttonName}."
+msgstr "{actionName}의 버튼을 {buttonName}(으)로 변경했어요."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{buttonName} is needed for \"{actionName}\". Pick another button."
+msgstr "{actionName}에는 {buttonName} 버튼이 필요해요. 다른 버튼을 선택하세요."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
@@ -680,6 +705,10 @@ msgstr "낮은 목소리도 얇게 만들어요"
 msgid "Always Ask for Screen Share Quality"
 msgstr "화면 공유 품질을 항상 묻기"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Always show"
+msgstr "항상 표시"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "American (MM/DD/YYYY)"
 msgstr "미국식 (MM/DD/YYYY)"
@@ -850,6 +879,7 @@ msgstr "인증 앱"
 msgid "Automatic Gain Control"
 msgstr "자동 게인 컨트롤"
 
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Avatar"
 msgstr "아바타"
@@ -891,6 +921,10 @@ msgstr "B (오른쪽 버튼)"
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "뒤로"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Back to AnyTalk"
+msgstr "AnyTalk으로 돌아가기"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Back to categories"
@@ -982,6 +1016,10 @@ msgstr "왼쪽 아래"
 msgid "Bottom right"
 msgstr "오른쪽 아래"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Bring back"
+msgstr "되돌리기"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "브라우저"
@@ -1051,6 +1089,10 @@ msgstr "통화"
 msgid "Camera"
 msgstr "카메라"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Camera is off"
+msgstr "카메라가 꺼져 있어요"
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
 msgstr "딱 맞는 GIF를 못 찾으셨나요? Gifbox에 직접 올려서 모두가 쓸 수 있게 해 보세요."
@@ -1111,6 +1153,10 @@ msgstr "메시지 취소"
 msgid "Cancel your discover request and remove it from the review queue"
 msgstr "탐색 요청을 취소하고 검토 대기열에서 제거해요"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Cancelled."
+msgstr "취소했어요."
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
 msgstr "모든 서버가 삭제되거나 이전될 때까지 계정을 삭제할 수 없습니다"
@@ -1168,6 +1214,15 @@ msgstr "내 아바타 변경"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
 msgstr "내 닉네임 변경"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Change the button for \"{0}\""
+#~ msgstr "\"{0}\" 버튼 변경"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Change the button for \"{actionName}\""
+msgstr "\"{actionName}\" 버튼 변경"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
@@ -1261,6 +1316,10 @@ msgstr "사용자 이름 선택"
 msgid "Clear status"
 msgstr "상태 삭제"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Click a button to give its action another controller button, then press the new button. Press Escape to cancel. If the new button already has an action, the two swap. Controllers without the standard layout only support A, B, X and Y."
+msgstr "동작을 클릭해 다른 컨트롤러 버튼을 지정한 다음 새 버튼을 누르세요. Escape를 누르면 취소돼요. 새 버튼에 이미 동작이 있으면 서로 바뀌어요. 표준 배열이 아닌 컨트롤러는 A, B, X, Y만 지원해요."
+
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
 msgstr "아래 항목을 눌러 달라진 점을 자세히 알아보세요!"
@@ -1347,13 +1406,17 @@ msgstr "색상"
 msgid "Coming soon! 👀"
 msgstr "곧 만나요! 👀"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Compact"
+msgstr "간단히"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Compact mode"
 msgstr "간결 모드"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Compact: only the avatars"
-msgstr "간단히: 아바타만"
+#~ msgid "Compact: only the avatars"
+#~ msgstr "간단히: 아바타만"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
@@ -1455,6 +1518,10 @@ msgstr "컨트롤러"
 msgid "Controller support"
 msgstr "컨트롤러 지원"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Controls that can't be changed"
+msgstr "변경할 수 없는 조작"
+
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Conversations"
 msgstr "대화"
@@ -1541,6 +1608,15 @@ msgstr "요청한 항목을 찾을 수 없어요."
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not load the patch notes right now."
 msgstr "지금은 패치 노트를 불러올 수 없어요."
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window."
+msgstr "스트림을 별도 창에서 열지 못했어요."
+
+#: components/rtc/components/StreamPopouts.tsx
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
+msgstr "스트림을 별도 창에서 열지 못했어요. 팝업이 허용되어 있는지 확인해 주세요."
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
@@ -1702,6 +1778,10 @@ msgstr "현재 비밀번호"
 msgid "Current Session"
 msgstr "현재 세션"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Custom"
+msgstr "사용자 지정"
+
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Custom colour"
 msgstr "사용자 지정 색상"
@@ -1719,8 +1799,24 @@ msgid "Customisation"
 msgstr "커스터마이징"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad down"
+msgstr "방향 패드 아래"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad left"
+msgstr "방향 패드 왼쪽"
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad or left stick"
 msgstr "방향 패드 또는 왼쪽 스틱"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad right"
+msgstr "방향 패드 오른쪽"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad up"
+msgstr "방향 패드 위"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
@@ -1748,6 +1844,14 @@ msgstr "음성 통화에서 낮은 등급의 멤버 헤드셋 음소거"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
 msgstr "사용자 음소거"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Deafen or undeafen in a call"
+msgstr "통화 중 헤드셋 음소거 켜기/끄기"
+
+#: components/rtc/components/OverlayPublisher.tsx
+msgid "Deafened"
+msgstr "헤드셋 음소거됨"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -1910,8 +2014,12 @@ msgid "Desktop app"
 msgstr "데스크톱 앱"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
-msgstr "자세히: 말하는 동안 이름 표시, 스트림에는 LIVE 태그 표시"
+msgid "Detailed"
+msgstr "자세히"
+
+#: components/app/interface/settings/user/Overlay.tsx
+#~ msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+#~ msgstr "자세히: 말하는 동안 이름 표시, 스트림에는 LIVE 태그 표시"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2282,6 +2390,10 @@ msgstr "매우 좋음"
 msgid "Excellent connection"
 msgstr "연결 상태 매우 좋음"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Exit fullscreen"
+msgstr "전체 화면 종료"
+
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "내보내기"
@@ -2342,6 +2454,10 @@ msgstr "참여할 새 서버 찾기"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "나만의 커<0/>뮤니티를 찾고<1/>세상과 연결하세요."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Fixed controls"
+msgstr "고정 조작"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2413,6 +2529,10 @@ msgstr "멈춤"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Fruit Salad"
 msgstr "프루트 샐러드"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Fullscreen"
+msgstr "전체 화면"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Generate a new token if it gets lost or compromised"
@@ -2586,6 +2706,10 @@ msgstr "역할 따로 표시"
 #~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
 #~ msgstr "Ctrl, Alt 또는 Shift를 문자나 숫자와 함께 누르세요."
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Hold this button to talk, even while a game is in front. It only applies when the input mode is Push to talk. The game also sees the button, so pick one it doesn't use. Works with Xbox controllers; PlayStation controllers need Steam Input or DS4Windows."
+msgstr "이 버튼을 누르는 동안 말할 수 있어요. 게임이 앞에 있어도 작동해요. 입력 모드가 눌러서 말하기일 때만 적용돼요. 게임에도 이 버튼 입력이 전달되니 게임에서 쓰지 않는 버튼을 고르세요. Xbox 컨트롤러에서 작동하며, PlayStation 컨트롤러는 Steam Input 또는 DS4Windows가 필요해요."
+
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
@@ -2707,6 +2831,10 @@ msgstr "걸려 오는 통화"
 #: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 msgid "Input device"
 msgstr "입력 장치"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Input mode"
+msgstr "입력 모드"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -2933,12 +3061,24 @@ msgid "Leave stream"
 msgstr "스트림에서 나가기"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right bumper"
-msgstr "왼쪽·오른쪽 범퍼"
+#~ msgid "Left and right bumper"
+#~ msgstr "왼쪽·오른쪽 범퍼"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right trigger"
-msgstr "왼쪽·오른쪽 트리거"
+#~ msgid "Left and right trigger"
+#~ msgstr "왼쪽·오른쪽 트리거"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left bumper (LB)"
+msgstr "왼쪽 범퍼 (LB)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left stick click (L3)"
+msgstr "왼쪽 스틱 클릭 (L3)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left trigger (LT)"
+msgstr "왼쪽 트리거 (LT)"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Let AnyTalk use its own custom titlebar."
@@ -2986,6 +3126,10 @@ msgstr "듣기"
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
 msgstr "LIVE"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "LIVE indicator"
+msgstr "LIVE 표시"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Live overlay, recording and recaps of previous calls"
@@ -3315,6 +3459,10 @@ msgstr "멀티 스트림: 스트림을 열면 다른 스트림 옆에 추가돼�
 msgid "Mute"
 msgstr "음소거"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Mute and deafen"
+msgstr "음소거 및 헤드셋 음소거"
+
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Mute Channel"
 msgstr "채널 음소거"
@@ -3351,6 +3499,7 @@ msgstr "사용자 음소거"
 msgid "Mute when not speaking"
 msgstr "말하지 않을 때 음소거"
 
+#: components/rtc/components/OverlayPublisher.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Muted"
 msgstr "음소거됨"
@@ -3383,11 +3532,16 @@ msgid "My Bots"
 msgstr "내 봇"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Name"
 msgstr "이름"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Needs a server that supports stream viewers."
+msgstr "스트림 시청자를 지원하는 서버가 필요해요."
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
@@ -3426,6 +3580,14 @@ msgstr "서버 새내기"
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "New unreads"
 msgstr "새로 읽지 않음"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next channel"
+msgstr "다음 채널"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next server"
+msgstr "다음 서버"
 
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
@@ -3503,6 +3665,7 @@ msgstr "지금은 아무도 없어요!"
 msgid "Noise suppression"
 msgstr "노이즈 억제"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "None"
@@ -3529,6 +3692,10 @@ msgstr "제한 없음"
 msgid "Not of minimum age to use the platform"
 msgstr "이 플랫폼을 사용할 수 있는 최소 연령이 아님"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Not set"
+msgstr "설정 안 됨"
+
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
 msgstr "없음"
@@ -3547,6 +3714,7 @@ msgstr "아직 비교할 항목이 없어요. CSV를 가져오거나 내 스트�
 msgid "Notifications"
 msgstr "알림"
 
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "Off"
@@ -3653,6 +3821,10 @@ msgstr "{0} 열기"
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Open an app or switch to Entire screen."
 msgstr "앱을 열거나 '전체 화면'으로 전환해 보세요."
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Open as window"
+msgstr "창으로 열기"
 
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Open channel settings"
@@ -3883,6 +4055,10 @@ msgstr "연결 상태 나쁨"
 msgid "Poor or lost connection"
 msgstr "연결이 나쁘거나 끊김"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Pop out into a separate window"
+msgstr "별도 창으로 열기"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Position"
 msgstr "위치"
@@ -3890,6 +4066,23 @@ msgstr "위치"
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
 msgstr "RNNoise 기반"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Preset"
+msgstr "프리셋"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a button…"
+msgstr "버튼을 누르세요…"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Press a controller button for \"{0}\". Press Escape to cancel."
+#~ msgstr "\"{0}\"에 지정할 컨트롤러 버튼을 누르세요. Escape를 누르면 취소돼요."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a controller button for \"{actionName}\". Press Escape to cancel."
+msgstr "\"{actionName}\"에 지정할 컨트롤러 버튼을 누르세요. Escape를 누르면 취소돼요."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
@@ -3904,12 +4097,20 @@ msgid "Preview"
 msgstr "미리 보기"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next channel"
-msgstr "이전 채널 및 다음 채널"
+#~ msgid "Previous and next channel"
+#~ msgstr "이전 채널 및 다음 채널"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next server"
-msgstr "이전 서버 및 다음 서버"
+#~ msgid "Previous and next server"
+#~ msgstr "이전 서버 및 다음 서버"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous channel"
+msgstr "이전 채널"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous server"
+msgstr "이전 서버"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
@@ -3948,6 +4149,23 @@ msgstr "호칭"
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
 msgstr "이메일 또는 비밀번호가 올바르지 않아요."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk"
+msgstr "눌러서 말하기"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk keeps your microphone off until you hold its hotkey. Set the hotkey under Hotkeys."
+msgstr "눌러서 말하기를 사용하면 단축키를 누르고 있는 동안만 마이크가 켜져요. 단축키는 단축키에서 지정하세요."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Push to talk only works while AnyTalk is focused on this computer."
+msgstr "눌러서 말하기는 이 컴퓨터에서 AnyTalk에 포커스가 있을 때만 작동해요."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Push-to-talk button"
+msgstr "눌러서 말하기 버튼"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Put your recaps next to CSV recaps from other people"
@@ -4109,6 +4327,7 @@ msgstr "원격 채널"
 msgid "Remote Server"
 msgstr "원격 서버"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
@@ -4146,6 +4365,15 @@ msgstr "다른 멤버의 아바타 제거"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "반응 제거"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Remove the button for \"{0}\""
+#~ msgstr "\"{0}\" 버튼 제거"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Remove the button for \"{actionName}\""
+msgstr "\"{actionName}\" 버튼 제거"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -4237,6 +4465,10 @@ msgstr "초기화"
 msgid "Reset {0}'s token?"
 msgstr "{0}의 토큰을 재설정할까요?"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset all buttons"
+msgstr "모든 버튼 초기화"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
 msgstr "모든 소리 초기화"
@@ -4251,11 +4483,21 @@ msgstr "비밀번호 재설정"
 msgid "Reset Recovery Codes"
 msgstr "복구 코드 재설정"
 
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Reset the button for \"{0}\""
+#~ msgstr "\"{0}\" 버튼 초기화"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset the button for \"{actionName}\""
+msgstr "\"{actionName}\" 버튼 초기화"
+
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "{0}(으)로 초기화"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
 msgstr "기본값으로 재설정"
@@ -4310,8 +4552,20 @@ msgid "Review policy changes"
 msgstr "정책 변경 검토"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "Right bumper (RB)"
+msgstr "오른쪽 범퍼 (RB)"
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "Right stick"
 msgstr "오른쪽 스틱"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right stick click (R3)"
+msgstr "오른쪽 스틱 클릭 (R3)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right trigger (RT)"
+msgstr "오른쪽 트리거 (RT)"
 
 #~ msgid "Roadmap"
 #~ msgstr ""
@@ -4696,6 +4950,14 @@ msgid "Show send message button"
 msgstr "메시지 보내기 버튼 표시"
 
 #: components/app/interface/settings/user/Overlay.tsx
+msgid "Show when speaking"
+msgstr "말할 때 표시"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Showing in a separate window"
+msgstr "별도 창에서 표시 중"
+
+#: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr "통화에서 누가 말하고 있는지 게임 화면 위에 보여줘요. 테두리 없는 창 모드와 창 모드 게임에서 작동하며, 독점 전체 화면에서는 작동하지 않아요."
 
@@ -4899,6 +5161,10 @@ msgstr "스트림 통계"
 msgid "Stream Stats"
 msgstr "스트림 통계"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Stream viewers"
+msgstr "스트림 시청자"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Streams"
 msgstr "스트림"
@@ -4917,8 +5183,8 @@ msgid "Strong (150 Hz)"
 msgstr "강함 (150 Hz)"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Style"
-msgstr "스타일"
+#~ msgid "Style"
+#~ msgstr "스타일"
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
@@ -5044,6 +5310,15 @@ msgstr "이 봇은 이미 탐색에 있어요. 제거하려면 사용자가 지�
 msgid "The bot will not be granted any permissions."
 msgstr "봇에게는 어떤 권한도 부여되지 않아요."
 
+#. placeholder {0}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "The default button is needed for \"{0}\". Reset that one first."
+#~ msgstr "\"{0}\"에 기본 버튼이 필요해요. 먼저 그 버튼을 초기화하세요."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The default button is needed for \"{actionName}\". Reset that one first."
+msgstr "\"{actionName}\"에는 기본 버튼이 필요해요. 먼저 그 버튼을 초기화하세요."
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
 msgstr "데스크톱 앱은 Windows와 Linux에서 사용할 수 있어요."
@@ -5072,6 +5347,10 @@ msgstr "이 항목은 관리자에 의해 제거되어 앞으로 신청할 수 �
 #: components/i18n/errors.tsx
 msgid "The password is too short."
 msgstr "비밀번호가 너무 짧아요."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The push-to-talk button isn't available on this computer."
+msgstr "이 컴퓨터에서는 눌러서 말하기 버튼을 사용할 수 없어요."
 
 #: components/i18n/errors.tsx
 msgid "The server has been removed from discover by moderators, the user must contact support."
@@ -5121,6 +5400,10 @@ msgstr "이 봇은 탐색에서 찾을 수 있어요"
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
 msgstr "이 봇은 비공개라서 만든 사람만 추가할 수 있어요."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr "이 버튼은 눌러서 말하기 버튼이라 기능이 켜져 있는 동안 다른 용도로 쓸 수 없어요. 다른 버튼을 선택하세요."
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
@@ -5245,6 +5528,10 @@ msgstr "{0}까지 타임아웃됨"
 #: components/app/interface/channels/text/Message.tsx
 msgid "Timed Out until {0}"
 msgstr "{0}까지 타임아웃됨"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Timed out."
+msgstr "시간이 초과됐어요."
 
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
@@ -5687,6 +5974,10 @@ msgstr "음성"
 msgid "Voice & Video"
 msgstr "음성 및 비디오"
 
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Voice activity"
+msgstr "음성 감지"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Voice call developer mode"
 msgstr "음성 통화 개발자 모드"
@@ -5739,6 +6030,10 @@ msgstr "여러 스트림을 동시에 시청"
 msgid "Watch stream"
 msgstr "스트림 시청"
 
+#: components/rtc/components/OverlayPublisher.tsx
+msgid "Watching your stream"
+msgstr "내 스트림 시청 중"
+
 #: src/AndroidNag.tsx
 msgid "We are working hard on optimising our web app for mobile."
 msgstr "모바일에 맞춰 웹 앱을 최적화하려고 열심히 작업 중이에요."
@@ -5776,8 +6071,8 @@ msgid "Welcome!"
 msgstr "환영합니다!"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "What each controller button does"
-msgstr "컨트롤러 버튼별 기능"
+#~ msgid "What each controller button does"
+#~ msgstr "컨트롤러 버튼별 기능"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"

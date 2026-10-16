@@ -106,6 +106,11 @@ msgstr "{0, plural, other {+# คนอื่น}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, other {วางไฟล์ # ไฟล์}}"
 
+#. placeholder {0}: user().username
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "{0} – AnyTalk"
+msgstr ""
+
 #. placeholder {0}: users() .slice(0, -1) .map((user) => user!.username) .join(", ")
 #. placeholder {1}: users().slice(-1)[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -152,6 +157,18 @@ msgstr "{0} อยู่ล่างสุดแล้ว"
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} is already at the top"
 msgstr "{0} อยู่บนสุดแล้ว"
+
+#. placeholder {0}: buttonLabels()[button]
+#. placeholder {1}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is needed for \"{1}\". Pick another button."
+#~ msgstr ""
+
+#. placeholder {0}: actionLabels()[action]
+#. placeholder {1}: buttonLabels()[button]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is now {1}."
+#~ msgstr ""
 
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -271,6 +288,14 @@ msgstr "บทบาทของ {0}"
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
 msgstr "การหมดเวลาของ {0} จะถูกยกเลิก และเขาจะสามารถโต้ตอบกับเซิร์ฟเวอร์ได้อีกครั้ง"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{actionName} is now {buttonName}."
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{buttonName} is needed for \"{actionName}\". Pick another button."
+msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
@@ -680,6 +705,10 @@ msgstr "ช่วยลดเสียงทุ้มต่ำด้วย"
 msgid "Always Ask for Screen Share Quality"
 msgstr "ถามคุณภาพการแชร์หน้าจอทุกครั้ง"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Always show"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "American (MM/DD/YYYY)"
 msgstr "แบบอเมริกัน (MM/DD/YYYY)"
@@ -850,6 +879,7 @@ msgstr "แอพยืนยันตัวตน"
 msgid "Automatic Gain Control"
 msgstr "ควบคุมระดับเสียงอัตโนมัติ"
 
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Avatar"
 msgstr "รูปโปรไฟล์"
@@ -891,6 +921,10 @@ msgstr "B (ปุ่มขวา)"
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "กลับ"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Back to AnyTalk"
+msgstr ""
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Back to categories"
@@ -982,6 +1016,10 @@ msgstr ""
 msgid "Bottom right"
 msgstr ""
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Bring back"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "เบราว์เซอร์"
@@ -1051,6 +1089,10 @@ msgstr "การโทร"
 msgid "Camera"
 msgstr "กล้อง"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Camera is off"
+msgstr ""
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
 msgstr "หา GIF ที่ใช่ไม่เจอใช่ไหม? ไปที่ Gifbox แล้วอัปโหลดของคุณเองให้ทุกคนใช้ได้เลย"
@@ -1111,6 +1153,10 @@ msgstr "ยกเลิกข้อความ"
 msgid "Cancel your discover request and remove it from the review queue"
 msgstr "ยกเลิกคำขอค้นพบของคุณและนำออกจากคิวตรวจสอบ"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Cancelled."
+msgstr ""
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
 msgstr "ไม่สามารถลบบัญชีได้จนกว่าจะลบหรือโอนเซิร์ฟเวอร์"
@@ -1168,6 +1214,15 @@ msgstr "เปลี่ยนรูปโปรไฟล์ของตัวเ
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
 msgstr "เปลี่ยนชื่อเล่นของตัวเอง"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Change the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Change the button for \"{actionName}\""
+msgstr ""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
@@ -1261,6 +1316,10 @@ msgstr "เลือกชื่อผู้ใช้"
 msgid "Clear status"
 msgstr "ล้างสถานะ"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Click a button to give its action another controller button, then press the new button. Press Escape to cancel. If the new button already has an action, the two swap. Controllers without the standard layout only support A, B, X and Y."
+msgstr ""
+
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
 msgstr "คลิกรายการด้านล่างเพื่อดูรายละเอียดของการเปลี่ยนแปลงต่าง ๆ!"
@@ -1347,13 +1406,17 @@ msgstr "สี"
 msgid "Coming soon! 👀"
 msgstr "เร็ว ๆ นี้! 👀"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Compact"
+msgstr ""
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Compact mode"
 msgstr "โหมดกะทัดรัด"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Compact: only the avatars"
-msgstr ""
+#~ msgid "Compact: only the avatars"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
@@ -1455,6 +1518,10 @@ msgstr "จอยควบคุม"
 msgid "Controller support"
 msgstr "รองรับจอยควบคุม"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Controls that can't be changed"
+msgstr ""
+
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Conversations"
 msgstr "บทสนทนา"
@@ -1541,6 +1608,15 @@ msgstr "ไม่พบสิ่งที่คุณร้องขอ"
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not load the patch notes right now."
 msgstr "ขณะนี้ไม่สามารถโหลดบันทึกการอัปเดตได้"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window."
+msgstr ""
+
+#: components/rtc/components/StreamPopouts.tsx
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
+msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
@@ -1702,6 +1778,10 @@ msgstr "รหัสผ่านปัจจุบัน"
 msgid "Current Session"
 msgstr "เซสชันปัจจุบัน"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Custom"
+msgstr ""
+
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Custom colour"
 msgstr "สีกำหนดเอง"
@@ -1719,8 +1799,24 @@ msgid "Customisation"
 msgstr "การปรับแต่ง"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad down"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad left"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad or left stick"
 msgstr "D-pad หรือสติ๊กซ้าย"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad right"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad up"
+msgstr ""
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
@@ -1748,6 +1844,14 @@ msgstr "ปิดเสียงการฟังของสมาชิกท
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
 msgstr "ปิดการได้ยินผู้ใช้อื่น"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Deafen or undeafen in a call"
+msgstr ""
+
+#: components/rtc/components/OverlayPublisher.tsx
+msgid "Deafened"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -1910,8 +2014,12 @@ msgid "Desktop app"
 msgstr "แอปเดสก์ท็อป"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+msgid "Detailed"
 msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
+#~ msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2282,6 +2390,10 @@ msgstr "ยอดเยี่ยม"
 msgid "Excellent connection"
 msgstr "การเชื่อมต่อยอดเยี่ยม"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Exit fullscreen"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "ส่งออก"
@@ -2342,6 +2454,10 @@ msgstr "ค้นหาเซิร์ฟเวอร์ใหม่ที่จ
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "ค้นหาชุมชน<0/>ของคุณ<1/>เชื่อมต่อกับโลก"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Fixed controls"
+msgstr ""
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2413,6 +2529,10 @@ msgstr "ค้าง"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Fruit Salad"
 msgstr "ฟรุตสลัด"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Fullscreen"
+msgstr ""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Generate a new token if it gets lost or compromised"
@@ -2586,6 +2706,10 @@ msgstr "แสดงบทบาทแยก"
 #~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
 #~ msgstr "กด Ctrl, Alt หรือ Shift พร้อมกับตัวอักษรหรือตัวเลข"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Hold this button to talk, even while a game is in front. It only applies when the input mode is Push to talk. The game also sees the button, so pick one it doesn't use. Works with Xbox controllers; PlayStation controllers need Steam Input or DS4Windows."
+msgstr ""
+
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
@@ -2706,6 +2830,10 @@ msgstr "สายเรียกเข้า"
 
 #: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 msgid "Input device"
+msgstr ""
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Input mode"
 msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
@@ -2933,12 +3061,24 @@ msgid "Leave stream"
 msgstr "ออกจากสตรีม"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right bumper"
-msgstr "บัมเปอร์ซ้ายและขวา"
+#~ msgid "Left and right bumper"
+#~ msgstr "บัมเปอร์ซ้ายและขวา"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right trigger"
-msgstr "ทริกเกอร์ซ้ายและขวา"
+#~ msgid "Left and right trigger"
+#~ msgstr "ทริกเกอร์ซ้ายและขวา"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left bumper (LB)"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left stick click (L3)"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left trigger (LT)"
+msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Let AnyTalk use its own custom titlebar."
@@ -2986,6 +3126,10 @@ msgstr "ฟัง"
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
 msgstr "สด"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "LIVE indicator"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Live overlay, recording and recaps of previous calls"
@@ -3315,6 +3459,10 @@ msgstr "หลายสตรีม: การเปิดสตรีมจะ�
 msgid "Mute"
 msgstr "ปิดเสียง"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Mute and deafen"
+msgstr ""
+
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Mute Channel"
 msgstr "ปิดเสียงช่อง"
@@ -3351,6 +3499,7 @@ msgstr ""
 msgid "Mute when not speaking"
 msgstr "ปิดเสียงเมื่อไม่ได้พูด"
 
+#: components/rtc/components/OverlayPublisher.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Muted"
 msgstr "ปิดการแจ้งเตือน"
@@ -3383,11 +3532,16 @@ msgid "My Bots"
 msgstr "บอทของฉัน"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Name"
 msgstr "ชื่อ"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Needs a server that supports stream viewers."
+msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
@@ -3426,6 +3580,14 @@ msgstr "ใหม่ในเซิร์ฟเวอร์"
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "New unreads"
 msgstr "ที่ยังไม่ได้อ่านใหม่"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next channel"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next server"
+msgstr ""
 
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
@@ -3503,6 +3665,7 @@ msgstr "ตอนนี้ไม่มีใครอยู่ที่นี่
 msgid "Noise suppression"
 msgstr "การลดเสียงรบกวน"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "None"
@@ -3529,6 +3692,10 @@ msgstr "ไม่จำกัด"
 msgid "Not of minimum age to use the platform"
 msgstr "อายุไม่ถึงเกณฑ์ขั้นต่ำในการใช้แพลตฟอร์ม"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Not set"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
 msgstr "ไม่มี"
@@ -3547,6 +3714,7 @@ msgstr "ยังไม่มีอะไรให้เปรียบเที
 msgid "Notifications"
 msgstr "การแจ้งเตือน"
 
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "Off"
@@ -3653,6 +3821,10 @@ msgstr "เปิด {0}"
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Open an app or switch to Entire screen."
 msgstr "เปิดแอปหรือสลับเป็นทั้งหน้าจอ"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Open as window"
+msgstr ""
 
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Open channel settings"
@@ -3883,6 +4055,10 @@ msgstr "การเชื่อมต่อแย่"
 msgid "Poor or lost connection"
 msgstr "การเชื่อมต่อแย่หรือขาดหาย"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Pop out into a separate window"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Position"
 msgstr ""
@@ -3890,6 +4066,23 @@ msgstr ""
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
 msgstr "ขับเคลื่อนโดย RNNoise"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Preset"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a button…"
+msgstr ""
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Press a controller button for \"{0}\". Press Escape to cancel."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a controller button for \"{actionName}\". Press Escape to cancel."
+msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
@@ -3904,12 +4097,20 @@ msgid "Preview"
 msgstr "ตัวอย่าง"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next channel"
-msgstr "ช่องก่อนหน้าและถัดไป"
+#~ msgid "Previous and next channel"
+#~ msgstr "ช่องก่อนหน้าและถัดไป"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next server"
-msgstr "เซิร์ฟเวอร์ก่อนหน้าและถัดไป"
+#~ msgid "Previous and next server"
+#~ msgstr "เซิร์ฟเวอร์ก่อนหน้าและถัดไป"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous channel"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous server"
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
@@ -3948,6 +4149,23 @@ msgstr "สรรพนาม"
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
 msgstr "อีเมลหรือรหัสผ่านที่ระบุไม่ถูกต้อง"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk"
+msgstr ""
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk keeps your microphone off until you hold its hotkey. Set the hotkey under Hotkeys."
+msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Push to talk only works while AnyTalk is focused on this computer."
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Push-to-talk button"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Put your recaps next to CSV recaps from other people"
@@ -4109,6 +4327,7 @@ msgstr "ช่องระยะไกล"
 msgid "Remote Server"
 msgstr "เซิร์ฟเวอร์ระยะไกล"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
@@ -4146,6 +4365,15 @@ msgstr "ลบรูปโปรไฟล์ของสมาชิกอื่
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "ลบรีแอคชัน"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Remove the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Remove the button for \"{actionName}\""
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -4237,6 +4465,10 @@ msgstr "รีเซ็ต"
 msgid "Reset {0}'s token?"
 msgstr "รีเซ็ตโทเค็นของ {0} หรือไม่?"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset all buttons"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
 msgstr "รีเซ็ตเสียงทั้งหมด"
@@ -4251,11 +4483,21 @@ msgstr "ตั้งรหัสผ่านใหม่"
 msgid "Reset Recovery Codes"
 msgstr "รีเซ็ตรหัสกู้คืน"
 
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Reset the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset the button for \"{actionName}\""
+msgstr ""
+
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "รีเซ็ตเป็น {0}"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
 msgstr "รีเซ็ตเป็นค่าเริ่มต้น"
@@ -4310,8 +4552,20 @@ msgid "Review policy changes"
 msgstr "ตรวจสอบการเปลี่ยนแปลงนโยบาย"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "Right bumper (RB)"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "Right stick"
 msgstr "สติ๊กขวา"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right stick click (R3)"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right trigger (RT)"
+msgstr ""
 
 #~ msgid "Roadmap"
 #~ msgstr ""
@@ -4696,6 +4950,14 @@ msgid "Show send message button"
 msgstr "แสดงปุ่มส่งข้อความ"
 
 #: components/app/interface/settings/user/Overlay.tsx
+msgid "Show when speaking"
+msgstr ""
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Showing in a separate window"
+msgstr ""
+
+#: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr ""
 
@@ -4899,6 +5161,10 @@ msgstr "สถิติสตรีม"
 msgid "Stream Stats"
 msgstr "สถิติสตรีม"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Stream viewers"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Streams"
 msgstr "สตรีม"
@@ -4917,8 +5183,8 @@ msgid "Strong (150 Hz)"
 msgstr "แรง (150 Hz)"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Style"
-msgstr ""
+#~ msgid "Style"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
@@ -5044,6 +5310,15 @@ msgstr "บอทอยู่ในการค้นพบอยู่แล้
 msgid "The bot will not be granted any permissions."
 msgstr "บอทจะไม่ได้รับสิทธิ์ใด ๆ"
 
+#. placeholder {0}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "The default button is needed for \"{0}\". Reset that one first."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The default button is needed for \"{actionName}\". Reset that one first."
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
 msgstr "แอปเดสก์ท็อปมีให้สำหรับ Windows และ Linux"
@@ -5072,6 +5347,10 @@ msgstr "รายการถูกผู้ดูแลนำออก จึ�
 #: components/i18n/errors.tsx
 msgid "The password is too short."
 msgstr "รหัสผ่านสั้นเกินไป"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The push-to-talk button isn't available on this computer."
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "The server has been removed from discover by moderators, the user must contact support."
@@ -5121,6 +5400,10 @@ msgstr "บอทนี้ค้นพบได้"
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
 msgstr "บอทนี้เป็นส่วนตัวและผู้สร้างเท่านั้นที่เพิ่มได้"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr ""
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
@@ -5245,6 +5528,10 @@ msgstr "ถูกหมดเวลาจนถึง {0}"
 #: components/app/interface/channels/text/Message.tsx
 msgid "Timed Out until {0}"
 msgstr "ถูกหมดเวลาจนถึง {0}"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Timed out."
+msgstr ""
 
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
@@ -5687,6 +5974,10 @@ msgstr "เสียง"
 msgid "Voice & Video"
 msgstr "เสียงและวิดีโอ"
 
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Voice activity"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Voice call developer mode"
 msgstr "โหมดนักพัฒนาการโทรด้วยเสียง"
@@ -5739,6 +6030,10 @@ msgstr "ดูหลายสตรีมพร้อมกัน"
 msgid "Watch stream"
 msgstr "ดูสตรีม"
 
+#: components/rtc/components/OverlayPublisher.tsx
+msgid "Watching your stream"
+msgstr ""
+
 #: src/AndroidNag.tsx
 msgid "We are working hard on optimising our web app for mobile."
 msgstr "เรากำลังเร่งปรับปรุงเว็บแอปของเราให้ใช้งานบนมือถือได้ดีขึ้น"
@@ -5776,8 +6071,8 @@ msgid "Welcome!"
 msgstr "ยินดีต้อนรับ!"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "What each controller button does"
-msgstr "แต่ละปุ่มบนจอยทำอะไร"
+#~ msgid "What each controller button does"
+#~ msgstr "แต่ละปุ่มบนจอยทำอะไร"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"

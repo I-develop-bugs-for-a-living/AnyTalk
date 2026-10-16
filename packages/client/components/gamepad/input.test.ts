@@ -31,9 +31,11 @@ function pad(
 
 describe("snapshotPad", () => {
   it("maps the standard layout by position", () => {
-    const snapshot = snapshotPad(pad([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]));
+    const snapshot = snapshotPad(pad([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]));
     expect(snapshot.standard).toBe(true);
     expect(Object.values(snapshot.pressed).every(Boolean)).toBe(true);
+    expect(snapshot.pressed.l3).toBe(true);
+    expect(snapshot.pressed.r3).toBe(true);
     expect(snapshot.dpad).toEqual({
       up: false,
       down: false,

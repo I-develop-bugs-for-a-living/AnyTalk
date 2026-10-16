@@ -106,6 +106,11 @@ msgstr "{0, plural, zero {+# آخرين} one {+# آخر} two {+# آخران} few
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, zero {تنزيل # ملف} one {تنزيل ملف} two {تنزيل ملفين} few {تنزيل # ملفات} many {تنزيل # ملفًا} other {تنزيل # ملف}}"
 
+#. placeholder {0}: user().username
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "{0} – AnyTalk"
+msgstr "{0} – AnyTalk"
+
 #. placeholder {0}: users() .slice(0, -1) .map((user) => user!.username) .join(", ")
 #. placeholder {1}: users().slice(-1)[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -152,6 +157,18 @@ msgstr "{0} في الأسفل بالفعل"
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} is already at the top"
 msgstr "{0} في الأعلى بالفعل"
+
+#. placeholder {0}: buttonLabels()[button]
+#. placeholder {1}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is needed for \"{1}\". Pick another button."
+#~ msgstr "{0} مطلوب لـ \"{1}\". اختر زرًا آخر."
+
+#. placeholder {0}: actionLabels()[action]
+#. placeholder {1}: buttonLabels()[button]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is now {1}."
+#~ msgstr "{0} الآن هو {1}."
 
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -271,6 +288,14 @@ msgstr "رتب {0}"
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
 msgstr "ستتم إزالة الحظر المؤقت عن {0} وسيتمكن من التفاعل مع الخادم مجددًا."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{actionName} is now {buttonName}."
+msgstr "أصبح {actionName} هو {buttonName}."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{buttonName} is needed for \"{actionName}\". Pick another button."
+msgstr "{buttonName} مطلوب لـ \"{actionName}\". اختر زرًا آخر."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
@@ -680,6 +705,10 @@ msgstr "يخفّف أيضًا من الأصوات العميقة"
 msgid "Always Ask for Screen Share Quality"
 msgstr "اطلب دائمًا جودة مشاركة الشاشة"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Always show"
+msgstr "إظهار دائمًا"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "American (MM/DD/YYYY)"
 msgstr "النمط الأمريكي (MM/DD/YYYY)"
@@ -850,6 +879,7 @@ msgstr "تطبيق المصادقة الثنائية"
 msgid "Automatic Gain Control"
 msgstr "التحكم التلقائي في المكسب"
 
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Avatar"
 msgstr "الصورة الرمزية"
@@ -891,6 +921,10 @@ msgstr "B (الزر الأيمن)"
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "عودة"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Back to AnyTalk"
+msgstr "العودة إلى AnyTalk"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Back to categories"
@@ -982,6 +1016,10 @@ msgstr "أسفل اليسار"
 msgid "Bottom right"
 msgstr "أسفل اليمين"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Bring back"
+msgstr "إعادة"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "متصفح"
@@ -1050,6 +1088,10 @@ msgstr "المكالمات"
 msgid "Camera"
 msgstr "الكاميرا"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Camera is off"
+msgstr "الكاميرا متوقفة"
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
 msgstr "لم تجد الصورة المتحركة المثالية؟ توجه إلى Gifbox وارفع صورتك الخاصة ليستخدمها الجميع."
@@ -1110,6 +1152,10 @@ msgstr "إلغاء الرسالة"
 msgid "Cancel your discover request and remove it from the review queue"
 msgstr "ألغِ طلب الاكتشاف الخاص بك وأزله من قائمة المراجعة"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Cancelled."
+msgstr "تم الإلغاء."
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
 msgstr "لا يمكن حذف الحساب حتى يتم حذف الخوادم أو نقلها"
@@ -1167,6 +1213,15 @@ msgstr "تغيير صورتك الرمزية"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
 msgstr "تغيير اسمك المستعار"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Change the button for \"{0}\""
+#~ msgstr "تغيير الزر الخاص بـ \"{0}\""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Change the button for \"{actionName}\""
+msgstr "تغيير الزر الخاص بـ \"{actionName}\""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
@@ -1259,6 +1314,10 @@ msgstr "إختر إسم مستعار"
 msgid "Clear status"
 msgstr "امسح الحالة"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Click a button to give its action another controller button, then press the new button. Press Escape to cancel. If the new button already has an action, the two swap. Controllers without the standard layout only support A, B, X and Y."
+msgstr "انقر على إجراء لتعيين زر آخر في وحدة التحكم له، ثم اضغط الزر الجديد. اضغط Escape للإلغاء. إذا كان للزر الجديد إجراء بالفعل فسيتم تبديل الإجراءين. وحدات التحكم ذات التخطيط غير القياسي تدعم الأزرار A وB وX وY فقط."
+
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
 msgstr "قم بالضغط على الأغراض أسفله لمعرفة المزيد حول التغييرات!"
@@ -1345,13 +1404,17 @@ msgstr "الألوان"
 msgid "Coming soon! 👀"
 msgstr "قريباً! 👀"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Compact"
+msgstr "مضغوط"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Compact mode"
 msgstr "الوضع المضغوط"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Compact: only the avatars"
-msgstr "مضغوط: الصور الرمزية فقط"
+#~ msgid "Compact: only the avatars"
+#~ msgstr "مضغوط: الصور الرمزية فقط"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
@@ -1453,6 +1516,10 @@ msgstr "وحدة التحكم"
 msgid "Controller support"
 msgstr "دعم وحدة التحكم"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Controls that can't be changed"
+msgstr "عناصر تحكم لا يمكن تغييرها"
+
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Conversations"
 msgstr "المحادثات"
@@ -1539,6 +1606,15 @@ msgstr "لم يتم العثور على طلبك."
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not load the patch notes right now."
 msgstr "تعذّر تحميل ملاحظات التحديث حاليًا."
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window."
+msgstr "تعذّر فتح البث في نافذة منفصلة."
+
+#: components/rtc/components/StreamPopouts.tsx
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
+msgstr "تعذّر فتح البث في نافذة منفصلة. تأكد من السماح بالنوافذ المنبثقة."
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
@@ -1700,6 +1776,10 @@ msgstr "كلمة السر الحالية"
 msgid "Current Session"
 msgstr "الجلسة الحالية"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Custom"
+msgstr "مخصص"
+
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Custom colour"
 msgstr "لون مخصص"
@@ -1717,8 +1797,24 @@ msgid "Customisation"
 msgstr "التخصيص"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad down"
+msgstr "لوحة الاتجاهات: أسفل"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad left"
+msgstr "لوحة الاتجاهات: يسار"
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad or left stick"
 msgstr "لوحة الاتجاهات أو العصا اليسرى"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad right"
+msgstr "لوحة الاتجاهات: يمين"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad up"
+msgstr "لوحة الاتجاهات: أعلى"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
@@ -1746,6 +1842,14 @@ msgstr "تعطيل الاستماع و المحادحثة للأفراد ذوي 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
 msgstr "منع الأعضاء من الاستماع"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Deafen or undeafen in a call"
+msgstr "تعطيل الصوت أو إلغاء تعطيله في المكالمة"
+
+#: components/rtc/components/OverlayPublisher.tsx
+msgid "Deafened"
+msgstr "الاستماع معطّل"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -1907,8 +2011,12 @@ msgid "Desktop app"
 msgstr "تطبيق سطح المكتب"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
-msgstr "مفصّل: الأسماء أثناء التحدث، وشارة مباشر للبثوث"
+msgid "Detailed"
+msgstr "مفصّل"
+
+#: components/app/interface/settings/user/Overlay.tsx
+#~ msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+#~ msgstr "مفصّل: الأسماء أثناء التحدث، وشارة مباشر للبثوث"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2279,6 +2387,10 @@ msgstr "ممتاز"
 msgid "Excellent connection"
 msgstr "اتصال ممتاز"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Exit fullscreen"
+msgstr "الخروج من ملء الشاشة"
+
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "تصدير"
@@ -2339,6 +2451,10 @@ msgstr "اعثر على خوادم جديدة للانضمام إليها"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "قم بإيجاد مجمت<0/>معك،<1/> إتصل بالعالم."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Fixed controls"
+msgstr "عناصر تحكم ثابتة"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2410,6 +2526,10 @@ msgstr "متجمّد"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Fruit Salad"
 msgstr "سلطة فاكهة"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Fullscreen"
+msgstr "ملء الشاشة"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Generate a new token if it gets lost or compromised"
@@ -2583,6 +2703,10 @@ msgstr "إبراز الرتبة"
 #~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
 #~ msgstr "اضغط Ctrl أو Alt أو Shift مع حرف أو رقم."
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Hold this button to talk, even while a game is in front. It only applies when the input mode is Push to talk. The game also sees the button, so pick one it doesn't use. Works with Xbox controllers; PlayStation controllers need Steam Input or DS4Windows."
+msgstr "اضغط مع الاستمرار على هذا الزر للتحدث، حتى عندما تكون لعبة في المقدمة. ينطبق فقط عندما يكون وضع الإدخال «اضغط للتحدث». تستقبل اللعبة الزر أيضًا، لذا اختر زرًا لا تستخدمه. يعمل مع وحدات تحكم Xbox؛ تحتاج وحدات تحكم PlayStation إلى Steam Input أو DS4Windows."
+
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
@@ -2703,6 +2827,10 @@ msgstr "مكالمة واردة"
 #: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 msgid "Input device"
 msgstr "جهاز الإدخال"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Input mode"
+msgstr "وضع الإدخال"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -2929,12 +3057,24 @@ msgid "Leave stream"
 msgstr "مغادرة البث"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right bumper"
-msgstr "الزرّان العلويان الأيسر والأيمن"
+#~ msgid "Left and right bumper"
+#~ msgstr "الزرّان العلويان الأيسر والأيمن"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right trigger"
-msgstr "الزنادان الأيسر والأيمن"
+#~ msgid "Left and right trigger"
+#~ msgstr "الزنادان الأيسر والأيمن"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left bumper (LB)"
+msgstr "الزر العلوي الأيسر (LB)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left stick click (L3)"
+msgstr "النقر على العصا اليسرى (L3)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left trigger (LT)"
+msgstr "الزناد الأيسر (LT)"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Let AnyTalk use its own custom titlebar."
@@ -2982,6 +3122,10 @@ msgstr "السماع"
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
 msgstr "مباشر"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "LIVE indicator"
+msgstr "مؤشر مباشر"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Live overlay, recording and recaps of previous calls"
@@ -3311,6 +3455,10 @@ msgstr "بث متعدد: فتح بث يضيفه بجانب البقية"
 msgid "Mute"
 msgstr "كتم"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Mute and deafen"
+msgstr "كتم الميكروفون وتعطيل الصوت"
+
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Mute Channel"
 msgstr "كتم قناة"
@@ -3347,6 +3495,7 @@ msgstr "كتم المستخدم"
 msgid "Mute when not speaking"
 msgstr "كتم الصوت عند عدم التحدث"
 
+#: components/rtc/components/OverlayPublisher.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Muted"
 msgstr "مكتوم"
@@ -3379,11 +3528,16 @@ msgid "My Bots"
 msgstr "البوتّات الخاصة بي"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Name"
 msgstr "الاسم"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Needs a server that supports stream viewers."
+msgstr "يتطلب خادمًا يدعم مشاهدي البث."
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
@@ -3422,6 +3576,14 @@ msgstr "جديد على السيرفر"
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "New unreads"
 msgstr "غير مقروء جديد"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next channel"
+msgstr "القناة التالية"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next server"
+msgstr "الخادم التالي"
 
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
@@ -3499,6 +3661,7 @@ msgstr "لا احد هنا في الوقت الحالي!"
 msgid "Noise suppression"
 msgstr "كتم الضوضاء"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "None"
@@ -3525,6 +3688,10 @@ msgstr "بلا حد"
 msgid "Not of minimum age to use the platform"
 msgstr "غير مستوف للحد الادنى العمري لهذه المنصة"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Not set"
+msgstr "غير معيّن"
+
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
 msgstr "لا شيء"
@@ -3543,10 +3710,11 @@ msgstr "لا يوجد ما يمكن مقارنته بعد. استورد ملف C
 msgid "Notifications"
 msgstr "الإشعارات"
 
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "Off"
-msgstr "موقف"
+msgstr "إيقاف"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Offers to stream the games you play during a call. Detection happens only on this computer and nothing is sent."
@@ -3649,6 +3817,10 @@ msgstr "إفتح {0}"
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Open an app or switch to Entire screen."
 msgstr "افتح تطبيقًا أو انتقل إلى «الشاشة بالكامل»."
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Open as window"
+msgstr "فتح في نافذة"
 
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Open channel settings"
@@ -3879,6 +4051,10 @@ msgstr "اتصال ضعيف"
 msgid "Poor or lost connection"
 msgstr "اتصال ضعيف أو مفقود"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Pop out into a separate window"
+msgstr "فتح في نافذة منفصلة"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Position"
 msgstr "الموضع"
@@ -3886,6 +4062,23 @@ msgstr "الموضع"
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
 msgstr "مدعوم بواسطة RNNoise"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Preset"
+msgstr "إعداد مسبق"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a button…"
+msgstr "اضغط زرًا…"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Press a controller button for \"{0}\". Press Escape to cancel."
+#~ msgstr "اضغط زرًا في وحدة التحكم لـ \"{0}\". اضغط Escape للإلغاء."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a controller button for \"{actionName}\". Press Escape to cancel."
+msgstr "اضغط زرًا في وحدة التحكم لـ \"{actionName}\". اضغط Escape للإلغاء."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
@@ -3900,12 +4093,20 @@ msgid "Preview"
 msgstr "معاينة"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next channel"
-msgstr "القناة السابقة والتالية"
+#~ msgid "Previous and next channel"
+#~ msgstr "القناة السابقة والتالية"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next server"
-msgstr "الخادم السابق والتالي"
+#~ msgid "Previous and next server"
+#~ msgstr "الخادم السابق والتالي"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous channel"
+msgstr "القناة السابقة"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous server"
+msgstr "الخادم السابق"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
@@ -3944,6 +4145,23 @@ msgstr "الضمائر"
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
 msgstr "البريد الإلكتروني أو كلمة المرور المدخلة غير صحيحة."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk"
+msgstr "اضغط للتحدث"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk keeps your microphone off until you hold its hotkey. Set the hotkey under Hotkeys."
+msgstr "يُبقي «اضغط للتحدث» الميكروفون مغلقًا حتى تضغط مع الاستمرار على اختصاره. حدّد الاختصار ضمن «اختصارات لوحة المفاتيح»."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Push to talk only works while AnyTalk is focused on this computer."
+msgstr "يعمل «اضغط للتحدث» فقط أثناء تركيز AnyTalk على هذا الكمبيوتر."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Push-to-talk button"
+msgstr "زر اضغط للتحدث"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Put your recaps next to CSV recaps from other people"
@@ -4104,6 +4322,7 @@ msgstr "قناة بعيدة"
 msgid "Remote Server"
 msgstr "خادم بعيد"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
@@ -4141,6 +4360,15 @@ msgstr "حذف الصور الشخصية للاعضاء الاخرين"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "حذف التفاعل"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Remove the button for \"{0}\""
+#~ msgstr "إزالة الزر الخاص بـ \"{0}\""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Remove the button for \"{actionName}\""
+msgstr "إزالة الزر الخاص بـ \"{actionName}\""
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -4232,6 +4460,10 @@ msgstr "إعادة التعيين"
 msgid "Reset {0}'s token?"
 msgstr "اعادة تعيين رمز {0}؟"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset all buttons"
+msgstr "إعادة تعيين كل الأزرار"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
 msgstr "إعادة ضبط كل الأصوات"
@@ -4246,11 +4478,21 @@ msgstr "أعد تعيين كلمة السر"
 msgid "Reset Recovery Codes"
 msgstr "اعادة تعيين رموز الاسترجاع"
 
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Reset the button for \"{0}\""
+#~ msgstr "إعادة تعيين الزر الخاص بـ \"{0}\""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset the button for \"{actionName}\""
+msgstr "إعادة تعيين الزر الخاص بـ \"{actionName}\""
+
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "إعادة الضبط إلى {0}"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
 msgstr "إعادة التعيين إلى الافتراضي"
@@ -4305,8 +4547,20 @@ msgid "Review policy changes"
 msgstr "مراجعة التغييرات في سياسة الاستخدام"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "Right bumper (RB)"
+msgstr "الزر العلوي الأيمن (RB)"
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "Right stick"
 msgstr "العصا اليمنى"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right stick click (R3)"
+msgstr "النقر على العصا اليمنى (R3)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right trigger (RT)"
+msgstr "الزناد الأيمن (RT)"
 
 #~ msgid "Roadmap"
 #~ msgstr ""
@@ -4691,6 +4945,14 @@ msgid "Show send message button"
 msgstr "عرض زر إرسال الرسالة"
 
 #: components/app/interface/settings/user/Overlay.tsx
+msgid "Show when speaking"
+msgstr "إظهار عند التحدث"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Showing in a separate window"
+msgstr "يُعرض في نافذة منفصلة"
+
+#: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr "تعرض من يتحدث في مكالمتك فوق لعبتك. تعمل مع الألعاب في وضع النافذة وبلا إطار، وليس مع ملء الشاشة الحصري."
 
@@ -4894,6 +5156,10 @@ msgstr "إحصاءات البث"
 msgid "Stream Stats"
 msgstr "إحصاءات البث"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Stream viewers"
+msgstr "مشاهدو البث"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Streams"
 msgstr "البثوث"
@@ -4912,8 +5178,8 @@ msgid "Strong (150 Hz)"
 msgstr "قوي (150 هرتز)"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Style"
-msgstr "النمط"
+#~ msgid "Style"
+#~ msgstr "النمط"
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
@@ -5039,6 +5305,15 @@ msgstr "البوت موجود بالفعل في الاكتشاف، ويجب عل
 msgid "The bot will not be granted any permissions."
 msgstr "لن يُمنح البوت أي أذونات."
 
+#. placeholder {0}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "The default button is needed for \"{0}\". Reset that one first."
+#~ msgstr "الزر الافتراضي مطلوب لـ \"{0}\". أعد تعيين ذلك الزر أولاً."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The default button is needed for \"{actionName}\". Reset that one first."
+msgstr "الزر الافتراضي مطلوب لـ \"{actionName}\". أعد تعيين ذلك الزر أولاً."
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
 msgstr "تطبيق سطح المكتب متاح لنظامي Windows وLinux."
@@ -5067,6 +5342,10 @@ msgstr "أزال المشرفون العنصر، وبالتالي يُمنع ت�
 #: components/i18n/errors.tsx
 msgid "The password is too short."
 msgstr "كلمة المرور أقصر من الحد الادنى."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The push-to-talk button isn't available on this computer."
+msgstr "زر «اضغط للتحدث» غير متاح على هذا الكمبيوتر."
 
 #: components/i18n/errors.tsx
 msgid "The server has been removed from discover by moderators, the user must contact support."
@@ -5116,6 +5395,10 @@ msgstr "هذا البوت قابل للاكتشاف"
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
 msgstr "هذا البوت خاص ولا يمكن إضافته إلا بواسطة الشخص الذي انشأه."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr "هذا الزر هو زر الضغط للتحدث، لذا لا يؤدي أي وظيفة أخرى أثناء تفعيل الضغط للتحدث. اختر زرًا آخر."
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
@@ -5241,6 +5524,10 @@ msgstr "محظور مؤقتًا حتى {0}"
 msgid "Timed Out until {0}"
 msgstr "محظور مؤقتًا حتى {0}"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Timed out."
+msgstr "انتهت المهلة."
+
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
 msgstr "حظر مؤقت"
@@ -5340,7 +5627,7 @@ msgstr "خطأ Staot غير مراقب: {0}"
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
-msgstr "غير مافن"
+msgstr "إلغاء تعطيل الصوت"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Unknown"
@@ -5680,6 +5967,10 @@ msgstr "صوت"
 msgid "Voice & Video"
 msgstr "الصوت والفيديو"
 
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Voice activity"
+msgstr "التنشيط الصوتي"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Voice call developer mode"
 msgstr "وضع مطوّر المكالمة الصوتية"
@@ -5732,6 +6023,10 @@ msgstr "مشاهدة عدة بثوث في وقت واحد"
 msgid "Watch stream"
 msgstr "مشاهدة البث"
 
+#: components/rtc/components/OverlayPublisher.tsx
+msgid "Watching your stream"
+msgstr "يشاهد بثك"
+
 #: src/AndroidNag.tsx
 msgid "We are working hard on optimising our web app for mobile."
 msgstr "نحن نعمل بجد على تحسين تطبيق الويب الخاص بنا للهواتف المحمولة."
@@ -5769,8 +6064,8 @@ msgid "Welcome!"
 msgstr "أهلًا!"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "What each controller button does"
-msgstr "وظيفة كل زر في وحدة التحكم"
+#~ msgid "What each controller button does"
+#~ msgstr "وظيفة كل زر في وحدة التحكم"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"

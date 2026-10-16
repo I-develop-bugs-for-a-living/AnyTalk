@@ -106,6 +106,11 @@ msgstr "{0, plural, other {他 # 人}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {ファイルをドロップ} other {# 個のファイルをドロップ}}"
 
+#. placeholder {0}: user().username
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "{0} – AnyTalk"
+msgstr "{0} – AnyTalk"
+
 #. placeholder {0}: users() .slice(0, -1) .map((user) => user!.username) .join(", ")
 #. placeholder {1}: users().slice(-1)[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -152,6 +157,18 @@ msgstr "{0} はすでに一番下です"
 #: src/interface/navigation/servers/railDrag.ts
 msgid "{0} is already at the top"
 msgstr "{0} はすでに一番上です"
+
+#. placeholder {0}: buttonLabels()[button]
+#. placeholder {1}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is needed for \"{1}\". Pick another button."
+#~ msgstr "{0}は「{1}」に必要です。別のボタンを選んでください。"
+
+#. placeholder {0}: actionLabels()[action]
+#. placeholder {1}: buttonLabels()[button]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is now {1}."
+#~ msgstr "「{0}」を{1}に設定しました。"
 
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -271,6 +288,14 @@ msgstr "{0}のロール"
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
 msgstr "{0} のタイムアウトを解除し、再びサーバーで操作できるようになります。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{actionName} is now {buttonName}."
+msgstr "「{actionName}」を{buttonName}に設定しました。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{buttonName} is needed for \"{actionName}\". Pick another button."
+msgstr "{buttonName}は「{actionName}」に必要です。別のボタンを選んでください。"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
@@ -606,6 +631,10 @@ msgstr "低い声も細くなります"
 msgid "Always Ask for Screen Share Quality"
 msgstr "常に画面共有の画質を確認する"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Always show"
+msgstr "常に表示"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "American (MM/DD/YYYY)"
 msgstr "米国式 (月/日/西暦)"
@@ -773,6 +802,7 @@ msgstr "二段階認証アプリ"
 msgid "Automatic Gain Control"
 msgstr "自動ゲイン制御"
 
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Avatar"
 msgstr "アバター"
@@ -814,6 +844,10 @@ msgstr "B(右のボタン)"
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "戻る"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Back to AnyTalk"
+msgstr "AnyTalk に戻る"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Back to categories"
@@ -905,6 +939,10 @@ msgstr "左下"
 msgid "Bottom right"
 msgstr "右下"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Bring back"
+msgstr "戻す"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser"
 msgstr "ブラウザ"
@@ -970,6 +1008,10 @@ msgstr "通話"
 msgid "Camera"
 msgstr "カメラ"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Camera is off"
+msgstr "カメラはオフです"
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
 msgstr "ぴったりの GIF が見つかりませんか？ Gifbox に自分の GIF をアップロードして、みんなで使いましょう。"
@@ -1030,6 +1072,10 @@ msgstr "メッセージを取り消す"
 msgid "Cancel your discover request and remove it from the review queue"
 msgstr "探索リクエストをキャンセルし、審査待ちから削除します"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Cancelled."
+msgstr "キャンセルしました。"
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
 msgstr "所有するサーバーが削除または譲渡されるまで、アカウントを削除することはできません"
@@ -1087,6 +1133,15 @@ msgstr "自分のアバターを変更できます"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
 msgstr "自分のニックネームを変更できます"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Change the button for \"{0}\""
+#~ msgstr "「{0}」のボタンを変更"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Change the button for \"{actionName}\""
+msgstr "「{actionName}」のボタンを変更"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
@@ -1176,6 +1231,10 @@ msgstr "ユーザー名を入力"
 msgid "Clear status"
 msgstr "ステータスをクリア"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Click a button to give its action another controller button, then press the new button. Press Escape to cancel. If the new button already has an action, the two swap. Controllers without the standard layout only support A, B, X and Y."
+msgstr "ボタンをクリックして、その操作に別のコントローラーボタンを割り当て、新しいボタンを押してください。Escapeキーでキャンセルできます。新しいボタンにすでに操作がある場合は、2つが入れ替わります。標準配置ではないコントローラーはA、B、X、Yのみ対応しています。"
+
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
 msgstr "各項目をクリックして、変更点の詳細を確認しましょう!"
@@ -1262,13 +1321,17 @@ msgstr "カラー"
 msgid "Coming soon! 👀"
 msgstr "近日公開! 👀"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Compact"
+msgstr "コンパクト"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Compact mode"
 msgstr "コンパクトモード"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Compact: only the avatars"
-msgstr "コンパクト：アバターのみ"
+#~ msgid "Compact: only the avatars"
+#~ msgstr "コンパクト：アバターのみ"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
@@ -1370,6 +1433,10 @@ msgstr "コントローラー"
 msgid "Controller support"
 msgstr "コントローラー対応"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Controls that can't be changed"
+msgstr "変更できない操作"
+
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Conversations"
 msgstr "会話"
@@ -1456,6 +1523,15 @@ msgstr "指定されたリクエスト先が見つかりませんでした。"
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not load the patch notes right now."
 msgstr "現在パッチノートを読み込めません。"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window."
+msgstr "配信を別ウィンドウで開けませんでした。"
+
+#: components/rtc/components/StreamPopouts.tsx
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
+msgstr "配信を別ウィンドウで開けませんでした。ポップアップが許可されているか確認してください。"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
@@ -1616,6 +1692,10 @@ msgstr "現在のパスワード"
 msgid "Current Session"
 msgstr "現在のセッション"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Custom"
+msgstr "カスタム"
+
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Custom colour"
 msgstr "カスタムカラー"
@@ -1633,8 +1713,24 @@ msgid "Customisation"
 msgstr "カスタマイズ"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad down"
+msgstr "十字キー 下"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad left"
+msgstr "十字キー 左"
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad or left stick"
 msgstr "十字キーまたは左スティック"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad right"
+msgstr "十字キー 右"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad up"
+msgstr "十字キー 上"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
@@ -1662,6 +1758,14 @@ msgstr "自分よりも低い位置にいるメンバーのスピーカーをミ
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
 msgstr "メンバーのスピーカーをミュート"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Deafen or undeafen in a call"
+msgstr "通話中にスピーカーミュートを切り替える"
+
+#: components/rtc/components/OverlayPublisher.tsx
+msgid "Deafened"
+msgstr "スピーカーミュート中"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -1816,8 +1920,12 @@ msgid "Desktop app"
 msgstr "デスクトップアプリ"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
-msgstr "詳細：話している間は名前を表示し、配信にはLIVEタグを表示"
+msgid "Detailed"
+msgstr "詳細"
+
+#: components/app/interface/settings/user/Overlay.tsx
+#~ msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+#~ msgstr "詳細：話している間は名前を表示し、配信にはLIVEタグを表示"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2185,6 +2293,10 @@ msgstr "非常に良い"
 msgid "Excellent connection"
 msgstr "接続品質: 非常に良い"
 
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Exit fullscreen"
+msgstr "全画面表示を終了"
+
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "エクスポート"
@@ -2245,6 +2357,10 @@ msgstr "参加する新しいサーバーを探す"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "あなたの居場所<0/>を探そう、<1/>世界と繋がろう。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Fixed controls"
+msgstr "固定の操作"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2316,6 +2432,10 @@ msgstr "フリーズ中"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Fruit Salad"
 msgstr "フルーツサラダ"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Fullscreen"
+msgstr "全画面表示"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Generate a new token if it gets lost or compromised"
@@ -2489,6 +2609,10 @@ msgstr "ロールを別表示"
 #~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
 #~ msgstr "Ctrl、Alt、Shift のいずれかを文字または数字と一緒に押してください。"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Hold this button to talk, even while a game is in front. It only applies when the input mode is Push to talk. The game also sees the button, so pick one it doesn't use. Works with Xbox controllers; PlayStation controllers need Steam Input or DS4Windows."
+msgstr "このボタンを押している間だけ話せます。ゲームが前面にあっても使えます。入力モードがプッシュ・トゥ・トークのときのみ有効です。ゲームにもこのボタンの入力が届くため、ゲームで使っていないボタンを選んでください。Xbox コントローラーで利用できます。PlayStation コントローラーでは Steam Input または DS4Windows が必要です。"
+
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
@@ -2606,6 +2730,10 @@ msgstr "着信"
 #: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 msgid "Input device"
 msgstr "入力デバイス"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Input mode"
+msgstr "入力モード"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -2829,12 +2957,24 @@ msgid "Leave stream"
 msgstr "配信から退出"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right bumper"
-msgstr "左右のバンパー"
+#~ msgid "Left and right bumper"
+#~ msgstr "左右のバンパー"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right trigger"
-msgstr "左右のトリガー"
+#~ msgid "Left and right trigger"
+#~ msgstr "左右のトリガー"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left bumper (LB)"
+msgstr "左バンパー (LB)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left stick click (L3)"
+msgstr "左スティック押し込み (L3)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left trigger (LT)"
+msgstr "左トリガー (LT)"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Let AnyTalk use its own custom titlebar."
@@ -2882,6 +3022,10 @@ msgstr "会話を聞く"
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "LIVE"
 msgstr "LIVE"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "LIVE indicator"
+msgstr "LIVEインジケーター"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Live overlay, recording and recaps of previous calls"
@@ -3211,6 +3355,10 @@ msgstr "マルチ配信: 配信を開くと、他の配信の隣に追加され�
 msgid "Mute"
 msgstr "ミュート"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Mute and deafen"
+msgstr "ミュートとスピーカーミュート"
+
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Mute Channel"
 msgstr "チャンネルをミュート"
@@ -3247,6 +3395,7 @@ msgstr "ユーザーをミュート"
 msgid "Mute when not speaking"
 msgstr "話していないときミュート"
 
+#: components/rtc/components/OverlayPublisher.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Muted"
 msgstr "通知オフ"
@@ -3279,11 +3428,16 @@ msgid "My Bots"
 msgstr "自分のボット"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Name"
 msgstr "名前"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Needs a server that supports stream viewers."
+msgstr "配信の視聴者に対応したサーバーが必要です。"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
@@ -3322,6 +3476,14 @@ msgstr "新しいサーバー参加者"
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "New unreads"
 msgstr "新しい未読"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next channel"
+msgstr "次のチャンネル"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next server"
+msgstr "次のサーバー"
 
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
@@ -3399,6 +3561,7 @@ msgstr "ここにはまだ誰もいません!"
 msgid "Noise suppression"
 msgstr "ノイズ抑制"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "None"
@@ -3425,6 +3588,10 @@ msgstr "制限なし"
 msgid "Not of minimum age to use the platform"
 msgstr "このプラットフォームを使用できる最低年齢に達していない"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Not set"
+msgstr "未設定"
+
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
 msgstr "なし"
@@ -3443,6 +3610,7 @@ msgstr "比較できるものがまだありません。CSV をインポート�
 msgid "Notifications"
 msgstr "通知"
 
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "Off"
@@ -3549,6 +3717,10 @@ msgstr "{0} を開く"
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Open an app or switch to Entire screen."
 msgstr "アプリを開くか、「画面全体」に切り替えてください。"
+
+#: components/rtc/components/StreamPopouts.tsx
+msgid "Open as window"
+msgstr "ウィンドウで開く"
 
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Open channel settings"
@@ -3779,6 +3951,10 @@ msgstr "接続品質: 悪い"
 msgid "Poor or lost connection"
 msgstr "接続が悪い、または途切れた"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Pop out into a separate window"
+msgstr "別ウィンドウで開く"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Position"
 msgstr "位置"
@@ -3786,6 +3962,23 @@ msgstr "位置"
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
 msgstr "RNNoise を使用"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Preset"
+msgstr "プリセット"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a button…"
+msgstr "ボタンを押してください…"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Press a controller button for \"{0}\". Press Escape to cancel."
+#~ msgstr "「{0}」に割り当てるコントローラーボタンを押してください。Escapeキーでキャンセルできます。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a controller button for \"{actionName}\". Press Escape to cancel."
+msgstr "「{actionName}」に割り当てるコントローラーボタンを押してください。Escapeキーでキャンセルできます。"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
@@ -3800,12 +3993,20 @@ msgid "Preview"
 msgstr "プレビュー"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next channel"
-msgstr "前後のチャンネル"
+#~ msgid "Previous and next channel"
+#~ msgstr "前後のチャンネル"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next server"
-msgstr "前後のサーバー"
+#~ msgid "Previous and next server"
+#~ msgstr "前後のサーバー"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous channel"
+msgstr "前のチャンネル"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous server"
+msgstr "前のサーバー"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
@@ -3844,6 +4045,23 @@ msgstr "代名詞"
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
 msgstr "メールアドレス、またはパスワードが間違っています。"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk"
+msgstr "プッシュ・トゥ・トーク"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk keeps your microphone off until you hold its hotkey. Set the hotkey under Hotkeys."
+msgstr "プッシュ・トゥ・トークでは、ホットキーを押している間だけマイクがオンになります。ホットキーは「ホットキー」で設定できます。"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Push to talk only works while AnyTalk is focused on this computer."
+msgstr "プッシュ・トゥ・トークは、このコンピューターで AnyTalk がフォーカスされているときのみ動作します。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Push-to-talk button"
+msgstr "プッシュ・トゥ・トークボタン"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Put your recaps next to CSV recaps from other people"
@@ -4001,6 +4219,7 @@ msgstr "リモートチャンネル"
 msgid "Remote Server"
 msgstr "リモートサーバー"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
@@ -4038,6 +4257,15 @@ msgstr "他のメンバーのアバターを変更できます"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "リアクションを削除"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Remove the button for \"{0}\""
+#~ msgstr "「{0}」のボタンを削除"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Remove the button for \"{actionName}\""
+msgstr "「{actionName}」のボタンを削除"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -4129,6 +4357,10 @@ msgstr "元に戻す"
 msgid "Reset {0}'s token?"
 msgstr "{0}のトークンを元に返す？"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset all buttons"
+msgstr "すべてのボタンを元に戻す"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
 msgstr "すべてのサウンドをリセット"
@@ -4143,11 +4375,21 @@ msgstr "パスワードをリセット"
 msgid "Reset Recovery Codes"
 msgstr "リカバリーコードをリセット"
 
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Reset the button for \"{0}\""
+#~ msgstr "「{0}」のボタンを元に戻す"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset the button for \"{actionName}\""
+msgstr "「{actionName}」のボタンを元に戻す"
+
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "{0} にリセット"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
 msgstr "デフォルトに戻す"
@@ -4202,8 +4444,20 @@ msgid "Review policy changes"
 msgstr "規約の変更を確認"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "Right bumper (RB)"
+msgstr "右バンパー (RB)"
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "Right stick"
 msgstr "右スティック"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right stick click (R3)"
+msgstr "右スティック押し込み (R3)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right trigger (RT)"
+msgstr "右トリガー (RT)"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Role Colour"
@@ -4582,6 +4836,14 @@ msgid "Show send message button"
 msgstr "メッセージ送信ボタンを表示"
 
 #: components/app/interface/settings/user/Overlay.tsx
+msgid "Show when speaking"
+msgstr "話しているときに表示"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Showing in a separate window"
+msgstr "別ウィンドウで表示中"
+
+#: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr "通話で誰が話しているかをゲームの上に表示します。ボーダーレスとウィンドウモードのゲームで動作し、排他的フルスクリーンでは動作しません。"
 
@@ -4779,6 +5041,10 @@ msgstr "配信の統計"
 msgid "Stream Stats"
 msgstr "配信の統計"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Stream viewers"
+msgstr "配信の視聴者"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Streams"
 msgstr "配信"
@@ -4797,8 +5063,8 @@ msgid "Strong (150 Hz)"
 msgstr "強（150 Hz）"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Style"
-msgstr "スタイル"
+#~ msgid "Style"
+#~ msgstr "スタイル"
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
@@ -4924,6 +5190,15 @@ msgstr "このボットはすでに探索に載っています。削除するに
 msgid "The bot will not be granted any permissions."
 msgstr "ボットには権限が付与されません。"
 
+#. placeholder {0}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "The default button is needed for \"{0}\". Reset that one first."
+#~ msgstr "「{0}」にはデフォルトのボタンが必要です。先にそちらを元に戻してください。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The default button is needed for \"{actionName}\". Reset that one first."
+msgstr "「{actionName}」にはデフォルトのボタンが必要です。先にそちらを元に戻してください。"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
 msgstr "デスクトップアプリは Windows と Linux で利用できます。"
@@ -4952,6 +5227,10 @@ msgstr "このアイテムはモデレーターによって削除されたため
 #: components/i18n/errors.tsx
 msgid "The password is too short."
 msgstr "パスワードが短すぎます。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The push-to-talk button isn't available on this computer."
+msgstr "プッシュ・トゥ・トークボタンはこのコンピューターでは利用できません。"
 
 #: components/i18n/errors.tsx
 msgid "The server has been removed from discover by moderators, the user must contact support."
@@ -5001,6 +5280,10 @@ msgstr "このボットは探索で見つけられます"
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
 msgstr "このボットは非公開で、作成者のみが追加できます。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr "このボタンはプッシュ・トゥ・トーク用なので、有効な間は他の操作に使えません。別のボタンを選んでください。"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
@@ -5125,6 +5408,10 @@ msgstr "{0} までタイムアウト中"
 #: components/app/interface/channels/text/Message.tsx
 msgid "Timed Out until {0}"
 msgstr "{0} までタイムアウト中"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Timed out."
+msgstr "タイムアウトしました。"
 
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
@@ -5559,6 +5846,10 @@ msgstr "ボイス"
 msgid "Voice & Video"
 msgstr "音声とビデオ"
 
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Voice activity"
+msgstr "音声検出"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Voice call developer mode"
 msgstr "音声通話の開発者モード"
@@ -5611,6 +5902,10 @@ msgstr "複数の配信を同時に視聴"
 msgid "Watch stream"
 msgstr "配信を視聴"
 
+#: components/rtc/components/OverlayPublisher.tsx
+msgid "Watching your stream"
+msgstr "配信を視聴中"
+
 #: src/AndroidNag.tsx
 msgid "We are working hard on optimising our web app for mobile."
 msgstr "モバイル向けにウェブアプリを最適化するため、懸命に取り組んでいます。"
@@ -5648,8 +5943,8 @@ msgid "Welcome!"
 msgstr "ようこそ！"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "What each controller button does"
-msgstr "各コントローラーボタンの機能"
+#~ msgid "What each controller button does"
+#~ msgstr "各コントローラーボタンの機能"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"

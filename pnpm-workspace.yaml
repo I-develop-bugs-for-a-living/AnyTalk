@@ -8,6 +8,8 @@ allowBuilds:
   esbuild: true
   electron: true
   electron-winstaller: true
+  uiohook-napi: false # ships N-API prebuilds, no compile needed
+  koffi: false # 2.x ships prebuilds for every platform, no compile needed
 minimumReleaseAgeExclude:
   - stoat-api
 nodeLinker: isolated

@@ -39,6 +39,8 @@ await build({
   ...common,
   entryPoints: [resolve(root, "src/main/index.ts")],
   outfile: resolve(dist, "main.js"),
+  // Native module, loaded from node_modules at runtime
+  external: [...common.external, "uiohook-napi", "koffi"],
   define: { __DEFAULT_URL__: JSON.stringify(defaultUrl) },
 });
 

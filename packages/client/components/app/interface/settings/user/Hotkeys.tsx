@@ -9,6 +9,7 @@ import {
   MODIFIER_KEYS,
   defaultSequence,
   formatSequence,
+  globalHotkeyReleaseSupported,
   globalHotkeyStatus,
   isReservedBareKey,
   keyOfEvent,
@@ -42,6 +43,10 @@ export function HotkeysSettings() {
     [KeybindAction.VOICE_TOGGLE_DEAFEN]: {
       title: <Trans>Toggle deafen</Trans>,
       icon: "headset_off",
+    },
+    [KeybindAction.VOICE_PUSH_TO_TALK]: {
+      title: <Trans>Push to talk</Trans>,
+      icon: "mic",
     },
     [KeybindAction.VOICE_TOGGLE_GAME_STREAM]: {
       title: <Trans>Stream focused game</Trans>,
@@ -91,6 +96,12 @@ export function HotkeysSettings() {
     if (!window.native || !current(action).enabled) return;
     if (!sequenceToGlobalAccelerator(current(action).keys))
       return t`These keys only work inside AnyTalk. Numpad keys (except Enter), F keys, Insert, Home, End, Page Up and Page Down also work everywhere on their own.`;
+    // hold-to-talk can't be global without release events from the shell
+    if (
+      action === KeybindAction.VOICE_PUSH_TO_TALK &&
+      globalHotkeyReleaseSupported() === false
+    )
+      return t`Push to talk only works while AnyTalk is focused on this computer.`;
     if (globalHotkeyStatus()[action] === false)
       return t`Another app is already using these keys, so they only work inside AnyTalk. Pick other keys.`;
   }

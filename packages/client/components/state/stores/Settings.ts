@@ -1,4 +1,8 @@
 import {
+  type BindingOverrides,
+  cleanBindingOverrides,
+} from "@revolt/gamepad/bindings";
+import {
   UNICODE_EMOJI_PACKS,
   UnicodeEmojiPacks,
 } from "@revolt/markdown/emoji/UnicodeEmoji";
@@ -134,6 +138,17 @@ interface SettingsDefinition {
   "controller:enabled": boolean;
 
   /**
+   * Controller button that works as push to talk (desktop app), empty for none
+   */
+  "controller:ptt_button": string;
+
+  /**
+   * Controller buttons the user moved, by action: a button name, or null for
+   * none. Actions left out keep their default button.
+   */
+  "controller:bindings": BindingOverrides;
+
+  /**
    * User changes to keybinds, by keybind action
    */
   "keybinds:custom": Record<string, CustomKeybind>;
@@ -207,6 +222,8 @@ const EXPECTED_TYPES: { [K in keyof SettingsDefinition]: ValueType<K> } = {
   "advanced:developer_voice_record": "boolean",
   "advanced:recent_calls_shown": "number",
   "controller:enabled": "boolean",
+  "controller:ptt_button": "string",
+  "controller:bindings": cleanBindingOverrides,
   "keybinds:custom": cleanKeybinds,
 };
 
@@ -260,6 +277,7 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
       "advanced:developer_voice_record": true,
       "advanced:recent_calls_shown": DEFAULT_RECENT_CALLS_SHOWN,
       "controller:enabled": true,
+      "controller:ptt_button": "",
     };
   }
 

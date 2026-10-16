@@ -10,11 +10,19 @@ export { InRoom } from "./components/InRoom";
 export { RoomAudioManager } from "./components/RoomAudioManager";
 export { findEarpiece, isIOSBusMode } from "./outputBus";
 export {
+  type OverlayVisibility,
+  COMPACT_ELEMENTS,
+  DETAILED_ELEMENTS,
   overlayAvailable,
+  overlayAvatar,
   overlayCorner,
   overlayEnabled,
+  overlayLive,
   overlayMode,
-  overlayStyle,
+  overlayName,
+  overlayPreset,
+  overlayStatus,
+  overlayWatching,
   saveOverlaySettings,
 } from "./overlayConfig";
 export {

@@ -10,7 +10,7 @@ overrides:
   svelte-dnd-action: ^0.9.79
 
 patchedDependencies:
-  livekit-client: aaa5857885c579bb42546763169fbc579a0428c99138d5b40a69a040c8a32959
+  livekit-client: 5d61e29b1935f650cbbfb8a7567a8dc0359d5ac84b068e48c187bdd055110976
 
 importers:
 
@@ -147,7 +147,7 @@ importers:
         version: 6.6.0(@babel/core@7.29.7)(@babel/types@7.29.8)(babel-plugin-macros@3.1.0)(solid-js@1.9.14)
       '@livekit/components-core':
         specifier: ^0.12.14
-        version: 0.12.14(livekit-client@2.20.2(patch_hash=aaa5857885c579bb42546763169fbc579a0428c99138d5b40a69a040c8a32959)(@types/dom-mediacapture-record@1.0.22))(tslib@2.8.1)
+        version: 0.12.14(livekit-client@2.20.2(patch_hash=5d61e29b1935f650cbbfb8a7567a8dc0359d5ac84b068e48c187bdd055110976)(@types/dom-mediacapture-record@1.0.22))(tslib@2.8.1)
       '@material-design-icons/svg':
         specifier: ^0.14.15
         version: 0.14.15
@@ -237,7 +237,7 @@ importers:
         version: 5.0.0
       livekit-client:
         specifier: ~2.20.2
-        version: 2.20.2(patch_hash=aaa5857885c579bb42546763169fbc579a0428c99138d5b40a69a040c8a32959)(@types/dom-mediacapture-record@1.0.22)
+        version: 2.20.2(patch_hash=5d61e29b1935f650cbbfb8a7567a8dc0359d5ac84b068e48c187bdd055110976)(@types/dom-mediacapture-record@1.0.22)
       localforage:
         specifier: ^1.10.0
         version: 1.10.0
@@ -475,6 +475,13 @@ importers:
         version: 5.0.1(@types/node@24.7.1)(jsdom@25.0.1)(vite@6.4.3(@types/node@24.7.1)(jiti@2.7.0)(lightningcss@1.31.1)(terser@5.49.2)(yaml@2.7.1))
 
   packages/desktop:
+    dependencies:
+      koffi:
+        specifier: ^2.16.3
+        version: 2.16.3
+      uiohook-napi:
+        specifier: ^1.5.5
+        version: 1.5.5
     devDependencies:
       '@types/node':
         specifier: ^24.0.0
@@ -502,7 +509,7 @@ importers:
     dependencies:
       '@livekit/components-core':
         specifier: ^0.12.14
-        version: 0.12.14(livekit-client@2.20.2(patch_hash=aaa5857885c579bb42546763169fbc579a0428c99138d5b40a69a040c8a32959)(@types/dom-mediacapture-record@1.0.22))(tslib@2.8.1)
+        version: 0.12.14(livekit-client@2.20.2(patch_hash=5d61e29b1935f650cbbfb8a7567a8dc0359d5ac84b068e48c187bdd055110976)(@types/dom-mediacapture-record@1.0.22))(tslib@2.8.1)
       '@solid-primitives/intersection-observer':
         specifier: ^2.2.2
         version: 2.2.2(solid-js@1.9.14)
@@ -514,7 +521,7 @@ importers:
         version: 1.5.3(solid-js@1.9.14)
       livekit-client:
         specifier: ^2.20.2
-        version: 2.20.2(patch_hash=aaa5857885c579bb42546763169fbc579a0428c99138d5b40a69a040c8a32959)(@types/dom-mediacapture-record@1.0.22)
+        version: 2.20.2(patch_hash=5d61e29b1935f650cbbfb8a7567a8dc0359d5ac84b068e48c187bdd055110976)(@types/dom-mediacapture-record@1.0.22)
       rxjs:
         specifier: ^7.8.2
         version: 7.8.2
@@ -5510,6 +5517,9 @@ packages:
   known-css-properties@0.30.0:
     resolution: {integrity: sha512-VSWXYUnsPu9+WYKkfmJyLKtIvaRJi1kXUqVmBACORXZQxT5oZDsoZ2vQP+bQFDnWtpI/4eq3MLoRMjI2fnLzTQ==}
 
+  koffi@2.16.3:
+    resolution: {integrity: sha512-E9y1AsgYGlaxMhcZzHr8y96QF2U5XzA12GGVAfbWqIubTwPNMXQarfBzePNXHe0xtIEtNd6ifAv3GAKYGUeBAQ==}
+
   lazy-val@1.0.5:
     resolution: {integrity: sha512-0/BnGCCfyUMkBpeDgWihanIAF9JmZhHBgUhEqzvf+adhNGLoP6TaiI5oF8oyb3I45P+PcnrqihSf01M0l0G5+Q==}
 
@@ -6020,6 +6030,10 @@ packages:
 
   node-api-version@0.2.1:
     resolution: {integrity: sha512-2xP/IGGMmmSQpI1+O/k72jF/ykvZ89JeuKX3TLJAYPDVLUalrshrLHkeVcCCZqG/eEa635cr8IBYzgnDvM2O8Q==}
+
+  node-gyp-build@4.8.4:
+    resolution: {integrity: sha512-LA4ZjwlnUblHVgq0oBF3Jl/6h/Nvs5fzBLwdEF4nuxnFdsfajde4WfxtJr3CaiH+F6ewcIB/q4jQ4UzPyid+CQ==}
+    hasBin: true
 
   node-gyp@12.4.0:
     resolution: {integrity: sha512-OMcPNvqTCFUnNaBlmdgq+lfNqY7gTiSmNRDjY3uAXRyudeKZEZxu3CLtjMQrx4zZxCX2b/mpNqTtwuCJgXhHkw==}
@@ -7354,6 +7368,10 @@ packages:
 
   uc.micro@2.1.0:
     resolution: {integrity: sha512-ARDJmphmdvUk6Glw7y9DQ2bFkKBHwQHLi2lsaH6PPmz/Ka9sFOBsBluozhDltWmnv9u/cF6Rt87znRTPV+yp/A==}
+
+  uiohook-napi@1.5.5:
+    resolution: {integrity: sha512-oSlTdnECw2GBfsJPTbBQBeE4v/EXP0EZmX6BJq5nzH/JgFaBE8JpFwEA/kLhiEP7HxQw28FViWiYgdIZzWuuJQ==}
+    engines: {node: '>= 16'}
 
   ulid@3.0.2:
     resolution: {integrity: sha512-yu26mwteFYzBAot7KVMqFGCVpsF6g8wXfJzQUHvu1no3+rRRSFcSV2nKeYvNPLD2J4b08jYBDhHUjeH0ygIl9w==}
@@ -9971,10 +9989,10 @@ snapshots:
     dependencies:
       '@lit-labs/ssr-dom-shim': 1.3.0
 
-  '@livekit/components-core@0.12.14(livekit-client@2.20.2(patch_hash=aaa5857885c579bb42546763169fbc579a0428c99138d5b40a69a040c8a32959)(@types/dom-mediacapture-record@1.0.22))(tslib@2.8.1)':
+  '@livekit/components-core@0.12.14(livekit-client@2.20.2(patch_hash=5d61e29b1935f650cbbfb8a7567a8dc0359d5ac84b068e48c187bdd055110976)(@types/dom-mediacapture-record@1.0.22))(tslib@2.8.1)':
     dependencies:
       '@floating-ui/dom': 1.7.6
-      livekit-client: 2.20.2(patch_hash=aaa5857885c579bb42546763169fbc579a0428c99138d5b40a69a040c8a32959)(@types/dom-mediacapture-record@1.0.22)
+      livekit-client: 2.20.2(patch_hash=5d61e29b1935f650cbbfb8a7567a8dc0359d5ac84b068e48c187bdd055110976)(@types/dom-mediacapture-record@1.0.22)
       loglevel: 1.9.1
       rxjs: 7.8.2
       tslib: 2.8.1
@@ -13722,6 +13740,8 @@ snapshots:
 
   known-css-properties@0.30.0: {}
 
+  koffi@2.16.3: {}
+
   lazy-val@1.0.5: {}
 
   leven@3.1.0: {}
@@ -13808,7 +13828,7 @@ snapshots:
       lit-element: 4.2.0
       lit-html: 3.3.0
 
-  livekit-client@2.20.2(patch_hash=aaa5857885c579bb42546763169fbc579a0428c99138d5b40a69a040c8a32959)(@types/dom-mediacapture-record@1.0.22):
+  livekit-client@2.20.2(patch_hash=5d61e29b1935f650cbbfb8a7567a8dc0359d5ac84b068e48c187bdd055110976)(@types/dom-mediacapture-record@1.0.22):
     dependencies:
       '@livekit/mutex': 1.1.1
       '@livekit/protocol': 1.46.6
@@ -14389,6 +14409,8 @@ snapshots:
   node-api-version@0.2.1:
     dependencies:
       semver: 7.7.4
+
+  node-gyp-build@4.8.4: {}
 
   node-gyp@12.4.0:
     dependencies:
@@ -15911,6 +15933,10 @@ snapshots:
   typescript@6.0.3: {}
 
   uc.micro@2.1.0: {}
+
+  uiohook-napi@1.5.5:
+    dependencies:
+      node-gyp-build: 4.8.4
 
   ulid@3.0.2: {}
 
