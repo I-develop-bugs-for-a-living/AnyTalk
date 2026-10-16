@@ -1743,8 +1743,24 @@ msgid "Customisation"
 msgstr "التخصيص"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad down"
+msgstr "لوحة الاتجاهات: أسفل"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad left"
+msgstr "لوحة الاتجاهات: يسار"
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad or left stick"
 msgstr "لوحة الاتجاهات أو العصا اليسرى"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad right"
+msgstr "لوحة الاتجاهات: يمين"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad up"
+msgstr "لوحة الاتجاهات: أعلى"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
@@ -2617,6 +2633,10 @@ msgstr "إبراز الرتبة"
 #~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
 #~ msgstr "اضغط Ctrl أو Alt أو Shift مع حرف أو رقم."
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Hold this button to talk, even while a game is in front. It only applies when the input mode is Push to talk. The game also sees the button, so pick one it doesn't use. Works with Xbox controllers; PlayStation controllers need Steam Input or DS4Windows."
+msgstr "اضغط مع الاستمرار على هذا الزر للتحدث، حتى عندما تكون لعبة في المقدمة. ينطبق فقط عندما يكون وضع الإدخال «اضغط للتحدث». تستقبل اللعبة الزر أيضًا، لذا اختر زرًا لا تستخدمه. يعمل مع وحدات تحكم Xbox؛ تحتاج وحدات تحكم PlayStation إلى Steam Input أو DS4Windows."
+
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
@@ -2737,6 +2757,10 @@ msgstr "مكالمة واردة"
 #: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 msgid "Input device"
 msgstr "جهاز الإدخال"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Input mode"
+msgstr "وضع الإدخال"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -2969,6 +2993,18 @@ msgstr "الزرّان العلويان الأيسر والأيمن"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Left and right trigger"
 msgstr "الزنادان الأيسر والأيمن"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left bumper (LB)"
+msgstr "الزر العلوي الأيسر (LB)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left stick click (L3)"
+msgstr "النقر على العصا اليسرى (L3)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left trigger (LT)"
+msgstr "الزناد الأيسر (LT)"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Let AnyTalk use its own custom titlebar."
@@ -3533,6 +3569,7 @@ msgstr "لا احد هنا في الوقت الحالي!"
 msgid "Noise suppression"
 msgstr "كتم الضوضاء"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "None"
@@ -3987,6 +4024,23 @@ msgstr "الضمائر"
 msgid "Provided email or password is wrong."
 msgstr "البريد الإلكتروني أو كلمة المرور المدخلة غير صحيحة."
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk"
+msgstr "اضغط للتحدث"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk keeps your microphone off until you hold its hotkey. Set the hotkey under Hotkeys."
+msgstr "يُبقي «اضغط للتحدث» الميكروفون مغلقًا حتى تضغط مع الاستمرار على اختصاره. حدّد الاختصار ضمن «اختصارات لوحة المفاتيح»."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Push to talk only works while AnyTalk is focused on this computer."
+msgstr "يعمل «اضغط للتحدث» فقط أثناء تركيز AnyTalk على هذا الكمبيوتر."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Push-to-talk button"
+msgstr "زر اضغط للتحدث"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Put your recaps next to CSV recaps from other people"
 msgstr "ضع ملخصاتك بجانب ملخصات CSV من أشخاص آخرين"
@@ -4347,8 +4401,20 @@ msgid "Review policy changes"
 msgstr "مراجعة التغييرات في سياسة الاستخدام"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "Right bumper (RB)"
+msgstr "الزر العلوي الأيمن (RB)"
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "Right stick"
 msgstr "العصا اليمنى"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right stick click (R3)"
+msgstr "النقر على العصا اليمنى (R3)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right trigger (RT)"
+msgstr "الزناد الأيمن (RT)"
 
 #~ msgid "Roadmap"
 #~ msgstr ""
@@ -5114,6 +5180,10 @@ msgstr "أزال المشرفون العنصر، وبالتالي يُمنع ت�
 msgid "The password is too short."
 msgstr "كلمة المرور أقصر من الحد الادنى."
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The push-to-talk button isn't available on this computer."
+msgstr "زر «اضغط للتحدث» غير متاح على هذا الكمبيوتر."
+
 #: components/i18n/errors.tsx
 msgid "The server has been removed from discover by moderators, the user must contact support."
 msgstr "أزال المشرفون الخادم من الاكتشاف، ويجب على المستخدم التواصل مع الدعم."
@@ -5725,6 +5795,10 @@ msgstr "صوت"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Voice & Video"
 msgstr "الصوت والفيديو"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Voice activity"
+msgstr "التنشيط الصوتي"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Voice call developer mode"

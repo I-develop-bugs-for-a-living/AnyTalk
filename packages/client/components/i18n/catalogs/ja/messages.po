@@ -1659,8 +1659,24 @@ msgid "Customisation"
 msgstr "カスタマイズ"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad down"
+msgstr "十字キー 下"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad left"
+msgstr "十字キー 左"
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad or left stick"
 msgstr "十字キーまたは左スティック"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad right"
+msgstr "十字キー 右"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad up"
+msgstr "十字キー 上"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
@@ -2523,6 +2539,10 @@ msgstr "ロールを別表示"
 #~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
 #~ msgstr "Ctrl、Alt、Shift のいずれかを文字または数字と一緒に押してください。"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Hold this button to talk, even while a game is in front. It only applies when the input mode is Push to talk. The game also sees the button, so pick one it doesn't use. Works with Xbox controllers; PlayStation controllers need Steam Input or DS4Windows."
+msgstr "このボタンを押している間だけ話せます。ゲームが前面にあっても使えます。入力モードがプッシュ・トゥ・トークのときのみ有効です。ゲームにもこのボタンの入力が届くため、ゲームで使っていないボタンを選んでください。Xbox コントローラーで利用できます。PlayStation コントローラーでは Steam Input または DS4Windows が必要です。"
+
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
@@ -2640,6 +2660,10 @@ msgstr "着信"
 #: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 msgid "Input device"
 msgstr "入力デバイス"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Input mode"
+msgstr "入力モード"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -2869,6 +2893,18 @@ msgstr "左右のバンパー"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Left and right trigger"
 msgstr "左右のトリガー"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left bumper (LB)"
+msgstr "左バンパー (LB)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left stick click (L3)"
+msgstr "左スティック押し込み (L3)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left trigger (LT)"
+msgstr "左トリガー (LT)"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Let AnyTalk use its own custom titlebar."
@@ -3433,6 +3469,7 @@ msgstr "ここにはまだ誰もいません!"
 msgid "Noise suppression"
 msgstr "ノイズ抑制"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "None"
@@ -3887,6 +3924,23 @@ msgstr "代名詞"
 msgid "Provided email or password is wrong."
 msgstr "メールアドレス、またはパスワードが間違っています。"
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk"
+msgstr "プッシュ・トゥ・トーク"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk keeps your microphone off until you hold its hotkey. Set the hotkey under Hotkeys."
+msgstr "プッシュ・トゥ・トークでは、ホットキーを押している間だけマイクがオンになります。ホットキーは「ホットキー」で設定できます。"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Push to talk only works while AnyTalk is focused on this computer."
+msgstr "プッシュ・トゥ・トークは、このコンピューターで AnyTalk がフォーカスされているときのみ動作します。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Push-to-talk button"
+msgstr "プッシュ・トゥ・トークボタン"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Put your recaps next to CSV recaps from other people"
 msgstr "自分のリキャップを他の人の CSV リキャップと並べます"
@@ -4244,8 +4298,20 @@ msgid "Review policy changes"
 msgstr "規約の変更を確認"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "Right bumper (RB)"
+msgstr "右バンパー (RB)"
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "Right stick"
 msgstr "右スティック"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right stick click (R3)"
+msgstr "右スティック押し込み (R3)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right trigger (RT)"
+msgstr "右トリガー (RT)"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Role Colour"
@@ -4999,6 +5065,10 @@ msgstr "このアイテムはモデレーターによって削除されたため
 msgid "The password is too short."
 msgstr "パスワードが短すぎます。"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The push-to-talk button isn't available on this computer."
+msgstr "プッシュ・トゥ・トークボタンはこのコンピューターでは利用できません。"
+
 #: components/i18n/errors.tsx
 msgid "The server has been removed from discover by moderators, the user must contact support."
 msgstr "このサーバーはモデレーターによって探索から削除されました。ユーザーはサポートに連絡してください。"
@@ -5604,6 +5674,10 @@ msgstr "ボイス"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Voice & Video"
 msgstr "音声とビデオ"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Voice activity"
+msgstr "音声検出"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Voice call developer mode"

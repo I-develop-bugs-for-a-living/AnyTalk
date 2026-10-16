@@ -1710,8 +1710,24 @@ msgid "Customisation"
 msgstr "Personnalisation"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad down"
+msgstr "Croix directionnelle bas"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad left"
+msgstr "Croix directionnelle gauche"
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad or left stick"
 msgstr "Croix directionnelle ou stick gauche"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad right"
+msgstr "Croix directionnelle droite"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad up"
+msgstr "Croix directionnelle haut"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
@@ -2574,6 +2590,10 @@ msgstr "Afficher les membres du rôle séparément"
 #~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
 #~ msgstr "Maintenez Ctrl, Alt ou Maj avec une lettre ou un chiffre."
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Hold this button to talk, even while a game is in front. It only applies when the input mode is Push to talk. The game also sees the button, so pick one it doesn't use. Works with Xbox controllers; PlayStation controllers need Steam Input or DS4Windows."
+msgstr "Maintenez ce bouton enfoncé pour parler, même quand un jeu est au premier plan. Il ne s'applique que si le mode d'entrée est Appuyer pour parler. Le jeu voit aussi ce bouton, choisissez-en donc un qu'il n'utilise pas. Fonctionne avec les manettes Xbox ; les manettes PlayStation nécessitent Steam Input ou DS4Windows."
+
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
@@ -2691,6 +2711,10 @@ msgstr "Appel entrant"
 #: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 msgid "Input device"
 msgstr "Périphérique d'entrée"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Input mode"
+msgstr "Mode d'entrée"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -2920,6 +2944,18 @@ msgstr "Boutons d'épaule gauche et droit"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Left and right trigger"
 msgstr "Gâchettes gauche et droite"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left bumper (LB)"
+msgstr "Bumper gauche (LB)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left stick click (L3)"
+msgstr "Clic du stick gauche (L3)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left trigger (LT)"
+msgstr "Gâchette gauche (LT)"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Let AnyTalk use its own custom titlebar."
@@ -3484,6 +3520,7 @@ msgstr "Il n'y a personne ici pour le moment !"
 msgid "Noise suppression"
 msgstr "Suppression du bruit"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "None"
@@ -3938,6 +3975,23 @@ msgstr "Pronoms"
 msgid "Provided email or password is wrong."
 msgstr "L'adresse e-mail ou le mot de passe fourni est incorrect."
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk"
+msgstr "Appuyer pour parler"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk keeps your microphone off until you hold its hotkey. Set the hotkey under Hotkeys."
+msgstr "Avec Appuyer pour parler, votre micro reste coupé tant que vous ne maintenez pas son raccourci. Définissez le raccourci dans Raccourcis."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Push to talk only works while AnyTalk is focused on this computer."
+msgstr "Appuyer pour parler ne fonctionne que lorsque AnyTalk est au premier plan sur cet ordinateur."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Push-to-talk button"
+msgstr "Bouton Appuyer pour parler"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Put your recaps next to CSV recaps from other people"
 msgstr "Placez vos récapitulatifs à côté des récapitulatifs CSV d'autres personnes"
@@ -4295,8 +4349,20 @@ msgid "Review policy changes"
 msgstr "Modifications apportées à la politique d'évaluation"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "Right bumper (RB)"
+msgstr "Bumper droit (RB)"
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "Right stick"
 msgstr "Stick droit"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right stick click (R3)"
+msgstr "Clic du stick droit (R3)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right trigger (RT)"
+msgstr "Gâchette droite (RT)"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Role Colour"
@@ -5050,6 +5116,10 @@ msgstr "L'élément a été retiré par les modérateurs, les nouvelles demandes
 msgid "The password is too short."
 msgstr "Le mot de passe est trop court."
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The push-to-talk button isn't available on this computer."
+msgstr "Le bouton Appuyer pour parler n'est pas disponible sur cet ordinateur."
+
 #: components/i18n/errors.tsx
 msgid "The server has been removed from discover by moderators, the user must contact support."
 msgstr "Le serveur a été retiré de Découvrir par les modérateurs, l'utilisateur doit contacter le support."
@@ -5655,6 +5725,10 @@ msgstr "Voix"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Voice & Video"
 msgstr "Voix & vidéo"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Voice activity"
+msgstr "Activité vocale"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Voice call developer mode"

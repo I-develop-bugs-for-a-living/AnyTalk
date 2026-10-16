@@ -1745,8 +1745,24 @@ msgid "Customisation"
 msgstr "커스터마이징"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad down"
+msgstr "방향 패드 아래"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad left"
+msgstr "방향 패드 왼쪽"
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad or left stick"
 msgstr "방향 패드 또는 왼쪽 스틱"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad right"
+msgstr "방향 패드 오른쪽"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "D-pad up"
+msgstr "방향 패드 위"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
@@ -2620,6 +2636,10 @@ msgstr "역할 따로 표시"
 #~ msgid "Hold Ctrl, Alt or Shift together with a letter or number."
 #~ msgstr "Ctrl, Alt 또는 Shift를 문자나 숫자와 함께 누르세요."
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Hold this button to talk, even while a game is in front. It only applies when the input mode is Push to talk. The game also sees the button, so pick one it doesn't use. Works with Xbox controllers; PlayStation controllers need Steam Input or DS4Windows."
+msgstr "이 버튼을 누르는 동안 말할 수 있어요. 게임이 앞에 있어도 작동해요. 입력 모드가 눌러서 말하기일 때만 적용돼요. 게임에도 이 버튼 입력이 전달되니 게임에서 쓰지 않는 버튼을 고르세요. Xbox 컨트롤러에서 작동하며, PlayStation 컨트롤러는 Steam Input 또는 DS4Windows가 필요해요."
+
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
@@ -2741,6 +2761,10 @@ msgstr "걸려 오는 통화"
 #: components/ui/components/features/voice/callCard/AudioDeviceChevron.tsx
 msgid "Input device"
 msgstr "입력 장치"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Input mode"
+msgstr "입력 모드"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
@@ -2973,6 +2997,18 @@ msgstr "왼쪽·오른쪽 범퍼"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Left and right trigger"
 msgstr "왼쪽·오른쪽 트리거"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left bumper (LB)"
+msgstr "왼쪽 범퍼 (LB)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left stick click (L3)"
+msgstr "왼쪽 스틱 클릭 (L3)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Left trigger (LT)"
+msgstr "왼쪽 트리거 (LT)"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Let AnyTalk use its own custom titlebar."
@@ -3537,6 +3573,7 @@ msgstr "지금은 아무도 없어요!"
 msgid "Noise suppression"
 msgstr "노이즈 억제"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "None"
@@ -3991,6 +4028,23 @@ msgstr "호칭"
 msgid "Provided email or password is wrong."
 msgstr "이메일 또는 비밀번호가 올바르지 않아요."
 
+#: components/app/interface/settings/user/Hotkeys.tsx
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk"
+msgstr "눌러서 말하기"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Push to talk keeps your microphone off until you hold its hotkey. Set the hotkey under Hotkeys."
+msgstr "눌러서 말하기를 사용하면 단축키를 누르고 있는 동안만 마이크가 켜져요. 단축키는 단축키에서 지정하세요."
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Push to talk only works while AnyTalk is focused on this computer."
+msgstr "눌러서 말하기는 이 컴퓨터에서 AnyTalk에 포커스가 있을 때만 작동해요."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Push-to-talk button"
+msgstr "눌러서 말하기 버튼"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Put your recaps next to CSV recaps from other people"
 msgstr "내 요약을 다른 사람의 CSV 요약과 나란히 놓아요"
@@ -4352,8 +4406,20 @@ msgid "Review policy changes"
 msgstr "정책 변경 검토"
 
 #: components/app/interface/settings/user/Controller.tsx
+msgid "Right bumper (RB)"
+msgstr "오른쪽 범퍼 (RB)"
+
+#: components/app/interface/settings/user/Controller.tsx
 msgid "Right stick"
 msgstr "오른쪽 스틱"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right stick click (R3)"
+msgstr "오른쪽 스틱 클릭 (R3)"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Right trigger (RT)"
+msgstr "오른쪽 트리거 (RT)"
 
 #~ msgid "Roadmap"
 #~ msgstr ""
@@ -5119,6 +5185,10 @@ msgstr "이 항목은 관리자에 의해 제거되어 앞으로 신청할 수 �
 msgid "The password is too short."
 msgstr "비밀번호가 너무 짧아요."
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The push-to-talk button isn't available on this computer."
+msgstr "이 컴퓨터에서는 눌러서 말하기 버튼을 사용할 수 없어요."
+
 #: components/i18n/errors.tsx
 msgid "The server has been removed from discover by moderators, the user must contact support."
 msgstr "이 서버는 관리자에 의해 탐색에서 제거되었어요. 사용자는 지원팀에 문의해야 해요."
@@ -5732,6 +5802,10 @@ msgstr "음성"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Voice & Video"
 msgstr "음성 및 비디오"
+
+#: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
+msgid "Voice activity"
+msgstr "음성 감지"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Voice call developer mode"
