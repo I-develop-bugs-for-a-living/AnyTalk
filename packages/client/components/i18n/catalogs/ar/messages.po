@@ -158,6 +158,18 @@ msgstr "{0} في الأسفل بالفعل"
 msgid "{0} is already at the top"
 msgstr "{0} في الأعلى بالفعل"
 
+#. placeholder {0}: buttonLabels()[button]
+#. placeholder {1}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is needed for \"{1}\". Pick another button."
+#~ msgstr "{0} مطلوب لـ \"{1}\". اختر زرًا آخر."
+
+#. placeholder {0}: actionLabels()[action]
+#. placeholder {1}: buttonLabels()[button]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is now {1}."
+#~ msgstr "{0} الآن هو {1}."
+
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "{0} is typing…"
@@ -276,6 +288,14 @@ msgstr "رتب {0}"
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
 msgstr "ستتم إزالة الحظر المؤقت عن {0} وسيتمكن من التفاعل مع الخادم مجددًا."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{actionName} is now {buttonName}."
+msgstr "أصبح {actionName} هو {buttonName}."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{buttonName} is needed for \"{actionName}\". Pick another button."
+msgstr "{buttonName} مطلوب لـ \"{actionName}\". اختر زرًا آخر."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
@@ -1127,6 +1147,10 @@ msgstr "إلغاء الرسالة"
 msgid "Cancel your discover request and remove it from the review queue"
 msgstr "ألغِ طلب الاكتشاف الخاص بك وأزله من قائمة المراجعة"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Cancelled."
+msgstr "تم الإلغاء."
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
 msgstr "لا يمكن حذف الحساب حتى يتم حذف الخوادم أو نقلها"
@@ -1184,6 +1208,15 @@ msgstr "تغيير صورتك الرمزية"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
 msgstr "تغيير اسمك المستعار"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Change the button for \"{0}\""
+#~ msgstr "تغيير الزر الخاص بـ \"{0}\""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Change the button for \"{actionName}\""
+msgstr "تغيير الزر الخاص بـ \"{actionName}\""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
@@ -1275,6 +1308,10 @@ msgstr "إختر إسم مستعار"
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "امسح الحالة"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Click a button to give its action another controller button, then press the new button. Press Escape to cancel. If the new button already has an action, the two swap. Controllers without the standard layout only support A, B, X and Y."
+msgstr "انقر على إجراء لتعيين زر آخر في وحدة التحكم له، ثم اضغط الزر الجديد. اضغط Escape للإلغاء. إذا كان للزر الجديد إجراء بالفعل فسيتم تبديل الإجراءين. وحدات التحكم ذات التخطيط غير القياسي تدعم الأزرار A وB وX وY فقط."
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
@@ -1469,6 +1506,10 @@ msgstr "وحدة التحكم"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Controller support"
 msgstr "دعم وحدة التحكم"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Controls that can't be changed"
+msgstr "عناصر تحكم لا يمكن تغييرها"
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Conversations"
@@ -1788,6 +1829,10 @@ msgstr "تعطيل الاستماع و المحادحثة للأفراد ذوي 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
 msgstr "منع الأعضاء من الاستماع"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Deafen or undeafen in a call"
+msgstr "تعطيل الصوت أو إلغاء تعطيله في المكالمة"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -2385,6 +2430,10 @@ msgstr "اعثر على خوادم جديدة للانضمام إليها"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "قم بإيجاد مجمت<0/>معك،<1/> إتصل بالعالم."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Fixed controls"
+msgstr "عناصر تحكم ثابتة"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2987,12 +3036,12 @@ msgid "Leave stream"
 msgstr "مغادرة البث"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right bumper"
-msgstr "الزرّان العلويان الأيسر والأيمن"
+#~ msgid "Left and right bumper"
+#~ msgstr "الزرّان العلويان الأيسر والأيمن"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right trigger"
-msgstr "الزنادان الأيسر والأيمن"
+#~ msgid "Left and right trigger"
+#~ msgstr "الزنادان الأيسر والأيمن"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Left bumper (LB)"
@@ -3493,6 +3542,14 @@ msgstr "جديد على السيرفر"
 msgid "New unreads"
 msgstr "غير مقروء جديد"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next channel"
+msgstr "القناة التالية"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next server"
+msgstr "الخادم التالي"
+
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
 msgstr "لقب"
@@ -3595,6 +3652,10 @@ msgstr "بلا حد"
 #: components/modal/modals/ReportContent.tsx
 msgid "Not of minimum age to use the platform"
 msgstr "غير مستوف للحد الادنى العمري لهذه المنصة"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Not set"
+msgstr "غير معيّن"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
@@ -3966,6 +4027,19 @@ msgstr "الموضع"
 msgid "Powered by RNNoise"
 msgstr "مدعوم بواسطة RNNoise"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a button…"
+msgstr "اضغط زرًا…"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Press a controller button for \"{0}\". Press Escape to cancel."
+#~ msgstr "اضغط زرًا في وحدة التحكم لـ \"{0}\". اضغط Escape للإلغاء."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a controller button for \"{actionName}\". Press Escape to cancel."
+msgstr "اضغط زرًا في وحدة التحكم لـ \"{actionName}\". اضغط Escape للإلغاء."
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
 msgstr "اضغط على المفاتيح…"
@@ -3979,12 +4053,20 @@ msgid "Preview"
 msgstr "معاينة"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next channel"
-msgstr "القناة السابقة والتالية"
+#~ msgid "Previous and next channel"
+#~ msgstr "القناة السابقة والتالية"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next server"
-msgstr "الخادم السابق والتالي"
+#~ msgid "Previous and next server"
+#~ msgstr "الخادم السابق والتالي"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous channel"
+msgstr "القناة السابقة"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous server"
+msgstr "الخادم السابق"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
@@ -4200,6 +4282,7 @@ msgstr "قناة بعيدة"
 msgid "Remote Server"
 msgstr "خادم بعيد"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
@@ -4237,6 +4320,15 @@ msgstr "حذف الصور الشخصية للاعضاء الاخرين"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "حذف التفاعل"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Remove the button for \"{0}\""
+#~ msgstr "إزالة الزر الخاص بـ \"{0}\""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Remove the button for \"{actionName}\""
+msgstr "إزالة الزر الخاص بـ \"{actionName}\""
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -4328,6 +4420,10 @@ msgstr "إعادة التعيين"
 msgid "Reset {0}'s token?"
 msgstr "اعادة تعيين رمز {0}؟"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset all buttons"
+msgstr "إعادة تعيين كل الأزرار"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
 msgstr "إعادة ضبط كل الأصوات"
@@ -4342,11 +4438,21 @@ msgstr "أعد تعيين كلمة السر"
 msgid "Reset Recovery Codes"
 msgstr "اعادة تعيين رموز الاسترجاع"
 
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Reset the button for \"{0}\""
+#~ msgstr "إعادة تعيين الزر الخاص بـ \"{0}\""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset the button for \"{actionName}\""
+msgstr "إعادة تعيين الزر الخاص بـ \"{actionName}\""
+
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "إعادة الضبط إلى {0}"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
 msgstr "إعادة التعيين إلى الافتراضي"
@@ -5151,6 +5257,15 @@ msgstr "البوت موجود بالفعل في الاكتشاف، ويجب عل
 msgid "The bot will not be granted any permissions."
 msgstr "لن يُمنح البوت أي أذونات."
 
+#. placeholder {0}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "The default button is needed for \"{0}\". Reset that one first."
+#~ msgstr "الزر الافتراضي مطلوب لـ \"{0}\". أعد تعيين ذلك الزر أولاً."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The default button is needed for \"{actionName}\". Reset that one first."
+msgstr "الزر الافتراضي مطلوب لـ \"{actionName}\". أعد تعيين ذلك الزر أولاً."
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
 msgstr "تطبيق سطح المكتب متاح لنظامي Windows وLinux."
@@ -5232,6 +5347,10 @@ msgstr "هذا البوت قابل للاكتشاف"
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
 msgstr "هذا البوت خاص ولا يمكن إضافته إلا بواسطة الشخص الذي انشأه."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr "هذا الزر هو زر الضغط للتحدث، لذا لا يؤدي أي وظيفة أخرى أثناء تفعيل الضغط للتحدث. اختر زرًا آخر."
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
@@ -5357,6 +5476,10 @@ msgstr "محظور مؤقتًا حتى {0}"
 msgid "Timed Out until {0}"
 msgstr "محظور مؤقتًا حتى {0}"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Timed out."
+msgstr "انتهت المهلة."
+
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
 msgstr "حظر مؤقت"
@@ -5456,7 +5579,7 @@ msgstr "خطأ Staot غير مراقب: {0}"
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallButtons.tsx
 msgid "Undeafen"
-msgstr "غير مافن"
+msgstr "إلغاء تعطيل الصوت"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Unknown"
@@ -5889,8 +6012,8 @@ msgid "Welcome!"
 msgstr "أهلًا!"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "What each controller button does"
-msgstr "وظيفة كل زر في وحدة التحكم"
+#~ msgid "What each controller button does"
+#~ msgstr "وظيفة كل زر في وحدة التحكم"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"

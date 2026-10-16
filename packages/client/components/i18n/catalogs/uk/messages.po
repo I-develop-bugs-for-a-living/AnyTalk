@@ -158,6 +158,18 @@ msgstr "{0} уже внизу"
 msgid "{0} is already at the top"
 msgstr "{0} уже вгорі"
 
+#. placeholder {0}: buttonLabels()[button]
+#. placeholder {1}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is needed for \"{1}\". Pick another button."
+#~ msgstr ""
+
+#. placeholder {0}: actionLabels()[action]
+#. placeholder {1}: buttonLabels()[button]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is now {1}."
+#~ msgstr ""
+
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "{0} is typing…"
@@ -276,6 +288,14 @@ msgstr "Ролі {0}"
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
 msgstr "Тайм-аут для {0} буде знято, і користувач знову зможе взаємодіяти із сервером."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{actionName} is now {buttonName}."
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{buttonName} is needed for \"{actionName}\". Pick another button."
+msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
@@ -1104,6 +1124,10 @@ msgstr "Скасувати повідомлення"
 msgid "Cancel your discover request and remove it from the review queue"
 msgstr "Скасуйте заявку до «Огляду» й видаліть її з черги на перевірку"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Cancelled."
+msgstr ""
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
 msgstr "Неможливо видалити акаунт, доки ваші сервери не будуть видалені або перенесені"
@@ -1161,6 +1185,15 @@ msgstr "Змінити власний аватар"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
 msgstr "Змінити власний нікнейм"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Change the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Change the button for \"{actionName}\""
+msgstr ""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
@@ -1252,6 +1285,10 @@ msgstr "Оберіть ім'я користувача"
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "Очистити статус"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Click a button to give its action another controller button, then press the new button. Press Escape to cancel. If the new button already has an action, the two swap. Controllers without the standard layout only support A, B, X and Y."
+msgstr ""
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
@@ -1446,6 +1483,10 @@ msgstr "Геймпад"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Controller support"
 msgstr "Підтримка геймпада"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Controls that can't be changed"
+msgstr ""
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Conversations"
@@ -1764,6 +1805,10 @@ msgstr "Заглушити нижчих за рангом користувачі
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
 msgstr "Заглушити учасників"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Deafen or undeafen in a call"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -2357,6 +2402,10 @@ msgstr "Знайти нові сервери"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "Знайдіть свою спіль<0/>ноту, <1/> будьте на зв'язку зі світом."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Fixed controls"
+msgstr ""
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2959,12 +3008,12 @@ msgid "Leave stream"
 msgstr "Залишити трансляцію"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right bumper"
-msgstr "Лівий і правий бампер"
+#~ msgid "Left and right bumper"
+#~ msgstr "Лівий і правий бампер"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right trigger"
-msgstr "Лівий і правий тригер"
+#~ msgid "Left and right trigger"
+#~ msgstr "Лівий і правий тригер"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Left bumper (LB)"
@@ -3465,6 +3514,14 @@ msgstr "Новачок на сервері"
 msgid "New unreads"
 msgstr "Нові непрочитані"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next channel"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next server"
+msgstr ""
+
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
 msgstr "Нікнейм"
@@ -3567,6 +3624,10 @@ msgstr "Без обмежень"
 #: components/modal/modals/ReportContent.tsx
 msgid "Not of minimum age to use the platform"
 msgstr "Занадто юний вік для користування цією платформою"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Not set"
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
@@ -3938,6 +3999,19 @@ msgstr ""
 msgid "Powered by RNNoise"
 msgstr "За підтримки RNNoise"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a button…"
+msgstr ""
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Press a controller button for \"{0}\". Press Escape to cancel."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a controller button for \"{actionName}\". Press Escape to cancel."
+msgstr ""
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
 msgstr "Натисніть клавіші…"
@@ -3951,12 +4025,20 @@ msgid "Preview"
 msgstr "Прев'ю"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next channel"
-msgstr "Попередній і наступний канал"
+#~ msgid "Previous and next channel"
+#~ msgstr "Попередній і наступний канал"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next server"
-msgstr "Попередній і наступний сервер"
+#~ msgid "Previous and next server"
+#~ msgstr "Попередній і наступний сервер"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous channel"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous server"
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
@@ -4172,6 +4254,7 @@ msgstr "Віддалений канал"
 msgid "Remote Server"
 msgstr "Віддалений сервер"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
@@ -4209,6 +4292,15 @@ msgstr "Прибрати аватарки інших учасників"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "Прибрати реакцію"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Remove the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Remove the button for \"{actionName}\""
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -4300,6 +4392,10 @@ msgstr "Скинути"
 msgid "Reset {0}'s token?"
 msgstr "Перезавантажити токен {0}?"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset all buttons"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
 msgstr "Скинути всі звуки"
@@ -4314,11 +4410,21 @@ msgstr "Відновити пароль"
 msgid "Reset Recovery Codes"
 msgstr "Перепризначити коди відновлення"
 
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Reset the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset the button for \"{actionName}\""
+msgstr ""
+
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "Скинути на {0}"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
 msgstr "Скинути до типових"
@@ -5123,6 +5229,15 @@ msgstr "Бот уже в «Огляді», користувач має звер�
 msgid "The bot will not be granted any permissions."
 msgstr "Боту не буде надано жодних дозволів."
 
+#. placeholder {0}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "The default button is needed for \"{0}\". Reset that one first."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The default button is needed for \"{actionName}\". Reset that one first."
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
 msgstr "Застосунок для комп'ютера доступний для Windows і Linux."
@@ -5204,6 +5319,10 @@ msgstr "Цей бот доступний в «Огляді»"
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
 msgstr "Цей бот є приватним і може бути доданим лише його творцем."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr ""
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
@@ -5328,6 +5447,10 @@ msgstr "Тайм-аут до {0}"
 #: components/app/interface/channels/text/Message.tsx
 msgid "Timed Out until {0}"
 msgstr "Тайм-аут до {0}"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Timed out."
+msgstr ""
 
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
@@ -5861,8 +5984,8 @@ msgid "Welcome!"
 msgstr "Ласкаво просимо!"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "What each controller button does"
-msgstr "Що робить кожна кнопка геймпада"
+#~ msgid "What each controller button does"
+#~ msgstr "Що робить кожна кнопка геймпада"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"

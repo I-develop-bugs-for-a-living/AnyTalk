@@ -158,6 +158,18 @@ msgstr "{0} është tashmë në fund"
 msgid "{0} is already at the top"
 msgstr "{0} është tashmë në krye"
 
+#. placeholder {0}: buttonLabels()[button]
+#. placeholder {1}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is needed for \"{1}\". Pick another button."
+#~ msgstr ""
+
+#. placeholder {0}: actionLabels()[action]
+#. placeholder {1}: buttonLabels()[button]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is now {1}."
+#~ msgstr ""
+
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "{0} is typing…"
@@ -276,6 +288,14 @@ msgstr "Rolet e {0}"
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
 msgstr "Ndëshkimi kohor i {0} do të hiqet dhe ai do të mund të ndërveprojë sërish me serverin."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{actionName} is now {buttonName}."
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{buttonName} is needed for \"{actionName}\". Pick another button."
+msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
@@ -1127,6 +1147,10 @@ msgstr "Anulo mesazhin"
 msgid "Cancel your discover request and remove it from the review queue"
 msgstr "Anulo kërkesën tënde për Discover dhe hiqe nga radha e shqyrtimit"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Cancelled."
+msgstr ""
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
 msgstr "Nuk mund të fshihet llogaria derisa serverat të fshihen ose transferohen"
@@ -1184,6 +1208,15 @@ msgstr "Ndrysho avatarin tënd"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
 msgstr "Ndrysho pseudonimin tënd"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Change the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Change the button for \"{actionName}\""
+msgstr ""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
@@ -1275,6 +1308,10 @@ msgstr "Zgjidh emrin e përdoruesit"
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "Statusi i personalizuar"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Click a button to give its action another controller button, then press the new button. Press Escape to cancel. If the new button already has an action, the two swap. Controllers without the standard layout only support A, B, X and Y."
+msgstr ""
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
@@ -1469,6 +1506,10 @@ msgstr "Kontrolluesi"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Controller support"
 msgstr "Mbështetja për kontrolluesin"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Controls that can't be changed"
+msgstr ""
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Conversations"
@@ -1788,6 +1829,10 @@ msgstr "Shurdho anëtarët me rang më të ulët në thirrje zanore"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
 msgstr "Anëtarët e shurdhër"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Deafen or undeafen in a call"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -2385,6 +2430,10 @@ msgstr "Gjej serverë të rinj për t'u bashkuar"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "Gjej komu<0/>nitetin tënd,<1/>lidhu me botën."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Fixed controls"
+msgstr ""
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2987,12 +3036,12 @@ msgid "Leave stream"
 msgstr "Largohu nga transmetimi"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right bumper"
-msgstr "Bumper-i majtas dhe djathtas"
+#~ msgid "Left and right bumper"
+#~ msgstr "Bumper-i majtas dhe djathtas"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right trigger"
-msgstr "Trigger-i majtas dhe djathtas"
+#~ msgid "Left and right trigger"
+#~ msgstr "Trigger-i majtas dhe djathtas"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Left bumper (LB)"
@@ -3493,6 +3542,14 @@ msgstr "I ri në server"
 msgid "New unreads"
 msgstr "Të palexuara të reja"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next channel"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next server"
+msgstr ""
+
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
 msgstr "Pseudonimi"
@@ -3595,6 +3652,10 @@ msgstr "Pa kufizim"
 #: components/modal/modals/ReportContent.tsx
 msgid "Not of minimum age to use the platform"
 msgstr "Nuk ka moshën minimale për të përdorur platformën"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Not set"
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
@@ -3966,6 +4027,19 @@ msgstr ""
 msgid "Powered by RNNoise"
 msgstr "Mundësuar nga RNNoise"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a button…"
+msgstr ""
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Press a controller button for \"{0}\". Press Escape to cancel."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a controller button for \"{actionName}\". Press Escape to cancel."
+msgstr ""
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
 msgstr "Shtyp tastet…"
@@ -3979,12 +4053,20 @@ msgid "Preview"
 msgstr "Pamje paraprake"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next channel"
-msgstr "Kanali i mëparshëm dhe i ardhshëm"
+#~ msgid "Previous and next channel"
+#~ msgstr "Kanali i mëparshëm dhe i ardhshëm"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next server"
-msgstr "Serveri i mëparshëm dhe i ardhshëm"
+#~ msgid "Previous and next server"
+#~ msgstr "Serveri i mëparshëm dhe i ardhshëm"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous channel"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous server"
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
@@ -4200,6 +4282,7 @@ msgstr "Kanal i largët"
 msgid "Remote Server"
 msgstr "Server i largët"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
@@ -4237,6 +4320,15 @@ msgstr "Hiq avatarët e anëtarëve të tjerë"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "Hiq reagimin"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Remove the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Remove the button for \"{actionName}\""
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -4328,6 +4420,10 @@ msgstr "Rivendos"
 msgid "Reset {0}'s token?"
 msgstr "Të rivendoset tokeni i {0}?"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset all buttons"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
 msgstr "Rivendos të gjithë tingujt"
@@ -4342,11 +4438,21 @@ msgstr "Rivendosni fjalëkalimin"
 msgid "Reset Recovery Codes"
 msgstr "Rivendos kodet e rikuperimit"
 
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Reset the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset the button for \"{actionName}\""
+msgstr ""
+
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "Rivendos në {0}"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
 msgstr "Rivendos te parazgjedhja"
@@ -5151,6 +5257,15 @@ msgstr "Roboti është tashmë në Discover, përdoruesi duhet të kontaktojë m
 msgid "The bot will not be granted any permissions."
 msgstr "Robotit nuk do t'i jepet asnjë leje."
 
+#. placeholder {0}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "The default button is needed for \"{0}\". Reset that one first."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The default button is needed for \"{actionName}\". Reset that one first."
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
 msgstr "Aplikacioni për desktop është i disponueshëm për Windows dhe Linux."
@@ -5232,6 +5347,10 @@ msgstr "Ky robot është i zbulueshëm"
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
 msgstr "Ky robot është privat dhe mund të shtohet vetëm nga krijuesi."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr ""
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
@@ -5356,6 +5475,10 @@ msgstr "I ndëshkuar kohësisht deri më {0}"
 #: components/app/interface/channels/text/Message.tsx
 msgid "Timed Out until {0}"
 msgstr "I ndëshkuar kohësisht deri më {0}"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Timed out."
+msgstr ""
 
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
@@ -5889,8 +6012,8 @@ msgid "Welcome!"
 msgstr "Mirësevini!"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "What each controller button does"
-msgstr "Çfarë bën çdo buton i kontrolluesit"
+#~ msgid "What each controller button does"
+#~ msgstr "Çfarë bën çdo buton i kontrolluesit"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"

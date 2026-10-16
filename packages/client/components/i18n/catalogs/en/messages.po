@@ -158,6 +158,18 @@ msgstr "{0} is already at the bottom"
 msgid "{0} is already at the top"
 msgstr "{0} is already at the top"
 
+#. placeholder {0}: buttonLabels()[button]
+#. placeholder {1}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is needed for \"{1}\". Pick another button."
+#~ msgstr "{0} is needed for \"{1}\". Pick another button."
+
+#. placeholder {0}: actionLabels()[action]
+#. placeholder {1}: buttonLabels()[button]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is now {1}."
+#~ msgstr "{0} is now {1}."
+
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "{0} is typing…"
@@ -276,6 +288,14 @@ msgstr "{0}'s roles"
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
 msgstr "{0}'s timeout will be removed and they will be able to interact with the server again."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{actionName} is now {buttonName}."
+msgstr "{actionName} is now {buttonName}."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{buttonName} is needed for \"{actionName}\". Pick another button."
+msgstr "{buttonName} is needed for \"{actionName}\". Pick another button."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
@@ -1129,6 +1149,10 @@ msgstr "Cancel message"
 msgid "Cancel your discover request and remove it from the review queue"
 msgstr "Cancel your discover request and remove it from the review queue"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Cancelled."
+msgstr "Cancelled."
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
 msgstr "Cannot delete account until servers are deleted or transferred"
@@ -1186,6 +1210,15 @@ msgstr "Change own avatar"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
 msgstr "Change own nickname"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Change the button for \"{0}\""
+#~ msgstr "Change the button for \"{0}\""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Change the button for \"{actionName}\""
+msgstr "Change the button for \"{actionName}\""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
@@ -1278,6 +1311,10 @@ msgstr "Choose username"
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "Clear status"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Click a button to give its action another controller button, then press the new button. Press Escape to cancel. If the new button already has an action, the two swap. Controllers without the standard layout only support A, B, X and Y."
+msgstr "Click a button to give its action another controller button, then press the new button. Press Escape to cancel. If the new button already has an action, the two swap. Controllers without the standard layout only support A, B, X and Y."
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
@@ -1472,6 +1509,10 @@ msgstr "Controller"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Controller support"
 msgstr "Controller support"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Controls that can't be changed"
+msgstr "Controls that can't be changed"
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Conversations"
@@ -1792,6 +1833,10 @@ msgstr "Deafen lower-ranking members in voice call"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
 msgstr "Deafen Members"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Deafen or undeafen in a call"
+msgstr "Deafen or undeafen in a call"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -2391,6 +2436,10 @@ msgstr "Find new servers to join"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "Find your com<0/>munity,<1/>connect with the world."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Fixed controls"
+msgstr "Fixed controls"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2996,12 +3045,12 @@ msgid "Leave stream"
 msgstr "Leave stream"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right bumper"
-msgstr "Left and right bumper"
+#~ msgid "Left and right bumper"
+#~ msgstr "Left and right bumper"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right trigger"
-msgstr "Left and right trigger"
+#~ msgid "Left and right trigger"
+#~ msgstr "Left and right trigger"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Left bumper (LB)"
@@ -3502,6 +3551,14 @@ msgstr "New to the server"
 msgid "New unreads"
 msgstr "New unreads"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next channel"
+msgstr "Next channel"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next server"
+msgstr "Next server"
+
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
 msgstr "Nickname"
@@ -3604,6 +3661,10 @@ msgstr "Not limited"
 #: components/modal/modals/ReportContent.tsx
 msgid "Not of minimum age to use the platform"
 msgstr "Not of minimum age to use the platform"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Not set"
+msgstr "Not set"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
@@ -3975,6 +4036,19 @@ msgstr "Position"
 msgid "Powered by RNNoise"
 msgstr "Powered by RNNoise"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a button…"
+msgstr "Press a button…"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Press a controller button for \"{0}\". Press Escape to cancel."
+#~ msgstr "Press a controller button for \"{0}\". Press Escape to cancel."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a controller button for \"{actionName}\". Press Escape to cancel."
+msgstr "Press a controller button for \"{actionName}\". Press Escape to cancel."
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
 msgstr "Press keys…"
@@ -3988,12 +4062,20 @@ msgid "Preview"
 msgstr "Preview"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next channel"
-msgstr "Previous and next channel"
+#~ msgid "Previous and next channel"
+#~ msgstr "Previous and next channel"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next server"
-msgstr "Previous and next server"
+#~ msgid "Previous and next server"
+#~ msgstr "Previous and next server"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous channel"
+msgstr "Previous channel"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous server"
+msgstr "Previous server"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
@@ -4210,6 +4292,7 @@ msgstr "Remote Channel"
 msgid "Remote Server"
 msgstr "Remote Server"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
@@ -4247,6 +4330,15 @@ msgstr "Remove other members' avatars"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "Remove reaction"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Remove the button for \"{0}\""
+#~ msgstr "Remove the button for \"{0}\""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Remove the button for \"{actionName}\""
+msgstr "Remove the button for \"{actionName}\""
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -4338,6 +4430,10 @@ msgstr "Reset"
 msgid "Reset {0}'s token?"
 msgstr "Reset {0}'s token?"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset all buttons"
+msgstr "Reset all buttons"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
 msgstr "Reset all sounds"
@@ -4352,11 +4448,21 @@ msgstr "Reset password"
 msgid "Reset Recovery Codes"
 msgstr "Reset Recovery Codes"
 
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Reset the button for \"{0}\""
+#~ msgstr "Reset the button for \"{0}\""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset the button for \"{actionName}\""
+msgstr "Reset the button for \"{actionName}\""
+
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "Reset to {0}"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
 msgstr "Reset to default"
@@ -5165,6 +5271,15 @@ msgstr "The bot is already on discover, the user must contact support to have it
 msgid "The bot will not be granted any permissions."
 msgstr "The bot will not be granted any permissions."
 
+#. placeholder {0}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "The default button is needed for \"{0}\". Reset that one first."
+#~ msgstr "The default button is needed for \"{0}\". Reset that one first."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The default button is needed for \"{actionName}\". Reset that one first."
+msgstr "The default button is needed for \"{actionName}\". Reset that one first."
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
 msgstr "The desktop app is available for Windows and Linux."
@@ -5246,6 +5361,10 @@ msgstr "This bot is discoverable"
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
 msgstr "This bot is private and can only be added by the creator."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
@@ -5370,6 +5489,10 @@ msgstr "Timed out until {0}"
 #: components/app/interface/channels/text/Message.tsx
 msgid "Timed Out until {0}"
 msgstr "Timed Out until {0}"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Timed out."
+msgstr "Timed out."
 
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
@@ -5908,8 +6031,8 @@ msgid "Welcome!"
 msgstr "Welcome!"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "What each controller button does"
-msgstr "What each controller button does"
+#~ msgid "What each controller button does"
+#~ msgstr "What each controller button does"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"

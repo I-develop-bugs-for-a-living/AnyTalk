@@ -158,6 +158,18 @@ msgstr "{0} jau apačioje"
 msgid "{0} is already at the top"
 msgstr "{0} jau viršuje"
 
+#. placeholder {0}: buttonLabels()[button]
+#. placeholder {1}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is needed for \"{1}\". Pick another button."
+#~ msgstr ""
+
+#. placeholder {0}: actionLabels()[action]
+#. placeholder {1}: buttonLabels()[button]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is now {1}."
+#~ msgstr ""
+
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "{0} is typing…"
@@ -276,6 +288,14 @@ msgstr "{0} vaidmenys"
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
 msgstr "{0} laikinas apribojimas bus panaikintas ir jis vėl galės bendrauti serveryje."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{actionName} is now {buttonName}."
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{buttonName} is needed for \"{actionName}\". Pick another button."
+msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
@@ -1129,6 +1149,10 @@ msgstr "Atšaukti pranešimą"
 msgid "Cancel your discover request and remove it from the review queue"
 msgstr "Atšaukite „Atradimo“ prašymą ir pašalinkite jį iš peržiūros eilės"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Cancelled."
+msgstr ""
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
 msgstr "Paskyros negalima ištrinti kol serveriai nėra ištrinti arba perduota nuosavybė"
@@ -1186,6 +1210,15 @@ msgstr "Keisti savo avatarą"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
 msgstr "Keisti savo pravardę"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Change the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Change the button for \"{actionName}\""
+msgstr ""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
@@ -1278,6 +1311,10 @@ msgstr "Pasirinkite naudotojo vardą"
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "Valyti būseną"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Click a button to give its action another controller button, then press the new button. Press Escape to cancel. If the new button already has an action, the two swap. Controllers without the standard layout only support A, B, X and Y."
+msgstr ""
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
@@ -1472,6 +1509,10 @@ msgstr "Valdiklis"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Controller support"
 msgstr "Valdiklių palaikymas"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Controls that can't be changed"
+msgstr ""
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Conversations"
@@ -1792,6 +1833,10 @@ msgstr "Išjungti garsą žemesnio rango nariams balso skambutyje"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
 msgstr "Išjungti narių garsą"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Deafen or undeafen in a call"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -2391,6 +2436,10 @@ msgstr "Raskite naujų serverių"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "Raskite savo bend<0/>ruomenę,<1/>užmegzkite ryšį su pasauliu."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Fixed controls"
+msgstr ""
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2996,12 +3045,12 @@ msgid "Leave stream"
 msgstr "Išeiti iš transliacijos"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right bumper"
-msgstr "Kairysis ir dešinysis bamperis"
+#~ msgid "Left and right bumper"
+#~ msgstr "Kairysis ir dešinysis bamperis"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right trigger"
-msgstr "Kairysis ir dešinysis gaidukas"
+#~ msgid "Left and right trigger"
+#~ msgstr "Kairysis ir dešinysis gaidukas"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Left bumper (LB)"
@@ -3502,6 +3551,14 @@ msgstr "Naujokas serveryje"
 msgid "New unreads"
 msgstr "Nauji neperskaityti"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next channel"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next server"
+msgstr ""
+
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
 msgstr "Pravardė"
@@ -3604,6 +3661,10 @@ msgstr "Neribota"
 #: components/modal/modals/ReportContent.tsx
 msgid "Not of minimum age to use the platform"
 msgstr "Nesulaukė minimalaus amžiaus naudotis platforma"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Not set"
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
@@ -3975,6 +4036,19 @@ msgstr ""
 msgid "Powered by RNNoise"
 msgstr "Veikia su RNNoise"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a button…"
+msgstr ""
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Press a controller button for \"{0}\". Press Escape to cancel."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a controller button for \"{actionName}\". Press Escape to cancel."
+msgstr ""
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
 msgstr "Spauskite klavišus…"
@@ -3988,12 +4062,20 @@ msgid "Preview"
 msgstr "Peržiūra"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next channel"
-msgstr "Ankstesnis ir kitas kanalas"
+#~ msgid "Previous and next channel"
+#~ msgstr "Ankstesnis ir kitas kanalas"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next server"
-msgstr "Ankstesnis ir kitas serveris"
+#~ msgid "Previous and next server"
+#~ msgstr "Ankstesnis ir kitas serveris"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous channel"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous server"
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
@@ -4210,6 +4292,7 @@ msgstr "Nuotolinis kanalas"
 msgid "Remote Server"
 msgstr "Nuotolinis serveris"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
@@ -4247,6 +4330,15 @@ msgstr "Pašalinti kitų narių avatarus"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "Pašalinti reakciją"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Remove the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Remove the button for \"{actionName}\""
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -4338,6 +4430,10 @@ msgstr "Atkurti"
 msgid "Reset {0}'s token?"
 msgstr "Atstatyti {0} prieigos raktą?"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset all buttons"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
 msgstr "Atstatyti visus garsus"
@@ -4352,11 +4448,21 @@ msgstr "Atkurti slaptažodį"
 msgid "Reset Recovery Codes"
 msgstr "Atstatyti atkūrimo kodus"
 
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Reset the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset the button for \"{actionName}\""
+msgstr ""
+
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "Atstatyti į {0}"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
 msgstr "Atstatyti numatytąjį"
@@ -5165,6 +5271,15 @@ msgstr "Botas jau yra Atradimuose, naudotojas turi susisiekti su palaikymu, kad 
 msgid "The bot will not be granted any permissions."
 msgstr "Botui nebus suteikta jokių leidimų."
 
+#. placeholder {0}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "The default button is needed for \"{0}\". Reset that one first."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The default button is needed for \"{actionName}\". Reset that one first."
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
 msgstr "Kompiuterio programa pasiekiama Windows ir Linux sistemoms."
@@ -5246,6 +5361,10 @@ msgstr "Šį botą galima rasti Atradimuose"
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
 msgstr "Šis botas yra privatus ir jį gali pridėti tik kūrėjas."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr ""
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
@@ -5370,6 +5489,10 @@ msgstr "Apribotas iki {0}"
 #: components/app/interface/channels/text/Message.tsx
 msgid "Timed Out until {0}"
 msgstr "Apribotas iki {0}"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Timed out."
+msgstr ""
 
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
@@ -5908,8 +6031,8 @@ msgid "Welcome!"
 msgstr "Sveiki!"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "What each controller button does"
-msgstr "Ką daro kiekvienas valdiklio mygtukas"
+#~ msgid "What each controller button does"
+#~ msgstr "Ką daro kiekvienas valdiklio mygtukas"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"

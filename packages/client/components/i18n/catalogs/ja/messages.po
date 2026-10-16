@@ -158,6 +158,18 @@ msgstr "{0} はすでに一番下です"
 msgid "{0} is already at the top"
 msgstr "{0} はすでに一番上です"
 
+#. placeholder {0}: buttonLabels()[button]
+#. placeholder {1}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is needed for \"{1}\". Pick another button."
+#~ msgstr "{0}は「{1}」に必要です。別のボタンを選んでください。"
+
+#. placeholder {0}: actionLabels()[action]
+#. placeholder {1}: buttonLabels()[button]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is now {1}."
+#~ msgstr "「{0}」を{1}に設定しました。"
+
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "{0} is typing…"
@@ -276,6 +288,14 @@ msgstr "{0}のロール"
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
 msgstr "{0} のタイムアウトを解除し、再びサーバーで操作できるようになります。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{actionName} is now {buttonName}."
+msgstr "「{actionName}」を{buttonName}に設定しました。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{buttonName} is needed for \"{actionName}\". Pick another button."
+msgstr "{buttonName}は「{actionName}」に必要です。別のボタンを選んでください。"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
@@ -1047,6 +1067,10 @@ msgstr "メッセージを取り消す"
 msgid "Cancel your discover request and remove it from the review queue"
 msgstr "探索リクエストをキャンセルし、審査待ちから削除します"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Cancelled."
+msgstr "キャンセルしました。"
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
 msgstr "所有するサーバーが削除または譲渡されるまで、アカウントを削除することはできません"
@@ -1104,6 +1128,15 @@ msgstr "自分のアバターを変更できます"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
 msgstr "自分のニックネームを変更できます"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Change the button for \"{0}\""
+#~ msgstr "「{0}」のボタンを変更"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Change the button for \"{actionName}\""
+msgstr "「{actionName}」のボタンを変更"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
@@ -1192,6 +1225,10 @@ msgstr "ユーザー名を入力"
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "ステータスをクリア"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Click a button to give its action another controller button, then press the new button. Press Escape to cancel. If the new button already has an action, the two swap. Controllers without the standard layout only support A, B, X and Y."
+msgstr "ボタンをクリックして、その操作に別のコントローラーボタンを割り当て、新しいボタンを押してください。Escapeキーでキャンセルできます。新しいボタンにすでに操作がある場合は、2つが入れ替わります。標準配置ではないコントローラーはA、B、X、Yのみ対応しています。"
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
@@ -1386,6 +1423,10 @@ msgstr "コントローラー"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Controller support"
 msgstr "コントローラー対応"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Controls that can't be changed"
+msgstr "変更できない操作"
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Conversations"
@@ -1704,6 +1745,10 @@ msgstr "自分よりも低い位置にいるメンバーのスピーカーをミ
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
 msgstr "メンバーのスピーカーをミュート"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Deafen or undeafen in a call"
+msgstr "通話中にスピーカーミュートを切り替える"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -2291,6 +2336,10 @@ msgstr "参加する新しいサーバーを探す"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "あなたの居場所<0/>を探そう、<1/>世界と繋がろう。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Fixed controls"
+msgstr "固定の操作"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2887,12 +2936,12 @@ msgid "Leave stream"
 msgstr "配信から退出"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right bumper"
-msgstr "左右のバンパー"
+#~ msgid "Left and right bumper"
+#~ msgstr "左右のバンパー"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right trigger"
-msgstr "左右のトリガー"
+#~ msgid "Left and right trigger"
+#~ msgstr "左右のトリガー"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Left bumper (LB)"
@@ -3393,6 +3442,14 @@ msgstr "新しいサーバー参加者"
 msgid "New unreads"
 msgstr "新しい未読"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next channel"
+msgstr "次のチャンネル"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next server"
+msgstr "次のサーバー"
+
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
 msgstr "ニックネーム"
@@ -3495,6 +3552,10 @@ msgstr "制限なし"
 #: components/modal/modals/ReportContent.tsx
 msgid "Not of minimum age to use the platform"
 msgstr "このプラットフォームを使用できる最低年齢に達していない"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Not set"
+msgstr "未設定"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
@@ -3866,6 +3927,19 @@ msgstr "位置"
 msgid "Powered by RNNoise"
 msgstr "RNNoise を使用"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a button…"
+msgstr "ボタンを押してください…"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Press a controller button for \"{0}\". Press Escape to cancel."
+#~ msgstr "「{0}」に割り当てるコントローラーボタンを押してください。Escapeキーでキャンセルできます。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a controller button for \"{actionName}\". Press Escape to cancel."
+msgstr "「{actionName}」に割り当てるコントローラーボタンを押してください。Escapeキーでキャンセルできます。"
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
 msgstr "キーを押してください…"
@@ -3879,12 +3953,20 @@ msgid "Preview"
 msgstr "プレビュー"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next channel"
-msgstr "前後のチャンネル"
+#~ msgid "Previous and next channel"
+#~ msgstr "前後のチャンネル"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next server"
-msgstr "前後のサーバー"
+#~ msgid "Previous and next server"
+#~ msgstr "前後のサーバー"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous channel"
+msgstr "前のチャンネル"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous server"
+msgstr "前のサーバー"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
@@ -4097,6 +4179,7 @@ msgstr "リモートチャンネル"
 msgid "Remote Server"
 msgstr "リモートサーバー"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
@@ -4134,6 +4217,15 @@ msgstr "他のメンバーのアバターを変更できます"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "リアクションを削除"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Remove the button for \"{0}\""
+#~ msgstr "「{0}」のボタンを削除"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Remove the button for \"{actionName}\""
+msgstr "「{actionName}」のボタンを削除"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -4225,6 +4317,10 @@ msgstr "元に戻す"
 msgid "Reset {0}'s token?"
 msgstr "{0}のトークンを元に返す？"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset all buttons"
+msgstr "すべてのボタンを元に戻す"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
 msgstr "すべてのサウンドをリセット"
@@ -4239,11 +4335,21 @@ msgstr "パスワードをリセット"
 msgid "Reset Recovery Codes"
 msgstr "リカバリーコードをリセット"
 
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Reset the button for \"{0}\""
+#~ msgstr "「{0}」のボタンを元に戻す"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset the button for \"{actionName}\""
+msgstr "「{actionName}」のボタンを元に戻す"
+
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "{0} にリセット"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
 msgstr "デフォルトに戻す"
@@ -5036,6 +5142,15 @@ msgstr "このボットはすでに探索に載っています。削除するに
 msgid "The bot will not be granted any permissions."
 msgstr "ボットには権限が付与されません。"
 
+#. placeholder {0}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "The default button is needed for \"{0}\". Reset that one first."
+#~ msgstr "「{0}」にはデフォルトのボタンが必要です。先にそちらを元に戻してください。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The default button is needed for \"{actionName}\". Reset that one first."
+msgstr "「{actionName}」にはデフォルトのボタンが必要です。先にそちらを元に戻してください。"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
 msgstr "デスクトップアプリは Windows と Linux で利用できます。"
@@ -5117,6 +5232,10 @@ msgstr "このボットは探索で見つけられます"
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
 msgstr "このボットは非公開で、作成者のみが追加できます。"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr "このボタンはプッシュ・トゥ・トーク用なので、有効な間は他の操作に使えません。別のボタンを選んでください。"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
@@ -5241,6 +5360,10 @@ msgstr "{0} までタイムアウト中"
 #: components/app/interface/channels/text/Message.tsx
 msgid "Timed Out until {0}"
 msgstr "{0} までタイムアウト中"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Timed out."
+msgstr "タイムアウトしました。"
 
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
@@ -5768,8 +5891,8 @@ msgid "Welcome!"
 msgstr "ようこそ！"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "What each controller button does"
-msgstr "各コントローラーボタンの機能"
+#~ msgid "What each controller button does"
+#~ msgstr "各コントローラーボタンの機能"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"

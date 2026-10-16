@@ -158,6 +158,18 @@ msgstr "{0} isyay alreadyyay atyay ethay ottombay"
 msgid "{0} is already at the top"
 msgstr "{0} isyay alreadyyay atyay ethay optay"
 
+#. placeholder {0}: buttonLabels()[button]
+#. placeholder {1}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is needed for \"{1}\". Pick another button."
+#~ msgstr "{0} isyay eedednay orfay \"{1}\". Ickpay anotheryay uttonbay."
+
+#. placeholder {0}: actionLabels()[action]
+#. placeholder {1}: buttonLabels()[button]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is now {1}."
+#~ msgstr "{0} isyay ownay {1}."
+
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "{0} is typing…"
@@ -276,6 +288,14 @@ msgstr "{0}'say olesray"
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
 msgstr "{0}'say imeouttay illway ebay emovedray andyay eythay illway ebay ableyay otay interactyay ithway ethay erversay againyay."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{actionName} is now {buttonName}."
+msgstr "{actionName} isyay ownay {buttonName}."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{buttonName} is needed for \"{actionName}\". Pick another button."
+msgstr "{buttonName} isyay eedednay orfay \"{actionName}\". Ickpay anotheryay uttonbay."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
@@ -1129,6 +1149,10 @@ msgstr "Ancelcay essagemay"
 msgid "Cancel your discover request and remove it from the review queue"
 msgstr "Ancelcay ouryay iscoverday equestray andyay emoveray ityay omfray ethay eviewray euequay"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Cancelled."
+msgstr "Ancelledcay."
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
 msgstr "Annotcay eleteday accountyay untilyay erverssay areyay eletedday oryay ansferredtray"
@@ -1186,6 +1210,15 @@ msgstr "Angechay ownyay avataryay"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
 msgstr "Angechay ownyay icknamenay"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Change the button for \"{0}\""
+#~ msgstr "Angechay ethay uttonbay orfay \"{0}\""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Change the button for \"{actionName}\""
+msgstr "Angechay ethay uttonbay orfay \"{actionName}\""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
@@ -1278,6 +1311,10 @@ msgstr "Oosechay usernameyay"
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "Earclay atusstay"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Click a button to give its action another controller button, then press the new button. Press Escape to cancel. If the new button already has an action, the two swap. Controllers without the standard layout only support A, B, X and Y."
+msgstr "Ickclay ayay uttonbay otay ivegay itsyay actionyay anotheryay ontrollercay uttonbay, enthay esspray ethay ewnay uttonbay. Esspray Escapeyay otay ancelcay. Ifyay ethay ewnay uttonbay alreadyyay ashay anyay actionyay, ethay otway apsway. Ontrollerscay ithoutway ethay andardstay ayoutlay onlyyay upportsay Ayay, Bay, Xay andyay Yay."
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
@@ -1472,6 +1509,10 @@ msgstr "Ontrollercay"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Controller support"
 msgstr "Ontrollercay upportsay"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Controls that can't be changed"
+msgstr "Ontrolscay atthay an'tcay ebay angedchay"
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Conversations"
@@ -1792,6 +1833,10 @@ msgstr "Eafenday owerlay-ankingray embersmay inyay oicevay allcay"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
 msgstr "Eafenday Embersmay"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Deafen or undeafen in a call"
+msgstr "Eafenday oryay undeafenyay inyay ayay allcay"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -2391,6 +2436,10 @@ msgstr "Indfay ewnay erverssay otay oinjay"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "Indfay ouryay omcay<0/>unitymay,<1/>onnectcay ithway ethay orldway."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Fixed controls"
+msgstr "Ixedfay ontrolscay"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2996,12 +3045,12 @@ msgid "Leave stream"
 msgstr "Eavelay eamstray"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right bumper"
-msgstr "Eftlay andyay ightray umperbay"
+#~ msgid "Left and right bumper"
+#~ msgstr "Eftlay andyay ightray umperbay"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right trigger"
-msgstr "Eftlay andyay ightray iggertray"
+#~ msgid "Left and right trigger"
+#~ msgstr "Eftlay andyay ightray iggertray"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Left bumper (LB)"
@@ -3502,6 +3551,14 @@ msgstr "Ewnay otay ethay erversay"
 msgid "New unreads"
 msgstr "Ewnay unreadsyay"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next channel"
+msgstr "Extnay annelchay"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next server"
+msgstr "Extnay erversay"
+
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
 msgstr "Icknamenay"
@@ -3604,6 +3661,10 @@ msgstr "Otnay imitedlay"
 #: components/modal/modals/ReportContent.tsx
 msgid "Not of minimum age to use the platform"
 msgstr "Otnay ofyay inimummay ageyay otay useyay ethay atformplay"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Not set"
+msgstr "Otnay etsay"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
@@ -3975,6 +4036,19 @@ msgstr "Ositionpay"
 msgid "Powered by RNNoise"
 msgstr "Oweredpay ybay RNNoise"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a button…"
+msgstr "Esspray ayay uttonbay…"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Press a controller button for \"{0}\". Press Escape to cancel."
+#~ msgstr "Esspray ayay ontrollercay uttonbay orfay \"{0}\". Esspray Escapeyay otay ancelcay."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a controller button for \"{actionName}\". Press Escape to cancel."
+msgstr "Esspray ayay ontrollercay uttonbay orfay \"{actionName}\". Esspray Escapeyay otay ancelcay."
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
 msgstr "Esspray eyskay…"
@@ -3988,12 +4062,20 @@ msgid "Preview"
 msgstr "Eviewpray"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next channel"
-msgstr "Eviouspray andyay extnay annelchay"
+#~ msgid "Previous and next channel"
+#~ msgstr "Eviouspray andyay extnay annelchay"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next server"
-msgstr "Eviouspray andyay extnay erversay"
+#~ msgid "Previous and next server"
+#~ msgstr "Eviouspray andyay extnay erversay"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous channel"
+msgstr "Eviouspray annelchay"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous server"
+msgstr "Eviouspray erversay"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
@@ -4210,6 +4292,7 @@ msgstr "Emoteray Annelchay"
 msgid "Remote Server"
 msgstr "Emoteray Erversay"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
@@ -4247,6 +4330,15 @@ msgstr "Emoveray otheryay embersmay' avatarsyay"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "Emoveray eactionray"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Remove the button for \"{0}\""
+#~ msgstr "Emoveray ethay uttonbay orfay \"{0}\""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Remove the button for \"{actionName}\""
+msgstr "Emoveray ethay uttonbay orfay \"{actionName}\""
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -4338,6 +4430,10 @@ msgstr "Esetray"
 msgid "Reset {0}'s token?"
 msgstr "Esetray {0}'say okentay?"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset all buttons"
+msgstr "Esetray allyay uttonsbay"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
 msgstr "Esetray allyay oundssay"
@@ -4352,11 +4448,21 @@ msgstr "Esetray asswordpay"
 msgid "Reset Recovery Codes"
 msgstr "Esetray Ecoveryray Odescay"
 
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Reset the button for \"{0}\""
+#~ msgstr "Esetray ethay uttonbay orfay \"{0}\""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset the button for \"{actionName}\""
+msgstr "Esetray ethay uttonbay orfay \"{actionName}\""
+
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "Esetray otay {0}"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
 msgstr "Esetray otay efaultday"
@@ -5165,6 +5271,15 @@ msgstr "Ethay otbay isyay alreadyyay onyay iscoverday, ethay useryay ustmay onta
 msgid "The bot will not be granted any permissions."
 msgstr "Ethay otbay illway otnay ebay antedgray anyyay ermissionspay."
 
+#. placeholder {0}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "The default button is needed for \"{0}\". Reset that one first."
+#~ msgstr "Ethay efaultday uttonbay isyay eedednay orfay \"{0}\". Esetray atthay oneyay irstfay."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The default button is needed for \"{actionName}\". Reset that one first."
+msgstr "Ethay efaultday uttonbay isyay eedednay orfay \"{actionName}\". Esetray atthay oneyay irstfay."
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
 msgstr "Ethay esktopday appyay isyay availableyay orfay Indowsway andyay Inuxlay."
@@ -5246,6 +5361,10 @@ msgstr "Isthay otbay isyay iscoverableday"
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
 msgstr "Isthay otbay isyay ivatepray andyay ancay onlyyay ebay addedyay ybay ethay eatorcray."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr "Isthay uttonbay isyay ethay ushpay-otay-alktay uttonbay, osay ityay oesday othingnay elseyay ilewhay ushpay otay alktay isyay onyay. Ickpay anotheryay uttonbay."
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
@@ -5370,6 +5489,10 @@ msgstr "Imedtay outyay untilyay {0}"
 #: components/app/interface/channels/text/Message.tsx
 msgid "Timed Out until {0}"
 msgstr "Imedtay Outyay untilyay {0}"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Timed out."
+msgstr "Imedtay outyay."
 
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
@@ -5908,8 +6031,8 @@ msgid "Welcome!"
 msgstr "Elcomeway!"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "What each controller button does"
-msgstr "Atwhay eachyay ontrollercay uttonbay oesday"
+#~ msgid "What each controller button does"
+#~ msgstr "Atwhay eachyay ontrollercay uttonbay oesday"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"

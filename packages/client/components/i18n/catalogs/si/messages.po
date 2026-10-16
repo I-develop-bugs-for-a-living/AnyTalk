@@ -158,6 +158,18 @@ msgstr "{0} දැනටමත් පහළින්ම ඇත"
 msgid "{0} is already at the top"
 msgstr "{0} දැනටමත් ඉහළින්ම ඇත"
 
+#. placeholder {0}: buttonLabels()[button]
+#. placeholder {1}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is needed for \"{1}\". Pick another button."
+#~ msgstr ""
+
+#. placeholder {0}: actionLabels()[action]
+#. placeholder {1}: buttonLabels()[button]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is now {1}."
+#~ msgstr ""
+
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "{0} is typing…"
@@ -276,6 +288,14 @@ msgstr "{0} ගේ භූමිකා"
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
 msgstr "{0} ගේ කාල සීමාව ඉවත් කර ඔහුට/ඇයට නැවත සේවාදායකයේ ක්‍රියාකාරී විය හැක."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{actionName} is now {buttonName}."
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{buttonName} is needed for \"{actionName}\". Pick another button."
+msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
@@ -1129,6 +1149,10 @@ msgstr "පණිවිඩය අවලංගු කරන්න"
 msgid "Cancel your discover request and remove it from the review queue"
 msgstr "ඔබේ Discover ඉල්ලීම අවලංගු කර සමාලෝචන පෝලිමෙන් ඉවත් කරන්න"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Cancelled."
+msgstr ""
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
 msgstr "සේවාදායක මකා දමන තුරු හෝ මාරු කරන තුරු ගිණුම මකා දැමිය නොහැක"
@@ -1186,6 +1210,15 @@ msgstr "තමන්ගේ ප්‍රතිරූපය වෙනස් කර
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
 msgstr "තමන්ගේ අපනාමය වෙනස් කරන්න"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Change the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Change the button for \"{actionName}\""
+msgstr ""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
@@ -1278,6 +1311,10 @@ msgstr "පරිශීලක නාමය තෝරන්න"
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "තත්‍වය මකන්න"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Click a button to give its action another controller button, then press the new button. Press Escape to cancel. If the new button already has an action, the two swap. Controllers without the standard layout only support A, B, X and Y."
+msgstr ""
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
@@ -1472,6 +1509,10 @@ msgstr "පාලකය"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Controller support"
 msgstr "පාලක සහාය"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Controls that can't be changed"
+msgstr ""
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Conversations"
@@ -1792,6 +1833,10 @@ msgstr "හඬ ඇමතුමේ පහළ ශ්‍රේණියේ සා�
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
 msgstr "සාමාජිකයින්ව බිහිරි කරන්න"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Deafen or undeafen in a call"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -2391,6 +2436,10 @@ msgstr "එක්වීමට නව සේවාදායක සොයන්න
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "ඔබේ ප්‍රජාව<0/> සොයාගෙන,<1/>ලෝකය සමග සම්බන්ධ වන්න."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Fixed controls"
+msgstr ""
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2996,12 +3045,12 @@ msgid "Leave stream"
 msgstr "ප්‍රවාහයෙන් ඉවත් වන්න"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right bumper"
-msgstr "වම් සහ දකුණු බම්පර්"
+#~ msgid "Left and right bumper"
+#~ msgstr "වම් සහ දකුණු බම්පර්"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right trigger"
-msgstr "වම් සහ දකුණු ට්‍රිගර්"
+#~ msgid "Left and right trigger"
+#~ msgstr "වම් සහ දකුණු ට්‍රිගර්"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Left bumper (LB)"
@@ -3502,6 +3551,14 @@ msgstr "සේවාදායකයට අලුත්"
 msgid "New unreads"
 msgstr "නව නොකියවූ"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next channel"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next server"
+msgstr ""
+
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
 msgstr "අපනාමය"
@@ -3604,6 +3661,10 @@ msgstr "සීමා කර නැත"
 #: components/modal/modals/ReportContent.tsx
 msgid "Not of minimum age to use the platform"
 msgstr "වේදිකාව භාවිතයට අවම වයසට නොපැමිණීම"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Not set"
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
@@ -3975,6 +4036,19 @@ msgstr ""
 msgid "Powered by RNNoise"
 msgstr "RNNoise මගින් ක්‍රියාත්මක වේ"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a button…"
+msgstr ""
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Press a controller button for \"{0}\". Press Escape to cancel."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a controller button for \"{actionName}\". Press Escape to cancel."
+msgstr ""
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
 msgstr "යතුරු ඔබන්න…"
@@ -3988,12 +4062,20 @@ msgid "Preview"
 msgstr "පෙරදසුන"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next channel"
-msgstr "පෙර සහ ඊළඟ නාලිකාව"
+#~ msgid "Previous and next channel"
+#~ msgstr "පෙර සහ ඊළඟ නාලිකාව"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next server"
-msgstr "පෙර සහ ඊළඟ සේවාදායකය"
+#~ msgid "Previous and next server"
+#~ msgstr "පෙර සහ ඊළඟ සේවාදායකය"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous channel"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous server"
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
@@ -4210,6 +4292,7 @@ msgstr "දුරස්ථ නාලිකාව"
 msgid "Remote Server"
 msgstr "දුරස්ථ සේවාදායකය"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
@@ -4247,6 +4330,15 @@ msgstr "අනෙක් සාමාජිකයින්ගේ ප්‍රත�
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "ප්‍රතිචාරය ඉවත් කරන්න"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Remove the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Remove the button for \"{actionName}\""
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -4338,6 +4430,10 @@ msgstr "යළි සකසන්න"
 msgid "Reset {0}'s token?"
 msgstr "{0} ගේ ටෝකනය යළි සකසන්නද?"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset all buttons"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
 msgstr "සියලුම ශබ්ද යළි සකසන්න"
@@ -4352,11 +4448,21 @@ msgstr "මුරපදය යළි සකසන්න"
 msgid "Reset Recovery Codes"
 msgstr "ප්‍රතිසාධන කේත යළි සකසන්න"
 
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Reset the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset the button for \"{actionName}\""
+msgstr ""
+
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "{0} වෙත යළි සකසන්න"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
 msgstr "පෙරනිමියට යළි සකසන්න"
@@ -5165,6 +5271,15 @@ msgstr "ස්වයංක්‍රමලේඛය දැනටමත් Discove
 msgid "The bot will not be granted any permissions."
 msgstr "ස්වයංක්‍රමලේඛයට කිසිදු අවසරයක් ලබා නොදෙනු ඇත."
 
+#. placeholder {0}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "The default button is needed for \"{0}\". Reset that one first."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The default button is needed for \"{actionName}\". Reset that one first."
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
 msgstr "වැඩතල යෙදුම Windows සහ Linux සඳහා ලබාගත හැක."
@@ -5246,6 +5361,10 @@ msgstr "මෙම ස්වයංක්‍රමලේඛය Discover හරහ�
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
 msgstr "මෙම ස්වයංක්‍රමලේඛය පුද්ගලිකයි, එය එක් කළ හැක්කේ නිර්මාතෘට පමණි."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr ""
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
@@ -5370,6 +5489,10 @@ msgstr "{0} තෙක් කාල සීමාවක් ඇත"
 #: components/app/interface/channels/text/Message.tsx
 msgid "Timed Out until {0}"
 msgstr "{0} තෙක් කාල සීමාවක් ඇත"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Timed out."
+msgstr ""
 
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
@@ -5908,8 +6031,8 @@ msgid "Welcome!"
 msgstr "සාදරයෙන් පිළිගනිමු!"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "What each controller button does"
-msgstr "පාලකයේ සෑම බොත්තමක්ම කරන දේ"
+#~ msgid "What each controller button does"
+#~ msgstr "පාලකයේ සෑම බොත්තමක්ම කරන දේ"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"

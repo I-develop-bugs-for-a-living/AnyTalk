@@ -158,6 +158,18 @@ msgstr "{0} از قبل در پایین‌ترین جایگاه است"
 msgid "{0} is already at the top"
 msgstr "{0} از قبل در بالاترین جایگاه است"
 
+#. placeholder {0}: buttonLabels()[button]
+#. placeholder {1}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is needed for \"{1}\". Pick another button."
+#~ msgstr ""
+
+#. placeholder {0}: actionLabels()[action]
+#. placeholder {1}: buttonLabels()[button]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "{0} is now {1}."
+#~ msgstr ""
+
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "{0} is typing…"
@@ -276,6 +288,14 @@ msgstr "نقش‌های {0}"
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "{0}'s timeout will be removed and they will be able to interact with the server again."
 msgstr "محدودیت زمانی {0} برداشته می‌شود و او دوباره می‌تواند با سرور تعامل کند."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{actionName} is now {buttonName}."
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "{buttonName} is needed for \"{actionName}\". Pick another button."
+msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "{combo} is already used for another hotkey."
@@ -1128,6 +1148,10 @@ msgstr "لغو پیام"
 msgid "Cancel your discover request and remove it from the review queue"
 msgstr "درخواست کاوش خود را لغو کنید و از صف بررسی حذف کنید"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Cancelled."
+msgstr ""
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Cannot delete account until servers are deleted or transferred"
 msgstr "تا زمانی که سرورها حذف یا منتقل نشده باشند، نمی توان حساب را حذف کرد"
@@ -1185,6 +1209,15 @@ msgstr "تغییر آواتار خود"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change own nickname"
 msgstr "تغییر لقب خود"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Change the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Change the button for \"{actionName}\""
+msgstr ""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Change this bot's username"
@@ -1277,6 +1310,10 @@ msgstr "انتخاب نام کاربری"
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "حذف وضعیت"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Click a button to give its action another controller button, then press the new button. Press Escape to cancel. If the new button already has an action, the two swap. Controllers without the standard layout only support A, B, X and Y."
+msgstr ""
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
@@ -1471,6 +1508,10 @@ msgstr "کنترلر"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Controller support"
 msgstr "پشتیبانی از کنترلر"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Controls that can't be changed"
+msgstr ""
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Conversations"
@@ -1790,6 +1831,10 @@ msgstr "ناشنوا کردن اعضای رتبه پایین‌تر در تما�
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen Members"
 msgstr "ناشنوا کردن اعضا"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Deafen or undeafen in a call"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -2388,6 +2433,10 @@ msgstr "سرورهای جدید برای پیوستن پیدا کنید"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "جامعه خود را <0/>پیدا کنید،<1/>با جهان ارتباط بگیرید."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Fixed controls"
+msgstr ""
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2991,12 +3040,12 @@ msgid "Leave stream"
 msgstr "ترک استریم"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right bumper"
-msgstr "بامپر چپ و راست"
+#~ msgid "Left and right bumper"
+#~ msgstr "بامپر چپ و راست"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Left and right trigger"
-msgstr "تریگر چپ و راست"
+#~ msgid "Left and right trigger"
+#~ msgstr "تریگر چپ و راست"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Left bumper (LB)"
@@ -3497,6 +3546,14 @@ msgstr "تازه‌وارد سرور"
 msgid "New unreads"
 msgstr "خوانده‌نشده‌های جدید"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next channel"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Next server"
+msgstr ""
+
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Nickname"
 msgstr "لقب"
@@ -3599,6 +3656,10 @@ msgstr "بدون محدودیت"
 #: components/modal/modals/ReportContent.tsx
 msgid "Not of minimum age to use the platform"
 msgstr "کمتر از حداقل سن برای استفاده از پلتفرم"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Not set"
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Nothing"
@@ -3970,6 +4031,19 @@ msgstr ""
 msgid "Powered by RNNoise"
 msgstr "قدرت‌گرفته از RNNoise"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a button…"
+msgstr ""
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Press a controller button for \"{0}\". Press Escape to cancel."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Press a controller button for \"{actionName}\". Press Escape to cancel."
+msgstr ""
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Press keys…"
 msgstr "کلیدها را فشار دهید…"
@@ -3983,12 +4057,20 @@ msgid "Preview"
 msgstr "پیش‌نمایش"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next channel"
-msgstr "کانال قبلی و بعدی"
+#~ msgid "Previous and next channel"
+#~ msgstr "کانال قبلی و بعدی"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "Previous and next server"
-msgstr "سرور قبلی و بعدی"
+#~ msgid "Previous and next server"
+#~ msgstr "سرور قبلی و بعدی"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous channel"
+msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Previous server"
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Privacy"
@@ -4205,6 +4287,7 @@ msgstr "کانال راه‌دور"
 msgid "Remote Server"
 msgstr "سرور راه‌دور"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
@@ -4242,6 +4325,15 @@ msgstr "حذف آواتار سایر اعضا"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "حذف واکنش"
+
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Remove the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Remove the button for \"{actionName}\""
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -4333,6 +4425,10 @@ msgstr "بازنشانی کنید"
 msgid "Reset {0}'s token?"
 msgstr "توکن {0} بازنشانی شود؟"
 
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset all buttons"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Reset all sounds"
 msgstr "بازنشانی همه صداها"
@@ -4347,11 +4443,21 @@ msgstr "بازنشانی رمز عبور"
 msgid "Reset Recovery Codes"
 msgstr "بازنشانی کدهای بازیابی"
 
+#. placeholder {0}: actionLabels()[action]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "Reset the button for \"{0}\""
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Reset the button for \"{actionName}\""
+msgstr ""
+
 #. placeholder {0}: formatSequence( defaultSequence(action), )
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Reset to {0}"
 msgstr "بازنشانی به {0}"
 
+#: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Reset to default"
 msgstr "بازنشانی به پیش‌فرض"
@@ -5156,6 +5262,15 @@ msgstr "ربات از قبل در کاوش است، برای حذف آن کار�
 msgid "The bot will not be granted any permissions."
 msgstr "به ربات هیچ مجوزی داده نخواهد شد."
 
+#. placeholder {0}: actionLabels()[blocker]
+#: components/app/interface/settings/user/Controller.tsx
+#~ msgid "The default button is needed for \"{0}\". Reset that one first."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "The default button is needed for \"{actionName}\". Reset that one first."
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The desktop app is available for Windows and Linux."
 msgstr "برنامه دسکتاپ برای Windows و Linux در دسترس است."
@@ -5237,6 +5352,10 @@ msgstr "این ربات در کاوش قابل مشاهده است"
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
 msgstr "این ربات خصوصی است و فقط سازنده می‌تواند آن را اضافه کند."
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr ""
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
@@ -5361,6 +5480,10 @@ msgstr "در محدودیت زمانی تا {0}"
 #: components/app/interface/channels/text/Message.tsx
 msgid "Timed Out until {0}"
 msgstr "در محدودیت زمانی تا {0}"
+
+#: components/app/interface/settings/user/Controller.tsx
+msgid "Timed out."
+msgstr ""
 
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Timeout"
@@ -5896,8 +6019,8 @@ msgid "Welcome!"
 msgstr "خوش آمدید!"
 
 #: components/app/interface/settings/user/Controller.tsx
-msgid "What each controller button does"
-msgstr "هر دکمه کنترلر چه کاری انجام می‌دهد"
+#~ msgid "What each controller button does"
+#~ msgstr "هر دکمه کنترلر چه کاری انجام می‌دهد"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "What limited the stream quality"
