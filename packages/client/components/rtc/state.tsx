@@ -58,6 +58,7 @@ import { InRoom } from "./components/InRoom";
 import { OverlayPublisher } from "./components/OverlayPublisher";
 import { RoomAudioManager } from "./components/RoomAudioManager";
 import { StatsRecorder } from "./components/StatsRecorder";
+import { StreamPopouts } from "./components/StreamPopouts";
 import { StreamViewers } from "./components/StreamViewers";
 import { VoiceKeybinds } from "./components/VoiceKeybinds";
 import { VoiceMoves } from "./components/VoiceMoves";
@@ -102,6 +103,12 @@ import {
   isFollowing,
   republishWaitMs,
 } from "./streamFollow";
+import {
+  type PopoutKind,
+  openPopoutWindow,
+  pickPopoutApi,
+  popoutSize,
+} from "./streamPopout";
 import { VoiceProcessor } from "./VoiceProcessor";
 
 type State =
@@ -383,6 +390,12 @@ class Voice {
   #followUnsupported = false;
 
   /**
+   * Streams shown in a window of their own, by track id (see trackId). Each
+   * entry holds the window; it never changes what is watched or focused.
+   */
+  popouts = new ReactiveMap<string, StreamPopout>();
+
+  /**
    * People whose stream was unpublished a moment ago: a window swap
    * republishes it, which must not look like the stream ended
    */
@@ -481,6 +494,8 @@ class Voice {
     device: Device,
   ) {
     this.#settings = voiceSettings;
+    // the windows belong to this page, don't leave them behind when it goes
+    window.addEventListener("pagehide", () => this.closeAllPopouts());
     this.sound = sound;
     this.device = device;
 
@@ -634,8 +649,11 @@ class Voice {
     this.device.setWakeLocked();
 
     const room = new Room({
-      // Only receive video at the size it is displayed, and pause it when hidden
-      adaptiveStream: true,
+      // Only receive video at the size it is displayed. Not paused while this
+      // page is in the background: a stream popup window (the fallback for
+      // Document Picture-in-Picture) would freeze when AnyTalk is minimized.
+      // The trade-off is that a hidden tab keeps receiving its video.
+      adaptiveStream: { pauseVideoInBackground: false },
       // Stop sending simulcast layers that nobody is subscribed to
       dynacast: true,
       // Keep trying for about a minute, so a switch from wifi to mobile or a
@@ -1458,6 +1476,8 @@ class Voice {
    * the call; nothing is told to the user
    */
   #teardown(forRejoin: boolean) {
+    // the tracks of the old room are gone
+    this.closeAllPopouts();
     // the room goes away, nobody needs to be told
     this.#endFollow(false);
     this.#shareToken = undefined;
@@ -3109,6 +3129,194 @@ class Voice {
     return this.trackId(t) === this.focusId();
   }
 
+  /**
+   * How a stream can be popped out on this device, undefined if it can't
+   */
+  get popoutKind(): PopoutKind | undefined {
+    return pickPopoutApi(
+      window,
+      // touch-only means no mouse or trackpad at all: a touchscreen on a
+      // laptop still has a fine pointer
+      !matchMedia("(any-pointer: fine)").matches,
+      typeof window.open === "function",
+      // the desktop app opens a normal window of its own, never a floating one
+      !!window.native,
+    );
+  }
+
+  /**
+   * Whether the track is shown in a window of its own
+   */
+  isPoppedOut(t: TrackReferenceOrPlaceholder) {
+    return this.popouts.has(this.trackId(t));
+  }
+
+  /**
+   * Show a track in a window of its own that can be moved to another screen.
+   * Has to be called from a click or key press, browsers refuse windows
+   * otherwise. Watching and focus stay as they are.
+   * @param t The track
+   * @param title Name shown in the title of the window
+   * @param dimensions Size of the video, for the starting size of the window
+   * @returns Whether a window is open for the track now
+   */
+  async popOut(
+    t: TrackReferenceOrPlaceholder,
+    title: string,
+    dimensions?: { width: number; height: number },
+  ) {
+    const id = this.trackId(t);
+    if (this.popouts.has(id)) return true;
+
+    const kind = this.popoutKind;
+    if (!kind) return false;
+
+    // Document Picture-in-Picture allows a single window: the stream that was
+    // in it goes back to its tile. (Opening a new one would end it anyway, but
+    // this keeps the state in step without waiting for the old window's event.)
+    if (kind === "pip") {
+      for (const [other, popout] of [...this.popouts]) {
+        if (popout.kind === "pip") this.closePopout(other);
+      }
+    }
+
+    // a track we stopped receiving would show black in the window
+    if (t.publication instanceof RemoteTrackPublication)
+      t.publication.setSubscribed(true);
+
+    // no second try with another API: a failed request has used up the user
+    // activation a popup needs
+    try {
+      const { win, stopFollowing } = await openPopoutWindow(kind, {
+        title,
+        ...popoutSize(dimensions),
+        name: id.replace(/[^a-zA-Z0-9]/g, "_"),
+      });
+
+      // the track may have been popped out or the call left meanwhile
+      if (this.popouts.has(id) || !this.room()) {
+        stopFollowing();
+        win.close();
+        return this.popouts.has(id);
+      }
+
+      this.#registerPopout(id, kind, win, stopFollowing);
+      return true;
+    } catch (e) {
+      console.debug("[rtc] could not pop out the stream with", kind, e);
+    }
+
+    return false;
+  }
+
+  /**
+   * Keep track of an opened window: forget it when it is closed
+   */
+  #registerPopout(
+    id: string,
+    kind: PopoutKind,
+    win: Window,
+    stopFollowing: () => void,
+  ) {
+    const onGone = () => this.#dropPopout(id, win);
+    win.addEventListener("pagehide", onGone);
+    // a popup can't always tell that it was closed, so look for it too
+    const poll =
+      kind === "popup" ? setInterval(() => win.closed && onGone(), 500) : 0;
+
+    this.popouts.set(id, {
+      win,
+      kind,
+      dispose: () => {
+        stopFollowing();
+        win.removeEventListener("pagehide", onGone);
+        if (poll) clearInterval(poll);
+      },
+    });
+  }
+
+  /**
+   * Move a stream from its Document Picture-in-Picture window (which Chrome
+   * doesn't let go fullscreen) into a normal popup window. The stream never
+   * goes back to its tile in between and watching and focus stay as they are.
+   *
+   * Call it straight from a click, with nothing awaited before: the popup
+   * is opened synchronously, while the user activation is still there.
+   * @param id Track id (see trackId)
+   * @returns Whether the stream is in a popup now, on failure the old window
+   * stays open
+   */
+  async reopenPopoutAsWindow(id: string) {
+    const old = this.popouts.get(id);
+    if (!old || old.kind === "popup" || typeof window.open !== "function")
+      return false;
+
+    try {
+      // synchronous up to the window.open inside
+      const opening = openPopoutWindow("popup", {
+        title: old.win.document.title,
+        width: old.win.innerWidth || popoutSize().width,
+        height: old.win.innerHeight || popoutSize().height,
+        name: id.replace(/[^a-zA-Z0-9]/g, "_"),
+      });
+      const { win, stopFollowing } = await opening;
+
+      // the old window went away meanwhile (track ended, call left)
+      if (this.popouts.get(id) !== old) {
+        stopFollowing();
+        win.close();
+        return false;
+      }
+
+      // replacing the entry swaps the content over without the tile showing
+      // the video in between
+      old.dispose();
+      this.#registerPopout(id, "popup", win, stopFollowing);
+      try {
+        old.win.close();
+      } catch {
+        // already gone
+      }
+      return true;
+    } catch (e) {
+      console.debug("[rtc] could not move the stream to a popup", e);
+      return false;
+    }
+  }
+
+  /**
+   * Forget the window of a track that was closed by the user
+   */
+  #dropPopout(id: string, win: Window) {
+    const popout = this.popouts.get(id);
+    if (!popout || popout.win !== win) return;
+    popout.dispose();
+    this.popouts.delete(id);
+  }
+
+  /**
+   * Close the window of a track, if it has one
+   * @param id Track id (see trackId)
+   */
+  closePopout(id: string) {
+    const popout = this.popouts.get(id);
+    if (!popout) return;
+    popout.dispose();
+    this.popouts.delete(id);
+    try {
+      popout.win.close();
+    } catch {
+      // already gone
+    }
+  }
+
+  /**
+   * Close every stream window
+   */
+  closeAllPopouts() {
+    for (const id of [...this.popouts.keys()]) this.closePopout(id);
+  }
+
   focusTrack() {
     const id = this.focusId();
     return id
@@ -3154,6 +3362,16 @@ class Voice {
   }
 }
 
+/** A stream shown in a window of its own */
+export type StreamPopout = {
+  /** The window the stream is shown in */
+  win: Window;
+  /** Which API opened it */
+  kind: PopoutKind;
+  /** Stop following the window, called when it goes away */
+  dispose: () => void;
+};
+
 const voiceContext = createContext<Voice>(null as unknown as Voice);
 
 /**
@@ -3174,6 +3392,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
           <RoomAudioManager />
           <VoiceKeybinds />
           <StreamViewers />
+          <StreamPopouts />
         </InRoom>
         <StatsRecorder />
         <OverlayPublisher />

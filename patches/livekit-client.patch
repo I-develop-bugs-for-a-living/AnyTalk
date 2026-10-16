@@ -1,8 +1,36 @@
 diff --git a/dist/livekit-client.esm.mjs b/dist/livekit-client.esm.mjs
-index 9a59e0a8070491816883192690a92ad87736da2c..f10cb8cb12e24405fb73c45ba70c019ee63baaf6 100644
+index 9a59e0a8070491816883192690a92ad87736da2c..869ac7583a13352c3715ed2e5da54b4cd59ab95a 100644
 --- a/dist/livekit-client.esm.mjs
 +++ b/dist/livekit-client.esm.mjs
-@@ -20877,6 +20877,31 @@ class LocalVideoTrack extends LocalTrack {
+@@ -15010,10 +15010,10 @@ class RemoteVideoTrack extends RemoteTrack {
+ }
+ class HTMLElementInfo {
+   get visible() {
+-    return this.isPiP || this.isIntersecting;
++    return this.isPiP || this.isIntersecting || isElementInOtherWindow(this.element);
+   }
+   get pictureInPicture() {
+-    return this.isPiP;
++    return this.isPiP || isElementInOtherWindow(this.element);
+   }
+   constructor(element, visible) {
+     this.onVisibilityChanged = entry => {
+@@ -15083,8 +15083,14 @@ class HTMLElementInfo {
+     (_e = (_d = window.documentPictureInPicture) === null || _d === void 0 ? void 0 : _d.window) === null || _e === void 0 ? void 0 : _e.removeEventListener('pagehide', this.onLeavePiP);
+   }
+ }
++// AnyTalk: an element shown in another window (a stream popout opened with window.open) can't be
++// seen by the observers of this document, so it counts as visible whenever it is attached there
++function isElementInOtherWindow(el) {
++  return el.ownerDocument !== document && el.isConnected;
++}
+ function isElementInPiP(el) {
+   var _a, _b;
++  if (isElementInOtherWindow(el)) return true;
+   // Simple video PiP
+   if (document.pictureInPictureElement === el) return true;
+   // Document PiP
+@@ -20877,6 +20883,31 @@ class LocalVideoTrack extends LocalTrack {
        yield this.onSenderTrackSwapped();
      });
    }
@@ -74,7 +102,7 @@ index ab79a69dbe346b8353ab7d57f3105c4bd69059a8..b569bf64ec4f7a65cd711b5ddd8f0733
 +{"version":3,"file":"LocalVideoTrack.d.ts","sourceRoot":"","sources":["../../../../src/room/track/LocalVideoTrack.ts"],"names":[],"mappings":"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"}
 \ No newline at end of file
 diff --git a/dist/ts4.2/room/track/LocalVideoTrack.d.ts b/dist/ts4.2/room/track/LocalVideoTrack.d.ts
-index 1e9b28ed79a5c13727e48afdf3d131ab2168c4e4..1566239702c9869e0ad1a6e1194dbb99d039a396 100644
+index 1e9b28ed79a5c13727e48afdf3d131ab2168c4e4..d6d9a14ba66f03e077bb0c51082d08f4df6a40b9 100644
 --- a/dist/ts4.2/room/track/LocalVideoTrack.d.ts
 +++ b/dist/ts4.2/room/track/LocalVideoTrack.d.ts
 @@ -4,7 +4,7 @@ import type { VideoSenderStats } from '../stats';
@@ -154,3 +182,31 @@ index 34f5daba10f602ecc7460891cc6db02581f06f92..2eebc026b520de31e93e72526befac4a
    protected override async onSenderTrackSwapped(): Promise<void> {
      await this.refreshSenderEncodings();
    }
+diff --git a/src/room/track/RemoteVideoTrack.ts b/src/room/track/RemoteVideoTrack.ts
+index 38ad6f22237e1e2cbd33c90b514014833b6168f9..090631e9d2a3bd90900c684f74a79d1408487f7a 100644
+--- a/src/room/track/RemoteVideoTrack.ts
++++ b/src/room/track/RemoteVideoTrack.ts
+@@ -339,11 +339,11 @@ class HTMLElementInfo implements ElementInfo {
+   element: HTMLMediaElement;
+ 
+   get visible(): boolean {
+-    return this.isPiP || this.isIntersecting;
++    return this.isPiP || this.isIntersecting || isElementInOtherWindow(this.element);
+   }
+ 
+   get pictureInPicture(): boolean {
+-    return this.isPiP;
++    return this.isPiP || isElementInOtherWindow(this.element);
+   }
+ 
+   visibilityChangedAt: number | undefined;
+@@ -466,3 +466,9 @@ function isElementInViewport(el: HTMLElement, win?: Window) {
+     display !== 'none'
+   );
+ }
++
++// AnyTalk: an element shown in another window (a stream popout opened with window.open) can't be
++// seen by the observers of this document, so it counts as visible whenever it is attached there
++function isElementInOtherWindow(el: HTMLElement): boolean {
++  return el.ownerDocument !== document && el.isConnected;
++}
