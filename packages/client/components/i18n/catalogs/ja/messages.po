@@ -631,6 +631,10 @@ msgstr "低い声も細くなります"
 msgid "Always Ask for Screen Share Quality"
 msgstr "常に画面共有の画質を確認する"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Always show"
+msgstr "常に表示"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "American (MM/DD/YYYY)"
 msgstr "米国式 (月/日/西暦)"
@@ -798,6 +802,7 @@ msgstr "二段階認証アプリ"
 msgid "Automatic Gain Control"
 msgstr "自動ゲイン制御"
 
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Avatar"
 msgstr "アバター"
@@ -1316,13 +1321,17 @@ msgstr "カラー"
 msgid "Coming soon! 👀"
 msgstr "近日公開! 👀"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Compact"
+msgstr "コンパクト"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Compact mode"
 msgstr "コンパクトモード"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Compact: only the avatars"
-msgstr "コンパクト：アバターのみ"
+#~ msgid "Compact: only the avatars"
+#~ msgstr "コンパクト：アバターのみ"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Compare recaps"
@@ -1683,6 +1692,10 @@ msgstr "現在のパスワード"
 msgid "Current Session"
 msgstr "現在のセッション"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Custom"
+msgstr "カスタム"
+
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Custom colour"
 msgstr "カスタムカラー"
@@ -1907,8 +1920,12 @@ msgid "Desktop app"
 msgstr "デスクトップアプリ"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
-msgstr "詳細：話している間は名前を表示し、配信にはLIVEタグを表示"
+msgid "Detailed"
+msgstr "詳細"
+
+#: components/app/interface/settings/user/Overlay.tsx
+#~ msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
+#~ msgstr "詳細：話している間は名前を表示し、配信にはLIVEタグを表示"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -3006,6 +3023,10 @@ msgstr "会話を聞く"
 msgid "LIVE"
 msgstr "LIVE"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "LIVE indicator"
+msgstr "LIVEインジケーター"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Live overlay, recording and recaps of previous calls"
 msgstr "ライブオーバーレイ、録画、過去の通話のリキャップ"
@@ -3334,6 +3355,10 @@ msgstr "マルチ配信: 配信を開くと、他の配信の隣に追加され�
 msgid "Mute"
 msgstr "ミュート"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Mute and deafen"
+msgstr "ミュートとスピーカーミュート"
+
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Mute Channel"
 msgstr "チャンネルをミュート"
@@ -3403,11 +3428,16 @@ msgid "My Bots"
 msgstr "自分のボット"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Name"
 msgstr "名前"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Needs a server that supports stream viewers."
+msgstr "配信の視聴者に対応したサーバーが必要です。"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
@@ -3580,6 +3610,7 @@ msgstr "比較できるものがまだありません。CSV をインポート�
 msgid "Notifications"
 msgstr "通知"
 
+#: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "Off"
@@ -3931,6 +3962,10 @@ msgstr "位置"
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Powered by RNNoise"
 msgstr "RNNoise を使用"
+
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Preset"
+msgstr "プリセット"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Press a button…"
@@ -4800,6 +4835,10 @@ msgstr "オーバーレイを表示"
 msgid "Show send message button"
 msgstr "メッセージ送信ボタンを表示"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Show when speaking"
+msgstr "話しているときに表示"
+
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
 msgstr "別ウィンドウで表示中"
@@ -5002,6 +5041,10 @@ msgstr "配信の統計"
 msgid "Stream Stats"
 msgstr "配信の統計"
 
+#: components/app/interface/settings/user/Overlay.tsx
+msgid "Stream viewers"
+msgstr "配信の視聴者"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Streams"
 msgstr "配信"
@@ -5020,8 +5063,8 @@ msgid "Strong (150 Hz)"
 msgstr "強（150 Hz）"
 
 #: components/app/interface/settings/user/Overlay.tsx
-msgid "Style"
-msgstr "スタイル"
+#~ msgid "Style"
+#~ msgstr "スタイル"
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Submit feature suggestion"
@@ -5858,6 +5901,10 @@ msgstr "複数の配信を同時に視聴"
 #: components/ui/components/features/voice/VoiceChannelPreview.tsx
 msgid "Watch stream"
 msgstr "配信を視聴"
+
+#: components/rtc/components/OverlayPublisher.tsx
+msgid "Watching your stream"
+msgstr "配信を視聴中"
 
 #: src/AndroidNag.tsx
 msgid "We are working hard on optimising our web app for mobile."
