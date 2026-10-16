@@ -2879,6 +2879,33 @@ class Voice {
   }
 
   /**
+   * The watched stream filling the multi-stream view, if one is focused.
+   * The other streams stay watched and subscribed underneath it.
+   */
+  multiFocusTrack() {
+    if (!this.isMultiStream()) return undefined;
+    const track = this.focusTrack();
+    return track && this.isWatchedStream(track) ? track : undefined;
+  }
+
+  /**
+   * Enlarge a stream of the multi-stream view, or go back to the grid when
+   * it is already enlarged. Only the focus changes: no stream is stopped and
+   * the bar of other participants keeps its state.
+   */
+  toggleMultiFocus(t: TrackReferenceOrPlaceholder) {
+    const id = this.trackId(t);
+    this.#setFocus(this.focusId() === id ? undefined : id);
+  }
+
+  /**
+   * Go back to the multi-stream grid, leaving the bar as it is
+   */
+  clearMultiFocus() {
+    if (this.focusId()) this.#setFocus(undefined);
+  }
+
+  /**
    * Drop the focus and bring the participant grid back
    */
   clearFocus() {
@@ -2943,6 +2970,9 @@ class Voice {
       }
       this.#setPendingFocus(last);
     }
+    // defensive: the stream window also clears a focus left over when a
+    // second stream opens, this covers 2+ streams already being watched
+    if (value && this.isMultiStream()) this.clearMultiFocus();
   }
 
   /**

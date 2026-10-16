@@ -19,3 +19,12 @@ export const volumePanelOpen = () => openPanels() > 0;
 export function trackVolumePanel(open: boolean) {
   setOpenPanels((count) => Math.max(0, count + (open ? 1 : -1)));
 }
+
+const [theaterControlsHidden, setTheaterControlsHidden] = createSignal(false);
+
+export {
+  /** Report the call card hiding or showing its full screen controls */
+  setTheaterControlsHidden,
+  /** Whether the full screen view has faded out its controls */
+  theaterControlsHidden,
+};

@@ -1,4 +1,4 @@
-import { createSignal, onCleanup, Show } from "solid-js";
+import { createMemo, createSignal, onCleanup, Show } from "solid-js";
 import {
   TrackReference,
   useEnsureParticipant,
@@ -27,7 +27,7 @@ import { AudioStats } from "./AudioStats";
 import { ConnectionQualityIcon } from "./ConnectionQualityIcon";
 import { StreamVolumeButton } from "./StreamVolumeButton";
 import { TrackStats } from "./TrackStats";
-import { touchOnly } from "./volumePanelState";
+import { theaterControlsHidden, touchOnly } from "./volumePanelState";
 
 /**
  * Whether this window is focused and visible
@@ -101,6 +101,12 @@ export function ParticipantTile(props: TileProps) {
   // Streams only play once we choose to watch them
   const unwatched = () => voice.isUnwatchedStream(track);
 
+  // Multi-stream view: this tile fills the whole stream area, the other tiles
+  // stay mounted (and subscribed) underneath it
+  const multiFocused = createMemo(() => !!voice.multiFocusTrack());
+  const enlarged = () => !!props.fill && multiFocused() && voice.isFocus(track);
+  const covered = () => !!props.fill && multiFocused() && !enlarged();
+
   const getHeight = () => {
     if (!props.focus || theater() || videoDims().height == 0) return {};
     // Calculate the aspect ratio
@@ -122,8 +128,13 @@ export function ParticipantTile(props: TileProps) {
             fullscreen: voice.layout() === "fullscreen",
             ...props,
             theater: theater(),
+            enlarged: enlarged(),
           }) + " vc_tile group"
         }
+        data-stream-tile={props.fill ? "" : undefined}
+        aria-pressed={props.fill ? enlarged() : undefined}
+        // out of reach while covered, so keyboard and screen readers skip it
+        inert={covered()}
         // reachable by keyboard: Enter / Space act like a click, Shift+F10
         // opens the context menu. Known limitation: the tile also holds its
         // own buttons (stream controls), so screen readers see nested
@@ -142,7 +153,14 @@ export function ParticipantTile(props: TileProps) {
           if (isScreenShare() && !voice.isWatchedStream(track)) {
             // open the stream (our own one too, once it's out of view)
             voice.watchStream(participant.identity);
-          } else if (!props.fill && !(theater() && touchOnly())) {
+          } else if (props.fill) {
+            // multi-stream view: enlarge this stream or go back to the grid.
+            // On touch in the full screen view a tap first shows the hidden
+            // controls (the call card handles that tap), then toggles
+            if (!(touchOnly() && theaterControlsHidden())) {
+              voice.toggleMultiFocus(track);
+            }
+          } else if (!(theater() && touchOnly())) {
             // in the full screen stream a tap only shows the controls
             voice.toggleFocus(track);
           }
@@ -429,8 +447,16 @@ export const tile = cva({
         height: "100%",
         maxWidth: "none",
         aspectRatio: "auto",
-        cursor: "default",
         background: "black",
+      },
+    },
+    // fills the stream area of the multi-stream view, over the other tiles
+    enlarged: {
+      true: {
+        position: "absolute",
+        inset: 0,
+        zIndex: 1,
+        width: "100%",
       },
     },
     video: {

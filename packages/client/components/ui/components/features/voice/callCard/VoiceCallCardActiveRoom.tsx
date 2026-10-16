@@ -32,7 +32,11 @@ import {
   VoiceCallCardEnableAudio,
   VoiceCallCardStatus,
 } from "./VoiceCallCardStatus";
-import { touchOnly, volumePanelOpen } from "./volumePanelState";
+import {
+  setTheaterControlsHidden,
+  touchOnly,
+  volumePanelOpen,
+} from "./volumePanelState";
 
 /**
  * Call card (active)
@@ -75,6 +79,10 @@ export function VoiceCallCardActiveRoom() {
     if (theater() && !volumePanelOpen()) wake();
   });
 
+  // lets the stream tiles know whether a tap would only wake the controls
+  createEffect(() => setTheaterControlsHidden(theater() && idle()));
+  onCleanup(() => setTheaterControlsHidden(false));
+
   onMount(() => {
     window.addEventListener("blur", sleep);
     document.documentElement.addEventListener("mouseleave", sleep);
@@ -98,6 +106,9 @@ export function VoiceCallCardActiveRoom() {
       onClick={(e) => {
         if (!theater() || !touchOnly()) return;
         if ((e.target as Element).closest("button, a, input, [role=slider]"))
+          return;
+        // a tap on a stream tile with the controls up toggles its focus
+        if (!idle() && (e.target as Element).closest("[data-stream-tile]"))
           return;
         if (idle()) wake();
         else sleep();
@@ -326,10 +337,27 @@ function Participants(props: { theater: boolean }) {
     }
   });
 
+  // While tiling, only a watched stream can fill the view: drop any other
+  // focus (e.g. a camera) that would show in the controls without a tile
+  createEffect(() => {
+    const track = voice.focusTrack();
+    if (voice.isMultiStream() && track && !voice.isWatchedStream(track)) {
+      voice.clearMultiFocus();
+    }
+  });
+
   // Focus a stream we just started watching, once its track is listed
   createEffect(() => {
     const identity = voice.pendingFocus();
     if (!identity) return;
+
+    // tiling several streams: a new stream joins the grid, it doesn't take
+    // over the view (and a focus left from the first stream would hide it)
+    if (voice.multiStream() && voice.watching.size >= 2) {
+      voice.clearMultiFocus();
+      voice.clearPendingFocus();
+      return;
+    }
     const track = voice
       .vidTracks()
       .find(
@@ -436,6 +464,7 @@ function StreamTiling() {
 
   return (
     <Tiling>
+      {/* the enlarged tile covers the others, which stay mounted and watched */}
       {/* Index, not For: rows() builds new arrays on every track update, and
           For would treat each as a new row and re-create every video */}
       <Index each={rows()}>
@@ -691,6 +720,7 @@ const Grid = styled("div", {
 
 const Tiling = styled("div", {
   base: {
+    position: "relative",
     height: 0,
     flexGrow: 1,
     display: "flex",
