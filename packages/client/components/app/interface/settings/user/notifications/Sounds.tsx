@@ -18,6 +18,8 @@ import {
 } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
+import MdExpandLess from "@material-design-icons/svg/outlined/expand_less.svg?component-solid";
+import MdExpandMore from "@material-design-icons/svg/outlined/expand_more.svg?component-solid";
 import MdVolumeUp from "@material-design-icons/svg/outlined/volume_up.svg?component-solid";
 
 const percent = (value: number) => (value * 100).toFixed(0) + "%";
@@ -176,29 +178,31 @@ export default function Sounds() {
         <PreviewButton sound="userJoinVoice" />
       </Content>
 
-      <CategoryButton.Group>
-        <CategoryButton
-          icon={<Symbol>tune</Symbol>}
-          action={<Symbol>{advanced() ? "expand_less" : "expand_more"}</Symbol>}
-          onClick={() => setAdvanced(!advanced())}
-          description={
-            <Trans>
-              Turn single sounds off, change their volume or use your own
-            </Trans>
-          }
-        >
-          <Trans>Advanced sound settings</Trans>
-        </CategoryButton>
-      </CategoryButton.Group>
+      {/* the per-sound list only matters while sounds are on */}
+      <Show when={sounds.playSounds}>
+        <CategoryButton.Group>
+          <CategoryButton
+            icon={<Symbol>tune</Symbol>}
+            action={
+              advanced() ? (
+                <MdExpandLess {...iconSize(24)} />
+              ) : (
+                <MdExpandMore {...iconSize(24)} />
+              )
+            }
+            onClick={() => setAdvanced(!advanced())}
+            description={
+              <Trans>
+                Turn single sounds off, change their volume or use your own
+              </Trans>
+            }
+          >
+            <Trans>Advanced sound settings</Trans>
+          </CategoryButton>
+        </CategoryButton.Group>
+      </Show>
 
-      <Show when={advanced()}>
-        <Show when={!sounds.playSounds}>
-          <Text class="label">
-            <Trans>
-              Sounds are turned off above, you can still preview them here.
-            </Trans>
-          </Text>
-        </Show>
+      <Show when={sounds.playSounds && advanced()}>
         <For each={groups()}>
           {(group) => (
             <Column gap="sm">
