@@ -60,6 +60,18 @@ export function ChannelHeader(props: Props) {
   const voice = useVoice();
   const { layout } = useDevice();
 
+  /**
+   * Search placeholder naming the channel: "#name" for server channels,
+   * plain name for DMs and groups
+   */
+  const searchPlaceholder = () => {
+    const name = props.channel.displayName ?? props.channel.name;
+    if (!name) return t`Search messages...`;
+    return props.channel.serverId
+      ? t`Search in #${name}`
+      : t`Search in ${name}`;
+  };
+
   const searchValue = () => {
     if (!props.sidebarState) return null;
 
@@ -277,7 +289,7 @@ export function ChannelHeader(props: Props) {
           }
         >
           <SearchBox
-            placeholder={t`Search messages...`}
+            placeholder={searchPlaceholder()}
             value={searchValue()!}
             onChange={(e) =>
               e.currentTarget.value
