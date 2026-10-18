@@ -19,8 +19,7 @@ import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
 import { useInstance } from "@revolt/instance";
 import { KeybindAction, createKeybind } from "@revolt/keybinds";
-import { useModals } from "@revolt/modal";
-import { useNavigate } from "@revolt/routing";
+import { useNavigate, useSmartParams } from "@revolt/routing";
 import { ResolvedEntry, useState } from "@revolt/state";
 import {
   Avatar,
@@ -55,7 +54,12 @@ interface Props {
   setServerOrder: (ids: string[]) => void;
 
   /**
-   * Unread conversations list
+   * Pinned conversations, in pin order
+   */
+  pinnedConversations: Channel[];
+
+  /**
+   * Unread conversations list (pinned ones excluded)
    */
   unreadConversations: Channel[];
 
@@ -88,7 +92,6 @@ export const ServerList = (props: Props) => {
   const client = useClient();
   const navigate = useNavigate();
   const { isMobile } = useDevice();
-  const { openModal } = useModals();
   const { t } = useLingui();
   const instance = useInstance();
 
@@ -128,13 +131,27 @@ export const ServerList = (props: Props) => {
   createKeybind(KeybindAction.NAVIGATION_SERVER_UP, () => navigateServer(-1));
   createKeybind(KeybindAction.NAVIGATION_SERVER_DOWN, () => navigateServer(1));
 
+  const params = useSmartParams();
+
+  /**
+   * Whether the open channel is one of the chat shortcuts on the rail
+   */
+  const chatShortcutOpen = () => {
+    const id = params().channelId;
+    return (
+      !!id &&
+      (props.pinnedConversations.some((c) => c.id === id) ||
+        props.unreadConversations.slice(0, 9).some((c) => c.id === id))
+    );
+  };
+
   const homeNotifications = createMemo(() => {
     return client().users.filter((user) => user.relationship === "Incoming")
       .length;
   });
 
   // Ref for floating menu
-  const [menuButton, setMenuButton] = createSignal<HTMLDivElement>();
+  const [menuButton, setMenuButton] = createSignal<HTMLElement>();
 
   let rail!: HTMLDivElement;
 
@@ -268,7 +285,10 @@ export const ServerList = (props: Props) => {
       <div use:invisibleScrollable={{ direction: "y", class: listBase() }}>
         <a
           class={entryContainer({
-            indicator: !props.selectedServer() ? "selected" : undefined,
+            indicator:
+              !props.selectedServer() && !chatShortcutOpen()
+                ? "selected"
+                : undefined,
           })}
           href="/app"
           use:floating={{
@@ -295,69 +315,12 @@ export const ServerList = (props: Props) => {
             }
           />
         </a>
-        <Tooltip
-          placement="right"
-          content={() => (
-            <Column>
-              <span>{props.user.username}</span>
-              <Text class="label" size="small">
-                {props.user.presence === "Online"
-                  ? t`Online`
-                  : props.user.presence === "Busy"
-                    ? t`Busy`
-                    : props.user.presence === "Focus"
-                      ? t`Focus`
-                      : props.user.presence === "Idle"
-                        ? t`Idle`
-                        : props.user.presence === "Invisible"
-                          ? t`Invisible`
-                          : t`Offline`}
-              </Text>
-            </Column>
-          )}
-          aria={props.user.username}
-        >
-          <a ref={setMenuButton} class={entryContainer()}>
-            <Avatar
-              size={42}
-              src={props.user.avatarURL}
-              holepunch={"bottom-right"}
-              overlay={<UserStatus.Graphic status={props.user.presence} />}
-              interactive
-            />
-          </a>
-          <UserMenu anchor={menuButton} />
-        </Tooltip>
         <For each={props.unreadConversations.slice(0, 9)}>
           {(conversation) => (
-            <Tooltip placement="right" content={conversation.displayName}>
-              <a
-                class={entryContainer()}
-                use:floating={props.menuGenerator(conversation)}
-                href={`/channel/${conversation.id}`}
-              >
-                <Avatar
-                  size={42}
-                  // TODO: fix this
-                  src={conversation.iconURL}
-                  holepunch={conversation.unread ? "top-right" : "none"}
-                  overlay={
-                    <>
-                      <Show when={conversation.unread}>
-                        <Unreads.Graphic
-                          count={conversation.mentions?.size ?? 0}
-                          unread
-                        />
-                      </Show>
-                    </>
-                  }
-                  fallback={
-                    conversation.name ?? conversation.recipient?.username
-                  }
-                  interactive
-                />
-              </a>
-            </Tooltip>
+            <ChatShortcut
+              conversation={conversation}
+              menuGenerator={props.menuGenerator}
+            />
           )}
         </For>
         <Show when={props.unreadConversations.length > 9}>
@@ -368,7 +331,23 @@ export const ServerList = (props: Props) => {
             />
           </a>
         </Show>
-        <LineDivider />
+        <For each={props.pinnedConversations}>
+          {(conversation) => (
+            <ChatShortcut
+              conversation={conversation}
+              menuGenerator={props.menuGenerator}
+              pinned
+            />
+          )}
+        </For>
+        {/* separates the chat shortcuts from the servers */}
+        <Show
+          when={
+            props.unreadConversations.length || props.pinnedConversations.length
+          }
+        >
+          <LineDivider />
+        </Show>
         <div ref={rail}>
           <For each={props.orderedEntries}>
             {(entry) => (
@@ -464,21 +443,145 @@ export const ServerList = (props: Props) => {
       <Shadow>
         <div />
       </Shadow>
-      <Tooltip placement="right" content={t`Settings`}>
-        <a
-          class={entryContainer()}
-          onClick={() => openModal({ type: "settings", config: "user" })}
+      <Tooltip
+        placement="right"
+        content={() => (
+          <Column>
+            <span>{props.user.username}</span>
+            <Text class="label" size="small">
+              {props.user.presence === "Online"
+                ? t`Online`
+                : props.user.presence === "Busy"
+                  ? t`Busy`
+                  : props.user.presence === "Focus"
+                    ? t`Focus`
+                    : props.user.presence === "Idle"
+                      ? t`Idle`
+                      : props.user.presence === "Invisible"
+                        ? t`Invisible`
+                        : t`Offline`}
+            </Text>
+          </Column>
+        )}
+        aria={props.user.username}
+      >
+        <button
+          type="button"
+          ref={setMenuButton}
+          class={entryContainer() + " " + resetButton}
+          aria-haspopup="menu"
+          aria-label={props.user.username}
         >
           <Avatar
             size={42}
-            fallback={<Symbol fill>settings</Symbol>}
+            src={props.user.avatarURL}
+            holepunch={"bottom-right"}
+            overlay={<UserStatus.Graphic status={props.user.presence} />}
             interactive
           />
-        </a>
+        </button>
+        <UserMenu anchor={menuButton} />
       </Tooltip>
     </ServerListBase>
   );
 };
+
+/**
+ * Strips default button chrome so a button can use rail entry styling
+ */
+const resetButton = css({
+  background: "none",
+  border: 0,
+  padding: 0,
+  color: "inherit",
+  cursor: "pointer",
+});
+
+/**
+ * Small pin badge at the bottom corner of a pinned chat shortcut
+ */
+const PinBadge = styled("span", {
+  base: {
+    position: "absolute",
+    insetBlockEnd: "4px",
+    insetInlineEnd: "4px",
+    display: "grid",
+    placeItems: "center",
+    width: "16px",
+    height: "16px",
+    borderRadius: "var(--borderRadius-circle)",
+    background: "var(--md-sys-color-surface-container-highest)",
+    color: "var(--md-sys-color-on-surface-variant)",
+    pointerEvents: "none",
+  },
+});
+
+/**
+ * Shortcut to a DM or group DM on the rail, used for unread and pinned chats
+ */
+function ChatShortcut(props: {
+  conversation: Channel;
+  menuGenerator: (target: Server | Channel) => JSX.Directives["floating"];
+  pinned?: boolean;
+}) {
+  const params = useSmartParams();
+  const { t } = useLingui();
+
+  return (
+    <Tooltip
+      placement="right"
+      content={() => (
+        <Show when={props.pinned} fallback={props.conversation.displayName}>
+          <Column>
+            <span>{props.conversation.displayName}</span>
+            <Text class="label" size="small">
+              <Trans>Pinned</Trans>
+            </Text>
+          </Column>
+        </Show>
+      )}
+      aria={
+        props.pinned
+          ? `${props.conversation.displayName ?? ""} (${t`Pinned`})`
+          : (props.conversation.displayName ?? "")
+      }
+    >
+      <a
+        class={entryContainer({
+          indicator:
+            params().channelId === props.conversation.id
+              ? "selected"
+              : undefined,
+        })}
+        use:floating={props.menuGenerator(props.conversation)}
+        href={`/channel/${props.conversation.id}`}
+      >
+        <Avatar
+          size={42}
+          src={props.conversation.iconURL}
+          holepunch={props.conversation.unread ? "top-right" : "none"}
+          overlay={
+            <Show when={props.conversation.unread}>
+              <Unreads.Graphic
+                count={props.conversation.mentions?.size ?? 0}
+                unread
+              />
+            </Show>
+          }
+          fallback={
+            props.conversation.name ?? props.conversation.recipient?.username
+          }
+          interactive
+        />
+        <Show when={props.pinned}>
+          <PinBadge aria-hidden="true">
+            <Symbol size={12}>push_pin</Symbol>
+          </PinBadge>
+        </Show>
+      </a>
+    </Tooltip>
+  );
+}
 
 /**
  * A single server in the list

@@ -11,7 +11,7 @@ import {
 import { Portal } from "solid-js/web";
 import { Motion, Presence } from "solid-motionone";
 
-import { autoUpdate, offset, shift } from "@floating-ui/dom";
+import { autoUpdate, flip, offset, shift } from "@floating-ui/dom";
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { API } from "stoat.js";
 import { styled } from "styled-system/jsx";
@@ -32,9 +32,10 @@ import MdDelete from "@material-design-icons/svg/outlined/delete.svg?component-s
 import MdEditNote from "@material-design-icons/svg/outlined/edit_note.svg?component-solid";
 import MdInfo from "@material-design-icons/svg/outlined/info.svg?component-solid";
 import MdNotificationsOff from "@material-design-icons/svg/outlined/notifications_off.svg?component-solid";
+import MdSettings from "@material-design-icons/svg/outlined/settings.svg?component-solid";
 
 interface Props {
-  anchor: Accessor<HTMLDivElement | undefined>;
+  anchor: Accessor<HTMLElement | undefined>;
 }
 
 const TruncatedStatusText = styled("div", {
@@ -60,9 +61,10 @@ export function UserMenu(props: Props) {
   const [ref, setRef] = createSignal<HTMLDivElement>();
 
   const position = useFloating(() => props.anchor(), ref, {
-    placement: "right-start",
+    // the avatar sits at the bottom of the rail, so grow upwards
+    placement: "right-end",
     whileElementsMounted: autoUpdate,
-    middleware: [offset(5), shift()],
+    middleware: [offset(5), flip(), shift({ padding: 8 })],
   });
 
   function toggle() {
@@ -122,7 +124,10 @@ export function UserMenu(props: Props) {
           >
             <ContextMenu onRequestClose={close}>
               <ContextMenuItem
-                onClick={() => openModal({ type: "settings", config: "user" })}
+                onClick={() => {
+                  openModal({ type: "settings", config: "user" });
+                  close();
+                }}
                 action
               >
                 <Row align>
@@ -256,6 +261,18 @@ export function UserMenu(props: Props) {
                   <Trans>Copy user ID</Trans>
                 </ContextMenuButton>
               </Show>
+
+              <ContextMenuDivider />
+
+              <ContextMenuButton
+                icon={MdSettings}
+                onClick={() => {
+                  openModal({ type: "settings", config: "user" });
+                  close();
+                }}
+              >
+                <Trans>Settings</Trans>
+              </ContextMenuButton>
             </ContextMenu>
           </Motion>
         </Show>

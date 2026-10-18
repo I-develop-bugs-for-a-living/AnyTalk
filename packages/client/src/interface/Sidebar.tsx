@@ -53,11 +53,14 @@ export const Sidebar = (props: {
         orderedServers={state.ordering.orderedServers(client())}
         orderedEntries={state.ordering.orderedEntries(client())}
         setServerOrder={state.ordering.setServerOrder}
+        pinnedConversations={state.ordering.pinnedConversations(client())}
         unreadConversations={state.ordering
-          .recentConversations(client())
+          .orderedConversations(client())
           .filter(
-            // TODO: muting channels
-            (channel) => channel.unread,
+            // TODO: muting channels; pinned chats show in their own group
+            (channel) =>
+              channel.unread &&
+              !state["pinned-conversations"].isPinned(channel.id),
           )}
         user={user()!}
         selectedServer={() => params.server}

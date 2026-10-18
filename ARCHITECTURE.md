@@ -69,7 +69,7 @@ Every store extends `AbstractStore` (`stores/index.ts`), validates its data in `
 | `Settings` | generic key/value app settings (`appearance:*`, `notifications:*`, `controller:enabled`, `controller:ptt_button`, `controller:bindings` (this device only, not synced), ...) |
 | `Layout` | open sections, sidebar visibility, active interface |
 | `Ordering`, `ServerFolders` | server/channel/conversation order, server folders |
-| `PinnedConversations` | DM and group DM ids pinned to the top of the Home sidebar. Own synced key (`pinned-conversations`), so clients without it don't drop the pins. Pure rules in `stores/pinOrder.ts` |
+| `PinnedConversations` | DM and group DM ids pinned to the server rail. Own synced key (`pinned-conversations`), so clients without it don't drop the pins. Pure rules in `stores/pinOrder.ts` |
 | `Voice` | devices, input mode (voice activity or push to talk), noise suppression mode, screen-share quality, volumes |
 | `Sounds`, `NotificationOptions` | sound/ringtone choices, notification preferences |
 | `Theme`, `Locale` | theme preset and fonts, language |
@@ -87,7 +87,7 @@ Every store extends `AbstractStore` (`stores/index.ts`), validates its data in `
 - `components/routing/index.tsx`: `useSmartParams()` reads server/channel/message ids from the URL. The URL is the source of truth for what's on screen.
 - Key files: `src/Interface.tsx` (shell: titlebar, sidebars, content), `src/interface/Sidebar.tsx` (shows the server sidebar or the home sidebar), `src/interface/navigation/servers/ServerList.tsx` (server rail, drag reorder, user menu).
 - Channel list: `src/interface/navigation/channels/ServerSidebar.tsx` (categories, drag, keyboard navigation), `HomeSidebar.tsx` (DMs, saved notes). Both show `VoiceStatusFooter` at the bottom during a call.
-- Pinned DMs: `Ordering.orderedConversations()` puts pinned DMs and group DMs first (`splitConversations`), then the rest by last update. `Ordering.recentConversations()` is the unpinned order, used by `src/interface/Sidebar.tsx` for the server rail's unread-DM shortcuts. Pins are toggled from the user and channel context menus (`components/app/menus/shared/PinConversationButton.tsx`).
+- Pinned DMs: shown on the server rail (`ServerList.tsx`) after the unread-DM shortcuts and before a separator and the servers. `Ordering.pinnedConversations()` returns them in pin order; `src/interface/Sidebar.tsx` leaves pinned chats out of the unread shortcuts so they show once. The Home sidebar DM list stays in recent order. Pins are toggled from the user and channel context menus (`components/app/menus/shared/PinConversationButton.tsx`). The user avatar sits at the bottom of the rail and opens `UserMenu.tsx`, which also holds the Settings item.
 - Channel page: `src/interface/channels/ChannelPage.tsx` resolves the channel from the URL, and `src/interface/channels/text/TextChannel.tsx` lays out the header, message list, composer and member sidebar (`ServerMemberSidebar` / `GroupMemberSidebar`).
 - Shared interface components: `src/interface/common/CommonHeader.tsx` exports `HeaderIcon`, a wrapper for header icons that handles sidebar toggle behavior on desktop and mobile with RTL support.
 - Home page friends overview: `src/interface/home/FriendsOverview.tsx` (friends in calls, recent calls, online friends) with pure logic in `friendsOverview.ts`. Recent calls are recorded per user in the `Voice` store (`recentCalls`, helpers in `components/state/stores/recentCalls.ts`) when a call connects.

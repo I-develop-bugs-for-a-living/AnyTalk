@@ -11,7 +11,7 @@ export interface TypePinnedConversations {
 }
 
 /**
- * Conversations pinned to the top of the Home sidebar.
+ * Conversations pinned to the server rail.
  *
  * Kept in its own synced key, not inside `ordering`, because clients without
  * this feature write the whole `ordering` key back and would drop the pins.
