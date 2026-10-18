@@ -39,6 +39,7 @@ export function RenderSpoiler(props: {
 
   return (
     <Spoiler
+      data-no-reply
       shown={shown()}
       onClick={props.disabled ? undefined : () => setShown(true)}
     >

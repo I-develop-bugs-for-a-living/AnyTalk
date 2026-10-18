@@ -89,7 +89,7 @@ export function Attachment(props: { file: File; message?: Message }) {
         </SizedContent>
       </Match>
       <Match when={props.file.metadata.type === "Audio"}>
-        <AttachmentContainer>
+        <AttachmentContainer data-no-reply>
           <FileInfo file={props.file} />
           <SizedContent width={360} height={48}>
             <audio
@@ -109,12 +109,12 @@ export function Attachment(props: { file: File; message?: Message }) {
         </AttachmentContainer>
       </Match>
       <Match when={props.file.metadata.type === "File"}>
-        <AttachmentContainer>
+        <AttachmentContainer data-no-reply>
           <FileInfo file={props.file} />
         </AttachmentContainer>
       </Match>
       <Match when={props.file.metadata.type === "Text"}>
-        <AttachmentContainer>
+        <AttachmentContainer data-no-reply>
           <FileInfo file={props.file} />
           <SizedContent width={480} height={120}>
             <TextFile file={props.file} />
