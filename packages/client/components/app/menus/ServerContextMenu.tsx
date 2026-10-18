@@ -42,6 +42,19 @@ import {
  * Context menu for servers
  */
 export function ServerContextMenu(props: { server: Server }) {
+  return (
+    <ContextMenu>
+      <ServerContextMenuItems server={props.server} />
+    </ContextMenu>
+  );
+}
+
+/**
+ * Shared server menu items (mark as read, mute, notifications, invite,
+ * settings, leave, ...), each with its own permission checks. Rendered
+ * inside a ContextMenu by the server rail and the channel list menus.
+ */
+export function ServerContextMenuItems(props: { server: Server }) {
   const state = useState();
   const client = useClient();
   const device = useDevice();
@@ -164,7 +177,7 @@ export function ServerContextMenu(props: { server: Server }) {
     props.server.havePermission("ManageWebhooks");
 
   return (
-    <ContextMenu>
+    <>
       <Show when={props.server.unread}>
         <ContextMenuButton icon={MdMarkChatRead} onClick={markAsRead}>
           <Trans>Mark as read</Trans>
@@ -378,6 +391,6 @@ export function ServerContextMenu(props: { server: Server }) {
           <Trans>Copy server ID</Trans>
         </ContextMenuButton>
       </Show>
-    </ContextMenu>
+    </>
   );
 }
