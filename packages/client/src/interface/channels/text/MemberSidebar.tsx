@@ -242,65 +242,19 @@ export function ServerMemberSidebar(props: Props) {
               >
                 <Switch
                   fallback={
-                    <CategoryTitle
-                      role="button"
-                      tabIndex={0}
-                      aria-expanded={(entry() as { open: boolean }).open}
-                      onClick={() =>
+                    <GroupHeader
+                      open={(entry() as { open: boolean }).open}
+                      id={(entry() as { id: string }).id}
+                      name={(entry() as { name: string }).name}
+                      count={(entry() as { count: number }).count}
+                      icon={entry().icon}
+                      onToggle={() =>
                         state.layout.toggleSectionState(
                           groupKey((entry() as { id: string }).id),
                           true,
                         )
                       }
-                      onKeyDown={(
-                        e: KeyboardEvent & { currentTarget: HTMLElement },
-                      ) => {
-                        if (e.target !== e.currentTarget) return;
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          // the virtual container also clicks on Enter, so stop
-                          // it here to avoid toggling twice
-                          e.stopPropagation();
-                          e.currentTarget.click();
-                        }
-                      }}
-                    >
-                      <MdChevronRight
-                        class="rtl-mirror"
-                        {...iconSize(16)}
-                        style={{
-                          fill: "var(--md-sys-color-on-surface-variant)",
-                          transition: "var(--transitions-fast) transform",
-                          transform: (entry() as { open: boolean }).open
-                            ? "rotateZ(90deg)"
-                            : undefined,
-                          "flex-shrink": 0,
-                        }}
-                      />
-                      <Show when={entry().icon}>
-                        <RoleIcon src={entry().icon!} alt="" />
-                      </Show>
-                      <Show
-                        when={
-                          (entry() as { id: string }).id === "online" ||
-                          (entry() as { id: string }).id === "offline"
-                        }
-                      >
-                        <UserStatus
-                          size="0.7em"
-                          status={
-                            (entry() as { id: string }).id === "online"
-                              ? "Online"
-                              : "Invisible"
-                          }
-                        />
-                      </Show>
-                      <span>{(entry() as { name: string }).name}</span>
-                      <span>
-                        {" – "}
-                        {(entry() as { count: number }).count}
-                      </span>
-                    </CategoryTitle>
+                    />
                   }
                 >
                   <Match when={entry().t === 1}>
@@ -323,34 +277,171 @@ export function ServerMemberSidebar(props: Props) {
  */
 export function GroupMemberSidebar(props: Props) {
   const { t } = useLingui();
+  const state = useState();
+
+  type GroupElement =
+    | { t: 0; id: string; open: boolean; name: string; count: number }
+    | { t: 1; user: User };
+
+  /**
+   * Section state key of a member group, remembered per group DM
+   */
+  const groupKey = (groupId: string) =>
+    `members:${props.channel.id}:${groupId}`;
+
+  /**
+   * Online and offline groups with their sorted members, skipping members of
+   * collapsed groups
+   */
+  const elements = createMemo(() => {
+    const sorted = props.channel.recipients
+      .filter((user): user is User => !!user)
+      .toSorted((a, b) => a.displayName.localeCompare(b.displayName));
+
+    const groups = [
+      { id: "online", name: t`Online`, users: sorted.filter((u) => u.online) },
+      {
+        id: "offline",
+        name: t`Offline`,
+        users: sorted.filter((u) => !u.online),
+      },
+    ];
+
+    const result: GroupElement[] = [];
+
+    for (const group of groups) {
+      if (!group.users.length) continue;
+
+      const open = state.layout.getSectionState(groupKey(group.id), true);
+      result.push({
+        t: 0,
+        id: group.id,
+        open,
+        name: group.name,
+        count: group.users.length,
+      });
+
+      if (open) {
+        for (const user of group.users) result.push({ t: 1, user });
+      }
+    }
+
+    return result;
+  });
 
   return (
     <Container aria-label={t`Members`} data-region="members">
-      <MemberTitle>
-        <Row align>{props.channel.recipientIds.size} members</Row>
-      </MemberTitle>
-
       <Deferred>
         <VirtualContainer
-          items={props.channel.recipients.toSorted((a, b) =>
-            a.displayName.localeCompare(b.displayName),
-          )}
+          items={elements()}
           scrollTarget={props.scrollTargetElement}
           itemSize={{ height: 42 }}
         >
-          {(item) => (
-            <div
-              style={{
-                ...item.style,
-                width: "100%",
-              }}
-            >
-              <Member user={item.item} group={props.channel} />
-            </div>
-          )}
+          {(item) => {
+            /**
+             * This row's entry. When the list shrinks (someone leaves or a
+             * group collapses) the container briefly re-renders slots past
+             * the new end with an undefined item, so keep the last one
+             * instead of crashing.
+             */
+            const entry = createMemo<GroupElement>(
+              (prev) => item.item ?? prev!,
+            );
+
+            return (
+              <div
+                style={{
+                  ...item.style,
+                  width: "100%",
+                }}
+              >
+                <Switch
+                  fallback={
+                    <GroupHeader
+                      open={(entry() as { open: boolean }).open}
+                      id={(entry() as { id: string }).id}
+                      name={(entry() as { name: string }).name}
+                      count={(entry() as { count: number }).count}
+                      onToggle={() =>
+                        state.layout.toggleSectionState(
+                          groupKey((entry() as { id: string }).id),
+                          true,
+                        )
+                      }
+                    />
+                  }
+                >
+                  <Match when={entry().t === 1}>
+                    <Member
+                      user={(entry() as { user: User }).user}
+                      group={props.channel}
+                    />
+                  </Match>
+                </Switch>
+              </div>
+            );
+          }}
         </VirtualContainer>
       </Deferred>
     </Container>
+  );
+}
+
+/**
+ * Collapsible header of a member group (role, Online or Offline), shared by
+ * the server and group DM member lists
+ */
+function GroupHeader(props: {
+  open: boolean;
+  /** Group id, "online" and "offline" get a status dot */
+  id: string;
+  name: string;
+  count: number;
+  icon?: string | null;
+  onToggle: () => void;
+}) {
+  return (
+    <CategoryTitle
+      role="button"
+      tabIndex={0}
+      aria-expanded={props.open}
+      onClick={() => props.onToggle()}
+      onKeyDown={(e: KeyboardEvent & { currentTarget: HTMLElement }) => {
+        if (e.target !== e.currentTarget) return;
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          // the virtual container also clicks on Enter, so stop
+          // it here to avoid toggling twice
+          e.stopPropagation();
+          e.currentTarget.click();
+        }
+      }}
+    >
+      <MdChevronRight
+        class="rtl-mirror"
+        {...iconSize(16)}
+        style={{
+          fill: "var(--md-sys-color-on-surface-variant)",
+          transition: "var(--transitions-fast) transform",
+          transform: props.open ? "rotateZ(90deg)" : undefined,
+          "flex-shrink": 0,
+        }}
+      />
+      <Show when={props.icon}>
+        <RoleIcon src={props.icon!} alt="" />
+      </Show>
+      <Show when={props.id === "online" || props.id === "offline"}>
+        <UserStatus
+          size="0.7em"
+          status={props.id === "online" ? "Online" : "Invisible"}
+        />
+      </Show>
+      <span>{props.name}</span>
+      <span>
+        {" – "}
+        {props.count}
+      </span>
+    </CategoryTitle>
   );
 }
 
@@ -400,28 +491,6 @@ const RoleIcon = styled("img", {
     objectFit: "cover",
   },
 });
-
-/**
- * Member title
- */
-const MemberTitle = styled("div", {
-  base: {
-    marginTop: "12px",
-    marginInlineStart: "14px",
-    color: "var(--md-sys-color-on-surface)",
-
-    ...typography.raw({ class: "label", size: "small" }),
-  },
-  variants: {
-    bottomMargin: {
-      no: {},
-      yes: {
-        marginBottom: "-12px",
-      },
-    },
-  },
-});
-
 /**
  * Styles required to correctly display name and status
  */
