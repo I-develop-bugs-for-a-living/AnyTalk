@@ -3,6 +3,7 @@ import { Client, Server } from "stoat.js";
 import { State } from "..";
 
 import { AbstractStore } from ".";
+import { splitPinned } from "./pinOrder";
 import { ServerFolder } from "./ServerFolders";
 
 /**
@@ -296,19 +297,39 @@ export class Ordering extends AbstractStore<"ordering", TypeOrdering> {
   }
 
   /**
-   * All known active DM conversations ordered by last updated
+   * All known active DM conversations, pinned ones first then by last updated
    * @returns List of Channel objects
    */
   orderedConversations(client: Client) {
-    return (
-      client.channels
-        .toList()
-        .filter(
-          (channel) =>
-            (channel.type === "DirectMessage" && channel.active) ||
-            channel.type === "Group",
-        )
-        .sort((a, b) => +b.updatedAt - +a.updatedAt) ?? []
+    const { pinned, rest } = this.splitConversations(client);
+    return [...pinned, ...rest];
+  }
+
+  /**
+   * Active conversations split into the pinned group (in pin order) and the
+   * rest (by last updated). Pinned IDs of conversations which no longer
+   * exist are ignored.
+   * @returns Pinned and remaining Channel objects
+   */
+  splitConversations(client: Client) {
+    return splitPinned(
+      this.recentConversations(client),
+      this.state["pinned-conversations"].list(),
     );
+  }
+
+  /**
+   * All known active DM conversations by last updated, ignoring pins
+   * @returns List of Channel objects
+   */
+  recentConversations(client: Client) {
+    return client.channels
+      .toList()
+      .filter(
+        (channel) =>
+          (channel.type === "DirectMessage" && channel.active) ||
+          channel.type === "Group",
+      )
+      .sort((a, b) => +b.updatedAt - +a.updatedAt);
   }
 }

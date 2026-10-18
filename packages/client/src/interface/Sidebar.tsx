@@ -54,7 +54,7 @@ export const Sidebar = (props: {
         orderedEntries={state.ordering.orderedEntries(client())}
         setServerOrder={state.ordering.setServerOrder}
         unreadConversations={state.ordering
-          .orderedConversations(client())
+          .recentConversations(client())
           .filter(
             // TODO: muting channels
             (channel) => channel.unread,

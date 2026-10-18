@@ -11,6 +11,7 @@ import { TypeLinkSafety } from "./LinkSafety";
 import { TypeLocale } from "./Locale";
 import { TypeNotificationOptions } from "./NotificationOptions";
 import { TypeOrdering } from "./Ordering";
+import { TypePinnedConversations } from "./PinnedConversations";
 import { TypeReleaseNotes } from "./ReleaseNotes";
 import { TypeServerFolders } from "./ServerFolders";
 import { TypeSettings } from "./Settings";
@@ -29,6 +30,7 @@ export type Store = {
   locale: TypeLocale;
   notifications: TypeNotificationOptions;
   ordering: TypeOrdering;
+  "pinned-conversations": TypePinnedConversations;
   "release-notes": TypeReleaseNotes;
   "server-folders": TypeServerFolders;
   settings: TypeSettings;

@@ -5,6 +5,7 @@ import { VirtualContainer } from "@minht11/solid-virtual-container";
 import { Channel } from "stoat.js";
 import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
+import { visuallyHidden } from "styled-system/patterns";
 
 import { ChannelContextMenu, UserContextMenu } from "@revolt/app";
 import { useClient } from "@revolt/client";
@@ -13,6 +14,7 @@ import Instance from "@revolt/instance/Instance";
 import { TextWithEmoji } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 import { useLocation, useNavigate } from "@revolt/routing";
+import { useState } from "@revolt/state";
 import {
   Avatar,
   Deferred,
@@ -265,10 +267,37 @@ const Category = styled("div", {
  */
 const NameStatusStack = styled("div", {
   base: {
+    flexGrow: 1,
+    minWidth: 0,
     height: "100%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
+  },
+});
+
+/**
+ * Row holding the name stack and the pin indicator
+ */
+const EntryRow = styled("div", {
+  base: {
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    gap: "var(--gap-sm)",
+    minWidth: 0,
+  },
+});
+
+/**
+ * Subtle indicator that a conversation is pinned
+ */
+const PinMark = styled("span", {
+  base: {
+    flexShrink: 0,
+    display: "flex",
+    alignItems: "center",
+    color: "var(--md-sys-color-on-surface-variant)",
   },
 });
 
@@ -285,6 +314,12 @@ function Entry(
 
   const { t } = useLingui();
   const { openModal } = useModals();
+  const state = useState();
+
+  /**
+   * Whether this conversation is pinned
+   */
+  const pinned = () => state["pinned-conversations"].isPinned(local.channel.id);
 
   /**
    * Determine user status if present
@@ -358,38 +393,48 @@ function Entry(
           ),
       }}
     >
-      <NameStatusStack>
-        <Switch>
-          <Match when={local.channel.type === "Group"}>
-            <OverflowingText>
-              <TextWithEmoji content={local.channel.name!} />
-            </OverflowingText>
-            <span class={typography({ class: "_status" })}>
-              <Plural
-                value={local.channel.recipientIds.size}
-                one="# Member"
-                other="# Members"
-              />
+      <EntryRow>
+        <NameStatusStack>
+          <Switch>
+            <Match when={local.channel.type === "Group"}>
+              <OverflowingText>
+                <TextWithEmoji content={local.channel.name!} />
+              </OverflowingText>
+              <span class={typography({ class: "_status" })}>
+                <Plural
+                  value={local.channel.recipientIds.size}
+                  one="# Member"
+                  other="# Members"
+                />
+              </span>
+            </Match>
+            <Match when={local.channel.type === "DirectMessage"}>
+              <OverflowingText>
+                {local.channel?.recipient?.displayName}
+              </OverflowingText>
+              <Show when={status()}>
+                <Tooltip
+                  content={() => <TextWithEmoji content={status()!} />}
+                  placement="top-start"
+                  aria={status()!}
+                >
+                  <OverflowingText class={typography({ class: "_status" })}>
+                    <TextWithEmoji content={status()!} />
+                  </OverflowingText>
+                </Tooltip>
+              </Show>
+            </Match>
+          </Switch>
+        </NameStatusStack>
+        <Show when={pinned()}>
+          <PinMark>
+            <Symbol size={16}>push_pin</Symbol>
+            <span class={visuallyHidden()}>
+              <Trans>Pinned</Trans>
             </span>
-          </Match>
-          <Match when={local.channel.type === "DirectMessage"}>
-            <OverflowingText>
-              {local.channel?.recipient?.displayName}
-            </OverflowingText>
-            <Show when={status()}>
-              <Tooltip
-                content={() => <TextWithEmoji content={status()!} />}
-                placement="top-start"
-                aria={status()!}
-              >
-                <OverflowingText class={typography({ class: "_status" })}>
-                  <TextWithEmoji content={status()!} />
-                </OverflowingText>
-              </Tooltip>
-            </Show>
-          </Match>
-        </Switch>
-      </NameStatusStack>
+          </PinMark>
+        </Show>
+      </EntryRow>
     </MenuButton>
   );
 }
