@@ -19,6 +19,7 @@ import MdDownload from "@material-design-icons/svg/outlined/download.svg?compone
 import MdEdit from "@material-design-icons/svg/outlined/edit.svg?component-solid";
 import MdEmojiEmotions from "@material-design-icons/svg/outlined/emoji_emotions.svg?component-solid";
 import MdLink from "@material-design-icons/svg/outlined/link.svg?component-solid";
+import MdLinkOff from "@material-design-icons/svg/outlined/link_off.svg?component-solid";
 import MdMarkChatUnread from "@material-design-icons/svg/outlined/mark_chat_unread.svg?component-solid";
 import MdOpenInNew from "@material-design-icons/svg/outlined/open_in_new.svg?component-solid";
 import MdPin from "@material-design-icons/svg/outlined/pin_invoke.svg?component-solid";
@@ -113,6 +114,29 @@ export function MessageContextMenu(props: {
         message: props.message!,
       });
     }
+  }
+
+  /**
+   * Whether the message has auto-generated (website, image, video) embeds.
+   * Custom text embeds are kept by the server on edit, so they don't count.
+   */
+  function hasGeneratedEmbeds() {
+    return !!props.message?.embeds?.some(
+      (embed) =>
+        embed.type === "Website" ||
+        embed.type === "Image" ||
+        embed.type === "Video",
+    );
+  }
+
+  /**
+   * Remove link previews: the server drops auto-generated embeds on every
+   * edit and only regenerates them when content is sent.
+   */
+  function removeEmbeds() {
+    props
+      .message!.edit({})
+      .catch((error) => openModal({ type: "error2", error }));
   }
 
   /**
@@ -233,6 +257,17 @@ export function MessageContextMenu(props: {
             onClick={() => state.draft.setEditingMessage(props.message!)}
           >
             <Trans>Edit message</Trans>
+          </ContextMenuButton>
+        </Show>
+        <Show
+          when={
+            props.message!.author?.self &&
+            props.message!.channel?.havePermission("SendMessage") &&
+            hasGeneratedEmbeds()
+          }
+        >
+          <ContextMenuButton icon={MdLinkOff} onClick={removeEmbeds}>
+            <Trans>Remove embeds</Trans>
           </ContextMenuButton>
         </Show>
         <Show
