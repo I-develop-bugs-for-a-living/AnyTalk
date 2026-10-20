@@ -111,7 +111,13 @@ function untranslated(blocks) {
  * @returns String identifying the placeholders, for comparison
  */
 function placeholders(text) {
-  const names = [...text.matchAll(/\{(\w+)\s*[,}]/g)].map((m) => `{${m[1]}}`);
+  // only real arguments: `{name}` or `{name, plural|select|...}`, not plural
+  // branch text that happens to start with a word and a comma
+  const names = [
+    ...text.matchAll(
+      /\{(\w+)\s*(?:\}|,\s*(?:plural|select|selectordinal|number|date|time)\b)/g,
+    ),
+  ].map((m) => `{${m[1]}}`);
   const tags = [...text.matchAll(/<\/?\d+\s*\/?>/g)].map((m) =>
     m[0].replace(/\s/g, ""),
   );
