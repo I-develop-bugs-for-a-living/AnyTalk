@@ -61,6 +61,11 @@ msgstr "(újrakapcsolódás most)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {# letiltott üzenet} other {# letiltott üzenetek}}"
 
+#. placeholder {0}: server().channelIds.size
+#: src/interface/servers/ServerOverview.tsx
+msgid "{0, plural, one {# channel} other {# channels}}"
+msgstr ""
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -1333,6 +1338,10 @@ msgstr "Válassz egy felhasználónevet"
 msgid "Choose username"
 msgstr "Felhasználónév kiválasztása"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Clear search"
+msgstr ""
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "Törlés"
@@ -1767,6 +1776,7 @@ msgstr "Meghívók készítése mások számára"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Create or join a server"
 msgstr "Szerver létrehozása vagy csatlakozás"
 
@@ -2995,6 +3005,10 @@ msgstr "Csatlakozás a hangcsatornába"
 msgid "Joined"
 msgstr "Csatlakozott"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Joined {date}"
+msgstr ""
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Jump between servers, channels, messages and members"
 msgstr "Ugrálás szerverek, csatornák, üzenetek és tagok között"
@@ -3591,6 +3605,10 @@ msgstr "Saját robik"
 msgid "Name"
 msgstr "Név"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Name (A-Z)"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr ""
@@ -3665,6 +3683,10 @@ msgstr "Nem található kontroller. Csatlakoztass egyet, és nyomj meg rajta egy
 msgid "no data"
 msgstr "nincs adat"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "No description"
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "No desktop app available yet"
 msgstr "Még nincs elérhető asztali alkalmazás"
@@ -3700,6 +3722,14 @@ msgstr "Nincsenek szerepkör-felülbírálások beállítva."
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No screens found"
 msgstr "Nem található képernyő"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers match \"{search}\""
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers yet"
+msgstr ""
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
@@ -3780,7 +3810,7 @@ msgstr ""
 msgid "Official Communication"
 msgstr "Hivatalos kommunikáció"
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Official Server"
 msgstr "Hivatalos szerver"
 
@@ -3801,6 +3831,10 @@ msgstr "OK"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "Régiek"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Oldest joined"
+msgstr ""
 
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
@@ -4250,6 +4284,10 @@ msgstr "Tedd a saját összefoglalóidat mások összefoglalói mellé. Ők megn
 msgid "Raid or spam attack"
 msgstr "Raid vagy spamtámadás"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Rail order"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
 msgid "React"
@@ -4327,6 +4365,10 @@ msgstr "Legutóbbi hívások"
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Recent calls on Home"
 msgstr "Legutóbbi hívások a Kezdőlapon"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Recently joined"
+msgstr ""
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
@@ -4790,9 +4832,17 @@ msgstr "Üzenetek keresése..."
 msgid "Search Results"
 msgstr "Keresési eredmények"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Search servers"
+msgstr ""
+
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "Beállítások keresése"
+
+#: src/interface/Home.tsx
+msgid "See all your servers at a glance."
+msgstr ""
 
 #~ msgid "See what we're currently working on."
 #~ msgstr ""
@@ -4936,13 +4986,28 @@ msgstr "Szerver-identitások"
 msgid "Server Name"
 msgstr "Szervernév"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Server options for {name}"
+msgstr ""
+
+#: src/interface/Home.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Server overview"
+msgstr ""
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
 msgstr "Szerver szerepkörei"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "Szerverek"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Servers you join show up here."
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5088,6 +5153,10 @@ msgstr "Lassított mód kikapcsolva"
 msgid "Someone calls you in a DM or group"
 msgstr "Valaki felhív egy privát üzenetben vagy csoportban"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Someone is in a voice call"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
 msgstr "Valaki csatlakozik a hangcsatornádhoz"
@@ -5127,6 +5196,10 @@ msgstr "Valami hiba történt! {error}"
 
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Sort by"
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
@@ -5805,6 +5878,18 @@ msgstr ""
 msgid "Unpin message"
 msgstr "Üzenet kitűzésének megszüntetése"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread first"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread mentions"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread messages"
+msgstr ""
+
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Unsent message"
 msgstr "Üzenet törölve"
@@ -5993,7 +6078,7 @@ msgstr "A felhasználók mostantól nem lesznek megkérve, hogy igazolják élet
 #~ msgid "Using default speaker"
 #~ msgstr ""
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Verified"
 msgstr "Igazolva"
 

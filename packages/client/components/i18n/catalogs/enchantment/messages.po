@@ -61,6 +61,11 @@ msgstr "(∷ᒷᓵ𝙹リリᒷᓵℸ リ𝙹∴)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {# ʖꖎ𝙹ᓵꖌᒷ↸ ᒲᒷᓭᓭᔑ⊣ᒷ} other {# ʖꖎ𝙹ᓵꖌᒷ↸ ᒲᒷᓭᓭᔑ⊣ᒷᓭ}}"
 
+#. placeholder {0}: server().channelIds.size
+#: src/interface/servers/ServerOverview.tsx
+msgid "{0, plural, one {# channel} other {# channels}}"
+msgstr "{0, plural, one {# ᓵ⍑ᔑリリᒷꖎ} other {# ᓵ⍑ᔑリリᒷꖎᓭ}}"
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -1334,6 +1339,10 @@ msgstr "ᓵ⍑𝙹𝙹ᓭᒷ ᔑ ⚍ᓭᒷ∷リᔑᒲᒷ"
 msgid "Choose username"
 msgstr "ᓵ⍑𝙹𝙹ᓭᒷ ⚍ᓭᒷ∷リᔑᒲᒷ"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Clear search"
+msgstr "ᓵꖎᒷᔑ∷ ᓭᒷᔑ∷ᓵ⍑"
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "ᓵꖎᒷᔑ∷ ᓭℸᔑℸ⚍ᓭ"
@@ -1769,6 +1778,7 @@ msgstr "ᓵ∷ᒷᔑℸᒷ ╎リ⍊╎ℸᒷᓭ ⎓𝙹∷ 𝙹ℸ⍑ᒷ∷ᓭ 
 
 #: components/modal/modals/CreateOrJoinServer.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Create or join a server"
 msgstr "ᓵ∷ᒷᔑℸᒷ 𝙹∷ ⋮𝙹╎リ ᔑ ᓭᒷ∷⍊ᒷ∷"
 
@@ -3000,6 +3010,10 @@ msgstr "⋮𝙹╎リ ℸ⍑ᒷ ⍊𝙹╎ᓵᒷ ᓵ⍑ᔑリリᒷꖎ"
 msgid "Joined"
 msgstr "⋮𝙹╎リᒷ↸"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Joined {date}"
+msgstr "⋮𝙹╎リᒷ↸ {date}"
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Jump between servers, channels, messages and members"
 msgstr "⋮⚍ᒲ!¡ ʖᒷℸ∴ᒷᒷリ ᓭᒷ∷⍊ᒷ∷ᓭ, ᓵ⍑ᔑリリᒷꖎᓭ, ᒲᒷᓭᓭᔑ⊣ᒷᓭ ᔑリ↸ ᒲᒷᒲʖᒷ∷ᓭ"
@@ -3596,6 +3610,10 @@ msgstr "ᒲ|| ʖ𝙹ℸᓭ"
 msgid "Name"
 msgstr "リᔑᒲᒷ"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Name (A-Z)"
+msgstr "リᔑᒲᒷ (ᔑ-⨅)"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr "リᒷᒷ↸ᓭ ᔑ ᓭᒷ∷⍊ᒷ∷ ℸ⍑ᔑℸ ᓭ⚍!¡!¡𝙹∷ℸᓭ ᓭℸ∷ᒷᔑᒲ ⍊╎ᒷ∴ᒷ∷ᓭ."
@@ -3670,6 +3688,10 @@ msgstr "リ𝙹 ᓵ𝙹リℸ∷𝙹ꖎꖎᒷ∷ ⎓𝙹⚍リ↸. ᓵ𝙹リリ
 msgid "no data"
 msgstr "リ𝙹 ↸ᔑℸᔑ"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "No description"
+msgstr "リ𝙹 ↸ᒷᓭᓵ∷╎!¡ℸ╎𝙹リ"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "No desktop app available yet"
 msgstr "リ𝙹 ↸ᒷᓭꖌℸ𝙹!¡ ᔑ!¡!¡ ᔑ⍊ᔑ╎ꖎᔑʖꖎᒷ ||ᒷℸ"
@@ -3705,6 +3727,14 @@ msgstr "リ𝙹 ∷𝙹ꖎᒷ 𝙹⍊ᒷ∷∷╎↸ᒷᓭ ⍑ᔑ⍊ᒷ ʖᒷᒷ
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No screens found"
 msgstr "リ𝙹 ᓭᓵ∷ᒷᒷリᓭ ⎓𝙹⚍リ↸"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers match \"{search}\""
+msgstr "リ𝙹 ᓭᒷ∷⍊ᒷ∷ᓭ ᒲᔑℸᓵ⍑ \"{search}\""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers yet"
+msgstr "リ𝙹 ᓭᒷ∷⍊ᒷ∷ᓭ ||ᒷℸ"
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
@@ -3785,7 +3815,7 @@ msgstr "𝙹⎓⎓ᒷ∷ᓭ ℸ𝙹 ᓭℸ∷ᒷᔑᒲ ℸ⍑ᒷ ⊣ᔑᒲᒷᓭ
 msgid "Official Communication"
 msgstr "𝙹⎓⎓╎ᓵ╎ᔑꖎ ᓵ𝙹ᒲᒲ⚍リ╎ᓵᔑℸ╎𝙹リ"
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Official Server"
 msgstr "𝙹⎓⎓╎ᓵ╎ᔑꖎ ᓭᒷ∷⍊ᒷ∷"
 
@@ -3806,6 +3836,10 @@ msgstr "𝙹ꖌ"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "𝙹ꖎ↸ᒷᓭℸ"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Oldest joined"
+msgstr "𝙹ꖎ↸ᒷᓭℸ ⋮𝙹╎リᒷ↸"
 
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
@@ -4255,6 +4289,10 @@ msgstr "!¡⚍ℸ ||𝙹⚍∷ ∷ᒷᓵᔑ!¡ᓭ リᒷ/ℸ ℸ𝙹 ∷ᒷᓵ�
 msgid "Raid or spam attack"
 msgstr "∷ᔑ╎↸ 𝙹∷ ᓭ!¡ᔑᒲ ᔑℸℸᔑᓵꖌ"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Rail order"
+msgstr "∷ᔑ╎ꖎ 𝙹∷↸ᒷ∷"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
 msgid "React"
@@ -4332,6 +4370,10 @@ msgstr "∷ᒷᓵᒷリℸ ᓵᔑꖎꖎᓭ"
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Recent calls on Home"
 msgstr "∷ᒷᓵᒷリℸ ᓵᔑꖎꖎᓭ 𝙹リ ⍑𝙹ᒲᒷ"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Recently joined"
+msgstr "∷ᒷᓵᒷリℸꖎ|| ⋮𝙹╎リᒷ↸"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
@@ -4796,9 +4838,17 @@ msgstr "ᓭᒷᔑ∷ᓵ⍑ ᒲᒷᓭᓭᔑ⊣ᒷᓭ..."
 msgid "Search Results"
 msgstr "ᓭᒷᔑ∷ᓵ⍑ ∷ᒷᓭ⚍ꖎℸᓭ"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Search servers"
+msgstr "ᓭᒷᔑ∷ᓵ⍑ ᓭᒷ∷⍊ᒷ∷ᓭ"
+
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "ᓭᒷᔑ∷ᓵ⍑ ᓭᒷℸℸ╎リ⊣ᓭ"
+
+#: src/interface/Home.tsx
+msgid "See all your servers at a glance."
+msgstr "ᓭᒷᒷ ᔑꖎꖎ ||𝙹⚍∷ ᓭᒷ∷⍊ᒷ∷ᓭ ᔑℸ ᔑ ⊣ꖎᔑリᓵᒷ."
 
 #: components/app/interface/settings/user/Feedback.tsx
 #~ msgid "See what we're currently working on."
@@ -4943,13 +4993,28 @@ msgstr "ᓭᒷ∷⍊ᒷ∷ ╎↸ᒷリℸ╎ℸ╎ᒷᓭ"
 msgid "Server Name"
 msgstr "ᓭᒷ∷⍊ᒷ∷ リᔑᒲᒷ"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Server options for {name}"
+msgstr "ᓭᒷ∷⍊ᒷ∷ 𝙹!¡ℸ╎𝙹リᓭ ⎓𝙹∷ {name}"
+
+#: src/interface/Home.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Server overview"
+msgstr "ᓭᒷ∷⍊ᒷ∷ 𝙹⍊ᒷ∷⍊╎ᒷ∴"
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
 msgstr "ᓭᒷ∷⍊ᒷ∷ ∷𝙹ꖎᒷᓭ"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "ᓭᒷ∷⍊ᒷ∷ᓭ"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Servers you join show up here."
+msgstr "ᓭᒷ∷⍊ᒷ∷ᓭ ||𝙹⚍ ⋮𝙹╎リ ᓭ⍑𝙹∴ ⚍!¡ ⍑ᒷ∷ᒷ."
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5095,6 +5160,10 @@ msgstr "ᓭꖎ𝙹∴ᒲ𝙹↸ᒷ 𝙹⎓⎓"
 msgid "Someone calls you in a DM or group"
 msgstr "ᓭ𝙹ᒲᒷ𝙹リᒷ ᓵᔑꖎꖎᓭ ||𝙹⚍ ╎リ ᔑ ↸ᒲ 𝙹∷ ⊣∷𝙹⚍!¡"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Someone is in a voice call"
+msgstr "ᓭ𝙹ᒲᒷ𝙹リᒷ ╎ᓭ ╎リ ᔑ ⍊𝙹╎ᓵᒷ ᓵᔑꖎꖎ"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
 msgstr "ᓭ𝙹ᒲᒷ𝙹リᒷ ⋮𝙹╎リᓭ ||𝙹⚍∷ ⍊𝙹╎ᓵᒷ ᓵ⍑ᔑリリᒷꖎ"
@@ -5135,6 +5204,10 @@ msgstr "ᓭ𝙹ᒲᒷℸ⍑╎リ⊣ ∴ᒷリℸ ∴∷𝙹リ⊣! {error}"
 #: components/i18n/errors.ts
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Sort by"
+msgstr "ᓭ𝙹∷ℸ ʖ||"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
@@ -5814,6 +5887,18 @@ msgstr "⚍リ!¡╎リ ᓵ𝙹リ⍊ᒷ∷ᓭᔑℸ╎𝙹リ"
 msgid "Unpin message"
 msgstr "⚍リ!¡╎リ ᒲᒷᓭᓭᔑ⊣ᒷ"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread first"
+msgstr "⚍リ∷ᒷᔑ↸ ⎓╎∷ᓭℸ"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread mentions"
+msgstr "⚍リ∷ᒷᔑ↸ ᒲᒷリℸ╎𝙹リᓭ"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread messages"
+msgstr "⚍リ∷ᒷᔑ↸ ᒲᒷᓭᓭᔑ⊣ᒷᓭ"
+
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Unsent message"
 msgstr "⚍リᓭᒷリℸ ᒲᒷᓭᓭᔑ⊣ᒷ"
@@ -6002,7 +6087,7 @@ msgstr "⚍ᓭᒷ∷ᓭ ∴╎ꖎꖎ リ𝙹 ꖎ𝙹リ⊣ᒷ∷ ʖᒷ ᔑᓭꖌ
 #~ msgid "Using default speaker"
 #~ msgstr ""
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Verified"
 msgstr "⍊ᒷ∷╎⎓╎ᒷ↸"
 

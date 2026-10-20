@@ -61,6 +61,11 @@ msgstr "(ponovno poveži zdaj)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {# blokirano sporočilo} two {# blokirani sporočili} few {# blokirana sporočila} other {# blokiranih sporočil}}"
 
+#. placeholder {0}: server().channelIds.size
+#: src/interface/servers/ServerOverview.tsx
+msgid "{0, plural, one {# channel} other {# channels}}"
+msgstr ""
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -1334,6 +1339,10 @@ msgstr "Izberite uporabniško ime"
 msgid "Choose username"
 msgstr "Izberi uporabniško ime"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Clear search"
+msgstr ""
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "Odstrani status"
@@ -1769,6 +1778,7 @@ msgstr "Ustvarjanje povabil, ki jih lahko uporabijo drugi"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Create or join a server"
 msgstr "Ustvari strežnik ali se mu pridruži"
 
@@ -3000,6 +3010,10 @@ msgstr "Pridruži se glasovnemu kanalu"
 msgid "Joined"
 msgstr "Pridružen(a)"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Joined {date}"
+msgstr ""
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Jump between servers, channels, messages and members"
 msgstr "Preskoči med strežniki, kanali, sporočili in člani"
@@ -3596,6 +3610,10 @@ msgstr "Moji roboti"
 msgid "Name"
 msgstr "Ime"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Name (A-Z)"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr ""
@@ -3670,6 +3688,10 @@ msgstr "Krmilnika ni mogoče najti. Povežite ga in pritisnite poljuben gumb nan
 msgid "no data"
 msgstr "ni podatkov"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "No description"
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "No desktop app available yet"
 msgstr "Namizna aplikacija še ni na voljo"
@@ -3705,6 +3727,14 @@ msgstr "Nobena preglasitev vlog ni nastavljena."
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No screens found"
 msgstr "Ni najdenih zaslonov"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers match \"{search}\""
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers yet"
+msgstr ""
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
@@ -3785,7 +3815,7 @@ msgstr ""
 msgid "Official Communication"
 msgstr "Uradna Komunikacija"
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Official Server"
 msgstr "Uradni Strežnik"
 
@@ -3806,6 +3836,10 @@ msgstr "OK"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "Najstarejši"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Oldest joined"
+msgstr ""
 
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
@@ -4255,6 +4289,10 @@ msgstr "Primerjajte svoje povzetke s povzetki drugih oseb. Ti odprejo povzetek v
 msgid "Raid or spam attack"
 msgstr "Napad z množičnimi vdori ali nezaželeno pošto"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Rail order"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
 msgid "React"
@@ -4332,6 +4370,10 @@ msgstr "Nedavni klici"
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Recent calls on Home"
 msgstr "Nedavni klici na domači strani"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Recently joined"
+msgstr ""
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
@@ -4796,9 +4838,17 @@ msgstr "Iskanje sporočil …"
 msgid "Search Results"
 msgstr "Rezultati iskanja"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Search servers"
+msgstr ""
+
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "Iskanje po nastavitvah"
+
+#: src/interface/Home.tsx
+msgid "See all your servers at a glance."
+msgstr ""
 
 #: components/app/interface/settings/user/Feedback.tsx
 #~ msgid "See what we're currently working on."
@@ -4943,13 +4993,28 @@ msgstr "Identitete strežnika"
 msgid "Server Name"
 msgstr "Ime Strežnika"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Server options for {name}"
+msgstr ""
+
+#: src/interface/Home.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Server overview"
+msgstr ""
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
 msgstr "Vloge strežnika"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "Strežniki"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Servers you join show up here."
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5095,6 +5160,10 @@ msgstr "Počasni način izklopljen"
 msgid "Someone calls you in a DM or group"
 msgstr "Nekdo vas pokliče v neposrednem sporočilu ali skupini"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Someone is in a voice call"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
 msgstr "Nekdo se pridruži vašemu glasovnemu kanalu"
@@ -5135,6 +5204,10 @@ msgstr "Nekaj je šlo narobe! {error}"
 #: components/i18n/errors.ts
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Sort by"
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
@@ -5814,6 +5887,18 @@ msgstr ""
 msgid "Unpin message"
 msgstr "Odpni sporočilo"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread first"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread mentions"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread messages"
+msgstr ""
+
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Unsent message"
 msgstr "Neposlano sporočilo"
@@ -6002,7 +6087,7 @@ msgstr "Uporabnikov ne bomo več prosili za potrditev starosti pred pridružitvi
 #~ msgid "Using default speaker"
 #~ msgstr ""
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Verified"
 msgstr "Preverjeno"
 

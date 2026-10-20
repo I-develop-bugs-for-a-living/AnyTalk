@@ -61,6 +61,11 @@ msgstr "(pieslēgties tagad)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, zero {# bloķētu ziņu} one {# bloķēta ziņa} other {# bloķētas ziņas}}"
 
+#. placeholder {0}: server().channelIds.size
+#: src/interface/servers/ServerOverview.tsx
+msgid "{0, plural, one {# channel} other {# channels}}"
+msgstr ""
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -1334,6 +1339,10 @@ msgstr "Izvēlies lietotājvārdu"
 msgid "Choose username"
 msgstr "Izvēlēties lietotājvārdu"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Clear search"
+msgstr ""
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "Notīrīt statusu"
@@ -1769,6 +1778,7 @@ msgstr "Izveidot uzaicinājumus, ko var izmantot citi"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Create or join a server"
 msgstr "Izveidot serveri vai pievienoties tam"
 
@@ -3000,6 +3010,10 @@ msgstr "Pievienoties balss kanālam"
 msgid "Joined"
 msgstr "Pievienojies"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Joined {date}"
+msgstr ""
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Jump between servers, channels, messages and members"
 msgstr "Pārlēkt starp serveriem, kanāliem, ziņām un dalībniekiem"
@@ -3596,6 +3610,10 @@ msgstr "Mani roboti"
 msgid "Name"
 msgstr "Nosaukums"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Name (A-Z)"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr ""
@@ -3670,6 +3688,10 @@ msgstr "Vadāmierīce nav atrasta. Pievieno vienu un nospied jebkuru tās pogu."
 msgid "no data"
 msgstr "nav datu"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "No description"
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "No desktop app available yet"
 msgstr "Darbvirsmas lietotne vēl nav pieejama"
@@ -3705,6 +3727,14 @@ msgstr "Lomu izņēmumi nav iestatīti."
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No screens found"
 msgstr "Ekrāni nav atrasti"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers match \"{search}\""
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers yet"
+msgstr ""
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
@@ -3785,7 +3815,7 @@ msgstr ""
 msgid "Official Communication"
 msgstr "Oficiālā saziņa"
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Official Server"
 msgstr "Oficiālais serveris"
 
@@ -3806,6 +3836,10 @@ msgstr "Labi"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "Vecākās"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Oldest joined"
+msgstr ""
 
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
@@ -4255,6 +4289,10 @@ msgstr "Novieto savus kopsavilkumus blakus citu cilvēku kopsavilkumiem. Viņi a
 msgid "Raid or spam attack"
 msgstr "Reids vai surogātpasta uzbrukums"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Rail order"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
 msgid "React"
@@ -4332,6 +4370,10 @@ msgstr "Nesenie zvani"
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Recent calls on Home"
 msgstr "Nesenie zvani sākumlapā"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Recently joined"
+msgstr ""
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
@@ -4796,9 +4838,17 @@ msgstr "Meklēt ziņas..."
 msgid "Search Results"
 msgstr "Meklēšanas rezultāti"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Search servers"
+msgstr ""
+
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "Meklēt iestatījumus"
+
+#: src/interface/Home.tsx
+msgid "See all your servers at a glance."
+msgstr ""
 
 #: components/app/interface/settings/user/Feedback.tsx
 #~ msgid "See what we're currently working on."
@@ -4943,13 +4993,28 @@ msgstr "Servera identitātes"
 msgid "Server Name"
 msgstr "Servera nosaukums"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Server options for {name}"
+msgstr ""
+
+#: src/interface/Home.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Server overview"
+msgstr ""
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
 msgstr "Servera lomas"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "Serveri"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Servers you join show up here."
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5095,6 +5160,10 @@ msgstr "Lēnais režīms izslēgts"
 msgid "Someone calls you in a DM or group"
 msgstr "Kāds tev zvana privātajā sarunā vai grupā"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Someone is in a voice call"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
 msgstr "Kāds pievienojas tavam balss kanālam"
@@ -5135,6 +5204,10 @@ msgstr "Kaut kas nogāja greizi! {error}"
 #: components/i18n/errors.ts
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Sort by"
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
@@ -5814,6 +5887,18 @@ msgstr ""
 msgid "Unpin message"
 msgstr "Atspraust ziņu"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread first"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread mentions"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread messages"
+msgstr ""
+
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Unsent message"
 msgstr "Nenosūtīta ziņa"
@@ -6002,7 +6087,7 @@ msgstr "Lietotājiem vairs netiks lūgts apstiprināt savu vecumu, pirms pievien
 #~ msgid "Using default speaker"
 #~ msgstr ""
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Verified"
 msgstr "Pārbaudīts"
 

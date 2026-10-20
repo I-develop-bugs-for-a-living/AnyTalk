@@ -61,6 +61,11 @@ msgstr "(jetzt neu verbinden)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {# blockierte Nachricht} other {# blockierte Nachrichten}}"
 
+#. placeholder {0}: server().channelIds.size
+#: src/interface/servers/ServerOverview.tsx
+msgid "{0, plural, one {# channel} other {# channels}}"
+msgstr "{0, plural, one {# Kanal} other {# Kanäle}}"
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -1299,6 +1304,10 @@ msgstr "Wähle einen Benutzernamen"
 msgid "Choose username"
 msgstr "Benutzernamen wählen"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Clear search"
+msgstr "Suche löschen"
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "Status entfernen"
@@ -1732,6 +1741,7 @@ msgstr "Einladungen erstellen damit andere Nutzer beitreten können"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Create or join a server"
 msgstr "Server erstellen oder beitreten"
 
@@ -2942,6 +2952,10 @@ msgstr "Sprachchat beitreten"
 msgid "Joined"
 msgstr "Beigetreten"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Joined {date}"
+msgstr "Beigetreten am {date}"
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Jump between servers, channels, messages and members"
 msgstr "Zwischen Servern, Kanälen, Nachrichten und Mitgliedern springen"
@@ -3538,6 +3552,10 @@ msgstr "Meine Bots"
 msgid "Name"
 msgstr "Name"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Name (A-Z)"
+msgstr "Name (A–Z)"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr "Benötigt einen Server, der Stream-Zuschauer unterstützt."
@@ -3612,6 +3630,10 @@ msgstr "Kein Controller gefunden. Schließe einen an und drücke eine beliebige 
 msgid "no data"
 msgstr "keine Daten"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "No description"
+msgstr "Keine Beschreibung"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "No desktop app available yet"
 msgstr "Noch keine Desktop-App verfügbar"
@@ -3647,6 +3669,14 @@ msgstr "Es wurden keine Rollenüberschreibungen konfiguriert."
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No screens found"
 msgstr "Keine Bildschirme gefunden"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers match \"{search}\""
+msgstr "Keine Server für „{search}“ gefunden"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers yet"
+msgstr "Noch keine Server"
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
@@ -3727,7 +3757,7 @@ msgstr "Bietet an, Spiele, die du in einem Anruf spielst, zu streamen. Die Erken
 msgid "Official Communication"
 msgstr "Offizielle Kommunikation"
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Official Server"
 msgstr "Offizieller Server"
 
@@ -3748,6 +3778,10 @@ msgstr "OK"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "Älteste"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Oldest joined"
+msgstr "Älteste Beitritte zuerst"
 
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
@@ -4197,6 +4231,10 @@ msgstr "Zeige deine Rückblicke neben Rückblicken anderer Personen an. Diese ö
 msgid "Raid or spam attack"
 msgstr "Raid- oder Spam-Angriff"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Rail order"
+msgstr "Reihenfolge der Serverleiste"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
 msgid "React"
@@ -4270,6 +4308,10 @@ msgstr "Letzte Anrufe"
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Recent calls on Home"
 msgstr "Letzte Anrufe auf der Startseite"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Recently joined"
+msgstr "Zuletzt beigetreten"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
@@ -4730,9 +4772,17 @@ msgstr "Nachrichten durchsuchen..."
 msgid "Search Results"
 msgstr "Suchergebnisse"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Search servers"
+msgstr "Server durchsuchen"
+
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "Einstellungen durchsuchen"
+
+#: src/interface/Home.tsx
+msgid "See all your servers at a glance."
+msgstr "Sieh alle deine Server auf einen Blick."
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select"
@@ -4873,13 +4923,28 @@ msgstr "Server-Identitäten"
 msgid "Server Name"
 msgstr "Servername"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Server options for {name}"
+msgstr "Serveroptionen für {name}"
+
+#: src/interface/Home.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Server overview"
+msgstr "Serverübersicht"
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
 msgstr "Serverrollen"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "Server"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Servers you join show up here."
+msgstr "Server, denen du beitrittst, erscheinen hier."
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5025,6 +5090,10 @@ msgstr "Langsamer Modus aus"
 msgid "Someone calls you in a DM or group"
 msgstr "Jemand ruft dich in einer DM oder Gruppe an"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Someone is in a voice call"
+msgstr "Jemand ist in einem Sprachanruf"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
 msgstr "Jemand betritt deinen Sprachkanal"
@@ -5061,6 +5130,10 @@ msgstr "Etwas mit deiner Anfrage stimmt nicht, {0}."
 #: components/i18n/errors.tsx
 msgid "Something went wrong! {error}"
 msgstr "Etwas ist schief gelaufen! {error}"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Sort by"
+msgstr "Sortieren nach"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
@@ -5736,6 +5809,18 @@ msgstr "Unterhaltung lösen"
 msgid "Unpin message"
 msgstr "Nachricht loslösen"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread first"
+msgstr "Ungelesene zuerst"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread mentions"
+msgstr "Ungelesene Erwähnungen"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread messages"
+msgstr "Ungelesene Nachrichten"
+
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Unsent message"
 msgstr "Nichtgesendete Nachricht"
@@ -5916,7 +6001,7 @@ msgstr "Nutzer müssen ihr Alter bestätigen bevor sie diesen Kanal öffnen kön
 msgid "Users will no longer be asked to confirm their age before joining this channel.<0/> Please ensure the content is appropriate for all ages."
 msgstr "Nutzer müssen nicht länger ihr Alter bestätigen bevor sie diesem Kanal beitreten können.<0/> Bitte stell sicher, dass Inhalte für alle Altersgruppen geeignet sind."
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Verified"
 msgstr "Verifiziert"
 

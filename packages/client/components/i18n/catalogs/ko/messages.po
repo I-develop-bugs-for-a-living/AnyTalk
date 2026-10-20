@@ -61,6 +61,11 @@ msgstr "(지금 다시 연결)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, other {차단된 메시지 #개}}"
 
+#. placeholder {0}: server().channelIds.size
+#: src/interface/servers/ServerOverview.tsx
+msgid "{0, plural, one {# channel} other {# channels}}"
+msgstr "{0, plural, other {채널 #개}}"
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -1333,6 +1338,10 @@ msgstr "사용자 이름을 정하세요"
 msgid "Choose username"
 msgstr "사용자 이름 선택"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Clear search"
+msgstr "검색 지우기"
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "상태 삭제"
@@ -1767,6 +1776,7 @@ msgstr "다른 사람이 사용할 초대 만들기"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Create or join a server"
 msgstr "서버 만들기 또는 참여"
 
@@ -2995,6 +3005,10 @@ msgstr "음성 채널 참여"
 msgid "Joined"
 msgstr "참여함"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Joined {date}"
+msgstr "{date}에 참여함"
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Jump between servers, channels, messages and members"
 msgstr "서버, 채널, 메시지, 멤버 사이 이동"
@@ -3591,6 +3605,10 @@ msgstr "내 봇"
 msgid "Name"
 msgstr "이름"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Name (A-Z)"
+msgstr "이름순 (A-Z)"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr "스트림 시청자를 지원하는 서버가 필요해요."
@@ -3665,6 +3683,10 @@ msgstr "컨트롤러를 찾을 수 없어요. 컨트롤러를 연결하고 아�
 msgid "no data"
 msgstr "데이터 없음"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "No description"
+msgstr "설명 없음"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "No desktop app available yet"
 msgstr "아직 사용할 수 있는 데스크톱 앱이 없어요"
@@ -3700,6 +3722,14 @@ msgstr "설정된 역할 재정의가 없어요."
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No screens found"
 msgstr "화면을 찾을 수 없어요"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers match \"{search}\""
+msgstr "\"{search}\"와(과) 일치하는 서버가 없어요"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers yet"
+msgstr "아직 서버가 없어요"
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
@@ -3780,7 +3810,7 @@ msgstr "통화 중에 플레이하는 게임을 스트리밍하도록 제안해�
 msgid "Official Communication"
 msgstr "공식 대화"
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Official Server"
 msgstr "공식 서버"
 
@@ -3801,6 +3831,10 @@ msgstr "확인"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "오래된 순"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Oldest joined"
+msgstr "오래된 참여순"
 
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
@@ -4250,6 +4284,10 @@ msgstr "내 요약을 다른 사람의 요약과 나란히 놓아요. 상대가 
 msgid "Raid or spam attack"
 msgstr "레이드 또는 스팸 공격"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Rail order"
+msgstr "사이드바 순서"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
 msgid "React"
@@ -4327,6 +4365,10 @@ msgstr "최근 통화"
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Recent calls on Home"
 msgstr "홈의 최근 통화"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Recently joined"
+msgstr "최근 참여순"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
@@ -4790,9 +4832,17 @@ msgstr "메시지 검색..."
 msgid "Search Results"
 msgstr "검색 결과"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Search servers"
+msgstr "서버 검색"
+
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "설정 검색"
+
+#: src/interface/Home.tsx
+msgid "See all your servers at a glance."
+msgstr "참여 중인 서버를 한눈에 확인해요."
 
 #~ msgid "See what we're currently working on."
 #~ msgstr ""
@@ -4936,13 +4986,28 @@ msgstr "서버 프로필"
 msgid "Server Name"
 msgstr "서버 이름"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Server options for {name}"
+msgstr "{name} 서버 옵션"
+
+#: src/interface/Home.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Server overview"
+msgstr "서버 개요"
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
 msgstr "서버 역할"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "서버"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Servers you join show up here."
+msgstr "참여한 서버가 여기에 표시돼요."
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5088,6 +5153,10 @@ msgstr "슬로우 모드 끔"
 msgid "Someone calls you in a DM or group"
 msgstr "누군가 DM이나 그룹에서 나에게 전화할 때"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Someone is in a voice call"
+msgstr "누군가 음성 통화 중이에요"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
 msgstr "누군가 내 음성 채널에 들어올 때"
@@ -5127,6 +5196,10 @@ msgstr "문제가 생겼어요! {error}"
 
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Sort by"
+msgstr "정렬 기준"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
@@ -5805,6 +5878,18 @@ msgstr "대화 고정 해제"
 msgid "Unpin message"
 msgstr "메시지 고정 해제"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread first"
+msgstr "읽지 않음 우선"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread mentions"
+msgstr "읽지 않은 멘션"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread messages"
+msgstr "읽지 않은 메시지"
+
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Unsent message"
 msgstr "전송되지 않은 메시지"
@@ -5993,7 +6078,7 @@ msgstr "이제 사용자는 이 채널에 참여하기 전에 나이를 확인�
 #~ msgid "Using default speaker"
 #~ msgstr ""
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Verified"
 msgstr "인증됨"
 

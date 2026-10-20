@@ -61,6 +61,11 @@ msgstr "(econnectray ownay)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {# ockedblay essagemay} other {# ockedblay essagesmay}}"
 
+#. placeholder {0}: server().channelIds.size
+#: src/interface/servers/ServerOverview.tsx
+msgid "{0, plural, one {# channel} other {# channels}}"
+msgstr "{0, plural, one {# annelchay} other {# annelschay}}"
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -1334,6 +1339,10 @@ msgstr "Oosechay ayay usernameyay"
 msgid "Choose username"
 msgstr "Oosechay usernameyay"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Clear search"
+msgstr "Earclay earchsay"
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "Earclay atusstay"
@@ -1769,6 +1778,7 @@ msgstr "Eatecray invitesyay orfay othersyay otay useyay"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Create or join a server"
 msgstr "Eatecray oryay oinjay ayay erversay"
 
@@ -3000,6 +3010,10 @@ msgstr "Oinjay ethay oicevay annelchay"
 msgid "Joined"
 msgstr "Oinedjay"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Joined {date}"
+msgstr "Oinedjay {date}"
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Jump between servers, channels, messages and members"
 msgstr "Umpjay etweenbay erverssay, annelschay, essagesmay andyay embersmay"
@@ -3596,6 +3610,10 @@ msgstr "Ymay Otsbay"
 msgid "Name"
 msgstr "Amenay"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Name (A-Z)"
+msgstr "Amenay (Ayay-Zay)"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr "Eedsnay ayay erversay atthay upportssay eamstray iewersvay."
@@ -3670,6 +3688,10 @@ msgstr "Onay ontrollercay oundfay. Onnectcay oneyay andyay esspray anyyay uttonb
 msgid "no data"
 msgstr "onay ataday"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "No description"
+msgstr "Onay escriptionday"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "No desktop app available yet"
 msgstr "Onay esktopday appyay availableyay etyay"
@@ -3705,6 +3727,14 @@ msgstr "Onay oleray overridesyay avehay eenbay onfiguredcay."
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No screens found"
 msgstr "Onay eensscray oundfay"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers match \"{search}\""
+msgstr "Onay erverssay atchmay \"{search}\""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers yet"
+msgstr "Onay erverssay etyay"
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
@@ -3785,7 +3815,7 @@ msgstr "Offersyay otay eamstray ethay amesgay ouyay ayplay uringday ayay allcay.
 msgid "Official Communication"
 msgstr "Officialyay ommunicationcay"
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Official Server"
 msgstr "Officialyay Erversay"
 
@@ -3806,6 +3836,10 @@ msgstr "Okway"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "Ldestoay"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Oldest joined"
+msgstr "Oldestyay oinedjay"
 
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
@@ -4255,6 +4289,10 @@ msgstr "Utpay ouryay ecapsray extnay otay ecapsray omfray otheryay eoplepay. Eyt
 msgid "Raid or spam attack"
 msgstr "Aidray oryay amspay attackyay"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Rail order"
+msgstr "Ailray orderyay"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
 msgid "React"
@@ -4332,6 +4370,10 @@ msgstr "Ecentray allscay"
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Recent calls on Home"
 msgstr "Ecentray allscay onyay Omehay"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Recently joined"
+msgstr "Ecentlyray oinedjay"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
@@ -4796,9 +4838,17 @@ msgstr "Earchsay essagesmay..."
 msgid "Search Results"
 msgstr "Earchsay Esultsray"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Search servers"
+msgstr "Earchsay erverssay"
+
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "Earchsay ettingssay"
+
+#: src/interface/Home.tsx
+msgid "See all your servers at a glance."
+msgstr "Eesay allyay ouryay erverssay atyay ayay anceglay."
 
 #: components/app/interface/settings/user/Feedback.tsx
 #~ msgid "See what we're currently working on."
@@ -4943,13 +4993,28 @@ msgstr "Erversay Identitiesyay"
 msgid "Server Name"
 msgstr "Erversay amenay"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Server options for {name}"
+msgstr "Erversay optionsyay orfay {name}"
+
+#: src/interface/Home.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Server overview"
+msgstr "Erversay overviewyay"
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
 msgstr "Erversay Olesray"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "Erverssay"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Servers you join show up here."
+msgstr "Erverssay ouyay oinjay owshay upyay erehay."
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5095,6 +5160,10 @@ msgstr "Owmodeslay offyay"
 msgid "Someone calls you in a DM or group"
 msgstr "Omeonesay allscay ouyay inyay ayay DMAY oryay oupgray"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Someone is in a voice call"
+msgstr "Omeonesay isyay inyay ayay oicevay allcay"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
 msgstr "Omeonesay oinsjay ouryay oicevay annelchay"
@@ -5135,6 +5204,10 @@ msgstr "Omethingsay entway ongwray! {error}"
 #: components/i18n/errors.ts
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Sort by"
+msgstr "Ortsay ybay"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
@@ -5814,6 +5887,18 @@ msgstr "Unpinyay onversationcay"
 msgid "Unpin message"
 msgstr "Unpinyay essagemay"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread first"
+msgstr "Unreadyay irstfay"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread mentions"
+msgstr "Unreadyay entionsmay"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread messages"
+msgstr "Unreadyay essagesmay"
+
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Unsent message"
 msgstr "Unsentyay essagemay"
@@ -6002,7 +6087,7 @@ msgstr "Usersyay illway onay ongerlay ebay askedyay otay onfirmcay eirthay ageya
 #~ msgid "Using default speaker"
 #~ msgstr ""
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Verified"
 msgstr "Erifiedvay"
 

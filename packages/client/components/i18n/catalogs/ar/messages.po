@@ -61,6 +61,11 @@ msgstr "(أعد الاتصال الآن)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, zero {# رسالة مرفوضة} one {رسالة مرفوضة واحدة} two {رسالتان مرفوضتان} few {# رسائل مرفوضة} many {# رسالة مرفوضة} other {# رسالة مرفوضة}}"
 
+#. placeholder {0}: server().channelIds.size
+#: src/interface/servers/ServerOverview.tsx
+msgid "{0, plural, one {# channel} other {# channels}}"
+msgstr "{0, plural, zero {# قناة} one {قناة واحدة} two {قناتان} few {# قنوات} many {# قناة} other {# قناة}}"
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -1331,6 +1336,10 @@ msgstr "قم بإختيار اسم مستعار"
 msgid "Choose username"
 msgstr "إختر إسم مستعار"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Clear search"
+msgstr "مسح البحث"
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "امسح الحالة"
@@ -1765,6 +1774,7 @@ msgstr "قم بإنشاء دعوات ليستعملها الاخرين"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Create or join a server"
 msgstr "إنشاء خادم أو الانضمام إليه"
 
@@ -2991,6 +3001,10 @@ msgstr "انضم الى قناة صوتية"
 msgid "Joined"
 msgstr "انضم"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Joined {date}"
+msgstr "انضممت في {date}"
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Jump between servers, channels, messages and members"
 msgstr "التنقل بين الخوادم والقنوات والرسائل والأعضاء"
@@ -3587,6 +3601,10 @@ msgstr "البوتّات الخاصة بي"
 msgid "Name"
 msgstr "الاسم"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Name (A-Z)"
+msgstr "الاسم (أ-ي)"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr "يتطلب خادمًا يدعم مشاهدي البث."
@@ -3661,6 +3679,10 @@ msgstr "لم يتم العثور على وحدة تحكم. وصّل واحدة �
 msgid "no data"
 msgstr "لا توجد بيانات"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "No description"
+msgstr "لا يوجد وصف"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "No desktop app available yet"
 msgstr "لا يتوفر تطبيق لسطح المكتب بعد"
@@ -3696,6 +3718,14 @@ msgstr "لم تتم إعداد أي تجاوزات للرتب."
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No screens found"
 msgstr "لم يتم العثور على شاشات"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers match \"{search}\""
+msgstr "لا توجد خوادم تطابق \"{search}\""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers yet"
+msgstr "لا توجد خوادم بعد"
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
@@ -3776,7 +3806,7 @@ msgstr "يقترح بث الألعاب التي تلعبها أثناء المك
 msgid "Official Communication"
 msgstr "التواصل الرسمي"
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Official Server"
 msgstr "سيرفر رسمي"
 
@@ -3797,6 +3827,10 @@ msgstr "تأكيد"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "الأقدم"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Oldest joined"
+msgstr "الأقدم انضمامًا"
 
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
@@ -4246,6 +4280,10 @@ msgstr "ضع ملخصاتك بجانب ملخصات أشخاص آخرين. يف�
 msgid "Raid or spam attack"
 msgstr "هجوم أو رسائل مزعجة (سبام)"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Rail order"
+msgstr "ترتيب الشريط الجانبي"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
 msgid "React"
@@ -4322,6 +4360,10 @@ msgstr "المكالمات الأخيرة"
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Recent calls on Home"
 msgstr "المكالمات الأخيرة في الصفحة الرئيسية"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Recently joined"
+msgstr "الأحدث انضمامًا"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
@@ -4785,9 +4827,17 @@ msgstr "ابحث في الرسائل..."
 msgid "Search Results"
 msgstr "نتائج البحث"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Search servers"
+msgstr "البحث في الخوادم"
+
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "البحث في الإعدادات"
+
+#: src/interface/Home.tsx
+msgid "See all your servers at a glance."
+msgstr "شاهد جميع خوادمك بنظرة واحدة."
 
 #~ msgid "See what we're currently working on."
 #~ msgstr ""
@@ -4931,13 +4981,28 @@ msgstr "هويات السيرفر"
 msgid "Server Name"
 msgstr "اسم السيرفر"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Server options for {name}"
+msgstr "خيارات الخادم {name}"
+
+#: src/interface/Home.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Server overview"
+msgstr "نظرة عامة على الخوادم"
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
 msgstr "رتب السيرفر"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "الخوادم"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Servers you join show up here."
+msgstr "ستظهر الخوادم التي تنضم إليها هنا."
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5083,6 +5148,10 @@ msgstr "إيقاف تشغيل الوضع البطيء"
 msgid "Someone calls you in a DM or group"
 msgstr "يتصل بك أحد في رسالة خاصة أو مجموعة"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Someone is in a voice call"
+msgstr "شخص ما في مكالمة صوتية"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
 msgstr "ينضم أحد إلى قناتك الصوتية"
@@ -5122,6 +5191,10 @@ msgstr "حدث خطأ ما! {error}"
 
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Sort by"
+msgstr "ترتيب حسب"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
@@ -5800,6 +5873,18 @@ msgstr "إلغاء تثبيت المحادثة"
 msgid "Unpin message"
 msgstr "إلغاء تثبيت الرسالة"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread first"
+msgstr "غير المقروءة أولًا"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread mentions"
+msgstr "إشارات غير مقروءة"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread messages"
+msgstr "رسائل غير مقروءة"
+
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Unsent message"
 msgstr "رسالة لم تصل"
@@ -5986,7 +6071,7 @@ msgstr "لن يتم طلب إثبات العمر للمستخدمين قبل د�
 #~ msgid "Using default speaker"
 #~ msgstr ""
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Verified"
 msgstr "تم التحقق منه"
 

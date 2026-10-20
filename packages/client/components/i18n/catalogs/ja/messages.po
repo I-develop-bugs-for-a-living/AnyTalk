@@ -61,6 +61,11 @@ msgstr "(今すぐ再接続)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, other {ブロックしたメッセージ # 件}}"
 
+#. placeholder {0}: server().channelIds.size
+#: src/interface/servers/ServerOverview.tsx
+msgid "{0, plural, one {# channel} other {# channels}}"
+msgstr "{0, plural, other {#個のチャンネル}}"
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -1248,6 +1253,10 @@ msgstr "ユーザー名を入力"
 msgid "Choose username"
 msgstr "ユーザー名を入力"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Clear search"
+msgstr "検索をクリア"
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "ステータスをクリア"
@@ -1681,6 +1690,7 @@ msgstr "招待リンクを発行できます"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Create or join a server"
 msgstr "サーバーを作成または参加"
 
@@ -2891,6 +2901,10 @@ msgstr "ボイスチャンネルに参加"
 msgid "Joined"
 msgstr "参加済み"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Joined {date}"
+msgstr "{date}に参加"
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Jump between servers, channels, messages and members"
 msgstr "サーバー、チャンネル、メッセージ、メンバー間を移動"
@@ -3487,6 +3501,10 @@ msgstr "自分のボット"
 msgid "Name"
 msgstr "名前"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Name (A-Z)"
+msgstr "名前（A-Z）"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr "配信の視聴者に対応したサーバーが必要です。"
@@ -3561,6 +3579,10 @@ msgstr "コントローラーが見つかりません。接続して、いずれ
 msgid "no data"
 msgstr "データなし"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "No description"
+msgstr "説明なし"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "No desktop app available yet"
 msgstr "デスクトップアプリはまだありません"
@@ -3596,6 +3618,14 @@ msgstr "ロールの上書きは設定されていません。"
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No screens found"
 msgstr "画面が見つかりません"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers match \"{search}\""
+msgstr "「{search}」に一致するサーバーはありません"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers yet"
+msgstr "まだサーバーがありません"
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
@@ -3676,7 +3706,7 @@ msgstr "通話中にプレイしているゲームの配信を提案します。
 msgid "Official Communication"
 msgstr "公式"
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Official Server"
 msgstr "公式サーバー"
 
@@ -3697,6 +3727,10 @@ msgstr "OK"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "古い順"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Oldest joined"
+msgstr "参加が古い順"
 
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
@@ -4146,6 +4180,10 @@ msgstr "自分のリキャップを他の人のリキャップと並べます。
 msgid "Raid or spam attack"
 msgstr "レイド、またはスパム攻撃"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Rail order"
+msgstr "サイドバーの順"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
 msgid "React"
@@ -4219,6 +4257,10 @@ msgstr "最近の通話"
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Recent calls on Home"
 msgstr "ホームの最近の通話"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Recently joined"
+msgstr "参加が新しい順"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
@@ -4679,9 +4721,17 @@ msgstr "メッセージを検索..."
 msgid "Search Results"
 msgstr "検索結果"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Search servers"
+msgstr "サーバーを検索"
+
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "設定を検索"
+
+#: src/interface/Home.tsx
+msgid "See all your servers at a glance."
+msgstr "参加しているサーバーをひと目で確認できます。"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select"
@@ -4822,13 +4872,28 @@ msgstr "サーバー内プロフィール"
 msgid "Server Name"
 msgstr "サーバー名"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Server options for {name}"
+msgstr "{name}のサーバーオプション"
+
+#: src/interface/Home.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Server overview"
+msgstr "サーバー一覧"
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
 msgstr "サーバーロール"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "サーバー"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Servers you join show up here."
+msgstr "参加したサーバーはここに表示されます。"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -4974,6 +5039,10 @@ msgstr "スローモードオフ"
 msgid "Someone calls you in a DM or group"
 msgstr "DM またはグループで誰かから着信があったとき"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Someone is in a voice call"
+msgstr "誰かがボイス通話中です"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
 msgstr "誰かがボイスチャンネルに参加したとき"
@@ -5010,6 +5079,10 @@ msgstr "リクエストに問題があります。{0}。"
 #: components/i18n/errors.tsx
 msgid "Something went wrong! {error}"
 msgstr "問題が発生しました。{error}"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Sort by"
+msgstr "並べ替え"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
@@ -5685,6 +5758,18 @@ msgstr "会話のピン留めを解除"
 msgid "Unpin message"
 msgstr "メッセージのピン留めを解除"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread first"
+msgstr "未読を先頭に"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread mentions"
+msgstr "未読のメンション"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread messages"
+msgstr "未読メッセージ"
+
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Unsent message"
 msgstr "未送信のメッセージ"
@@ -5865,7 +5950,7 @@ msgstr "ユーザーはこのチャンネルを開く前に年齢の確認を求
 msgid "Users will no longer be asked to confirm their age before joining this channel.<0/> Please ensure the content is appropriate for all ages."
 msgstr "ユーザーはこのチャンネルに参加する前の年齢確認が不要になります。<0/>すべての年齢に適した内容であることをご確認ください。"
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Verified"
 msgstr "認証済み"
 

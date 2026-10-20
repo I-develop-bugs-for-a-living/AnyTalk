@@ -61,6 +61,11 @@ msgstr "(இப்போது மீண்டும் இணைக்கவு
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {# தடுக்கப்பட்ட செய்தி} other {# தடுக்கப்பட்ட செய்திகள்}}"
 
+#. placeholder {0}: server().channelIds.size
+#: src/interface/servers/ServerOverview.tsx
+msgid "{0, plural, one {# channel} other {# channels}}"
+msgstr ""
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -1334,6 +1339,10 @@ msgstr "பயனர்பெயரைத் தேர்ந்தெடுக�
 msgid "Choose username"
 msgstr "பயனர்பெயரைத் தேர்ந்தெடு"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Clear search"
+msgstr ""
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "நிலையை அழி"
@@ -1769,6 +1778,7 @@ msgstr "மற்றவர்கள் பயன்படுத்த அழை�
 
 #: components/modal/modals/CreateOrJoinServer.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Create or join a server"
 msgstr "சர்வரை உருவாக்கு அல்லது சேர்"
 
@@ -3000,6 +3010,10 @@ msgstr "குரல் சேனலில் சேர்"
 msgid "Joined"
 msgstr "சேர்ந்தார்"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Joined {date}"
+msgstr ""
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Jump between servers, channels, messages and members"
 msgstr "சர்வர்கள், சேனல்கள், செய்திகள் மற்றும் உறுப்பினர்களுக்கு இடையே தாவவும்"
@@ -3596,6 +3610,10 @@ msgstr "என் போட்ஸ்"
 msgid "Name"
 msgstr "பெயர்"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Name (A-Z)"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr ""
@@ -3670,6 +3688,10 @@ msgstr "கட்டுப்படுத்தி எதுவும் இல�
 msgid "no data"
 msgstr "தரவு இல்லை"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "No description"
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "No desktop app available yet"
 msgstr "டெஸ்க்டாப் பயன்பாடு இன்னும் இல்லை"
@@ -3705,6 +3727,14 @@ msgstr "பாத்திர மேலெழுதல்கள் எதுவ�
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No screens found"
 msgstr "திரைகள் எதுவும் இல்லை"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers match \"{search}\""
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers yet"
+msgstr ""
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
@@ -3785,7 +3815,7 @@ msgstr ""
 msgid "Official Communication"
 msgstr "அதிகாரப்பூர்வ தகவல்தொடர்பு"
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Official Server"
 msgstr "அதிகாரப்பூர்வ சர்வர்"
 
@@ -3806,6 +3836,10 @@ msgstr "சரி"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "பழமையான"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Oldest joined"
+msgstr ""
 
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
@@ -4255,6 +4289,10 @@ msgstr "உங்கள் சுருக்கங்களை மற்றவ�
 msgid "Raid or spam attack"
 msgstr "ரெய்டு அல்லது ஸ்பேம் தாக்குதல்"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Rail order"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
 msgid "React"
@@ -4332,6 +4370,10 @@ msgstr "சமீபத்திய அழைப்புகள்"
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Recent calls on Home"
 msgstr "முகப்பில் சமீபத்திய அழைப்புகள்"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Recently joined"
+msgstr ""
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
@@ -4796,9 +4838,17 @@ msgstr "செய்திகளைத் தேடு..."
 msgid "Search Results"
 msgstr "தேடல் முடிவுகள்"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Search servers"
+msgstr ""
+
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "அமைப்புகளைத் தேடு"
+
+#: src/interface/Home.tsx
+msgid "See all your servers at a glance."
+msgstr ""
 
 #: components/app/interface/settings/user/Feedback.tsx
 #~ msgid "See what we're currently working on."
@@ -4943,13 +4993,28 @@ msgstr "சர்வர் அடையாளங்கள்"
 msgid "Server Name"
 msgstr "சர்வர் பெயர்"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Server options for {name}"
+msgstr ""
+
+#: src/interface/Home.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Server overview"
+msgstr ""
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
 msgstr "சர்வர் பாத்திரங்கள்"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "சர்வர்கள்"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Servers you join show up here."
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5095,6 +5160,10 @@ msgstr "மெதுவான பயன்முறை முடக்கம்"
 msgid "Someone calls you in a DM or group"
 msgstr "நேரடிச் செய்தி அல்லது குழுவில் யாராவது உங்களை அழைக்கும்போது"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Someone is in a voice call"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
 msgstr "யாராவது உங்கள் குரல் சேனலில் சேரும்போது"
@@ -5135,6 +5204,10 @@ msgstr "ஏதோ தவறு நடந்துவிட்டது! {error}"
 #: components/i18n/errors.ts
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Sort by"
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
@@ -5814,6 +5887,18 @@ msgstr ""
 msgid "Unpin message"
 msgstr "செய்தியின் பின்னை நீக்கு"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread first"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread mentions"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread messages"
+msgstr ""
+
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Unsent message"
 msgstr "அனுப்பப்படாத செய்தி"
@@ -6002,7 +6087,7 @@ msgstr "இந்தச் சேனலில் சேரும் முன்
 #~ msgid "Using default speaker"
 #~ msgstr ""
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Verified"
 msgstr "சரிபார்க்கப்பட்டது"
 
