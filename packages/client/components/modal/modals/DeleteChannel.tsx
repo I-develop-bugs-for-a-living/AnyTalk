@@ -46,7 +46,7 @@ export function DeleteChannelModal(
                 <Trans>Leave</Trans>
               </Match>
               <Match when={props.channel.type === "DirectMessage"}>
-                <Trans>Close</Trans>
+                <Trans>Confirm</Trans>
               </Match>
             </Switch>
           ),
