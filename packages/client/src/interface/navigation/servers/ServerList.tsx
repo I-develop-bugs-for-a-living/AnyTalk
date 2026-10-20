@@ -9,6 +9,7 @@ import {
   createSignal,
 } from "solid-js";
 
+import { plural } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { Channel, Server, User } from "stoat.js";
 import { css, cva } from "styled-system/css";
@@ -33,6 +34,7 @@ import {
 import { VoiceStatus } from "@revolt/ui/components/design/VoiceStatus";
 import { Tooltip } from "@revolt/ui/components/floating";
 
+import { INBOX_PANEL_ID, Inbox, createInboxMentions } from "./Inbox";
 import { UserMenu } from "./UserMenu";
 import { RailEntry, createRailDrag } from "./railDrag";
 
@@ -152,6 +154,18 @@ export const ServerList = (props: Props) => {
 
   // Ref for floating menu
   const [menuButton, setMenuButton] = createSignal<HTMLElement>();
+
+  // Inbox of unread mentions
+  const [inboxButton, setInboxButton] = createSignal<HTMLElement>();
+  const [inboxOpen, setInboxOpen] = createSignal(false);
+  const inboxMentions = createInboxMentions();
+  const inboxLabel = () =>
+    inboxMentions.count() > 0
+      ? plural(inboxMentions.count(), {
+          one: "Inbox, # unread mention",
+          other: "Inbox, # unread mentions",
+        })
+      : t`Inbox`;
 
   let rail!: HTMLDivElement;
 
@@ -315,6 +329,36 @@ export const ServerList = (props: Props) => {
             }
           />
         </a>
+        <Tooltip placement="right" content={inboxLabel()} aria={inboxLabel()}>
+          <button
+            type="button"
+            ref={setInboxButton}
+            class={entryContainer() + " " + resetButton}
+            aria-haspopup="dialog"
+            aria-controls={INBOX_PANEL_ID}
+            aria-expanded={inboxOpen()}
+            aria-label={inboxLabel()}
+            onClick={() => setInboxOpen((open) => !open)}
+          >
+            <Avatar
+              size={42}
+              fallback={<Symbol fill={inboxOpen()}>alternate_email</Symbol>}
+              holepunch={inboxMentions.count() > 0 ? "top-right" : undefined}
+              overlay={
+                <Show when={inboxMentions.count() > 0}>
+                  <Unreads.Graphic count={inboxMentions.count()} unread />
+                </Show>
+              }
+              interactive
+            />
+          </button>
+        </Tooltip>
+        <Inbox
+          anchor={inboxButton}
+          mentions={inboxMentions}
+          open={inboxOpen()}
+          onClose={() => setInboxOpen(false)}
+        />
         <For each={props.unreadConversations.slice(0, 9)}>
           {(conversation) => (
             <ChatShortcut
@@ -340,14 +384,8 @@ export const ServerList = (props: Props) => {
             />
           )}
         </For>
-        {/* separates the chat shortcuts from the servers */}
-        <Show
-          when={
-            props.unreadConversations.length || props.pinnedConversations.length
-          }
-        >
-          <LineDivider />
-        </Show>
+        {/* always separates the top group (home, inbox, chat shortcuts) from the servers; rendered once so it never stacks */}
+        <LineDivider />
         <div ref={rail}>
           <For each={props.orderedEntries}>
             {(entry) => (

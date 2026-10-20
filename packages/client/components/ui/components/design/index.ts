@@ -27,6 +27,7 @@
 
 export { Avatar } from "./Avatar";
 export { Badge } from "./Badge";
+export { BottomSheet } from "./BottomSheet";
 export { Button } from "./Button";
 export { type CategorySelectOption, CategoryButton } from "./CategoryButton";
 export { Checkbox } from "./Checkbox";
