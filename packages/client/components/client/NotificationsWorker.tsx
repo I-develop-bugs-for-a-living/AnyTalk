@@ -16,6 +16,8 @@ import { useNavigate, useSmartParams } from "@revolt/routing";
 import { useState } from "@revolt/state";
 
 import { useClient, useNotifications, useSound } from ".";
+import { neverThrows } from "./safeListener";
+import { canShowNotifications, tryShowNotification } from "./safeNotify";
 
 /**
  * Process and display desktop notifications
@@ -192,35 +194,43 @@ export function NotificationsWorker() {
       body = t`Sent ${message.attachments!.length} attachments`;
     }
 
-    // Don't continue if we don't have notification permissions
-    if (
-      Notification.permission !== "granted" ||
-      state.settings.desktopNotificationsState !== "allowed"
-    )
-      return;
+    // Don't continue if notifications are turned off in the app
+    if (state.settings.desktopNotificationsState !== "allowed") return;
+
+    // A browser without the Notification API (iOS Safari) or with the
+    // permission denied shows nothing; granted or missing API keeps the sound
+    const hasApi = "Notification" in window;
+    if (hasApi && !canShowNotifications()) return;
 
     sound.playSound("message");
 
-    const notification = new Notification(title!, {
-      icon,
-      // @ts-expect-error this does exist on some platforms
-      image,
-      body,
-      timestamp: message.createdAt,
-      tag: message.channelId,
-      badge: "/assets/web/android-chrome-512x512.png",
-      silent: true,
-    });
+    if (!hasApi) return;
 
-    notification.addEventListener("click", () => {
-      window.focus();
-      navigate(message.path);
-    });
+    tryShowNotification(
+      title!,
+      {
+        icon,
+        // @ts-expect-error this does exist on some platforms
+        image,
+        body,
+        timestamp: message.createdAt,
+        tag: message.channelId,
+        badge: "/assets/web/android-chrome-512x512.png",
+        silent: true,
+      },
+      () => {
+        window.focus();
+        navigate(message.path);
+      },
+    );
   }
 
+  // must never throw: the library emits this inside its unread update
+  const safeOnMessage = neverThrows("notifications", onMessage);
+
   createEffect(() => {
-    client().addListener("messageCreate", onMessage);
-    onCleanup(() => client().removeListener("messageCreate", onMessage));
+    client().addListener("messageCreate", safeOnMessage);
+    onCleanup(() => client().removeListener("messageCreate", safeOnMessage));
   });
 
   /**

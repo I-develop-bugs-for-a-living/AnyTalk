@@ -22,6 +22,7 @@ import { styled } from "styled-system/jsx";
 
 import { Message } from "@revolt/app";
 import { useClient } from "@revolt/client";
+import { neverThrows } from "@revolt/client/safeListener";
 import { ackNow, useDevice } from "@revolt/common";
 import {
   BottomSheet,
@@ -94,7 +95,7 @@ export function createInboxMentions() {
     setLive({});
     setFailed(new Set<string>());
 
-    const onMessage = (message: StoatMessage) => {
+    const onMessage = neverThrows("inbox", (message: StoatMessage) => {
       const channel = message.channel;
       if (!channel) return;
       const isConversation =
@@ -116,7 +117,7 @@ export function createInboxMentions() {
         ...all,
         [channel.id]: [...(all[channel.id] ?? []), message.id],
       }));
-    };
+    });
 
     /**
      * Forget deleted messages

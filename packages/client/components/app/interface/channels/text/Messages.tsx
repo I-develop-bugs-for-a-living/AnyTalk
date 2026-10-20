@@ -24,6 +24,7 @@ import { styled } from "styled-system/jsx";
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { isHiddenCallNotice } from "@revolt/client/callNotices";
 import { State } from "@revolt/client/Controller";
+import { neverThrows } from "@revolt/client/safeListener";
 import { useTime } from "@revolt/i18n";
 import { useState } from "@revolt/state";
 import {
@@ -902,10 +903,13 @@ export function Messages(props: Props) {
     }
   }
 
+  // must never throw: the library emits this inside its unread update
+  const safeOnMessage = neverThrows("messages", onMessage);
+
   // Add listener for messages
   onMount(() => {
     const c = client();
-    c.addListener("messageCreate", onMessage);
+    c.addListener("messageCreate", safeOnMessage);
     c.addListener("messageDelete", onMessageDelete);
     c.addListener("messageDeleteBulk", onMessageDeleteBulk);
   });
@@ -913,7 +917,7 @@ export function Messages(props: Props) {
   onCleanup(() => {
     clearTimeout(escapeFallback);
     const c = client();
-    c.removeListener("messageCreate", onMessage);
+    c.removeListener("messageCreate", safeOnMessage);
     c.removeListener("messageDeleteBulk", onMessageDeleteBulk);
     c.removeListener("messageDelete", onMessageDelete);
   });
