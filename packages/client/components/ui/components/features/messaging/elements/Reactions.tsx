@@ -91,7 +91,7 @@ export function Reactions(props: Props) {
 
   return (
     <Show when={hasReactions()}>
-      <List>
+      <List data-no-reply>
         <For each={lists().required}>
           {(entry) => (
             <Reaction

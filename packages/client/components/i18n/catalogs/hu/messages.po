@@ -61,6 +61,16 @@ msgstr "(újrakapcsolódás most)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {# letiltott üzenet} other {# letiltott üzenetek}}"
 
+#. placeholder {0}: data().failed
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{0, plural, one {# channel could not be searched} other {# channels could not be searched}}"
+msgstr ""
+
+#. placeholder {0}: server().channelIds.size
+#: src/interface/servers/ServerOverview.tsx
+msgid "{0, plural, one {# channel} other {# channels}}"
+msgstr ""
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -73,8 +83,8 @@ msgstr "{0, plural, one {# fagyás} other {# fagyás}}"
 
 #. placeholder {0}: onlineMembers()
 #: src/interface/channels/text/MemberSidebar.tsx
-msgid "{0, plural, one {# member online} other {# members online}}"
-msgstr "{0, plural, one {# tag online} other {# tag online}}"
+#~ msgid "{0, plural, one {# member online} other {# members online}}"
+#~ msgstr "{0, plural, one {# tag online} other {# tag online}}"
 
 #. placeholder {0}: memberCount()
 #: components/ui/components/features/messaging/elements/Invite.tsx
@@ -105,6 +115,18 @@ msgstr "{0, plural, one {+# másik} other {+# másik}}"
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {Fájl feltöltése} other {Fájlok # feltöltése}}"
+
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr ""
+
+#. placeholder {0}: currentProgress()!.total
+#. placeholder {1}: currentProgress()!.done
+#. placeholder {2}: currentProgress()!.done
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{0, plural, one {Searching {1} of # channel} other {Searching {2} of # channels}}"
+#~ msgstr ""
 
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
@@ -309,9 +331,17 @@ msgstr "{count, plural, one {{title} az idő függvényében, # összefoglaló} 
 msgid "{count, plural, one {# language} other {# languages}}"
 msgstr "{count, plural, one {# nyelv} other {# nyelv}}"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{count, plural, one {# result} other {# results}}"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 #~ msgid "{count} languages"
 #~ msgstr "{count} nyelv"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{count} results"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{count} selected"
@@ -364,6 +394,10 @@ msgstr "{participant} hallotta"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} az idő függvényében"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{total, plural, one {Searching {done} of # channel} other {Searching {done} of # channels}}"
+msgstr ""
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
@@ -460,6 +494,10 @@ msgstr "<0>Vigyázz!</0><1/>Ez nem egyezik meg a megjelent linkkel:"
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "1 person reacted"
 msgstr "1 ember reagált"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "1 result"
+#~ msgstr ""
 
 #: src/interface/channels/text/Composition.tsx
 #~ msgid "1 second"
@@ -875,6 +913,10 @@ msgstr "Hangerő"
 msgid "Authenticator App"
 msgstr "Hitelesítést végző app"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Automatic"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Automatic Gain Control"
 msgstr "Automatikus erősítésszabályozás"
@@ -975,6 +1017,14 @@ msgstr "Sávszélesség"
 msgid "Banner"
 msgstr "Borítókép"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Banner colour"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Banner hue"
+msgstr ""
+
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Bans"
 msgstr "Kitiltottak"
@@ -999,6 +1049,10 @@ msgstr "Kizártak"
 #: components/ui/components/features/messaging/elements/MessageReply.tsx
 msgid "Blocked User"
 msgstr "Kizárt felhasználó"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Blue"
+msgstr ""
 
 #: components/app/interface/channels/text/Message.tsx
 msgid "Bot"
@@ -1312,6 +1366,10 @@ msgstr "Válassz egy felhasználónevet"
 msgid "Choose username"
 msgstr "Felhasználónév kiválasztása"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Clear search"
+msgstr ""
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "Törlés"
@@ -1368,6 +1426,7 @@ msgstr "Kliens beállításai"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "Bezárás"
 
@@ -1744,7 +1803,6 @@ msgid "Create invites for others to use"
 msgstr "Meghívók készítése mások számára"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
-#: src/interface/navigation/servers/ServerList.tsx
 msgid "Create or join a server"
 msgstr "Szerver létrehozása vagy csatlakozás"
 
@@ -1753,6 +1811,7 @@ msgid "Create Role"
 msgstr "Rang készítése"
 
 #: components/modal/modals/CreateServer.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Create server"
 msgstr "Szerver létrehozása"
 
@@ -1779,6 +1838,7 @@ msgid "Current Session"
 msgstr "Jelenlegi munkamenet"
 
 #: components/app/interface/settings/user/Overlay.tsx
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Custom"
 msgstr ""
 
@@ -1797,6 +1857,10 @@ msgstr "Egyéni ablakkeret"
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Customisation"
 msgstr "Testreszabás"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Cyan"
+msgstr ""
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad down"
@@ -2070,6 +2134,7 @@ msgstr "Nincs kapcsolat"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
+#: src/interface/navigation/servers/ServerList.tsx
 msgid "Discover"
 msgstr "Felfedezés"
 
@@ -2645,6 +2710,10 @@ msgstr "Értem"
 msgid "Grants {0} permissions and denies {1} permissions"
 msgstr "{0} engedélyt ad és {1} engedélyt tilt"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Green"
+msgstr ""
+
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Group"
 msgstr "Csoport"
@@ -2693,6 +2762,14 @@ msgstr "Itt az új meghívó kódod: <0>{0}</0>"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "Többiek elrejtése"
+
+#: src/interface/navigation/servers/UserMenu.tsx
+msgid "Hide server list"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Hide server names"
+msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "High Contrast"
@@ -2819,6 +2896,11 @@ msgstr "Hívásban"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "Addig is telepítsd az AnyTalkot a Google Playről a gyorsabb, gördülékenyebb, Androidra tervezett élményért."
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -2938,6 +3020,7 @@ msgid "Join {label}"
 msgstr "Csatlakozás: {label}"
 
 #: components/modal/modals/JoinServer.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Join a server"
 msgstr "Csatlakozás egy szerverhez"
 
@@ -2958,6 +3041,10 @@ msgstr "Csatlakozás a hangcsatornába"
 #: components/ui/components/features/profiles/ProfileJoined.tsx
 msgid "Joined"
 msgstr "Csatlakozott"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Joined {date}"
+msgstr ""
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Jump between servers, channels, messages and members"
@@ -3148,6 +3235,10 @@ msgstr "Élő statisztikai átfedés"
 msgid "Load file ({0})"
 msgstr "Fájl betöltése ({0})"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr ""
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "Bejelentkezés"
@@ -3197,6 +3288,10 @@ msgstr "Mélyvágó szűrő"
 msgid "Lowercase letters, numbers and underscores only."
 msgstr "Csak kisbetűk, számok és alsó vonások."
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Magenta"
+msgstr ""
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
 msgstr "Súlyos üzemkimaradás"
@@ -3236,6 +3331,10 @@ msgstr "Kezelhetik a szervert"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Manage Webhooks"
 msgstr "Kezelhetnek Webhookokat"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr ""
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
@@ -3317,6 +3416,10 @@ msgstr "Bizonyos rangok megjelölése"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "Megjelölések"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3429,6 +3532,10 @@ msgstr "Több kontraszt"
 msgid "More options"
 msgstr "További beállítások"
 
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "More unread chats"
+msgstr ""
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Move between buttons, menus and messages"
 msgstr "Mozgás gombok, menük és üzenetek között"
@@ -3539,6 +3646,10 @@ msgstr "Saját robik"
 msgid "Name"
 msgstr "Név"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Name (A-Z)"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr ""
@@ -3601,6 +3712,10 @@ msgstr "Nem található alkalmazás"
 msgid "No audio was captured, switch window to share audio"
 msgstr "Nem rögzült hang, váltsd az ablakot a hang megosztásához"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No channels to search"
+msgstr ""
+
 #: src/interface/ServerHome.tsx
 msgid "No channels!"
 msgstr "Nincsenek csatornák!"
@@ -3612,6 +3727,10 @@ msgstr "Nem található kontroller. Csatlakoztass egyet, és nyomj meg rajta egy
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "no data"
 msgstr "nincs adat"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No description"
+msgstr ""
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "No desktop app available yet"
@@ -3641,6 +3760,10 @@ msgstr "Még nincsenek összefoglalók. Kapcsold be a „Hívásösszefoglalók 
 msgid "No recaps yet. Turn on \"Record stream recaps\", then join a call and start or watch a stream."
 msgstr "Még nincsenek összefoglalók. Kapcsold be a „Közvetítés-összefoglalók rögzítése” opciót, majd csatlakozz egy híváshoz, és indíts vagy nézz egy közvetítést."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No results"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No role overrides have been configured."
 msgstr "Nincsenek szerepkör-felülbírálások beállítva."
@@ -3648,6 +3771,14 @@ msgstr "Nincsenek szerepkör-felülbírálások beállítva."
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No screens found"
 msgstr "Nem található képernyő"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers match \"{search}\""
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers yet"
+msgstr ""
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
@@ -3728,7 +3859,7 @@ msgstr ""
 msgid "Official Communication"
 msgstr "Hivatalos kommunikáció"
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Official Server"
 msgstr "Hivatalos szerver"
 
@@ -3749,6 +3880,10 @@ msgstr "OK"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "Régiek"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Oldest joined"
+msgstr ""
 
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
@@ -3837,6 +3972,13 @@ msgstr "Fájl megnyitása"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "Barátok megnyitása"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -3972,6 +4114,10 @@ msgstr "Olyan felhasználónevet válassz, ami alapján mások azonosítanak maj
 msgid "Pin"
 msgstr "Kitűzés"
 
+#: components/app/menus/shared/PinConversationButton.tsx
+msgid "Pin conversation"
+msgstr ""
+
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin message"
@@ -3986,6 +4132,18 @@ msgstr "Ping (oda-vissza út a szerverig)"
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Ping avg / max"
 msgstr "Ping átl. / max."
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Pink"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Pinned"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Pinned chats"
+msgstr ""
 
 #: src/interface/channels/text/TextChannel.tsx
 msgid "Pinned Messages"
@@ -4179,6 +4337,10 @@ msgstr "Tedd a saját összefoglalóidat mások összefoglalói mellé. Ők megn
 msgid "Raid or spam attack"
 msgstr "Raid vagy spamtámadás"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Rail order"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
 msgid "React"
@@ -4257,6 +4419,10 @@ msgstr "Legutóbbi hívások"
 msgid "Recent calls on Home"
 msgstr "Legutóbbi hívások a Kezdőlapon"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Recently joined"
+msgstr ""
+
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 #: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
@@ -4286,6 +4452,10 @@ msgstr "Helyreállító kód"
 #: components/app/interface/settings/user/Account.tsx
 msgid "Recovery Codes"
 msgstr "Helyreállító kódok"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Red"
+msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Reduced"
@@ -4344,6 +4514,10 @@ msgstr "Hitelesítő eltávolítása"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove Avatars"
 msgstr "Profilképeket távolíthatnak el"
+
+#: components/app/menus/MessageContextMenu.tsx
+msgid "Remove embeds"
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Remove friend"
@@ -4674,6 +4848,10 @@ msgstr "Görgetés"
 msgid "Search"
 msgstr "Keresés"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search failed"
+msgstr ""
+
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Search for emojis..."
 msgstr "Emojik keresése..."
@@ -4691,9 +4869,29 @@ msgstr "Csoportok keresése..."
 msgid "Search for users..."
 msgstr "Felhasználók keresése..."
 
+#: src/interface/channels/ChannelHeader.tsx
+#~ msgid "Search in"
+#~ msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {name}"
+msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {serverName}"
+msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in #{name}"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Search languages"
 msgstr "Nyelvek keresése"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search messages"
+msgstr ""
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search messages..."
@@ -4703,9 +4901,31 @@ msgstr "Üzenetek keresése..."
 msgid "Search Results"
 msgstr "Keresési eredmények"
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Search scope"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Search servers"
+msgstr ""
+
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "Beállítások keresése"
+
+#. placeholder {0}: progress()!.done
+#. placeholder {1}: progress()!.total
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Searching {0} of {1} channels"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Searching…"
+msgstr ""
+
+#: src/interface/Home.tsx
+msgid "See all your servers at a glance."
+msgstr ""
 
 #~ msgid "See what we're currently working on."
 #~ msgstr ""
@@ -4849,13 +5069,28 @@ msgstr "Szerver-identitások"
 msgid "Server Name"
 msgstr "Szervernév"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Server options for {name}"
+msgstr ""
+
+#: src/interface/Home.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Server overview"
+msgstr ""
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
 msgstr "Szerver szerepkörei"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "Szerverek"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Servers you join show up here."
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -4880,7 +5115,7 @@ msgstr "Státuszod beállítása"
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
 #: components/modal/modals/ServerInfo.tsx
-#: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/navigation/servers/UserMenu.tsx
 msgid "Settings"
 msgstr "Beállítások"
 
@@ -4949,6 +5184,15 @@ msgstr ""
 msgid "Show send message button"
 msgstr "Üzenetküldés gomb megjelenítése"
 
+#: src/interface/common/CommonHeader.tsx
+#: src/interface/Sidebar.tsx
+msgid "Show server list"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Show server names"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Show when speaking"
 msgstr ""
@@ -4956,6 +5200,34 @@ msgstr ""
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
 msgstr ""
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the newest {limit} results"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest 50 results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the oldest {limit} results"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest 50 results"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
@@ -4997,6 +5269,10 @@ msgstr "Lassított mód kikapcsolva"
 msgid "Someone calls you in a DM or group"
 msgstr "Valaki felhív egy privát üzenetben vagy csoportban"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Someone is in a voice call"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
 msgstr "Valaki csatlakozik a hangcsatornádhoz"
@@ -5030,12 +5306,21 @@ msgstr "Valami menő rólam..."
 msgid "Something is wrong with your request, {0}."
 msgstr "Valami baj van a kéréseddel, {0}."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Something went wrong while searching. Try again."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "Something went wrong! {error}"
 msgstr "Valami hiba történt! {error}"
 
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#: src/interface/servers/ServerOverview.tsx
+msgid "Sort by"
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
@@ -5046,8 +5331,8 @@ msgid "Sounds"
 msgstr "Hangos értesítés"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-msgid "Sounds are turned off above, you can still preview them here."
-msgstr "A hangok fent ki vannak kapcsolva, de itt még meghallgathatod őket."
+#~ msgid "Sounds are turned off above, you can still preview them here."
+#~ msgstr "A hangok fent ki vannak kapcsolva, de itt még meghallgathatod őket."
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/auth/src/AuthPage.tsx
@@ -5266,6 +5551,10 @@ msgstr "Rendszer üzenetes csatornák"
 msgid "Tap to enable audio"
 msgstr "Koppints a hang engedélyezéséhez"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Teal"
+msgstr ""
+
 #: components/modal/modals/ReportContent.tsx
 msgid "Tell us what's wrong with this message"
 msgstr "Mondd el, mi a baj ezzel az üzenettel"
@@ -5403,6 +5692,10 @@ msgstr "Ez a bot privát és csak a készítője adhatja hozzá."
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr ""
+
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "This channel"
 msgstr ""
 
 #: components/app/interface/settings/channel/Overview.tsx
@@ -5601,12 +5894,17 @@ msgstr "Hibaelhárítás"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 #: components/app/interface/settings/user/Updates.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Try again"
 msgstr "Próbáld újra"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Try another name or language code."
 msgstr "Próbálj másik nevet vagy nyelvkódot."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Try different words or another scope."
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn every sound on and reset their volumes and files?"
@@ -5619,6 +5917,18 @@ msgstr "Kapcsolj ki egyes hangokat, módosítsd a hangerejüket, vagy használj 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "Ha ezt kikapcsolod, az ablak bezárása azonnal kilépteti az AnyTalkot."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Type in the search box and press Enter."
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search the whole server"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search this channel"
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
@@ -5701,10 +6011,26 @@ msgstr "Névtelen mappa"
 msgid "Unpin"
 msgstr "Kitűzés megszüntetése"
 
+#: components/app/menus/shared/PinConversationButton.tsx
+msgid "Unpin conversation"
+msgstr ""
+
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Unpin message"
 msgstr "Üzenet kitűzésének megszüntetése"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread first"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread mentions"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread messages"
+msgstr ""
 
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Unsent message"
@@ -5894,7 +6220,7 @@ msgstr "A felhasználók mostantól nem lesznek megkérve, hogy igazolják élet
 #~ msgid "Using default speaker"
 #~ msgstr ""
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Verified"
 msgstr "Igazolva"
 
@@ -5964,6 +6290,10 @@ msgstr "Néző kilépett"
 #: components/ui/components/features/messaging/bars/JumpToBottom.tsx
 msgid "Viewing older messages"
 msgstr "a régen írt üzeneteket látod"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Violet"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -6107,6 +6437,10 @@ msgstr "Amíg a közvetítés fejlesztői mód és a „Közvetítés-összefogl
 msgid "While voice call developer mode and \"Record call recaps\" are on, your microphone and everyone you hear are measured once per second. Recaps are stored on this device only; the newest 20 calls are kept."
 msgstr "Amíg a hanghívás fejlesztői mód és a „Hívásösszefoglalók rögzítése” be van kapcsolva, a mikrofonod és mindenki, akit hallasz, másodpercenként egyszer mérésre kerül. Az összefoglalók csak ezen az eszközön tárolódnak; a legújabb 20 hívás marad meg."
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Whole server"
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "Windows telepítő"
@@ -6217,6 +6551,10 @@ msgstr "Nem lehet több mint {0} csatorna ezen a szerveren."
 msgid "You can't have more than {0} emojis on this server."
 msgstr "Nem lehet több mint {0} emoji ezen a szerveren."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "You can't read the message history of any channel on this server."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "You cannot give yourself missing permissions."
 msgstr "Nem adhatsz magadnak hiányzó engedélyeket."
@@ -6319,6 +6657,10 @@ msgstr "Nem fogsz tudni hozzáférni a fiókodhoz, amíg segítséget nem kérsz
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "Nem fogsz tudni visszalépni, amíg újra meg nem hívnak."
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."

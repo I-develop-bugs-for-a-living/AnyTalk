@@ -38,6 +38,7 @@ import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import MdAddCircle from "@material-design-icons/svg/filled/add_circle.svg?component-solid";
 import MdExplore from "@material-design-icons/svg/filled/explore.svg?component-solid";
+import MdGridView from "@material-design-icons/svg/filled/grid_view.svg?component-solid";
 import MdGroups3 from "@material-design-icons/svg/filled/groups_3.svg?component-solid";
 import MdHome from "@material-design-icons/svg/filled/home.svg?component-solid";
 import MdSettings from "@material-design-icons/svg/filled/settings.svg?component-solid";
@@ -315,6 +316,13 @@ export function HomePage() {
                 <Trans>Discover AnyTalk</Trans>
               </CategoryButton>
             </Show>
+            <CategoryButton
+              onClick={() => navigate("/servers")}
+              description={<Trans>See all your servers at a glance.</Trans>}
+              icon={<MdGridView />}
+            >
+              <Trans>Server overview</Trans>
+            </CategoryButton>
             <CategoryButton
               onClick={() => openModal({ type: "settings", config: "user" })}
               description={

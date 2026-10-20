@@ -61,6 +61,16 @@ msgstr "(23C0NN3C7 N0W)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {# 8L0CK3D M355463} other {# 8L0CK3D M3554635}}"
 
+#. placeholder {0}: data().failed
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{0, plural, one {# channel could not be searched} other {# channels could not be searched}}"
+msgstr "{0, plural, one {# CH4NN3L C0ULD N07 83 5342CH3D} other {# CH4NN3L5 C0ULD N07 83 5342CH3D}}"
+
+#. placeholder {0}: server().channelIds.size
+#: src/interface/servers/ServerOverview.tsx
+msgid "{0, plural, one {# channel} other {# channels}}"
+msgstr "{0, plural, one {# CH4NN3L} other {# CH4NN3L5}}"
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -73,8 +83,8 @@ msgstr "{0, plural, one {# F233Z3} other {# F233Z35}}"
 
 #. placeholder {0}: onlineMembers()
 #: src/interface/channels/text/MemberSidebar.tsx
-msgid "{0, plural, one {# member online} other {# members online}}"
-msgstr "{0, plural, one {# M3M832 0NL1N3} other {# M3M8325 0NL1N3}}"
+#~ msgid "{0, plural, one {# member online} other {# members online}}"
+#~ msgstr "{0, plural, one {# M3M832 0NL1N3} other {# M3M8325 0NL1N3}}"
 
 #. placeholder {0}: memberCount()
 #: components/ui/components/features/messaging/elements/Invite.tsx
@@ -105,6 +115,18 @@ msgstr "{0, plural, one {+# 07H32} other {+# 07H325}}"
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {D20P 4 F1L3} other {D20P # F1L35}}"
+
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr "{0, plural, one {1N80X, # UN234D M3N710N} other {1N80X, # UN234D M3N710N5}}"
+
+#. placeholder {0}: currentProgress()!.total
+#. placeholder {1}: currentProgress()!.done
+#. placeholder {2}: currentProgress()!.done
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{0, plural, one {Searching {1} of # channel} other {Searching {2} of # channels}}"
+#~ msgstr "{0, plural, one {5342CH1N6 {1} 0F # CH4NN3L} other {5342CH1N6 {2} 0F # CH4NN3L5}}"
 
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
@@ -309,9 +331,17 @@ msgstr "{count, plural, one {{title} 0V32 71M3, # 23C4P} other {{title} 0V32 71M
 msgid "{count, plural, one {# language} other {# languages}}"
 msgstr "{count, plural, one {# L4N6U463} other {# L4N6U4635}}"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{count, plural, one {# result} other {# results}}"
+msgstr "{count, plural, one {# 235UL7} other {# 235UL75}}"
+
 #: components/app/interface/settings/user/Language.tsx
 #~ msgid "{count} languages"
 #~ msgstr "{count} L4N6U4635"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{count} results"
+#~ msgstr "{count} 235UL75"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{count} selected"
@@ -364,6 +394,10 @@ msgstr "{participant} H342D"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} 0V32 71M3"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{total, plural, one {Searching {done} of # channel} other {Searching {done} of # channels}}"
+msgstr "{total, plural, one {5342CH1N6 {done} 0F # CH4NN3L} other {5342CH1N6 {done} 0F # CH4NN3L5}}"
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
@@ -460,6 +494,10 @@ msgstr "<0>83 C423FUL!</0><1/>7H15 15 N07 7H3 54M3 45 7H3 L1NK 7H47 W45 D15PL4Y3
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "1 person reacted"
 msgstr "1 P3250N 234C73D"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "1 result"
+#~ msgstr "1 235UL7"
 
 #: src/interface/channels/text/Composition.tsx
 #~ msgid "1 second"
@@ -876,6 +914,10 @@ msgstr "4UD10 L3V3L"
 msgid "Authenticator App"
 msgstr "4U7H3N71C4702 4PP"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Automatic"
+msgstr "4U70M471C"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Automatic Gain Control"
 msgstr "4U70M471C 641N C0N720L"
@@ -976,6 +1018,14 @@ msgstr "84NDW1D7H"
 msgid "Banner"
 msgstr "84NN32"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Banner colour"
+msgstr "84NN32 C0L0U2"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Banner hue"
+msgstr "84NN32 HU3"
+
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Bans"
 msgstr "84N5"
@@ -1000,6 +1050,10 @@ msgstr "8L0CK3D"
 #: components/ui/components/features/messaging/elements/MessageReply.tsx
 msgid "Blocked User"
 msgstr "8L0CK3D U532"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Blue"
+msgstr "8LU3"
 
 #: components/app/interface/channels/text/Message.tsx
 msgid "Bot"
@@ -1313,6 +1367,10 @@ msgstr "CH0053 4 U532N4M3"
 msgid "Choose username"
 msgstr "CH0053 U532N4M3"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Clear search"
+msgstr "CL342 5342CH"
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "CL342 5747U5"
@@ -1369,6 +1427,7 @@ msgstr "CL13N7 53771N65"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "CL053"
 
@@ -1746,7 +1805,6 @@ msgid "Create invites for others to use"
 msgstr "C23473 1NV1735 F02 07H325 70 U53"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
-#: src/interface/navigation/servers/ServerList.tsx
 msgid "Create or join a server"
 msgstr "C23473 02 J01N 4 532V32"
 
@@ -1755,6 +1813,7 @@ msgid "Create Role"
 msgstr "C23473 20L3"
 
 #: components/modal/modals/CreateServer.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Create server"
 msgstr "C23473 532V32"
 
@@ -1781,6 +1840,7 @@ msgid "Current Session"
 msgstr "CU223N7 535510N"
 
 #: components/app/interface/settings/user/Overlay.tsx
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Custom"
 msgstr "CU570M"
 
@@ -1799,6 +1859,10 @@ msgstr "CU570M W1ND0W F24M3"
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Customisation"
 msgstr "CU570M154710N"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Cyan"
+msgstr "CY4N"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad down"
@@ -2072,6 +2136,7 @@ msgstr "D15C0NN3C73D"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
+#: src/interface/navigation/servers/ServerList.tsx
 msgid "Discover"
 msgstr "D15C0V32"
 
@@ -2649,6 +2714,10 @@ msgstr "607 17"
 msgid "Grants {0} permissions and denies {1} permissions"
 msgstr "624N75 {0} P32M15510N5 4ND D3N135 {1} P32M15510N5"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Green"
+msgstr "6233N"
+
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Group"
 msgstr "620UP"
@@ -2697,6 +2766,14 @@ msgstr "H323 15 Y0U2 N3W 1NV173 C0D3: <0>{0}</0>"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "H1D3 07H325"
+
+#: src/interface/navigation/servers/UserMenu.tsx
+msgid "Hide server list"
+msgstr "H1D3 532V32 L157"
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Hide server names"
+msgstr "H1D3 532V32 N4M35"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "High Contrast"
@@ -2823,6 +2900,11 @@ msgstr "1N C4LL"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "1N 7H3 M34N71M3, 1N574LL 4NY74LK F20M 6006L3 PL4Y F02 4 F45732, 5M007H32 3XP3213NC3 D3516N3D F02 4ND201D."
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr "1N80X"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -2942,6 +3024,7 @@ msgid "Join {label}"
 msgstr "J01N {label}"
 
 #: components/modal/modals/JoinServer.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Join a server"
 msgstr "J01N 4 532V32"
 
@@ -2963,6 +3046,10 @@ msgstr "J01N 7H3 V01C3 CH4NN3L"
 #: components/ui/components/features/profiles/ProfileJoined.tsx
 msgid "Joined"
 msgstr "J01N3D"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Joined {date}"
+msgstr "J01N3D {date}"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Jump between servers, channels, messages and members"
@@ -3153,6 +3240,10 @@ msgstr "L1V3 57471571C5 0V32L4Y"
 msgid "Load file ({0})"
 msgstr "L04D F1L3 ({0})"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr "L04D1N6 M355463"
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "L06 1N"
@@ -3202,6 +3293,10 @@ msgstr "L0W-CU7 F1L732"
 msgid "Lowercase letters, numbers and underscores only."
 msgstr "L0W32C453 L377325, NUM8325 4ND UND325C0235 0NLY."
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Magenta"
+msgstr "M463N74"
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
 msgstr "M4J02 0U7463"
@@ -3241,6 +3336,10 @@ msgstr "M4N463 532V32"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Manage Webhooks"
 msgstr "M4N463 W38H00K5"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr "M42K 4LL 234D"
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
@@ -3322,6 +3421,10 @@ msgstr "M3N710N 5P3C1F1C 20L35"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "M3N710N5"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr "M3N710N5 4ND N3W D123C7 M3554635 5H0W UP H323."
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3434,6 +3537,10 @@ msgstr "M023 C0N72457"
 msgid "More options"
 msgstr "M023 0P710N5"
 
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "More unread chats"
+msgstr "M023 UN234D CH475"
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Move between buttons, menus and messages"
 msgstr "M0V3 837W33N 8U770N5, M3NU5 4ND M3554635"
@@ -3544,6 +3651,10 @@ msgstr "MY 8075"
 msgid "Name"
 msgstr "N4M3"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Name (A-Z)"
+msgstr "N4M3 (4-Z)"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr "N33D5 4 532V32 7H47 5UPP0275 57234M V13W325."
@@ -3606,6 +3717,10 @@ msgstr "N0 4PP5 F0UND"
 msgid "No audio was captured, switch window to share audio"
 msgstr "N0 4UD10 W45 C4P7U23D, 5W17CH W1ND0W 70 5H423 4UD10"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No channels to search"
+msgstr "N0 CH4NN3L5 70 5342CH"
+
 #: src/interface/ServerHome.tsx
 msgid "No channels!"
 msgstr "N0 CH4NN3L5!"
@@ -3617,6 +3732,10 @@ msgstr "N0 C0N720LL32 F0UND. C0NN3C7 0N3 4ND P2355 4NY 8U770N 0N 17."
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "no data"
 msgstr "N0 D474"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No description"
+msgstr "N0 D35C21P710N"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "No desktop app available yet"
@@ -3646,6 +3765,10 @@ msgstr "N0 23C4P5 Y37. 7U2N 0N \"23C02D C4LL 23C4P5\", 7H3N J01N 4 C4LL."
 msgid "No recaps yet. Turn on \"Record stream recaps\", then join a call and start or watch a stream."
 msgstr "N0 23C4P5 Y37. 7U2N 0N \"23C02D 57234M 23C4P5\", 7H3N J01N 4 C4LL 4ND 57427 02 W47CH 4 57234M."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No results"
+msgstr "N0 235UL75"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No role overrides have been configured."
 msgstr "N0 20L3 0V3221D35 H4V3 833N C0NF16U23D."
@@ -3653,6 +3776,14 @@ msgstr "N0 20L3 0V3221D35 H4V3 833N C0NF16U23D."
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No screens found"
 msgstr "N0 5C233N5 F0UND"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers match \"{search}\""
+msgstr "N0 532V325 M47CH \"{search}\""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers yet"
+msgstr "N0 532V325 Y37"
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
@@ -3733,7 +3864,7 @@ msgstr "0FF325 70 57234M 7H3 64M35 Y0U PL4Y DU21N6 4 C4LL. D373C710N H4PP3N5 0NL
 msgid "Official Communication"
 msgstr "0FF1C14L C0MMUN1C4710N"
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Official Server"
 msgstr "0FF1C14L 532V32"
 
@@ -3754,6 +3885,10 @@ msgstr "0K"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "0LD357"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Oldest joined"
+msgstr "0LD357 J01N3D"
 
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
@@ -3842,6 +3977,13 @@ msgstr "0P3N F1L3"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "0P3N F213ND5"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr "0P3N M355463 F20M {0} 1N {1}: {2}"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -3977,6 +4119,10 @@ msgstr "P1CK 4 U532N4M3 7H47 Y0U W4N7 P30PL3 70 83 48L3 70 F1ND Y0U 8Y. 7H15 C4N
 msgid "Pin"
 msgstr "P1N"
 
+#: components/app/menus/shared/PinConversationButton.tsx
+msgid "Pin conversation"
+msgstr "P1N C0NV3254710N"
+
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin message"
@@ -3991,6 +4137,18 @@ msgstr "P1N6 (20UND 721P 70 7H3 532V32)"
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Ping avg / max"
 msgstr "P1N6 4V6 / M4X"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Pink"
+msgstr "P1NK"
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Pinned"
+msgstr "P1NN3D"
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Pinned chats"
+msgstr "P1NN3D CH475"
 
 #: src/interface/channels/text/TextChannel.tsx
 msgid "Pinned Messages"
@@ -4184,6 +4342,10 @@ msgstr "PU7 Y0U2 23C4P5 N3X7 70 23C4P5 F20M 07H32 P30PL3. 7H3Y 0P3N 4 23C4P 1N V
 msgid "Raid or spam attack"
 msgstr "241D 02 5P4M 4774CK"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Rail order"
+msgstr "241L 02D32"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
 msgid "React"
@@ -4262,6 +4424,10 @@ msgstr "23C3N7 C4LL5"
 msgid "Recent calls on Home"
 msgstr "23C3N7 C4LL5 0N H0M3"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Recently joined"
+msgstr "23C3N7LY J01N3D"
+
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 #: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
@@ -4291,6 +4457,10 @@ msgstr "23C0V32Y C0D3"
 #: components/app/interface/settings/user/Account.tsx
 msgid "Recovery Codes"
 msgstr "23C0V32Y C0D35"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Red"
+msgstr "23D"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Reduced"
@@ -4349,6 +4519,10 @@ msgstr "23M0V3 4U7H3N71C4702"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove Avatars"
 msgstr "23M0V3 4V47425"
+
+#: components/app/menus/MessageContextMenu.tsx
+msgid "Remove embeds"
+msgstr "23M0V3 3M83D5"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Remove friend"
@@ -4680,6 +4854,10 @@ msgstr "5C20LL"
 msgid "Search"
 msgstr "5342CH"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search failed"
+msgstr "5342CH F41L3D"
+
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Search for emojis..."
 msgstr "5342CH F02 3M0J15..."
@@ -4697,9 +4875,29 @@ msgstr "5342CH F02 620UP5..."
 msgid "Search for users..."
 msgstr "5342CH F02 U5325..."
 
+#: src/interface/channels/ChannelHeader.tsx
+#~ msgid "Search in"
+#~ msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {name}"
+msgstr "5342CH 1N {name}"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {serverName}"
+msgstr "5342CH 1N {serverName}"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in #{name}"
+msgstr "5342CH 1N #{name}"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Search languages"
 msgstr "5342CH L4N6U4635"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search messages"
+msgstr "5342CH M3554635"
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search messages..."
@@ -4709,9 +4907,31 @@ msgstr "5342CH M3554635..."
 msgid "Search Results"
 msgstr "5342CH 235UL75"
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Search scope"
+msgstr "5342CH 5C0P3"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Search servers"
+msgstr "5342CH 532V325"
+
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "5342CH 53771N65"
+
+#. placeholder {0}: progress()!.done
+#. placeholder {1}: progress()!.total
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Searching {0} of {1} channels"
+#~ msgstr "5342CH1N6 {0} 0F {1} CH4NN3L5"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Searching…"
+msgstr "5342CH1N6…"
+
+#: src/interface/Home.tsx
+msgid "See all your servers at a glance."
+msgstr "533 4LL Y0U2 532V325 47 4 6L4NC3."
 
 #: components/app/interface/settings/user/Feedback.tsx
 #~ msgid "See what we're currently working on."
@@ -4856,13 +5076,28 @@ msgstr "532V32 1D3N717135"
 msgid "Server Name"
 msgstr "532V32 N4M3"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Server options for {name}"
+msgstr "532V32 0P710N5 F02 {name}"
+
+#: src/interface/Home.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Server overview"
+msgstr "532V32 0V32V13W"
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
 msgstr "532V32 20L35"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "532V325"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Servers you join show up here."
+msgstr "532V325 Y0U J01N 5H0W UP H323."
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -4887,7 +5122,7 @@ msgstr "537 Y0U2 5747U5"
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
 #: components/modal/modals/ServerInfo.tsx
-#: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/navigation/servers/UserMenu.tsx
 msgid "Settings"
 msgstr "53771N65"
 
@@ -4956,6 +5191,15 @@ msgstr "5H0W 0V32L4Y"
 msgid "Show send message button"
 msgstr "5H0W 53ND M355463 8U770N"
 
+#: src/interface/common/CommonHeader.tsx
+#: src/interface/Sidebar.tsx
+msgid "Show server list"
+msgstr "5H0W 532V32 L157"
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Show server names"
+msgstr "5H0W 532V32 N4M35"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Show when speaking"
 msgstr "5H0W WH3N 5P34K1N6"
@@ -4963,6 +5207,34 @@ msgstr "5H0W WH3N 5P34K1N6"
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
 msgstr "5H0W1N6 1N 4 53P42473 W1ND0W"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
+msgstr "5H0W1N6 7H3 {INBOX_LIMIT} N3W357"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the newest {limit} results"
+msgstr "5H0W1N6 7H3 N3W357 {limit} 235UL75"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr "5H0W1N6 7H3 N3W357 {SERVER_SEARCH_LIMIT} 235UL75"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest 50 results"
+#~ msgstr "5H0W1N6 7H3 N3W357 50 235UL75"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the oldest {limit} results"
+msgstr "5H0W1N6 7H3 0LD357 {limit} 235UL75"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr "5H0W1N6 7H3 0LD357 {SERVER_SEARCH_LIMIT} 235UL75"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest 50 results"
+#~ msgstr "5H0W1N6 7H3 0LD357 50 235UL75"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
@@ -5004,6 +5276,10 @@ msgstr "5L0WM0D3 0FF"
 msgid "Someone calls you in a DM or group"
 msgstr "50M30N3 C4LL5 Y0U 1N 4 DM 02 620UP"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Someone is in a voice call"
+msgstr "50M30N3 15 1N 4 V01C3 C4LL"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
 msgstr "50M30N3 J01N5 Y0U2 V01C3 CH4NN3L"
@@ -5037,6 +5313,10 @@ msgstr "50M37H1N6 C00L 480U7 M3..."
 msgid "Something is wrong with your request, {0}."
 msgstr "50M37H1N6 15 W20N6 W17H Y0U2 23QU357, {0}."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Something went wrong while searching. Try again."
+msgstr "50M37H1N6 W3N7 W20N6 WH1L3 5342CH1N6. 72Y 4641N."
+
 #: components/i18n/errors.tsx
 msgid "Something went wrong! {error}"
 msgstr "50M37H1N6 W3N7 W20N6! {error}"
@@ -5044,6 +5324,11 @@ msgstr "50M37H1N6 W3N7 W20N6! {error}"
 #: components/i18n/errors.ts
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#: src/interface/servers/ServerOverview.tsx
+msgid "Sort by"
+msgstr "5027 8Y"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
@@ -5054,8 +5339,8 @@ msgid "Sounds"
 msgstr "50UND5"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-msgid "Sounds are turned off above, you can still preview them here."
-msgstr "50UND5 423 7U2N3D 0FF 480V3, Y0U C4N 571LL P23V13W 7H3M H323."
+#~ msgid "Sounds are turned off above, you can still preview them here."
+#~ msgstr "50UND5 423 7U2N3D 0FF 480V3, Y0U C4N 571LL P23V13W 7H3M H323."
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/auth/src/AuthPage.tsx
@@ -5275,6 +5560,10 @@ msgstr "5Y573M M355463 CH4NN3L5"
 msgid "Tap to enable audio"
 msgstr "74P 70 3N48L3 4UD10"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Teal"
+msgstr "734L"
+
 #: components/modal/modals/ReportContent.tsx
 msgid "Tell us what's wrong with this message"
 msgstr "73LL U5 WH47'5 W20N6 W17H 7H15 M355463"
@@ -5413,6 +5702,10 @@ msgstr "7H15 807 15 P21V473 4ND C4N 0NLY 83 4DD3D 8Y 7H3 C234702."
 #: components/app/interface/settings/user/Controller.tsx
 msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
 msgstr "7H15 8U770N 15 7H3 PU5H-70-74LK 8U770N, 50 17 D035 N07H1N6 3L53 WH1L3 PU5H 70 74LK 15 0N. P1CK 4N07H32 8U770N."
+
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "This channel"
+msgstr "7H15 CH4NN3L"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
@@ -5610,12 +5903,17 @@ msgstr "720U8L35H0071N6"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 #: components/app/interface/settings/user/Updates.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Try again"
 msgstr "72Y 4641N"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Try another name or language code."
 msgstr "72Y 4N07H32 N4M3 02 L4N6U463 C0D3."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Try different words or another scope."
+msgstr "72Y D1FF323N7 W02D5 02 4N07H32 5C0P3."
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn every sound on and reset their volumes and files?"
@@ -5628,6 +5926,18 @@ msgstr "7U2N 51N6L3 50UND5 0FF, CH4N63 7H312 V0LUM3 02 U53 Y0U2 0WN"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "7U2N 7H15 0FF 4ND CL051N6 7H3 W1ND0W QU175 4NY74LK 216H7 4W4Y."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Type in the search box and press Enter."
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search the whole server"
+msgstr "7YP3 70 5342CH 7H3 WH0L3 532V32"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search this channel"
+msgstr "7YP3 70 5342CH 7H15 CH4NN3L"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
@@ -5710,10 +6020,26 @@ msgstr "UNN4M3D F0LD32"
 msgid "Unpin"
 msgstr "UNP1N"
 
+#: components/app/menus/shared/PinConversationButton.tsx
+msgid "Unpin conversation"
+msgstr "UNP1N C0NV3254710N"
+
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Unpin message"
 msgstr "UNP1N M355463"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread first"
+msgstr "UN234D F1257"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread mentions"
+msgstr "UN234D M3N710N5"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread messages"
+msgstr "UN234D M3554635"
 
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Unsent message"
@@ -5903,7 +6229,7 @@ msgstr "U5325 W1LL N0 L0N632 83 45K3D 70 C0NF12M 7H312 463 83F023 J01N1N6 7H15 C
 #~ msgid "Using default speaker"
 #~ msgstr ""
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Verified"
 msgstr "V321F13D"
 
@@ -5974,6 +6300,10 @@ msgstr "V13W32 L3F7"
 #: components/ui/components/features/messaging/bars/JumpToBottom.tsx
 msgid "Viewing older messages"
 msgstr "V13W1N6 0LD32 M3554635"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Violet"
+msgstr "V10L37"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -6119,6 +6449,10 @@ msgstr "WH1L3 57234M D3V3L0P32 M0D3 4ND \"23C02D 57234M 23C4P5\" 423 0N, 5747157
 msgid "While voice call developer mode and \"Record call recaps\" are on, your microphone and everyone you hear are measured once per second. Recaps are stored on this device only; the newest 20 calls are kept."
 msgstr "WH1L3 V01C3 C4LL D3V3L0P32 M0D3 4ND \"23C02D C4LL 23C4P5\" 423 0N, Y0U2 M1C20PH0N3 4ND 3V32Y0N3 Y0U H342 423 M345U23D 0NC3 P32 53C0ND. 23C4P5 423 57023D 0N 7H15 D3V1C3 0NLY; 7H3 N3W357 20 C4LL5 423 K3P7."
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Whole server"
+msgstr "WH0L3 532V32"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "W1ND0W5 1N574LL32"
@@ -6230,6 +6564,10 @@ msgstr "Y0U C4N'7 H4V3 M023 7H4N {0} CH4NN3L5 0N 7H15 532V32."
 msgid "You can't have more than {0} emojis on this server."
 msgstr "Y0U C4N'7 H4V3 M023 7H4N {0} 3M0J15 0N 7H15 532V32."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "You can't read the message history of any channel on this server."
+msgstr "Y0U C4N'7 234D 7H3 M355463 H15702Y 0F 4NY CH4NN3L 0N 7H15 532V32."
+
 #: components/i18n/errors.tsx
 msgid "You cannot give yourself missing permissions."
 msgstr "Y0U C4NN07 61V3 Y0U253LF M1551N6 P32M15510N5."
@@ -6332,6 +6670,10 @@ msgstr "Y0U W0N'7 83 48L3 70 4CC355 Y0U2 4CC0UN7 UNL355 Y0U C0N74C7 5UPP027 - H0
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "Y0U W0N'7 83 48L3 70 23J01N UNL355 Y0U 423 23-1NV173D."
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr "Y0U'23 4LL C4U6H7 UP"
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."

@@ -5,11 +5,21 @@ let wasm: ArrayBuffer | undefined;
 const loadedContexts = new WeakSet<BaseAudioContext>();
 
 /**
+ * AudioWorkletNode, or a stand-in where the browser hides it. Safari only
+ * exposes it in secure contexts, and extending an undefined global would throw
+ * while the module is evaluated and break the whole app on plain http.
+ * loadModule fails there (no audioWorklet), so the node is never created.
+ */
+const BaseNode = (
+  typeof AudioWorkletNode !== "undefined" ? AudioWorkletNode : class {}
+) as typeof AudioWorkletNode;
+
+/**
  * Noise suppression with RNNoise, which also fades out audio away from speech
  *
  * The worklet is built from worklet.js by build.sh.
  */
-export class RNNoiseNode extends AudioWorkletNode {
+export class RNNoiseNode extends BaseNode {
   /**
    * Load the worklet into the context and download the model, must be awaited
    * before creating a node

@@ -108,6 +108,12 @@ type Props = CommonProps & {
    */
   contextMenu?: () => JSX.Element;
 
+  /**
+   * Called when the message is double-clicked (a mouse shortcut; keyboard and
+   * touch users reply through the toolbar or context menu)
+   */
+  onDblClick?: (event: MouseEvent) => void;
+
   ref?: HTMLDivElement;
 
   /**
@@ -384,6 +390,7 @@ export function MessageContainer(props: Props) {
       ref={props.ref}
       onMouseEnter={() => props.onHover && props.onHover(true)}
       onMouseLeave={() => props.onHover && props.onHover(false)}
+      onDblClick={(event) => props.onDblClick?.(event)}
       class={
         "group " +
         base({

@@ -61,6 +61,16 @@ msgstr "(දැන් නැවත සබඳින්න)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {අවහිර කළ පණිවිඩ #ක්} other {අවහිර කළ පණිවිඩ #ක්}}"
 
+#. placeholder {0}: data().failed
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{0, plural, one {# channel could not be searched} other {# channels could not be searched}}"
+msgstr ""
+
+#. placeholder {0}: server().channelIds.size
+#: src/interface/servers/ServerOverview.tsx
+msgid "{0, plural, one {# channel} other {# channels}}"
+msgstr ""
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -73,8 +83,8 @@ msgstr "{0, plural, one {හිරවීම් #ක්} other {හිරවී�
 
 #. placeholder {0}: onlineMembers()
 #: src/interface/channels/text/MemberSidebar.tsx
-msgid "{0, plural, one {# member online} other {# members online}}"
-msgstr "{0, plural, one {සාමාජිකයෙක් # මාර්ගගතයි} other {සාමාජිකයින් # මාර්ගගතයි}}"
+#~ msgid "{0, plural, one {# member online} other {# members online}}"
+#~ msgstr "{0, plural, one {සාමාජිකයෙක් # මාර්ගගතයි} other {සාමාජිකයින් # මාර්ගගතයි}}"
 
 #. placeholder {0}: memberCount()
 #: components/ui/components/features/messaging/elements/Invite.tsx
@@ -105,6 +115,18 @@ msgstr "{0, plural, one {+තවත් #ක්} other {+තවත් #ක්}}"
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {ගොනුවක් දමන්න} other {ගොනු # ක් දමන්න}}"
+
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr ""
+
+#. placeholder {0}: currentProgress()!.total
+#. placeholder {1}: currentProgress()!.done
+#. placeholder {2}: currentProgress()!.done
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{0, plural, one {Searching {1} of # channel} other {Searching {2} of # channels}}"
+#~ msgstr ""
 
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
@@ -309,9 +331,17 @@ msgstr "{count, plural, one {කාලයත් සමග {title}, සාරා�
 msgid "{count, plural, one {# language} other {# languages}}"
 msgstr "{count, plural, one {භාෂා #} other {භාෂා #}}"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{count, plural, one {# result} other {# results}}"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 #~ msgid "{count} languages"
 #~ msgstr "භාෂා {count}ක්"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{count} results"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{count} selected"
@@ -364,6 +394,10 @@ msgstr "{participant} ට ඇසුණා"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "කාලයත් සමග {title}"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{total, plural, one {Searching {done} of # channel} other {Searching {done} of # channels}}"
+msgstr ""
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
@@ -460,6 +494,10 @@ msgstr "<0>ප්‍රවේශම් වන්න!</0><1/>මෙය පෙන�
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "1 person reacted"
 msgstr "1 පුද්ගලයෙක් ප්‍රතිචාර දැක්වීය"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "1 result"
+#~ msgstr ""
 
 #: src/interface/channels/text/Composition.tsx
 #~ msgid "1 second"
@@ -876,6 +914,10 @@ msgstr "ශ්‍රව්‍ය මට්ටම"
 msgid "Authenticator App"
 msgstr "සත්‍යාපන යෙදුම"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Automatic"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Automatic Gain Control"
 msgstr "ස්වයංක්‍රීය ලාභ පාලනය"
@@ -976,6 +1018,14 @@ msgstr "කලාප පළල"
 msgid "Banner"
 msgstr "බැනරය"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Banner colour"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Banner hue"
+msgstr ""
+
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Bans"
 msgstr "තහනම් කිරීම්"
@@ -1000,6 +1050,10 @@ msgstr "අවහිර කර ඇත"
 #: components/ui/components/features/messaging/elements/MessageReply.tsx
 msgid "Blocked User"
 msgstr "අවහිර කළ පරිශීලකයෙකි"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Blue"
+msgstr ""
 
 #: components/app/interface/channels/text/Message.tsx
 msgid "Bot"
@@ -1313,6 +1367,10 @@ msgstr "පරිශීලක නාමයක් තෝරන්න"
 msgid "Choose username"
 msgstr "පරිශීලක නාමය තෝරන්න"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Clear search"
+msgstr ""
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "තත්‍වය මකන්න"
@@ -1369,6 +1427,7 @@ msgstr "අනුග්‍රාහක සැකසුම්"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "වසන්න"
 
@@ -1746,7 +1805,6 @@ msgid "Create invites for others to use"
 msgstr "අන් අයට භාවිතා කිරීමට ඇරයුම් සාදන්න"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
-#: src/interface/navigation/servers/ServerList.tsx
 msgid "Create or join a server"
 msgstr "සේවාදායකයක් සාදන්න හෝ එක්වන්න"
 
@@ -1755,6 +1813,7 @@ msgid "Create Role"
 msgstr "භූමිකාව සාදන්න"
 
 #: components/modal/modals/CreateServer.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Create server"
 msgstr "සේවාදායකය සාදන්න"
 
@@ -1781,6 +1840,7 @@ msgid "Current Session"
 msgstr "වත්මන් වාරය"
 
 #: components/app/interface/settings/user/Overlay.tsx
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Custom"
 msgstr ""
 
@@ -1799,6 +1859,10 @@ msgstr "අභිරුචි කවුළු රාමුව"
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Customisation"
 msgstr "අභිරුචිකරණය"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Cyan"
+msgstr ""
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad down"
@@ -2072,6 +2136,7 @@ msgstr "විසන්ධි විය"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
+#: src/interface/navigation/servers/ServerList.tsx
 msgid "Discover"
 msgstr "Discover"
 
@@ -2649,6 +2714,10 @@ msgstr "තේරුණා"
 msgid "Grants {0} permissions and denies {1} permissions"
 msgstr "අවසර {0}ක් ලබාදී අවසර {1}ක් ප්‍රතික්ෂේප කරයි"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Green"
+msgstr ""
+
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Group"
 msgstr "සමූහය"
@@ -2697,6 +2766,14 @@ msgstr "මෙන්න ඔබේ නව ඇරයුම් කේතය: <0>{0}
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "අන් අය සඟවන්න"
+
+#: src/interface/navigation/servers/UserMenu.tsx
+msgid "Hide server list"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Hide server names"
+msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "High Contrast"
@@ -2823,6 +2900,11 @@ msgstr "ඇමතුමේ"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "ඒ අතරතුර, Android සඳහා නිර්මාණය කළ වඩා වේගවත්, සුමට අත්දැකීමක් සඳහා Google Play වෙතින් AnyTalk ස්ථාපනය කරන්න."
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -2942,6 +3024,7 @@ msgid "Join {label}"
 msgstr "{label} වෙත එක්වන්න"
 
 #: components/modal/modals/JoinServer.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Join a server"
 msgstr "සේවාදායකයකට එක්වන්න"
 
@@ -2963,6 +3046,10 @@ msgstr "හඬ නාලිකාවට එක්වන්න"
 #: components/ui/components/features/profiles/ProfileJoined.tsx
 msgid "Joined"
 msgstr "එක් වුණා"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Joined {date}"
+msgstr ""
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Jump between servers, channels, messages and members"
@@ -3153,6 +3240,10 @@ msgstr "සජීවී සංඛ්‍යාලේඛන උඩුවැසු�
 msgid "Load file ({0})"
 msgstr "ගොනුව පූරණය කරන්න ({0})"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr ""
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "පිවිසෙන්න"
@@ -3202,6 +3293,10 @@ msgstr "අඩු-කපන පෙරහන"
 msgid "Lowercase letters, numbers and underscores only."
 msgstr "කුඩා අකුරු, ඉලක්කම් සහ යටි ඉරි පමණි."
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Magenta"
+msgstr ""
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
 msgstr "ප්‍රධාන බිඳ වැටීමක්"
@@ -3241,6 +3336,10 @@ msgstr "සේවාදායකය කළමණාකරනය"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Manage Webhooks"
 msgstr "Webhooks කළමනාකරණය කරන්න"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr ""
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
@@ -3322,6 +3421,10 @@ msgstr "නිශ්චිත භූමිකා සඳහන් කරන්න
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "සැඳහුම්"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3434,6 +3537,10 @@ msgstr "වැඩි වෙනස"
 msgid "More options"
 msgstr "තවත් විකල්ප"
 
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "More unread chats"
+msgstr ""
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Move between buttons, menus and messages"
 msgstr "බොත්තම්, මෙනු සහ පණිවිඩ අතර ගමන් කරන්න"
@@ -3544,6 +3651,10 @@ msgstr "මාගේ ස්වයංක්‍රමලේඛ"
 msgid "Name"
 msgstr "නම"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Name (A-Z)"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr ""
@@ -3606,6 +3717,10 @@ msgstr "යෙදුම් හමු නොවීය"
 msgid "No audio was captured, switch window to share audio"
 msgstr "ශ්‍රව්‍ය ග්‍රහණය නොවීය, ශ්‍රව්‍ය බෙදාගැනීමට කවුළුව මාරු කරන්න"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No channels to search"
+msgstr ""
+
 #: src/interface/ServerHome.tsx
 msgid "No channels!"
 msgstr "නාලිකා නැත!"
@@ -3617,6 +3732,10 @@ msgstr "පාලකයක් හමු නොවීය. එකක් සම්�
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "no data"
 msgstr "දත්ත නැත"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No description"
+msgstr ""
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "No desktop app available yet"
@@ -3646,6 +3765,10 @@ msgstr "තවමත් සාරාංශ නැත. \"ඇමතුම් ස�
 msgid "No recaps yet. Turn on \"Record stream recaps\", then join a call and start or watch a stream."
 msgstr "තවමත් සාරාංශ නැත. \"ප්‍රවාහ සාරාංශ පටිගත කරන්න\" සක්‍රිය කර, ඉන්පසු ඇමතුමකට එක්වී ප්‍රවාහයක් අරඹන්න හෝ නරඹන්න."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No results"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No role overrides have been configured."
 msgstr "භූමිකා අභිභවන සකසා නැත."
@@ -3653,6 +3776,14 @@ msgstr "භූමිකා අභිභවන සකසා නැත."
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No screens found"
 msgstr "තිර හමු නොවීය"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers match \"{search}\""
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers yet"
+msgstr ""
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
@@ -3733,7 +3864,7 @@ msgstr ""
 msgid "Official Communication"
 msgstr "නිල සන්නිවේදනය"
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Official Server"
 msgstr "නිල සේවාදායකය"
 
@@ -3754,6 +3885,10 @@ msgstr "හරි"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "පරණම"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Oldest joined"
+msgstr ""
 
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
@@ -3842,6 +3977,13 @@ msgstr "ගොනුව විවෘත කරන්න"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "යහළුවන් විවෘත කරන්න"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -3977,6 +4119,10 @@ msgstr "මිනිසුන්ට ඔබව සොයා ගැනීමට �
 msgid "Pin"
 msgstr "ඇමිණීම"
 
+#: components/app/menus/shared/PinConversationButton.tsx
+msgid "Pin conversation"
+msgstr ""
+
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin message"
@@ -3991,6 +4137,18 @@ msgstr "Ping (සේවාදායකයට ගොස් ආපසු)"
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Ping avg / max"
 msgstr "Ping සාමාන්‍ය / උපරිම"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Pink"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Pinned"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Pinned chats"
+msgstr ""
 
 #: src/interface/channels/text/TextChannel.tsx
 msgid "Pinned Messages"
@@ -4184,6 +4342,10 @@ msgstr "ඔබේ සාරාංශ අන් අයගේ සාරාංශ �
 msgid "Raid or spam attack"
 msgstr "රේඩ් හෝ ස්පෑම් ප්‍රහාරය"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Rail order"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
 msgid "React"
@@ -4262,6 +4424,10 @@ msgstr "මෑත ඇමතුම්"
 msgid "Recent calls on Home"
 msgstr "මුල් පිටුවේ මෑත ඇමතුම්"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Recently joined"
+msgstr ""
+
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 #: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
@@ -4291,6 +4457,10 @@ msgstr "ප්‍රතිසාධන කේතය"
 #: components/app/interface/settings/user/Account.tsx
 msgid "Recovery Codes"
 msgstr "ප්‍රතිසාධන කේත"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Red"
+msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Reduced"
@@ -4349,6 +4519,10 @@ msgstr "ඔතන්ටිකේටරය ඉවත් කරන්න"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove Avatars"
 msgstr "පැතිකඩ පින්තූර ඉවත් කරන්න"
+
+#: components/app/menus/MessageContextMenu.tsx
+msgid "Remove embeds"
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Remove friend"
@@ -4680,6 +4854,10 @@ msgstr "අනුචලනය"
 msgid "Search"
 msgstr "සොයන්න"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search failed"
+msgstr ""
+
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Search for emojis..."
 msgstr "ඉමෝජි සොයන්න..."
@@ -4697,9 +4875,29 @@ msgstr "සමූහ සොයන්න..."
 msgid "Search for users..."
 msgstr "පරිශීලකයින් සොයන්න..."
 
+#: src/interface/channels/ChannelHeader.tsx
+#~ msgid "Search in"
+#~ msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {name}"
+msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {serverName}"
+msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in #{name}"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Search languages"
 msgstr "භාෂා සොයන්න"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search messages"
+msgstr ""
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search messages..."
@@ -4709,9 +4907,31 @@ msgstr "පණිවිඩ සොයන්න..."
 msgid "Search Results"
 msgstr "සෙවුම් ප්‍රතිඵල"
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Search scope"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Search servers"
+msgstr ""
+
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "සැකසුම් සොයන්න"
+
+#. placeholder {0}: progress()!.done
+#. placeholder {1}: progress()!.total
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Searching {0} of {1} channels"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Searching…"
+msgstr ""
+
+#: src/interface/Home.tsx
+msgid "See all your servers at a glance."
+msgstr ""
 
 #: components/app/interface/settings/user/Feedback.tsx
 #~ msgid "See what we're currently working on."
@@ -4856,13 +5076,28 @@ msgstr "සේවාදායක අනන්‍යතා"
 msgid "Server Name"
 msgstr "සේවාදායකයේ නම"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Server options for {name}"
+msgstr ""
+
+#: src/interface/Home.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Server overview"
+msgstr ""
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
 msgstr "සේවාදායක භූමිකා"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "සේවාදායක"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Servers you join show up here."
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -4887,7 +5122,7 @@ msgstr "ඔබේ තත්‍වය සකසන්න"
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
 #: components/modal/modals/ServerInfo.tsx
-#: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/navigation/servers/UserMenu.tsx
 msgid "Settings"
 msgstr "සැකසුම්"
 
@@ -4956,6 +5191,15 @@ msgstr ""
 msgid "Show send message button"
 msgstr "පණිවිඩ යවන බොත්තම පෙන්වන්න"
 
+#: src/interface/common/CommonHeader.tsx
+#: src/interface/Sidebar.tsx
+msgid "Show server list"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Show server names"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Show when speaking"
 msgstr ""
@@ -4963,6 +5207,34 @@ msgstr ""
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
 msgstr ""
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the newest {limit} results"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest 50 results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the oldest {limit} results"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest 50 results"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
@@ -5004,6 +5276,10 @@ msgstr "මන්දගාමී ප්‍රකාරය අක්‍රිය�
 msgid "Someone calls you in a DM or group"
 msgstr "යමෙක් DM එකක හෝ සමූහයක ඔබට අමතයි"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Someone is in a voice call"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
 msgstr "යමෙක් ඔබේ හඬ නාලිකාවට එක්වේ"
@@ -5037,6 +5313,10 @@ msgstr "මා ගැන නියම දෙයක්..."
 msgid "Something is wrong with your request, {0}."
 msgstr "ඔබේ ඉල්ලීමේ යම් දෝෂයක් ඇත, {0}."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Something went wrong while searching. Try again."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "Something went wrong! {error}"
 msgstr "යමක් වැරදුණා! {error}"
@@ -5044,6 +5324,11 @@ msgstr "යමක් වැරදුණා! {error}"
 #: components/i18n/errors.ts
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#: src/interface/servers/ServerOverview.tsx
+msgid "Sort by"
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
@@ -5054,8 +5339,8 @@ msgid "Sounds"
 msgstr "ශබ්ද"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-msgid "Sounds are turned off above, you can still preview them here."
-msgstr "ශබ්ද ඉහත අක්‍රිය කර ඇත, ඔබට තවමත් ඒවායේ පෙරදසුන මෙහි බැලිය හැක."
+#~ msgid "Sounds are turned off above, you can still preview them here."
+#~ msgstr "ශබ්ද ඉහත අක්‍රිය කර ඇත, ඔබට තවමත් ඒවායේ පෙරදසුන මෙහි බැලිය හැක."
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/auth/src/AuthPage.tsx
@@ -5275,6 +5560,10 @@ msgstr "පද්ධති පණිවිඩ නාලිකා"
 msgid "Tap to enable audio"
 msgstr "ශ්‍රව්‍ය සක්‍රිය කිරීමට තට්ටු කරන්න"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Teal"
+msgstr ""
+
 #: components/modal/modals/ReportContent.tsx
 msgid "Tell us what's wrong with this message"
 msgstr "මෙම පණිවිඩයේ ඇති ගැටළුව අපට කියන්න"
@@ -5412,6 +5701,10 @@ msgstr "මෙම ස්වයංක්‍රමලේඛය පුද්ගල�
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr ""
+
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "This channel"
 msgstr ""
 
 #: components/app/interface/settings/channel/Overview.tsx
@@ -5610,12 +5903,17 @@ msgstr "දෝෂ නිරාකරණය"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 #: components/app/interface/settings/user/Updates.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Try again"
 msgstr "නැවත උත්සාහ කරන්න"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Try another name or language code."
 msgstr "වෙනත් නමක් හෝ භාෂා කේතයක් උත්සාහ කරන්න."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Try different words or another scope."
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn every sound on and reset their volumes and files?"
@@ -5628,6 +5926,18 @@ msgstr "තනි ශබ්ද අක්‍රිය කරන්න, ඒවා�
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "මෙය අක්‍රිය කළහොත් කවුළුව වැසූ සැණින් AnyTalk වැසේ."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Type in the search box and press Enter."
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search the whole server"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search this channel"
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
@@ -5710,10 +6020,26 @@ msgstr "නම් නොකළ ෆෝල්ඩරය"
 msgid "Unpin"
 msgstr "ඇමිණුම ඉවත් කරන්න"
 
+#: components/app/menus/shared/PinConversationButton.tsx
+msgid "Unpin conversation"
+msgstr ""
+
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Unpin message"
 msgstr "පණිවිඩයේ ඇමිණුම ඉවත් කරන්න"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread first"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread mentions"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread messages"
+msgstr ""
 
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Unsent message"
@@ -5903,7 +6229,7 @@ msgstr "මෙම නාලිකාවට එක්වීමට පෙර ප�
 #~ msgid "Using default speaker"
 #~ msgstr ""
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Verified"
 msgstr "සත්‍යාපිතයි"
 
@@ -5974,6 +6300,10 @@ msgstr "නරඹන්නා ඉවත් වුණා"
 #: components/ui/components/features/messaging/bars/JumpToBottom.tsx
 msgid "Viewing older messages"
 msgstr "පරණ පණිවිඩ දකිමින්"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Violet"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -6119,6 +6449,10 @@ msgstr "ප්‍රවාහ සංවර්ධක ප්‍රකාරය ස
 msgid "While voice call developer mode and \"Record call recaps\" are on, your microphone and everyone you hear are measured once per second. Recaps are stored on this device only; the newest 20 calls are kept."
 msgstr "හඬ ඇමතුම් සංවර්ධක ප්‍රකාරය සහ \"ඇමතුම් සාරාංශ පටිගත කරන්න\" සක්‍රිය අතරතුර, ඔබේ මයික්‍රොෆෝනය සහ ඔබට ඇසෙන සැමදෙනා තත්පරයකට වරක් මනිනු ලැබේ. සාරාංශ මෙම උපාංගයේ පමණක් ගබඩා වන අතර නවතම ඇමතුම් 20 තබා ගනී."
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Whole server"
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "Windows ස්ථාපකය"
@@ -6230,6 +6564,10 @@ msgstr "මෙම සේවාදායකයේ ඔබට නාලිකා {0
 msgid "You can't have more than {0} emojis on this server."
 msgstr "මෙම සේවාදායකයේ ඔබට ඉමෝජි {0}කට වඩා තිබිය නොහැක."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "You can't read the message history of any channel on this server."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "You cannot give yourself missing permissions."
 msgstr "ඔබට නැති අවසර ඔබටම ලබාදිය නොහැක."
@@ -6332,6 +6670,10 @@ msgstr "ඔබ සහාය සම්බන්ධ කර ගන්නේ නම�
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "ඔබට ඇරයුමකින් තොරව නැවත එක්වීමට නොහැකිය."
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."

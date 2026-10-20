@@ -61,6 +61,16 @@ msgstr "(свържи отново)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {# блокирано съобщение} other {# блокирани съобщения}}"
 
+#. placeholder {0}: data().failed
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{0, plural, one {# channel could not be searched} other {# channels could not be searched}}"
+msgstr ""
+
+#. placeholder {0}: server().channelIds.size
+#: src/interface/servers/ServerOverview.tsx
+msgid "{0, plural, one {# channel} other {# channels}}"
+msgstr ""
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -73,8 +83,8 @@ msgstr "{0, plural, one {# забавяне} other {# забавяния}}"
 
 #. placeholder {0}: onlineMembers()
 #: src/interface/channels/text/MemberSidebar.tsx
-msgid "{0, plural, one {# member online} other {# members online}}"
-msgstr "{0, plural, one {# член онлайн} other {# члена онлайн}}"
+#~ msgid "{0, plural, one {# member online} other {# members online}}"
+#~ msgstr "{0, plural, one {# член онлайн} other {# члена онлайн}}"
 
 #. placeholder {0}: memberCount()
 #: components/ui/components/features/messaging/elements/Invite.tsx
@@ -105,6 +115,18 @@ msgstr "{0, plural, one {+# друг} other {+# други}}"
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {Пусни файл} other {Пусни # файла}}"
+
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr ""
+
+#. placeholder {0}: currentProgress()!.total
+#. placeholder {1}: currentProgress()!.done
+#. placeholder {2}: currentProgress()!.done
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{0, plural, one {Searching {1} of # channel} other {Searching {2} of # channels}}"
+#~ msgstr ""
 
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
@@ -309,9 +331,17 @@ msgstr "{count, plural, one {{title} във времето, # обобщение
 msgid "{count, plural, one {# language} other {# languages}}"
 msgstr "{count, plural, one {# език} other {# езика}}"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{count, plural, one {# result} other {# results}}"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 #~ msgid "{count} languages"
 #~ msgstr "Езици: {count}"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{count} results"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{count} selected"
@@ -364,6 +394,10 @@ msgstr "Чува се: {participant}"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} във времето"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{total, plural, one {Searching {done} of # channel} other {Searching {done} of # channels}}"
+msgstr ""
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
@@ -460,6 +494,10 @@ msgstr "<0>Внимавай!</0><1/>Това не е същото като по�
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "1 person reacted"
 msgstr "1 човек реагира"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "1 result"
+#~ msgstr ""
 
 #: src/interface/channels/text/Composition.tsx
 #~ msgid "1 second"
@@ -875,6 +913,10 @@ msgstr "Ниво на звука"
 msgid "Authenticator App"
 msgstr "Приложение за удостоверяване"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Automatic"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Automatic Gain Control"
 msgstr "Автоматичен контрол на усилването"
@@ -975,6 +1017,14 @@ msgstr "Честотна лента"
 msgid "Banner"
 msgstr "Банер"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Banner colour"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Banner hue"
+msgstr ""
+
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Bans"
 msgstr "Банове"
@@ -999,6 +1049,10 @@ msgstr "Блокирани"
 #: components/ui/components/features/messaging/elements/MessageReply.tsx
 msgid "Blocked User"
 msgstr "Блокиран потребител"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Blue"
+msgstr ""
 
 #: components/app/interface/channels/text/Message.tsx
 msgid "Bot"
@@ -1312,6 +1366,10 @@ msgstr "Избери потребителско име"
 msgid "Choose username"
 msgstr "Избери потребителско име"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Clear search"
+msgstr ""
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "Изчистване на статуса"
@@ -1368,6 +1426,7 @@ msgstr "Настройки на приложението"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "Затвори"
 
@@ -1744,7 +1803,6 @@ msgid "Create invites for others to use"
 msgstr "Създавай покани, които други да използват"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
-#: src/interface/navigation/servers/ServerList.tsx
 msgid "Create or join a server"
 msgstr "Създай сървър или се присъедини"
 
@@ -1753,6 +1811,7 @@ msgid "Create Role"
 msgstr "Създай роля"
 
 #: components/modal/modals/CreateServer.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Create server"
 msgstr "Създай сървър"
 
@@ -1779,6 +1838,7 @@ msgid "Current Session"
 msgstr "Текуща сесия"
 
 #: components/app/interface/settings/user/Overlay.tsx
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Custom"
 msgstr ""
 
@@ -1797,6 +1857,10 @@ msgstr "Персонализирана рамка на прозореца"
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Customisation"
 msgstr "Персонализиране"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Cyan"
+msgstr ""
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad down"
@@ -2070,6 +2134,7 @@ msgstr "Прекъсната връзка"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
+#: src/interface/navigation/servers/ServerList.tsx
 msgid "Discover"
 msgstr "Откриване"
 
@@ -2645,6 +2710,10 @@ msgstr "Разбрах"
 msgid "Grants {0} permissions and denies {1} permissions"
 msgstr "Дава {0} разрешения и отказва {1} разрешения"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Green"
+msgstr ""
+
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Group"
 msgstr "Група"
@@ -2693,6 +2762,14 @@ msgstr "Ето новия ти код за покана: <0>{0}</0>"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "Скрий останалите"
+
+#: src/interface/navigation/servers/UserMenu.tsx
+msgid "Hide server list"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Hide server names"
+msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "High Contrast"
@@ -2819,6 +2896,11 @@ msgstr "В обаждане"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "Междувременно инсталирай AnyTalk от Google Play за по-бързо и по-плавно изживяване, създадено за Android."
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -2938,6 +3020,7 @@ msgid "Join {label}"
 msgstr "Присъедини се към {label}"
 
 #: components/modal/modals/JoinServer.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Join a server"
 msgstr "Присъедини се към сървър"
 
@@ -2958,6 +3041,10 @@ msgstr "Присъедини се към гласовия канал"
 #: components/ui/components/features/profiles/ProfileJoined.tsx
 msgid "Joined"
 msgstr "Присъединил се"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Joined {date}"
+msgstr ""
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Jump between servers, channels, messages and members"
@@ -3148,6 +3235,10 @@ msgstr "Наслагване със статистика на живо"
 msgid "Load file ({0})"
 msgstr "Зареди файл ({0})"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr ""
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "Вход"
@@ -3197,6 +3288,10 @@ msgstr "Нискочестотен филтър"
 msgid "Lowercase letters, numbers and underscores only."
 msgstr "Само малки букви, цифри и долни черти."
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Magenta"
+msgstr ""
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
 msgstr "Сериозен срив"
@@ -3236,6 +3331,10 @@ msgstr "Управление на сървъра"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Manage Webhooks"
 msgstr "Управлявайте Webhooks"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr ""
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
@@ -3317,6 +3416,10 @@ msgstr "Споменавай конкретни роли"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "Споменавания"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3429,6 +3532,10 @@ msgstr "Повече контраст"
 msgid "More options"
 msgstr "Още опции"
 
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "More unread chats"
+msgstr ""
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Move between buttons, menus and messages"
 msgstr "Придвижване между бутони, менюта и съобщения"
@@ -3539,6 +3646,10 @@ msgstr "Моите ботове"
 msgid "Name"
 msgstr "Име"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Name (A-Z)"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr ""
@@ -3601,6 +3712,10 @@ msgstr "Няма намерени приложения"
 msgid "No audio was captured, switch window to share audio"
 msgstr "Не е уловен звук, смени прозореца, за да споделиш звук"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No channels to search"
+msgstr ""
+
 #: src/interface/ServerHome.tsx
 msgid "No channels!"
 msgstr "Няма канали!"
@@ -3612,6 +3727,10 @@ msgstr "Не е намерен контролер. Свържете такъв �
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "no data"
 msgstr "няма данни"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No description"
+msgstr ""
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "No desktop app available yet"
@@ -3641,6 +3760,10 @@ msgstr "Още няма обобщения. Включи „Записвай о�
 msgid "No recaps yet. Turn on \"Record stream recaps\", then join a call and start or watch a stream."
 msgstr "Още няма обобщения. Включи „Записвай обобщения на стриймове“, присъедини се към обаждане и започни или гледай стрийм."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No results"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No role overrides have been configured."
 msgstr "Не са настроени замени на роли."
@@ -3648,6 +3771,14 @@ msgstr "Не са настроени замени на роли."
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No screens found"
 msgstr "Няма намерени екрани"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers match \"{search}\""
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers yet"
+msgstr ""
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
@@ -3728,7 +3859,7 @@ msgstr ""
 msgid "Official Communication"
 msgstr "Официална комуникация"
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Official Server"
 msgstr "Официялен сървър"
 
@@ -3749,6 +3880,10 @@ msgstr "Продължаване"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "Най-стари"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Oldest joined"
+msgstr ""
 
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
@@ -3837,6 +3972,13 @@ msgstr "Отвори файла"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "Отвори приятелите"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -3972,6 +4114,10 @@ msgstr "Изберете потребителско име, по което ис
 msgid "Pin"
 msgstr "Закрепи"
 
+#: components/app/menus/shared/PinConversationButton.tsx
+msgid "Pin conversation"
+msgstr ""
+
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin message"
@@ -3986,6 +4132,18 @@ msgstr "Пинг (до сървъра и обратно)"
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Ping avg / max"
 msgstr "Пинг ср. / макс."
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Pink"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Pinned"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Pinned chats"
+msgstr ""
 
 #: src/interface/channels/text/TextChannel.tsx
 msgid "Pinned Messages"
@@ -4179,6 +4337,10 @@ msgstr "Сравнявай своите обобщения с обобщения
 msgid "Raid or spam attack"
 msgstr "Рейд или спам атака"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Rail order"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
 msgid "React"
@@ -4257,6 +4419,10 @@ msgstr "Скорошни обаждания"
 msgid "Recent calls on Home"
 msgstr "Скорошни обаждания в началото"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Recently joined"
+msgstr ""
+
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 #: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
@@ -4286,6 +4452,10 @@ msgstr "Код за възстановяване"
 #: components/app/interface/settings/user/Account.tsx
 msgid "Recovery Codes"
 msgstr "Кодове за възстановяване"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Red"
+msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Reduced"
@@ -4344,6 +4514,10 @@ msgstr "Премахване на аутентификатор"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove Avatars"
 msgstr "Премахване на профилни снимки"
+
+#: components/app/menus/MessageContextMenu.tsx
+msgid "Remove embeds"
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Remove friend"
@@ -4674,6 +4848,10 @@ msgstr "Превъртане"
 msgid "Search"
 msgstr "Търсене"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search failed"
+msgstr ""
+
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Search for emojis..."
 msgstr "Търсене на емоджита..."
@@ -4691,9 +4869,29 @@ msgstr "Търсене на групи..."
 msgid "Search for users..."
 msgstr "Търсене на потребители..."
 
+#: src/interface/channels/ChannelHeader.tsx
+#~ msgid "Search in"
+#~ msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {name}"
+msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {serverName}"
+msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in #{name}"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Search languages"
 msgstr "Търсене на езици"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search messages"
+msgstr ""
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search messages..."
@@ -4703,9 +4901,31 @@ msgstr "Търсене на съобщения..."
 msgid "Search Results"
 msgstr "Резултати от търсенето"
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Search scope"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Search servers"
+msgstr ""
+
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "Търсене в настройките"
+
+#. placeholder {0}: progress()!.done
+#. placeholder {1}: progress()!.total
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Searching {0} of {1} channels"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Searching…"
+msgstr ""
+
+#: src/interface/Home.tsx
+msgid "See all your servers at a glance."
+msgstr ""
 
 #~ msgid "See what we're currently working on."
 #~ msgstr ""
@@ -4849,13 +5069,28 @@ msgstr "Профили в сървъра"
 msgid "Server Name"
 msgstr "Име на сървъра"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Server options for {name}"
+msgstr ""
+
+#: src/interface/Home.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Server overview"
+msgstr ""
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
 msgstr "Роли в сървъра"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "Сървъри"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Servers you join show up here."
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -4880,7 +5115,7 @@ msgstr "Задай статуса си"
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
 #: components/modal/modals/ServerInfo.tsx
-#: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/navigation/servers/UserMenu.tsx
 msgid "Settings"
 msgstr "Настройки"
 
@@ -4949,6 +5184,15 @@ msgstr ""
 msgid "Show send message button"
 msgstr "Показвай бутон за изпращане на съобщение"
 
+#: src/interface/common/CommonHeader.tsx
+#: src/interface/Sidebar.tsx
+msgid "Show server list"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Show server names"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Show when speaking"
 msgstr ""
@@ -4956,6 +5200,34 @@ msgstr ""
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
 msgstr ""
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the newest {limit} results"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest 50 results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the oldest {limit} results"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest 50 results"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
@@ -4997,6 +5269,10 @@ msgstr "Бавният режим е изключен"
 msgid "Someone calls you in a DM or group"
 msgstr "Някой ти се обажда в лични съобщения или група"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Someone is in a voice call"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
 msgstr "Някой влиза в гласовия ти канал"
@@ -5030,12 +5306,21 @@ msgstr "Нещо интересно за мен..."
 msgid "Something is wrong with your request, {0}."
 msgstr "Нещо не е наред със заявката ти, {0}."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Something went wrong while searching. Try again."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "Something went wrong! {error}"
 msgstr "Нещо се обърка! {error}"
 
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#: src/interface/servers/ServerOverview.tsx
+msgid "Sort by"
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
@@ -5046,8 +5331,8 @@ msgid "Sounds"
 msgstr "Звуци"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-msgid "Sounds are turned off above, you can still preview them here."
-msgstr "Звуците са изключени по-горе, но можеш да ги чуеш тук."
+#~ msgid "Sounds are turned off above, you can still preview them here."
+#~ msgstr "Звуците са изключени по-горе, но можеш да ги чуеш тук."
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/auth/src/AuthPage.tsx
@@ -5266,6 +5551,10 @@ msgstr "Канали за системни съобщения"
 msgid "Tap to enable audio"
 msgstr "Докосни, за да включиш звука"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Teal"
+msgstr ""
+
 #: components/modal/modals/ReportContent.tsx
 msgid "Tell us what's wrong with this message"
 msgstr "Кажи ни какво не е наред с това съобщение"
@@ -5403,6 +5692,10 @@ msgstr "Този бот е личен и може да бъде добавен �
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr ""
+
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "This channel"
 msgstr ""
 
 #: components/app/interface/settings/channel/Overview.tsx
@@ -5601,12 +5894,17 @@ msgstr "Отстраняване на проблеми"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 #: components/app/interface/settings/user/Updates.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Try again"
 msgstr "Опитай отново"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Try another name or language code."
 msgstr "Опитайте с друго име или езиков код."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Try different words or another scope."
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn every sound on and reset their volumes and files?"
@@ -5619,6 +5917,18 @@ msgstr "Изключвай отделни звуци, променяй сила�
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "Ако изключиш това, затварянето на прозореца веднага излиза от AnyTalk."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Type in the search box and press Enter."
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search the whole server"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search this channel"
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
@@ -5701,10 +6011,26 @@ msgstr "Папка без име"
 msgid "Unpin"
 msgstr "Откачи"
 
+#: components/app/menus/shared/PinConversationButton.tsx
+msgid "Unpin conversation"
+msgstr ""
+
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Unpin message"
 msgstr "Откачи съобщението"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread first"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread mentions"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread messages"
+msgstr ""
 
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Unsent message"
@@ -5894,7 +6220,7 @@ msgstr "Потребителите вече няма да бъдат питан�
 #~ msgid "Using default speaker"
 #~ msgstr ""
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Verified"
 msgstr "Потвърден"
 
@@ -5964,6 +6290,10 @@ msgstr "Зрител напусна"
 #: components/ui/components/features/messaging/bars/JumpToBottom.tsx
 msgid "Viewing older messages"
 msgstr "Преглед на по-стари съобщения"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Violet"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -6107,6 +6437,10 @@ msgstr "Докато режимът за разработчици на стри�
 msgid "While voice call developer mode and \"Record call recaps\" are on, your microphone and everyone you hear are measured once per second. Recaps are stored on this device only; the newest 20 calls are kept."
 msgstr "Докато режимът за разработчици на гласови обаждания и „Записвай обобщения на обаждания“ са включени, микрофонът ти и всички, които чуваш, се измерват веднъж в секунда. Обобщенията се пазят само на това устройство; пазят се най-новите 20 обаждания."
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Whole server"
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "Инсталатор за Windows"
@@ -6217,6 +6551,10 @@ msgstr "Не можеш да имаш повече от {0} канала в то
 msgid "You can't have more than {0} emojis on this server."
 msgstr "Не можеш да имаш повече от {0} емоджита в този сървър."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "You can't read the message history of any channel on this server."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "You cannot give yourself missing permissions."
 msgstr "Не можеш да си дадеш разрешения, които ти липсват."
@@ -6319,6 +6657,10 @@ msgstr "Няма да имаш достъп до акаунта си, освен
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "Няма да можете да се присъедините отново, освен ако не бъдете поканени отново."
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."

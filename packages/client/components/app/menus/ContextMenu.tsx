@@ -2,6 +2,7 @@ import { useFloating } from "solid-floating-ui";
 import {
   Component,
   ComponentProps,
+  createEffect,
   createSignal,
   JSX,
   onCleanup,
@@ -487,6 +488,26 @@ export function ContextMenuSubMenu(
 
   // submenus open towards the reading direction
   const rtl = document.documentElement.dir === "rtl";
+
+  // Close a hover-opened submenu as soon as the pointer moves onto another
+  // item of the parent menu. The floating mouse-leave area can't be relied on
+  // for this: when the submenu is shifted to fit the screen it no longer sits
+  // next to its trigger, so no leave event fires and sibling submenus pile up.
+  createEffect(() => {
+    const parentMenu = anchor()?.closest<HTMLElement>('[role="menu"]');
+    if (!parentMenu) return;
+
+    const onPointerOver = (event: PointerEvent) => {
+      const target = event.target as Node;
+      if (anchor()?.contains(target) || ref()?.contains(target)) return;
+      setShow((show) => (show === true ? false : show));
+    };
+
+    parentMenu.addEventListener("pointerover", onPointerOver);
+    onCleanup(() =>
+      parentMenu.removeEventListener("pointerover", onPointerOver),
+    );
+  });
 
   const position = useFloating(anchor, ref, {
     placement: rtl ? "left-start" : "right-start",

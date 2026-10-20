@@ -1,4 +1,14 @@
-import { Accessor, Match, Setter, Show, Switch } from "solid-js";
+import {
+  Accessor,
+  createEffect,
+  createSignal,
+  Match,
+  on,
+  onCleanup,
+  Setter,
+  Show,
+  Switch,
+} from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { Channel } from "stoat.js";
@@ -30,6 +40,7 @@ import MdSettings from "@material-design-icons/svg/outlined/settings.svg?compone
 import MdKeep from "../../svg/keep.svg?component-solid";
 import { HeaderIcon } from "../common/CommonHeader";
 
+import { searchScope } from "./text/SearchScopeSwitch";
 import { canIHasSidebar, SidebarState } from "./text/TextChannel";
 
 interface Props {
@@ -59,6 +70,91 @@ export function ChannelHeader(props: Props) {
   const state = useState();
   const voice = useVoice();
   const { layout } = useDevice();
+
+  /**
+   * Search placeholder naming the channel: "#name" for server channels,
+   * plain name for DMs and groups
+   */
+  const searchPlaceholder = () => {
+    if (props.channel.serverId && searchScope() === "server") {
+      const serverName = props.channel.server?.name;
+      if (serverName) return t`Search in ${serverName}`;
+    }
+    const name = props.channel.displayName ?? props.channel.name;
+    if (!name) return t`Search messages...`;
+    return props.channel.serverId
+      ? t`Search in #${name}`
+      : t`Search in ${name}`;
+  };
+
+  let searchInput: HTMLInputElement | undefined;
+  let focusOnMount = false;
+
+  // whether the latest pointer press landed inside the search panel or on one
+  // of the header's panel buttons (pins, members): closing the empty panel then would shift the layout under the
+  // pointer (the header resizes) and swallow the click, e.g. on pins/members
+  let pointerInPanel = false;
+  const trackPointer = (e: PointerEvent) => {
+    pointerInPanel = !!(e.target as Element | null)?.closest?.(
+      "[data-search-panel], [data-sidebar-toggle]",
+    );
+  };
+  document.addEventListener("pointerdown", trackPointer, true);
+  onCleanup(() =>
+    document.removeEventListener("pointerdown", trackPointer, true),
+  );
+
+  /** Whether the sidebar shows search with nothing typed yet */
+  const isEmptySearch = () => {
+    const state = props.sidebarState?.();
+    return state?.state === "search" && !state.query;
+  };
+
+  /**
+   * Text in the search box. Kept apart from the sidebar state so it survives
+   * switching to the pins or members panel.
+   */
+  const [searchText, setSearchText] = createSignal("");
+  createEffect(
+    on(
+      () => props.sidebarState?.(),
+      (state) => {
+        // adopt a query set from outside (e.g. the phone search icon)
+        if (state?.state === "search" && state.query)
+          setSearchText(state.query);
+      },
+    ),
+  );
+
+  /**
+   * Show the search panel for the text in the box (empty state when empty),
+   * whichever panel is open
+   */
+  const openSearch = () => {
+    if (props.sidebarState?.().state !== "search")
+      props.setSidebarState?.({ state: "search", query: searchText() });
+  };
+
+  /** Take focus out of the search box so typing doesn't go into it */
+  const leaveSearchBox = () => searchInput?.blur();
+
+  /** Close the search panel again if nothing was typed */
+  const closeEmptySearch = () => {
+    if (isEmptySearch()) props.setSidebarState?.({ state: "default" });
+  };
+
+  // keyboard focus stays in the box when switching channels: reopen the panel
+  createEffect(
+    on(
+      () => props.channel.id,
+      () => {
+        // the box is cleared with the sidebar state when changing channel
+        setSearchText("");
+        if (searchInput && document.activeElement === searchInput) openSearch();
+      },
+      { defer: true },
+    ),
+  );
 
   const searchValue = () => {
     if (!props.sidebarState) return null;
@@ -203,56 +299,60 @@ export function ChannelHeader(props: Props) {
       </Show>
 
       <Show when={props.sidebarState}>
-        <IconButton
-          use:floating={{
-            tooltip: {
-              placement: "bottom",
-              content: t`View pinned messages`,
-            },
-          }}
-          onPress={() =>
-            props.sidebarState!().state === "pins"
-              ? props.setSidebarState!({
-                  state: "default",
-                })
-              : props.setSidebarState!({
-                  state: "pins",
-                })
-          }
-        >
-          <MdKeep />
-        </IconButton>
+        <span data-sidebar-toggle class={css({ display: "contents" })}>
+          <IconButton
+            use:floating={{
+              tooltip: {
+                placement: "bottom",
+                content: t`View pinned messages`,
+              },
+            }}
+            onPress={() => {
+              leaveSearchBox();
+              props.setSidebarState!(
+                props.sidebarState!().state === "pins"
+                  ? { state: "default" }
+                  : { state: "pins" },
+              );
+            }}
+          >
+            <MdKeep />
+          </IconButton>
+        </span>
       </Show>
 
       <Show when={props.sidebarState && canIHasSidebar(props.channel)}>
-        <IconButton
-          onPress={() => {
-            if (props.sidebarState!().state === "default") {
-              state.layout.toggleSectionState(
-                LAYOUT_SECTIONS.MEMBER_SIDEBAR,
-                true,
-              );
-            } else {
-              state.layout.setSectionState(
-                LAYOUT_SECTIONS.MEMBER_SIDEBAR,
-                true,
-                true,
-              );
+        <span data-sidebar-toggle class={css({ display: "contents" })}>
+          <IconButton
+            onPress={() => {
+              leaveSearchBox();
+              if (props.sidebarState!().state === "default") {
+                state.layout.toggleSectionState(
+                  LAYOUT_SECTIONS.MEMBER_SIDEBAR,
+                  true,
+                );
+              } else {
+                state.layout.setSectionState(
+                  LAYOUT_SECTIONS.MEMBER_SIDEBAR,
+                  true,
+                  true,
+                );
 
-              props.setSidebarState!({
-                state: "default",
-              });
-            }
-          }}
-          use:floating={{
-            tooltip: {
-              placement: "bottom",
-              content: t`View members`,
-            },
-          }}
-        >
-          <MdGroup />
-        </IconButton>
+                props.setSidebarState!({
+                  state: "default",
+                });
+              }
+            }}
+            use:floating={{
+              tooltip: {
+                placement: "bottom",
+                content: t`View members`,
+              },
+            }}
+          >
+            <MdGroup />
+          </IconButton>
+        </span>
       </Show>
 
       <Show when={searchValue() !== null}>
@@ -262,9 +362,10 @@ export function ChannelHeader(props: Props) {
           }
           fallback={
             <IconButton
-              onPress={() =>
-                props.setSidebarState!({ state: "search", query: "" })
-              }
+              onPress={() => {
+                focusOnMount = true;
+                props.setSidebarState!({ state: "search", query: "" });
+              }}
               use:floating={{
                 tooltip: {
                   placement: "bottom",
@@ -277,8 +378,45 @@ export function ChannelHeader(props: Props) {
           }
         >
           <SearchBox
-            placeholder={t`Search messages...`}
-            value={searchValue()!}
+            placeholder={searchPlaceholder()}
+            aria-label={searchPlaceholder()}
+            value={searchText()}
+            ref={(el) => {
+              searchInput = el;
+              // opened with the search icon (phone): start typing right away
+              if (focusOnMount) {
+                focusOnMount = false;
+                queueMicrotask(() => el.focus());
+              }
+            }}
+            onFocus={openSearch}
+            onInput={(e) => {
+              setSearchText(e.currentTarget.value);
+              // typing while pins/members is open switches back to search
+              if (props.sidebarState!().state !== "search")
+                props.setSidebarState!({ state: "search", query: "" });
+            }}
+            onBlur={(e) => {
+              if (e.currentTarget.value) return;
+              const input = e.currentTarget;
+              // defer: tapping inside the panel must not close it, and on
+              // iOS buttons don't take focus so relatedTarget can be null
+              requestAnimationFrame(() => {
+                if (
+                  pointerInPanel ||
+                  document.activeElement === input ||
+                  document.activeElement?.closest("[data-search-panel]")
+                )
+                  return;
+                closeEmptySearch();
+              });
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Escape" && !e.isComposing && isEmptySearch()) {
+                closeEmptySearch();
+                e.currentTarget.blur();
+              }
+            }}
             onChange={(e) =>
               e.currentTarget.value
                 ? props.setSidebarState!({

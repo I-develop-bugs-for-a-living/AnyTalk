@@ -13,7 +13,7 @@ Read this before designing or building UI. The goal: new UI looks like it belong
 ### Styling
 
 - PandaCSS: `styled()` and `css()` from `styled-system/jsx` / `styled-system/css`, `cva()` for components with variants. Look at `design/Button.tsx` as the reference.
-- Responsive conditions from `components/common/Breakpoint.ts`: `phone` (max-width 600px) and `tablet` (max-width 840px or max-height 600px). Use them as Panda conditions: `{ padding: "16px", phone: { padding: "8px" } }`.
+- Responsive conditions from `components/common/Breakpoint.ts`: `phone` (max-width 600px) and `tablet` (max-width 840px or max-height 600px). Use them as Panda conditions with a leading underscore: `{ padding: "16px", _phone: { padding: "8px" } }`.
 
 ### Colors (CSS variables)
 
@@ -44,7 +44,7 @@ Use `<Text class="..." size="...">` from `@revolt/ui` instead of setting font si
 
 ### Components to reuse
 
-Exported from `@revolt/ui` (`components/ui/components/design`): `Button` (variants `filled`, `tonal`, `outlined`, `text`, `elevated`; sizes `xs` to `xl`), `IconButton`, `Fab`, `TextField`, `TextEditor`, `Checkbox`, `Radio2`, `Switch`, `Slider`, `FloatingSelect`, `Dialog`, `MenuItem`, `MenuButton`, `List`, `DataTable`, `Avatar`, `Badge`, `CircularProgress`, `LoadingScreen`, `Text`.
+Exported from `@revolt/ui` (`components/ui/components/design`): `Button` (variants `filled`, `tonal`, `outlined`, `text`, `elevated`; sizes `xs` to `xl`), `IconButton`, `Fab`, `TextField`, `TextEditor`, `Checkbox`, `Radio2`, `Switch`, `Slider`, `FloatingSelect`, `Dialog`, `BottomSheet` (phone-only sheet from the bottom edge: scrim, focus trap, scroll lock, close button; use it where desktop shows a popover), `MenuItem`, `MenuButton`, `List`, `DataTable`, `Avatar`, `Badge`, `CircularProgress`, `LoadingScreen`, `Text`.
 
 Layout helpers: `Column`, `Row`, `Header`, `main` (`components/layout`). Icons: `Symbol` from `@revolt/ui/components/utils/Symbol` (Material Symbols, outlined; `fill` only for active states).
 

@@ -18,7 +18,7 @@ import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 import { decodeTime } from "ulid";
 
-import { useClient } from "@revolt/client";
+import { useClient, useUser } from "@revolt/client";
 import { isGif } from "@revolt/common/lib/gifs";
 import { useTime } from "@revolt/i18n";
 import { Markdown } from "@revolt/markdown";
@@ -54,6 +54,29 @@ import { EditMessage } from "./EditMessage";
  */
 const RE_URL =
   /[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/;
+
+/**
+ * Elements inside a message where a double-click must not start a reply
+ */
+const IGNORE_DBLCLICK = [
+  "a",
+  "button",
+  "input",
+  "textarea",
+  "select",
+  "img",
+  "video",
+  "audio",
+  "canvas",
+  "iframe",
+  "pre",
+  "code",
+  "summary",
+  "[role='button']",
+  "[role='link']",
+  "[contenteditable='true']",
+  "[data-no-reply]",
+].join(",");
 
 interface Props {
   /**
@@ -115,6 +138,7 @@ export function Message(props: Props) {
   const state = useState();
   const { t } = useLingui();
   const client = useClient();
+  const user = useUser();
 
   const [isHovering, setIsHovering] = createSignal(false);
   const [reactPicker, setReactPicker] = createSignal<MediaPickerProps>();
@@ -155,11 +179,41 @@ export function Message(props: Props) {
     ),
   );
 
+  /**
+   * Start a reply when the message is double-clicked (mouse and similar
+   * fine pointers only). Skips interactive or media targets, messages being
+   * edited and channels where the user cannot send messages. Keyboard and
+   * touch users reply through the toolbar or context menu instead.
+   * @param event Double-click event
+   */
+  const onDoubleClick = (event: MouseEvent) => {
+    if (
+      props.editing ||
+      props.isLink ||
+      props.message.systemMessage ||
+      !window.matchMedia("(pointer: fine)").matches ||
+      !props.message.channel?.havePermission("SendMessage")
+    )
+      return;
+
+    const self = user();
+    if (!self) return;
+
+    const target = event.target;
+    if (target instanceof Element && target.closest(IGNORE_DBLCLICK)) return;
+
+    state.draft.addReply(props.message, self.id);
+
+    // A double-click selects a word, which we don't want here
+    window.getSelection()?.removeAllRanges();
+  };
+
   return (
     <MessageContext message={props.message} reactPicker={reactPicker}>
       <MessageContainer
         ref={msgRef}
         onHover={setIsHovering}
+        onDblClick={onDoubleClick}
         username={
           <div use:floating={floatingUserMenusFromMessage(props.message)}>
             <Username

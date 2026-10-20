@@ -41,7 +41,7 @@ export function MessageToolbar() {
   }
 
   return (
-    <Base class="Toolbar">
+    <Base class="Toolbar" data-no-reply>
       <Show when={message?.channel?.havePermission("SendMessage")}>
         <button
           type="button"

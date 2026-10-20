@@ -1,6 +1,7 @@
 import { createMemo, Match, Show, Switch } from "solid-js";
 
-import { Plural, useLingui } from "@lingui/solid/macro";
+import { useLingui } from "@lingui/solid/macro";
+import MdChevronRight from "@material-design-icons/svg/filled/chevron_right.svg?component-solid";
 import { VirtualContainer } from "@minht11/solid-virtual-container";
 import { Channel, ServerMember, User } from "stoat.js";
 import { styled } from "styled-system/jsx";
@@ -10,9 +11,11 @@ import { useClient } from "@revolt/client";
 import { createIsTimedOut } from "@revolt/common/lib/createIsTimedOut";
 import { TextWithEmoji } from "@revolt/markdown";
 import { userInformation } from "@revolt/markdown/users";
+import { useState } from "@revolt/state";
 import {
   Avatar,
   Deferred,
+  iconSize,
   MenuButton,
   OverflowingText,
   Row,
@@ -69,12 +72,29 @@ export function MemberSidebar(props: Props) {
 export function ServerMemberSidebar(props: Props) {
   const client = useClient();
   const { t } = useLingui();
+  const state = useState();
 
   type MemberRoleElement =
-    | { t: 0; name: string; count: number; icon?: string | null }
+    | {
+        t: 0;
+        id: string;
+        open: boolean;
+        name: string;
+        count: number;
+        icon?: string | null;
+      }
     | { t: 1; member: ServerMember; icon?: never; isOnline: boolean };
 
-  const elements = createMemo(() => {
+  /**
+   * Section state key of a member group, remembered per server
+   */
+  const groupKey = (groupId: string) =>
+    `members:${props.channel.serverId}:${groupId}`;
+
+  /**
+   * All groups and their members, ignoring collapsed state
+   */
+  const allElements = createMemo(() => {
     const hoistedRoles = props.channel.server!.orderedRoles.filter(
       (role) => role.hoist,
     );
@@ -155,6 +175,8 @@ export function ServerMemberSidebar(props: Props) {
 
       elements.push({
         t: 0,
+        id: role.id,
+        open: true,
         name: role.name,
         icon: role.icon,
         count: roleMembers.length,
@@ -172,60 +194,78 @@ export function ServerMemberSidebar(props: Props) {
     return elements;
   });
 
-  const onlineMembers = createMemo(
-    () => elements().filter((ele) => ele.t === 1 && ele.isOnline).length,
-  );
+  /**
+   * Elements to display: headers stay, members of collapsed groups are skipped
+   */
+  const elements = createMemo(() => {
+    const result: MemberRoleElement[] = [];
+    let open = true;
+
+    for (const ele of allElements()) {
+      if (ele.t === 0) {
+        // "default" is the Online group
+        const id = ele.id === "default" ? "online" : ele.id;
+        open = state.layout.getSectionState(groupKey(id), true);
+        result.push({ ...ele, id, open });
+      } else if (open) {
+        result.push(ele);
+      }
+    }
+
+    return result;
+  });
 
   return (
     <Container aria-label={t`Members`} data-region="members">
-      <Show when={!props.isLargeServer}>
-        <MemberTitle bottomMargin="yes">
-          <Row align>
-            <UserStatus size="0.7em" status="Online" />
-            <Plural
-              value={onlineMembers()}
-              one="# member online"
-              other="# members online"
-            />
-          </Row>
-        </MemberTitle>
-      </Show>
-
       <Deferred>
         <VirtualContainer
           items={elements()}
           scrollTarget={props.scrollTargetElement}
           itemSize={{ height: 42 }}
         >
-          {(item) => (
-            <div
-              style={{
-                ...item.style,
-                width: "100%",
-              }}
-            >
-              <Switch
-                fallback={
-                  <CategoryTitle>
-                    <Show when={item.item.icon}>
-                      <RoleIcon src={item.item.icon!} alt="" />
-                    </Show>
-                    <span>{(item.item as { name: string }).name}</span>
-                    <span>
-                      {" – "}
-                      {(item.item as { count: number }).count}
-                    </span>
-                  </CategoryTitle>
-                }
+          {(item) => {
+            /**
+             * This row's entry. When the list shrinks the container briefly
+             * re-renders slots past the new end with an undefined item, so
+             * keep the last one instead of crashing mid-update.
+             */
+            const entry = createMemo<MemberRoleElement>(
+              (prev) => item.item ?? prev!,
+            );
+
+            return (
+              <div
+                style={{
+                  ...item.style,
+                  width: "100%",
+                }}
               >
-                <Match when={item.item.t === 1}>
-                  <Member
-                    member={(item.item as { member: ServerMember }).member}
-                  />
-                </Match>
-              </Switch>
-            </div>
-          )}
+                <Switch
+                  fallback={
+                    <GroupHeader
+                      open={(entry() as { open: boolean }).open}
+                      id={(entry() as { id: string }).id}
+                      name={(entry() as { name: string }).name}
+                      count={(entry() as { count: number }).count}
+                      icon={entry().icon}
+                      onToggle={() =>
+                        state.layout.toggleSectionState(
+                          groupKey((entry() as { id: string }).id),
+                          true,
+                        )
+                      }
+                    />
+                  }
+                >
+                  <Match when={entry().t === 1}>
+                    <Member
+                      member={(entry() as { member: ServerMember }).member}
+                    />
+                  </Match>
+                </Switch>
+              </div>
+            );
+          }}
         </VirtualContainer>
       </Deferred>
     </Container>
@@ -237,34 +277,171 @@ export function ServerMemberSidebar(props: Props) {
  */
 export function GroupMemberSidebar(props: Props) {
   const { t } = useLingui();
+  const state = useState();
+
+  type GroupElement =
+    | { t: 0; id: string; open: boolean; name: string; count: number }
+    | { t: 1; user: User };
+
+  /**
+   * Section state key of a member group, remembered per group DM
+   */
+  const groupKey = (groupId: string) =>
+    `members:${props.channel.id}:${groupId}`;
+
+  /**
+   * Online and offline groups with their sorted members, skipping members of
+   * collapsed groups
+   */
+  const elements = createMemo(() => {
+    const sorted = props.channel.recipients
+      .filter((user): user is User => !!user)
+      .toSorted((a, b) => a.displayName.localeCompare(b.displayName));
+
+    const groups = [
+      { id: "online", name: t`Online`, users: sorted.filter((u) => u.online) },
+      {
+        id: "offline",
+        name: t`Offline`,
+        users: sorted.filter((u) => !u.online),
+      },
+    ];
+
+    const result: GroupElement[] = [];
+
+    for (const group of groups) {
+      if (!group.users.length) continue;
+
+      const open = state.layout.getSectionState(groupKey(group.id), true);
+      result.push({
+        t: 0,
+        id: group.id,
+        open,
+        name: group.name,
+        count: group.users.length,
+      });
+
+      if (open) {
+        for (const user of group.users) result.push({ t: 1, user });
+      }
+    }
+
+    return result;
+  });
 
   return (
     <Container aria-label={t`Members`} data-region="members">
-      <MemberTitle>
-        <Row align>{props.channel.recipientIds.size} members</Row>
-      </MemberTitle>
-
       <Deferred>
         <VirtualContainer
-          items={props.channel.recipients.toSorted((a, b) =>
-            a.displayName.localeCompare(b.displayName),
-          )}
+          items={elements()}
           scrollTarget={props.scrollTargetElement}
           itemSize={{ height: 42 }}
         >
-          {(item) => (
-            <div
-              style={{
-                ...item.style,
-                width: "100%",
-              }}
-            >
-              <Member user={item.item} group={props.channel} />
-            </div>
-          )}
+          {(item) => {
+            /**
+             * This row's entry. When the list shrinks (someone leaves or a
+             * group collapses) the container briefly re-renders slots past
+             * the new end with an undefined item, so keep the last one
+             * instead of crashing.
+             */
+            const entry = createMemo<GroupElement>(
+              (prev) => item.item ?? prev!,
+            );
+
+            return (
+              <div
+                style={{
+                  ...item.style,
+                  width: "100%",
+                }}
+              >
+                <Switch
+                  fallback={
+                    <GroupHeader
+                      open={(entry() as { open: boolean }).open}
+                      id={(entry() as { id: string }).id}
+                      name={(entry() as { name: string }).name}
+                      count={(entry() as { count: number }).count}
+                      onToggle={() =>
+                        state.layout.toggleSectionState(
+                          groupKey((entry() as { id: string }).id),
+                          true,
+                        )
+                      }
+                    />
+                  }
+                >
+                  <Match when={entry().t === 1}>
+                    <Member
+                      user={(entry() as { user: User }).user}
+                      group={props.channel}
+                    />
+                  </Match>
+                </Switch>
+              </div>
+            );
+          }}
         </VirtualContainer>
       </Deferred>
     </Container>
+  );
+}
+
+/**
+ * Collapsible header of a member group (role, Online or Offline), shared by
+ * the server and group DM member lists
+ */
+function GroupHeader(props: {
+  open: boolean;
+  /** Group id, "online" and "offline" get a status dot */
+  id: string;
+  name: string;
+  count: number;
+  icon?: string | null;
+  onToggle: () => void;
+}) {
+  return (
+    <CategoryTitle
+      role="button"
+      tabIndex={0}
+      aria-expanded={props.open}
+      onClick={() => props.onToggle()}
+      onKeyDown={(e: KeyboardEvent & { currentTarget: HTMLElement }) => {
+        if (e.target !== e.currentTarget) return;
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          // the virtual container also clicks on Enter, so stop
+          // it here to avoid toggling twice
+          e.stopPropagation();
+          e.currentTarget.click();
+        }
+      }}
+    >
+      <MdChevronRight
+        class="rtl-mirror"
+        {...iconSize(16)}
+        style={{
+          fill: "var(--md-sys-color-on-surface-variant)",
+          transition: "var(--transitions-fast) transform",
+          transform: props.open ? "rotateZ(90deg)" : undefined,
+          "flex-shrink": 0,
+        }}
+      />
+      <Show when={props.icon}>
+        <RoleIcon src={props.icon!} alt="" />
+      </Show>
+      <Show when={props.id === "online" || props.id === "offline"}>
+        <UserStatus
+          size="0.7em"
+          status={props.id === "online" ? "Online" : "Invisible"}
+        />
+      </Show>
+      <span>{props.name}</span>
+      <span>
+        {" – "}
+        {props.count}
+      </span>
+    </CategoryTitle>
   );
 }
 
@@ -283,13 +460,26 @@ const Container = styled("aside", {
  */
 const CategoryTitle = styled("div", {
   base: {
-    padding: "28px 14px 0",
+    // fills the fixed 42px row: room above, a gap to the first member below
+    padding: "14px 14px 8px",
     color: "var(--md-sys-color-on-surface)",
     display: "flex",
     alignItems: "center",
     gap: "6px",
+    width: "100%",
+    cursor: "pointer",
+    userSelect: "none",
 
-    ...typography.raw({ class: "label", size: "small" }),
+    ...typography.raw({ class: "label", size: "medium" }),
+    // a step above member names (15px) so groups stand out
+    fontSize: "16px",
+    lineHeight: "20px",
+    fontWeight: 700,
+
+    _focusVisible: {
+      outline: "2px solid var(--md-sys-color-primary)",
+      outlineOffset: "-2px",
+    },
   },
 });
 
@@ -301,28 +491,6 @@ const RoleIcon = styled("img", {
     objectFit: "cover",
   },
 });
-
-/**
- * Member title
- */
-const MemberTitle = styled("div", {
-  base: {
-    marginTop: "12px",
-    marginInlineStart: "14px",
-    color: "var(--md-sys-color-on-surface)",
-
-    ...typography.raw({ class: "label", size: "small" }),
-  },
-  variants: {
-    bottomMargin: {
-      no: {},
-      yes: {
-        marginBottom: "-12px",
-      },
-    },
-  },
-});
-
 /**
  * Styles required to correctly display name and status
  */
@@ -341,6 +509,14 @@ function Member(props: {
   group?: Channel;
 }) {
   const { t } = useLingui();
+  const client = useClient();
+
+  /**
+   * Whether this entry is the current user
+   */
+  const isSelf = () =>
+    !!client().user?.id &&
+    client().user?.id === (props.user ?? props.member?.user)?.id;
 
   /**
    * Create user information
@@ -392,9 +568,14 @@ function Member(props: {
             e.currentTarget.click();
           }
         }}
+        aria-current={isSelf() ? "true" : undefined}
         size="normal"
         attention={
-          (props.user ?? props.member?.user)?.online ? "active" : "muted"
+          isSelf()
+            ? "selected"
+            : (props.user ?? props.member?.user)?.online
+              ? "active"
+              : "muted"
         }
         icon={
           <div

@@ -76,6 +76,7 @@ export function SizedContent(props: Props) {
 
   return (
     <Container
+      data-no-reply
       style={{
         width: size().width + "px",
         // height: size().height + "px",

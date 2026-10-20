@@ -7,7 +7,12 @@ import { useModals } from "@revolt/modal";
 
 import MdLibraryAdd from "@material-design-icons/svg/outlined/library_add.svg?component-solid";
 
-import { ContextMenu, ContextMenuButton } from "./ContextMenu";
+import {
+  ContextMenu,
+  ContextMenuButton,
+  ContextMenuDivider,
+} from "./ContextMenu";
+import { ServerContextMenuItems } from "./ServerContextMenu";
 
 /**
  * Context menu for server sidebar
@@ -44,7 +49,9 @@ export function ServerSidebarContextMenu(props: { server: Server }) {
         <ContextMenuButton icon={MdLibraryAdd} onClick={createCategory}>
           <Trans>Create category</Trans>
         </ContextMenuButton>
+        <ContextMenuDivider />
       </Show>
+      <ServerContextMenuItems server={props.server} />
     </ContextMenu>
   );
 }

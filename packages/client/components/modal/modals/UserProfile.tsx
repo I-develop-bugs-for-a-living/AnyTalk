@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/solid-query";
 import { styled } from "styled-system/jsx";
 
+import { useClient } from "@revolt/client";
+import { fetchProfile } from "@revolt/client/resources";
 import { Dialog, DialogProps, Profile } from "@revolt/ui";
 
 import { useModals } from "..";
@@ -10,10 +12,11 @@ export function UserProfileModal(
   props: DialogProps & Modals & { type: "user_profile" },
 ) {
   const { openModal } = useModals();
+  const client = useClient();
 
   const query = useQuery(() => ({
     queryKey: ["profile", props.user.id],
-    queryFn: () => props.user.fetchProfile(),
+    queryFn: () => fetchProfile(client(), props.user),
   }));
 
   return (
@@ -29,6 +32,7 @@ export function UserProfileModal(
           user={props.user}
           member={props.member}
           bannerUrl={query.data?.animatedBannerURL}
+          bannerHue={query.data?.bannerHue}
           onClick={
             query.data?.banner
               ? () =>

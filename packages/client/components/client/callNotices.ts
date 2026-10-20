@@ -1,5 +1,7 @@
 import type { Channel, Client, Message } from "stoat.js";
 
+import { neverThrows } from "./safeListener";
+
 /** Maximum number of messages fetched per channel when checking on startup */
 const STARTUP_FETCH_LIMIT = 15;
 
@@ -113,23 +115,26 @@ export function autoAckCallNotices(client: Client): void {
   // the library updates `lastMessageId` around the time the event fires
   const lastSeen = new Map<string, string | undefined>();
 
-  client.on("messageCreate", (message: Message) => {
-    const channel = message.channel;
-    if (!channel || !canHaveCalls(channel)) return;
+  client.on(
+    "messageCreate",
+    neverThrows("call notices", (message: Message) => {
+      const channel = message.channel;
+      if (!channel || !canHaveCalls(channel)) return;
 
-    const previous = lastSeen.has(channel.id)
-      ? lastSeen.get(channel.id)
-      : channel.lastMessageId;
-    lastSeen.set(channel.id, message.id);
+      const previous = lastSeen.has(channel.id)
+        ? lastSeen.get(channel.id)
+        : channel.lastMessageId;
+      lastSeen.set(channel.id, message.id);
 
-    const unread = client.channelUnreads.for(channel);
-    const hasMentions = unread.messageMentionIds.size > 0;
-    const target = hasMentions
-      ? undefined
-      : liveAckTarget(unread.lastMessageId, previous, message);
+      const unread = client.channelUnreads.for(channel);
+      const hasMentions = unread.messageMentionIds.size > 0;
+      const target = hasMentions
+        ? undefined
+        : liveAckTarget(unread.lastMessageId, previous, message);
 
-    if (target) void channel.ack(target, true);
-  });
+      if (target) void channel.ack(target, true);
+    }),
+  );
 
   // bumped on every ready so an older sweep stops at its next channel
   let generation = 0;

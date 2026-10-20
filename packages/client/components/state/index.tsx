@@ -28,6 +28,7 @@ import { LinkSafety } from "./stores/LinkSafety";
 import { Locale } from "./stores/Locale";
 import { NotificationOptions } from "./stores/NotificationOptions";
 import { Ordering } from "./stores/Ordering";
+import { PinnedConversations } from "./stores/PinnedConversations";
 import { ReleaseNotes } from "./stores/ReleaseNotes";
 import { ServerFolders } from "./stores/ServerFolders";
 import { Settings } from "./stores/Settings";
@@ -96,6 +97,7 @@ export class State {
   locale = new Locale(this);
   notifications = new NotificationOptions(this);
   ordering = new Ordering(this);
+  "pinned-conversations" = new PinnedConversations(this);
   "server-folders" = new ServerFolders(this);
   "release-notes" = new ReleaseNotes(this);
   settings = new Settings(this);

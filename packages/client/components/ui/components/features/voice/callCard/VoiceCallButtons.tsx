@@ -14,8 +14,11 @@ export function MuteButton(props: { size: "xs" | "sm" }) {
   const voice = useVoice();
   const { t } = useLingui();
 
+  // permissions only matter in a call, outside one the saved choice changes
+  const allowed = () => !voice.channel() || voice.speakingPermission;
+
   const label = () =>
-    voice.speakingPermission
+    allowed()
       ? voice.microphone()
         ? t`Mute`
         : t`Unmute`
@@ -33,7 +36,7 @@ export function MuteButton(props: { size: "xs" | "sm" }) {
           content: label(),
         },
       }}
-      isDisabled={!voice.speakingPermission}
+      isDisabled={!allowed()}
     >
       <Show when={voice.microphone()} fallback={<Symbol>mic_off</Symbol>}>
         <Symbol>mic</Symbol>
@@ -50,8 +53,11 @@ export function DeafenButton(props: { size: "xs" | "sm" }) {
   const voice = useVoice();
   const { t } = useLingui();
 
+  // permissions only matter in a call, outside one the saved choice changes
+  const allowed = () => !voice.channel() || voice.listenPermission;
+
   const label = () =>
-    voice.listenPermission
+    allowed()
       ? voice.deafen()
         ? t`Undeafen`
         : t`Deafen`
@@ -60,7 +66,7 @@ export function DeafenButton(props: { size: "xs" | "sm" }) {
   return (
     <IconButton
       size={props.size}
-      variant={voice.deafen() || !voice.listenPermission ? "tonal" : "filled"}
+      variant={voice.deafen() || !allowed() ? "tonal" : "filled"}
       onPress={() => voice.toggleDeafen()}
       aria-label={label()}
       use:floating={{
@@ -69,10 +75,10 @@ export function DeafenButton(props: { size: "xs" | "sm" }) {
           content: label(),
         },
       }}
-      isDisabled={!voice.listenPermission}
+      isDisabled={!allowed()}
     >
       <Show
-        when={voice.deafen() || !voice.listenPermission}
+        when={voice.deafen() || !allowed()}
         fallback={<Symbol>headset</Symbol>}
       >
         <Symbol>headset_off</Symbol>

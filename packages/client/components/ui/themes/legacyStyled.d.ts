@@ -186,7 +186,7 @@ export interface DefaultTheme {
   };
   layout: {
     width: {
-      [key in "channel-sidebar"]: string;
+      [key in "channel-sidebar" | "server-rail-wide"]: string;
     };
     height: {
       [key in

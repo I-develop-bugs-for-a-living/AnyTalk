@@ -1,4 +1,4 @@
-import { For } from "solid-js";
+import { For, createSignal } from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";
 
@@ -21,11 +21,19 @@ export function EditProfile() {
   const { openModal } = useModals();
   const profile = createOwnProfileResource();
 
+  /** Banner hue as currently edited (undefined until the editor reports it) */
+  const [editedHue, setEditedHue] = createSignal<number | null>();
+
   return (
     <Column gap="lg">
       <UserSummary
         user={client().user!}
         bannerUrl={profile.data?.animatedBannerURL}
+        bannerHue={
+          editedHue() === undefined
+            ? profile.data?.bannerHue
+            : (editedHue() ?? undefined)
+        }
       />
 
       <CategoryButton.Group>
@@ -63,7 +71,11 @@ export function EditProfile() {
         <Text class="title" size="large">
           <Trans>Edit Global Profile</Trans>
         </Text>
-        <UserProfileEditor user={client().user!} profile={profile.data} />
+        <UserProfileEditor
+          user={client().user!}
+          profile={profile.data}
+          onBannerHueChange={setEditedHue}
+        />
       </Column>
     </Column>
   );

@@ -15,13 +15,15 @@ type SynchronisedStores =
   | "ordering"
   | "notifications"
   | "release-notes"
-  | "server-folders";
+  | "server-folders"
+  | "pinned-conversations";
 
 const STORE_KEYS: SynchronisedStores[] = [
   "ordering",
   "notifications",
   "release-notes",
   "server-folders",
+  "pinned-conversations",
 ];
 
 export interface TypeSynchronisation {
@@ -67,6 +69,7 @@ export class Sync extends AbstractStore<"sync", TypeSynchronisation> {
         notifications: 0,
         "release-notes": 0,
         "server-folders": 0,
+        "pinned-conversations": 0,
       },
     };
   }

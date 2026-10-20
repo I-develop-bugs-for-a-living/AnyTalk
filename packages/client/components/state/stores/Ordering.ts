@@ -3,6 +3,7 @@ import { Client, Server } from "stoat.js";
 import { State } from "..";
 
 import { AbstractStore } from ".";
+import { splitPinned } from "./pinOrder";
 import { ServerFolder } from "./ServerFolders";
 
 /**
@@ -310,5 +311,17 @@ export class Ordering extends AbstractStore<"ordering", TypeOrdering> {
         )
         .sort((a, b) => +b.updatedAt - +a.updatedAt) ?? []
     );
+  }
+
+  /**
+   * Pinned DM and group DM conversations in pin order, shown on the server
+   * rail. Pinned IDs of conversations which no longer exist are ignored.
+   * @returns List of Channel objects
+   */
+  pinnedConversations(client: Client) {
+    return splitPinned(
+      this.orderedConversations(client),
+      this.state["pinned-conversations"].list(),
+    ).pinned;
   }
 }

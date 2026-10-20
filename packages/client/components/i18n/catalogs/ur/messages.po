@@ -61,6 +61,16 @@ msgstr "(ابھی دوبارہ جڑیں)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {# بلاک شدہ پیغام} other {# بلاک شدہ پیغامات}}"
 
+#. placeholder {0}: data().failed
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{0, plural, one {# channel could not be searched} other {# channels could not be searched}}"
+msgstr ""
+
+#. placeholder {0}: server().channelIds.size
+#: src/interface/servers/ServerOverview.tsx
+msgid "{0, plural, one {# channel} other {# channels}}"
+msgstr ""
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -73,8 +83,8 @@ msgstr "{0, plural, one {# فریز} other {# فریز}}"
 
 #. placeholder {0}: onlineMembers()
 #: src/interface/channels/text/MemberSidebar.tsx
-msgid "{0, plural, one {# member online} other {# members online}}"
-msgstr "{0, plural, one {# رکن آن لائن} other {# اراکین آن لائن}}"
+#~ msgid "{0, plural, one {# member online} other {# members online}}"
+#~ msgstr "{0, plural, one {# رکن آن لائن} other {# اراکین آن لائن}}"
 
 #. placeholder {0}: memberCount()
 #: components/ui/components/features/messaging/elements/Invite.tsx
@@ -105,6 +115,18 @@ msgstr "{0, plural, one {+# اور} other {+# اور}}"
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {فائل چھوڑیں} other {# فائلیں چھوڑیں}}"
+
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr ""
+
+#. placeholder {0}: currentProgress()!.total
+#. placeholder {1}: currentProgress()!.done
+#. placeholder {2}: currentProgress()!.done
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{0, plural, one {Searching {1} of # channel} other {Searching {2} of # channels}}"
+#~ msgstr ""
 
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
@@ -309,9 +331,17 @@ msgstr "{count, plural, one {{title} وقت کے ساتھ، # ری کیپ} other
 msgid "{count, plural, one {# language} other {# languages}}"
 msgstr "{count, plural, one {# زبان} other {# زبانیں}}"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{count, plural, one {# result} other {# results}}"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 #~ msgid "{count} languages"
 #~ msgstr "{count} زبانیں"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{count} results"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{count} selected"
@@ -364,6 +394,10 @@ msgstr "{participant} نے سنا"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} وقت کے ساتھ"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{total, plural, one {Searching {done} of # channel} other {Searching {done} of # channels}}"
+msgstr ""
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
@@ -460,6 +494,10 @@ msgstr "<0>احتیاط کریں!</0><1/>یہ اس لنک سے مختلف ہے �
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "1 person reacted"
 msgstr "1 شخص نے ردعمل دیا"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "1 result"
+#~ msgstr ""
 
 #: src/interface/channels/text/Composition.tsx
 #~ msgid "1 second"
@@ -876,6 +914,10 @@ msgstr "آواز کی سطح"
 msgid "Authenticator App"
 msgstr "تصدیق کنندہ ایپ"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Automatic"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Automatic Gain Control"
 msgstr "خودکار گین کنٹرول"
@@ -976,6 +1018,14 @@ msgstr "بینڈوڈتھ"
 msgid "Banner"
 msgstr "بینر"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Banner colour"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Banner hue"
+msgstr ""
+
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Bans"
 msgstr "پابندیاں"
@@ -1000,6 +1050,10 @@ msgstr "بلاک شدہ"
 #: components/ui/components/features/messaging/elements/MessageReply.tsx
 msgid "Blocked User"
 msgstr "بلاک شدہ صارف"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Blue"
+msgstr ""
 
 #: components/app/interface/channels/text/Message.tsx
 msgid "Bot"
@@ -1313,6 +1367,10 @@ msgstr "صارف نام چنیں"
 msgid "Choose username"
 msgstr "صارف نام چنیں"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Clear search"
+msgstr ""
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "اسٹیٹس صاف کریں"
@@ -1369,6 +1427,7 @@ msgstr "کلائنٹ کی ترتیبات"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "بند کریں"
 
@@ -1746,7 +1805,6 @@ msgid "Create invites for others to use"
 msgstr "دوسروں کے استعمال کے لیے دعوتیں بنائیں"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
-#: src/interface/navigation/servers/ServerList.tsx
 msgid "Create or join a server"
 msgstr "سرور بنائیں یا شامل ہوں"
 
@@ -1755,6 +1813,7 @@ msgid "Create Role"
 msgstr "کردار بنائیں"
 
 #: components/modal/modals/CreateServer.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Create server"
 msgstr "سرور بنائیں"
 
@@ -1781,6 +1840,7 @@ msgid "Current Session"
 msgstr "موجودہ سیشن"
 
 #: components/app/interface/settings/user/Overlay.tsx
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Custom"
 msgstr ""
 
@@ -1799,6 +1859,10 @@ msgstr "حسب ضرورت ونڈو فریم"
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Customisation"
 msgstr "حسب ضرورت بنانا"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Cyan"
+msgstr ""
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad down"
@@ -2072,6 +2136,7 @@ msgstr "منقطع"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
+#: src/interface/navigation/servers/ServerList.tsx
 msgid "Discover"
 msgstr "دریافت"
 
@@ -2649,6 +2714,10 @@ msgstr "سمجھ گیا"
 msgid "Grants {0} permissions and denies {1} permissions"
 msgstr "{0} اجازتیں دیتا ہے اور {1} اجازتیں مسترد کرتا ہے"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Green"
+msgstr ""
+
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Group"
 msgstr "گروپ"
@@ -2697,6 +2766,14 @@ msgstr "یہ آپ کا نیا دعوتی کوڈ ہے: <0>{0}</0>"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "دوسروں کو چھپائیں"
+
+#: src/interface/navigation/servers/UserMenu.tsx
+msgid "Hide server list"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Hide server names"
+msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "High Contrast"
@@ -2823,6 +2900,11 @@ msgstr "کال میں"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "اس دوران، اینڈرائیڈ کے لیے بنے تیز اور ہموار تجربے کے لیے Google Play سے AnyTalk انسٹال کریں۔"
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -2942,6 +3024,7 @@ msgid "Join {label}"
 msgstr "{label} میں شامل ہوں"
 
 #: components/modal/modals/JoinServer.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Join a server"
 msgstr "سرور میں شامل ہوں"
 
@@ -2963,6 +3046,10 @@ msgstr "وائس چینل میں شامل ہوں"
 #: components/ui/components/features/profiles/ProfileJoined.tsx
 msgid "Joined"
 msgstr "شامل ہوا"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Joined {date}"
+msgstr ""
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Jump between servers, channels, messages and members"
@@ -3153,6 +3240,10 @@ msgstr "لائیو اعداد و شمار کا اوورلے"
 msgid "Load file ({0})"
 msgstr "فائل لوڈ کریں ({0})"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr ""
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "لاگ ان کریں"
@@ -3202,6 +3293,10 @@ msgstr "لو کٹ فلٹر"
 msgid "Lowercase letters, numbers and underscores only."
 msgstr "صرف چھوٹے حروف، نمبر اور انڈر اسکور۔"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Magenta"
+msgstr ""
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
 msgstr "بڑی بندش"
@@ -3241,6 +3336,10 @@ msgstr "سرور کا انتظام"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Manage Webhooks"
 msgstr "ویب ہکس کا انتظام"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr ""
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
@@ -3322,6 +3421,10 @@ msgstr "مخصوص کرداروں کا ذکر کریں"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "ذکر"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3434,6 +3537,10 @@ msgstr "مزید کنٹراسٹ"
 msgid "More options"
 msgstr "مزید اختیارات"
 
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "More unread chats"
+msgstr ""
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Move between buttons, menus and messages"
 msgstr "بٹنوں، مینوز اور پیغامات کے درمیان جائیں"
@@ -3544,6 +3651,10 @@ msgstr "میرے بوٹس"
 msgid "Name"
 msgstr "نام"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Name (A-Z)"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr ""
@@ -3606,6 +3717,10 @@ msgstr "کوئی ایپ نہیں ملی"
 msgid "No audio was captured, switch window to share audio"
 msgstr "کوئی آڈیو کیپچر نہیں ہوئی، آڈیو شیئر کرنے کے لیے ونڈو بدلیں"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No channels to search"
+msgstr ""
+
 #: src/interface/ServerHome.tsx
 msgid "No channels!"
 msgstr "کوئی چینل نہیں!"
@@ -3617,6 +3732,10 @@ msgstr "کوئی کنٹرولر نہیں ملا۔ ایک جوڑیں اور اس 
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "no data"
 msgstr "کوئی ڈیٹا نہیں"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No description"
+msgstr ""
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "No desktop app available yet"
@@ -3646,6 +3765,10 @@ msgstr "ابھی کوئی ری کیپ نہیں۔ \"کال ری کیپس ریکا
 msgid "No recaps yet. Turn on \"Record stream recaps\", then join a call and start or watch a stream."
 msgstr "ابھی کوئی ری کیپ نہیں۔ \"اسٹریم ری کیپس ریکارڈ کریں\" آن کریں، پھر کال میں شامل ہو کر اسٹریم شروع کریں یا دیکھیں۔"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No results"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No role overrides have been configured."
 msgstr "کوئی کردار اووررائیڈ ترتیب نہیں دیا گیا۔"
@@ -3653,6 +3776,14 @@ msgstr "کوئی کردار اووررائیڈ ترتیب نہیں دیا گیا
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No screens found"
 msgstr "کوئی اسکرین نہیں ملی"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers match \"{search}\""
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers yet"
+msgstr ""
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
@@ -3733,7 +3864,7 @@ msgstr ""
 msgid "Official Communication"
 msgstr "سرکاری مواصلات"
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Official Server"
 msgstr "سرکاری سرور"
 
@@ -3754,6 +3885,10 @@ msgstr "ٹھیک ہے"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "سب سے پرانا"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Oldest joined"
+msgstr ""
 
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
@@ -3842,6 +3977,13 @@ msgstr "فائل کھولیں"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "دوست کھولیں"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -3977,6 +4119,10 @@ msgstr "ایسا صارف نام چنیں جس سے لوگ آپ کو ڈھونڈ 
 msgid "Pin"
 msgstr "پن کریں"
 
+#: components/app/menus/shared/PinConversationButton.tsx
+msgid "Pin conversation"
+msgstr ""
+
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin message"
@@ -3991,6 +4137,18 @@ msgstr "پنگ (سرور تک آنا جانا)"
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Ping avg / max"
 msgstr "پنگ اوسط / زیادہ سے زیادہ"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Pink"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Pinned"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Pinned chats"
+msgstr ""
 
 #: src/interface/channels/text/TextChannel.tsx
 msgid "Pinned Messages"
@@ -4184,6 +4342,10 @@ msgstr "اپنی ری کیپس کو دوسرے لوگوں کی ری کیپس ک�
 msgid "Raid or spam attack"
 msgstr "ریڈ یا اسپام حملہ"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Rail order"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
 msgid "React"
@@ -4262,6 +4424,10 @@ msgstr "حالیہ کالز"
 msgid "Recent calls on Home"
 msgstr "ہوم پر حالیہ کالز"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Recently joined"
+msgstr ""
+
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 #: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
@@ -4291,6 +4457,10 @@ msgstr "ریکوری کوڈ"
 #: components/app/interface/settings/user/Account.tsx
 msgid "Recovery Codes"
 msgstr "ریکوری کوڈز"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Red"
+msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Reduced"
@@ -4349,6 +4519,10 @@ msgstr "تصدیق کنندہ ہٹائیں"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove Avatars"
 msgstr "اوتار ہٹائیں"
+
+#: components/app/menus/MessageContextMenu.tsx
+msgid "Remove embeds"
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Remove friend"
@@ -4680,6 +4854,10 @@ msgstr "اسکرول"
 msgid "Search"
 msgstr "تلاش کریں"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search failed"
+msgstr ""
+
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Search for emojis..."
 msgstr "ایموجیز تلاش کریں..."
@@ -4697,9 +4875,29 @@ msgstr "گروپس تلاش کریں..."
 msgid "Search for users..."
 msgstr "صارفین تلاش کریں..."
 
+#: src/interface/channels/ChannelHeader.tsx
+#~ msgid "Search in"
+#~ msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {name}"
+msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {serverName}"
+msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in #{name}"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Search languages"
 msgstr "زبانیں تلاش کریں"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search messages"
+msgstr ""
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search messages..."
@@ -4709,9 +4907,31 @@ msgstr "پیغامات تلاش کریں..."
 msgid "Search Results"
 msgstr "تلاش کے نتائج"
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Search scope"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Search servers"
+msgstr ""
+
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "ترتیبات تلاش کریں"
+
+#. placeholder {0}: progress()!.done
+#. placeholder {1}: progress()!.total
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Searching {0} of {1} channels"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Searching…"
+msgstr ""
+
+#: src/interface/Home.tsx
+msgid "See all your servers at a glance."
+msgstr ""
 
 #: components/app/interface/settings/user/Feedback.tsx
 #~ msgid "See what we're currently working on."
@@ -4856,13 +5076,28 @@ msgstr "سرور کی شناختیں"
 msgid "Server Name"
 msgstr "سرور کا نام"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Server options for {name}"
+msgstr ""
+
+#: src/interface/Home.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Server overview"
+msgstr ""
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
 msgstr "سرور کے کردار"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "سرورز"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Servers you join show up here."
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -4887,7 +5122,7 @@ msgstr "اپنا اسٹیٹس سیٹ کریں"
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
 #: components/modal/modals/ServerInfo.tsx
-#: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/navigation/servers/UserMenu.tsx
 msgid "Settings"
 msgstr "ترتیبات"
 
@@ -4956,6 +5191,15 @@ msgstr ""
 msgid "Show send message button"
 msgstr "پیغام بھیجنے کا بٹن دکھائیں"
 
+#: src/interface/common/CommonHeader.tsx
+#: src/interface/Sidebar.tsx
+msgid "Show server list"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Show server names"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Show when speaking"
 msgstr ""
@@ -4963,6 +5207,34 @@ msgstr ""
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
 msgstr ""
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the newest {limit} results"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest 50 results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the oldest {limit} results"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest 50 results"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
@@ -5004,6 +5276,10 @@ msgstr "سلو موڈ بند"
 msgid "Someone calls you in a DM or group"
 msgstr "کوئی ذاتی پیغام یا گروپ میں آپ کو کال کرے"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Someone is in a voice call"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
 msgstr "کوئی آپ کے وائس چینل میں شامل ہو"
@@ -5037,6 +5313,10 @@ msgstr "میرے بارے میں کچھ دلچسپ..."
 msgid "Something is wrong with your request, {0}."
 msgstr "آپ کی درخواست میں کچھ غلط ہے، {0}۔"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Something went wrong while searching. Try again."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "Something went wrong! {error}"
 msgstr "کچھ غلط ہو گیا! {error}"
@@ -5044,6 +5324,11 @@ msgstr "کچھ غلط ہو گیا! {error}"
 #: components/i18n/errors.ts
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#: src/interface/servers/ServerOverview.tsx
+msgid "Sort by"
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
@@ -5054,8 +5339,8 @@ msgid "Sounds"
 msgstr "آوازیں"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-msgid "Sounds are turned off above, you can still preview them here."
-msgstr "آوازیں اوپر بند ہیں، آپ اب بھی انہیں یہاں سن کر دیکھ سکتے ہیں۔"
+#~ msgid "Sounds are turned off above, you can still preview them here."
+#~ msgstr "آوازیں اوپر بند ہیں، آپ اب بھی انہیں یہاں سن کر دیکھ سکتے ہیں۔"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/auth/src/AuthPage.tsx
@@ -5275,6 +5560,10 @@ msgstr "سسٹم پیغامات کے چینلز"
 msgid "Tap to enable audio"
 msgstr "آڈیو فعال کرنے کے لیے ٹیپ کریں"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Teal"
+msgstr ""
+
 #: components/modal/modals/ReportContent.tsx
 msgid "Tell us what's wrong with this message"
 msgstr "ہمیں بتائیں اس پیغام میں کیا مسئلہ ہے"
@@ -5412,6 +5701,10 @@ msgstr "یہ بوٹ نجی ہے اور اسے صرف بنانے والا شام�
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr ""
+
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "This channel"
 msgstr ""
 
 #: components/app/interface/settings/channel/Overview.tsx
@@ -5610,12 +5903,17 @@ msgstr "مسائل کا حل"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 #: components/app/interface/settings/user/Updates.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Try again"
 msgstr "دوبارہ کوشش کریں"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Try another name or language code."
 msgstr "کوئی اور نام یا زبان کا کوڈ آزمائیں۔"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Try different words or another scope."
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn every sound on and reset their volumes and files?"
@@ -5628,6 +5926,18 @@ msgstr "الگ الگ آوازیں بند کریں، ان کا والیوم بد
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "اسے بند کرنے پر ونڈو بند کرتے ہی AnyTalk فوراً بند ہو جاتا ہے۔"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Type in the search box and press Enter."
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search the whole server"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search this channel"
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
@@ -5710,10 +6020,26 @@ msgstr "بے نام فولڈر"
 msgid "Unpin"
 msgstr "ان پن کریں"
 
+#: components/app/menus/shared/PinConversationButton.tsx
+msgid "Unpin conversation"
+msgstr ""
+
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Unpin message"
 msgstr "پیغام ان پن کریں"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread first"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread mentions"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread messages"
+msgstr ""
 
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Unsent message"
@@ -5903,7 +6229,7 @@ msgstr "اس چینل میں شامل ہونے سے پہلے صارفین سے �
 #~ msgid "Using default speaker"
 #~ msgstr ""
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Verified"
 msgstr "تصدیق شدہ"
 
@@ -5974,6 +6300,10 @@ msgstr "ناظر چلا گیا"
 #: components/ui/components/features/messaging/bars/JumpToBottom.tsx
 msgid "Viewing older messages"
 msgstr "پرانے پیغامات دیکھنا"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Violet"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -6119,6 +6449,10 @@ msgstr "اسٹریم ڈیویلپر موڈ اور \"اسٹریم ری کیپس �
 msgid "While voice call developer mode and \"Record call recaps\" are on, your microphone and everyone you hear are measured once per second. Recaps are stored on this device only; the newest 20 calls are kept."
 msgstr "وائس کال ڈیویلپر موڈ اور \"کال ری کیپس ریکارڈ کریں\" آن ہونے پر آپ کا مائیکروفون اور آپ کو سنائی دینے والے سب ہر سیکنڈ ایک بار ناپے جاتے ہیں۔ ری کیپس صرف اسی ڈیوائس پر محفوظ ہوتی ہیں؛ سب سے نئی 20 کالز رکھی جاتی ہیں۔"
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Whole server"
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "ونڈوز انسٹالر"
@@ -6230,6 +6564,10 @@ msgstr "اس سرور پر {0} سے زیادہ چینلز نہیں ہو سکتے
 msgid "You can't have more than {0} emojis on this server."
 msgstr "اس سرور پر {0} سے زیادہ ایموجیز نہیں ہو سکتے۔"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "You can't read the message history of any channel on this server."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "You cannot give yourself missing permissions."
 msgstr "آپ خود کو وہ اجازتیں نہیں دے سکتے جو آپ کے پاس نہیں۔"
@@ -6332,6 +6670,10 @@ msgstr "سپورٹ سے رابطہ کیے بغیر آپ اپنے اکاؤنٹ ت
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "دوبارہ مدعو کیے بغیر آپ دوبارہ شامل نہیں ہو سکیں گے۔"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."

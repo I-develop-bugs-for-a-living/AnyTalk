@@ -87,7 +87,7 @@ export function TextEmbed(props: { embed: TextEmbedClass | WebsiteEmbed }) {
   const { openModal } = useModals();
 
   return (
-    <Base style={{ "border-color": props.embed.colour }}>
+    <Base data-no-reply style={{ "border-color": props.embed.colour }}>
       <Content gap="md" grow>
         <Show
           when={

@@ -23,6 +23,7 @@ import {
   ContextMenuDivider,
 } from "./ContextMenu";
 import { NotificationContextMenu } from "./shared/NotificationContextMenu";
+import { PinConversationButton } from "./shared/PinConversationButton";
 
 /**
  * Context menu for channels
@@ -130,6 +131,10 @@ export function ChannelContextMenu(props: { channel: Channel }) {
 
   return (
     <ContextMenu>
+      <Show when={props.channel.type === "Group"}>
+        <PinConversationButton channel={props.channel} />
+        <ContextMenuDivider />
+      </Show>
       <Show
         when={
           props.channel.unread || props.channel.havePermission("InviteOthers")

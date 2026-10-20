@@ -56,6 +56,7 @@ import { Device, useDevice } from "@revolt/common";
 import { CallSounds } from "./components/CallSounds";
 import { GamepadPushToTalk } from "./components/GamepadPushToTalk";
 import { InRoom } from "./components/InRoom";
+import { MuteKeybinds } from "./components/MuteKeybinds";
 import { OverlayPublisher } from "./components/OverlayPublisher";
 import { RoomAudioManager } from "./components/RoomAudioManager";
 import { StatsRecorder } from "./components/StatsRecorder";
@@ -735,11 +736,13 @@ class Voice {
         // the user's mute choice and stays as it is.
         this.#publishMutedMicrophone(room);
       } else if (this.speakingPermission)
-        // the microphone state the user had (muted or not) is in the settings
+        // the microphone state the user had (muted or not) is in the settings;
+        // while deafened the mic stays closed and micOn stays as it is
         room.localParticipant
-          .setMicrophoneEnabled(this.#settings.micOn)
+          .setMicrophoneEnabled(this.#micWanted())
           .then((track) => {
-            this.#settings.micOn = track != null;
+            // only a mic we asked for can tell that opening it failed
+            if (this.#micWanted()) this.#settings.micOn = track != null;
           })
           // MediaDevicesError tells what went wrong
           .catch((err) => console.warn("[rtc] could not start the mic", err));
@@ -1693,7 +1696,13 @@ class Voice {
   async toggleDeafen(fromMute?: boolean) {
     try {
       const room = this.room();
-      if (!room) throw "invalid state";
+      if (!room) {
+        // outside a call only the saved choice changes, the next call uses it
+        this.#settings.deafen = !this.#settings.deafen;
+        if (fromMute) this.#settings.micOn = true;
+        this.sound.playSound(this.#settings.deafen ? "deafen" : "undeafen");
+        return;
+      }
       if (this.#settings.inputMode === "ptt") {
         // the key decides whether the mic is open, so only the flags change
         this.#settings.deafen = !this.#settings.deafen;
@@ -1730,8 +1739,10 @@ class Voice {
     }
     try {
       const room = this.room();
-      if (!room) throw "invalid state";
-      if (this.#settings.inputMode === "ptt") {
+      if (!room) {
+        // outside a call only the saved choice changes, the next call uses it
+        this.#settings.micOn = !this.#settings.micOn;
+      } else if (this.#settings.inputMode === "ptt") {
         // in push to talk, mute is a hard mute the key can't override
         this.#settings.micOn = !this.#settings.micOn;
         this.syncMicrophone();
@@ -3560,6 +3571,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
         <StatsRecorder />
         <OverlayPublisher />
         <GamepadPushToTalk />
+        <MuteKeybinds />
         <CallSounds />
         <VoiceMoves />
       </RoomContext.Provider>

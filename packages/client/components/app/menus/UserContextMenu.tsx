@@ -22,6 +22,7 @@ import {
   ContextMenuSubMenu,
 } from "./ContextMenu";
 import { NotificationContextMenu } from "./shared/NotificationContextMenu";
+import { PinConversationButton } from "./shared/PinConversationButton";
 
 /**
  * Context menu for users
@@ -520,6 +521,7 @@ export function UserContextMenu(props: {
       {/* DM-specific section */}
       <Show when={props.channel?.type === "DirectMessage"}>
         <ContextMenuDivider />
+        <PinConversationButton channel={props.channel!} />
         <ContextMenuButton
           symbol={
             <IconSlot>

@@ -304,7 +304,7 @@ export function TextChannel(props: ChannelPageProps) {
               }
             >
               <Match when={sidebarState().state === "search"}>
-                <WideSidebarContainer>
+                <WideSidebarContainer data-search-panel>
                   <SidebarTitle>
                     <Text class="label" size="large">
                       <Trans>Search Results</Trans>

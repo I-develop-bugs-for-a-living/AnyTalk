@@ -44,6 +44,7 @@ export function ViewBot(props: { bot: Bot }) {
         user={props.bot.user!}
         showBadges
         bannerUrl={profile.data?.animatedBannerURL}
+        bannerHue={profile.data?.bannerHue}
       />
 
       <UserProfileEditor

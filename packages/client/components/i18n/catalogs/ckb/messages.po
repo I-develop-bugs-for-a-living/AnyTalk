@@ -61,6 +61,16 @@ msgstr "(ئێستا دووبارە پەیوەندی بکە)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {# نامەی بلۆککراو} other {# نامەی بلۆککراو}}"
 
+#. placeholder {0}: data().failed
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{0, plural, one {# channel could not be searched} other {# channels could not be searched}}"
+msgstr ""
+
+#. placeholder {0}: server().channelIds.size
+#: src/interface/servers/ServerOverview.tsx
+msgid "{0, plural, one {# channel} other {# channels}}"
+msgstr ""
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -73,8 +83,8 @@ msgstr "{0, plural, one {# وەستان} other {# وەستان}}"
 
 #. placeholder {0}: onlineMembers()
 #: src/interface/channels/text/MemberSidebar.tsx
-msgid "{0, plural, one {# member online} other {# members online}}"
-msgstr "{0, plural, one {# ئەندام ئۆنلاین} other {# ئەندام ئۆنلاین}}"
+#~ msgid "{0, plural, one {# member online} other {# members online}}"
+#~ msgstr "{0, plural, one {# ئەندام ئۆنلاین} other {# ئەندام ئۆنلاین}}"
 
 #. placeholder {0}: memberCount()
 #: components/ui/components/features/messaging/elements/Invite.tsx
@@ -105,6 +115,18 @@ msgstr "{0, plural, one {+# کەسی تر} other {+# کەسی تر}}"
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {فایلێک دابنێ} other {# فایل دابنێ}}"
+
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr ""
+
+#. placeholder {0}: currentProgress()!.total
+#. placeholder {1}: currentProgress()!.done
+#. placeholder {2}: currentProgress()!.done
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{0, plural, one {Searching {1} of # channel} other {Searching {2} of # channels}}"
+#~ msgstr ""
 
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
@@ -309,9 +331,17 @@ msgstr "{count, plural, one {{title} بەپێی کات، # پوختە} other {{t
 msgid "{count, plural, one {# language} other {# languages}}"
 msgstr "{count, plural, one {# زمان} other {# زمان}}"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{count, plural, one {# result} other {# results}}"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 #~ msgid "{count} languages"
 #~ msgstr "{count} زمان"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{count} results"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{count} selected"
@@ -364,6 +394,10 @@ msgstr "{participant} بیسترا"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} بەپێی کات"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{total, plural, one {Searching {done} of # channel} other {Searching {done} of # channels}}"
+msgstr ""
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
@@ -460,6 +494,10 @@ msgstr "<0>وریابە!</0><1/>ئەمە هەمان ئەو بەستەرە نیی
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "1 person reacted"
 msgstr "1 کەس کاردانەوەی هەبوو"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "1 result"
+#~ msgstr ""
 
 #: src/interface/channels/text/Composition.tsx
 #~ msgid "1 second"
@@ -876,6 +914,10 @@ msgstr "ئاستی دەنگ"
 msgid "Authenticator App"
 msgstr "ئەپی ڕەسەنایەتی"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Automatic"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Automatic Gain Control"
 msgstr "کۆنترۆڵی خۆکاری بەرزی دەنگ"
@@ -976,6 +1018,14 @@ msgstr "پانی باند"
 msgid "Banner"
 msgstr "بانەر"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Banner colour"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Banner hue"
+msgstr ""
+
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Bans"
 msgstr "بانەکان"
@@ -1000,6 +1050,10 @@ msgstr "بلۆککراو"
 #: components/ui/components/features/messaging/elements/MessageReply.tsx
 msgid "Blocked User"
 msgstr "بەکارهێنەری بلۆککراو"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Blue"
+msgstr ""
 
 #: components/app/interface/channels/text/Message.tsx
 msgid "Bot"
@@ -1313,6 +1367,10 @@ msgstr "ناوی بەکارهێنەرێک هەڵبژێرە"
 msgid "Choose username"
 msgstr "ناوی بەکارهێنەر هەڵبژێرە"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Clear search"
+msgstr ""
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Clear status"
 msgstr "سڕینەوەی دۆخ"
@@ -1369,6 +1427,7 @@ msgstr "ڕێکخستنەکانی بەرنامە"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "داخستن"
 
@@ -1746,7 +1805,6 @@ msgid "Create invites for others to use"
 msgstr "بانگێشت دروست بکە بۆ ئەوەی کەسانی تر بەکاری بهێنن"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
-#: src/interface/navigation/servers/ServerList.tsx
 msgid "Create or join a server"
 msgstr "سێرڤەرێک دروست بکە یان بچۆ ناوی"
 
@@ -1755,6 +1813,7 @@ msgid "Create Role"
 msgstr "دروستکردنی ڕۆڵ"
 
 #: components/modal/modals/CreateServer.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Create server"
 msgstr "دروستکردنی سێرڤەر"
 
@@ -1781,6 +1840,7 @@ msgid "Current Session"
 msgstr "دانیشتنی ئێستا"
 
 #: components/app/interface/settings/user/Overlay.tsx
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Custom"
 msgstr ""
 
@@ -1799,6 +1859,10 @@ msgstr "چوارچێوەی تایبەتی پەنجەرە"
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Customisation"
 msgstr "خۆکارکردن"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Cyan"
+msgstr ""
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "D-pad down"
@@ -2072,6 +2136,7 @@ msgstr "پچڕاوە"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
+#: src/interface/navigation/servers/ServerList.tsx
 msgid "Discover"
 msgstr "دۆزینەوە"
 
@@ -2649,6 +2714,10 @@ msgstr "تێگەیشتم"
 msgid "Grants {0} permissions and denies {1} permissions"
 msgstr "{0} مۆڵەت دەدات و {1} مۆڵەت ڕەت دەکاتەوە"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Green"
+msgstr ""
+
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Group"
 msgstr "گروپ"
@@ -2697,6 +2766,14 @@ msgstr "ئەمە کۆدی بانگێشتی نوێی تۆیە: <0>{0}</0>"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "شاردنەوەی ئەوانی تر"
+
+#: src/interface/navigation/servers/UserMenu.tsx
+msgid "Hide server list"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Hide server names"
+msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "High Contrast"
@@ -2823,6 +2900,11 @@ msgstr "لە پەیوەندیدا"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "لەو ماوەیەدا، AnyTalk لە Google Play دابمەزرێنە بۆ ئەزموونێکی خێراتر و نەرمتر کە بۆ ئەندرۆید دیزاین کراوە."
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -2942,6 +3024,7 @@ msgid "Join {label}"
 msgstr "بچۆ ناو {label}"
 
 #: components/modal/modals/JoinServer.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Join a server"
 msgstr "بچۆ ناو سێرڤەرێک"
 
@@ -2963,6 +3046,10 @@ msgstr "بچۆ ناو کەناڵی دەنگی"
 #: components/ui/components/features/profiles/ProfileJoined.tsx
 msgid "Joined"
 msgstr "چووەتە ناو"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Joined {date}"
+msgstr ""
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Jump between servers, channels, messages and members"
@@ -3153,6 +3240,10 @@ msgstr "ڕووپۆشی ئاماری ڕاستەوخۆ"
 msgid "Load file ({0})"
 msgstr "بارکردنی فایل ({0})"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr ""
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "چوونەژوورەوە"
@@ -3202,6 +3293,10 @@ msgstr "فلتەری بڕینی نزم"
 msgid "Lowercase letters, numbers and underscores only."
 msgstr "تەنها پیتی بچووک، ژمارە و هێڵی ژێرەوە."
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Magenta"
+msgstr ""
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
 msgstr "پچڕانی گەورە"
@@ -3241,6 +3336,10 @@ msgstr "بەڕێوەبردنی سێرڤەر"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Manage Webhooks"
 msgstr "بەڕێوەبردنی وێبهووک"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr ""
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
@@ -3322,6 +3421,10 @@ msgstr "ئاماژە بە ڕۆڵی دیاریکراو بدە"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "ئاماژەکان"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3434,6 +3537,10 @@ msgstr "جیاوازیی زیاتر"
 msgid "More options"
 msgstr "هەڵبژاردنی زیاتر"
 
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "More unread chats"
+msgstr ""
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Move between buttons, menus and messages"
 msgstr "بجوڵێ نێوان دوگمە، لیست و نامەکان"
@@ -3544,6 +3651,10 @@ msgstr "بۆتەکانم"
 msgid "Name"
 msgstr "ناو"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Name (A-Z)"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr ""
@@ -3606,6 +3717,10 @@ msgstr "هیچ ئەپێک نەدۆزرایەوە"
 msgid "No audio was captured, switch window to share audio"
 msgstr "هیچ دەنگێک نەگیرا، پەنجەرە بگۆڕە بۆ هاوبەشکردنی دەنگ"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No channels to search"
+msgstr ""
+
 #: src/interface/ServerHome.tsx
 msgid "No channels!"
 msgstr "هیچ کەناڵێک نییە!"
@@ -3617,6 +3732,10 @@ msgstr "هیچ دەستەی کۆنترۆڵێک نەدۆزرایەوە. یەکێ�
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "no data"
 msgstr "هیچ داتایەک نییە"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No description"
+msgstr ""
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "No desktop app available yet"
@@ -3646,6 +3765,10 @@ msgstr "هێشتا هیچ پوختەیەک نییە. \"تۆمارکردنی پو
 msgid "No recaps yet. Turn on \"Record stream recaps\", then join a call and start or watch a stream."
 msgstr "هێشتا هیچ پوختەیەک نییە. \"تۆمارکردنی پوختەی ستریم\" چالاک بکە، پاشان بچۆ ناو پەیوەندییەک و ستریمێک دەستپێبکە یان ببینە."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No results"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No role overrides have been configured."
 msgstr "هیچ باڵادەستییەکی ڕۆڵ ڕێک نەخراوە."
@@ -3653,6 +3776,14 @@ msgstr "هیچ باڵادەستییەکی ڕۆڵ ڕێک نەخراوە."
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No screens found"
 msgstr "هیچ شاشەیەک نەدۆزرایەوە"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers match \"{search}\""
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "No servers yet"
+msgstr ""
 
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "No settings found"
@@ -3733,7 +3864,7 @@ msgstr ""
 msgid "Official Communication"
 msgstr "پەیوەندی فەرمی"
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Official Server"
 msgstr "سێرڤەری فەرمی"
 
@@ -3754,6 +3885,10 @@ msgstr "باشە"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "کۆنترین"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Oldest joined"
+msgstr ""
 
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
@@ -3842,6 +3977,13 @@ msgstr "کردنەوەی فایل"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "کردنەوەی هاوڕێکان"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -3977,6 +4119,10 @@ msgstr "ناوی بەکارهێنەرێک هەڵبژێرە کە دەتەوێت �
 msgid "Pin"
 msgstr "چەسپاندن"
 
+#: components/app/menus/shared/PinConversationButton.tsx
+msgid "Pin conversation"
+msgstr ""
+
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin message"
@@ -3991,6 +4137,18 @@ msgstr "پینگ (چوون و گەڕانەوە بۆ سێرڤەر)"
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Ping avg / max"
 msgstr "تێکڕای پینگ / زۆرترین"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Pink"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Pinned"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Pinned chats"
+msgstr ""
 
 #: src/interface/channels/text/TextChannel.tsx
 msgid "Pinned Messages"
@@ -4184,6 +4342,10 @@ msgstr "پوختەکانت لەتەنیشت پوختەکانی کەسانی تر
 msgid "Raid or spam attack"
 msgstr "هێرش یان سپامی بەکۆمەڵ"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Rail order"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
 msgid "React"
@@ -4262,6 +4424,10 @@ msgstr "پەیوەندییە تازەکان"
 msgid "Recent calls on Home"
 msgstr "پەیوەندییە تازەکان لە پەڕەی سەرەکی"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Recently joined"
+msgstr ""
+
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 #: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
@@ -4291,6 +4457,10 @@ msgstr "کۆدی گەڕانەوە"
 #: components/app/interface/settings/user/Account.tsx
 msgid "Recovery Codes"
 msgstr "کۆدەکانی گەڕاندنەوە"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Red"
+msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Reduced"
@@ -4349,6 +4519,10 @@ msgstr "لابردنی ڕەسەنایەتی"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove Avatars"
 msgstr "لابردنی ئاڤاتارەکان"
+
+#: components/app/menus/MessageContextMenu.tsx
+msgid "Remove embeds"
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Remove friend"
@@ -4680,6 +4854,10 @@ msgstr "سکرۆڵ"
 msgid "Search"
 msgstr "گەڕان"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search failed"
+msgstr ""
+
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Search for emojis..."
 msgstr "بگەڕێ بۆ ئیمۆجی..."
@@ -4697,9 +4875,29 @@ msgstr "بگەڕێ بۆ گروپ..."
 msgid "Search for users..."
 msgstr "بگەڕێ بۆ بەکارهێنەر..."
 
+#: src/interface/channels/ChannelHeader.tsx
+#~ msgid "Search in"
+#~ msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {name}"
+msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {serverName}"
+msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in #{name}"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Search languages"
 msgstr "گەڕان بەدوای زمان"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search messages"
+msgstr ""
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search messages..."
@@ -4709,9 +4907,31 @@ msgstr "بگەڕێ لە نامەکان..."
 msgid "Search Results"
 msgstr "ئەنجامەکانی گەڕان"
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Search scope"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Search servers"
+msgstr ""
+
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "گەڕان لە ڕێکخستنەکان"
+
+#. placeholder {0}: progress()!.done
+#. placeholder {1}: progress()!.total
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Searching {0} of {1} channels"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Searching…"
+msgstr ""
+
+#: src/interface/Home.tsx
+msgid "See all your servers at a glance."
+msgstr ""
 
 #: components/app/interface/settings/user/Feedback.tsx
 #~ msgid "See what we're currently working on."
@@ -4856,13 +5076,28 @@ msgstr "ناسنامەکانی سێرڤەر"
 msgid "Server Name"
 msgstr "ناوی سێرڤەر"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Server options for {name}"
+msgstr ""
+
+#: src/interface/Home.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Server overview"
+msgstr ""
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Server Roles"
 msgstr "ڕۆڵەکانی سێرڤەر"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "سێرڤەرەکان"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Servers you join show up here."
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -4887,7 +5122,7 @@ msgstr "دۆخەکەت دیاری بکە"
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
 #: components/modal/modals/ServerInfo.tsx
-#: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/navigation/servers/UserMenu.tsx
 msgid "Settings"
 msgstr "ڕێکخستنەکان"
 
@@ -4956,6 +5191,15 @@ msgstr ""
 msgid "Show send message button"
 msgstr "دوگمەی ناردنی نامە پیشان بدە"
 
+#: src/interface/common/CommonHeader.tsx
+#: src/interface/Sidebar.tsx
+msgid "Show server list"
+msgstr ""
+
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Show server names"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Show when speaking"
 msgstr ""
@@ -4963,6 +5207,34 @@ msgstr ""
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
 msgstr ""
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the newest {limit} results"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest 50 results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the oldest {limit} results"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest 50 results"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
@@ -5004,6 +5276,10 @@ msgstr "دۆخی هێواش کوژاوەتەوە"
 msgid "Someone calls you in a DM or group"
 msgstr "کەسێک پەیوەندیت پێوە دەکات لە نامەی ڕاستەوخۆ یان گروپدا"
 
+#: src/interface/servers/ServerOverview.tsx
+msgid "Someone is in a voice call"
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Someone joins your voice channel"
 msgstr "کەسێک دێتە ناو کەناڵە دەنگییەکەت"
@@ -5037,6 +5313,10 @@ msgstr "شتێکی خۆش دەربارەی من..."
 msgid "Something is wrong with your request, {0}."
 msgstr "شتێک لە داواکارییەکەتدا هەڵەیە، {0}."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Something went wrong while searching. Try again."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "Something went wrong! {error}"
 msgstr "هەڵەیەک ڕوویدا! {error}"
@@ -5044,6 +5324,11 @@ msgstr "هەڵەیەک ڕوویدا! {error}"
 #: components/i18n/errors.ts
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#: src/interface/servers/ServerOverview.tsx
+msgid "Sort by"
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
@@ -5054,8 +5339,8 @@ msgid "Sounds"
 msgstr "دەنگەکان"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
-msgid "Sounds are turned off above, you can still preview them here."
-msgstr "دەنگەکان لە سەرەوە کوژێنراونەتەوە، هێشتا دەتوانیت لێرە گوێیان لێ بگریت."
+#~ msgid "Sounds are turned off above, you can still preview them here."
+#~ msgstr "دەنگەکان لە سەرەوە کوژێنراونەتەوە، هێشتا دەتوانیت لێرە گوێیان لێ بگریت."
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/auth/src/AuthPage.tsx
@@ -5275,6 +5560,10 @@ msgstr "کەناڵەکانی نامەی سیستەم"
 msgid "Tap to enable audio"
 msgstr "دەست لێ بدە بۆ چالاککردنی دەنگ"
 
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Teal"
+msgstr ""
+
 #: components/modal/modals/ReportContent.tsx
 msgid "Tell us what's wrong with this message"
 msgstr "پێمان بڵێ چی لەم نامەیەدا هەڵەیە"
@@ -5412,6 +5701,10 @@ msgstr "ئەم بۆتە تایبەتە و تەنها دروستکەرەکەی د
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
+msgstr ""
+
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "This channel"
 msgstr ""
 
 #: components/app/interface/settings/channel/Overview.tsx
@@ -5610,12 +5903,17 @@ msgstr "چارەسەرکردنی کێشە"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 #: components/app/interface/settings/user/Updates.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Try again"
 msgstr "دووبارە هەوڵ بدەرەوە"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Try another name or language code."
 msgstr "ناوێکی دیکە یان کۆدی زمانێکی دیکە تاقی بکەرەوە."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Try different words or another scope."
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn every sound on and reset their volumes and files?"
@@ -5628,6 +5926,18 @@ msgstr "دەنگی تاک بکوژێنەرەوە، بەرزییان بگۆڕە �
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "ئەمە بکوژێنەرەوە و داخستنی پەنجەرە یەکسەر AnyTalk دادەخات."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Type in the search box and press Enter."
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search the whole server"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search this channel"
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
@@ -5710,10 +6020,26 @@ msgstr "بوخچەی بێ ناو"
 msgid "Unpin"
 msgstr "لابردنی چەسپاندن"
 
+#: components/app/menus/shared/PinConversationButton.tsx
+msgid "Unpin conversation"
+msgstr ""
+
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Unpin message"
 msgstr "لابردنی چەسپاندنی نامە"
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread first"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread mentions"
+msgstr ""
+
+#: src/interface/servers/ServerOverview.tsx
+msgid "Unread messages"
+msgstr ""
 
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Unsent message"
@@ -5903,7 +6229,7 @@ msgstr "چیتر داوا لە بەکارهێنەران ناکرێت تەمەن�
 #~ msgid "Using default speaker"
 #~ msgstr ""
 
-#: src/interface/navigation/channels/ServerSidebar.tsx
+#: src/interface/common/ServerBadge.tsx
 msgid "Verified"
 msgstr "پشتڕاستکراو"
 
@@ -5974,6 +6300,10 @@ msgstr "بینەر ڕۆیشت"
 #: components/ui/components/features/messaging/bars/JumpToBottom.tsx
 msgid "Viewing older messages"
 msgstr "بینینی نامە کۆنەکان"
+
+#: components/app/interface/settings/user/profile/BannerColourField.tsx
+msgid "Violet"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -6119,6 +6449,10 @@ msgstr "لەکاتێکدا دۆخی گەشەپێدەری ستریم و \"تۆم�
 msgid "While voice call developer mode and \"Record call recaps\" are on, your microphone and everyone you hear are measured once per second. Recaps are stored on this device only; the newest 20 calls are kept."
 msgstr "لەکاتێکدا دۆخی گەشەپێدەری پەیوەندی دەنگی و \"تۆمارکردنی پوختەی پەیوەندی\" چالاکن، مایکرۆفۆنەکەت و هەموو ئەوانەی دەیانبیستیت هەر چرکەیەک جارێک دەپێورێن. پوختەکان تەنها لەسەر ئەم ئامێرە هەڵدەگیرێن؛ نوێترین ٢٠ پەیوەندی دەمێنن."
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Whole server"
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "دامەزرێنەری ویندۆز"
@@ -6230,6 +6564,10 @@ msgstr "ناتوانیت زیاتر لە {0} کەناڵت هەبێت لەم سێ
 msgid "You can't have more than {0} emojis on this server."
 msgstr "ناتوانیت زیاتر لە {0} ئیمۆجیت هەبێت لەم سێرڤەرەدا."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "You can't read the message history of any channel on this server."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "You cannot give yourself missing permissions."
 msgstr "ناتوانیت مۆڵەتی نەبوو بە خۆت بدەیت."
@@ -6332,6 +6670,10 @@ msgstr "تۆ ناتوانیت بچیتە ناو ئەکاونتەکەتەوە م�
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "تۆ ناتوانیت دووبارە بەشداری بکەیتەوە مەگەر دووبارە بانگهێشت بکرێیتەوە."
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."
