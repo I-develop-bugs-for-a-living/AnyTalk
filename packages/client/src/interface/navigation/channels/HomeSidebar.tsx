@@ -6,7 +6,7 @@ import { Channel } from "stoat.js";
 import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
-import { ChannelContextMenu, UserContextMenu } from "@revolt/app";
+import { ConversationContextMenu } from "@revolt/app";
 import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
 import Instance from "@revolt/instance/Instance";
@@ -364,15 +364,7 @@ function Entry(
         </Switch>
       }
       use:floating={{
-        contextMenu: () =>
-          local.channel.type === "DirectMessage" ? (
-            <UserContextMenu
-              user={local.channel.recipient!}
-              channel={local.channel}
-            />
-          ) : (
-            <ChannelContextMenu channel={local.channel} />
-          ),
+        contextMenu: () => <ConversationContextMenu channel={local.channel} />,
       }}
     >
       <NameStatusStack>

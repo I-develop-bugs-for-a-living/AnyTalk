@@ -10,7 +10,11 @@ import {
 import { Server } from "stoat.js";
 import { styled } from "styled-system/jsx";
 
-import { ChannelContextMenu, ServerContextMenu } from "@revolt/app";
+import {
+  ChannelContextMenu,
+  ConversationContextMenu,
+  ServerContextMenu,
+} from "@revolt/app";
 import { MessageCache } from "@revolt/app/interface/channels/text/MessageCache";
 import { Titlebar } from "@revolt/app/interface/desktop/Titlebar";
 import { useClient, useClientLifecycle } from "@revolt/client";
@@ -105,8 +109,10 @@ const Interface = (props: { children: JSX.Element }) => {
                       <>
                         {target instanceof Server ? (
                           <ServerContextMenu server={target} />
-                        ) : (
+                        ) : target.server ? (
                           <ChannelContextMenu channel={target} />
+                        ) : (
+                          <ConversationContextMenu channel={target} />
                         )}
                       </>
                     );

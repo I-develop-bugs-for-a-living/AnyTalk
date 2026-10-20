@@ -348,6 +348,12 @@ export function UserContextMenu(props: {
 
   return (
     <ContextMenu class="UserContextMenu">
+      {/* Pin / unpin comes first for a DM, same as for a group */}
+      <Show when={props.channel?.type === "DirectMessage"}>
+        <PinConversationButton channel={props.channel!} />
+        <ContextMenuDivider />
+      </Show>
+
       {/* Voice controls */}
       <Show when={props.inVoice && !props.user.self && !props.isScreenshare}>
         <ContextMenuButton
@@ -521,7 +527,6 @@ export function UserContextMenu(props: {
       {/* DM-specific section */}
       <Show when={props.channel?.type === "DirectMessage"}>
         <ContextMenuDivider />
-        <PinConversationButton channel={props.channel!} />
         <ContextMenuButton
           symbol={
             <IconSlot>
