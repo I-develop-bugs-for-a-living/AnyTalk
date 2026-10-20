@@ -379,6 +379,14 @@ msgstr "{name} の画面共有"
 msgid "{participant} heard"
 msgstr "{participant} の音声"
 
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {This channel is in slowmode. Your message is back in the text box, try again in # second.} other {This channel is in slowmode. Your message is back in the text box, try again in # seconds.}}"
+msgstr "{seconds, plural, other {このチャンネルは低速モードです。メッセージはテキストボックスに戻りました。# 秒後にもう一度お試しください。}}"
+
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {You're sending messages too quickly. Your message is back in the text box, try again in # second.} other {You're sending messages too quickly. Your message is back in the text box, try again in # seconds.}}"
+msgstr "{seconds, plural, other {メッセージの送信が速すぎます。メッセージはテキストボックスに戻りました。# 秒後にもう一度お試しください。}}"
+
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} の推移"
@@ -5582,6 +5590,10 @@ msgstr "このチャンネル"
 msgid "This channel is about..."
 msgstr "このチャンネルについて..."
 
+#: components/client/rateLimitNotice.ts
+msgid "This channel is in slowmode. Your message is back in the text box, try again in a moment."
+msgstr "このチャンネルは低速モードです。メッセージはテキストボックスに戻りました。しばらくしてからもう一度お試しください。"
+
 #: src/interface/channels/AgeGate.tsx
 msgid "This channel is marked as mature."
 msgstr "このチャンネルは成人向けとしてマークされています。"
@@ -6546,6 +6558,10 @@ msgstr "すでにこのサーバーに参加しています。"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "You're offline. Connect to the internet first, otherwise AnyTalk couldn't load again."
 msgstr "オフラインです。先にインターネットに接続してください。そうしないと AnyTalk を再読み込みできません。"
+
+#: components/client/rateLimitNotice.ts
+msgid "You're sending messages too quickly. Your message is back in the text box, try again in a moment."
+msgstr "メッセージの送信が速すぎます。メッセージはテキストボックスに戻りました。しばらくしてからもう一度お試しください。"
 
 #: components/i18n/errors.tsx
 msgid "You've already sent a request to this user."

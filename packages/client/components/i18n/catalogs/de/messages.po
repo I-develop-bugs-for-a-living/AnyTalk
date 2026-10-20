@@ -388,6 +388,14 @@ msgstr "{participant} gehört"
 #~ msgid "{sec} seconds"
 #~ msgstr "{sec} Sekunden"
 
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {This channel is in slowmode. Your message is back in the text box, try again in # second.} other {This channel is in slowmode. Your message is back in the text box, try again in # seconds.}}"
+msgstr "{seconds, plural, one {Dieser Kanal ist im langsamen Modus. Deine Nachricht steht wieder im Textfeld, versuche es in # Sekunde erneut.} other {Dieser Kanal ist im langsamen Modus. Deine Nachricht steht wieder im Textfeld, versuche es in # Sekunden erneut.}}"
+
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {You're sending messages too quickly. Your message is back in the text box, try again in # second.} other {You're sending messages too quickly. Your message is back in the text box, try again in # seconds.}}"
+msgstr "{seconds, plural, one {Du sendest Nachrichten zu schnell. Deine Nachricht steht wieder im Textfeld, versuche es in # Sekunde erneut.} other {Du sendest Nachrichten zu schnell. Deine Nachricht steht wieder im Textfeld, versuche es in # Sekunden erneut.}}"
+
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} im Zeitverlauf"
@@ -5633,6 +5641,10 @@ msgstr "Dieser Kanal"
 msgid "This channel is about..."
 msgstr "Dieser Kanal befasst sich mit..."
 
+#: components/client/rateLimitNotice.ts
+msgid "This channel is in slowmode. Your message is back in the text box, try again in a moment."
+msgstr "Dieser Kanal ist im langsamen Modus. Deine Nachricht steht wieder im Textfeld, versuche es gleich noch einmal."
+
 #: src/interface/channels/AgeGate.tsx
 msgid "This channel is marked as mature."
 msgstr "Dieser Kanal ist als \"für Erwachsene\" markiert."
@@ -6595,6 +6607,10 @@ msgstr "Du bist bereits Teil dieses Servers."
 #: components/app/interface/settings/UserSettings.tsx
 msgid "You're offline. Connect to the internet first, otherwise AnyTalk couldn't load again."
 msgstr "Du bist offline. Verbinde dich zuerst mit dem Internet, sonst könnte AnyTalk nicht erneut laden."
+
+#: components/client/rateLimitNotice.ts
+msgid "You're sending messages too quickly. Your message is back in the text box, try again in a moment."
+msgstr "Du sendest Nachrichten zu schnell. Deine Nachricht steht wieder im Textfeld, versuche es gleich noch einmal."
 
 #: components/i18n/errors.tsx
 msgid "You've already sent a request to this user."

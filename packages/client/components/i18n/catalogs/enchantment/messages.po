@@ -391,6 +391,14 @@ msgstr "{participant} ⍑ᒷᔑ∷↸"
 #~ msgid "{sec} seconds"
 #~ msgstr ""
 
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {This channel is in slowmode. Your message is back in the text box, try again in # second.} other {This channel is in slowmode. Your message is back in the text box, try again in # seconds.}}"
+msgstr "{seconds, plural, one {ℸ⍑╎ᓭ ᓵ⍑ᔑリリᒷꖎ ╎ᓭ ╎リ ᓭꖎ𝙹∴ᒲ𝙹↸ᒷ. ||𝙹⚍∷ ᒲᒷᓭᓭᔑ⊣ᒷ ╎ᓭ ʖᔑᓵꖌ ╎リ ℸ⍑ᒷ ℸᒷ/ℸ ʖ𝙹/, ℸ∷|| ᔑ⊣ᔑ╎リ ╎リ # ᓭᒷᓵ𝙹リ↸.} other {ℸ⍑╎ᓭ ᓵ⍑ᔑリリᒷꖎ ╎ᓭ ╎リ ᓭꖎ𝙹∴ᒲ𝙹↸ᒷ. ||𝙹⚍∷ ᒲᒷᓭᓭᔑ⊣ᒷ ╎ᓭ ʖᔑᓵꖌ ╎リ ℸ⍑ᒷ ℸᒷ/ℸ ʖ𝙹/, ℸ∷|| ᔑ⊣ᔑ╎リ ╎リ # ᓭᒷᓵ𝙹リ↸ᓭ.}}"
+
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {You're sending messages too quickly. Your message is back in the text box, try again in # second.} other {You're sending messages too quickly. Your message is back in the text box, try again in # seconds.}}"
+msgstr "{seconds, plural, one {||𝙹⚍'∷ᒷ ᓭᒷリ↸╎リ⊣ ᒲᒷᓭᓭᔑ⊣ᒷᓭ ℸ𝙹𝙹 ᑑ⚍╎ᓵꖌꖎ||. ||𝙹⚍∷ ᒲᒷᓭᓭᔑ⊣ᒷ ╎ᓭ ʖᔑᓵꖌ ╎リ ℸ⍑ᒷ ℸᒷ/ℸ ʖ𝙹/, ℸ∷|| ᔑ⊣ᔑ╎リ ╎リ # ᓭᒷᓵ𝙹リ↸.} other {||𝙹⚍'∷ᒷ ᓭᒷリ↸╎リ⊣ ᒲᒷᓭᓭᔑ⊣ᒷᓭ ℸ𝙹𝙹 ᑑ⚍╎ᓵꖌꖎ||. ||𝙹⚍∷ ᒲᒷᓭᓭᔑ⊣ᒷ ╎ᓭ ʖᔑᓵꖌ ╎リ ℸ⍑ᒷ ℸᒷ/ℸ ʖ𝙹/, ℸ∷|| ᔑ⊣ᔑ╎リ ╎リ # ᓭᒷᓵ𝙹リ↸ᓭ.}}"
+
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} 𝙹⍊ᒷ∷ ℸ╎ᒲᒷ"
@@ -5711,6 +5719,10 @@ msgstr "ℸ⍑╎ᓭ ᓵ⍑ᔑリリᒷꖎ"
 msgid "This channel is about..."
 msgstr "ℸ⍑╎ᓭ ᓵ⍑ᔑリリᒷꖎ ╎ᓭ ᔑʖ𝙹⚍ℸ..."
 
+#: components/client/rateLimitNotice.ts
+msgid "This channel is in slowmode. Your message is back in the text box, try again in a moment."
+msgstr "ℸ⍑╎ᓭ ᓵ⍑ᔑリリᒷꖎ ╎ᓭ ╎リ ᓭꖎ𝙹∴ᒲ𝙹↸ᒷ. ||𝙹⚍∷ ᒲᒷᓭᓭᔑ⊣ᒷ ╎ᓭ ʖᔑᓵꖌ ╎リ ℸ⍑ᒷ ℸᒷ/ℸ ʖ𝙹/, ℸ∷|| ᔑ⊣ᔑ╎リ ╎リ ᔑ ᒲ𝙹ᒲᒷリℸ."
+
 #: src/interface/channels/AgeGate.tsx
 msgid "This channel is marked as mature."
 msgstr "ℸ⍑╎ᓭ ᓵ⍑ᔑリリᒷꖎ ╎ᓭ ᒲᔑ∷ꖌᒷ↸ ᔑᓭ ᒲᔑℸ⚍∷ᒷ."
@@ -6687,6 +6699,10 @@ msgstr "||𝙹⚍'∷ᒷ ᔑꖎ∷ᒷᔑ↸|| !¡ᔑ∷ℸ 𝙹⎓ ℸ⍑╎ᓭ 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "You're offline. Connect to the internet first, otherwise AnyTalk couldn't load again."
 msgstr "||𝙹⚍'∷ᒷ 𝙹⎓⎓ꖎ╎リᒷ. ᓵ𝙹リリᒷᓵℸ ℸ𝙹 ℸ⍑ᒷ ╎リℸᒷ∷リᒷℸ ⎓╎∷ᓭℸ, 𝙹ℸ⍑ᒷ∷∴╎ᓭᒷ ᔑリ||ℸᔑꖎꖌ ᓵ𝙹⚍ꖎ↸リ'ℸ ꖎ𝙹ᔑ↸ ᔑ⊣ᔑ╎リ."
+
+#: components/client/rateLimitNotice.ts
+msgid "You're sending messages too quickly. Your message is back in the text box, try again in a moment."
+msgstr "||𝙹⚍'∷ᒷ ᓭᒷリ↸╎リ⊣ ᒲᒷᓭᓭᔑ⊣ᒷᓭ ℸ𝙹𝙹 ᑑ⚍╎ᓵꖌꖎ||. ||𝙹⚍∷ ᒲᒷᓭᓭᔑ⊣ᒷ ╎ᓭ ʖᔑᓵꖌ ╎リ ℸ⍑ᒷ ℸᒷ/ℸ ʖ𝙹/, ℸ∷|| ᔑ⊣ᔑ╎リ ╎リ ᔑ ᒲ𝙹ᒲᒷリℸ."
 
 #: components/i18n/errors.tsx
 msgid "You've already sent a request to this user."
