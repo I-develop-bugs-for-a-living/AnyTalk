@@ -106,6 +106,11 @@ msgstr "{0, plural, one {+# kişi daha} other {+# kişi daha}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {Bir Dosya Bırak} other {Dosya # Bırak}}"
 
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr ""
+
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "{0} – AnyTalk"
@@ -1344,6 +1349,7 @@ msgstr "İstemci Ayarları"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "Kapat"
 
@@ -2790,6 +2796,11 @@ msgstr "Aramada"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "Bu arada, Android için tasarlanmış daha hızlı ve sorunsuz bir deneyim için Google Play'den AnyTalk uygulamasını yükleyin."
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -3119,6 +3130,10 @@ msgstr "Canlı istatistik katmanı"
 msgid "Load file ({0})"
 msgstr "({0}) adlı dosyayı yükle"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr ""
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "Giriş Yap"
@@ -3208,6 +3223,10 @@ msgstr "Sunucuyu Yönetebilme"
 msgid "Manage Webhooks"
 msgstr "Webhookları Yönetebilme"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr ""
+
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
 msgstr "Yetişkin olarak işaretle"
@@ -3288,6 +3307,10 @@ msgstr "Bazı rollerden bahsedebilme"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "Başkalarından bahsedebilme"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3808,6 +3831,13 @@ msgstr "Dosyayı aç"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "Arkadaşları aç"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -4946,6 +4976,10 @@ msgstr ""
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
+msgstr ""
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
 msgstr ""
 
 #: components/app/interface/settings/user/Overlay.tsx
@@ -6312,6 +6346,10 @@ msgstr "Destek ekibiyle iletişime geçmediğin sürece hesabına erişemezsin -
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "Yeniden davet edilmediğin sürece tekrar katılamazsın."
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."

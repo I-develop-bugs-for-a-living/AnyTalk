@@ -106,6 +106,11 @@ msgstr "{0, plural, one {+# weitere} other {+# weitere}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {Datei ablegen} other {# Dateien ablegen}}"
 
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr "{0, plural, one {Postfach, # ungelesene Erwähnung} other {Postfach, # ungelesene Erwähnungen}}"
+
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "{0} – AnyTalk"
@@ -1334,6 +1339,7 @@ msgstr "Clienteinstellungen"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "Schließen"
 
@@ -2769,6 +2775,11 @@ msgstr "Im Anruf"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "Installiere in der Zwischenzeit AnyTalk auf Google Play für eine schneller und Flüssigere Erfahrung auf Android."
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr "Postfach"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -3095,6 +3106,10 @@ msgstr "Live-Statistik-Overlay"
 msgid "Load file ({0})"
 msgstr "Datei ({0}) laden"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr "Nachricht wird geladen"
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "Anmelden"
@@ -3184,6 +3199,10 @@ msgstr "Server verwalten"
 msgid "Manage Webhooks"
 msgstr "Webhooks verwalten"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr "Alle als gelesen markieren"
+
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
 msgstr "Als \"für Erwachsene\" markieren"
@@ -3264,6 +3283,10 @@ msgstr "Spezifische Rollen erwähnen"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "Erwähnungen"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr "Erwähnungen und neue Direktnachrichten erscheinen hier."
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3784,6 +3807,13 @@ msgstr "Datei öffnen"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "Freunde öffnen"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr "Nachricht von {0} in {1} öffnen: {2}"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -4913,6 +4943,10 @@ msgstr "Beim Sprechen anzeigen"
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
 msgstr "In separatem Fenster angezeigt"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
+msgstr "Die {INBOX_LIMIT} neuesten werden angezeigt"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
@@ -6264,6 +6298,10 @@ msgstr "Du kannst dein Konto nicht mehr benutzen, es sei denn, du kontaktierst d
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "Du kannst nicht wieder beitreten, außer du erhältst eine neue Einladung."
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr "Du bist auf dem neuesten Stand"
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."

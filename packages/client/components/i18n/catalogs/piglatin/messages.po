@@ -106,6 +106,11 @@ msgstr "{0, plural, one {+# otheryay} other {+# othersyay}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {Opdray ayay ilefay} other {Opdray # ilesfay}}"
 
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr "{0, plural, one {Inboxyay, # unreadyay entionmay} other {Inboxyay, # unreadyay entionsmay}}"
+
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "{0} – AnyTalk"
@@ -1369,6 +1374,7 @@ msgstr "Ientclay Ettingssay"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "Oseclay"
 
@@ -2823,6 +2829,11 @@ msgstr "Inyay allcay"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "Inyay ethay eantimemay, installyay AnyTalk omfray Ooglegay Ayplay orfay ayay asterfay, oothersmay experienceyay esignedday orfay Androidyay."
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr "Inboxyay"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -3153,6 +3164,10 @@ msgstr "Ivelay atisticsstay overlayyay"
 msgid "Load file ({0})"
 msgstr "Oadlay ilefay ({0})"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr "Oadinglay essagemay"
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "Oglay Inyay"
@@ -3242,6 +3257,10 @@ msgstr "Anagemay Erversay"
 msgid "Manage Webhooks"
 msgstr "Anagemay Ebhooksway"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr "Arkmay allyay eadray"
+
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
 msgstr "Arkmay asyay aturemay"
@@ -3322,6 +3341,10 @@ msgstr "Entionmay ecificspay olesray"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "Entionsmay"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr "Entionsmay andyay ewnay irectday essagesmay owshay upyay erehay."
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3842,6 +3865,13 @@ msgstr "Openyay ilefay"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "Openyay iendsfray"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr "Openyay essagemay omfray {0} inyay {1}: {2}"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -4983,6 +5013,10 @@ msgstr "Owshay enwhay eakingspay"
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
 msgstr "Owingshay inyay ayay eparatesay indowway"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
+msgstr "Owingshay ethay {INBOX_LIMIT} ewestnay"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
@@ -6356,6 +6390,10 @@ msgstr "Ouyay on'tway ebay ableyay otay accessyay ouryay accountyay unlessyay ou
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "Youway on'tway ebay ableway otay ejoinray unlessway youway areway e-invitedray."
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr "Ou'reyay allyay aughtcay upyay"
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."

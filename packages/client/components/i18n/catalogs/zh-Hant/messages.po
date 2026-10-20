@@ -106,6 +106,11 @@ msgstr "{0, plural, other {+# 位其他人}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, other {放開以上傳 # 個檔案}}"
 
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr ""
+
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "{0} – AnyTalk"
@@ -1343,6 +1348,7 @@ msgstr "用戶端設定"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "關閉"
 
@@ -2784,6 +2790,11 @@ msgstr "通話中"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "在此之前，請從 Google Play 安裝 AnyTalk，享受專為 Android 設計、更快更流暢的體驗。"
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -3113,6 +3124,10 @@ msgstr "即時統計浮層"
 msgid "Load file ({0})"
 msgstr "載入檔案（{0}）"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr ""
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "登入"
@@ -3202,6 +3217,10 @@ msgstr "管理伺服器"
 msgid "Manage Webhooks"
 msgstr "管理 Webhook"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr ""
+
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
 msgstr "標記為成人內容"
@@ -3282,6 +3301,10 @@ msgstr "提及特定身分組"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "提及"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3802,6 +3825,13 @@ msgstr "開啟檔案"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "開啟好友"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -4939,6 +4969,10 @@ msgstr ""
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
+msgstr ""
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
 msgstr ""
 
 #: components/app/interface/settings/user/Overlay.tsx
@@ -6303,6 +6337,10 @@ msgstr "除非您聯絡支援人員，否則您將無法存取您的帳戶 - 但
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "除非再度收到邀請，否則您將無法再次加入。"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."

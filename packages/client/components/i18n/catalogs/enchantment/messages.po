@@ -106,6 +106,11 @@ msgstr "{0, plural, one {+# 𝙹ℸ⍑ᒷ∷} other {+# 𝙹ℸ⍑ᒷ∷ᓭ}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {↸∷𝙹!¡ ᔑ ⎓╎ꖎᒷ} other {↸∷𝙹!¡ # ⎓╎ꖎᒷᓭ}}"
 
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr "{0, plural, one {╎リʖ𝙹/, # ⚍リ∷ᒷᔑ↸ ᒲᒷリℸ╎𝙹リ} other {╎リʖ𝙹/, # ⚍リ∷ᒷᔑ↸ ᒲᒷリℸ╎𝙹リᓭ}}"
+
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "{0} – AnyTalk"
@@ -1369,6 +1374,7 @@ msgstr "ᓵꖎ╎ᒷリℸ ᓭᒷℸℸ╎リ⊣ᓭ"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "ᓵꖎ𝙹ᓭᒷ"
 
@@ -2823,6 +2829,11 @@ msgstr "╎リ ᓵᔑꖎꖎ"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "╎リ ℸ⍑ᒷ ᒲᒷᔑリℸ╎ᒲᒷ, ╎リᓭℸᔑꖎꖎ ᔑリ||ℸᔑꖎꖌ ⎓∷𝙹ᒲ ⊣𝙹𝙹⊣ꖎᒷ !¡ꖎᔑ|| ⎓𝙹∷ ᔑ ⎓ᔑᓭℸᒷ∷, ᓭᒲ𝙹𝙹ℸ⍑ᒷ∷ ᒷ/!¡ᒷ∷╎ᒷリᓵᒷ ↸ᒷᓭ╎⊣リᒷ↸ ⎓𝙹∷ ᔑリ↸∷𝙹╎↸."
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr "╎リʖ𝙹/"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -3153,6 +3164,10 @@ msgstr "ꖎ╎⍊ᒷ ᓭℸᔑℸ╎ᓭℸ╎ᓵᓭ 𝙹⍊ᒷ∷ꖎᔑ||"
 msgid "Load file ({0})"
 msgstr "ꖎ𝙹ᔑ↸ ⎓╎ꖎᒷ ({0})"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr "ꖎ𝙹ᔑ↸╎リ⊣ ᒲᒷᓭᓭᔑ⊣ᒷ"
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "ꖎ𝙹⊣ ╎リ"
@@ -3242,6 +3257,10 @@ msgstr "ᒲᔑリᔑ⊣ᒷ ᓭᒷ∷⍊ᒷ∷"
 msgid "Manage Webhooks"
 msgstr "ᒲᔑリᔑ⊣ᒷ ∴ᒷʖ⍑𝙹𝙹ꖌᓭ"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr "ᒲᔑ∷ꖌ ᔑꖎꖎ ∷ᒷᔑ↸"
+
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
 msgstr "ᒲᔑ∷ꖌ ᔑᓭ ᒲᔑℸ⚍∷ᒷ"
@@ -3322,6 +3341,10 @@ msgstr "ᒲᒷリℸ╎𝙹リ ᓭ!¡ᒷᓵ╎⎓╎ᓵ ∷𝙹ꖎᒷᓭ"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "ᒲᒷリℸ╎𝙹リᓭ"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr "ᒲᒷリℸ╎𝙹リᓭ ᔑリ↸ リᒷ∴ ↸╎∷ᒷᓵℸ ᒲᒷᓭᓭᔑ⊣ᒷᓭ ᓭ⍑𝙹∴ ⚍!¡ ⍑ᒷ∷ᒷ."
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3842,6 +3865,13 @@ msgstr "𝙹!¡ᒷリ ⎓╎ꖎᒷ"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "𝙹!¡ᒷリ ⎓∷╎ᒷリ↸ᓭ"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr "𝙹!¡ᒷリ ᒲᒷᓭᓭᔑ⊣ᒷ ⎓∷𝙹ᒲ {0} ╎リ {1}: {2}"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -4983,6 +5013,10 @@ msgstr "ᓭ⍑𝙹∴ ∴⍑ᒷリ ᓭ!¡ᒷᔑꖌ╎リ⊣"
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
 msgstr "ᓭ⍑𝙹∴╎リ⊣ ╎リ ᔑ ᓭᒷ!¡ᔑ∷ᔑℸᒷ ∴╎リ↸𝙹∴"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
+msgstr "ᓭ⍑𝙹∴╎リ⊣ ℸ⍑ᒷ {INBOX_LIMIT} リᒷ∴ᒷᓭℸ"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
@@ -6356,6 +6390,10 @@ msgstr "||𝙹⚍ ∴𝙹リ'ℸ ʖᒷ ᔑʖꖎᒷ ℸ𝙹 ᔑᓵᓵᒷᓭᓭ ||
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "||𝙹⚍ ∴𝙹リ'ℸ ʖᒷ ᔑʖꖎᒷ ℸ𝙹 ∷ᒷ⋮𝙹╎リ ⚍リꖎᒷᓭᓭ ||𝙹⚍ ᔑ∷ᒷ ∷ᒷ-╎リ⍊╎ℸᒷ↸."
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr "||𝙹⚍'∷ᒷ ᔑꖎꖎ ᓵᔑ⚍⊣⍑ℸ ⚍!¡"
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."

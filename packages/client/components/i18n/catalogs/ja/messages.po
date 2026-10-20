@@ -106,6 +106,11 @@ msgstr "{0, plural, other {他 # 人}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {ファイルをドロップ} other {# 個のファイルをドロップ}}"
 
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr "{0, plural, other {受信トレイ、未読のメンション # 件}}"
+
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "{0} – AnyTalk"
@@ -1283,6 +1288,7 @@ msgstr "クライアントの設定"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "閉じる"
 
@@ -2718,6 +2724,11 @@ msgstr "通話中"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "それまでは、Google Play から AnyTalk をインストールすると、Android 向けに作られた、より速くスムーズな環境を利用できます。"
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr "受信トレイ"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -3044,6 +3055,10 @@ msgstr "ライブ統計オーバーレイ"
 msgid "Load file ({0})"
 msgstr "読み込む ({0})"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr "メッセージを読み込み中"
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "ログイン"
@@ -3133,6 +3148,10 @@ msgstr "サーバーの管理"
 msgid "Manage Webhooks"
 msgstr "ウェブフックの管理"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr "すべて既読にする"
+
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
 msgstr "成人向けとしてマーク"
@@ -3213,6 +3232,10 @@ msgstr "全てのロールにメンションできます"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "メンション"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr "メンションと新しいダイレクトメッセージがここに表示されます。"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3733,6 +3756,13 @@ msgstr "ファイルを開く"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "フレンドを開く"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr "{1} の {0} からのメッセージを開く: {2}"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -4862,6 +4892,10 @@ msgstr "話しているときに表示"
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
 msgstr "別ウィンドウで表示中"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
+msgstr "最新の {INBOX_LIMIT} 件を表示中"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
@@ -6215,6 +6249,10 @@ msgstr "サポートに連絡しない限り、アカウントにアクセスす
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "再招待されない限り、参加することはできません。"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr "すべて確認済みです"
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."

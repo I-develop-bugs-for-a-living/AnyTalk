@@ -106,6 +106,11 @@ msgstr "{0, plural, other {외 #명}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, other {파일 #개 놓기}}"
 
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr "{0, plural, other {받은 편지함, 읽지 않은 멘션 #개}}"
+
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "{0} – AnyTalk"
@@ -1368,6 +1373,7 @@ msgstr "클라이언트 설정"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "닫기"
 
@@ -2819,6 +2825,11 @@ msgstr "통화 중"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "그동안은 Google Play에서 AnyTalk을 설치하면 Android에 맞춘 더 빠르고 부드러운 환경을 쓸 수 있어요."
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr "받은 편지함"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -3148,6 +3159,10 @@ msgstr "실시간 통계 오버레이"
 msgid "Load file ({0})"
 msgstr "파일 불러오기 ({0})"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr "메시지 불러오는 중"
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "로그인"
@@ -3237,6 +3252,10 @@ msgstr "서버 관리"
 msgid "Manage Webhooks"
 msgstr "웹훅 관리"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr "모두 읽음으로 표시"
+
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
 msgstr "성인 콘텐츠로 표시"
@@ -3317,6 +3336,10 @@ msgstr "특정 역할 멘션"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "멘션"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr "멘션과 새 다이렉트 메시지가 여기에 표시돼요."
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3837,6 +3860,13 @@ msgstr "파일 열기"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "친구 열기"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr "{1}의 {0} 님이 보낸 메시지 열기: {2}"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -4976,6 +5006,10 @@ msgstr "말할 때 표시"
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
 msgstr "별도 창에서 표시 중"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
+msgstr "최신 {INBOX_LIMIT}개 표시 중"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
@@ -6343,6 +6377,10 @@ msgstr "지원팀에 문의하지 않으면 귀하의 계정에 액세스할 수
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "다시 초대되지 않는 이상 다시 들어올 수 없어요."
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr "모두 확인했어요"
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."

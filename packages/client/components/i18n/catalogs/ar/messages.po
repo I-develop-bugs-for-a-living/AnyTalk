@@ -106,6 +106,11 @@ msgstr "{0, plural, zero {+# آخرين} one {+# آخر} two {+# آخران} few
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, zero {تنزيل # ملف} one {تنزيل ملف} two {تنزيل ملفين} few {تنزيل # ملفات} many {تنزيل # ملفًا} other {تنزيل # ملف}}"
 
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr "{0, plural, zero {صندوق الوارد، لا توجد منشنات غير مقروءة} one {صندوق الوارد، منشن واحد غير مقروء} two {صندوق الوارد، منشنان غير مقروءين} few {صندوق الوارد، # منشنات غير مقروءة} many {صندوق الوارد، # منشنًا غير مقروء} other {صندوق الوارد، # منشن غير مقروء}}"
+
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "{0} – AnyTalk"
@@ -1366,6 +1371,7 @@ msgstr "إعدادات التطبيق"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "أغلق"
 
@@ -2815,6 +2821,11 @@ msgstr "في مكالمة"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "في هذه الأثناء، قم بتثبيت AnyTalk من Google Play للحصول على تجربة أسرع وأكثر سلاسة مصممة لنظام Android."
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr "صندوق الوارد"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -3144,6 +3155,10 @@ msgstr "طبقة الإحصاءات المباشرة"
 msgid "Load file ({0})"
 msgstr "تحميل الملف ({0})"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr "جارٍ تحميل الرسالة"
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "تسجيل دخول"
@@ -3233,6 +3248,10 @@ msgstr "إدارة السيرفر"
 msgid "Manage Webhooks"
 msgstr "إدارة ربط الخدمات"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr "حدّد الكل كمقروء"
+
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
 msgstr "تفعيل وضع البالغين فقط"
@@ -3313,6 +3332,10 @@ msgstr "منشن رتب محددة"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "المنشنات"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr "ستظهر المنشنات والرسائل المباشرة الجديدة هنا."
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3833,6 +3856,13 @@ msgstr "فتح الملف"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "فتح الأصدقاء"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr "فتح رسالة من {0} في {1}: {2}"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -4971,6 +5001,10 @@ msgstr "إظهار عند التحدث"
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
 msgstr "يُعرض في نافذة منفصلة"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
+msgstr "عرض أحدث {INBOX_LIMIT}"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
@@ -6336,6 +6370,10 @@ msgstr "لن يكن لك القدرة أن تستخدم حسابك إلا إذا
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "لن تتمكن من الانضمام مجدداً ما لم تتم دعوتك مرة أُخرى."
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr "لا يوجد جديد"
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."

@@ -106,6 +106,11 @@ msgstr "{0, plural, other {+# 人}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, other {拖入 # 个文件}}"
 
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr "{0, plural, other {收件箱，#条未读提及}}"
+
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "{0} – AnyTalk"
@@ -1368,6 +1373,7 @@ msgstr "客户端设置"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "关闭"
 
@@ -2815,6 +2821,11 @@ msgstr "通话中"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "在此期间，请从 Google Play 安装 AnyTalk，获得专为 Android 设计的更快、更流畅的体验。"
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr "收件箱"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -3144,6 +3155,10 @@ msgstr "实时统计叠加层"
 msgid "Load file ({0})"
 msgstr "加载文件（{0}）"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr "正在加载消息"
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "登录"
@@ -3233,6 +3248,10 @@ msgstr "管理服务器"
 msgid "Manage Webhooks"
 msgstr "管理 Webhook"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr "全部标记为已读"
+
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
 msgstr "标记为成人内容"
@@ -3313,6 +3332,10 @@ msgstr "提及特定角色"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "提及"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr "提及和新的私信会显示在这里。"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3833,6 +3856,13 @@ msgstr "打开文件"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "打开好友"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr "打开 {0} 在 {1} 中发送的消息：{2}"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -4972,6 +5002,10 @@ msgstr "说话时显示"
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
 msgstr "正在单独窗口中显示"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
+msgstr "显示最新的 {INBOX_LIMIT} 条"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
@@ -6339,6 +6373,10 @@ msgstr "除非您联系技术支持人员，否则就无法访问您的账户—
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "除非重新接受邀请，否则您将无法重新加入。"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr "你已看完所有消息"
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."

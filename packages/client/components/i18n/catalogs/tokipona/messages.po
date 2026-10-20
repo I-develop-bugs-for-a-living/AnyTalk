@@ -106,6 +106,11 @@ msgstr "{0, plural, one {+# ante} other {+# ante}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {o pana e lipu} other {o pana e lipu #}}"
 
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr ""
+
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "{0} – AnyTalk"
@@ -1368,6 +1373,7 @@ msgstr "nasin pi ilo sina"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "pona"
 
@@ -2819,6 +2825,11 @@ msgstr "lon toki kalama"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "lon tenpo ni la o jo e AnyTalk tan Google Play tawa ilo Android. ona li tawa kon li pona."
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -3148,6 +3159,10 @@ msgstr "sitelen nanpa lon"
 msgid "Load file ({0})"
 msgstr "o kama e lipu ({0})"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr ""
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "o open"
@@ -3237,6 +3252,10 @@ msgstr "o lawa e ma"
 msgid "Manage Webhooks"
 msgstr "o lawa e nasin pana"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr ""
+
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
 msgstr "o pana e nimi pi jan utala"
@@ -3317,6 +3336,10 @@ msgstr "o kalama tawa nasin pi wan taso"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "kalama tawa sina"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3837,6 +3860,13 @@ msgstr "o open e lipu"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "o open e jan pona"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -4975,6 +5005,10 @@ msgstr ""
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
+msgstr ""
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
 msgstr ""
 
 #: components/app/interface/settings/user/Overlay.tsx
@@ -6343,6 +6377,10 @@ msgstr "sina ken ala open e sijelo sina la sina toki tawa jan pona. taso sona si
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "sina wile kama sin lon tenpo kama la sina wile e nimi kama sin."
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."

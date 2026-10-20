@@ -106,6 +106,11 @@ msgstr "{0, plural, other {+# người khác}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, other {Thả # tệp}}"
 
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr ""
+
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "{0} – AnyTalk"
@@ -1343,6 +1348,7 @@ msgstr "Cài Đặt Ứng Dụng"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "Đóng"
 
@@ -2787,6 +2793,11 @@ msgstr "Đang trong cuộc gọi"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "Trong lúc chờ, hãy cài AnyTalk từ Google Play để có trải nghiệm nhanh và mượt hơn, được thiết kế cho Android."
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -3116,6 +3127,10 @@ msgstr "Lớp phủ thống kê trực tiếp"
 msgid "Load file ({0})"
 msgstr "Tải tệp ({0})"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr ""
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "Đăng nhập"
@@ -3205,6 +3220,10 @@ msgstr "Quản Lí Máy Chủ"
 msgid "Manage Webhooks"
 msgstr "Điều Hành Webhook"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr ""
+
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
 msgstr "Đánh dấu là nội dung người lớn"
@@ -3285,6 +3304,10 @@ msgstr "Nhắc các vai trò cụ thể"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "Lượt nhắc"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3805,6 +3828,13 @@ msgstr "Mở tệp"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "Mở danh sách bạn bè"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -4942,6 +4972,10 @@ msgstr ""
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
+msgstr ""
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
 msgstr ""
 
 #: components/app/interface/settings/user/Overlay.tsx
@@ -6306,6 +6340,10 @@ msgstr "Bạn sẽ không thể truy cập tài khoản của bạn trừ khi b�
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "Bạn sẽ không thể tham gia trừ khi được mời lại."
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."

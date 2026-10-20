@@ -106,6 +106,11 @@ msgstr "{0, plural, one {+# अन्य} other {+# अन्य}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {फ़ाइल यहाँ छोड़ें} other {# फ़ाइलें यहाँ छोड़ें}}"
 
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr ""
+
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "{0} – AnyTalk"
@@ -1368,6 +1373,7 @@ msgstr "ग्राहक सेटिंग्स"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "बंद करे"
 
@@ -2819,6 +2825,11 @@ msgstr "कॉल में"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "तब तक, Android के लिए बने तेज़ और सहज अनुभव के लिए Google Play से AnyTalk इंस्टॉल करें।"
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -3148,6 +3159,10 @@ msgstr "लाइव आँकड़ों का ओवरले"
 msgid "Load file ({0})"
 msgstr "फ़ाइल लोड करें ({0})"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr ""
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "लॉग इन करें"
@@ -3237,6 +3252,10 @@ msgstr "सर्वर प्रबंधित करें"
 msgid "Manage Webhooks"
 msgstr "Webhooks प्रबंधित करें"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr ""
+
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
 msgstr "वयस्क के रूप में चिह्नित करें"
@@ -3317,6 +3336,10 @@ msgstr "खास भूमिकाओं को मेंशन करें"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "मेंशन"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3837,6 +3860,13 @@ msgstr "फ़ाइल खोलें"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "दोस्तों को खोलें"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -4975,6 +5005,10 @@ msgstr ""
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
+msgstr ""
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
 msgstr ""
 
 #: components/app/interface/settings/user/Overlay.tsx
@@ -6343,6 +6377,10 @@ msgstr "सपोर्ट से संपर्क किए बिना आ�
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "जब तक आपको फिर से आमंत्रित नहीं किया जाता, आप फिर से शामिल नहीं हो पाएंगे।"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."

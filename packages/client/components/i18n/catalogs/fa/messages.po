@@ -106,6 +106,11 @@ msgstr "{0, plural, one {+# نفر دیگر} other {+# نفر دیگر}}"
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
 msgstr "{0, plural, one {یک فایل را رها کنید} other {# فایل را رها کنید}}"
 
+#. placeholder {0}: inboxMentions.count()
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr ""
+
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "{0} – AnyTalk"
@@ -1368,6 +1373,7 @@ msgstr "تنظیمات کلاینت"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/ui/components/design/BottomSheet.tsx
 msgid "Close"
 msgstr "بستن"
 
@@ -2819,6 +2825,11 @@ msgstr "در تماس"
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "در این بین، AnyTalk را از Google Play نصب کنید تا تجربه‌ای سریع‌تر و روان‌تر که برای اندروید طراحی شده است داشته باشید."
 
+#: src/interface/navigation/servers/Inbox.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Inbox"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: src/interface/Friends.tsx
 msgid "Incoming"
@@ -3148,6 +3159,10 @@ msgstr "نمایش زنده آمار"
 msgid "Load file ({0})"
 msgstr "بارگذاری فایل ({0})"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Loading message"
+msgstr ""
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "ورود"
@@ -3237,6 +3252,10 @@ msgstr "مدیریت سرور"
 msgid "Manage Webhooks"
 msgstr "مدیریت وب هوک ها"
 
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mark all read"
+msgstr ""
+
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
 msgstr "علامت‌گذاری به‌عنوان محتوای بزرگسالان"
@@ -3317,6 +3336,10 @@ msgstr "منشن کردن نقش‌های مشخص"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mentions"
 msgstr "منشن‌ها"
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Mentions and new direct messages show up here."
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Mentions only"
@@ -3837,6 +3860,13 @@ msgstr "باز کردن فایل"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "باز کردن دوستان"
+
+#. placeholder {0}: author()
+#. placeholder {1}: place()
+#. placeholder {2}: preview()
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Open message from {0} in {1}: {2}"
+msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -4975,6 +5005,10 @@ msgstr ""
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
+msgstr ""
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "Showing the {INBOX_LIMIT} newest"
 msgstr ""
 
 #: components/app/interface/settings/user/Overlay.tsx
@@ -6343,6 +6377,10 @@ msgstr "شما نمی توانید به حساب خود دسترسی پیدا ک
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "شما قادر به عضویت مجدد نیستید مگر اینکه مجدداً دعوت شوید."
+
+#: src/interface/navigation/servers/Inbox.tsx
+msgid "You're all caught up"
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."
