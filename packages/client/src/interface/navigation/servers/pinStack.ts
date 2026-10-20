@@ -25,3 +25,23 @@ export function aggregatePinBadges(
     unread: chats.some((chat) => chat.unread),
   };
 }
+
+/**
+ * Number of slots in the collapsed stack's 2x2 preview grid
+ */
+export const PIN_PREVIEW_SLOTS = 4;
+
+/**
+ * Split pinned chats into the avatars shown in the collapsed preview and the
+ * number left over for a "+N" counter, which takes the last slot
+ * @param chats Pinned chats, in rail order
+ * @returns Chats to show as avatars, and how many are hidden (0 if none)
+ */
+export function splitPinPreview<T>(chats: T[]): {
+  shown: T[];
+  hidden: number;
+} {
+  if (chats.length <= PIN_PREVIEW_SLOTS) return { shown: chats, hidden: 0 };
+  const shown = chats.slice(0, PIN_PREVIEW_SLOTS - 1);
+  return { shown, hidden: chats.length - shown.length };
+}

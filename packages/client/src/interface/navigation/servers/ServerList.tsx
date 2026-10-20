@@ -37,7 +37,11 @@ import { Tooltip } from "@revolt/ui/components/floating";
 
 import { INBOX_PANEL_ID, Inbox, createInboxMentions } from "./Inbox";
 import { UserMenu } from "./UserMenu";
-import { aggregatePinBadges, shouldStackPins } from "./pinStack";
+import {
+  aggregatePinBadges,
+  shouldStackPins,
+  splitPinPreview,
+} from "./pinStack";
 import { RailEntry, createRailDrag } from "./railDrag";
 
 interface Props {
@@ -568,6 +572,26 @@ const PinBadge = styled("span", {
 });
 
 /**
+ * "+N" counter in the last slot of a collapsed pin stack's preview, sized
+ * like the preview avatars (in the outer avatar's 32-unit space)
+ */
+const PinPreviewCounter = styled("span", {
+  base: {
+    display: "grid",
+    placeItems: "center",
+    width: "11px",
+    height: "11px",
+    borderRadius: "var(--borderRadius-circle)",
+    background: "var(--md-sys-color-surface-container-highest)",
+    color: "var(--md-sys-color-on-surface)",
+    fontSize: "6px",
+    fontWeight: 700,
+    lineHeight: 1,
+    letterSpacing: "-0.02em",
+  },
+});
+
+/**
  * Shortcut to a DM or group DM on the rail, used for unread and pinned chats
  */
 function ChatShortcut(props: {
@@ -658,6 +682,8 @@ function PinStack(props: {
       })),
     );
 
+  const preview = () => splitPinPreview(props.conversations);
+
   const holdsSelected = () =>
     props.conversations.some((chat) => chat.id === params().channelId);
 
@@ -704,22 +730,23 @@ function PinStack(props: {
               fallback={
                 <Show
                   when={collapsed()}
-                  fallback={
-                    <Symbol size={24} fill>
-                      push_pin
-                    </Symbol>
-                  }
+                  fallback={<Symbol size={24}>expand_less</Symbol>}
                 >
                   <FolderPreviewBase>
-                    <For each={props.conversations.slice(0, 4)}>
+                    <For each={preview().shown}>
                       {(chat) => (
+                        // 11 units keeps the whole 2x2 grid inside the
+                        // stack's circle (13 clips the outer corners)
                         <Avatar
-                          size={13}
+                          size={11}
                           src={chat.iconURL}
                           fallback={chat.name ?? chat.recipient?.username}
                         />
                       )}
                     </For>
+                    <Show when={preview().hidden}>
+                      <PinPreviewCounter>+{preview().hidden}</PinPreviewCounter>
+                    </Show>
                   </FolderPreviewBase>
                 </Show>
               }
