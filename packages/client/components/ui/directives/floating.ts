@@ -64,6 +64,16 @@ function anchorFor(element: HTMLElement): KeyboardMenuAnchor {
 }
 
 /**
+ * Close every open context menu except the one of the given element
+ * @param except Element whose menu may stay as it is
+ */
+function closeOtherContextMenus(except: HTMLElement) {
+  for (const entry of floatingElements()) {
+    if (entry.element !== except && entry.show()?.contextMenu) entry.hide();
+  }
+}
+
+/**
  * Open the context menu of an element (or of its closest parent that has one)
  * below it, as if the user asked for it with the keyboard. Used by the
  * Shift+F10 / ContextMenu key handler, and meant for a controller layer too.
@@ -237,6 +247,11 @@ export function floating(element: HTMLElement, accessor: Accessor<Props>) {
     }
 
     if (target === "contextMenu" && config.contextMenu) {
+      // only one context menu at a time: the outside-click handlers can miss
+      // the opening click (click is stopped above, pointerdown may be stopped
+      // or default-prevented, keyboard opening has none), so close the others here
+      if (!current?.contextMenu) closeOtherContextMenus(element);
+
       if (current?.contextMenu) {
         setShow(undefined);
       } else if (!current) {
