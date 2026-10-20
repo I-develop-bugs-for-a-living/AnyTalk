@@ -4,7 +4,13 @@ import { User } from "stoat.js";
 import { styled } from "styled-system/jsx";
 
 import { useTime } from "@revolt/i18n";
-import { Avatar, CategoryButton, IconButton, iconSize } from "@revolt/ui";
+import {
+  Avatar,
+  CategoryButton,
+  IconButton,
+  emptyBannerColour,
+  iconSize,
+} from "@revolt/ui";
 
 import MdCakeFill from "@material-design-icons/svg/filled/cake.svg?component-solid";
 import MdEdit from "@material-design-icons/svg/outlined/edit.svg?component-solid";
@@ -23,8 +29,8 @@ export function UserSummary(props: {
           color: "black",
         }
       : {
-          background: `var(--md-sys-color-primary-container)`,
-          color: "var(--md-sys-color-on-primary)",
+          "background-color": emptyBannerColour(props.user.id),
+          color: "var(--md-sys-color-on-primary-container)",
         };
 
   return (

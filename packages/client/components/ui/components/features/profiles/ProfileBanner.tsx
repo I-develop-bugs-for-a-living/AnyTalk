@@ -9,6 +9,8 @@ import { OverflowingText, Tooltip } from "@revolt/ui";
 import { Avatar, Ripple, UserStatus, typography } from "../../design";
 import { Row } from "../../layout";
 
+import { emptyBannerColour } from "./bannerHue";
+
 export function ProfileBanner(props: {
   user: User;
   member?: ServerMember;
@@ -37,13 +39,29 @@ export function ProfileBanner(props: {
     }, 2000);
   }
 
+  /** Black overlay that keeps the white text readable on any background */
+  const overlay = "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.7))";
+
+  /**
+   * Background style. With a banner image it is the overlay on the image;
+   * without one it is the per-user colour from `emptyBannerColour`.
+   */
+  const bannerStyle = () => {
+    if (props.bannerUrl) {
+      return { "background-image": `${overlay}, url('${props.bannerUrl}')` };
+    }
+
+    return {
+      "background-image": overlay,
+      "background-color": emptyBannerColour(props.user.id),
+    };
+  };
+
   const pronouns = () => props.member?.pronouns ?? props.user.pronouns;
 
   return (
     <Banner
-      style={{
-        "background-image": `linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.7)), url('${props.bannerUrl}')`,
-      }}
+      style={bannerStyle()}
       isLink={typeof props.onClick !== "undefined"}
       onClick={props.onClick}
       width={props.width}
