@@ -37,6 +37,7 @@ import { Tooltip } from "@revolt/ui/components/floating";
 
 import { INBOX_PANEL_ID, Inbox, createInboxMentions } from "./Inbox";
 import { UserMenu } from "./UserMenu";
+import { aggregatePinBadges, shouldStackPins } from "./pinStack";
 import { RailEntry, createRailDrag } from "./railDrag";
 
 interface Props {
@@ -372,15 +373,25 @@ export const ServerList = (props: Props) => {
             />
           </a>
         </Show>
-        <For each={props.pinnedConversations}>
-          {(conversation) => (
-            <ChatShortcut
-              conversation={conversation}
-              menuGenerator={props.menuGenerator}
-              pinned
-            />
-          )}
-        </For>
+        <Show
+          when={shouldStackPins(props.pinnedConversations.length)}
+          fallback={
+            <For each={props.pinnedConversations}>
+              {(conversation) => (
+                <ChatShortcut
+                  conversation={conversation}
+                  menuGenerator={props.menuGenerator}
+                  pinned
+                />
+              )}
+            </For>
+          }
+        >
+          <PinStack
+            conversations={props.pinnedConversations}
+            menuGenerator={props.menuGenerator}
+          />
+        </Show>
         {/* always separates the top group (home, inbox, chat shortcuts) from the servers; rendered once so it never stacks */}
         <LineDivider />
         <div ref={rail}>
@@ -620,6 +631,120 @@ function ChatShortcut(props: {
         </Show>
       </a>
     </Tooltip>
+  );
+}
+
+/**
+ * Pinned chats folded into one collapsible entry on the rail, used from
+ * three pins on. The collapsed state is stored with the pins and synced.
+ * Not draggable, and it never collapses on its own when navigating.
+ */
+function PinStack(props: {
+  conversations: Channel[];
+  menuGenerator: (target: Server | Channel) => JSX.Directives["floating"];
+}) {
+  const state = useState();
+  const params = useSmartParams();
+  const { t } = useLingui();
+
+  const pins = () => state["pinned-conversations"];
+  const collapsed = () => pins().isCollapsed();
+
+  const badges = () =>
+    aggregatePinBadges(
+      props.conversations.map((chat) => ({
+        unread: !!chat.unread,
+        mentions: chat.mentions?.size ?? 0,
+      })),
+    );
+
+  const holdsSelected = () =>
+    props.conversations.some((chat) => chat.id === params().channelId);
+
+  /**
+   * Collapse or expand the stack
+   */
+  const toggle = () => pins().toggle();
+
+  return (
+    <FolderGroup expanded={!collapsed()}>
+      <Tooltip placement="right" content={t`Pinned chats`}>
+        <div
+          class={entryContainer({
+            indicator:
+              collapsed() && holdsSelected()
+                ? "selected"
+                : collapsed() && badges().unread
+                  ? "alert"
+                  : undefined,
+          })}
+        >
+          <a
+            role="button"
+            tabindex="0"
+            aria-expanded={!collapsed()}
+            aria-label={t`Pinned chats`}
+            onClick={toggle}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                toggle();
+              }
+            }}
+          >
+            <Avatar
+              size={42}
+              holepunch={collapsed() && badges().unread ? "top-right" : "none"}
+              overlay={
+                <Show when={collapsed() && badges().unread}>
+                  <Unreads.Graphic count={badges().mentions} unread />
+                </Show>
+              }
+              fallbackBackground={collapsed()}
+              fallback={
+                <Show
+                  when={collapsed()}
+                  fallback={
+                    <Symbol size={24} fill>
+                      push_pin
+                    </Symbol>
+                  }
+                >
+                  <FolderPreviewBase>
+                    <For each={props.conversations.slice(0, 4)}>
+                      {(chat) => (
+                        <Avatar
+                          size={13}
+                          src={chat.iconURL}
+                          fallback={chat.name ?? chat.recipient?.username}
+                        />
+                      )}
+                    </For>
+                  </FolderPreviewBase>
+                </Show>
+              }
+              interactive
+            />
+          </a>
+          <Show when={collapsed()}>
+            <PinBadge aria-hidden="true">
+              <Symbol size={12}>push_pin</Symbol>
+            </PinBadge>
+          </Show>
+        </div>
+      </Tooltip>
+      <Show when={!collapsed()}>
+        <For each={props.conversations}>
+          {(conversation) => (
+            <ChatShortcut
+              conversation={conversation}
+              menuGenerator={props.menuGenerator}
+              pinned
+            />
+          )}
+        </For>
+      </Show>
+    </FolderGroup>
   );
 }
 

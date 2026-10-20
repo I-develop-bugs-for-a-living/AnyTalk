@@ -8,6 +8,11 @@ export interface TypePinnedConversations {
    * IDs of pinned DMs and group DMs, oldest pin first
    */
   ids: string[];
+
+  /**
+   * Whether the pin stack on the rail is collapsed (default: collapsed)
+   */
+  collapsed?: boolean;
 }
 
 /**
@@ -28,6 +33,7 @@ export class PinnedConversations extends AbstractStore<
     super(state, "pinned-conversations");
     this.pin = this.pin.bind(this);
     this.unpin = this.unpin.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
   /**
@@ -57,7 +63,10 @@ export class PinnedConversations extends AbstractStore<
    * Validate the given data to see if it is compliant and return a compliant object
    */
   clean(input: Partial<TypePinnedConversations>): TypePinnedConversations {
-    return { ids: cleanPinnedIds(input.ids) };
+    const ids = cleanPinnedIds(input.ids);
+    return typeof input.collapsed === "boolean"
+      ? { ids, collapsed: input.collapsed }
+      : { ids };
   }
 
   /**
@@ -92,5 +101,19 @@ export class PinnedConversations extends AbstractStore<
       "ids",
       this.list().filter((pinned) => pinned !== id),
     );
+  }
+
+  /**
+   * Whether the pin stack is collapsed, true unless the user expanded it
+   */
+  isCollapsed(): boolean {
+    return this.get().collapsed ?? true;
+  }
+
+  /**
+   * Collapse or expand the pin stack
+   */
+  toggle() {
+    this.set("collapsed", !this.isCollapsed());
   }
 }
