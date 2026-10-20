@@ -56,6 +56,7 @@ import { Device, useDevice } from "@revolt/common";
 import { CallSounds } from "./components/CallSounds";
 import { GamepadPushToTalk } from "./components/GamepadPushToTalk";
 import { InRoom } from "./components/InRoom";
+import { MuteKeybinds } from "./components/MuteKeybinds";
 import { OverlayPublisher } from "./components/OverlayPublisher";
 import { RoomAudioManager } from "./components/RoomAudioManager";
 import { StatsRecorder } from "./components/StatsRecorder";
@@ -1695,7 +1696,13 @@ class Voice {
   async toggleDeafen(fromMute?: boolean) {
     try {
       const room = this.room();
-      if (!room) throw "invalid state";
+      if (!room) {
+        // outside a call only the saved choice changes, the next call uses it
+        this.#settings.deafen = !this.#settings.deafen;
+        if (fromMute) this.#settings.micOn = true;
+        this.sound.playSound(this.#settings.deafen ? "deafen" : "undeafen");
+        return;
+      }
       if (this.#settings.inputMode === "ptt") {
         // the key decides whether the mic is open, so only the flags change
         this.#settings.deafen = !this.#settings.deafen;
@@ -1732,8 +1739,10 @@ class Voice {
     }
     try {
       const room = this.room();
-      if (!room) throw "invalid state";
-      if (this.#settings.inputMode === "ptt") {
+      if (!room) {
+        // outside a call only the saved choice changes, the next call uses it
+        this.#settings.micOn = !this.#settings.micOn;
+      } else if (this.#settings.inputMode === "ptt") {
         // in push to talk, mute is a hard mute the key can't override
         this.#settings.micOn = !this.#settings.micOn;
         this.syncMicrophone();
@@ -3562,6 +3571,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
         <StatsRecorder />
         <OverlayPublisher />
         <GamepadPushToTalk />
+        <MuteKeybinds />
         <CallSounds />
         <VoiceMoves />
       </RoomContext.Provider>

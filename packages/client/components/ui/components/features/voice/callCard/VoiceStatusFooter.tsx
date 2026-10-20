@@ -15,9 +15,11 @@ import { GameStreamPrompt } from "./GameStreamPrompt";
 import { DeafenButton, LeaveCallButton, MuteButton } from "./VoiceCallButtons";
 
 /**
- * Footer of the channel sidebars, shown only while in a voice call. Shows the
- * connection state, the voice channel (click to go there) and the mute,
- * deafen and leave buttons. It also holds the bottom safe area inset.
+ * Footer of the channel sidebars, always shown. Outside a call it holds the
+ * mute and deafen buttons (they change the saved choice for the next call).
+ * In a call it adds the connection state, the voice channel (click to go
+ * there) and the leave button above and beside them. It also holds the bottom
+ * safe area inset.
  */
 export function VoiceStatusFooter() {
   const voice = useVoice();
@@ -28,77 +30,81 @@ export function VoiceStatusFooter() {
   const { isMobile } = useDevice();
 
   return (
-    <Show when={voice.channel()}>
-      {(channel) => (
-        <Footer role="region" aria-label={t`Voice connection`}>
-          <GameStreamPrompt />
-          <Info>
-            <Status
-              role="status"
-              trouble={
-                voice.state() === "RECONNECTING" ||
-                voice.state() === "DISCONNECTED"
+    <Footer role="region" aria-label={t`Voice connection`}>
+      <Show when={voice.channel()}>
+        {(channel) => (
+          <>
+            <GameStreamPrompt />
+            <Info>
+              <Status
+                role="status"
+                trouble={
+                  voice.state() === "RECONNECTING" ||
+                  voice.state() === "DISCONNECTED"
+                }
+              >
+                <Symbol size={16}>
+                  {voice.state() === "CONNECTED"
+                    ? "graphic_eq"
+                    : "wifi_tethering"}
+                </Symbol>
+                <Switch fallback={<Trans>Connected</Trans>}>
+                  <Match when={voice.state() === "CONNECTING"}>
+                    <Trans>Connecting</Trans>
+                  </Match>
+                  <Match when={voice.state() === "RECONNECTING"}>
+                    <Trans>Reconnecting</Trans>
+                  </Match>
+                  <Match when={voice.state() === "DISCONNECTED"}>
+                    <Trans>Disconnected</Trans>
+                  </Match>
+                </Switch>
+              </Status>
+              <ChannelLink
+                type="button"
+                onClick={() => {
+                  navigate(channel().path);
+                  // Show the content pane (slides the sidebar away) on phones
+                  state.appDrawer()?.setShown(true);
+                }}
+              >
+                <Show when={channel().server}>
+                  {(server) => <>{server().name} / </>}
+                </Show>
+                {channel().name}
+              </ChannelLink>
+            </Info>
+          </>
+        )}
+      </Show>
+      <Buttons>
+        <Split>
+          <MuteButton size="sm" />
+          <Show when={!isMobile}>
+            <AudioDeviceChevron
+              kind="audioinput"
+              variant={voice.microphone() ? "filled" : "tonal"}
+            />
+          </Show>
+        </Split>
+        <Split>
+          <DeafenButton size="sm" />
+          <Show when={!isMobile}>
+            <AudioDeviceChevron
+              kind="audiooutput"
+              variant={
+                voice.deafen() || (!!voice.channel() && !voice.listenPermission)
+                  ? "tonal"
+                  : "filled"
               }
-            >
-              <Symbol size={16}>
-                {voice.state() === "CONNECTED"
-                  ? "graphic_eq"
-                  : "wifi_tethering"}
-              </Symbol>
-              <Switch fallback={<Trans>Connected</Trans>}>
-                <Match when={voice.state() === "CONNECTING"}>
-                  <Trans>Connecting</Trans>
-                </Match>
-                <Match when={voice.state() === "RECONNECTING"}>
-                  <Trans>Reconnecting</Trans>
-                </Match>
-                <Match when={voice.state() === "DISCONNECTED"}>
-                  <Trans>Disconnected</Trans>
-                </Match>
-              </Switch>
-            </Status>
-            <ChannelLink
-              type="button"
-              onClick={() => {
-                navigate(channel().path);
-                // Show the content pane (slides the sidebar away) on phones
-                state.appDrawer()?.setShown(true);
-              }}
-            >
-              <Show when={channel().server}>
-                {(server) => <>{server().name} / </>}
-              </Show>
-              {channel().name}
-            </ChannelLink>
-          </Info>
-          <Buttons>
-            <Split>
-              <MuteButton size="sm" />
-              <Show when={!isMobile}>
-                <AudioDeviceChevron
-                  kind="audioinput"
-                  variant={voice.microphone() ? "filled" : "tonal"}
-                />
-              </Show>
-            </Split>
-            <Split>
-              <DeafenButton size="sm" />
-              <Show when={!isMobile}>
-                <AudioDeviceChevron
-                  kind="audiooutput"
-                  variant={
-                    voice.deafen() || !voice.listenPermission
-                      ? "tonal"
-                      : "filled"
-                  }
-                />
-              </Show>
-            </Split>
-            <LeaveCallButton size="sm" />
-          </Buttons>
-        </Footer>
-      )}
-    </Show>
+            />
+          </Show>
+        </Split>
+        <Show when={voice.channel()}>
+          <LeaveCallButton size="sm" />
+        </Show>
+      </Buttons>
+    </Footer>
   );
 }
 

@@ -107,7 +107,6 @@ export const ServerSidebar = (props: Props) => {
   const navigate = useNavigate();
   const { isMobile } = useDevice();
   const { t } = useLingui();
-  const voice = useVoice();
 
   // Users can manage certain parts of the server individually, regardless of their ManageServer Permission
   const canManageServer = () =>
@@ -279,7 +278,7 @@ export const ServerSidebar = (props: Props) => {
           </Header>
         </Match>
       </Switch>
-      <ChannelList inCall={!!voice.channel()}>
+      <ChannelList>
         <UnreadCallout list={list} />
         <div
           ref={setList}
@@ -336,13 +335,8 @@ const ChannelList = styled("div", {
     position: "relative",
     flexGrow: 1,
     minHeight: 0,
-    marginBottom: "calc(var(--gap-md) + var(--safe-area-bottom))",
-  },
-  variants: {
-    // The voice footer holds the safe area inset instead
-    inCall: {
-      true: { marginBottom: "var(--gap-md)" },
-    },
+    // The voice footer below holds the safe area inset
+    marginBottom: "var(--gap-md)",
   },
 });
 

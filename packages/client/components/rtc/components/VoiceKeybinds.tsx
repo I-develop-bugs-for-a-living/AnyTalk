@@ -11,7 +11,8 @@ import { useState } from "@revolt/state";
 import { useVoice } from "../state";
 
 /**
- * Call hotkeys, active while in a call and the app has focus
+ * Call hotkeys, active while in a call and the app has focus. Mute and deafen
+ * live in MuteKeybinds, which also works outside calls.
  */
 export function VoiceKeybinds() {
   const voice = useVoice();
@@ -42,14 +43,6 @@ export function VoiceKeybinds() {
     (global) => usesPress(global) && voice.pushToTalk(true),
     (global) => usesPress(global) && voice.pushToTalk(false),
   );
-
-  createKeybind(KeybindAction.VOICE_TOGGLE_MUTE, () => {
-    if (voice.speakingPermission) voice.toggleMute();
-  });
-
-  createKeybind(KeybindAction.VOICE_TOGGLE_DEAFEN, () => {
-    if (voice.listenPermission) voice.toggleDeafen();
-  });
 
   createKeybind(KeybindAction.VOICE_TOGGLE_GAME_STREAM, () => {
     voice.toggleFocusedGameStream();
