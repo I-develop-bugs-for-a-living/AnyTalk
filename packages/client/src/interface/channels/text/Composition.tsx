@@ -12,12 +12,14 @@ import { useLingui } from "@lingui/solid/macro";
 import { Channel } from "stoat.js";
 
 import { useClient } from "@revolt/client";
+import { useRateLimitNotice } from "@revolt/client/rateLimitNotice";
 import { ackNow, debounce } from "@revolt/common";
 import { createIsTimedOut } from "@revolt/common/lib/createIsTimedOut";
 import { useInstance } from "@revolt/instance";
 import { createKeybind, Keybind, KeybindAction } from "@revolt/keybinds";
 import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
+import { parseRateLimitError } from "@revolt/state/stores/rateLimit";
 import {
   CompositionMediaPicker,
   FileCarousel,
@@ -52,6 +54,8 @@ export function MessageComposition(props: Props) {
   const client = useClient();
   const { limits } = useInstance();
   const { openModal } = useModals();
+
+  const notifyRateLimited = useRateLimitNotice();
 
   const isTimedOut = createIsTimedOut(
     () => props.channel.server?.member?.timeout,
@@ -118,6 +122,14 @@ export function MessageComposition(props: Props) {
   // bind this composition instance to the global node replacement signal
   state.draft._setNodeReplacement = setNodeReplacement;
   onCleanup(() => (state.draft._setNodeReplacement = undefined));
+
+  // show text restored after a blocked send, only if this channel is on screen
+  // (otherwise the draft store is enough, it is read again on mount); this
+  // moves the cursor to the end but does not steal focus
+  state.draft._onDraftRestored = (channelId, content) => {
+    if (channelId === props.channel.id) setInitialValue([content]);
+  };
+  onCleanup(() => (state.draft._onDraftRestored = undefined));
 
   createEffect(
     on(
@@ -206,17 +218,36 @@ export function MessageComposition(props: Props) {
           ...currentDraft,
           content: useContent,
         });
-        return state.draft.sendDraft(client(), props.channel);
+        return state.draft.sendDraft(
+          client(),
+          props.channel,
+          undefined,
+          notifyRateLimited,
+        );
       }
       // only ack our own message if nothing unseen came before it
       const wasRead = !props.channel.unread;
-      const sent = await props.channel.sendMessage(useContent);
+      try {
+        const sent = await props.channel.sendMessage(useContent);
 
-      if (wasRead) ackNow(props.channel, sent);
-      return sent;
+        if (wasRead) ackNow(props.channel, sent);
+        return sent;
+      } catch (error) {
+        // blocked by the rate limit: restore the text so nothing is lost
+        const rateLimit = parseRateLimitError(error);
+        if (!rateLimit) throw error;
+        state.draft.restoreToDraft(props.channel.id, { content: useContent });
+        notifyRateLimited(rateLimit);
+        return;
+      }
     }
 
-    state.draft.sendDraft(client(), props.channel);
+    state.draft.sendDraft(
+      client(),
+      props.channel,
+      undefined,
+      notifyRateLimited,
+    );
   }
 
   /**
