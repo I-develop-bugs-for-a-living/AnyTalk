@@ -17,6 +17,7 @@ import {
   probeSocket,
 } from "./lifecycleWake";
 import { killServiceWorkerSubscription } from "./NotificationsController";
+import { type UnreadResyncer, autoResyncUnreads } from "./unreadResync";
 
 export enum State {
   Ready = "Ready",
@@ -97,6 +98,9 @@ class Lifecycle {
 
   client: Client;
 
+  /** Unread catch-up for the current client */
+  #unreadResyncer?: UnreadResyncer;
+
   #connectionFailures = 0;
   #permanentError: string | undefined;
   #retryTimeout: number | undefined;
@@ -127,6 +131,11 @@ class Lifecycle {
     this.dispose();
   }
 
+  /**
+   * Ask for a throttled unread resync of the current client
+   */
+  requestUnreadResync = () => this.#unreadResyncer?.request();
+
   private dispose(logout = false) {
     this.#controller.cancelProbe();
     if (logout) this.client.logout();
@@ -143,6 +152,8 @@ class Lifecycle {
     this.client.on("ready", this.onReady);
     this.client.on("policyChanges", this.onPolicyChanges);
     autoAckCallNotices(this.client);
+    this.#unreadResyncer?.cancel();
+    this.#unreadResyncer = autoResyncUnreads(this.client);
   }
 
   #enter(nextState: State) {
@@ -505,6 +516,8 @@ export default class ClientController {
     window.addEventListener("online", this.onOnline);
     window.addEventListener("offline", this.onOffline);
     document.addEventListener("visibilitychange", this.onVisibilityChange);
+    this.onPageShow = this.onPageShow.bind(this);
+    window.addEventListener("pageshow", this.onPageShow);
 
     this.loginCached();
   }
@@ -529,6 +542,8 @@ export default class ClientController {
       return;
     }
 
+    this.resyncUnreadsIfConnected();
+
     const hiddenFor = this.#hiddenAt ? Date.now() - this.#hiddenAt : 0;
     this.#hiddenAt = undefined;
 
@@ -540,6 +555,24 @@ export default class ClientController {
       );
     } else {
       this.lifecycle.wake();
+    }
+  }
+
+  /**
+   * A page restored from the back/forward cache (or a frozen iOS tab) may
+   * have missed events without a new "ready"
+   */
+  private onPageShow(event: PageTransitionEvent) {
+    if (event.persisted) this.resyncUnreadsIfConnected();
+  }
+
+  /**
+   * Catch up on unreads when the page returns while the socket is up; when
+   * it is not, the next "ready" does it
+   */
+  private resyncUnreadsIfConnected() {
+    if (this.lifecycle.state() === State.Connected) {
+      this.lifecycle.requestUnreadResync();
     }
   }
 
@@ -665,6 +698,7 @@ export default class ClientController {
     window.removeEventListener("online", this.onOnline);
     window.removeEventListener("offline", this.onOffline);
     document.removeEventListener("visibilitychange", this.onVisibilityChange);
+    window.removeEventListener("pageshow", this.onPageShow);
 
     this.lifecycle.transition({
       type: TransitionType.DisposeOnly,
