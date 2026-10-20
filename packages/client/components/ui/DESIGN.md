@@ -13,7 +13,7 @@ Read this before designing or building UI. The goal: new UI looks like it belong
 ### Styling
 
 - PandaCSS: `styled()` and `css()` from `styled-system/jsx` / `styled-system/css`, `cva()` for components with variants. Look at `design/Button.tsx` as the reference.
-- Responsive conditions from `components/common/Breakpoint.ts`: `phone` (max-width 600px) and `tablet` (max-width 840px or max-height 600px). Use them as Panda conditions: `{ padding: "16px", phone: { padding: "8px" } }`.
+- Responsive conditions from `components/common/Breakpoint.ts`: `phone` (max-width 600px) and `tablet` (max-width 840px or max-height 600px). Use them as Panda conditions with a leading underscore: `{ padding: "16px", _phone: { padding: "8px" } }`.
 
 ### Colors (CSS variables)
 
