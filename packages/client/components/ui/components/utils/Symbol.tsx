@@ -55,6 +55,8 @@ const DIRECTIONAL_SYMBOLS = new Set([
   "chevron_right",
   "first_page",
   "last_page",
+  "keyboard_double_arrow_left",
+  "keyboard_double_arrow_right",
   "keyboard_arrow_left",
   "keyboard_arrow_right",
   "navigate_before",

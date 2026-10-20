@@ -11,6 +11,10 @@ export enum LAYOUT_SECTIONS {
   PRIMARY_SIDEBAR = "PRIMARY_SIDEBAR",
   MEMBER_SIDEBAR = "MEMBER_SIDEBAR",
   MENTION_REPLY = "MENTION_REPLY",
+  /** Server rail shows names next to the icons (desktop only, default off) */
+  RAIL_WIDE = "RAIL_WIDE",
+  /** Server rail is hidden completely (desktop only, default off) */
+  RAIL_HIDDEN = "RAIL_HIDDEN",
   MATURE = "nsfw",
 }
 

@@ -25,14 +25,18 @@ import {
 import { useClient, useUser } from "@revolt/client";
 import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
+import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
 import { Avatar, Column, Row, Text, UserStatus, iconSize } from "@revolt/ui";
 
 import MdContactPage from "@material-design-icons/svg/outlined/contact_page.svg?component-solid";
 import MdDelete from "@material-design-icons/svg/outlined/delete.svg?component-solid";
 import MdEditNote from "@material-design-icons/svg/outlined/edit_note.svg?component-solid";
 import MdInfo from "@material-design-icons/svg/outlined/info.svg?component-solid";
+import MdKeyboardDoubleArrowLeft from "@material-design-icons/svg/outlined/keyboard_double_arrow_left.svg?component-solid";
 import MdNotificationsOff from "@material-design-icons/svg/outlined/notifications_off.svg?component-solid";
 import MdSettings from "@material-design-icons/svg/outlined/settings.svg?component-solid";
+
+import { useRailDesktop } from "./railMode";
 
 interface Props {
   anchor: Accessor<HTMLElement | undefined>;
@@ -56,6 +60,7 @@ export function UserMenu(props: Props) {
   const client = useClient();
   const user = useUser();
   const state = useState();
+  const desktop = useRailDesktop();
 
   const [show, setShow] = createSignal(false);
   const [ref, setRef] = createSignal<HTMLDivElement>();
@@ -263,6 +268,27 @@ export function UserMenu(props: Props) {
               </Show>
 
               <ContextMenuDivider />
+
+              {/* desktop layout only: phones and drawer mode keep the server list */}
+              <Show when={desktop()}>
+                <ContextMenuButton
+                  icon={(iconProps) => (
+                    <MdKeyboardDoubleArrowLeft
+                      {...iconProps}
+                      class="rtl-mirror"
+                    />
+                  )}
+                  onClick={() => {
+                    state.layout.setSectionState(
+                      LAYOUT_SECTIONS.RAIL_HIDDEN,
+                      true,
+                    );
+                    close();
+                  }}
+                >
+                  <Trans>Hide server list</Trans>
+                </ContextMenuButton>
+              </Show>
 
               <ContextMenuButton
                 icon={MdSettings}

@@ -7,6 +7,7 @@ import {
   Switch,
   createMemo,
   createSignal,
+  splitProps,
 } from "solid-js";
 
 import { plural } from "@lingui/core/macro";
@@ -23,6 +24,7 @@ import Instance from "@revolt/instance/Instance";
 import { KeybindAction, createKeybind } from "@revolt/keybinds";
 import { useLocation, useNavigate, useSmartParams } from "@revolt/routing";
 import { ResolvedEntry, useState } from "@revolt/state";
+import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
 import {
   Avatar,
   Column,
@@ -43,6 +45,7 @@ import {
   splitPinPreview,
 } from "./pinStack";
 import { RailEntry, createRailDrag } from "./railDrag";
+import { useRailDesktop, useRailWide } from "./railMode";
 
 interface Props {
   /**
@@ -98,6 +101,8 @@ export const ServerList = (props: Props) => {
   const { t } = useLingui();
   const instance = useInstance();
   const location = useLocation();
+  const wide = useRailWide();
+  const desktop = useRailDesktop();
 
   const navigateServer = (byOffset: number) => {
     const serverId = props.selectedServer();
@@ -289,6 +294,11 @@ export const ServerList = (props: Props) => {
   };
 
   /**
+   * Display name of the current user, shown next to the avatar in wide mode
+   */
+  const userName = () => props.user.displayName ?? props.user.username;
+
+  /**
    * Whether the drop would land after every entry
    */
   const insertionAtEnd = () => {
@@ -297,7 +307,7 @@ export const ServerList = (props: Props) => {
   };
 
   return (
-    <ServerListBase aria-label={t`Servers`} data-region="servers">
+    <ServerListBase aria-label={t`Servers`} data-region="servers" wide={wide()}>
       <div use:invisibleScrollable={{ direction: "y", class: listBase() }}>
         <a
           class={entryContainer({
@@ -305,16 +315,22 @@ export const ServerList = (props: Props) => {
               !props.selectedServer() && !chatShortcutOpen()
                 ? "selected"
                 : undefined,
+            wide: wide(),
           })}
           href="/app"
+          aria-label={t`Home`}
           use:floating={{
-            tooltip: {
-              content:
-                homeNotifications() > 0
-                  ? t`You have ${homeNotifications()} pending friend requests.`
-                  : t`Home`,
-              placement: "right",
-            },
+            // wide mode shows the name, the tooltip only stays for the friend requests
+            tooltip:
+              wide() && homeNotifications() === 0
+                ? undefined
+                : {
+                    content:
+                      homeNotifications() > 0
+                        ? t`You have ${homeNotifications()} pending friend requests.`
+                        : t`Home`,
+                    placement: "right",
+                  },
           }}
         >
           <Avatar
@@ -330,12 +346,22 @@ export const ServerList = (props: Props) => {
               </Show>
             }
           />
+          <Show when={wide()}>
+            <RailLabel>
+              <Trans>Home</Trans>
+            </RailLabel>
+          </Show>
         </a>
-        <Tooltip placement="right" content={inboxLabel()} aria={inboxLabel()}>
+        <RailTooltip
+          hidden={wide()}
+          placement="right"
+          content={inboxLabel()}
+          aria={inboxLabel()}
+        >
           <button
             type="button"
             ref={setInboxButton}
-            class={entryContainer() + " " + resetButton}
+            class={entryContainer({ wide: wide() }) + " " + resetButton}
             aria-haspopup="dialog"
             aria-controls={INBOX_PANEL_ID}
             aria-expanded={inboxOpen()}
@@ -353,8 +379,13 @@ export const ServerList = (props: Props) => {
               }
               interactive
             />
+            <Show when={wide()}>
+              <RailLabel>
+                <Trans>Inbox</Trans>
+              </RailLabel>
+            </Show>
           </button>
-        </Tooltip>
+        </RailTooltip>
         <Inbox
           anchor={inboxButton}
           mentions={inboxMentions}
@@ -370,11 +401,16 @@ export const ServerList = (props: Props) => {
           )}
         </For>
         <Show when={props.unreadConversations.length > 9}>
-          <a class={entryContainer()} href={`/`}>
+          <a class={entryContainer({ wide: wide() })} href={`/`}>
             <Avatar
               size={42}
               fallback={<>+{props.unreadConversations.length - 9}</>}
             />
+            <Show when={wide()}>
+              <RailLabel>
+                <Trans>More unread chats</Trans>
+              </RailLabel>
+            </Show>
           </a>
         </Show>
         <Show
@@ -437,15 +473,15 @@ export const ServerList = (props: Props) => {
             <div
               class={railGhost}
               style={{
-                left: `${(drag.pointer()?.x ?? 0) - 21}px`,
-                top: `${(drag.pointer()?.y ?? 0) - 21}px`,
+                left: `${(drag.pointer()?.x ?? 0) - RAIL_AVATAR / 2}px`,
+                top: `${(drag.pointer()?.y ?? 0) - RAIL_AVATAR / 2}px`,
               }}
             >
               <Switch>
                 <Match when={held().type === "server" && held()}>
                   {(item) => (
                     <Avatar
-                      size={42}
+                      size={RAIL_AVATAR}
                       src={(item() as { server: Server }).server.iconURL}
                       fallback={(item() as { server: Server }).server.name}
                     />
@@ -454,7 +490,7 @@ export const ServerList = (props: Props) => {
                 <Match when={held().type === "folder" && held()}>
                   {(item) => (
                     <Avatar
-                      size={42}
+                      size={RAIL_AVATAR}
                       fallback={
                         <FolderPreview
                           servers={(item() as { servers: Server[] }).servers}
@@ -471,26 +507,44 @@ export const ServerList = (props: Props) => {
             </div>
           )}
         </Show>
-        <Tooltip placement="right" content={t`Server overview`}>
+        <RailTooltip
+          hidden={wide()}
+          placement="right"
+          content={t`Server overview`}
+        >
           <a
             href="/servers"
+            aria-label={t`Server overview`}
             class={entryContainer({
               indicator:
                 Instance.relPath(location.pathname) === "/servers"
                   ? "selected"
                   : undefined,
+              wide: wide(),
             })}
           >
             <Avatar size={42} fallback={<Symbol>grid_view</Symbol>} />
+            <Show when={wide()}>
+              <RailLabel>
+                <Trans>Server overview</Trans>
+              </RailLabel>
+            </Show>
           </a>
-        </Tooltip>
+        </RailTooltip>
         <Show when={instance.isStoat}>
+          {/* the tooltip explains more than the short label, so it stays in wide mode */}
           <Tooltip placement="right" content={t`Find new servers to join`}>
             <a
               href={state.layout.getLastActiveDiscoverPath()}
-              class={entryContainer()}
+              aria-label={wide() ? t`Discover` : t`Find new servers to join`}
+              class={entryContainer({ wide: wide() })}
             >
               <Avatar size={42} fallback={<Symbol fill>explore</Symbol>} />
+              <Show when={wide()}>
+                <RailLabel>
+                  <Trans>Discover</Trans>
+                </RailLabel>
+              </Show>
             </a>
           </Tooltip>
         </Show>
@@ -498,6 +552,34 @@ export const ServerList = (props: Props) => {
       <Shadow>
         <div />
       </Shadow>
+      {/* desktop only: phones always keep the narrow rail */}
+      <Show when={desktop()}>
+        <button
+          type="button"
+          class={railToggle({ wide: wide() })}
+          aria-label={wide() ? t`Hide server names` : t`Show server names`}
+          aria-expanded={wide()}
+          onClick={() =>
+            state.layout.toggleSectionState(LAYOUT_SECTIONS.RAIL_WIDE, false)
+          }
+          use:floating={{
+            tooltip: wide()
+              ? undefined
+              : { placement: "right", content: t`Show server names` },
+          }}
+        >
+          <Symbol size={20}>
+            {wide()
+              ? "keyboard_double_arrow_left"
+              : "keyboard_double_arrow_right"}
+          </Symbol>
+          <Show when={wide()}>
+            <RailLabel>
+              <Trans>Hide server names</Trans>
+            </RailLabel>
+          </Show>
+        </button>
+      </Show>
       <Tooltip
         placement="right"
         content={() => (
@@ -518,14 +600,14 @@ export const ServerList = (props: Props) => {
             </Text>
           </Column>
         )}
-        aria={props.user.username}
+        aria={userName()}
       >
         <button
           type="button"
           ref={setMenuButton}
-          class={entryContainer() + " " + resetButton}
+          class={entryContainer({ wide: wide() }) + " " + resetButton}
           aria-haspopup="menu"
-          aria-label={props.user.username}
+          aria-label={userName()}
         >
           <Avatar
             size={42}
@@ -534,12 +616,49 @@ export const ServerList = (props: Props) => {
             overlay={<UserStatus.Graphic status={props.user.presence} />}
             interactive
           />
+          <Show when={wide()}>
+            <RailLabel>{userName()}</RailLabel>
+          </Show>
         </button>
         <UserMenu anchor={menuButton} />
       </Tooltip>
     </ServerListBase>
   );
 };
+
+/**
+ * Size of the avatar / icon of every rail entry, also used by the drag ghost
+ */
+const RAIL_AVATAR = 42;
+
+/**
+ * Tooltip which can be switched off, used where wide mode already shows
+ * the same text as a visible label
+ */
+function RailTooltip(
+  props: { hidden?: boolean } & Parameters<typeof Tooltip>[0],
+) {
+  const [local, remote] = splitProps(props, ["hidden"]);
+
+  return (
+    <Show when={!local.hidden} fallback={remote.children}>
+      <Tooltip {...remote} />
+    </Show>
+  );
+}
+
+/**
+ * Name of a rail entry in wide mode, cut off with an ellipsis when too long
+ */
+function RailLabel(props: { children: JSX.Element }) {
+  return (
+    <span class={railLabel}>
+      <Text class="label" size="large">
+        {props.children}
+      </Text>
+    </span>
+  );
+}
 
 /**
  * Strips default button chrome so a button can use rail entry styling
@@ -568,6 +687,16 @@ const PinBadge = styled("span", {
     background: "var(--md-sys-color-surface-container-highest)",
     color: "var(--md-sys-color-on-surface-variant)",
     pointerEvents: "none",
+  },
+  variants: {
+    // wide mode: stay on the avatar's end corner instead of the row's end
+    wide: {
+      true: {
+        insetInlineEnd: "auto",
+        insetInlineStart: "30px",
+      },
+      false: {},
+    },
   },
 });
 
@@ -601,9 +730,11 @@ function ChatShortcut(props: {
 }) {
   const params = useSmartParams();
   const { t } = useLingui();
+  const wide = useRailWide();
 
   return (
-    <Tooltip
+    <RailTooltip
+      hidden={wide()}
       placement="right"
       content={() => (
         <Show when={props.pinned} fallback={props.conversation.displayName}>
@@ -627,7 +758,13 @@ function ChatShortcut(props: {
             params().channelId === props.conversation.id
               ? "selected"
               : undefined,
+          wide: wide(),
         })}
+        aria-label={
+          props.pinned
+            ? `${props.conversation.displayName ?? ""} (${t`Pinned`})`
+            : (props.conversation.displayName ?? "")
+        }
         use:floating={props.menuGenerator(props.conversation)}
         href={`/channel/${props.conversation.id}`}
       >
@@ -648,13 +785,16 @@ function ChatShortcut(props: {
           }
           interactive
         />
+        <Show when={wide()}>
+          <RailLabel>{props.conversation.displayName}</RailLabel>
+        </Show>
         <Show when={props.pinned}>
-          <PinBadge aria-hidden="true">
+          <PinBadge aria-hidden="true" wide={wide()}>
             <Symbol size={12}>push_pin</Symbol>
           </PinBadge>
         </Show>
       </a>
-    </Tooltip>
+    </RailTooltip>
   );
 }
 
@@ -670,6 +810,7 @@ function PinStack(props: {
   const state = useState();
   const params = useSmartParams();
   const { t } = useLingui();
+  const wide = useRailWide();
 
   const pins = () => state["pinned-conversations"];
   const collapsed = () => pins().isCollapsed();
@@ -693,8 +834,8 @@ function PinStack(props: {
   const toggle = () => pins().toggle();
 
   return (
-    <FolderGroup expanded={!collapsed()}>
-      <Tooltip placement="right" content={t`Pinned chats`}>
+    <FolderGroup expanded={!collapsed()} wide={wide()}>
+      <RailTooltip hidden={wide()} placement="right" content={t`Pinned chats`}>
         <div
           class={entryContainer({
             indicator:
@@ -703,9 +844,11 @@ function PinStack(props: {
                 : collapsed() && badges().unread
                   ? "alert"
                   : undefined,
+            wide: wide(),
           })}
         >
           <a
+            class={entryLink({ wide: wide() })}
             role="button"
             tabindex="0"
             aria-expanded={!collapsed()}
@@ -752,24 +895,31 @@ function PinStack(props: {
               }
               interactive
             />
+            <Show when={wide()}>
+              <RailLabel>
+                <Trans>Pinned chats</Trans>
+              </RailLabel>
+            </Show>
           </a>
           <Show when={collapsed()}>
-            <PinBadge aria-hidden="true">
+            <PinBadge aria-hidden="true" wide={wide()}>
               <Symbol size={12}>push_pin</Symbol>
             </PinBadge>
           </Show>
         </div>
-      </Tooltip>
+      </RailTooltip>
       <Show when={!collapsed()}>
-        <For each={props.conversations}>
-          {(conversation) => (
-            <ChatShortcut
-              conversation={conversation}
-              menuGenerator={props.menuGenerator}
-              pinned
-            />
-          )}
-        </For>
+        <div class={folderChildren({ wide: wide() })}>
+          <For each={props.conversations}>
+            {(conversation) => (
+              <ChatShortcut
+                conversation={conversation}
+                menuGenerator={props.menuGenerator}
+                pinned
+              />
+            )}
+          </For>
+        </div>
       </Show>
     </FolderGroup>
   );
@@ -785,9 +935,12 @@ function ServerEntry(props: {
   drag: RailDrag;
 }) {
   const state = useState();
+  const wide = useRailWide();
 
   return (
-    <Tooltip
+    <RailTooltip
+      // wide mode shows the name, the tooltip only stays for the muted state
+      hidden={wide() && !state.notifications.isMuted(props.server)}
       placement="right"
       content={() => (
         <Column>
@@ -828,9 +981,13 @@ function ServerEntry(props: {
                   !state.notifications.isMuted(props.server)
                 ? "alert"
                 : undefined,
+          wide: wide(),
         })}
         classList={{
-          [railFolding]: isFoldTarget(props.drag, props.server.id),
+          [railFolding({ wide: wide() })]: isFoldTarget(
+            props.drag,
+            props.server.id,
+          ),
           [railHeld]:
             props.drag.dragging() === props.server.id ||
             props.drag.carrying() === props.server.id,
@@ -841,8 +998,10 @@ function ServerEntry(props: {
           <div class={railInsertion} />
         </Show>
         <a
+          class={entryLink({ wide: wide() })}
           draggable="false"
           tabindex="0"
+          aria-label={props.server.name}
           href={state.layout.getLastActiveServerPath(props.server.id)}
         >
           <Avatar
@@ -877,9 +1036,17 @@ function ServerEntry(props: {
             fallback={props.server.name}
             interactive
           />
+          <Show when={wide()}>
+            <RailLabel>{props.server.name}</RailLabel>
+            <Show when={state.notifications.isMuted(props.server)}>
+              <Symbol size={16} aria-hidden="true">
+                notifications_off
+              </Symbol>
+            </Show>
+          </Show>
         </a>
       </div>
-    </Tooltip>
+    </RailTooltip>
   );
 }
 
@@ -894,6 +1061,7 @@ function FolderEntry(props: {
 }) {
   const state = useState();
   const { t } = useLingui();
+  const wide = useRailWide();
 
   const collapsed = () => props.entry.folder.collapsed ?? false;
 
@@ -916,6 +1084,7 @@ function FolderEntry(props: {
   return (
     <FolderGroup
       expanded={!collapsed()}
+      wide={wide()}
       style={{
         background:
           !collapsed() && props.entry.folder.colour
@@ -923,7 +1092,12 @@ function FolderEntry(props: {
             : undefined,
       }}
     >
-      <Tooltip placement="right" content={folderName()} aria={folderName()}>
+      <RailTooltip
+        hidden={wide()}
+        placement="right"
+        content={folderName()}
+        aria={folderName()}
+      >
         <div
           ref={(el) => props.drag.register(props.entry.id, el)}
           onPointerDown={(e) => props.drag.press(props.entry.id, e)}
@@ -935,9 +1109,13 @@ function FolderEntry(props: {
                 : collapsed() && unread()
                   ? "alert"
                   : undefined,
+            wide: wide(),
           })}
           classList={{
-            [railFolding]: isFoldTarget(props.drag, props.entry.id),
+            [railFolding({ wide: wide() })]: isFoldTarget(
+              props.drag,
+              props.entry.id,
+            ),
             [railHeld]:
               props.drag.dragging() === props.entry.id ||
               props.drag.carrying() === props.entry.id,
@@ -953,9 +1131,11 @@ function FolderEntry(props: {
             <div class={railInsertion} />
           </Show>
           <a
+            class={entryLink({ wide: wide() })}
             role="button"
             tabindex="0"
             aria-expanded={!collapsed()}
+            aria-label={folderName()}
             onClick={() => state.ordering.toggleFolder(props.entry.folder.id)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -989,20 +1169,28 @@ function FolderEntry(props: {
                 </Show>
               }
             />
+            <Show when={wide()}>
+              <RailLabel>{folderName()}</RailLabel>
+              <Symbol size={20}>
+                {collapsed() ? "chevron_right" : "expand_more"}
+              </Symbol>
+            </Show>
           </a>
         </div>
-      </Tooltip>
+      </RailTooltip>
       <Show when={!collapsed()}>
-        <For each={props.entry.servers}>
-          {(server) => (
-            <ServerEntry
-              server={server}
-              selectedServer={props.selectedServer}
-              menuGenerator={props.menuGenerator}
-              drag={props.drag}
-            />
-          )}
-        </For>
+        <div class={folderChildren({ wide: wide() })}>
+          <For each={props.entry.servers}>
+            {(server) => (
+              <ServerEntry
+                server={server}
+                selectedServer={props.selectedServer}
+                menuGenerator={props.menuGenerator}
+                drag={props.drag}
+              />
+            )}
+          </For>
+        </div>
       </Show>
     </FolderGroup>
   );
@@ -1045,16 +1233,32 @@ function isInsertionBefore(drag: RailDrag, id: string) {
 /**
  * Ring drawn around the entry a drop would fold into
  */
-const railFolding = css({
-  "&:after": {
-    content: "' '",
-    position: "absolute",
-    top: "3px",
-    insetInlineStart: "3px",
-    width: "50px",
-    height: "50px",
-    borderRadius: "var(--borderRadius-circle)",
-    outline: "2px solid var(--md-sys-color-primary)",
+const railFolding = cva({
+  base: {
+    "&:after": {
+      content: "' '",
+      position: "absolute",
+      top: "3px",
+      insetInlineStart: "3px",
+      width: "50px",
+      height: "50px",
+      borderRadius: "var(--borderRadius-circle)",
+      outline: "2px solid var(--md-sys-color-primary)",
+    },
+  },
+  variants: {
+    // wide mode rings the whole row instead of the icon
+    wide: {
+      true: {
+        "&:after": {
+          insetInlineStart: "4px",
+          insetInlineEnd: "4px",
+          width: "auto",
+          borderRadius: "var(--borderRadius-md)",
+        },
+      },
+      false: {},
+    },
   },
 });
 
@@ -1134,6 +1338,115 @@ const ServerListBase = styled("nav", {
 
     fill: "var(--md-sys-color-on-surface)",
   },
+  variants: {
+    // wide mode fixes the width, narrow shrink-wraps the 56px entries
+    wide: {
+      true: {
+        width: "var(--layout-width-server-rail-wide)",
+        flexShrink: 0,
+      },
+      false: {},
+    },
+  },
+});
+
+/**
+ * Name of an entry in wide mode
+ */
+const railLabel = css({
+  flex: "1 1 0",
+  minWidth: 0,
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  textAlign: "start",
+  color: "var(--md-sys-color-on-surface)",
+});
+
+/**
+ * Link or button inside an entry container (folders, servers). In wide mode
+ * it fills the row so icon, name and chevron lay out in a line.
+ */
+const entryLink = cva({
+  base: {},
+  variants: {
+    wide: {
+      true: {
+        display: "flex",
+        alignItems: "center",
+        gap: "12px",
+        flexGrow: 1,
+        minWidth: 0,
+        height: "100%",
+        cursor: "pointer",
+        color: "var(--md-sys-color-on-surface)",
+      },
+      false: {},
+    },
+  },
+});
+
+/**
+ * Toggle between the narrow and the wide rail, below the scroll area
+ */
+const railToggle = cva({
+  base: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "8px",
+    flexShrink: 0,
+    height: "40px",
+    marginBlock: "4px",
+    background: "none",
+    border: 0,
+    padding: 0,
+    cursor: "pointer",
+    borderRadius: "var(--borderRadius-md)",
+    color: "var(--md-sys-color-on-surface-variant)",
+    transition: "var(--transitions-fast) background",
+
+    "&:hover": {
+      background:
+        "color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent)",
+    },
+  },
+  variants: {
+    wide: {
+      true: {
+        marginInline: "8px",
+        justifyContent: "flex-start",
+        paddingInline: "12px",
+      },
+      false: {
+        width: "40px",
+        marginInline: "auto",
+      },
+    },
+  },
+});
+
+/**
+ * Members of an open folder or pin stack, indented below the header in
+ * wide mode
+ */
+const folderChildren = cva({
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  variants: {
+    wide: {
+      true: {
+        alignItems: "stretch",
+        paddingInlineStart: "16px",
+        // keeps the selection pill on the rail's edge despite the indent
+        "--rail-pill-inset": "-24px",
+      },
+      false: {},
+    },
+  },
 });
 
 /**
@@ -1156,6 +1469,7 @@ const entryContainer = cva({
     display: "grid",
     flexShrink: 0,
     placeItems: "center",
+    textAlign: "start",
 
     "&:before": {
       content: "' '",
@@ -1163,7 +1477,7 @@ const entryContainer = cva({
       width: "12px",
       height: "0px",
       transition: "var(--transitions-fast) all",
-      insetInlineStart: "-8px",
+      insetInlineStart: "var(--rail-pill-inset, -8px)",
       borderRadius: "4px",
       background: "var(--md-sys-color-on-surface)",
     },
@@ -1185,6 +1499,19 @@ const entryContainer = cva({
         },
       },
     },
+    // wide mode: a row with icon, name and (for folders) a chevron
+    wide: {
+      true: {
+        display: "flex",
+        alignItems: "center",
+        gap: "12px",
+        width: "100%",
+        paddingInline: "8px",
+        borderRadius: "var(--borderRadius-md)",
+        color: "var(--md-sys-color-on-surface)",
+      },
+      false: {},
+    },
   },
 });
 
@@ -1199,6 +1526,11 @@ const FolderGroup = styled("div", {
     flexShrink: 0,
   },
   variants: {
+    // wide mode stretches the header row and the indented members
+    wide: {
+      true: { alignItems: "stretch" },
+      false: {},
+    },
     expanded: {
       true: {
         paddingBlock: "6px",
