@@ -3,7 +3,7 @@ import { Accessor, For, Match, Show, Switch } from "solid-js";
 import { Trans } from "@lingui/solid/macro";
 import { File, Message } from "stoat.js";
 
-import { useClient, useUser } from "@revolt/client";
+import { setMessagePinned, useClient, useUser } from "@revolt/client";
 import { useInstance } from "@revolt/instance";
 import { CustomEmoji, UnicodeEmoji } from "@revolt/markdown/emoji";
 import { useModals } from "@revolt/modal";
@@ -103,11 +103,9 @@ export function MessageContextMenu(props: {
    */
   function pinMessage(ev: MouseEvent) {
     if (ev.shiftKey) {
-      if (props.message!.pinned) {
-        props.message!.unpin().catch(showError);
-      } else {
-        props.message!.pin().catch(showError);
-      }
+      setMessagePinned(client(), props.message!, !props.message!.pinned).catch(
+        showError,
+      );
     } else {
       openModal({
         type: "pin_message",
