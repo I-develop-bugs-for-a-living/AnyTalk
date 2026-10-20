@@ -1,4 +1,3 @@
-import { BiRegularCheckCircle, BiSolidCheckCircle } from "solid-icons/bi";
 import {
   Accessor,
   JSX,
@@ -10,7 +9,7 @@ import {
 } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
-import type { Channel, Server, ServerFlags } from "stoat.js";
+import type { Channel, Server } from "stoat.js";
 import { styled } from "styled-system/jsx";
 
 import { useDevice } from "@revolt/common";
@@ -28,7 +27,6 @@ import {
   MenuButton,
   OverflowingText,
   Row,
-  Tooltip,
   iconSize,
   symbolSize,
   typography,
@@ -49,6 +47,7 @@ import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import MdChevronRight from "@material-design-icons/svg/filled/chevron_right.svg?component-solid";
 import MdSettings from "@material-symbols/svg-400/outlined/settings-fill.svg?component-solid";
 
+import { ServerBadge } from "../../common/ServerBadge";
 import { SidebarBase } from "./common";
 import {
   OrderedCategory,
@@ -388,28 +387,6 @@ const ServerName = styled("a", {
     textOverflow: "ellipsis",
   },
 });
-
-/**
- * Server badge
- */
-function ServerBadge(props: { flags: ServerFlags }) {
-  const { t } = useLingui();
-
-  return (
-    <Show when={props.flags}>
-      <Tooltip
-        content={props.flags === 1 ? t`Official Server` : t`Verified`}
-        placement="top"
-      >
-        {props.flags === 1 ? (
-          <BiSolidCheckCircle size={12} />
-        ) : (
-          <BiRegularCheckCircle size={12} />
-        )}
-      </Tooltip>
-    </Show>
-  );
-}
 
 /**
  * Single category entry

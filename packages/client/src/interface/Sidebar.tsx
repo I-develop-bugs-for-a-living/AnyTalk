@@ -42,7 +42,6 @@ export const Sidebar = (props: {
   const user = useUser();
   const state = useState();
   const client = useClient();
-  const { openModal } = useModals();
 
   const params = useParams<{ server: string }>();
   const location = useLocation();
@@ -64,12 +63,6 @@ export const Sidebar = (props: {
           )}
         user={user()!}
         selectedServer={() => params.server}
-        onCreateOrJoinServer={() =>
-          openModal({
-            type: "create_or_join_server",
-            client: client(),
-          })
-        }
         menuGenerator={props.menuGenerator}
       />
       <Show

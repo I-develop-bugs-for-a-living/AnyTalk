@@ -51,6 +51,7 @@ import { Friends } from "./interface/Friends";
 import { HomePage } from "./interface/Home";
 import { ServerHome } from "./interface/ServerHome";
 import { ChannelPage } from "./interface/channels/ChannelPage";
+import { ServerOverview } from "./interface/servers/ServerOverview";
 import "./serviceWorkerInterface";
 
 attachDevtoolsOverlay();
@@ -167,6 +168,7 @@ const routes = () => (
       <Route path="/invite/:code" component={InviteRedirect} />
       <Route path="/bot/:code" component={BotRedirect} />
       <Route path="/friends" component={Friends} />
+      <Route path="/servers" component={ServerOverview} />
       <Route path="/server/:server/*">
         <Route path="/channel/:channel/*" component={ChannelPage} />
         <Route path="/*" component={ServerHome} />

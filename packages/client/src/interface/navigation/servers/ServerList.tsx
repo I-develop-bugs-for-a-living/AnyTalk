@@ -19,8 +19,9 @@ import { ServerFolderContextMenu } from "@revolt/app/menus";
 import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
 import { useInstance } from "@revolt/instance";
+import Instance from "@revolt/instance/Instance";
 import { KeybindAction, createKeybind } from "@revolt/keybinds";
-import { useNavigate, useSmartParams } from "@revolt/routing";
+import { useLocation, useNavigate, useSmartParams } from "@revolt/routing";
 import { ResolvedEntry, useState } from "@revolt/state";
 import {
   Avatar,
@@ -76,11 +77,6 @@ interface Props {
   selectedServer: Accessor<string | undefined>;
 
   /**
-   * Create or join server
-   */
-  onCreateOrJoinServer(): void;
-
-  /**
    * Menu generator
    */
   menuGenerator: (target: Server | Channel) => JSX.Directives["floating"];
@@ -96,6 +92,7 @@ export const ServerList = (props: Props) => {
   const { isMobile } = useDevice();
   const { t } = useLingui();
   const instance = useInstance();
+  const location = useLocation();
 
   const navigateServer = (byOffset: number) => {
     const serverId = props.selectedServer();
@@ -459,12 +456,17 @@ export const ServerList = (props: Props) => {
             </div>
           )}
         </Show>
-        <Tooltip placement="right" content={t`Create or join a server`}>
+        <Tooltip placement="right" content={t`Server overview`}>
           <a
-            class={entryContainer()}
-            onClick={() => props.onCreateOrJoinServer()}
+            href="/servers"
+            class={entryContainer({
+              indicator:
+                Instance.relPath(location.pathname) === "/servers"
+                  ? "selected"
+                  : undefined,
+            })}
           >
-            <Avatar size={42} fallback={<Symbol>add</Symbol>} />
+            <Avatar size={42} fallback={<Symbol>grid_view</Symbol>} />
           </a>
         </Tooltip>
         <Show when={instance.isStoat}>

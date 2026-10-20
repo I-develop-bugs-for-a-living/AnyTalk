@@ -116,6 +116,23 @@ export const HomeSidebar = (props: Props) => {
 
           <div style={{ height: "5px" }} />
 
+          <MenuButton
+            href="/servers"
+            size="normal"
+            icon={<Symbol>grid_view</Symbol>}
+            attention={
+              Instance.relPath(location.pathname) === "/servers"
+                ? "selected"
+                : "normal"
+            }
+          >
+            <ButtonTitle>
+              <Trans>Servers</Trans>
+            </ButtonTitle>
+          </MenuButton>
+
+          <div style={{ height: "5px" }} />
+
           <Switch
             fallback={
               <MenuButton
