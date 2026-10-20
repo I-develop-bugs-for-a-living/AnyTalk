@@ -3,9 +3,10 @@ import { createEffect, createSignal, JSX, on, Show } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { useQueryClient } from "@tanstack/solid-query";
-import { API, User, UserProfile } from "stoat.js";
+import { API, User } from "stoat.js";
 
 import { useClient } from "@revolt/client";
+import type { ProfileWithHue } from "@revolt/client/resources";
 import { useInstance } from "@revolt/instance";
 import {
   CategoryButton,
@@ -14,11 +15,14 @@ import {
   Form2,
   Row,
   Text,
+  validBannerHue,
 } from "@revolt/ui";
 
 import MdBadge from "@material-design-icons/svg/filled/badge.svg?component-solid";
 
 import { useSettingsNavigation } from "../../Settings";
+
+import { BannerColourField } from "./BannerColourField";
 
 type AttachedControl<T> = {
   name: string;
@@ -27,10 +31,12 @@ type AttachedControl<T> = {
 
 interface Props {
   user: User;
-  profile?: UserProfile;
+  profile?: ProfileWithHue;
   attach?: AttachedControl<unknown>[];
   onSubmit?: (g: IFormGroup) => void;
   onReset?: (g: IFormGroup) => void;
+  /** Called with the banner hue as currently edited (null = automatic) */
+  onBannerHueChange?: (hue: number | null) => void;
   children?: (g: IFormGroup) => JSX.Element;
 }
 
@@ -50,6 +56,7 @@ export function UserProfileEditor(props: Props) {
     ),
     pronouns: createFormControl<string>(props.user.pronouns),
     banner: createFormControl<string | File[] | null>(null),
+    bannerHue: createFormControl<number | null>(null),
     bio: createFormControl(""),
     ...(props.attach
       ? props.attach.reduce(
@@ -65,6 +72,25 @@ export function UserProfileEditor(props: Props) {
 
   const [initialBio, setInitialBio] = createSignal<readonly [string]>();
 
+  /** Banner hue stored on the server (null = automatic), to detect changes */
+  const [initialHue, setInitialHue] = createSignal<number | null>(null);
+
+  /** Set the hue control from a stored value and tell the preview */
+  function resetHue(hue: number | undefined) {
+    const valid = validBannerHue(hue) ?? null;
+    setInitialHue(valid);
+    editGroup.controls.bannerHue.setValue(valid);
+    editGroup.controls.bannerHue.markDirty(false);
+    props.onBannerHueChange?.(valid);
+  }
+
+  /** Apply a hue picked in the field: update the control and the preview */
+  function pickHue(hue: number | null) {
+    editGroup.controls.bannerHue.setValue(hue);
+    editGroup.controls.bannerHue.markDirty(hue !== initialHue());
+    props.onBannerHueChange?.(hue);
+  }
+
   // once profile data is loaded, copy it into the form
   createEffect(
     on(
@@ -77,6 +103,7 @@ export function UserProfileEditor(props: Props) {
 
           editGroup.controls.bio.setValue(profileData.content || "");
           setInitialBio([profileData.content || ""]);
+          resetHue(profileData.bannerHue);
         }
       },
     ),
@@ -93,6 +120,7 @@ export function UserProfileEditor(props: Props) {
       );
       editGroup.controls.bio.setValue(props.profile.content || "");
       setInitialBio([props.profile.content || ""]);
+      resetHue(props.profile.bannerHue);
     }
 
     if (props.onReset) {
@@ -161,18 +189,43 @@ export function UserProfileEditor(props: Props) {
       }
     }
 
+    // custom banner colour (only editable while there is no banner image).
+    // A hue picked before adding an image is saved on purpose: it shows
+    // again if the image is removed.
+    const newHue = editGroup.controls.bannerHue.value;
+    const hueChanged = editGroup.controls.bannerHue.isDirty;
+
+    if (hueChanged) {
+      if (newHue === null) {
+        // `ProfileBannerHue` is newer than the stoat-api types
+        (changes.remove as string[]).push("ProfileBannerHue");
+      } else {
+        changes.profile ??= {};
+        (changes.profile as { banner_hue?: number }).banner_hue = newHue;
+      }
+    }
+
     await props.user.edit(changes);
 
     if (
-      (editGroup.controls.banner.isDirty || editGroup.controls.bio.isDirty) &&
+      (editGroup.controls.banner.isDirty ||
+        editGroup.controls.bio.isDirty ||
+        hueChanged) &&
       props.profile
     ) {
       queryClient.setQueryData(["profile", props.user.id], {
         ...props.profile,
-        animatedBannerURL: newBannerUrl,
-        bannerURL: newBannerUrl,
+        // keep the cached banner unless this save changed it
+        animatedBannerURL: editGroup.controls.banner.isDirty
+          ? newBannerUrl
+          : props.profile.animatedBannerURL,
+        bannerURL: editGroup.controls.banner.isDirty
+          ? newBannerUrl
+          : props.profile.bannerURL,
         content: editGroup.controls.bio.value,
+        bannerHue: newHue ?? undefined,
       });
+      setInitialHue(newHue);
     }
 
     if (props.onSubmit) {
@@ -201,6 +254,13 @@ export function UserProfileEditor(props: Props) {
           imageJustify={false}
           maxSize={instance.limits().file_upload_size_limits["backgrounds"]}
         />
+        <Show when={!editGroup.controls.banner.value}>
+          <BannerColourField
+            userId={props.user.id}
+            value={editGroup.controls.bannerHue.value}
+            onChange={pickHue}
+          />
+        </Show>
         <Form2.TextField
           minlength={2}
           maxlength={32}

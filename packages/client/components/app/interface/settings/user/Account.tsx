@@ -36,6 +36,7 @@ export function MyAccount() {
       <UserSummary
         user={client().user!}
         bannerUrl={profile.data?.animatedBannerURL}
+        bannerHue={profile.data?.bannerHue}
         onEdit={() => navigate("profile")}
         showBadges
       />

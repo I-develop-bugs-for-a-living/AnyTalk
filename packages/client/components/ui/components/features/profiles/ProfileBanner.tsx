@@ -15,6 +15,8 @@ export function ProfileBanner(props: {
   user: User;
   member?: ServerMember;
   bannerUrl?: string;
+  /** Custom banner hue (0-359) from the profile; used when there is no image */
+  bannerHue?: number;
   onClick?: (e: MouseEvent) => void;
   onClickAvatar?: (e: MouseEvent) => void;
   width: 2 | 3;
@@ -53,7 +55,7 @@ export function ProfileBanner(props: {
 
     return {
       "background-image": overlay,
-      "background-color": emptyBannerColour(props.user.id),
+      "background-color": emptyBannerColour(props.user.id, props.bannerHue),
     };
   };
 

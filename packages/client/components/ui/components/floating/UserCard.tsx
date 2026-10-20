@@ -3,6 +3,8 @@ import { JSX, onMount, Show } from "solid-js";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
+import { useClient } from "@revolt/client";
+import { fetchProfile } from "@revolt/client/resources";
 import { useDevice } from "@revolt/common";
 import { useModals } from "@revolt/modal";
 
@@ -35,9 +37,10 @@ export function UserCard(
 ) {
   const { isMobile } = useDevice();
   const { openModal } = useModals();
+  const client = useClient();
   const query = useQuery(() => ({
     queryKey: ["profile", props.user.id],
-    queryFn: () => props.user.fetchProfile(),
+    queryFn: () => fetchProfile(client(), props.user),
   }));
 
   function openFull() {
@@ -63,6 +66,7 @@ export function UserCard(
             user={props.user}
             member={props.member}
             bannerUrl={query.data?.animatedBannerURL}
+            bannerHue={query.data?.bannerHue}
             onClick={openFull}
           />
           <Profile.Actions

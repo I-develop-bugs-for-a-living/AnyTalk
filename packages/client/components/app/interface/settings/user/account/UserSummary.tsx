@@ -19,6 +19,8 @@ export function UserSummary(props: {
   user: User;
   showBadges?: boolean;
   bannerUrl?: string;
+  /** Custom banner hue (0-359) from the profile; used when there is no image */
+  bannerHue?: number;
   onEdit?: () => void;
 }) {
   const dayjs = useTime();
@@ -29,7 +31,7 @@ export function UserSummary(props: {
           color: "black",
         }
       : {
-          "background-color": emptyBannerColour(props.user.id),
+          "background-color": emptyBannerColour(props.user.id, props.bannerHue),
           color: "var(--md-sys-color-on-primary-container)",
         };
 

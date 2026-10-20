@@ -40,7 +40,7 @@ let relativeColourSupported: boolean | null = null;
  * the first call.
  * @returns True if relative colours are supported
  */
-function supportsRelativeColour(): boolean {
+export function supportsRelativeColour(): boolean {
   if (relativeColourSupported === null) {
     relativeColourSupported =
       typeof CSS !== "undefined" &&
@@ -57,15 +57,47 @@ export function resetRelativeColourSupportCache() {
 }
 
 /**
+ * Check a banner hue coming from the server or a form. Only integers from
+ * 0 to 359 count; anything else (missing, fractional, out of range, another
+ * type) means "automatic".
+ * @param value Raw value
+ * @returns The hue, or undefined if it is not a valid hue
+ */
+export function validBannerHue(value: unknown): number | undefined {
+  return typeof value === "number" &&
+    Number.isInteger(value) &&
+    value >= 0 &&
+    value <= 359
+    ? value
+    : undefined;
+}
+
+/**
+ * Preset hues offered in the profile editor, spread over the wheel and
+ * outside the muddy 35-114 band. Names are translated in the editor.
+ */
+export const BANNER_HUE_PRESETS = {
+  red: 25,
+  green: 145,
+  teal: 175,
+  cyan: 205,
+  blue: 250,
+  violet: 290,
+  magenta: 320,
+  pink: 350,
+} as const;
+
+/**
  * Background colour for a profile banner without an image: the theme's
- * primary container with its hue swapped for the user's hue. Falls back to
- * the plain primary container where relative colour syntax is unsupported.
- * A user-chosen colour can replace the result here later.
+ * primary container with its hue swapped for the chosen hue, or the user's
+ * automatic hue. Falls back to the plain primary container where relative
+ * colour syntax is unsupported.
  * @param userId User id
+ * @param hue Hue chosen by the user; invalid or missing means automatic
  * @returns CSS colour value
  */
-export function emptyBannerColour(userId: string): string {
+export function emptyBannerColour(userId: string, hue?: unknown): string {
   return supportsRelativeColour()
-    ? `oklch(from var(--md-sys-color-primary-container) l c ${bannerHue(userId)})`
+    ? `oklch(from var(--md-sys-color-primary-container) l c ${validBannerHue(hue) ?? bannerHue(userId)})`
     : "var(--md-sys-color-primary-container)";
 }

@@ -9,7 +9,12 @@ import { ProfileOwner } from "./ProfileOwner";
 import { ProfileRoles } from "./ProfileRoles";
 import { ProfileStatus } from "./ProfileStatus";
 
-export { emptyBannerColour } from "./bannerHue";
+export {
+  BANNER_HUE_PRESETS,
+  emptyBannerColour,
+  supportsRelativeColour,
+  validBannerHue,
+} from "./bannerHue";
 
 export const Profile = {
   Actions: ProfileActions,

@@ -1,9 +1,11 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import {
+  BANNER_HUE_PRESETS,
   bannerHue,
   emptyBannerColour,
   resetRelativeColourSupportCache,
+  validBannerHue,
 } from "./bannerHue";
 
 const HUE_OF_KNOWN_ID = 116;
@@ -68,5 +70,57 @@ describe("emptyBannerColour", () => {
     expect(emptyBannerColour("a")).toBe(
       "var(--md-sys-color-primary-container)",
     );
+  });
+});
+
+describe("validBannerHue", () => {
+  it("accepts integers from 0 to 359", () => {
+    expect(validBannerHue(0)).toBe(0);
+    expect(validBannerHue(210)).toBe(210);
+    expect(validBannerHue(359)).toBe(359);
+  });
+
+  it("rejects everything else", () => {
+    for (const bad of [
+      -1,
+      360,
+      1.5,
+      NaN,
+      Infinity,
+      "210",
+      null,
+      undefined,
+      {},
+    ]) {
+      expect(validBannerHue(bad)).toBeUndefined();
+    }
+  });
+
+  it("keeps presets valid and outside the muddy band", () => {
+    for (const hue of Object.values(BANNER_HUE_PRESETS)) {
+      expect(validBannerHue(hue)).toBe(hue);
+      expect(hue < 35 || hue >= 115).toBe(true);
+    }
+  });
+});
+
+describe("emptyBannerColour with a chosen hue", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    resetRelativeColourSupportCache();
+  });
+
+  it("uses the chosen hue, even inside the muddy band", () => {
+    resetRelativeColourSupportCache();
+    vi.stubGlobal("CSS", { supports: () => true });
+    expect(emptyBannerColour("a", 60)).toBe(
+      "oklch(from var(--md-sys-color-primary-container) l c 60)",
+    );
+  });
+
+  it("uses the automatic hue for an invalid one", () => {
+    resetRelativeColourSupportCache();
+    vi.stubGlobal("CSS", { supports: () => true });
+    expect(emptyBannerColour("a", 400)).toBe(emptyBannerColour("a"));
   });
 });
