@@ -61,6 +61,11 @@ msgstr "(újrakapcsolódás most)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {# letiltott üzenet} other {# letiltott üzenetek}}"
 
+#. placeholder {0}: data().failed
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{0, plural, one {# channel could not be searched} other {# channels could not be searched}}"
+msgstr ""
+
 #. placeholder {0}: server().channelIds.size
 #: src/interface/servers/ServerOverview.tsx
 msgid "{0, plural, one {# channel} other {# channels}}"
@@ -115,6 +120,13 @@ msgstr "{0, plural, one {Fájl feltöltése} other {Fájlok # feltöltése}}"
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
 msgstr ""
+
+#. placeholder {0}: currentProgress()!.total
+#. placeholder {1}: currentProgress()!.done
+#. placeholder {2}: currentProgress()!.done
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{0, plural, one {Searching {1} of # channel} other {Searching {2} of # channels}}"
+#~ msgstr ""
 
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
@@ -319,9 +331,17 @@ msgstr "{count, plural, one {{title} az idő függvényében, # összefoglaló} 
 msgid "{count, plural, one {# language} other {# languages}}"
 msgstr "{count, plural, one {# nyelv} other {# nyelv}}"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{count, plural, one {# result} other {# results}}"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 #~ msgid "{count} languages"
 #~ msgstr "{count} nyelv"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{count} results"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{count} selected"
@@ -374,6 +394,10 @@ msgstr "{participant} hallotta"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} az idő függvényében"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{total, plural, one {Searching {done} of # channel} other {Searching {done} of # channels}}"
+msgstr ""
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
@@ -470,6 +494,10 @@ msgstr "<0>Vigyázz!</0><1/>Ez nem egyezik meg a megjelent linkkel:"
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "1 person reacted"
 msgstr "1 ember reagált"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "1 result"
+#~ msgstr ""
 
 #: src/interface/channels/text/Composition.tsx
 #~ msgid "1 second"
@@ -3671,6 +3699,10 @@ msgstr "Nem található alkalmazás"
 msgid "No audio was captured, switch window to share audio"
 msgstr "Nem rögzült hang, váltsd az ablakot a hang megosztásához"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No channels to search"
+msgstr ""
+
 #: src/interface/ServerHome.tsx
 msgid "No channels!"
 msgstr "Nincsenek csatornák!"
@@ -3714,6 +3746,10 @@ msgstr "Még nincsenek összefoglalók. Kapcsold be a „Hívásösszefoglalók 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "No recaps yet. Turn on \"Record stream recaps\", then join a call and start or watch a stream."
 msgstr "Még nincsenek összefoglalók. Kapcsold be a „Közvetítés-összefoglalók rögzítése” opciót, majd csatlakozz egy híváshoz, és indíts vagy nézz egy közvetítést."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No results"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No role overrides have been configured."
@@ -4799,6 +4835,10 @@ msgstr "Görgetés"
 msgid "Search"
 msgstr "Keresés"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search failed"
+msgstr ""
+
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Search for emojis..."
 msgstr "Emojik keresése..."
@@ -4817,7 +4857,15 @@ msgid "Search for users..."
 msgstr "Felhasználók keresése..."
 
 #: src/interface/channels/ChannelHeader.tsx
+#~ msgid "Search in"
+#~ msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
 msgid "Search in {name}"
+msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {serverName}"
 msgstr ""
 
 #: src/interface/channels/ChannelHeader.tsx
@@ -4828,6 +4876,10 @@ msgstr ""
 msgid "Search languages"
 msgstr "Nyelvek keresése"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search messages"
+msgstr ""
+
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search messages..."
 msgstr "Üzenetek keresése..."
@@ -4836,6 +4888,10 @@ msgstr "Üzenetek keresése..."
 msgid "Search Results"
 msgstr "Keresési eredmények"
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Search scope"
+msgstr ""
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Search servers"
 msgstr ""
@@ -4843,6 +4899,16 @@ msgstr ""
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "Beállítások keresése"
+
+#. placeholder {0}: progress()!.done
+#. placeholder {1}: progress()!.total
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Searching {0} of {1} channels"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Searching…"
+msgstr ""
 
 #: src/interface/Home.tsx
 msgid "See all your servers at a glance."
@@ -5117,6 +5183,30 @@ msgstr ""
 msgid "Showing the {INBOX_LIMIT} newest"
 msgstr ""
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the newest {limit} results"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest 50 results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the oldest {limit} results"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest 50 results"
+#~ msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr ""
@@ -5194,6 +5284,10 @@ msgstr "Valami menő rólam..."
 msgid "Something is wrong with your request, {0}."
 msgstr "Valami baj van a kéréseddel, {0}."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Something went wrong while searching. Try again."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "Something went wrong! {error}"
 msgstr "Valami hiba történt! {error}"
@@ -5201,6 +5295,7 @@ msgstr "Valami hiba történt! {error}"
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
 #: src/interface/servers/ServerOverview.tsx
 msgid "Sort by"
 msgstr ""
@@ -5577,6 +5672,10 @@ msgstr "Ez a bot privát és csak a készítője adhatja hozzá."
 msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
 msgstr ""
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "This channel"
+msgstr ""
+
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
 msgstr "Erről szól ez a csatorna..."
@@ -5773,12 +5872,17 @@ msgstr "Hibaelhárítás"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 #: components/app/interface/settings/user/Updates.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Try again"
 msgstr "Próbáld újra"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Try another name or language code."
 msgstr "Próbálj másik nevet vagy nyelvkódot."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Try different words or another scope."
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn every sound on and reset their volumes and files?"
@@ -5791,6 +5895,18 @@ msgstr "Kapcsolj ki egyes hangokat, módosítsd a hangerejüket, vagy használj 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "Ha ezt kikapcsolod, az ablak bezárása azonnal kilépteti az AnyTalkot."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Type in the search box and press Enter."
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search the whole server"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search this channel"
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
@@ -6299,6 +6415,10 @@ msgstr "Amíg a közvetítés fejlesztői mód és a „Közvetítés-összefogl
 msgid "While voice call developer mode and \"Record call recaps\" are on, your microphone and everyone you hear are measured once per second. Recaps are stored on this device only; the newest 20 calls are kept."
 msgstr "Amíg a hanghívás fejlesztői mód és a „Hívásösszefoglalók rögzítése” be van kapcsolva, a mikrofonod és mindenki, akit hallasz, másodpercenként egyszer mérésre kerül. Az összefoglalók csak ezen az eszközön tárolódnak; a legújabb 20 hívás marad meg."
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Whole server"
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "Windows telepítő"
@@ -6408,6 +6528,10 @@ msgstr "Nem lehet több mint {0} csatorna ezen a szerveren."
 #: components/i18n/errors.tsx
 msgid "You can't have more than {0} emojis on this server."
 msgstr "Nem lehet több mint {0} emoji ezen a szerveren."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "You can't read the message history of any channel on this server."
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "You cannot give yourself missing permissions."

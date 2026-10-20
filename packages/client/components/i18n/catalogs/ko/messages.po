@@ -61,6 +61,11 @@ msgstr "(지금 다시 연결)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, other {차단된 메시지 #개}}"
 
+#. placeholder {0}: data().failed
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{0, plural, one {# channel could not be searched} other {# channels could not be searched}}"
+msgstr "{0, plural, other {채널 #개를 검색할 수 없었어요}}"
+
 #. placeholder {0}: server().channelIds.size
 #: src/interface/servers/ServerOverview.tsx
 msgid "{0, plural, one {# channel} other {# channels}}"
@@ -115,6 +120,13 @@ msgstr "{0, plural, other {파일 #개 놓기}}"
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
 msgstr "{0, plural, other {받은 편지함, 읽지 않은 멘션 #개}}"
+
+#. placeholder {0}: currentProgress()!.total
+#. placeholder {1}: currentProgress()!.done
+#. placeholder {2}: currentProgress()!.done
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{0, plural, one {Searching {1} of # channel} other {Searching {2} of # channels}}"
+#~ msgstr "{0, plural, =1 {채널 1개 중 {1}개 검색 중} other {채널 #개 중 {2}개 검색 중}}"
 
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
@@ -319,9 +331,17 @@ msgstr "{count, plural, other {{title} 시간에 따른 변화, 요약 #개}}"
 msgid "{count, plural, one {# language} other {# languages}}"
 msgstr "{count, plural, other {#개 언어}}"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{count, plural, one {# result} other {# results}}"
+msgstr "{count, plural, other {결과 #개}}"
+
 #: components/app/interface/settings/user/Language.tsx
 #~ msgid "{count} languages"
 #~ msgstr "언어 {count}개"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{count} results"
+#~ msgstr "결과 {count}개"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{count} selected"
@@ -374,6 +394,10 @@ msgstr "{participant}의 소리 들음"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "시간에 따른 {title}"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{total, plural, one {Searching {done} of # channel} other {Searching {done} of # channels}}"
+msgstr "{total, plural, other {채널 #개 중 {done}개 검색 중}}"
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
@@ -470,6 +494,10 @@ msgstr "<0>조심하세요!</0><1/>표시된 링크와 다른 주소예요:"
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "1 person reacted"
 msgstr "1명이 반응했어요"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "1 result"
+#~ msgstr "결과 1개"
 
 #: src/interface/channels/text/Composition.tsx
 #~ msgid "1 second"
@@ -3671,6 +3699,10 @@ msgstr "앱을 찾을 수 없어요"
 msgid "No audio was captured, switch window to share audio"
 msgstr "캡처된 오디오가 없어요. 오디오를 공유하려면 창을 바꾸세요"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No channels to search"
+msgstr "검색할 채널이 없어요"
+
 #: src/interface/ServerHome.tsx
 msgid "No channels!"
 msgstr "채널이 없어요!"
@@ -3714,6 +3746,10 @@ msgstr "아직 요약이 없어요. \"통화 요약 기록\"을 켠 다음 통�
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "No recaps yet. Turn on \"Record stream recaps\", then join a call and start or watch a stream."
 msgstr "아직 요약이 없어요. \"스트림 요약 기록\"을 켠 다음 통화에 참여해 스트림을 시작하거나 시청하세요."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No results"
+msgstr "결과 없음"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No role overrides have been configured."
@@ -4799,6 +4835,10 @@ msgstr "스크롤"
 msgid "Search"
 msgstr "검색"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search failed"
+msgstr "검색 실패"
+
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Search for emojis..."
 msgstr "이모지 검색..."
@@ -4817,8 +4857,16 @@ msgid "Search for users..."
 msgstr "사용자 검색..."
 
 #: src/interface/channels/ChannelHeader.tsx
+#~ msgid "Search in"
+#~ msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
 msgid "Search in {name}"
 msgstr "{name}에서 검색"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {serverName}"
+msgstr "{serverName}에서 검색"
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search in #{name}"
@@ -4828,6 +4876,10 @@ msgstr "#{name}에서 검색"
 msgid "Search languages"
 msgstr "언어 검색"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search messages"
+msgstr "메시지 검색"
+
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search messages..."
 msgstr "메시지 검색..."
@@ -4836,6 +4888,10 @@ msgstr "메시지 검색..."
 msgid "Search Results"
 msgstr "검색 결과"
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Search scope"
+msgstr "검색 범위"
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Search servers"
 msgstr "서버 검색"
@@ -4843,6 +4899,16 @@ msgstr "서버 검색"
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "설정 검색"
+
+#. placeholder {0}: progress()!.done
+#. placeholder {1}: progress()!.total
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Searching {0} of {1} channels"
+#~ msgstr "채널 {1}개 중 {0}개 검색 중"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Searching…"
+msgstr "검색 중…"
 
 #: src/interface/Home.tsx
 msgid "See all your servers at a glance."
@@ -5117,6 +5183,30 @@ msgstr "별도 창에서 표시 중"
 msgid "Showing the {INBOX_LIMIT} newest"
 msgstr "최신 {INBOX_LIMIT}개 표시 중"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the newest {limit} results"
+msgstr "최신 결과 {limit}개 표시 중"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr "최신 결과 {SERVER_SEARCH_LIMIT}개 표시 중"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest 50 results"
+#~ msgstr "최신 결과 50개 표시 중"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the oldest {limit} results"
+msgstr "가장 오래된 결과 {limit}개 표시 중"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr "가장 오래된 결과 {SERVER_SEARCH_LIMIT}개 표시 중"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest 50 results"
+#~ msgstr "오래된 결과 50개 표시 중"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr "통화에서 누가 말하고 있는지 게임 화면 위에 보여줘요. 테두리 없는 창 모드와 창 모드 게임에서 작동하며, 독점 전체 화면에서는 작동하지 않아요."
@@ -5194,6 +5284,10 @@ msgstr "나에 대한 멋진 이야기..."
 msgid "Something is wrong with your request, {0}."
 msgstr "요청에 문제가 있어요. {0}."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Something went wrong while searching. Try again."
+msgstr "검색 중 문제가 발생했어요. 다시 시도해 주세요."
+
 #: components/i18n/errors.tsx
 msgid "Something went wrong! {error}"
 msgstr "문제가 생겼어요! {error}"
@@ -5201,6 +5295,7 @@ msgstr "문제가 생겼어요! {error}"
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
 #: src/interface/servers/ServerOverview.tsx
 msgid "Sort by"
 msgstr "정렬 기준"
@@ -5577,6 +5672,10 @@ msgstr "이 봇은 비공개라서 만든 사람만 추가할 수 있어요."
 msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
 msgstr "이 버튼은 눌러서 말하기 버튼이라 기능이 켜져 있는 동안 다른 용도로 쓸 수 없어요. 다른 버튼을 선택하세요."
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "This channel"
+msgstr "이 채널"
+
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
 msgstr "이 채널은..."
@@ -5773,12 +5872,17 @@ msgstr "문제 해결"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 #: components/app/interface/settings/user/Updates.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Try again"
 msgstr "다시 시도"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Try another name or language code."
 msgstr "다른 이름이나 언어 코드를 입력해 보세요."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Try different words or another scope."
+msgstr "다른 단어나 다른 범위로 시도해 보세요."
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn every sound on and reset their volumes and files?"
@@ -5791,6 +5895,18 @@ msgstr "소리를 하나씩 끄거나, 볼륨을 바꾸거나, 직접 만든 소
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "이 옵션을 끄면 창을 닫을 때 AnyTalk가 바로 종료돼요."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Type in the search box and press Enter."
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search the whole server"
+msgstr "서버 전체 검색…"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search this channel"
+msgstr "이 채널 검색…"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
@@ -6299,6 +6415,10 @@ msgstr "스트림 개발자 모드와 \"스트림 요약 기록\"이 켜져 있�
 msgid "While voice call developer mode and \"Record call recaps\" are on, your microphone and everyone you hear are measured once per second. Recaps are stored on this device only; the newest 20 calls are kept."
 msgstr "음성 통화 개발자 모드와 \"통화 요약 기록\"이 켜져 있는 동안, 내 마이크와 들리는 모든 사람을 1초마다 측정해요. 요약은 이 기기에만 저장되며 최근 20개의 통화만 보관해요."
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Whole server"
+msgstr "서버 전체"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "Windows 설치 프로그램"
@@ -6408,6 +6528,10 @@ msgstr "이 서버에는 채널을 {0}개보다 많이 만들 수 없어요."
 #: components/i18n/errors.tsx
 msgid "You can't have more than {0} emojis on this server."
 msgstr "이 서버에는 이모지를 {0}개보다 많이 둘 수 없어요."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "You can't read the message history of any channel on this server."
+msgstr "이 서버의 어떤 채널도 메시지 기록을 읽을 수 없어요."
 
 #: components/i18n/errors.tsx
 msgid "You cannot give yourself missing permissions."

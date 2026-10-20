@@ -61,6 +61,11 @@ msgstr "(أعد الاتصال الآن)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, zero {# رسالة مرفوضة} one {رسالة مرفوضة واحدة} two {رسالتان مرفوضتان} few {# رسائل مرفوضة} many {# رسالة مرفوضة} other {# رسالة مرفوضة}}"
 
+#. placeholder {0}: data().failed
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{0, plural, one {# channel could not be searched} other {# channels could not be searched}}"
+msgstr "{0, plural, zero {تعذر البحث في # قناة} one {تعذر البحث في قناة واحدة} two {تعذر البحث في قناتين} few {تعذر البحث في # قنوات} many {تعذر البحث في # قناة} other {تعذر البحث في # قناة}}"
+
 #. placeholder {0}: server().channelIds.size
 #: src/interface/servers/ServerOverview.tsx
 msgid "{0, plural, one {# channel} other {# channels}}"
@@ -115,6 +120,13 @@ msgstr "{0, plural, zero {تنزيل # ملف} one {تنزيل ملف} two {تن
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
 msgstr "{0, plural, zero {صندوق الوارد، لا توجد منشنات غير مقروءة} one {صندوق الوارد، منشن واحد غير مقروء} two {صندوق الوارد، منشنان غير مقروءين} few {صندوق الوارد، # منشنات غير مقروءة} many {صندوق الوارد، # منشنًا غير مقروء} other {صندوق الوارد، # منشن غير مقروء}}"
+
+#. placeholder {0}: currentProgress()!.total
+#. placeholder {1}: currentProgress()!.done
+#. placeholder {2}: currentProgress()!.done
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{0, plural, one {Searching {1} of # channel} other {Searching {2} of # channels}}"
+#~ msgstr "{0, plural, zero {جارٍ البحث في {2} من # قناة} one {جارٍ البحث في {1} من قناة واحدة} two {جارٍ البحث في {2} من قناتين} few {جارٍ البحث في {2} من # قنوات} many {جارٍ البحث في {2} من # قناة} other {جارٍ البحث في {2} من # قناة}}"
 
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
@@ -319,9 +331,17 @@ msgstr "{count, plural, zero {{title} عبر الزمن، # ملخص} one {{titl
 msgid "{count, plural, one {# language} other {# languages}}"
 msgstr "{count, plural, zero {لا لغات} one {لغة واحدة} two {لغتان} few {# لغات} many {# لغة} other {# لغة}}"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{count, plural, one {# result} other {# results}}"
+msgstr "{count, plural, zero {لا نتائج} one {نتيجة واحدة} two {نتيجتان} few {# نتائج} many {# نتيجة} other {# نتيجة}}"
+
 #: components/app/interface/settings/user/Language.tsx
 #~ msgid "{count} languages"
 #~ msgstr "{count} لغات"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{count} results"
+#~ msgstr "{count} نتيجة"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{count} selected"
@@ -374,6 +394,10 @@ msgstr "سُمع {participant}"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} عبر الزمن"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{total, plural, one {Searching {done} of # channel} other {Searching {done} of # channels}}"
+msgstr "{total, plural, zero {جارٍ البحث في {done} من # قناة} one {جارٍ البحث في {done} من قناة واحدة} two {جارٍ البحث في {done} من قناتين} few {جارٍ البحث في {done} من # قنوات} many {جارٍ البحث في {done} من # قناة} other {جارٍ البحث في {done} من # قناة}}"
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
@@ -470,6 +494,10 @@ msgstr "<0>كن حذرا!</0><1/>هذا ليس نفس الرابط الذي تم
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "1 person reacted"
 msgstr "شخص واحد تفاعل"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "1 result"
+#~ msgstr "نتيجة واحدة"
 
 #: src/interface/channels/text/Composition.tsx
 #~ msgid "1 second"
@@ -3667,6 +3695,10 @@ msgstr "لم يتم العثور على تطبيقات"
 msgid "No audio was captured, switch window to share audio"
 msgstr "لم يتم التقاط أي صوت، بدّل النافذة لمشاركة الصوت"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No channels to search"
+msgstr "لا توجد قنوات للبحث فيها"
+
 #: src/interface/ServerHome.tsx
 msgid "No channels!"
 msgstr "لا توجد قنوات!"
@@ -3710,6 +3742,10 @@ msgstr "لا توجد ملخصات بعد. فعّل «تسجيل ملخصات ا
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "No recaps yet. Turn on \"Record stream recaps\", then join a call and start or watch a stream."
 msgstr "لا توجد ملخصات بعد. فعّل «تسجيل ملخصات البث» ثم انضم إلى مكالمة وابدأ بثًا أو شاهده."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No results"
+msgstr "لا توجد نتائج"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No role overrides have been configured."
@@ -4794,6 +4830,10 @@ msgstr "تمرير"
 msgid "Search"
 msgstr "أبحث"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search failed"
+msgstr "فشل البحث"
+
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Search for emojis..."
 msgstr "ابحث عن رموز تعبيرية..."
@@ -4812,8 +4852,16 @@ msgid "Search for users..."
 msgstr "البحث عن مستخدمين..."
 
 #: src/interface/channels/ChannelHeader.tsx
+#~ msgid "Search in"
+#~ msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
 msgid "Search in {name}"
 msgstr "البحث في {name}"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {serverName}"
+msgstr "البحث في {serverName}"
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search in #{name}"
@@ -4823,6 +4871,10 @@ msgstr "البحث في #{name}"
 msgid "Search languages"
 msgstr "البحث عن اللغات"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search messages"
+msgstr "البحث في الرسائل"
+
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search messages..."
 msgstr "ابحث في الرسائل..."
@@ -4831,6 +4883,10 @@ msgstr "ابحث في الرسائل..."
 msgid "Search Results"
 msgstr "نتائج البحث"
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Search scope"
+msgstr "نطاق البحث"
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Search servers"
 msgstr "البحث في الخوادم"
@@ -4838,6 +4894,16 @@ msgstr "البحث في الخوادم"
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "البحث في الإعدادات"
+
+#. placeholder {0}: progress()!.done
+#. placeholder {1}: progress()!.total
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Searching {0} of {1} channels"
+#~ msgstr "جارٍ البحث في {0} من {1} قناة"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Searching…"
+msgstr "جارٍ البحث…"
 
 #: src/interface/Home.tsx
 msgid "See all your servers at a glance."
@@ -5112,6 +5178,30 @@ msgstr "يُعرض في نافذة منفصلة"
 msgid "Showing the {INBOX_LIMIT} newest"
 msgstr "عرض أحدث {INBOX_LIMIT}"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the newest {limit} results"
+msgstr "عرض أحدث {limit} نتيجة"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr "عرض أحدث {SERVER_SEARCH_LIMIT} نتيجة"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest 50 results"
+#~ msgstr "عرض أحدث 50 نتيجة"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the oldest {limit} results"
+msgstr "عرض أقدم {limit} نتيجة"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr "عرض أقدم {SERVER_SEARCH_LIMIT} نتيجة"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest 50 results"
+#~ msgstr "عرض أقدم 50 نتيجة"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr "تعرض من يتحدث في مكالمتك فوق لعبتك. تعمل مع الألعاب في وضع النافذة وبلا إطار، وليس مع ملء الشاشة الحصري."
@@ -5189,6 +5279,10 @@ msgstr "وصف عني..."
 msgid "Something is wrong with your request, {0}."
 msgstr "هنالك خطأ في طلبك، {0}."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Something went wrong while searching. Try again."
+msgstr "حدث خطأ أثناء البحث. حاول مرة أخرى."
+
 #: components/i18n/errors.tsx
 msgid "Something went wrong! {error}"
 msgstr "حدث خطأ ما! {error}"
@@ -5196,6 +5290,7 @@ msgstr "حدث خطأ ما! {error}"
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
 #: src/interface/servers/ServerOverview.tsx
 msgid "Sort by"
 msgstr "ترتيب حسب"
@@ -5572,6 +5667,10 @@ msgstr "هذا البوت خاص ولا يمكن إضافته إلا بواسط�
 msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
 msgstr "هذا الزر هو زر الضغط للتحدث، لذا لا يؤدي أي وظيفة أخرى أثناء تفعيل الضغط للتحدث. اختر زرًا آخر."
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "This channel"
+msgstr "هذه القناة"
+
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
 msgstr "هذه القناة هي عن..."
@@ -5768,12 +5867,17 @@ msgstr "استكشاف الأخطاء وإصلاحها"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 #: components/app/interface/settings/user/Updates.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Try again"
 msgstr "حاول مرة أخرى"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Try another name or language code."
 msgstr "جرّب اسمًا أو رمز لغة آخر."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Try different words or another scope."
+msgstr "جرّب كلمات مختلفة أو نطاقًا آخر."
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn every sound on and reset their volumes and files?"
@@ -5786,6 +5890,18 @@ msgstr "أوقف أصواتًا فردية أو غيّر مستواها أو ا�
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "عند إيقاف هذا الخيار، يؤدي إغلاق النافذة إلى إنهاء AnyTalk فورًا."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Type in the search box and press Enter."
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search the whole server"
+msgstr "اكتب للبحث في الخادم بأكمله"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search this channel"
+msgstr "اكتب للبحث في هذه القناة"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
@@ -6292,6 +6408,10 @@ msgstr "أثناء تفعيل وضع مطوّر البث و«تسجيل ملخص
 msgid "While voice call developer mode and \"Record call recaps\" are on, your microphone and everyone you hear are measured once per second. Recaps are stored on this device only; the newest 20 calls are kept."
 msgstr "أثناء تفعيل وضع مطوّر المكالمة الصوتية و«تسجيل ملخصات المكالمات»، يُقاس الميكروفون الخاص بك وكل من تسمعه مرة كل ثانية. تُخزَّن الملخصات على هذا الجهاز فقط، ويُحتفظ بأحدث 20 مكالمة."
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Whole server"
+msgstr "الخادم بالكامل"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "مثبّت Windows"
@@ -6401,6 +6521,10 @@ msgstr "لا يمكنك الحصول على أكثر من {0} قناة في هذ
 #: components/i18n/errors.tsx
 msgid "You can't have more than {0} emojis on this server."
 msgstr "لا يمكنك الحصول على أكثر من {0} رموز تعبيرية في هذا السيرفر."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "You can't read the message history of any channel on this server."
+msgstr "لا يمكنك قراءة سجل الرسائل في أي قناة على هذا الخادم."
 
 #: components/i18n/errors.tsx
 msgid "You cannot give yourself missing permissions."

@@ -61,6 +61,11 @@ msgstr "（立即重新连接）"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, other {# 条已屏蔽的消息}}"
 
+#. placeholder {0}: data().failed
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{0, plural, one {# channel could not be searched} other {# channels could not be searched}}"
+msgstr "{0, plural, other {有 # 个频道无法搜索}}"
+
 #. placeholder {0}: server().channelIds.size
 #: src/interface/servers/ServerOverview.tsx
 msgid "{0, plural, one {# channel} other {# channels}}"
@@ -115,6 +120,13 @@ msgstr "{0, plural, other {拖入 # 个文件}}"
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
 msgstr "{0, plural, other {收件箱，#条未读提及}}"
+
+#. placeholder {0}: currentProgress()!.total
+#. placeholder {1}: currentProgress()!.done
+#. placeholder {2}: currentProgress()!.done
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{0, plural, one {Searching {1} of # channel} other {Searching {2} of # channels}}"
+#~ msgstr "{0, plural, =1 {正在搜索，已完成 {1}/1 个频道} other {正在搜索，已完成 {2}/# 个频道}}"
 
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
@@ -319,9 +331,17 @@ msgstr "{count, plural, other {{title} 随时间变化，{count} 条回顾}}"
 msgid "{count, plural, one {# language} other {# languages}}"
 msgstr "{count, plural, other {# 种语言}}"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{count, plural, one {# result} other {# results}}"
+msgstr "{count, plural, other {# 条结果}}"
+
 #: components/app/interface/settings/user/Language.tsx
 #~ msgid "{count} languages"
 #~ msgstr "{count} 种语言"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{count} results"
+#~ msgstr "{count} 条结果"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{count} selected"
@@ -374,6 +394,10 @@ msgstr "听到 {participant}"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} 随时间变化"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{total, plural, one {Searching {done} of # channel} other {Searching {done} of # channels}}"
+msgstr "{total, plural, other {正在搜索，已完成 {done}/# 个频道}}"
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
@@ -470,6 +494,10 @@ msgstr "<0>请小心！</0><1/>这与显示的链接不一致："
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "1 person reacted"
 msgstr "1 人反应了"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "1 result"
+#~ msgstr "1 条结果"
 
 #: src/interface/channels/text/Composition.tsx
 #~ msgid "1 second"
@@ -3667,6 +3695,10 @@ msgstr "未找到应用"
 msgid "No audio was captured, switch window to share audio"
 msgstr "未捕获到音频，请切换窗口以共享音频"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No channels to search"
+msgstr "没有可搜索的频道"
+
 #: src/interface/ServerHome.tsx
 msgid "No channels!"
 msgstr "没有频道！"
@@ -3710,6 +3742,10 @@ msgstr "还没有回顾。请开启“录制通话回顾”，然后加入通话
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "No recaps yet. Turn on \"Record stream recaps\", then join a call and start or watch a stream."
 msgstr "还没有回顾。请开启“录制直播回顾”，然后加入通话并开始或观看直播。"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No results"
+msgstr "没有结果"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No role overrides have been configured."
@@ -4795,6 +4831,10 @@ msgstr "滚动"
 msgid "Search"
 msgstr "搜索"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search failed"
+msgstr "搜索失败"
+
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Search for emojis..."
 msgstr "搜索表情..."
@@ -4813,8 +4853,16 @@ msgid "Search for users..."
 msgstr "搜索用户..."
 
 #: src/interface/channels/ChannelHeader.tsx
+#~ msgid "Search in"
+#~ msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
 msgid "Search in {name}"
 msgstr "在 {name} 中搜索"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {serverName}"
+msgstr "在 {serverName} 中搜索"
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search in #{name}"
@@ -4824,6 +4872,10 @@ msgstr "在 #{name} 中搜索"
 msgid "Search languages"
 msgstr "搜索语言"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search messages"
+msgstr "搜索消息"
+
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search messages..."
 msgstr "搜索消息..."
@@ -4832,6 +4884,10 @@ msgstr "搜索消息..."
 msgid "Search Results"
 msgstr "搜索结果"
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Search scope"
+msgstr "搜索范围"
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Search servers"
 msgstr "搜索服务器"
@@ -4839,6 +4895,16 @@ msgstr "搜索服务器"
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "搜索设置"
+
+#. placeholder {0}: progress()!.done
+#. placeholder {1}: progress()!.total
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Searching {0} of {1} channels"
+#~ msgstr "正在搜索 {1} 个频道中的 {0} 个"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Searching…"
+msgstr "正在搜索…"
 
 #: src/interface/Home.tsx
 msgid "See all your servers at a glance."
@@ -5113,6 +5179,30 @@ msgstr "正在单独窗口中显示"
 msgid "Showing the {INBOX_LIMIT} newest"
 msgstr "显示最新的 {INBOX_LIMIT} 条"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the newest {limit} results"
+msgstr "显示最新的 {limit} 条结果"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr "显示最新的 {SERVER_SEARCH_LIMIT} 条结果"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest 50 results"
+#~ msgstr "显示最新的 50 条结果"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the oldest {limit} results"
+msgstr "显示最早的 {limit} 条结果"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr "显示最早的 {SERVER_SEARCH_LIMIT} 条结果"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest 50 results"
+#~ msgstr "显示最早的 50 条结果"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr "在游戏画面上方显示通话中谁在说话。适用于无边框和窗口化游戏，不适用于独占全屏。"
@@ -5190,6 +5280,10 @@ msgstr "关于我的一些趣事…"
 msgid "Something is wrong with your request, {0}."
 msgstr "你的请求有问题，{0}。"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Something went wrong while searching. Try again."
+msgstr "搜索时出错，请重试。"
+
 #: components/i18n/errors.tsx
 msgid "Something went wrong! {error}"
 msgstr "出错了！{error}"
@@ -5197,6 +5291,7 @@ msgstr "出错了！{error}"
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
 #: src/interface/servers/ServerOverview.tsx
 msgid "Sort by"
 msgstr "排序方式"
@@ -5573,6 +5668,10 @@ msgstr "此机器人是私有的，只有创建者可以添加。"
 msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
 msgstr "此按钮是按键说话按钮，开启按键说话时不能用于其他操作。请选择其他按钮。"
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "This channel"
+msgstr "此频道"
+
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
 msgstr "这个频道是关于…"
@@ -5769,12 +5868,17 @@ msgstr "故障排查"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 #: components/app/interface/settings/user/Updates.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Try again"
 msgstr "重试"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Try another name or language code."
 msgstr "请尝试其他名称或语言代码。"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Try different words or another scope."
+msgstr "试试其他关键词或其他范围。"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn every sound on and reset their volumes and files?"
@@ -5787,6 +5891,18 @@ msgstr "单独关闭某些声音、调整音量或使用你自己的声音"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "关闭后，关闭窗口会立即退出 AnyTalk。"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Type in the search box and press Enter."
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search the whole server"
+msgstr "输入内容以搜索整个服务器"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search this channel"
+msgstr "输入内容以搜索此频道"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
@@ -6295,6 +6411,10 @@ msgstr "开启直播开发者模式和“录制直播回顾”后，你在通话
 msgid "While voice call developer mode and \"Record call recaps\" are on, your microphone and everyone you hear are measured once per second. Recaps are stored on this device only; the newest 20 calls are kept."
 msgstr "开启语音通话开发者模式和“录制通话回顾”后，你的麦克风和你听到的所有人会每秒测量一次。回顾仅保存在此设备上，保留最近的 20 次通话。"
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Whole server"
+msgstr "整个服务器"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "Windows 安装程序"
@@ -6404,6 +6524,10 @@ msgstr "此服务器上最多只能有 {0} 个频道。"
 #: components/i18n/errors.tsx
 msgid "You can't have more than {0} emojis on this server."
 msgstr "此服务器上最多只能有 {0} 个表情。"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "You can't read the message history of any channel on this server."
+msgstr "你无法读取此服务器上任何频道的消息历史。"
 
 #: components/i18n/errors.tsx
 msgid "You cannot give yourself missing permissions."

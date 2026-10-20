@@ -61,6 +61,11 @@ msgstr "(এখনই আবার সংযোগ করুন)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {# টি ব্লক করা মেসেজ} other {# টি ব্লক করা মেসেজ}}"
 
+#. placeholder {0}: data().failed
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{0, plural, one {# channel could not be searched} other {# channels could not be searched}}"
+msgstr ""
+
 #. placeholder {0}: server().channelIds.size
 #: src/interface/servers/ServerOverview.tsx
 msgid "{0, plural, one {# channel} other {# channels}}"
@@ -115,6 +120,13 @@ msgstr "{0, plural, one {ফাইলটি ছেড়ে দিন} other {# 
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
 msgstr ""
+
+#. placeholder {0}: currentProgress()!.total
+#. placeholder {1}: currentProgress()!.done
+#. placeholder {2}: currentProgress()!.done
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{0, plural, one {Searching {1} of # channel} other {Searching {2} of # channels}}"
+#~ msgstr ""
 
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
@@ -319,9 +331,17 @@ msgstr "{count, plural, one {সময়ের সাথে {title}, # টি �
 msgid "{count, plural, one {# language} other {# languages}}"
 msgstr "{count, plural, one {# টি ভাষা} other {# টি ভাষা}}"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{count, plural, one {# result} other {# results}}"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 #~ msgid "{count} languages"
 #~ msgstr "{count}টি ভাষা"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{count} results"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{count} selected"
@@ -371,6 +391,10 @@ msgstr "{participant} শুনেছেন"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "সময়ের সাথে {title}"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{total, plural, one {Searching {done} of # channel} other {Searching {done} of # channels}}"
+msgstr ""
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
@@ -461,6 +485,10 @@ msgstr "<0>সাবধান!</0><1/>এটি যে লিংকটি দে
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "1 person reacted"
 msgstr "1 জন রিয়্যাক্ট করেছেন"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "1 result"
+#~ msgstr ""
 
 #~ msgid "1 second"
 #~ msgstr ""
@@ -3639,6 +3667,10 @@ msgstr "কোনো অ্যাপ পাওয়া যায়নি"
 msgid "No audio was captured, switch window to share audio"
 msgstr "কোনো অডিও ধরা পড়েনি, অডিও শেয়ার করতে উইন্ডো বদলান"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No channels to search"
+msgstr ""
+
 #: src/interface/ServerHome.tsx
 msgid "No channels!"
 msgstr "কোনো চ্যানেল নেই!"
@@ -3682,6 +3714,10 @@ msgstr "এখনও কোনো রিক্যাপ নেই। \"কল �
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "No recaps yet. Turn on \"Record stream recaps\", then join a call and start or watch a stream."
 msgstr "এখনও কোনো রিক্যাপ নেই। \"স্ট্রিম রিক্যাপ রেকর্ড করুন\" চালু করুন, তারপর একটি কলে যুক্ত হয়ে স্ট্রিম শুরু করুন বা দেখুন।"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No results"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No role overrides have been configured."
@@ -4766,6 +4802,10 @@ msgstr "স্ক্রল"
 msgid "Search"
 msgstr "খুঁজুন"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search failed"
+msgstr ""
+
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Search for emojis..."
 msgstr "ইমোজি খুঁজুন..."
@@ -4784,7 +4824,15 @@ msgid "Search for users..."
 msgstr "ইউজার খুঁজুন..."
 
 #: src/interface/channels/ChannelHeader.tsx
+#~ msgid "Search in"
+#~ msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
 msgid "Search in {name}"
+msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {serverName}"
 msgstr ""
 
 #: src/interface/channels/ChannelHeader.tsx
@@ -4795,6 +4843,10 @@ msgstr ""
 msgid "Search languages"
 msgstr "ভাষা খুঁজুন"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search messages"
+msgstr ""
+
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search messages..."
 msgstr "মেসেজ খুঁজুন..."
@@ -4803,6 +4855,10 @@ msgstr "মেসেজ খুঁজুন..."
 msgid "Search Results"
 msgstr "খোঁজার ফলাফল"
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Search scope"
+msgstr ""
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Search servers"
 msgstr ""
@@ -4810,6 +4866,16 @@ msgstr ""
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "সেটিংস খুঁজুন"
+
+#. placeholder {0}: progress()!.done
+#. placeholder {1}: progress()!.total
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Searching {0} of {1} channels"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Searching…"
+msgstr ""
 
 #: src/interface/Home.tsx
 msgid "See all your servers at a glance."
@@ -5084,6 +5150,30 @@ msgstr ""
 msgid "Showing the {INBOX_LIMIT} newest"
 msgstr ""
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the newest {limit} results"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest 50 results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the oldest {limit} results"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest 50 results"
+#~ msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr ""
@@ -5161,6 +5251,10 @@ msgstr "আমার সম্পর্কে দারুণ কিছু..."
 msgid "Something is wrong with your request, {0}."
 msgstr "আপনার অনুরোধে কিছু একটা ভুল আছে, {0}।"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Something went wrong while searching. Try again."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "Something went wrong! {error}"
 msgstr "কিছু একটা ভুল হয়েছে! {error}"
@@ -5168,6 +5262,7 @@ msgstr "কিছু একটা ভুল হয়েছে! {error}"
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
 #: src/interface/servers/ServerOverview.tsx
 msgid "Sort by"
 msgstr ""
@@ -5544,6 +5639,10 @@ msgstr "এই বট ব্যক্তিগত এবং শুধু নি�
 msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
 msgstr ""
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "This channel"
+msgstr ""
+
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
 msgstr "এই চ্যানেলটি এই সম্পর্কে..."
@@ -5740,12 +5839,17 @@ msgstr "সমস্যা সমাধান"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 #: components/app/interface/settings/user/Updates.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Try again"
 msgstr "আবার চেষ্টা করুন"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Try another name or language code."
 msgstr "অন্য নাম বা ভাষার কোড চেষ্টা করুন।"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Try different words or another scope."
+msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn every sound on and reset their volumes and files?"
@@ -5758,6 +5862,18 @@ msgstr "আলাদা আলাদা শব্দ বন্ধ করুন, 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "এটি বন্ধ করলে উইন্ডো বন্ধ করার সাথে সাথেই AnyTalk বন্ধ হয়ে যাবে।"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Type in the search box and press Enter."
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search the whole server"
+msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search this channel"
+msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
@@ -6264,6 +6380,10 @@ msgstr "স্ট্রিম ডেভেলপার মোড ও \"স্ট
 msgid "While voice call developer mode and \"Record call recaps\" are on, your microphone and everyone you hear are measured once per second. Recaps are stored on this device only; the newest 20 calls are kept."
 msgstr "ভয়েস কল ডেভেলপার মোড ও \"কল রিক্যাপ রেকর্ড করুন\" চালু থাকলে, আপনার মাইক্রোফোন ও আপনি যাদের শোনেন সবাইকে প্রতি সেকেন্ডে একবার মাপা হয়। রিক্যাপ শুধু এই ডিভাইসে রাখা হয়; সর্বশেষ 20 টি কল রাখা হয়।"
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Whole server"
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "Windows ইনস্টলার"
@@ -6371,6 +6491,10 @@ msgstr "এই সার্ভারে {0} টির বেশি চ্যা�
 #: components/i18n/errors.tsx
 msgid "You can't have more than {0} emojis on this server."
 msgstr "এই সার্ভারে {0} টির বেশি ইমোজি থাকতে পারবে না।"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "You can't read the message history of any channel on this server."
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "You cannot give yourself missing permissions."

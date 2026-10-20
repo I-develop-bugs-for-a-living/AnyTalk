@@ -61,6 +61,11 @@ msgstr "(23C0NN3C7 N0W)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {# 8L0CK3D M355463} other {# 8L0CK3D M3554635}}"
 
+#. placeholder {0}: data().failed
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{0, plural, one {# channel could not be searched} other {# channels could not be searched}}"
+msgstr "{0, plural, one {# CH4NN3L C0ULD N07 83 5342CH3D} other {# CH4NN3L5 C0ULD N07 83 5342CH3D}}"
+
 #. placeholder {0}: server().channelIds.size
 #: src/interface/servers/ServerOverview.tsx
 msgid "{0, plural, one {# channel} other {# channels}}"
@@ -115,6 +120,13 @@ msgstr "{0, plural, one {D20P 4 F1L3} other {D20P # F1L35}}"
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
 msgstr "{0, plural, one {1N80X, # UN234D M3N710N} other {1N80X, # UN234D M3N710N5}}"
+
+#. placeholder {0}: currentProgress()!.total
+#. placeholder {1}: currentProgress()!.done
+#. placeholder {2}: currentProgress()!.done
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{0, plural, one {Searching {1} of # channel} other {Searching {2} of # channels}}"
+#~ msgstr "{0, plural, one {5342CH1N6 {1} 0F # CH4NN3L} other {5342CH1N6 {2} 0F # CH4NN3L5}}"
 
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
@@ -319,9 +331,17 @@ msgstr "{count, plural, one {{title} 0V32 71M3, # 23C4P} other {{title} 0V32 71M
 msgid "{count, plural, one {# language} other {# languages}}"
 msgstr "{count, plural, one {# L4N6U463} other {# L4N6U4635}}"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{count, plural, one {# result} other {# results}}"
+msgstr "{count, plural, one {# 235UL7} other {# 235UL75}}"
+
 #: components/app/interface/settings/user/Language.tsx
 #~ msgid "{count} languages"
 #~ msgstr "{count} L4N6U4635"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{count} results"
+#~ msgstr "{count} 235UL75"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{count} selected"
@@ -374,6 +394,10 @@ msgstr "{participant} H342D"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} 0V32 71M3"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{total, plural, one {Searching {done} of # channel} other {Searching {done} of # channels}}"
+msgstr "{total, plural, one {5342CH1N6 {done} 0F # CH4NN3L} other {5342CH1N6 {done} 0F # CH4NN3L5}}"
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
@@ -470,6 +494,10 @@ msgstr "<0>83 C423FUL!</0><1/>7H15 15 N07 7H3 54M3 45 7H3 L1NK 7H47 W45 D15PL4Y3
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "1 person reacted"
 msgstr "1 P3250N 234C73D"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "1 result"
+#~ msgstr "1 235UL7"
 
 #: src/interface/channels/text/Composition.tsx
 #~ msgid "1 second"
@@ -3676,6 +3704,10 @@ msgstr "N0 4PP5 F0UND"
 msgid "No audio was captured, switch window to share audio"
 msgstr "N0 4UD10 W45 C4P7U23D, 5W17CH W1ND0W 70 5H423 4UD10"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No channels to search"
+msgstr "N0 CH4NN3L5 70 5342CH"
+
 #: src/interface/ServerHome.tsx
 msgid "No channels!"
 msgstr "N0 CH4NN3L5!"
@@ -3719,6 +3751,10 @@ msgstr "N0 23C4P5 Y37. 7U2N 0N \"23C02D C4LL 23C4P5\", 7H3N J01N 4 C4LL."
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "No recaps yet. Turn on \"Record stream recaps\", then join a call and start or watch a stream."
 msgstr "N0 23C4P5 Y37. 7U2N 0N \"23C02D 57234M 23C4P5\", 7H3N J01N 4 C4LL 4ND 57427 02 W47CH 4 57234M."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No results"
+msgstr "N0 235UL75"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No role overrides have been configured."
@@ -4805,6 +4841,10 @@ msgstr "5C20LL"
 msgid "Search"
 msgstr "5342CH"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search failed"
+msgstr "5342CH F41L3D"
+
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Search for emojis..."
 msgstr "5342CH F02 3M0J15..."
@@ -4823,8 +4863,16 @@ msgid "Search for users..."
 msgstr "5342CH F02 U5325..."
 
 #: src/interface/channels/ChannelHeader.tsx
+#~ msgid "Search in"
+#~ msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
 msgid "Search in {name}"
 msgstr "5342CH 1N {name}"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {serverName}"
+msgstr "5342CH 1N {serverName}"
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search in #{name}"
@@ -4834,6 +4882,10 @@ msgstr "5342CH 1N #{name}"
 msgid "Search languages"
 msgstr "5342CH L4N6U4635"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search messages"
+msgstr "5342CH M3554635"
+
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search messages..."
 msgstr "5342CH M3554635..."
@@ -4842,6 +4894,10 @@ msgstr "5342CH M3554635..."
 msgid "Search Results"
 msgstr "5342CH 235UL75"
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Search scope"
+msgstr "5342CH 5C0P3"
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Search servers"
 msgstr "5342CH 532V325"
@@ -4849,6 +4905,16 @@ msgstr "5342CH 532V325"
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "5342CH 53771N65"
+
+#. placeholder {0}: progress()!.done
+#. placeholder {1}: progress()!.total
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Searching {0} of {1} channels"
+#~ msgstr "5342CH1N6 {0} 0F {1} CH4NN3L5"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Searching…"
+msgstr "5342CH1N6…"
 
 #: src/interface/Home.tsx
 msgid "See all your servers at a glance."
@@ -5124,6 +5190,30 @@ msgstr "5H0W1N6 1N 4 53P42473 W1ND0W"
 msgid "Showing the {INBOX_LIMIT} newest"
 msgstr "5H0W1N6 7H3 {INBOX_LIMIT} N3W357"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the newest {limit} results"
+msgstr "5H0W1N6 7H3 N3W357 {limit} 235UL75"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr "5H0W1N6 7H3 N3W357 {SERVER_SEARCH_LIMIT} 235UL75"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest 50 results"
+#~ msgstr "5H0W1N6 7H3 N3W357 50 235UL75"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the oldest {limit} results"
+msgstr "5H0W1N6 7H3 0LD357 {limit} 235UL75"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr "5H0W1N6 7H3 0LD357 {SERVER_SEARCH_LIMIT} 235UL75"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest 50 results"
+#~ msgstr "5H0W1N6 7H3 0LD357 50 235UL75"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr "5H0W5 WH0 15 74LK1N6 1N Y0U2 C4LL 0N 70P 0F Y0U2 64M3. 17 W02K5 0V32 802D32L355 4ND W1ND0W3D 64M35, N07 0V32 3XCLU51V3 FULL5C233N."
@@ -5201,6 +5291,10 @@ msgstr "50M37H1N6 C00L 480U7 M3..."
 msgid "Something is wrong with your request, {0}."
 msgstr "50M37H1N6 15 W20N6 W17H Y0U2 23QU357, {0}."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Something went wrong while searching. Try again."
+msgstr "50M37H1N6 W3N7 W20N6 WH1L3 5342CH1N6. 72Y 4641N."
+
 #: components/i18n/errors.tsx
 msgid "Something went wrong! {error}"
 msgstr "50M37H1N6 W3N7 W20N6! {error}"
@@ -5209,6 +5303,7 @@ msgstr "50M37H1N6 W3N7 W20N6! {error}"
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
 #: src/interface/servers/ServerOverview.tsx
 msgid "Sort by"
 msgstr "5027 8Y"
@@ -5586,6 +5681,10 @@ msgstr "7H15 807 15 P21V473 4ND C4N 0NLY 83 4DD3D 8Y 7H3 C234702."
 msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
 msgstr "7H15 8U770N 15 7H3 PU5H-70-74LK 8U770N, 50 17 D035 N07H1N6 3L53 WH1L3 PU5H 70 74LK 15 0N. P1CK 4N07H32 8U770N."
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "This channel"
+msgstr "7H15 CH4NN3L"
+
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
 msgstr "7H15 CH4NN3L 15 480U7..."
@@ -5782,12 +5881,17 @@ msgstr "720U8L35H0071N6"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 #: components/app/interface/settings/user/Updates.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Try again"
 msgstr "72Y 4641N"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Try another name or language code."
 msgstr "72Y 4N07H32 N4M3 02 L4N6U463 C0D3."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Try different words or another scope."
+msgstr "72Y D1FF323N7 W02D5 02 4N07H32 5C0P3."
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn every sound on and reset their volumes and files?"
@@ -5800,6 +5904,18 @@ msgstr "7U2N 51N6L3 50UND5 0FF, CH4N63 7H312 V0LUM3 02 U53 Y0U2 0WN"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "7U2N 7H15 0FF 4ND CL051N6 7H3 W1ND0W QU175 4NY74LK 216H7 4W4Y."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Type in the search box and press Enter."
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search the whole server"
+msgstr "7YP3 70 5342CH 7H3 WH0L3 532V32"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search this channel"
+msgstr "7YP3 70 5342CH 7H15 CH4NN3L"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
@@ -6311,6 +6427,10 @@ msgstr "WH1L3 57234M D3V3L0P32 M0D3 4ND \"23C02D 57234M 23C4P5\" 423 0N, 5747157
 msgid "While voice call developer mode and \"Record call recaps\" are on, your microphone and everyone you hear are measured once per second. Recaps are stored on this device only; the newest 20 calls are kept."
 msgstr "WH1L3 V01C3 C4LL D3V3L0P32 M0D3 4ND \"23C02D C4LL 23C4P5\" 423 0N, Y0U2 M1C20PH0N3 4ND 3V32Y0N3 Y0U H342 423 M345U23D 0NC3 P32 53C0ND. 23C4P5 423 57023D 0N 7H15 D3V1C3 0NLY; 7H3 N3W357 20 C4LL5 423 K3P7."
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Whole server"
+msgstr "WH0L3 532V32"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "W1ND0W5 1N574LL32"
@@ -6421,6 +6541,10 @@ msgstr "Y0U C4N'7 H4V3 M023 7H4N {0} CH4NN3L5 0N 7H15 532V32."
 #: components/i18n/errors.tsx
 msgid "You can't have more than {0} emojis on this server."
 msgstr "Y0U C4N'7 H4V3 M023 7H4N {0} 3M0J15 0N 7H15 532V32."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "You can't read the message history of any channel on this server."
+msgstr "Y0U C4N'7 234D 7H3 M355463 H15702Y 0F 4NY CH4NN3L 0N 7H15 532V32."
 
 #: components/i18n/errors.tsx
 msgid "You cannot give yourself missing permissions."

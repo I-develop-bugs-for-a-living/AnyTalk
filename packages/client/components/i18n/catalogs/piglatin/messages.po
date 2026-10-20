@@ -61,6 +61,11 @@ msgstr "(econnectray ownay)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {# ockedblay essagemay} other {# ockedblay essagesmay}}"
 
+#. placeholder {0}: data().failed
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{0, plural, one {# channel could not be searched} other {# channels could not be searched}}"
+msgstr "{0, plural, one {# annelchay ouldcay otnay ebay earchedsay} other {# annelschay ouldcay otnay ebay earchedsay}}"
+
 #. placeholder {0}: server().channelIds.size
 #: src/interface/servers/ServerOverview.tsx
 msgid "{0, plural, one {# channel} other {# channels}}"
@@ -115,6 +120,13 @@ msgstr "{0, plural, one {Opdray ayay ilefay} other {Opdray # ilesfay}}"
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
 msgstr "{0, plural, one {Inboxyay, # unreadyay entionmay} other {Inboxyay, # unreadyay entionsmay}}"
+
+#. placeholder {0}: currentProgress()!.total
+#. placeholder {1}: currentProgress()!.done
+#. placeholder {2}: currentProgress()!.done
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{0, plural, one {Searching {1} of # channel} other {Searching {2} of # channels}}"
+#~ msgstr "{0, plural, one {Earchingsay {1} ofyay # annelchay} other {Earchingsay {2} ofyay # annelschay}}"
 
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
@@ -319,9 +331,17 @@ msgstr "{count, plural, one {{title} overyay imetay, # ecapray} other {{title} o
 msgid "{count, plural, one {# language} other {# languages}}"
 msgstr "{count, plural, one {# anguagelay} other {# anguageslay}}"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{count, plural, one {# result} other {# results}}"
+msgstr "{count, plural, one {# esultray} other {# esultsray}}"
+
 #: components/app/interface/settings/user/Language.tsx
 #~ msgid "{count} languages"
 #~ msgstr "{count} anguageslay"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{count} results"
+#~ msgstr "{count} esultsray"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{count} selected"
@@ -374,6 +394,10 @@ msgstr "{participant} eardhay"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} overyay imetay"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{total, plural, one {Searching {done} of # channel} other {Searching {done} of # channels}}"
+msgstr "{total, plural, one {Earchingsay {done} ofyay # annelchay} other {Earchingsay {done} ofyay # annelschay}}"
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
@@ -470,6 +494,10 @@ msgstr "<0>Ebay arefulcay!</0><1/>Isthay isyay otnay ethay amesay asyay ethay in
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "1 person reacted"
 msgstr "1 ersonpay eactedpay"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "1 result"
+#~ msgstr "1 esultray"
 
 #: src/interface/channels/text/Composition.tsx
 #~ msgid "1 second"
@@ -3676,6 +3704,10 @@ msgstr "Onay appsyay oundfay"
 msgid "No audio was captured, switch window to share audio"
 msgstr "Onay audioyay asway apturedcay, itchsway indowway otay areshay audioyay"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No channels to search"
+msgstr "Onay annelschay otay earchsay"
+
 #: src/interface/ServerHome.tsx
 msgid "No channels!"
 msgstr "Onay annelschay!"
@@ -3719,6 +3751,10 @@ msgstr "Onay ecapsray etyay. Urntay onyay \"Ecordray allcay ecapsray\", enthay o
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "No recaps yet. Turn on \"Record stream recaps\", then join a call and start or watch a stream."
 msgstr "Onay ecapsray etyay. Urntay onyay \"Ecordray eamstray ecapsray\", enthay oinjay ayay allcay andyay artstay oryay atchway ayay eamstray."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No results"
+msgstr "Onay esultsray"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No role overrides have been configured."
@@ -4805,6 +4841,10 @@ msgstr "Ollscray"
 msgid "Search"
 msgstr "Earchsay"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search failed"
+msgstr "Earchsay ailedfay"
+
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Search for emojis..."
 msgstr "Earchsay orfay emojisyay..."
@@ -4823,8 +4863,16 @@ msgid "Search for users..."
 msgstr "Earchsay orfay usersyay..."
 
 #: src/interface/channels/ChannelHeader.tsx
+#~ msgid "Search in"
+#~ msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
 msgid "Search in {name}"
 msgstr "Earchsay inyay {name}"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {serverName}"
+msgstr "Earchsay inyay {serverName}"
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search in #{name}"
@@ -4834,6 +4882,10 @@ msgstr "Earchsay inyay #{name}"
 msgid "Search languages"
 msgstr "Earchsay anguageslay"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search messages"
+msgstr "Earchsay essagesmay"
+
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search messages..."
 msgstr "Earchsay essagesmay..."
@@ -4842,6 +4894,10 @@ msgstr "Earchsay essagesmay..."
 msgid "Search Results"
 msgstr "Earchsay Esultsray"
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Search scope"
+msgstr "Earchsay opescay"
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Search servers"
 msgstr "Earchsay erverssay"
@@ -4849,6 +4905,16 @@ msgstr "Earchsay erverssay"
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "Earchsay ettingssay"
+
+#. placeholder {0}: progress()!.done
+#. placeholder {1}: progress()!.total
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Searching {0} of {1} channels"
+#~ msgstr "Earchingsay {0} ofyay {1} annelschay"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Searching…"
+msgstr "Earchingsay…"
 
 #: src/interface/Home.tsx
 msgid "See all your servers at a glance."
@@ -5124,6 +5190,30 @@ msgstr "Owingshay inyay ayay eparatesay indowway"
 msgid "Showing the {INBOX_LIMIT} newest"
 msgstr "Owingshay ethay {INBOX_LIMIT} ewestnay"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the newest {limit} results"
+msgstr "Owingshay ethay ewestnay {limit} esultsray"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr "Owingshay ethay ewestnay {SERVER_SEARCH_LIMIT} esultsray"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest 50 results"
+#~ msgstr "Owingshay ethay ewestnay 50 esultsray"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the oldest {limit} results"
+msgstr "Owingshay ethay oldestyay {limit} esultsray"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr "Owingshay ethay oldestyay {SERVER_SEARCH_LIMIT} esultsray"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest 50 results"
+#~ msgstr "Owingshay ethay oldestyay 50 esultsray"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr "Owsshay owhay isyay alkingtay inyay ouryay allcay onyay optay ofyay ouryay amegay. Ityay orksway overyay orderlessbay andyay indowedway amesgay, otnay overyay exclusiveyay ullscreenfay."
@@ -5201,6 +5291,10 @@ msgstr "Omethingsay oolcay aboutyay emay..."
 msgid "Something is wrong with your request, {0}."
 msgstr "Omethingsay isyay ongwray ithway ouryay equestray, {0}."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Something went wrong while searching. Try again."
+msgstr "Omethingsay entway ongwray ilewhay earchingsay. Ytray againyay."
+
 #: components/i18n/errors.tsx
 msgid "Something went wrong! {error}"
 msgstr "Omethingsay entway ongwray! {error}"
@@ -5209,6 +5303,7 @@ msgstr "Omethingsay entway ongwray! {error}"
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
 #: src/interface/servers/ServerOverview.tsx
 msgid "Sort by"
 msgstr "Ortsay ybay"
@@ -5586,6 +5681,10 @@ msgstr "Isthay otbay isyay ivatepray andyay ancay onlyyay ebay addedyay ybay eth
 msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
 msgstr "Isthay uttonbay isyay ethay ushpay-otay-alktay uttonbay, osay ityay oesday othingnay elseyay ilewhay ushpay otay alktay isyay onyay. Ickpay anotheryay uttonbay."
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "This channel"
+msgstr "Isthay annelchay"
+
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
 msgstr "Isthay annelchay isyay aboutyay..."
@@ -5782,12 +5881,17 @@ msgstr "Oubleshootingtray"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 #: components/app/interface/settings/user/Updates.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Try again"
 msgstr "Ytray againyay"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Try another name or language code."
 msgstr "Ytray anotheryay amenay oryay anguagelay odecay."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Try different words or another scope."
+msgstr "Ytray ifferentday ordsway oryay anotheryay opescay."
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn every sound on and reset their volumes and files?"
@@ -5800,6 +5904,18 @@ msgstr "Urntay inglesay oundssay offyay, angechay eirthay olumevay oryay useyay 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "Urntay isthay offyay andyay osingclay ethay indowway itsquay AnyTalk ightray awayyay."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Type in the search box and press Enter."
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search the whole server"
+msgstr "Ypetay otay earchsay ethay olewhay erversay"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search this channel"
+msgstr "Ypetay otay earchsay isthay annelchay"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
@@ -6311,6 +6427,10 @@ msgstr "Ilewhay eamstray eveloperday odemay andyay \"Ecordray eamstray ecapsray\
 msgid "While voice call developer mode and \"Record call recaps\" are on, your microphone and everyone you hear are measured once per second. Recaps are stored on this device only; the newest 20 calls are kept."
 msgstr "Ilewhay oicevay allcay eveloperday odemay andyay \"Ecordray allcay ecapsray\" areyay onyay, ouryay icrophonemay andyay everyoneyay ouyay earhay areyay easuredmay onceyay erpay econdsay. Ecapsray areyay oredstay onyay isthay eviceday onlyyay; ethay ewestnay 20 allscay areyay eptkay."
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Whole server"
+msgstr "Olewhay erversay"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "Indowsway installeryay"
@@ -6421,6 +6541,10 @@ msgstr "Ouyay an'tcay avehay oremay anthay {0} annelschay onyay isthay erversay.
 #: components/i18n/errors.tsx
 msgid "You can't have more than {0} emojis on this server."
 msgstr "Ouyay an'tcay avehay oremay anthay {0} emojisyay onyay isthay erversay."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "You can't read the message history of any channel on this server."
+msgstr "Ouyay an'tcay eadray ethay essagemay istoryhay ofyay anyyay annelchay onyay isthay erversay."
 
 #: components/i18n/errors.tsx
 msgid "You cannot give yourself missing permissions."

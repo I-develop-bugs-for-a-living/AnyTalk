@@ -61,6 +61,11 @@ msgstr "(jetzt neu verbinden)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {# blockierte Nachricht} other {# blockierte Nachrichten}}"
 
+#. placeholder {0}: data().failed
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{0, plural, one {# channel could not be searched} other {# channels could not be searched}}"
+msgstr "{0, plural, one {# Kanal konnte nicht durchsucht werden} other {# Kanäle konnten nicht durchsucht werden}}"
+
 #. placeholder {0}: server().channelIds.size
 #: src/interface/servers/ServerOverview.tsx
 msgid "{0, plural, one {# channel} other {# channels}}"
@@ -115,6 +120,13 @@ msgstr "{0, plural, one {Datei ablegen} other {# Dateien ablegen}}"
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "{0, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
 msgstr "{0, plural, one {Postfach, # ungelesene Erwähnung} other {Postfach, # ungelesene Erwähnungen}}"
+
+#. placeholder {0}: currentProgress()!.total
+#. placeholder {1}: currentProgress()!.done
+#. placeholder {2}: currentProgress()!.done
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{0, plural, one {Searching {1} of # channel} other {Searching {2} of # channels}}"
+#~ msgstr "{0, plural, one {Durchsuche {1} von # Kanal} other {Durchsuche {2} von # Kanälen}}"
 
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
@@ -319,9 +331,17 @@ msgstr "{count, plural, one {{title} im Zeitverlauf, # Rückblick} other {{title
 msgid "{count, plural, one {# language} other {# languages}}"
 msgstr "{count, plural, one {# Sprache} other {# Sprachen}}"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{count, plural, one {# result} other {# results}}"
+msgstr "{count, plural, one {# Ergebnis} other {# Ergebnisse}}"
+
 #: components/app/interface/settings/user/Language.tsx
 #~ msgid "{count} languages"
 #~ msgstr "{count} Sprachen"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "{count} results"
+#~ msgstr "{count} Ergebnisse"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "{count} selected"
@@ -371,6 +391,10 @@ msgstr "{participant} gehört"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} im Zeitverlauf"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "{total, plural, one {Searching {done} of # channel} other {Searching {done} of # channels}}"
+msgstr "{total, plural, one {Durchsuche {done} von # Kanal} other {Durchsuche {done} von # Kanälen}}"
 
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "{unknown} reacted"
@@ -461,6 +485,10 @@ msgstr "<0>Vorsicht!</0><1/>Das ist nicht der gleiche Link, der angezeigt wurde:
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "1 person reacted"
 msgstr "Eine Person hat reagiert"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "1 result"
+#~ msgstr "1 Ergebnis"
 
 #~ msgid "1 second"
 #~ msgstr "1 Sekunde"
@@ -3618,6 +3646,10 @@ msgstr "Keine Apps gefunden"
 msgid "No audio was captured, switch window to share audio"
 msgstr "Es wurde kein Ton aufgenommen, wechsle das Fenster, um Ton zu teilen"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No channels to search"
+msgstr "Keine Kanäle zum Durchsuchen"
+
 #: src/interface/ServerHome.tsx
 msgid "No channels!"
 msgstr "Keine Kanäle!"
@@ -3661,6 +3693,10 @@ msgstr "Noch keine Rückblicke. Aktiviere „Anrufrückblicke aufzeichnen“ und
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "No recaps yet. Turn on \"Record stream recaps\", then join a call and start or watch a stream."
 msgstr "Noch keine Rückblicke. Aktiviere „Stream-Rückblicke aufzeichnen“, tritt dann einem Anruf bei und starte oder sieh einen Stream an."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No results"
+msgstr "Keine Ergebnisse"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No role overrides have been configured."
@@ -4739,6 +4775,10 @@ msgstr "Scrollen"
 msgid "Search"
 msgstr "Suche"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search failed"
+msgstr "Suche fehlgeschlagen"
+
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Search for emojis..."
 msgstr "Nach Emojis suchen..."
@@ -4757,8 +4797,16 @@ msgid "Search for users..."
 msgstr "Suche nach Nutzern..."
 
 #: src/interface/channels/ChannelHeader.tsx
+#~ msgid "Search in"
+#~ msgstr ""
+
+#: src/interface/channels/ChannelHeader.tsx
 msgid "Search in {name}"
 msgstr "Suche in {name}"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Search in {serverName}"
+msgstr "Suche in {serverName}"
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search in #{name}"
@@ -4768,6 +4816,10 @@ msgstr "Suche in #{name}"
 msgid "Search languages"
 msgstr "Sprachen suchen"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Search messages"
+msgstr "Nachrichten durchsuchen"
+
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Search messages..."
 msgstr "Nachrichten durchsuchen..."
@@ -4776,6 +4828,10 @@ msgstr "Nachrichten durchsuchen..."
 msgid "Search Results"
 msgstr "Suchergebnisse"
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Search scope"
+msgstr "Suchbereich"
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Search servers"
 msgstr "Server durchsuchen"
@@ -4783,6 +4839,16 @@ msgstr "Server durchsuchen"
 #: components/app/interface/settings/_layout/Sidebar.tsx
 msgid "Search settings"
 msgstr "Einstellungen durchsuchen"
+
+#. placeholder {0}: progress()!.done
+#. placeholder {1}: progress()!.total
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Searching {0} of {1} channels"
+#~ msgstr "Durchsuche {0} von {1} Kanälen"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Searching…"
+msgstr "Suche läuft…"
 
 #: src/interface/Home.tsx
 msgid "See all your servers at a glance."
@@ -5054,6 +5120,30 @@ msgstr "In separatem Fenster angezeigt"
 msgid "Showing the {INBOX_LIMIT} newest"
 msgstr "Die {INBOX_LIMIT} neuesten werden angezeigt"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the newest {limit} results"
+msgstr "Die neuesten {limit} Ergebnisse werden angezeigt"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr "Die neuesten {SERVER_SEARCH_LIMIT} Ergebnisse werden angezeigt"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the newest 50 results"
+#~ msgstr "Die neuesten 50 Ergebnisse werden angezeigt"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Showing the oldest {limit} results"
+msgstr "Die ältesten {limit} Ergebnisse werden angezeigt"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest {SERVER_SEARCH_LIMIT} results"
+#~ msgstr "Die ältesten {SERVER_SEARCH_LIMIT} Ergebnisse werden angezeigt"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Showing the oldest 50 results"
+#~ msgstr "Die ältesten 50 Ergebnisse werden angezeigt"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr "Zeigt über deinem Spiel, wer in deinem Anruf spricht. Funktioniert über Spielen im Fenster- und rahmenlosen Modus, nicht im exklusiven Vollbild."
@@ -5131,10 +5221,15 @@ msgstr "Etwas cooles über mich..."
 msgid "Something is wrong with your request, {0}."
 msgstr "Etwas mit deiner Anfrage stimmt nicht, {0}."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Something went wrong while searching. Try again."
+msgstr "Bei der Suche ist etwas schiefgelaufen. Versuche es erneut."
+
 #: components/i18n/errors.tsx
 msgid "Something went wrong! {error}"
 msgstr "Etwas ist schief gelaufen! {error}"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
 #: src/interface/servers/ServerOverview.tsx
 msgid "Sort by"
 msgstr "Sortieren nach"
@@ -5508,6 +5603,10 @@ msgstr "Dieser Bot ist privat und kann nur vom Ersteller hinzugefügt werden."
 msgid "This button is the push-to-talk button, so it does nothing else while push to talk is on. Pick another button."
 msgstr "Diese Taste ist die Push-to-Talk-Taste und hat bei aktivem Push-to-Talk keine andere Funktion. Wähle eine andere Taste."
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "This channel"
+msgstr "Dieser Kanal"
+
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "This channel is about..."
 msgstr "Dieser Kanal befasst sich mit..."
@@ -5704,12 +5803,17 @@ msgstr "Fehlerbehebung"
 
 #: components/app/interface/settings/user/DesktopDownload.tsx
 #: components/app/interface/settings/user/Updates.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Try again"
 msgstr "Erneut versuchen"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Try another name or language code."
 msgstr "Probier einen anderen Namen oder Sprachcode."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Try different words or another scope."
+msgstr "Probiere andere Wörter oder einen anderen Bereich."
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn every sound on and reset their volumes and files?"
@@ -5722,6 +5826,18 @@ msgstr "Einzelne Sounds ausschalten, ihre Lautstärke ändern oder eigene verwen
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "Wenn du das ausschaltest, wird AnyTalk beim Schließen des Fensters sofort beendet."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "Type in the search box and press Enter."
+#~ msgstr ""
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search the whole server"
+msgstr "Tippe, um den ganzen Server zu durchsuchen"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type to search this channel"
+msgstr "Tippe, um diesen Kanal zu durchsuchen"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Unblock user"
@@ -6222,6 +6338,10 @@ msgstr "Solange der Stream-Entwicklermodus und „Stream-Rückblicke aufzeichnen
 msgid "While voice call developer mode and \"Record call recaps\" are on, your microphone and everyone you hear are measured once per second. Recaps are stored on this device only; the newest 20 calls are kept."
 msgstr "Solange der Sprachanruf-Entwicklermodus und „Anrufrückblicke aufzeichnen“ aktiv sind, werden dein Mikrofon und alle, die du hörst, einmal pro Sekunde gemessen. Rückblicke werden nur auf diesem Gerät gespeichert; die neuesten 20 Anrufe bleiben erhalten."
 
+#: src/interface/channels/text/SearchScopeSwitch.tsx
+msgid "Whole server"
+msgstr "Ganzer Server"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "Windows-Installer"
@@ -6329,6 +6449,10 @@ msgstr "Du kannst nicht mehr als {0} Channel auf diesem Server hinzufügen."
 #: components/i18n/errors.tsx
 msgid "You can't have more than {0} emojis on this server."
 msgstr "Du kannst nicht mehr als {0} Emojis auf diesem Server hinzufügen."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "You can't read the message history of any channel on this server."
+msgstr "Du kannst den Nachrichtenverlauf keines Kanals auf diesem Server lesen."
 
 #: components/i18n/errors.tsx
 msgid "You cannot give yourself missing permissions."
