@@ -735,11 +735,13 @@ class Voice {
         // the user's mute choice and stays as it is.
         this.#publishMutedMicrophone(room);
       } else if (this.speakingPermission)
-        // the microphone state the user had (muted or not) is in the settings
+        // the microphone state the user had (muted or not) is in the settings;
+        // while deafened the mic stays closed and micOn stays as it is
         room.localParticipant
-          .setMicrophoneEnabled(this.#settings.micOn)
+          .setMicrophoneEnabled(this.#micWanted())
           .then((track) => {
-            this.#settings.micOn = track != null;
+            // only a mic we asked for can tell that opening it failed
+            if (this.#micWanted()) this.#settings.micOn = track != null;
           })
           // MediaDevicesError tells what went wrong
           .catch((err) => console.warn("[rtc] could not start the mic", err));
