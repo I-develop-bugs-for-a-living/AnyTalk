@@ -342,7 +342,7 @@ export const ServerList = (props: Props) => {
           >
             <Avatar
               size={42}
-              fallback={<Symbol fill={inboxOpen()}>alternate_email</Symbol>}
+              fallback={<Symbol fill={inboxOpen()}>inbox</Symbol>}
               holepunch={inboxMentions.count() > 0 ? "top-right" : undefined}
               overlay={
                 <Show when={inboxMentions.count() > 0}>

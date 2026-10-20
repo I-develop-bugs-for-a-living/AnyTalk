@@ -445,7 +445,7 @@ function InboxContent(props: {
         when={hasList()}
         fallback={
           <Empty>
-            <Symbol size={48}>alternate_email</Symbol>
+            <Symbol size={48}>done_all</Symbol>
             <Text class="title" size="medium">
               <Trans>You're all caught up</Trans>
             </Text>
