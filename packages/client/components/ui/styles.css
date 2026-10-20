@@ -8,6 +8,16 @@
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* touch screens have no hover, and <md-ripple> puts its press circle in the
+   wrong place inside scaled SVG content (rail icons), so it is hidden there,
+   keyboard focus rings are separate and stay */
+@media (hover: none) {
+  md-ripple {
+    display: none;
+  }
 }
 
 body {
