@@ -391,6 +391,14 @@ msgstr "{participant} eardhay"
 #~ msgid "{sec} seconds"
 #~ msgstr ""
 
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {This channel is in slowmode. Your message is back in the text box, try again in # second.} other {This channel is in slowmode. Your message is back in the text box, try again in # seconds.}}"
+msgstr "{seconds, plural, one {Isthay annelchay isyay inyay owmodeslay. Ouryay essagemay isyay ackbay inyay ethay exttay oxbay, ytray againyay inyay # econdsay.} other {Isthay annelchay isyay inyay owmodeslay. Ouryay essagemay isyay ackbay inyay ethay exttay oxbay, ytray againyay inyay # econdssay.}}"
+
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {You're sending messages too quickly. Your message is back in the text box, try again in # second.} other {You're sending messages too quickly. Your message is back in the text box, try again in # seconds.}}"
+msgstr "{seconds, plural, one {Ou'reyay endingsay essagesmay ootay icklyquay. Ouryay essagemay isyay ackbay inyay ethay exttay oxbay, ytray againyay inyay # econdsay.} other {Ou'reyay endingsay essagesmay ootay icklyquay. Ouryay essagemay isyay ackbay inyay ethay exttay oxbay, ytray againyay inyay # econdssay.}}"
+
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} overyay imetay"
@@ -1413,7 +1421,6 @@ msgstr "Ientclay Ettingssay"
 #: components/modal/modals/CreateServer.tsx
 #: components/modal/modals/CreateWebhook.tsx
 #: components/modal/modals/CustomStatus.tsx
-#: components/modal/modals/DeleteChannel.tsx
 #: components/modal/modals/EditBotUsername.tsx
 #: components/modal/modals/EditEmail.tsx
 #: components/modal/modals/EditEmoji.tsx
@@ -1503,6 +1510,7 @@ msgid "Configure one-time password authentication"
 msgstr "Onfigurecay oneyay-imetay asswordpay authenticationyay"
 
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/modal/modals/DeleteChannel.tsx
 #: components/modal/modals/MFAFlow.tsx
 msgid "Confirm"
 msgstr "Onfirmcay"
@@ -5711,6 +5719,10 @@ msgstr "Isthay annelchay"
 msgid "This channel is about..."
 msgstr "Isthay annelchay isyay aboutyay..."
 
+#: components/client/rateLimitNotice.ts
+msgid "This channel is in slowmode. Your message is back in the text box, try again in a moment."
+msgstr "Isthay annelchay isyay inyay owmodeslay. Ouryay essagemay isyay ackbay inyay ethay exttay oxbay, ytray againyay inyay ayay omentmay."
+
 #: src/interface/channels/AgeGate.tsx
 msgid "This channel is marked as mature."
 msgstr "Isthay annelchay isyay arkedmay asyay aturemay."
@@ -6687,6 +6699,10 @@ msgstr "Ou'reyay alreadyyay artpay ofyay isthay erversay."
 #: components/app/interface/settings/UserSettings.tsx
 msgid "You're offline. Connect to the internet first, otherwise AnyTalk couldn't load again."
 msgstr "Ou'reyay offlineyay. Onnectcay otay ethay internetyay irstfay, otherwiseyay AnyTalk ouldn'tcay oadlay againyay."
+
+#: components/client/rateLimitNotice.ts
+msgid "You're sending messages too quickly. Your message is back in the text box, try again in a moment."
+msgstr "Ou'reyay endingsay essagesmay ootay icklyquay. Ouryay essagemay isyay ackbay inyay ethay exttay oxbay, ytray againyay inyay ayay omentmay."
 
 #: components/i18n/errors.tsx
 msgid "You've already sent a request to this user."

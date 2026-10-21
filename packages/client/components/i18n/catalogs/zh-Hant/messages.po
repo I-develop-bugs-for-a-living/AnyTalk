@@ -388,6 +388,14 @@ msgstr "{participant} 聽到的內容"
 #~ msgid "{sec} seconds"
 #~ msgstr ""
 
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {This channel is in slowmode. Your message is back in the text box, try again in # second.} other {This channel is in slowmode. Your message is back in the text box, try again in # seconds.}}"
+msgstr ""
+
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {You're sending messages too quickly. Your message is back in the text box, try again in # second.} other {You're sending messages too quickly. Your message is back in the text box, try again in # seconds.}}"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title}趨勢"
@@ -1387,7 +1395,6 @@ msgstr "用戶端設定"
 #: components/modal/modals/CreateServer.tsx
 #: components/modal/modals/CreateWebhook.tsx
 #: components/modal/modals/CustomStatus.tsx
-#: components/modal/modals/DeleteChannel.tsx
 #: components/modal/modals/EditBotUsername.tsx
 #: components/modal/modals/EditEmail.tsx
 #: components/modal/modals/EditEmoji.tsx
@@ -1477,6 +1484,7 @@ msgid "Configure one-time password authentication"
 msgstr "設定一次性密碼驗證"
 
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/modal/modals/DeleteChannel.tsx
 #: components/modal/modals/MFAFlow.tsx
 msgid "Confirm"
 msgstr "確定"
@@ -5666,6 +5674,10 @@ msgstr ""
 msgid "This channel is about..."
 msgstr "這個頻道是關於..."
 
+#: components/client/rateLimitNotice.ts
+msgid "This channel is in slowmode. Your message is back in the text box, try again in a moment."
+msgstr ""
+
 #: src/interface/channels/AgeGate.tsx
 msgid "This channel is marked as mature."
 msgstr "此頻道已標記為成人內容。"
@@ -6634,6 +6646,10 @@ msgstr "您已加入此伺服器。"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "You're offline. Connect to the internet first, otherwise AnyTalk couldn't load again."
 msgstr "你目前離線。請先連上網際網路，否則 AnyTalk 將無法再次載入。"
+
+#: components/client/rateLimitNotice.ts
+msgid "You're sending messages too quickly. Your message is back in the text box, try again in a moment."
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "You've already sent a request to this user."

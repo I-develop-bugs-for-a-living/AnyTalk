@@ -388,6 +388,14 @@ msgstr "{participant} escuchado"
 #~ msgid "{sec} seconds"
 #~ msgstr "{sec} segundos"
 
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {This channel is in slowmode. Your message is back in the text box, try again in # second.} other {This channel is in slowmode. Your message is back in the text box, try again in # seconds.}}"
+msgstr "{seconds, plural, one {Este canal está en modo pausado. Tu mensaje ha vuelto al cuadro de texto, inténtalo de nuevo en # segundo.} many {Este canal está en modo pausado. Tu mensaje ha vuelto al cuadro de texto, inténtalo de nuevo en # segundos.} other {Este canal está en modo pausado. Tu mensaje ha vuelto al cuadro de texto, inténtalo de nuevo en # segundos.}}"
+
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {You're sending messages too quickly. Your message is back in the text box, try again in # second.} other {You're sending messages too quickly. Your message is back in the text box, try again in # seconds.}}"
+msgstr "{seconds, plural, one {Estás enviando mensajes demasiado rápido. Tu mensaje ha vuelto al cuadro de texto, inténtalo de nuevo en # segundo.} many {Estás enviando mensajes demasiado rápido. Tu mensaje ha vuelto al cuadro de texto, inténtalo de nuevo en # segundos.} other {Estás enviando mensajes demasiado rápido. Tu mensaje ha vuelto al cuadro de texto, inténtalo de nuevo en # segundos.}}"
+
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} a lo largo del tiempo"
@@ -1384,7 +1392,6 @@ msgstr "Ajustes del cliente"
 #: components/modal/modals/CreateServer.tsx
 #: components/modal/modals/CreateWebhook.tsx
 #: components/modal/modals/CustomStatus.tsx
-#: components/modal/modals/DeleteChannel.tsx
 #: components/modal/modals/EditBotUsername.tsx
 #: components/modal/modals/EditEmail.tsx
 #: components/modal/modals/EditEmoji.tsx
@@ -1474,6 +1481,7 @@ msgid "Configure one-time password authentication"
 msgstr "Configura la autenticación mediante contraseña de un solo uso"
 
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/modal/modals/DeleteChannel.tsx
 #: components/modal/modals/MFAFlow.tsx
 msgid "Confirm"
 msgstr "Confirmar"
@@ -5651,6 +5659,10 @@ msgstr "Este canal"
 msgid "This channel is about..."
 msgstr "Este canal es sobre..."
 
+#: components/client/rateLimitNotice.ts
+msgid "This channel is in slowmode. Your message is back in the text box, try again in a moment."
+msgstr "Este canal está en modo pausado. Tu mensaje ha vuelto al cuadro de texto, inténtalo de nuevo en un momento."
+
 #: src/interface/channels/AgeGate.tsx
 msgid "This channel is marked as mature."
 msgstr "Este canal está marcado como adulto."
@@ -6619,6 +6631,10 @@ msgstr "Ya eres miembro de este servidor."
 #: components/app/interface/settings/UserSettings.tsx
 msgid "You're offline. Connect to the internet first, otherwise AnyTalk couldn't load again."
 msgstr "Sin conexión. Conéctate primero a internet, de lo contrario AnyTalk no podría volver a cargar."
+
+#: components/client/rateLimitNotice.ts
+msgid "You're sending messages too quickly. Your message is back in the text box, try again in a moment."
+msgstr "Estás enviando mensajes demasiado rápido. Tu mensaje ha vuelto al cuadro de texto, inténtalo de nuevo en un momento."
 
 #: components/i18n/errors.tsx
 msgid "You've already sent a request to this user."

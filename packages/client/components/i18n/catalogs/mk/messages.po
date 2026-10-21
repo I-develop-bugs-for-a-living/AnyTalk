@@ -391,6 +391,14 @@ msgstr "{participant} се слушна"
 #~ msgid "{sec} seconds"
 #~ msgstr ""
 
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {This channel is in slowmode. Your message is back in the text box, try again in # second.} other {This channel is in slowmode. Your message is back in the text box, try again in # seconds.}}"
+msgstr ""
+
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {You're sending messages too quickly. Your message is back in the text box, try again in # second.} other {You're sending messages too quickly. Your message is back in the text box, try again in # seconds.}}"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} со текот на времето"
@@ -1413,7 +1421,6 @@ msgstr "Поставки на клиентот"
 #: components/modal/modals/CreateServer.tsx
 #: components/modal/modals/CreateWebhook.tsx
 #: components/modal/modals/CustomStatus.tsx
-#: components/modal/modals/DeleteChannel.tsx
 #: components/modal/modals/EditBotUsername.tsx
 #: components/modal/modals/EditEmail.tsx
 #: components/modal/modals/EditEmoji.tsx
@@ -1503,6 +1510,7 @@ msgid "Configure one-time password authentication"
 msgstr "Постави автентикација со еднократна лозинка"
 
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/modal/modals/DeleteChannel.tsx
 #: components/modal/modals/MFAFlow.tsx
 msgid "Confirm"
 msgstr "Потврди"
@@ -5711,6 +5719,10 @@ msgstr ""
 msgid "This channel is about..."
 msgstr "Овој канал е за..."
 
+#: components/client/rateLimitNotice.ts
+msgid "This channel is in slowmode. Your message is back in the text box, try again in a moment."
+msgstr ""
+
 #: src/interface/channels/AgeGate.tsx
 msgid "This channel is marked as mature."
 msgstr "Овој канал е означен како за возрасни."
@@ -6687,6 +6699,10 @@ msgstr "Веќе си дел од овој сервер."
 #: components/app/interface/settings/UserSettings.tsx
 msgid "You're offline. Connect to the internet first, otherwise AnyTalk couldn't load again."
 msgstr "Офлајн си. Најпрво поврзи се на интернет, инаку AnyTalk не би можел повторно да се вчита."
+
+#: components/client/rateLimitNotice.ts
+msgid "You're sending messages too quickly. Your message is back in the text box, try again in a moment."
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "You've already sent a request to this user."

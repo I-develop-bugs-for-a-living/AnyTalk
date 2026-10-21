@@ -1,12 +1,21 @@
-import { For, Show, Suspense, createSignal } from "solid-js";
+import {
+  For,
+  Show,
+  Suspense,
+  createEffect,
+  createSignal,
+  on,
+  onCleanup,
+} from "solid-js";
 
 import { plural } from "@lingui/core/macro";
 import { Plural, Trans, useLingui } from "@lingui/solid/macro";
 import { useQuery } from "@tanstack/solid-query";
-import type { API, Channel, Message as MessageClass } from "stoat.js";
+import type { API, Channel, Client, Message as MessageClass } from "stoat.js";
 import { css } from "styled-system/css";
 
 import { Message } from "@revolt/app";
+import { useClient } from "@revolt/client";
 import { Button, CircularProgress, Row, Text } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
@@ -47,6 +56,24 @@ interface SearchResult {
   failed: number;
   total: number;
   order: API.DataMessageSearch["sort"];
+}
+
+/** Wait before refetching, so a burst of pin events causes one request */
+const REFETCH_DELAY_MS = 400;
+
+/**
+ * Make sure messages returned by the pinned search are flagged as pinned in
+ * the store. A stored copy can be stale (a pin event for it was dropped), and
+ * the pinned view hides messages whose flag is false.
+ */
+function markPinned(client: Client, messages: MessageClass[]) {
+  for (const message of messages) {
+    if (client.messages.has(message.id) && !message.pinned) {
+      client.messages.updateUnderlyingObject(message.id, {
+        pinned: true,
+      });
+    }
+  }
 }
 
 /**
@@ -94,6 +121,7 @@ export function TextSearchSidebar(props: {
   query: Omit<API.DataMessageSearch, "include_users">;
 }) {
   const { t } = useLingui();
+  const client = useClient();
   const [sort, setSort] = createSignal<API.DataMessageSearch["sort"]>("Latest");
   const [progress, setProgress] = createSignal<{
     key: string;
@@ -188,9 +216,14 @@ export function TextSearchSidebar(props: {
 
   /** Search only the current channel */
   async function searchChannel(p: SearchParams): Promise<SearchResult> {
+    const generation = pinGeneration;
     const messages = await p.channel
       .searchWithUsers(p.query.sort ? p.query : { ...p.query, sort: p.sort })
       .then((result) => result.messages);
+    // skip when a pin event arrived meanwhile: the response may be older
+    if (p.query.pinned && generation === pinGeneration) {
+      markPinned(client(), messages);
+    }
     return { messages, truncated: false, failed: 0, total: 1, order: p.sort };
   }
 
@@ -207,6 +240,66 @@ export function TextSearchSidebar(props: {
     };
   });
 
+  /** Bumped on every pin event, so older search responses can be told apart */
+  let pinGeneration = 0;
+
+  /**
+   * Keep the pinned list live. A pin or unpin by anyone posts a system
+   * message into the channel, which is the one signal that always reaches
+   * us (a MessageUpdate for an uncached message is dropped by stoat.js, and
+   * an unpin only says `clear: ["Pinned"]`). So refetch, debounced, when such
+   * a system message arrives or when a stored message changes its pinned flag.
+   */
+  createEffect(
+    on(
+      () => [props.query.pinned, props.channel, client()] as const,
+      ([pinned, channel, c]) => {
+        if (!pinned) return;
+        let timer: ReturnType<typeof setTimeout> | undefined;
+        const refetchSoon = () => {
+          pinGeneration++;
+          clearTimeout(timer);
+          timer = setTimeout(() => void query.refetch(), REFETCH_DELAY_MS);
+        };
+        const onCreate = (message: MessageClass) => {
+          const type = message.systemMessage?.type;
+          if (
+            message.channelId === channel.id &&
+            (type === "message_pinned" || type === "message_unpinned")
+          ) {
+            refetchSoon();
+          }
+        };
+        const onUpdate = (
+          message: MessageClass,
+          previous: { pinned?: boolean },
+        ) => {
+          if (
+            message.channelId === channel.id &&
+            !!previous.pinned !== message.pinned
+          ) {
+            refetchSoon();
+          }
+        };
+        c.on("messageCreate", onCreate);
+        c.on("messageUpdate", onUpdate);
+        onCleanup(() => {
+          clearTimeout(timer);
+          c.off("messageCreate", onCreate);
+          c.off("messageUpdate", onUpdate);
+        });
+      },
+    ),
+  );
+
+  /**
+   * Messages to show. In the pinned view, a message whose stored flag turned
+   * false (own unpin, or an unpin event) disappears right away, before the
+   * refetch confirms it.
+   */
+  const visibleMessages = (messages: MessageClass[]) =>
+    props.query.pinned ? messages.filter((m) => m.pinned) : messages;
+
   /** Progress of the run currently shown, ignoring other runs' progress */
   const currentProgress = () => {
     const current = progress();
@@ -217,7 +310,7 @@ export function TextSearchSidebar(props: {
   const liveText = () => {
     if (query.isFetching) return t`Searching…`;
     if (query.isSuccess) {
-      const count = query.data.messages.length;
+      const count = visibleMessages(query.data.messages).length;
       return plural(count, { one: "# result", other: "# results" });
     }
     if (query.isError) return t`Search failed`;
@@ -322,7 +415,12 @@ export function TextSearchSidebar(props: {
                   />
                 </Text>
               </Show>
-              <Show when={!query.isFetching && data().messages.length === 0}>
+              <Show
+                when={
+                  !query.isFetching &&
+                  visibleMessages(data().messages).length === 0
+                }
+              >
                 <Show
                   when={data().total > 0}
                   fallback={
@@ -340,7 +438,7 @@ export function TextSearchSidebar(props: {
                   />
                 </Show>
               </Show>
-              <For each={data().messages}>
+              <For each={visibleMessages(data().messages)}>
                 {(message) => (
                   <a href={message.path}>
                     <Show when={serverScope() && message.channel?.name}>

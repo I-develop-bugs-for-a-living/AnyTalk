@@ -12,6 +12,7 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import { css } from "styled-system/css";
 
 import { CONFIGURATION } from "@revolt/common";
+import { intlLocale } from "@revolt/i18n";
 import { Markdown } from "@revolt/markdown";
 import {
   Button,
@@ -145,9 +146,9 @@ export default function Updates() {
   function formatDate(value?: string | null) {
     const date = value ? new Date(value) : undefined;
     if (!date || isNaN(date.getTime())) return "";
-    return new Intl.DateTimeFormat(i18n().locale, { dateStyle: "long" }).format(
-      date,
-    );
+    return new Intl.DateTimeFormat(intlLocale(i18n().locale), {
+      dateStyle: "long",
+    }).format(date);
   }
 
   return (

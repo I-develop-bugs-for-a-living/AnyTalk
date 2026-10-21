@@ -391,6 +391,14 @@ msgstr "{participant} H342D"
 #~ msgid "{sec} seconds"
 #~ msgstr ""
 
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {This channel is in slowmode. Your message is back in the text box, try again in # second.} other {This channel is in slowmode. Your message is back in the text box, try again in # seconds.}}"
+msgstr "{seconds, plural, one {7H15 CH4NN3L 15 1N 5L0WM0D3. Y0U2 M355463 15 84CK 1N 7H3 73X7 80X, 72Y 4641N 1N # 53C0ND.} other {7H15 CH4NN3L 15 1N 5L0WM0D3. Y0U2 M355463 15 84CK 1N 7H3 73X7 80X, 72Y 4641N 1N # 53C0ND5.}}"
+
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {You're sending messages too quickly. Your message is back in the text box, try again in # second.} other {You're sending messages too quickly. Your message is back in the text box, try again in # seconds.}}"
+msgstr "{seconds, plural, one {Y0U'23 53ND1N6 M3554635 700 QU1CKLY. Y0U2 M355463 15 84CK 1N 7H3 73X7 80X, 72Y 4641N 1N # 53C0ND.} other {Y0U'23 53ND1N6 M3554635 700 QU1CKLY. Y0U2 M355463 15 84CK 1N 7H3 73X7 80X, 72Y 4641N 1N # 53C0ND5.}}"
+
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} 0V32 71M3"
@@ -1413,7 +1421,6 @@ msgstr "CL13N7 53771N65"
 #: components/modal/modals/CreateServer.tsx
 #: components/modal/modals/CreateWebhook.tsx
 #: components/modal/modals/CustomStatus.tsx
-#: components/modal/modals/DeleteChannel.tsx
 #: components/modal/modals/EditBotUsername.tsx
 #: components/modal/modals/EditEmail.tsx
 #: components/modal/modals/EditEmoji.tsx
@@ -1503,6 +1510,7 @@ msgid "Configure one-time password authentication"
 msgstr "C0NF16U23 0N3-71M3 P455W02D 4U7H3N71C4710N"
 
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/modal/modals/DeleteChannel.tsx
 #: components/modal/modals/MFAFlow.tsx
 msgid "Confirm"
 msgstr "C0NF12M"
@@ -5711,6 +5719,10 @@ msgstr "7H15 CH4NN3L"
 msgid "This channel is about..."
 msgstr "7H15 CH4NN3L 15 480U7..."
 
+#: components/client/rateLimitNotice.ts
+msgid "This channel is in slowmode. Your message is back in the text box, try again in a moment."
+msgstr "7H15 CH4NN3L 15 1N 5L0WM0D3. Y0U2 M355463 15 84CK 1N 7H3 73X7 80X, 72Y 4641N 1N 4 M0M3N7."
+
 #: src/interface/channels/AgeGate.tsx
 msgid "This channel is marked as mature."
 msgstr "7H15 CH4NN3L 15 M42K3D 45 M47U23."
@@ -6687,6 +6699,10 @@ msgstr "Y0U'23 4L234DY P427 0F 7H15 532V32."
 #: components/app/interface/settings/UserSettings.tsx
 msgid "You're offline. Connect to the internet first, otherwise AnyTalk couldn't load again."
 msgstr "Y0U'23 0FFL1N3. C0NN3C7 70 7H3 1N732N37 F1257, 07H32W153 4NY74LK C0ULDN'7 L04D 4641N."
+
+#: components/client/rateLimitNotice.ts
+msgid "You're sending messages too quickly. Your message is back in the text box, try again in a moment."
+msgstr "Y0U'23 53ND1N6 M3554635 700 QU1CKLY. Y0U2 M355463 15 84CK 1N 7H3 73X7 80X, 72Y 4641N 1N 4 M0M3N7."
 
 #: components/i18n/errors.tsx
 msgid "You've already sent a request to this user."

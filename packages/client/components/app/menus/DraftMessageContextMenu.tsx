@@ -3,6 +3,7 @@ import { Show } from "solid-js";
 import type { Channel } from "stoat.js";
 
 import { useClient } from "@revolt/client";
+import { useRateLimitNotice } from "@revolt/client/rateLimitNotice";
 import { useState } from "@revolt/state";
 import type { UnsentMessage } from "@revolt/state/stores/Draft";
 
@@ -28,12 +29,18 @@ interface Props {
 export function DraftMessageContextMenu(props: Props) {
   const state = useState();
   const client = useClient();
+  const notifyRateLimited = useRateLimitNotice();
 
   /**
    * Retry sending the draft message
    */
   function retrySend() {
-    state.draft.retrySend(client(), props.channel, props.draft.idempotencyKey);
+    state.draft.retrySend(
+      client(),
+      props.channel,
+      props.draft.idempotencyKey,
+      notifyRateLimited,
+    );
   }
 
   /**

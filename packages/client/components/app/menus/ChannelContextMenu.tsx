@@ -131,7 +131,12 @@ export function ChannelContextMenu(props: { channel: Channel }) {
 
   return (
     <ContextMenu>
-      <Show when={props.channel.type === "Group"}>
+      <Show
+        when={
+          props.channel.type === "Group" ||
+          props.channel.type === "DirectMessage"
+        }
+      >
         <PinConversationButton channel={props.channel} />
         <ContextMenuDivider />
       </Show>

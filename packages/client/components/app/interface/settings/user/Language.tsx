@@ -1,7 +1,12 @@
 import { plural } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/solid/macro";
 
-import { Language, Languages, browserPreferredLanguage } from "@revolt/i18n";
+import {
+  Language,
+  Languages,
+  browserPreferredLanguage,
+  intlLocale,
+} from "@revolt/i18n";
 import type { LanguageEntry } from "@revolt/i18n/Languages";
 import { timeLocale } from "@revolt/i18n/dayjs";
 import { languageMatchesQuery } from "@revolt/i18n/languageSearch";
@@ -112,7 +117,7 @@ function PickLanguage() {
             query,
             key,
             Languages[key].display,
-            i18n().locale,
+            intlLocale(i18n().locale),
           ),
         resultsLabel: (count) =>
           count

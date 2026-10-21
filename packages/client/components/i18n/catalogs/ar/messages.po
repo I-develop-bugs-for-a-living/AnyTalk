@@ -391,6 +391,14 @@ msgstr "سُمع {participant}"
 #~ msgid "{sec} seconds"
 #~ msgstr "ثواني {sec}"
 
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {This channel is in slowmode. Your message is back in the text box, try again in # second.} other {This channel is in slowmode. Your message is back in the text box, try again in # seconds.}}"
+msgstr "{seconds, plural, zero {هذه القناة في الوضع البطيء. عادت رسالتك إلى مربع النص، حاول مرة أخرى بعد # ثانية.} one {هذه القناة في الوضع البطيء. عادت رسالتك إلى مربع النص، حاول مرة أخرى بعد ثانية واحدة.} two {هذه القناة في الوضع البطيء. عادت رسالتك إلى مربع النص، حاول مرة أخرى بعد ثانيتين.} few {هذه القناة في الوضع البطيء. عادت رسالتك إلى مربع النص، حاول مرة أخرى بعد # ثوانٍ.} many {هذه القناة في الوضع البطيء. عادت رسالتك إلى مربع النص، حاول مرة أخرى بعد # ثانية.} other {هذه القناة في الوضع البطيء. عادت رسالتك إلى مربع النص، حاول مرة أخرى بعد # ثانية.}}"
+
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {You're sending messages too quickly. Your message is back in the text box, try again in # second.} other {You're sending messages too quickly. Your message is back in the text box, try again in # seconds.}}"
+msgstr "{seconds, plural, zero {أنت ترسل الرسائل بسرعة كبيرة. عادت رسالتك إلى مربع النص، حاول مرة أخرى بعد # ثانية.} one {أنت ترسل الرسائل بسرعة كبيرة. عادت رسالتك إلى مربع النص، حاول مرة أخرى بعد ثانية واحدة.} two {أنت ترسل الرسائل بسرعة كبيرة. عادت رسالتك إلى مربع النص، حاول مرة أخرى بعد ثانيتين.} few {أنت ترسل الرسائل بسرعة كبيرة. عادت رسالتك إلى مربع النص، حاول مرة أخرى بعد # ثوانٍ.} many {أنت ترسل الرسائل بسرعة كبيرة. عادت رسالتك إلى مربع النص، حاول مرة أخرى بعد # ثانية.} other {أنت ترسل الرسائل بسرعة كبيرة. عادت رسالتك إلى مربع النص، حاول مرة أخرى بعد # ثانية.}}"
+
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "{title} عبر الزمن"
@@ -1410,7 +1418,6 @@ msgstr "إعدادات التطبيق"
 #: components/modal/modals/CreateServer.tsx
 #: components/modal/modals/CreateWebhook.tsx
 #: components/modal/modals/CustomStatus.tsx
-#: components/modal/modals/DeleteChannel.tsx
 #: components/modal/modals/EditBotUsername.tsx
 #: components/modal/modals/EditEmail.tsx
 #: components/modal/modals/EditEmoji.tsx
@@ -1500,6 +1507,7 @@ msgid "Configure one-time password authentication"
 msgstr "قم بإعداد المصادقة بكلمة مرور لمرة واحدة"
 
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/modal/modals/DeleteChannel.tsx
 #: components/modal/modals/MFAFlow.tsx
 msgid "Confirm"
 msgstr "تأكيد"
@@ -5697,6 +5705,10 @@ msgstr "هذه القناة"
 msgid "This channel is about..."
 msgstr "هذه القناة هي عن..."
 
+#: components/client/rateLimitNotice.ts
+msgid "This channel is in slowmode. Your message is back in the text box, try again in a moment."
+msgstr "هذه القناة في الوضع البطيء. عادت رسالتك إلى مربع النص، حاول مرة أخرى بعد قليل."
+
 #: src/interface/channels/AgeGate.tsx
 msgid "This channel is marked as mature."
 msgstr "تم وضع علامة البالغين لهذه القناة."
@@ -6667,6 +6679,10 @@ msgstr "أنت بالفعل موجود في هذا السيرفر."
 #: components/app/interface/settings/UserSettings.tsx
 msgid "You're offline. Connect to the internet first, otherwise AnyTalk couldn't load again."
 msgstr "أنت غير متصل بالإنترنت. اتصل بالإنترنت أولًا، وإلا لن يتمكن AnyTalk من التحميل مجددًا."
+
+#: components/client/rateLimitNotice.ts
+msgid "You're sending messages too quickly. Your message is back in the text box, try again in a moment."
+msgstr "أنت ترسل الرسائل بسرعة كبيرة. عادت رسالتك إلى مربع النص، حاول مرة أخرى بعد قليل."
 
 #: components/i18n/errors.tsx
 msgid "You've already sent a request to this user."

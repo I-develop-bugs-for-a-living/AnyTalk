@@ -1,6 +1,7 @@
 import { Trans } from "@lingui/solid/macro";
 import { useMutation } from "@tanstack/solid-query";
 
+import { setMessagePinned, useClient } from "@revolt/client";
 import { Dialog, DialogProps } from "@revolt/ui";
 
 import { useModals } from "..";
@@ -12,13 +13,13 @@ import { Modals } from "../types";
 export function PinMessageModal(
   props: DialogProps & Modals & { type: "pin_message" },
 ) {
+  const client = useClient();
   const { showError } = useModals();
 
   const isPinned = () => props.message.pinned;
 
   const togglePin = useMutation(() => ({
-    mutationFn: () =>
-      isPinned() ? props.message.unpin() : props.message.pin(),
+    mutationFn: () => setMessagePinned(client(), props.message, !isPinned()),
     onError: showError,
     onSuccess: () => props.onClose(),
   }));

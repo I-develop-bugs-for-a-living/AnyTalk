@@ -391,6 +391,14 @@ msgstr "{participant}의 소리 들음"
 #~ msgid "{sec} seconds"
 #~ msgstr ""
 
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {This channel is in slowmode. Your message is back in the text box, try again in # second.} other {This channel is in slowmode. Your message is back in the text box, try again in # seconds.}}"
+msgstr "{seconds, plural, other {이 채널은 슬로우 모드예요. 메시지가 입력창으로 돌아왔어요. #초 후에 다시 시도해 주세요.}}"
+
+#: components/client/rateLimitNotice.ts
+msgid "{seconds, plural, one {You're sending messages too quickly. Your message is back in the text box, try again in # second.} other {You're sending messages too quickly. Your message is back in the text box, try again in # seconds.}}"
+msgstr "{seconds, plural, other {메시지를 너무 빨리 보내고 있어요. 메시지가 입력창으로 돌아왔어요. #초 후에 다시 시도해 주세요.}}"
+
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "{title} over time"
 msgstr "시간에 따른 {title}"
@@ -1412,7 +1420,6 @@ msgstr "클라이언트 설정"
 #: components/modal/modals/CreateServer.tsx
 #: components/modal/modals/CreateWebhook.tsx
 #: components/modal/modals/CustomStatus.tsx
-#: components/modal/modals/DeleteChannel.tsx
 #: components/modal/modals/EditBotUsername.tsx
 #: components/modal/modals/EditEmail.tsx
 #: components/modal/modals/EditEmoji.tsx
@@ -1502,6 +1509,7 @@ msgid "Configure one-time password authentication"
 msgstr "일회용 비밀번호 인증을 설정해요"
 
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/modal/modals/DeleteChannel.tsx
 #: components/modal/modals/MFAFlow.tsx
 msgid "Confirm"
 msgstr "확인"
@@ -5702,6 +5710,10 @@ msgstr "이 채널"
 msgid "This channel is about..."
 msgstr "이 채널은..."
 
+#: components/client/rateLimitNotice.ts
+msgid "This channel is in slowmode. Your message is back in the text box, try again in a moment."
+msgstr "이 채널은 슬로우 모드예요. 메시지가 입력창으로 돌아왔어요. 잠시 후에 다시 시도해 주세요."
+
 #: src/interface/channels/AgeGate.tsx
 msgid "This channel is marked as mature."
 msgstr "이 채널은 성인 콘텐츠로 표시되어 있어요."
@@ -6674,6 +6686,10 @@ msgstr "이미 이 서버의 멤버예요."
 #: components/app/interface/settings/UserSettings.tsx
 msgid "You're offline. Connect to the internet first, otherwise AnyTalk couldn't load again."
 msgstr "오프라인이에요. 먼저 인터넷에 연결하세요. 그러지 않으면 AnyTalk을 다시 불러올 수 없어요."
+
+#: components/client/rateLimitNotice.ts
+msgid "You're sending messages too quickly. Your message is back in the text box, try again in a moment."
+msgstr "메시지를 너무 빨리 보내고 있어요. 메시지가 입력창으로 돌아왔어요. 잠시 후에 다시 시도해 주세요."
 
 #: components/i18n/errors.tsx
 msgid "You've already sent a request to this user."

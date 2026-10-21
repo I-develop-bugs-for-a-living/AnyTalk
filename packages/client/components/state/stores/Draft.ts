@@ -9,6 +9,7 @@ import { useInstance } from "@revolt/instance";
 import { AbstractStore } from ".";
 import { State } from "..";
 import { LAYOUT_SECTIONS } from "./Layout";
+import { RateLimitInfo, parseRateLimitError } from "./rateLimit";
 
 export interface DraftData {
   /**
@@ -114,6 +115,12 @@ export class Draft extends AbstractStore<"draft", TypeDraft> {
   private textSelection?: TextSelection;
 
   _setNodeReplacement?: Setter<readonly [string | "_focus"] | undefined>;
+
+  /**
+   * Bound by the mounted composer so it can show text restored to a draft
+   * (its editor is uncontrolled and only reads the draft on channel change)
+   */
+  _onDraftRestored?: (channelId: string, content: string) => void;
 
   private instance;
 
@@ -285,8 +292,14 @@ export class Draft extends AbstractStore<"draft", TypeDraft> {
    * @param client Client
    * @param channel Channel
    * @param existingDraft The existing draft to send
+   * @param onRateLimited Called when the server rejected the message because of the rate limit
    */
-  async sendDraft(client: Client, channel: Channel, existingDraft?: DraftData) {
+  async sendDraft(
+    client: Client,
+    channel: Channel,
+    existingDraft?: DraftData,
+    onRateLimited?: (info: RateLimitInfo) => void,
+  ) {
     const draft = existingDraft ?? this.popDraft(channel.id);
 
     // Check if this is something we can even send
@@ -313,6 +326,18 @@ export class Draft extends AbstractStore<"draft", TypeDraft> {
       replies,
       attachments,
     };
+
+    /** Mark this outbox entry as failed ("not sent") */
+    const markFailed = () =>
+      this.set(
+        "outbox",
+        channel.id,
+        this.getPendingMessages(channel.id).map((entry) =>
+          entry.idempotencyKey === idempotencyKey
+            ? { ...entry, status: "failed" }
+            : entry,
+        ),
+      );
 
     // Add any files if attached
     if (files?.length) {
@@ -363,7 +388,10 @@ export class Draft extends AbstractStore<"draft", TypeDraft> {
           xhr.send(body);
         });
 
-        if (!success) throw "Upload Error";
+        if (!success) {
+          markFailed();
+          return;
+        }
 
         attachments.push(response.id);
         this.fileCache[fileId].autumnId = response.id;
@@ -396,20 +424,51 @@ export class Draft extends AbstractStore<"draft", TypeDraft> {
           (entry) => entry.idempotencyKey !== idempotencyKey,
         ),
       );
-    } catch {
-      this.set(
-        "outbox",
-        channel.id,
-        this.getPendingMessages(channel.id).map((entry) =>
-          entry.idempotencyKey === idempotencyKey
-            ? {
-                ...entry,
-                status: "failed",
-              }
-            : entry,
-        ),
-      );
+    } catch (error) {
+      // rejected by the rate limiter or slowmode: drop the message from the
+      // outbox, put what the user wrote back in the composer and let the
+      // caller tell them to slow down
+      const rateLimit = parseRateLimitError(error);
+      if (rateLimit) {
+        this.cancelSend(channel, idempotencyKey);
+        this.restoreToDraft(channel.id, { content, replies, files });
+        onRateLimited?.(rateLimit);
+        return;
+      }
+
+      markFailed();
     }
+  }
+
+  /**
+   * Put a blocked message back into the composer draft of a channel. Existing
+   * text is kept and the blocked text is added on a new line; replies and
+   * files are merged. The file cache is untouched so uploads are reused.
+   * @param channelId Channel ID
+   * @param blocked Content, replies and files of the blocked message
+   */
+  restoreToDraft(channelId: string, blocked: DraftData) {
+    const current = this.getDraft(channelId);
+
+    const replies = [...(current.replies ?? [])];
+    for (const reply of blocked.replies ?? []) {
+      if (replies.length >= this.instance.globalLimits.message_replies) break;
+      if (!replies.some((entry) => entry.id === reply.id)) replies.push(reply);
+    }
+
+    const files = [...(current.files ?? [])];
+    for (const file of blocked.files ?? []) {
+      if (!files.includes(file)) files.push(file);
+    }
+
+    const content = [current.content, blocked.content]
+      .filter(Boolean)
+      .join("\n");
+
+    // write the draft first so text typed meanwhile is kept, then let the
+    // composer (if it shows this channel) update its editor
+    this.setDraft(channelId, { ...current, content, replies, files });
+    this._onDraftRestored?.(channelId, content);
   }
 
   /**
@@ -439,8 +498,14 @@ export class Draft extends AbstractStore<"draft", TypeDraft> {
    * @param client Client
    * @param channel Channel
    * @param idempotencyKey Idempotency key
+   * @param onRateLimited Called when the server rejected the message because of the rate limit
    */
-  retrySend(client: Client, channel: Channel, idempotencyKey: string) {
+  retrySend(
+    client: Client,
+    channel: Channel,
+    idempotencyKey: string,
+    onRateLimited?: (info: RateLimitInfo) => void,
+  ) {
     batch(() => {
       const draft = this.get().outbox[channel.id].find(
         (entry) => entry.idempotencyKey === idempotencyKey,
@@ -448,7 +513,7 @@ export class Draft extends AbstractStore<"draft", TypeDraft> {
       // TODO: validation?
 
       this.cancelSend(channel, idempotencyKey);
-      this.sendDraft(client, channel, draft!);
+      this.sendDraft(client, channel, draft!, onRateLimited);
     });
   }
 

@@ -7,6 +7,7 @@ import { styled } from "styled-system/jsx";
 
 import { ServerContextMenu } from "@revolt/app";
 import { useClient } from "@revolt/client";
+import { intlLocale } from "@revolt/i18n";
 import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 import {
@@ -133,7 +134,7 @@ export function ServerOverview() {
     return sortServers(
       all().filter((item) => matches.has(item.id)),
       sort(),
-      i18n().locale,
+      intlLocale(i18n().locale),
     );
   });
 
@@ -146,9 +147,9 @@ export function ServerOverview() {
 
   /** Localised short date */
   const formatDate = (date: number) =>
-    new Intl.DateTimeFormat(i18n().locale, { dateStyle: "medium" }).format(
-      date,
-    );
+    new Intl.DateTimeFormat(intlLocale(i18n().locale), {
+      dateStyle: "medium",
+    }).format(date);
 
   return (
     <Base>
