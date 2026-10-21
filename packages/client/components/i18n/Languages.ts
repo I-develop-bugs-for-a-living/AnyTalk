@@ -338,3 +338,28 @@ export const Languages: { [key in Language]: LanguageEntry } = {
     cat: "alt",
   },
 };
+
+/** Catalog keys of the encoded joke languages, which have no real locale */
+const JOKE_LANGUAGES: string[] = [
+  Language.BOTTOM,
+  Language.LEET,
+  Language.PIGLATIN,
+  Language.ENCHANTMENT_TABLE,
+];
+
+/**
+ * Locale that `Intl` accepts for a catalog key. Joke languages and tags that
+ * are not valid BCP 47 would make `Intl.*` throw a RangeError, so they use `en`.
+ * @param key Catalog key (e.g. `de`, `leet`)
+ * @returns A valid locale tag
+ */
+export function intlLocale(key: string): string {
+  if (JOKE_LANGUAGES.includes(key)) return "en";
+  const tag = Languages[key as Language]?.i18n ?? key;
+  try {
+    Intl.getCanonicalLocales(tag);
+    return tag;
+  } catch {
+    return "en";
+  }
+}

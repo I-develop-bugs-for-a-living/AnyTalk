@@ -1,8 +1,8 @@
 import { createSignal } from "solid-js";
 
-import { Language } from "./Languages";
+import { type Language, intlLocale } from "./Languages";
 
-const [durationLocale, setDurationLocale] = createSignal<Language>(null!);
+const [durationLocale, setDurationLocale] = createSignal<string>(null!);
 
 export function useDurationFormat() {
   return (
@@ -13,5 +13,5 @@ export function useDurationFormat() {
 }
 
 export function updateDurationLocale(key: Language) {
-  setDurationLocale(key);
+  setDurationLocale(intlLocale(key));
 }

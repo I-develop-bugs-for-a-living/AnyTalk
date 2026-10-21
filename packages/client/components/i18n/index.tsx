@@ -3,7 +3,12 @@ import type { JSX } from "solid-js";
 import { i18n } from "@lingui/core";
 import { I18nProvider as LinguiProvider } from "@lingui/solid";
 
-import { type LocaleOptions, Language, Languages } from "./Languages";
+import {
+  type LocaleOptions,
+  Language,
+  Languages,
+  intlLocale,
+} from "./Languages";
 import { messages as en } from "./catalogs/en/messages";
 import { initTime, loadTimeLocale } from "./dayjs";
 import { updateDurationLocale } from "./durations";
@@ -13,7 +18,7 @@ export function I18nProvider(props: { children: JSX.Element }) {
     en,
   });
 
-  i18n.activate(Language.ENGLISH);
+  i18n.activate(Language.ENGLISH, [intlLocale(Language.ENGLISH)]);
 
   initTime();
 
@@ -22,7 +27,7 @@ export function I18nProvider(props: { children: JSX.Element }) {
   return <LinguiProvider i18n={i18n}>{props.children}</LinguiProvider>;
 }
 
-export { Language, Languages } from "./Languages";
+export { Language, Languages, intlLocale } from "./Languages";
 export { timeLocale, useTime } from "./dayjs";
 export { useError } from "./errors";
 
@@ -34,7 +39,7 @@ export { useError } from "./errors";
  */
 function applyDocumentLocale(key: Language, localeOptions: LocaleOptions) {
   const rtl = localeOptions.rtl ?? Languages[key].localeOptions?.rtl ?? false;
-  document.documentElement.lang = Languages[key].i18n;
+  document.documentElement.lang = intlLocale(key);
   document.documentElement.dir = rtl ? "rtl" : "ltr";
 }
 
@@ -55,7 +60,7 @@ export async function loadAndSwitchLocale(
       [key]: data,
     });
 
-    i18n.activate(key);
+    i18n.activate(key, [intlLocale(key)]);
 
     loadTimeLocale(Languages[key], localeOptions);
 
