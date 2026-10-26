@@ -37,7 +37,7 @@ import {
 } from "livekit-client";
 import { Channel } from "stoat.js";
 
-import { SoundController, useSound } from "@revolt/client";
+import { SoundController, useClient, useSound } from "@revolt/client";
 import { useInstance } from "@revolt/instance";
 import { ModalController, useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
@@ -54,6 +54,7 @@ import { VoiceCallCardContext } from "@revolt/ui/components/features/voice/callC
 
 import { Device, useDevice } from "@revolt/common";
 import { CallSounds } from "./components/CallSounds";
+import { E2eeNotices } from "./components/E2eeNotices";
 import { GamepadPushToTalk } from "./components/GamepadPushToTalk";
 import { InRoom } from "./components/InRoom";
 import { MuteKeybinds } from "./components/MuteKeybinds";
@@ -64,6 +65,11 @@ import { StreamPopouts } from "./components/StreamPopouts";
 import { StreamViewers } from "./components/StreamViewers";
 import { VoiceKeybinds } from "./components/VoiceKeybinds";
 import { VoiceMoves } from "./components/VoiceMoves";
+import {
+  type E2eeFailureKind,
+  CallE2ee,
+  isCallE2eeSupported,
+} from "./e2ee/callE2ee";
 import { decideFocusedGameStream } from "./focusedGame";
 import {
   type FrameSample,
@@ -118,6 +124,9 @@ import {
   popoutSize,
 } from "./streamPopout";
 import { VoiceProcessor } from "./VoiceProcessor";
+
+/** Why E2EE kept us out of a call or ended it: no browser support, worker or key exchange failure */
+export type E2eeNotice = { kind: "unsupported" | E2eeFailureKind };
 
 type State =
   | "READY"
@@ -328,6 +337,9 @@ class Voice {
 
   #settings: VoiceSettings;
 
+  /** Id of the logged in user, which is our LiveKit identity */
+  #selfId: () => string | undefined;
+
   /** When people last moved into or out of our channel, by user id */
   #movedAt = new Map<string, number>();
 
@@ -336,6 +348,30 @@ class Voice {
 
   room: Accessor<Room | undefined>;
   #setRoom: Setter<Room | undefined>;
+
+  /**
+   * End-to-end encryption of the current call (state for the UI: per
+   * participant trust, own encryption active, failures)
+   */
+  e2ee: Accessor<CallE2ee | undefined>;
+  #setE2ee: Setter<CallE2ee | undefined>;
+
+  /**
+   * True when the last join was refused because this browser cannot encrypt
+   * call media (everyone else refuses unencrypted participants)
+   */
+  e2eeUnsupported: Accessor<boolean>;
+  #setE2eeUnsupported: Setter<boolean>;
+
+  /**
+   * Set (to a new object each time) when E2EE kept us out of a call or ended
+   * it, for the notice that tells the user (see E2eeNotices)
+   */
+  e2eeNotice: Accessor<E2eeNotice | undefined>;
+  #setE2eeNotice: Setter<E2eeNotice | undefined>;
+
+  /** The last join was refused for an E2EE reason; retrying won't help */
+  #e2eeRefused = false;
 
   vidTracks: Accessor<TrackReferenceOrPlaceholder[]>;
 
@@ -500,8 +536,10 @@ class Voice {
     modals: ModalController,
     sound: SoundController,
     device: Device,
+    selfId: () => string | undefined,
   ) {
     this.#settings = voiceSettings;
+    this.#selfId = selfId;
     // the windows belong to this page, don't leave them behind when it goes
     window.addEventListener("pagehide", () => this.closeAllPopouts());
     this.sound = sound;
@@ -514,6 +552,18 @@ class Voice {
     const [room, setRoom] = createSignal<Room>();
     this.room = room;
     this.#setRoom = setRoom;
+
+    const [e2ee, setE2ee] = createSignal<CallE2ee>();
+    this.e2ee = e2ee;
+    this.#setE2ee = setE2ee;
+
+    const [e2eeUnsupported, setE2eeUnsupported] = createSignal(false);
+    this.e2eeUnsupported = e2eeUnsupported;
+    this.#setE2eeUnsupported = setE2eeUnsupported;
+
+    const [e2eeNotice, setE2eeNotice] = createSignal<E2eeNotice>();
+    this.e2eeNotice = e2eeNotice;
+    this.#setE2eeNotice = setE2eeNotice;
 
     this.vidTracks = () => [];
 
@@ -648,6 +698,38 @@ class Voice {
     if (!rejoining) this.#micRestarts = [];
     this.#teardown(rejoining);
 
+    // Everyone in a call encrypts and refuses participants who don't, so
+    // joining without E2EE would only make us unheard and unseen. Refuse.
+    // Done before the wake lock and the output bus are started, so a refusal
+    // leaves nothing behind.
+    this.#e2eeRefused = false;
+    this.#setE2eeUnsupported(false);
+    if (!isCallE2eeSupported()) {
+      console.error(
+        "[e2ee] this browser cannot encrypt call media, not joining the call",
+      );
+      this.#setE2eeUnsupported(true);
+      this.#refuseE2ee("unsupported");
+      return;
+    }
+
+    // Frame encryption keys and worker; own LiveKit identity is the user id
+    let e2ee: CallE2ee;
+    try {
+      const selfId = this.#selfId();
+      if (!selfId) throw new Error("not logged in");
+      e2ee = new CallE2ee(selfId, (kind) => {
+        // only the call this belongs to; leaving also stops any rejoin
+        if (this.e2ee() !== e2ee) return;
+        this.#setE2eeNotice({ kind });
+        this.disconnect();
+      });
+    } catch (err) {
+      console.error("[e2ee] could not set up call encryption", err);
+      this.#refuseE2ee("worker");
+      return;
+    }
+
     // Safari: start the audio output bus while still inside the tap that
     // joined the call (before the first await), it needs a gesture
     if (outputBus.isBusMode()) {
@@ -656,39 +738,17 @@ class Voice {
 
     this.device.setWakeLocked();
 
-    const room = new Room({
-      // Only receive video at the size it is displayed. Not paused while this
-      // page is in the background: a stream popup window (the fallback for
-      // Document Picture-in-Picture) would freeze when AnyTalk is minimized.
-      // The trade-off is that a hidden tab keeps receiving its video.
-      adaptiveStream: { pauseVideoInBackground: false },
-      // Stop sending simulcast layers that nobody is subscribed to
-      dynacast: true,
-      // Keep trying for about a minute, so a switch from wifi to mobile or a
-      // phone waking up recovers inside the SDK before we have to rejoin
-      reconnectPolicy: {
-        nextRetryDelayInMs: (context) => sdkRetryDelayMs(context),
-      },
-      audioCaptureDefaults: {
-        deviceId: this.#settings.preferredAudioInputDevice,
-        echoCancellation: this.#settings.echoCancellation,
-        noiseSuppression: this.#settings.noiseSupression === "browser",
-        autoGainControl: this.#settings.autoGainControl,
-        voiceIsolation: this.#settings.noiseSupression === "browser",
-      },
-      audioOutput: {
-        deviceId: this.#settings.preferredAudioOutputDevice,
-      },
-      videoCaptureDefaults: {
-        // TODO: Support higher resolutions based on limits
-        resolution: VideoPresets.h720.resolution,
-        deviceId: this.#settings.preferredVideoDevice,
-      },
-      publishDefaults: {
-        videoEncoding: VideoPresets.h720.encoding,
-        screenShareEncoding: ScreenSharePresets.h720fps30.encoding,
-      },
-    });
+    let room: Room;
+    try {
+      room = this.#createRoom(e2ee);
+    } catch (err) {
+      console.error("[e2ee] could not create the room", err);
+      e2ee.dispose();
+      this.device.releaseWakeLock();
+      outputBus.teardown();
+      this.#refuseE2ee("start");
+      return;
+    }
 
     this.#unlockAudio(room);
 
@@ -711,12 +771,17 @@ class Voice {
       );
       return all.filter(
         (t) =>
-          t.source === Track.Source.ScreenShare ||
-          !streaming.has(t.participant.identity),
+          // tracks without encryption are refused (see CallE2ee) and never shown
+          (t.participant.isLocal ||
+            !t.publication ||
+            t.publication.isEncrypted) &&
+          (t.source === Track.Source.ScreenShare ||
+            !streaming.has(t.participant.identity)),
       );
     });
 
     batch(() => {
+      this.#setE2ee(e2ee);
       this.#setRoom(room);
       this.#setChannel(channel);
       this.#setState(rejoining ? "RECONNECTING" : "CONNECTING");
@@ -731,21 +796,33 @@ class Voice {
       joined = true;
       this.#setState("CONNECTED");
       this.#settings.addRecentCall(channel.id);
-      if (this.speakingPermission && this.#settings.inputMode === "ptt") {
-        // push to talk starts with the mic closed, the key opens it. micOn is
-        // the user's mute choice and stays as it is.
-        this.#publishMutedMicrophone(room);
-      } else if (this.speakingPermission)
-        // the microphone state the user had (muted or not) is in the settings;
-        // while deafened the mic stays closed and micOn stays as it is
-        room.localParticipant
-          .setMicrophoneEnabled(this.#micWanted())
-          .then((track) => {
-            // only a mic we asked for can tell that opening it failed
-            if (this.#micWanted()) this.#settings.micOn = track != null;
-          })
-          // MediaDevicesError tells what went wrong
-          .catch((err) => console.warn("[rtc] could not start the mic", err));
+      const publishMic = () => {
+        if (this.speakingPermission && this.#settings.inputMode === "ptt") {
+          // push to talk starts with the mic closed, the key opens it. micOn is
+          // the user's mute choice and stays as it is.
+          this.#publishMutedMicrophone(room);
+        } else if (this.speakingPermission)
+          // the microphone state the user had (muted or not) is in the settings;
+          // while deafened the mic stays closed and micOn stays as it is
+          room.localParticipant
+            .setMicrophoneEnabled(this.#micWanted())
+            .then((track) => {
+              // only a mic we asked for can tell that opening it failed
+              if (this.#micWanted()) this.#settings.micOn = track != null;
+            })
+            // MediaDevicesError tells what went wrong
+            .catch((err) => console.warn("[rtc] could not start the mic", err));
+      };
+      // nothing is published before our key is installed and the hello is
+      // out, otherwise the first audio would be sent without a usable key
+      e2ee.start(room).then(
+        () => {
+          if (this.room() !== room) return;
+          publishMic();
+        },
+        // CallE2ee already told the user and left the call
+        (err) => console.error("[e2ee] could not start", err),
+      );
       if (rejoining) {
         // streams of people who left meanwhile can't be watched any more
         for (const id of [...this.watching]) {
@@ -761,7 +838,7 @@ class Voice {
         const screenShareTrack = p.getTrackPublication(
           Track.Source.ScreenShare,
         );
-        if (screenShareTrack) {
+        if (screenShareTrack?.isEncrypted) {
           this.screenShareTracks.add(screenShareTrack.trackSid);
         }
       }
@@ -844,8 +921,9 @@ class Voice {
     });
 
     room.addListener("trackPublished", (pub, participant) => {
-      // streams aren't watched automatically, so announce them right away
-      if (pub.source === Track.Source.ScreenShare) {
+      // streams aren't watched automatically, so announce them right away;
+      // an unencrypted one is refused (see CallE2ee), not worth announcing
+      if (pub.source === Track.Source.ScreenShare && pub.isEncrypted) {
         // back after a window swap: not a new stream
         if (!this.#cancelPendingEnd(participant.identity)) {
           this.sound.playSound("streamStart");
@@ -905,6 +983,7 @@ class Voice {
     if (this.room() !== room || (rejoin && rejoin.cancelled)) {
       room.removeAllListeners();
       room.disconnect();
+      e2ee.dispose();
       return;
     }
 
@@ -916,6 +995,7 @@ class Voice {
     if (this.room() !== room || (rejoin && rejoin.cancelled)) {
       room.removeAllListeners();
       room.disconnect();
+      e2ee.dispose();
       return;
     }
 
@@ -923,6 +1003,60 @@ class Voice {
       autoSubscribe: false,
       maxRetries: 3,
       peerConnectionTimeout: PEER_CONNECTION_TIMEOUT_MS,
+    });
+  }
+
+  /** Builds the LiveKit room with our options and end-to-end encryption */
+  #createRoom(e2ee: CallE2ee): Room {
+    const room = new Room({
+      // Only receive video at the size it is displayed. Not paused while this
+      // page is in the background: a stream popup window (the fallback for
+      // Document Picture-in-Picture) would freeze when AnyTalk is minimized.
+      // The trade-off is that a hidden tab keeps receiving its video.
+      adaptiveStream: { pauseVideoInBackground: false },
+      // Stop sending simulcast layers that nobody is subscribed to
+      dynacast: true,
+      // Keep trying for about a minute, so a switch from wifi to mobile or a
+      // phone waking up recovers inside the SDK before we have to rejoin
+      reconnectPolicy: {
+        nextRetryDelayInMs: (context) => sdkRetryDelayMs(context),
+      },
+      audioCaptureDefaults: {
+        deviceId: this.#settings.preferredAudioInputDevice,
+        echoCancellation: this.#settings.echoCancellation,
+        noiseSuppression: this.#settings.noiseSupression === "browser",
+        autoGainControl: this.#settings.autoGainControl,
+        voiceIsolation: this.#settings.noiseSupression === "browser",
+      },
+      audioOutput: {
+        deviceId: this.#settings.preferredAudioOutputDevice,
+      },
+      videoCaptureDefaults: {
+        // TODO: Support higher resolutions based on limits
+        resolution: VideoPresets.h720.resolution,
+        deviceId: this.#settings.preferredVideoDevice,
+      },
+      publishDefaults: {
+        videoEncoding: VideoPresets.h720.encoding,
+        screenShareEncoding: ScreenSharePresets.h720fps30.encoding,
+      },
+      // end-to-end encrypted media (not the `encryption` option, data
+      // messages must stay readable for the server-side relays)
+      e2ee: e2ee.roomOptions(),
+    });
+    e2ee.attach(room);
+    return room;
+  }
+
+  /**
+   * Stay out of the call for an E2EE reason and tell the user. Retrying
+   * can't help, so the rejoin loop stops too (see #startRejoin).
+   */
+  #refuseE2ee(kind: E2eeNotice["kind"]) {
+    this.#e2eeRefused = true;
+    batch(() => {
+      this.#setE2eeNotice({ kind });
+      this.#setState("DISCONNECTED");
     });
   }
 
@@ -1009,6 +1143,13 @@ class Voice {
         try {
           await this.#open(channel, undefined, true);
           if (rejoin.cancelled) return;
+          // E2EE can't work here (browser, worker): trying again won't help
+          if (this.#e2eeRefused) {
+            this.#teardown(true);
+            this.#rejoin = undefined;
+            this.#setState("DISCONNECTED");
+            return;
+          }
           if (this.state() === "CONNECTED") {
             this.#rejoin = undefined;
             return;
@@ -1645,12 +1786,17 @@ class Voice {
     this.device.releaseWakeLock();
     this.#releaseAudioUnlock?.();
     this.#releaseAudioUnlock = undefined;
+    // stops the key exchange and terminates the E2EE worker of the old room,
+    // after the room is disconnected so tracks can still be released
+    const e2ee = this.e2ee();
+    this.#setE2ee();
     try {
       const room = this.room();
       if (!room) return;
 
       room.removeAllListeners();
       room.disconnect();
+      e2ee?.dispose();
 
       // not stopped by disconnecting while it isn't sent
       this.#streamAudio?.stop();
@@ -1677,6 +1823,8 @@ class Voice {
       this.sound.playSound("userLeaveVoice");
     } catch (e) {
       this.onErr(e);
+    } finally {
+      e2ee?.dispose();
     }
   }
 
@@ -3345,6 +3493,15 @@ class Voice {
     const kind = this.popoutKind;
     if (!kind) return false;
 
+    // never show or subscribe to a track without encryption (see CallE2ee);
+    // checked first so an open window isn't closed for nothing
+    if (
+      t.publication instanceof RemoteTrackPublication &&
+      !t.publication.isEncrypted
+    ) {
+      return false;
+    }
+
     // Document Picture-in-Picture allows a single window: the stream that was
     // in it goes back to its tile. (Opening a new one would end it anyway, but
     // this keeps the state in step without waiting for the old window's event.)
@@ -3556,7 +3713,14 @@ export function VoiceContext(props: { children: JSX.Element }) {
   const modals = useModals();
   const sound = useSound();
   const device = useDevice();
-  const voice = new Voice(state.voice, modals, sound, device);
+  const client = useClient();
+  const voice = new Voice(
+    state.voice,
+    modals,
+    sound,
+    device,
+    () => client()?.user?.id,
+  );
 
   return (
     <voiceContext.Provider value={voice}>
@@ -3573,6 +3737,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
         <GamepadPushToTalk />
         <MuteKeybinds />
         <CallSounds />
+        <E2eeNotices />
         <VoiceMoves />
       </RoomContext.Provider>
     </voiceContext.Provider>

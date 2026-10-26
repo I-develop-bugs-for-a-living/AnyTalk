@@ -98,6 +98,8 @@ export function RoomAudioManager() {
       (track) =>
         !isLocal(track.participant) &&
         track.publication.kind === Track.Kind.Audio &&
+        // tracks without encryption are refused (see CallE2ee), never played
+        (track.publication as RemoteTrackPublication).isEncrypted &&
         // stream audio only plays while we watch that stream
         (track.source !== Track.Source.ScreenShareAudio ||
           voice.watching.has(track.participant.identity)),
