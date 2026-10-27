@@ -423,7 +423,12 @@ function EntryRow(props: {
       <Cell data-kind="status" data-failed={failed() || undefined}>
         {row().status}
       </Cell>
-      <Cell data-kind="summary">{summary()}</Cell>
+      <Cell data-kind="summary">
+        <Show when={row().desktop}>
+          <DesktopTag>{t`Desktop app`}</DesktopTag>
+        </Show>
+        {summary()}
+      </Cell>
       <Cell data-kind="host">{row().host}</Cell>
       <Cell data-kind="size">{formatBytes(entrySize(props.entry))}</Cell>
       <Cell data-kind="duration">
@@ -632,6 +637,20 @@ const Cell = styled("span", {
       textAlign: "end",
       opacity: 0.8,
     },
+  },
+});
+
+/** Small label on rows the desktop app's session saw */
+const DesktopTag = styled("span", {
+  base: {
+    marginInlineEnd: "6px",
+    paddingInline: "5px",
+    borderRadius: "var(--borderRadius-xs)",
+    fontSize: "10px",
+    lineHeight: "16px",
+    fontFamily: "var(--fonts-primary, sans-serif)",
+    background: "var(--md-sys-color-surface-container-highest)",
+    color: "var(--md-sys-color-on-surface-variant)",
   },
 });
 

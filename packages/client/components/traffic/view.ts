@@ -1,3 +1,4 @@
+import { isDesktopFile } from "./desktopRequests";
 import type {
   CallBytesEntry,
   CallConnectionEntry,
@@ -9,6 +10,13 @@ import type {
 
 /** How far apart (ms) an http entry and its resource entry may start. */
 export const MERGE_WINDOW_MS = 100;
+
+/**
+ * How far apart (ms) a desktop entry and a page resource entry may start. The
+ * shell sees a request when its headers go out, after connecting, so it can
+ * be later than the page's start.
+ */
+export const DESKTOP_MERGE_WINDOW_MS = 1500;
 
 /** `initiatorType`s of resource entries that duplicate fetch/XHR entries. */
 const DUPLICATE_INITIATORS = new Set(["fetch", "xmlhttprequest"]);
@@ -40,7 +48,9 @@ const mergedCache = new WeakMap<HttpEntry, WeakMap<ResourceEntry, HttpEntry>>();
  * and duration are copied over and the resource entry is dropped. A resource
  * matches the nearest unmatched http entry with the same absolute URL that
  * started within 100 ms. Other resources (images, video, ...) stay as they
- * are. The input is not changed.
+ * are, unless the desktop app's session saw the same load (an http entry with
+ * `source: "desktop"`, matched within 1.5 s): then the resource is folded in
+ * too, so the file appears once. The input is not changed.
  *
  * @param entries Entries, oldest first
  * @param base Base for relative URLs (defaults to the page address)
@@ -50,8 +60,7 @@ export function mergeResources(
   base?: string,
 ): TrafficEntry[] {
   const resources = entries.filter(
-    (e): e is ResourceEntry =>
-      e.kind === "resource" && DUPLICATE_INITIATORS.has(e.initiatorType),
+    (e): e is ResourceEntry => e.kind === "resource",
   );
   if (!resources.length) return entries;
 
@@ -74,8 +83,14 @@ export function mergeResources(
     let bestGap = Infinity;
     for (const http of byUrl.get(absoluteUrl(resource.url, base)) ?? []) {
       if (taken.has(http)) continue;
+      const desktop = http.source === "desktop";
+      // page fetch/xhr only merge with fetch/xhr resources, desktop entries
+      // with any resource
+      if (!desktop && !DUPLICATE_INITIATORS.has(resource.initiatorType))
+        continue;
       const gap = Math.abs(http.start - resource.start);
-      if (gap <= MERGE_WINDOW_MS && gap < bestGap) {
+      const limit = desktop ? DESKTOP_MERGE_WINDOW_MS : MERGE_WINDOW_MS;
+      if (gap <= limit && gap < bestGap) {
         best = http;
         bestGap = gap;
       }
@@ -121,7 +136,7 @@ export type KindGroup = "http" | "ws" | "call" | "files";
 export function kindGroup(entry: TrafficEntry): KindGroup {
   switch (entry.kind) {
     case "http":
-      return "http";
+      return isDesktopFile(entry) ? "files" : "http";
     case "ws":
       return "ws";
     case "resource":

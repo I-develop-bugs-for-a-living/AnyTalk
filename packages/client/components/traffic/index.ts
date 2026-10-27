@@ -9,6 +9,8 @@ import {
   watchCallTraffic,
 } from "./state";
 
+export { isDesktopFile } from "./desktopRequests";
+export type { DesktopRequestEvent } from "./desktopRequests";
 export { buildHar, buildJson } from "./export";
 export {
   fileStamp,

@@ -84,6 +84,7 @@ function harHttp(e: HttpEntry) {
     cache: {},
     timings: { send: 0, wait: time, receive: 0 },
     _source: e.source,
+    ...(e.resourceType ? { _resourceType: e.resourceType } : {}),
   };
 }
 

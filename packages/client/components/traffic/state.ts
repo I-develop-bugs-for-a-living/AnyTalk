@@ -1,6 +1,7 @@
 import { createSignal } from "solid-js";
 
 import { type CallRoomLike, monitorCall } from "./callTraffic";
+import { observeDesktopRequests } from "./desktopRequests";
 import { installWrappers } from "./install";
 import { TrafficRecorder } from "./recorder";
 import { redactEntry } from "./redact";
@@ -18,6 +19,9 @@ const [version, setVersion] = createSignal(0);
 
 /** Stops the resource observer while recording is on. */
 let stopResources: (() => void) | undefined;
+
+/** Stops the desktop request feed while recording is on (desktop app only). */
+let stopDesktop: (() => void) | undefined;
 
 /** Pending flush of change notifications, so busy sockets don't thrash the UI. */
 let flushTimer: ReturnType<typeof setTimeout> | undefined;
@@ -50,7 +54,8 @@ export function recording(): boolean {
 }
 
 /**
- * Turn recording on or off. Turning it on also starts the resource observer.
+ * Turn recording on or off. Turning it on also starts the resource observer
+ * and, in the desktop app, the feed of requests its session sees.
  * Recorded entries are kept when turned off, until `clear()` or a reload.
  *
  * @param value New state
@@ -61,7 +66,10 @@ export function setRecording(value: boolean) {
   setRecordingSignal(value);
   if (value) {
     stopResources = observeResources(recorder);
+    stopDesktop = observeDesktopRequests(recorder);
   } else {
+    stopDesktop?.();
+    stopDesktop = undefined;
     stopResources?.();
     stopResources = undefined;
   }

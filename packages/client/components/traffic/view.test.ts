@@ -291,3 +291,31 @@ describe("pause cutoff", () => {
     expect(upToId(list, undefined)).toBe(list);
   });
 });
+
+describe("mergeResources with desktop entries", () => {
+  it("folds a page resource into the desktop entry for the same load", () => {
+    const merged = mergeResources(
+      [
+        http(1, "https://cdn.example.com/a.png", 1400, {
+          source: "desktop",
+          resourceType: "image",
+        }),
+        resource(2, "https://cdn.example.com/a.png", 1000, "img"),
+      ],
+      BASE,
+    );
+    expect(merged).toHaveLength(1);
+    expect(merged[0]).toMatchObject({ source: "desktop", protocol: "h2" });
+  });
+
+  it("keeps resources too far from the desktop entry", () => {
+    const merged = mergeResources(
+      [
+        http(1, "https://cdn.example.com/a.png", 5000, { source: "desktop" }),
+        resource(2, "https://cdn.example.com/a.png", 1000, "img"),
+      ],
+      BASE,
+    );
+    expect(merged).toHaveLength(2);
+  });
+});

@@ -159,6 +159,37 @@ declare global {
           watchingYou: boolean;
         }[];
       }): Promise<void>;
+      /** TLS key log (network inspector), missing in older desktop versions */
+      getTlsKeyLog?(): Promise<{
+        /** The setting: on from the next start */
+        enabled: boolean;
+        /** Keys are being written in this session */
+        active: boolean;
+        /** Where the keys are written */
+        path: string;
+        /** The file exists */
+        exists: boolean;
+      }>;
+      /**
+       * Switches the TLS key log on or off. Switching on asks in a native
+       * dialog; resolves with the new state, `restarting` is true when the
+       * user chose "Restart now".
+       */
+      setTlsKeyLog?(enabled: boolean): Promise<{
+        enabled: boolean;
+        active: boolean;
+        path: string;
+        exists: boolean;
+        restarting: boolean;
+      }>;
+      /** Shows the key log file in the file manager, resolves false if there is none */
+      revealTlsKeyLog?(): Promise<boolean>;
+      /** Tells the shell whether the inspector records, it only reports requests then */
+      setRequestWatch?(on: boolean): Promise<void>;
+      /** Listen for requests the app's session saw, returns a function to stop listening */
+      onDesktopRequests?(
+        cb: (requests: import("@revolt/traffic").DesktopRequestEvent[]) => void,
+      ): () => void;
     };
 
     /**

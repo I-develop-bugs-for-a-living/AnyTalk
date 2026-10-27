@@ -1,3 +1,4 @@
+import { isDesktopFile } from "./desktopRequests";
 import { formatBytes } from "./format";
 import type { TrafficEntry } from "./types";
 import { remoteOf } from "./view";
@@ -36,6 +37,8 @@ export type RowSummary = {
   /** Short path, topic or preview. */
   summary: string;
   host: string;
+  /** Seen by the desktop app's session, not by the page's own recorder. */
+  desktop?: boolean;
 };
 
 /** Path and query of a URL, the whole input when it cannot be parsed. */
@@ -63,7 +66,8 @@ export function describeRow(entry: TrafficEntry): RowSummary {
   switch (entry.kind) {
     case "http":
       return {
-        badge: "HTTP",
+        badge: isDesktopFile(entry) ? "FILE" : "HTTP",
+        ...(entry.source === "desktop" ? { desktop: true } : {}),
         method: entry.method,
         status: entry.error ? "ERR" : entry.status ? String(entry.status) : "",
         summary: pathOf(entry.url),

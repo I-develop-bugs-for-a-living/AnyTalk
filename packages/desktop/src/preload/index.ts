@@ -3,6 +3,7 @@ import { contextBridge, ipcRenderer } from "electron";
 import {
   type AppInfo,
   type DesktopConfig,
+  type DesktopRequest,
   type ErrorInfo,
   type HotkeyBinding,
   type HotkeyCapabilities,
@@ -12,6 +13,8 @@ import {
   type PickerRequest,
   type PickerSource,
   type RunningGame,
+  type TlsKeyLogResult,
+  type TlsKeyLogState,
   type UpdaterState,
   IPC,
 } from "../shared/ipc";
@@ -78,6 +81,12 @@ ipcRenderer.on(IPC.updaterState, (_event, state: UpdaterState) => {
 const gamesListeners = new Set<(games: RunningGame[]) => void>();
 ipcRenderer.on(IPC.gamesChanged, (_event, games: RunningGame[]) => {
   gamesListeners.forEach((listener) => listener(games));
+});
+
+/** Subscribers to requests the desktop session saw (network inspector). */
+const requestListeners = new Set<(requests: DesktopRequest[]) => void>();
+ipcRenderer.on(IPC.requestsSeen, (_event, requests: DesktopRequest[]) => {
+  requestListeners.forEach((listener) => listener(requests));
 });
 
 /** Expose the bridge the web client switches on. */
@@ -148,6 +157,18 @@ function exposeNative() {
       invoke<void>(IPC.overlaySet, state),
     setNextScreenSource: (sourceId: string | null) =>
       invoke<void>(IPC.screenSourceSet, sourceId),
+    // Network inspector extras, missing in older desktop versions
+    getTlsKeyLog: () => invoke<TlsKeyLogState>(IPC.tlsKeyLogGet),
+    setTlsKeyLog: (enabled: boolean) =>
+      invoke<TlsKeyLogResult>(IPC.tlsKeyLogSet, enabled),
+    revealTlsKeyLog: () => invoke<boolean>(IPC.tlsKeyLogReveal),
+    setRequestWatch: (on: boolean) => invoke<void>(IPC.requestWatchSet, on),
+    onDesktopRequests: (callback: (requests: DesktopRequest[]) => void) => {
+      requestListeners.add(callback);
+      return () => {
+        requestListeners.delete(callback);
+      };
+    },
   });
 
   contextBridge.exposeInMainWorld("desktopConfig", {

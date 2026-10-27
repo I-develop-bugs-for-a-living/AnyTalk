@@ -35,6 +35,11 @@ export const IPC = {
   updaterState: "updater:state",
   overlaySet: "overlay:set",
   overlayState: "overlay:state",
+  tlsKeyLogGet: "tlskeylog:get",
+  tlsKeyLogSet: "tlskeylog:set",
+  tlsKeyLogReveal: "tlskeylog:reveal",
+  requestWatchSet: "requestwatch:set",
+  requestsSeen: "requestwatch:seen",
 } as const;
 
 /** Screen corners the overlay can sit in. */
@@ -127,6 +132,10 @@ export type DesktopConfig = OverlayElements & {
   overlayMode: OverlayMode;
   /** Custom server URL, empty string means the default */
   serverUrl: string;
+  /** Write the TLS session keys of this app to a file (network inspector) */
+  tlsKeyLog: boolean;
+  /** App version the key log was switched on in, it resets on an update */
+  tlsKeyLogVersion: string;
   windowState: {
     isMaximised: boolean;
     width: number;
@@ -241,3 +250,49 @@ export interface UpdaterState {
   /** Short message, only for the "error" status */
   error?: string;
 }
+
+/** State of the TLS key log option, see `main/tlsKeyLog.ts`. */
+export type TlsKeyLogState = {
+  /** The setting: on from the next start */
+  enabled: boolean;
+  /** Keys are being written in this session */
+  active: boolean;
+  /** Where the keys are written, whether or not the file exists yet */
+  path: string;
+  /** The file exists */
+  exists: boolean;
+};
+
+/** What the user chose when switching the TLS key log on. */
+export type TlsKeyLogResult = TlsKeyLogState & {
+  /** The user chose "Restart now": the app is restarting */
+  restarting: boolean;
+};
+
+/**
+ * A request the desktop session saw that the page's own recorder cannot see
+ * (see `main/requestWatch.ts`). Header values are raw: the page redacts them.
+ */
+export type DesktopRequest = {
+  /** Chromium's request id, unique within the session */
+  id: number;
+  method: string;
+  url: string;
+  /** Chromium resource type: image, script, font, media, mainFrame, ... */
+  resourceType: string;
+  /** Epoch milliseconds when the request was sent */
+  start: number;
+  /** Epoch milliseconds when it finished or failed */
+  end: number;
+  /** Not tied to a page: main process, updater or service worker */
+  background: boolean;
+  requestHeaders: [name: string, value: string][];
+  status?: number;
+  statusLine?: string;
+  responseHeaders: [name: string, value: string][];
+  fromCache: boolean;
+  /** Chromium error code (`net::ERR_...`) when it failed */
+  error?: string;
+  /** Server address as Chromium connected to it */
+  ip?: string;
+};

@@ -61,7 +61,19 @@ export function EntryDetails(props: { entry: TrafficEntry }) {
         add(t`Transferred`, size(e.transferSize));
         add(t`Compressed size`, size(e.encodedBodySize));
         add(t`Decoded size`, size(e.decodedBodySize));
-        add(t`Made with`, e.source === "xhr" ? "XMLHttpRequest" : "fetch");
+        add(
+          t`Made with`,
+          e.source === "desktop"
+            ? e.background
+              ? t`Desktop app (not tied to a page)`
+              : t`Desktop app`
+            : e.source === "xhr"
+              ? "XMLHttpRequest"
+              : "fetch",
+        );
+        add(t`Type`, e.resourceType);
+        add(t`From cache`, e.fromCache ? t`Yes` : undefined);
+        add(t`Server address`, e.remoteAddress, true);
         break;
       case "resource":
         add(t`URL`, e.url, true);

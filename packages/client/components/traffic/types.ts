@@ -23,12 +23,14 @@ export type HeaderList = [name: string, value: string][];
 
 /**
  * A finished (or failed) fetch or XMLHttpRequest. Recorded when the response
- * headers arrived (fetch) or the request ended (xhr).
+ * headers arrived (fetch) or the request ended (xhr). With `source: "desktop"`
+ * it is a request the desktop app's session saw instead (see
+ * `desktopRequests.ts`): resource loads, main process and updater requests.
  */
 export type HttpEntry = {
   kind: "http";
   id: number;
-  source: "fetch" | "xhr";
+  source: "fetch" | "xhr" | "desktop";
   method: string;
   url: string;
   host: string;
@@ -47,6 +49,14 @@ export type HttpEntry = {
   responseSize?: number;
   /** Text of small text/JSON responses. */
   responsePreview?: string;
+  /** Desktop app only: Chromium resource type (image, script, font, ...). */
+  resourceType?: string;
+  /** Desktop app only: no page made it (main process, updater, worker). */
+  background?: boolean;
+  /** Desktop app only: answered from the cache. */
+  fromCache?: boolean;
+  /** Desktop app only: server address Chromium connected to. */
+  remoteAddress?: string;
   /**
    * Browser timing, merged in from the matching `resource` entry (see
    * `mergeResources`). Only set on entries returned by `entries()`.

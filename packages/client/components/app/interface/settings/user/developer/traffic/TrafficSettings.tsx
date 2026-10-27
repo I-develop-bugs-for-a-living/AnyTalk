@@ -1,4 +1,11 @@
-import { type JSX, For, Show, createMemo, createSignal } from "solid-js";
+import {
+  type JSX,
+  For,
+  Show,
+  createMemo,
+  createSignal,
+  onMount,
+} from "solid-js";
 
 import { plural } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/solid/macro";
@@ -40,6 +47,48 @@ export function TrafficSettings() {
   const { t } = useLingui();
   const { navigate } = useSettingsNavigation();
   const [confirmSecrets, setConfirmSecrets] = createSignal(false);
+
+  /** TLS key log state, desktop app only (missing in older versions) */
+  const [keyLog, setKeyLog] =
+    createSignal<
+      Awaited<ReturnType<NonNullable<Window["native"]["getTlsKeyLog"]>>>
+    >();
+  /** The key log could not be read or changed */
+  const [keyLogError, setKeyLogError] = createSignal(false);
+  /** Whether this desktop app can write a TLS key log */
+  const hasKeyLog = () => !!window.native?.getTlsKeyLog;
+
+  onMount(async () => {
+    try {
+      setKeyLog(await window.native?.getTlsKeyLog?.());
+    } catch (err) {
+      console.error("[desktop] could not read the TLS key log state", err);
+      setKeyLogError(true);
+    }
+  });
+
+  /** Switch the key log on or off. The desktop app asks before switching on. */
+  const toggleKeyLog = async () => {
+    const current = keyLog();
+    if (!current) return;
+    try {
+      const result = await window.native?.setTlsKeyLog?.(!current.enabled);
+      if (result) setKeyLog(result);
+      setKeyLogError(false);
+    } catch (err) {
+      console.error("[desktop] could not change the TLS key log", err);
+      setKeyLogError(true);
+    }
+  };
+
+  /** Show the key log file in the file manager. */
+  const revealKeyLog = async () => {
+    try {
+      await window.native?.revealTlsKeyLog?.();
+    } catch (err) {
+      console.error("[desktop] could not show the TLS key log", err);
+    }
+  };
 
   const list = createMemo(() => entries({ showSecrets: showSecrets() }));
   const destinations = createMemo(() => summarizeDestinations(list()));
@@ -132,6 +181,70 @@ export function TrafficSettings() {
         </ErrorText>
       </Buttons>
 
+      <Show when={hasKeyLog()}>
+        <Column gap="md">
+          <Text class="title">
+            <Trans>TLS key log</Trans>
+          </Text>
+          <CategoryButton.Group>
+            <CategoryButton
+              icon={<Symbol>vpn_key</Symbol>}
+              action={<Checkbox checked={keyLog()?.enabled ?? false} />}
+              onClick={toggleKeyLog}
+              description={
+                <Show
+                  when={keyLog()}
+                  fallback={<Trans>Could not read the key log state.</Trans>}
+                >
+                  {(state) => (
+                    <Show
+                      when={state().active}
+                      fallback={
+                        <Show
+                          when={state().enabled}
+                          fallback={<Trans>Off</Trans>}
+                        >
+                          <Trans>Turns on after restart</Trans>
+                        </Show>
+                      }
+                    >
+                      <Show
+                        when={state().enabled}
+                        fallback={<Trans>Turns off after restart</Trans>}
+                      >
+                        <Trans>Active, writing to {state().path}</Trans>
+                      </Show>
+                    </Show>
+                  )}
+                </Show>
+              }
+            >
+              <Trans>Write TLS keys to a file</Trans>
+            </CategoryButton>
+          </CategoryButton.Group>
+          <Show when={keyLogError()}>
+            <ErrorLine role="alert">
+              <Trans>Could not change the key log. Try again.</Trans>
+            </ErrorLine>
+          </Show>
+          <Buttons>
+            <Button
+              variant="tonal"
+              isDisabled={!keyLog()?.exists}
+              onPress={revealKeyLog}
+            >
+              <Trans>Show file</Trans>
+            </Button>
+          </Buttons>
+          <Text class="label">
+            <Trans>
+              Call encryption (DTLS-SRTP) keys are not in this file, so call
+              media stays unreadable in Wireshark even with it.
+            </Trans>
+          </Text>
+        </Column>
+      </Show>
+
       <Column>
         <Text class="title">
           <Trans>Where your data goes</Trans>
@@ -223,9 +336,27 @@ export function TrafficSettings() {
         >
           <p>
             <Trans>
-              In the desktop app, a key log option that lets Wireshark decrypt
-              the traffic is coming in a later update. Until then, export the
-              HAR file to see the requests in detail.
+              In the desktop app, switch on "Write TLS keys to a file" above and
+              restart the app. Then start a capture in Wireshark, use the app,
+              and open Edit, Preferences, Protocols, TLS. Set
+              "(Pre)-Master-Secret log filename" to the file shown above (use
+              "Show file" to find it). Wireshark then decrypts the HTTPS and WSS
+              traffic.
+            </Trans>
+          </p>
+          <p>
+            <Trans>
+              Anyone who gets the key log file and a capture can read the
+              traffic, so switch it off when you are done. It also switches off
+              when the app updates. Calls stay unreadable: their media keys are
+              not in this file.
+            </Trans>
+          </p>
+          <p>
+            <Trans>
+              Requests from images, fonts and other files, and from the app
+              itself rather than a page, are listed too, marked "Desktop app".
+              They are only recorded while recording is on.
             </Trans>
           </p>
         </Show>
@@ -297,6 +428,15 @@ function Section(props: { summary: JSX.Element; children: JSX.Element }) {
 /** The action buttons, wrapping on narrow screens */
 const Buttons = styled("div", {
   base: { display: "flex", flexWrap: "wrap", gap: "8px", alignItems: "center" },
+});
+
+/** Error message under a setting */
+const ErrorLine = styled("p", {
+  base: {
+    margin: 0,
+    fontSize: "13px",
+    color: "var(--md-sys-color-error)",
+  },
 });
 
 /** Makes the text button inside use the error color */

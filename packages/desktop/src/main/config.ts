@@ -27,6 +27,8 @@ const DEFAULTS: DesktopConfig = {
   overlayMode: "games",
   ...overlayElementsFromStyle(undefined),
   serverUrl: "",
+  tlsKeyLog: false,
+  tlsKeyLogVersion: "",
   windowState: { isMaximised: false, width: 1280, height: 800 },
 };
 
