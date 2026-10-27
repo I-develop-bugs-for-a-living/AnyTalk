@@ -231,21 +231,24 @@ export function TrafficSettings() {
         </Show>
       </Section>
 
-      <Dialog
-        show={confirmSecrets()}
-        onClose={() => setConfirmSecrets(false)}
-        title={<Trans>Show tokens and keys?</Trans>}
-        actions={[
-          { text: <Trans>Cancel</Trans> },
-          { text: <Trans>Show</Trans>, onClick: () => setShowSecrets(true) },
-        ]}
-      >
-        <Trans>
-          Session tokens, passwords and call keys will appear on screen and in
-          exports. Anyone who sees or gets them could sign in as you. Turn this
-          on only to debug, and don't share the exports.
-        </Trans>
-      </Dialog>
+      {/* only mount while open: a closed Dialog still covers the window and swallows clicks */}
+      <Show when={confirmSecrets()}>
+        <Dialog
+          show
+          onClose={() => setConfirmSecrets(false)}
+          title={<Trans>Show tokens and keys?</Trans>}
+          actions={[
+            { text: <Trans>Cancel</Trans> },
+            { text: <Trans>Show</Trans>, onClick: () => setShowSecrets(true) },
+          ]}
+        >
+          <Trans>
+            Session tokens, passwords and call keys will appear on screen and in
+            exports. Anyone who sees or gets them could sign in as you. Turn
+            this on only to debug, and don't share the exports.
+          </Trans>
+        </Dialog>
+      </Show>
     </Column>
   );
 }
