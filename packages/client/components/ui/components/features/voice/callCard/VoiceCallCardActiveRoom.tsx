@@ -26,7 +26,6 @@ import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { scrollableStyles } from "@revolt/ui/directives";
 
 import { ParticipantInfo, ParticipantTile, tile } from "./ParticipantTile";
-import { StreamViewerList } from "./StreamViewerList";
 import { VoiceCallCardActions } from "./VoiceCallCardActions";
 import {
   VoiceCallCardEnableAudio,
@@ -120,19 +119,6 @@ export function VoiceCallCardActiveRoom() {
         <VoiceCallCardEnableAudio />
       </Show>
       <Participants theater={theater()} />
-      <Show
-        when={
-          theater() &&
-          voice.focusTrack()?.source === Track.Source.ScreenShare &&
-          voice.focusTrack()
-        }
-      >
-        {(track) => (
-          <ViewerCorner hidden={idle()}>
-            <StreamViewerList streamer={track().participant.identity} />
-          </ViewerCorner>
-        )}
-      </Show>
       <VoiceCallControls theater={theater()} hidden={theater() && idle()}>
         <VoiceCallControlHolder left collapsed={collapsed()}>
           <VoiceCallCardStatus />
@@ -574,29 +560,6 @@ const VoiceCallControls = styled("div", {
         transition: "opacity var(--transitions-medium)",
       },
     },
-    hidden: {
-      true: {
-        opacity: 0,
-        pointerEvents: "none",
-      },
-    },
-  },
-});
-
-/** Who's watching the stream, fades with the controls */
-const ViewerCorner = styled("div", {
-  base: {
-    position: "absolute",
-    top: 0,
-    right: 0,
-    zIndex: 1,
-    padding: "var(--gap-md)",
-    // keep clear of the notch and rounded corners on phones
-    paddingTop: "calc(var(--gap-md) + env(safe-area-inset-top))",
-    paddingRight: "calc(var(--gap-md) + env(safe-area-inset-right))",
-    transition: "opacity var(--transitions-medium)",
-  },
-  variants: {
     hidden: {
       true: {
         opacity: 0,
