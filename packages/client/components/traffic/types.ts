@@ -97,8 +97,122 @@ export type ResourceEntry = {
   status?: number;
 };
 
+/**
+ * One call (LiveKit) at the time it was joined, or when recording was turned
+ * on during it. Says where the media goes and whether it is end-to-end
+ * encrypted.
+ */
+export type CallInfoEntry = {
+  kind: "call-info";
+  id: number;
+  time: number;
+  /** LiveKit room name. */
+  room: string;
+  /** SFU address as given by the API (tokens are redacted when read). */
+  url: string;
+  host: string;
+  /** Whether the call's media is end-to-end encrypted. */
+  e2ee: boolean;
+};
+
+/** The two peer connections LiveKit keeps. */
+export type CallPeerConnection = "publisher" | "subscriber";
+
+/**
+ * The network path a call peer connection selected: where media goes and how
+ * it is protected on the wire. A new entry is recorded when the path changes.
+ */
+export type CallConnectionEntry = {
+  kind: "call-connection";
+  id: number;
+  time: number;
+  pc: CallPeerConnection;
+  /** Local and remote candidate types: host, srflx, prflx or relay. */
+  localType?: string;
+  remoteType?: string;
+  /** Transport of the selected pair: udp or tcp. */
+  protocol?: string;
+  /** True when the media goes through a TURN relay. */
+  relayed: boolean;
+  /** Protocol spoken to the TURN server (udp, tcp, tls), relayed only. */
+  relayProtocol?: string;
+  /** STUN/TURN server the local candidate came from, if exposed. */
+  relayUrl?: string;
+  remoteAddress?: string;
+  remotePort?: number;
+  /** Network type of the local interface (wifi, cellular, ...). */
+  networkType?: string;
+  dtlsState?: string;
+  dtlsCipher?: string;
+  srtpCipher?: string;
+  tlsVersion?: string;
+};
+
+/** Bytes moved by one media stream in a stats snapshot. */
+export type CallTrackBytes = {
+  direction: "out" | "in";
+  kind: string;
+  /** Media id (mid) or track identifier. */
+  id: string;
+  bytes: number;
+  packets: number;
+};
+
+/**
+ * A snapshot of cumulative byte counts of a call peer connection. Only
+ * recorded when the counts changed since the last snapshot.
+ */
+export type CallBytesEntry = {
+  kind: "call-bytes";
+  id: number;
+  time: number;
+  pc: CallPeerConnection;
+  /** Totals of the whole transport. */
+  bytesSent?: number;
+  bytesReceived?: number;
+  tracks: CallTrackBytes[];
+};
+
+/**
+ * A LiveKit data message we sent or received. The payload preview is raw; key
+ * exchange messages are redacted when read.
+ */
+export type CallDataEntry = {
+  kind: "call-data";
+  id: number;
+  time: number;
+  direction: "in" | "out";
+  topic: string;
+  /** `all`, or the identities addressed (outgoing). */
+  destination: "all" | string[];
+  /** Sender identity (incoming). */
+  identity?: string;
+  reliable?: boolean;
+  size: number;
+  preview: string;
+  truncated: boolean;
+};
+
+/**
+ * Participant attributes we set on the call (hello, deafened, follow).
+ */
+export type CallAttributeEntry = {
+  kind: "call-attribute";
+  id: number;
+  time: number;
+  attributes: { key: string; value: string }[];
+};
+
+/** Entries about a call. */
+export type CallEntry =
+  | CallInfoEntry
+  | CallConnectionEntry
+  | CallBytesEntry
+  | CallDataEntry
+  | CallAttributeEntry;
+
 /** Anything the recorder stores. */
-export type TrafficEntry = HttpEntry | WsEntry | ResourceEntry;
+export type TrafficEntry = HttpEntry | WsEntry | ResourceEntry | CallEntry;
 
 /** An entry before the recorder gives it an id. */
 export type NewEntry<T extends TrafficEntry = TrafficEntry> = T extends unknown

@@ -1,5 +1,6 @@
 import { createSignal } from "solid-js";
 
+import { type CallRoomLike, monitorCall } from "./callTraffic";
 import { installWrappers } from "./install";
 import { TrafficRecorder } from "./recorder";
 import { redactEntry } from "./redact";
@@ -79,4 +80,25 @@ export function entries(options?: { showSecrets?: boolean }): TrafficEntry[] {
 export function clear() {
   recorder.clear();
   setVersion((v) => v + 1);
+}
+
+/**
+ * Record a call's connection details, byte counts, data messages and
+ * participant attributes while recording is on (see `monitorCall`). Call once
+ * per room, before connecting. Costs nothing while recording is off.
+ *
+ * @param room The LiveKit room
+ * @param options.url SFU address the room is joined with
+ * @param options.e2ee Whether the call's media is end-to-end encrypted
+ * @returns A function that stops watching the call
+ */
+export function watchCallTraffic(
+  room: CallRoomLike,
+  options: { url: string; e2ee: () => boolean },
+): () => void {
+  try {
+    return monitorCall(room, recorder, options);
+  } catch {
+    return () => {};
+  }
 }

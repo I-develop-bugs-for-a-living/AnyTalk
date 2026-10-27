@@ -1,5 +1,8 @@
 import type {
   BodySummary,
+  CallAttributeEntry,
+  CallDataEntry,
+  CallInfoEntry,
   HeaderList,
   HttpEntry,
   ResourceEntry,
@@ -172,6 +175,39 @@ export function redactJsonText(text: string): string {
   );
 }
 
+/** Data message topic of the call key exchange (see rtc/e2ee/session.ts). */
+export const E2EE_TOPIC = "anytalk:e2ee";
+
+/**
+ * Fields of key exchange messages that hold key material: `ct` is the media
+ * key wrapped for one recipient and `iv` the wrap's initialisation vector.
+ * The sender, recipient, epoch and nonce are not secret.
+ */
+const E2EE_SECRET_FIELDS = new Set(["ct", "iv"]);
+
+/**
+ * Redact the key material of a call key exchange message. The public keys of
+ * the hello attribute are not touched (they are public by design).
+ */
+export function redactE2eeText(text: string): string {
+  try {
+    const parsed: unknown = JSON.parse(text);
+    if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+      const out: Record<string, unknown> = {};
+      for (const [key, value] of Object.entries(parsed)) {
+        out[key] = E2EE_SECRET_FIELDS.has(key) ? REDACTED : value;
+      }
+      return JSON.stringify(out);
+    }
+  } catch {
+    // cut off or not JSON: fall through to the pattern
+  }
+  return text.replace(
+    /("(?:ct|iv)"\s*:\s*)("(?:[^"\\]|\\.)*"?|[^,}\]\s]+)/g,
+    (_match, prefix: string) => `${prefix}"${REDACTED}"`,
+  );
+}
+
 /**
  * Redact the preview text of a body summary.
  */
@@ -224,5 +260,31 @@ export function redactEntry<T extends TrafficEntry>(entry: T): T {
       const e = entry as ResourceEntry;
       return { ...e, url: redactUrl(e.url) } as T;
     }
+    case "call-info": {
+      const e = entry as CallInfoEntry;
+      return { ...e, url: redactUrl(e.url) } as T;
+    }
+    case "call-data": {
+      const e = entry as CallDataEntry;
+      const preview =
+        e.topic === E2EE_TOPIC
+          ? redactE2eeText(e.preview)
+          : redactJsonText(e.preview);
+      return { ...e, preview } as T;
+    }
+    case "call-attribute": {
+      const e = entry as CallAttributeEntry;
+      return {
+        ...e,
+        attributes: e.attributes.map(({ key, value }) => ({
+          key,
+          value: isSecretField(key) ? REDACTED : redactJsonText(value),
+        })),
+      } as T;
+    }
+    case "call-connection":
+    case "call-bytes":
+      // addresses and byte counts are what the inspector exists to show
+      return entry;
   }
 }

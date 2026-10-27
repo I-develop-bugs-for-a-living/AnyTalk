@@ -50,6 +50,7 @@ import {
   ScreenShareResolutions,
   Voice as VoiceSettings,
 } from "@revolt/state/stores/Voice";
+import { watchCallTraffic } from "@revolt/traffic";
 import { VoiceCallCardContext } from "@revolt/ui/components/features/voice/callCard/VoiceCallCard";
 
 import { Device, useDevice } from "@revolt/common";
@@ -491,6 +492,9 @@ class Voice {
   #setPlaybackBlocked: Setter<boolean>;
   #setMicBlocked: Setter<boolean>;
   #releaseAudioUnlock?: () => void;
+
+  /** Stops recording the call's traffic for the traffic inspector. */
+  #stopCallTraffic?: () => void;
 
   /**
    * Participants whose screen share we chose to watch; other streams are
@@ -998,6 +1002,13 @@ class Voice {
       e2ee.dispose();
       return;
     }
+
+    // the traffic inspector records the call while it is on (no-op otherwise)
+    this.#stopCallTraffic?.();
+    this.#stopCallTraffic = watchCallTraffic(room, {
+      url: auth.url,
+      e2ee: () => e2ee.state.active,
+    });
 
     await room.connect(auth.url, auth.token, {
       autoSubscribe: false,
@@ -1786,6 +1797,8 @@ class Voice {
     this.device.releaseWakeLock();
     this.#releaseAudioUnlock?.();
     this.#releaseAudioUnlock = undefined;
+    this.#stopCallTraffic?.();
+    this.#stopCallTraffic = undefined;
     // stops the key exchange and terminates the E2EE worker of the old room,
     // after the room is disconnected so tracks can still be released
     const e2ee = this.e2ee();
