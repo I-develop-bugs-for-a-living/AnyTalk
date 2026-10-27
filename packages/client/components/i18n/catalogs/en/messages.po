@@ -637,6 +637,11 @@ msgstr "Acknowledge"
 msgid "Action"
 msgstr "Action"
 
+#. placeholder {0}: state().path
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Active, writing to {0}"
+msgstr "Active, writing to {0}"
+
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
 msgid "Add"
@@ -796,6 +801,10 @@ msgstr "Another app is already using these keys, so they only work inside AnyTal
 #: components/app/interface/settings/user/Hotkeys.tsx
 #~ msgid "Another app is already using these keys. Pick other keys."
 #~ msgstr "Another app is already using these keys. Pick other keys."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Anyone who gets the key log file and a capture can read the traffic, so switch it off when you are done. It also switches off when the app updates. Calls stay unreadable: their media keys are not in this file."
+msgstr "Anyone who gets the key log file and a capture can read the traffic, so switch it off when you are done. It also switches off when the app updates. Calls stay unreadable: their media keys are not in this file."
 
 #. placeholder {0}: installed()
 #: components/app/interface/settings/user/Updates.tsx
@@ -1181,6 +1190,10 @@ msgstr "bytes"
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Call"
 msgstr "Call"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Call encryption (DTLS-SRTP) keys are not in this file, so call media stays unreadable in Wireshark even with it."
+msgstr "Call encryption (DTLS-SRTP) keys are not in this file, so call media stays unreadable in Wireshark even with it."
 
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Call encryption couldn't be loaded. Try reloading the page."
@@ -1749,6 +1762,10 @@ msgstr "Copy user ID"
 msgid "Copy webhook URL"
 msgstr "Copy webhook URL"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not change the key log. Try again."
+msgstr "Could not change the key log. Try again."
+
 #: components/app/interface/settings/user/Updates.tsx
 #~ msgid "Could not check for updates."
 #~ msgstr "Could not check for updates."
@@ -1777,6 +1794,10 @@ msgstr "Could not open the window. Check that pop-ups are allowed."
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
 msgstr "Could not reach the updater. Try again."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not read the key log state."
+msgstr "Could not read the key log state."
 
 #: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/user/Overlay.tsx
@@ -2187,9 +2208,15 @@ msgstr "Description provided by {0}"
 msgid "Desktop"
 msgstr "Desktop"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
 msgstr "Desktop app"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Desktop app (not tied to a page)"
+msgstr "Desktop app (not tied to a page)"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Detailed"
@@ -2776,6 +2803,10 @@ msgstr "From"
 msgid "from "
 msgstr "from "
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "From cache"
+msgstr "From cache"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frozen"
 msgstr "Frozen"
@@ -3095,8 +3126,12 @@ msgid "In the browser, export the HAR file and open it in your browser's develop
 msgstr "In the browser, export the HAR file and open it in your browser's developer tools (Network tab, import) or another HAR viewer to see the requests in detail."
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
-msgstr "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
+#~ msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
+#~ msgstr "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the desktop app, switch on \"Write TLS keys to a file\" above and restart the app. Then start a capture in Wireshark, use the app, and open Edit, Preferences, Protocols, TLS. Set \"(Pre)-Master-Secret log filename\" to the file shown above (use \"Show file\" to find it). Wireshark then decrypts the HTTPS and WSS traffic."
+msgstr "In the desktop app, switch on \"Write TLS keys to a file\" above and restart the app. Then start a capture in Wireshark, use the app, and open Edit, Preferences, Protocols, TLS. Set \"(Pre)-Master-Secret log filename\" to the file shown above (use \"Show file\" to find it). Wireshark then decrypts the HTTPS and WSS traffic."
 
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
@@ -4128,6 +4163,7 @@ msgstr "Nothing to show yet"
 msgid "Notifications"
 msgstr "Notifications"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
@@ -4977,6 +5013,10 @@ msgstr "Request headers"
 msgid "Requests and messages show up here as they happen."
 msgstr "Requests and messages show up here as they happen."
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Requests from images, fonts and other files, and from the app itself rather than a page, are listed too, marked \"Desktop app\". They are only recorded while recording is on."
+msgstr "Requests from images, fonts and other files, and from the app itself rather than a page, are listed too, marked \"Desktop app\". They are only recorded while recording is on."
+
 #: components/auth/src/flows/FlowResend.tsx
 msgid "Resend"
 msgstr "Resend"
@@ -5442,6 +5482,7 @@ msgstr "Sent multiple attachments"
 msgid "Server"
 msgstr "Server"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Server address"
 msgstr "Server address"
@@ -5585,6 +5626,10 @@ msgstr "Show admin panel shortcuts in context menus"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
 msgstr "Show corrections and suggestions as you type."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show file"
+msgstr "Show file"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Show live microphone statistics on call tiles"
@@ -6313,6 +6358,10 @@ msgstr "Timeout Member"
 msgid "Timeout Members"
 msgstr "Timeout Members"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "TLS key log"
+msgstr "TLS key log"
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "To"
 msgstr "To"
@@ -6416,6 +6465,14 @@ msgstr "Turn single sounds off, change their volume or use your own"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "Turn this off and closing the window quits AnyTalk right away."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turns off after restart"
+msgstr "Turns off after restart"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turns on after restart"
+msgstr "Turns on after restart"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Type"
@@ -6997,6 +7054,10 @@ msgstr "Would you like to create a new server or join an existing one?"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Write a message"
 msgstr "Write a message"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Write TLS keys to a file"
+msgstr "Write TLS keys to a file"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "X (left button)"

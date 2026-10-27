@@ -637,6 +637,11 @@ msgstr "已知晓"
 msgid "Action"
 msgstr "操作"
 
+#. placeholder {0}: state().path
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Active, writing to {0}"
+msgstr "已启用，正在写入 {0}"
+
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
 msgid "Add"
@@ -796,6 +801,10 @@ msgstr "其他应用已在使用这些按键，因此它们仅在 AnyTalk 内有
 #: components/app/interface/settings/user/Hotkeys.tsx
 #~ msgid "Another app is already using these keys. Pick other keys."
 #~ msgstr "其他应用已在使用这些按键，请选择其他按键。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Anyone who gets the key log file and a capture can read the traffic, so switch it off when you are done. It also switches off when the app updates. Calls stay unreadable: their media keys are not in this file."
+msgstr "任何人获得密钥日志文件和抓包后都能读取流量，因此用完请关闭。应用更新时它也会自动关闭。通话仍然无法读取：通话的媒体密钥不在此文件中。"
 
 #. placeholder {0}: installed()
 #: components/app/interface/settings/user/Updates.tsx
@@ -1180,6 +1189,10 @@ msgstr "字节"
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Call"
 msgstr "通话"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Call encryption (DTLS-SRTP) keys are not in this file, so call media stays unreadable in Wireshark even with it."
+msgstr "通话加密（DTLS-SRTP）密钥不在此文件中，因此即使有它，通话媒体在 Wireshark 中也无法读取。"
 
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Call encryption couldn't be loaded. Try reloading the page."
@@ -1748,6 +1761,10 @@ msgstr "复制用户 ID"
 msgid "Copy webhook URL"
 msgstr "复制 Webhook 链接"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not change the key log. Try again."
+msgstr "无法更改密钥日志，请重试。"
+
 #: components/app/interface/settings/user/Updates.tsx
 #~ msgid "Could not check for updates."
 #~ msgstr "无法检查更新。"
@@ -1776,6 +1793,10 @@ msgstr "无法打开窗口。请检查是否允许弹出窗口。"
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
 msgstr "无法连接到更新程序，请重试。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not read the key log state."
+msgstr "无法读取密钥日志状态。"
 
 #: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/user/Overlay.tsx
@@ -2181,9 +2202,15 @@ msgstr "描述由 {0} 提供"
 msgid "Desktop"
 msgstr "桌面"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
 msgstr "桌面应用"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Desktop app (not tied to a page)"
+msgstr "桌面应用（不属于某个页面）"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Detailed"
@@ -2769,6 +2796,10 @@ msgstr "来自"
 msgid "from "
 msgstr "来自 "
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "From cache"
+msgstr "来自缓存"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frozen"
 msgstr "已卡住"
@@ -3087,8 +3118,12 @@ msgid "In the browser, export the HAR file and open it in your browser's develop
 msgstr "在浏览器中，导出 HAR 文件，然后在浏览器的开发者工具（“网络”标签页，导入）或其他 HAR 查看器中打开，即可查看请求详情。"
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
-msgstr "桌面应用将在后续更新中提供密钥日志选项，让 Wireshark 可以解密流量。在此之前，请导出 HAR 文件查看请求详情。"
+#~ msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
+#~ msgstr "桌面应用将在后续更新中提供密钥日志选项，让 Wireshark 可以解密流量。在此之前，请导出 HAR 文件查看请求详情。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the desktop app, switch on \"Write TLS keys to a file\" above and restart the app. Then start a capture in Wireshark, use the app, and open Edit, Preferences, Protocols, TLS. Set \"(Pre)-Master-Secret log filename\" to the file shown above (use \"Show file\" to find it). Wireshark then decrypts the HTTPS and WSS traffic."
+msgstr "在桌面应用中，打开上方的“将 TLS 密钥写入文件”并重启应用。然后在 Wireshark 中开始抓包，使用应用，并打开 Edit, Preferences, Protocols, TLS。将“(Pre)-Master-Secret log filename”设置为上方显示的文件（可用“显示文件”找到它）。之后 Wireshark 即可解密 HTTPS 和 WSS 流量。"
 
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
@@ -4119,6 +4154,7 @@ msgstr "暂无可显示的内容"
 msgid "Notifications"
 msgstr "通知"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
@@ -4968,6 +5004,10 @@ msgstr "请求标头"
 msgid "Requests and messages show up here as they happen."
 msgstr "请求和消息会在发生时显示在这里。"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Requests from images, fonts and other files, and from the app itself rather than a page, are listed too, marked \"Desktop app\". They are only recorded while recording is on."
+msgstr "来自图片、字体和其他文件的请求，以及来自应用本身而非页面的请求也会列出，并标记为“桌面应用”。它们仅在录制开启时记录。"
+
 #: components/auth/src/flows/FlowResend.tsx
 msgid "Resend"
 msgstr "重新发送"
@@ -5431,6 +5471,7 @@ msgstr "发送多个附件"
 msgid "Server"
 msgstr "服务器"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Server address"
 msgstr "服务器地址"
@@ -5574,6 +5615,10 @@ msgstr "在右键菜单中显示管理面板快捷方式"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
 msgstr "输入时显示更正和建议。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show file"
+msgstr "显示文件"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Show live microphone statistics on call tiles"
@@ -6300,6 +6345,10 @@ msgstr "静默成员"
 msgid "Timeout Members"
 msgstr "静默成员"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "TLS key log"
+msgstr "TLS 密钥日志"
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "To"
 msgstr "发往"
@@ -6403,6 +6452,14 @@ msgstr "单独关闭某些声音、调整音量或使用你自己的声音"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "关闭后，关闭窗口会立即退出 AnyTalk。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turns off after restart"
+msgstr "重启后关闭"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turns on after restart"
+msgstr "重启后开启"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Type"
@@ -6981,6 +7038,10 @@ msgstr "你想创建新服务器还是加入已有服务器？"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Write a message"
 msgstr "撰写消息"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Write TLS keys to a file"
+msgstr "将 TLS 密钥写入文件"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "X (left button)"

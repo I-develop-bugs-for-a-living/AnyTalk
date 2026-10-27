@@ -637,6 +637,11 @@ msgstr "Acknowledgeyay"
 msgid "Action"
 msgstr "Actionyay"
 
+#. placeholder {0}: state().path
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Active, writing to {0}"
+msgstr "Activeyay, itingwray otay {0}"
+
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
 msgid "Add"
@@ -796,6 +801,10 @@ msgstr "Anotheryay appyay isyay alreadyyay usingyay esethay eyskay, osay eythay 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #~ msgid "Another app is already using these keys. Pick other keys."
 #~ msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Anyone who gets the key log file and a capture can read the traffic, so switch it off when you are done. It also switches off when the app updates. Calls stay unreadable: their media keys are not in this file."
+msgstr "Anyoneyay owhay etsgay ethay eykay oglay ilefay andyay ayay apturecay ancay eadray ethay affictray, osay itchsway ityay offyay enwhay ouyay areyay oneday. Ityay alsoyay itchessway offyay enwhay ethay appyay updatesyay. Allscay aystay unreadableyay: eirthay ediamay eyskay areyay otnay inyay isthay ilefay."
 
 #. placeholder {0}: installed()
 #: components/app/interface/settings/user/Updates.tsx
@@ -1181,6 +1190,10 @@ msgstr "ytesbay"
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Call"
 msgstr "Allcay"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Call encryption (DTLS-SRTP) keys are not in this file, so call media stays unreadable in Wireshark even with it."
+msgstr "Allcay encryptionyay (DTLSAY-SRTPAY) eyskay areyay otnay inyay isthay ilefay, osay allcay ediamay aysstay unreadableyay inyay Iresharkway evenyay ithway ityay."
 
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Call encryption couldn't be loaded. Try reloading the page."
@@ -1749,6 +1762,10 @@ msgstr "Opycay useryay IDyay"
 msgid "Copy webhook URL"
 msgstr "Opycay ebhookway URLYAY"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not change the key log. Try again."
+msgstr "Ouldcay otnay angechay ethay eykay oglay. Ytray againyay."
+
 #: components/app/interface/settings/user/Updates.tsx
 #~ msgid "Could not check for updates."
 #~ msgstr ""
@@ -1777,6 +1794,10 @@ msgstr "Ouldcay otnay openyay ethay indowway. Eckchay atthay oppay-upsyay areyay
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
 msgstr "Ouldcay otnay eachray ethay updateryay. Ytray againyay."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not read the key log state."
+msgstr "Ouldcay otnay eadray ethay eykay oglay atestay."
 
 #: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/user/Overlay.tsx
@@ -2187,9 +2208,15 @@ msgstr "Escriptionday ovidedpray ybay {0}"
 msgid "Desktop"
 msgstr "Esktopday"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
 msgstr "Esktopday appyay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Desktop app (not tied to a page)"
+msgstr "Esktopday appyay (otnay iedtay otay ayay agepay)"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Detailed"
@@ -2776,6 +2803,10 @@ msgstr "Omfray"
 msgid "from "
 msgstr "omfray "
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "From cache"
+msgstr "Omfray achecay"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frozen"
 msgstr "Ozenfray"
@@ -3095,8 +3126,12 @@ msgid "In the browser, export the HAR file and open it in your browser's develop
 msgstr "Inyay ethay owserbray, exportyay ethay ARHAY ilefay andyay openyay ityay inyay ouryay owser'sbray eveloperday oolstay (Etworknay abtay, importyay) oryay anotheryay ARHAY iewervay otay eesay ethay equestsray inyay etailday."
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
-msgstr "Inyay ethay esktopday appyay, ayay eykay oglay optionyay atthay etslay Iresharkway ecryptday ethay affictray isyay omingcay inyay ayay aterlay updateyay. Untilyay enthay, exportyay ethay ARHAY ilefay otay eesay ethay equestsray inyay etailday."
+#~ msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
+#~ msgstr "Inyay ethay esktopday appyay, ayay eykay oglay optionyay atthay etslay Iresharkway ecryptday ethay affictray isyay omingcay inyay ayay aterlay updateyay. Untilyay enthay, exportyay ethay ARHAY ilefay otay eesay ethay equestsray inyay etailday."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the desktop app, switch on \"Write TLS keys to a file\" above and restart the app. Then start a capture in Wireshark, use the app, and open Edit, Preferences, Protocols, TLS. Set \"(Pre)-Master-Secret log filename\" to the file shown above (use \"Show file\" to find it). Wireshark then decrypts the HTTPS and WSS traffic."
+msgstr "Inyay ethay esktopday appyay, itchsway onyay \"Itewray TLSAY eyskay otay ayay ilefay\" aboveyay andyay estartray ethay appyay. Enthay artstay ayay apturecay inyay Iresharkway, useyay ethay appyay, andyay openyay Edityay, Eferencespray, Otocolspray, TLSAY. Etsay \"(Epray)-Astermay-Ecretsay oglay ilenamefay\" otay ethay ilefay ownshay aboveyay (useyay \"Owshay ilefay\" otay indfay ityay). Iresharkway enthay ecryptsday ethay HTTPSAY andyay WSSAY affictray."
 
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
@@ -4128,6 +4163,7 @@ msgstr "Othingnay otay owshay etyay"
 msgid "Notifications"
 msgstr "Otificationsnay"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
@@ -4977,6 +5013,10 @@ msgstr "Equestray eadershay"
 msgid "Requests and messages show up here as they happen."
 msgstr "Equestsray andyay essagesmay owshay upyay erehay asyay eythay appenhay."
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Requests from images, fonts and other files, and from the app itself rather than a page, are listed too, marked \"Desktop app\". They are only recorded while recording is on."
+msgstr "Equestsray omfray imagesyay, ontsfay andyay otheryay ilesfay, andyay omfray ethay appyay itselfyay atherray anthay ayay agepay, areyay istedlay ootay, arkedmay \"Esktopday appyay\". Eythay areyay onlyyay ecordedray ilewhay ecordingray isyay onyay."
+
 #: components/auth/src/flows/FlowResend.tsx
 msgid "Resend"
 msgstr "Esendray"
@@ -5442,6 +5482,7 @@ msgstr "Entsay ultiplemay ttachmentsaay"
 msgid "Server"
 msgstr "Erversay"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Server address"
 msgstr "Erversay addressyay"
@@ -5585,6 +5626,10 @@ msgstr "Owshay adminyay anelpay ortcutsshay inyay ontextcay enusmay"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
 msgstr "Owshay orrectionscay andyay uggestionssay asyay ouyay ypetay."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show file"
+msgstr "Owshay ilefay"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Show live microphone statistics on call tiles"
@@ -6313,6 +6358,10 @@ msgstr "Imeouttay Embermay"
 msgid "Timeout Members"
 msgstr "Imeouttay Embersmay"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "TLS key log"
+msgstr "TLSAY eykay oglay"
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "To"
 msgstr "Otay"
@@ -6416,6 +6465,14 @@ msgstr "Urntay inglesay oundssay offyay, angechay eirthay olumevay oryay useyay 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "Urntay isthay offyay andyay osingclay ethay indowway itsquay AnyTalk ightray awayyay."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turns off after restart"
+msgstr "Urnstay offyay afteryay estartray"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turns on after restart"
+msgstr "Urnstay onyay afteryay estartray"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Type"
@@ -6997,6 +7054,10 @@ msgstr "Ouldway ouyay ikelay otay eatecray ayay ewnay erversay oryay oinjay anya
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Write a message"
 msgstr "Itewray ayay essagemay"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Write TLS keys to a file"
+msgstr "Itewray TLSAY eyskay otay ayay ilefay"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "X (left button)"

@@ -637,6 +637,11 @@ msgstr "4CKN0WL3D63"
 msgid "Action"
 msgstr "4C710N"
 
+#. placeholder {0}: state().path
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Active, writing to {0}"
+msgstr "4C71V3, W2171N6 70 {0}"
+
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
 msgid "Add"
@@ -796,6 +801,10 @@ msgstr "4N07H32 4PP 15 4L234DY U51N6 7H353 K3Y5, 50 7H3Y 0NLY W02K 1N51D3 4NY74L
 #: components/app/interface/settings/user/Hotkeys.tsx
 #~ msgid "Another app is already using these keys. Pick other keys."
 #~ msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Anyone who gets the key log file and a capture can read the traffic, so switch it off when you are done. It also switches off when the app updates. Calls stay unreadable: their media keys are not in this file."
+msgstr "4NY0N3 WH0 6375 7H3 K3Y L06 F1L3 4ND 4 C4P7U23 C4N 234D 7H3 724FF1C, 50 5W17CH 17 0FF WH3N Y0U 423 D0N3. 17 4L50 5W17CH35 0FF WH3N 7H3 4PP UPD4735. C4LL5 574Y UN234D48L3: 7H312 M3D14 K3Y5 423 N07 1N 7H15 F1L3."
 
 #. placeholder {0}: installed()
 #: components/app/interface/settings/user/Updates.tsx
@@ -1181,6 +1190,10 @@ msgstr "8Y735"
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Call"
 msgstr "C4LL"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Call encryption (DTLS-SRTP) keys are not in this file, so call media stays unreadable in Wireshark even with it."
+msgstr "C4LL 3NC2YP710N (D7L5-527P) K3Y5 423 N07 1N 7H15 F1L3, 50 C4LL M3D14 574Y5 UN234D48L3 1N W1235H42K 3V3N W17H 17."
 
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Call encryption couldn't be loaded. Try reloading the page."
@@ -1749,6 +1762,10 @@ msgstr "C0PY U532 1D"
 msgid "Copy webhook URL"
 msgstr "C0PY W38H00K U2L"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not change the key log. Try again."
+msgstr "C0ULD N07 CH4N63 7H3 K3Y L06. 72Y 4641N."
+
 #: components/app/interface/settings/user/Updates.tsx
 #~ msgid "Could not check for updates."
 #~ msgstr ""
@@ -1777,6 +1794,10 @@ msgstr "C0ULD N07 0P3N 7H3 W1ND0W. CH3CK 7H47 P0P-UP5 423 4LL0W3D."
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
 msgstr "C0ULD N07 234CH 7H3 UPD4732. 72Y 4641N."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not read the key log state."
+msgstr "C0ULD N07 234D 7H3 K3Y L06 57473."
 
 #: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/user/Overlay.tsx
@@ -2187,9 +2208,15 @@ msgstr "D35C21P710N P20V1D3D 8Y {0}"
 msgid "Desktop"
 msgstr "D35K70P"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
 msgstr "D35K70P 4PP"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Desktop app (not tied to a page)"
+msgstr "D35K70P 4PP (N07 713D 70 4 P463)"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Detailed"
@@ -2776,6 +2803,10 @@ msgstr "F20M"
 msgid "from "
 msgstr "F20M "
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "From cache"
+msgstr "F20M C4CH3"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frozen"
 msgstr "F20Z3N"
@@ -3095,8 +3126,12 @@ msgid "In the browser, export the HAR file and open it in your browser's develop
 msgstr "1N 7H3 820W532, 3XP027 7H3 H42 F1L3 4ND 0P3N 17 1N Y0U2 820W532'5 D3V3L0P32 700L5 (N37W02K 748, 1MP027) 02 4N07H32 H42 V13W32 70 533 7H3 23QU3575 1N D3741L."
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
-msgstr "1N 7H3 D35K70P 4PP, 4 K3Y L06 0P710N 7H47 L375 W1235H42K D3C2YP7 7H3 724FF1C 15 C0M1N6 1N 4 L4732 UPD473. UN71L 7H3N, 3XP027 7H3 H42 F1L3 70 533 7H3 23QU3575 1N D3741L."
+#~ msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
+#~ msgstr "1N 7H3 D35K70P 4PP, 4 K3Y L06 0P710N 7H47 L375 W1235H42K D3C2YP7 7H3 724FF1C 15 C0M1N6 1N 4 L4732 UPD473. UN71L 7H3N, 3XP027 7H3 H42 F1L3 70 533 7H3 23QU3575 1N D3741L."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the desktop app, switch on \"Write TLS keys to a file\" above and restart the app. Then start a capture in Wireshark, use the app, and open Edit, Preferences, Protocols, TLS. Set \"(Pre)-Master-Secret log filename\" to the file shown above (use \"Show file\" to find it). Wireshark then decrypts the HTTPS and WSS traffic."
+msgstr "1N 7H3 D35K70P 4PP, 5W17CH 0N \"W2173 7L5 K3Y5 70 4 F1L3\" 480V3 4ND 2357427 7H3 4PP. 7H3N 57427 4 C4P7U23 1N W1235H42K, U53 7H3 4PP, 4ND 0P3N 3D17, P23F323NC35, P2070C0L5, 7L5. 537 \"(P23)-M45732-53C237 L06 F1L3N4M3\" 70 7H3 F1L3 5H0WN 480V3 (U53 \"5H0W F1L3\" 70 F1ND 17). W1235H42K 7H3N D3C2YP75 7H3 H77P5 4ND W55 724FF1C."
 
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
@@ -4128,6 +4163,7 @@ msgstr "N07H1N6 70 5H0W Y37"
 msgid "Notifications"
 msgstr "N071F1C4710N5"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
@@ -4977,6 +5013,10 @@ msgstr "23QU357 H34D325"
 msgid "Requests and messages show up here as they happen."
 msgstr "23QU3575 4ND M3554635 5H0W UP H323 45 7H3Y H4PP3N."
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Requests from images, fonts and other files, and from the app itself rather than a page, are listed too, marked \"Desktop app\". They are only recorded while recording is on."
+msgstr "23QU3575 F20M 1M4635, F0N75 4ND 07H32 F1L35, 4ND F20M 7H3 4PP 1753LF 247H32 7H4N 4 P463, 423 L1573D 700, M42K3D \"D35K70P 4PP\". 7H3Y 423 0NLY 23C02D3D WH1L3 23C02D1N6 15 0N."
+
 #: components/auth/src/flows/FlowResend.tsx
 msgid "Resend"
 msgstr "2353ND"
@@ -5442,6 +5482,7 @@ msgstr "53N7 MUL71PL3 4774CHM3N75"
 msgid "Server"
 msgstr "532V32"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Server address"
 msgstr "532V32 4DD2355"
@@ -5585,6 +5626,10 @@ msgstr "5H0W 4DM1N P4N3L 5H027CU75 1N C0N73X7 M3NU5"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
 msgstr "5H0W C0223C710N5 4ND 5U6635710N5 45 Y0U 7YP3."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show file"
+msgstr "5H0W F1L3"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Show live microphone statistics on call tiles"
@@ -6313,6 +6358,10 @@ msgstr "71M30U7 M3M832"
 msgid "Timeout Members"
 msgstr "71M30U7 M3M8325"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "TLS key log"
+msgstr "7L5 K3Y L06"
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "To"
 msgstr "70"
@@ -6416,6 +6465,14 @@ msgstr "7U2N 51N6L3 50UND5 0FF, CH4N63 7H312 V0LUM3 02 U53 Y0U2 0WN"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "7U2N 7H15 0FF 4ND CL051N6 7H3 W1ND0W QU175 4NY74LK 216H7 4W4Y."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turns off after restart"
+msgstr "7U2N5 0FF 4F732 2357427"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turns on after restart"
+msgstr "7U2N5 0N 4F732 2357427"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Type"
@@ -6997,6 +7054,10 @@ msgstr "W0ULD Y0U L1K3 70 C23473 4 N3W 532V32 02 J01N 4N 3X1571N6 0N3?"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Write a message"
 msgstr "W2173 4 M355463"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Write TLS keys to a file"
+msgstr "W2173 7L5 K3Y5 70 4 F1L3"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "X (left button)"

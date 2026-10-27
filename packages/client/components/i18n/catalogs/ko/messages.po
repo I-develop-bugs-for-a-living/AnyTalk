@@ -637,6 +637,11 @@ msgstr "확인"
 msgid "Action"
 msgstr "동작"
 
+#. placeholder {0}: state().path
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Active, writing to {0}"
+msgstr "활성, {0}에 기록 중"
+
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
 msgid "Add"
@@ -796,6 +801,10 @@ msgstr "다른 앱이 이미 이 키를 사용하고 있어서 AnyTalk 안에서
 #: components/app/interface/settings/user/Hotkeys.tsx
 #~ msgid "Another app is already using these keys. Pick other keys."
 #~ msgstr "다른 앱이 이미 이 키를 사용하고 있어요. 다른 키를 선택해 주세요."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Anyone who gets the key log file and a capture can read the traffic, so switch it off when you are done. It also switches off when the app updates. Calls stay unreadable: their media keys are not in this file."
+msgstr "키 로그 파일과 캡처를 입수한 사람은 트래픽을 읽을 수 있으니 다 쓰면 꺼 주세요. 앱이 업데이트될 때도 꺼져요. 통화는 계속 읽을 수 없어요. 통화의 미디어 키는 이 파일에 없어요."
 
 #. placeholder {0}: installed()
 #: components/app/interface/settings/user/Updates.tsx
@@ -1180,6 +1189,10 @@ msgstr "바이트"
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Call"
 msgstr "통화"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Call encryption (DTLS-SRTP) keys are not in this file, so call media stays unreadable in Wireshark even with it."
+msgstr "통화 암호화(DTLS-SRTP) 키는 이 파일에 없어서, 이 파일이 있어도 Wireshark에서 통화 미디어는 읽을 수 없어요."
 
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Call encryption couldn't be loaded. Try reloading the page."
@@ -1748,6 +1761,10 @@ msgstr "유저 ID 복사"
 msgid "Copy webhook URL"
 msgstr "웹훅 URL 복사"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not change the key log. Try again."
+msgstr "키 로그를 변경하지 못했어요. 다시 시도해 주세요."
+
 #: components/app/interface/settings/user/Updates.tsx
 #~ msgid "Could not check for updates."
 #~ msgstr "업데이트를 확인할 수 없어요."
@@ -1776,6 +1793,10 @@ msgstr "창을 열 수 없어요. 팝업이 허용되어 있는지 확인해 주
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
 msgstr "업데이터에 연결할 수 없어요. 다시 시도해 주세요."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not read the key log state."
+msgstr "키 로그 상태를 읽지 못했어요."
 
 #: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/user/Overlay.tsx
@@ -2185,9 +2206,15 @@ msgstr "{0}님이 제공한 설명"
 msgid "Desktop"
 msgstr "데스크톱"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
 msgstr "데스크톱 앱"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Desktop app (not tied to a page)"
+msgstr "데스크톱 앱(페이지와 무관)"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Detailed"
@@ -2773,6 +2800,10 @@ msgstr "보낸 곳"
 msgid "from "
 msgstr "출처: "
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "From cache"
+msgstr "캐시에서"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frozen"
 msgstr "멈춤"
@@ -3091,8 +3122,12 @@ msgid "In the browser, export the HAR file and open it in your browser's develop
 msgstr "브라우저에서는 HAR 파일을 내보낸 뒤 브라우저의 개발자 도구(네트워크 탭, 가져오기)나 다른 HAR 뷰어에서 열면 요청을 자세히 볼 수 있어요."
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
-msgstr "데스크톱 앱에는 Wireshark로 트래픽을 복호화할 수 있는 키 로그 옵션이 이후 업데이트에서 추가될 예정이에요. 그때까지는 HAR 파일을 내보내서 요청을 자세히 확인해 보세요."
+#~ msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
+#~ msgstr "데스크톱 앱에는 Wireshark로 트래픽을 복호화할 수 있는 키 로그 옵션이 이후 업데이트에서 추가될 예정이에요. 그때까지는 HAR 파일을 내보내서 요청을 자세히 확인해 보세요."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the desktop app, switch on \"Write TLS keys to a file\" above and restart the app. Then start a capture in Wireshark, use the app, and open Edit, Preferences, Protocols, TLS. Set \"(Pre)-Master-Secret log filename\" to the file shown above (use \"Show file\" to find it). Wireshark then decrypts the HTTPS and WSS traffic."
+msgstr "데스크톱 앱에서 위의 'TLS 키를 파일에 기록'을 켜고 앱을 다시 시작하세요. 그런 다음 Wireshark에서 캡처를 시작하고 앱을 사용한 뒤 Edit, Preferences, Protocols, TLS를 여세요. '(Pre)-Master-Secret log filename'을 위에 표시된 파일로 설정하세요('파일 보기'로 위치를 찾을 수 있어요). 그러면 Wireshark가 HTTPS와 WSS 트래픽을 복호화해요."
 
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
@@ -4123,6 +4158,7 @@ msgstr "아직 표시할 내용이 없어요"
 msgid "Notifications"
 msgstr "알림"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
@@ -4972,6 +5008,10 @@ msgstr "요청 헤더"
 msgid "Requests and messages show up here as they happen."
 msgstr "요청과 메시지가 발생하는 대로 여기에 표시돼요."
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Requests from images, fonts and other files, and from the app itself rather than a page, are listed too, marked \"Desktop app\". They are only recorded while recording is on."
+msgstr "이미지, 글꼴 등 다른 파일의 요청과 페이지가 아닌 앱 자체의 요청도 '데스크톱 앱'으로 표시되어 목록에 나와요. 기록 중일 때만 기록돼요."
+
 #: components/auth/src/flows/FlowResend.tsx
 msgid "Resend"
 msgstr "다시 보내기"
@@ -5435,6 +5475,7 @@ msgstr "여러 개의 첨부파일을 보냈어요"
 msgid "Server"
 msgstr "서버"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Server address"
 msgstr "서버 주소"
@@ -5578,6 +5619,10 @@ msgstr "컨텍스트 메뉴에 관리자 패널 바로가기 표시"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
 msgstr "입력하는 동안 교정과 추천을 표시해요."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show file"
+msgstr "파일 보기"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Show live microphone statistics on call tiles"
@@ -6304,6 +6349,10 @@ msgstr "멤버 타임아웃"
 msgid "Timeout Members"
 msgstr "타임아웃"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "TLS key log"
+msgstr "TLS 키 로그"
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "To"
 msgstr "받는 곳"
@@ -6407,6 +6456,14 @@ msgstr "소리를 하나씩 끄거나, 볼륨을 바꾸거나, 직접 만든 소
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "이 옵션을 끄면 창을 닫을 때 AnyTalk가 바로 종료돼요."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turns off after restart"
+msgstr "다시 시작하면 꺼져요"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turns on after restart"
+msgstr "다시 시작하면 켜져요"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Type"
@@ -6985,6 +7042,10 @@ msgstr "새 서버를 만들거나 기존 서버에 참여할까요?"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Write a message"
 msgstr "메시지 작성"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Write TLS keys to a file"
+msgstr "TLS 키를 파일에 기록"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "X (left button)"

@@ -565,6 +565,11 @@ msgstr "確認しました"
 msgid "Action"
 msgstr "操作"
 
+#. placeholder {0}: state().path
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Active, writing to {0}"
+msgstr "有効、{0} に書き込み中"
+
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
 msgid "Add"
@@ -722,6 +727,10 @@ msgstr "別のアプリがすでにこれらのキーを使っているため、
 #: components/app/interface/settings/user/Hotkeys.tsx
 #~ msgid "Another app is already using these keys. Pick other keys."
 #~ msgstr "別のアプリがすでにこのキーを使用しています。別のキーを選んでください。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Anyone who gets the key log file and a capture can read the traffic, so switch it off when you are done. It also switches off when the app updates. Calls stay unreadable: their media keys are not in this file."
+msgstr "キーログファイルとキャプチャを入手した人は通信内容を読み取れるため、使い終わったらオフにしてください。アプリの更新時にもオフになります。通話は読み取れないままです。通話のメディアキーはこのファイルに含まれません。"
 
 #. placeholder {0}: installed()
 #: components/app/interface/settings/user/Updates.tsx
@@ -1099,6 +1108,10 @@ msgstr "バイト"
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Call"
 msgstr "通話"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Call encryption (DTLS-SRTP) keys are not in this file, so call media stays unreadable in Wireshark even with it."
+msgstr "通話の暗号化 (DTLS-SRTP) のキーはこのファイルに含まれないため、このファイルがあっても通話のメディアは Wireshark で読み取れません。"
 
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Call encryption couldn't be loaded. Try reloading the page."
@@ -1663,6 +1676,10 @@ msgstr "ユーザーIDをコピー"
 msgid "Copy webhook URL"
 msgstr "ウェブフックURLをコピー"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not change the key log. Try again."
+msgstr "キーログを変更できませんでした。もう一度お試しください。"
+
 #: components/app/interface/settings/user/Updates.tsx
 #~ msgid "Could not check for updates."
 #~ msgstr "アップデートを確認できませんでした。"
@@ -1691,6 +1708,10 @@ msgstr "ウィンドウを開けませんでした。ポップアップが許可
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
 msgstr "アップデーターに接続できませんでした。もう一度お試しください。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not read the key log state."
+msgstr "キーログの状態を読み取れませんでした。"
 
 #: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/user/Overlay.tsx
@@ -2091,9 +2112,15 @@ msgstr "{0} より"
 msgid "Desktop"
 msgstr "デスクトップ"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
 msgstr "デスクトップアプリ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Desktop app (not tied to a page)"
+msgstr "デスクトップアプリ(ページに紐づかない)"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Detailed"
@@ -2676,6 +2703,10 @@ msgstr "送信元"
 msgid "from "
 msgstr "提供元: "
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "From cache"
+msgstr "キャッシュから"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frozen"
 msgstr "フリーズ中"
@@ -2990,8 +3021,12 @@ msgid "In the browser, export the HAR file and open it in your browser's develop
 msgstr "ブラウザーでは、HAR ファイルをエクスポートし、ブラウザーの開発者ツール(ネットワークタブでインポート)や他の HAR ビューアーで開くと、リクエストの詳細を確認できます。"
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
-msgstr "デスクトップアプリでは、Wireshark で通信を復号できる鍵ログのオプションを今後のアップデートで追加予定です。それまでは HAR ファイルをエクスポートして、リクエストの詳細を確認してください。"
+#~ msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
+#~ msgstr "デスクトップアプリでは、Wireshark で通信を復号できる鍵ログのオプションを今後のアップデートで追加予定です。それまでは HAR ファイルをエクスポートして、リクエストの詳細を確認してください。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the desktop app, switch on \"Write TLS keys to a file\" above and restart the app. Then start a capture in Wireshark, use the app, and open Edit, Preferences, Protocols, TLS. Set \"(Pre)-Master-Secret log filename\" to the file shown above (use \"Show file\" to find it). Wireshark then decrypts the HTTPS and WSS traffic."
+msgstr "デスクトップアプリで、上の「TLS キーをファイルに書き込む」をオンにしてアプリを再起動します。次に Wireshark でキャプチャを開始し、アプリを使ってから Edit, Preferences, Protocols, TLS を開きます。「(Pre)-Master-Secret log filename」に上に表示されているファイルを指定してください(「ファイルを表示」で場所を確認できます)。これで Wireshark が HTTPS と WSS の通信を復号します。"
 
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
@@ -4019,6 +4054,7 @@ msgstr "まだ表示するものがありません"
 msgid "Notifications"
 msgstr "通知"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
@@ -4864,6 +4900,10 @@ msgstr "リクエストヘッダー"
 msgid "Requests and messages show up here as they happen."
 msgstr "リクエストやメッセージは発生するたびにここに表示されます。"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Requests from images, fonts and other files, and from the app itself rather than a page, are listed too, marked \"Desktop app\". They are only recorded while recording is on."
+msgstr "画像やフォントなどのファイルからのリクエスト、およびページではなくアプリ自体からのリクエストも「デスクトップアプリ」と表示して一覧に含まれます。これらは記録中のみ記録されます。"
+
 #: components/auth/src/flows/FlowResend.tsx
 msgid "Resend"
 msgstr "再送信"
@@ -5321,6 +5361,7 @@ msgstr "複数の添付ファイルが送信されました"
 msgid "Server"
 msgstr "サーバー"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Server address"
 msgstr "サーバーアドレス"
@@ -5464,6 +5505,10 @@ msgstr "コンテキストメニューに管理パネルのショートカット
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
 msgstr "入力中に修正候補や提案を表示します。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show file"
+msgstr "ファイルを表示"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Show live microphone statistics on call tiles"
@@ -6184,6 +6229,10 @@ msgstr "メンバーをタイムアウト"
 msgid "Timeout Members"
 msgstr "メンバーをタイムアウト"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "TLS key log"
+msgstr "TLS キーログ"
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "To"
 msgstr "送信先"
@@ -6287,6 +6336,14 @@ msgstr "サウンドを個別にオフにしたり、音量を変えたり、自
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "オフにすると、ウィンドウを閉じた時点で AnyTalk がすぐに終了します。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turns off after restart"
+msgstr "再起動後にオフになります"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turns on after restart"
+msgstr "再起動後にオンになります"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Type"
@@ -6857,6 +6914,10 @@ msgstr "新しいサーバーを作成しますか？ それとも既存のサ�
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Write a message"
 msgstr "メッセージを書く"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Write TLS keys to a file"
+msgstr "TLS キーをファイルに書き込む"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "X (left button)"
