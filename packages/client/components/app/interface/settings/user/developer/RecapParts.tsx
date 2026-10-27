@@ -4,6 +4,7 @@ import { plural, t } from "@lingui/core/macro";
 import { Trans } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
+import { downloadFile } from "@revolt/common/lib/downloadFile";
 import { zipFiles } from "@revolt/rtc/zip";
 import { Button, CategoryButton, Checkbox, Row, Text } from "@revolt/ui";
 
@@ -12,21 +13,6 @@ import { Button, CategoryButton, Checkbox, Row, Text } from "@revolt/ui";
  */
 
 export type RecapCsv = { name: string; text: string };
-
-/**
- * Save a file to the viewer's device
- * @param data Contents
- * @param type Media type
- * @param name File name
- */
-export function downloadFile(data: BlobPart, type: string, name: string) {
-  const url = URL.createObjectURL(new Blob([data], { type }));
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = name;
-  a.click();
-  URL.revokeObjectURL(url);
-}
 
 /**
  * Download recap CSVs: one as a CSV file, several packed in a zip
