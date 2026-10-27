@@ -298,6 +298,58 @@ describe("monitorCall", () => {
     expect(f.listeners.size).toBe(0);
   });
 
+  it("leaves the destination of received data messages out", async () => {
+    vi.useFakeTimers();
+    const r = new TrafficRecorder();
+    r.enabled = true;
+    const f = fakeRoom(async () => new Map());
+    const stop = monitorCall(f.room, r, { url: "wss://x", e2ee: () => true });
+    f.listeners.get("dataReceived")!(
+      new Uint8Array([1]),
+      { identity: "u2" },
+      undefined,
+      "t",
+    );
+    const received = r.snapshot().find((e) => e.kind === "call-data");
+    expect(received).toBeDefined();
+    expect(received).not.toHaveProperty("destination");
+    stop();
+  });
+
+  it("calls the only peer connection of single mode a connection", async () => {
+    vi.useFakeTimers();
+    const r = new TrafficRecorder();
+    r.enabled = true;
+    const f = fakeRoom(async () => new Map(reports(100).map((x) => [x.id, x])));
+    // fakeRoom has only a publisher, as in single peer connection mode
+    const stop = monitorCall(f.room, r, { url: "wss://x", e2ee: () => true });
+    await vi.advanceTimersByTimeAsync(5000);
+    const pcs = r
+      .snapshot()
+      .filter((e) => e.kind === "call-connection" || e.kind === "call-bytes")
+      .map((e) => (e as { pc: string }).pc);
+    expect(pcs.length).toBeGreaterThan(0);
+    expect(new Set(pcs)).toEqual(new Set(["connection"]));
+    stop();
+  });
+
+  it("keeps publisher and subscriber when both exist", async () => {
+    vi.useFakeTimers();
+    const r = new TrafficRecorder();
+    r.enabled = true;
+    const getStats = async () => new Map(reports(100).map((x) => [x.id, x]));
+    const f = fakeRoom(getStats);
+    f.room.engine!.pcManager!.subscriber = { _pc: {}, getStats } as never;
+    const stop = monitorCall(f.room, r, { url: "wss://x", e2ee: () => true });
+    await vi.advanceTimersByTimeAsync(5000);
+    const pcs = r
+      .snapshot()
+      .filter((e) => e.kind === "call-connection")
+      .map((e) => (e as { pc: string }).pc);
+    expect(new Set(pcs)).toEqual(new Set(["publisher", "subscriber"]));
+    stop();
+  });
+
   it("survives missing or throwing stats", async () => {
     vi.useFakeTimers();
     const r = new TrafficRecorder();

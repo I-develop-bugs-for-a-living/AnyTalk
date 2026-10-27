@@ -8,7 +8,7 @@ import {
   redactJsonText,
   redactUrl,
 } from "./redact";
-import type { HttpEntry, WsEntry } from "./types";
+import type { HttpEntry, TrafficEntry, WsEntry } from "./types";
 
 describe("redactHeaders", () => {
   it("hides secret headers only", () => {
@@ -181,5 +181,51 @@ describe("redactEntry", () => {
     expect(isSecretRoute("https://a/auth/account/change/password")).toBe(true);
     expect(isSecretRoute("https://a/push/subscribe")).toBe(true);
     expect(isSecretRoute("https://a/users/@me")).toBe(false);
+  });
+});
+
+describe("redaction of free text fields", () => {
+  it("redacts secrets in a websocket close reason", () => {
+    const e = redactEntry({
+      kind: "ws",
+      id: 1,
+      connectionId: 1,
+      event: "close",
+      url: "wss://x.example.com/",
+      host: "x.example.com",
+      time: 0,
+      reason: '{"token":"SECRET","why":"bye"}',
+    } as TrafficEntry) as { reason: string };
+    expect(e.reason).not.toContain("SECRET");
+    expect(e.reason).toContain("bye");
+  });
+
+  it("redacts secrets in a request error and keeps plain errors", () => {
+    const base = {
+      kind: "http",
+      id: 1,
+      source: "fetch",
+      method: "GET",
+      url: "https://x.example.com/",
+      host: "x.example.com",
+      start: 0,
+      end: 1,
+      requestHeaders: [],
+      responseHeaders: [],
+      requestBody: { kind: "none" },
+    };
+    const secret = redactEntry({
+      ...base,
+      error: 'bad {"access_token":"SECRET"}',
+    } as TrafficEntry) as { error: string };
+    expect(secret.error).not.toContain("SECRET");
+    const plain = redactEntry({
+      ...base,
+      error: "Failed to fetch",
+    } as TrafficEntry) as { error: string };
+    expect(plain.error).toBe("Failed to fetch");
+    expect(
+      (redactEntry(base as TrafficEntry) as { error?: string }).error,
+    ).toBeUndefined();
   });
 });

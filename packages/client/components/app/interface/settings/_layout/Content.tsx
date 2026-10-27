@@ -38,7 +38,11 @@ export function SettingsContent(props: {
   return (
     <div ref={props.ref} use:scrollable={{ class: base }}>
       <Show when={props.page()}>
-        <InnerContent class="settings_cont">
+        <InnerContent
+          class="settings_cont"
+          // the inspector's live view needs room for its list and details
+          data-wide={props.page() === "developer/traffic/live" || undefined}
+        >
           <InnerColumn>
             {/* pages fill the screen on phones, so say how to get out */}
             <Show when={device.layout() === "phone"}>
@@ -156,6 +160,8 @@ const InnerContent = styled("div", {
     padding: "80px 32px",
     justifyContent: "stretch",
     zIndex: 1,
+
+    "&[data-wide]": { maxWidth: "none" },
 
     _tablet: { padding: "12px" },
     _phone: { height: "100dvh" },

@@ -14,6 +14,7 @@ import "material-symbols/outlined.css";
 import "mdui/mdui.css";
 import { PublicBot, PublicChannelInvite } from "stoat.js";
 
+import { TrafficWindow } from "@revolt/app/interface/settings/user/developer/traffic/TrafficWindow";
 import FlowCheck from "@revolt/auth/src/flows/FlowCheck";
 import FlowConfirmReset from "@revolt/auth/src/flows/FlowConfirmReset";
 import FlowCreate from "@revolt/auth/src/flows/FlowCreate";
@@ -140,6 +141,7 @@ function MountContext(props: { children?: JSX.Element }) {
                 <QueryClientProvider client={client}>
                   {props.children}
                   <ModalRenderer />
+                  <TrafficWindow />
                   <FloatingManager />
                   <AndroidNag />
                 </QueryClientProvider>

@@ -237,6 +237,7 @@ export function redactEntry<T extends TrafficEntry>(entry: T): T {
       const out: HttpEntry = {
         ...e,
         url: redactUrl(e.url),
+        error: e.error === undefined ? undefined : redactJsonText(e.error),
         requestHeaders: redactHeaders(e.requestHeaders),
         responseHeaders: redactHeaders(e.responseHeaders),
         requestBody: redactBody(e.requestBody, secretRoute),
@@ -253,6 +254,9 @@ export function redactEntry<T extends TrafficEntry>(entry: T): T {
         ...e,
         url: redactUrl(e.url),
         text: e.text === undefined ? undefined : redactJsonText(e.text),
+        // `hex` is only the first 32 bytes of a binary frame: too short to
+        // hold a token or key, so it is shown as is
+        reason: e.reason === undefined ? undefined : redactJsonText(e.reason),
       };
       return out as T;
     }

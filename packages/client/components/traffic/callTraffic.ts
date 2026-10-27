@@ -14,22 +14,6 @@ export const STATS_INTERVAL_MS = 5000;
 /** How long one stats read may take before it is given up. */
 export const STATS_TIMEOUT_MS = 4000;
 
-/**
- * Plain description of how call media is protected, for the inspector to show
- * (chunk 3 turns it into translated text). Not user-facing text yet.
- */
-export const CALL_ENCRYPTION_EXPLANATION = {
-  /** Short title. */
-  title: "Call media is encrypted twice",
-  /** Points in order from the inside out. */
-  points: [
-    "Inside: end-to-end encryption (LiveKit E2EE, SFrame style) with a key only the participants hold. The media server (SFU) forwards frames it cannot read.",
-    "Outside: SRTP over DTLS between your device and the media server, as for any WebRTC call.",
-    "A packet capture (for example Wireshark) therefore shows only DTLS/SRTP ciphertext, and the media server only sees end-to-end ciphertext.",
-    "Data messages and participant attributes (who watches a stream, deafened, key exchange) go over the signalling WebSocket to the media server. They are not end-to-end encrypted, but the key exchange only carries public keys and keys wrapped for one recipient.",
-  ],
-} as const;
-
 /** A stats report as returned by `RTCPeerConnection.getStats()`, as a plain record. */
 export type StatsRecord = Record<string, unknown> & {
   id: string;
@@ -227,6 +211,8 @@ export type CallRoomLike = {
   };
   engine?: {
     pcManager?: {
+      /** `publisher-only` is single peer connection mode. */
+      mode?: string;
       publisher?: { getStats?: () => Promise<unknown> };
       subscriber?: { getStats?: () => Promise<unknown> };
     };
@@ -368,7 +354,6 @@ export function monitorCall(
         time: now(),
         direction: "in",
         topic: topic ?? "",
-        destination: "all",
         identity: participant?.identity,
         ...describePayload(payload),
       });
@@ -446,10 +431,17 @@ export function monitorCall(
       reading = true;
       try {
         const manager = room.engine?.pcManager;
-        const sides: [CallPeerConnection, unknown][] = [
-          ["publisher", manager?.publisher],
-          ["subscriber", manager?.subscriber],
-        ];
+        // single peer connection mode has only the publisher transport, which
+        // then carries everything: call it "connection"
+        const single =
+          manager?.mode === "publisher-only" ||
+          (!!manager?.publisher && !manager.subscriber);
+        const sides: [CallPeerConnection, unknown][] = single
+          ? [["connection", manager?.publisher]]
+          : [
+              ["publisher", manager?.publisher],
+              ["subscriber", manager?.subscriber],
+            ];
         for (const [pc, transport] of sides) {
           try {
             const reports = statsToRecords(await readStats(transport));

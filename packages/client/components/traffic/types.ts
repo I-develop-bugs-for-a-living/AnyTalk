@@ -47,6 +47,15 @@ export type HttpEntry = {
   responseSize?: number;
   /** Text of small text/JSON responses. */
   responsePreview?: string;
+  /**
+   * Browser timing, merged in from the matching `resource` entry (see
+   * `mergeResources`). Only set on entries returned by `entries()`.
+   */
+  protocol?: string;
+  transferSize?: number;
+  encodedBodySize?: number;
+  decodedBodySize?: number;
+  durationMs?: number;
 };
 
 /**
@@ -115,8 +124,11 @@ export type CallInfoEntry = {
   e2ee: boolean;
 };
 
-/** The two peer connections LiveKit keeps. */
-export type CallPeerConnection = "publisher" | "subscriber";
+/**
+ * The peer connections LiveKit keeps: a publisher and a subscriber, or just
+ * one `connection` in single peer connection mode.
+ */
+export type CallPeerConnection = "publisher" | "subscriber" | "connection";
 
 /**
  * The network path a call peer connection selected: where media goes and how
@@ -183,8 +195,11 @@ export type CallDataEntry = {
   time: number;
   direction: "in" | "out";
   topic: string;
-  /** `all`, or the identities addressed (outgoing). */
-  destination: "all" | string[];
+  /**
+   * `all`, or the identities addressed. Outgoing only: for received messages
+   * it isn't known.
+   */
+  destination?: "all" | string[];
   /** Sender identity (incoming). */
   identity?: string;
   reliable?: boolean;

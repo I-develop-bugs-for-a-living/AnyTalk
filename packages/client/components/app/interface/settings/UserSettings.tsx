@@ -45,6 +45,8 @@ import {
   StreamStatsSettings,
   VoiceStatsSettings,
 } from "./user/developer/Developer";
+import { LiveView } from "./user/developer/traffic/LiveView";
+import { TrafficSettings } from "./user/developer/traffic/TrafficSettings";
 import { Feedback } from "./user/Feedback";
 import { HotkeysSettings } from "./user/Hotkeys";
 import { LanguageSettings } from "./user/Language";
@@ -57,6 +59,16 @@ import { updateWaiting, watchUpdater } from "./user/updaterState";
 import Updates from "./user/Updates";
 import { VoiceSettings } from "./user/voice/VoiceSettings";
 
+/**
+ * Height of the live view's page: the viewport minus what surrounds it: the settings pane's
+ * 80px top padding and 80px spacer below, plus the title row (about 60px).
+ * Phones have no big padding, only the back header and title (about 150px).
+ */
+const LIVE_VIEW_HEIGHT = {
+  desktop: "calc(100dvh - 220px)",
+  phone: "calc(100dvh - 150px)",
+};
+
 const Config: SettingsConfiguration<{ server: Server }> = {
   /**
    * Page titles
@@ -66,6 +78,8 @@ const Config: SettingsConfiguration<{ server: Server }> = {
     if (key === "developer/voice") return i18n._(msg`Voice Call Stats`);
     if (key === "developer/streams") return i18n._(msg`Stream Stats`);
     if (key === "developer/compare") return i18n._(msg`Compare Recaps`);
+    if (key === "traffic") return i18n._(msg`Network Inspector`);
+    if (key === "live") return i18n._(msg`Live View`);
 
     if (key.startsWith("bots/")) {
       const user = useUser(key.substring(5));
@@ -107,6 +121,21 @@ const Config: SettingsConfiguration<{ server: Server }> = {
         return <StreamStatsSettings />;
       case "developer/compare":
         return <CompareRecaps />;
+      case "developer/traffic":
+        return <TrafficSettings />;
+      case "developer/traffic/live":
+        // fills the settings pane, the list scrolls inside
+        return (
+          <div
+            class={css({
+              height: LIVE_VIEW_HEIGHT.desktop,
+              minHeight: "420px",
+              _phone: { height: LIVE_VIEW_HEIGHT.phone },
+            })}
+          >
+            <LiveView />
+          </div>
+        );
       case "profile":
         return <EditProfile />;
       case "sessions":

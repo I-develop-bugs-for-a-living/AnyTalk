@@ -1,6 +1,12 @@
 /** Frame name of the fallback popup, the desktop app recognises it by this prefix */
 export const POPOUT_FRAME_PREFIX = "anytalk-stream-popout";
 
+/**
+ * Frame name prefix of the network inspector's window. The desktop app lets
+ * this one open as a window of its own, like the stream one.
+ */
+export const INSPECTOR_FRAME_PREFIX = "anytalk-inspector-popout";
+
 /** How a stream gets its own window */
 export type PopoutKind = "pip" | "popup";
 
@@ -175,16 +181,32 @@ export function followDocument(from: Document, to: Document) {
   };
 }
 
+/** What `openPopoutWindow` needs to know */
+export type PopoutWindowOptions = {
+  title: string;
+  width: number;
+  height: number;
+  /** Ends the popup's frame name: `<framePrefix>-<name>` */
+  name: string;
+  /** Start of the popup's frame name, the stream one when missing */
+  framePrefix?: string;
+  /** Page background, black when missing (the stream window) */
+  background?: string;
+  /** Whether the page scrolls, it doesn't when missing (the stream window) */
+  scroll?: boolean;
+};
+
 /**
- * Open a window for a stream and prepare its document: title, styles, theme
- * and a black, scroll-free page.
+ * Open a window for a stream (or other content) and prepare its document:
+ * title, styles, theme, background and scrolling.
  * @param kind Which API to open it with
- * @param options Title, starting size and a name for the popup frame
+ * @param options Title, starting size, a name for the popup frame and how the
+ * page looks
  * @returns The window, it is ready to get content
  */
 export async function openPopoutWindow(
   kind: PopoutKind,
-  options: { title: string; width: number; height: number; name: string },
+  options: PopoutWindowOptions,
 ): Promise<{ win: Window; stopFollowing: () => void }> {
   let win: Window | null = null;
 
@@ -196,7 +218,7 @@ export async function openPopoutWindow(
   } else {
     win = window.open(
       "about:blank",
-      `${POPOUT_FRAME_PREFIX}-${options.name}`,
+      `${options.framePrefix ?? POPOUT_FRAME_PREFIX}-${options.name}`,
       `popup=yes,width=${options.width},height=${options.height}`,
     );
   }
@@ -209,8 +231,9 @@ export async function openPopoutWindow(
     copyRootAttributes(document, doc);
 
     const base = doc.createElement("style");
-    base.textContent =
-      "html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}";
+    base.textContent = `html,body{margin:0;width:100%;height:100%;overflow:${
+      options.scroll ? "auto" : "hidden"
+    };background:${options.background ?? "#000"}}`;
     doc.head.appendChild(base);
 
     return { win, stopFollowing: followDocument(document, doc) };

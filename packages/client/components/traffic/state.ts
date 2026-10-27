@@ -6,6 +6,7 @@ import { TrafficRecorder } from "./recorder";
 import { redactEntry } from "./redact";
 import { observeResources } from "./resources";
 import type { TrafficEntry } from "./types";
+import { mergeResources } from "./view";
 
 /** The one recorder shared by the whole app. */
 const recorder = new TrafficRecorder();
@@ -21,7 +22,11 @@ let stopResources: (() => void) | undefined;
 /** Pending flush of change notifications, so busy sockets don't thrash the UI. */
 let flushTimer: ReturnType<typeof setTimeout> | undefined;
 
+/** Counts recorder changes right away, to tell when cached results are stale. */
+let generation = 0;
+
 recorder.subscribe(() => {
+  generation++;
   if (flushTimer !== undefined) return;
   flushTimer = setTimeout(() => {
     flushTimer = undefined;
@@ -62,16 +67,69 @@ export function setRecording(value: boolean) {
   }
 }
 
+/** Redacted copies by stored entry (stored entries never change). */
+const redactedCache = new WeakMap<TrafficEntry, TrafficEntry>();
+
+/** The last list built by `entries()` and what it was built from. */
+let cached:
+  | { generation: number; secrets: boolean; result: TrafficEntry[] }
+  | undefined;
+
+/** Redact an entry once and reuse the copy, so rows keep their identity. */
+function redactedOf(entry: TrafficEntry): TrafficEntry {
+  let out = redactedCache.get(entry);
+  if (!out) {
+    out = redactEntry(entry);
+    redactedCache.set(entry, out);
+  }
+  return out;
+}
+
+/** Whether tokens and keys are shown, in memory only (resets on reload). */
+const [showSecretsSignal, setShowSecretsSignal] = createSignal(false);
+
+/**
+ * Whether tokens and keys are shown on screen and in exports (reactive). Off
+ * at startup and never persisted.
+ */
+export function showSecrets(): boolean {
+  return showSecretsSignal();
+}
+
+/**
+ * Show or hide tokens and keys in the inspector and its exports.
+ *
+ * @param value New state
+ */
+export function setShowSecrets(value: boolean) {
+  setShowSecretsSignal(value);
+}
+
 /**
  * Recorded entries, oldest first (reactive). Secrets are redacted unless
- * `showSecrets` is true.
+ * `showSecrets` is true. The browser's resource entries for fetch and
+ * XMLHttpRequest are merged into the matching http entries (`mergeResources`),
+ * so a request appears once.
  *
  * @param options.showSecrets Return the raw stored values
  */
 export function entries(options?: { showSecrets?: boolean }): TrafficEntry[] {
   version();
+  const secrets = !!options?.showSecrets;
+  // every consumer asks for the same list: build it once per change
+  if (
+    cached &&
+    cached.generation === generation &&
+    cached.secrets === secrets
+  ) {
+    return cached.result;
+  }
   const all = recorder.snapshot();
-  return options?.showSecrets ? all : all.map((entry) => redactEntry(entry));
+  const result = mergeResources(
+    secrets ? all : all.map((entry) => redactedOf(entry)),
+  );
+  cached = { generation, secrets, result };
+  return result;
 }
 
 /**
