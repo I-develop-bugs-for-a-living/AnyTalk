@@ -213,9 +213,10 @@ if (location.href.split(/[?#]/)[0] === info.errorPageUrl) {
 } else if (location.href.split(/[?#]/)[0] === info.overlayPageUrl) {
   exposeOverlayPage();
 } else if (
-  // a stream popout inherits the opener's origin but never gets the bridge
+  // a stream or inspector popout inherits the opener's origin but never gets the bridge
   !window.opener &&
   !window.name.startsWith("anytalk-stream-popout") &&
+  !window.name.startsWith("anytalk-inspector-popout") &&
   location.origin === info.origin
 ) {
   // Without the synchronous config the page can't tell it runs in the app

@@ -235,6 +235,9 @@ function restartToUpdate() {
 /** Frame name prefix of the stream popout window (see rtc/streamPopout.ts) */
 const STREAM_POPOUT_FRAME = "anytalk-stream-popout";
 
+/** Frame name prefix of the network inspector's window, treated the same */
+const INSPECTOR_POPOUT_FRAME = "anytalk-inspector-popout";
+
 /** Create the main window with the saved size and frame style. */
 function createWindow() {
   const config = getConfig();
@@ -352,7 +355,8 @@ function createWindow() {
     // handled below.
     if (
       url === "about:blank" &&
-      frameName.startsWith(STREAM_POPOUT_FRAME) &&
+      (frameName.startsWith(STREAM_POPOUT_FRAME) ||
+        frameName.startsWith(INSPECTOR_POPOUT_FRAME)) &&
       isServerUrl(wc.getURL()) &&
       isServerUrl(referrer.url)
     ) {
@@ -364,7 +368,10 @@ function createWindow() {
           resizable: true,
           fullscreenable: true,
           autoHideMenuBar: true,
-          backgroundColor: "#000000",
+          // black for streams, a neutral dark grey for the inspector
+          backgroundColor: frameName.startsWith(INSPECTOR_POPOUT_FRAME)
+            ? "#1a1a1a"
+            : "#000000",
           title: "AnyTalk",
           icon: nativeImage.createFromPath(
             join(
