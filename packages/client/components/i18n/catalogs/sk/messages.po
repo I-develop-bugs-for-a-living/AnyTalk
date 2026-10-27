@@ -71,6 +71,13 @@ msgstr ""
 msgid "{0, plural, one {# channel} other {# channels}}"
 msgstr ""
 
+#. placeholder {0}: list().length
+#. placeholder {0}: shown().length
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "{0, plural, one {# entry} other {# entries}}"
+msgstr ""
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -581,6 +588,10 @@ msgstr "Príde správa alebo upozornenie"
 msgid "A new version of AnyTalk is available"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "A packet capture (for example Wireshark) therefore shows only DTLS/SRTP ciphertext, and the media server only sees end-to-end ciphertext."
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream in your call ends"
 msgstr "Stream vo vašom hovore skončí"
@@ -698,6 +709,7 @@ msgstr "Rozšírené nastavenia zvuku"
 #~ msgid "Affects all roles and users"
 #~ msgstr "Vplýva na všetky role a členov"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: src/interface/Friends.tsx
 msgid "All"
 msgstr "Všetko"
@@ -810,6 +822,10 @@ msgstr "AnyTalk je jeden z najlepších spôsobov, ako zostať v kontakte s pria
 msgid "AnyTalk is up to date."
 msgstr "AnyTalk je aktuálny."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "AnyTalk network inspector"
+msgstr ""
+
 #: src/AndroidNag.tsx
 msgid "AnyTalk on Android"
 msgstr "AnyTalk pre Android"
@@ -904,6 +920,18 @@ msgstr "Priradiť roly"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "at {time}"
 msgstr "o {time}"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "attached"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "attributes"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Attributes"
+msgstr ""
 
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Audio devices"
@@ -1143,7 +1171,13 @@ msgstr "Obísť pomalý režim"
 msgid "Bypasses slowmode in channels"
 msgstr "Obchádza pomalý režim v kanáloch"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "bytes"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Call"
 msgstr "Hovor"
 
@@ -1155,6 +1189,10 @@ msgstr ""
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Calls"
 msgstr "Hovory"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Calls: how they are encrypted"
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Camera"
@@ -1173,6 +1211,7 @@ msgid "Can't get discover request status right now"
 msgstr "Stav žiadosti o Objavovanie sa teraz nepodarilo zistiť"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Native.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/AddBot.tsx
@@ -1383,6 +1422,10 @@ msgstr "Zvoľte si používateľské meno"
 msgid "Choose username"
 msgstr "Zvoliť používateľské meno"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Clear"
+msgstr ""
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Clear search"
 msgstr ""
@@ -1414,6 +1457,10 @@ msgstr "Odkryť spoiler"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Client Settings"
 msgstr "Nastavenia klienta"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "close"
+msgstr ""
 
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
@@ -1449,6 +1496,10 @@ msgstr "Zavrieť"
 #: components/app/menus/UserContextMenu.tsx
 msgid "Close chat"
 msgstr "Uzavrieť konverzáciu"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Close code"
+msgstr ""
 
 #. placeholder {0}: props.channel.recipient?.displayName
 #: components/modal/modals/DeleteChannel.tsx
@@ -1501,6 +1552,10 @@ msgstr "Porovnať súhrny"
 msgid "Compare Recaps"
 msgstr "Porovnať súhrny"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Compressed size"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Concealed audio"
 msgstr "Zamaskovaný zvuk"
@@ -1539,10 +1594,18 @@ msgstr "Pripojiť sa do hovoru"
 msgid "Connected"
 msgstr "Pripojené"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "connecting"
+msgstr ""
+
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "Pripája sa"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Connection"
+msgstr ""
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Connection lost"
@@ -1564,6 +1627,10 @@ msgstr "Na odstránenie tohto bota z Objavovania kontaktujte podporu"
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Contact support to remove this server from discover"
 msgstr "Na odstránenie tohto servera z Objavovania kontaktujte podporu"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Content"
+msgstr ""
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Content breaks one or more laws"
@@ -1602,6 +1669,10 @@ msgstr ""
 msgid "Conversations"
 msgstr "Konverzácie"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Copied"
+msgstr ""
+
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "Skopírované!"
@@ -1629,6 +1700,10 @@ msgstr "Kopírovať odkaz na pozvánku"
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Copy Invite URL"
 msgstr "Skopírovať pozývací odkaz"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Copy JSON"
+msgstr ""
 
 #: components/app/menus/ChannelContextMenu.tsx
 #: components/app/menus/MessageContextMenu.tsx
@@ -1692,6 +1767,10 @@ msgstr ""
 #: components/rtc/components/StreamPopouts.tsx
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Could not open the window. Check that pop-ups are allowed."
 msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
@@ -1908,6 +1987,10 @@ msgstr ""
 msgid "Dark"
 msgstr "Tmavá"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Data messages and participant attributes (who watches a stream, deafened, key exchange) go over the signalling WebSocket to the media server. They are not end-to-end encrypted, but the key exchange only carries public keys and keys wrapped for one recipient."
+msgstr ""
+
 #. placeholder {0}: err.location
 #: components/i18n/errors.tsx
 msgid "Database error, please contact support. ({0})"
@@ -1936,6 +2019,10 @@ msgstr ""
 
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Decoded size"
 msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
@@ -2085,6 +2172,10 @@ msgstr "Odstrániť webhook"
 msgid "Deleting this emoji will disallow future use. All past uses will remain."
 msgstr "Odstránením tohto emodži zakážete jeho budúce používanie. Všetky doterajšie použitia zostanú."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Delivery"
+msgstr ""
+
 #. placeholder {0}: props.invite.username
 #: components/modal/modals/AddBot.tsx
 msgid "Description provided by {0}"
@@ -2106,6 +2197,10 @@ msgstr ""
 #~ msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
 #~ msgstr ""
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Details"
+msgstr ""
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
 msgstr ""
@@ -2126,9 +2221,21 @@ msgstr "Vývojárske režimy merajú výkon hovorov a uchovávajú na tomto zari
 msgid "Device is offline"
 msgstr "Zariadenie je offline"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "direct"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Direct"
+msgstr ""
+
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Direct Messages"
 msgstr "Priame správy"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Direction"
+msgstr ""
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Disable Account"
@@ -2256,8 +2363,21 @@ msgstr "Zahodené snímky za sekundu"
 msgid "Drugs or illegal goods"
 msgstr "Drogy alebo iný ilegálny tovar"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS cipher"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS state"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS version"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Duration"
 msgstr "Trvanie"
@@ -2397,6 +2517,10 @@ msgstr "Cieľový bitrate kodéra"
 msgid "End call"
 msgstr "Ukončiť hovor"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "End-to-end encrypted"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced"
 msgstr "Vylepšený"
@@ -2448,6 +2572,10 @@ msgstr "Zadajte vaše preferované používateľské meno."
 msgid "Entire screen"
 msgstr "Celá obrazovka"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "error"
+msgstr ""
+
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Error occurred, please email support."
 msgstr "Vyskytla sa chyba, napíšte prosím podpore."
@@ -2461,12 +2589,20 @@ msgstr "esc na <0>zrušenie</0> · enter na <1>uloženie</1>"
 msgid "Estimated upload bandwidth"
 msgstr "Odhadovaná šírka pásma na odosielanie"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Event"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone"
 msgstr "Všetci"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Everyone in the call"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Excellent"
@@ -2483,6 +2619,14 @@ msgstr ""
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "Exportovať"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Export HAR"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Export JSON"
+msgstr ""
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "External links can be dangerous!"
@@ -2529,6 +2673,15 @@ msgstr "Spätná väzba"
 msgid "File must be smaller than {0}"
 msgstr "Súbor musí byť menší ako {0}"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Files"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Filter by address, host or topic"
+msgstr ""
+
 #: src/interface/Home.tsx
 msgid "Find a community based on your hobbies or interests."
 msgstr "Nájdite komunitu na základe svojich koníčkov alebo záujmov."
@@ -2540,6 +2693,10 @@ msgstr "Nájdite nové servery, ku ktorým sa pripojíte"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "Nájdite svoju ko<0/>munitu,<1/>spojte sa so svetom."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "First bytes"
+msgstr ""
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Fixed controls"
@@ -2591,6 +2748,10 @@ msgstr "Na 8 hodín"
 msgid "Frame rate"
 msgstr "Snímková frekvencia"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Freeze the list. Recording goes on."
+msgstr ""
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Freezes"
 msgstr "Zamrznutia"
@@ -2603,6 +2764,10 @@ msgstr "Priatelia"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Friends who are online or in a call show up here."
 msgstr "Priatelia, ktorí sú online alebo v hovore, sa zobrazia tu."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "From"
+msgstr ""
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "from "
@@ -2780,6 +2945,10 @@ msgstr "Pomohol/pomohla s prekladom AnyTalk-a"
 msgid "Here is your new invite code: <0>{0}</0>"
 msgstr "Tu je váš pozývací kód: <0>{0}</0>"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Hide call signalling noise"
+msgstr ""
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "Skryť ostatných"
@@ -2842,6 +3011,10 @@ msgstr "Ako sa k vám dostal zvuk všetkých ostatných."
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "How many recently joined calls the Home page lists. 0 hides them."
 msgstr "Koľko nedávno pripojených hovorov zobrazí domovská stránka. 0 ich skryje."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "HTTP"
+msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>{HYPRLAND_BIND_EXAMPLE}</1>."
@@ -2913,6 +3086,14 @@ msgstr "V hovore · {count}"
 msgid "In call"
 msgstr "V hovore"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the browser, export the HAR file and open it in your browser's developer tools (Network tab, import) or another HAR viewer to see the requests in detail."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
+msgstr ""
+
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "Dovtedy si nainštalujte AnyTalk z Google Play pre rýchlejší a plynulejší zážitok navrhnutý pre Android."
@@ -2942,6 +3123,14 @@ msgstr ""
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
 msgstr "Hlasitosť vstupu"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Inside: end-to-end encryption (LiveKit E2EE) with a key only the people in the call hold. The media server forwards frames it cannot read."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Inspect with Wireshark"
+msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Install updates automatically"
@@ -3058,6 +3247,10 @@ msgstr "Vojsť do Spoločenskej miestnosti AnyTalk-a"
 msgid "Join the voice channel"
 msgstr "Vojsť do zvukového kanála"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "joined"
+msgstr ""
+
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: components/ui/components/features/profiles/ProfileJoined.tsx
 msgid "Joined"
@@ -3086,6 +3279,10 @@ msgstr "Nechať AnyTalk bežať v systémovej oblasti po zatvorení okna"
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Keep as is"
 msgstr "Ponechať"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "kept in memory only, gone when you reload"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Keyframe requests per second (viewers asking for a full new picture)"
@@ -3251,6 +3448,10 @@ msgstr "Živé prekrytie, nahrávanie a súhrny predchádzajúcich streamov"
 msgid "Live statistics overlay"
 msgstr "Živé prekrytie so štatistikami"
 
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Live View"
+msgstr ""
+
 #. placeholder {0}: humanFileSize(props.file.size ?? 0)
 #: components/ui/components/features/messaging/elements/TextFile.tsx
 msgid "Load file ({0})"
@@ -3258,6 +3459,10 @@ msgstr "Načítať súbor ({0})"
 
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Loading message"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Local candidate"
 msgstr ""
 
 #: components/auth/src/flows/FlowHome.tsx
@@ -3293,6 +3498,10 @@ msgstr "Hľadá sa najnovšia verzia…"
 msgid "Loss and jitter are what the server reports about the audio it got from you."
 msgstr "Strata a jitter sú údaje, ktoré server hlási o zvuku, ktorý od vás dostal."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Lossy"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Lost"
 msgstr "Stratené"
@@ -3308,6 +3517,10 @@ msgstr "Filter nízkych frekvencií"
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Lowercase letters, numbers and underscores only."
 msgstr "Iba malé písmená, číslice a podčiarkovníky."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Made with"
+msgstr ""
 
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Magenta"
@@ -3398,6 +3611,14 @@ msgstr "Merať video z kamery a zdieľanej obrazovky, ktoré odosielate alebo sl
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Measure your microphone and everyone you hear in calls"
 msgstr "Merať váš mikrofón a všetkých, ktorých počujete v hovoroch"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Media server"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Media streams"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Medium (90 Hz)"
@@ -3514,6 +3735,10 @@ msgstr "Správy"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Messaging"
 msgstr "Správy"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Method"
+msgstr ""
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "MFA setup canceled."
@@ -3675,6 +3900,18 @@ msgstr ""
 msgid "Needs a server that supports stream viewers."
 msgstr ""
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Network inspector"
+msgstr ""
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Network Inspector"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Network type"
+msgstr ""
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
 msgstr "Neutrálna"
@@ -3725,6 +3962,10 @@ msgstr ""
 msgid "Nickname"
 msgstr "Prezývka"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "No"
+msgstr ""
+
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No apps found"
 msgstr "Nenašli sa žiadne aplikácie"
@@ -3764,6 +4005,10 @@ msgstr "Nenašli sa žiadne GIFy"
 #: components/app/interface/settings/user/Language.tsx
 msgid "No languages found"
 msgstr "Nenašli sa žiadne jazyky"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "No matches"
+msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "No patch notes for this version."
@@ -3852,6 +4097,14 @@ msgstr ""
 msgid "Nothing"
 msgstr "Nič"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Nothing fits this filter. Try another word or show all kinds."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Nothing recorded yet"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own call recaps."
 msgstr "Zatiaľ nie je čo porovnávať. Importujte CSV alebo pridajte jeden z vlastných súhrnov hovorov."
@@ -3859,6 +4112,10 @@ msgstr "Zatiaľ nie je čo porovnávať. Importujte CSV alebo pridajte jeden z v
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own stream recaps."
 msgstr "Zatiaľ nie je čo porovnávať. Importujte CSV alebo pridajte jeden z vlastných súhrnov streamov."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Nothing to show yet"
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/ServerContextMenu.tsx
@@ -3871,6 +4128,10 @@ msgstr "Oznámenia"
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "Off"
 msgstr "Vypnuté"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
+msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Offers to stream the games you play during a call. Detection happens only on this computer and nothing is sent."
@@ -3965,6 +4226,10 @@ msgstr ""
 msgid "Oops, something went wrong! {e}"
 msgstr "Ups, niečo sa pokazilo! {e}"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "open"
+msgstr ""
+
 #: components/modal/modals/Invite.tsx
 msgid "Open"
 msgstr "Otvoriť"
@@ -3978,6 +4243,7 @@ msgstr "Otvoriť {0}"
 msgid "Open an app or switch to Entire screen."
 msgstr "Otvorte aplikáciu alebo prepnite na Celú obrazovku."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/rtc/components/StreamPopouts.tsx
 msgid "Open as window"
 msgstr ""
@@ -3993,6 +4259,10 @@ msgstr "Otvoriť súbor"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "Otvoriť priateľov"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Open live view"
+msgstr ""
 
 #. placeholder {0}: author()
 #. placeholder {1}: place()
@@ -4046,6 +4316,10 @@ msgstr ""
 msgid "Output Volume"
 msgstr "Hlasitosť výstupu"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Outside: SRTP over DTLS between your device and the media server, as for any WebRTC call."
+msgstr ""
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Overlay"
 msgstr ""
@@ -4094,6 +4368,14 @@ msgstr "Heslo"
 #: components/modal/modals/EditPassword.tsx
 msgid "Password changed successfully."
 msgstr "Heslo bolo úspešne zmenené."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Pause"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Paused"
+msgstr ""
 
 #: components/app/interface/settings/user/subscriptions/EditSubscriptionJoinFlow.tsx
 #~ msgid "Pay"
@@ -4325,6 +4607,10 @@ msgstr "Podporuje ubližovanie na zdraví"
 msgid "Pronouns"
 msgstr "Zámená"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Protocol"
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
 msgstr "Email alebo heslo je nesprávne."
@@ -4393,6 +4679,7 @@ msgid "Ready to install: {0}"
 msgstr "Pripravené na inštaláciu: {0}"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
 msgid "Reason"
@@ -4432,6 +4719,11 @@ msgstr "Dostávať upozornenia, kým je karta otvorená."
 msgid "Receive push notifications while the app is closed."
 msgstr "Dostávať push upozornenia, kým je aplikácia zatvorená."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Received"
+msgstr ""
+
 #: src/interface/home/FriendsOverview.tsx
 msgid "Recent calls"
 msgstr "Nedávne hovory"
@@ -4454,6 +4746,10 @@ msgstr "Pripája sa späť"
 msgid "Record call recaps"
 msgstr "Nahrávať súhrny hovorov"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Record network traffic"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record statistics of every call you are in, with or without the overlay"
 msgstr "Zaznamenávať štatistiky každého hovoru, v ktorom ste, s prekrytím aj bez neho"
@@ -4465,6 +4761,14 @@ msgstr "Zaznamenávať štatistiky každého streamu, ktorý odosielate alebo sl
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record stream recaps"
 msgstr "Nahrávať súhrny streamov"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Recorded traffic"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Recording is off"
+msgstr ""
 
 #: components/modal/modals/MFAFlow.tsx
 msgid "Recovery Code"
@@ -4494,6 +4798,18 @@ msgstr "Členom od <0/>"
 msgid "Reject friend request"
 msgstr "Odmietnuť žiadosť o priateľstvo"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "relay"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Relay protocol"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Relay server"
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Release notes"
 msgstr "Poznámky k vydaniu"
@@ -4502,6 +4818,10 @@ msgstr "Poznámky k vydaniu"
 msgid "Relevance"
 msgstr "Relevantnosť"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Reliable"
+msgstr ""
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload and clear cache"
 msgstr "Znova načítať a vymazať vyrovnávaciu pamäť"
@@ -4509,6 +4829,14 @@ msgstr "Znova načítať a vymazať vyrovnávaciu pamäť"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload AnyTalk with fresh files from the server? This is the same as Ctrl+F5 and fixes most display problems after an update. You stay logged in and keep your settings."
 msgstr "Znova načítať AnyTalk s čerstvými súbormi zo servera? Je to to isté ako Ctrl+F5 a opraví väčšinu problémov so zobrazením po aktualizácii. Zostanete prihlásení a zachováte si nastavenia."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Remote address"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Remote candidate"
+msgstr ""
 
 #: components/markdown/plugins/anchors.tsx
 msgid "Remote Channel"
@@ -4632,6 +4960,18 @@ msgstr "Nahlásiť server"
 msgid "Report user"
 msgstr "Nahlásiť používateľa"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Request body"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Request headers"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Requests and messages show up here as they happen."
+msgstr ""
+
 #: components/auth/src/flows/FlowResend.tsx
 msgid "Resend"
 msgstr "Poslať znovu"
@@ -4709,6 +5049,18 @@ msgstr "Rozlíšenie"
 msgid "Resolution and FPS"
 msgstr "Rozlíšenie a FPS"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response headers"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response preview"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response size"
+msgstr ""
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Responsibly disclosed security issues"
 msgstr "Zodpovedný hlásateľ bezpečnostných chýb"
@@ -4725,6 +5077,10 @@ msgstr ""
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Restore call window"
 msgstr "Obnoviť okno hovoru"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Resume"
+msgstr ""
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 msgid "Retry sending"
@@ -4790,6 +5146,18 @@ msgstr "Roly"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Roles with No Overrides"
 msgstr "Roly bez prepísaní"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Room"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "route"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Route"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Running"
@@ -4948,6 +5316,10 @@ msgstr ""
 msgid "See all your servers at a glance."
 msgstr ""
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "See what the app sends and receives, and export it to check against Wireshark"
+msgstr ""
+
 #~ msgid "See what we're currently working on."
 #~ msgstr ""
 
@@ -4958,6 +5330,10 @@ msgstr "Vybrať"
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select all"
 msgstr "Vybrať všetko"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Select an entry to see its details."
+msgstr ""
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Select at least one line above to compare."
@@ -5035,6 +5411,8 @@ msgstr "Odoslať žiadosť"
 msgid "Sending..."
 msgstr "Odosiela sa…"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Sent"
 msgstr "Odoslané"
@@ -5109,8 +5487,20 @@ msgstr "Roly servera"
 msgid "Servers"
 msgstr "Servery"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Servers contacted"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Servers show up here as soon as the app talks to them."
+msgstr ""
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Servers you join show up here."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
 msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
@@ -5169,6 +5559,10 @@ msgstr "Zdieľať kameru alebo obrazovku v hlasovom hovore"
 msgid "Share screen"
 msgstr "Zdieľať obrazovku"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show"
+msgstr ""
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show 'copy ID' in context menus"
 msgstr "Zobrazovať „Kopírovať ID“ v kontextových ponukách"
@@ -5193,6 +5587,10 @@ msgstr "Zobrazovať živé štatistiky mikrofónu na dlaždiciach hovoru"
 msgid "Show live statistics on call video tiles"
 msgstr "Zobrazovať živé štatistiky na video dlaždiciach hovoru"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show only"
+msgstr ""
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Show Others"
 msgstr "Zobraziť ostatných"
@@ -5214,8 +5612,20 @@ msgstr ""
 msgid "Show server names"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show tokens and keys"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show tokens and keys?"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Show when speaking"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show window"
 msgstr ""
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
@@ -5273,6 +5683,10 @@ msgstr "Tichý"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Single stream: opening a stream replaces the current one"
 msgstr "Jeden stream: otvorený stream nahradí aktuálny"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Size"
+msgstr ""
 
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "Slowmode Immune"
@@ -5387,6 +5801,10 @@ msgstr "Kontrola pravopisu"
 msgid "Spoiler"
 msgstr "Spoiler"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "SRTP cipher"
+msgstr ""
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Start camera"
 msgstr "Zapnúť kameru"
@@ -5403,6 +5821,11 @@ msgstr "Začať hovor"
 msgid "Start with Computer"
 msgstr "Spustiť so systémom"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Started"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 msgid "Status"
 msgstr "Stav"
@@ -5418,6 +5841,7 @@ msgstr "Vypnúť kameru"
 msgid "Stop sharing"
 msgstr "Ukončiť zdieľanie"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/ui/components/features/voice/callCard/GameStreamPrompt.tsx
 msgid "Stream"
 msgstr ""
@@ -5600,6 +6024,10 @@ msgstr "Podmienky"
 #~ msgid "Terms of Service"
 #~ msgstr "Podmienky Služby"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Text"
+msgstr ""
+
 #: components/modal/modals/CreateChannel.tsx
 msgid "Text Channel"
 msgstr "Textový Kanál"
@@ -5653,6 +6081,10 @@ msgstr "Prvá verzia ešte nebola zverejnená. Skúste to čoskoro znova."
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
 msgstr "Položka bola odstránená moderátormi, a preto sú budúce žiadosti zakázané. Pre viac informácií kontaktujte podporu."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "The password is too short."
@@ -5833,6 +6265,14 @@ msgstr "Toto používateľské meno nie je povolené."
 msgid "This will invalidate the current token and stop any existing instances of the bot from running."
 msgstr "Tým sa zneplatní aktuálny token a zastavia sa všetky bežiace inštancie bota."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Through a relay (TURN)"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Time"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Time format"
 msgstr "Formát času"
@@ -5863,6 +6303,10 @@ msgstr "Udeliť členovi časový limit"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Timeout Members"
 msgstr "Umlčať Členov"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "To"
+msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Toggle deafen"
@@ -5900,12 +6344,21 @@ msgstr ""
 msgid "Top right"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Topic"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
 msgstr "Tradičný (DD/MM/RRRR)"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Transferred"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Transport"
 msgstr "Transport"
 
@@ -5935,6 +6388,18 @@ msgstr ""
 msgid "Turn every sound on and reset their volumes and files?"
 msgstr "Zapnúť všetky zvuky a obnoviť ich hlasitosti a súbory?"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Turn it on to see what the app sends and receives."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Turn on recording"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turn on recording to see which servers the app talks to."
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn single sounds off, change their volume or use your own"
 msgstr "Vypínajte jednotlivé zvuky, meňte ich hlasitosť alebo použite vlastné"
@@ -5942,6 +6407,10 @@ msgstr "Vypínajte jednotlivé zvuky, meňte ich hlasitosť alebo použite vlast
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "Ak to vypnete, zatvorenie okna okamžite ukončí AnyTalk."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Type"
+msgstr ""
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 #~ msgid "Type in the search box and press Enter."
@@ -6133,6 +6602,10 @@ msgstr "Nahrať do Gifbox"
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Uploading file `{fileName}`... {0}%"
 msgstr "Nahráva sa súbor `{fileName}`… {0} %"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "URL"
+msgstr ""
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
@@ -6414,6 +6887,10 @@ msgstr "Názov webhooku"
 msgid "Webhooks"
 msgstr "Webhooks"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "WebSocket"
+msgstr ""
+
 #~ msgid "Welcome to"
 #~ msgstr "Vitajte v"
 
@@ -6448,6 +6925,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Whenever I'm in a call"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Where your data goes"
 msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
@@ -6489,6 +6970,10 @@ msgstr "s ďalšími ({0})"
 msgid "with {participants}"
 msgstr "s {participants}"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Without the keys, Wireshark only sees encrypted TLS and DTLS traffic. What it can still tell you is where the data goes and how much. Compare that with the servers and sizes listed above."
+msgstr ""
+
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Would you like to create a new group or server?"
 msgstr "Chcete vytvoriť novú skupinu alebo server?"
@@ -6508,6 +6993,10 @@ msgstr "X (ľavé tlačidlo)"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Y (top button)"
 msgstr "Y (horné tlačidlo)"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Yes"
+msgstr ""
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "You agree that your bot is subject to the Acceptable Usage Policy."

@@ -71,6 +71,13 @@ msgstr "{0, plural, one {# annelchay ouldcay otnay ebay earchedsay} other {# ann
 msgid "{0, plural, one {# channel} other {# channels}}"
 msgstr "{0, plural, one {# annelchay} other {# annelschay}}"
 
+#. placeholder {0}: list().length
+#. placeholder {0}: shown().length
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "{0, plural, one {# entry} other {# entries}}"
+msgstr "{0, plural, one {# entryyay} other {# entriesyay}}"
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -581,6 +588,10 @@ msgstr "Ayay essagemay oryay otificationnay arrivesyay"
 msgid "A new version of AnyTalk is available"
 msgstr "Ayay ewnay ersionvay ofyay AnyTalk isyay availableyay"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "A packet capture (for example Wireshark) therefore shows only DTLS/SRTP ciphertext, and the media server only sees end-to-end ciphertext."
+msgstr "Ayay acketpay apturecay (orfay exampleyay Iresharkway) ereforethay owsshay onlyyay DTLSAY/SRTPAY iphertextcay, andyay ethay ediamay erversay onlyyay eessay endyay-otay-endyay iphertextcay."
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream in your call ends"
 msgstr "Ayay eamstray inyay ouryay allcay endsyay"
@@ -698,6 +709,7 @@ msgstr "Advancedyay oundsay ettingssay"
 #~ msgid "Affects all roles and users"
 #~ msgstr ""
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: src/interface/Friends.tsx
 msgid "All"
 msgstr "Allyay"
@@ -810,6 +822,10 @@ msgstr "AnyTalk isyay oneyay ofyay ethay estbay aysway otay aystay onnectedcay i
 msgid "AnyTalk is up to date."
 msgstr "AnyTalk isyay upyay otay ateday."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "AnyTalk network inspector"
+msgstr "AnyTalk etworknay inspectoryay"
+
 #: src/AndroidNag.tsx
 msgid "AnyTalk on Android"
 msgstr "AnyTalk onyay Androidyay"
@@ -905,6 +921,18 @@ msgstr "Assignway Olesray"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "at {time}"
 msgstr "atyay {time}"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "attached"
+msgstr "attachedyay"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "attributes"
+msgstr "attributesyay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Attributes"
+msgstr "Attributesyay"
 
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Audio devices"
@@ -1144,7 +1172,13 @@ msgstr "Ypassbay Owmodeslay"
 msgid "Bypasses slowmode in channels"
 msgstr "Ypassesbay owmodeslay inyay annelschay"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "bytes"
+msgstr "ytesbay"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Call"
 msgstr "Allcay"
 
@@ -1156,6 +1190,10 @@ msgstr "Allcay encryptionyay ouldn'tcay ebay oadedlay. Ytray eloadingray ethay a
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Calls"
 msgstr "Allscay"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Calls: how they are encrypted"
+msgstr "Allscay: owhay eythay areyay encryptedyay"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Camera"
@@ -1174,6 +1212,7 @@ msgid "Can't get discover request status right now"
 msgstr "An'tcay etgay iscoverday equestray atusstay ightray ownay"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Native.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/AddBot.tsx
@@ -1384,6 +1423,10 @@ msgstr "Oosechay ayay usernameyay"
 msgid "Choose username"
 msgstr "Oosechay usernameyay"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Clear"
+msgstr "Earclay"
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Clear search"
 msgstr "Earclay earchsay"
@@ -1415,6 +1458,10 @@ msgstr "Ickclay otay owshay oilerspay"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Client Settings"
 msgstr "Ientclay Ettingssay"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "close"
+msgstr "oseclay"
 
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
@@ -1450,6 +1497,10 @@ msgstr "Oseclay"
 #: components/app/menus/UserContextMenu.tsx
 msgid "Close chat"
 msgstr "Oseclay atchay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Close code"
+msgstr "Oseclay odecay"
 
 #. placeholder {0}: props.channel.recipient?.displayName
 #: components/modal/modals/DeleteChannel.tsx
@@ -1502,6 +1553,10 @@ msgstr "Omparecay ecapsray"
 msgid "Compare Recaps"
 msgstr "Omparecay Ecapsray"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Compressed size"
+msgstr "Ompressedcay izesay"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Concealed audio"
 msgstr "Oncealedcay audioyay"
@@ -1540,10 +1595,18 @@ msgstr "Onnectcay otay oicevay annelchay"
 msgid "Connected"
 msgstr "Onnectedcay"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "connecting"
+msgstr "onnectingcay"
+
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "Onnectingcay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Connection"
+msgstr "Onnectioncay"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Connection lost"
@@ -1565,6 +1628,10 @@ msgstr "Ontactcay upportsay otay emoveray isthay otbay omfray iscoverday"
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Contact support to remove this server from discover"
 msgstr "Ontactcay upportsay otay emoveray isthay erversay omfray iscoverday"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Content"
+msgstr "Ontentcay"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Content breaks one or more laws"
@@ -1603,6 +1670,10 @@ msgstr "Ontrolscay atthay an'tcay ebay angedchay"
 msgid "Conversations"
 msgstr "Onversationscay"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Copied"
+msgstr "Opiedcay"
+
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "Opiedcay!"
@@ -1630,6 +1701,10 @@ msgstr "Opycay inviteyay inklay"
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Copy Invite URL"
 msgstr "Opycay Inviteyay URLYAY"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Copy JSON"
+msgstr "Opycay ONJSAY"
 
 #: components/app/menus/ChannelContextMenu.tsx
 #: components/app/menus/MessageContextMenu.tsx
@@ -1694,6 +1769,10 @@ msgstr "Ouldcay otnay openyay ethay eamstray inyay ayay eparatesay indowway."
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
 msgstr "Ouldcay otnay openyay ethay eamstray inyay ayay eparatesay indowway. Eckchay atthay oppay-upsyay areyay allowedyay."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Could not open the window. Check that pop-ups are allowed."
+msgstr "Ouldcay otnay openyay ethay indowway. Eckchay atthay oppay-upsyay areyay allowedyay."
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
@@ -1910,6 +1989,10 @@ msgstr "Day-adpay upyay"
 msgid "Dark"
 msgstr "Arkday"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Data messages and participant attributes (who watches a stream, deafened, key exchange) go over the signalling WebSocket to the media server. They are not end-to-end encrypted, but the key exchange only carries public keys and keys wrapped for one recipient."
+msgstr "Ataday essagesmay andyay articipantpay attributesyay (owhay atchesway ayay eamstray, eafenedday, eykay exchangeyay) ogay overyay ethay ignallingsay WebSocket otay ethay ediamay erversay. Eythay areyay otnay endyay-otay-endyay encryptedyay, utbay ethay eykay exchangeyay onlyyay arriescay ublicpay eyskay andyay eyskay appedwray orfay oneyay ecipientray."
+
 #. placeholder {0}: err.location
 #: components/i18n/errors.tsx
 msgid "Database error, please contact support. ({0})"
@@ -1939,6 +2022,10 @@ msgstr "Eafenday oryay undeafenyay inyay ayay allcay"
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
 msgstr "Eafenedday"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Decoded size"
+msgstr "Ecodedday izesay"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -2087,6 +2174,10 @@ msgstr "Eleteday ebhookway"
 msgid "Deleting this emoji will disallow future use. All past uses will remain."
 msgstr "Eletingday isthay emojiyay illway isallowday uturefay useyay. Allyay astpay usesyay illway emainray."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Delivery"
+msgstr "Eliveryday"
+
 #. placeholder {0}: props.invite.username
 #: components/modal/modals/AddBot.tsx
 msgid "Description provided by {0}"
@@ -2108,6 +2199,10 @@ msgstr "Etailedday"
 #~ msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
 #~ msgstr "Etailedday: amesnay ilewhay omeonesay eaksspay, andyay ayay IVELAY agtay orfay eamsstray"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Details"
+msgstr "Etailsday"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
 msgstr "Etectday unningray amesgay"
@@ -2128,9 +2223,21 @@ msgstr "Eveloperday odesmay easuremay allcay erformancepay andyay eepkay atistic
 msgid "Device is offline"
 msgstr "Eviceday isyay offlineyay"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "direct"
+msgstr "irectday"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Direct"
+msgstr "Irectday"
+
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Direct Messages"
 msgstr "Irectday Essagesmay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Direction"
+msgstr "Irectionday"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Disable Account"
@@ -2259,8 +2366,21 @@ msgstr "Oppeddray amesfray erpay econdsay"
 msgid "Drugs or illegal goods"
 msgstr "Ugsdray oryay illegalyay oodsgay"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS cipher"
+msgstr "DTLSAY iphercay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS state"
+msgstr "DTLSAY atestay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS version"
+msgstr "DTLSAY ersionvay"
+
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Duration"
 msgstr "Urationday"
@@ -2400,6 +2520,10 @@ msgstr "Encoderyay argettay itratebay"
 msgid "End call"
 msgstr "Endyay allcay"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "End-to-end encrypted"
+msgstr "Endyay-otay-endyay encryptedyay"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced"
 msgstr "Enhancedyay"
@@ -2451,6 +2575,10 @@ msgstr "Enteryay ouryay usernameyay."
 msgid "Entire screen"
 msgstr "Entireyay eenscray"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "error"
+msgstr "erroryay"
+
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Error occurred, please email support."
 msgstr "Erroryay occurredyay, easeplay emailyay upportsay."
@@ -2464,12 +2592,20 @@ msgstr "escapeyay otay <0>ancelcay</0> · enteryay otay <1>avesay</1>"
 msgid "Estimated upload bandwidth"
 msgstr "Estimatedyay uploadyay andwidthbay"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Event"
+msgstr "Eventyay"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone"
 msgstr "Everyoneyay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Everyone in the call"
+msgstr "Everyoneyay inyay ethay allcay"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Excellent"
@@ -2486,6 +2622,14 @@ msgstr "Exityay ullscreenfay"
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "Exportyay"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Export HAR"
+msgstr "Exportyay ARHAY"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Export JSON"
+msgstr "Exportyay ONJSAY"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "External links can be dangerous!"
@@ -2532,6 +2676,15 @@ msgstr "Eedbackfay"
 msgid "File must be smaller than {0}"
 msgstr "Ilefay ustmay ebay allersmay anthay {0}"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Files"
+msgstr "Ilesfay"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Filter by address, host or topic"
+msgstr "Ilterfay ybay addressyay, osthay oryay opictay"
+
 #: src/interface/Home.tsx
 msgid "Find a community based on your hobbies or interests."
 msgstr "Indfay ayay ommunitycay asedbay onyay ouryay obbieshay oryay interestsyay."
@@ -2543,6 +2696,10 @@ msgstr "Indfay ewnay erverssay otay oinjay"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "Indfay ouryay omcay<0/>unitymay,<1/>onnectcay ithway ethay orldway."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "First bytes"
+msgstr "Irstfay ytesbay"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Fixed controls"
@@ -2594,6 +2751,10 @@ msgstr "Orfay 8 ourshay"
 msgid "Frame rate"
 msgstr "Amefray ateray"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Freeze the list. Recording goes on."
+msgstr "Eezefray ethay istlay. Ecordingray oesgay onyay."
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Freezes"
 msgstr "Eezesfray"
@@ -2606,6 +2767,10 @@ msgstr "Iendsfray"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Friends who are online or in a call show up here."
 msgstr "Iendsfray owhay areyay onlineyay oryay inyay ayay allcay owshay upyay erehay."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "From"
+msgstr "Omfray"
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "from "
@@ -2784,6 +2949,10 @@ msgstr "Elpedhay anslatetray AnyTalk"
 msgid "Here is your new invite code: <0>{0}</0>"
 msgstr "Erehay isyay ouryay ewnay inviteyay odecay: <0>{0}</0>"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Hide call signalling noise"
+msgstr "Idehay allcay ignallingsay oisenay"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "Idehay Othersyay"
@@ -2846,6 +3015,10 @@ msgstr "Owhay everyoneyay else'syay audioyay eachedray ouyay."
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "How many recently joined calls the Home page lists. 0 hides them."
 msgstr "Owhay anymay ecentlyray oinedjay allscay ethay Omehay agepay istslay. 0 ideshay emthay."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "HTTP"
+msgstr "HTTPAY"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>{HYPRLAND_BIND_EXAMPLE}</1>."
@@ -2917,6 +3090,14 @@ msgstr "Inyay ayay allcay · {count}"
 msgid "In call"
 msgstr "Inyay allcay"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the browser, export the HAR file and open it in your browser's developer tools (Network tab, import) or another HAR viewer to see the requests in detail."
+msgstr "Inyay ethay owserbray, exportyay ethay ARHAY ilefay andyay openyay ityay inyay ouryay owser'sbray eveloperday oolstay (Etworknay abtay, importyay) oryay anotheryay ARHAY iewervay otay eesay ethay equestsray inyay etailday."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
+msgstr "Inyay ethay esktopday appyay, ayay eykay oglay optionyay atthay etslay Iresharkway ecryptday ethay affictray isyay omingcay inyay ayay aterlay updateyay. Untilyay enthay, exportyay ethay ARHAY ilefay otay eesay ethay equestsray inyay etailday."
+
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "Inyay ethay eantimemay, installyay AnyTalk omfray Ooglegay Ayplay orfay ayay asterfay, oothersmay experienceyay esignedday orfay Androidyay."
@@ -2946,6 +3127,14 @@ msgstr "Inputyay odemay"
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
 msgstr "Inputyay Olumevay"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Inside: end-to-end encryption (LiveKit E2EE) with a key only the people in the call hold. The media server forwards frames it cannot read."
+msgstr "Insideyay: endyay-otay-endyay encryptionyay (LiveKit E2EE) ithway ayay eykay onlyyay ethay eoplepay inyay ethay allcay oldhay. Ethay ediamay erversay orwardsfay amesfray ityay annotcay eadray."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Inspect with Wireshark"
+msgstr "Inspectyay ithway Iresharkway"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Install updates automatically"
@@ -3063,6 +3252,10 @@ msgstr "Oinjay ethay AnyTalk Oungelay"
 msgid "Join the voice channel"
 msgstr "Oinjay ethay oicevay annelchay"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "joined"
+msgstr "oinedjay"
+
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: components/ui/components/features/profiles/ProfileJoined.tsx
 msgid "Joined"
@@ -3091,6 +3284,10 @@ msgstr "Eepkay AnyTalk unningray inyay ethay aytray enwhay osingclay ethay indow
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Keep as is"
 msgstr "Eepkay asyay isyay"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "kept in memory only, gone when you reload"
+msgstr "eptkay inyay emorymay onlyyay, onegay enwhay ouyay eloadray"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Keyframe requests per second (viewers asking for a full new picture)"
@@ -3256,6 +3453,10 @@ msgstr "Ivelay overlayyay, ecordingray andyay ecapsray ofyay eviouspray eamsstra
 msgid "Live statistics overlay"
 msgstr "Ivelay atisticsstay overlayyay"
 
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Live View"
+msgstr "Ivelay Iewvay"
+
 #. placeholder {0}: humanFileSize(props.file.size ?? 0)
 #: components/ui/components/features/messaging/elements/TextFile.tsx
 msgid "Load file ({0})"
@@ -3264,6 +3465,10 @@ msgstr "Oadlay ilefay ({0})"
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Loading message"
 msgstr "Oadinglay essagemay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Local candidate"
+msgstr "Ocallay andidatecay"
 
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
@@ -3298,6 +3503,10 @@ msgstr "Ookinglay orfay ethay atestlay ersionvay..."
 msgid "Loss and jitter are what the server reports about the audio it got from you."
 msgstr "Osslay andyay itterjay areyay atwhay ethay erversay eportsray aboutyay ethay audioyay ityay otgay omfray ouyay."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Lossy"
+msgstr "Ossylay"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Lost"
 msgstr "Ostlay"
@@ -3313,6 +3522,10 @@ msgstr "Owlay-utcay ilterfay"
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Lowercase letters, numbers and underscores only."
 msgstr "Owercaselay etterslay, umbersnay andyay underscoresyay onlyyay."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Made with"
+msgstr "Ademay ithway"
 
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Magenta"
@@ -3403,6 +3616,14 @@ msgstr "Easuremay ameracay andyay eenscray areshay ideovay ouyay endsay oryay at
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Measure your microphone and everyone you hear in calls"
 msgstr "Easuremay ouryay icrophonemay andyay everyoneyay ouyay earhay inyay allscay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Media server"
+msgstr "Ediamay erversay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Media streams"
+msgstr "Ediamay eamsstray"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Medium (90 Hz)"
@@ -3519,6 +3740,10 @@ msgstr "Essagesmay"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Messaging"
 msgstr "Essagingmay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Method"
+msgstr "Ethodmay"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "MFA setup canceled."
@@ -3680,6 +3905,18 @@ msgstr "Amenay (Ayay-Zay)"
 msgid "Needs a server that supports stream viewers."
 msgstr "Eedsnay ayay erversay atthay upportssay eamstray iewersvay."
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Network inspector"
+msgstr "Etworknay inspectoryay"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Network Inspector"
+msgstr "Etworknay Inspectoryay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Network type"
+msgstr "Etworknay ypetay"
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
 msgstr "Eutralnay"
@@ -3730,6 +3967,10 @@ msgstr "Extnay erversay"
 msgid "Nickname"
 msgstr "Icknamenay"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "No"
+msgstr "Onay"
+
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No apps found"
 msgstr "Onay appsyay oundfay"
@@ -3769,6 +4010,10 @@ msgstr "Onay GIFs oundfay"
 #: components/app/interface/settings/user/Language.tsx
 msgid "No languages found"
 msgstr "Onay anguageslay oundfay"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "No matches"
+msgstr "Onay atchesmay"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "No patch notes for this version."
@@ -3857,6 +4102,14 @@ msgstr "Otnay etsay"
 msgid "Nothing"
 msgstr "Othingnay"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Nothing fits this filter. Try another word or show all kinds."
+msgstr "Othingnay itsfay isthay ilterfay. Ytray anotheryay ordway oryay owshay allyay indskay."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Nothing recorded yet"
+msgstr "Othingnay ecordedray etyay"
+
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own call recaps."
 msgstr "Othingnay otay omparecay etyay. Importyay ayay CSVAY oryay addyay oneyay ofyay ouryay ownyay allcay ecapsray."
@@ -3864,6 +4117,10 @@ msgstr "Othingnay otay omparecay etyay. Importyay ayay CSVAY oryay addyay oneyay
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own stream recaps."
 msgstr "Othingnay otay omparecay etyay. Importyay ayay CSVAY oryay addyay oneyay ofyay ouryay ownyay eamstray ecapsray."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Nothing to show yet"
+msgstr "Othingnay otay owshay etyay"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/ServerContextMenu.tsx
@@ -3876,6 +4133,10 @@ msgstr "Otificationsnay"
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "Off"
 msgstr "Offyay"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
+msgstr "Offyay: okenstay, asswordspay andyay eyskay areyay iddenhay. Esetsray enwhay ouyay eloadray."
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Offers to stream the games you play during a call. Detection happens only on this computer and nothing is sent."
@@ -3970,6 +4231,10 @@ msgstr "Onlyyay ilewhay ayay etectedday amegay isyay unningray"
 msgid "Oops, something went wrong! {e}"
 msgstr "Oopsyay, omethingsay entway ongwray! {e}"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "open"
+msgstr "openyay"
+
 #: components/modal/modals/Invite.tsx
 msgid "Open"
 msgstr "Openyay"
@@ -3983,6 +4248,7 @@ msgstr "Openyay {0}"
 msgid "Open an app or switch to Entire screen."
 msgstr "Openyay anyay appyay oryay itchsway otay Entireyay eenscray."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/rtc/components/StreamPopouts.tsx
 msgid "Open as window"
 msgstr "Openyay asyay indowway"
@@ -3998,6 +4264,10 @@ msgstr "Openyay ilefay"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "Openyay iendsfray"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Open live view"
+msgstr "Openyay ivelay iewvay"
 
 #. placeholder {0}: author()
 #. placeholder {1}: place()
@@ -4051,6 +4321,10 @@ msgstr "Outputyay eviceday"
 msgid "Output Volume"
 msgstr "Outputyay Olumevay"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Outside: SRTP over DTLS between your device and the media server, as for any WebRTC call."
+msgstr "Outsideyay: SRTPAY overyay DTLSAY etweenbay ouryay eviceday andyay ethay ediamay erversay, asyay orfay anyyay WebRTC allcay."
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Overlay"
 msgstr "Overlayyay"
@@ -4099,6 +4373,14 @@ msgstr "Asswordpay"
 #: components/modal/modals/EditPassword.tsx
 msgid "Password changed successfully."
 msgstr "Asswordpay angedchay uccessfullysay."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Pause"
+msgstr "Ausepay"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Paused"
+msgstr "Ausedpay"
 
 #: components/app/interface/settings/user/subscriptions/EditSubscriptionJoinFlow.tsx
 #~ msgid "Pay"
@@ -4330,6 +4612,10 @@ msgstr "Omotespray armhay"
 msgid "Pronouns"
 msgstr "Onounspray"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Protocol"
+msgstr "Otocolpray"
+
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
 msgstr "Ovidedpray emailyay oryay asswordpay isyay ongwray."
@@ -4398,6 +4684,7 @@ msgid "Ready to install: {0}"
 msgstr "Eadyray otay installyay: {0}"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
 msgid "Reason"
@@ -4437,6 +4724,11 @@ msgstr "Eceiveray otificationsnay ilewhay ethay abtay isyay openyay."
 msgid "Receive push notifications while the app is closed."
 msgstr "Eceiveray ushpay otificationsnay ilewhay ethay appyay isyay osedclay."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Received"
+msgstr "Eceivedray"
+
 #: src/interface/home/FriendsOverview.tsx
 msgid "Recent calls"
 msgstr "Ecentray allscay"
@@ -4459,6 +4751,10 @@ msgstr "Econnectingray"
 msgid "Record call recaps"
 msgstr "Ecordray allcay ecapsray"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Record network traffic"
+msgstr "Ecordray etworknay affictray"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record statistics of every call you are in, with or without the overlay"
 msgstr "Ecordray atisticsstay ofyay everyyay allcay ouyay areyay inyay, ithway oryay ithoutway ethay overlayyay"
@@ -4470,6 +4766,14 @@ msgstr "Ecordray atisticsstay ofyay everyyay eamstray ouyay endsay oryay atchway
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record stream recaps"
 msgstr "Ecordray eamstray ecapsray"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Recorded traffic"
+msgstr "Ecordedray affictray"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Recording is off"
+msgstr "Ecordingray isyay offyay"
 
 #: components/modal/modals/MFAFlow.tsx
 msgid "Recovery Code"
@@ -4499,6 +4803,18 @@ msgstr "Egisteredray incesay <0/>"
 msgid "Reject friend request"
 msgstr "Ejectray iendfray equestray"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "relay"
+msgstr "elayray"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Relay protocol"
+msgstr "Elayray otocolpray"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Relay server"
+msgstr "Elayray erversay"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Release notes"
 msgstr "Eleaseray otesnay"
@@ -4507,6 +4823,10 @@ msgstr "Eleaseray otesnay"
 msgid "Relevance"
 msgstr "Elevanceray"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Reliable"
+msgstr "Eliableray"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload and clear cache"
 msgstr "Eloadray andyay earclay achecay"
@@ -4514,6 +4834,14 @@ msgstr "Eloadray andyay earclay achecay"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload AnyTalk with fresh files from the server? This is the same as Ctrl+F5 and fixes most display problems after an update. You stay logged in and keep your settings."
 msgstr "Eloadray AnyTalk ithway eshfray ilesfay omfray ethay erversay? Isthay isyay ethay amesay asyay Ctrlay+F5 andyay ixesfay ostmay isplayday oblemspray afteryay anyay updateyay. Ouyay aystay oggedlay inyay andyay eepkay ouryay ettingssay."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Remote address"
+msgstr "Emoteray addressyay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Remote candidate"
+msgstr "Emoteray andidatecay"
 
 #: components/markdown/plugins/anchors.tsx
 msgid "Remote Channel"
@@ -4637,6 +4965,18 @@ msgstr "Eportray erversay"
 msgid "Report user"
 msgstr "Eportray useryay"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Request body"
+msgstr "Equestray odybay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Request headers"
+msgstr "Equestray eadershay"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Requests and messages show up here as they happen."
+msgstr "Equestsray andyay essagesmay owshay upyay erehay asyay eythay appenhay."
+
 #: components/auth/src/flows/FlowResend.tsx
 msgid "Resend"
 msgstr "Esendray"
@@ -4714,6 +5054,18 @@ msgstr "Esolutionray"
 msgid "Resolution and FPS"
 msgstr "Esolutionray andyay FPSAY"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response headers"
+msgstr "Esponseray eadershay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response preview"
+msgstr "Esponseray eviewpray"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response size"
+msgstr "Esponseray izesay"
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Responsibly disclosed security issues"
 msgstr "Esponsiblyray isclosedday ecuritysay issuesyay"
@@ -4730,6 +5082,10 @@ msgstr "Estartray otay updateyay"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Restore call window"
 msgstr "Estoreray allcay indowway"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Resume"
+msgstr "Esumeray"
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 msgid "Retry sending"
@@ -4796,6 +5152,18 @@ msgstr "Olesray"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Roles with No Overrides"
 msgstr "Olesray ithway Onay Overridesyay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Room"
+msgstr "Oomray"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "route"
+msgstr "outeray"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Route"
+msgstr "Outeray"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Running"
@@ -4954,6 +5322,10 @@ msgstr "Earchingsay…"
 msgid "See all your servers at a glance."
 msgstr "Eesay allyay ouryay erverssay atyay ayay anceglay."
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "See what the app sends and receives, and export it to check against Wireshark"
+msgstr "Eesay atwhay ethay appyay endssay andyay eceivesray, andyay exportyay ityay otay eckchay againstyay Iresharkway"
+
 #: components/app/interface/settings/user/Feedback.tsx
 #~ msgid "See what we're currently working on."
 #~ msgstr ""
@@ -4965,6 +5337,10 @@ msgstr "Electsay"
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select all"
 msgstr "Electsay allyay"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Select an entry to see its details."
+msgstr "Electsay anyay entryyay otay eesay itsyay etailsday."
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Select at least one line above to compare."
@@ -5042,6 +5418,8 @@ msgstr "Endsay Equestray"
 msgid "Sending..."
 msgstr "Endingsay..."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Sent"
 msgstr "Entsay"
@@ -5116,9 +5494,21 @@ msgstr "Erversay Olesray"
 msgid "Servers"
 msgstr "Erverssay"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Servers contacted"
+msgstr "Erverssay ontactedcay"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Servers show up here as soon as the app talks to them."
+msgstr "Erverssay owshay upyay erehay asyay oonsay asyay ethay appyay alkstay otay emthay."
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Servers you join show up here."
 msgstr "Erverssay ouyay oinjay owshay upyay erehay."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+msgstr "Essionsay okenstay, asswordspay andyay allcay eyskay illway appearyay onyay eenscray andyay inyay exportsyay. Anyoneyay owhay eessay oryay etsgay emthay ouldcay ignsay inyay asyay ouyay. Urntay isthay onyay onlyyay otay ebugday, andyay on'tday areshay ethay exportsyay."
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5176,6 +5566,10 @@ msgstr "Areshay ameracay oryay eenscray inyay oicevay allcay"
 msgid "Share screen"
 msgstr "Areshay eenscray"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show"
+msgstr "Owshay"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show 'copy ID' in context menus"
 msgstr "Owshay 'opycay IDYAY' inyay ontextcay enusmay"
@@ -5200,6 +5594,10 @@ msgstr "Owshay ivelay icrophonemay atisticsstay onyay allcay ilestay"
 msgid "Show live statistics on call video tiles"
 msgstr "Owshay ivelay atisticsstay onyay allcay ideovay ilestay"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show only"
+msgstr "Owshay onlyyay"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Show Others"
 msgstr "Owshay Othersyay"
@@ -5221,9 +5619,21 @@ msgstr "Owshay erversay istlay"
 msgid "Show server names"
 msgstr "Owshay erversay amesnay"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show tokens and keys"
+msgstr "Owshay okenstay andyay eyskay"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show tokens and keys?"
+msgstr "Owshay okenstay andyay eyskay?"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Show when speaking"
 msgstr "Owshay enwhay eakingspay"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show window"
+msgstr "Owshay indowway"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
@@ -5280,6 +5690,10 @@ msgstr "Ilentsay"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Single stream: opening a stream replaces the current one"
 msgstr "Inglesay eamstray: openingyay ayay eamstray eplacesray ethay urrentcay oneyay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Size"
+msgstr "Izesay"
 
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "Slowmode Immune"
@@ -5395,6 +5809,10 @@ msgstr "Ellcheckerspay"
 msgid "Spoiler"
 msgstr "Oilerspay"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "SRTP cipher"
+msgstr "SRTPAY iphercay"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Start camera"
 msgstr "Artstay ameracay"
@@ -5411,6 +5829,11 @@ msgstr "Artstay ethay allcay"
 msgid "Start with Computer"
 msgstr "Artstay ithway Omputercay"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Started"
+msgstr "Artedstay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 msgid "Status"
 msgstr "Atusstay"
@@ -5427,6 +5850,7 @@ msgstr "Opstay ameracay"
 msgid "Stop sharing"
 msgstr "Opstay aringshay"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/ui/components/features/voice/callCard/GameStreamPrompt.tsx
 msgid "Stream"
 msgstr "Eamstray"
@@ -5609,6 +6033,10 @@ msgstr "Ermstay"
 #~ msgid "Terms of Service"
 #~ msgstr "Ermstay ofway Ervicesay"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Text"
+msgstr "Exttay"
+
 #: components/modal/modals/CreateChannel.tsx
 msgid "Text Channel"
 msgstr "Exttay Hannelcay"
@@ -5662,6 +6090,10 @@ msgstr "Ethay irstfay ersionvay asn'thay eenbay ublishedpay. Eckchay ackbay oons
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
 msgstr "Ethay itemyay asway emovedray ybay oderatorsmay, andyay asyay uchsay uturefay applicationsyay areyay ohibitedpray. Ontactcay upportsay orfay oremay informationyay."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
+msgstr "Ethay etworknay inspectoryay ecordsray atwhay AnyTalk endssay andyay eceivesray, osay ouyay ancay eckchay ityay againstyay ayay ooltay ikelay Iresharkway. Ityay isyay offyay ybay efaultday andyay othingnay isyay entsay anywhereyay."
 
 #: components/i18n/errors.tsx
 msgid "The password is too short."
@@ -5842,6 +6274,14 @@ msgstr "Isthay usernameyay isyay otnay allowedyay."
 msgid "This will invalidate the current token and stop any existing instances of the bot from running."
 msgstr "Isthay illway invalidateyay ethay urrentcay okentay andyay opstay anyyay existingyay instancesyay ofyay ethay otbay omfray unningray."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Through a relay (TURN)"
+msgstr "Oughthray ayay elayray (URNTAY)"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Time"
+msgstr "Imetay"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Time format"
 msgstr "Imetay ormatfay"
@@ -5872,6 +6312,10 @@ msgstr "Imeouttay Embermay"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Timeout Members"
 msgstr "Imeouttay Embersmay"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "To"
+msgstr "Otay"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Toggle deafen"
@@ -5909,12 +6353,21 @@ msgstr "Optay eftlay"
 msgid "Top right"
 msgstr "Optay ightray"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Topic"
+msgstr "Opictay"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
 msgstr "Aditionaltray (DDAY/MMAY/YYYYAY)"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Transferred"
+msgstr "Ansferredtray"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Transport"
 msgstr "Ansporttray"
 
@@ -5944,6 +6397,18 @@ msgstr "Ytray ifferentday ordsway oryay anotheryay opescay."
 msgid "Turn every sound on and reset their volumes and files?"
 msgstr "Urntay everyyay oundsay onyay andyay esetray eirthay olumesvay andyay ilesfay?"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Turn it on to see what the app sends and receives."
+msgstr "Urntay ityay onyay otay eesay atwhay ethay appyay endssay andyay eceivesray."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Turn on recording"
+msgstr "Urntay onyay ecordingray"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turn on recording to see which servers the app talks to."
+msgstr "Urntay onyay ecordingray otay eesay ichwhay erverssay ethay appyay alkstay otay."
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn single sounds off, change their volume or use your own"
 msgstr "Urntay inglesay oundssay offyay, angechay eirthay olumevay oryay useyay ouryay ownyay"
@@ -5951,6 +6416,10 @@ msgstr "Urntay inglesay oundssay offyay, angechay eirthay olumevay oryay useyay 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "Urntay isthay offyay andyay osingclay ethay indowway itsquay AnyTalk ightray awayyay."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Type"
+msgstr "Ypetay"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 #~ msgid "Type in the search box and press Enter."
@@ -6142,6 +6611,10 @@ msgstr "Uploadyay otay Ifboxgay"
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Uploading file `{fileName}`... {0}%"
 msgstr "Uploadingyay ilefay `{fileName}`... {0}%"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "URL"
+msgstr "URLYAY"
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
@@ -6424,6 +6897,10 @@ msgstr "Ebhookway Amenay"
 msgid "Webhooks"
 msgstr "Ebhooksway"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "WebSocket"
+msgstr "WebSocket"
+
 #: src/interface/Home.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #~ msgid "Welcome to"
@@ -6461,6 +6938,10 @@ msgstr "Enwhay otay owshay"
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Whenever I'm in a call"
 msgstr "Eneverwhay I'myay inyay ayay allcay"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Where your data goes"
+msgstr "Erewhay ouryay ataday oesgay"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Whether other users can edit these settings"
@@ -6501,6 +6982,10 @@ msgstr "ithway {0} othersyay"
 msgid "with {participants}"
 msgstr "ithway {participants}"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Without the keys, Wireshark only sees encrypted TLS and DTLS traffic. What it can still tell you is where the data goes and how much. Compare that with the servers and sizes listed above."
+msgstr "Ithoutway ethay eyskay, Iresharkway onlyyay eessay encryptedyay TLSAY andyay DTLSAY affictray. Atwhay ityay ancay illstay elltay ouyay isyay erewhay ethay ataday oesgay andyay owhay uchmay. Omparecay atthay ithway ethay erverssay andyay izessay istedlay aboveyay."
+
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Would you like to create a new group or server?"
 msgstr "Ouldway ouyay ikelay otay eatecray ayay ewnay oupgray oryay erversay?"
@@ -6520,6 +7005,10 @@ msgstr "Xay (eftlay uttonbay)"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Y (top button)"
 msgstr "Yay (optay uttonbay)"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Yes"
+msgstr "Esyay"
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "You agree that your bot is subject to the Acceptable Usage Policy."

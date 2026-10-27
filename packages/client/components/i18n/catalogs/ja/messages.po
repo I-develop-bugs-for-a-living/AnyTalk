@@ -71,6 +71,13 @@ msgstr "{0, plural, other {# 件のチャンネルを検索できませんでし
 msgid "{0, plural, one {# channel} other {# channels}}"
 msgstr "{0, plural, other {#個のチャンネル}}"
 
+#. placeholder {0}: list().length
+#. placeholder {0}: shown().length
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "{0, plural, one {# entry} other {# entries}}"
+msgstr "{0, plural, other {#件のエントリ}}"
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -509,6 +516,10 @@ msgstr "メッセージや通知が届いたとき"
 msgid "A new version of AnyTalk is available"
 msgstr "AnyTalk の新しいバージョンが利用できます"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "A packet capture (for example Wireshark) therefore shows only DTLS/SRTP ciphertext, and the media server only sees end-to-end ciphertext."
+msgstr "そのため、パケットキャプチャ(Wireshark など)ではDTLS/SRTPの暗号文しか見えず、メディアサーバーにはエンドツーエンドの暗号文しか見えません。"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream in your call ends"
 msgstr "通話中の配信が終了したとき"
@@ -624,6 +635,7 @@ msgstr "詳細なサウンド設定"
 #~ msgid "Affects all roles and users"
 #~ msgstr "全てのロールとユーザーに影響します"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: src/interface/Friends.tsx
 msgid "All"
 msgstr "全て"
@@ -736,6 +748,10 @@ msgstr "AnyTalk は、いつでもどこでも友達やコミュニティとつ�
 msgid "AnyTalk is up to date."
 msgstr "AnyTalk は最新です。"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "AnyTalk network inspector"
+msgstr "AnyTalk ネットワークインスペクター"
+
 #: src/AndroidNag.tsx
 msgid "AnyTalk on Android"
 msgstr "Android 版 AnyTalk"
@@ -827,6 +843,18 @@ msgstr "ロールを付与"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "at {time}"
 msgstr "{time} 時点"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "attached"
+msgstr "アタッチ済み"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "attributes"
+msgstr "属性"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Attributes"
+msgstr "属性"
 
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Audio devices"
@@ -1062,7 +1090,13 @@ msgstr "低速モードを回避"
 msgid "Bypasses slowmode in channels"
 msgstr "チャンネルの低速モードを回避"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "bytes"
+msgstr "バイト"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Call"
 msgstr "通話"
 
@@ -1074,6 +1108,10 @@ msgstr "通話の暗号化を読み込めませんでした。ページを再読
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Calls"
 msgstr "通話"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Calls: how they are encrypted"
+msgstr "通話の暗号化のしくみ"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Camera"
@@ -1092,6 +1130,7 @@ msgid "Can't get discover request status right now"
 msgstr "現在、探索リクエストの状況を取得できません"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Native.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/AddBot.tsx
@@ -1298,6 +1337,10 @@ msgstr "ユーザー名を入力"
 msgid "Choose username"
 msgstr "ユーザー名を入力"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Clear"
+msgstr "クリア"
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Clear search"
 msgstr "検索をクリア"
@@ -1329,6 +1372,10 @@ msgstr "クリックしてスポイラーを解除"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Client Settings"
 msgstr "クライアントの設定"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "close"
+msgstr "切断"
 
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
@@ -1364,6 +1411,10 @@ msgstr "閉じる"
 #: components/app/menus/UserContextMenu.tsx
 msgid "Close chat"
 msgstr "閉じる"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Close code"
+msgstr "切断コード"
 
 #. placeholder {0}: props.channel.recipient?.displayName
 #: components/modal/modals/DeleteChannel.tsx
@@ -1416,6 +1467,10 @@ msgstr "リキャップを比較"
 msgid "Compare Recaps"
 msgstr "リキャップを比較"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Compressed size"
+msgstr "圧縮サイズ"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Concealed audio"
 msgstr "補完された音声"
@@ -1454,10 +1509,18 @@ msgstr "ボイスチャンネルに接続できます"
 msgid "Connected"
 msgstr "接続済み"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "connecting"
+msgstr "接続中"
+
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "接続中"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Connection"
+msgstr "接続"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Connection lost"
@@ -1479,6 +1542,10 @@ msgstr "このボットを探索から削除するにはサポートに連絡し
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Contact support to remove this server from discover"
 msgstr "このサーバーを探索から削除するにはサポートに連絡してください"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Content"
+msgstr "内容"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Content breaks one or more laws"
@@ -1517,6 +1584,10 @@ msgstr "変更できない操作"
 msgid "Conversations"
 msgstr "会話"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Copied"
+msgstr "コピーしました"
+
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "コピーしました!"
@@ -1544,6 +1615,10 @@ msgstr "招待リンクをコピー"
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Copy Invite URL"
 msgstr "招待リンクをコピー"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Copy JSON"
+msgstr "JSON をコピー"
 
 #: components/app/menus/ChannelContextMenu.tsx
 #: components/app/menus/MessageContextMenu.tsx
@@ -1608,6 +1683,10 @@ msgstr "配信を別ウィンドウで開けませんでした。"
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
 msgstr "配信を別ウィンドウで開けませんでした。ポップアップが許可されているか確認してください。"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Could not open the window. Check that pop-ups are allowed."
+msgstr "ウィンドウを開けませんでした。ポップアップが許可されているか確認してください。"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
@@ -1822,6 +1901,10 @@ msgstr "十字キー 上"
 msgid "Dark"
 msgstr "ダーク"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Data messages and participant attributes (who watches a stream, deafened, key exchange) go over the signalling WebSocket to the media server. They are not end-to-end encrypted, but the key exchange only carries public keys and keys wrapped for one recipient."
+msgstr "データメッセージと参加者の属性(誰が配信を見ているか、スピーカーミュート、鍵交換)は、シグナリング用 WebSocket を通じてメディアサーバーに送られます。エンドツーエンド暗号化はされていませんが、鍵交換で送られるのは公開鍵と、特定の1人宛てに包まれた鍵だけです。"
+
 #. placeholder {0}: err.location
 #: components/i18n/errors.tsx
 msgid "Database error, please contact support. ({0})"
@@ -1851,6 +1934,10 @@ msgstr "通話中にスピーカーミュートを切り替える"
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
 msgstr "スピーカーミュート中"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Decoded size"
+msgstr "デコード後のサイズ"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -1991,6 +2078,10 @@ msgstr "ウェブフックを削除"
 msgid "Deleting this emoji will disallow future use. All past uses will remain."
 msgstr "この絵文字を削除すると今後は使えなくなります。過去の使用分はそのまま残ります。"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Delivery"
+msgstr "配信方式"
+
 #. placeholder {0}: props.invite.username
 #: components/modal/modals/AddBot.tsx
 msgid "Description provided by {0}"
@@ -2012,6 +2103,10 @@ msgstr "詳細"
 #~ msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
 #~ msgstr "詳細：話している間は名前を表示し、配信にはLIVEタグを表示"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Details"
+msgstr "詳細"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
 msgstr "実行中のゲームを検出"
@@ -2032,9 +2127,21 @@ msgstr "開発者モードは通話のパフォーマンスを測定し、過去
 msgid "Device is offline"
 msgstr "端末がオフラインです"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "direct"
+msgstr "直接"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Direct"
+msgstr "直接"
+
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Direct Messages"
 msgstr "ダイレクトメッセージ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Direction"
+msgstr "方向"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Disable Account"
@@ -2159,8 +2266,21 @@ msgstr "1 秒あたりのドロップフレーム数"
 msgid "Drugs or illegal goods"
 msgstr "薬物または違法物品"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS cipher"
+msgstr "DTLS 暗号"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS state"
+msgstr "DTLS の状態"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS version"
+msgstr "DTLS のバージョン"
+
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Duration"
 msgstr "時間"
@@ -2300,6 +2420,10 @@ msgstr "エンコーダーの目標ビットレート"
 msgid "End call"
 msgstr "通話を終了"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "End-to-end encrypted"
+msgstr "エンドツーエンド暗号化"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced"
 msgstr "強化"
@@ -2351,6 +2475,10 @@ msgstr "好きなユーザー名を入力してください。"
 msgid "Entire screen"
 msgstr "画面全体"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "error"
+msgstr "エラー"
+
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Error occurred, please email support."
 msgstr "エラーが発生しました。サポートにメールでお問い合わせください。"
@@ -2364,12 +2492,20 @@ msgstr "Esc で<0>キャンセル</0> · Enter で<1>保存</1>"
 msgid "Estimated upload bandwidth"
 msgstr "推定アップロード帯域幅"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Event"
+msgstr "イベント"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone"
 msgstr "全員"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Everyone in the call"
+msgstr "通話中の全員"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Excellent"
@@ -2386,6 +2522,14 @@ msgstr "全画面表示を終了"
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "エクスポート"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Export HAR"
+msgstr "HAR をエクスポート"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Export JSON"
+msgstr "JSON をエクスポート"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "External links can be dangerous!"
@@ -2432,6 +2576,15 @@ msgstr "フィードバック"
 msgid "File must be smaller than {0}"
 msgstr "ファイルは {0} より小さくする必要があります"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Files"
+msgstr "ファイル"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Filter by address, host or topic"
+msgstr "アドレス、ホスト、トピックで絞り込み"
+
 #: src/interface/Home.tsx
 msgid "Find a community based on your hobbies or interests."
 msgstr "自分にぴったりなコミュニティを探してみましょう。"
@@ -2443,6 +2596,10 @@ msgstr "参加する新しいサーバーを探す"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "あなたの居場所<0/>を探そう、<1/>世界と繋がろう。"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "First bytes"
+msgstr "先頭バイト"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Fixed controls"
@@ -2494,6 +2651,10 @@ msgstr "8時間"
 msgid "Frame rate"
 msgstr "フレームレート"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Freeze the list. Recording goes on."
+msgstr "リストを固定します。記録は続きます。"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Freezes"
 msgstr "フリーズ"
@@ -2506,6 +2667,10 @@ msgstr "フレンド"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Friends who are online or in a call show up here."
 msgstr "オンラインまたは通話中のフレンドがここに表示されます。"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "From"
+msgstr "送信元"
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "from "
@@ -2683,6 +2848,10 @@ msgstr "AnyTalkの翻訳に協力した"
 msgid "Here is your new invite code: <0>{0}</0>"
 msgstr "招待リンクを発行しました<0>{0}</0>"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Hide call signalling noise"
+msgstr "通話のシグナリングの雑多な通信を隠す"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "他の人を非表示"
@@ -2745,6 +2914,10 @@ msgstr "他の人の音声があなたにどう届いたか。"
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "How many recently joined calls the Home page lists. 0 hides them."
 msgstr "ホームに表示する最近参加した通話の数です。0にすると非表示になります。"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "HTTP"
+msgstr "HTTP"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>{HYPRLAND_BIND_EXAMPLE}</1>."
@@ -2812,6 +2985,14 @@ msgstr "通話中 · {count}"
 msgid "In call"
 msgstr "通話中"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the browser, export the HAR file and open it in your browser's developer tools (Network tab, import) or another HAR viewer to see the requests in detail."
+msgstr "ブラウザーでは、HAR ファイルをエクスポートし、ブラウザーの開発者ツール(ネットワークタブでインポート)や他の HAR ビューアーで開くと、リクエストの詳細を確認できます。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
+msgstr "デスクトップアプリでは、Wireshark で通信を復号できる鍵ログのオプションを今後のアップデートで追加予定です。それまでは HAR ファイルをエクスポートして、リクエストの詳細を確認してください。"
+
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "それまでは、Google Play から AnyTalk をインストールすると、Android 向けに作られた、より速くスムーズな環境を利用できます。"
@@ -2841,6 +3022,14 @@ msgstr "入力モード"
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
 msgstr "入力音量"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Inside: end-to-end encryption (LiveKit E2EE) with a key only the people in the call hold. The media server forwards frames it cannot read."
+msgstr "内側:通話参加者だけが持つ鍵によるエンドツーエンド暗号化(LiveKit E2EE)。メディアサーバーは読み取れないフレームを中継するだけです。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Inspect with Wireshark"
+msgstr "Wireshark で調べる"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Install updates automatically"
@@ -2954,6 +3143,10 @@ msgstr "AnyTalkラウンジに参加"
 msgid "Join the voice channel"
 msgstr "ボイスチャンネルに参加"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "joined"
+msgstr "参加"
+
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: components/ui/components/features/profiles/ProfileJoined.tsx
 msgid "Joined"
@@ -2982,6 +3175,10 @@ msgstr "ウィンドウを閉じても AnyTalk をトレイで実行し続ける
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Keep as is"
 msgstr "変更しない"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "kept in memory only, gone when you reload"
+msgstr "メモリ上のみに保持され、再読み込みで消えます"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Keyframe requests per second (viewers asking for a full new picture)"
@@ -3147,6 +3344,10 @@ msgstr "ライブオーバーレイ、録画、過去の配信のリキャップ
 msgid "Live statistics overlay"
 msgstr "ライブ統計オーバーレイ"
 
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Live View"
+msgstr "ライブビュー"
+
 #. placeholder {0}: humanFileSize(props.file.size ?? 0)
 #: components/ui/components/features/messaging/elements/TextFile.tsx
 msgid "Load file ({0})"
@@ -3155,6 +3356,10 @@ msgstr "読み込む ({0})"
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Loading message"
 msgstr "メッセージを読み込み中"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Local candidate"
+msgstr "ローカル候補"
 
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
@@ -3189,6 +3394,10 @@ msgstr "最新バージョンを確認中..."
 msgid "Loss and jitter are what the server reports about the audio it got from you."
 msgstr "損失とジッターは、サーバーがあなたから受け取った音声について報告した値です。"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Lossy"
+msgstr "非保証型"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Lost"
 msgstr "途切れ"
@@ -3204,6 +3413,10 @@ msgstr "ローカットフィルター"
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Lowercase letters, numbers and underscores only."
 msgstr "小文字の英字、数字、アンダースコアのみ使用できます。"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Made with"
+msgstr "作成ツール"
 
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Magenta"
@@ -3294,6 +3507,14 @@ msgstr "送信または視聴するカメラと画面共有の映像を測定し
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Measure your microphone and everyone you hear in calls"
 msgstr "マイクと、通話で聞こえるすべての人を測定します"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Media server"
+msgstr "メディアサーバー"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Media streams"
+msgstr "メディアストリーム"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Medium (90 Hz)"
@@ -3410,6 +3631,10 @@ msgstr "メッセージ"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Messaging"
 msgstr "メッセージ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Method"
+msgstr "メソッド"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "MFA setup canceled."
@@ -3571,6 +3796,18 @@ msgstr "名前（A-Z）"
 msgid "Needs a server that supports stream viewers."
 msgstr "配信の視聴者に対応したサーバーが必要です。"
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Network inspector"
+msgstr "ネットワークインスペクター"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Network Inspector"
+msgstr "ネットワークインスペクター"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Network type"
+msgstr "ネットワークの種類"
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
 msgstr "ニュートラル"
@@ -3621,6 +3858,10 @@ msgstr "次のサーバー"
 msgid "Nickname"
 msgstr "ニックネーム"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "No"
+msgstr "いいえ"
+
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No apps found"
 msgstr "アプリが見つかりません"
@@ -3660,6 +3901,10 @@ msgstr "GIF が見つかりません"
 #: components/app/interface/settings/user/Language.tsx
 msgid "No languages found"
 msgstr "言語が見つかりません"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "No matches"
+msgstr "一致なし"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "No patch notes for this version."
@@ -3748,6 +3993,14 @@ msgstr "未設定"
 msgid "Nothing"
 msgstr "なし"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Nothing fits this filter. Try another word or show all kinds."
+msgstr "このフィルターに一致するものはありません。別の言葉を試すか、すべての種類を表示してください。"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Nothing recorded yet"
+msgstr "まだ何も記録されていません"
+
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own call recaps."
 msgstr "比較できるものがまだありません。CSV をインポートするか、自分の通話リキャップを追加してください。"
@@ -3755,6 +4008,10 @@ msgstr "比較できるものがまだありません。CSV をインポート�
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own stream recaps."
 msgstr "比較できるものがまだありません。CSV をインポートするか、自分の配信リキャップを追加してください。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Nothing to show yet"
+msgstr "まだ表示するものがありません"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/ServerContextMenu.tsx
@@ -3767,6 +4024,10 @@ msgstr "通知"
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "Off"
 msgstr "オフ"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
+msgstr "オフ:トークン、パスワード、鍵は隠されます。再読み込みでリセットされます。"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Offers to stream the games you play during a call. Detection happens only on this computer and nothing is sent."
@@ -3861,6 +4122,10 @@ msgstr "検出されたゲームの実行中のみ"
 msgid "Oops, something went wrong! {e}"
 msgstr "問題が発生しました。{e}"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "open"
+msgstr "確立"
+
 #: components/modal/modals/Invite.tsx
 msgid "Open"
 msgstr "開く"
@@ -3874,6 +4139,7 @@ msgstr "{0} を開く"
 msgid "Open an app or switch to Entire screen."
 msgstr "アプリを開くか、「画面全体」に切り替えてください。"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/rtc/components/StreamPopouts.tsx
 msgid "Open as window"
 msgstr "ウィンドウで開く"
@@ -3889,6 +4155,10 @@ msgstr "ファイルを開く"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "フレンドを開く"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Open live view"
+msgstr "ライブビューを開く"
 
 #. placeholder {0}: author()
 #. placeholder {1}: place()
@@ -3942,6 +4212,10 @@ msgstr "出力デバイス"
 msgid "Output Volume"
 msgstr "出力音量"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Outside: SRTP over DTLS between your device and the media server, as for any WebRTC call."
+msgstr "外側:他の WebRTC 通話と同様に、お使いの端末とメディアサーバーの間で DTLS 上の SRTP を使用します。"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Overlay"
 msgstr "オーバーレイ"
@@ -3990,6 +4264,14 @@ msgstr "パスワード"
 #: components/modal/modals/EditPassword.tsx
 msgid "Password changed successfully."
 msgstr "パスワードを変更しました。"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Pause"
+msgstr "一時停止"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Paused"
+msgstr "一時停止中"
 
 #: components/app/interface/settings/user/subscriptions/EditSubscriptionJoinFlow.tsx
 #~ msgid "Pay"
@@ -4221,6 +4503,10 @@ msgstr "有害な行為の助長"
 msgid "Pronouns"
 msgstr "代名詞"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Protocol"
+msgstr "プロトコル"
+
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
 msgstr "メールアドレス、またはパスワードが間違っています。"
@@ -4285,6 +4571,7 @@ msgid "Ready to install: {0}"
 msgstr "インストール準備完了: {0}"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
 msgid "Reason"
@@ -4324,6 +4611,11 @@ msgstr "タブを開いている間、通知を受け取ります。"
 msgid "Receive push notifications while the app is closed."
 msgstr "アプリを閉じている間もプッシュ通知を受け取ります。"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Received"
+msgstr "受信"
+
 #: src/interface/home/FriendsOverview.tsx
 msgid "Recent calls"
 msgstr "最近の通話"
@@ -4346,6 +4638,10 @@ msgstr "再接続中"
 msgid "Record call recaps"
 msgstr "通話リキャップを記録"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Record network traffic"
+msgstr "ネットワーク通信を記録"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record statistics of every call you are in, with or without the overlay"
 msgstr "オーバーレイの有無にかかわらず、参加するすべての通話の統計を記録します"
@@ -4357,6 +4653,14 @@ msgstr "オーバーレイの有無にかかわらず、送信または視聴す
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record stream recaps"
 msgstr "配信リキャップを記録"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Recorded traffic"
+msgstr "記録された通信"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Recording is off"
+msgstr "記録はオフです"
 
 #: components/modal/modals/MFAFlow.tsx
 msgid "Recovery Code"
@@ -4386,6 +4690,18 @@ msgstr "<0/>に登録"
 msgid "Reject friend request"
 msgstr "フレンド申請を拒否"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "relay"
+msgstr "リレー"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Relay protocol"
+msgstr "リレープロトコル"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Relay server"
+msgstr "リレーサーバー"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Release notes"
 msgstr "リリースノート"
@@ -4394,6 +4710,10 @@ msgstr "リリースノート"
 msgid "Relevance"
 msgstr "関連性"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Reliable"
+msgstr "保証型"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload and clear cache"
 msgstr "再読み込みしてキャッシュを消去"
@@ -4401,6 +4721,14 @@ msgstr "再読み込みしてキャッシュを消去"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload AnyTalk with fresh files from the server? This is the same as Ctrl+F5 and fixes most display problems after an update. You stay logged in and keep your settings."
 msgstr "サーバーから最新のファイルで AnyTalk を再読み込みしますか？ Ctrl+F5 と同じで、更新後の表示の問題の多くが解消します。ログイン状態と設定はそのままです。"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Remote address"
+msgstr "リモートアドレス"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Remote candidate"
+msgstr "リモート候補"
 
 #: components/markdown/plugins/anchors.tsx
 msgid "Remote Channel"
@@ -4524,6 +4852,18 @@ msgstr "サーバーを報告"
 msgid "Report user"
 msgstr "ユーザーを報告"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Request body"
+msgstr "リクエストボディ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Request headers"
+msgstr "リクエストヘッダー"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Requests and messages show up here as they happen."
+msgstr "リクエストやメッセージは発生するたびにここに表示されます。"
+
 #: components/auth/src/flows/FlowResend.tsx
 msgid "Resend"
 msgstr "再送信"
@@ -4601,6 +4941,18 @@ msgstr "解像度"
 msgid "Resolution and FPS"
 msgstr "解像度と FPS"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response headers"
+msgstr "レスポンスヘッダー"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response preview"
+msgstr "レスポンスのプレビュー"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response size"
+msgstr "レスポンスサイズ"
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Responsibly disclosed security issues"
 msgstr "脆弱性を報告した"
@@ -4617,6 +4969,10 @@ msgstr "再起動してアップデート"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Restore call window"
 msgstr "通話ウィンドウを元に戻す"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Resume"
+msgstr "再開"
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 msgid "Retry sending"
@@ -4679,6 +5035,18 @@ msgstr "ロール"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Roles with No Overrides"
 msgstr "上書きのないロール"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Room"
+msgstr "ルーム"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "route"
+msgstr "経路"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Route"
+msgstr "経路"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Running"
@@ -4837,6 +5205,10 @@ msgstr "検索中…"
 msgid "See all your servers at a glance."
 msgstr "参加しているサーバーをひと目で確認できます。"
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "See what the app sends and receives, and export it to check against Wireshark"
+msgstr "アプリが送受信している内容を確認し、エクスポートして Wireshark と照合できます"
+
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select"
 msgstr "選択"
@@ -4844,6 +5216,10 @@ msgstr "選択"
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select all"
 msgstr "すべて選択"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Select an entry to see its details."
+msgstr "エントリを選択すると詳細が表示されます。"
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Select at least one line above to compare."
@@ -4921,6 +5297,8 @@ msgstr "申請を送信"
 msgid "Sending..."
 msgstr "送信中..."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Sent"
 msgstr "送信済み"
@@ -4995,9 +5373,21 @@ msgstr "サーバーロール"
 msgid "Servers"
 msgstr "サーバー"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Servers contacted"
+msgstr "通信したサーバー"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Servers show up here as soon as the app talks to them."
+msgstr "アプリがサーバーと通信すると、ここに表示されます。"
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Servers you join show up here."
 msgstr "参加したサーバーはここに表示されます。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+msgstr "セッショントークン、パスワード、通話の鍵が画面とエクスポートに表示されます。それらを見たり入手したりした人は、あなたとしてサインインできてしまいます。デバッグ時のみオンにし、エクスポートは共有しないでください。"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5055,6 +5445,10 @@ msgstr "ボイスチャットでカメラまたは画面を共有"
 msgid "Share screen"
 msgstr "画面を共有"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show"
+msgstr "表示"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show 'copy ID' in context menus"
 msgstr "コンテキストメニューに「IDをコピー」を表示"
@@ -5079,6 +5473,10 @@ msgstr "通話タイルにマイクのライブ統計を表示"
 msgid "Show live statistics on call video tiles"
 msgstr "通話の映像タイルにライブ統計を表示"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show only"
+msgstr "絞り込み表示"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Show Others"
 msgstr "他の人を表示"
@@ -5100,9 +5498,21 @@ msgstr "サーバーリストを表示"
 msgid "Show server names"
 msgstr "サーバー名を表示"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show tokens and keys"
+msgstr "トークンと鍵を表示"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show tokens and keys?"
+msgstr "トークンと鍵を表示しますか?"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Show when speaking"
 msgstr "話しているときに表示"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show window"
+msgstr "ウィンドウを表示"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
@@ -5159,6 +5569,10 @@ msgstr "サイレント"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Single stream: opening a stream replaces the current one"
 msgstr "シングル配信: 配信を開くと現在の配信が置き換わります"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Size"
+msgstr "サイズ"
 
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "Slowmode Immune"
@@ -5270,6 +5684,10 @@ msgstr "スペルチェック"
 msgid "Spoiler"
 msgstr "ネタバレ"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "SRTP cipher"
+msgstr "SRTP 暗号"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Start camera"
 msgstr "カメラを開始"
@@ -5286,6 +5704,11 @@ msgstr "通話を開始"
 msgid "Start with Computer"
 msgstr "コンピューターと一緒に起動"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Started"
+msgstr "開始"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 msgid "Status"
 msgstr "ステータス"
@@ -5298,6 +5721,7 @@ msgstr "カメラを停止"
 msgid "Stop sharing"
 msgstr "共有を停止"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/ui/components/features/voice/callCard/GameStreamPrompt.tsx
 msgid "Stream"
 msgstr "配信"
@@ -5480,6 +5904,10 @@ msgstr "利用規約"
 #~ msgid "Terms of Service"
 #~ msgstr "利用規約"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Text"
+msgstr "テキスト"
+
 #: components/modal/modals/CreateChannel.tsx
 msgid "Text Channel"
 msgstr "テキストチャンネル"
@@ -5533,6 +5961,10 @@ msgstr "最初のバージョンはまだ公開されていません。しばら
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
 msgstr "このアイテムはモデレーターによって削除されたため、今後の申請はできません。詳しくはサポートにお問い合わせください。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
+msgstr "ネットワークインスペクターは AnyTalk が送受信する内容を記録し、Wireshark などのツールと照合できるようにします。初期設定ではオフで、どこにも送信されません。"
 
 #: components/i18n/errors.tsx
 msgid "The password is too short."
@@ -5713,6 +6145,14 @@ msgstr "このユーザー名は使用できません。"
 msgid "This will invalidate the current token and stop any existing instances of the bot from running."
 msgstr "現在のトークンが無効になり、実行中のボットのインスタンスがすべて停止します。"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Through a relay (TURN)"
+msgstr "リレー(TURN)経由"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Time"
+msgstr "時刻"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Time format"
 msgstr "時刻の形式"
@@ -5743,6 +6183,10 @@ msgstr "メンバーをタイムアウト"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Timeout Members"
 msgstr "メンバーをタイムアウト"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "To"
+msgstr "送信先"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Toggle deafen"
@@ -5780,12 +6224,21 @@ msgstr "左上"
 msgid "Top right"
 msgstr "右上"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Topic"
+msgstr "トピック"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
 msgstr "従来型（DD/MM/YYYY）"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Transferred"
+msgstr "転送量"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Transport"
 msgstr "トランスポート"
 
@@ -5815,6 +6268,18 @@ msgstr "別のキーワードか、別の検索範囲をお試しください。
 msgid "Turn every sound on and reset their volumes and files?"
 msgstr "すべてのサウンドをオンに戻し、音量とファイルをリセットしますか？"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Turn it on to see what the app sends and receives."
+msgstr "オンにすると、アプリが送受信している内容を確認できます。"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Turn on recording"
+msgstr "記録をオンにする"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turn on recording to see which servers the app talks to."
+msgstr "記録をオンにすると、アプリがどのサーバーと通信しているか確認できます。"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn single sounds off, change their volume or use your own"
 msgstr "サウンドを個別にオフにしたり、音量を変えたり、自分のサウンドを使えます"
@@ -5822,6 +6287,10 @@ msgstr "サウンドを個別にオフにしたり、音量を変えたり、自
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "オフにすると、ウィンドウを閉じた時点で AnyTalk がすぐに終了します。"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Type"
+msgstr "種類"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 #~ msgid "Type in the search box and press Enter."
@@ -6013,6 +6482,10 @@ msgstr "Gifbox にアップロード"
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Uploading file `{fileName}`... {0}%"
 msgstr "ファイル `{fileName}` をアップロード中... {0}%"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "URL"
+msgstr "URL"
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
@@ -6286,6 +6759,10 @@ msgstr "ウェブフックの名前"
 msgid "Webhooks"
 msgstr "ウェブフック"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "WebSocket"
+msgstr "WebSocket"
+
 #~ msgid "Welcome to"
 #~ msgstr "ようこそ"
 
@@ -6321,6 +6798,10 @@ msgstr "表示するタイミング"
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Whenever I'm in a call"
 msgstr "通話中は常に"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Where your data goes"
+msgstr "データの送信先"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Whether other users can edit these settings"
@@ -6361,6 +6842,10 @@ msgstr "ほか {0} 人と"
 msgid "with {participants}"
 msgstr "{participants} と"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Without the keys, Wireshark only sees encrypted TLS and DTLS traffic. What it can still tell you is where the data goes and how much. Compare that with the servers and sizes listed above."
+msgstr "鍵がないと、Wireshark には暗号化された TLS と DTLS の通信しか見えません。それでも、データの送信先と量は分かります。上に表示されているサーバーやサイズと比べてみてください。"
+
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Would you like to create a new group or server?"
 msgstr "新しいグループまたはサーバーを作成しますか？"
@@ -6380,6 +6865,10 @@ msgstr "X(左のボタン)"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Y (top button)"
 msgstr "Y(上のボタン)"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Yes"
+msgstr "はい"
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "You agree that your bot is subject to the Acceptable Usage Policy."

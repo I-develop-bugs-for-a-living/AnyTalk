@@ -71,6 +71,13 @@ msgstr "{0, plural, one {# ᓵ⍑ᔑリリᒷꖎ ᓵ𝙹⚍ꖎ↸ リ𝙹ℸ ʖ�
 msgid "{0, plural, one {# channel} other {# channels}}"
 msgstr "{0, plural, one {# ᓵ⍑ᔑリリᒷꖎ} other {# ᓵ⍑ᔑリリᒷꖎᓭ}}"
 
+#. placeholder {0}: list().length
+#. placeholder {0}: shown().length
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "{0, plural, one {# entry} other {# entries}}"
+msgstr "{0, plural, one {# ᒷリℸ∷||} other {# ᒷリℸ∷╎ᒷᓭ}}"
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -581,6 +588,10 @@ msgstr "ᔑ ᒲᒷᓭᓭᔑ⊣ᒷ 𝙹∷ リ𝙹ℸ╎⎓╎ᓵᔑℸ╎𝙹リ
 msgid "A new version of AnyTalk is available"
 msgstr "ᔑ リᒷ∴ ⍊ᒷ∷ᓭ╎𝙹リ 𝙹⎓ ᔑリ||ℸᔑꖎꖌ ╎ᓭ ᔑ⍊ᔑ╎ꖎᔑʖꖎᒷ"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "A packet capture (for example Wireshark) therefore shows only DTLS/SRTP ciphertext, and the media server only sees end-to-end ciphertext."
+msgstr "ᔑ !¡ᔑᓵꖌᒷℸ ᓵᔑ!¡ℸ⚍∷ᒷ (⎓𝙹∷ ᒷ/ᔑᒲ!¡ꖎᒷ ∴╎∷ᒷᓭ⍑ᔑ∷ꖌ) ℸ⍑ᒷ∷ᒷ⎓𝙹∷ᒷ ᓭ⍑𝙹∴ᓭ 𝙹リꖎ|| ↸ℸꖎᓭ/ᓭ∷ℸ!¡ ᓵ╎!¡⍑ᒷ∷ℸᒷ/ℸ, ᔑリ↸ ℸ⍑ᒷ ᒲᒷ↸╎ᔑ ᓭᒷ∷⍊ᒷ∷ 𝙹リꖎ|| ᓭᒷᒷᓭ ᒷリ↸-ℸ𝙹-ᒷリ↸ ᓵ╎!¡⍑ᒷ∷ℸᒷ/ℸ."
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream in your call ends"
 msgstr "ᔑ ᓭℸ∷ᒷᔑᒲ ╎リ ||𝙹⚍∷ ᓵᔑꖎꖎ ᒷリ↸ᓭ"
@@ -698,6 +709,7 @@ msgstr "ᔑ↸⍊ᔑリᓵᒷ↸ ᓭ𝙹⚍リ↸ ᓭᒷℸℸ╎リ⊣ᓭ"
 #~ msgid "Affects all roles and users"
 #~ msgstr ""
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: src/interface/Friends.tsx
 msgid "All"
 msgstr "ᔑꖎꖎ"
@@ -810,6 +822,10 @@ msgstr "ᔑリ||ℸᔑꖎꖌ ╎ᓭ 𝙹リᒷ 𝙹⎓ ℸ⍑ᒷ ʖᒷᓭℸ ∴
 msgid "AnyTalk is up to date."
 msgstr "ᔑリ||ℸᔑꖎꖌ ╎ᓭ ⚍!¡ ℸ𝙹 ↸ᔑℸᒷ."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "AnyTalk network inspector"
+msgstr "ᔑリ||ℸᔑꖎꖌ リᒷℸ∴𝙹∷ꖌ ╎リᓭ!¡ᒷᓵℸ𝙹∷"
+
 #: src/AndroidNag.tsx
 msgid "AnyTalk on Android"
 msgstr "ᔑリ||ℸᔑꖎꖌ 𝙹リ ᔑリ↸∷𝙹╎↸"
@@ -905,6 +921,18 @@ msgstr "ᔑᓭᓭ╎⊣リ ∷𝙹ꖎᒷᓭ"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "at {time}"
 msgstr "ᔑℸ {time}"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "attached"
+msgstr "ᔑℸℸᔑᓵ⍑ᒷ↸"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "attributes"
+msgstr "ᔑℸℸ∷╎ʖ⚍ℸᒷᓭ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Attributes"
+msgstr "ᔑℸℸ∷╎ʖ⚍ℸᒷᓭ"
 
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Audio devices"
@@ -1144,7 +1172,13 @@ msgstr "ʖ||!¡ᔑᓭᓭ ᓭꖎ𝙹∴ᒲ𝙹↸ᒷ"
 msgid "Bypasses slowmode in channels"
 msgstr "ʖ||!¡ᔑᓭᓭᒷᓭ ᓭꖎ𝙹∴ᒲ𝙹↸ᒷ ╎リ ᓵ⍑ᔑリリᒷꖎᓭ"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "bytes"
+msgstr "ʖ||ℸᒷᓭ"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Call"
 msgstr "ᓵᔑꖎꖎ"
 
@@ -1156,6 +1190,10 @@ msgstr "ᓵᔑꖎꖎ ᒷリᓵ∷||!¡ℸ╎𝙹リ ᓵ𝙹⚍ꖎ↸リ'ℸ ʖ�
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Calls"
 msgstr "ᓵᔑꖎꖎᓭ"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Calls: how they are encrypted"
+msgstr "ᓵᔑꖎꖎᓭ: ⍑𝙹∴ ℸ⍑ᒷ|| ᔑ∷ᒷ ᒷリᓵ∷||!¡ℸᒷ↸"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Camera"
@@ -1174,6 +1212,7 @@ msgid "Can't get discover request status right now"
 msgstr "ᓵᔑリ'ℸ ⊣ᒷℸ ↸╎ᓭᓵ𝙹⍊ᒷ∷ ∷ᒷᑑ⚍ᒷᓭℸ ᓭℸᔑℸ⚍ᓭ ∷╎⊣⍑ℸ リ𝙹∴"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Native.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/AddBot.tsx
@@ -1384,6 +1423,10 @@ msgstr "ᓵ⍑𝙹𝙹ᓭᒷ ᔑ ⚍ᓭᒷ∷リᔑᒲᒷ"
 msgid "Choose username"
 msgstr "ᓵ⍑𝙹𝙹ᓭᒷ ⚍ᓭᒷ∷リᔑᒲᒷ"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Clear"
+msgstr "ᓵꖎᒷᔑ∷"
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Clear search"
 msgstr "ᓵꖎᒷᔑ∷ ᓭᒷᔑ∷ᓵ⍑"
@@ -1415,6 +1458,10 @@ msgstr "ᓵꖎ╎ᓵꖌ ℸ𝙹 ᓭ⍑𝙹∴ ᓭ!¡𝙹╎ꖎᒷ∷"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Client Settings"
 msgstr "ᓵꖎ╎ᒷリℸ ᓭᒷℸℸ╎リ⊣ᓭ"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "close"
+msgstr "ᓵꖎ𝙹ᓭᒷ"
 
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
@@ -1450,6 +1497,10 @@ msgstr "ᓵꖎ𝙹ᓭᒷ"
 #: components/app/menus/UserContextMenu.tsx
 msgid "Close chat"
 msgstr "ᓵꖎ𝙹ᓭᒷ ᓵ⍑ᔑℸ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Close code"
+msgstr "ᓵꖎ𝙹ᓭᒷ ᓵ𝙹↸ᒷ"
 
 #. placeholder {0}: props.channel.recipient?.displayName
 #: components/modal/modals/DeleteChannel.tsx
@@ -1502,6 +1553,10 @@ msgstr "ᓵ𝙹ᒲ!¡ᔑ∷ᒷ ∷ᒷᓵᔑ!¡ᓭ"
 msgid "Compare Recaps"
 msgstr "ᓵ𝙹ᒲ!¡ᔑ∷ᒷ ∷ᒷᓵᔑ!¡ᓭ"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Compressed size"
+msgstr "ᓵ𝙹ᒲ!¡∷ᒷᓭᓭᒷ↸ ᓭ╎⨅ᒷ"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Concealed audio"
 msgstr "ᓵ𝙹リᓵᒷᔑꖎᒷ↸ ᔑ⚍↸╎𝙹"
@@ -1540,10 +1595,18 @@ msgstr "ᓵ𝙹リリᒷᓵℸ ℸ𝙹 ⍊𝙹╎ᓵᒷ ᓵ⍑ᔑリリᒷꖎ"
 msgid "Connected"
 msgstr "ᓵ𝙹リリᒷᓵℸᒷ↸"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "connecting"
+msgstr "ᓵ𝙹リリᒷᓵℸ╎リ⊣"
+
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "ᓵ𝙹リリᒷᓵℸ╎リ⊣"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Connection"
+msgstr "ᓵ𝙹リリᒷᓵℸ╎𝙹リ"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Connection lost"
@@ -1565,6 +1628,10 @@ msgstr "ᓵ𝙹リℸᔑᓵℸ ᓭ⚍!¡!¡𝙹∷ℸ ℸ𝙹 ∷ᒷᒲ𝙹⍊�
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Contact support to remove this server from discover"
 msgstr "ᓵ𝙹リℸᔑᓵℸ ᓭ⚍!¡!¡𝙹∷ℸ ℸ𝙹 ∷ᒷᒲ𝙹⍊ᒷ ℸ⍑╎ᓭ ᓭᒷ∷⍊ᒷ∷ ⎓∷𝙹ᒲ ↸╎ᓭᓵ𝙹⍊ᒷ∷"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Content"
+msgstr "ᓵ𝙹リℸᒷリℸ"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Content breaks one or more laws"
@@ -1603,6 +1670,10 @@ msgstr "ᓵ𝙹リℸ∷𝙹ꖎᓭ ℸ⍑ᔑℸ ᓵᔑリ'ℸ ʖᒷ ᓵ⍑ᔑリ
 msgid "Conversations"
 msgstr "ᓵ𝙹リ⍊ᒷ∷ᓭᔑℸ╎𝙹リᓭ"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Copied"
+msgstr "ᓵ𝙹!¡╎ᒷ↸"
+
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "ᓵ𝙹!¡╎ᒷ↸!"
@@ -1630,6 +1701,10 @@ msgstr "ᓵ𝙹!¡|| ╎リ⍊╎ℸᒷ ꖎ╎リꖌ"
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Copy Invite URL"
 msgstr "ᓵ𝙹!¡|| ╎リ⍊╎ℸᒷ ⚍∷ꖎ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Copy JSON"
+msgstr "ᓵ𝙹!¡|| ⋮ᓭ𝙹リ"
 
 #: components/app/menus/ChannelContextMenu.tsx
 #: components/app/menus/MessageContextMenu.tsx
@@ -1694,6 +1769,10 @@ msgstr "ᓵ𝙹⚍ꖎ↸ リ𝙹ℸ 𝙹!¡ᒷリ ℸ⍑ᒷ ᓭℸ∷ᒷᔑᒲ �
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
 msgstr "ᓵ𝙹⚍ꖎ↸ リ𝙹ℸ 𝙹!¡ᒷリ ℸ⍑ᒷ ᓭℸ∷ᒷᔑᒲ ╎リ ᔑ ᓭᒷ!¡ᔑ∷ᔑℸᒷ ∴╎リ↸𝙹∴. ᓵ⍑ᒷᓵꖌ ℸ⍑ᔑℸ !¡𝙹!¡-⚍!¡ᓭ ᔑ∷ᒷ ᔑꖎꖎ𝙹∴ᒷ↸."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Could not open the window. Check that pop-ups are allowed."
+msgstr "ᓵ𝙹⚍ꖎ↸ リ𝙹ℸ 𝙹!¡ᒷリ ℸ⍑ᒷ ∴╎リ↸𝙹∴. ᓵ⍑ᒷᓵꖌ ℸ⍑ᔑℸ !¡𝙹!¡-⚍!¡ᓭ ᔑ∷ᒷ ᔑꖎꖎ𝙹∴ᒷ↸."
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
@@ -1910,6 +1989,10 @@ msgstr "↸-!¡ᔑ↸ ⚍!¡"
 msgid "Dark"
 msgstr "↸ᔑ∷ꖌ"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Data messages and participant attributes (who watches a stream, deafened, key exchange) go over the signalling WebSocket to the media server. They are not end-to-end encrypted, but the key exchange only carries public keys and keys wrapped for one recipient."
+msgstr "↸ᔑℸᔑ ᒲᒷᓭᓭᔑ⊣ᒷᓭ ᔑリ↸ !¡ᔑ∷ℸ╎ᓵ╎!¡ᔑリℸ ᔑℸℸ∷╎ʖ⚍ℸᒷᓭ (∴⍑𝙹 ∴ᔑℸᓵ⍑ᒷᓭ ᔑ ᓭℸ∷ᒷᔑᒲ, ↸ᒷᔑ⎓ᒷリᒷ↸, ꖌᒷ|| ᒷ/ᓵ⍑ᔑリ⊣ᒷ) ⊣𝙹 𝙹⍊ᒷ∷ ℸ⍑ᒷ ᓭ╎⊣リᔑꖎꖎ╎リ⊣ ∴ᒷʖᓭ𝙹ᓵꖌᒷℸ ℸ𝙹 ℸ⍑ᒷ ᒲᒷ↸╎ᔑ ᓭᒷ∷⍊ᒷ∷. ℸ⍑ᒷ|| ᔑ∷ᒷ リ𝙹ℸ ᒷリ↸-ℸ𝙹-ᒷリ↸ ᒷリᓵ∷||!¡ℸᒷ↸, ʖ⚍ℸ ℸ⍑ᒷ ꖌᒷ|| ᒷ/ᓵ⍑ᔑリ⊣ᒷ 𝙹リꖎ|| ᓵᔑ∷∷╎ᒷᓭ !¡⚍ʖꖎ╎ᓵ ꖌᒷ||ᓭ ᔑリ↸ ꖌᒷ||ᓭ ∴∷ᔑ!¡!¡ᒷ↸ ⎓𝙹∷ 𝙹リᒷ ∷ᒷᓵ╎!¡╎ᒷリℸ."
+
 #. placeholder {0}: err.location
 #: components/i18n/errors.tsx
 msgid "Database error, please contact support. ({0})"
@@ -1939,6 +2022,10 @@ msgstr "↸ᒷᔑ⎓ᒷリ 𝙹∷ ⚍リ↸ᒷᔑ⎓ᒷリ ╎リ ᔑ ᓵᔑꖎ
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
 msgstr "↸ᒷᔑ⎓ᒷリᒷ↸"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Decoded size"
+msgstr "↸ᒷᓵ𝙹↸ᒷ↸ ᓭ╎⨅ᒷ"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -2087,6 +2174,10 @@ msgstr "↸ᒷꖎᒷℸᒷ ∴ᒷʖ⍑𝙹𝙹ꖌ"
 msgid "Deleting this emoji will disallow future use. All past uses will remain."
 msgstr "↸ᒷꖎᒷℸ╎リ⊣ ℸ⍑╎ᓭ ᒷᒲ𝙹⋮╎ ∴╎ꖎꖎ ↸╎ᓭᔑꖎꖎ𝙹∴ ⎓⚍ℸ⚍∷ᒷ ⚍ᓭᒷ. ᔑꖎꖎ !¡ᔑᓭℸ ⚍ᓭᒷᓭ ∴╎ꖎꖎ ∷ᒷᒲᔑ╎リ."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Delivery"
+msgstr "↸ᒷꖎ╎⍊ᒷ∷||"
+
 #. placeholder {0}: props.invite.username
 #: components/modal/modals/AddBot.tsx
 msgid "Description provided by {0}"
@@ -2108,6 +2199,10 @@ msgstr "↸ᒷℸᔑ╎ꖎᒷ↸"
 #~ msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
 #~ msgstr "↸ᒷℸᔑ╎ꖎᒷ↸: リᔑᒲᒷᓭ ∴⍑╎ꖎᒷ ᓭ𝙹ᒲᒷ𝙹リᒷ ᓭ!¡ᒷᔑꖌᓭ, ᔑリ↸ ᔑ ꖎ╎⍊ᒷ ℸᔑ⊣ ⎓𝙹∷ ᓭℸ∷ᒷᔑᒲᓭ"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Details"
+msgstr "↸ᒷℸᔑ╎ꖎᓭ"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
 msgstr "↸ᒷℸᒷᓵℸ ∷⚍リリ╎リ⊣ ⊣ᔑᒲᒷᓭ"
@@ -2128,9 +2223,21 @@ msgstr "↸ᒷ⍊ᒷꖎ𝙹!¡ᒷ∷ ᒲ𝙹↸ᒷᓭ ᒲᒷᔑᓭ⚍∷ᒷ ᓵ�
 msgid "Device is offline"
 msgstr "↸ᒷ⍊╎ᓵᒷ ╎ᓭ 𝙹⎓⎓ꖎ╎リᒷ"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "direct"
+msgstr "↸╎∷ᒷᓵℸ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Direct"
+msgstr "↸╎∷ᒷᓵℸ"
+
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Direct Messages"
 msgstr "↸╎∷ᒷᓵℸ ᒲᒷᓭᓭᔑ⊣ᒷᓭ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Direction"
+msgstr "↸╎∷ᒷᓵℸ╎𝙹リ"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Disable Account"
@@ -2259,8 +2366,21 @@ msgstr "↸∷𝙹!¡!¡ᒷ↸ ⎓∷ᔑᒲᒷᓭ !¡ᒷ∷ ᓭᒷᓵ𝙹リ↸"
 msgid "Drugs or illegal goods"
 msgstr "↸∷⚍⊣ᓭ 𝙹∷ ╎ꖎꖎᒷ⊣ᔑꖎ ⊣𝙹𝙹↸ᓭ"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS cipher"
+msgstr "↸ℸꖎᓭ ᓵ╎!¡⍑ᒷ∷"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS state"
+msgstr "↸ℸꖎᓭ ᓭℸᔑℸᒷ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS version"
+msgstr "↸ℸꖎᓭ ⍊ᒷ∷ᓭ╎𝙹リ"
+
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Duration"
 msgstr "↸⚍∷ᔑℸ╎𝙹リ"
@@ -2400,6 +2520,10 @@ msgstr "ᒷリᓵ𝙹↸ᒷ∷ ℸᔑ∷⊣ᒷℸ ʖ╎ℸ∷ᔑℸᒷ"
 msgid "End call"
 msgstr "ᒷリ↸ ᓵᔑꖎꖎ"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "End-to-end encrypted"
+msgstr "ᒷリ↸-ℸ𝙹-ᒷリ↸ ᒷリᓵ∷||!¡ℸᒷ↸"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced"
 msgstr "ᒷリ⍑ᔑリᓵᒷ↸"
@@ -2451,6 +2575,10 @@ msgstr "ᒷリℸᒷ∷ ||𝙹⚍∷ !¡∷ᒷ⎓ᒷ∷∷ᒷ↸ ⚍ᓭᒷ∷リ
 msgid "Entire screen"
 msgstr "ᒷリℸ╎∷ᒷ ᓭᓵ∷ᒷᒷリ"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "error"
+msgstr "ᒷ∷∷𝙹∷"
+
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Error occurred, please email support."
 msgstr "ᒷ∷∷𝙹∷ 𝙹ᓵᓵ⚍∷∷ᒷ↸, !¡ꖎᒷᔑᓭᒷ ᒷᒲᔑ╎ꖎ ᓭ⚍!¡!¡𝙹∷ℸ."
@@ -2464,12 +2592,20 @@ msgstr "ᒷᓭᓵᔑ!¡ᒷ ℸ𝙹 <0>ᓵᔑリᓵᒷꖎ</0> · ᒷリℸᒷ∷ 
 msgid "Estimated upload bandwidth"
 msgstr "ᒷᓭℸ╎ᒲᔑℸᒷ↸ ⚍!¡ꖎ𝙹ᔑ↸ ʖᔑリ↸∴╎↸ℸ⍑"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Event"
+msgstr "ᒷ⍊ᒷリℸ"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone"
 msgstr "ᒷ⍊ᒷ∷||𝙹リᒷ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Everyone in the call"
+msgstr "ᒷ⍊ᒷ∷||𝙹リᒷ ╎リ ℸ⍑ᒷ ᓵᔑꖎꖎ"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Excellent"
@@ -2486,6 +2622,14 @@ msgstr "ᒷ/╎ℸ ⎓⚍ꖎꖎᓭᓵ∷ᒷᒷリ"
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "ᒷ/!¡𝙹∷ℸ"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Export HAR"
+msgstr "ᒷ/!¡𝙹∷ℸ ⍑ᔑ∷"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Export JSON"
+msgstr "ᒷ/!¡𝙹∷ℸ ⋮ᓭ𝙹リ"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "External links can be dangerous!"
@@ -2532,6 +2676,15 @@ msgstr "⎓ᒷᒷ↸ʖᔑᓵꖌ"
 msgid "File must be smaller than {0}"
 msgstr "⎓╎ꖎᒷ ᒲ⚍ᓭℸ ʖᒷ ᓭᒲᔑꖎꖎᒷ∷ ℸ⍑ᔑリ {0}"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Files"
+msgstr "⎓╎ꖎᒷᓭ"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Filter by address, host or topic"
+msgstr "⎓╎ꖎℸᒷ∷ ʖ|| ᔑ↸↸∷ᒷᓭᓭ, ⍑𝙹ᓭℸ 𝙹∷ ℸ𝙹!¡╎ᓵ"
+
 #: src/interface/Home.tsx
 msgid "Find a community based on your hobbies or interests."
 msgstr "⎓╎リ↸ ᔑ ᓵ𝙹ᒲᒲ⚍リ╎ℸ|| ʖᔑᓭᒷ↸ 𝙹リ ||𝙹⚍∷ ⍑𝙹ʖʖ╎ᒷᓭ 𝙹∷ ╎リℸᒷ∷ᒷᓭℸᓭ."
@@ -2543,6 +2696,10 @@ msgstr "⎓╎リ↸ リᒷ∴ ᓭᒷ∷⍊ᒷ∷ᓭ ℸ𝙹 ⋮𝙹╎リ"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "⎓╎リ↸ ||𝙹⚍∷ ᓵ𝙹ᒲ<0/>ᒲ⚍リ╎ℸ||,<1/>ᓵ𝙹リリᒷᓵℸ ∴╎ℸ⍑ ℸ⍑ᒷ ∴𝙹∷ꖎ↸."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "First bytes"
+msgstr "⎓╎∷ᓭℸ ʖ||ℸᒷᓭ"
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Fixed controls"
@@ -2594,6 +2751,10 @@ msgstr "⎓𝙹∷ 8 ⍑𝙹⚍∷ᓭ"
 msgid "Frame rate"
 msgstr "⎓∷ᔑᒲᒷ ∷ᔑℸᒷ"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Freeze the list. Recording goes on."
+msgstr "⎓∷ᒷᒷ⨅ᒷ ℸ⍑ᒷ ꖎ╎ᓭℸ. ∷ᒷᓵ𝙹∷↸╎リ⊣ ⊣𝙹ᒷᓭ 𝙹リ."
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Freezes"
 msgstr "⎓∷ᒷᒷ⨅ᒷᓭ"
@@ -2606,6 +2767,10 @@ msgstr "⎓∷╎ᒷリ↸ᓭ"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Friends who are online or in a call show up here."
 msgstr "⎓∷╎ᒷリ↸ᓭ ∴⍑𝙹 ᔑ∷ᒷ 𝙹リꖎ╎リᒷ 𝙹∷ ╎リ ᔑ ᓵᔑꖎꖎ ᓭ⍑𝙹∴ ⚍!¡ ⍑ᒷ∷ᒷ."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "From"
+msgstr "⎓∷𝙹ᒲ"
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "from "
@@ -2784,6 +2949,10 @@ msgstr "⍑ᒷꖎ!¡ᒷ↸ ℸ∷ᔑリᓭꖎᔑℸᒷ ᔑリ||ℸᔑꖎꖌ"
 msgid "Here is your new invite code: <0>{0}</0>"
 msgstr "⍑ᒷ∷ᒷ ╎ᓭ ||𝙹⚍∷ リᒷ∴ ╎リ⍊╎ℸᒷ ᓵ𝙹↸ᒷ: <0>{0}</0>"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Hide call signalling noise"
+msgstr "⍑╎↸ᒷ ᓵᔑꖎꖎ ᓭ╎⊣リᔑꖎꖎ╎リ⊣ リ𝙹╎ᓭᒷ"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "⍑╎↸ᒷ 𝙹ℸ⍑ᒷ∷ᓭ"
@@ -2846,6 +3015,10 @@ msgstr "⍑𝙹∴ ᒷ⍊ᒷ∷||𝙹リᒷ ᒷꖎᓭᒷ'ᓭ ᔑ⚍↸╎𝙹 �
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "How many recently joined calls the Home page lists. 0 hides them."
 msgstr "⍑𝙹∴ ᒲᔑリ|| ∷ᒷᓵᒷリℸꖎ|| ⋮𝙹╎リᒷ↸ ᓵᔑꖎꖎᓭ ℸ⍑ᒷ ⍑𝙹ᒲᒷ !¡ᔑ⊣ᒷ ꖎ╎ᓭℸᓭ. 0 ⍑╎↸ᒷᓭ ℸ⍑ᒷᒲ."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "HTTP"
+msgstr "⍑ℸℸ!¡"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>{HYPRLAND_BIND_EXAMPLE}</1>."
@@ -2917,6 +3090,14 @@ msgstr "╎リ ᔑ ᓵᔑꖎꖎ · {count}"
 msgid "In call"
 msgstr "╎リ ᓵᔑꖎꖎ"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the browser, export the HAR file and open it in your browser's developer tools (Network tab, import) or another HAR viewer to see the requests in detail."
+msgstr "╎リ ℸ⍑ᒷ ʖ∷𝙹∴ᓭᒷ∷, ᒷ/!¡𝙹∷ℸ ℸ⍑ᒷ ⍑ᔑ∷ ⎓╎ꖎᒷ ᔑリ↸ 𝙹!¡ᒷリ ╎ℸ ╎リ ||𝙹⚍∷ ʖ∷𝙹∴ᓭᒷ∷'ᓭ ↸ᒷ⍊ᒷꖎ𝙹!¡ᒷ∷ ℸ𝙹𝙹ꖎᓭ (リᒷℸ∴𝙹∷ꖌ ℸᔑʖ, ╎ᒲ!¡𝙹∷ℸ) 𝙹∷ ᔑリ𝙹ℸ⍑ᒷ∷ ⍑ᔑ∷ ⍊╎ᒷ∴ᒷ∷ ℸ𝙹 ᓭᒷᒷ ℸ⍑ᒷ ∷ᒷᑑ⚍ᒷᓭℸᓭ ╎リ ↸ᒷℸᔑ╎ꖎ."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
+msgstr "╎リ ℸ⍑ᒷ ↸ᒷᓭꖌℸ𝙹!¡ ᔑ!¡!¡, ᔑ ꖌᒷ|| ꖎ𝙹⊣ 𝙹!¡ℸ╎𝙹リ ℸ⍑ᔑℸ ꖎᒷℸᓭ ∴╎∷ᒷᓭ⍑ᔑ∷ꖌ ↸ᒷᓵ∷||!¡ℸ ℸ⍑ᒷ ℸ∷ᔑ⎓⎓╎ᓵ ╎ᓭ ᓵ𝙹ᒲ╎リ⊣ ╎リ ᔑ ꖎᔑℸᒷ∷ ⚍!¡↸ᔑℸᒷ. ⚍リℸ╎ꖎ ℸ⍑ᒷリ, ᒷ/!¡𝙹∷ℸ ℸ⍑ᒷ ⍑ᔑ∷ ⎓╎ꖎᒷ ℸ𝙹 ᓭᒷᒷ ℸ⍑ᒷ ∷ᒷᑑ⚍ᒷᓭℸᓭ ╎リ ↸ᒷℸᔑ╎ꖎ."
+
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "╎リ ℸ⍑ᒷ ᒲᒷᔑリℸ╎ᒲᒷ, ╎リᓭℸᔑꖎꖎ ᔑリ||ℸᔑꖎꖌ ⎓∷𝙹ᒲ ⊣𝙹𝙹⊣ꖎᒷ !¡ꖎᔑ|| ⎓𝙹∷ ᔑ ⎓ᔑᓭℸᒷ∷, ᓭᒲ𝙹𝙹ℸ⍑ᒷ∷ ᒷ/!¡ᒷ∷╎ᒷリᓵᒷ ↸ᒷᓭ╎⊣リᒷ↸ ⎓𝙹∷ ᔑリ↸∷𝙹╎↸."
@@ -2946,6 +3127,14 @@ msgstr "╎リ!¡⚍ℸ ᒲ𝙹↸ᒷ"
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
 msgstr "╎リ!¡⚍ℸ ⍊𝙹ꖎ⚍ᒲᒷ"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Inside: end-to-end encryption (LiveKit E2EE) with a key only the people in the call hold. The media server forwards frames it cannot read."
+msgstr "╎リᓭ╎↸ᒷ: ᒷリ↸-ℸ𝙹-ᒷリ↸ ᒷリᓵ∷||!¡ℸ╎𝙹リ (ꖎ╎⍊ᒷꖌ╎ℸ ᒷ2ᒷᒷ) ∴╎ℸ⍑ ᔑ ꖌᒷ|| 𝙹リꖎ|| ℸ⍑ᒷ !¡ᒷ𝙹!¡ꖎᒷ ╎リ ℸ⍑ᒷ ᓵᔑꖎꖎ ⍑𝙹ꖎ↸. ℸ⍑ᒷ ᒲᒷ↸╎ᔑ ᓭᒷ∷⍊ᒷ∷ ⎓𝙹∷∴ᔑ∷↸ᓭ ⎓∷ᔑᒲᒷᓭ ╎ℸ ᓵᔑリリ𝙹ℸ ∷ᒷᔑ↸."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Inspect with Wireshark"
+msgstr "╎リᓭ!¡ᒷᓵℸ ∴╎ℸ⍑ ∴╎∷ᒷᓭ⍑ᔑ∷ꖌ"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Install updates automatically"
@@ -3063,6 +3252,10 @@ msgstr "⋮𝙹╎リ ℸ⍑ᒷ ᔑリ||ℸᔑꖎꖌ ꖎ𝙹⚍リ⊣ᒷ"
 msgid "Join the voice channel"
 msgstr "⋮𝙹╎リ ℸ⍑ᒷ ⍊𝙹╎ᓵᒷ ᓵ⍑ᔑリリᒷꖎ"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "joined"
+msgstr "⋮𝙹╎リᒷ↸"
+
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: components/ui/components/features/profiles/ProfileJoined.tsx
 msgid "Joined"
@@ -3091,6 +3284,10 @@ msgstr "ꖌᒷᒷ!¡ ᔑリ||ℸᔑꖎꖌ ∷⚍リリ╎リ⊣ ╎リ ℸ⍑ᒷ
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Keep as is"
 msgstr "ꖌᒷᒷ!¡ ᔑᓭ ╎ᓭ"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "kept in memory only, gone when you reload"
+msgstr "ꖌᒷ!¡ℸ ╎リ ᒲᒷᒲ𝙹∷|| 𝙹リꖎ||, ⊣𝙹リᒷ ∴⍑ᒷリ ||𝙹⚍ ∷ᒷꖎ𝙹ᔑ↸"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Keyframe requests per second (viewers asking for a full new picture)"
@@ -3256,6 +3453,10 @@ msgstr "ꖎ╎⍊ᒷ 𝙹⍊ᒷ∷ꖎᔑ||, ∷ᒷᓵ𝙹∷↸╎リ⊣ ᔑリ�
 msgid "Live statistics overlay"
 msgstr "ꖎ╎⍊ᒷ ᓭℸᔑℸ╎ᓭℸ╎ᓵᓭ 𝙹⍊ᒷ∷ꖎᔑ||"
 
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Live View"
+msgstr "ꖎ╎⍊ᒷ ⍊╎ᒷ∴"
+
 #. placeholder {0}: humanFileSize(props.file.size ?? 0)
 #: components/ui/components/features/messaging/elements/TextFile.tsx
 msgid "Load file ({0})"
@@ -3264,6 +3465,10 @@ msgstr "ꖎ𝙹ᔑ↸ ⎓╎ꖎᒷ ({0})"
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Loading message"
 msgstr "ꖎ𝙹ᔑ↸╎リ⊣ ᒲᒷᓭᓭᔑ⊣ᒷ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Local candidate"
+msgstr "ꖎ𝙹ᓵᔑꖎ ᓵᔑリ↸╎↸ᔑℸᒷ"
 
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
@@ -3298,6 +3503,10 @@ msgstr "ꖎ𝙹𝙹ꖌ╎リ⊣ ⎓𝙹∷ ℸ⍑ᒷ ꖎᔑℸᒷᓭℸ ⍊ᒷ�
 msgid "Loss and jitter are what the server reports about the audio it got from you."
 msgstr "ꖎ𝙹ᓭᓭ ᔑリ↸ ⋮╎ℸℸᒷ∷ ᔑ∷ᒷ ∴⍑ᔑℸ ℸ⍑ᒷ ᓭᒷ∷⍊ᒷ∷ ∷ᒷ!¡𝙹∷ℸᓭ ᔑʖ𝙹⚍ℸ ℸ⍑ᒷ ᔑ⚍↸╎𝙹 ╎ℸ ⊣𝙹ℸ ⎓∷𝙹ᒲ ||𝙹⚍."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Lossy"
+msgstr "ꖎ𝙹ᓭᓭ||"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Lost"
 msgstr "ꖎ𝙹ᓭℸ"
@@ -3313,6 +3522,10 @@ msgstr "ꖎ𝙹∴-ᓵ⚍ℸ ⎓╎ꖎℸᒷ∷"
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Lowercase letters, numbers and underscores only."
 msgstr "ꖎ𝙹∴ᒷ∷ᓵᔑᓭᒷ ꖎᒷℸℸᒷ∷ᓭ, リ⚍ᒲʖᒷ∷ᓭ ᔑリ↸ ⚍リ↸ᒷ∷ᓭᓵ𝙹∷ᒷᓭ 𝙹リꖎ||."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Made with"
+msgstr "ᒲᔑ↸ᒷ ∴╎ℸ⍑"
 
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Magenta"
@@ -3403,6 +3616,14 @@ msgstr "ᒲᒷᔑᓭ⚍∷ᒷ ᓵᔑᒲᒷ∷ᔑ ᔑリ↸ ᓭᓵ∷ᒷᒷリ �
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Measure your microphone and everyone you hear in calls"
 msgstr "ᒲᒷᔑᓭ⚍∷ᒷ ||𝙹⚍∷ ᒲ╎ᓵ∷𝙹!¡⍑𝙹リᒷ ᔑリ↸ ᒷ⍊ᒷ∷||𝙹リᒷ ||𝙹⚍ ⍑ᒷᔑ∷ ╎リ ᓵᔑꖎꖎᓭ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Media server"
+msgstr "ᒲᒷ↸╎ᔑ ᓭᒷ∷⍊ᒷ∷"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Media streams"
+msgstr "ᒲᒷ↸╎ᔑ ᓭℸ∷ᒷᔑᒲᓭ"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Medium (90 Hz)"
@@ -3519,6 +3740,10 @@ msgstr "ᒲᒷᓭᓭᔑ⊣ᒷᓭ"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Messaging"
 msgstr "ᒲᒷᓭᓭᔑ⊣╎リ⊣"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Method"
+msgstr "ᒲᒷℸ⍑𝙹↸"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "MFA setup canceled."
@@ -3680,6 +3905,18 @@ msgstr "リᔑᒲᒷ (ᔑ-⨅)"
 msgid "Needs a server that supports stream viewers."
 msgstr "リᒷᒷ↸ᓭ ᔑ ᓭᒷ∷⍊ᒷ∷ ℸ⍑ᔑℸ ᓭ⚍!¡!¡𝙹∷ℸᓭ ᓭℸ∷ᒷᔑᒲ ⍊╎ᒷ∴ᒷ∷ᓭ."
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Network inspector"
+msgstr "リᒷℸ∴𝙹∷ꖌ ╎リᓭ!¡ᒷᓵℸ𝙹∷"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Network Inspector"
+msgstr "リᒷℸ∴𝙹∷ꖌ ╎リᓭ!¡ᒷᓵℸ𝙹∷"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Network type"
+msgstr "リᒷℸ∴𝙹∷ꖌ ℸ||!¡ᒷ"
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
 msgstr "リᒷ⚍ℸ∷ᔑꖎ"
@@ -3730,6 +3967,10 @@ msgstr "リᒷ/ℸ ᓭᒷ∷⍊ᒷ∷"
 msgid "Nickname"
 msgstr "リ╎ᓵꖌリᔑᒲᒷ"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "No"
+msgstr "リ𝙹"
+
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No apps found"
 msgstr "リ𝙹 ᔑ!¡!¡ᓭ ⎓𝙹⚍リ↸"
@@ -3769,6 +4010,10 @@ msgstr "リ𝙹 ⊣╎⎓ᓭ ⎓𝙹⚍リ↸"
 #: components/app/interface/settings/user/Language.tsx
 msgid "No languages found"
 msgstr "リ𝙹 ꖎᔑリ⊣⚍ᔑ⊣ᒷᓭ ⎓𝙹⚍リ↸"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "No matches"
+msgstr "リ𝙹 ᒲᔑℸᓵ⍑ᒷᓭ"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "No patch notes for this version."
@@ -3857,6 +4102,14 @@ msgstr "リ𝙹ℸ ᓭᒷℸ"
 msgid "Nothing"
 msgstr "リ𝙹ℸ⍑╎リ⊣"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Nothing fits this filter. Try another word or show all kinds."
+msgstr "リ𝙹ℸ⍑╎リ⊣ ⎓╎ℸᓭ ℸ⍑╎ᓭ ⎓╎ꖎℸᒷ∷. ℸ∷|| ᔑリ𝙹ℸ⍑ᒷ∷ ∴𝙹∷↸ 𝙹∷ ᓭ⍑𝙹∴ ᔑꖎꖎ ꖌ╎リ↸ᓭ."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Nothing recorded yet"
+msgstr "リ𝙹ℸ⍑╎リ⊣ ∷ᒷᓵ𝙹∷↸ᒷ↸ ||ᒷℸ"
+
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own call recaps."
 msgstr "リ𝙹ℸ⍑╎リ⊣ ℸ𝙹 ᓵ𝙹ᒲ!¡ᔑ∷ᒷ ||ᒷℸ. ╎ᒲ!¡𝙹∷ℸ ᔑ ᓵᓭ⍊ 𝙹∷ ᔑ↸↸ 𝙹リᒷ 𝙹⎓ ||𝙹⚍∷ 𝙹∴リ ᓵᔑꖎꖎ ∷ᒷᓵᔑ!¡ᓭ."
@@ -3864,6 +4117,10 @@ msgstr "リ𝙹ℸ⍑╎リ⊣ ℸ𝙹 ᓵ𝙹ᒲ!¡ᔑ∷ᒷ ||ᒷℸ. ╎ᒲ!�
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own stream recaps."
 msgstr "リ𝙹ℸ⍑╎リ⊣ ℸ𝙹 ᓵ𝙹ᒲ!¡ᔑ∷ᒷ ||ᒷℸ. ╎ᒲ!¡𝙹∷ℸ ᔑ ᓵᓭ⍊ 𝙹∷ ᔑ↸↸ 𝙹リᒷ 𝙹⎓ ||𝙹⚍∷ 𝙹∴リ ᓭℸ∷ᒷᔑᒲ ∷ᒷᓵᔑ!¡ᓭ."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Nothing to show yet"
+msgstr "リ𝙹ℸ⍑╎リ⊣ ℸ𝙹 ᓭ⍑𝙹∴ ||ᒷℸ"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/ServerContextMenu.tsx
@@ -3876,6 +4133,10 @@ msgstr "リ𝙹ℸ╎⎓╎ᓵᔑℸ╎𝙹リᓭ"
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "Off"
 msgstr "𝙹⎓⎓"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
+msgstr "𝙹⎓⎓: ℸ𝙹ꖌᒷリᓭ, !¡ᔑᓭᓭ∴𝙹∷↸ᓭ ᔑリ↸ ꖌᒷ||ᓭ ᔑ∷ᒷ ⍑╎↸↸ᒷリ. ∷ᒷᓭᒷℸᓭ ∴⍑ᒷリ ||𝙹⚍ ∷ᒷꖎ𝙹ᔑ↸."
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Offers to stream the games you play during a call. Detection happens only on this computer and nothing is sent."
@@ -3970,6 +4231,10 @@ msgstr "𝙹リꖎ|| ∴⍑╎ꖎᒷ ᔑ ↸ᒷℸᒷᓵℸᒷ↸ ⊣ᔑᒲᒷ �
 msgid "Oops, something went wrong! {e}"
 msgstr "𝙹𝙹!¡ᓭ, ᓭ𝙹ᒲᒷℸ⍑╎リ⊣ ∴ᒷリℸ ∴∷𝙹リ⊣! {e}"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "open"
+msgstr "𝙹!¡ᒷリ"
+
 #: components/modal/modals/Invite.tsx
 msgid "Open"
 msgstr "𝙹!¡ᒷリ"
@@ -3983,6 +4248,7 @@ msgstr "𝙹!¡ᒷリ {0}"
 msgid "Open an app or switch to Entire screen."
 msgstr "𝙹!¡ᒷリ ᔑリ ᔑ!¡!¡ 𝙹∷ ᓭ∴╎ℸᓵ⍑ ℸ𝙹 ᒷリℸ╎∷ᒷ ᓭᓵ∷ᒷᒷリ."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/rtc/components/StreamPopouts.tsx
 msgid "Open as window"
 msgstr "𝙹!¡ᒷリ ᔑᓭ ∴╎リ↸𝙹∴"
@@ -3998,6 +4264,10 @@ msgstr "𝙹!¡ᒷリ ⎓╎ꖎᒷ"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "𝙹!¡ᒷリ ⎓∷╎ᒷリ↸ᓭ"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Open live view"
+msgstr "𝙹!¡ᒷリ ꖎ╎⍊ᒷ ⍊╎ᒷ∴"
 
 #. placeholder {0}: author()
 #. placeholder {1}: place()
@@ -4051,6 +4321,10 @@ msgstr "𝙹⚍ℸ!¡⚍ℸ ↸ᒷ⍊╎ᓵᒷ"
 msgid "Output Volume"
 msgstr "𝙹⚍ℸ!¡⚍ℸ ⍊𝙹ꖎ⚍ᒲᒷ"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Outside: SRTP over DTLS between your device and the media server, as for any WebRTC call."
+msgstr "𝙹⚍ℸᓭ╎↸ᒷ: ᓭ∷ℸ!¡ 𝙹⍊ᒷ∷ ↸ℸꖎᓭ ʖᒷℸ∴ᒷᒷリ ||𝙹⚍∷ ↸ᒷ⍊╎ᓵᒷ ᔑリ↸ ℸ⍑ᒷ ᒲᒷ↸╎ᔑ ᓭᒷ∷⍊ᒷ∷, ᔑᓭ ⎓𝙹∷ ᔑリ|| ∴ᒷʖ∷ℸᓵ ᓵᔑꖎꖎ."
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Overlay"
 msgstr "𝙹⍊ᒷ∷ꖎᔑ||"
@@ -4099,6 +4373,14 @@ msgstr "!¡ᔑᓭᓭ∴𝙹∷↸"
 #: components/modal/modals/EditPassword.tsx
 msgid "Password changed successfully."
 msgstr "!¡ᔑᓭᓭ∴𝙹∷↸ ᓵ⍑ᔑリ⊣ᒷ↸ ᓭ⚍ᓵᓵᒷᓭᓭ⎓⚍ꖎꖎ||."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Pause"
+msgstr "!¡ᔑ⚍ᓭᒷ"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Paused"
+msgstr "!¡ᔑ⚍ᓭᒷ↸"
 
 #: components/app/interface/settings/user/subscriptions/EditSubscriptionJoinFlow.tsx
 #~ msgid "Pay"
@@ -4330,6 +4612,10 @@ msgstr "!¡∷𝙹ᒲ𝙹ℸᒷᓭ ⍑ᔑ∷ᒲ"
 msgid "Pronouns"
 msgstr "!¡∷𝙹リ𝙹⚍リᓭ"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Protocol"
+msgstr "!¡∷𝙹ℸ𝙹ᓵ𝙹ꖎ"
+
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
 msgstr "!¡∷𝙹⍊╎↸ᒷ↸ ᒷᒲᔑ╎ꖎ 𝙹∷ !¡ᔑᓭᓭ∴𝙹∷↸ ╎ᓭ ∴∷𝙹リ⊣."
@@ -4398,6 +4684,7 @@ msgid "Ready to install: {0}"
 msgstr "∷ᒷᔑ↸|| ℸ𝙹 ╎リᓭℸᔑꖎꖎ: {0}"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
 msgid "Reason"
@@ -4437,6 +4724,11 @@ msgstr "∷ᒷᓵᒷ╎⍊ᒷ リ𝙹ℸ╎⎓╎ᓵᔑℸ╎𝙹リᓭ ∴⍑�
 msgid "Receive push notifications while the app is closed."
 msgstr "∷ᒷᓵᒷ╎⍊ᒷ !¡⚍ᓭ⍑ リ𝙹ℸ╎⎓╎ᓵᔑℸ╎𝙹リᓭ ∴⍑╎ꖎᒷ ℸ⍑ᒷ ᔑ!¡!¡ ╎ᓭ ᓵꖎ𝙹ᓭᒷ↸."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Received"
+msgstr "∷ᒷᓵᒷ╎⍊ᒷ↸"
+
 #: src/interface/home/FriendsOverview.tsx
 msgid "Recent calls"
 msgstr "∷ᒷᓵᒷリℸ ᓵᔑꖎꖎᓭ"
@@ -4459,6 +4751,10 @@ msgstr "∷ᒷᓵ𝙹リリᒷᓵℸ╎リ⊣"
 msgid "Record call recaps"
 msgstr "∷ᒷᓵ𝙹∷↸ ᓵᔑꖎꖎ ∷ᒷᓵᔑ!¡ᓭ"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Record network traffic"
+msgstr "∷ᒷᓵ𝙹∷↸ リᒷℸ∴𝙹∷ꖌ ℸ∷ᔑ⎓⎓╎ᓵ"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record statistics of every call you are in, with or without the overlay"
 msgstr "∷ᒷᓵ𝙹∷↸ ᓭℸᔑℸ╎ᓭℸ╎ᓵᓭ 𝙹⎓ ᒷ⍊ᒷ∷|| ᓵᔑꖎꖎ ||𝙹⚍ ᔑ∷ᒷ ╎リ, ∴╎ℸ⍑ 𝙹∷ ∴╎ℸ⍑𝙹⚍ℸ ℸ⍑ᒷ 𝙹⍊ᒷ∷ꖎᔑ||"
@@ -4470,6 +4766,14 @@ msgstr "∷ᒷᓵ𝙹∷↸ ᓭℸᔑℸ╎ᓭℸ╎ᓵᓭ 𝙹⎓ ᒷ⍊ᒷ∷|
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record stream recaps"
 msgstr "∷ᒷᓵ𝙹∷↸ ᓭℸ∷ᒷᔑᒲ ∷ᒷᓵᔑ!¡ᓭ"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Recorded traffic"
+msgstr "∷ᒷᓵ𝙹∷↸ᒷ↸ ℸ∷ᔑ⎓⎓╎ᓵ"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Recording is off"
+msgstr "∷ᒷᓵ𝙹∷↸╎リ⊣ ╎ᓭ 𝙹⎓⎓"
 
 #: components/modal/modals/MFAFlow.tsx
 msgid "Recovery Code"
@@ -4499,6 +4803,18 @@ msgstr "∷ᒷ⊣╎ᓭℸᒷ∷ᒷ↸ ᓭ╎リᓵᒷ <0/>"
 msgid "Reject friend request"
 msgstr "∷ᒷ⋮ᒷᓵℸ ⎓∷╎ᒷリ↸ ∷ᒷᑑ⚍ᒷᓭℸ"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "relay"
+msgstr "∷ᒷꖎᔑ||"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Relay protocol"
+msgstr "∷ᒷꖎᔑ|| !¡∷𝙹ℸ𝙹ᓵ𝙹ꖎ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Relay server"
+msgstr "∷ᒷꖎᔑ|| ᓭᒷ∷⍊ᒷ∷"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Release notes"
 msgstr "∷ᒷꖎᒷᔑᓭᒷ リ𝙹ℸᒷᓭ"
@@ -4507,6 +4823,10 @@ msgstr "∷ᒷꖎᒷᔑᓭᒷ リ𝙹ℸᒷᓭ"
 msgid "Relevance"
 msgstr "∷ᒷꖎᒷ⍊ᔑリᓵᒷ"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Reliable"
+msgstr "∷ᒷꖎ╎ᔑʖꖎᒷ"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload and clear cache"
 msgstr "∷ᒷꖎ𝙹ᔑ↸ ᔑリ↸ ᓵꖎᒷᔑ∷ ᓵᔑᓵ⍑ᒷ"
@@ -4514,6 +4834,14 @@ msgstr "∷ᒷꖎ𝙹ᔑ↸ ᔑリ↸ ᓵꖎᒷᔑ∷ ᓵᔑᓵ⍑ᒷ"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload AnyTalk with fresh files from the server? This is the same as Ctrl+F5 and fixes most display problems after an update. You stay logged in and keep your settings."
 msgstr "∷ᒷꖎ𝙹ᔑ↸ ᔑリ||ℸᔑꖎꖌ ∴╎ℸ⍑ ⎓∷ᒷᓭ⍑ ⎓╎ꖎᒷᓭ ⎓∷𝙹ᒲ ℸ⍑ᒷ ᓭᒷ∷⍊ᒷ∷? ℸ⍑╎ᓭ ╎ᓭ ℸ⍑ᒷ ᓭᔑᒲᒷ ᔑᓭ ᓵℸ∷ꖎ+⎓5 ᔑリ↸ ⎓╎/ᒷᓭ ᒲ𝙹ᓭℸ ↸╎ᓭ!¡ꖎᔑ|| !¡∷𝙹ʖꖎᒷᒲᓭ ᔑ⎓ℸᒷ∷ ᔑリ ⚍!¡↸ᔑℸᒷ. ||𝙹⚍ ᓭℸᔑ|| ꖎ𝙹⊣⊣ᒷ↸ ╎リ ᔑリ↸ ꖌᒷᒷ!¡ ||𝙹⚍∷ ᓭᒷℸℸ╎リ⊣ᓭ."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Remote address"
+msgstr "∷ᒷᒲ𝙹ℸᒷ ᔑ↸↸∷ᒷᓭᓭ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Remote candidate"
+msgstr "∷ᒷᒲ𝙹ℸᒷ ᓵᔑリ↸╎↸ᔑℸᒷ"
 
 #: components/markdown/plugins/anchors.tsx
 msgid "Remote Channel"
@@ -4637,6 +4965,18 @@ msgstr "∷ᒷ!¡𝙹∷ℸ ᓭᒷ∷⍊ᒷ∷"
 msgid "Report user"
 msgstr "∷ᒷ!¡𝙹∷ℸ ⚍ᓭᒷ∷"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Request body"
+msgstr "∷ᒷᑑ⚍ᒷᓭℸ ʖ𝙹↸||"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Request headers"
+msgstr "∷ᒷᑑ⚍ᒷᓭℸ ⍑ᒷᔑ↸ᒷ∷ᓭ"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Requests and messages show up here as they happen."
+msgstr "∷ᒷᑑ⚍ᒷᓭℸᓭ ᔑリ↸ ᒲᒷᓭᓭᔑ⊣ᒷᓭ ᓭ⍑𝙹∴ ⚍!¡ ⍑ᒷ∷ᒷ ᔑᓭ ℸ⍑ᒷ|| ⍑ᔑ!¡!¡ᒷリ."
+
 #: components/auth/src/flows/FlowResend.tsx
 msgid "Resend"
 msgstr "∷ᒷᓭᒷリ↸"
@@ -4714,6 +5054,18 @@ msgstr "∷ᒷᓭ𝙹ꖎ⚍ℸ╎𝙹リ"
 msgid "Resolution and FPS"
 msgstr "∷ᒷᓭ𝙹ꖎ⚍ℸ╎𝙹リ ᔑリ↸ ⎓!¡ᓭ"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response headers"
+msgstr "∷ᒷᓭ!¡𝙹リᓭᒷ ⍑ᒷᔑ↸ᒷ∷ᓭ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response preview"
+msgstr "∷ᒷᓭ!¡𝙹リᓭᒷ !¡∷ᒷ⍊╎ᒷ∴"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response size"
+msgstr "∷ᒷᓭ!¡𝙹リᓭᒷ ᓭ╎⨅ᒷ"
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Responsibly disclosed security issues"
 msgstr "∷ᒷᓭ!¡𝙹リᓭ╎ʖꖎ|| ↸╎ᓭᓵꖎ𝙹ᓭᒷ↸ ᓭᒷᓵ⚍∷╎ℸ|| ╎ᓭᓭ⚍ᒷᓭ"
@@ -4730,6 +5082,10 @@ msgstr "∷ᒷᓭℸᔑ∷ℸ ℸ𝙹 ⚍!¡↸ᔑℸᒷ"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Restore call window"
 msgstr "∷ᒷᓭℸ𝙹∷ᒷ ᓵᔑꖎꖎ ∴╎リ↸𝙹∴"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Resume"
+msgstr "∷ᒷᓭ⚍ᒲᒷ"
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 msgid "Retry sending"
@@ -4796,6 +5152,18 @@ msgstr "∷𝙹ꖎᒷᓭ"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Roles with No Overrides"
 msgstr "∷𝙹ꖎᒷᓭ ∴╎ℸ⍑ リ𝙹 𝙹⍊ᒷ∷∷╎↸ᒷᓭ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Room"
+msgstr "∷𝙹𝙹ᒲ"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "route"
+msgstr "∷𝙹⚍ℸᒷ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Route"
+msgstr "∷𝙹⚍ℸᒷ"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Running"
@@ -4954,6 +5322,10 @@ msgstr "ᓭᒷᔑ∷ᓵ⍑╎リ⊣…"
 msgid "See all your servers at a glance."
 msgstr "ᓭᒷᒷ ᔑꖎꖎ ||𝙹⚍∷ ᓭᒷ∷⍊ᒷ∷ᓭ ᔑℸ ᔑ ⊣ꖎᔑリᓵᒷ."
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "See what the app sends and receives, and export it to check against Wireshark"
+msgstr "ᓭᒷᒷ ∴⍑ᔑℸ ℸ⍑ᒷ ᔑ!¡!¡ ᓭᒷリ↸ᓭ ᔑリ↸ ∷ᒷᓵᒷ╎⍊ᒷᓭ, ᔑリ↸ ᒷ/!¡𝙹∷ℸ ╎ℸ ℸ𝙹 ᓵ⍑ᒷᓵꖌ ᔑ⊣ᔑ╎リᓭℸ ∴╎∷ᒷᓭ⍑ᔑ∷ꖌ"
+
 #: components/app/interface/settings/user/Feedback.tsx
 #~ msgid "See what we're currently working on."
 #~ msgstr ""
@@ -4965,6 +5337,10 @@ msgstr "ᓭᒷꖎᒷᓵℸ"
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select all"
 msgstr "ᓭᒷꖎᒷᓵℸ ᔑꖎꖎ"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Select an entry to see its details."
+msgstr "ᓭᒷꖎᒷᓵℸ ᔑリ ᒷリℸ∷|| ℸ𝙹 ᓭᒷᒷ ╎ℸᓭ ↸ᒷℸᔑ╎ꖎᓭ."
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Select at least one line above to compare."
@@ -5042,6 +5418,8 @@ msgstr "ᓭᒷリ↸ ∷ᒷᑑ⚍ᒷᓭℸ"
 msgid "Sending..."
 msgstr "ᓭᒷリ↸╎リ⊣..."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Sent"
 msgstr "ᓭᒷリℸ"
@@ -5116,9 +5494,21 @@ msgstr "ᓭᒷ∷⍊ᒷ∷ ∷𝙹ꖎᒷᓭ"
 msgid "Servers"
 msgstr "ᓭᒷ∷⍊ᒷ∷ᓭ"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Servers contacted"
+msgstr "ᓭᒷ∷⍊ᒷ∷ᓭ ᓵ𝙹リℸᔑᓵℸᒷ↸"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Servers show up here as soon as the app talks to them."
+msgstr "ᓭᒷ∷⍊ᒷ∷ᓭ ᓭ⍑𝙹∴ ⚍!¡ ⍑ᒷ∷ᒷ ᔑᓭ ᓭ𝙹𝙹リ ᔑᓭ ℸ⍑ᒷ ᔑ!¡!¡ ℸᔑꖎꖌᓭ ℸ𝙹 ℸ⍑ᒷᒲ."
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Servers you join show up here."
 msgstr "ᓭᒷ∷⍊ᒷ∷ᓭ ||𝙹⚍ ⋮𝙹╎リ ᓭ⍑𝙹∴ ⚍!¡ ⍑ᒷ∷ᒷ."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+msgstr "ᓭᒷᓭᓭ╎𝙹リ ℸ𝙹ꖌᒷリᓭ, !¡ᔑᓭᓭ∴𝙹∷↸ᓭ ᔑリ↸ ᓵᔑꖎꖎ ꖌᒷ||ᓭ ∴╎ꖎꖎ ᔑ!¡!¡ᒷᔑ∷ 𝙹リ ᓭᓵ∷ᒷᒷリ ᔑリ↸ ╎リ ᒷ/!¡𝙹∷ℸᓭ. ᔑリ||𝙹リᒷ ∴⍑𝙹 ᓭᒷᒷᓭ 𝙹∷ ⊣ᒷℸᓭ ℸ⍑ᒷᒲ ᓵ𝙹⚍ꖎ↸ ᓭ╎⊣リ ╎リ ᔑᓭ ||𝙹⚍. ℸ⚍∷リ ℸ⍑╎ᓭ 𝙹リ 𝙹リꖎ|| ℸ𝙹 ↸ᒷʖ⚍⊣, ᔑリ↸ ↸𝙹リ'ℸ ᓭ⍑ᔑ∷ᒷ ℸ⍑ᒷ ᒷ/!¡𝙹∷ℸᓭ."
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5176,6 +5566,10 @@ msgstr "ᓭ⍑ᔑ∷ᒷ ᓵᔑᒲᒷ∷ᔑ 𝙹∷ ᓭᓵ∷ᒷᒷリ ╎リ ⍊
 msgid "Share screen"
 msgstr "ᓭ⍑ᔑ∷ᒷ ᓭᓵ∷ᒷᒷリ"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show"
+msgstr "ᓭ⍑𝙹∴"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show 'copy ID' in context menus"
 msgstr "ᓭ⍑𝙹∴ 'ᓵ𝙹!¡|| ╎↸' ╎リ ᓵ𝙹リℸᒷ/ℸ ᒲᒷリ⚍ᓭ"
@@ -5200,6 +5594,10 @@ msgstr "ᓭ⍑𝙹∴ ꖎ╎⍊ᒷ ᒲ╎ᓵ∷𝙹!¡⍑𝙹リᒷ ᓭℸᔑℸ
 msgid "Show live statistics on call video tiles"
 msgstr "ᓭ⍑𝙹∴ ꖎ╎⍊ᒷ ᓭℸᔑℸ╎ᓭℸ╎ᓵᓭ 𝙹リ ᓵᔑꖎꖎ ⍊╎↸ᒷ𝙹 ℸ╎ꖎᒷᓭ"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show only"
+msgstr "ᓭ⍑𝙹∴ 𝙹リꖎ||"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Show Others"
 msgstr "ᓭ⍑𝙹∴ 𝙹ℸ⍑ᒷ∷ᓭ"
@@ -5221,9 +5619,21 @@ msgstr "ᓭ⍑𝙹∴ ᓭᒷ∷⍊ᒷ∷ ꖎ╎ᓭℸ"
 msgid "Show server names"
 msgstr "ᓭ⍑𝙹∴ ᓭᒷ∷⍊ᒷ∷ リᔑᒲᒷᓭ"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show tokens and keys"
+msgstr "ᓭ⍑𝙹∴ ℸ𝙹ꖌᒷリᓭ ᔑリ↸ ꖌᒷ||ᓭ"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show tokens and keys?"
+msgstr "ᓭ⍑𝙹∴ ℸ𝙹ꖌᒷリᓭ ᔑリ↸ ꖌᒷ||ᓭ?"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Show when speaking"
 msgstr "ᓭ⍑𝙹∴ ∴⍑ᒷリ ᓭ!¡ᒷᔑꖌ╎リ⊣"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show window"
+msgstr "ᓭ⍑𝙹∴ ∴╎リ↸𝙹∴"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
@@ -5280,6 +5690,10 @@ msgstr "ᓭ╎ꖎᒷリℸ"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Single stream: opening a stream replaces the current one"
 msgstr "ᓭ╎リ⊣ꖎᒷ ᓭℸ∷ᒷᔑᒲ: 𝙹!¡ᒷリ╎リ⊣ ᔑ ᓭℸ∷ᒷᔑᒲ ∷ᒷ!¡ꖎᔑᓵᒷᓭ ℸ⍑ᒷ ᓵ⚍∷∷ᒷリℸ 𝙹リᒷ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Size"
+msgstr "ᓭ╎⨅ᒷ"
 
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "Slowmode Immune"
@@ -5395,6 +5809,10 @@ msgstr "ᓭ!¡ᒷꖎꖎᓵ⍑ᒷᓵꖌᒷ∷"
 msgid "Spoiler"
 msgstr "ᓭ!¡𝙹╎ꖎᒷ∷"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "SRTP cipher"
+msgstr "ᓭ∷ℸ!¡ ᓵ╎!¡⍑ᒷ∷"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Start camera"
 msgstr "ᓭℸᔑ∷ℸ ᓵᔑᒲᒷ∷ᔑ"
@@ -5411,6 +5829,11 @@ msgstr "ᓭℸᔑ∷ℸ ℸ⍑ᒷ ᓵᔑꖎꖎ"
 msgid "Start with Computer"
 msgstr "ᓭℸᔑ∷ℸ ∴╎ℸ⍑ ᓵ𝙹ᒲ!¡⚍ℸᒷ∷"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Started"
+msgstr "ᓭℸᔑ∷ℸᒷ↸"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 msgid "Status"
 msgstr "ᓭℸᔑℸ⚍ᓭ"
@@ -5427,6 +5850,7 @@ msgstr "ᓭℸ𝙹!¡ ᓵᔑᒲᒷ∷ᔑ"
 msgid "Stop sharing"
 msgstr "ᓭℸ𝙹!¡ ᓭ⍑ᔑ∷╎リ⊣"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/ui/components/features/voice/callCard/GameStreamPrompt.tsx
 msgid "Stream"
 msgstr "ᓭℸ∷ᒷᔑᒲ"
@@ -5609,6 +6033,10 @@ msgstr "ℸᒷ∷ᒲᓭ"
 #~ msgid "Terms of Service"
 #~ msgstr "ℸᒷ∷ᒲᓭ 𝙹⎓ ᓭᒷ∷⍊╎ᓵᒷ"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Text"
+msgstr "ℸᒷ/ℸ"
+
 #: components/modal/modals/CreateChannel.tsx
 msgid "Text Channel"
 msgstr "ℸᒷ/ℸ ᓵ⍑ᔑリリᒷꖎ"
@@ -5662,6 +6090,10 @@ msgstr "ℸ⍑ᒷ ⎓╎∷ᓭℸ ⍊ᒷ∷ᓭ╎𝙹リ ⍑ᔑᓭリ'ℸ ʖᒷ�
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
 msgstr "ℸ⍑ᒷ ╎ℸᒷᒲ ∴ᔑᓭ ∷ᒷᒲ𝙹⍊ᒷ↸ ʖ|| ᒲ𝙹↸ᒷ∷ᔑℸ𝙹∷ᓭ, ᔑリ↸ ᔑᓭ ᓭ⚍ᓵ⍑ ⎓⚍ℸ⚍∷ᒷ ᔑ!¡!¡ꖎ╎ᓵᔑℸ╎𝙹リᓭ ᔑ∷ᒷ !¡∷𝙹⍑╎ʖ╎ℸᒷ↸. ᓵ𝙹リℸᔑᓵℸ ᓭ⚍!¡!¡𝙹∷ℸ ⎓𝙹∷ ᒲ𝙹∷ᒷ ╎リ⎓𝙹∷ᒲᔑℸ╎𝙹リ."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
+msgstr "ℸ⍑ᒷ リᒷℸ∴𝙹∷ꖌ ╎リᓭ!¡ᒷᓵℸ𝙹∷ ∷ᒷᓵ𝙹∷↸ᓭ ∴⍑ᔑℸ ᔑリ||ℸᔑꖎꖌ ᓭᒷリ↸ᓭ ᔑリ↸ ∷ᒷᓵᒷ╎⍊ᒷᓭ, ᓭ𝙹 ||𝙹⚍ ᓵᔑリ ᓵ⍑ᒷᓵꖌ ╎ℸ ᔑ⊣ᔑ╎リᓭℸ ᔑ ℸ𝙹𝙹ꖎ ꖎ╎ꖌᒷ ∴╎∷ᒷᓭ⍑ᔑ∷ꖌ. ╎ℸ ╎ᓭ 𝙹⎓⎓ ʖ|| ↸ᒷ⎓ᔑ⚍ꖎℸ ᔑリ↸ リ𝙹ℸ⍑╎リ⊣ ╎ᓭ ᓭᒷリℸ ᔑリ||∴⍑ᒷ∷ᒷ."
 
 #: components/i18n/errors.tsx
 msgid "The password is too short."
@@ -5842,6 +6274,14 @@ msgstr "ℸ⍑╎ᓭ ⚍ᓭᒷ∷リᔑᒲᒷ ╎ᓭ リ𝙹ℸ ᔑꖎꖎ𝙹∴
 msgid "This will invalidate the current token and stop any existing instances of the bot from running."
 msgstr "ℸ⍑╎ᓭ ∴╎ꖎꖎ ╎リ⍊ᔑꖎ╎↸ᔑℸᒷ ℸ⍑ᒷ ᓵ⚍∷∷ᒷリℸ ℸ𝙹ꖌᒷリ ᔑリ↸ ᓭℸ𝙹!¡ ᔑリ|| ᒷ/╎ᓭℸ╎リ⊣ ╎リᓭℸᔑリᓵᒷᓭ 𝙹⎓ ℸ⍑ᒷ ʖ𝙹ℸ ⎓∷𝙹ᒲ ∷⚍リリ╎リ⊣."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Through a relay (TURN)"
+msgstr "ℸ⍑∷𝙹⚍⊣⍑ ᔑ ∷ᒷꖎᔑ|| (ℸ⚍∷リ)"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Time"
+msgstr "ℸ╎ᒲᒷ"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Time format"
 msgstr "ℸ╎ᒲᒷ ⎓𝙹∷ᒲᔑℸ"
@@ -5872,6 +6312,10 @@ msgstr "ℸ╎ᒲᒷ𝙹⚍ℸ ᒲᒷᒲʖᒷ∷"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Timeout Members"
 msgstr "ℸ╎ᒲᒷ𝙹⚍ℸ ᒲᒷᒲʖᒷ∷ᓭ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "To"
+msgstr "ℸ𝙹"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Toggle deafen"
@@ -5909,12 +6353,21 @@ msgstr "ℸ𝙹!¡ ꖎᒷ⎓ℸ"
 msgid "Top right"
 msgstr "ℸ𝙹!¡ ∷╎⊣⍑ℸ"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Topic"
+msgstr "ℸ𝙹!¡╎ᓵ"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
 msgstr "ℸ∷ᔑ↸╎ℸ╎𝙹リᔑꖎ (↸↸/ᒲᒲ/||||||||)"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Transferred"
+msgstr "ℸ∷ᔑリᓭ⎓ᒷ∷∷ᒷ↸"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Transport"
 msgstr "ℸ∷ᔑリᓭ!¡𝙹∷ℸ"
 
@@ -5944,6 +6397,18 @@ msgstr "ℸ∷|| ↸╎⎓⎓ᒷ∷ᒷリℸ ∴𝙹∷↸ᓭ 𝙹∷ ᔑリ𝙹
 msgid "Turn every sound on and reset their volumes and files?"
 msgstr "ℸ⚍∷リ ᒷ⍊ᒷ∷|| ᓭ𝙹⚍リ↸ 𝙹リ ᔑリ↸ ∷ᒷᓭᒷℸ ℸ⍑ᒷ╎∷ ⍊𝙹ꖎ⚍ᒲᒷᓭ ᔑリ↸ ⎓╎ꖎᒷᓭ?"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Turn it on to see what the app sends and receives."
+msgstr "ℸ⚍∷リ ╎ℸ 𝙹リ ℸ𝙹 ᓭᒷᒷ ∴⍑ᔑℸ ℸ⍑ᒷ ᔑ!¡!¡ ᓭᒷリ↸ᓭ ᔑリ↸ ∷ᒷᓵᒷ╎⍊ᒷᓭ."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Turn on recording"
+msgstr "ℸ⚍∷リ 𝙹リ ∷ᒷᓵ𝙹∷↸╎リ⊣"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turn on recording to see which servers the app talks to."
+msgstr "ℸ⚍∷リ 𝙹リ ∷ᒷᓵ𝙹∷↸╎リ⊣ ℸ𝙹 ᓭᒷᒷ ∴⍑╎ᓵ⍑ ᓭᒷ∷⍊ᒷ∷ᓭ ℸ⍑ᒷ ᔑ!¡!¡ ℸᔑꖎꖌᓭ ℸ𝙹."
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn single sounds off, change their volume or use your own"
 msgstr "ℸ⚍∷リ ᓭ╎リ⊣ꖎᒷ ᓭ𝙹⚍リ↸ᓭ 𝙹⎓⎓, ᓵ⍑ᔑリ⊣ᒷ ℸ⍑ᒷ╎∷ ⍊𝙹ꖎ⚍ᒲᒷ 𝙹∷ ⚍ᓭᒷ ||𝙹⚍∷ 𝙹∴リ"
@@ -5951,6 +6416,10 @@ msgstr "ℸ⚍∷リ ᓭ╎リ⊣ꖎᒷ ᓭ𝙹⚍リ↸ᓭ 𝙹⎓⎓, ᓵ⍑�
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "ℸ⚍∷リ ℸ⍑╎ᓭ 𝙹⎓⎓ ᔑリ↸ ᓵꖎ𝙹ᓭ╎リ⊣ ℸ⍑ᒷ ∴╎リ↸𝙹∴ ᑑ⚍╎ℸᓭ ᔑリ||ℸᔑꖎꖌ ∷╎⊣⍑ℸ ᔑ∴ᔑ||."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Type"
+msgstr "ℸ||!¡ᒷ"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 #~ msgid "Type in the search box and press Enter."
@@ -6142,6 +6611,10 @@ msgstr "⚍!¡ꖎ𝙹ᔑ↸ ℸ𝙹 ⊣╎⎓ʖ𝙹/"
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Uploading file `{fileName}`... {0}%"
 msgstr "⚍!¡ꖎ𝙹ᔑ↸╎リ⊣ ⎓╎ꖎᒷ `{fileName}`... {0}%"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "URL"
+msgstr "⚍∷ꖎ"
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
@@ -6424,6 +6897,10 @@ msgstr "∴ᒷʖ⍑𝙹𝙹ꖌ リᔑᒲᒷ"
 msgid "Webhooks"
 msgstr "∴ᒷʖ⍑𝙹𝙹ꖌᓭ"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "WebSocket"
+msgstr "∴ᒷʖᓭ𝙹ᓵꖌᒷℸ"
+
 #: src/interface/Home.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #~ msgid "Welcome to"
@@ -6461,6 +6938,10 @@ msgstr "∴⍑ᒷリ ℸ𝙹 ᓭ⍑𝙹∴"
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Whenever I'm in a call"
 msgstr "∴⍑ᒷリᒷ⍊ᒷ∷ ╎'ᒲ ╎リ ᔑ ᓵᔑꖎꖎ"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Where your data goes"
+msgstr "∴⍑ᒷ∷ᒷ ||𝙹⚍∷ ↸ᔑℸᔑ ⊣𝙹ᒷᓭ"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Whether other users can edit these settings"
@@ -6501,6 +6982,10 @@ msgstr "∴╎ℸ⍑ {0} 𝙹ℸ⍑ᒷ∷ᓭ"
 msgid "with {participants}"
 msgstr "∴╎ℸ⍑ {participants}"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Without the keys, Wireshark only sees encrypted TLS and DTLS traffic. What it can still tell you is where the data goes and how much. Compare that with the servers and sizes listed above."
+msgstr "∴╎ℸ⍑𝙹⚍ℸ ℸ⍑ᒷ ꖌᒷ||ᓭ, ∴╎∷ᒷᓭ⍑ᔑ∷ꖌ 𝙹リꖎ|| ᓭᒷᒷᓭ ᒷリᓵ∷||!¡ℸᒷ↸ ℸꖎᓭ ᔑリ↸ ↸ℸꖎᓭ ℸ∷ᔑ⎓⎓╎ᓵ. ∴⍑ᔑℸ ╎ℸ ᓵᔑリ ᓭℸ╎ꖎꖎ ℸᒷꖎꖎ ||𝙹⚍ ╎ᓭ ∴⍑ᒷ∷ᒷ ℸ⍑ᒷ ↸ᔑℸᔑ ⊣𝙹ᒷᓭ ᔑリ↸ ⍑𝙹∴ ᒲ⚍ᓵ⍑. ᓵ𝙹ᒲ!¡ᔑ∷ᒷ ℸ⍑ᔑℸ ∴╎ℸ⍑ ℸ⍑ᒷ ᓭᒷ∷⍊ᒷ∷ᓭ ᔑリ↸ ᓭ╎⨅ᒷᓭ ꖎ╎ᓭℸᒷ↸ ᔑʖ𝙹⍊ᒷ."
+
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Would you like to create a new group or server?"
 msgstr "∴𝙹⚍ꖎ↸ ||𝙹⚍ ꖎ╎ꖌᒷ ℸ𝙹 ᓵ∷ᒷᔑℸᒷ ᔑ リᒷ∴ ⊣∷𝙹⚍!¡ 𝙹∷ ᓭᒷ∷⍊ᒷ∷?"
@@ -6520,6 +7005,10 @@ msgstr "/ (ꖎᒷ⎓ℸ ʖ⚍ℸℸ𝙹リ)"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Y (top button)"
 msgstr "|| (ℸ𝙹!¡ ʖ⚍ℸℸ𝙹リ)"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Yes"
+msgstr "||ᒷᓭ"
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "You agree that your bot is subject to the Acceptable Usage Policy."

@@ -71,6 +71,13 @@ msgstr ""
 msgid "{0, plural, one {# channel} other {# channels}}"
 msgstr ""
 
+#. placeholder {0}: list().length
+#. placeholder {0}: shown().length
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "{0, plural, one {# entry} other {# entries}}"
+msgstr ""
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -581,6 +588,10 @@ msgstr "เมื่อมีข้อความหรือการแจ้
 msgid "A new version of AnyTalk is available"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "A packet capture (for example Wireshark) therefore shows only DTLS/SRTP ciphertext, and the media server only sees end-to-end ciphertext."
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream in your call ends"
 msgstr "เมื่อการสตรีมในการโทรของคุณสิ้นสุด"
@@ -698,6 +709,7 @@ msgstr "การตั้งค่าเสียงขั้นสูง"
 #~ msgid "Affects all roles and users"
 #~ msgstr ""
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: src/interface/Friends.tsx
 msgid "All"
 msgstr "ทั้งหมด"
@@ -810,6 +822,10 @@ msgstr "AnyTalk เป็นหนึ่งในวิธีที่ดีท�
 msgid "AnyTalk is up to date."
 msgstr "AnyTalk เป็นเวอร์ชันล่าสุดแล้ว"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "AnyTalk network inspector"
+msgstr ""
+
 #: src/AndroidNag.tsx
 msgid "AnyTalk on Android"
 msgstr "AnyTalk บน Android"
@@ -904,6 +920,18 @@ msgstr "ตั้งบทบาท"
 #: components/app/interface/settings/user/developer/TimeChart.tsx
 msgid "at {time}"
 msgstr "เวลา {time}"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "attached"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "attributes"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Attributes"
+msgstr ""
 
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Audio devices"
@@ -1143,7 +1171,13 @@ msgstr "ข้ามโหมดช้า"
 msgid "Bypasses slowmode in channels"
 msgstr "ข้ามโหมดช้าในช่อง"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "bytes"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Call"
 msgstr "การโทร"
 
@@ -1155,6 +1189,10 @@ msgstr ""
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Calls"
 msgstr "การโทร"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Calls: how they are encrypted"
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Camera"
@@ -1173,6 +1211,7 @@ msgid "Can't get discover request status right now"
 msgstr "ขณะนี้ไม่สามารถดูสถานะคำขอค้นพบได้"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Native.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/AddBot.tsx
@@ -1383,6 +1422,10 @@ msgstr "เลือกชื่อผู้ใช้"
 msgid "Choose username"
 msgstr "เลือกชื่อผู้ใช้"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Clear"
+msgstr ""
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Clear search"
 msgstr ""
@@ -1414,6 +1457,10 @@ msgstr "คลิกเพื่อแสดงสปอยเลอร์"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Client Settings"
 msgstr "การตั้งค่าแอป"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "close"
+msgstr ""
 
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
@@ -1449,6 +1496,10 @@ msgstr "ปิด"
 #: components/app/menus/UserContextMenu.tsx
 msgid "Close chat"
 msgstr "ปิดแชท"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Close code"
+msgstr ""
 
 #. placeholder {0}: props.channel.recipient?.displayName
 #: components/modal/modals/DeleteChannel.tsx
@@ -1501,6 +1552,10 @@ msgstr "เปรียบเทียบสรุป"
 msgid "Compare Recaps"
 msgstr "เปรียบเทียบสรุป"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Compressed size"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Concealed audio"
 msgstr "เสียงที่ปกปิด"
@@ -1539,10 +1594,18 @@ msgstr "เชื่อมต่อช่องเสียง"
 msgid "Connected"
 msgstr "เชื่อมต่อแล้ว"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "connecting"
+msgstr ""
+
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "กำลังเชื่อมต่อ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Connection"
+msgstr ""
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Connection lost"
@@ -1564,6 +1627,10 @@ msgstr "ติดต่อฝ่ายสนับสนุนเพื่อน
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Contact support to remove this server from discover"
 msgstr "ติดต่อฝ่ายสนับสนุนเพื่อนำเซิร์ฟเวอร์นี้ออกจากการค้นพบ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Content"
+msgstr ""
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Content breaks one or more laws"
@@ -1602,6 +1669,10 @@ msgstr ""
 msgid "Conversations"
 msgstr "บทสนทนา"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Copied"
+msgstr ""
+
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "คัดลอกแล้ว!"
@@ -1629,6 +1700,10 @@ msgstr "คัดลอกลิงก์เชิญ"
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Copy Invite URL"
 msgstr "คัดลอก URL คำเชิญ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Copy JSON"
+msgstr ""
 
 #: components/app/menus/ChannelContextMenu.tsx
 #: components/app/menus/MessageContextMenu.tsx
@@ -1692,6 +1767,10 @@ msgstr ""
 #: components/rtc/components/StreamPopouts.tsx
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Could not open the window. Check that pop-ups are allowed."
 msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
@@ -1908,6 +1987,10 @@ msgstr ""
 msgid "Dark"
 msgstr "มืด"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Data messages and participant attributes (who watches a stream, deafened, key exchange) go over the signalling WebSocket to the media server. They are not end-to-end encrypted, but the key exchange only carries public keys and keys wrapped for one recipient."
+msgstr ""
+
 #. placeholder {0}: err.location
 #: components/i18n/errors.tsx
 msgid "Database error, please contact support. ({0})"
@@ -1936,6 +2019,10 @@ msgstr ""
 
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Decoded size"
 msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
@@ -2085,6 +2172,10 @@ msgstr "ลบเว็บฮุก"
 msgid "Deleting this emoji will disallow future use. All past uses will remain."
 msgstr "การลบอีโมจินี้จะทำให้ใช้ต่อไปไม่ได้ แต่การใช้งานที่ผ่านมาทั้งหมดจะยังอยู่"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Delivery"
+msgstr ""
+
 #. placeholder {0}: props.invite.username
 #: components/modal/modals/AddBot.tsx
 msgid "Description provided by {0}"
@@ -2106,6 +2197,10 @@ msgstr ""
 #~ msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
 #~ msgstr ""
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Details"
+msgstr ""
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
 msgstr ""
@@ -2126,9 +2221,21 @@ msgstr "โหมดนักพัฒนาจะวัดประสิทธ
 msgid "Device is offline"
 msgstr "อุปกรณ์ออฟไลน์"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "direct"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Direct"
+msgstr ""
+
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Direct Messages"
 msgstr "ข้อความส่วนตัว"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Direction"
+msgstr ""
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Disable Account"
@@ -2256,8 +2363,21 @@ msgstr "เฟรมที่ถูกทิ้งต่อวินาที"
 msgid "Drugs or illegal goods"
 msgstr "ยาเสพติดหรือสินค้าผิดกฎหมาย"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS cipher"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS state"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS version"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Duration"
 msgstr "ระยะเวลา"
@@ -2397,6 +2517,10 @@ msgstr "บิตเรตเป้าหมายของตัวเข้า
 msgid "End call"
 msgstr "วางสาย"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "End-to-end encrypted"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced"
 msgstr "เพิ่มประสิทธิภาพ"
@@ -2448,6 +2572,10 @@ msgstr "กรอกชื่อผู้ใช้ของคุณ"
 msgid "Entire screen"
 msgstr "ทั้งหน้าจอ"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "error"
+msgstr ""
+
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Error occurred, please email support."
 msgstr "เกิดข้อผิดพลาด โปรดส่งอีเมลถึงฝ่ายสนับสนุน"
@@ -2461,12 +2589,20 @@ msgstr "กด escape เพื่อ<0>ยกเลิก</0> · กด enter �
 msgid "Estimated upload bandwidth"
 msgstr "แบนด์วิดท์อัปโหลดโดยประมาณ"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Event"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone"
 msgstr "ทุกคน"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Everyone in the call"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Excellent"
@@ -2483,6 +2619,14 @@ msgstr ""
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "ส่งออก"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Export HAR"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Export JSON"
+msgstr ""
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "External links can be dangerous!"
@@ -2529,6 +2673,15 @@ msgstr "ข้อเสนอแนะ"
 msgid "File must be smaller than {0}"
 msgstr "ไฟล์ต้องมีขนาดเล็กกว่า {0}"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Files"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Filter by address, host or topic"
+msgstr ""
+
 #: src/interface/Home.tsx
 msgid "Find a community based on your hobbies or interests."
 msgstr "หาชุมชนที่เหมาะสมกับงานอดิเรกหรือความสนใจของคุณ"
@@ -2540,6 +2693,10 @@ msgstr "ค้นหาเซิร์ฟเวอร์ใหม่ที่จ
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "ค้นหาชุมชน<0/>ของคุณ<1/>เชื่อมต่อกับโลก"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "First bytes"
+msgstr ""
 
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Fixed controls"
@@ -2591,6 +2748,10 @@ msgstr "เป็นเวลา 8 ชั่วโมง"
 msgid "Frame rate"
 msgstr "เฟรมเรต"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Freeze the list. Recording goes on."
+msgstr ""
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Freezes"
 msgstr "ภาพค้าง"
@@ -2603,6 +2764,10 @@ msgstr "เพื่อน"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Friends who are online or in a call show up here."
 msgstr "เพื่อนที่ออนไลน์หรืออยู่ในการโทรจะแสดงที่นี่"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "From"
+msgstr ""
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "from "
@@ -2780,6 +2945,10 @@ msgstr "ช่วยแปล AnyTalk"
 msgid "Here is your new invite code: <0>{0}</0>"
 msgstr "รหัสเชิญใหม่ของคุณ: <0>{0}</0>"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Hide call signalling noise"
+msgstr ""
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "ซ่อนผู้อื่น"
@@ -2842,6 +3011,10 @@ msgstr "เสียงของทุกคนมาถึงคุณอย่
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "How many recently joined calls the Home page lists. 0 hides them."
 msgstr "จำนวนการโทรที่เข้าร่วมล่าสุดที่หน้าหลักแสดง ใส่ 0 เพื่อซ่อน"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "HTTP"
+msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>{HYPRLAND_BIND_EXAMPLE}</1>."
@@ -2913,6 +3086,14 @@ msgstr "อยู่ในการโทร · {count}"
 msgid "In call"
 msgstr "อยู่ในการโทร"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the browser, export the HAR file and open it in your browser's developer tools (Network tab, import) or another HAR viewer to see the requests in detail."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
+msgstr ""
+
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "ระหว่างนี้ ติดตั้ง AnyTalk จาก Google Play เพื่อประสบการณ์ที่เร็วและลื่นไหลกว่า ซึ่งออกแบบมาสำหรับ Android"
@@ -2942,6 +3123,14 @@ msgstr ""
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input Volume"
 msgstr "ระดับเสียงอินพุต"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Inside: end-to-end encryption (LiveKit E2EE) with a key only the people in the call hold. The media server forwards frames it cannot read."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Inspect with Wireshark"
+msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Install updates automatically"
@@ -3058,6 +3247,10 @@ msgstr "เข้าร่วม AnyTalk Lounge"
 msgid "Join the voice channel"
 msgstr "เข้าร่วมช่องเสียง"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "joined"
+msgstr ""
+
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: components/ui/components/features/profiles/ProfileJoined.tsx
 msgid "Joined"
@@ -3086,6 +3279,10 @@ msgstr "ให้ AnyTalk ทำงานในถาดระบบเมื่
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Keep as is"
 msgstr "คงไว้เหมือนเดิม"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "kept in memory only, gone when you reload"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Keyframe requests per second (viewers asking for a full new picture)"
@@ -3251,6 +3448,10 @@ msgstr "โอเวอร์เลย์สด การบันทึก แ�
 msgid "Live statistics overlay"
 msgstr "โอเวอร์เลย์สถิติสด"
 
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Live View"
+msgstr ""
+
 #. placeholder {0}: humanFileSize(props.file.size ?? 0)
 #: components/ui/components/features/messaging/elements/TextFile.tsx
 msgid "Load file ({0})"
@@ -3258,6 +3459,10 @@ msgstr "โหลดไฟล์ ({0})"
 
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Loading message"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Local candidate"
 msgstr ""
 
 #: components/auth/src/flows/FlowHome.tsx
@@ -3293,6 +3498,10 @@ msgstr "กำลังค้นหาเวอร์ชันล่าสุด
 msgid "Loss and jitter are what the server reports about the audio it got from you."
 msgstr "การสูญหายและจิตเตอร์คือสิ่งที่เซิร์ฟเวอร์รายงานเกี่ยวกับเสียงที่ได้รับจากคุณ"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Lossy"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Lost"
 msgstr "สูญหาย"
@@ -3308,6 +3517,10 @@ msgstr "ตัวกรองตัดความถี่ต่ำ"
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Lowercase letters, numbers and underscores only."
 msgstr "ใช้ได้เฉพาะตัวพิมพ์เล็ก ตัวเลข และขีดล่าง"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Made with"
+msgstr ""
 
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Magenta"
@@ -3398,6 +3611,14 @@ msgstr "วัดวิดีโอกล้องและการแชร์
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Measure your microphone and everyone you hear in calls"
 msgstr "วัดไมโครโฟนของคุณและทุกคนที่คุณได้ยินในการโทร"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Media server"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Media streams"
+msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Medium (90 Hz)"
@@ -3514,6 +3735,10 @@ msgstr "ข้อความ"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Messaging"
 msgstr "ส่งข้อความ"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Method"
+msgstr ""
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "MFA setup canceled."
@@ -3675,6 +3900,18 @@ msgstr ""
 msgid "Needs a server that supports stream viewers."
 msgstr ""
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Network inspector"
+msgstr ""
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Network Inspector"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Network type"
+msgstr ""
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
 msgstr "กลาง"
@@ -3725,6 +3962,10 @@ msgstr ""
 msgid "Nickname"
 msgstr "ชื่อเล่น"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "No"
+msgstr ""
+
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No apps found"
 msgstr "ไม่พบแอป"
@@ -3764,6 +4005,10 @@ msgstr "ไม่พบ GIF"
 #: components/app/interface/settings/user/Language.tsx
 msgid "No languages found"
 msgstr "ไม่พบภาษา"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "No matches"
+msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "No patch notes for this version."
@@ -3852,6 +4097,14 @@ msgstr ""
 msgid "Nothing"
 msgstr "ไม่มี"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Nothing fits this filter. Try another word or show all kinds."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Nothing recorded yet"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own call recaps."
 msgstr "ยังไม่มีอะไรให้เปรียบเทียบ นำเข้า CSV หรือเพิ่มสรุปการโทรของคุณเอง"
@@ -3859,6 +4112,10 @@ msgstr "ยังไม่มีอะไรให้เปรียบเที
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own stream recaps."
 msgstr "ยังไม่มีอะไรให้เปรียบเทียบ นำเข้า CSV หรือเพิ่มสรุปการสตรีมของคุณเอง"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Nothing to show yet"
+msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/ServerContextMenu.tsx
@@ -3871,6 +4128,10 @@ msgstr "การแจ้งเตือน"
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "Off"
 msgstr "ปิด"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
+msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Offers to stream the games you play during a call. Detection happens only on this computer and nothing is sent."
@@ -3965,6 +4226,10 @@ msgstr ""
 msgid "Oops, something went wrong! {e}"
 msgstr "อุ๊ปส์ มีบางอย่างผิดพลาด! {e}"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "open"
+msgstr ""
+
 #: components/modal/modals/Invite.tsx
 msgid "Open"
 msgstr "เปิด"
@@ -3978,6 +4243,7 @@ msgstr "เปิด {0}"
 msgid "Open an app or switch to Entire screen."
 msgstr "เปิดแอปหรือสลับเป็นทั้งหน้าจอ"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/rtc/components/StreamPopouts.tsx
 msgid "Open as window"
 msgstr ""
@@ -3993,6 +4259,10 @@ msgstr "เปิดไฟล์"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Open friends"
 msgstr "เปิดรายชื่อเพื่อน"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Open live view"
+msgstr ""
 
 #. placeholder {0}: author()
 #. placeholder {1}: place()
@@ -4046,6 +4316,10 @@ msgstr ""
 msgid "Output Volume"
 msgstr "ระดับเสียงเอาต์พุต"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Outside: SRTP over DTLS between your device and the media server, as for any WebRTC call."
+msgstr ""
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Overlay"
 msgstr ""
@@ -4094,6 +4368,14 @@ msgstr "รหัสผ่าน"
 #: components/modal/modals/EditPassword.tsx
 msgid "Password changed successfully."
 msgstr "เปลี่ยนรหัสผ่านสำเร็จแล้ว"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Pause"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Paused"
+msgstr ""
 
 #: components/app/interface/settings/user/subscriptions/EditSubscriptionJoinFlow.tsx
 #~ msgid "Pay"
@@ -4325,6 +4607,10 @@ msgstr "ส่งเสริมการทำร้าย"
 msgid "Pronouns"
 msgstr "สรรพนาม"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Protocol"
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
 msgstr "อีเมลหรือรหัสผ่านที่ระบุไม่ถูกต้อง"
@@ -4393,6 +4679,7 @@ msgid "Ready to install: {0}"
 msgstr "พร้อมติดตั้ง: {0}"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
 msgid "Reason"
@@ -4432,6 +4719,11 @@ msgstr "รับการแจ้งเตือนขณะที่แท็
 msgid "Receive push notifications while the app is closed."
 msgstr "รับการแจ้งเตือนแบบพุชขณะที่แอปปิดอยู่"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Received"
+msgstr ""
+
 #: src/interface/home/FriendsOverview.tsx
 msgid "Recent calls"
 msgstr "การโทรล่าสุด"
@@ -4454,6 +4746,10 @@ msgstr "กำลังเชื่อมต่อใหม่"
 msgid "Record call recaps"
 msgstr "บันทึกสรุปการโทร"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Record network traffic"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record statistics of every call you are in, with or without the overlay"
 msgstr "บันทึกสถิติของทุกการโทรที่คุณอยู่ ไม่ว่าจะมีโอเวอร์เลย์หรือไม่"
@@ -4465,6 +4761,14 @@ msgstr "บันทึกสถิติของทุกสตรีมที
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record stream recaps"
 msgstr "บันทึกสรุปการสตรีม"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Recorded traffic"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Recording is off"
+msgstr ""
 
 #: components/modal/modals/MFAFlow.tsx
 msgid "Recovery Code"
@@ -4494,6 +4798,18 @@ msgstr "ลงทะเบียนตั้งแต่ <0/>"
 msgid "Reject friend request"
 msgstr "ปฏิเสธคำขอเป็นเพื่อน"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "relay"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Relay protocol"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Relay server"
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Release notes"
 msgstr "บันทึกประจำรุ่น"
@@ -4502,6 +4818,10 @@ msgstr "บันทึกประจำรุ่น"
 msgid "Relevance"
 msgstr "เกี่ยวข้อง"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Reliable"
+msgstr ""
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload and clear cache"
 msgstr "โหลดใหม่และล้างแคช"
@@ -4509,6 +4829,14 @@ msgstr "โหลดใหม่และล้างแคช"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload AnyTalk with fresh files from the server? This is the same as Ctrl+F5 and fixes most display problems after an update. You stay logged in and keep your settings."
 msgstr "โหลด AnyTalk ใหม่ด้วยไฟล์ล่าสุดจากเซิร์ฟเวอร์หรือไม่? เหมือนกับการกด Ctrl+F5 และแก้ปัญหาการแสดงผลส่วนใหญ่หลังอัปเดต คุณจะยังเข้าสู่ระบบอยู่และการตั้งค่าจะไม่หาย"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Remote address"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Remote candidate"
+msgstr ""
 
 #: components/markdown/plugins/anchors.tsx
 msgid "Remote Channel"
@@ -4632,6 +4960,18 @@ msgstr "รายงานเซิร์ฟเวอร์"
 msgid "Report user"
 msgstr "รายงานผู้ใช้"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Request body"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Request headers"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Requests and messages show up here as they happen."
+msgstr ""
+
 #: components/auth/src/flows/FlowResend.tsx
 msgid "Resend"
 msgstr "ส่งอีกครั้ง"
@@ -4709,6 +5049,18 @@ msgstr "ความละเอียด"
 msgid "Resolution and FPS"
 msgstr "ความละเอียดและ FPS"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response headers"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response preview"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response size"
+msgstr ""
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Responsibly disclosed security issues"
 msgstr "ปัญหาความปลอดภัยที่เปิดเผยอย่างรับผิดชอบ"
@@ -4725,6 +5077,10 @@ msgstr ""
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Restore call window"
 msgstr "คืนค่าหน้าต่างการโทร"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Resume"
+msgstr ""
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 msgid "Retry sending"
@@ -4790,6 +5146,18 @@ msgstr "บทบาท"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Roles with No Overrides"
 msgstr "บทบาทที่ไม่มีการแทนที่"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Room"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "route"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Route"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Running"
@@ -4948,6 +5316,10 @@ msgstr ""
 msgid "See all your servers at a glance."
 msgstr ""
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "See what the app sends and receives, and export it to check against Wireshark"
+msgstr ""
+
 #~ msgid "See what we're currently working on."
 #~ msgstr ""
 
@@ -4958,6 +5330,10 @@ msgstr "เลือก"
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select all"
 msgstr "เลือกทั้งหมด"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Select an entry to see its details."
+msgstr ""
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Select at least one line above to compare."
@@ -5035,6 +5411,8 @@ msgstr "ส่งคำขอ"
 msgid "Sending..."
 msgstr "กำลังส่ง..."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Sent"
 msgstr "ส่งแล้ว"
@@ -5109,8 +5487,20 @@ msgstr "บทบาทในเซิร์ฟเวอร์"
 msgid "Servers"
 msgstr "เซิร์ฟเวอร์"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Servers contacted"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Servers show up here as soon as the app talks to them."
+msgstr ""
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Servers you join show up here."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
 msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
@@ -5169,6 +5559,10 @@ msgstr "แชร์กล้องหรือหน้าจอในการ
 msgid "Share screen"
 msgstr "แชร์หน้าจอ"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show"
+msgstr ""
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show 'copy ID' in context menus"
 msgstr "แสดง 'คัดลอก ID' ในเมนูบริบท"
@@ -5193,6 +5587,10 @@ msgstr "แสดงสถิติไมโครโฟนสดบนช่อ
 msgid "Show live statistics on call video tiles"
 msgstr "แสดงสถิติสดบนช่องวิดีโอของการโทร"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show only"
+msgstr ""
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Show Others"
 msgstr "แสดงผู้อื่น"
@@ -5214,8 +5612,20 @@ msgstr ""
 msgid "Show server names"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show tokens and keys"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show tokens and keys?"
+msgstr ""
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Show when speaking"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show window"
 msgstr ""
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
@@ -5273,6 +5683,10 @@ msgstr "เงียบ"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Single stream: opening a stream replaces the current one"
 msgstr "สตรีมเดียว: การเปิดสตรีมจะแทนที่สตรีมปัจจุบัน"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Size"
+msgstr ""
 
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "Slowmode Immune"
@@ -5387,6 +5801,10 @@ msgstr "ตัวตรวจการสะกด"
 msgid "Spoiler"
 msgstr "สปอยเลอร์"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "SRTP cipher"
+msgstr ""
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Start camera"
 msgstr "เปิดกล้อง"
@@ -5403,6 +5821,11 @@ msgstr "เริ่มการโทร"
 msgid "Start with Computer"
 msgstr "เริ่มพร้อมคอมพิวเตอร์"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Started"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 msgid "Status"
 msgstr "สถานะ"
@@ -5418,6 +5841,7 @@ msgstr "ปิดกล้อง"
 msgid "Stop sharing"
 msgstr "หยุดแชร์"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/ui/components/features/voice/callCard/GameStreamPrompt.tsx
 msgid "Stream"
 msgstr ""
@@ -5600,6 +6024,10 @@ msgstr "ข้อกำหนด"
 #~ msgid "Terms of Service"
 #~ msgstr "ข้อกำหนดในการให้บริการ"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Text"
+msgstr ""
+
 #: components/modal/modals/CreateChannel.tsx
 msgid "Text Channel"
 msgstr "ช่องข้อความ"
@@ -5653,6 +6081,10 @@ msgstr "ยังไม่ได้เผยแพร่เวอร์ชัน
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
 msgstr "รายการถูกผู้ดูแลนำออก จึงห้ามสมัครใหม่ ติดต่อฝ่ายสนับสนุนเพื่อขอข้อมูลเพิ่มเติม"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "The password is too short."
@@ -5833,6 +6265,14 @@ msgstr "ไม่อนุญาตชื่อผู้ใช้นี้"
 msgid "This will invalidate the current token and stop any existing instances of the bot from running."
 msgstr "การดำเนินการนี้จะทำให้โทเค็นปัจจุบันใช้ไม่ได้และหยุดบอทที่กำลังทำงานอยู่ทั้งหมด"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Through a relay (TURN)"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Time"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Time format"
 msgstr "รูปแบบเวลา"
@@ -5863,6 +6303,10 @@ msgstr "หมดเวลาสมาชิก"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Timeout Members"
 msgstr "หยุดสมาชิกไว้ชั่วคราว"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "To"
+msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Toggle deafen"
@@ -5900,12 +6344,21 @@ msgstr ""
 msgid "Top right"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Topic"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
 msgstr "แบบดั้งเดิม (DD/MM/YYYY)"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Transferred"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Transport"
 msgstr "การส่งผ่าน"
 
@@ -5935,6 +6388,18 @@ msgstr ""
 msgid "Turn every sound on and reset their volumes and files?"
 msgstr "เปิดเสียงทุกอย่างและรีเซ็ตระดับเสียงและไฟล์หรือไม่?"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Turn it on to see what the app sends and receives."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Turn on recording"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turn on recording to see which servers the app talks to."
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn single sounds off, change their volume or use your own"
 msgstr "ปิดเสียงทีละรายการ เปลี่ยนระดับเสียง หรือใช้เสียงของคุณเอง"
@@ -5942,6 +6407,10 @@ msgstr "ปิดเสียงทีละรายการ เปลี่�
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "หากปิดสิ่งนี้ การปิดหน้าต่างจะออกจาก AnyTalk ทันที"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Type"
+msgstr ""
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 #~ msgid "Type in the search box and press Enter."
@@ -6133,6 +6602,10 @@ msgstr "อัปโหลดไปยัง Gifbox"
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Uploading file `{fileName}`... {0}%"
 msgstr "กำลังอัปโหลดไฟล์ `{fileName}`... {0}%"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "URL"
+msgstr ""
 
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
@@ -6414,6 +6887,10 @@ msgstr "ชื่อเว็บฮุก"
 msgid "Webhooks"
 msgstr "เว็บฮุก"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "WebSocket"
+msgstr ""
+
 #~ msgid "Welcome to"
 #~ msgstr "ยินดีต้อนรับสู่"
 
@@ -6448,6 +6925,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Whenever I'm in a call"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Where your data goes"
 msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
@@ -6489,6 +6970,10 @@ msgstr "กับอีก {0} คน"
 msgid "with {participants}"
 msgstr "กับ {participants}"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Without the keys, Wireshark only sees encrypted TLS and DTLS traffic. What it can still tell you is where the data goes and how much. Compare that with the servers and sizes listed above."
+msgstr ""
+
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Would you like to create a new group or server?"
 msgstr "ต้องการสร้างกลุ่มหรือเซิร์ฟเวอร์ใหม่ไหม?"
@@ -6508,6 +6993,10 @@ msgstr "X (ปุ่มซ้าย)"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Y (top button)"
 msgstr "Y (ปุ่มบน)"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Yes"
+msgstr ""
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "You agree that your bot is subject to the Acceptable Usage Policy."
