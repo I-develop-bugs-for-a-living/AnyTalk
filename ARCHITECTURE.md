@@ -33,6 +33,7 @@ Each `@revolt/*` alias maps to `components/*`:
 | `@revolt/modal` | modal controller and all modals |
 | `@revolt/routing` | router re-exports and URL param parsing |
 | `@revolt/rtc` | calls, screen share, audio processing |
+| `@revolt/traffic` | traffic inspector recorder (see Traffic inspector) |
 | `@revolt/ui` | shared components, themes, directives, call UI, composer |
 | `@revolt/markdown` | message markdown pipeline |
 | `@revolt/i18n` | Lingui setup and language loading |
@@ -173,6 +174,13 @@ Every store extends `AbstractStore` (`stores/index.ts`), validates its data in `
 - `data-input="gamepad"` on `<html>` (set on controller use, cleared on trusted mouse/touch/keyboard use) turns on `:focus` rings in `components/ui/styles.css`.
 - Push to talk button: `gamepad/pushToTalkButton.ts` (button names, saved in `controller:ptt_button`, and whether the desktop shell accepted it). The chosen button is hidden from navigation with `maskButton` in `input.ts`, so it only acts as push to talk. Its presses come from the desktop shell (see Desktop shell), not from `GamepadControls`, and only work on Windows.
 - Settings page: `components/app/interface/settings/user/Controller.tsx` (page id `controller`, also listed in `settingsSearch.plugin.ts`). It is the rebinding UI: one row per action with its button, a recorder to pick a new one, a reset per action and "Reset all buttons". Bindings are saved in the `controller:bindings` setting.
+
+### Traffic inspector
+- `components/traffic/` (alias `@revolt/traffic`), chunk 1: the recorder only, no UI yet. Meant for cross-checking what the app sends against Wireshark. Off by default, memory only, cleared on reload, nothing is sent anywhere.
+- `src/index.tsx` calls `startTrafficInspector()` after the early `./sentry` import and before the stoat.js `Client` exists. `install.ts` replaces global `fetch`, `XMLHttpRequest` (prototype) and `WebSocket` (subclass) once; with recording off they only pass through (`fetchWrapper.ts`, `xhrWrapper.ts`, `wsWrapper.ts`).
+- Data: `recorder.ts` (flag plus `ringBuffer.ts`, 5000 entries, raw values) with entry types in `types.ts`: `http` (fetch/xhr), `ws` (connection events and frames, linked by connection id) and `resource` (PerformanceObserver, `resources.ts`, for img/video/iframes). `summarize.ts` builds body summaries and previews. `redact.ts` hides secrets (session tokens, auth headers, token query params, password/token JSON fields, whole auth/MFA bodies) when entries are read, not when stored.
+- `state.ts` is the reactive Solid API (`recording()`, `setRecording()`, `entries()`, `clear()`). In dev builds it is also on `window.__anytalkTraffic`.
+- Not recorded: WebRTC media (LiveKit RTP), push delivery, service worker fetches, anything outside the page's JS. Coming: call data, a settings page with a live view, and desktop extras (TLS key log, Electron webRequest).
 
 ### PWA and notifications
 - `src/serviceWorker.ts`, `src/serviceWorkerInterface.ts` (vite-plugin-pwa, set up in `vite.config.ts`). A pending update is activated from the update notice, so deploys don't need a hard reload. Doesn't run over the plain-http phone link.

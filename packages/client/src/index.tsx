@@ -32,6 +32,7 @@ import { GlobalKeybinds, KeybindContext } from "@revolt/keybinds";
 import { ModalContext, ModalRenderer, useModals } from "@revolt/modal";
 import { VoiceContext } from "@revolt/rtc";
 import { StateContext, SyncWorker, useState } from "@revolt/state";
+import { startTrafficInspector } from "@revolt/traffic";
 import {
   FloatingManager,
   LoadTheme,
@@ -55,6 +56,11 @@ import { ServerOverview } from "./interface/servers/ServerOverview";
 import "./serviceWorkerInterface";
 
 attachDevtoolsOverlay();
+
+// Install the traffic recorder after Sentry (imported first) has wrapped fetch
+// and XHR, so ours is the outermost layer and sees what the app code sends.
+// The stoat.js Client is only created later, so it uses the wrapped globals.
+startTrafficInspector();
 
 /**
  * Redirect PWA start to the last active path
