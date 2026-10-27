@@ -9,7 +9,12 @@ import { useInstance } from "@revolt/instance";
 import { AbstractStore } from ".";
 import { State } from "..";
 import { LAYOUT_SECTIONS } from "./Layout";
-import { RateLimitInfo, parseRateLimitError } from "./rateLimit";
+import {
+  RateLimitInfo,
+  decideUploadRetry,
+  parseRateLimitError,
+  parseUploadRetryDelay,
+} from "./rateLimit";
 
 export interface DraftData {
   /**
@@ -327,6 +332,12 @@ export class Draft extends AbstractStore<"draft", TypeDraft> {
       attachments,
     };
 
+    /** Whether this outbox entry still exists (not cancelled or removed) */
+    const isPending = () =>
+      this.getPendingMessages(channel.id).some(
+        (entry) => entry.idempotencyKey === idempotencyKey,
+      );
+
     /** Mark this outbox entry as failed ("not sent") */
     const markFailed = () =>
       this.set(
@@ -362,39 +373,87 @@ export class Draft extends AbstractStore<"draft", TypeDraft> {
           this.isFileSpoiler(fileId) ? `SPOILER_${file.name}` : file.name,
         );
 
-        // We have to use XMLHttpRequest because modern fetch duplex streams require QUIC or HTTP/2
-        const xhr = new XMLHttpRequest();
+        // Upload, retrying automatically while Autumn rate limits us
+        let attempt = 0;
+        let success = false;
+        let response: { id: string } = { id: "" };
+        let rateLimited: RateLimitInfo | undefined;
 
-        const [success, response] = await new Promise<
-          [boolean, { id: string }]
-        >((resolve) => {
-          xhr.upload.addEventListener("progress", (event) => {
-            if (event.lengthComputable) {
-              uploadProgress[1](event.loaded / event.total);
-            }
-          });
+        while (true) {
+          attempt++;
+          rateLimited = undefined;
 
-          xhr.addEventListener("loadend", () => {
-            uploadProgress[1](1);
-            resolve([xhr.readyState === 4 && xhr.status === 200, xhr.response]);
-          });
+          // We have to use XMLHttpRequest because modern fetch duplex streams require QUIC or HTTP/2
+          const xhr = new XMLHttpRequest();
 
-          xhr.open("POST", `${this.instance.mediaUrl}/attachments`, true);
+          [success, response] = await new Promise<[boolean, { id: string }]>(
+            (resolve) => {
+              xhr.upload.addEventListener("progress", (event) => {
+                if (event.lengthComputable) {
+                  uploadProgress[1](event.loaded / event.total);
+                }
+              });
 
-          const [authHeader, authHeaderValue] = client.authenticationHeader;
-          xhr.setRequestHeader(authHeader, authHeaderValue);
-          xhr.responseType = "json";
+              xhr.addEventListener("loadend", () => {
+                uploadProgress[1](1);
+                resolve([
+                  xhr.readyState === 4 && xhr.status === 200,
+                  xhr.response,
+                ]);
+              });
 
-          xhr.send(body);
-        });
+              xhr.open("POST", `${this.instance.mediaUrl}/attachments`, true);
+
+              const [authHeader, authHeaderValue] = client.authenticationHeader;
+              xhr.setRequestHeader(authHeader, authHeaderValue);
+              xhr.responseType = "json";
+
+              xhr.send(body);
+            },
+          );
+
+          if (success || xhr.status !== 429) break;
+
+          const retryAfterMs = parseUploadRetryDelay(
+            xhr.getResponseHeader("X-RateLimit-Reset-After"),
+            xhr.response,
+          );
+          rateLimited = { kind: "rateLimit", retryAfterMs };
+
+          const wait = decideUploadRetry(attempt, retryAfterMs);
+          if (wait === undefined) break;
+
+          // keep the message pending while waiting. Note: messages sent
+          // during the wait can reach the server before this one.
+          uploadProgress[1](0);
+          await new Promise((resolve) => setTimeout(resolve, wait));
+
+          // the user cancelled the message while it was waiting
+          if (!isPending()) return;
+        }
 
         if (!success) {
+          // out of retries: back into the composer, files stay cached
+          if (rateLimited) {
+            // cancelled or removed while the request was in flight
+            if (!isPending()) return;
+
+            // loadend marked the upload as done, it was not
+            uploadProgress[1](0);
+            this.cancelSend(channel, idempotencyKey);
+            this.restoreToDraft(channel.id, { content, replies, files });
+            onRateLimited?.(rateLimited);
+            return;
+          }
+
           markFailed();
           return;
         }
 
         attachments.push(response.id);
-        this.fileCache[fileId].autumnId = response.id;
+        // the file may have been removed while waiting
+        if (this.fileCache[fileId])
+          this.fileCache[fileId].autumnId = response.id;
       }
     }
 

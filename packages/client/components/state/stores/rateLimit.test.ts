@@ -2,7 +2,9 @@ import { beforeEach, describe, expect, it } from "vitest";
 
 import {
   claimRateLimitNotice,
+  decideUploadRetry,
   parseRateLimitError,
+  parseUploadRetryDelay,
   resetRateLimitNotice,
   retryAfterSeconds,
 } from "./rateLimit";
@@ -71,5 +73,26 @@ describe("retryAfterSeconds", () => {
     );
     expect(retryAfterSeconds({ kind: "rateLimit", retryAfterMs: 10 })).toBe(1);
     expect(retryAfterSeconds({ kind: "rateLimit" })).toBeUndefined();
+  });
+});
+
+describe("upload retry", () => {
+  it("prefers the header, falls back to the body", () => {
+    expect(parseUploadRetryDelay("4000", { retry_after: 1 })).toBe(4000);
+    expect(parseUploadRetryDelay(null, { retry_after: 2500 })).toBe(2500);
+    expect(parseUploadRetryDelay(undefined, '{"retry_after":900}')).toBe(900);
+    expect(parseUploadRetryDelay("  ", { retry_after: 700 })).toBe(700);
+    expect(parseUploadRetryDelay("", { retry_after: 700 })).toBe(700);
+    expect(parseUploadRetryDelay(" 3000 ", null)).toBe(3000);
+    expect(parseUploadRetryDelay("abc", null)).toBeUndefined();
+    expect(parseUploadRetryDelay(null, "nope")).toBeUndefined();
+  });
+
+  it("retries short waits and gives up on long ones or too many tries", () => {
+    expect(decideUploadRetry(1, 2000)).toBe(2250);
+    expect(decideUploadRetry(1, 0)).toBe(1250);
+    expect(decideUploadRetry(2, undefined)).toBe(10_250);
+    expect(decideUploadRetry(1, 30_001)).toBeUndefined();
+    expect(decideUploadRetry(3, 1000)).toBeUndefined();
   });
 });

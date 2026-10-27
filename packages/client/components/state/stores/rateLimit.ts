@@ -101,3 +101,68 @@ export function retryAfterSeconds(info: RateLimitInfo) {
     ? Math.max(1, Math.ceil(info.retryAfterMs / 1000))
     : undefined;
 }
+
+/** Most upload attempts (first try included) for one file */
+export const MAX_UPLOAD_ATTEMPTS = 3;
+
+/** Longest wait (ms) we accept before retrying a rate limited upload */
+export const MAX_UPLOAD_RETRY_WAIT_MS = 30_000;
+
+/** Shortest wait (ms) before retrying a rate limited upload */
+export const MIN_UPLOAD_RETRY_WAIT_MS = 1000;
+
+/** Wait (ms) used when Autumn answers 429 without a usable delay */
+export const DEFAULT_UPLOAD_RETRY_WAIT_MS = 10_000;
+
+/**
+ * Read the retry delay of a rate limited Autumn upload. Autumn answers 429
+ * with the header `X-RateLimit-Reset-After` and the body
+ * `{"retry_after": <n>}`, both in milliseconds.
+ * @param header Value of the `X-RateLimit-Reset-After` response header
+ * @param body Parsed (or raw text) response body
+ * @returns Milliseconds to wait, or undefined if the server gave none
+ */
+export function parseUploadRetryDelay(
+  header: string | null | undefined,
+  body: unknown,
+): number | undefined {
+  const trimmed = header?.trim();
+  const fromHeader = trimmed ? Number(trimmed) : NaN;
+  if (Number.isFinite(fromHeader) && fromHeader >= 0) return fromHeader;
+
+  let parsed = body;
+  if (typeof parsed === "string") {
+    try {
+      parsed = JSON.parse(parsed);
+    } catch {
+      return undefined;
+    }
+  }
+  if (parsed && typeof parsed === "object") {
+    const value = (parsed as Record<string, unknown>).retry_after;
+    if (typeof value === "number" && Number.isFinite(value) && value >= 0) {
+      return value;
+    }
+  }
+  return undefined;
+}
+
+/**
+ * Decide what to do after a rate limited upload attempt.
+ * @param attempt Number of attempts made so far (at least 1)
+ * @param retryAfterMs Delay from the server, if any
+ * @returns Wait time in ms to retry after, or undefined to give up
+ */
+export function decideUploadRetry(
+  attempt: number,
+  retryAfterMs: number | undefined,
+): number | undefined {
+  if (attempt >= MAX_UPLOAD_ATTEMPTS) return undefined;
+  const wait = Math.max(
+    MIN_UPLOAD_RETRY_WAIT_MS,
+    retryAfterMs ?? DEFAULT_UPLOAD_RETRY_WAIT_MS,
+  );
+  if (wait > MAX_UPLOAD_RETRY_WAIT_MS) return undefined;
+  // small margin so the window has really passed
+  return wait + 250;
+}
