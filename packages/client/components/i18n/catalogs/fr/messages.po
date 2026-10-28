@@ -381,6 +381,22 @@ msgstr "{n, plural, one {Supprimer # récapitulatif d'appel ?} many {Supprimer #
 msgid "{n, plural, one {Delete # stream recap?} other {Delete # stream recaps?}}"
 msgstr "{n, plural, one {Supprimer # récapitulatif de stream ?} many {Supprimer # récapitulatifs de stream ?} other {Supprimer # récapitulatifs de stream ?}}"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Home, # pending friend request} other {Home, # pending friend requests}}"
+msgstr "{n, plural, one {Accueil, # demande d’ami en attente} many {Accueil, # demandes d’ami en attente} other {Accueil, # demandes d’ami en attente}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr "{n, plural, one {Boîte de réception, # mention non lue} many {Boîte de réception, # mentions non lues} other {Boîte de réception, # mentions non lues}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Messages, # unread} other {Messages, # unread}}"
+msgstr "{n, plural, one {Messages, # non lu} many {Messages, # non lus} other {Messages, # non lus}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Servers, # unread mention} other {Servers, # unread mentions}}"
+msgstr "{n, plural, one {Serveurs, # mention non lue} many {Serveurs, # mentions non lues} other {Serveurs, # mentions non lues}}"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{name}'s {source}"
 msgstr "{source} de {name}"
@@ -607,6 +623,10 @@ msgstr "Accepter"
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Accept friend request"
 msgstr "Accepter la demande d'ami"
+
+#: src/interface/navigation/bottomNav/YouScreen.tsx
+msgid "Account"
+msgstr "Compte"
 
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Account has been queued for deletion!"
@@ -1095,6 +1115,10 @@ msgstr "Les bots ne sont pas vérifiés par AnyTalk."
 msgid "Bottom left"
 msgstr "En bas à gauche"
 
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Bottom navigation bar on phones"
+msgstr "Barre de navigation inférieure sur téléphone"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Bottom right"
 msgstr "En bas à droite"
@@ -1127,6 +1151,7 @@ msgstr "Construit sur Stoat"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Busy"
@@ -1398,6 +1423,10 @@ msgstr "Vérifiez vos e-mails !"
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Checking for updates…"
 msgstr "Recherche de mises à jour…"
+
+#: src/interface/Sidebar.tsx
+msgid "Choose a server from the list to see its channels."
+msgstr "Choisissez un serveur dans la liste pour voir ses salons."
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
@@ -2702,6 +2731,7 @@ msgstr "Commandes fixes"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2754,6 +2784,7 @@ msgid "Freezes"
 msgstr "Gels"
 
 #: src/interface/Friends.tsx
+#: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Friends"
 msgstr "Amis"
@@ -2950,6 +2981,10 @@ msgstr "Voici votre nouveau code d'invitation : <0>{0}</0>"
 msgid "Hide call signalling noise"
 msgstr "Masquer le bruit de signalisation des appels"
 
+#: components/ui/components/features/voice/callCard/VoiceCallCardPiP.tsx
+msgid "Hide call window"
+msgstr "Masquer la fenêtre d’appel"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "Masquer les autres"
@@ -2979,6 +3014,7 @@ msgid "Hold this button to talk, even while a game is in front. It only applies 
 msgstr "Maintenez ce bouton enfoncé pour parler, même quand un jeu est au premier plan. Il ne s'applique que si le mode d'entrée est Appuyer pour parler. Le jeu voit aussi ce bouton, choisissez-en donc un qu'il n'utilise pas. Fonctionne avec les manettes Xbox ; les manettes PlayStation nécessitent Steam Input ou DS4Windows."
 
 #: src/interface/Home.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Home"
@@ -3049,6 +3085,7 @@ msgstr "ID copié dans le presse-papiers"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -3100,6 +3137,7 @@ msgstr "Dans l'application de bureau, activez « Écrire les clés TLS dans un f
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "En attendant, installez AnyTalk depuis le Google Play pour une expérience plus rapide et plus fluide, conçue pour Android."
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/servers/Inbox.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Inbox"
@@ -3154,6 +3192,7 @@ msgstr "Police de l'interface"
 msgid "Invalid Mention Element"
 msgstr "Élément de mention invalide"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Invisible"
@@ -3525,6 +3564,10 @@ msgstr "Créé avec"
 msgid "Magenta"
 msgstr "Magenta"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "Main navigation"
+msgstr "Navigation principale"
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
 msgstr "Panne majeure"
@@ -3728,6 +3771,7 @@ msgstr "Sons de messages, d'appels et de streams"
 
 #: components/app/interface/channels/text/Messages.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 msgid "Messages"
 msgstr "Messages"
 
@@ -3913,6 +3957,10 @@ msgstr "Nom"
 #: src/interface/servers/ServerOverview.tsx
 msgid "Name (A-Z)"
 msgstr "Nom (A-Z)"
+
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Navigation"
+msgstr "Navigation"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
@@ -4167,6 +4215,7 @@ msgstr "Serveur Officiel"
 #: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Offline"
@@ -4216,6 +4265,7 @@ msgstr "Maintenance en cours"
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -4434,6 +4484,10 @@ msgstr "Mode appel téléphonique"
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Pick a Screen to Share"
 msgstr "Choisissez un écran à partager"
+
+#: src/interface/Sidebar.tsx
+msgid "Pick a server"
+msgstr "Choisir un serveur"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Pick a username that you want people to be able to find you by. This can be changed later in your user settings."
@@ -5344,6 +5398,10 @@ msgstr "Voyez tous vos serveurs en un coup d'œil."
 msgid "See what the app sends and receives, and export it to check against Wireshark"
 msgstr "Voyez ce que l'application envoie et reçoit, et exportez-le pour le comparer avec Wireshark"
 
+#: src/interface/Home.tsx
+msgid "See your friends and answer friend requests."
+msgstr "Consultez vos amis et répondez aux demandes d’ami."
+
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select"
 msgstr "Sélectionner"
@@ -5496,6 +5554,7 @@ msgstr "Options du serveur {name}"
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/Sidebar.tsx
 msgid "Server overview"
 msgstr "Aperçu des serveurs"
 
@@ -5503,6 +5562,7 @@ msgstr "Aperçu des serveurs"
 msgid "Server Roles"
 msgstr "Rôles du serveur"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/servers/ServerOverview.tsx
@@ -5520,6 +5580,10 @@ msgstr "Les serveurs apparaissent ici dès que l'application communique avec eux
 #: src/interface/servers/ServerOverview.tsx
 msgid "Servers you join show up here."
 msgstr "Les serveurs que vous rejoignez apparaissent ici."
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "Servers, unread messages"
+msgstr "Serveurs, messages non lus"
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
@@ -5596,6 +5660,10 @@ msgstr "Afficher une notification lorsqu'une nouvelle version est disponible"
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show admin panel shortcuts in context menus"
 msgstr "Afficher les raccourcis du panneau d'administration dans les menus contextuels"
+
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Show call window"
+msgstr "Afficher la fenêtre d’appel"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
@@ -7028,6 +7096,11 @@ msgstr "Y (bouton du haut)"
 msgid "Yes"
 msgstr "Oui"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+#: src/interface/navigation/bottomNav/YouScreen.tsx
+msgid "You"
+msgstr "Vous"
+
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "You agree that your bot is subject to the Acceptable Usage Policy."
 msgstr "Vous acceptez que votre bot soit soumis à la politique d'utilisation."
@@ -7201,6 +7274,11 @@ msgstr "Vous ne pourrez plus accéder à votre compte sans contacter le support.
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "Vous ne pourrez pas revenir à moins d'être réinvité."
+
+#. placeholder {0}: presence()
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "You, {0}"
+msgstr "Vous, {0}"
 
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "You're all caught up"

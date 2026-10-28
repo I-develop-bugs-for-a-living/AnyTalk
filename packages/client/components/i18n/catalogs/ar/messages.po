@@ -383,6 +383,22 @@ msgstr "{n, plural, zero {حذف # ملخص مكالمة؟} one {حذف ملخص
 msgid "{n, plural, one {Delete # stream recap?} other {Delete # stream recaps?}}"
 msgstr "{n, plural, zero {حذف # ملخص بث؟} one {حذف ملخص بث واحد؟} two {حذف ملخصي بث؟} few {حذف # ملخصات بث؟} many {حذف # ملخص بث؟} other {حذف # ملخص بث؟}}"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Home, # pending friend request} other {Home, # pending friend requests}}"
+msgstr "{n, plural, zero {الرئيسية، لا طلبات صداقة معلّقة} one {الرئيسية، طلب صداقة معلّق واحد} two {الرئيسية، طلبان معلّقان} few {الرئيسية، # طلبات صداقة معلّقة} many {الرئيسية، # طلب صداقة معلّق} other {الرئيسية، # طلب صداقة معلّق}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr "{n, plural, zero {الوارد، لا إشارات غير مقروءة} one {الوارد، إشارة واحدة غير مقروءة} two {الوارد، إشارتان غير مقروءتين} few {الوارد، # إشارات غير مقروءة} many {الوارد، # إشارة غير مقروءة} other {الوارد، # إشارة غير مقروءة}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Messages, # unread} other {Messages, # unread}}"
+msgstr "{n, plural, zero {الرسائل، لا رسائل غير مقروءة} one {الرسائل، رسالة واحدة غير مقروءة} two {الرسائل، رسالتان غير مقروءتان} few {الرسائل، # رسائل غير مقروءة} many {الرسائل، # رسالة غير مقروءة} other {الرسائل، # رسالة غير مقروءة}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Servers, # unread mention} other {Servers, # unread mentions}}"
+msgstr "{n, plural, zero {الخوادم، لا إشارات غير مقروءة} one {الخوادم، إشارة واحدة غير مقروءة} two {الخوادم، إشارتان غير مقروءتين} few {الخوادم، # إشارات غير مقروءة} many {الخوادم، # إشارة غير مقروءة} other {الخوادم، # إشارة غير مقروءة}}"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{name}'s {source}"
 msgstr "{source} {name}"
@@ -628,6 +644,10 @@ msgstr "قبول"
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Accept friend request"
 msgstr "قبول طلب الصداقة"
+
+#: src/interface/navigation/bottomNav/YouScreen.tsx
+msgid "Account"
+msgstr "الحساب"
 
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Account has been queued for deletion!"
@@ -1121,6 +1141,10 @@ msgstr "البوتات غير موثّقة من AnyTalk."
 msgid "Bottom left"
 msgstr "أسفل اليسار"
 
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Bottom navigation bar on phones"
+msgstr "شريط التنقل السفلي على الهواتف"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Bottom right"
 msgstr "أسفل اليمين"
@@ -1156,6 +1180,7 @@ msgstr "مبني على Stoat"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Busy"
@@ -1430,6 +1455,10 @@ msgstr "راجع بريدك الإلكتروني!"
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Checking for updates…"
 msgstr "جارٍ التحقق من التحديثات…"
+
+#: src/interface/Sidebar.tsx
+msgid "Choose a server from the list to see its channels."
+msgstr "اختر خادمًا من القائمة لعرض قنواته."
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
@@ -2745,6 +2774,7 @@ msgstr "عناصر تحكم ثابتة"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2797,6 +2827,7 @@ msgid "Freezes"
 msgstr "التجمّدات"
 
 #: src/interface/Friends.tsx
+#: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Friends"
 msgstr "الأصدقاء"
@@ -2993,6 +3024,10 @@ msgstr "إليك رمز الدعوة الخاص بك : <0>{0}</0>"
 msgid "Hide call signalling noise"
 msgstr "إخفاء ضجيج إشارات المكالمات"
 
+#: components/ui/components/features/voice/callCard/VoiceCallCardPiP.tsx
+msgid "Hide call window"
+msgstr "إخفاء نافذة المكالمة"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "إخفاء الآخرين"
@@ -3022,6 +3057,7 @@ msgid "Hold this button to talk, even while a game is in front. It only applies 
 msgstr "اضغط مع الاستمرار على هذا الزر للتحدث، حتى عندما تكون لعبة في المقدمة. ينطبق فقط عندما يكون وضع الإدخال «اضغط للتحدث». تستقبل اللعبة الزر أيضًا، لذا اختر زرًا لا تستخدمه. يعمل مع وحدات تحكم Xbox؛ تحتاج وحدات تحكم PlayStation إلى Steam Input أو DS4Windows."
 
 #: src/interface/Home.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Home"
@@ -3092,6 +3128,7 @@ msgstr "تم نسخ ID إلى الحافظة"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -3146,6 +3183,7 @@ msgstr "في تطبيق سطح المكتب، فعّل «كتابة مفاتيح
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "في هذه الأثناء، قم بتثبيت AnyTalk من Google Play للحصول على تجربة أسرع وأكثر سلاسة مصممة لنظام Android."
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/servers/Inbox.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Inbox"
@@ -3200,6 +3238,7 @@ msgstr "أسلوب الخط"
 msgid "Invalid Mention Element"
 msgstr "عنصر إشارة غير صالح"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Invisible"
@@ -3574,6 +3613,10 @@ msgstr "أُنشئ بواسطة"
 msgid "Magenta"
 msgstr "أرجواني"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "Main navigation"
+msgstr "التنقل الرئيسي"
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
 msgstr "انقطاع كبير"
@@ -3777,6 +3820,7 @@ msgstr "أصوات الرسائل والمكالمات والبث"
 
 #: components/app/interface/channels/text/Messages.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 msgid "Messages"
 msgstr "الرسائل"
 
@@ -3962,6 +4006,10 @@ msgstr "الاسم"
 #: src/interface/servers/ServerOverview.tsx
 msgid "Name (A-Z)"
 msgstr "الاسم (أ-ي)"
+
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Navigation"
+msgstr "التنقل"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
@@ -4216,6 +4264,7 @@ msgstr "سيرفر رسمي"
 #: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Offline"
@@ -4265,6 +4314,7 @@ msgstr "الصيانة مستمرة"
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -4483,6 +4533,10 @@ msgstr "وضع المكالمة الهاتفية"
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Pick a Screen to Share"
 msgstr "اختر شاشة للمشاركة"
+
+#: src/interface/Sidebar.tsx
+msgid "Pick a server"
+msgstr "اختر خادمًا"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Pick a username that you want people to be able to find you by. This can be changed later in your user settings."
@@ -5402,6 +5456,10 @@ msgstr "اطّلع على ما يرسله التطبيق ويستقبله، وص
 #~ msgid "See what we're currently working on."
 #~ msgstr ""
 
+#: src/interface/Home.tsx
+msgid "See your friends and answer friend requests."
+msgstr "شاهد أصدقاءك وردّ على طلبات الصداقة."
+
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select"
 msgstr "تحديد"
@@ -5554,6 +5612,7 @@ msgstr "خيارات الخادم {name}"
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/Sidebar.tsx
 msgid "Server overview"
 msgstr "نظرة عامة على الخوادم"
 
@@ -5561,6 +5620,7 @@ msgstr "نظرة عامة على الخوادم"
 msgid "Server Roles"
 msgstr "رتب السيرفر"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/servers/ServerOverview.tsx
@@ -5578,6 +5638,10 @@ msgstr "تظهر الخوادم هنا بمجرد أن يتواصل معها ا�
 #: src/interface/servers/ServerOverview.tsx
 msgid "Servers you join show up here."
 msgstr "ستظهر الخوادم التي تنضم إليها هنا."
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "Servers, unread messages"
+msgstr "الخوادم، رسائل غير مقروءة"
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
@@ -5654,6 +5718,10 @@ msgstr "عرض إشعار عند توفر إصدار جديد"
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show admin panel shortcuts in context menus"
 msgstr "إظهار اختصارات لوحة المسؤول في قوائم السياق"
+
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Show call window"
+msgstr "إظهار نافذة المكالمة"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
@@ -7100,6 +7168,11 @@ msgstr "Y (الزر العلوي)"
 msgid "Yes"
 msgstr "نعم"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+#: src/interface/navigation/bottomNav/YouScreen.tsx
+msgid "You"
+msgstr "أنت"
+
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "You agree that your bot is subject to the Acceptable Usage Policy."
 msgstr "أنت توافق على أن البوت الخاص بك يخضع لسياسة الاستخدام المقبول."
@@ -7273,6 +7346,11 @@ msgstr "لن يكن لك القدرة أن تستخدم حسابك إلا إذا
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "لن تتمكن من الانضمام مجدداً ما لم تتم دعوتك مرة أُخرى."
+
+#. placeholder {0}: presence()
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "You, {0}"
+msgstr "أنت، {0}"
 
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "You're all caught up"

@@ -383,6 +383,22 @@ msgstr "{n, plural, other {删除 # 条通话回顾？}}"
 msgid "{n, plural, one {Delete # stream recap?} other {Delete # stream recaps?}}"
 msgstr "{n, plural, other {删除 # 条直播回顾？}}"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Home, # pending friend request} other {Home, # pending friend requests}}"
+msgstr "{n, plural, other {主页，# 个待处理的好友请求}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr "{n, plural, other {收件箱，# 条未读提及}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Messages, # unread} other {Messages, # unread}}"
+msgstr "{n, plural, other {消息，# 条未读}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Servers, # unread mention} other {Servers, # unread mentions}}"
+msgstr "{n, plural, other {服务器，# 条未读提及}}"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{name}'s {source}"
 msgstr "{name} 的{source}"
@@ -628,6 +644,10 @@ msgstr "接受"
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Accept friend request"
 msgstr "接受好友请求"
+
+#: src/interface/navigation/bottomNav/YouScreen.tsx
+msgid "Account"
+msgstr "账号"
 
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Account has been queued for deletion!"
@@ -1121,6 +1141,10 @@ msgstr "机器人未经 AnyTalk 验证。"
 msgid "Bottom left"
 msgstr "左下角"
 
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Bottom navigation bar on phones"
+msgstr "手机底部导航栏"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Bottom right"
 msgstr "右下角"
@@ -1157,6 +1181,7 @@ msgstr "基于 Stoat 构建"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Busy"
@@ -1432,6 +1457,10 @@ msgstr "请检查您的邮件！"
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Checking for updates…"
 msgstr "正在检查更新…"
+
+#: src/interface/Sidebar.tsx
+msgid "Choose a server from the list to see its channels."
+msgstr "从列表中选择一个服务器以查看其频道。"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
@@ -2744,6 +2773,7 @@ msgstr "固定操作"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2796,6 +2826,7 @@ msgid "Freezes"
 msgstr "卡顿次数"
 
 #: src/interface/Friends.tsx
+#: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Friends"
 msgstr "好友"
@@ -2992,6 +3023,10 @@ msgstr "这是你的新邀请码：<0>{0}</0>"
 msgid "Hide call signalling noise"
 msgstr "隐藏通话信令的冗余消息"
 
+#: components/ui/components/features/voice/callCard/VoiceCallCardPiP.tsx
+msgid "Hide call window"
+msgstr "隐藏通话窗口"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "隐藏其他人"
@@ -3021,6 +3056,7 @@ msgid "Hold this button to talk, even while a game is in front. It only applies 
 msgstr "按住此按钮即可说话，即使游戏在前台也有效。仅在输入模式为按键说话时生效。游戏也会收到此按钮的输入，请选择游戏未使用的按钮。支持 Xbox 手柄；PlayStation 手柄需要 Steam Input 或 DS4Windows。"
 
 #: src/interface/Home.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Home"
@@ -3091,6 +3127,7 @@ msgstr "ID 已复制到剪贴板"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -3146,6 +3183,7 @@ msgstr "在桌面应用中，打开上方的“将 TLS 密钥写入文件”并�
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "在此期间，请从 Google Play 安装 AnyTalk，获得专为 Android 设计的更快、更流畅的体验。"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/servers/Inbox.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Inbox"
@@ -3200,6 +3238,7 @@ msgstr "界面字体"
 msgid "Invalid Mention Element"
 msgstr "无效的提及元素"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Invisible"
@@ -3574,6 +3613,10 @@ msgstr "生成工具"
 msgid "Magenta"
 msgstr "洋红色"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "Main navigation"
+msgstr "主导航"
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
 msgstr "严重故障"
@@ -3777,6 +3820,7 @@ msgstr "消息、通话和直播提示音"
 
 #: components/app/interface/channels/text/Messages.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 msgid "Messages"
 msgstr "消息"
 
@@ -3962,6 +4006,10 @@ msgstr "名称"
 #: src/interface/servers/ServerOverview.tsx
 msgid "Name (A-Z)"
 msgstr "名称（A-Z）"
+
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Navigation"
+msgstr "导航"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
@@ -4216,6 +4264,7 @@ msgstr "官方服务器"
 #: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Offline"
@@ -4265,6 +4314,7 @@ msgstr "正在维护"
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -4483,6 +4533,10 @@ msgstr "电话通话模式"
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Pick a Screen to Share"
 msgstr "选择要共享的屏幕"
+
+#: src/interface/Sidebar.tsx
+msgid "Pick a server"
+msgstr "选择服务器"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Pick a username that you want people to be able to find you by. This can be changed later in your user settings."
@@ -5403,6 +5457,10 @@ msgstr "查看应用发送和接收的内容，并导出以便与 Wireshark 对�
 #~ msgid "See what we're currently working on."
 #~ msgstr ""
 
+#: src/interface/Home.tsx
+msgid "See your friends and answer friend requests."
+msgstr "查看你的好友并回复好友请求。"
+
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select"
 msgstr "选择"
@@ -5555,6 +5613,7 @@ msgstr "{name} 的服务器选项"
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/Sidebar.tsx
 msgid "Server overview"
 msgstr "服务器概览"
 
@@ -5562,6 +5621,7 @@ msgstr "服务器概览"
 msgid "Server Roles"
 msgstr "服务器角色"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/servers/ServerOverview.tsx
@@ -5579,6 +5639,10 @@ msgstr "应用一旦与服务器通信，服务器就会显示在这里。"
 #: src/interface/servers/ServerOverview.tsx
 msgid "Servers you join show up here."
 msgstr "你加入的服务器会显示在这里。"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "Servers, unread messages"
+msgstr "服务器，有未读消息"
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
@@ -5655,6 +5719,10 @@ msgstr "有新版本时显示通知"
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show admin panel shortcuts in context menus"
 msgstr "在右键菜单中显示管理面板快捷方式"
+
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Show call window"
+msgstr "显示通话窗口"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
@@ -7103,6 +7171,11 @@ msgstr "Y(上方按钮)"
 msgid "Yes"
 msgstr "是"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+#: src/interface/navigation/bottomNav/YouScreen.tsx
+msgid "You"
+msgstr "我"
+
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "You agree that your bot is subject to the Acceptable Usage Policy."
 msgstr "你同意你的机器人须遵守《可接受使用政策》。"
@@ -7276,6 +7349,11 @@ msgstr "除非您联系技术支持人员，否则就无法访问您的账户—
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "除非重新接受邀请，否则您将无法重新加入。"
+
+#. placeholder {0}: presence()
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "You, {0}"
+msgstr "我，{0}"
 
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "You're all caught up"

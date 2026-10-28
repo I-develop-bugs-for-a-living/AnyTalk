@@ -383,6 +383,22 @@ msgstr "{n, plural, other {통화 요약 #개를 삭제할까요?}}"
 msgid "{n, plural, one {Delete # stream recap?} other {Delete # stream recaps?}}"
 msgstr "{n, plural, other {스트림 요약 #개를 삭제할까요?}}"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Home, # pending friend request} other {Home, # pending friend requests}}"
+msgstr "{n, plural, other {홈, 대기 중인 친구 요청 #개}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr "{n, plural, other {받은 알림, 읽지 않은 멘션 #개}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Messages, # unread} other {Messages, # unread}}"
+msgstr "{n, plural, other {메시지, 읽지 않음 #개}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Servers, # unread mention} other {Servers, # unread mentions}}"
+msgstr "{n, plural, other {서버, 읽지 않은 멘션 #개}}"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{name}'s {source}"
 msgstr "{name}님의 {source}"
@@ -628,6 +644,10 @@ msgstr "수락"
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Accept friend request"
 msgstr "친구 요청 수락"
+
+#: src/interface/navigation/bottomNav/YouScreen.tsx
+msgid "Account"
+msgstr "계정"
 
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Account has been queued for deletion!"
@@ -1121,6 +1141,10 @@ msgstr "봇은 AnyTalk에서 인증하지 않아요."
 msgid "Bottom left"
 msgstr "왼쪽 아래"
 
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Bottom navigation bar on phones"
+msgstr "휴대폰 하단 내비게이션 바"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Bottom right"
 msgstr "오른쪽 아래"
@@ -1157,6 +1181,7 @@ msgstr "Stoat 기반"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Busy"
@@ -1432,6 +1457,10 @@ msgstr "메일함을 확인하세요!"
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Checking for updates…"
 msgstr "업데이트 확인 중…"
+
+#: src/interface/Sidebar.tsx
+msgid "Choose a server from the list to see its channels."
+msgstr "목록에서 서버를 선택하면 채널을 볼 수 있어요."
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
@@ -2748,6 +2777,7 @@ msgstr "고정 조작"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2800,6 +2830,7 @@ msgid "Freezes"
 msgstr "멈춤 횟수"
 
 #: src/interface/Friends.tsx
+#: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Friends"
 msgstr "친구"
@@ -2996,6 +3027,10 @@ msgstr "새 초대 코드예요: <0>{0}</0>"
 msgid "Hide call signalling noise"
 msgstr "통화 시그널링 잡음 숨기기"
 
+#: components/ui/components/features/voice/callCard/VoiceCallCardPiP.tsx
+msgid "Hide call window"
+msgstr "통화 창 숨기기"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "다른 사람 숨기기"
@@ -3025,6 +3060,7 @@ msgid "Hold this button to talk, even while a game is in front. It only applies 
 msgstr "이 버튼을 누르는 동안 말할 수 있어요. 게임이 앞에 있어도 작동해요. 입력 모드가 눌러서 말하기일 때만 적용돼요. 게임에도 이 버튼 입력이 전달되니 게임에서 쓰지 않는 버튼을 고르세요. Xbox 컨트롤러에서 작동하며, PlayStation 컨트롤러는 Steam Input 또는 DS4Windows가 필요해요."
 
 #: src/interface/Home.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Home"
@@ -3095,6 +3131,7 @@ msgstr "ID를 클립보드에 복사했어요"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -3150,6 +3187,7 @@ msgstr "데스크톱 앱에서 위의 'TLS 키를 파일에 기록'을 켜고 �
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "그동안은 Google Play에서 AnyTalk을 설치하면 Android에 맞춘 더 빠르고 부드러운 환경을 쓸 수 있어요."
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/servers/Inbox.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Inbox"
@@ -3204,6 +3242,7 @@ msgstr "인터페이스 글꼴"
 msgid "Invalid Mention Element"
 msgstr "잘못된 멘션 요소"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Invisible"
@@ -3578,6 +3617,10 @@ msgstr "생성 도구"
 msgid "Magenta"
 msgstr "마젠타"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "Main navigation"
+msgstr "메인 내비게이션"
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
 msgstr "심각한 장애"
@@ -3781,6 +3824,7 @@ msgstr "메시지, 통화, 스트림 소리"
 
 #: components/app/interface/channels/text/Messages.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 msgid "Messages"
 msgstr "메시지"
 
@@ -3966,6 +4010,10 @@ msgstr "이름"
 #: src/interface/servers/ServerOverview.tsx
 msgid "Name (A-Z)"
 msgstr "이름순 (A-Z)"
+
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Navigation"
+msgstr "내비게이션"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
@@ -4220,6 +4268,7 @@ msgstr "공식 서버"
 #: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Offline"
@@ -4269,6 +4318,7 @@ msgstr "점검 중"
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -4487,6 +4537,10 @@ msgstr "전화 통화 모드"
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Pick a Screen to Share"
 msgstr "공유할 화면 선택"
+
+#: src/interface/Sidebar.tsx
+msgid "Pick a server"
+msgstr "서버 선택"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Pick a username that you want people to be able to find you by. This can be changed later in your user settings."
@@ -5407,6 +5461,10 @@ msgstr "앱이 보내고 받는 내용을 확인하고, 내보내서 Wireshark�
 #~ msgid "See what we're currently working on."
 #~ msgstr ""
 
+#: src/interface/Home.tsx
+msgid "See your friends and answer friend requests."
+msgstr "친구를 확인하고 친구 요청에 답해 보세요."
+
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select"
 msgstr "선택"
@@ -5559,6 +5617,7 @@ msgstr "{name} 서버 옵션"
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/Sidebar.tsx
 msgid "Server overview"
 msgstr "서버 개요"
 
@@ -5566,6 +5625,7 @@ msgstr "서버 개요"
 msgid "Server Roles"
 msgstr "서버 역할"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/servers/ServerOverview.tsx
@@ -5583,6 +5643,10 @@ msgstr "앱이 서버와 통신하는 즉시 여기에 표시돼요."
 #: src/interface/servers/ServerOverview.tsx
 msgid "Servers you join show up here."
 msgstr "참여한 서버가 여기에 표시돼요."
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "Servers, unread messages"
+msgstr "서버, 읽지 않은 메시지"
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
@@ -5659,6 +5723,10 @@ msgstr "새 버전이 있으면 알림 표시"
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show admin panel shortcuts in context menus"
 msgstr "컨텍스트 메뉴에 관리자 패널 바로가기 표시"
+
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Show call window"
+msgstr "통화 창 표시"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
@@ -7107,6 +7175,11 @@ msgstr "Y (위쪽 버튼)"
 msgid "Yes"
 msgstr "예"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+#: src/interface/navigation/bottomNav/YouScreen.tsx
+msgid "You"
+msgstr "나"
+
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "You agree that your bot is subject to the Acceptable Usage Policy."
 msgstr "내 봇이 허용 가능한 사용 정책의 적용을 받는다는 데 동의해요."
@@ -7280,6 +7353,11 @@ msgstr "지원팀에 문의하지 않으면 귀하의 계정에 액세스할 수
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "다시 초대되지 않는 이상 다시 들어올 수 없어요."
+
+#. placeholder {0}: presence()
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "You, {0}"
+msgstr "나, {0}"
 
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "You're all caught up"

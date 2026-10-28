@@ -375,6 +375,22 @@ msgstr "{n, plural, other {通話リキャップ # 件を削除しますか？}}
 msgid "{n, plural, one {Delete # stream recap?} other {Delete # stream recaps?}}"
 msgstr "{n, plural, other {配信リキャップ # 件を削除しますか？}}"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Home, # pending friend request} other {Home, # pending friend requests}}"
+msgstr "{n, plural, other {ホーム、保留中のフレンドリクエスト # 件}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr "{n, plural, other {受信箱、未読のメンション # 件}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Messages, # unread} other {Messages, # unread}}"
+msgstr "{n, plural, other {メッセージ、未読 # 件}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Servers, # unread mention} other {Servers, # unread mentions}}"
+msgstr "{n, plural, other {サーバー、未読のメンション # 件}}"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{name}'s {source}"
 msgstr "{name} の{source}"
@@ -556,6 +572,10 @@ msgstr "承認"
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Accept friend request"
 msgstr "フレンド申請を承認"
+
+#: src/interface/navigation/bottomNav/YouScreen.tsx
+msgid "Account"
+msgstr "アカウント"
 
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Account has been queued for deletion!"
@@ -1044,6 +1064,10 @@ msgstr "ボットは AnyTalk による認証を受けていません。"
 msgid "Bottom left"
 msgstr "左下"
 
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Bottom navigation bar on phones"
+msgstr "スマートフォンの下部ナビゲーションバー"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Bottom right"
 msgstr "右下"
@@ -1076,6 +1100,7 @@ msgstr "Stoat をベースに作成"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Busy"
@@ -1347,6 +1372,10 @@ msgstr "メールをご確認ください!"
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Checking for updates…"
 msgstr "アップデートを確認中…"
+
+#: src/interface/Sidebar.tsx
+msgid "Choose a server from the list to see its channels."
+msgstr "リストからサーバーを選ぶと、チャンネルが表示されます。"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
@@ -2651,6 +2680,7 @@ msgstr "固定の操作"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2703,6 +2733,7 @@ msgid "Freezes"
 msgstr "フリーズ"
 
 #: src/interface/Friends.tsx
+#: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Friends"
 msgstr "フレンド"
@@ -2899,6 +2930,10 @@ msgstr "招待リンクを発行しました<0>{0}</0>"
 msgid "Hide call signalling noise"
 msgstr "通話のシグナリングの雑多な通信を隠す"
 
+#: components/ui/components/features/voice/callCard/VoiceCallCardPiP.tsx
+msgid "Hide call window"
+msgstr "通話ウィンドウを隠す"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "他の人を非表示"
@@ -2928,6 +2963,7 @@ msgid "Hold this button to talk, even while a game is in front. It only applies 
 msgstr "このボタンを押している間だけ話せます。ゲームが前面にあっても使えます。入力モードがプッシュ・トゥ・トークのときのみ有効です。ゲームにもこのボタンの入力が届くため、ゲームで使っていないボタンを選んでください。Xbox コントローラーで利用できます。PlayStation コントローラーでは Steam Input または DS4Windows が必要です。"
 
 #: src/interface/Home.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Home"
@@ -2998,6 +3034,7 @@ msgstr "IDをクリップボードにコピーしました"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -3049,6 +3086,7 @@ msgstr "デスクトップアプリで、上の「TLS キーをファイルに�
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "それまでは、Google Play から AnyTalk をインストールすると、Android 向けに作られた、より速くスムーズな環境を利用できます。"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/servers/Inbox.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Inbox"
@@ -3103,6 +3141,7 @@ msgstr "UIフォント"
 msgid "Invalid Mention Element"
 msgstr "無効なメンション要素"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Invisible"
@@ -3474,6 +3513,10 @@ msgstr "作成ツール"
 msgid "Magenta"
 msgstr "マゼンタ"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "Main navigation"
+msgstr "メインナビゲーション"
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
 msgstr "大規模な障害"
@@ -3677,6 +3720,7 @@ msgstr "メッセージ、通話、配信のサウンド"
 
 #: components/app/interface/channels/text/Messages.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 msgid "Messages"
 msgstr "メッセージ"
 
@@ -3862,6 +3906,10 @@ msgstr "名前"
 #: src/interface/servers/ServerOverview.tsx
 msgid "Name (A-Z)"
 msgstr "名前（A-Z）"
+
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Navigation"
+msgstr "ナビゲーション"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
@@ -4116,6 +4164,7 @@ msgstr "公式サーバー"
 #: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Offline"
@@ -4165,6 +4214,7 @@ msgstr "メンテナンス中"
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -4383,6 +4433,10 @@ msgstr "通話モード"
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Pick a Screen to Share"
 msgstr "共有する画面を選択"
+
+#: src/interface/Sidebar.tsx
+msgid "Pick a server"
+msgstr "サーバーを選択"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Pick a username that you want people to be able to find you by. This can be changed later in your user settings."
@@ -5293,6 +5347,10 @@ msgstr "参加しているサーバーをひと目で確認できます。"
 msgid "See what the app sends and receives, and export it to check against Wireshark"
 msgstr "アプリが送受信している内容を確認し、エクスポートして Wireshark と照合できます"
 
+#: src/interface/Home.tsx
+msgid "See your friends and answer friend requests."
+msgstr "フレンドを確認し、フレンドリクエストに返信します。"
+
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select"
 msgstr "選択"
@@ -5445,6 +5503,7 @@ msgstr "{name}のサーバーオプション"
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/Sidebar.tsx
 msgid "Server overview"
 msgstr "サーバー一覧"
 
@@ -5452,6 +5511,7 @@ msgstr "サーバー一覧"
 msgid "Server Roles"
 msgstr "サーバーロール"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/servers/ServerOverview.tsx
@@ -5469,6 +5529,10 @@ msgstr "アプリがサーバーと通信すると、ここに表示されます
 #: src/interface/servers/ServerOverview.tsx
 msgid "Servers you join show up here."
 msgstr "参加したサーバーはここに表示されます。"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "Servers, unread messages"
+msgstr "サーバー、未読メッセージ"
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
@@ -5545,6 +5609,10 @@ msgstr "新しいバージョンが利用可能になったら通知を表示す
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show admin panel shortcuts in context menus"
 msgstr "コンテキストメニューに管理パネルのショートカットを表示"
+
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Show call window"
+msgstr "通話ウィンドウを表示"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
@@ -6979,6 +7047,11 @@ msgstr "Y(上のボタン)"
 msgid "Yes"
 msgstr "はい"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+#: src/interface/navigation/bottomNav/YouScreen.tsx
+msgid "You"
+msgstr "あなた"
+
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "You agree that your bot is subject to the Acceptable Usage Policy."
 msgstr "ボットが利用規約に従うことに同意します。"
@@ -7152,6 +7225,11 @@ msgstr "サポートに連絡しない限り、アカウントにアクセスす
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "再招待されない限り、参加することはできません。"
+
+#. placeholder {0}: presence()
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "You, {0}"
+msgstr "あなた、{0}"
 
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "You're all caught up"
