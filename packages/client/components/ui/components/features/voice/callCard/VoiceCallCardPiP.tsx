@@ -1,4 +1,6 @@
 import { Show } from "solid-js";
+
+import { useLingui } from "@lingui/solid/macro";
 import {
   TrackLoop,
   TrackReference,
@@ -14,14 +16,16 @@ import { styled } from "styled-system/jsx";
 
 import { useUser } from "@revolt/markdown/users";
 import { useFastIsSpeaking, useVoice } from "@revolt/rtc";
-import { Avatar } from "@revolt/ui/components/design";
+import { Avatar, IconButton } from "@revolt/ui/components/design";
 import { Row } from "@revolt/ui/components/layout";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
+import { hideCallWindow, isPhoneWidth } from "./callWindow";
 import { VoiceCallCardActions } from "./VoiceCallCardActions";
 import { VoiceCallCardStatus } from "./VoiceCallCardStatus";
 
 export function VoiceCallCardPiP() {
+  const { t } = useLingui();
   const voice = useVoice();
   const audTracks = useTracks(
     [{ source: Track.Source.Microphone, withPlaceholder: true }],
@@ -44,14 +48,28 @@ export function VoiceCallCardPiP() {
   return (
     <MiniCard data-mini-card>
       <VoiceCallCardStatus pip />
+      {/* phones: just the focused stream as background, no avatars */}
       <Show when={!hasFocusVideo()} fallback={<MiniVideoTile />}>
-        <Row align justify grow wrap>
-          <TrackLoop tracks={audTracks}>{() => <ConnectedUser />}</TrackLoop>
-        </Row>
+        <Show when={!isPhoneWidth()}>
+          <Row align justify grow wrap>
+            <TrackLoop tracks={audTracks}>{() => <ConnectedUser />}</TrackLoop>
+          </Row>
+        </Show>
       </Show>
       <MiniActions>
         <VoiceCallCardActions size="xs" />
       </MiniActions>
+      <Show when={isPhoneWidth()}>
+        <IconButton
+          data-hide-call-window
+          size="xs"
+          variant="tonal"
+          aria-label={t`Hide call window`}
+          onPress={hideCallWindow}
+        >
+          <Symbol>close</Symbol>
+        </IconButton>
+      </Show>
     </MiniCard>
   );
 }
@@ -192,5 +210,14 @@ const MiniCard = styled("div", {
 
     borderRadius: "var(--borderRadius-lg)",
     background: "var(--md-sys-color-secondary-container)",
+
+    // phones: the slim strip is one row, people on one side, controls on
+    // the other
+    _phone: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      padding: "var(--gap-sm) var(--gap-md)",
+      overflow: "hidden",
+    },
   },
 });
