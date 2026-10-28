@@ -827,6 +827,10 @@ msgstr "今後参加または作成するサーバーに適用されます。既
 msgid "Apply"
 msgstr "適用"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Approve"
+msgstr "承認"
+
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Apps"
 msgstr "アプリ"
@@ -910,6 +914,10 @@ msgstr "音声レベル"
 msgid "Authenticator App"
 msgstr "二段階認証アプリ"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Authenticator code"
+msgstr "認証コード"
+
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Automatic"
 msgstr "自動"
@@ -956,6 +964,7 @@ msgstr "B(右のボタン)"
 #: components/auth/src/flows/FlowCheck.tsx
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
@@ -1077,6 +1086,7 @@ msgid "Bring back"
 msgstr "戻す"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+#: components/modal/modals/QrLoginApprove.tsx
 msgid "Browser"
 msgstr "ブラウザ"
 
@@ -1161,9 +1171,17 @@ msgstr "通話の暗号化のしくみ"
 msgid "Camera"
 msgstr "カメラ"
 
+#: components/modal/modals/QrScanner.tsx
+msgid "Camera access was denied. Allow the camera for this site in your browser settings and try again."
+msgstr "カメラへのアクセスが拒否されました。ブラウザの設定でこのサイトのカメラを許可してから、もう一度お試しください。"
+
 #: components/rtc/components/StreamPopouts.tsx
 msgid "Camera is off"
 msgstr "カメラはオフです"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "Camera preview"
+msgstr "カメラのプレビュー"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
@@ -1177,6 +1195,7 @@ msgstr "現在、探索リクエストの状況を取得できません"
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Native.tsx
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
@@ -1196,6 +1215,7 @@ msgstr "現在、探索リクエストの状況を取得できません"
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/Onboarding.tsx
 #: components/modal/modals/PinMessage.tsx
+#: components/modal/modals/QrScanner.tsx
 #: components/modal/modals/RemoveMember.tsx
 #: components/modal/modals/RemoveTimeout.tsx
 #: components/modal/modals/RenameSession.tsx
@@ -1373,6 +1393,10 @@ msgstr "メールをご確認ください!"
 msgid "Checking for updates…"
 msgstr "アップデートを確認中…"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Checking the account..."
+msgstr "アカウントを確認しています..."
+
 #: src/interface/Sidebar.tsx
 msgid "Choose a server from the list to see its channels."
 msgstr "リストからサーバーを選ぶと、チャンネルが表示されます。"
@@ -1448,6 +1472,7 @@ msgstr "切断"
 #: components/modal/modals/JoinServer.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/PolicyChange.tsx
+#: components/modal/modals/QrLoginApprove.tsx
 #: components/modal/modals/ServerInfo.tsx
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
@@ -1545,6 +1570,10 @@ msgstr "確認"
 msgid "Confirm action"
 msgstr "本人確認"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Confirm on your other device."
+msgstr "もう一方のデバイスで確認してください。"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Connect"
 msgstr "接続"
@@ -1599,6 +1628,7 @@ msgstr "内容"
 msgid "Content breaks one or more laws"
 msgstr "コンテンツが規約に違反しています"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
 msgid "Continue"
@@ -1720,6 +1750,10 @@ msgstr "キーログを変更できませんでした。もう一度お試しく
 #~ msgid "Could not check for updates."
 #~ msgstr "アップデートを確認できませんでした。"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Could not check which account this is. Cancel and try again."
+msgstr "アカウントを確認できませんでした。キャンセルしてもう一度お試しください。"
+
 #: components/i18n/errors.tsx
 msgid "Could not find what you requested."
 msgstr "指定されたリクエスト先が見つかりませんでした。"
@@ -1740,6 +1774,10 @@ msgstr "配信を別ウィンドウで開けませんでした。ポップアッ
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Could not open the window. Check that pop-ups are allowed."
 msgstr "ウィンドウを開けませんでした。ポップアップが許可されているか確認してください。"
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Could not reach the server. Trying again..."
+msgstr "サーバーに接続できません。再試行しています..."
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
@@ -2143,6 +2181,10 @@ msgstr "この絵文字を削除すると今後は使えなくなります。過
 msgid "Delivery"
 msgstr "配信方式"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Deny"
+msgstr "拒否"
+
 #. placeholder {0}: props.invite.username
 #: components/modal/modals/AddBot.tsx
 msgid "Description provided by {0}"
@@ -2189,6 +2231,10 @@ msgstr "デベロッパードキュメント"
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Developer modes measure call performance and keep statistics of previous calls and streams on this device. Turn on either or both."
 msgstr "開発者モードは通話のパフォーマンスを測定し、過去の通話と配信の統計をこの端末に保存します。片方または両方をオンにできます。"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Device"
+msgstr "デバイス"
 
 #: components/app/interface/desktop/Titlebar.tsx
 msgid "Device is offline"
@@ -2523,6 +2569,10 @@ msgstr "チャンネルを開く"
 #: components/modal/modals/MFAEnableTOTP.tsx
 msgid "Enter Code"
 msgstr "認証コード"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Enter your account password to approve this login."
+msgstr "このログインを承認するには、アカウントのパスワードを入力してください。"
 
 #: components/auth/src/flows/Form.tsx
 msgid "Enter your current password."
@@ -3393,6 +3443,10 @@ msgstr "ライト"
 msgid "Light (60 Hz)"
 msgstr "ライト（60 Hz）"
 
+#: components/app/interface/settings/user/Sessions.tsx
+msgid "Link a device"
+msgstr "デバイスをリンク"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Linux .deb (Debian/Ubuntu)"
 msgstr "Linux .deb（Debian/Ubuntu）"
@@ -3455,6 +3509,24 @@ msgstr "ローカル候補"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "ログイン"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Log in a new device?"
+msgstr "新しいデバイスでログインしますか？"
+
+#. placeholder {0}: approved()!.account!.display_name || approved()!.account!.username
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Log in as <0>{0}</0>? If you don't recognise this account, cancel."
+msgstr "<0>{0}</0> としてログインしますか？心当たりのないアカウントの場合はキャンセルしてください。"
+
+#: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Log in with QR code"
+msgstr "QRコードでログイン"
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Log in?"
+msgstr "ログインしますか？"
 
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -3915,6 +3987,10 @@ msgstr "ナビゲーション"
 msgid "Needs a server that supports stream viewers."
 msgstr "配信の視聴者に対応したサーバーが必要です。"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Network address"
+msgstr "ネットワークアドレス"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Network inspector"
 msgstr "ネットワークインスペクター"
@@ -3988,6 +4064,10 @@ msgstr "アプリが見つかりません"
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "No audio was captured, switch window to share audio"
 msgstr "音声がキャプチャされませんでした。音声を共有するにはウィンドウを切り替えてください"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "No camera was found on this device."
+msgstr "このデバイスにカメラが見つかりませんでした。"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "No channels to search"
@@ -4230,6 +4310,10 @@ msgstr "オンライン"
 msgid "Online · {count}"
 msgstr "オンライン · {count}"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Only approve this if you are looking at that device's screen right now and it shows this QR code. Someone could send you their QR code to take over your account."
+msgstr "今そのデバイスの画面を見ていて、このQRコードが表示されている場合にのみ承認してください。他の人から送られたQRコードを承認すると、アカウントを乗っ取られるおそれがあります。"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Only change this if you run your own AnyTalk server."
 msgstr "独自の AnyTalk サーバーを運用している場合のみ変更してください。"
@@ -4387,6 +4471,7 @@ msgstr "一部障害"
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/QrLoginApprove.tsx
 msgid "Password"
 msgstr "パスワード"
 
@@ -4532,6 +4617,10 @@ msgstr "お待ちください..."
 #: components/state/stores/Experiments.ts
 msgid "Plugins v2 Placeholder"
 msgstr "プラグイン v2 プレースホルダー"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "Point the camera at the QR code on the login screen of the new device."
+msgstr "新しいデバイスのログイン画面にあるQRコードにカメラを向けてください。"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor"
@@ -4795,6 +4884,10 @@ msgstr "記録された通信"
 msgid "Recording is off"
 msgstr "記録はオフです"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Recovery code"
+msgstr "リカバリーコード"
+
 #: components/modal/modals/MFAFlow.tsx
 msgid "Recovery Code"
 msgstr "リカバリーコード"
@@ -4992,6 +5085,10 @@ msgstr "リクエストボディ"
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Request headers"
 msgstr "リクエストヘッダー"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Requested"
+msgstr "リクエスト日時"
 
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Requests and messages show up here as they happen."
@@ -5238,6 +5335,23 @@ msgstr "保存中…"
 #: components/modal/modals/ReportContent.tsx
 msgid "Scams or fraud"
 msgstr "詐欺、または不正行為"
+
+#: components/modal/modals/QrScanner.tsx
+#: src/interface/navigation/servers/UserMenu.tsx
+msgid "Scan QR code"
+msgstr "QRコードをスキャン"
+
+#: components/app/interface/settings/user/Sessions.tsx
+msgid "Scan the QR code on the login screen of a new device to log it in."
+msgstr "新しいデバイスのログイン画面にあるQRコードをスキャンすると、そのデバイスでログインできます。"
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Scan this with AnyTalk on a device where you're logged in. Open Settings, then Sessions, then Link a device."
+msgstr "ログイン済みのデバイスでAnyTalkを使ってこれをスキャンしてください。設定、セッション、デバイスをリンクの順に開きます。"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "Scanning needs a secure connection (HTTPS). This page is opened over plain HTTP, so the browser blocks the camera."
+msgstr "スキャンには安全な接続（HTTPS）が必要です。このページは通常のHTTPで開かれているため、ブラウザがカメラをブロックしています。"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Screen share frame rate"
@@ -5602,6 +5716,10 @@ msgstr "表示"
 msgid "Show 'copy ID' in context menus"
 msgstr "コンテキストメニューに「IDをコピー」を表示"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Show a new code"
+msgstr "新しいコードを表示"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show a notice when a new version is available"
 msgstr "新しいバージョンが利用可能になったら通知を表示する"
@@ -5708,6 +5826,7 @@ msgid "Shows who is talking in your call on top of your game. It works over bord
 msgstr "通話で誰が話しているかをゲームの上に表示します。ボーダーレスとウィンドウモードのゲームで動作し、排他的フルスクリーンでは動作しません。"
 
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Sign into AnyTalk"
 msgstr "AnyTalk にログイン"
 
@@ -5791,6 +5910,10 @@ msgstr "検索中に問題が発生しました。もう一度お試しくださ
 #: components/i18n/errors.tsx
 msgid "Something went wrong! {error}"
 msgstr "問題が発生しました。{error}"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Something went wrong. Check your connection and try again."
+msgstr "問題が発生しました。接続を確認して、もう一度お試しください。"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 #: src/interface/servers/ServerOverview.tsx
@@ -6073,6 +6196,22 @@ msgstr "テキストチャンネル"
 msgid "That action had no effect."
 msgstr "その操作は効果がありませんでした。"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That code is not correct. Check it and try again."
+msgstr "コードが正しくありません。確認してもう一度お試しください。"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That password is not correct. Check it and try again."
+msgstr "パスワードが正しくありません。確認してもう一度お試しください。"
+
+#: components/modal/modals/QrLoginApprove.tsx
+#~ msgid "That password or code is not correct. Check it and try again."
+#~ msgstr "パスワードまたはコードが正しくありません。確認してもう一度お試しください。"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "That QR code is not an AnyTalk login code. Point the camera at the code on the login screen of the new device."
+msgstr "このQRコードはAnyTalkのログインコードではありません。新しいデバイスのログイン画面にあるコードにカメラを向けてください。"
+
 #: components/i18n/errors.tsx
 msgid "The bot has been removed from discover by moderators, the user must contact support."
 msgstr "このボットはモデレーターによって探索から削除されました。ユーザーはサポートに連絡してください。"
@@ -6084,6 +6223,14 @@ msgstr "このボットはすでに探索に載っています。削除するに
 #: components/modal/modals/AddBot.tsx
 msgid "The bot will not be granted any permissions."
 msgstr "ボットには権限が付与されません。"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "The camera could not be started."
+msgstr "カメラを起動できませんでした。"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "The camera is on but no picture arrives. Close this window and try again, or check that no other app is using the camera."
+msgstr "カメラはオンですが、映像が届きません。このウィンドウを閉じてもう一度お試しいただくか、他のアプリがカメラを使用していないか確認してください。"
 
 #. placeholder {0}: actionLabels()[blocker]
 #: components/app/interface/settings/user/Controller.tsx
@@ -6118,6 +6265,14 @@ msgstr "最初のバージョンはまだ公開されていません。しばら
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
 msgstr "このアイテムはモデレーターによって削除されたため、今後の申請はできません。詳しくはサポートにお問い合わせください。"
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "The login was cancelled, but the new session could not be removed. Remove it in Settings, then Sessions, on a device where you are logged in."
+msgstr "ログインはキャンセルされましたが、新しいセッションを削除できませんでした。ログイン済みのデバイスで、設定、セッションの順に開いて削除してください。"
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "The login was denied on the other device."
+msgstr "もう一方のデバイスでログインが拒否されました。"
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
@@ -6204,6 +6359,14 @@ msgstr "このチャンネルは成人向けとしてマークされています
 msgid "This channel is not available in your region while we review options on legal compliance."
 msgstr "法令順守に関する対応を検討している間、このチャンネルはお住まいの地域では利用できません。"
 
+#: components/modal/modals/QrScanner.tsx
+msgid "This code is from a different AnyTalk server. Open the login page of this server on the new device instead."
+msgstr "このコードは別のAnyTalkサーバーのものです。代わりに、新しいデバイスでこのサーバーのログインページを開いてください。"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "This code was made on an address that only works on the other device (localhost). Open the login page there with the same address you use on this device."
+msgstr "このコードは、もう一方のデバイスでしか使えないアドレス（localhost）で作成されました。そちらで、このデバイスで使っているものと同じアドレスでログインページを開いてください。"
+
 #: src/interface/channels/AgeGate.tsx
 msgid "This content is not available in your region."
 msgstr "このコンテンツはお住まいの地域では利用できません。"
@@ -6241,6 +6404,10 @@ msgstr "これがノートの始まりです。"
 msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
 msgstr "このキーは単独では使えません。Ctrl、Alt、Shift のいずれかを加えるか、別のキーを選んでください。"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "This login request has expired or was already answered. Ask the other device to show a new QR code."
+msgstr "このログインリクエストは期限切れか、すでに応答済みです。もう一方のデバイスで新しいQRコードを表示してください。"
+
 #: components/i18n/errors.tsx
 msgid "This message is already pinned."
 msgstr "このメッセージはすでにピン留めされています。"
@@ -6261,6 +6428,10 @@ msgstr "このパスワードは過去のセキュリティ漏えいで確認さ
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "This recap no longer exists."
 msgstr "このリキャップはもう存在しません。"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "This request cannot be approved right now. Ask the other device to show a new QR code."
+msgstr "このリクエストは現在承認できません。もう一方のデバイスで新しいQRコードを表示してください。"
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "This server is about..."
@@ -6376,6 +6547,14 @@ msgstr "トーナルスポット"
 #: src/interface/channels/text/Composition.tsx
 msgid "Too Long"
 msgstr "長すぎます"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Too many attempts. Wait a moment and try again."
+msgstr "試行回数が多すぎます。しばらく待ってからもう一度お試しください。"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Too many wrong codes. Wait a while before trying again."
+msgstr "間違ったコードの入力が多すぎます。しばらく待ってからもう一度お試しください。"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Top left"
@@ -6494,6 +6673,10 @@ msgstr "不明"
 #: src/interface/channels/ChannelPage.tsx
 msgid "Unknown channel type!"
 msgstr "不明なチャンネルタイプです！"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Unknown device"
+msgstr "不明なデバイス"
 
 #: components/markdown/plugins/customEmoji.tsx
 msgid "Unknown emote"
@@ -6664,9 +6847,17 @@ msgstr "コードまたは招待リンクを使う"
 msgid "Use a game controller to move around AnyTalk. Works with Xbox, PlayStation, Switch and Steam Deck controllers."
 msgstr "ゲームコントローラーでAnyTalkを操作できます。Xbox、PlayStation、Switch、Steam Deckのコントローラーに対応しています。"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a recovery code instead"
+msgstr "代わりにリカバリーコードを使う"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Use hotkeys that work even while AnyTalk isn't focused, and keep AnyTalk running in the system tray."
 msgstr "AnyTalk がフォーカスされていなくても使えるホットキーを利用でき、AnyTalk をシステムトレイで実行し続けられます。"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use the authenticator app instead"
+msgstr "代わりに認証アプリを使う"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Use the graphics card to improve performance."

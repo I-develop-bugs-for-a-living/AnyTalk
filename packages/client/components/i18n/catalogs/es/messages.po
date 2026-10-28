@@ -878,6 +878,10 @@ msgstr "Se aplica a los servidores a los que te unas o que crees a partir de aho
 msgid "Apply"
 msgstr "Aplicar"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Approve"
+msgstr "Aprobar"
+
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Apps"
 msgstr "Aplicaciones"
@@ -961,6 +965,10 @@ msgstr "Nivel de audio"
 msgid "Authenticator App"
 msgstr "Aplicación de autenticación"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Authenticator code"
+msgstr "Código de autenticación"
+
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Automatic"
 msgstr "Automático"
@@ -1007,6 +1015,7 @@ msgstr "B (botón derecho)"
 #: components/auth/src/flows/FlowCheck.tsx
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
@@ -1128,6 +1137,7 @@ msgid "Bring back"
 msgstr "Traer de vuelta"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+#: components/modal/modals/QrLoginApprove.tsx
 msgid "Browser"
 msgstr "Navegador"
 
@@ -1215,9 +1225,17 @@ msgstr "Llamadas: cómo se cifran"
 msgid "Camera"
 msgstr "Cámara"
 
+#: components/modal/modals/QrScanner.tsx
+msgid "Camera access was denied. Allow the camera for this site in your browser settings and try again."
+msgstr "Se denegó el acceso a la cámara. Permite la cámara para este sitio en los ajustes de tu navegador e inténtalo de nuevo."
+
 #: components/rtc/components/StreamPopouts.tsx
 msgid "Camera is off"
 msgstr "La cámara está apagada"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "Camera preview"
+msgstr "Vista previa de la cámara"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
@@ -1231,6 +1249,7 @@ msgstr "No se puede obtener el estado de la solicitud de Descubrir ahora mismo"
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Native.tsx
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
@@ -1250,6 +1269,7 @@ msgstr "No se puede obtener el estado de la solicitud de Descubrir ahora mismo"
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/Onboarding.tsx
 #: components/modal/modals/PinMessage.tsx
+#: components/modal/modals/QrScanner.tsx
 #: components/modal/modals/RemoveMember.tsx
 #: components/modal/modals/RemoveTimeout.tsx
 #: components/modal/modals/RenameSession.tsx
@@ -1430,6 +1450,10 @@ msgstr "¡Revisa tu correo electrónico!"
 msgid "Checking for updates…"
 msgstr "Buscando actualizaciones…"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Checking the account..."
+msgstr "Comprobando la cuenta..."
+
 #: src/interface/Sidebar.tsx
 msgid "Choose a server from the list to see its channels."
 msgstr "Elige un servidor de la lista para ver sus canales."
@@ -1505,6 +1529,7 @@ msgstr "cerrado"
 #: components/modal/modals/JoinServer.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/PolicyChange.tsx
+#: components/modal/modals/QrLoginApprove.tsx
 #: components/modal/modals/ServerInfo.tsx
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
@@ -1602,6 +1627,10 @@ msgstr "Confirmar"
 msgid "Confirm action"
 msgstr "Confirmar acción"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Confirm on your other device."
+msgstr "Confirma en tu otro dispositivo."
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Connect"
 msgstr "Conectar"
@@ -1656,6 +1685,7 @@ msgstr "Contenido"
 msgid "Content breaks one or more laws"
 msgstr "El contenido infringe una o varias leyes"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
 msgid "Continue"
@@ -1777,6 +1807,10 @@ msgstr "No se pudo cambiar el registro de claves. Inténtalo de nuevo."
 #~ msgid "Could not check for updates."
 #~ msgstr "No se pudo buscar actualizaciones."
 
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Could not check which account this is. Cancel and try again."
+msgstr "No se pudo comprobar de qué cuenta se trata. Cancela e inténtalo de nuevo."
+
 #: components/i18n/errors.tsx
 msgid "Could not find what you requested."
 msgstr "No se pudo encontrar lo que solicitaste."
@@ -1797,6 +1831,10 @@ msgstr "No se pudo abrir la transmisión en una ventana aparte. Comprueba que la
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Could not open the window. Check that pop-ups are allowed."
 msgstr "No se pudo abrir la ventana. Comprueba que las ventanas emergentes estén permitidas."
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Could not reach the server. Trying again..."
+msgstr "No se pudo conectar con el servidor. Reintentando..."
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
@@ -2203,6 +2241,10 @@ msgstr "Eliminar este emoji impedirá su uso futuro. Los usos anteriores se mant
 msgid "Delivery"
 msgstr "Entrega"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Deny"
+msgstr "Rechazar"
+
 #. placeholder {0}: props.invite.username
 #: components/modal/modals/AddBot.tsx
 msgid "Description provided by {0}"
@@ -2249,6 +2291,10 @@ msgstr "Documentación para desarrolladores"
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Developer modes measure call performance and keep statistics of previous calls and streams on this device. Turn on either or both."
 msgstr "Los modos de desarrollador miden el rendimiento de las llamadas y guardan en este dispositivo estadísticas de llamadas y transmisiones anteriores. Activa uno o ambos."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Device"
+msgstr "Dispositivo"
 
 #: components/app/interface/desktop/Titlebar.tsx
 msgid "Device is offline"
@@ -2583,6 +2629,10 @@ msgstr "Entrar al canal"
 #: components/modal/modals/MFAEnableTOTP.tsx
 msgid "Enter Code"
 msgstr "Introducir código"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Enter your account password to approve this login."
+msgstr "Introduce la contraseña de tu cuenta para aprobar este inicio de sesión."
 
 #: components/auth/src/flows/Form.tsx
 msgid "Enter your current password."
@@ -3456,6 +3506,10 @@ msgstr "Claro"
 msgid "Light (60 Hz)"
 msgstr "Ligero (60 Hz)"
 
+#: components/app/interface/settings/user/Sessions.tsx
+msgid "Link a device"
+msgstr "Vincular un dispositivo"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Linux .deb (Debian/Ubuntu)"
 msgstr "Linux .deb (Debian/Ubuntu)"
@@ -3518,6 +3572,24 @@ msgstr "Candidato local"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "Iniciar sesión"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Log in a new device?"
+msgstr "¿Iniciar sesión en un dispositivo nuevo?"
+
+#. placeholder {0}: approved()!.account!.display_name || approved()!.account!.username
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Log in as <0>{0}</0>? If you don't recognise this account, cancel."
+msgstr "¿Iniciar sesión como <0>{0}</0>? Si no reconoces esta cuenta, cancela."
+
+#: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Log in with QR code"
+msgstr "Iniciar sesión con código QR"
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Log in?"
+msgstr "¿Iniciar sesión?"
 
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -3978,6 +4050,10 @@ msgstr "Navegación"
 msgid "Needs a server that supports stream viewers."
 msgstr "Requiere un servidor compatible con espectadores de transmisión."
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Network address"
+msgstr "Dirección de red"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Network inspector"
 msgstr "Inspector de red"
@@ -4051,6 +4127,10 @@ msgstr "No se encontraron aplicaciones"
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "No audio was captured, switch window to share audio"
 msgstr "No se capturó audio, cambia de ventana para compartir audio"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "No camera was found on this device."
+msgstr "No se encontró ninguna cámara en este dispositivo."
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "No channels to search"
@@ -4293,6 +4373,10 @@ msgstr "Conectado"
 msgid "Online · {count}"
 msgstr "En línea · {count}"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Only approve this if you are looking at that device's screen right now and it shows this QR code. Someone could send you their QR code to take over your account."
+msgstr "Aprueba esto solo si estás mirando la pantalla de ese dispositivo ahora mismo y muestra este código QR. Alguien podría enviarte su código QR para hacerse con tu cuenta."
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Only change this if you run your own AnyTalk server."
 msgstr "Cambia esto solo si ejecutas tu propio servidor de AnyTalk."
@@ -4450,6 +4534,7 @@ msgstr "Incidencia parcial"
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/QrLoginApprove.tsx
 msgid "Password"
 msgstr "Contraseña"
 
@@ -4595,6 +4680,10 @@ msgstr "Espera un momento..."
 #: components/state/stores/Experiments.ts
 msgid "Plugins v2 Placeholder"
 msgstr "Marcador de Plugins v2"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "Point the camera at the QR code on the login screen of the new device."
+msgstr "Apunta la cámara al código QR de la pantalla de inicio de sesión del dispositivo nuevo."
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor"
@@ -4861,6 +4950,10 @@ msgstr "Tráfico grabado"
 msgid "Recording is off"
 msgstr "La grabación está desactivada"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Recovery code"
+msgstr "Código de recuperación"
+
 #: components/modal/modals/MFAFlow.tsx
 msgid "Recovery Code"
 msgstr "Código de recuperación"
@@ -5058,6 +5151,10 @@ msgstr "Cuerpo de la solicitud"
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Request headers"
 msgstr "Encabezados de la solicitud"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Requested"
+msgstr "Solicitado"
 
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Requests and messages show up here as they happen."
@@ -5304,6 +5401,23 @@ msgstr "Guardando…"
 #: components/modal/modals/ReportContent.tsx
 msgid "Scams or fraud"
 msgstr "Estafas o fraude"
+
+#: components/modal/modals/QrScanner.tsx
+#: src/interface/navigation/servers/UserMenu.tsx
+msgid "Scan QR code"
+msgstr "Escanear código QR"
+
+#: components/app/interface/settings/user/Sessions.tsx
+msgid "Scan the QR code on the login screen of a new device to log it in."
+msgstr "Escanea el código QR de la pantalla de inicio de sesión de un dispositivo nuevo para iniciar sesión en él."
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Scan this with AnyTalk on a device where you're logged in. Open Settings, then Sessions, then Link a device."
+msgstr "Escanea esto con AnyTalk en un dispositivo donde hayas iniciado sesión. Abre Ajustes, luego Sesiones y después Vincular un dispositivo."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "Scanning needs a secure connection (HTTPS). This page is opened over plain HTTP, so the browser blocks the camera."
+msgstr "Escanear requiere una conexión segura (HTTPS). Esta página se abrió con HTTP simple, así que el navegador bloquea la cámara."
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Screen share frame rate"
@@ -5668,6 +5782,10 @@ msgstr "Mostrar"
 msgid "Show 'copy ID' in context menus"
 msgstr "Mostrar «Copiar ID» en los menús contextuales"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Show a new code"
+msgstr "Mostrar un código nuevo"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show a notice when a new version is available"
 msgstr "Mostrar un aviso cuando haya una nueva versión disponible"
@@ -5774,6 +5892,7 @@ msgid "Shows who is talking in your call on top of your game. It works over bord
 msgstr "Muestra quién está hablando en tu llamada sobre tu juego. Funciona con juegos en ventana y sin bordes, no en pantalla completa exclusiva."
 
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Sign into AnyTalk"
 msgstr "Iniciar sesión en AnyTalk"
 
@@ -5860,6 +5979,10 @@ msgstr "¡Algo salió mal! {error}"
 
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr "¡Algo ha ido mal! Inténtalo de nuevo más tarde."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Something went wrong. Check your connection and try again."
+msgstr "Algo salió mal. Comprueba tu conexión e inténtalo de nuevo."
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 #: src/interface/servers/ServerOverview.tsx
@@ -6142,6 +6265,22 @@ msgstr "Canal de texto"
 msgid "That action had no effect."
 msgstr "Esta acción no tuvo efecto."
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That code is not correct. Check it and try again."
+msgstr "Ese código no es correcto. Compruébalo e inténtalo de nuevo."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That password is not correct. Check it and try again."
+msgstr "Esa contraseña no es correcta. Compruébala e inténtalo de nuevo."
+
+#: components/modal/modals/QrLoginApprove.tsx
+#~ msgid "That password or code is not correct. Check it and try again."
+#~ msgstr "Esa contraseña o ese código no es correcto. Revísalo e inténtalo de nuevo."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "That QR code is not an AnyTalk login code. Point the camera at the code on the login screen of the new device."
+msgstr "Ese código QR no es un código de inicio de sesión de AnyTalk. Apunta la cámara al código de la pantalla de inicio de sesión del dispositivo nuevo."
+
 #: components/i18n/errors.tsx
 msgid "The bot has been removed from discover by moderators, the user must contact support."
 msgstr "Los moderadores han quitado el bot de Descubrir, el usuario debe contactar con soporte."
@@ -6153,6 +6292,14 @@ msgstr "El bot ya está en Descubrir, el usuario debe contactar con soporte para
 #: components/modal/modals/AddBot.tsx
 msgid "The bot will not be granted any permissions."
 msgstr "Al bot no se le concederá ningún permiso."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "The camera could not be started."
+msgstr "No se pudo iniciar la cámara."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "The camera is on but no picture arrives. Close this window and try again, or check that no other app is using the camera."
+msgstr "La cámara está encendida, pero no llega ninguna imagen. Cierra esta ventana e inténtalo de nuevo, o comprueba que ninguna otra aplicación esté usando la cámara."
 
 #. placeholder {0}: actionLabels()[blocker]
 #: components/app/interface/settings/user/Controller.tsx
@@ -6187,6 +6334,14 @@ msgstr "La primera versión aún no se ha publicado. Vuelve pronto."
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
 msgstr "Los moderadores quitaron el elemento, por lo que no se permiten nuevas solicitudes. Contacta con soporte para más información."
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "The login was cancelled, but the new session could not be removed. Remove it in Settings, then Sessions, on a device where you are logged in."
+msgstr "El inicio de sesión se canceló, pero no se pudo eliminar la sesión nueva. Elimínala en Ajustes, luego Sesiones, en un dispositivo donde hayas iniciado sesión."
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "The login was denied on the other device."
+msgstr "El inicio de sesión se denegó en el otro dispositivo."
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
@@ -6273,6 +6428,14 @@ msgstr "Este canal está marcado como adulto."
 msgid "This channel is not available in your region while we review options on legal compliance."
 msgstr "Este canal no está disponible en tu región mientras revisamos opciones para cumplir con la ley."
 
+#: components/modal/modals/QrScanner.tsx
+msgid "This code is from a different AnyTalk server. Open the login page of this server on the new device instead."
+msgstr "Este código es de otro servidor de AnyTalk. Abre en su lugar la página de inicio de sesión de este servidor en el dispositivo nuevo."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "This code was made on an address that only works on the other device (localhost). Open the login page there with the same address you use on this device."
+msgstr "Este código se creó con una dirección que solo funciona en el otro dispositivo (localhost). Abre allí la página de inicio de sesión con la misma dirección que usas en este dispositivo."
+
 #: src/interface/channels/AgeGate.tsx
 msgid "This content is not available in your region."
 msgstr "Este contenido no está disponible en tu región."
@@ -6310,6 +6473,10 @@ msgstr "Este es el comienzo de tus notas."
 msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
 msgstr "Esta tecla no se puede usar sola. Añade Ctrl, Alt o Mayús, o elige otra tecla."
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "This login request has expired or was already answered. Ask the other device to show a new QR code."
+msgstr "Esta solicitud de inicio de sesión ha caducado o ya se respondió. Pide al otro dispositivo que muestre un código QR nuevo."
+
 #: components/i18n/errors.tsx
 msgid "This message is already pinned."
 msgstr "Este mensaje ya está fijado."
@@ -6330,6 +6497,10 @@ msgstr "Esta contraseña ha aparecido previamente en brechas de seguridad, por f
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "This recap no longer exists."
 msgstr "Este resumen ya no existe."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "This request cannot be approved right now. Ask the other device to show a new QR code."
+msgstr "Esta solicitud no se puede aprobar ahora mismo. Pide al otro dispositivo que muestre un código QR nuevo."
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "This server is about..."
@@ -6445,6 +6616,14 @@ msgstr "Acento tonal"
 #: src/interface/channels/text/Composition.tsx
 msgid "Too Long"
 msgstr "Demasiado largo"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Too many attempts. Wait a moment and try again."
+msgstr "Demasiados intentos. Espera un momento e inténtalo de nuevo."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Too many wrong codes. Wait a while before trying again."
+msgstr "Demasiados códigos incorrectos. Espera un rato antes de volver a intentarlo."
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Top left"
@@ -6563,6 +6742,10 @@ msgstr "Desconocido"
 #: src/interface/channels/ChannelPage.tsx
 msgid "Unknown channel type!"
 msgstr "¡Tipo de canal desconocido!"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Unknown device"
+msgstr "Dispositivo desconocido"
 
 #: components/markdown/plugins/customEmoji.tsx
 msgid "Unknown emote"
@@ -6733,9 +6916,17 @@ msgstr "Usar un código o un enlace de invitación"
 msgid "Use a game controller to move around AnyTalk. Works with Xbox, PlayStation, Switch and Steam Deck controllers."
 msgstr "Usa un mando de juego para moverte por AnyTalk. Funciona con mandos de Xbox, PlayStation, Switch y Steam Deck."
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a recovery code instead"
+msgstr "Usar un código de recuperación"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Use hotkeys that work even while AnyTalk isn't focused, and keep AnyTalk running in the system tray."
 msgstr "Usa atajos de teclado que funcionan incluso cuando AnyTalk no está en primer plano y mantén AnyTalk en ejecución en la bandeja del sistema."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use the authenticator app instead"
+msgstr "Usar la aplicación de autenticación"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Use the graphics card to improve performance."

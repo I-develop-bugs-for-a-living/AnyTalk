@@ -901,6 +901,10 @@ msgstr "适用于你之后加入或创建的服务器。现有服务器保持原
 msgid "Apply"
 msgstr "应用"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Approve"
+msgstr "批准"
+
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Apps"
 msgstr "应用"
@@ -987,6 +991,10 @@ msgstr "音频电平"
 msgid "Authenticator App"
 msgstr "身份验证器应用"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Authenticator code"
+msgstr "验证码"
+
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Automatic"
 msgstr "自动"
@@ -1033,6 +1041,7 @@ msgstr "B(右侧按钮)"
 #: components/auth/src/flows/FlowCheck.tsx
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
@@ -1154,6 +1163,7 @@ msgid "Bring back"
 msgstr "放回"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+#: components/modal/modals/QrLoginApprove.tsx
 msgid "Browser"
 msgstr "浏览器"
 
@@ -1242,9 +1252,17 @@ msgstr "通话：加密方式"
 msgid "Camera"
 msgstr "摄像头"
 
+#: components/modal/modals/QrScanner.tsx
+msgid "Camera access was denied. Allow the camera for this site in your browser settings and try again."
+msgstr "相机访问被拒绝。请在浏览器设置中允许此网站使用相机，然后重试。"
+
 #: components/rtc/components/StreamPopouts.tsx
 msgid "Camera is off"
 msgstr "摄像头已关闭"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "Camera preview"
+msgstr "相机预览"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
@@ -1258,6 +1276,7 @@ msgstr "暂时无法获取发现申请状态"
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Native.tsx
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
@@ -1277,6 +1296,7 @@ msgstr "暂时无法获取发现申请状态"
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/Onboarding.tsx
 #: components/modal/modals/PinMessage.tsx
+#: components/modal/modals/QrScanner.tsx
 #: components/modal/modals/RemoveMember.tsx
 #: components/modal/modals/RemoveTimeout.tsx
 #: components/modal/modals/RenameSession.tsx
@@ -1458,6 +1478,10 @@ msgstr "请检查您的邮件！"
 msgid "Checking for updates…"
 msgstr "正在检查更新…"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Checking the account..."
+msgstr "正在检查账号..."
+
 #: src/interface/Sidebar.tsx
 msgid "Choose a server from the list to see its channels."
 msgstr "从列表中选择一个服务器以查看其频道。"
@@ -1533,6 +1557,7 @@ msgstr "关闭"
 #: components/modal/modals/JoinServer.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/PolicyChange.tsx
+#: components/modal/modals/QrLoginApprove.tsx
 #: components/modal/modals/ServerInfo.tsx
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
@@ -1630,6 +1655,10 @@ msgstr "确认"
 msgid "Confirm action"
 msgstr "确认操作"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Confirm on your other device."
+msgstr "请在另一台设备上确认。"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Connect"
 msgstr "连接"
@@ -1684,6 +1713,7 @@ msgstr "内容"
 msgid "Content breaks one or more laws"
 msgstr "内容违反一条或多条规则"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
 msgid "Continue"
@@ -1805,6 +1835,10 @@ msgstr "无法更改密钥日志，请重试。"
 #~ msgid "Could not check for updates."
 #~ msgstr "无法检查更新。"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Could not check which account this is. Cancel and try again."
+msgstr "无法确认这是哪个账号。请取消后重试。"
+
 #: components/i18n/errors.tsx
 msgid "Could not find what you requested."
 msgstr "找不到你请求的内容。"
@@ -1825,6 +1859,10 @@ msgstr "无法在单独窗口中打开该直播。请检查是否允许弹出窗
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Could not open the window. Check that pop-ups are allowed."
 msgstr "无法打开窗口。请检查是否允许弹出窗口。"
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Could not reach the server. Trying again..."
+msgstr "无法连接到服务器。正在重试..."
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
@@ -2233,6 +2271,10 @@ msgstr "删除此表情后将无法再使用，过去的使用不受影响。"
 msgid "Delivery"
 msgstr "传输方式"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Deny"
+msgstr "拒绝"
+
 #. placeholder {0}: props.invite.username
 #: components/modal/modals/AddBot.tsx
 msgid "Description provided by {0}"
@@ -2279,6 +2321,10 @@ msgstr "开发者文档"
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Developer modes measure call performance and keep statistics of previous calls and streams on this device. Turn on either or both."
 msgstr "开发者模式会测量通话性能，并在此设备上保存过往通话和直播的统计数据。可开启其中一项或两项。"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Device"
+msgstr "设备"
 
 #: components/app/interface/desktop/Titlebar.tsx
 msgid "Device is offline"
@@ -2616,6 +2662,10 @@ msgstr "进入频道"
 #: components/modal/modals/MFAEnableTOTP.tsx
 msgid "Enter Code"
 msgstr "输入代码"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Enter your account password to approve this login."
+msgstr "请输入账号密码以批准此次登录。"
 
 #: components/auth/src/flows/Form.tsx
 msgid "Enter your current password."
@@ -3493,6 +3543,10 @@ msgstr "浅色"
 msgid "Light (60 Hz)"
 msgstr "浅色（60 Hz）"
 
+#: components/app/interface/settings/user/Sessions.tsx
+msgid "Link a device"
+msgstr "关联设备"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Linux .deb (Debian/Ubuntu)"
 msgstr "Linux .deb（Debian/Ubuntu）"
@@ -3555,6 +3609,24 @@ msgstr "本地候选"
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "登录"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Log in a new device?"
+msgstr "登录新设备？"
+
+#. placeholder {0}: approved()!.account!.display_name || approved()!.account!.username
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Log in as <0>{0}</0>? If you don't recognise this account, cancel."
+msgstr "以 <0>{0}</0> 的身份登录？如果你不认识此账号，请取消。"
+
+#: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Log in with QR code"
+msgstr "使用二维码登录"
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Log in?"
+msgstr "登录？"
 
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -4015,6 +4087,10 @@ msgstr "导航"
 msgid "Needs a server that supports stream viewers."
 msgstr "需要支持直播观众的服务器。"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Network address"
+msgstr "网络地址"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Network inspector"
 msgstr "网络检查器"
@@ -4088,6 +4164,10 @@ msgstr "未找到应用"
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "No audio was captured, switch window to share audio"
 msgstr "未捕获到音频，请切换窗口以共享音频"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "No camera was found on this device."
+msgstr "在此设备上未找到相机。"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "No channels to search"
@@ -4330,6 +4410,10 @@ msgstr "在线"
 msgid "Online · {count}"
 msgstr "在线 · {count}"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Only approve this if you are looking at that device's screen right now and it shows this QR code. Someone could send you their QR code to take over your account."
+msgstr "仅当你此刻正看着那台设备的屏幕且屏幕上显示的正是此二维码时才批准。有人可能会把他们的二维码发给你，以夺取你的账号。"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Only change this if you run your own AnyTalk server."
 msgstr "仅当你运行自己的 AnyTalk 服务器时才需要更改。"
@@ -4487,6 +4571,7 @@ msgstr "部分故障"
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/QrLoginApprove.tsx
 msgid "Password"
 msgstr "密码"
 
@@ -4632,6 +4717,10 @@ msgstr "请稍候..."
 #: components/state/stores/Experiments.ts
 msgid "Plugins v2 Placeholder"
 msgstr "插件 v2 占位"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "Point the camera at the QR code on the login screen of the new device."
+msgstr "请将相机对准新设备登录界面上的二维码。"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor"
@@ -4899,6 +4988,10 @@ msgstr "已录制的流量"
 msgid "Recording is off"
 msgstr "录制已关闭"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Recovery code"
+msgstr "恢复码"
+
 #: components/modal/modals/MFAFlow.tsx
 msgid "Recovery Code"
 msgstr "恢复代码"
@@ -5096,6 +5189,10 @@ msgstr "请求正文"
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Request headers"
 msgstr "请求标头"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Requested"
+msgstr "请求时间"
 
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Requests and messages show up here as they happen."
@@ -5345,6 +5442,23 @@ msgstr "正在保存…"
 #: components/modal/modals/ReportContent.tsx
 msgid "Scams or fraud"
 msgstr "诈骗或欺诈"
+
+#: components/modal/modals/QrScanner.tsx
+#: src/interface/navigation/servers/UserMenu.tsx
+msgid "Scan QR code"
+msgstr "扫描二维码"
+
+#: components/app/interface/settings/user/Sessions.tsx
+msgid "Scan the QR code on the login screen of a new device to log it in."
+msgstr "扫描新设备登录界面上的二维码，即可让其登录。"
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Scan this with AnyTalk on a device where you're logged in. Open Settings, then Sessions, then Link a device."
+msgstr "请在已登录的设备上用 AnyTalk 扫描此码。依次打开设置、登录会话、关联设备。"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "Scanning needs a secure connection (HTTPS). This page is opened over plain HTTP, so the browser blocks the camera."
+msgstr "扫描需要安全连接（HTTPS）。此页面是通过普通 HTTP 打开的，因此浏览器会阻止使用相机。"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Screen share frame rate"
@@ -5712,6 +5826,10 @@ msgstr "显示"
 msgid "Show 'copy ID' in context menus"
 msgstr "在右键菜单中显示“复制 ID”"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Show a new code"
+msgstr "显示新二维码"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show a notice when a new version is available"
 msgstr "有新版本时显示通知"
@@ -5818,6 +5936,7 @@ msgid "Shows who is talking in your call on top of your game. It works over bord
 msgstr "在游戏画面上方显示通话中谁在说话。适用于无边框和窗口化游戏，不适用于独占全屏。"
 
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Sign into AnyTalk"
 msgstr "登录 AnyTalk"
 
@@ -5904,6 +6023,10 @@ msgstr "出错了！{error}"
 
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Something went wrong. Check your connection and try again."
+msgstr "出了点问题。请检查网络连接后重试。"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 #: src/interface/servers/ServerOverview.tsx
@@ -6189,6 +6312,22 @@ msgstr "文本频道"
 msgid "That action had no effect."
 msgstr "该操作没有任何效果。"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That code is not correct. Check it and try again."
+msgstr "验证码不正确，请检查后重试。"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That password is not correct. Check it and try again."
+msgstr "密码不正确，请检查后重试。"
+
+#: components/modal/modals/QrLoginApprove.tsx
+#~ msgid "That password or code is not correct. Check it and try again."
+#~ msgstr "密码或验证码不正确。请检查后重试。"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "That QR code is not an AnyTalk login code. Point the camera at the code on the login screen of the new device."
+msgstr "该二维码不是 AnyTalk 登录二维码。请将相机对准新设备登录界面上的二维码。"
+
 #: components/i18n/errors.tsx
 msgid "The bot has been removed from discover by moderators, the user must contact support."
 msgstr "该机器人已被管理员从发现页面移除，用户必须联系支持人员。"
@@ -6200,6 +6339,14 @@ msgstr "该机器人已在发现页面中，用户必须联系支持人员才能
 #: components/modal/modals/AddBot.tsx
 msgid "The bot will not be granted any permissions."
 msgstr "不会授予该机器人任何权限。"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "The camera could not be started."
+msgstr "无法启动相机。"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "The camera is on but no picture arrives. Close this window and try again, or check that no other app is using the camera."
+msgstr "相机已开启，但没有画面。请关闭此窗口后重试，或检查是否有其他应用正在使用相机。"
 
 #. placeholder {0}: actionLabels()[blocker]
 #: components/app/interface/settings/user/Controller.tsx
@@ -6234,6 +6381,14 @@ msgstr "第一个版本尚未发布，请稍后再来看看。"
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
 msgstr "该项目已被管理员移除，因此禁止再次申请。请联系支持人员了解更多信息。"
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "The login was cancelled, but the new session could not be removed. Remove it in Settings, then Sessions, on a device where you are logged in."
+msgstr "登录已取消，但无法移除新的会话。请在已登录的设备上，依次打开设置、登录会话，将其移除。"
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "The login was denied on the other device."
+msgstr "另一台设备已拒绝此次登录。"
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
@@ -6320,6 +6475,14 @@ msgstr "此频道已被标记为成人内容。"
 msgid "This channel is not available in your region while we review options on legal compliance."
 msgstr "在我们审查合规方案期间，你所在地区无法使用此频道。"
 
+#: components/modal/modals/QrScanner.tsx
+msgid "This code is from a different AnyTalk server. Open the login page of this server on the new device instead."
+msgstr "此二维码来自另一个 AnyTalk 服务器。请改为在新设备上打开本服务器的登录页面。"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "This code was made on an address that only works on the other device (localhost). Open the login page there with the same address you use on this device."
+msgstr "此代码是通过仅在另一台设备上可用的地址（localhost）生成的。请在那台设备上使用与本设备相同的地址打开登录页面。"
+
 #: src/interface/channels/AgeGate.tsx
 msgid "This content is not available in your region."
 msgstr "此内容在你所在地区不可用。"
@@ -6357,6 +6520,10 @@ msgstr "这里是您笔记的开始。"
 msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
 msgstr "此按键不能单独使用。请加上 Ctrl、Alt 或 Shift，或选择其他按键。"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "This login request has expired or was already answered. Ask the other device to show a new QR code."
+msgstr "此登录请求已过期或已被处理。请让另一台设备显示新的二维码。"
+
 #: components/i18n/errors.tsx
 msgid "This message is already pinned."
 msgstr "这条消息已被置顶。"
@@ -6377,6 +6544,10 @@ msgstr "此密码曾出现在安全泄露事件中，请使用其他密码。"
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "This recap no longer exists."
 msgstr "此回顾已不存在。"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "This request cannot be approved right now. Ask the other device to show a new QR code."
+msgstr "目前无法批准此请求。请让另一台设备显示新的二维码。"
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "This server is about..."
@@ -6492,6 +6663,14 @@ msgstr "Tonal Spot"
 #: src/interface/channels/text/Composition.tsx
 msgid "Too Long"
 msgstr "过长"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Too many attempts. Wait a moment and try again."
+msgstr "尝试次数过多。请稍候再试。"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Too many wrong codes. Wait a while before trying again."
+msgstr "错误验证码次数过多。请稍等一段时间后再试。"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Top left"
@@ -6610,6 +6789,10 @@ msgstr "未知"
 #: src/interface/channels/ChannelPage.tsx
 msgid "Unknown channel type!"
 msgstr "未知的频道类型！"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Unknown device"
+msgstr "未知设备"
 
 #: components/markdown/plugins/customEmoji.tsx
 msgid "Unknown emote"
@@ -6780,9 +6963,17 @@ msgstr "使用邀请码或邀请链接"
 msgid "Use a game controller to move around AnyTalk. Works with Xbox, PlayStation, Switch and Steam Deck controllers."
 msgstr "使用游戏手柄在 AnyTalk 中操作。支持 Xbox、PlayStation、Switch 和 Steam Deck 手柄。"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a recovery code instead"
+msgstr "改用恢复码"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Use hotkeys that work even while AnyTalk isn't focused, and keep AnyTalk running in the system tray."
 msgstr "使用即使 AnyTalk 未处于焦点时也能生效的快捷键，并让 AnyTalk 在系统托盘中持续运行。"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use the authenticator app instead"
+msgstr "改用验证器应用"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Use the graphics card to improve performance."
