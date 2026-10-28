@@ -222,10 +222,34 @@ export function ChannelHeader(props: Props) {
           <HeaderIcon>
             <Symbol>alternate_email</Symbol>
           </HeaderIcon>
-          <OverflowingText>
-            <TextWithEmoji content={props.channel.recipient?.username} />
-          </OverflowingText>
-          <UserStatus status={props.channel.recipient?.presence} size="8px" />
+          <Show
+            when={props.channel.recipient}
+            fallback={
+              <OverflowingText>
+                <TextWithEmoji content={props.channel.recipient?.username} />
+              </OverflowingText>
+            }
+          >
+            {/* name and presence open the other person's profile */}
+            <ProfileButton
+              type="button"
+              aria-label={t`Open profile of ${props.channel.recipient!.username}`}
+              onClick={() =>
+                openModal({
+                  type: "user_profile",
+                  user: props.channel.recipient!,
+                })
+              }
+            >
+              <OverflowingText>
+                <TextWithEmoji content={props.channel.recipient!.username} />
+              </OverflowingText>
+              <UserStatus
+                status={props.channel.recipient!.presence}
+                size="8px"
+              />
+            </ProfileButton>
+          </Show>
         </Match>
         <Match when={props.channel.type === "SavedMessages"}>
           <HeaderIcon>
@@ -441,6 +465,26 @@ const SearchBox = styled("input", {
     paddingInline: "16px",
     borderRadius: "var(--borderRadius-full)",
     background: "var(--md-sys-color-surface-container-high)",
+  },
+});
+
+/**
+ * Button around the name of a DM partner that opens their profile
+ */
+const ProfileButton = styled("button", {
+  base: {
+    all: "unset",
+    boxSizing: "border-box",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    minWidth: 0,
+    minHeight: "44px",
+    color: "inherit",
+    _focusVisible: {
+      outline: "2px solid var(--md-sys-color-primary)",
+    },
   },
 });
 
