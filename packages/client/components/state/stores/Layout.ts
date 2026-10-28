@@ -1,3 +1,8 @@
+import {
+  type PhoneTab,
+  DEFAULT_PHONE_TAB,
+  isPhoneTab,
+} from "@revolt/common/lib/phoneTabs";
 import Instance from "@revolt/instance/Instance";
 import { paramsFromPathname } from "@revolt/routing";
 
@@ -45,6 +50,11 @@ export interface TypeLayout {
    * Only the contrary is ever stored
    */
   openSections: Record<string, boolean>;
+
+  /**
+   * Tab of the bottom navigation bar on phones
+   */
+  phoneTab: PhoneTab;
 }
 
 /**
@@ -74,6 +84,7 @@ export class Layout extends AbstractStore<"layout", TypeLayout> {
       activeInterface: "home",
       activePath: {},
       openSections: {},
+      phoneTab: DEFAULT_PHONE_TAB,
     };
   }
 
@@ -107,6 +118,10 @@ export class Layout extends AbstractStore<"layout", TypeLayout> {
           layout.openSections[section] = input.openSections[section];
         }
       }
+    }
+
+    if (isPhoneTab(input.phoneTab)) {
+      layout.phoneTab = input.phoneTab;
     }
 
     return layout;
@@ -163,6 +178,21 @@ export class Layout extends AbstractStore<"layout", TypeLayout> {
       : (params.serverId ?? "home");
     this.set("activeInterface", section);
     this.set("activePath", section, Instance.relPath(pathname));
+  }
+
+  /**
+   * Tab of the phone bottom navigation bar that is open
+   */
+  getPhoneTab(): PhoneTab {
+    return this.get().phoneTab;
+  }
+
+  /**
+   * Open a tab of the phone bottom navigation bar
+   * @param tab Tab to open
+   */
+  setPhoneTab(tab: PhoneTab) {
+    if (this.get().phoneTab !== tab) this.set("phoneTab", tab);
   }
 
   /**

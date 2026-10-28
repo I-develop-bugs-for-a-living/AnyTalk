@@ -8,6 +8,7 @@ import {
   createMemo,
   createSignal,
   splitProps,
+  untrack,
 } from "solid-js";
 
 import { plural } from "@lingui/core/macro";
@@ -19,9 +20,9 @@ import { styled } from "styled-system/jsx";
 import { ServerFolderContextMenu } from "@revolt/app/menus";
 import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
+import { countIncomingRequests } from "@revolt/common/lib/phoneTabs";
 import { useInstance } from "@revolt/instance";
 import Instance from "@revolt/instance/Instance";
-import { KeybindAction, createKeybind } from "@revolt/keybinds";
 import { useLocation, useNavigate, useSmartParams } from "@revolt/routing";
 import { ResolvedEntry, useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
@@ -37,7 +38,12 @@ import {
 import { VoiceStatus } from "@revolt/ui/components/design/VoiceStatus";
 import { Tooltip } from "@revolt/ui/components/floating";
 
-import { INBOX_PANEL_ID, Inbox, createInboxMentions } from "./Inbox";
+import {
+  type InboxMentions,
+  INBOX_PANEL_ID,
+  Inbox,
+  createInboxMentions,
+} from "./Inbox";
 import { UserMenu } from "./UserMenu";
 import {
   aggregatePinBadges,
@@ -46,6 +52,7 @@ import {
 } from "./pinStack";
 import { RailEntry, createRailDrag } from "./railDrag";
 import { useRailDesktop, useRailWide } from "./railMode";
+import { createServerKeybinds } from "./serverKeybinds";
 
 interface Props {
   /**
@@ -88,6 +95,17 @@ interface Props {
    * Menu generator
    */
   menuGenerator: (target: Server | Channel) => JSX.Directives["floating"];
+
+  /**
+   * Only list the servers: no Home, inbox, chat shortcuts or own avatar.
+   * Used by the Servers tab of the phone bottom bar, which has tabs for those.
+   */
+  serversOnly?: boolean;
+
+  /**
+   * Inbox data to use instead of tracking our own (the bottom bar owns it)
+   */
+  inboxMentions?: InboxMentions;
 }
 
 /**
@@ -104,41 +122,13 @@ export const ServerList = (props: Props) => {
   const wide = useRailWide();
   const desktop = useRailDesktop();
 
-  const navigateServer = (byOffset: number) => {
-    const serverId = props.selectedServer();
-    if (serverId == null && props.orderedServers.length) {
-      if (byOffset === 1) {
-        navigate(`/server/${props.orderedServers[0].id}`);
-      } else {
-        navigate(
-          `/server/${props.orderedServers[props.orderedServers.length - 1].id}`,
-        );
-      }
-      return;
-    }
-
-    const currentServerIndex = props.orderedServers.findIndex(
-      (server) => server.id === serverId,
+  // the bottom bar registers these itself, once, for every tab
+  if (!untrack(() => props.serversOnly)) {
+    createServerKeybinds(
+      () => props.orderedServers,
+      () => props.selectedServer(),
     );
-
-    const nextIndex = currentServerIndex + byOffset;
-
-    if (nextIndex === -1) {
-      return navigate("/app");
-    }
-
-    // this will wrap the index around
-    const nextServer = props.orderedServers.at(
-      nextIndex % props.orderedServers.length,
-    );
-
-    if (nextServer) {
-      navigate(`/server/${nextServer.id}`);
-    }
-  };
-
-  createKeybind(KeybindAction.NAVIGATION_SERVER_UP, () => navigateServer(-1));
-  createKeybind(KeybindAction.NAVIGATION_SERVER_DOWN, () => navigateServer(1));
+  }
 
   const params = useSmartParams();
 
@@ -154,10 +144,9 @@ export const ServerList = (props: Props) => {
     );
   };
 
-  const homeNotifications = createMemo(() => {
-    return client().users.filter((user) => user.relationship === "Incoming")
-      .length;
-  });
+  const homeNotifications = createMemo(() =>
+    countIncomingRequests(client().users),
+  );
 
   // Ref for floating menu
   const [menuButton, setMenuButton] = createSignal<HTMLElement>();
@@ -165,7 +154,9 @@ export const ServerList = (props: Props) => {
   // Inbox of unread mentions
   const [inboxButton, setInboxButton] = createSignal<HTMLElement>();
   const [inboxOpen, setInboxOpen] = createSignal(false);
-  const inboxMentions = createInboxMentions();
+  // the bottom bar passes its own, which never changes while this is mounted
+  const inboxMentions =
+    untrack(() => props.inboxMentions) ?? createInboxMentions();
   const inboxLabel = () =>
     inboxMentions.count() > 0
       ? plural(inboxMentions.count(), {
@@ -309,131 +300,133 @@ export const ServerList = (props: Props) => {
   return (
     <ServerListBase aria-label={t`Servers`} data-region="servers" wide={wide()}>
       <div use:invisibleScrollable={{ direction: "y", class: listBase() }}>
-        <a
-          class={entryContainer({
-            indicator:
-              !props.selectedServer() && !chatShortcutOpen()
-                ? "selected"
-                : undefined,
-            wide: wide(),
-          })}
-          href="/app"
-          aria-label={t`Home`}
-          use:floating={{
-            // wide mode shows the name, the tooltip only stays for the friend requests
-            tooltip:
-              wide() && homeNotifications() === 0
-                ? undefined
-                : {
-                    content:
-                      homeNotifications() > 0
-                        ? t`You have ${homeNotifications()} pending friend requests.`
-                        : t`Home`,
-                    placement: "right",
-                  },
-          }}
-        >
-          <Avatar
-            size={42}
-            fallback={<Symbol fill>home</Symbol>}
-            holepunch={homeNotifications() ? "top-right" : undefined}
-            overlay={
-              <Show when={homeNotifications()}>
-                <Unreads.Graphic
-                  unread={homeNotifications() !== 0}
-                  count={homeNotifications()}
-                />
-              </Show>
-            }
-          />
-          <Show when={wide()}>
-            <RailLabel>
-              <Trans>Home</Trans>
-            </RailLabel>
-          </Show>
-        </a>
-        <RailTooltip
-          hidden={wide()}
-          placement="right"
-          content={inboxLabel()}
-          aria={inboxLabel()}
-        >
-          <button
-            type="button"
-            ref={setInboxButton}
-            class={entryContainer({ wide: wide() }) + " " + resetButton}
-            aria-haspopup="dialog"
-            aria-controls={INBOX_PANEL_ID}
-            aria-expanded={inboxOpen()}
-            aria-label={inboxLabel()}
-            onClick={() => setInboxOpen((open) => !open)}
+        <Show when={!props.serversOnly}>
+          <a
+            class={entryContainer({
+              indicator:
+                !props.selectedServer() && !chatShortcutOpen()
+                  ? "selected"
+                  : undefined,
+              wide: wide(),
+            })}
+            href="/app"
+            aria-label={t`Home`}
+            use:floating={{
+              // wide mode shows the name, the tooltip only stays for the friend requests
+              tooltip:
+                wide() && homeNotifications() === 0
+                  ? undefined
+                  : {
+                      content:
+                        homeNotifications() > 0
+                          ? t`You have ${homeNotifications()} pending friend requests.`
+                          : t`Home`,
+                      placement: "right",
+                    },
+            }}
           >
             <Avatar
               size={42}
-              fallback={<Symbol fill={inboxOpen()}>inbox</Symbol>}
-              holepunch={inboxMentions.count() > 0 ? "top-right" : undefined}
+              fallback={<Symbol fill>home</Symbol>}
+              holepunch={homeNotifications() ? "top-right" : undefined}
               overlay={
-                <Show when={inboxMentions.count() > 0}>
-                  <Unreads.Graphic count={inboxMentions.count()} unread />
+                <Show when={homeNotifications()}>
+                  <Unreads.Graphic
+                    unread={homeNotifications() !== 0}
+                    count={homeNotifications()}
+                  />
                 </Show>
               }
-              interactive
             />
             <Show when={wide()}>
               <RailLabel>
-                <Trans>Inbox</Trans>
-              </RailLabel>
-            </Show>
-          </button>
-        </RailTooltip>
-        <Inbox
-          anchor={inboxButton}
-          mentions={inboxMentions}
-          open={inboxOpen()}
-          onClose={() => setInboxOpen(false)}
-        />
-        <For each={props.unreadConversations.slice(0, 9)}>
-          {(conversation) => (
-            <ChatShortcut
-              conversation={conversation}
-              menuGenerator={props.menuGenerator}
-            />
-          )}
-        </For>
-        <Show when={props.unreadConversations.length > 9}>
-          <a class={entryContainer({ wide: wide() })} href={`/`}>
-            <Avatar
-              size={42}
-              fallback={<>+{props.unreadConversations.length - 9}</>}
-            />
-            <Show when={wide()}>
-              <RailLabel>
-                <Trans>More unread chats</Trans>
+                <Trans>Home</Trans>
               </RailLabel>
             </Show>
           </a>
-        </Show>
-        <Show
-          when={shouldStackPins(props.pinnedConversations.length)}
-          fallback={
-            <For each={props.pinnedConversations}>
-              {(conversation) => (
-                <ChatShortcut
-                  conversation={conversation}
-                  menuGenerator={props.menuGenerator}
-                  pinned
-                />
-              )}
-            </For>
-          }
-        >
-          <PinStack
-            conversations={props.pinnedConversations}
-            menuGenerator={props.menuGenerator}
+          <RailTooltip
+            hidden={wide()}
+            placement="right"
+            content={inboxLabel()}
+            aria={inboxLabel()}
+          >
+            <button
+              type="button"
+              ref={setInboxButton}
+              class={entryContainer({ wide: wide() }) + " " + resetButton}
+              aria-haspopup="dialog"
+              aria-controls={INBOX_PANEL_ID}
+              aria-expanded={inboxOpen()}
+              aria-label={inboxLabel()}
+              onClick={() => setInboxOpen((open) => !open)}
+            >
+              <Avatar
+                size={42}
+                fallback={<Symbol fill={inboxOpen()}>inbox</Symbol>}
+                holepunch={inboxMentions.count() > 0 ? "top-right" : undefined}
+                overlay={
+                  <Show when={inboxMentions.count() > 0}>
+                    <Unreads.Graphic count={inboxMentions.count()} unread />
+                  </Show>
+                }
+                interactive
+              />
+              <Show when={wide()}>
+                <RailLabel>
+                  <Trans>Inbox</Trans>
+                </RailLabel>
+              </Show>
+            </button>
+          </RailTooltip>
+          <Inbox
+            anchor={inboxButton}
+            mentions={inboxMentions}
+            open={inboxOpen()}
+            onClose={() => setInboxOpen(false)}
           />
+          <For each={props.unreadConversations.slice(0, 9)}>
+            {(conversation) => (
+              <ChatShortcut
+                conversation={conversation}
+                menuGenerator={props.menuGenerator}
+              />
+            )}
+          </For>
+          <Show when={props.unreadConversations.length > 9}>
+            <a class={entryContainer({ wide: wide() })} href={`/`}>
+              <Avatar
+                size={42}
+                fallback={<>+{props.unreadConversations.length - 9}</>}
+              />
+              <Show when={wide()}>
+                <RailLabel>
+                  <Trans>More unread chats</Trans>
+                </RailLabel>
+              </Show>
+            </a>
+          </Show>
+          <Show
+            when={shouldStackPins(props.pinnedConversations.length)}
+            fallback={
+              <For each={props.pinnedConversations}>
+                {(conversation) => (
+                  <ChatShortcut
+                    conversation={conversation}
+                    menuGenerator={props.menuGenerator}
+                    pinned
+                  />
+                )}
+              </For>
+            }
+          >
+            <PinStack
+              conversations={props.pinnedConversations}
+              menuGenerator={props.menuGenerator}
+            />
+          </Show>
+          {/* always separates the top group (home, inbox, chat shortcuts) from the servers; rendered once so it never stacks */}
+          <LineDivider />
         </Show>
-        {/* always separates the top group (home, inbox, chat shortcuts) from the servers; rendered once so it never stacks */}
-        <LineDivider />
         <div ref={rail}>
           <For each={props.orderedEntries}>
             {(entry) => (
@@ -580,48 +573,50 @@ export const ServerList = (props: Props) => {
           </Show>
         </button>
       </Show>
-      <Tooltip
-        placement="right"
-        content={() => (
-          <Column>
-            <span>{props.user.username}</span>
-            <Text class="label" size="small">
-              {props.user.presence === "Online"
-                ? t`Online`
-                : props.user.presence === "Busy"
-                  ? t`Busy`
-                  : props.user.presence === "Focus"
-                    ? t`Focus`
-                    : props.user.presence === "Idle"
-                      ? t`Idle`
-                      : props.user.presence === "Invisible"
-                        ? t`Invisible`
-                        : t`Offline`}
-            </Text>
-          </Column>
-        )}
-        aria={userName()}
-      >
-        <button
-          type="button"
-          ref={setMenuButton}
-          class={entryContainer({ wide: wide() }) + " " + resetButton}
-          aria-haspopup="menu"
-          aria-label={userName()}
+      <Show when={!props.serversOnly}>
+        <Tooltip
+          placement="right"
+          content={() => (
+            <Column>
+              <span>{props.user.username}</span>
+              <Text class="label" size="small">
+                {props.user.presence === "Online"
+                  ? t`Online`
+                  : props.user.presence === "Busy"
+                    ? t`Busy`
+                    : props.user.presence === "Focus"
+                      ? t`Focus`
+                      : props.user.presence === "Idle"
+                        ? t`Idle`
+                        : props.user.presence === "Invisible"
+                          ? t`Invisible`
+                          : t`Offline`}
+              </Text>
+            </Column>
+          )}
+          aria={userName()}
         >
-          <Avatar
-            size={42}
-            src={props.user.avatarURL}
-            holepunch={"bottom-right"}
-            overlay={<UserStatus.Graphic status={props.user.presence} />}
-            interactive
-          />
-          <Show when={wide()}>
-            <RailLabel>{userName()}</RailLabel>
-          </Show>
-        </button>
-        <UserMenu anchor={menuButton} />
-      </Tooltip>
+          <button
+            type="button"
+            ref={setMenuButton}
+            class={entryContainer({ wide: wide() }) + " " + resetButton}
+            aria-haspopup="menu"
+            aria-label={userName()}
+          >
+            <Avatar
+              size={42}
+              src={props.user.avatarURL}
+              holepunch={"bottom-right"}
+              overlay={<UserStatus.Graphic status={props.user.presence} />}
+              interactive
+            />
+            <Show when={wide()}>
+              <RailLabel>{userName()}</RailLabel>
+            </Show>
+          </button>
+          <UserMenu anchor={menuButton} />
+        </Tooltip>
+      </Show>
     </ServerListBase>
   );
 };

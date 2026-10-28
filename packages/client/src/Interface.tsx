@@ -26,7 +26,10 @@ import { useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
 import { LoadingScreen } from "@revolt/ui";
 
-import { SlideDrawer } from "../components/ui/components/navigation/SlideDrawer";
+import {
+  SlideDrawer,
+  SlideState,
+} from "../components/ui/components/navigation/SlideDrawer";
 import { Sidebar } from "./interface/Sidebar";
 
 /**
@@ -79,6 +82,16 @@ const Interface = (props: { children: JSX.Element }) => {
         if (en) rstLayout();
       }, 1);
     }
+  });
+  // Make the pane that is covered (or swiped away) inert, so focus, taps and
+  // screen readers cannot reach it. Not while moving, so the swipe keeps working.
+  createEffect(() => {
+    const cont = contRef();
+    const drawer = state.appDrawer();
+    const list = cont?.previousElementSibling as HTMLElement | null | undefined;
+    const slide = drawer?.state;
+    if (list) list.inert = slide === SlideState.SHOWN;
+    if (cont) cont.inert = slide === SlideState.HIDDEN;
   });
   onCleanup(() => {
     sDrawer?.delete();
