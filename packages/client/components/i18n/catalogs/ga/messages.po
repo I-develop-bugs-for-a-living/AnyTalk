@@ -616,6 +616,10 @@ msgstr "In ann labhairt i nglao gutha"
 #~ msgid "About"
 #~ msgstr "Faoi"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "About me"
+msgstr ""
+
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Accept"
 msgstr "Glac leis"
@@ -1011,6 +1015,7 @@ msgstr "B (cnaipe deas)"
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "Ar ais"
@@ -1149,6 +1154,7 @@ msgstr "Tógtha ar <0>Stoat</0>"
 msgid "Built on Stoat"
 msgstr "Tógtha ar Stoat"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -1687,6 +1693,7 @@ msgstr "Comhráití"
 msgid "Copied"
 msgstr ""
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "Cóipeáilte!"
@@ -2042,6 +2049,10 @@ msgstr ""
 
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
+msgstr ""
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Decline friend request"
 msgstr ""
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
@@ -2463,6 +2474,10 @@ msgstr "Cuir Féiniúlacht in Eagar"
 msgid "Edit message"
 msgstr "Eagarthóireacht teachtaireacht"
 
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Edit profile"
+msgstr ""
+
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
 msgstr "Cuir róil in eagar"
@@ -2732,6 +2747,7 @@ msgstr ""
 msgid "Fixed controls"
 msgstr ""
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3079,6 +3095,7 @@ msgstr "Léigh mé agus d'athbhreithnigh mé na hathruithe."
 msgid "ID copied to clipboard"
 msgstr "ID cóipeáilte chuig an ghearrthaisce"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3814,6 +3831,7 @@ msgstr "Cló Aonspáis"
 msgid "More Contrast"
 msgstr "Tuilleadh Codarsnachta"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "More options"
 msgstr "Tuilleadh roghanna"
@@ -3903,13 +3921,31 @@ msgstr "Balbhaithe"
 msgid "Muted until <0/>"
 msgstr "Balbhaithe go dtí <0/>"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends"
+msgstr ""
+
 #: components/modal/modals/UserProfileMutualFriends.tsx
 msgid "Mutual Friends"
 msgstr "Cairde i gCoitinne"
 
+#. placeholder {0}: mutuals.data!.users.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends ({0})"
+msgstr ""
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups"
+msgstr ""
+
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "Grúpaí Frithpháirteach"
+
+#. placeholder {0}: mutuals.data!.groups.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups ({0})"
+msgstr ""
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Mutuals"
@@ -4186,6 +4222,7 @@ msgstr "Cumarsáid Oifigiúil"
 msgid "Official Server"
 msgstr "Freastalaí Oifigiúil"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -4232,6 +4269,7 @@ msgstr "Duine de na chéad 1000 úsáideoir!"
 msgid "Ongoing Maintenance"
 msgstr "Cothabháil ar Siúl"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
@@ -4310,6 +4348,11 @@ msgstr ""
 #. placeholder {2}: preview()
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Open message from {0} in {1}: {2}"
+msgstr ""
+
+#. placeholder {0}: props.channel.recipient!.username
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Open profile of {0}"
 msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
@@ -5185,6 +5228,7 @@ msgid "Role Overrides"
 msgstr "Sáruithe Róil"
 
 #: components/app/interface/settings/ServerSettings.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
 msgid "Roles"
 msgstr "Róil"
@@ -6815,6 +6859,10 @@ msgstr "Cóipeanna físe á seoladh (méid iomlán / leath / ceathrú)"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "View (back) button"
 msgstr "Cnaipe amhairc (ar ais)"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "View banner"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"

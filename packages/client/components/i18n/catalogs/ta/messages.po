@@ -616,6 +616,10 @@ msgstr "குரல் அழைப்பில் பேசலாம்"
 #~ msgid "About"
 #~ msgstr "பற்றி"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "About me"
+msgstr ""
+
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Accept"
 msgstr "ஏற்கவும்"
@@ -1011,6 +1015,7 @@ msgstr "B (வலது பொத்தான்)"
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "பின்செல்"
@@ -1149,6 +1154,7 @@ msgstr "<0>Stoat</0> மீது கட்டப்பட்டது"
 msgid "Built on Stoat"
 msgstr "Stoat மீது கட்டப்பட்டது"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -1687,6 +1693,7 @@ msgstr "உரையாடல்கள்"
 msgid "Copied"
 msgstr ""
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "நகலெடுக்கப்பட்டது!"
@@ -2042,6 +2049,10 @@ msgstr ""
 
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
+msgstr ""
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Decline friend request"
 msgstr ""
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
@@ -2463,6 +2474,10 @@ msgstr "அடையாளத்தைத் திருத்து"
 msgid "Edit message"
 msgstr "செய்தியைத் திருத்து"
 
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Edit profile"
+msgstr ""
+
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
 msgstr "பாத்திரங்களைத் திருத்து"
@@ -2732,6 +2747,7 @@ msgstr ""
 msgid "Fixed controls"
 msgstr ""
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3079,6 +3095,7 @@ msgstr "மாற்றங்களைப் படித்து மதிப�
 msgid "ID copied to clipboard"
 msgstr "ஐடி கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3814,6 +3831,7 @@ msgstr "சம அகல எழுத்துரு"
 msgid "More Contrast"
 msgstr "கூடுதல் மாறுபாடு"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "More options"
 msgstr "மேலும் விருப்பங்கள்"
@@ -3903,13 +3921,31 @@ msgstr "முடக்கப்பட்டது"
 msgid "Muted until <0/>"
 msgstr "<0/> வரை முடக்கப்பட்டது"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends"
+msgstr ""
+
 #: components/modal/modals/UserProfileMutualFriends.tsx
 msgid "Mutual Friends"
 msgstr "பொது நண்பர்கள்"
 
+#. placeholder {0}: mutuals.data!.users.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends ({0})"
+msgstr ""
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups"
+msgstr ""
+
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "பொதுக் குழுக்கள்"
+
+#. placeholder {0}: mutuals.data!.groups.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups ({0})"
+msgstr ""
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Mutuals"
@@ -4186,6 +4222,7 @@ msgstr "அதிகாரப்பூர்வ தகவல்தொடர்�
 msgid "Official Server"
 msgstr "அதிகாரப்பூர்வ சர்வர்"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -4232,6 +4269,7 @@ msgstr "முதல் 1000 பயனர்களில் ஒருவர்!"
 msgid "Ongoing Maintenance"
 msgstr "பராமரிப்பு நடைபெறுகிறது"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
@@ -4310,6 +4348,11 @@ msgstr ""
 #. placeholder {2}: preview()
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Open message from {0} in {1}: {2}"
+msgstr ""
+
+#. placeholder {0}: props.channel.recipient!.username
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Open profile of {0}"
 msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
@@ -5185,6 +5228,7 @@ msgid "Role Overrides"
 msgstr "பாத்திர மேலெழுதல்கள்"
 
 #: components/app/interface/settings/ServerSettings.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
 msgid "Roles"
 msgstr "பாத்திரங்கள்"
@@ -6815,6 +6859,10 @@ msgstr "அனுப்பப்படும் வீடியோ நகல்�
 #: components/app/interface/settings/user/Controller.tsx
 msgid "View (back) button"
 msgstr "காட்சி (பின்) பொத்தான்"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "View banner"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"

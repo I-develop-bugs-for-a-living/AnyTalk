@@ -544,6 +544,10 @@ msgstr "通話で喋れるようになります"
 #~ msgid "About"
 #~ msgstr "概要"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "About me"
+msgstr "自己紹介"
+
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Accept"
 msgstr "承認"
@@ -933,6 +937,7 @@ msgstr "B(右のボタン)"
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "戻る"
@@ -1067,6 +1072,7 @@ msgstr "<0>Stoat</0> をベースに作成"
 msgid "Built on Stoat"
 msgstr "Stoat をベースに作成"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -1601,6 +1607,7 @@ msgstr "会話"
 msgid "Copied"
 msgstr "コピーしました"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "コピーしました!"
@@ -1955,6 +1962,10 @@ msgstr "通話中にスピーカーミュートを切り替える"
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
 msgstr "スピーカーミュート中"
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Decline friend request"
+msgstr "フレンド申請を拒否"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Decoded size"
@@ -2363,6 +2374,10 @@ msgstr "概要を編集"
 msgid "Edit message"
 msgstr "メッセージを編集"
 
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Edit profile"
+msgstr "プロフィールを編集"
+
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
 msgstr "ロールを編集"
@@ -2632,6 +2647,7 @@ msgstr "先頭バイト"
 msgid "Fixed controls"
 msgstr "固定の操作"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -2978,6 +2994,7 @@ msgstr "変更内容を読んで確認しました。"
 msgid "ID copied to clipboard"
 msgstr "IDをクリップボードにコピーしました"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3705,6 +3722,7 @@ msgstr "等幅フォント"
 msgid "More Contrast"
 msgstr "更にコントラスト"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "More options"
 msgstr "その他のオプション"
@@ -3794,13 +3812,31 @@ msgstr "通知オフ"
 msgid "Muted until <0/>"
 msgstr "<0/> まで通知されません"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends"
+msgstr "共通のフレンド"
+
 #: components/modal/modals/UserProfileMutualFriends.tsx
 msgid "Mutual Friends"
 msgstr "共通のフレンド"
 
+#. placeholder {0}: mutuals.data!.users.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends ({0})"
+msgstr "共通のフレンド ({0})"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups"
+msgstr "共通のグループ"
+
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "共通のグループ"
+
+#. placeholder {0}: mutuals.data!.groups.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups ({0})"
+msgstr "共通のグループ ({0})"
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Mutuals"
@@ -4077,6 +4113,7 @@ msgstr "公式"
 msgid "Official Server"
 msgstr "公式サーバー"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -4123,6 +4160,7 @@ msgstr "最初の1000ユーザー!"
 msgid "Ongoing Maintenance"
 msgstr "メンテナンス中"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
@@ -4202,6 +4240,11 @@ msgstr "ライブビューを開く"
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Open message from {0} in {1}: {2}"
 msgstr "{1} の {0} からのメッセージを開く: {2}"
+
+#. placeholder {0}: props.channel.recipient!.username
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Open profile of {0}"
+msgstr "{0} のプロフィールを開く"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -5068,6 +5111,7 @@ msgid "Role Overrides"
 msgstr "ロールの上書き"
 
 #: components/app/interface/settings/ServerSettings.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
 msgid "Roles"
 msgstr "ロール"
@@ -6678,6 +6722,10 @@ msgstr "送信中の映像コピー（フルサイズ / 半分 / 4 分の 1）"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "View (back) button"
 msgstr "ビュー(戻る)ボタン"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "View banner"
+msgstr "バナーを表示"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"

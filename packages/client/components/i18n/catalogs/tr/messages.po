@@ -595,6 +595,10 @@ msgstr "Sesli aramalarda konuşabilme"
 #~ msgid "About"
 #~ msgstr "Hakkında"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "About me"
+msgstr ""
+
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Accept"
 msgstr "Kabul et"
@@ -988,6 +992,7 @@ msgstr "B (sağ tuş)"
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "Geri"
@@ -1125,6 +1130,7 @@ msgstr "<0>Stoat</0> üzerine kuruludur"
 msgid "Built on Stoat"
 msgstr "Stoat üzerine kuruludur"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -1662,6 +1668,7 @@ msgstr "Sohbetler"
 msgid "Copied"
 msgstr ""
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "Kopyalandı!"
@@ -2015,6 +2022,10 @@ msgstr ""
 
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
+msgstr ""
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Decline friend request"
 msgstr ""
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
@@ -2431,6 +2442,10 @@ msgstr "Kişiliği Düzenle"
 msgid "Edit message"
 msgstr "Mesajı düzenle"
 
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Edit profile"
+msgstr ""
+
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
 msgstr "Rolleri düzenle"
@@ -2701,6 +2716,7 @@ msgstr ""
 msgid "Fixed controls"
 msgstr ""
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3047,6 +3063,7 @@ msgstr "Değişiklikleri okudum ve inceledim."
 msgid "ID copied to clipboard"
 msgstr "Kimlik panoya kopyalandı"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3780,6 +3797,7 @@ msgstr "Sabit Boşluklu Font"
 msgid "More Contrast"
 msgstr "Yüksek Kontrast"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "More options"
 msgstr "Diğer seçenekler"
@@ -3869,13 +3887,31 @@ msgstr "Susturuldu"
 msgid "Muted until <0/>"
 msgstr "Şu zamana kadar susturuldu <0/>"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends"
+msgstr ""
+
 #: components/modal/modals/UserProfileMutualFriends.tsx
 msgid "Mutual Friends"
 msgstr "Ortak Arkadaşlar"
 
+#. placeholder {0}: mutuals.data!.users.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends ({0})"
+msgstr ""
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups"
+msgstr ""
+
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "Ortak Gruplar"
+
+#. placeholder {0}: mutuals.data!.groups.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups ({0})"
+msgstr ""
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Mutuals"
@@ -4152,6 +4188,7 @@ msgstr "Resmi İletişim"
 msgid "Official Server"
 msgstr "Resmi Sunucu"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -4198,6 +4235,7 @@ msgstr "İlk 1000 kullanıcıdan biri!"
 msgid "Ongoing Maintenance"
 msgstr "Devam Eden Bakım"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
@@ -4276,6 +4314,11 @@ msgstr ""
 #. placeholder {2}: preview()
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Open message from {0} in {1}: {2}"
+msgstr ""
+
+#. placeholder {0}: props.channel.recipient!.username
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Open profile of {0}"
 msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
@@ -5149,6 +5192,7 @@ msgid "Role Overrides"
 msgstr "Rol Geçersiz Kılmaları"
 
 #: components/app/interface/settings/ServerSettings.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
 msgid "Roles"
 msgstr "Roller"
@@ -6775,6 +6819,10 @@ msgstr "Gönderilen video kopyaları (tam / yarım / çeyrek boyut)"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "View (back) button"
 msgstr "Görünüm (geri) tuşu"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "View banner"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"

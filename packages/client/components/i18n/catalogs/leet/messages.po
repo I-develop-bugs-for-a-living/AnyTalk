@@ -616,6 +616,10 @@ msgstr "48L3 70 5P34K 1N V01C3 C4LL"
 #~ msgid "About"
 #~ msgstr "480U7"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "About me"
+msgstr "480U7 M3"
+
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Accept"
 msgstr "4CC3P7"
@@ -1011,6 +1015,7 @@ msgstr "8 (216H7 8U770N)"
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "84CK"
@@ -1149,6 +1154,7 @@ msgstr "8U1L7 0N <0>57047</0>"
 msgid "Built on Stoat"
 msgstr "8U1L7 0N 57047"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -1687,6 +1693,7 @@ msgstr "C0NV3254710N5"
 msgid "Copied"
 msgstr "C0P13D"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "C0P13D!"
@@ -2043,6 +2050,10 @@ msgstr "D34F3N 02 UND34F3N 1N 4 C4LL"
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
 msgstr "D34F3N3D"
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Decline friend request"
+msgstr "D3CL1N3 F213ND 23QU357"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Decoded size"
@@ -2463,6 +2474,10 @@ msgstr "3D17 1D3N717Y"
 msgid "Edit message"
 msgstr "3D17 M355463"
 
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Edit profile"
+msgstr "3D17 P20F1L3"
+
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
 msgstr "3D17 20L35"
@@ -2732,6 +2747,7 @@ msgstr "F1257 8Y735"
 msgid "Fixed controls"
 msgstr "F1X3D C0N720L5"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3079,6 +3095,7 @@ msgstr "1'V3 234D 4ND 23V13W3D 7H3 CH4N635."
 msgid "ID copied to clipboard"
 msgstr "1D C0P13D 70 CL1P8042D"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3814,6 +3831,7 @@ msgstr "M0N05P4C3 F0N7"
 msgid "More Contrast"
 msgstr "M023 C0N72457"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "More options"
 msgstr "M023 0P710N5"
@@ -3903,13 +3921,31 @@ msgstr "MU73D"
 msgid "Muted until <0/>"
 msgstr "MU73D UN71L <0/>"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends"
+msgstr "MU7U4L F213ND5"
+
 #: components/modal/modals/UserProfileMutualFriends.tsx
 msgid "Mutual Friends"
 msgstr "MU7U4L F213ND5"
 
+#. placeholder {0}: mutuals.data!.users.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends ({0})"
+msgstr "MU7U4L F213ND5 ({0})"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups"
+msgstr "MU7U4L 620UP5"
+
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "MU7U4L 620UP5"
+
+#. placeholder {0}: mutuals.data!.groups.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups ({0})"
+msgstr "MU7U4L 620UP5 ({0})"
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Mutuals"
@@ -4186,6 +4222,7 @@ msgstr "0FF1C14L C0MMUN1C4710N"
 msgid "Official Server"
 msgstr "0FF1C14L 532V32"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -4232,6 +4269,7 @@ msgstr "0N3 0F 7H3 F1257 1000 U5325!"
 msgid "Ongoing Maintenance"
 msgstr "0N601N6 M41N73N4NC3"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
@@ -4311,6 +4349,11 @@ msgstr "0P3N L1V3 V13W"
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Open message from {0} in {1}: {2}"
 msgstr "0P3N M355463 F20M {0} 1N {1}: {2}"
+
+#. placeholder {0}: props.channel.recipient!.username
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Open profile of {0}"
+msgstr "0P3N P20F1L3 0F {0}"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -5185,6 +5228,7 @@ msgid "Role Overrides"
 msgstr "20L3 0V3221D35"
 
 #: components/app/interface/settings/ServerSettings.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
 msgid "Roles"
 msgstr "20L35"
@@ -6815,6 +6859,10 @@ msgstr "V1D30 C0P135 831N6 53N7 (FULL / H4LF / QU42732 51Z3)"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "View (back) button"
 msgstr "V13W (84CK) 8U770N"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "View banner"
+msgstr "V13W 84NN32"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"

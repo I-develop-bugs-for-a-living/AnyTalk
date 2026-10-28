@@ -544,6 +544,10 @@ msgstr "Má polovení mluvit v hovoru"
 #~ msgid "About"
 #~ msgstr "O nás"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "About me"
+msgstr ""
+
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Accept"
 msgstr "Přijmout"
@@ -933,6 +937,7 @@ msgstr "B (pravé tlačítko)"
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "Zpět"
@@ -1067,6 +1072,7 @@ msgstr "Postaveno na <0>Stoat</0>"
 msgid "Built on Stoat"
 msgstr "Postaveno na Stoat"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -1601,6 +1607,7 @@ msgstr "Konverzace"
 msgid "Copied"
 msgstr ""
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "Kopírováno!"
@@ -1954,6 +1961,10 @@ msgstr ""
 
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
+msgstr ""
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Decline friend request"
 msgstr ""
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
@@ -2363,6 +2374,10 @@ msgstr "Upravit identitu"
 msgid "Edit message"
 msgstr "Upravit zprávu"
 
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Edit profile"
+msgstr ""
+
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
 msgstr "Upravit role"
@@ -2632,6 +2647,7 @@ msgstr ""
 msgid "Fixed controls"
 msgstr ""
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -2978,6 +2994,7 @@ msgstr "Přečetl(a) jsem si změny a zkontroloval(a) je."
 msgid "ID copied to clipboard"
 msgstr "ID zkopírováno do schránky"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3705,6 +3722,7 @@ msgstr "Písmo s pevnou šířkou"
 msgid "More Contrast"
 msgstr "Větší kontrast"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "More options"
 msgstr "Další možnosti"
@@ -3794,13 +3812,31 @@ msgstr "Ztlumeno"
 msgid "Muted until <0/>"
 msgstr "Ztlumen do <0/>"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends"
+msgstr ""
+
 #: components/modal/modals/UserProfileMutualFriends.tsx
 msgid "Mutual Friends"
 msgstr "Společní přátelé"
 
+#. placeholder {0}: mutuals.data!.users.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends ({0})"
+msgstr ""
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups"
+msgstr ""
+
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "Společné skupiny"
+
+#. placeholder {0}: mutuals.data!.groups.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups ({0})"
+msgstr ""
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Mutuals"
@@ -4077,6 +4113,7 @@ msgstr "Oficiální komunikace"
 msgid "Official Server"
 msgstr "Oficiální server"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -4123,6 +4160,7 @@ msgstr "Jeden z prvních 1000 uživatelů!"
 msgid "Ongoing Maintenance"
 msgstr "Probíhá údržba"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
@@ -4201,6 +4239,11 @@ msgstr ""
 #. placeholder {2}: preview()
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Open message from {0} in {1}: {2}"
+msgstr ""
+
+#. placeholder {0}: props.channel.recipient!.username
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Open profile of {0}"
 msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
@@ -5068,6 +5111,7 @@ msgid "Role Overrides"
 msgstr "Přepsání rolí"
 
 #: components/app/interface/settings/ServerSettings.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
 msgid "Roles"
 msgstr "Role"
@@ -6678,6 +6722,10 @@ msgstr "Odesílané kopie videa (plná / poloviční / čtvrtinová velikost)"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "View (back) button"
 msgstr "Tlačítko view (zpět)"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "View banner"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"

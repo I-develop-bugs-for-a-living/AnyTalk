@@ -595,6 +595,10 @@ msgstr "Kann im Sprachkanal sprechen"
 #~ msgid "About"
 #~ msgstr "Über"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "About me"
+msgstr "Über mich"
+
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Accept"
 msgstr "Akzeptieren"
@@ -984,6 +988,7 @@ msgstr "B (rechte Taste)"
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "Zurück"
@@ -1118,6 +1123,7 @@ msgstr "Basiert auf <0>Stoat</0>"
 msgid "Built on Stoat"
 msgstr "Basiert auf Stoat"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -1652,6 +1658,7 @@ msgstr "Unterhaltungen"
 msgid "Copied"
 msgstr "Kopiert"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "Kopiert!"
@@ -2006,6 +2013,10 @@ msgstr "In einem Anruf taubstellen oder Taubstellung aufheben"
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
 msgstr "Taubgeschaltet"
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Decline friend request"
+msgstr "Freundschaftsanfrage ablehnen"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Decoded size"
@@ -2414,6 +2425,10 @@ msgstr "Identität bearbeiten"
 msgid "Edit message"
 msgstr "Nachricht bearbeiten"
 
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Edit profile"
+msgstr "Profil bearbeiten"
+
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
 msgstr "Rollen bearbeiten"
@@ -2683,6 +2698,7 @@ msgstr "Erste Bytes"
 msgid "Fixed controls"
 msgstr "Feste Steuerung"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3029,6 +3045,7 @@ msgstr "Ich habe die Änderungen gelesen und geprüft."
 msgid "ID copied to clipboard"
 msgstr "ID zur Zwischenablage kopiert"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3756,6 +3773,7 @@ msgstr "Monospace-Schriftart"
 msgid "More Contrast"
 msgstr "Mehr Kontrast"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "More options"
 msgstr "Weitere Optionen"
@@ -3845,13 +3863,31 @@ msgstr "Stumm"
 msgid "Muted until <0/>"
 msgstr "Stummgeschaltet bis <0/>"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends"
+msgstr "Gemeinsame Freunde"
+
 #: components/modal/modals/UserProfileMutualFriends.tsx
 msgid "Mutual Friends"
 msgstr "Gemeinsame Freunde"
 
+#. placeholder {0}: mutuals.data!.users.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends ({0})"
+msgstr "Gemeinsame Freunde ({0})"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups"
+msgstr "Gemeinsame Gruppen"
+
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "Gemeinsame Gruppen"
+
+#. placeholder {0}: mutuals.data!.groups.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups ({0})"
+msgstr "Gemeinsame Gruppen ({0})"
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Mutuals"
@@ -4128,6 +4164,7 @@ msgstr "Offizielle Kommunikation"
 msgid "Official Server"
 msgstr "Offizieller Server"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -4174,6 +4211,7 @@ msgstr "Einer der ersten 1000 Nutzer!"
 msgid "Ongoing Maintenance"
 msgstr "Laufende Wartung"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
@@ -4253,6 +4291,11 @@ msgstr "Live-Ansicht öffnen"
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Open message from {0} in {1}: {2}"
 msgstr "Nachricht von {0} in {1} öffnen: {2}"
+
+#. placeholder {0}: props.channel.recipient!.username
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Open profile of {0}"
+msgstr "Profil von {0} öffnen"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -5119,6 +5162,7 @@ msgid "Role Overrides"
 msgstr "Rollenüberschreibungen"
 
 #: components/app/interface/settings/ServerSettings.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
 msgid "Roles"
 msgstr "Rollen"
@@ -6729,6 +6773,10 @@ msgstr "Gesendete Videokopien (volle / halbe / Viertelgröße)"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "View (back) button"
 msgstr "Ansichtstaste (Zurück)"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "View banner"
+msgstr "Banner ansehen"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"

@@ -616,6 +616,10 @@ msgstr "Ձայնային զանգում խոսելու հնարավորությ�
 #~ msgid "About"
 #~ msgstr "Մասին"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "About me"
+msgstr ""
+
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Accept"
 msgstr "Ընդունել"
@@ -1010,6 +1014,7 @@ msgstr "B (աջ կոճակ)"
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "Հետ"
@@ -1148,6 +1153,7 @@ msgstr "Կառուցված է <0>Stoat</0>֊ի վրա"
 msgid "Built on Stoat"
 msgstr "Կառուցված է Stoat-ի վրա"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -1686,6 +1692,7 @@ msgstr "Զրույցներ"
 msgid "Copied"
 msgstr ""
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "Պատճենվեց։"
@@ -2040,6 +2047,10 @@ msgstr ""
 
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
+msgstr ""
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Decline friend request"
 msgstr ""
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
@@ -2460,6 +2471,10 @@ msgstr "Խմբագրել ինքնությունը"
 msgid "Edit message"
 msgstr "Խմբագրել հաղորդագրությունը"
 
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Edit profile"
+msgstr ""
+
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
 msgstr "Խմբագրել դերերը"
@@ -2729,6 +2744,7 @@ msgstr ""
 msgid "Fixed controls"
 msgstr ""
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3075,6 +3091,7 @@ msgstr "Ես կարդացել և ուսումնասիրել եմ փոփոխու�
 msgid "ID copied to clipboard"
 msgstr "ID-ն պատճենվեց clipboard-ում"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3809,6 +3826,7 @@ msgstr "Մոնոտառատեսակ"
 msgid "More Contrast"
 msgstr "Ավելի շատ կոնտրաստ"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "More options"
 msgstr "Այլ տարբերակներ"
@@ -3898,13 +3916,31 @@ msgstr "Անջատված է"
 msgid "Muted until <0/>"
 msgstr "Անջատված է մինչև <0/>"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends"
+msgstr ""
+
 #: components/modal/modals/UserProfileMutualFriends.tsx
 msgid "Mutual Friends"
 msgstr "Ընդհանուր ընկերներ"
 
+#. placeholder {0}: mutuals.data!.users.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends ({0})"
+msgstr ""
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups"
+msgstr ""
+
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "Փոխադարձ խմբեր"
+
+#. placeholder {0}: mutuals.data!.groups.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups ({0})"
+msgstr ""
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Mutuals"
@@ -4181,6 +4217,7 @@ msgstr "Պաշտոնական հաղորդագրություն"
 msgid "Official Server"
 msgstr "Պաշտոնական սերվեր"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -4227,6 +4264,7 @@ msgstr "Առաջին 1000 օգտատերերից մեկը։"
 msgid "Ongoing Maintenance"
 msgstr "Ընթացիկ տեխնիկական սպասարկում"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
@@ -4305,6 +4343,11 @@ msgstr ""
 #. placeholder {2}: preview()
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Open message from {0} in {1}: {2}"
+msgstr ""
+
+#. placeholder {0}: props.channel.recipient!.username
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Open profile of {0}"
 msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
@@ -5179,6 +5222,7 @@ msgid "Role Overrides"
 msgstr "Դերի վերասահմանումներ"
 
 #: components/app/interface/settings/ServerSettings.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
 msgid "Roles"
 msgstr "դերեր"
@@ -6806,6 +6850,10 @@ msgstr "Ուղարկվող տեսանյութի պատճեններ (լրիվ / �
 #: components/app/interface/settings/user/Controller.tsx
 msgid "View (back) button"
 msgstr "View (back) կոճակ"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "View banner"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"

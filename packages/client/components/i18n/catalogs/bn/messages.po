@@ -595,6 +595,10 @@ msgstr "ভয়েস কলে কথা বলতে পারবে"
 #~ msgid "About"
 #~ msgstr "Revolt সম্পর্কে জানুন"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "About me"
+msgstr ""
+
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Accept"
 msgstr "গ্রহণ করুন"
@@ -987,6 +991,7 @@ msgstr "B (ডান বোতাম)"
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "ফিরে যান"
@@ -1124,6 +1129,7 @@ msgstr "<0>Stoat</0> -এর উপর নির্মিত"
 msgid "Built on Stoat"
 msgstr "Stoat -এর উপর নির্মিত"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -1661,6 +1667,7 @@ msgstr "কথোপকথনগুলো"
 msgid "Copied"
 msgstr ""
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "কপি হয়েছে!"
@@ -2014,6 +2021,10 @@ msgstr ""
 
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
+msgstr ""
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Decline friend request"
 msgstr ""
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
@@ -2429,6 +2440,10 @@ msgstr "পরিচয় এডিট করুন"
 msgid "Edit message"
 msgstr "মেসেজকে সম্পাদনা করুন"
 
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Edit profile"
+msgstr ""
+
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
 msgstr "রোল এডিট করুন"
@@ -2698,6 +2713,7 @@ msgstr ""
 msgid "Fixed controls"
 msgstr ""
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3044,6 +3060,7 @@ msgstr "আমি পরিবর্তনগুলো পড়েছি ও �
 msgid "ID copied to clipboard"
 msgstr "ID ক্লিপবোর্ডে কপি হয়েছে"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3777,6 +3794,7 @@ msgstr "মনোস্পেস ফন্ট"
 msgid "More Contrast"
 msgstr "আরও বেশি কনট্রাস্ট"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "More options"
 msgstr "আরও বিকল্প"
@@ -3866,13 +3884,31 @@ msgstr "মিউট করা"
 msgid "Muted until <0/>"
 msgstr "<0/> পর্যন্ত মিউট"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends"
+msgstr ""
+
 #: components/modal/modals/UserProfileMutualFriends.tsx
 msgid "Mutual Friends"
 msgstr "পারস্পরিক বন্ধু"
 
+#. placeholder {0}: mutuals.data!.users.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends ({0})"
+msgstr ""
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups"
+msgstr ""
+
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "পারস্পরিক গ্রুপ"
+
+#. placeholder {0}: mutuals.data!.groups.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups ({0})"
+msgstr ""
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Mutuals"
@@ -4149,6 +4185,7 @@ msgstr "অফিসিয়াল কমিউনিকেশন"
 msgid "Official Server"
 msgstr "অফিসিয়াল সার্ভার"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -4195,6 +4232,7 @@ msgstr "প্রথম 1000 জন ইউজারের একজন!"
 msgid "Ongoing Maintenance"
 msgstr "রক্ষণাবেক্ষণ চলছে"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
@@ -4273,6 +4311,11 @@ msgstr ""
 #. placeholder {2}: preview()
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Open message from {0} in {1}: {2}"
+msgstr ""
+
+#. placeholder {0}: props.channel.recipient!.username
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Open profile of {0}"
 msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
@@ -5146,6 +5189,7 @@ msgid "Role Overrides"
 msgstr "রোল ওভাররাইড"
 
 #: components/app/interface/settings/ServerSettings.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
 msgid "Roles"
 msgstr "রোলগুলো"
@@ -6771,6 +6815,10 @@ msgstr "পাঠানো ভিডিও কপি (পূর্ণ / অর�
 #: components/app/interface/settings/user/Controller.tsx
 msgid "View (back) button"
 msgstr "View (back) বোতাম"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "View banner"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"

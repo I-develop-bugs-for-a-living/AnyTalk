@@ -616,6 +616,10 @@ msgstr "음성 통화에서 말할 수 있어요"
 #~ msgid "About"
 #~ msgstr "소개"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "About me"
+msgstr "소개"
+
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Accept"
 msgstr "수락"
@@ -1010,6 +1014,7 @@ msgstr "B (오른쪽 버튼)"
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "뒤로"
@@ -1148,6 +1153,7 @@ msgstr "<0>Stoat</0> 기반"
 msgid "Built on Stoat"
 msgstr "Stoat 기반"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -1686,6 +1692,7 @@ msgstr "대화"
 msgid "Copied"
 msgstr "복사됨"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "복사했어요!"
@@ -2041,6 +2048,10 @@ msgstr "통화 중 헤드셋 음소거 켜기/끄기"
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
 msgstr "헤드셋 음소거됨"
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Decline friend request"
+msgstr "친구 요청 거절"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Decoded size"
@@ -2460,6 +2471,10 @@ msgstr "프로필 편집"
 msgid "Edit message"
 msgstr "메시지 수정하기"
 
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Edit profile"
+msgstr "프로필 편집"
+
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
 msgstr "역할 편집"
@@ -2729,6 +2744,7 @@ msgstr "처음 바이트"
 msgid "Fixed controls"
 msgstr "고정 조작"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3075,6 +3091,7 @@ msgstr "변경 사항을 읽고 확인했어요."
 msgid "ID copied to clipboard"
 msgstr "ID를 클립보드에 복사했어요"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3809,6 +3826,7 @@ msgstr "고정폭 글꼴"
 msgid "More Contrast"
 msgstr "대비 높게"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "More options"
 msgstr "더 보기"
@@ -3898,13 +3916,31 @@ msgstr "음소거됨"
 msgid "Muted until <0/>"
 msgstr "<0/>까지 음소거됨"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends"
+msgstr "함께 아는 친구"
+
 #: components/modal/modals/UserProfileMutualFriends.tsx
 msgid "Mutual Friends"
 msgstr "같이 아는 친구"
 
+#. placeholder {0}: mutuals.data!.users.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends ({0})"
+msgstr "함께 아는 친구 ({0})"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups"
+msgstr "함께 있는 그룹"
+
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "같이 있는 그룹"
+
+#. placeholder {0}: mutuals.data!.groups.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups ({0})"
+msgstr "함께 있는 그룹 ({0})"
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Mutuals"
@@ -4181,6 +4217,7 @@ msgstr "공식 대화"
 msgid "Official Server"
 msgstr "공식 서버"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -4227,6 +4264,7 @@ msgstr "처음 1000명의 사용자 중 한 명!"
 msgid "Ongoing Maintenance"
 msgstr "점검 중"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
@@ -4306,6 +4344,11 @@ msgstr "실시간 보기 열기"
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Open message from {0} in {1}: {2}"
 msgstr "{1}의 {0} 님이 보낸 메시지 열기: {2}"
+
+#. placeholder {0}: props.channel.recipient!.username
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Open profile of {0}"
+msgstr "{0}님의 프로필 열기"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -5179,6 +5222,7 @@ msgid "Role Overrides"
 msgstr "역할 재정의"
 
 #: components/app/interface/settings/ServerSettings.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
 msgid "Roles"
 msgstr "역할"
@@ -6806,6 +6850,10 @@ msgstr "보내는 영상 사본 (전체 / 절반 / 4분의 1 크기)"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "View (back) button"
 msgstr "뷰(뒤로) 버튼"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "View banner"
+msgstr "배너 보기"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"

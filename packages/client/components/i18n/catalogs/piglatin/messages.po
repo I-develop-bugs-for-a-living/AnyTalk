@@ -616,6 +616,10 @@ msgstr "Ableyay otay eakspay inyay oicevay allcay"
 #~ msgid "About"
 #~ msgstr "Aboutyay"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "About me"
+msgstr "Aboutyay emay"
+
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Accept"
 msgstr "Acceptyay"
@@ -1011,6 +1015,7 @@ msgstr "Bay (ightray uttonbay)"
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "Ackbay"
@@ -1149,6 +1154,7 @@ msgstr "Uiltbay onyay <0>Oatstay</0>"
 msgid "Built on Stoat"
 msgstr "Uiltbay onyay Oatstay"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -1687,6 +1693,7 @@ msgstr "Onversationscay"
 msgid "Copied"
 msgstr "Opiedcay"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "Opiedcay!"
@@ -2043,6 +2050,10 @@ msgstr "Eafenday oryay undeafenyay inyay ayay allcay"
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
 msgstr "Eafenedday"
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Decline friend request"
+msgstr "Eclineday iendfray equestray"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Decoded size"
@@ -2463,6 +2474,10 @@ msgstr "Edityay Identityyay"
 msgid "Edit message"
 msgstr "Edityay essagemay"
 
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Edit profile"
+msgstr "Edityay ofilepray"
+
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
 msgstr "Edityay olesray"
@@ -2732,6 +2747,7 @@ msgstr "Irstfay ytesbay"
 msgid "Fixed controls"
 msgstr "Ixedfay ontrolscay"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3079,6 +3095,7 @@ msgstr "I'veyay eadray andyay eviewedray ethay angeschay."
 msgid "ID copied to clipboard"
 msgstr "IDYAY opiedcay otay ipboardclay"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3814,6 +3831,7 @@ msgstr "Onospacemay Ontfay"
 msgid "More Contrast"
 msgstr "Oremay Ontrastcay"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "More options"
 msgstr "Oremay optionsyay"
@@ -3903,13 +3921,31 @@ msgstr "Utedmay"
 msgid "Muted until <0/>"
 msgstr "Utedmay untilyay <0/>"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends"
+msgstr "Utualmay iendsfray"
+
 #: components/modal/modals/UserProfileMutualFriends.tsx
 msgid "Mutual Friends"
 msgstr "Utualmay Iendsfray"
 
+#. placeholder {0}: mutuals.data!.users.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends ({0})"
+msgstr "Utualmay iendsfray ({0})"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups"
+msgstr "Utualmay oupsgray"
+
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "Utualmay Oupsgray"
+
+#. placeholder {0}: mutuals.data!.groups.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups ({0})"
+msgstr "Utualmay oupsgray ({0})"
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Mutuals"
@@ -4186,6 +4222,7 @@ msgstr "Officialyay ommunicationcay"
 msgid "Official Server"
 msgstr "Officialyay Erversay"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -4232,6 +4269,7 @@ msgstr "Oneyay ofyay ethay irstfay 1000 usersyay!"
 msgid "Ongoing Maintenance"
 msgstr "Ongoingyay Aintenancemay"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
@@ -4311,6 +4349,11 @@ msgstr "Openyay ivelay iewvay"
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Open message from {0} in {1}: {2}"
 msgstr "Openyay essagemay omfray {0} inyay {1}: {2}"
+
+#. placeholder {0}: props.channel.recipient!.username
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Open profile of {0}"
+msgstr "Openyay ofilepray ofyay {0}"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -5185,6 +5228,7 @@ msgid "Role Overrides"
 msgstr "Oleray Overridesyay"
 
 #: components/app/interface/settings/ServerSettings.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
 msgid "Roles"
 msgstr "Olesray"
@@ -6815,6 +6859,10 @@ msgstr "Ideovay opiescay eingbay entsay (ullfay / alfhay / arterquay izesay)"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "View (back) button"
 msgstr "Iewvay (ackbay) uttonbay"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "View banner"
+msgstr "Iewvay annerbay"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"

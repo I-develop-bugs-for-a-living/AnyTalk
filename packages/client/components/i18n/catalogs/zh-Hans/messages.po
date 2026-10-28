@@ -616,6 +616,10 @@ msgstr "可以在语音通话中发言"
 #~ msgid "About"
 #~ msgstr "关于"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "About me"
+msgstr "关于我"
+
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Accept"
 msgstr "接受"
@@ -1010,6 +1014,7 @@ msgstr "B(右侧按钮)"
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "返回"
@@ -1148,6 +1153,7 @@ msgstr "基于 <0>Stoat</0> 构建"
 msgid "Built on Stoat"
 msgstr "基于 Stoat 构建"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -1686,6 +1692,7 @@ msgstr "对话"
 msgid "Copied"
 msgstr "已复制"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "已复制！"
@@ -2041,6 +2048,10 @@ msgstr "在通话中拒听或取消拒听"
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
 msgstr "已拒听"
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Decline friend request"
+msgstr "拒绝好友请求"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Decoded size"
@@ -2456,6 +2467,10 @@ msgstr "编辑身份"
 msgid "Edit message"
 msgstr "编辑消息"
 
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Edit profile"
+msgstr "编辑个人资料"
+
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
 msgstr "编辑角色"
@@ -2725,6 +2740,7 @@ msgstr "前几个字节"
 msgid "Fixed controls"
 msgstr "固定操作"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3071,6 +3087,7 @@ msgstr "我已阅读并查看了这些更改。"
 msgid "ID copied to clipboard"
 msgstr "ID 已复制到剪贴板"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3805,6 +3822,7 @@ msgstr "等宽字体"
 msgid "More Contrast"
 msgstr "更高对比度"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "More options"
 msgstr "更多选项"
@@ -3894,13 +3912,31 @@ msgstr "静音"
 msgid "Muted until <0/>"
 msgstr "静音至 <0/>"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends"
+msgstr "共同好友"
+
 #: components/modal/modals/UserProfileMutualFriends.tsx
 msgid "Mutual Friends"
 msgstr "共同好友"
 
+#. placeholder {0}: mutuals.data!.users.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends ({0})"
+msgstr "共同好友 ({0})"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups"
+msgstr "共同群组"
+
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "共同群组"
+
+#. placeholder {0}: mutuals.data!.groups.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups ({0})"
+msgstr "共同群组 ({0})"
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Mutuals"
@@ -4177,6 +4213,7 @@ msgstr "官方通讯"
 msgid "Official Server"
 msgstr "官方服务器"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -4223,6 +4260,7 @@ msgstr "前 1000 位用户之一！"
 msgid "Ongoing Maintenance"
 msgstr "正在维护"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
@@ -4302,6 +4340,11 @@ msgstr "打开实时视图"
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Open message from {0} in {1}: {2}"
 msgstr "打开 {0} 在 {1} 中发送的消息：{2}"
+
+#. placeholder {0}: props.channel.recipient!.username
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Open profile of {0}"
+msgstr "打开 {0} 的个人资料"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -5175,6 +5218,7 @@ msgid "Role Overrides"
 msgstr "角色覆盖"
 
 #: components/app/interface/settings/ServerSettings.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
 msgid "Roles"
 msgstr "角色"
@@ -6802,6 +6846,10 @@ msgstr "正在发送的视频副本（全尺寸 / 一半 / 四分之一）"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "View (back) button"
 msgstr "视图(返回)键"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "View banner"
+msgstr "查看横幅"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"

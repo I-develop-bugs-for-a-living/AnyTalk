@@ -616,6 +616,10 @@ msgstr "يمكن التحدث في مكالمة صوتية"
 #~ msgid "About"
 #~ msgstr "حول"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "About me"
+msgstr "نبذة عني"
+
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Accept"
 msgstr "قبول"
@@ -1010,6 +1014,7 @@ msgstr "B (الزر الأيمن)"
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "عودة"
@@ -1147,6 +1152,7 @@ msgstr "مبني على <0>Stoat</0>"
 msgid "Built on Stoat"
 msgstr "مبني على Stoat"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -1684,6 +1690,7 @@ msgstr "المحادثات"
 msgid "Copied"
 msgstr "تم النسخ"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "تم النسخ!"
@@ -2039,6 +2046,10 @@ msgstr "تعطيل الصوت أو إلغاء تعطيله في المكالمة
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
 msgstr "الاستماع معطّل"
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Decline friend request"
+msgstr "رفض طلب الصداقة"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Decoded size"
@@ -2457,6 +2468,10 @@ msgstr "تعديل الهوية"
 msgid "Edit message"
 msgstr "عدّل الرسالة"
 
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Edit profile"
+msgstr "تعديل الملف الشخصي"
+
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
 msgstr "تعديل الأدوار"
@@ -2726,6 +2741,7 @@ msgstr "البايتات الأولى"
 msgid "Fixed controls"
 msgstr "عناصر تحكم ثابتة"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3072,6 +3088,7 @@ msgstr "لقد قرأت التغييرات وراجعتها."
 msgid "ID copied to clipboard"
 msgstr "تم نسخ ID إلى الحافظة"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
@@ -3805,6 +3822,7 @@ msgstr "خط بمسافة ثابتة (Monospace)"
 msgid "More Contrast"
 msgstr "تباين لوني اكثر"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "More options"
 msgstr "المزيد من الخيارات"
@@ -3894,13 +3912,31 @@ msgstr "مكتوم"
 msgid "Muted until <0/>"
 msgstr "مكتوم لحد <0/>"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends"
+msgstr "الأصدقاء المشتركون"
+
 #: components/modal/modals/UserProfileMutualFriends.tsx
 msgid "Mutual Friends"
 msgstr "الأصدقاء المُشتَركون"
 
+#. placeholder {0}: mutuals.data!.users.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends ({0})"
+msgstr "الأصدقاء المشتركون ({0})"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups"
+msgstr "المجموعات المشتركة"
+
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "المجموعات المُشتَركة"
+
+#. placeholder {0}: mutuals.data!.groups.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups ({0})"
+msgstr "المجموعات المشتركة ({0})"
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Mutuals"
@@ -4177,6 +4213,7 @@ msgstr "التواصل الرسمي"
 msgid "Official Server"
 msgstr "سيرفر رسمي"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -4223,6 +4260,7 @@ msgstr "احد اول ١٠٠٠ مستخدم!"
 msgid "Ongoing Maintenance"
 msgstr "الصيانة مستمرة"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
@@ -4302,6 +4340,11 @@ msgstr "فتح العرض المباشر"
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Open message from {0} in {1}: {2}"
 msgstr "فتح رسالة من {0} في {1}: {2}"
+
+#. placeholder {0}: props.channel.recipient!.username
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Open profile of {0}"
+msgstr "فتح الملف الشخصي لـ {0}"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -5174,6 +5217,7 @@ msgid "Role Overrides"
 msgstr "تجاوزات الرتب"
 
 #: components/app/interface/settings/ServerSettings.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
 msgid "Roles"
 msgstr "الرُتب"
@@ -6799,6 +6843,10 @@ msgstr "نسخ الفيديو المُرسَلة (الحجم الكامل / ال
 #: components/app/interface/settings/user/Controller.tsx
 msgid "View (back) button"
 msgstr "زر العرض (رجوع)"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "View banner"
+msgstr "عرض اللافتة"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"
