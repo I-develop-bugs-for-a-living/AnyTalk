@@ -12,14 +12,17 @@ import { Avatar, Ripple, Text } from "../../design";
 
 import { ProfileCard } from "./ProfileCard";
 
-export function ProfileMutuals(props: { user: User; member?: ServerMember }) {
+/**
+ * Mutual friends, servers and group chats shared with a user. Shared by the
+ * profile cards and the phone profile page.
+ */
+export function useMutualsQuery(user: () => User) {
   const client = useClient();
-  const { openModal } = useModals();
 
   const query = useQuery(() => ({
-    queryKey: ["mutual", props.user.id],
+    queryKey: ["mutual", user().id],
     queryFn: async () => {
-      if (props.user.self || props.user.bot) {
+      if (user().self || user().bot) {
         return {
           users: [],
           groups: [],
@@ -27,25 +30,33 @@ export function ProfileMutuals(props: { user: User; member?: ServerMember }) {
       }
 
       const clnt = client();
-      const { users, servers } = await props.user.fetchMutual();
+      const { users, servers } = await user().fetchMutual();
 
       return {
-        users: users
-          .map((userId) => clnt.users.get(userId)!)
-          .filter((user) => user),
+        users: users.map((userId) => clnt.users.get(userId)!).filter((u) => u),
         groups: [
           ...servers
             .map((serverId) => clnt.servers.get(serverId)!)
             .filter((server) => server),
           ...clnt.channels.filter(
             (channel) =>
-              channel.type === "Group" &&
-              channel.recipientIds.has(props.user.id),
+              channel.type === "Group" && channel.recipientIds.has(user().id),
           ),
         ],
       };
     },
   }));
+
+  return query;
+}
+
+/**
+ * Mutual friends and groups cards
+ */
+export function ProfileMutuals(props: { user: User; member?: ServerMember }) {
+  const { openModal } = useModals();
+
+  const query = useMutualsQuery(() => props.user);
 
   /**
    * Open friends modal

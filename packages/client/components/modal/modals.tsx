@@ -182,7 +182,7 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
     case "sign_out_sessions":
       return <SignOutSessionsModal {...modalProps} />;
     case "user_profile":
-      return <UserProfileModal {...modalProps} />;
+      return <UserProfileModal {...modalProps} modalId={props.id} />;
     case "user_profile_roles":
       return <UserProfileRolesModal {...modalProps} />;
     case "user_profile_mutual_friends":

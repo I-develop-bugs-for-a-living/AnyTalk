@@ -1,6 +1,6 @@
 import { Show, createResource } from "solid-js";
 
-import { Trans } from "@lingui/solid/macro";
+import { Trans, useLingui } from "@lingui/solid/macro";
 import { useNavigate } from "@solidjs/router";
 import { PublicBot, ServerMember, User } from "stoat.js";
 import { styled } from "styled-system/jsx";
@@ -17,15 +17,23 @@ import { Button, IconButton } from "../../design";
 import { iconSize } from "../../utils";
 
 /**
- * Actions shown on profile cards
+ * Actions shown on profile cards and on the phone profile page.
+ *
+ * The `page` variant is for the phone page: buttons wrap, the main action is
+ * filled, the others tonal, and the edit and menu icons are left out (the
+ * page has its own menu button and an "Edit profile" button).
  */
 export function ProfileActions(props: {
-  width: 2 | 3;
+  /** Grid span for the card variant */
+  width?: 2 | 3;
+  /** Layout variant, defaults to the card */
+  variant?: "card" | "page";
 
   user: User;
   member?: ServerMember;
   onClose: () => void;
 }) {
+  const { t } = useLingui();
   const navigate = useNavigate();
   const client = useClient();
   const { openModal } = useModals();
@@ -59,23 +67,51 @@ export function ProfileActions(props: {
     if (!props.member) props.onClose();
   }
 
+  /**
+   * Whether the viewer may edit this profile (own profile, or a server
+   * identity they are allowed to change)
+   */
+  const canEdit = () =>
+    props.member
+      ? props.user.self
+        ? props.member.server!.havePermission("ChangeNickname") ||
+          props.member.server!.havePermission("ChangeAvatar")
+        : (props.member.server!.havePermission("ManageNicknames") ||
+            props.member.server!.havePermission("RemoveAvatars")) &&
+          props.member.inferiorTo(props.member!.server!.member!)
+      : props.user.self;
+
+  const page = () => props.variant === "page";
+
   return (
-    <Actions width={props.width}>
+    <Actions width={props.width} page={page()}>
       <Show when={props.user.relationship === "None" && !props.user.bot}>
-        <Button onPress={() => props.user.addFriend()}>
+        <Button
+          variant={page() ? "tonal" : undefined}
+          onPress={() => props.user.addFriend()}
+        >
           <Trans>Add Friend</Trans>
         </Button>
       </Show>
       <Show when={props.user.relationship === "Incoming"}>
-        <Button onPress={() => props.user.addFriend()}>
+        <Button
+          variant={page() ? "tonal" : undefined}
+          onPress={() => props.user.addFriend()}
+        >
           <Trans>Accept friend request</Trans>
         </Button>
-        <IconButton onPress={() => props.user.removeFriend()}>
+        <IconButton
+          aria-label={t`Decline friend request`}
+          onPress={() => props.user.removeFriend()}
+        >
           <MdCancel />
         </IconButton>
       </Show>
       <Show when={props.user.relationship === "Outgoing"}>
-        <Button onPress={() => props.user.removeFriend()}>
+        <Button
+          variant={page() ? "tonal" : undefined}
+          onPress={() => props.user.removeFriend()}
+        >
           <Trans>Cancel friend request</Trans>
         </Button>
       </Show>
@@ -97,37 +133,37 @@ export function ProfileActions(props: {
         </Button>
       </Show>
 
-      <Show
-        when={
-          props.member
-            ? props.user.self
-              ? props.member.server!.havePermission("ChangeNickname") ||
-                props.member.server!.havePermission("ChangeAvatar")
-              : (props.member.server!.havePermission("ManageNicknames") ||
-                  props.member.server!.havePermission("RemoveAvatars")) &&
-                props.member.inferiorTo(props.member!.server!.member!)
-            : props.user.self
-        }
-      >
-        <IconButton onPress={openEdit}>
-          <MdEdit {...iconSize(16)} />
-        </IconButton>
+      <Show when={canEdit()}>
+        <Show
+          when={page()}
+          fallback={
+            <IconButton aria-label={t`Edit profile`} onPress={openEdit}>
+              <MdEdit {...iconSize(16)} />
+            </IconButton>
+          }
+        >
+          <Button onPress={openEdit}>
+            <Trans>Edit profile</Trans>
+          </Button>
+        </Show>
       </Show>
 
-      <IconButton
-        use:floating={{
-          contextMenu: () => (
-            <UserContextMenu
-              user={props.user}
-              member={props.member}
-              onClose={props.onClose}
-            />
-          ),
-          contextMenuHandler: "click",
-        }}
-      >
-        <MdMoreVert />
-      </IconButton>
+      <Show when={!page()}>
+        <IconButton
+          use:floating={{
+            contextMenu: () => (
+              <UserContextMenu
+                user={props.user}
+                member={props.member}
+                onClose={props.onClose}
+              />
+            ),
+            contextMenuHandler: "click",
+          }}
+        >
+          <MdMoreVert />
+        </IconButton>
+      </Show>
     </Actions>
   );
 }
@@ -145,6 +181,13 @@ const Actions = styled("div", {
       },
       2: {
         gridColumn: "1 / 3",
+      },
+    },
+    page: {
+      true: {
+        flexWrap: "wrap",
+        alignItems: "center",
+        justifyContent: "flex-start",
       },
     },
   },
