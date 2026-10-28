@@ -74,6 +74,18 @@ function ManageCurrentSession(props: { otherSessions: Accessor<Session[]> }) {
 
   return (
     <CategoryButton.Group>
+      <CategoryButton
+        icon={<Symbol>qr_code_scanner</Symbol>}
+        action="chevron"
+        onClick={() => openModal({ type: "qr_scanner" })}
+        description={
+          <Trans>
+            Scan the QR code on the login screen of a new device to log it in.
+          </Trans>
+        }
+      >
+        <Trans>Link a device</Trans>
+      </CategoryButton>
       <CategoryButton.Collapse
         title={<Trans>Current Session</Trans>}
         description={currentSession()?.name}

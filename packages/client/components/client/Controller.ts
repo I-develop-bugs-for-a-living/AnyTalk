@@ -17,6 +17,13 @@ import {
   probeSocket,
 } from "./lifecycleWake";
 import { killServiceWorkerSubscription } from "./NotificationsController";
+import {
+  QrApiError,
+  createQrRequest,
+  fetchAccountWithToken,
+  pollQrRequest,
+  revokeSessionWithToken,
+} from "./qrApi";
 import { type UnreadResyncer, autoResyncUnreads } from "./unreadResync";
 
 export enum State {
@@ -495,6 +502,12 @@ export default class ClientController {
     this.lifecycle = new Lifecycle(this);
 
     this.login = this.login.bind(this);
+    this.createQrLogin = this.createQrLogin.bind(this);
+    this.pollQrLogin = this.pollQrLogin.bind(this);
+    this.fetchQrAccount = this.fetchQrAccount.bind(this);
+    this.cancelQrSession = this.cancelQrSession.bind(this);
+    this.revokeQrSessionOnExit = this.revokeQrSessionOnExit.bind(this);
+    this.completeLogin = this.completeLogin.bind(this);
     this.logout = this.logout.bind(this);
     this.selectUsername = this.selectUsername.bind(this);
     this.isError = this.isError.bind(this);
@@ -594,26 +607,7 @@ export default class ClientController {
    * @param credentials Credentials
    */
   async login(credentials: API.DataLogin, modals: ModalControllerExtended) {
-    const browser = detect();
-
-    // Generate a friendly name for this browser
-    let friendly_name;
-    if (browser) {
-      let { name, os } = browser as { name: string; os: string };
-      if (name === "ios") {
-        name = "safari";
-      } else if (name === "fxios") {
-        name = "firefox";
-      } else if (name === "crios") {
-        name = "chrome";
-      } else if (os === "Mac OS" && navigator.maxTouchPoints > 0) {
-        os = "iPadOS";
-      }
-
-      friendly_name = `AnyTalk for Web (${name} on ${os})`;
-    } else {
-      friendly_name = "AnyTalk for Web (Unknown Device)";
-    }
+    const friendly_name = this.friendlyName();
 
     // Try to login with given credentials
     let session = await this.api.post("/auth/session/login", {
@@ -661,6 +655,39 @@ export default class ClientController {
       return;
     }
 
+    this.completeLogin(session);
+  }
+
+  /**
+   * Name for this browser, shown in the session list
+   */
+  friendlyName(): string {
+    const browser = detect();
+
+    if (browser) {
+      let { name, os } = browser as { name: string; os: string };
+      if (name === "ios") {
+        name = "safari";
+      } else if (name === "fxios") {
+        name = "firefox";
+      } else if (name === "crios") {
+        name = "chrome";
+      } else if (os === "Mac OS" && navigator.maxTouchPoints > 0) {
+        os = "iPadOS";
+      }
+
+      return `AnyTalk for Web (${name} on ${os})`;
+    }
+
+    return "AnyTalk for Web (Unknown Device)";
+  }
+
+  /**
+   * Store a new session and start the client with it. Shared by password
+   * login and QR code login.
+   * @param session Session from the server
+   */
+  completeLogin(session: { _id: string; token: string; user_id: string }) {
     const createdSession = {
       _id: session._id,
       token: session.token,
@@ -673,6 +700,64 @@ export default class ClientController {
       type: TransitionType.LoginUncached,
       session: createdSession,
     });
+  }
+
+  /**
+   * Ask for a QR login request for this device
+   */
+  createQrLogin() {
+    return createQrRequest(this.api, this.friendlyName());
+  }
+
+  /**
+   * Check on a QR login request. Does not log in: for an approved request
+   * the caller must confirm the account first (see confirmQrAccount).
+   * @param id Request id
+   * @param secret Secret kept on this device
+   */
+  pollQrLogin(id: string, secret: string) {
+    return pollQrRequest(this.api, id, secret);
+  }
+
+  /**
+   * Fetch the account an approved QR session belongs to
+   * @param token Token of the new session
+   */
+  fetchQrAccount(token: string) {
+    return fetchAccountWithToken(this.api, token);
+  }
+
+  /**
+   * Cancel an approved QR login by revoking the session it created
+   * @param session The approved session
+   * @returns Whether the session is gone
+   */
+  async cancelQrSession(session: { _id: string; token: string }) {
+    // Retry a couple of times: a leftover session is a way into the account
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        await revokeSessionWithToken(this.api, session._id, session.token);
+        return true;
+      } catch (err) {
+        // 401 means the session is already gone
+        if (err instanceof QrApiError && err.status === 401) return true;
+        console.error("Failed to revoke cancelled QR session:", err);
+        await new Promise((resolve) =>
+          setTimeout(resolve, 500 * (attempt + 1)),
+        );
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Revoke an unconfirmed QR session while the page is being closed
+   * @param session The approved session
+   */
+  revokeQrSessionOnExit(session: { _id: string; token: string }) {
+    revokeSessionWithToken(this.api, session._id, session.token, true).catch(
+      () => {},
+    );
   }
 
   async selectUsername(username: string) {

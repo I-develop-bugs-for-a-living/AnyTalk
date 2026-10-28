@@ -217,6 +217,13 @@ export type Modals =
       acknowledge: () => Promise<void>;
     }
   | {
+      type: "qr_scanner";
+    }
+  | {
+      type: "qr_login_approve";
+      id: string;
+    }
+  | {
       type: "rename_session";
       session: Session;
     }

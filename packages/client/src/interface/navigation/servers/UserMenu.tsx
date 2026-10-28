@@ -34,6 +34,7 @@ import MdEditNote from "@material-design-icons/svg/outlined/edit_note.svg?compon
 import MdInfo from "@material-design-icons/svg/outlined/info.svg?component-solid";
 import MdKeyboardDoubleArrowLeft from "@material-design-icons/svg/outlined/keyboard_double_arrow_left.svg?component-solid";
 import MdNotificationsOff from "@material-design-icons/svg/outlined/notifications_off.svg?component-solid";
+import MdQrCodeScanner from "@material-design-icons/svg/outlined/qr_code_scanner.svg?component-solid";
 import MdSettings from "@material-design-icons/svg/outlined/settings.svg?component-solid";
 
 import { useRailDesktop } from "./railMode";
@@ -229,6 +230,16 @@ export function UserMenuItems(props: {
           <Trans>Hide server list</Trans>
         </ContextMenuButton>
       </Show>
+
+      <ContextMenuButton
+        icon={MdQrCodeScanner}
+        onClick={() => {
+          openModal({ type: "qr_scanner" });
+          close();
+        }}
+      >
+        <Trans>Scan QR code</Trans>
+      </ContextMenuButton>
 
       <ContextMenuButton
         icon={MdSettings}

@@ -5,7 +5,7 @@ import { Trans } from "@lingui/solid/macro";
 import { useClientLifecycle } from "@revolt/client";
 import { State, TransitionType } from "@revolt/client/Controller";
 import { useModals } from "@revolt/modal";
-import { Navigate } from "@revolt/routing";
+import { Navigate, useNavigate } from "@revolt/routing";
 import {
   Button,
   CircularProgress,
@@ -26,6 +26,7 @@ import { Fields, Form } from "./Form";
  */
 export default function FlowLogin() {
   const state = useState();
+  const navigate = useNavigate();
   const modals = useModals();
   const { lifecycle, isLoggedIn, login, selectUsername } = useClientLifecycle();
 
@@ -68,6 +69,9 @@ export default function FlowLogin() {
             <Form onSubmit={performLogin}>
               <Fields fields={["email", "password"]} />
               <Column gap="xl" align>
+                <Button variant="tonal" onPress={() => navigate("/login/qr")}>
+                  <Trans>Log in with QR code</Trans>
+                </Button>
                 <a href="/login/reset">
                   <Button variant="text">
                     <Trans>Reset password</Trans>
