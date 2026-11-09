@@ -3,6 +3,7 @@ import { Accessor, createMemo, createSignal } from "solid-js";
 
 import { CONFIGURATION } from "@revolt/common";
 import { AppConfig, STOAT_HOST } from "@revolt/common/lib/env";
+import { setServiceUrls } from "@revolt/traffic";
 import { Client, UserLimits } from "stoat.js";
 
 import { DefaultHost } from ".";
@@ -45,6 +46,15 @@ export default class Instance {
     this.proxyUrl = apiCfg.features.january.url;
     //TODO Gifbox URL from backend
     this.gifboxUrl = CONFIGURATION.DEV_GIFBOX_URL || "https://api.gifbox.me";
+
+    // let the network inspector label traffic per service
+    setServiceUrls({
+      api: this.apiUrl,
+      events: apiCfg.ws,
+      uploads: this.mediaUrl,
+      embeds: this.proxyUrl,
+      gif: this.gifboxUrl,
+    });
 
     //Features
     this.config = apiCfg;

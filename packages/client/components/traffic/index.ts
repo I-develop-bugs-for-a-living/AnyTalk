@@ -1,9 +1,11 @@
 import {
   clear,
+  droppedCount,
   entries,
   installTrafficInspector,
   recording,
   setRecording,
+  setServiceUrls,
   setShowSecrets,
   showSecrets,
   watchCallTraffic,
@@ -22,6 +24,8 @@ export {
 export { redactEntry } from "./redact";
 export { describeRow } from "./rows";
 export type { RowBadge, RowEvent, RowRoute, RowSummary } from "./rows";
+export { classifyService, SERVICES } from "./services";
+export type { ServiceId, ServiceUrls } from "./services";
 export type {
   BodySummary,
   CallAttributeEntry,
@@ -51,11 +55,19 @@ export {
 } from "./view";
 export type { Destination, DestinationType, KindGroup } from "./view";
 export {
+  callFilter,
+  destinationFilter,
+  hostFilter,
+  quoteFilterString,
+} from "./wireshark";
+export {
   clear,
+  droppedCount,
   entries,
   installTrafficInspector,
   recording,
   setRecording,
+  setServiceUrls,
   setShowSecrets,
   showSecrets,
   watchCallTraffic,

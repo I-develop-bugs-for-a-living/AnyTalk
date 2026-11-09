@@ -6,6 +6,11 @@ import { installWrappers } from "./install";
 import { TrafficRecorder } from "./recorder";
 import { redactEntry } from "./redact";
 import { observeResources } from "./resources";
+import {
+  type ServiceUrls,
+  addSignallingUrl,
+  setServiceUrls as storeServiceUrls,
+} from "./services";
 import type { TrafficEntry } from "./types";
 import { mergeResources } from "./view";
 
@@ -141,7 +146,30 @@ export function entries(options?: { showSecrets?: boolean }): TrafficEntry[] {
 }
 
 /**
- * Remove all recorded entries.
+ * How many entries were dropped to save memory since recording started or
+ * the last `clear()` (reactive).
+ */
+export function droppedCount(): number {
+  version();
+  return recorder.dropped;
+}
+
+/**
+ * Tell the inspector which addresses the client uses (see
+ * `services.setServiceUrls`). Entries are labelled when viewed, so this
+ * re-labels old entries too (an instance switch does that), and the cached
+ * list is rebuilt.
+ *
+ * @param urls Addresses from the client configuration
+ */
+export function setServiceUrls(urls: ServiceUrls) {
+  storeServiceUrls(urls);
+  generation++;
+  setVersion((v) => v + 1);
+}
+
+/**
+ * Remove all recorded entries and reset the dropped count.
  */
 export function clear() {
   recorder.clear();
@@ -163,6 +191,10 @@ export function watchCallTraffic(
   options: { url: string; e2ee: () => boolean },
 ): () => void {
   try {
+    // the joined LiveKit server counts as call signalling, whatever its path
+    addSignallingUrl(options.url);
+    generation++;
+    setVersion((v) => v + 1);
     return monitorCall(room, recorder, options);
   } catch {
     return () => {};

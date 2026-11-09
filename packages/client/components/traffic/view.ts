@@ -1,4 +1,5 @@
 import { isDesktopFile } from "./desktopRequests";
+import { type ServiceId, classifyService } from "./services";
 import type {
   CallBytesEntry,
   CallConnectionEntry,
@@ -7,6 +8,7 @@ import type {
   TrafficEntry,
   WsEntry,
 } from "./types";
+import { type CallRemote, callRemote } from "./wireshark";
 
 /** How far apart (ms) an http entry and its resource entry may start. */
 export const MERGE_WINDOW_MS = 100;
@@ -224,15 +226,19 @@ export function remoteOf(entry: CallConnectionEntry): string {
  *
  * @param entries Entries to filter
  * @param options.group Kind group, or all when missing
+ * @param options.service Service, or all when missing
  * @param options.text Text to look for
  */
 export function filterEntries(
   entries: TrafficEntry[],
-  options: { group?: KindGroup; text?: string },
+  options: { group?: KindGroup; service?: ServiceId; text?: string },
 ): TrafficEntry[] {
   const text = options.text?.trim().toLowerCase();
   return entries.filter((e) => {
     if (options.group && kindGroup(e) !== options.group) return false;
+    if (options.service && classifyService(e) !== options.service) {
+      return false;
+    }
     if (!text) return true;
     const haystack = [
       "url" in e ? e.url : "",
@@ -257,6 +263,12 @@ export type DestinationType =
 export type Destination = {
   host: string;
   type: DestinationType;
+  /** Which service the host belongs to. */
+  service: ServiceId;
+  /** Call media only: the remote address, port and transport on the wire. */
+  remote?: CallRemote;
+  /** Whether the connection uses TLS, where it can't be told from the type. */
+  secure?: boolean;
   count: number;
   /** Total bytes where known. */
   bytes?: number;
@@ -283,17 +295,28 @@ export function summarizeDestinations(entries: TrafficEntry[]): Destination[] {
     type: DestinationType,
     bytes: number | undefined,
     count = 1,
+    service: ServiceId = "other",
+    remote?: CallRemote,
+    secure?: boolean,
   ) => {
     if (!host) return;
-    const key = `${type}|${host}`;
-    const row = rows.get(key) ?? { host, type, count: 0 };
+    // the same host can serve several services (by path)
+    const key = `${type}|${host}|${service}`;
+    const row = rows.get(key) ?? {
+      host,
+      type,
+      service,
+      ...(remote ? { remote } : {}),
+      ...(secure === undefined ? {} : { secure }),
+      count: 0,
+    };
     row.count += count;
     if (bytes !== undefined) row.bytes = (row.bytes ?? 0) + bytes;
     rows.set(key, row);
   };
 
   /** Latest remote of each peer connection, and its latest byte total */
-  const remotes = new Map<string, string>();
+  const remotes = new Map<string, CallConnectionEntry>();
   const totals = new Map<string, number>();
   /** Websockets counted once (by connection), frames add bytes only */
   const sockets = new Set<number>();
@@ -306,7 +329,13 @@ export function summarizeDestinations(entries: TrafficEntry[]): Destination[] {
           known !== undefined || requestBytes(e)
             ? (known ?? 0) + requestBytes(e)
             : undefined;
-        add(e.host, e.url.startsWith("https:") ? "https" : "http", bytes);
+        add(
+          e.host,
+          e.url.startsWith("https:") ? "https" : "http",
+          bytes,
+          1,
+          classifyService(e),
+        );
         break;
       }
       case "ws": {
@@ -315,9 +344,9 @@ export function summarizeDestinations(entries: TrafficEntry[]): Destination[] {
         sockets.add(e.connectionId);
         // the host is counted once per socket, not once per frame
         if (e.event === "frame") {
-          add(e.host, type, e.size ?? 0, first ? 1 : 0);
+          add(e.host, type, e.size ?? 0, first ? 1 : 0, classifyService(e));
         } else if (first) {
-          add(e.host, type, undefined);
+          add(e.host, type, undefined, 1, classifyService(e));
         }
         break;
       }
@@ -326,16 +355,23 @@ export function summarizeDestinations(entries: TrafficEntry[]): Destination[] {
           e.host,
           "files",
           e.transferSize > 0 ? e.transferSize : e.encodedBodySize,
+          1,
+          classifyService(e),
+          undefined,
+          e.url.startsWith("https:"),
         );
         break;
       case "call-info":
-        add(e.host, "call", undefined);
+        add(e.host, "call", undefined, 1, "call-signalling");
         break;
       case "call-connection": {
         const remote = remoteOf(e);
         if (remote) {
-          if (remotes.get(e.pc) !== remote) add(remote, "call", undefined);
-          remotes.set(e.pc, remote);
+          const before = remotes.get(e.pc);
+          if (!before || remoteOf(before) !== remote) {
+            add(remote, "call", undefined, 1, "call-media", callRemote(e));
+          }
+          remotes.set(e.pc, e);
         }
         break;
       }
@@ -349,8 +385,8 @@ export function summarizeDestinations(entries: TrafficEntry[]): Destination[] {
 
   // the totals are cumulative, so only the last snapshot of a connection counts
   for (const [pc, bytes] of totals) {
-    const remote = remotes.get(pc);
-    if (remote) add(remote, "call", bytes, 0);
+    const last = remotes.get(pc);
+    if (last) add(remoteOf(last), "call", bytes, 0, "call-media");
   }
 
   return [...rows.values()].sort(

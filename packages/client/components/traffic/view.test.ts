@@ -247,6 +247,7 @@ describe("summarizeDestinations", () => {
     expect(rows.find((r) => r.type === "https")).toEqual({
       host: "api.example.com",
       type: "https",
+      service: "other",
       count: 2,
       bytes: 150,
     });
@@ -258,9 +259,10 @@ describe("summarizeDestinations", () => {
       host: "cdn.example.com",
       bytes: 1234,
     });
-    expect(rows.find((r) => r.type === "call")).toEqual({
+    expect(rows.find((r) => r.type === "call")).toMatchObject({
       host: "203.0.113.5:7882",
       type: "call",
+      service: "call-media",
       count: 1,
       bytes: 150,
     });
@@ -317,5 +319,30 @@ describe("mergeResources with desktop entries", () => {
       BASE,
     );
     expect(merged).toHaveLength(2);
+  });
+});
+
+describe("services in view", () => {
+  it("filters by service and labels destinations", async () => {
+    const { setServiceUrls } = await import("./services");
+    setServiceUrls({ api: "https://api.example.com" });
+    try {
+      const list = [
+        http(1, "https://api.example.com/a", 1, { responseSize: 10 }),
+        http(2, "https://other.example.com/b", 2),
+      ];
+      expect(filterEntries(list, { service: "api" }).map((e) => e.id)).toEqual([
+        1,
+      ]);
+      const rows = summarizeDestinations(list);
+      expect(rows.find((r) => r.host === "api.example.com")?.service).toBe(
+        "api",
+      );
+      expect(rows.find((r) => r.host === "other.example.com")?.service).toBe(
+        "other",
+      );
+    } finally {
+      setServiceUrls({});
+    }
   });
 });

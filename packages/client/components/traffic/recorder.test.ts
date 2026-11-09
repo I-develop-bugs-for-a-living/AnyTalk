@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { TrafficRecorder } from "./recorder";
+import { TrafficRecorder, estimateEntryBytes } from "./recorder";
 import type { NewEntry } from "./types";
 
 describe("TrafficRecorder", () => {
@@ -78,5 +78,45 @@ describe("desktop file budget", () => {
     expect(all.map((e) => e.id)).toEqual(
       [...all.map((e) => e.id)].sort((a, b) => a - b),
     );
+  });
+});
+
+describe("memory budget", () => {
+  const frame = (n: number, size: number): NewEntry => ({
+    kind: "ws",
+    connectionId: 1,
+    event: "frame",
+    url: "wss://a.test/",
+    host: "a.test",
+    time: n,
+    text: "x".repeat(size),
+  });
+
+  it("estimates bigger entries as bigger", () => {
+    const small = { ...frame(1, 10), id: 1 };
+    const big = { ...frame(1, 10_000), id: 2 };
+    expect(estimateEntryBytes(big)).toBeGreaterThan(
+      estimateEntryBytes(small) + 19_000,
+    );
+  });
+
+  it("drops the oldest entries over the byte budget and counts them", () => {
+    const r = new TrafficRecorder(1000, 50_000);
+    expect(r.dropped).toBe(0);
+    for (let n = 1; n <= 10; n++) r.record(frame(n, 10_000));
+    const kept = r.snapshot();
+    expect(kept.length).toBeLessThan(10);
+    expect(kept.length).toBeGreaterThan(0);
+    // the newest survive
+    expect(kept[kept.length - 1].id).toBe(10);
+    expect(r.dropped).toBe(10 - kept.length);
+  });
+
+  it("counts entries dropped by the count cap and resets on clear", () => {
+    const r = new TrafficRecorder(2);
+    for (let n = 1; n <= 5; n++) r.record(frame(n, 1));
+    expect(r.dropped).toBe(3);
+    r.clear();
+    expect(r.dropped).toBe(0);
   });
 });
