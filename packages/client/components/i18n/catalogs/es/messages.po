@@ -71,6 +71,13 @@ msgstr "{0, plural, one {No se pudo buscar en # canal} many {No se pudo buscar e
 msgid "{0, plural, one {# channel} other {# channels}}"
 msgstr "{0, plural, one {# canal} many {# canales} other {# canales}}"
 
+#. placeholder {0}: list().length
+#. placeholder {0}: shown().length
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "{0, plural, one {# entry} other {# entries}}"
+msgstr "{0, plural, one {# entrada} many {# entradas} other {# entradas}}"
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -105,6 +112,11 @@ msgstr "{0, plural, one {# nueva mención} many {# nuevas menciones} other {# nu
 #: src/interface/home/FriendsOverview.tsx
 msgid "{0, plural, one {# person in the call} other {# people in the call}}"
 msgstr "{0, plural, one {# persona en la llamada} many {# personas en la llamada} other {# personas en la llamada}}"
+
+#. placeholder {0}: viewers().length
+#: components/ui/components/features/voice/callCard/StreamViewerBadge.tsx
+msgid "{0, plural, one {# person watching} other {# people watching}}"
+msgstr "{0, plural, one {# persona viendo} many {# personas viendo} other {# personas viendo}}"
 
 #. placeholder {0}: entry.others
 #: src/interface/home/FriendsOverview.tsx
@@ -369,6 +381,22 @@ msgstr "{n, plural, one {¿Eliminar # resumen de llamada?} many {¿Eliminar # re
 msgid "{n, plural, one {Delete # stream recap?} other {Delete # stream recaps?}}"
 msgstr "{n, plural, one {¿Eliminar # resumen de transmisión?} many {¿Eliminar # resúmenes de transmisión?} other {¿Eliminar # resúmenes de transmisión?}}"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Home, # pending friend request} other {Home, # pending friend requests}}"
+msgstr "{n, plural, one {Inicio, # solicitud de amistad pendiente} many {Inicio, # solicitudes de amistad pendientes} other {Inicio, # solicitudes de amistad pendientes}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr "{n, plural, one {Bandeja, # mención sin leer} many {Bandeja, # menciones sin leer} other {Bandeja, # menciones sin leer}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Messages, # unread} other {Messages, # unread}}"
+msgstr "{n, plural, one {Mensajes, # sin leer} many {Mensajes, # sin leer} other {Mensajes, # sin leer}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Servers, # unread mention} other {Servers, # unread mentions}}"
+msgstr "{n, plural, one {Servidores, # mención sin leer} many {Servidores, # menciones sin leer} other {Servidores, # menciones sin leer}}"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{name}'s {source}"
 msgstr "{source} de {name}"
@@ -555,6 +583,10 @@ msgstr "Llega un mensaje o una notificación"
 msgid "A new version of AnyTalk is available"
 msgstr "Hay una nueva versión de AnyTalk disponible"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "A packet capture (for example Wireshark) therefore shows only DTLS/SRTP ciphertext, and the media server only sees end-to-end ciphertext."
+msgstr "Por eso, una captura de paquetes (por ejemplo con Wireshark) solo muestra texto cifrado DTLS/SRTP, y el servidor multimedia solo ve texto cifrado de extremo a extremo."
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream in your call ends"
 msgstr "Termina una transmisión en tu llamada"
@@ -579,6 +611,10 @@ msgstr "Poder hablar en llamadas de voz"
 #~ msgid "About"
 #~ msgstr "Acerca de"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "About me"
+msgstr "Sobre mí"
+
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Accept"
 msgstr "Aceptar"
@@ -587,6 +623,10 @@ msgstr "Aceptar"
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Accept friend request"
 msgstr "Aceptar solicitud de amistad"
+
+#: src/interface/navigation/bottomNav/YouScreen.tsx
+msgid "Account"
+msgstr "Cuenta"
 
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Account has been queued for deletion!"
@@ -599,6 +639,11 @@ msgstr "Aceptar"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Action"
 msgstr "Acción"
+
+#. placeholder {0}: state().path
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Active, writing to {0}"
+msgstr "Activo, escribiendo en {0}"
 
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
@@ -670,6 +715,7 @@ msgstr "Ajustes de sonido avanzados"
 #~ msgid "Affects all roles and users"
 #~ msgstr "Afecta a todos los roles y usuarios"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: src/interface/Friends.tsx
 msgid "All"
 msgstr "Todos"
@@ -757,6 +803,10 @@ msgstr "Otra aplicación ya usa estas teclas, así que solo funcionan dentro de 
 #~ msgid "Another app is already using these keys. Pick other keys."
 #~ msgstr "Otra aplicación ya usa estas teclas. Elige otras."
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Anyone who gets the key log file and a capture can read the traffic, so switch it off when you are done. It also switches off when the app updates. Calls stay unreadable: their media keys are not in this file."
+msgstr "Cualquiera que obtenga el archivo de claves y una captura puede leer el tráfico, así que desactívalo cuando termines. También se desactiva cuando la aplicación se actualiza. Las llamadas siguen siendo ilegibles: sus claves multimedia no están en este archivo."
+
 #. placeholder {0}: installed()
 #: components/app/interface/settings/user/Updates.tsx
 msgid "AnyTalk Desktop {0}"
@@ -781,6 +831,10 @@ msgstr "AnyTalk es una de las mejores formas de mantenerte conectado con tus ami
 #: components/app/interface/settings/user/Updates.tsx
 msgid "AnyTalk is up to date."
 msgstr "AnyTalk está actualizado."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "AnyTalk network inspector"
+msgstr "Inspector de red de AnyTalk"
 
 #: src/AndroidNag.tsx
 msgid "AnyTalk on Android"
@@ -823,6 +877,10 @@ msgstr "Se aplica a los servidores a los que te unas o que crees a partir de aho
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Apply"
 msgstr "Aplicar"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Approve"
+msgstr "Aprobar"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Apps"
@@ -874,6 +932,18 @@ msgstr "Asignar roles"
 msgid "at {time}"
 msgstr "a las {time}"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "attached"
+msgstr "adjunto"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "attributes"
+msgstr "atributos"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Attributes"
+msgstr "Atributos"
+
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Audio devices"
 msgstr "Dispositivos de audio"
@@ -894,6 +964,10 @@ msgstr "Nivel de audio"
 #: components/modal/modals/MFAFlow.tsx
 msgid "Authenticator App"
 msgstr "Aplicación de autenticación"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Authenticator code"
+msgstr "Código de autenticación"
 
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Automatic"
@@ -941,7 +1015,9 @@ msgstr "B (botón derecho)"
 #: components/auth/src/flows/FlowCheck.tsx
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "Atrás"
@@ -1048,6 +1124,10 @@ msgstr "AnyTalk no verifica los bots."
 msgid "Bottom left"
 msgstr "Abajo a la izquierda"
 
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Bottom navigation bar on phones"
+msgstr "Barra de navegación inferior en móviles"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Bottom right"
 msgstr "Abajo a la derecha"
@@ -1057,6 +1137,7 @@ msgid "Bring back"
 msgstr "Traer de vuelta"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+#: components/modal/modals/QrLoginApprove.tsx
 msgid "Browser"
 msgstr "Navegador"
 
@@ -1079,9 +1160,11 @@ msgstr "Creado sobre <0>Stoat</0>"
 msgid "Built on Stoat"
 msgstr "Creado sobre Stoat"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Busy"
@@ -1111,22 +1194,48 @@ msgstr "Ignorar modo pausado"
 msgid "Bypasses slowmode in channels"
 msgstr "Omite el modo pausado en los canales"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "bytes"
+msgstr "bytes"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Call"
 msgstr "Llamada"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Call encryption (DTLS-SRTP) keys are not in this file, so call media stays unreadable in Wireshark even with it."
+msgstr "Las claves de cifrado de las llamadas (DTLS-SRTP) no están en este archivo, así que el contenido multimedia de las llamadas sigue siendo ilegible en Wireshark incluso con él."
+
+#: components/rtc/components/E2eeNotices.tsx
+msgid "Call encryption couldn't be loaded. Try reloading the page."
+msgstr "No se pudo cargar el cifrado de llamadas. Prueba a recargar la página."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Calls"
 msgstr "Llamadas"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Calls: how they are encrypted"
+msgstr "Llamadas: cómo se cifran"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Camera"
 msgstr "Cámara"
 
+#: components/modal/modals/QrScanner.tsx
+msgid "Camera access was denied. Allow the camera for this site in your browser settings and try again."
+msgstr "Se denegó el acceso a la cámara. Permite la cámara para este sitio en los ajustes de tu navegador e inténtalo de nuevo."
+
 #: components/rtc/components/StreamPopouts.tsx
 msgid "Camera is off"
 msgstr "La cámara está apagada"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "Camera preview"
+msgstr "Vista previa de la cámara"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
@@ -1137,8 +1246,10 @@ msgid "Can't get discover request status right now"
 msgstr "No se puede obtener el estado de la solicitud de Descubrir ahora mismo"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Native.tsx
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
@@ -1158,6 +1269,7 @@ msgstr "No se puede obtener el estado de la solicitud de Descubrir ahora mismo"
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/Onboarding.tsx
 #: components/modal/modals/PinMessage.tsx
+#: components/modal/modals/QrScanner.tsx
 #: components/modal/modals/RemoveMember.tsx
 #: components/modal/modals/RemoveTimeout.tsx
 #: components/modal/modals/RenameSession.tsx
@@ -1338,6 +1450,14 @@ msgstr "¡Revisa tu correo electrónico!"
 msgid "Checking for updates…"
 msgstr "Buscando actualizaciones…"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Checking the account..."
+msgstr "Comprobando la cuenta..."
+
+#: src/interface/Sidebar.tsx
+msgid "Choose a server from the list to see its channels."
+msgstr "Elige un servidor de la lista para ver sus canales."
+
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
 msgstr "Elige un nombre de usuario"
@@ -1345,6 +1465,10 @@ msgstr "Elige un nombre de usuario"
 #: components/modal/modals/Onboarding.tsx
 msgid "Choose username"
 msgstr "Elegir nombre de usuario"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Clear"
+msgstr "Borrar"
 
 #: src/interface/servers/ServerOverview.tsx
 msgid "Clear search"
@@ -1378,6 +1502,10 @@ msgstr "Haz click para mostrar el spoiler"
 msgid "Client Settings"
 msgstr "Ajustes del cliente"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "close"
+msgstr "cerrado"
+
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
 #: components/modal/modals/AddFriend.tsx
@@ -1401,6 +1529,7 @@ msgstr "Ajustes del cliente"
 #: components/modal/modals/JoinServer.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/PolicyChange.tsx
+#: components/modal/modals/QrLoginApprove.tsx
 #: components/modal/modals/ServerInfo.tsx
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
@@ -1412,6 +1541,10 @@ msgstr "Cerrar"
 #: components/app/menus/UserContextMenu.tsx
 msgid "Close chat"
 msgstr "Cerrar chat"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Close code"
+msgstr "Código de cierre"
 
 #. placeholder {0}: props.channel.recipient?.displayName
 #: components/modal/modals/DeleteChannel.tsx
@@ -1464,6 +1597,10 @@ msgstr "Comparar resúmenes"
 msgid "Compare Recaps"
 msgstr "Comparar resúmenes"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Compressed size"
+msgstr "Tamaño comprimido"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Concealed audio"
 msgstr "Audio disimulado"
@@ -1490,6 +1627,10 @@ msgstr "Confirmar"
 msgid "Confirm action"
 msgstr "Confirmar acción"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Confirm on your other device."
+msgstr "Confirma en tu otro dispositivo."
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Connect"
 msgstr "Conectar"
@@ -1502,10 +1643,18 @@ msgstr "Conectarse al canal de voz"
 msgid "Connected"
 msgstr "Conectado"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "connecting"
+msgstr "conectando"
+
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "Conectando"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Connection"
+msgstr "Conexión"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Connection lost"
@@ -1528,10 +1677,15 @@ msgstr "Contacta con soporte para quitar este bot de Descubrir"
 msgid "Contact support to remove this server from discover"
 msgstr "Contacta con soporte para quitar este servidor de Descubrir"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Content"
+msgstr "Contenido"
+
 #: components/modal/modals/ReportContent.tsx
 msgid "Content breaks one or more laws"
 msgstr "El contenido infringe una o varias leyes"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
 msgid "Continue"
@@ -1565,6 +1719,11 @@ msgstr "Controles que no se pueden cambiar"
 msgid "Conversations"
 msgstr "Conversaciones"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Copied"
+msgstr "Copiado"
+
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "¡Copiado!"
@@ -1592,6 +1751,10 @@ msgstr "Copiar enlace de invitación"
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Copy Invite URL"
 msgstr "Copiar enlace de invitación"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Copy JSON"
+msgstr "Copiar JSON"
 
 #: components/app/menus/ChannelContextMenu.tsx
 #: components/app/menus/MessageContextMenu.tsx
@@ -1636,9 +1799,17 @@ msgstr "Copiar ID de usuario"
 msgid "Copy webhook URL"
 msgstr "Copiar enlace del webhook"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not change the key log. Try again."
+msgstr "No se pudo cambiar el registro de claves. Inténtalo de nuevo."
+
 #: components/app/interface/settings/user/Updates.tsx
 #~ msgid "Could not check for updates."
 #~ msgstr "No se pudo buscar actualizaciones."
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Could not check which account this is. Cancel and try again."
+msgstr "No se pudo comprobar de qué cuenta se trata. Cancela e inténtalo de nuevo."
 
 #: components/i18n/errors.tsx
 msgid "Could not find what you requested."
@@ -1657,9 +1828,21 @@ msgstr "No se pudo abrir la transmisión en una ventana aparte."
 msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
 msgstr "No se pudo abrir la transmisión en una ventana aparte. Comprueba que las ventanas emergentes estén permitidas."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Could not open the window. Check that pop-ups are allowed."
+msgstr "No se pudo abrir la ventana. Comprueba que las ventanas emergentes estén permitidas."
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Could not reach the server. Trying again..."
+msgstr "No se pudo conectar con el servidor. Reintentando..."
+
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
 msgstr "No se pudo conectar con el actualizador. Inténtalo de nuevo."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not read the key log state."
+msgstr "No se pudo leer el estado del registro de claves."
 
 #: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/user/Overlay.tsx
@@ -1679,6 +1862,10 @@ msgstr "No se pudieron cargar las descargas"
 #: components/ui/components/features/voice/useMoveVoiceUser.ts
 msgid "Couldn't move them to {0}."
 msgstr "No se pudo mover a {0}."
+
+#: components/rtc/components/E2eeNotices.tsx
+msgid "Couldn't set up call encryption. The server may need an update."
+msgstr "No se pudo configurar el cifrado de llamadas. Puede que el servidor necesite una actualización."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "CPU"
@@ -1866,6 +2053,10 @@ msgstr "Cruceta arriba"
 msgid "Dark"
 msgstr "Oscuro"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Data messages and participant attributes (who watches a stream, deafened, key exchange) go over the signalling WebSocket to the media server. They are not end-to-end encrypted, but the key exchange only carries public keys and keys wrapped for one recipient."
+msgstr "Los mensajes de datos y los atributos de los participantes (quién ve una transmisión, ensordecido, intercambio de claves) viajan por el WebSocket de señalización hasta el servidor multimedia. No están cifrados de extremo a extremo, pero el intercambio de claves solo lleva claves públicas y claves envueltas para un solo destinatario."
+
 #. placeholder {0}: err.location
 #: components/i18n/errors.tsx
 msgid "Database error, please contact support. ({0})"
@@ -1895,6 +2086,14 @@ msgstr "Ensordecer o dejar de ensordecer en una llamada"
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
 msgstr "Ensordecido"
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Decline friend request"
+msgstr "Rechazar solicitud de amistad"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Decoded size"
+msgstr "Tamaño decodificado"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -2038,6 +2237,14 @@ msgstr "Eliminar webhook"
 msgid "Deleting this emoji will disallow future use. All past uses will remain."
 msgstr "Eliminar este emoji impedirá su uso futuro. Los usos anteriores se mantendrán."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Delivery"
+msgstr "Entrega"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Deny"
+msgstr "Rechazar"
+
 #. placeholder {0}: props.invite.username
 #: components/modal/modals/AddBot.tsx
 msgid "Description provided by {0}"
@@ -2047,9 +2254,15 @@ msgstr "Descripción proporcionada por {0}"
 msgid "Desktop"
 msgstr "Escritorio"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
 msgstr "Aplicación de escritorio"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Desktop app (not tied to a page)"
+msgstr "Aplicación de escritorio (no vinculada a una página)"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Detailed"
@@ -2058,6 +2271,10 @@ msgstr "Detallado"
 #: components/app/interface/settings/user/Overlay.tsx
 #~ msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
 #~ msgstr "Detallado: nombres mientras alguien habla y una etiqueta EN VIVO para las transmisiones"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Details"
+msgstr "Detalles"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2075,13 +2292,29 @@ msgstr "Documentación para desarrolladores"
 msgid "Developer modes measure call performance and keep statistics of previous calls and streams on this device. Turn on either or both."
 msgstr "Los modos de desarrollador miden el rendimiento de las llamadas y guardan en este dispositivo estadísticas de llamadas y transmisiones anteriores. Activa uno o ambos."
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Device"
+msgstr "Dispositivo"
+
 #: components/app/interface/desktop/Titlebar.tsx
 msgid "Device is offline"
 msgstr "El dispositivo no tiene conexión"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "direct"
+msgstr "directa"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Direct"
+msgstr "Directa"
+
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Direct Messages"
 msgstr "Mensajes directos"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Direction"
+msgstr "Dirección"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Disable Account"
@@ -2206,8 +2439,21 @@ msgstr "Fotogramas descartados por segundo"
 msgid "Drugs or illegal goods"
 msgstr "Drogas o bienes ilegales"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS cipher"
+msgstr "Cifrado DTLS"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS state"
+msgstr "Estado de DTLS"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS version"
+msgstr "Versión de DTLS"
+
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Duration"
 msgstr "Duración"
@@ -2262,6 +2508,10 @@ msgstr "Editar Identidad"
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Edit message"
 msgstr "Editar mensaje"
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Edit profile"
+msgstr "Editar perfil"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
@@ -2347,6 +2597,10 @@ msgstr "Bitrate objetivo del codificador"
 msgid "End call"
 msgstr "Colgar"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "End-to-end encrypted"
+msgstr "Cifrado de extremo a extremo"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced"
 msgstr "Mejorado"
@@ -2376,6 +2630,10 @@ msgstr "Entrar al canal"
 msgid "Enter Code"
 msgstr "Introducir código"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Enter your account password to approve this login."
+msgstr "Introduce la contraseña de tu cuenta para aprobar este inicio de sesión."
+
 #: components/auth/src/flows/Form.tsx
 msgid "Enter your current password."
 msgstr "Introduce tu contraseña actual."
@@ -2398,6 +2656,10 @@ msgstr "Introduce tu nombre de usuario preferido."
 msgid "Entire screen"
 msgstr "Pantalla completa"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "error"
+msgstr "error"
+
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Error occurred, please email support."
 msgstr "Se ha producido un error, escribe un correo a soporte."
@@ -2411,12 +2673,20 @@ msgstr "Esc para <0>cancelar</0> · Intro para <1>guardar</1>"
 msgid "Estimated upload bandwidth"
 msgstr "Ancho de banda de subida estimado"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Event"
+msgstr "Evento"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone"
 msgstr "Permisos predeterminados"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Everyone in the call"
+msgstr "Todos en la llamada"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Excellent"
@@ -2433,6 +2703,14 @@ msgstr "Salir de pantalla completa"
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "Exportar"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Export HAR"
+msgstr "Exportar HAR"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Export JSON"
+msgstr "Exportar JSON"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "External links can be dangerous!"
@@ -2479,6 +2757,15 @@ msgstr "Comentarios"
 msgid "File must be smaller than {0}"
 msgstr "El archivo debe tener un tamaño inferior a {0}"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Files"
+msgstr "Archivos"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Filter by address, host or topic"
+msgstr "Filtrar por dirección, host o tema"
+
 #: src/interface/Home.tsx
 msgid "Find a community based on your hobbies or interests."
 msgstr "Encuentra una comunidad basada en tus hobbies o intereses."
@@ -2491,13 +2778,19 @@ msgstr "Encuentra nuevos servidores a los que unirte"
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "Encuentra tu com<0/>unidad,<1/>conecta con el mundo."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "First bytes"
+msgstr "Primeros bytes"
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Fixed controls"
 msgstr "Controles fijos"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2541,11 +2834,16 @@ msgstr "Por 8 horas"
 msgid "Frame rate"
 msgstr "Tasa de fotogramas"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Freeze the list. Recording goes on."
+msgstr "Congela la lista. La grabación continúa."
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Freezes"
 msgstr "Congelaciones"
 
 #: src/interface/Friends.tsx
+#: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Friends"
 msgstr "Amigos"
@@ -2554,9 +2852,17 @@ msgstr "Amigos"
 msgid "Friends who are online or in a call show up here."
 msgstr "Los amigos que están conectados o en una llamada aparecen aquí."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "From"
+msgstr "De"
+
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "from "
 msgstr "de "
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "From cache"
+msgstr "Desde la caché"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frozen"
@@ -2730,6 +3036,14 @@ msgstr "Ayudó a traducir AnyTalk"
 msgid "Here is your new invite code: <0>{0}</0>"
 msgstr "Aquí está tu nuevo código de invitación: <0>{0}</0>"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Hide call signalling noise"
+msgstr "Ocultar el ruido de señalización de llamadas"
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardPiP.tsx
+msgid "Hide call window"
+msgstr "Ocultar ventana de llamada"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "Ocultar otros"
@@ -2759,6 +3073,7 @@ msgid "Hold this button to talk, even while a game is in front. It only applies 
 msgstr "Mantén pulsado este botón para hablar, incluso con un juego en primer plano. Solo se aplica cuando el modo de entrada es Pulsar para hablar. El juego también ve el botón, así que elige uno que no use. Funciona con mandos Xbox; los mandos PlayStation necesitan Steam Input o DS4Windows."
 
 #: src/interface/Home.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Home"
@@ -2793,6 +3108,10 @@ msgstr "Cómo te llegó el audio de los demás."
 msgid "How many recently joined calls the Home page lists. 0 hides them."
 msgstr "Cuántas llamadas a las que te has unido recientemente aparecen en la página de inicio. 0 las oculta."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "HTTP"
+msgstr "HTTP"
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>{HYPRLAND_BIND_EXAMPLE}</1>."
 msgstr "Hyprland no asigna teclas a los atajos de las aplicaciones por sí solo. Ejecuta <0>{HYPRCTL_COMMAND}</0> para ver las entradas de AnyTalk y luego asigna cada una en tu configuración de Hyprland con el dispatcher «global», por ejemplo <1>{HYPRLAND_BIND_EXAMPLE}</1>."
@@ -2821,9 +3140,11 @@ msgstr "He leído y revisado los cambios."
 msgid "ID copied to clipboard"
 msgstr "ID copiado al portapapeles"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2862,10 +3183,23 @@ msgstr "En una llamada · {count}"
 msgid "In call"
 msgstr "En llamada"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the browser, export the HAR file and open it in your browser's developer tools (Network tab, import) or another HAR viewer to see the requests in detail."
+msgstr "En el navegador, exporta el archivo HAR y ábrelo en las herramientas de desarrollo de tu navegador (pestaña Red, importar) o en otro visor de HAR para ver las solicitudes en detalle."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+#~ msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
+#~ msgstr "En la aplicación de escritorio, una opción de registro de claves que permite a Wireshark descifrar el tráfico llegará en una próxima actualización. Hasta entonces, exporta el archivo HAR para ver las solicitudes en detalle."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the desktop app, switch on \"Write TLS keys to a file\" above and restart the app. Then start a capture in Wireshark, use the app, and open Edit, Preferences, Protocols, TLS. Set \"(Pre)-Master-Secret log filename\" to the file shown above (use \"Show file\" to find it). Wireshark then decrypts the HTTPS and WSS traffic."
+msgstr "En la aplicación de escritorio, activa «Escribir claves TLS en un archivo» arriba y reinicia la aplicación. Después inicia una captura en Wireshark, usa la aplicación y abre Edit, Preferences, Protocols, TLS. Establece «(Pre)-Master-Secret log filename» con el archivo indicado arriba (usa «Mostrar archivo» para encontrarlo). Wireshark descifrará entonces el tráfico HTTPS y WSS."
+
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "Mientras tanto, instala AnyTalk desde Google Play para disfrutar de una experiencia más rápida y fluida, diseñada para Android."
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/servers/Inbox.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Inbox"
@@ -2892,6 +3226,14 @@ msgstr "Modo de entrada"
 msgid "Input Volume"
 msgstr "Volumen de entrada"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Inside: end-to-end encryption (LiveKit E2EE) with a key only the people in the call hold. The media server forwards frames it cannot read."
+msgstr "Dentro: cifrado de extremo a extremo (LiveKit E2EE) con una clave que solo tienen las personas de la llamada. El servidor multimedia reenvía tramas que no puede leer."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Inspect with Wireshark"
+msgstr "Inspeccionar con Wireshark"
+
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Install updates automatically"
 msgstr "Instalar actualizaciones automáticamente"
@@ -2912,6 +3254,7 @@ msgstr "Fuente de la interfaz"
 msgid "Invalid Mention Element"
 msgstr "Elemento de mención no válido"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Invisible"
@@ -3004,6 +3347,10 @@ msgstr "Unirse a la estancia de AnyTalk"
 msgid "Join the voice channel"
 msgstr "Unirse al canal de voz"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "joined"
+msgstr "unido"
+
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: components/ui/components/features/profiles/ProfileJoined.tsx
 msgid "Joined"
@@ -3032,6 +3379,10 @@ msgstr "Mantener AnyTalk en la bandeja al cerrar la ventana"
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Keep as is"
 msgstr "Mantener como es"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "kept in memory only, gone when you reload"
+msgstr "solo en memoria, se pierde al recargar"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Keyframe requests per second (viewers asking for a full new picture)"
@@ -3155,6 +3506,10 @@ msgstr "Claro"
 msgid "Light (60 Hz)"
 msgstr "Ligero (60 Hz)"
 
+#: components/app/interface/settings/user/Sessions.tsx
+msgid "Link a device"
+msgstr "Vincular un dispositivo"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Linux .deb (Debian/Ubuntu)"
 msgstr "Linux .deb (Debian/Ubuntu)"
@@ -3197,6 +3552,10 @@ msgstr "Superposición en vivo, grabación y resúmenes de transmisiones anterio
 msgid "Live statistics overlay"
 msgstr "Superposición de estadísticas en vivo"
 
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Live View"
+msgstr "Vista en vivo"
+
 #. placeholder {0}: humanFileSize(props.file.size ?? 0)
 #: components/ui/components/features/messaging/elements/TextFile.tsx
 msgid "Load file ({0})"
@@ -3206,9 +3565,31 @@ msgstr "Cargar archivo ({0})"
 msgid "Loading message"
 msgstr "Cargando mensaje"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Local candidate"
+msgstr "Candidato local"
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "Iniciar sesión"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Log in a new device?"
+msgstr "¿Iniciar sesión en un dispositivo nuevo?"
+
+#. placeholder {0}: approved()!.account!.display_name || approved()!.account!.username
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Log in as <0>{0}</0>? If you don't recognise this account, cancel."
+msgstr "¿Iniciar sesión como <0>{0}</0>? Si no reconoces esta cuenta, cancela."
+
+#: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Log in with QR code"
+msgstr "Iniciar sesión con código QR"
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Log in?"
+msgstr "¿Iniciar sesión?"
 
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -3239,6 +3620,10 @@ msgstr "Buscando la última versión..."
 msgid "Loss and jitter are what the server reports about the audio it got from you."
 msgstr "La pérdida y el jitter son lo que el servidor informa sobre el audio que recibió de ti."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Lossy"
+msgstr "Con pérdidas"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Lost"
 msgstr "Perdida"
@@ -3255,9 +3640,17 @@ msgstr "Filtro de graves"
 msgid "Lowercase letters, numbers and underscores only."
 msgstr "Solo se permiten letras minúsculas, números y guiones bajos."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Made with"
+msgstr "Hecho con"
+
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Magenta"
 msgstr "Magenta"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "Main navigation"
+msgstr "Navegación principal"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
@@ -3344,6 +3737,14 @@ msgstr "Mide el vídeo de cámara y pantalla compartida que envías o ves"
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Measure your microphone and everyone you hear in calls"
 msgstr "Mide tu micrófono y a todas las personas que oyes en las llamadas"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Media server"
+msgstr "Servidor multimedia"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Media streams"
+msgstr "Flujos multimedia"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Medium (90 Hz)"
@@ -3454,12 +3855,17 @@ msgstr "Sonidos de mensajes, llamadas y transmisiones"
 
 #: components/app/interface/channels/text/Messages.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 msgid "Messages"
 msgstr "Mensajes"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Messaging"
 msgstr "Mensajería"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Method"
+msgstr "Método"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "MFA setup canceled."
@@ -3495,6 +3901,7 @@ msgstr "Fuente Monoespaciada"
 msgid "More Contrast"
 msgstr "Más contraste"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "More options"
 msgstr "Más opciones"
@@ -3584,13 +3991,31 @@ msgstr "Silenciado"
 msgid "Muted until <0/>"
 msgstr "Silenciado hasta <0/>"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends"
+msgstr "Amigos en común"
+
 #: components/modal/modals/UserProfileMutualFriends.tsx
 msgid "Mutual Friends"
 msgstr "Amigos en común"
 
+#. placeholder {0}: mutuals.data!.users.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends ({0})"
+msgstr "Amigos en común ({0})"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups"
+msgstr "Grupos en común"
+
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "Grupos en común"
+
+#. placeholder {0}: mutuals.data!.groups.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups ({0})"
+msgstr "Grupos en común ({0})"
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Mutuals"
@@ -3617,9 +4042,29 @@ msgstr "Nombre"
 msgid "Name (A-Z)"
 msgstr "Nombre (A-Z)"
 
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Navigation"
+msgstr "Navegación"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr "Requiere un servidor compatible con espectadores de transmisión."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Network address"
+msgstr "Dirección de red"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Network inspector"
+msgstr "Inspector de red"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Network Inspector"
+msgstr "Inspector de red"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Network type"
+msgstr "Tipo de red"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
@@ -3671,6 +4116,10 @@ msgstr "Servidor siguiente"
 msgid "Nickname"
 msgstr "Apodo"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "No"
+msgstr "No"
+
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No apps found"
 msgstr "No se encontraron aplicaciones"
@@ -3678,6 +4127,10 @@ msgstr "No se encontraron aplicaciones"
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "No audio was captured, switch window to share audio"
 msgstr "No se capturó audio, cambia de ventana para compartir audio"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "No camera was found on this device."
+msgstr "No se encontró ninguna cámara en este dispositivo."
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "No channels to search"
@@ -3710,6 +4163,10 @@ msgstr "No se han encontrado GIFs"
 #: components/app/interface/settings/user/Language.tsx
 msgid "No languages found"
 msgstr "No se encontraron idiomas"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "No matches"
+msgstr "Sin coincidencias"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "No patch notes for this version."
@@ -3798,6 +4255,14 @@ msgstr "Sin asignar"
 msgid "Nothing"
 msgstr "Nada"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Nothing fits this filter. Try another word or show all kinds."
+msgstr "Nada coincide con este filtro. Prueba otra palabra o muestra todos los tipos."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Nothing recorded yet"
+msgstr "Aún no se ha grabado nada"
+
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own call recaps."
 msgstr "Aún no hay nada que comparar. Importa un CSV o añade uno de tus resúmenes de llamada."
@@ -3806,17 +4271,26 @@ msgstr "Aún no hay nada que comparar. Importa un CSV o añade uno de tus resúm
 msgid "Nothing to compare yet. Import a CSV or add one of your own stream recaps."
 msgstr "Aún no hay nada que comparar. Importa un CSV o añade uno de tus resúmenes de transmisión."
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Nothing to show yet"
+msgstr "Aún no hay nada que mostrar"
+
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Notifications"
 msgstr "Notificaciones"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "Off"
 msgstr "Desactivado"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
+msgstr "Desactivado: los tokens, contraseñas y claves están ocultos. Se restablece al recargar."
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Offers to stream the games you play during a call. Detection happens only on this computer and nothing is sent."
@@ -3830,8 +4304,10 @@ msgstr "Comunicado oficial"
 msgid "Official Server"
 msgstr "Servidor oficial"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Offline"
@@ -3876,10 +4352,12 @@ msgstr "¡Uno de los primeros 1000 usuarios!"
 msgid "Ongoing Maintenance"
 msgstr "Mantenimiento en curso"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -3894,6 +4372,10 @@ msgstr "Conectado"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Online · {count}"
 msgstr "En línea · {count}"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Only approve this if you are looking at that device's screen right now and it shows this QR code. Someone could send you their QR code to take over your account."
+msgstr "Aprueba esto solo si estás mirando la pantalla de ese dispositivo ahora mismo y muestra este código QR. Alguien podría enviarte su código QR para hacerse con tu cuenta."
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Only change this if you run your own AnyTalk server."
@@ -3911,6 +4393,10 @@ msgstr "Solo mientras se ejecuta un juego detectado"
 msgid "Oops, something went wrong! {e}"
 msgstr "¡Vaya! Algo ha salido mal: {e}"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "open"
+msgstr "abierto"
+
 #: components/modal/modals/Invite.tsx
 msgid "Open"
 msgstr "Abrir"
@@ -3924,6 +4410,7 @@ msgstr "Abrir {0}"
 msgid "Open an app or switch to Entire screen."
 msgstr "Abre una aplicación o cambia a «Pantalla completa»."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/rtc/components/StreamPopouts.tsx
 msgid "Open as window"
 msgstr "Abrir en ventana"
@@ -3940,12 +4427,21 @@ msgstr "Abrir archivo"
 msgid "Open friends"
 msgstr "Abrir amigos"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Open live view"
+msgstr "Abrir vista en vivo"
+
 #. placeholder {0}: author()
 #. placeholder {1}: place()
 #. placeholder {2}: preview()
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Open message from {0} in {1}: {2}"
 msgstr "Abrir mensaje de {0} en {1}: {2}"
+
+#. placeholder {0}: props.channel.recipient!.username
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Open profile of {0}"
+msgstr "Abrir el perfil de {0}"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -3992,6 +4488,10 @@ msgstr "Dispositivo de salida"
 msgid "Output Volume"
 msgstr "Volumen de salida"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Outside: SRTP over DTLS between your device and the media server, as for any WebRTC call."
+msgstr "Fuera: SRTP sobre DTLS entre tu dispositivo y el servidor multimedia, como en cualquier llamada WebRTC."
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Overlay"
 msgstr "Superposición"
@@ -4034,12 +4534,21 @@ msgstr "Incidencia parcial"
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/QrLoginApprove.tsx
 msgid "Password"
 msgstr "Contraseña"
 
 #: components/modal/modals/EditPassword.tsx
 msgid "Password changed successfully."
 msgstr "La constraseña se ha cambiado correctamente."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Pause"
+msgstr "Pausar"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Paused"
+msgstr "En pausa"
 
 #: components/app/interface/settings/user/subscriptions/EditSubscriptionJoinFlow.tsx
 #~ msgid "Pay"
@@ -4072,6 +4581,10 @@ msgstr "Modo llamada telefónica"
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Pick a Screen to Share"
 msgstr "Selecciona que transmitir"
+
+#: src/interface/Sidebar.tsx
+msgid "Pick a server"
+msgstr "Elige un servidor"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Pick a username that you want people to be able to find you by. This can be changed later in your user settings."
@@ -4167,6 +4680,10 @@ msgstr "Espera un momento..."
 #: components/state/stores/Experiments.ts
 msgid "Plugins v2 Placeholder"
 msgstr "Marcador de Plugins v2"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "Point the camera at the QR code on the login screen of the new device."
+msgstr "Apunta la cámara al código QR de la pantalla de inicio de sesión del dispositivo nuevo."
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor"
@@ -4271,6 +4788,10 @@ msgstr "Promueve el daño"
 msgid "Pronouns"
 msgstr "Pronombres"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Protocol"
+msgstr "Protocolo"
+
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
 msgstr "El correo electrónico o contraseña proporcionados son erróneos."
@@ -4338,6 +4859,7 @@ msgid "Ready to install: {0}"
 msgstr "Listo para instalar: {0}"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
 msgid "Reason"
@@ -4377,6 +4899,11 @@ msgstr "Recibe notificaciones mientras la pestaña esté abierta."
 msgid "Receive push notifications while the app is closed."
 msgstr "Recibe notificaciones emergentes mientras la aplicación esté cerrada."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Received"
+msgstr "Recibido"
+
 #: src/interface/home/FriendsOverview.tsx
 msgid "Recent calls"
 msgstr "Llamadas recientes"
@@ -4399,6 +4926,10 @@ msgstr "Reconectando"
 msgid "Record call recaps"
 msgstr "Grabar resúmenes de llamadas"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Record network traffic"
+msgstr "Grabar el tráfico de red"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record statistics of every call you are in, with or without the overlay"
 msgstr "Registra las estadísticas de cada llamada en la que estés, con o sin superposición"
@@ -4410,6 +4941,18 @@ msgstr "Registra las estadísticas de cada transmisión que envíes o veas, con 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record stream recaps"
 msgstr "Grabar resúmenes de transmisiones"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Recorded traffic"
+msgstr "Tráfico grabado"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Recording is off"
+msgstr "La grabación está desactivada"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Recovery code"
+msgstr "Código de recuperación"
 
 #: components/modal/modals/MFAFlow.tsx
 msgid "Recovery Code"
@@ -4439,6 +4982,18 @@ msgstr "Registrado desde <0/>"
 msgid "Reject friend request"
 msgstr "Rechazar solicitud"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "relay"
+msgstr "relé"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Relay protocol"
+msgstr "Protocolo del relé"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Relay server"
+msgstr "Servidor de relé"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Release notes"
 msgstr "Notas de la versión"
@@ -4447,6 +5002,10 @@ msgstr "Notas de la versión"
 msgid "Relevance"
 msgstr "Relevancia"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Reliable"
+msgstr "Fiable"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload and clear cache"
 msgstr "Recargar y borrar caché"
@@ -4454,6 +5013,14 @@ msgstr "Recargar y borrar caché"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload AnyTalk with fresh files from the server? This is the same as Ctrl+F5 and fixes most display problems after an update. You stay logged in and keep your settings."
 msgstr "¿Recargar AnyTalk con archivos nuevos del servidor? Es lo mismo que Ctrl+F5 y arregla la mayoría de los problemas de visualización tras una actualización. Sigues con la sesión iniciada y conservas tus ajustes."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Remote address"
+msgstr "Dirección remota"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Remote candidate"
+msgstr "Candidato remoto"
 
 #: components/markdown/plugins/anchors.tsx
 msgid "Remote Channel"
@@ -4577,6 +5144,26 @@ msgstr "Reportar servidor"
 msgid "Report user"
 msgstr "Reportar usuario"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Request body"
+msgstr "Cuerpo de la solicitud"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Request headers"
+msgstr "Encabezados de la solicitud"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Requested"
+msgstr "Solicitado"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Requests and messages show up here as they happen."
+msgstr "Las solicitudes y los mensajes aparecen aquí a medida que ocurren."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Requests from images, fonts and other files, and from the app itself rather than a page, are listed too, marked \"Desktop app\". They are only recorded while recording is on."
+msgstr "Las solicitudes de imágenes, fuentes y otros archivos, y de la propia aplicación en lugar de una página, también aparecen en la lista, marcadas como «Aplicación de escritorio». Solo se registran mientras la grabación está activada."
+
 #: components/auth/src/flows/FlowResend.tsx
 msgid "Resend"
 msgstr "Reenviar"
@@ -4654,6 +5241,18 @@ msgstr "Resolución"
 msgid "Resolution and FPS"
 msgstr "Resolución y FPS"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response headers"
+msgstr "Encabezados de la respuesta"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response preview"
+msgstr "Vista previa de la respuesta"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response size"
+msgstr "Tamaño de la respuesta"
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Responsibly disclosed security issues"
 msgstr "Reportó problemas de seguridad responsablemente"
@@ -4670,6 +5269,10 @@ msgstr "Reiniciar para actualizar"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Restore call window"
 msgstr "Restaurar ventana de llamada"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Resume"
+msgstr "Reanudar"
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 msgid "Retry sending"
@@ -4725,6 +5328,7 @@ msgid "Role Overrides"
 msgstr "Excepciones de rol"
 
 #: components/app/interface/settings/ServerSettings.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
 msgid "Roles"
 msgstr "Roles"
@@ -4732,6 +5336,18 @@ msgstr "Roles"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Roles with No Overrides"
 msgstr "Roles sin excepciones"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Room"
+msgstr "Sala"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "route"
+msgstr "ruta"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Route"
+msgstr "Ruta"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Running"
@@ -4785,6 +5401,23 @@ msgstr "Guardando…"
 #: components/modal/modals/ReportContent.tsx
 msgid "Scams or fraud"
 msgstr "Estafas o fraude"
+
+#: components/modal/modals/QrScanner.tsx
+#: src/interface/navigation/servers/UserMenu.tsx
+msgid "Scan QR code"
+msgstr "Escanear código QR"
+
+#: components/app/interface/settings/user/Sessions.tsx
+msgid "Scan the QR code on the login screen of a new device to log it in."
+msgstr "Escanea el código QR de la pantalla de inicio de sesión de un dispositivo nuevo para iniciar sesión en él."
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Scan this with AnyTalk on a device where you're logged in. Open Settings, then Sessions, then Link a device."
+msgstr "Escanea esto con AnyTalk en un dispositivo donde hayas iniciado sesión. Abre Ajustes, luego Sesiones y después Vincular un dispositivo."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "Scanning needs a secure connection (HTTPS). This page is opened over plain HTTP, so the browser blocks the camera."
+msgstr "Escanear requiere una conexión segura (HTTPS). Esta página se abrió con HTTP simple, así que el navegador bloquea la cámara."
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Screen share frame rate"
@@ -4890,6 +5523,14 @@ msgstr "Buscando…"
 msgid "See all your servers at a glance."
 msgstr "Mira todos tus servidores de un vistazo."
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "See what the app sends and receives, and export it to check against Wireshark"
+msgstr "Mira lo que la aplicación envía y recibe, y expórtalo para compararlo con Wireshark"
+
+#: src/interface/Home.tsx
+msgid "See your friends and answer friend requests."
+msgstr "Mira a tus amigos y responde a las solicitudes de amistad."
+
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select"
 msgstr "Seleccionar"
@@ -4897,6 +5538,10 @@ msgstr "Seleccionar"
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select all"
 msgstr "Seleccionar todo"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Select an entry to see its details."
+msgstr "Selecciona una entrada para ver sus detalles."
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Select at least one line above to compare."
@@ -4974,6 +5619,8 @@ msgstr "Enviar petición"
 msgid "Sending..."
 msgstr "Enviando..."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Sent"
 msgstr "Enviado"
@@ -4996,6 +5643,7 @@ msgstr "Envió múltiples archivos"
 msgid "Server"
 msgstr "Servidor"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Server address"
 msgstr "Dirección del servidor"
@@ -5035,6 +5683,7 @@ msgstr "Opciones del servidor {name}"
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/Sidebar.tsx
 msgid "Server overview"
 msgstr "Resumen de servidores"
 
@@ -5042,15 +5691,32 @@ msgstr "Resumen de servidores"
 msgid "Server Roles"
 msgstr "Roles del servidor"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "Servidores"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Servers contacted"
+msgstr "Servidores contactados"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Servers show up here as soon as the app talks to them."
+msgstr "Los servidores aparecen aquí en cuanto la aplicación se comunica con ellos."
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Servers you join show up here."
 msgstr "Los servidores a los que te unas aparecerán aquí."
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "Servers, unread messages"
+msgstr "Servidores, mensajes sin leer"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+msgstr "Los tokens de sesión, las contraseñas y las claves de llamada aparecerán en pantalla y en las exportaciones. Quien los vea o los obtenga podría iniciar sesión como tú. Actívalo solo para depurar y no compartas las exportaciones."
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5108,9 +5774,17 @@ msgstr "Compartir cámara o pantalla en llamada"
 msgid "Share screen"
 msgstr "Transmitir pantalla"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show"
+msgstr "Mostrar"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show 'copy ID' in context menus"
 msgstr "Mostrar «Copiar ID» en los menús contextuales"
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Show a new code"
+msgstr "Mostrar un código nuevo"
 
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show a notice when a new version is available"
@@ -5120,9 +5794,17 @@ msgstr "Mostrar un aviso cuando haya una nueva versión disponible"
 msgid "Show admin panel shortcuts in context menus"
 msgstr "Mostrar atajos del panel de administración en los menús contextuales"
 
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Show call window"
+msgstr "Mostrar ventana de llamada"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
 msgstr "Mostrar correcciones y sugerencias mientras escribes."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show file"
+msgstr "Mostrar archivo"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Show live microphone statistics on call tiles"
@@ -5131,6 +5813,10 @@ msgstr "Mostrar estadísticas del micrófono en vivo en los mosaicos de llamada"
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Show live statistics on call video tiles"
 msgstr "Mostrar estadísticas en vivo en los mosaicos de vídeo de llamada"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show only"
+msgstr "Mostrar solo"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Show Others"
@@ -5153,9 +5839,21 @@ msgstr "Mostrar lista de servidores"
 msgid "Show server names"
 msgstr "Mostrar nombres de servidores"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show tokens and keys"
+msgstr "Mostrar tokens y claves"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show tokens and keys?"
+msgstr "¿Mostrar tokens y claves?"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Show when speaking"
 msgstr "Mostrar al hablar"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show window"
+msgstr "Mostrar ventana"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
@@ -5194,6 +5892,7 @@ msgid "Shows who is talking in your call on top of your game. It works over bord
 msgstr "Muestra quién está hablando en tu llamada sobre tu juego. Funciona con juegos en ventana y sin bordes, no en pantalla completa exclusiva."
 
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Sign into AnyTalk"
 msgstr "Iniciar sesión en AnyTalk"
 
@@ -5212,6 +5911,10 @@ msgstr "Silencioso"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Single stream: opening a stream replaces the current one"
 msgstr "Transmisión única: abrir una transmisión reemplaza la actual"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Size"
+msgstr "Tamaño"
 
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "Slowmode Immune"
@@ -5277,6 +5980,10 @@ msgstr "¡Algo salió mal! {error}"
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr "¡Algo ha ido mal! Inténtalo de nuevo más tarde."
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Something went wrong. Check your connection and try again."
+msgstr "Algo salió mal. Comprueba tu conexión e inténtalo de nuevo."
+
 #: src/interface/channels/text/TextSearchSidebar.tsx
 #: src/interface/servers/ServerOverview.tsx
 msgid "Sort by"
@@ -5326,6 +6033,10 @@ msgstr "Corrector ortográfico"
 msgid "Spoiler"
 msgstr "Spoiler"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "SRTP cipher"
+msgstr "Cifrado SRTP"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Start camera"
 msgstr "Activar cámara"
@@ -5342,6 +6053,11 @@ msgstr "Iniciar la llamada"
 msgid "Start with Computer"
 msgstr "Iniciar con el ordenador"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Started"
+msgstr "Iniciado"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 msgid "Status"
 msgstr "Estatus"
@@ -5354,6 +6070,7 @@ msgstr "Desactivar cámara"
 msgid "Stop sharing"
 msgstr "Detener transmisión"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/ui/components/features/voice/callCard/GameStreamPrompt.tsx
 msgid "Stream"
 msgstr "Transmitir"
@@ -5536,6 +6253,10 @@ msgstr "Términos"
 #~ msgid "Terms of Service"
 #~ msgstr "Términos de servicio"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Text"
+msgstr "Texto"
+
 #: components/modal/modals/CreateChannel.tsx
 msgid "Text Channel"
 msgstr "Canal de texto"
@@ -5543,6 +6264,22 @@ msgstr "Canal de texto"
 #: components/i18n/errors.tsx
 msgid "That action had no effect."
 msgstr "Esta acción no tuvo efecto."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That code is not correct. Check it and try again."
+msgstr "Ese código no es correcto. Compruébalo e inténtalo de nuevo."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That password is not correct. Check it and try again."
+msgstr "Esa contraseña no es correcta. Compruébala e inténtalo de nuevo."
+
+#: components/modal/modals/QrLoginApprove.tsx
+#~ msgid "That password or code is not correct. Check it and try again."
+#~ msgstr "Esa contraseña o ese código no es correcto. Revísalo e inténtalo de nuevo."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "That QR code is not an AnyTalk login code. Point the camera at the code on the login screen of the new device."
+msgstr "Ese código QR no es un código de inicio de sesión de AnyTalk. Apunta la cámara al código de la pantalla de inicio de sesión del dispositivo nuevo."
 
 #: components/i18n/errors.tsx
 msgid "The bot has been removed from discover by moderators, the user must contact support."
@@ -5555,6 +6292,14 @@ msgstr "El bot ya está en Descubrir, el usuario debe contactar con soporte para
 #: components/modal/modals/AddBot.tsx
 msgid "The bot will not be granted any permissions."
 msgstr "Al bot no se le concederá ningún permiso."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "The camera could not be started."
+msgstr "No se pudo iniciar la cámara."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "The camera is on but no picture arrives. Close this window and try again, or check that no other app is using the camera."
+msgstr "La cámara está encendida, pero no llega ninguna imagen. Cierra esta ventana e inténtalo de nuevo, o comprueba que ninguna otra aplicación esté usando la cámara."
 
 #. placeholder {0}: actionLabels()[blocker]
 #: components/app/interface/settings/user/Controller.tsx
@@ -5589,6 +6334,18 @@ msgstr "La primera versión aún no se ha publicado. Vuelve pronto."
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
 msgstr "Los moderadores quitaron el elemento, por lo que no se permiten nuevas solicitudes. Contacta con soporte para más información."
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "The login was cancelled, but the new session could not be removed. Remove it in Settings, then Sessions, on a device where you are logged in."
+msgstr "El inicio de sesión se canceló, pero no se pudo eliminar la sesión nueva. Elimínala en Ajustes, luego Sesiones, en un dispositivo donde hayas iniciado sesión."
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "The login was denied on the other device."
+msgstr "El inicio de sesión se denegó en el otro dispositivo."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
+msgstr "El inspector de red graba lo que AnyTalk envía y recibe, para que puedas compararlo con una herramienta como Wireshark. Está desactivado por defecto y no se envía nada a ningún sitio."
 
 #: components/i18n/errors.tsx
 msgid "The password is too short."
@@ -5671,6 +6428,14 @@ msgstr "Este canal está marcado como adulto."
 msgid "This channel is not available in your region while we review options on legal compliance."
 msgstr "Este canal no está disponible en tu región mientras revisamos opciones para cumplir con la ley."
 
+#: components/modal/modals/QrScanner.tsx
+msgid "This code is from a different AnyTalk server. Open the login page of this server on the new device instead."
+msgstr "Este código es de otro servidor de AnyTalk. Abre en su lugar la página de inicio de sesión de este servidor en el dispositivo nuevo."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "This code was made on an address that only works on the other device (localhost). Open the login page there with the same address you use on this device."
+msgstr "Este código se creó con una dirección que solo funciona en el otro dispositivo (localhost). Abre allí la página de inicio de sesión con la misma dirección que usas en este dispositivo."
+
 #: src/interface/channels/AgeGate.tsx
 msgid "This content is not available in your region."
 msgstr "Este contenido no está disponible en tu región."
@@ -5708,6 +6473,10 @@ msgstr "Este es el comienzo de tus notas."
 msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
 msgstr "Esta tecla no se puede usar sola. Añade Ctrl, Alt o Mayús, o elige otra tecla."
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "This login request has expired or was already answered. Ask the other device to show a new QR code."
+msgstr "Esta solicitud de inicio de sesión ha caducado o ya se respondió. Pide al otro dispositivo que muestre un código QR nuevo."
+
 #: components/i18n/errors.tsx
 msgid "This message is already pinned."
 msgstr "Este mensaje ya está fijado."
@@ -5728,6 +6497,10 @@ msgstr "Esta contraseña ha aparecido previamente en brechas de seguridad, por f
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "This recap no longer exists."
 msgstr "Este resumen ya no existe."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "This request cannot be approved right now. Ask the other device to show a new QR code."
+msgstr "Esta solicitud no se puede aprobar ahora mismo. Pide al otro dispositivo que muestre un código QR nuevo."
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "This server is about..."
@@ -5769,6 +6542,14 @@ msgstr "Este nombre de usuario no está permitido."
 msgid "This will invalidate the current token and stop any existing instances of the bot from running."
 msgstr "Esto invalidará el token actual y detendrá cualquier instancia del bot que se esté ejecutando."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Through a relay (TURN)"
+msgstr "A través de un relé (TURN)"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Time"
+msgstr "Hora"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Time format"
 msgstr "Formato de hora"
@@ -5800,6 +6581,14 @@ msgstr "Aislar temporalmente al miembro"
 msgid "Timeout Members"
 msgstr "Aislar temporalmente a miembros"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "TLS key log"
+msgstr "Registro de claves TLS"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "To"
+msgstr "Para"
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Toggle deafen"
 msgstr "Alternar ensordecer"
@@ -5828,6 +6617,14 @@ msgstr "Acento tonal"
 msgid "Too Long"
 msgstr "Demasiado largo"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Too many attempts. Wait a moment and try again."
+msgstr "Demasiados intentos. Espera un momento e inténtalo de nuevo."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Too many wrong codes. Wait a while before trying again."
+msgstr "Demasiados códigos incorrectos. Espera un rato antes de volver a intentarlo."
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Top left"
 msgstr "Arriba a la izquierda"
@@ -5836,12 +6633,21 @@ msgstr "Arriba a la izquierda"
 msgid "Top right"
 msgstr "Arriba a la derecha"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Topic"
+msgstr "Tema"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
 msgstr "Tradicional (DD/MM/YYYY)"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Transferred"
+msgstr "Transferido"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Transport"
 msgstr "Transporte"
 
@@ -5871,6 +6677,18 @@ msgstr "Prueba con otras palabras u otro ámbito."
 msgid "Turn every sound on and reset their volumes and files?"
 msgstr "¿Activar todos los sonidos y restablecer sus volúmenes y archivos?"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Turn it on to see what the app sends and receives."
+msgstr "Actívalo para ver lo que la aplicación envía y recibe."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Turn on recording"
+msgstr "Activar la grabación"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turn on recording to see which servers the app talks to."
+msgstr "Activa la grabación para ver con qué servidores se comunica la aplicación."
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn single sounds off, change their volume or use your own"
 msgstr "Desactiva sonidos individuales, cambia su volumen o usa los tuyos"
@@ -5878,6 +6696,18 @@ msgstr "Desactiva sonidos individuales, cambia su volumen o usa los tuyos"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "Si lo desactivas, al cerrar la ventana AnyTalk se cierra de inmediato."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turns off after restart"
+msgstr "Se desactiva tras reiniciar"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turns on after restart"
+msgstr "Se activa tras reiniciar"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Type"
+msgstr "Tipo"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 #~ msgid "Type in the search box and press Enter."
@@ -5912,6 +6742,10 @@ msgstr "Desconocido"
 #: src/interface/channels/ChannelPage.tsx
 msgid "Unknown channel type!"
 msgstr "¡Tipo de canal desconocido!"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Unknown device"
+msgstr "Dispositivo desconocido"
 
 #: components/markdown/plugins/customEmoji.tsx
 msgid "Unknown emote"
@@ -6070,6 +6904,10 @@ msgstr "Subir a Gifbox"
 msgid "Uploading file `{fileName}`... {0}%"
 msgstr "Subiendo el archivo `{fileName}`... {0}%"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "URL"
+msgstr "URL"
+
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
 msgstr "Usar un código o un enlace de invitación"
@@ -6078,9 +6916,17 @@ msgstr "Usar un código o un enlace de invitación"
 msgid "Use a game controller to move around AnyTalk. Works with Xbox, PlayStation, Switch and Steam Deck controllers."
 msgstr "Usa un mando de juego para moverte por AnyTalk. Funciona con mandos de Xbox, PlayStation, Switch y Steam Deck."
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a recovery code instead"
+msgstr "Usar un código de recuperación"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Use hotkeys that work even while AnyTalk isn't focused, and keep AnyTalk running in the system tray."
 msgstr "Usa atajos de teclado que funcionan incluso cuando AnyTalk no está en primer plano y mantén AnyTalk en ejecución en la bandeja del sistema."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use the authenticator app instead"
+msgstr "Usar la aplicación de autenticación"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Use the graphics card to improve performance."
@@ -6210,6 +7056,10 @@ msgstr "Copias de vídeo enviadas (tamaño completo / mitad / cuarto)"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "View (back) button"
 msgstr "Botón de vista (Atrás)"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "View banner"
+msgstr "Ver banner"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"
@@ -6348,6 +7198,10 @@ msgstr "Nombre de Webhook"
 msgid "Webhooks"
 msgstr "Webhooks"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "WebSocket"
+msgstr "WebSocket"
+
 #~ msgid "Welcome to"
 #~ msgstr "Bienvenido a"
 
@@ -6383,6 +7237,10 @@ msgstr "Cuándo mostrar"
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Whenever I'm in a call"
 msgstr "Siempre que esté en una llamada"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Where your data goes"
+msgstr "Adónde van tus datos"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Whether other users can edit these settings"
@@ -6421,6 +7279,10 @@ msgstr "con otros {0} usuarios"
 msgid "with {participants}"
 msgstr "con {participants}"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Without the keys, Wireshark only sees encrypted TLS and DTLS traffic. What it can still tell you is where the data goes and how much. Compare that with the servers and sizes listed above."
+msgstr "Sin las claves, Wireshark solo ve tráfico TLS y DTLS cifrado. Aun así, puede decirte adónde van los datos y cuántos. Compáralo con los servidores y tamaños indicados arriba."
+
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Would you like to create a new group or server?"
 msgstr "¿Quieres crear un nuevo grupo o servidor?"
@@ -6433,6 +7295,10 @@ msgstr "¿Quieres crear un nuevo servidor o unirte a uno existente?"
 msgid "Write a message"
 msgstr "Escribir un mensaje"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Write TLS keys to a file"
+msgstr "Escribir claves TLS en un archivo"
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "X (left button)"
 msgstr "X (botón izquierdo)"
@@ -6440,6 +7306,15 @@ msgstr "X (botón izquierdo)"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Y (top button)"
 msgstr "Y (botón superior)"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Yes"
+msgstr "Sí"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+#: src/interface/navigation/bottomNav/YouScreen.tsx
+msgid "You"
+msgstr "Tú"
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "You agree that your bot is subject to the Acceptable Usage Policy."
@@ -6615,6 +7490,11 @@ msgstr "No podrás acceder a tu cuenta a menos que te pongas en contacto con el 
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "No podrás volver a entrar a menos que te inviten de nuevo."
 
+#. placeholder {0}: presence()
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "You, {0}"
+msgstr "Tú, {0}"
+
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "You're all caught up"
 msgstr "Estás al día"
@@ -6677,6 +7557,10 @@ msgstr "¡Tu cuenta ha sido verificada!"
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your bot is under review"
 msgstr "Tu bot está en revisión"
+
+#: components/rtc/components/E2eeNotices.tsx
+msgid "Your browser can't encrypt calls, so you can't join."
+msgstr "Tu navegador no puede cifrar las llamadas, así que no puedes unirte."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Your camera"

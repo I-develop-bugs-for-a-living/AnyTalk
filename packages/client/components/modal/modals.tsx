@@ -50,6 +50,8 @@ import { MFARecoveryModal } from "./modals/MFARecovery";
 import { OnboardingModal } from "./modals/Onboarding";
 import { PinMessageModal } from "./modals/PinMessage";
 import { PolicyChangeModal } from "./modals/PolicyChange";
+import { QrLoginApproveModal } from "./modals/QrLoginApprove";
+import { QrScannerModal } from "./modals/QrScanner";
 import { RemoveMemberModal } from "./modals/RemoveMember";
 import { RemoveTimeoutModal } from "./modals/RemoveTimeout";
 import { RenameSessionModal } from "./modals/RenameSession";
@@ -167,6 +169,10 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
       return <OnboardingModal {...modalProps} />;
     case "policy_change":
       return <PolicyChangeModal {...modalProps} />;
+    case "qr_scanner":
+      return <QrScannerModal {...modalProps} />;
+    case "qr_login_approve":
+      return <QrLoginApproveModal {...modalProps} />;
     case "rename_session":
       return <RenameSessionModal {...modalProps} />;
     case "report_content":
@@ -182,7 +188,7 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
     case "sign_out_sessions":
       return <SignOutSessionsModal {...modalProps} />;
     case "user_profile":
-      return <UserProfileModal {...modalProps} />;
+      return <UserProfileModal {...modalProps} modalId={props.id} />;
     case "user_profile_roles":
       return <UserProfileRolesModal {...modalProps} />;
     case "user_profile_mutual_friends":

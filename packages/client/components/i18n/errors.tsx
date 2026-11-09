@@ -2,6 +2,8 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import { createMemo, Match, Switch } from "solid-js";
 import { API } from "stoat.js";
 
+import { stripHtml } from "./stripHtml";
+
 const RE_BREAK = /\s*\n\s*/g;
 
 function cleanError(
@@ -198,11 +200,7 @@ export function useError() {
       if (message) return message;
     } else if (typeof error === "string") {
       //Strip HTML from string
-      const p = document.createElement("html");
-      p.innerHTML = error;
-      p.querySelector("head")?.remove();
-      p.querySelector("[role=contentinfo]")?.remove();
-      error = p.textContent!.trim().replace(RE_BREAK, ". ");
+      error = stripHtml(error).replace(RE_BREAK, ". ");
     }
 
     return t`Something went wrong! ${error}`;

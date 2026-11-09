@@ -6,6 +6,7 @@ import {
   createContext,
   createEffect,
   createSignal,
+  on,
   onCleanup,
   onMount,
   useContext,
@@ -21,6 +22,7 @@ import { VoiceLayout } from "@revolt/rtc/state";
 import { useState } from "@revolt/state";
 import { SlideState } from "@revolt/ui/components/navigation/SlideDrawer";
 
+import { callWindowHiddenOnPhone, setCallWindowHidden } from "./callWindow";
 import { VoiceCallCardActiveRoom } from "./VoiceCallCardActiveRoom";
 import { VoiceCallCardPiP } from "./VoiceCallCardPiP";
 import { VoiceCallCardPreview } from "./VoiceCallCardPreview";
@@ -45,6 +47,14 @@ const callCardContext = createContext<(info?: Info) => void>();
 export function VoiceCallCardContext(props: { children: JSX.Element }) {
   const voice = useVoice();
   const inCall = () => !!voice.channel();
+
+  // a hidden call window comes back for the next call
+  createEffect(
+    on(
+      () => voice.channel()?.id,
+      () => setCallWindowHidden(false),
+    ),
+  );
 
   const [mode, setMode] = createSignal<Mode>();
   const [info, setInfo] = createSignal<Info>();
@@ -186,6 +196,10 @@ export function VoiceCallCardContext(props: { children: JSX.Element }) {
           fullscreen={voice.layout() === "fullscreen"}
         >
           <Switch>
+            {/* hidden on phones: the call bar brings it back */}
+            <Match when={mode() && inCall() && callWindowHiddenOnPhone()}>
+              {null}
+            </Match>
             <Match when={mode() && inCall()}>
               <VoiceCallCardPiP />
             </Match>
@@ -243,6 +257,14 @@ const Float = styled("div", {
         "--flt-h": "calc(var(--flt-w) * 0.57)",
         width: "var(--flt-w)",
         height: "var(--flt-h)",
+
+        // phones: the floating card is always the slim collapsed strip (the
+        // same 56px as the collapsed card in the voice channel); the full
+        // call view opens from the voice channel
+        _phone: {
+          "--flt-w": "calc(100vw - 32px)",
+          "--flt-h": "56px",
+        },
       },
     },
   ],

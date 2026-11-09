@@ -35,7 +35,9 @@ export function UserCard(
   props: JSX.Directives["floating"]["userCard"] &
     object & { onClose: () => void },
 ) {
-  const { isMobile } = useDevice();
+  const { layout } = useDevice();
+  // phone layout opens the full-screen profile page instead of the card
+  const isPhone = () => layout() === "phone";
   const { openModal } = useModals();
   const client = useClient();
   const query = useQuery(() => ({
@@ -49,11 +51,11 @@ export function UserCard(
   }
 
   onMount(() => {
-    if (isMobile) openFull();
+    if (isPhone()) openFull();
   });
 
   return (
-    <Show when={!isMobile}>
+    <Show when={!isPhone()}>
       <div
         use:invisibleScrollable={{ class: base() }}
         on:pointerdown={(e) => {

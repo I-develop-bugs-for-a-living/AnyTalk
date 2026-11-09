@@ -71,6 +71,13 @@ msgstr "{0, plural, one {# CH4NN3L C0ULD N07 83 5342CH3D} other {# CH4NN3L5 C0UL
 msgid "{0, plural, one {# channel} other {# channels}}"
 msgstr "{0, plural, one {# CH4NN3L} other {# CH4NN3L5}}"
 
+#. placeholder {0}: list().length
+#. placeholder {0}: shown().length
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "{0, plural, one {# entry} other {# entries}}"
+msgstr "{0, plural, one {# 3N72Y} other {# 3N72135}}"
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -105,6 +112,11 @@ msgstr "{0, plural, one {# N3W M3N710N} other {# N3W M3N710N5}}"
 #: src/interface/home/FriendsOverview.tsx
 msgid "{0, plural, one {# person in the call} other {# people in the call}}"
 msgstr "{0, plural, one {# P3250N 1N 7H3 C4LL} other {# P30PL3 1N 7H3 C4LL}}"
+
+#. placeholder {0}: viewers().length
+#: components/ui/components/features/voice/callCard/StreamViewerBadge.tsx
+msgid "{0, plural, one {# person watching} other {# people watching}}"
+msgstr "{0, plural, one {# P3250N W47CH1N6} other {# P30PL3 W47CH1N6}}"
 
 #. placeholder {0}: entry.others
 #: src/interface/home/FriendsOverview.tsx
@@ -371,6 +383,22 @@ msgstr "{n, plural, one {D3L373 # C4LL 23C4P?} other {D3L373 # C4LL 23C4P5?}}"
 msgid "{n, plural, one {Delete # stream recap?} other {Delete # stream recaps?}}"
 msgstr "{n, plural, one {D3L373 # 57234M 23C4P?} other {D3L373 # 57234M 23C4P5?}}"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Home, # pending friend request} other {Home, # pending friend requests}}"
+msgstr "{n, plural, one {H0M3, # P3ND1N6 F213ND 23QU357} other {H0M3, # P3ND1N6 F213ND 23QU3575}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr "{n, plural, one {1N80X, # UN234D M3N710N} other {1N80X, # UN234D M3N710N5}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Messages, # unread} other {Messages, # unread}}"
+msgstr "{n, plural, one {M3554635, # UN234D} other {M3554635, # UN234D}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Servers, # unread mention} other {Servers, # unread mentions}}"
+msgstr "{n, plural, one {532V325, # UN234D M3N710N} other {532V325, # UN234D M3N710N5}}"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{name}'s {source}"
 msgstr "{name}'5 {source}"
@@ -576,6 +604,10 @@ msgstr "4 M355463 02 N071F1C4710N 4221V35"
 msgid "A new version of AnyTalk is available"
 msgstr "4 N3W V32510N 0F 4NY74LK 15 4V41L48L3"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "A packet capture (for example Wireshark) therefore shows only DTLS/SRTP ciphertext, and the media server only sees end-to-end ciphertext."
+msgstr "4 P4CK37 C4P7U23 (F02 3X4MPL3 W1235H42K) 7H323F023 5H0W5 0NLY D7L5/527P C1PH3273X7, 4ND 7H3 M3D14 532V32 0NLY 5335 3ND-70-3ND C1PH3273X7."
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream in your call ends"
 msgstr "4 57234M 1N Y0U2 C4LL 3ND5"
@@ -600,6 +632,10 @@ msgstr "48L3 70 5P34K 1N V01C3 C4LL"
 #~ msgid "About"
 #~ msgstr "480U7"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "About me"
+msgstr "480U7 M3"
+
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Accept"
 msgstr "4CC3P7"
@@ -608,6 +644,10 @@ msgstr "4CC3P7"
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Accept friend request"
 msgstr "4CC3P7 F213ND 23QU357"
+
+#: src/interface/navigation/bottomNav/YouScreen.tsx
+msgid "Account"
+msgstr "4CC0UN7"
 
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Account has been queued for deletion!"
@@ -620,6 +660,11 @@ msgstr "4CKN0WL3D63"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Action"
 msgstr "4C710N"
+
+#. placeholder {0}: state().path
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Active, writing to {0}"
+msgstr "4C71V3, W2171N6 70 {0}"
 
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
@@ -693,6 +738,7 @@ msgstr "4DV4NC3D 50UND 53771N65"
 #~ msgid "Affects all roles and users"
 #~ msgstr ""
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: src/interface/Friends.tsx
 msgid "All"
 msgstr "4LL"
@@ -780,6 +826,10 @@ msgstr "4N07H32 4PP 15 4L234DY U51N6 7H353 K3Y5, 50 7H3Y 0NLY W02K 1N51D3 4NY74L
 #~ msgid "Another app is already using these keys. Pick other keys."
 #~ msgstr ""
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Anyone who gets the key log file and a capture can read the traffic, so switch it off when you are done. It also switches off when the app updates. Calls stay unreadable: their media keys are not in this file."
+msgstr "4NY0N3 WH0 6375 7H3 K3Y L06 F1L3 4ND 4 C4P7U23 C4N 234D 7H3 724FF1C, 50 5W17CH 17 0FF WH3N Y0U 423 D0N3. 17 4L50 5W17CH35 0FF WH3N 7H3 4PP UPD4735. C4LL5 574Y UN234D48L3: 7H312 M3D14 K3Y5 423 N07 1N 7H15 F1L3."
+
 #. placeholder {0}: installed()
 #: components/app/interface/settings/user/Updates.tsx
 msgid "AnyTalk Desktop {0}"
@@ -804,6 +854,10 @@ msgstr "4NY74LK 15 0N3 0F 7H3 8357 W4Y5 70 574Y C0NN3C73D W17H Y0U2 F213ND5 4ND 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "AnyTalk is up to date."
 msgstr "4NY74LK 15 UP 70 D473."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "AnyTalk network inspector"
+msgstr "4NY74LK N37W02K 1N5P3C702"
 
 #: src/AndroidNag.tsx
 msgid "AnyTalk on Android"
@@ -846,6 +900,10 @@ msgstr "4PPL135 70 532V325 Y0U J01N 02 C23473 F20M N0W 0N. 3X1571N6 532V325 K33P
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Apply"
 msgstr "4PPLY"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Approve"
+msgstr "4PP20V3"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Apps"
@@ -901,6 +959,18 @@ msgstr "45516N 20L35"
 msgid "at {time}"
 msgstr "47 {time}"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "attached"
+msgstr "4774CH3D"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "attributes"
+msgstr "477218U735"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Attributes"
+msgstr "477218U735"
+
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Audio devices"
 msgstr "4UD10 D3V1C35"
@@ -921,6 +991,10 @@ msgstr "4UD10 L3V3L"
 #: components/modal/modals/MFAFlow.tsx
 msgid "Authenticator App"
 msgstr "4U7H3N71C4702 4PP"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Authenticator code"
+msgstr "4U7H3N71C4702 C0D3"
 
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Automatic"
@@ -968,7 +1042,9 @@ msgstr "8 (216H7 8U770N)"
 #: components/auth/src/flows/FlowCheck.tsx
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "84CK"
@@ -1075,6 +1151,10 @@ msgstr "8075 423 N07 V321F13D 8Y 4NY74LK."
 msgid "Bottom left"
 msgstr "80770M L3F7"
 
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Bottom navigation bar on phones"
+msgstr "80770M N4V164710N 842 0N PH0N35"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Bottom right"
 msgstr "80770M 216H7"
@@ -1084,6 +1164,7 @@ msgid "Bring back"
 msgstr "821N6 84CK"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+#: components/modal/modals/QrLoginApprove.tsx
 msgid "Browser"
 msgstr "820W532"
 
@@ -1107,9 +1188,11 @@ msgstr "8U1L7 0N <0>57047</0>"
 msgid "Built on Stoat"
 msgstr "8U1L7 0N 57047"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Busy"
@@ -1139,22 +1222,48 @@ msgstr "8YP455 5L0WM0D3"
 msgid "Bypasses slowmode in channels"
 msgstr "8YP45535 5L0WM0D3 1N CH4NN3L5"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "bytes"
+msgstr "8Y735"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Call"
 msgstr "C4LL"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Call encryption (DTLS-SRTP) keys are not in this file, so call media stays unreadable in Wireshark even with it."
+msgstr "C4LL 3NC2YP710N (D7L5-527P) K3Y5 423 N07 1N 7H15 F1L3, 50 C4LL M3D14 574Y5 UN234D48L3 1N W1235H42K 3V3N W17H 17."
+
+#: components/rtc/components/E2eeNotices.tsx
+msgid "Call encryption couldn't be loaded. Try reloading the page."
+msgstr "C4LL 3NC2YP710N C0ULDN'7 83 L04D3D. 72Y 23L04D1N6 7H3 P463."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Calls"
 msgstr "C4LL5"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Calls: how they are encrypted"
+msgstr "C4LL5: H0W 7H3Y 423 3NC2YP73D"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Camera"
 msgstr "C4M324"
 
+#: components/modal/modals/QrScanner.tsx
+msgid "Camera access was denied. Allow the camera for this site in your browser settings and try again."
+msgstr "C4M324 4CC355 W45 D3N13D. 4LL0W 7H3 C4M324 F02 7H15 5173 1N Y0U2 820W532 53771N65 4ND 72Y 4641N."
+
 #: components/rtc/components/StreamPopouts.tsx
 msgid "Camera is off"
 msgstr "C4M324 15 0FF"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "Camera preview"
+msgstr "C4M324 P23V13W"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
@@ -1165,8 +1274,10 @@ msgid "Can't get discover request status right now"
 msgstr "C4N'7 637 D15C0V32 23QU357 5747U5 216H7 N0W"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Native.tsx
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
@@ -1186,6 +1297,7 @@ msgstr "C4N'7 637 D15C0V32 23QU357 5747U5 216H7 N0W"
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/Onboarding.tsx
 #: components/modal/modals/PinMessage.tsx
+#: components/modal/modals/QrScanner.tsx
 #: components/modal/modals/RemoveMember.tsx
 #: components/modal/modals/RemoveTimeout.tsx
 #: components/modal/modals/RenameSession.tsx
@@ -1367,6 +1479,14 @@ msgstr "CH3CK Y0U2 M41L!"
 msgid "Checking for updates…"
 msgstr "CH3CK1N6 F02 UPD4735…"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Checking the account..."
+msgstr "CH3CK1N6 7H3 4CC0UN7..."
+
+#: src/interface/Sidebar.tsx
+msgid "Choose a server from the list to see its channels."
+msgstr "CH0053 4 532V32 F20M 7H3 L157 70 533 175 CH4NN3L5."
+
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
 msgstr "CH0053 4 U532N4M3"
@@ -1374,6 +1494,10 @@ msgstr "CH0053 4 U532N4M3"
 #: components/modal/modals/Onboarding.tsx
 msgid "Choose username"
 msgstr "CH0053 U532N4M3"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Clear"
+msgstr "CL342"
 
 #: src/interface/servers/ServerOverview.tsx
 msgid "Clear search"
@@ -1407,6 +1531,10 @@ msgstr "CL1CK 70 5H0W 5P01L32"
 msgid "Client Settings"
 msgstr "CL13N7 53771N65"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "close"
+msgstr "CL053"
+
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
 #: components/modal/modals/AddFriend.tsx
@@ -1430,6 +1558,7 @@ msgstr "CL13N7 53771N65"
 #: components/modal/modals/JoinServer.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/PolicyChange.tsx
+#: components/modal/modals/QrLoginApprove.tsx
 #: components/modal/modals/ServerInfo.tsx
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
@@ -1441,6 +1570,10 @@ msgstr "CL053"
 #: components/app/menus/UserContextMenu.tsx
 msgid "Close chat"
 msgstr "CL053 CH47"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Close code"
+msgstr "CL053 C0D3"
 
 #. placeholder {0}: props.channel.recipient?.displayName
 #: components/modal/modals/DeleteChannel.tsx
@@ -1493,6 +1626,10 @@ msgstr "C0MP423 23C4P5"
 msgid "Compare Recaps"
 msgstr "C0MP423 23C4P5"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Compressed size"
+msgstr "C0MP23553D 51Z3"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Concealed audio"
 msgstr "C0NC34L3D 4UD10"
@@ -1519,6 +1656,10 @@ msgstr "C0NF12M"
 msgid "Confirm action"
 msgstr "C0NF12M 4C710N"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Confirm on your other device."
+msgstr "C0NF12M 0N Y0U2 07H32 D3V1C3."
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Connect"
 msgstr "C0NN3C7"
@@ -1531,10 +1672,18 @@ msgstr "C0NN3C7 70 V01C3 CH4NN3L"
 msgid "Connected"
 msgstr "C0NN3C73D"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "connecting"
+msgstr "C0NN3C71N6"
+
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "C0NN3C71N6"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Connection"
+msgstr "C0NN3C710N"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Connection lost"
@@ -1557,10 +1706,15 @@ msgstr "C0N74C7 5UPP027 70 23M0V3 7H15 807 F20M D15C0V32"
 msgid "Contact support to remove this server from discover"
 msgstr "C0N74C7 5UPP027 70 23M0V3 7H15 532V32 F20M D15C0V32"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Content"
+msgstr "C0N73N7"
+
 #: components/modal/modals/ReportContent.tsx
 msgid "Content breaks one or more laws"
 msgstr "C0N73N7 8234K5 0N3 02 M023 L4W5"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
 msgid "Continue"
@@ -1594,6 +1748,11 @@ msgstr "C0N720L5 7H47 C4N'7 83 CH4N63D"
 msgid "Conversations"
 msgstr "C0NV3254710N5"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Copied"
+msgstr "C0P13D"
+
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "C0P13D!"
@@ -1621,6 +1780,10 @@ msgstr "C0PY 1NV173 L1NK"
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Copy Invite URL"
 msgstr "C0PY 1NV173 U2L"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Copy JSON"
+msgstr "C0PY J50N"
 
 #: components/app/menus/ChannelContextMenu.tsx
 #: components/app/menus/MessageContextMenu.tsx
@@ -1665,9 +1828,17 @@ msgstr "C0PY U532 1D"
 msgid "Copy webhook URL"
 msgstr "C0PY W38H00K U2L"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not change the key log. Try again."
+msgstr "C0ULD N07 CH4N63 7H3 K3Y L06. 72Y 4641N."
+
 #: components/app/interface/settings/user/Updates.tsx
 #~ msgid "Could not check for updates."
 #~ msgstr ""
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Could not check which account this is. Cancel and try again."
+msgstr "C0ULD N07 CH3CK WH1CH 4CC0UN7 7H15 15. C4NC3L 4ND 72Y 4641N."
 
 #: components/i18n/errors.tsx
 msgid "Could not find what you requested."
@@ -1686,9 +1857,21 @@ msgstr "C0ULD N07 0P3N 7H3 57234M 1N 4 53P42473 W1ND0W."
 msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
 msgstr "C0ULD N07 0P3N 7H3 57234M 1N 4 53P42473 W1ND0W. CH3CK 7H47 P0P-UP5 423 4LL0W3D."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Could not open the window. Check that pop-ups are allowed."
+msgstr "C0ULD N07 0P3N 7H3 W1ND0W. CH3CK 7H47 P0P-UP5 423 4LL0W3D."
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Could not reach the server. Trying again..."
+msgstr "C0ULD N07 234CH 7H3 532V32. 72Y1N6 4641N..."
+
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
 msgstr "C0ULD N07 234CH 7H3 UPD4732. 72Y 4641N."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not read the key log state."
+msgstr "C0ULD N07 234D 7H3 K3Y L06 57473."
 
 #: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/user/Overlay.tsx
@@ -1708,6 +1891,10 @@ msgstr "C0ULDN'7 L04D D0WNL04D5"
 #: components/ui/components/features/voice/useMoveVoiceUser.ts
 msgid "Couldn't move them to {0}."
 msgstr "C0ULDN'7 M0V3 7H3M 70 {0}."
+
+#: components/rtc/components/E2eeNotices.tsx
+msgid "Couldn't set up call encryption. The server may need an update."
+msgstr "C0ULDN'7 537 UP C4LL 3NC2YP710N. 7H3 532V32 M4Y N33D 4N UPD473."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "CPU"
@@ -1897,6 +2084,10 @@ msgstr "D-P4D UP"
 msgid "Dark"
 msgstr "D42K"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Data messages and participant attributes (who watches a stream, deafened, key exchange) go over the signalling WebSocket to the media server. They are not end-to-end encrypted, but the key exchange only carries public keys and keys wrapped for one recipient."
+msgstr "D474 M3554635 4ND P4271C1P4N7 477218U735 (WH0 W47CH35 4 57234M, D34F3N3D, K3Y 3XCH4N63) 60 0V32 7H3 516N4LL1N6 W3850CK37 70 7H3 M3D14 532V32. 7H3Y 423 N07 3ND-70-3ND 3NC2YP73D, 8U7 7H3 K3Y 3XCH4N63 0NLY C422135 PU8L1C K3Y5 4ND K3Y5 W24PP3D F02 0N3 23C1P13N7."
+
 #. placeholder {0}: err.location
 #: components/i18n/errors.tsx
 msgid "Database error, please contact support. ({0})"
@@ -1926,6 +2117,14 @@ msgstr "D34F3N 02 UND34F3N 1N 4 C4LL"
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
 msgstr "D34F3N3D"
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Decline friend request"
+msgstr "D3CL1N3 F213ND 23QU357"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Decoded size"
+msgstr "D3C0D3D 51Z3"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -2074,6 +2273,14 @@ msgstr "D3L373 W38H00K"
 msgid "Deleting this emoji will disallow future use. All past uses will remain."
 msgstr "D3L371N6 7H15 3M0J1 W1LL D154LL0W FU7U23 U53. 4LL P457 U535 W1LL 23M41N."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Delivery"
+msgstr "D3L1V32Y"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Deny"
+msgstr "D3NY"
+
 #. placeholder {0}: props.invite.username
 #: components/modal/modals/AddBot.tsx
 msgid "Description provided by {0}"
@@ -2083,9 +2290,15 @@ msgstr "D35C21P710N P20V1D3D 8Y {0}"
 msgid "Desktop"
 msgstr "D35K70P"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
 msgstr "D35K70P 4PP"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Desktop app (not tied to a page)"
+msgstr "D35K70P 4PP (N07 713D 70 4 P463)"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Detailed"
@@ -2094,6 +2307,10 @@ msgstr "D3741L3D"
 #: components/app/interface/settings/user/Overlay.tsx
 #~ msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
 #~ msgstr "D3741L3D: N4M35 WH1L3 50M30N3 5P34K5, 4ND 4 L1V3 746 F02 57234M5"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Details"
+msgstr "D3741L5"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2111,13 +2328,29 @@ msgstr "D3V3L0P32 D0CUM3N74710N"
 msgid "Developer modes measure call performance and keep statistics of previous calls and streams on this device. Turn on either or both."
 msgstr "D3V3L0P32 M0D35 M345U23 C4LL P32F02M4NC3 4ND K33P 57471571C5 0F P23V10U5 C4LL5 4ND 57234M5 0N 7H15 D3V1C3. 7U2N 0N 317H32 02 807H."
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Device"
+msgstr "D3V1C3"
+
 #: components/app/interface/desktop/Titlebar.tsx
 msgid "Device is offline"
 msgstr "D3V1C3 15 0FFL1N3"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "direct"
+msgstr "D123C7"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Direct"
+msgstr "D123C7"
+
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Direct Messages"
 msgstr "D123C7 M3554635"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Direction"
+msgstr "D123C710N"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Disable Account"
@@ -2246,8 +2479,21 @@ msgstr "D20PP3D F24M35 P32 53C0ND"
 msgid "Drugs or illegal goods"
 msgstr "D2U65 02 1LL364L 600D5"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS cipher"
+msgstr "D7L5 C1PH32"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS state"
+msgstr "D7L5 57473"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS version"
+msgstr "D7L5 V32510N"
+
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Duration"
 msgstr "DU24710N"
@@ -2302,6 +2548,10 @@ msgstr "3D17 1D3N717Y"
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Edit message"
 msgstr "3D17 M355463"
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Edit profile"
+msgstr "3D17 P20F1L3"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
@@ -2387,6 +2637,10 @@ msgstr "3NC0D32 742637 8172473"
 msgid "End call"
 msgstr "3ND C4LL"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "End-to-end encrypted"
+msgstr "3ND-70-3ND 3NC2YP73D"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced"
 msgstr "3NH4NC3D"
@@ -2416,6 +2670,10 @@ msgstr "3N732 CH4NN3L"
 msgid "Enter Code"
 msgstr "3N732 C0D3"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Enter your account password to approve this login."
+msgstr "3N732 Y0U2 4CC0UN7 P455W02D 70 4PP20V3 7H15 L061N."
+
 #: components/auth/src/flows/Form.tsx
 msgid "Enter your current password."
 msgstr "3N732 Y0U2 CU223N7 P455W02D."
@@ -2438,6 +2696,10 @@ msgstr "3N732 Y0U2 P23F3223D U532N4M3."
 msgid "Entire screen"
 msgstr "3N7123 5C233N"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "error"
+msgstr "32202"
+
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Error occurred, please email support."
 msgstr "32202 0CCU223D, PL3453 3M41L 5UPP027."
@@ -2451,12 +2713,20 @@ msgstr "35C4P3 70 <0>C4NC3L</0> · 3N732 70 <1>54V3</1>"
 msgid "Estimated upload bandwidth"
 msgstr "3571M473D UPL04D 84NDW1D7H"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Event"
+msgstr "3V3N7"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone"
 msgstr "3V32Y0N3"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Everyone in the call"
+msgstr "3V32Y0N3 1N 7H3 C4LL"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Excellent"
@@ -2473,6 +2743,14 @@ msgstr "3X17 FULL5C233N"
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "3XP027"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Export HAR"
+msgstr "3XP027 H42"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Export JSON"
+msgstr "3XP027 J50N"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "External links can be dangerous!"
@@ -2519,6 +2797,15 @@ msgstr "F33D84CK"
 msgid "File must be smaller than {0}"
 msgstr "F1L3 MU57 83 5M4LL32 7H4N {0}"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Files"
+msgstr "F1L35"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Filter by address, host or topic"
+msgstr "F1L732 8Y 4DD2355, H057 02 70P1C"
+
 #: src/interface/Home.tsx
 msgid "Find a community based on your hobbies or interests."
 msgstr "F1ND 4 C0MMUN17Y 8453D 0N Y0U2 H088135 02 1N7323575."
@@ -2531,13 +2818,19 @@ msgstr "F1ND N3W 532V325 70 J01N"
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "F1ND Y0U2 C0M<0/>MUN17Y,<1/>C0NN3C7 W17H 7H3 W02LD."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "First bytes"
+msgstr "F1257 8Y735"
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Fixed controls"
 msgstr "F1X3D C0N720L5"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2581,11 +2874,16 @@ msgstr "F02 8 H0U25"
 msgid "Frame rate"
 msgstr "F24M3 2473"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Freeze the list. Recording goes on."
+msgstr "F233Z3 7H3 L157. 23C02D1N6 6035 0N."
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Freezes"
 msgstr "F233Z35"
 
 #: src/interface/Friends.tsx
+#: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Friends"
 msgstr "F213ND5"
@@ -2594,9 +2892,17 @@ msgstr "F213ND5"
 msgid "Friends who are online or in a call show up here."
 msgstr "F213ND5 WH0 423 0NL1N3 02 1N 4 C4LL 5H0W UP H323."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "From"
+msgstr "F20M"
+
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "from "
 msgstr "F20M "
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "From cache"
+msgstr "F20M C4CH3"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frozen"
@@ -2771,6 +3077,14 @@ msgstr "H3LP3D 724N5L473 4NY74LK"
 msgid "Here is your new invite code: <0>{0}</0>"
 msgstr "H323 15 Y0U2 N3W 1NV173 C0D3: <0>{0}</0>"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Hide call signalling noise"
+msgstr "H1D3 C4LL 516N4LL1N6 N0153"
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardPiP.tsx
+msgid "Hide call window"
+msgstr "H1D3 C4LL W1ND0W"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "H1D3 07H325"
@@ -2800,6 +3114,7 @@ msgid "Hold this button to talk, even while a game is in front. It only applies 
 msgstr "H0LD 7H15 8U770N 70 74LK, 3V3N WH1L3 4 64M3 15 1N F20N7. 17 0NLY 4PPL135 WH3N 7H3 1NPU7 M0D3 15 PU5H 70 74LK. 7H3 64M3 4L50 5335 7H3 8U770N, 50 P1CK 0N3 17 D035N'7 U53. W02K5 W17H X80X C0N720LL325; PL4Y574710N C0N720LL325 N33D 5734M 1NPU7 02 D54W1ND0W5."
 
 #: src/interface/Home.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Home"
@@ -2834,6 +3149,10 @@ msgstr "H0W 3V32Y0N3 3L53'5 4UD10 234CH3D Y0U."
 msgid "How many recently joined calls the Home page lists. 0 hides them."
 msgstr "H0W M4NY 23C3N7LY J01N3D C4LL5 7H3 H0M3 P463 L1575. 0 H1D35 7H3M."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "HTTP"
+msgstr "H77P"
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>{HYPRLAND_BIND_EXAMPLE}</1>."
 msgstr "HYP2L4ND D035N'7 45516N K3Y5 70 4PP 5H027CU75 0N 175 0WN. 2UN <0>{HYPRCTL_COMMAND}</0> 70 533 4NY74LK'5 3N72135, 7H3N 81ND 34CH 0N3 1N Y0U2 HYP2L4ND C0NF16 W17H 7H3 6L084L D15P47CH32, F02 3X4MPL3 <1>{HYPRLAND_BIND_EXAMPLE}</1>."
@@ -2862,9 +3181,11 @@ msgstr "1'V3 234D 4ND 23V13W3D 7H3 CH4N635."
 msgid "ID copied to clipboard"
 msgstr "1D C0P13D 70 CL1P8042D"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2904,10 +3225,23 @@ msgstr "1N 4 C4LL · {count}"
 msgid "In call"
 msgstr "1N C4LL"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the browser, export the HAR file and open it in your browser's developer tools (Network tab, import) or another HAR viewer to see the requests in detail."
+msgstr "1N 7H3 820W532, 3XP027 7H3 H42 F1L3 4ND 0P3N 17 1N Y0U2 820W532'5 D3V3L0P32 700L5 (N37W02K 748, 1MP027) 02 4N07H32 H42 V13W32 70 533 7H3 23QU3575 1N D3741L."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+#~ msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
+#~ msgstr "1N 7H3 D35K70P 4PP, 4 K3Y L06 0P710N 7H47 L375 W1235H42K D3C2YP7 7H3 724FF1C 15 C0M1N6 1N 4 L4732 UPD473. UN71L 7H3N, 3XP027 7H3 H42 F1L3 70 533 7H3 23QU3575 1N D3741L."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the desktop app, switch on \"Write TLS keys to a file\" above and restart the app. Then start a capture in Wireshark, use the app, and open Edit, Preferences, Protocols, TLS. Set \"(Pre)-Master-Secret log filename\" to the file shown above (use \"Show file\" to find it). Wireshark then decrypts the HTTPS and WSS traffic."
+msgstr "1N 7H3 D35K70P 4PP, 5W17CH 0N \"W2173 7L5 K3Y5 70 4 F1L3\" 480V3 4ND 2357427 7H3 4PP. 7H3N 57427 4 C4P7U23 1N W1235H42K, U53 7H3 4PP, 4ND 0P3N 3D17, P23F323NC35, P2070C0L5, 7L5. 537 \"(P23)-M45732-53C237 L06 F1L3N4M3\" 70 7H3 F1L3 5H0WN 480V3 (U53 \"5H0W F1L3\" 70 F1ND 17). W1235H42K 7H3N D3C2YP75 7H3 H77P5 4ND W55 724FF1C."
+
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "1N 7H3 M34N71M3, 1N574LL 4NY74LK F20M 6006L3 PL4Y F02 4 F45732, 5M007H32 3XP3213NC3 D3516N3D F02 4ND201D."
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/servers/Inbox.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Inbox"
@@ -2934,6 +3268,14 @@ msgstr "1NPU7 M0D3"
 msgid "Input Volume"
 msgstr "1NPU7 V0LUM3"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Inside: end-to-end encryption (LiveKit E2EE) with a key only the people in the call hold. The media server forwards frames it cannot read."
+msgstr "1N51D3: 3ND-70-3ND 3NC2YP710N (L1V3K17 3233) W17H 4 K3Y 0NLY 7H3 P30PL3 1N 7H3 C4LL H0LD. 7H3 M3D14 532V32 F02W42D5 F24M35 17 C4NN07 234D."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Inspect with Wireshark"
+msgstr "1N5P3C7 W17H W1235H42K"
+
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Install updates automatically"
 msgstr "1N574LL UPD4735 4U70M471C4LLY"
@@ -2954,6 +3296,7 @@ msgstr "1N732F4C3 F0N7"
 msgid "Invalid Mention Element"
 msgstr "1NV4L1D M3N710N 3L3M3N7"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Invisible"
@@ -3050,6 +3393,10 @@ msgstr "J01N 7H3 4NY74LK L0UN63"
 msgid "Join the voice channel"
 msgstr "J01N 7H3 V01C3 CH4NN3L"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "joined"
+msgstr "J01N3D"
+
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: components/ui/components/features/profiles/ProfileJoined.tsx
 msgid "Joined"
@@ -3078,6 +3425,10 @@ msgstr "K33P 4NY74LK 2UNN1N6 1N 7H3 724Y WH3N CL051N6 7H3 W1ND0W"
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Keep as is"
 msgstr "K33P 45 15"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "kept in memory only, gone when you reload"
+msgstr "K3P7 1N M3M02Y 0NLY, 60N3 WH3N Y0U 23L04D"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Keyframe requests per second (viewers asking for a full new picture)"
@@ -3201,6 +3552,10 @@ msgstr "L16H7"
 msgid "Light (60 Hz)"
 msgstr "L16H7 (60 HZ)"
 
+#: components/app/interface/settings/user/Sessions.tsx
+msgid "Link a device"
+msgstr "L1NK 4 D3V1C3"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Linux .deb (Debian/Ubuntu)"
 msgstr "L1NUX .D38 (D3814N/U8UN7U)"
@@ -3243,6 +3598,10 @@ msgstr "L1V3 0V32L4Y, 23C02D1N6 4ND 23C4P5 0F P23V10U5 57234M5"
 msgid "Live statistics overlay"
 msgstr "L1V3 57471571C5 0V32L4Y"
 
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Live View"
+msgstr "L1V3 V13W"
+
 #. placeholder {0}: humanFileSize(props.file.size ?? 0)
 #: components/ui/components/features/messaging/elements/TextFile.tsx
 msgid "Load file ({0})"
@@ -3252,9 +3611,31 @@ msgstr "L04D F1L3 ({0})"
 msgid "Loading message"
 msgstr "L04D1N6 M355463"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Local candidate"
+msgstr "L0C4L C4ND1D473"
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "L06 1N"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Log in a new device?"
+msgstr "L06 1N 4 N3W D3V1C3?"
+
+#. placeholder {0}: approved()!.account!.display_name || approved()!.account!.username
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Log in as <0>{0}</0>? If you don't recognise this account, cancel."
+msgstr "L06 1N 45 <0>{0}</0>? 1F Y0U D0N'7 23C06N153 7H15 4CC0UN7, C4NC3L."
+
+#: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Log in with QR code"
+msgstr "L06 1N W17H Q2 C0D3"
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Log in?"
+msgstr "L06 1N?"
 
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -3285,6 +3666,10 @@ msgstr "L00K1N6 F02 7H3 L47357 V32510N..."
 msgid "Loss and jitter are what the server reports about the audio it got from you."
 msgstr "L055 4ND J17732 423 WH47 7H3 532V32 23P0275 480U7 7H3 4UD10 17 607 F20M Y0U."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Lossy"
+msgstr "L055Y"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Lost"
 msgstr "L057"
@@ -3301,9 +3686,17 @@ msgstr "L0W-CU7 F1L732"
 msgid "Lowercase letters, numbers and underscores only."
 msgstr "L0W32C453 L377325, NUM8325 4ND UND325C0235 0NLY."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Made with"
+msgstr "M4D3 W17H"
+
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Magenta"
 msgstr "M463N74"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "Main navigation"
+msgstr "M41N N4V164710N"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
@@ -3390,6 +3783,14 @@ msgstr "M345U23 C4M324 4ND 5C233N 5H423 V1D30 Y0U 53ND 02 W47CH"
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Measure your microphone and everyone you hear in calls"
 msgstr "M345U23 Y0U2 M1C20PH0N3 4ND 3V32Y0N3 Y0U H342 1N C4LL5"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Media server"
+msgstr "M3D14 532V32"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Media streams"
+msgstr "M3D14 57234M5"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Medium (90 Hz)"
@@ -3500,12 +3901,17 @@ msgstr "M355463, C4LL 4ND 57234M 50UND5"
 
 #: components/app/interface/channels/text/Messages.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 msgid "Messages"
 msgstr "M3554635"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Messaging"
 msgstr "M355461N6"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Method"
+msgstr "M37H0D"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "MFA setup canceled."
@@ -3541,6 +3947,7 @@ msgstr "M0N05P4C3 F0N7"
 msgid "More Contrast"
 msgstr "M023 C0N72457"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "More options"
 msgstr "M023 0P710N5"
@@ -3630,13 +4037,31 @@ msgstr "MU73D"
 msgid "Muted until <0/>"
 msgstr "MU73D UN71L <0/>"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends"
+msgstr "MU7U4L F213ND5"
+
 #: components/modal/modals/UserProfileMutualFriends.tsx
 msgid "Mutual Friends"
 msgstr "MU7U4L F213ND5"
 
+#. placeholder {0}: mutuals.data!.users.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends ({0})"
+msgstr "MU7U4L F213ND5 ({0})"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups"
+msgstr "MU7U4L 620UP5"
+
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "MU7U4L 620UP5"
+
+#. placeholder {0}: mutuals.data!.groups.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups ({0})"
+msgstr "MU7U4L 620UP5 ({0})"
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Mutuals"
@@ -3663,9 +4088,29 @@ msgstr "N4M3"
 msgid "Name (A-Z)"
 msgstr "N4M3 (4-Z)"
 
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Navigation"
+msgstr "N4V164710N"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr "N33D5 4 532V32 7H47 5UPP0275 57234M V13W325."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Network address"
+msgstr "N37W02K 4DD2355"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Network inspector"
+msgstr "N37W02K 1N5P3C702"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Network Inspector"
+msgstr "N37W02K 1N5P3C702"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Network type"
+msgstr "N37W02K 7YP3"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
@@ -3717,6 +4162,10 @@ msgstr "N3X7 532V32"
 msgid "Nickname"
 msgstr "N1CKN4M3"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "No"
+msgstr "N0"
+
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No apps found"
 msgstr "N0 4PP5 F0UND"
@@ -3724,6 +4173,10 @@ msgstr "N0 4PP5 F0UND"
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "No audio was captured, switch window to share audio"
 msgstr "N0 4UD10 W45 C4P7U23D, 5W17CH W1ND0W 70 5H423 4UD10"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "No camera was found on this device."
+msgstr "N0 C4M324 W45 F0UND 0N 7H15 D3V1C3."
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "No channels to search"
@@ -3756,6 +4209,10 @@ msgstr "N0 61F5 F0UND"
 #: components/app/interface/settings/user/Language.tsx
 msgid "No languages found"
 msgstr "N0 L4N6U4635 F0UND"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "No matches"
+msgstr "N0 M47CH35"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "No patch notes for this version."
@@ -3844,6 +4301,14 @@ msgstr "N07 537"
 msgid "Nothing"
 msgstr "N07H1N6"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Nothing fits this filter. Try another word or show all kinds."
+msgstr "N07H1N6 F175 7H15 F1L732. 72Y 4N07H32 W02D 02 5H0W 4LL K1ND5."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Nothing recorded yet"
+msgstr "N07H1N6 23C02D3D Y37"
+
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own call recaps."
 msgstr "N07H1N6 70 C0MP423 Y37. 1MP027 4 C5V 02 4DD 0N3 0F Y0U2 0WN C4LL 23C4P5."
@@ -3852,17 +4317,26 @@ msgstr "N07H1N6 70 C0MP423 Y37. 1MP027 4 C5V 02 4DD 0N3 0F Y0U2 0WN C4LL 23C4P5.
 msgid "Nothing to compare yet. Import a CSV or add one of your own stream recaps."
 msgstr "N07H1N6 70 C0MP423 Y37. 1MP027 4 C5V 02 4DD 0N3 0F Y0U2 0WN 57234M 23C4P5."
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Nothing to show yet"
+msgstr "N07H1N6 70 5H0W Y37"
+
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Notifications"
 msgstr "N071F1C4710N5"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "Off"
 msgstr "0FF"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
+msgstr "0FF: 70K3N5, P455W02D5 4ND K3Y5 423 H1DD3N. 235375 WH3N Y0U 23L04D."
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Offers to stream the games you play during a call. Detection happens only on this computer and nothing is sent."
@@ -3876,8 +4350,10 @@ msgstr "0FF1C14L C0MMUN1C4710N"
 msgid "Official Server"
 msgstr "0FF1C14L 532V32"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Offline"
@@ -3922,10 +4398,12 @@ msgstr "0N3 0F 7H3 F1257 1000 U5325!"
 msgid "Ongoing Maintenance"
 msgstr "0N601N6 M41N73N4NC3"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -3940,6 +4418,10 @@ msgstr "0NL1N3"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Online · {count}"
 msgstr "0NL1N3 · {count}"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Only approve this if you are looking at that device's screen right now and it shows this QR code. Someone could send you their QR code to take over your account."
+msgstr "0NLY 4PP20V3 7H15 1F Y0U 423 L00K1N6 47 7H47 D3V1C3'5 5C233N 216H7 N0W 4ND 17 5H0W5 7H15 Q2 C0D3. 50M30N3 C0ULD 53ND Y0U 7H312 Q2 C0D3 70 74K3 0V32 Y0U2 4CC0UN7."
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Only change this if you run your own AnyTalk server."
@@ -3957,6 +4439,10 @@ msgstr "0NLY WH1L3 4 D373C73D 64M3 15 2UNN1N6"
 msgid "Oops, something went wrong! {e}"
 msgstr "00P5, 50M37H1N6 W3N7 W20N6! {e}"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "open"
+msgstr "0P3N"
+
 #: components/modal/modals/Invite.tsx
 msgid "Open"
 msgstr "0P3N"
@@ -3970,6 +4456,7 @@ msgstr "0P3N {0}"
 msgid "Open an app or switch to Entire screen."
 msgstr "0P3N 4N 4PP 02 5W17CH 70 3N7123 5C233N."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/rtc/components/StreamPopouts.tsx
 msgid "Open as window"
 msgstr "0P3N 45 W1ND0W"
@@ -3986,12 +4473,21 @@ msgstr "0P3N F1L3"
 msgid "Open friends"
 msgstr "0P3N F213ND5"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Open live view"
+msgstr "0P3N L1V3 V13W"
+
 #. placeholder {0}: author()
 #. placeholder {1}: place()
 #. placeholder {2}: preview()
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Open message from {0} in {1}: {2}"
 msgstr "0P3N M355463 F20M {0} 1N {1}: {2}"
+
+#. placeholder {0}: props.channel.recipient!.username
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Open profile of {0}"
+msgstr "0P3N P20F1L3 0F {0}"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -4038,6 +4534,10 @@ msgstr "0U7PU7 D3V1C3"
 msgid "Output Volume"
 msgstr "0U7PU7 V0LUM3"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Outside: SRTP over DTLS between your device and the media server, as for any WebRTC call."
+msgstr "0U751D3: 527P 0V32 D7L5 837W33N Y0U2 D3V1C3 4ND 7H3 M3D14 532V32, 45 F02 4NY W3827C C4LL."
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Overlay"
 msgstr "0V32L4Y"
@@ -4080,12 +4580,21 @@ msgstr "P42714L 0U7463"
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/QrLoginApprove.tsx
 msgid "Password"
 msgstr "P455W02D"
 
 #: components/modal/modals/EditPassword.tsx
 msgid "Password changed successfully."
 msgstr "P455W02D CH4N63D 5UCC355FULLY."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Pause"
+msgstr "P4U53"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Paused"
+msgstr "P4U53D"
 
 #: components/app/interface/settings/user/subscriptions/EditSubscriptionJoinFlow.tsx
 #~ msgid "Pay"
@@ -4118,6 +4627,10 @@ msgstr "PH0N3 C4LL M0D3"
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Pick a Screen to Share"
 msgstr "P1CK 4 5C233N 70 5H423"
+
+#: src/interface/Sidebar.tsx
+msgid "Pick a server"
+msgstr "P1CK 4 532V32"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Pick a username that you want people to be able to find you by. This can be changed later in your user settings."
@@ -4213,6 +4726,10 @@ msgstr "PL3453 W417..."
 #: components/state/stores/Experiments.ts
 msgid "Plugins v2 Placeholder"
 msgstr "PLU61N5 V2 PL4C3H0LD32"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "Point the camera at the QR code on the login screen of the new device."
+msgstr "P01N7 7H3 C4M324 47 7H3 Q2 C0D3 0N 7H3 L061N 5C233N 0F 7H3 N3W D3V1C3."
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor"
@@ -4317,6 +4834,10 @@ msgstr "P20M0735 H42M"
 msgid "Pronouns"
 msgstr "P20N0UN5"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Protocol"
+msgstr "P2070C0L"
+
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
 msgstr "P20V1D3D 3M41L 02 P455W02D 15 W20N6."
@@ -4385,6 +4906,7 @@ msgid "Ready to install: {0}"
 msgstr "234DY 70 1N574LL: {0}"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
 msgid "Reason"
@@ -4424,6 +4946,11 @@ msgstr "23C31V3 N071F1C4710N5 WH1L3 7H3 748 15 0P3N."
 msgid "Receive push notifications while the app is closed."
 msgstr "23C31V3 PU5H N071F1C4710N5 WH1L3 7H3 4PP 15 CL053D."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Received"
+msgstr "23C31V3D"
+
 #: src/interface/home/FriendsOverview.tsx
 msgid "Recent calls"
 msgstr "23C3N7 C4LL5"
@@ -4446,6 +4973,10 @@ msgstr "23C0NN3C71N6"
 msgid "Record call recaps"
 msgstr "23C02D C4LL 23C4P5"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Record network traffic"
+msgstr "23C02D N37W02K 724FF1C"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record statistics of every call you are in, with or without the overlay"
 msgstr "23C02D 57471571C5 0F 3V32Y C4LL Y0U 423 1N, W17H 02 W17H0U7 7H3 0V32L4Y"
@@ -4457,6 +4988,18 @@ msgstr "23C02D 57471571C5 0F 3V32Y 57234M Y0U 53ND 02 W47CH, W17H 02 W17H0U7 7H3
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record stream recaps"
 msgstr "23C02D 57234M 23C4P5"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Recorded traffic"
+msgstr "23C02D3D 724FF1C"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Recording is off"
+msgstr "23C02D1N6 15 0FF"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Recovery code"
+msgstr "23C0V32Y C0D3"
 
 #: components/modal/modals/MFAFlow.tsx
 msgid "Recovery Code"
@@ -4486,6 +5029,18 @@ msgstr "236157323D 51NC3 <0/>"
 msgid "Reject friend request"
 msgstr "23J3C7 F213ND 23QU357"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "relay"
+msgstr "23L4Y"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Relay protocol"
+msgstr "23L4Y P2070C0L"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Relay server"
+msgstr "23L4Y 532V32"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Release notes"
 msgstr "23L3453 N0735"
@@ -4494,6 +5049,10 @@ msgstr "23L3453 N0735"
 msgid "Relevance"
 msgstr "23L3V4NC3"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Reliable"
+msgstr "23L148L3"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload and clear cache"
 msgstr "23L04D 4ND CL342 C4CH3"
@@ -4501,6 +5060,14 @@ msgstr "23L04D 4ND CL342 C4CH3"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload AnyTalk with fresh files from the server? This is the same as Ctrl+F5 and fixes most display problems after an update. You stay logged in and keep your settings."
 msgstr "23L04D 4NY74LK W17H F235H F1L35 F20M 7H3 532V32? 7H15 15 7H3 54M3 45 C72L+F5 4ND F1X35 M057 D15PL4Y P208L3M5 4F732 4N UPD473. Y0U 574Y L0663D 1N 4ND K33P Y0U2 53771N65."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Remote address"
+msgstr "23M073 4DD2355"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Remote candidate"
+msgstr "23M073 C4ND1D473"
 
 #: components/markdown/plugins/anchors.tsx
 msgid "Remote Channel"
@@ -4624,6 +5191,26 @@ msgstr "23P027 532V32"
 msgid "Report user"
 msgstr "23P027 U532"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Request body"
+msgstr "23QU357 80DY"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Request headers"
+msgstr "23QU357 H34D325"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Requested"
+msgstr "23QU3573D"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Requests and messages show up here as they happen."
+msgstr "23QU3575 4ND M3554635 5H0W UP H323 45 7H3Y H4PP3N."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Requests from images, fonts and other files, and from the app itself rather than a page, are listed too, marked \"Desktop app\". They are only recorded while recording is on."
+msgstr "23QU3575 F20M 1M4635, F0N75 4ND 07H32 F1L35, 4ND F20M 7H3 4PP 1753LF 247H32 7H4N 4 P463, 423 L1573D 700, M42K3D \"D35K70P 4PP\". 7H3Y 423 0NLY 23C02D3D WH1L3 23C02D1N6 15 0N."
+
 #: components/auth/src/flows/FlowResend.tsx
 msgid "Resend"
 msgstr "2353ND"
@@ -4701,6 +5288,18 @@ msgstr "2350LU710N"
 msgid "Resolution and FPS"
 msgstr "2350LU710N 4ND FP5"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response headers"
+msgstr "235P0N53 H34D325"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response preview"
+msgstr "235P0N53 P23V13W"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response size"
+msgstr "235P0N53 51Z3"
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Responsibly disclosed security issues"
 msgstr "235P0N518LY D15CL053D 53CU217Y 155U35"
@@ -4717,6 +5316,10 @@ msgstr "2357427 70 UPD473"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Restore call window"
 msgstr "2357023 C4LL W1ND0W"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Resume"
+msgstr "235UM3"
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 msgid "Retry sending"
@@ -4776,6 +5379,7 @@ msgid "Role Overrides"
 msgstr "20L3 0V3221D35"
 
 #: components/app/interface/settings/ServerSettings.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
 msgid "Roles"
 msgstr "20L35"
@@ -4783,6 +5387,18 @@ msgstr "20L35"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Roles with No Overrides"
 msgstr "20L35 W17H N0 0V3221D35"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Room"
+msgstr "200M"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "route"
+msgstr "20U73"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Route"
+msgstr "20U73"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Running"
@@ -4836,6 +5452,23 @@ msgstr "54V1N6…"
 #: components/modal/modals/ReportContent.tsx
 msgid "Scams or fraud"
 msgstr "5C4M5 02 F24UD"
+
+#: components/modal/modals/QrScanner.tsx
+#: src/interface/navigation/servers/UserMenu.tsx
+msgid "Scan QR code"
+msgstr "5C4N Q2 C0D3"
+
+#: components/app/interface/settings/user/Sessions.tsx
+msgid "Scan the QR code on the login screen of a new device to log it in."
+msgstr "5C4N 7H3 Q2 C0D3 0N 7H3 L061N 5C233N 0F 4 N3W D3V1C3 70 L06 17 1N."
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Scan this with AnyTalk on a device where you're logged in. Open Settings, then Sessions, then Link a device."
+msgstr "5C4N 7H15 W17H 4NY74LK 0N 4 D3V1C3 WH323 Y0U'23 L0663D 1N. 0P3N 53771N65, 7H3N 535510N5, 7H3N L1NK 4 D3V1C3."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "Scanning needs a secure connection (HTTPS). This page is opened over plain HTTP, so the browser blocks the camera."
+msgstr "5C4NN1N6 N33D5 4 53CU23 C0NN3C710N (H77P5). 7H15 P463 15 0P3N3D 0V32 PL41N H77P, 50 7H3 820W532 8L0CK5 7H3 C4M324."
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Screen share frame rate"
@@ -4941,9 +5574,17 @@ msgstr "5342CH1N6…"
 msgid "See all your servers at a glance."
 msgstr "533 4LL Y0U2 532V325 47 4 6L4NC3."
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "See what the app sends and receives, and export it to check against Wireshark"
+msgstr "533 WH47 7H3 4PP 53ND5 4ND 23C31V35, 4ND 3XP027 17 70 CH3CK 4641N57 W1235H42K"
+
 #: components/app/interface/settings/user/Feedback.tsx
 #~ msgid "See what we're currently working on."
 #~ msgstr ""
+
+#: src/interface/Home.tsx
+msgid "See your friends and answer friend requests."
+msgstr "533 Y0U2 F213ND5 4ND 4N5W32 F213ND 23QU3575."
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select"
@@ -4952,6 +5593,10 @@ msgstr "53L3C7"
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select all"
 msgstr "53L3C7 4LL"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Select an entry to see its details."
+msgstr "53L3C7 4N 3N72Y 70 533 175 D3741L5."
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Select at least one line above to compare."
@@ -5029,6 +5674,8 @@ msgstr "53ND 23QU357"
 msgid "Sending..."
 msgstr "53ND1N6..."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Sent"
 msgstr "53N7"
@@ -5051,6 +5698,7 @@ msgstr "53N7 MUL71PL3 4774CHM3N75"
 msgid "Server"
 msgstr "532V32"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Server address"
 msgstr "532V32 4DD2355"
@@ -5090,6 +5738,7 @@ msgstr "532V32 0P710N5 F02 {name}"
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/Sidebar.tsx
 msgid "Server overview"
 msgstr "532V32 0V32V13W"
 
@@ -5097,15 +5746,32 @@ msgstr "532V32 0V32V13W"
 msgid "Server Roles"
 msgstr "532V32 20L35"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "532V325"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Servers contacted"
+msgstr "532V325 C0N74C73D"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Servers show up here as soon as the app talks to them."
+msgstr "532V325 5H0W UP H323 45 500N 45 7H3 4PP 74LK5 70 7H3M."
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Servers you join show up here."
 msgstr "532V325 Y0U J01N 5H0W UP H323."
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "Servers, unread messages"
+msgstr "532V325, UN234D M3554635"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+msgstr "535510N 70K3N5, P455W02D5 4ND C4LL K3Y5 W1LL 4PP342 0N 5C233N 4ND 1N 3XP0275. 4NY0N3 WH0 5335 02 6375 7H3M C0ULD 516N 1N 45 Y0U. 7U2N 7H15 0N 0NLY 70 D38U6, 4ND D0N'7 5H423 7H3 3XP0275."
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5163,9 +5829,17 @@ msgstr "5H423 C4M324 02 5C233N 1N V01C3 C4LL"
 msgid "Share screen"
 msgstr "5H423 5C233N"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show"
+msgstr "5H0W"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show 'copy ID' in context menus"
 msgstr "5H0W 'C0PY 1D' 1N C0N73X7 M3NU5"
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Show a new code"
+msgstr "5H0W 4 N3W C0D3"
 
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show a notice when a new version is available"
@@ -5175,9 +5849,17 @@ msgstr "5H0W 4 N071C3 WH3N 4 N3W V32510N 15 4V41L48L3"
 msgid "Show admin panel shortcuts in context menus"
 msgstr "5H0W 4DM1N P4N3L 5H027CU75 1N C0N73X7 M3NU5"
 
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Show call window"
+msgstr "5H0W C4LL W1ND0W"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
 msgstr "5H0W C0223C710N5 4ND 5U6635710N5 45 Y0U 7YP3."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show file"
+msgstr "5H0W F1L3"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Show live microphone statistics on call tiles"
@@ -5186,6 +5868,10 @@ msgstr "5H0W L1V3 M1C20PH0N3 57471571C5 0N C4LL 71L35"
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Show live statistics on call video tiles"
 msgstr "5H0W L1V3 57471571C5 0N C4LL V1D30 71L35"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show only"
+msgstr "5H0W 0NLY"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Show Others"
@@ -5208,9 +5894,21 @@ msgstr "5H0W 532V32 L157"
 msgid "Show server names"
 msgstr "5H0W 532V32 N4M35"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show tokens and keys"
+msgstr "5H0W 70K3N5 4ND K3Y5"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show tokens and keys?"
+msgstr "5H0W 70K3N5 4ND K3Y5?"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Show when speaking"
 msgstr "5H0W WH3N 5P34K1N6"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show window"
+msgstr "5H0W W1ND0W"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
@@ -5249,6 +5947,7 @@ msgid "Shows who is talking in your call on top of your game. It works over bord
 msgstr "5H0W5 WH0 15 74LK1N6 1N Y0U2 C4LL 0N 70P 0F Y0U2 64M3. 17 W02K5 0V32 802D32L355 4ND W1ND0W3D 64M35, N07 0V32 3XCLU51V3 FULL5C233N."
 
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Sign into AnyTalk"
 msgstr "516N 1N70 4NY74LK"
 
@@ -5267,6 +5966,10 @@ msgstr "51L3N7"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Single stream: opening a stream replaces the current one"
 msgstr "51N6L3 57234M: 0P3N1N6 4 57234M 23PL4C35 7H3 CU223N7 0N3"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Size"
+msgstr "51Z3"
 
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "Slowmode Immune"
@@ -5333,6 +6036,10 @@ msgstr "50M37H1N6 W3N7 W20N6! {error}"
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Something went wrong. Check your connection and try again."
+msgstr "50M37H1N6 W3N7 W20N6. CH3CK Y0U2 C0NN3C710N 4ND 72Y 4641N."
+
 #: src/interface/channels/text/TextSearchSidebar.tsx
 #: src/interface/servers/ServerOverview.tsx
 msgid "Sort by"
@@ -5382,6 +6089,10 @@ msgstr "5P3LLCH3CK32"
 msgid "Spoiler"
 msgstr "5P01L32"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "SRTP cipher"
+msgstr "527P C1PH32"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Start camera"
 msgstr "57427 C4M324"
@@ -5398,6 +6109,11 @@ msgstr "57427 7H3 C4LL"
 msgid "Start with Computer"
 msgstr "57427 W17H C0MPU732"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Started"
+msgstr "574273D"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 msgid "Status"
 msgstr "5747U5"
@@ -5414,6 +6130,7 @@ msgstr "570P C4M324"
 msgid "Stop sharing"
 msgstr "570P 5H421N6"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/ui/components/features/voice/callCard/GameStreamPrompt.tsx
 msgid "Stream"
 msgstr "57234M"
@@ -5596,6 +6313,10 @@ msgstr "732M5"
 #~ msgid "Terms of Service"
 #~ msgstr "732M5 0F 532V1C3"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Text"
+msgstr "73X7"
+
 #: components/modal/modals/CreateChannel.tsx
 msgid "Text Channel"
 msgstr "73X7 CH4NN3L"
@@ -5603,6 +6324,22 @@ msgstr "73X7 CH4NN3L"
 #: components/i18n/errors.tsx
 msgid "That action had no effect."
 msgstr "7H47 4C710N H4D N0 3FF3C7."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That code is not correct. Check it and try again."
+msgstr "7H47 C0D3 15 N07 C0223C7. CH3CK 17 4ND 72Y 4641N."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That password is not correct. Check it and try again."
+msgstr "7H47 P455W02D 15 N07 C0223C7. CH3CK 17 4ND 72Y 4641N."
+
+#: components/modal/modals/QrLoginApprove.tsx
+#~ msgid "That password or code is not correct. Check it and try again."
+#~ msgstr "7H47 P455W02D 02 C0D3 15 N07 C0223C7. CH3CK 17 4ND 72Y 4641N."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "That QR code is not an AnyTalk login code. Point the camera at the code on the login screen of the new device."
+msgstr "7H47 Q2 C0D3 15 N07 4N 4NY74LK L061N C0D3. P01N7 7H3 C4M324 47 7H3 C0D3 0N 7H3 L061N 5C233N 0F 7H3 N3W D3V1C3."
 
 #: components/i18n/errors.tsx
 msgid "The bot has been removed from discover by moderators, the user must contact support."
@@ -5615,6 +6352,14 @@ msgstr "7H3 807 15 4L234DY 0N D15C0V32, 7H3 U532 MU57 C0N74C7 5UPP027 70 H4V3 17
 #: components/modal/modals/AddBot.tsx
 msgid "The bot will not be granted any permissions."
 msgstr "7H3 807 W1LL N07 83 624N73D 4NY P32M15510N5."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "The camera could not be started."
+msgstr "7H3 C4M324 C0ULD N07 83 574273D."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "The camera is on but no picture arrives. Close this window and try again, or check that no other app is using the camera."
+msgstr "7H3 C4M324 15 0N 8U7 N0 P1C7U23 4221V35. CL053 7H15 W1ND0W 4ND 72Y 4641N, 02 CH3CK 7H47 N0 07H32 4PP 15 U51N6 7H3 C4M324."
 
 #. placeholder {0}: actionLabels()[blocker]
 #: components/app/interface/settings/user/Controller.tsx
@@ -5649,6 +6394,18 @@ msgstr "7H3 F1257 V32510N H45N'7 833N PU8L15H3D. CH3CK 84CK 500N."
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
 msgstr "7H3 173M W45 23M0V3D 8Y M0D3247025, 4ND 45 5UCH FU7U23 4PPL1C4710N5 423 P20H18173D. C0N74C7 5UPP027 F02 M023 1NF02M4710N."
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "The login was cancelled, but the new session could not be removed. Remove it in Settings, then Sessions, on a device where you are logged in."
+msgstr "7H3 L061N W45 C4NC3LL3D, 8U7 7H3 N3W 535510N C0ULD N07 83 23M0V3D. 23M0V3 17 1N 53771N65, 7H3N 535510N5, 0N 4 D3V1C3 WH323 Y0U 423 L0663D 1N."
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "The login was denied on the other device."
+msgstr "7H3 L061N W45 D3N13D 0N 7H3 07H32 D3V1C3."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
+msgstr "7H3 N37W02K 1N5P3C702 23C02D5 WH47 4NY74LK 53ND5 4ND 23C31V35, 50 Y0U C4N CH3CK 17 4641N57 4 700L L1K3 W1235H42K. 17 15 0FF 8Y D3F4UL7 4ND N07H1N6 15 53N7 4NYWH323."
 
 #: components/i18n/errors.tsx
 msgid "The password is too short."
@@ -5731,6 +6488,14 @@ msgstr "7H15 CH4NN3L 15 M42K3D 45 M47U23."
 msgid "This channel is not available in your region while we review options on legal compliance."
 msgstr "7H15 CH4NN3L 15 N07 4V41L48L3 1N Y0U2 23610N WH1L3 W3 23V13W 0P710N5 0N L364L C0MPL14NC3."
 
+#: components/modal/modals/QrScanner.tsx
+msgid "This code is from a different AnyTalk server. Open the login page of this server on the new device instead."
+msgstr "7H15 C0D3 15 F20M 4 D1FF323N7 4NY74LK 532V32. 0P3N 7H3 L061N P463 0F 7H15 532V32 0N 7H3 N3W D3V1C3 1N5734D."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "This code was made on an address that only works on the other device (localhost). Open the login page there with the same address you use on this device."
+msgstr "7H15 C0D3 W45 M4D3 0N 4N 4DD2355 7H47 0NLY W02K5 0N 7H3 07H32 D3V1C3 (L0C4LH057). 0P3N 7H3 L061N P463 7H323 W17H 7H3 54M3 4DD2355 Y0U U53 0N 7H15 D3V1C3."
+
 #: src/interface/channels/AgeGate.tsx
 msgid "This content is not available in your region."
 msgstr "7H15 C0N73N7 15 N07 4V41L48L3 1N Y0U2 23610N."
@@ -5768,6 +6533,10 @@ msgstr "7H15 15 7H3 57427 0F Y0U2 N0735."
 msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
 msgstr "7H15 K3Y C4N'7 83 U53D 0N 175 0WN. 4DD C72L, 4L7 02 5H1F7, 02 P1CK 4N07H32 K3Y."
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "This login request has expired or was already answered. Ask the other device to show a new QR code."
+msgstr "7H15 L061N 23QU357 H45 3XP123D 02 W45 4L234DY 4N5W323D. 45K 7H3 07H32 D3V1C3 70 5H0W 4 N3W Q2 C0D3."
+
 #: components/i18n/errors.tsx
 msgid "This message is already pinned."
 msgstr "7H15 M355463 15 4L234DY P1NN3D."
@@ -5788,6 +6557,10 @@ msgstr "7H15 P455W02D H45 P23V10U5LY 4PP3423D 1N 53CU217Y L34K5, PL3453 U53 4N07
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "This recap no longer exists."
 msgstr "7H15 23C4P N0 L0N632 3X1575."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "This request cannot be approved right now. Ask the other device to show a new QR code."
+msgstr "7H15 23QU357 C4NN07 83 4PP20V3D 216H7 N0W. 45K 7H3 07H32 D3V1C3 70 5H0W 4 N3W Q2 C0D3."
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "This server is about..."
@@ -5829,6 +6602,14 @@ msgstr "7H15 U532N4M3 15 N07 4LL0W3D."
 msgid "This will invalidate the current token and stop any existing instances of the bot from running."
 msgstr "7H15 W1LL 1NV4L1D473 7H3 CU223N7 70K3N 4ND 570P 4NY 3X1571N6 1N574NC35 0F 7H3 807 F20M 2UNN1N6."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Through a relay (TURN)"
+msgstr "7H20U6H 4 23L4Y (7U2N)"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Time"
+msgstr "71M3"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Time format"
 msgstr "71M3 F02M47"
@@ -5860,6 +6641,14 @@ msgstr "71M30U7 M3M832"
 msgid "Timeout Members"
 msgstr "71M30U7 M3M8325"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "TLS key log"
+msgstr "7L5 K3Y L06"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "To"
+msgstr "70"
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Toggle deafen"
 msgstr "7066L3 D34F3N"
@@ -5888,6 +6677,14 @@ msgstr "70N4L 5P07"
 msgid "Too Long"
 msgstr "700 L0N6"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Too many attempts. Wait a moment and try again."
+msgstr "700 M4NY 4773MP75. W417 4 M0M3N7 4ND 72Y 4641N."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Too many wrong codes. Wait a while before trying again."
+msgstr "700 M4NY W20N6 C0D35. W417 4 WH1L3 83F023 72Y1N6 4641N."
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Top left"
 msgstr "70P L3F7"
@@ -5896,12 +6693,21 @@ msgstr "70P L3F7"
 msgid "Top right"
 msgstr "70P 216H7"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Topic"
+msgstr "70P1C"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
 msgstr "724D1710N4L (DD/MM/YYYY)"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Transferred"
+msgstr "724N5F3223D"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Transport"
 msgstr "724N5P027"
 
@@ -5931,6 +6737,18 @@ msgstr "72Y D1FF323N7 W02D5 02 4N07H32 5C0P3."
 msgid "Turn every sound on and reset their volumes and files?"
 msgstr "7U2N 3V32Y 50UND 0N 4ND 23537 7H312 V0LUM35 4ND F1L35?"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Turn it on to see what the app sends and receives."
+msgstr "7U2N 17 0N 70 533 WH47 7H3 4PP 53ND5 4ND 23C31V35."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Turn on recording"
+msgstr "7U2N 0N 23C02D1N6"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turn on recording to see which servers the app talks to."
+msgstr "7U2N 0N 23C02D1N6 70 533 WH1CH 532V325 7H3 4PP 74LK5 70."
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn single sounds off, change their volume or use your own"
 msgstr "7U2N 51N6L3 50UND5 0FF, CH4N63 7H312 V0LUM3 02 U53 Y0U2 0WN"
@@ -5938,6 +6756,18 @@ msgstr "7U2N 51N6L3 50UND5 0FF, CH4N63 7H312 V0LUM3 02 U53 Y0U2 0WN"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "7U2N 7H15 0FF 4ND CL051N6 7H3 W1ND0W QU175 4NY74LK 216H7 4W4Y."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turns off after restart"
+msgstr "7U2N5 0FF 4F732 2357427"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turns on after restart"
+msgstr "7U2N5 0N 4F732 2357427"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Type"
+msgstr "7YP3"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 #~ msgid "Type in the search box and press Enter."
@@ -5972,6 +6802,10 @@ msgstr "UNKN0WN"
 #: src/interface/channels/ChannelPage.tsx
 msgid "Unknown channel type!"
 msgstr "UNKN0WN CH4NN3L 7YP3!"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Unknown device"
+msgstr "UNKN0WN D3V1C3"
 
 #: components/markdown/plugins/customEmoji.tsx
 msgid "Unknown emote"
@@ -6130,6 +6964,10 @@ msgstr "UPL04D 70 61F80X"
 msgid "Uploading file `{fileName}`... {0}%"
 msgstr "UPL04D1N6 F1L3 `{fileName}`... {0}%"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "URL"
+msgstr "U2L"
+
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
 msgstr "U53 4 C0D3 02 1NV173 L1NK"
@@ -6138,9 +6976,17 @@ msgstr "U53 4 C0D3 02 1NV173 L1NK"
 msgid "Use a game controller to move around AnyTalk. Works with Xbox, PlayStation, Switch and Steam Deck controllers."
 msgstr "U53 4 64M3 C0N720LL32 70 M0V3 420UND 4NY74LK. W02K5 W17H X80X, PL4Y574710N, 5W17CH 4ND 5734M D3CK C0N720LL325."
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a recovery code instead"
+msgstr "U53 4 23C0V32Y C0D3 1N5734D"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Use hotkeys that work even while AnyTalk isn't focused, and keep AnyTalk running in the system tray."
 msgstr "U53 H07K3Y5 7H47 W02K 3V3N WH1L3 4NY74LK 15N'7 F0CU53D, 4ND K33P 4NY74LK 2UNN1N6 1N 7H3 5Y573M 724Y."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use the authenticator app instead"
+msgstr "U53 7H3 4U7H3N71C4702 4PP 1N5734D"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Use the graphics card to improve performance."
@@ -6272,6 +7118,10 @@ msgstr "V1D30 C0P135 831N6 53N7 (FULL / H4LF / QU42732 51Z3)"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "View (back) button"
 msgstr "V13W (84CK) 8U770N"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "View banner"
+msgstr "V13W 84NN32"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"
@@ -6411,6 +7261,10 @@ msgstr "W38H00K N4M3"
 msgid "Webhooks"
 msgstr "W38H00K5"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "WebSocket"
+msgstr "W3850CK37"
+
 #: src/interface/Home.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #~ msgid "Welcome to"
@@ -6448,6 +7302,10 @@ msgstr "WH3N 70 5H0W"
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Whenever I'm in a call"
 msgstr "WH3N3V32 1'M 1N 4 C4LL"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Where your data goes"
+msgstr "WH323 Y0U2 D474 6035"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Whether other users can edit these settings"
@@ -6488,6 +7346,10 @@ msgstr "W17H {0} 07H325"
 msgid "with {participants}"
 msgstr "W17H {participants}"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Without the keys, Wireshark only sees encrypted TLS and DTLS traffic. What it can still tell you is where the data goes and how much. Compare that with the servers and sizes listed above."
+msgstr "W17H0U7 7H3 K3Y5, W1235H42K 0NLY 5335 3NC2YP73D 7L5 4ND D7L5 724FF1C. WH47 17 C4N 571LL 73LL Y0U 15 WH323 7H3 D474 6035 4ND H0W MUCH. C0MP423 7H47 W17H 7H3 532V325 4ND 51Z35 L1573D 480V3."
+
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Would you like to create a new group or server?"
 msgstr "W0ULD Y0U L1K3 70 C23473 4 N3W 620UP 02 532V32?"
@@ -6500,6 +7362,10 @@ msgstr "W0ULD Y0U L1K3 70 C23473 4 N3W 532V32 02 J01N 4N 3X1571N6 0N3?"
 msgid "Write a message"
 msgstr "W2173 4 M355463"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Write TLS keys to a file"
+msgstr "W2173 7L5 K3Y5 70 4 F1L3"
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "X (left button)"
 msgstr "X (L3F7 8U770N)"
@@ -6507,6 +7373,15 @@ msgstr "X (L3F7 8U770N)"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Y (top button)"
 msgstr "Y (70P 8U770N)"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Yes"
+msgstr "Y35"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+#: src/interface/navigation/bottomNav/YouScreen.tsx
+msgid "You"
+msgstr "Y0U"
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "You agree that your bot is subject to the Acceptable Usage Policy."
@@ -6683,6 +7558,11 @@ msgstr "Y0U W0N'7 83 48L3 70 4CC355 Y0U2 4CC0UN7 UNL355 Y0U C0N74C7 5UPP027 - H0
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "Y0U W0N'7 83 48L3 70 23J01N UNL355 Y0U 423 23-1NV173D."
 
+#. placeholder {0}: presence()
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "You, {0}"
+msgstr "Y0U, {0}"
+
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "You're all caught up"
 msgstr "Y0U'23 4LL C4U6H7 UP"
@@ -6745,6 +7625,10 @@ msgstr "Y0U2 4CC0UN7 H45 833N V321F13D!"
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your bot is under review"
 msgstr "Y0U2 807 15 UND32 23V13W"
+
+#: components/rtc/components/E2eeNotices.tsx
+msgid "Your browser can't encrypt calls, so you can't join."
+msgstr "Y0U2 820W532 C4N'7 3NC2YP7 C4LL5, 50 Y0U C4N'7 J01N."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Your camera"

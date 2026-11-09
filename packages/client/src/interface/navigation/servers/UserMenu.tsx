@@ -34,6 +34,7 @@ import MdEditNote from "@material-design-icons/svg/outlined/edit_note.svg?compon
 import MdInfo from "@material-design-icons/svg/outlined/info.svg?component-solid";
 import MdKeyboardDoubleArrowLeft from "@material-design-icons/svg/outlined/keyboard_double_arrow_left.svg?component-solid";
 import MdNotificationsOff from "@material-design-icons/svg/outlined/notifications_off.svg?component-solid";
+import MdQrCodeScanner from "@material-design-icons/svg/outlined/qr_code_scanner.svg?component-solid";
 import MdSettings from "@material-design-icons/svg/outlined/settings.svg?component-solid";
 
 import { useRailDesktop } from "./railMode";
@@ -52,16 +53,211 @@ const TruncatedStatusText = styled("div", {
 });
 
 /**
- * User menu attached to the server list
+ * Entries of the user menu: profile, status, custom status text and settings.
+ * Shared by the popover on the server rail and the You screen of the phone
+ * bottom bar.
  */
-export function UserMenu(props: Props) {
+export function UserMenuItems(props: {
+  /** Called after an entry that opens something else, to close the menu */
+  onClose: () => void;
+}) {
   const { t } = useLingui();
   const { openModal } = useModals();
   const client = useClient();
   const user = useUser();
   const state = useState();
   const desktop = useRailDesktop();
+  const close = () => props.onClose();
 
+  const setPresence = (
+    presence: (API.DataEditUser["status"] & {})["presence"],
+  ) => user()?.edit({ status: { presence } });
+
+  function copyId() {
+    navigator.clipboard.writeText(user()!.id);
+  }
+
+  return (
+    <>
+      <ContextMenuItem
+        onClick={() => {
+          openModal({ type: "settings", config: "user" });
+          close();
+        }}
+        action
+      >
+        <Row align>
+          <Avatar
+            size={32}
+            fallback={user()?.username}
+            src={user()?.animatedAvatarURL}
+          />
+          <Column gap="none">
+            <Text>{user()?.displayName}</Text>
+            <Text class="label">
+              {user()?.username}#{user()?.discriminator}
+            </Text>
+          </Column>
+        </Row>
+      </ContextMenuItem>
+
+      <ContextMenuDivider />
+
+      <ContextMenuButton
+        icon={
+          <Status>
+            <UserStatus size="10" status="Online" />
+          </Status>
+        }
+        onClick={() => setPresence("Online")}
+      >
+        <Trans>Online</Trans>
+      </ContextMenuButton>
+      <ContextMenuButton
+        icon={
+          <Status>
+            <UserStatus size="10" status="Idle" />
+          </Status>
+        }
+        onClick={() => setPresence("Idle")}
+      >
+        <Trans>Idle</Trans>
+      </ContextMenuButton>
+      <ContextMenuButton
+        icon={
+          <Status>
+            <UserStatus size="10" status="Focus" />
+          </Status>
+        }
+        onClick={() => setPresence("Focus")}
+      >
+        <Row align gap="sm">
+          <Trans>Focus</Trans>{" "}
+          <div
+            use:floating={{
+              tooltip: {
+                placement: "top",
+                content: t`Only mentions will notify you`,
+              },
+            }}
+          >
+            <MdInfo {...iconSize(12)} />
+          </div>
+        </Row>
+      </ContextMenuButton>
+      <ContextMenuButton
+        icon={
+          <Status>
+            <UserStatus size="10" status="Busy" />
+          </Status>
+        }
+        onClick={() => setPresence("Busy")}
+      >
+        <Row align gap="sm">
+          <Trans>Do Not Disturb</Trans>{" "}
+          <div
+            use:floating={{
+              tooltip: {
+                placement: "top",
+                content: t`You will not receive any notifications`,
+              },
+            }}
+          >
+            <MdNotificationsOff {...iconSize(12)} />
+          </div>
+        </Row>
+      </ContextMenuButton>
+      <ContextMenuButton
+        icon={
+          <Status>
+            <UserStatus size="10" status="Invisible" />
+          </Status>
+        }
+        onClick={() => setPresence("Invisible")}
+      >
+        <Trans>Invisible</Trans>
+      </ContextMenuButton>
+
+      <ContextMenuDivider />
+
+      <Show
+        when={user()?.status?.text}
+        fallback={
+          <ContextMenuButton
+            icon={MdEditNote}
+            onClick={() =>
+              openModal({ type: "custom_status", client: client() })
+            }
+          >
+            <Trans>Add status text</Trans>
+          </ContextMenuButton>
+        }
+      >
+        <ContextMenuButton
+          icon={MdEditNote}
+          onClick={() => openModal({ type: "custom_status", client: client() })}
+          _titleCase={false}
+        >
+          <TruncatedStatusText>{user()!.status!.text}</TruncatedStatusText>
+        </ContextMenuButton>
+        <ContextMenuButton
+          icon={MdDelete}
+          onClick={() => user()?.edit({ remove: ["StatusText"] })}
+        >
+          <Trans>Clear status</Trans>
+        </ContextMenuButton>
+      </Show>
+
+      <Show when={state.settings.getValue("advanced:copy_id")}>
+        <ContextMenuButton icon={MdContactPage} onClick={copyId}>
+          <Trans>Copy user ID</Trans>
+        </ContextMenuButton>
+      </Show>
+
+      <ContextMenuDivider />
+
+      {/* desktop layout only: phones and drawer mode keep the server list */}
+      <Show when={desktop()}>
+        <ContextMenuButton
+          icon={(iconProps) => (
+            <MdKeyboardDoubleArrowLeft {...iconProps} class="rtl-mirror" />
+          )}
+          onClick={() => {
+            state.layout.setSectionState(LAYOUT_SECTIONS.RAIL_HIDDEN, true);
+            close();
+          }}
+        >
+          <Trans>Hide server list</Trans>
+        </ContextMenuButton>
+      </Show>
+
+      <ContextMenuButton
+        icon={MdQrCodeScanner}
+        onClick={() => {
+          openModal({ type: "qr_scanner" });
+          close();
+        }}
+      >
+        <Trans>Scan QR code</Trans>
+      </ContextMenuButton>
+
+      <ContextMenuButton
+        icon={MdSettings}
+        onClick={() => {
+          openModal({ type: "settings", config: "user" });
+          close();
+        }}
+      >
+        <Trans>Settings</Trans>
+      </ContextMenuButton>
+    </>
+  );
+}
+
+/**
+ * User menu attached to the server list
+ */
+export function UserMenu(props: Props) {
   const [show, setShow] = createSignal(false);
   const [ref, setRef] = createSignal<HTMLDivElement>();
 
@@ -103,14 +299,6 @@ export function UserMenu(props: Props) {
     ),
   );
 
-  const setPresence = (
-    presence: (API.DataEditUser["status"] & {})["presence"],
-  ) => user()?.edit({ status: { presence } });
-
-  function copyId() {
-    navigator.clipboard.writeText(user()!.id);
-  }
-
   return (
     <Portal mount={document.getElementById("floating")!}>
       <Presence>
@@ -128,177 +316,7 @@ export function UserMenu(props: Props) {
             transition={{ duration: 0.2, easing: [0.87, 0, 0.13, 1] }}
           >
             <ContextMenu onRequestClose={close}>
-              <ContextMenuItem
-                onClick={() => {
-                  openModal({ type: "settings", config: "user" });
-                  close();
-                }}
-                action
-              >
-                <Row align>
-                  <Avatar
-                    size={32}
-                    fallback={user()?.username}
-                    src={user()?.animatedAvatarURL}
-                  />
-                  <Column gap="none">
-                    <Text>{user()?.displayName}</Text>
-                    <Text class="label">
-                      {user()?.username}#{user()?.discriminator}
-                    </Text>
-                  </Column>
-                </Row>
-              </ContextMenuItem>
-
-              <ContextMenuDivider />
-
-              <ContextMenuButton
-                icon={
-                  <Status>
-                    <UserStatus size="10" status="Online" />
-                  </Status>
-                }
-                onClick={() => setPresence("Online")}
-              >
-                <Trans>Online</Trans>
-              </ContextMenuButton>
-              <ContextMenuButton
-                icon={
-                  <Status>
-                    <UserStatus size="10" status="Idle" />
-                  </Status>
-                }
-                onClick={() => setPresence("Idle")}
-              >
-                <Trans>Idle</Trans>
-              </ContextMenuButton>
-              <ContextMenuButton
-                icon={
-                  <Status>
-                    <UserStatus size="10" status="Focus" />
-                  </Status>
-                }
-                onClick={() => setPresence("Focus")}
-              >
-                <Row align gap="sm">
-                  <Trans>Focus</Trans>{" "}
-                  <div
-                    use:floating={{
-                      tooltip: {
-                        placement: "top",
-                        content: t`Only mentions will notify you`,
-                      },
-                    }}
-                  >
-                    <MdInfo {...iconSize(12)} />
-                  </div>
-                </Row>
-              </ContextMenuButton>
-              <ContextMenuButton
-                icon={
-                  <Status>
-                    <UserStatus size="10" status="Busy" />
-                  </Status>
-                }
-                onClick={() => setPresence("Busy")}
-              >
-                <Row align gap="sm">
-                  <Trans>Do Not Disturb</Trans>{" "}
-                  <div
-                    use:floating={{
-                      tooltip: {
-                        placement: "top",
-                        content: t`You will not receive any notifications`,
-                      },
-                    }}
-                  >
-                    <MdNotificationsOff {...iconSize(12)} />
-                  </div>
-                </Row>
-              </ContextMenuButton>
-              <ContextMenuButton
-                icon={
-                  <Status>
-                    <UserStatus size="10" status="Invisible" />
-                  </Status>
-                }
-                onClick={() => setPresence("Invisible")}
-              >
-                <Trans>Invisible</Trans>
-              </ContextMenuButton>
-
-              <ContextMenuDivider />
-
-              <Show
-                when={user()?.status?.text}
-                fallback={
-                  <ContextMenuButton
-                    icon={MdEditNote}
-                    onClick={() =>
-                      openModal({ type: "custom_status", client: client() })
-                    }
-                  >
-                    <Trans>Add status text</Trans>
-                  </ContextMenuButton>
-                }
-              >
-                <ContextMenuButton
-                  icon={MdEditNote}
-                  onClick={() =>
-                    openModal({ type: "custom_status", client: client() })
-                  }
-                  _titleCase={false}
-                >
-                  <TruncatedStatusText>
-                    {user()!.status!.text}
-                  </TruncatedStatusText>
-                </ContextMenuButton>
-                <ContextMenuButton
-                  icon={MdDelete}
-                  onClick={() => user()?.edit({ remove: ["StatusText"] })}
-                >
-                  <Trans>Clear status</Trans>
-                </ContextMenuButton>
-              </Show>
-
-              <Show when={state.settings.getValue("advanced:copy_id")}>
-                <ContextMenuButton icon={MdContactPage} onClick={copyId}>
-                  <Trans>Copy user ID</Trans>
-                </ContextMenuButton>
-              </Show>
-
-              <ContextMenuDivider />
-
-              {/* desktop layout only: phones and drawer mode keep the server list */}
-              <Show when={desktop()}>
-                <ContextMenuButton
-                  icon={(iconProps) => (
-                    <MdKeyboardDoubleArrowLeft
-                      {...iconProps}
-                      class="rtl-mirror"
-                    />
-                  )}
-                  onClick={() => {
-                    state.layout.setSectionState(
-                      LAYOUT_SECTIONS.RAIL_HIDDEN,
-                      true,
-                    );
-                    close();
-                  }}
-                >
-                  <Trans>Hide server list</Trans>
-                </ContextMenuButton>
-              </Show>
-
-              <ContextMenuButton
-                icon={MdSettings}
-                onClick={() => {
-                  openModal({ type: "settings", config: "user" });
-                  close();
-                }}
-              >
-                <Trans>Settings</Trans>
-              </ContextMenuButton>
+              <UserMenuItems onClose={close} />
             </ContextMenu>
           </Motion>
         </Show>

@@ -24,6 +24,7 @@ import { Message } from "@revolt/app";
 import { useClient } from "@revolt/client";
 import { neverThrows } from "@revolt/client/safeListener";
 import { ackNow, useDevice } from "@revolt/common";
+import { useState } from "@revolt/state";
 import {
   BottomSheet,
   Button,
@@ -487,6 +488,24 @@ function InboxContent(props: {
 }
 
 /**
+ * Inbox as a screen of its own: the Inbox tab of the phone bottom bar.
+ * Opening a mention slides the chat over the list.
+ */
+export function InboxScreen(props: { mentions: InboxMentions }) {
+  const state = useState();
+  const { t } = useLingui();
+
+  return (
+    <ScreenSurface role="region" aria-label={t`Inbox`}>
+      <InboxContent
+        mentions={props.mentions}
+        onClose={() => state.appDrawer()?.setShown(true)}
+      />
+    </ScreenSurface>
+  );
+}
+
+/**
  * Where a channel is, for the line above a mention
  * @param channel Channel the mention is in
  * @returns "Server · #channel", or the DM user or group name
@@ -604,6 +623,21 @@ const srOnly = css({
   overflow: "hidden",
   clip: "rect(0 0 0 0)",
   whiteSpace: "nowrap",
+});
+
+/**
+ * Full-size surface of the inbox screen on phones
+ */
+const ScreenSurface = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    flexGrow: 1,
+    minWidth: 0,
+    minHeight: 0,
+    color: "var(--md-sys-color-on-surface)",
+    background: "var(--md-sys-color-surface-container-low)",
+  },
 });
 
 /**

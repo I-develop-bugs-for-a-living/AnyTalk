@@ -18,9 +18,11 @@ const RESOLVED_ID = "\0" + MODULE_ID;
 const ROOT = resolve("./components/app/interface/settings/user");
 
 /**
- * Page id to the file rendering it, as in UserSettings.tsx
+ * Page id to the file (or files) rendering it, as in UserSettings.tsx.
+ * Subpages have no sidebar entry of their own, so their files are listed under
+ * the page they are opened from
  */
-const PAGES: Record<string, string> = {
+const PAGES: Record<string, string | string[]> = {
   account: "Account.tsx",
   profile: "profile/index.ts",
   sessions: "Sessions.tsx",
@@ -35,7 +37,12 @@ const PAGES: Record<string, string> = {
   overlay: "Overlay.tsx",
   "desktop-download": "DesktopDownload.tsx",
   advanced: "Advanced.tsx",
-  developer: "developer/Developer.tsx",
+  developer: [
+    "developer/Developer.tsx",
+    // network inspector and its live view
+    "developer/traffic/TrafficSettings.tsx",
+    "developer/traffic/LiveView.tsx",
+  ],
 };
 
 const importRegex = /from\s+["'](\.{1,2}\/[^"']+)["']/g;
@@ -73,10 +80,10 @@ function resolveImport(from: string, specifier: string) {
 /**
  * Texts of a page's file and the files it imports from the same folder
  */
-function collect(entry: string, watch: Set<string>) {
+function collect(entries: string[], watch: Set<string>) {
   const messages = new Map<string, string>();
   const files = new Set<string>();
-  const queue = [entry];
+  const queue = [...entries];
 
   while (queue.length) {
     const file = queue.pop()!;
@@ -129,7 +136,10 @@ export default function settingsSearchPlugin() {
       const pages = Object.fromEntries(
         Object.entries(PAGES).map(([page, file]) => [
           page,
-          collect(resolve(ROOT, file), files),
+          collect(
+            [file].flat().map((entry) => resolve(ROOT, entry)),
+            files,
+          ),
         ]),
       );
 

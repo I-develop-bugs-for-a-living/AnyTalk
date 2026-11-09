@@ -30,6 +30,7 @@ import { VoiceStatefulUserIcons } from "../VoiceStatefulUserIcons";
 
 import { AudioStats } from "./AudioStats";
 import { ConnectionQualityIcon } from "./ConnectionQualityIcon";
+import { StreamViewerBadge } from "./StreamViewerBadge";
 import { StreamVolumeButton } from "./StreamVolumeButton";
 import { TrackStats } from "./TrackStats";
 import { theaterControlsHidden, touchOnly } from "./volumePanelState";
@@ -314,6 +315,10 @@ export function ParticipantTile(props: TileProps) {
           }
         >
           <AudioStats />
+        </Show>
+        {/* who watches this stream, never over the close button side */}
+        <Show when={isScreenShare() && !unwatched()}>
+          <StreamViewerBadge streamer={participant.identity} />
         </Show>
         <Show when={props.fill}>
           <CloseStream onClick={(e) => e.stopPropagation()}>

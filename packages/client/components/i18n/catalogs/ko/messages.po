@@ -71,6 +71,13 @@ msgstr "{0, plural, other {채널 #개를 검색할 수 없었어요}}"
 msgid "{0, plural, one {# channel} other {# channels}}"
 msgstr "{0, plural, other {채널 #개}}"
 
+#. placeholder {0}: list().length
+#. placeholder {0}: shown().length
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "{0, plural, one {# entry} other {# entries}}"
+msgstr "{0, plural, other {#개 항목}}"
+
 #. placeholder {0}: r.summary.freezes
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{0, plural, one {# freeze, {seconds} s} other {# freezes, {seconds} s}}"
@@ -105,6 +112,11 @@ msgstr "{0, plural, other {새 멘션 #개}}"
 #: src/interface/home/FriendsOverview.tsx
 msgid "{0, plural, one {# person in the call} other {# people in the call}}"
 msgstr "{0, plural, other {#명이 통화 중}}"
+
+#. placeholder {0}: viewers().length
+#: components/ui/components/features/voice/callCard/StreamViewerBadge.tsx
+msgid "{0, plural, one {# person watching} other {# people watching}}"
+msgstr "{0, plural, other {#명 시청 중}}"
 
 #. placeholder {0}: entry.others
 #: src/interface/home/FriendsOverview.tsx
@@ -371,6 +383,22 @@ msgstr "{n, plural, other {통화 요약 #개를 삭제할까요?}}"
 msgid "{n, plural, one {Delete # stream recap?} other {Delete # stream recaps?}}"
 msgstr "{n, plural, other {스트림 요약 #개를 삭제할까요?}}"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Home, # pending friend request} other {Home, # pending friend requests}}"
+msgstr "{n, plural, other {홈, 대기 중인 친구 요청 #개}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Inbox, # unread mention} other {Inbox, # unread mentions}}"
+msgstr "{n, plural, other {받은 알림, 읽지 않은 멘션 #개}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Messages, # unread} other {Messages, # unread}}"
+msgstr "{n, plural, other {메시지, 읽지 않음 #개}}"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "{n, plural, one {Servers, # unread mention} other {Servers, # unread mentions}}"
+msgstr "{n, plural, other {서버, 읽지 않은 멘션 #개}}"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "{name}'s {source}"
 msgstr "{name}님의 {source}"
@@ -576,6 +604,10 @@ msgstr "메시지나 알림이 도착할 때"
 msgid "A new version of AnyTalk is available"
 msgstr "AnyTalk 새 버전을 사용할 수 있어요"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "A packet capture (for example Wireshark) therefore shows only DTLS/SRTP ciphertext, and the media server only sees end-to-end ciphertext."
+msgstr "따라서 패킷 캡처(예: Wireshark)에는 DTLS/SRTP 암호문만 보이고, 미디어 서버에는 종단 간 암호문만 보여요."
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream in your call ends"
 msgstr "통화 중인 스트림이 끝날 때"
@@ -600,6 +632,10 @@ msgstr "음성 통화에서 말할 수 있어요"
 #~ msgid "About"
 #~ msgstr "소개"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "About me"
+msgstr "소개"
+
 #: components/modal/modals/SignOutSessions.tsx
 msgid "Accept"
 msgstr "수락"
@@ -608,6 +644,10 @@ msgstr "수락"
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Accept friend request"
 msgstr "친구 요청 수락"
+
+#: src/interface/navigation/bottomNav/YouScreen.tsx
+msgid "Account"
+msgstr "계정"
 
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Account has been queued for deletion!"
@@ -620,6 +660,11 @@ msgstr "확인"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Action"
 msgstr "동작"
+
+#. placeholder {0}: state().path
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Active, writing to {0}"
+msgstr "활성, {0}에 기록 중"
 
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
@@ -693,6 +738,7 @@ msgstr "고급 소리 설정"
 #~ msgid "Affects all roles and users"
 #~ msgstr ""
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: src/interface/Friends.tsx
 msgid "All"
 msgstr "전체"
@@ -780,6 +826,10 @@ msgstr "다른 앱이 이미 이 키를 사용하고 있어서 AnyTalk 안에서
 #~ msgid "Another app is already using these keys. Pick other keys."
 #~ msgstr "다른 앱이 이미 이 키를 사용하고 있어요. 다른 키를 선택해 주세요."
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Anyone who gets the key log file and a capture can read the traffic, so switch it off when you are done. It also switches off when the app updates. Calls stay unreadable: their media keys are not in this file."
+msgstr "키 로그 파일과 캡처를 입수한 사람은 트래픽을 읽을 수 있으니 다 쓰면 꺼 주세요. 앱이 업데이트될 때도 꺼져요. 통화는 계속 읽을 수 없어요. 통화의 미디어 키는 이 파일에 없어요."
+
 #. placeholder {0}: installed()
 #: components/app/interface/settings/user/Updates.tsx
 msgid "AnyTalk Desktop {0}"
@@ -804,6 +854,10 @@ msgstr "AnyTalk은 언제 어디서나 친구, 커뮤니티와 연결 상태를 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "AnyTalk is up to date."
 msgstr "AnyTalk이 최신 버전이에요."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "AnyTalk network inspector"
+msgstr "AnyTalk 네트워크 검사기"
 
 #: src/AndroidNag.tsx
 msgid "AnyTalk on Android"
@@ -846,6 +900,10 @@ msgstr "지금부터 참여하거나 만드는 서버에 적용돼요. 기존 �
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Apply"
 msgstr "적용"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Approve"
+msgstr "승인"
 
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Apps"
@@ -900,6 +958,18 @@ msgstr "역할 부여 하기"
 msgid "at {time}"
 msgstr "{time}"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "attached"
+msgstr "연결됨"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "attributes"
+msgstr "속성"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Attributes"
+msgstr "속성"
+
 #: components/ui/components/features/voice/callCard/AudioDevicesButton.tsx
 msgid "Audio devices"
 msgstr "오디오 장치"
@@ -920,6 +990,10 @@ msgstr "오디오 레벨"
 #: components/modal/modals/MFAFlow.tsx
 msgid "Authenticator App"
 msgstr "인증 앱"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Authenticator code"
+msgstr "인증 코드"
 
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Automatic"
@@ -967,7 +1041,9 @@ msgstr "B (오른쪽 버튼)"
 #: components/auth/src/flows/FlowCheck.tsx
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: src/interface/channels/AgeGate.tsx
 msgid "Back"
 msgstr "뒤로"
@@ -1074,6 +1150,10 @@ msgstr "봇은 AnyTalk에서 인증하지 않아요."
 msgid "Bottom left"
 msgstr "왼쪽 아래"
 
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Bottom navigation bar on phones"
+msgstr "휴대폰 하단 내비게이션 바"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Bottom right"
 msgstr "오른쪽 아래"
@@ -1083,6 +1163,7 @@ msgid "Bring back"
 msgstr "되돌리기"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+#: components/modal/modals/QrLoginApprove.tsx
 msgid "Browser"
 msgstr "브라우저"
 
@@ -1106,9 +1187,11 @@ msgstr "<0>Stoat</0> 기반"
 msgid "Built on Stoat"
 msgstr "Stoat 기반"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Busy"
@@ -1138,22 +1221,48 @@ msgstr "슬로우 모드 무시"
 msgid "Bypasses slowmode in channels"
 msgstr "채널의 슬로우 모드를 무시해요"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "bytes"
+msgstr "바이트"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Call"
 msgstr "통화"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Call encryption (DTLS-SRTP) keys are not in this file, so call media stays unreadable in Wireshark even with it."
+msgstr "통화 암호화(DTLS-SRTP) 키는 이 파일에 없어서, 이 파일이 있어도 Wireshark에서 통화 미디어는 읽을 수 없어요."
+
+#: components/rtc/components/E2eeNotices.tsx
+msgid "Call encryption couldn't be loaded. Try reloading the page."
+msgstr "통화 암호화를 불러오지 못했어요. 페이지를 새로고침해 보세요."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Calls"
 msgstr "통화"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Calls: how they are encrypted"
+msgstr "통화는 이렇게 암호화돼요"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Camera"
 msgstr "카메라"
 
+#: components/modal/modals/QrScanner.tsx
+msgid "Camera access was denied. Allow the camera for this site in your browser settings and try again."
+msgstr "카메라 접근이 거부되었어요. 브라우저 설정에서 이 사이트의 카메라를 허용한 뒤 다시 시도해 주세요."
+
 #: components/rtc/components/StreamPopouts.tsx
 msgid "Camera is off"
 msgstr "카메라가 꺼져 있어요"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "Camera preview"
+msgstr "카메라 미리보기"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Can't find the perfect GIF? Head to Gifbox and upload your own for everyone to use."
@@ -1164,8 +1273,10 @@ msgid "Can't get discover request status right now"
 msgstr "지금은 탐색 요청 상태를 불러올 수 없어요"
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Native.tsx
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
@@ -1185,6 +1296,7 @@ msgstr "지금은 탐색 요청 상태를 불러올 수 없어요"
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/Onboarding.tsx
 #: components/modal/modals/PinMessage.tsx
+#: components/modal/modals/QrScanner.tsx
 #: components/modal/modals/RemoveMember.tsx
 #: components/modal/modals/RemoveTimeout.tsx
 #: components/modal/modals/RenameSession.tsx
@@ -1366,6 +1478,14 @@ msgstr "메일함을 확인하세요!"
 msgid "Checking for updates…"
 msgstr "업데이트 확인 중…"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Checking the account..."
+msgstr "계정을 확인하는 중..."
+
+#: src/interface/Sidebar.tsx
+msgid "Choose a server from the list to see its channels."
+msgstr "목록에서 서버를 선택하면 채널을 볼 수 있어요."
+
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
 msgstr "사용자 이름을 정하세요"
@@ -1373,6 +1493,10 @@ msgstr "사용자 이름을 정하세요"
 #: components/modal/modals/Onboarding.tsx
 msgid "Choose username"
 msgstr "사용자 이름 선택"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Clear"
+msgstr "지우기"
 
 #: src/interface/servers/ServerOverview.tsx
 msgid "Clear search"
@@ -1406,6 +1530,10 @@ msgstr "눌러서 스포일러 보기"
 msgid "Client Settings"
 msgstr "클라이언트 설정"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "close"
+msgstr "닫힘"
+
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
 #: components/modal/modals/AddFriend.tsx
@@ -1429,6 +1557,7 @@ msgstr "클라이언트 설정"
 #: components/modal/modals/JoinServer.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/PolicyChange.tsx
+#: components/modal/modals/QrLoginApprove.tsx
 #: components/modal/modals/ServerInfo.tsx
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
@@ -1440,6 +1569,10 @@ msgstr "닫기"
 #: components/app/menus/UserContextMenu.tsx
 msgid "Close chat"
 msgstr "채팅 닫기"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Close code"
+msgstr "종료 코드"
 
 #. placeholder {0}: props.channel.recipient?.displayName
 #: components/modal/modals/DeleteChannel.tsx
@@ -1492,6 +1625,10 @@ msgstr "요약 비교"
 msgid "Compare Recaps"
 msgstr "요약 비교"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Compressed size"
+msgstr "압축된 크기"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Concealed audio"
 msgstr "보정된 오디오"
@@ -1518,6 +1655,10 @@ msgstr "확인"
 msgid "Confirm action"
 msgstr "작업 확인"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Confirm on your other device."
+msgstr "다른 기기에서 확인해 주세요."
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Connect"
 msgstr "연결"
@@ -1530,10 +1671,18 @@ msgstr "음성 채널에 연결"
 msgid "Connected"
 msgstr "연결됨"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "connecting"
+msgstr "연결 중"
+
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
 msgid "Connecting"
 msgstr "연결 중"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Connection"
+msgstr "연결"
 
 #: components/ui/components/features/voice/callCard/ConnectionQualityIcon.tsx
 msgid "Connection lost"
@@ -1556,10 +1705,15 @@ msgstr "이 봇을 탐색에서 제거하려면 지원팀에 문의하세요"
 msgid "Contact support to remove this server from discover"
 msgstr "이 서버를 탐색에서 제거하려면 지원팀에 문의하세요"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Content"
+msgstr "내용"
+
 #: components/modal/modals/ReportContent.tsx
 msgid "Content breaks one or more laws"
 msgstr "콘텐츠가 하나 이상의 법률을 위반함"
 
+#: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
 msgid "Continue"
@@ -1593,6 +1747,11 @@ msgstr "변경할 수 없는 조작"
 msgid "Conversations"
 msgstr "대화"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Copied"
+msgstr "복사됨"
+
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileBanner.tsx
 msgid "Copied!"
 msgstr "복사했어요!"
@@ -1620,6 +1779,10 @@ msgstr "초대 링크 복사"
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Copy Invite URL"
 msgstr "초대 URL 복사"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Copy JSON"
+msgstr "JSON 복사"
 
 #: components/app/menus/ChannelContextMenu.tsx
 #: components/app/menus/MessageContextMenu.tsx
@@ -1664,9 +1827,17 @@ msgstr "유저 ID 복사"
 msgid "Copy webhook URL"
 msgstr "웹훅 URL 복사"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not change the key log. Try again."
+msgstr "키 로그를 변경하지 못했어요. 다시 시도해 주세요."
+
 #: components/app/interface/settings/user/Updates.tsx
 #~ msgid "Could not check for updates."
 #~ msgstr "업데이트를 확인할 수 없어요."
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Could not check which account this is. Cancel and try again."
+msgstr "어떤 계정인지 확인할 수 없어요. 취소하고 다시 시도해 주세요."
 
 #: components/i18n/errors.tsx
 msgid "Could not find what you requested."
@@ -1685,9 +1856,21 @@ msgstr "스트림을 별도 창에서 열지 못했어요."
 msgid "Could not open the stream in a separate window. Check that pop-ups are allowed."
 msgstr "스트림을 별도 창에서 열지 못했어요. 팝업이 허용되어 있는지 확인해 주세요."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Could not open the window. Check that pop-ups are allowed."
+msgstr "창을 열 수 없어요. 팝업이 허용되어 있는지 확인해 주세요."
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Could not reach the server. Trying again..."
+msgstr "서버에 연결할 수 없어요. 다시 시도하는 중..."
+
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Could not reach the updater. Try again."
 msgstr "업데이터에 연결할 수 없어요. 다시 시도해 주세요."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not read the key log state."
+msgstr "키 로그 상태를 읽지 못했어요."
 
 #: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/user/Overlay.tsx
@@ -1707,6 +1890,10 @@ msgstr "다운로드를 불러오지 못했어요"
 #: components/ui/components/features/voice/useMoveVoiceUser.ts
 msgid "Couldn't move them to {0}."
 msgstr "{0}(으)로 옮기지 못했어요."
+
+#: components/rtc/components/E2eeNotices.tsx
+msgid "Couldn't set up call encryption. The server may need an update."
+msgstr "통화 암호화를 설정하지 못했어요. 서버 업데이트가 필요할 수 있어요."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "CPU"
@@ -1895,6 +2082,10 @@ msgstr "방향 패드 위"
 msgid "Dark"
 msgstr "다크"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Data messages and participant attributes (who watches a stream, deafened, key exchange) go over the signalling WebSocket to the media server. They are not end-to-end encrypted, but the key exchange only carries public keys and keys wrapped for one recipient."
+msgstr "데이터 메시지와 참가자 속성(누가 스트림을 보는지, 소리 끔 상태, 키 교환)은 시그널링 WebSocket을 통해 미디어 서버로 전송돼요. 종단 간 암호화는 되지 않지만, 키 교환에는 공개 키와 한 명의 수신자용으로 감싼 키만 들어 있어요."
+
 #. placeholder {0}: err.location
 #: components/i18n/errors.tsx
 msgid "Database error, please contact support. ({0})"
@@ -1924,6 +2115,14 @@ msgstr "통화 중 헤드셋 음소거 켜기/끄기"
 #: components/rtc/components/OverlayPublisher.tsx
 msgid "Deafened"
 msgstr "헤드셋 음소거됨"
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Decline friend request"
+msgstr "친구 요청 거절"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Decoded size"
+msgstr "디코딩된 크기"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Decoder"
@@ -2072,6 +2271,14 @@ msgstr "웹훅 삭제"
 msgid "Deleting this emoji will disallow future use. All past uses will remain."
 msgstr "이 이모지를 삭제하면 앞으로 사용할 수 없어요. 이전에 사용한 것은 그대로 남아요."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Delivery"
+msgstr "전달 방식"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Deny"
+msgstr "거부"
+
 #. placeholder {0}: props.invite.username
 #: components/modal/modals/AddBot.tsx
 msgid "Description provided by {0}"
@@ -2081,9 +2288,15 @@ msgstr "{0}님이 제공한 설명"
 msgid "Desktop"
 msgstr "데스크톱"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop app"
 msgstr "데스크톱 앱"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Desktop app (not tied to a page)"
+msgstr "데스크톱 앱(페이지와 무관)"
 
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Detailed"
@@ -2092,6 +2305,10 @@ msgstr "자세히"
 #: components/app/interface/settings/user/Overlay.tsx
 #~ msgid "Detailed: names while someone speaks, and a LIVE tag for streams"
 #~ msgstr "자세히: 말하는 동안 이름 표시, 스트림에는 LIVE 태그 표시"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Details"
+msgstr "세부 정보"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Detect running games"
@@ -2109,13 +2326,29 @@ msgstr "개발자 문서"
 msgid "Developer modes measure call performance and keep statistics of previous calls and streams on this device. Turn on either or both."
 msgstr "개발자 모드는 통화 성능을 측정하고 이전 통화와 스트림의 통계를 이 기기에 저장해요. 하나 또는 둘 다 켤 수 있어요."
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Device"
+msgstr "기기"
+
 #: components/app/interface/desktop/Titlebar.tsx
 msgid "Device is offline"
 msgstr "기기가 오프라인이에요"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "direct"
+msgstr "직접"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Direct"
+msgstr "직접"
+
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Direct Messages"
 msgstr "다이렉트 메시지"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Direction"
+msgstr "방향"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Disable Account"
@@ -2243,8 +2476,21 @@ msgstr "초당 누락 프레임"
 msgid "Drugs or illegal goods"
 msgstr "마약 또는 불법 물품"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS cipher"
+msgstr "DTLS 암호"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS state"
+msgstr "DTLS 상태"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "DTLS version"
+msgstr "DTLS 버전"
+
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/modal/modals/TimeoutMember.tsx
 msgid "Duration"
 msgstr "길이"
@@ -2299,6 +2545,10 @@ msgstr "프로필 편집"
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Edit message"
 msgstr "메시지 수정하기"
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Edit profile"
+msgstr "프로필 편집"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
@@ -2384,6 +2634,10 @@ msgstr "인코더 목표 비트레이트"
 msgid "End call"
 msgstr "통화 종료"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "End-to-end encrypted"
+msgstr "종단 간 암호화"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced"
 msgstr "향상"
@@ -2413,6 +2667,10 @@ msgstr "채널 입장"
 msgid "Enter Code"
 msgstr "코드 입력"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Enter your account password to approve this login."
+msgstr "이 로그인을 승인하려면 계정 비밀번호를 입력하세요."
+
 #: components/auth/src/flows/Form.tsx
 msgid "Enter your current password."
 msgstr "현재 비밀번호를 입력하세요."
@@ -2435,6 +2693,10 @@ msgstr "사용자명을 입력하세요."
 msgid "Entire screen"
 msgstr "전체 화면"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "error"
+msgstr "오류"
+
 #: components/auth/src/flows/FlowDelete.tsx
 msgid "Error occurred, please email support."
 msgstr "오류가 발생했어요. 지원팀에 이메일로 문의하세요."
@@ -2448,12 +2710,20 @@ msgstr "Esc로 <0>취소</0> · Enter로 <1>저장</1>"
 msgid "Estimated upload bandwidth"
 msgstr "예상 업로드 대역폭"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Event"
+msgstr "이벤트"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone"
 msgstr "모두"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Everyone in the call"
+msgstr "통화 중인 모든 사람"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Excellent"
@@ -2470,6 +2740,14 @@ msgstr "전체 화면 종료"
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Export"
 msgstr "내보내기"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Export HAR"
+msgstr "HAR 내보내기"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Export JSON"
+msgstr "JSON 내보내기"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "External links can be dangerous!"
@@ -2516,6 +2794,15 @@ msgstr "피드백"
 msgid "File must be smaller than {0}"
 msgstr "파일은 {0}보다 작아야 해요"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Files"
+msgstr "파일"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Filter by address, host or topic"
+msgstr "주소, 호스트 또는 주제로 필터링"
+
 #: src/interface/Home.tsx
 msgid "Find a community based on your hobbies or interests."
 msgstr "나의 취미와 흥미에 맞는 커뮤니티를 찾아보세요."
@@ -2528,13 +2815,19 @@ msgstr "참여할 새 서버 찾기"
 msgid "Find your com<0/>munity,<1/>connect with the world."
 msgstr "나만의 커<0/>뮤니티를 찾고<1/>세상과 연결하세요."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "First bytes"
+msgstr "처음 바이트"
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Fixed controls"
 msgstr "고정 조작"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2578,11 +2871,16 @@ msgstr "8시간 동안"
 msgid "Frame rate"
 msgstr "프레임 속도"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Freeze the list. Recording goes on."
+msgstr "목록을 고정해요. 기록은 계속돼요."
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Freezes"
 msgstr "멈춤 횟수"
 
 #: src/interface/Friends.tsx
+#: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Friends"
 msgstr "친구"
@@ -2591,9 +2889,17 @@ msgstr "친구"
 msgid "Friends who are online or in a call show up here."
 msgstr "온라인이거나 통화 중인 친구가 여기에 표시돼요."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "From"
+msgstr "보낸 곳"
+
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "from "
 msgstr "출처: "
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "From cache"
+msgstr "캐시에서"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frozen"
@@ -2767,6 +3073,14 @@ msgstr "AnyTalk 번역에 기여"
 msgid "Here is your new invite code: <0>{0}</0>"
 msgstr "새 초대 코드예요: <0>{0}</0>"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Hide call signalling noise"
+msgstr "통화 시그널링 잡음 숨기기"
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardPiP.tsx
+msgid "Hide call window"
+msgstr "통화 창 숨기기"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "다른 사람 숨기기"
@@ -2796,6 +3110,7 @@ msgid "Hold this button to talk, even while a game is in front. It only applies 
 msgstr "이 버튼을 누르는 동안 말할 수 있어요. 게임이 앞에 있어도 작동해요. 입력 모드가 눌러서 말하기일 때만 적용돼요. 게임에도 이 버튼 입력이 전달되니 게임에서 쓰지 않는 버튼을 고르세요. Xbox 컨트롤러에서 작동하며, PlayStation 컨트롤러는 Steam Input 또는 DS4Windows가 필요해요."
 
 #: src/interface/Home.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Home"
@@ -2830,6 +3145,10 @@ msgstr "다른 사람들의 오디오가 나에게 도착한 방식이에요."
 msgid "How many recently joined calls the Home page lists. 0 hides them."
 msgstr "홈 페이지에 표시할 최근 참여한 통화 수예요. 0이면 숨겨요."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "HTTP"
+msgstr "HTTP"
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Hyprland doesn't assign keys to app shortcuts on its own. Run <0>{HYPRCTL_COMMAND}</0> to see AnyTalk's entries, then bind each one in your Hyprland config with the global dispatcher, for example <1>{HYPRLAND_BIND_EXAMPLE}</1>."
 msgstr "Hyprland는 앱 단축키에 키를 자동으로 지정하지 않아요. <0>{HYPRCTL_COMMAND}</0>를 실행해 AnyTalk의 항목을 확인한 다음, Hyprland 설정에서 「global」 디스패처로 각 항목을 바인딩하세요. 예: <1>{HYPRLAND_BIND_EXAMPLE}</1>."
@@ -2858,9 +3177,11 @@ msgstr "변경 사항을 읽고 확인했어요."
 msgid "ID copied to clipboard"
 msgstr "ID를 클립보드에 복사했어요"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2900,10 +3221,23 @@ msgstr "통화 중 · {count}"
 msgid "In call"
 msgstr "통화 중"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the browser, export the HAR file and open it in your browser's developer tools (Network tab, import) or another HAR viewer to see the requests in detail."
+msgstr "브라우저에서는 HAR 파일을 내보낸 뒤 브라우저의 개발자 도구(네트워크 탭, 가져오기)나 다른 HAR 뷰어에서 열면 요청을 자세히 볼 수 있어요."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+#~ msgid "In the desktop app, a key log option that lets Wireshark decrypt the traffic is coming in a later update. Until then, export the HAR file to see the requests in detail."
+#~ msgstr "데스크톱 앱에는 Wireshark로 트래픽을 복호화할 수 있는 키 로그 옵션이 이후 업데이트에서 추가될 예정이에요. 그때까지는 HAR 파일을 내보내서 요청을 자세히 확인해 보세요."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "In the desktop app, switch on \"Write TLS keys to a file\" above and restart the app. Then start a capture in Wireshark, use the app, and open Edit, Preferences, Protocols, TLS. Set \"(Pre)-Master-Secret log filename\" to the file shown above (use \"Show file\" to find it). Wireshark then decrypts the HTTPS and WSS traffic."
+msgstr "데스크톱 앱에서 위의 'TLS 키를 파일에 기록'을 켜고 앱을 다시 시작하세요. 그런 다음 Wireshark에서 캡처를 시작하고 앱을 사용한 뒤 Edit, Preferences, Protocols, TLS를 여세요. '(Pre)-Master-Secret log filename'을 위에 표시된 파일로 설정하세요('파일 보기'로 위치를 찾을 수 있어요). 그러면 Wireshark가 HTTPS와 WSS 트래픽을 복호화해요."
+
 #: src/AndroidNag.tsx
 msgid "In the meantime, install AnyTalk from Google Play for a faster, smoother experience designed for Android."
 msgstr "그동안은 Google Play에서 AnyTalk을 설치하면 Android에 맞춘 더 빠르고 부드러운 환경을 쓸 수 있어요."
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/servers/Inbox.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Inbox"
@@ -2930,6 +3264,14 @@ msgstr "입력 모드"
 msgid "Input Volume"
 msgstr "입력 볼륨"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Inside: end-to-end encryption (LiveKit E2EE) with a key only the people in the call hold. The media server forwards frames it cannot read."
+msgstr "안쪽: 통화에 참여한 사람만 가진 키로 하는 종단 간 암호화(LiveKit E2EE)예요. 미디어 서버는 읽을 수 없는 프레임을 전달만 해요."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Inspect with Wireshark"
+msgstr "Wireshark로 살펴보기"
+
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Install updates automatically"
 msgstr "업데이트 자동 설치"
@@ -2950,6 +3292,7 @@ msgstr "인터페이스 글꼴"
 msgid "Invalid Mention Element"
 msgstr "잘못된 멘션 요소"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Invisible"
@@ -3045,6 +3388,10 @@ msgstr "AnyTalk 라운지 참여"
 msgid "Join the voice channel"
 msgstr "음성 채널 참여"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "joined"
+msgstr "참가함"
+
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: components/ui/components/features/profiles/ProfileJoined.tsx
 msgid "Joined"
@@ -3073,6 +3420,10 @@ msgstr "창을 닫아도 AnyTalk를 트레이에서 계속 실행"
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Keep as is"
 msgstr "그대로 두기"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "kept in memory only, gone when you reload"
+msgstr "메모리에만 보관되며 새로고침하면 사라져요"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Keyframe requests per second (viewers asking for a full new picture)"
@@ -3196,6 +3547,10 @@ msgstr "라이트"
 msgid "Light (60 Hz)"
 msgstr "라이트 (60 Hz)"
 
+#: components/app/interface/settings/user/Sessions.tsx
+msgid "Link a device"
+msgstr "기기 연결"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Linux .deb (Debian/Ubuntu)"
 msgstr "Linux .deb (Debian/Ubuntu)"
@@ -3238,6 +3593,10 @@ msgstr "실시간 오버레이, 녹화, 이전 스트림 요약"
 msgid "Live statistics overlay"
 msgstr "실시간 통계 오버레이"
 
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Live View"
+msgstr "실시간 보기"
+
 #. placeholder {0}: humanFileSize(props.file.size ?? 0)
 #: components/ui/components/features/messaging/elements/TextFile.tsx
 msgid "Load file ({0})"
@@ -3247,9 +3606,31 @@ msgstr "파일 불러오기 ({0})"
 msgid "Loading message"
 msgstr "메시지 불러오는 중"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Local candidate"
+msgstr "로컬 후보"
+
 #: components/auth/src/flows/FlowHome.tsx
 msgid "Log In"
 msgstr "로그인"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Log in a new device?"
+msgstr "새 기기에서 로그인할까요?"
+
+#. placeholder {0}: approved()!.account!.display_name || approved()!.account!.username
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Log in as <0>{0}</0>? If you don't recognise this account, cancel."
+msgstr "<0>{0}</0> 계정으로 로그인할까요? 모르는 계정이면 취소하세요."
+
+#: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Log in with QR code"
+msgstr "QR 코드로 로그인"
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Log in?"
+msgstr "로그인할까요?"
 
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -3280,6 +3661,10 @@ msgstr "최신 버전을 찾는 중..."
 msgid "Loss and jitter are what the server reports about the audio it got from you."
 msgstr "손실과 지터는 서버가 내 오디오를 받으면서 보고한 값이에요."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Lossy"
+msgstr "손실 허용"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Lost"
 msgstr "끊김"
@@ -3296,9 +3681,17 @@ msgstr "저음 차단 필터"
 msgid "Lowercase letters, numbers and underscores only."
 msgstr "영문 소문자, 숫자, 밑줄만 사용할 수 있어요."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Made with"
+msgstr "생성 도구"
+
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Magenta"
 msgstr "마젠타"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "Main navigation"
+msgstr "메인 내비게이션"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
@@ -3385,6 +3778,14 @@ msgstr "보내거나 시청하는 카메라 및 화면 공유 영상을 측정�
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Measure your microphone and everyone you hear in calls"
 msgstr "통화에서 내 마이크와 들리는 모든 사람을 측정해요"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Media server"
+msgstr "미디어 서버"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Media streams"
+msgstr "미디어 스트림"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Medium (90 Hz)"
@@ -3495,12 +3896,17 @@ msgstr "메시지, 통화, 스트림 소리"
 
 #: components/app/interface/channels/text/Messages.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 msgid "Messages"
 msgstr "메시지"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Messaging"
 msgstr "메시징"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Method"
+msgstr "메서드"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "MFA setup canceled."
@@ -3536,6 +3942,7 @@ msgstr "고정폭 글꼴"
 msgid "More Contrast"
 msgstr "대비 높게"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "More options"
 msgstr "더 보기"
@@ -3625,13 +4032,31 @@ msgstr "음소거됨"
 msgid "Muted until <0/>"
 msgstr "<0/>까지 음소거됨"
 
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends"
+msgstr "함께 아는 친구"
+
 #: components/modal/modals/UserProfileMutualFriends.tsx
 msgid "Mutual Friends"
 msgstr "같이 아는 친구"
 
+#. placeholder {0}: mutuals.data!.users.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual friends ({0})"
+msgstr "함께 아는 친구 ({0})"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups"
+msgstr "함께 있는 그룹"
+
 #: components/modal/modals/UserProfileMutualGroups.tsx
 msgid "Mutual Groups"
 msgstr "같이 있는 그룹"
+
+#. placeholder {0}: mutuals.data!.groups.length
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "Mutual groups ({0})"
+msgstr "함께 있는 그룹 ({0})"
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "Mutuals"
@@ -3658,9 +4083,29 @@ msgstr "이름"
 msgid "Name (A-Z)"
 msgstr "이름순 (A-Z)"
 
+#: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+msgid "Navigation"
+msgstr "내비게이션"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Needs a server that supports stream viewers."
 msgstr "스트림 시청자를 지원하는 서버가 필요해요."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Network address"
+msgstr "네트워크 주소"
+
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "Network inspector"
+msgstr "네트워크 검사기"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Network Inspector"
+msgstr "네트워크 검사기"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Network type"
+msgstr "네트워크 유형"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
@@ -3712,6 +4157,10 @@ msgstr "다음 서버"
 msgid "Nickname"
 msgstr "닉네임"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "No"
+msgstr "아니요"
+
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "No apps found"
 msgstr "앱을 찾을 수 없어요"
@@ -3719,6 +4168,10 @@ msgstr "앱을 찾을 수 없어요"
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "No audio was captured, switch window to share audio"
 msgstr "캡처된 오디오가 없어요. 오디오를 공유하려면 창을 바꾸세요"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "No camera was found on this device."
+msgstr "이 기기에서 카메라를 찾을 수 없어요."
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "No channels to search"
@@ -3751,6 +4204,10 @@ msgstr "GIF를 찾을 수 없어요"
 #: components/app/interface/settings/user/Language.tsx
 msgid "No languages found"
 msgstr "언어를 찾을 수 없어요"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "No matches"
+msgstr "일치하는 항목 없음"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "No patch notes for this version."
@@ -3839,6 +4296,14 @@ msgstr "설정 안 됨"
 msgid "Nothing"
 msgstr "없음"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Nothing fits this filter. Try another word or show all kinds."
+msgstr "이 필터에 맞는 항목이 없어요. 다른 단어를 입력하거나 모든 종류를 표시해 보세요."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Nothing recorded yet"
+msgstr "아직 기록된 내용이 없어요"
+
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Nothing to compare yet. Import a CSV or add one of your own call recaps."
 msgstr "아직 비교할 항목이 없어요. CSV를 가져오거나 내 통화 요약을 추가하세요."
@@ -3847,17 +4312,26 @@ msgstr "아직 비교할 항목이 없어요. CSV를 가져오거나 내 통화 
 msgid "Nothing to compare yet. Import a CSV or add one of your own stream recaps."
 msgstr "아직 비교할 항목이 없어요. CSV를 가져오거나 내 스트림 요약을 추가하세요."
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Nothing to show yet"
+msgstr "아직 표시할 내용이 없어요"
+
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Notifications"
 msgstr "알림"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "Off"
 msgstr "꺼짐"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
+msgstr "꺼짐: 토큰, 비밀번호, 키가 숨겨져요. 새로고침하면 초기화돼요."
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Offers to stream the games you play during a call. Detection happens only on this computer and nothing is sent."
@@ -3871,8 +4345,10 @@ msgstr "공식 대화"
 msgid "Official Server"
 msgstr "공식 서버"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Offline"
@@ -3917,10 +4393,12 @@ msgstr "처음 1000명의 사용자 중 한 명!"
 msgid "Ongoing Maintenance"
 msgstr "점검 중"
 
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
 #: src/interface/home/FriendsOverview.tsx
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -3935,6 +4413,10 @@ msgstr "온라인"
 #: src/interface/home/FriendsOverview.tsx
 msgid "Online · {count}"
 msgstr "온라인 · {count}"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Only approve this if you are looking at that device's screen right now and it shows this QR code. Someone could send you their QR code to take over your account."
+msgstr "지금 그 기기의 화면을 보고 있고 이 QR 코드가 표시되어 있을 때만 승인하세요. 누군가 자신의 QR 코드를 보내 내 계정을 가로챌 수 있어요."
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Only change this if you run your own AnyTalk server."
@@ -3952,6 +4434,10 @@ msgstr "감지된 게임이 실행 중일 때만"
 msgid "Oops, something went wrong! {e}"
 msgstr "이런, 문제가 생겼어요! {e}"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "open"
+msgstr "열림"
+
 #: components/modal/modals/Invite.tsx
 msgid "Open"
 msgstr "열기"
@@ -3965,6 +4451,7 @@ msgstr "{0} 열기"
 msgid "Open an app or switch to Entire screen."
 msgstr "앱을 열거나 '전체 화면'으로 전환해 보세요."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/rtc/components/StreamPopouts.tsx
 msgid "Open as window"
 msgstr "창으로 열기"
@@ -3981,12 +4468,21 @@ msgstr "파일 열기"
 msgid "Open friends"
 msgstr "친구 열기"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Open live view"
+msgstr "실시간 보기 열기"
+
 #. placeholder {0}: author()
 #. placeholder {1}: place()
 #. placeholder {2}: preview()
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Open message from {0} in {1}: {2}"
 msgstr "{1}의 {0} 님이 보낸 메시지 열기: {2}"
+
+#. placeholder {0}: props.channel.recipient!.username
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Open profile of {0}"
+msgstr "{0}님의 프로필 열기"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Open release page"
@@ -4033,6 +4529,10 @@ msgstr "출력 장치"
 msgid "Output Volume"
 msgstr "출력 볼륨"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Outside: SRTP over DTLS between your device and the media server, as for any WebRTC call."
+msgstr "바깥쪽: 다른 WebRTC 통화와 마찬가지로 내 기기와 미디어 서버 사이에서 DTLS 기반 SRTP를 사용해요."
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Overlay"
 msgstr "오버레이"
@@ -4075,12 +4575,21 @@ msgstr "부분 장애"
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/QrLoginApprove.tsx
 msgid "Password"
 msgstr "비밀번호"
 
 #: components/modal/modals/EditPassword.tsx
 msgid "Password changed successfully."
 msgstr "비밀번호를 변경했어요."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Pause"
+msgstr "일시정지"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Paused"
+msgstr "일시정지됨"
 
 #: components/app/interface/settings/user/subscriptions/EditSubscriptionJoinFlow.tsx
 #~ msgid "Pay"
@@ -4113,6 +4622,10 @@ msgstr "전화 통화 모드"
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Pick a Screen to Share"
 msgstr "공유할 화면 선택"
+
+#: src/interface/Sidebar.tsx
+msgid "Pick a server"
+msgstr "서버 선택"
 
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Pick a username that you want people to be able to find you by. This can be changed later in your user settings."
@@ -4208,6 +4721,10 @@ msgstr "잠시만 기다려 주세요..."
 #: components/state/stores/Experiments.ts
 msgid "Plugins v2 Placeholder"
 msgstr "플러그인 v2 자리 표시자"
+
+#: components/modal/modals/QrScanner.tsx
+msgid "Point the camera at the QR code on the login screen of the new device."
+msgstr "새 기기의 로그인 화면에 있는 QR 코드에 카메라를 향하게 해 주세요."
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "Poor"
@@ -4312,6 +4829,10 @@ msgstr "해로운 행위 조장"
 msgid "Pronouns"
 msgstr "호칭"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Protocol"
+msgstr "프로토콜"
+
 #: components/i18n/errors.tsx
 msgid "Provided email or password is wrong."
 msgstr "이메일 또는 비밀번호가 올바르지 않아요."
@@ -4380,6 +4901,7 @@ msgid "Ready to install: {0}"
 msgstr "설치 준비 완료: {0}"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
 msgid "Reason"
@@ -4419,6 +4941,11 @@ msgstr "탭이 열려 있는 동안 알림을 받아요."
 msgid "Receive push notifications while the app is closed."
 msgstr "앱이 닫혀 있어도 푸시 알림을 받아요."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Received"
+msgstr "수신됨"
+
 #: src/interface/home/FriendsOverview.tsx
 msgid "Recent calls"
 msgstr "최근 통화"
@@ -4441,6 +4968,10 @@ msgstr "다시 연결 중"
 msgid "Record call recaps"
 msgstr "통화 요약 기록"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Record network traffic"
+msgstr "네트워크 트래픽 기록"
+
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record statistics of every call you are in, with or without the overlay"
 msgstr "오버레이 사용 여부와 관계없이 참여한 모든 통화의 통계를 기록해요"
@@ -4452,6 +4983,18 @@ msgstr "오버레이 사용 여부와 관계없이 보내거나 시청하는 모
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Record stream recaps"
 msgstr "스트림 요약 기록"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Recorded traffic"
+msgstr "기록된 트래픽"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Recording is off"
+msgstr "기록이 꺼져 있어요"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Recovery code"
+msgstr "복구 코드"
 
 #: components/modal/modals/MFAFlow.tsx
 msgid "Recovery Code"
@@ -4481,6 +5024,18 @@ msgstr "가입일 <0/>"
 msgid "Reject friend request"
 msgstr "친구 요청 거절"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "relay"
+msgstr "릴레이"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Relay protocol"
+msgstr "릴레이 프로토콜"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Relay server"
+msgstr "릴레이 서버"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Release notes"
 msgstr "릴리스 노트"
@@ -4489,6 +5044,10 @@ msgstr "릴리스 노트"
 msgid "Relevance"
 msgstr "관련성순"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Reliable"
+msgstr "신뢰성 있음"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload and clear cache"
 msgstr "다시 불러오고 캐시 지우기"
@@ -4496,6 +5055,14 @@ msgstr "다시 불러오고 캐시 지우기"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload AnyTalk with fresh files from the server? This is the same as Ctrl+F5 and fixes most display problems after an update. You stay logged in and keep your settings."
 msgstr "서버에서 새 파일로 AnyTalk을 다시 불러올까요? Ctrl+F5와 같으며, 업데이트 후 생기는 대부분의 화면 문제를 해결해요. 로그인 상태와 설정은 그대로 유지돼요."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Remote address"
+msgstr "원격 주소"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Remote candidate"
+msgstr "원격 후보"
 
 #: components/markdown/plugins/anchors.tsx
 msgid "Remote Channel"
@@ -4619,6 +5186,26 @@ msgstr "서버 신고하기"
 msgid "Report user"
 msgstr "사용자 신고하기"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Request body"
+msgstr "요청 본문"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Request headers"
+msgstr "요청 헤더"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Requested"
+msgstr "요청 시각"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Requests and messages show up here as they happen."
+msgstr "요청과 메시지가 발생하는 대로 여기에 표시돼요."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Requests from images, fonts and other files, and from the app itself rather than a page, are listed too, marked \"Desktop app\". They are only recorded while recording is on."
+msgstr "이미지, 글꼴 등 다른 파일의 요청과 페이지가 아닌 앱 자체의 요청도 '데스크톱 앱'으로 표시되어 목록에 나와요. 기록 중일 때만 기록돼요."
+
 #: components/auth/src/flows/FlowResend.tsx
 msgid "Resend"
 msgstr "다시 보내기"
@@ -4696,6 +5283,18 @@ msgstr "해상도"
 msgid "Resolution and FPS"
 msgstr "해상도 및 FPS"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response headers"
+msgstr "응답 헤더"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response preview"
+msgstr "응답 미리보기"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Response size"
+msgstr "응답 크기"
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Responsibly disclosed security issues"
 msgstr "보안 문제를 책임감 있게 공개함"
@@ -4712,6 +5311,10 @@ msgstr "다시 시작하여 업데이트"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Restore call window"
 msgstr "통화 창 복원"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Resume"
+msgstr "재개"
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 msgid "Retry sending"
@@ -4770,6 +5373,7 @@ msgid "Role Overrides"
 msgstr "역할 재정의"
 
 #: components/app/interface/settings/ServerSettings.tsx
+#: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
 msgid "Roles"
 msgstr "역할"
@@ -4777,6 +5381,18 @@ msgstr "역할"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Roles with No Overrides"
 msgstr "재정의가 없는 역할"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Room"
+msgstr "룸"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "route"
+msgstr "경로"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Route"
+msgstr "경로"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Running"
@@ -4830,6 +5446,23 @@ msgstr "저장 중…"
 #: components/modal/modals/ReportContent.tsx
 msgid "Scams or fraud"
 msgstr "사기"
+
+#: components/modal/modals/QrScanner.tsx
+#: src/interface/navigation/servers/UserMenu.tsx
+msgid "Scan QR code"
+msgstr "QR 코드 스캔"
+
+#: components/app/interface/settings/user/Sessions.tsx
+msgid "Scan the QR code on the login screen of a new device to log it in."
+msgstr "새 기기의 로그인 화면에 있는 QR 코드를 스캔하면 그 기기에 로그인할 수 있어요."
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Scan this with AnyTalk on a device where you're logged in. Open Settings, then Sessions, then Link a device."
+msgstr "로그인한 기기에서 AnyTalk으로 이 코드를 스캔하세요. 설정, 세션, 기기 연결 순서로 열면 돼요."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "Scanning needs a secure connection (HTTPS). This page is opened over plain HTTP, so the browser blocks the camera."
+msgstr "스캔하려면 보안 연결(HTTPS)이 필요해요. 이 페이지는 일반 HTTP로 열려 있어서 브라우저가 카메라를 차단해요."
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "Screen share frame rate"
@@ -4935,8 +5568,16 @@ msgstr "검색 중…"
 msgid "See all your servers at a glance."
 msgstr "참여 중인 서버를 한눈에 확인해요."
 
+#: components/app/interface/settings/user/developer/Developer.tsx
+msgid "See what the app sends and receives, and export it to check against Wireshark"
+msgstr "앱이 보내고 받는 내용을 확인하고, 내보내서 Wireshark로 대조해 보세요"
+
 #~ msgid "See what we're currently working on."
 #~ msgstr ""
+
+#: src/interface/Home.tsx
+msgid "See your friends and answer friend requests."
+msgstr "친구를 확인하고 친구 요청에 답해 보세요."
 
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select"
@@ -4945,6 +5586,10 @@ msgstr "선택"
 #: components/app/interface/settings/user/developer/RecapParts.tsx
 msgid "Select all"
 msgstr "모두 선택"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Select an entry to see its details."
+msgstr "항목을 선택하면 세부 정보를 볼 수 있어요."
 
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Select at least one line above to compare."
@@ -5022,6 +5667,8 @@ msgstr "요청 보내기"
 msgid "Sending..."
 msgstr "보내는 중..."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Sent"
 msgstr "전송됨"
@@ -5044,6 +5691,7 @@ msgstr "여러 개의 첨부파일을 보냈어요"
 msgid "Server"
 msgstr "서버"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/app/interface/settings/user/Native.tsx
 msgid "Server address"
 msgstr "서버 주소"
@@ -5083,6 +5731,7 @@ msgstr "{name} 서버 옵션"
 
 #: src/interface/Home.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/Sidebar.tsx
 msgid "Server overview"
 msgstr "서버 개요"
 
@@ -5090,15 +5739,32 @@ msgstr "서버 개요"
 msgid "Server Roles"
 msgstr "서버 역할"
 
+#: src/interface/navigation/bottomNav/BottomNav.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/servers/ServerOverview.tsx
 msgid "Servers"
 msgstr "서버"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Servers contacted"
+msgstr "연결한 서버"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Servers show up here as soon as the app talks to them."
+msgstr "앱이 서버와 통신하는 즉시 여기에 표시돼요."
+
 #: src/interface/servers/ServerOverview.tsx
 msgid "Servers you join show up here."
 msgstr "참여한 서버가 여기에 표시돼요."
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "Servers, unread messages"
+msgstr "서버, 읽지 않은 메시지"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+msgstr "세션 토큰, 비밀번호, 통화 키가 화면과 내보내기 파일에 표시돼요. 이를 보거나 얻은 사람은 내 계정으로 로그인할 수 있어요. 디버깅할 때만 켜고, 내보낸 파일은 공유하지 마세요."
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5156,9 +5822,17 @@ msgstr "음성 통화에서 카메라나 화면 공유"
 msgid "Share screen"
 msgstr "화면 공유"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show"
+msgstr "표시"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show 'copy ID' in context menus"
 msgstr "컨텍스트 메뉴에 'ID 복사' 표시"
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "Show a new code"
+msgstr "새 코드 표시"
 
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show a notice when a new version is available"
@@ -5168,9 +5842,17 @@ msgstr "새 버전이 있으면 알림 표시"
 msgid "Show admin panel shortcuts in context menus"
 msgstr "컨텍스트 메뉴에 관리자 패널 바로가기 표시"
 
+#: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
+msgid "Show call window"
+msgstr "통화 창 표시"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
 msgstr "입력하는 동안 교정과 추천을 표시해요."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show file"
+msgstr "파일 보기"
 
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Show live microphone statistics on call tiles"
@@ -5179,6 +5861,10 @@ msgstr "통화 타일에 실시간 마이크 통계 표시"
 #: components/app/interface/settings/user/developer/Developer.tsx
 msgid "Show live statistics on call video tiles"
 msgstr "통화 영상 타일에 실시간 통계 표시"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show only"
+msgstr "다음만 표시"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Show Others"
@@ -5201,9 +5887,21 @@ msgstr "서버 목록 표시"
 msgid "Show server names"
 msgstr "서버 이름 표시"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show tokens and keys"
+msgstr "토큰과 키 표시"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Show tokens and keys?"
+msgstr "토큰과 키를 표시할까요?"
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Show when speaking"
 msgstr "말할 때 표시"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show window"
+msgstr "창 표시"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Showing in a separate window"
@@ -5242,6 +5940,7 @@ msgid "Shows who is talking in your call on top of your game. It works over bord
 msgstr "통화에서 누가 말하고 있는지 게임 화면 위에 보여줘요. 테두리 없는 창 모드와 창 모드 게임에서 작동하며, 독점 전체 화면에서는 작동하지 않아요."
 
 #: components/auth/src/flows/FlowLogin.tsx
+#: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Sign into AnyTalk"
 msgstr "AnyTalk에 로그인"
 
@@ -5260,6 +5959,10 @@ msgstr "무음"
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Single stream: opening a stream replaces the current one"
 msgstr "단일 스트림: 스트림을 열면 현재 스트림을 대체해요"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Size"
+msgstr "크기"
 
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "Slowmode Immune"
@@ -5325,6 +6028,10 @@ msgstr "문제가 생겼어요! {error}"
 #~ msgid "Something went wrong! Try again later."
 #~ msgstr ""
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Something went wrong. Check your connection and try again."
+msgstr "문제가 발생했어요. 연결을 확인하고 다시 시도해 주세요."
+
 #: src/interface/channels/text/TextSearchSidebar.tsx
 #: src/interface/servers/ServerOverview.tsx
 msgid "Sort by"
@@ -5374,6 +6081,10 @@ msgstr "맞춤법 검사"
 msgid "Spoiler"
 msgstr "스포일러"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "SRTP cipher"
+msgstr "SRTP 암호"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Start camera"
 msgstr "카메라 켜기"
@@ -5390,6 +6101,11 @@ msgstr "통화 시작"
 msgid "Start with Computer"
 msgstr "컴퓨터와 함께 시작"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Started"
+msgstr "시작됨"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 msgid "Status"
 msgstr "상태"
@@ -5405,6 +6121,7 @@ msgstr "카메라 끄기"
 msgid "Stop sharing"
 msgstr "공유 중지"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 #: components/ui/components/features/voice/callCard/GameStreamPrompt.tsx
 msgid "Stream"
 msgstr "스트리밍"
@@ -5587,6 +6304,10 @@ msgstr "약관"
 #~ msgid "Terms of Service"
 #~ msgstr "이용약관"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Text"
+msgstr "텍스트"
+
 #: components/modal/modals/CreateChannel.tsx
 msgid "Text Channel"
 msgstr "채팅 채널"
@@ -5594,6 +6315,22 @@ msgstr "채팅 채널"
 #: components/i18n/errors.tsx
 msgid "That action had no effect."
 msgstr "그 작업은 아무 효과가 없었어요."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That code is not correct. Check it and try again."
+msgstr "코드가 올바르지 않아요. 확인한 후 다시 시도해 주세요."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That password is not correct. Check it and try again."
+msgstr "비밀번호가 올바르지 않아요. 확인한 후 다시 시도해 주세요."
+
+#: components/modal/modals/QrLoginApprove.tsx
+#~ msgid "That password or code is not correct. Check it and try again."
+#~ msgstr "비밀번호 또는 코드가 올바르지 않아요. 확인하고 다시 시도해 주세요."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "That QR code is not an AnyTalk login code. Point the camera at the code on the login screen of the new device."
+msgstr "이 QR 코드는 AnyTalk 로그인 코드가 아니에요. 새 기기의 로그인 화면에 있는 코드에 카메라를 향하게 해 주세요."
 
 #: components/i18n/errors.tsx
 msgid "The bot has been removed from discover by moderators, the user must contact support."
@@ -5606,6 +6343,14 @@ msgstr "이 봇은 이미 탐색에 있어요. 제거하려면 사용자가 지�
 #: components/modal/modals/AddBot.tsx
 msgid "The bot will not be granted any permissions."
 msgstr "봇에게는 어떤 권한도 부여되지 않아요."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "The camera could not be started."
+msgstr "카메라를 시작할 수 없어요."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "The camera is on but no picture arrives. Close this window and try again, or check that no other app is using the camera."
+msgstr "카메라는 켜졌지만 화면이 나오지 않아요. 이 창을 닫고 다시 시도하거나, 다른 앱이 카메라를 사용 중인지 확인해 주세요."
 
 #. placeholder {0}: actionLabels()[blocker]
 #: components/app/interface/settings/user/Controller.tsx
@@ -5640,6 +6385,18 @@ msgstr "첫 버전이 아직 게시되지 않았어요. 곧 다시 확인해 주
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
 msgstr "이 항목은 관리자에 의해 제거되어 앞으로 신청할 수 없어요. 자세한 내용은 지원팀에 문의하세요."
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "The login was cancelled, but the new session could not be removed. Remove it in Settings, then Sessions, on a device where you are logged in."
+msgstr "로그인은 취소되었지만 새 세션을 삭제하지 못했어요. 로그인한 기기에서 설정, 세션 순서로 열어 삭제해 주세요."
+
+#: components/auth/src/flows/FlowQrLogin.tsx
+msgid "The login was denied on the other device."
+msgstr "다른 기기에서 로그인이 거부되었어요."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
+msgstr "네트워크 검사기는 AnyTalk이 보내고 받는 내용을 기록해서 Wireshark 같은 도구로 대조할 수 있게 해요. 기본적으로 꺼져 있고 어디로도 전송되지 않아요."
 
 #: components/i18n/errors.tsx
 msgid "The password is too short."
@@ -5722,6 +6479,14 @@ msgstr "이 채널은 성인 콘텐츠로 표시되어 있어요."
 msgid "This channel is not available in your region while we review options on legal compliance."
 msgstr "법적 준수 방안을 검토하는 동안 이 채널은 내 지역에서 사용할 수 없어요."
 
+#: components/modal/modals/QrScanner.tsx
+msgid "This code is from a different AnyTalk server. Open the login page of this server on the new device instead."
+msgstr "이 코드는 다른 AnyTalk 서버의 코드예요. 대신 새 기기에서 이 서버의 로그인 페이지를 열어 주세요."
+
+#: components/modal/modals/QrScanner.tsx
+msgid "This code was made on an address that only works on the other device (localhost). Open the login page there with the same address you use on this device."
+msgstr "이 코드는 다른 기기에서만 작동하는 주소(localhost)로 만들어졌어요. 그 기기에서 이 기기에서 사용하는 것과 같은 주소로 로그인 페이지를 열어 주세요."
+
 #: src/interface/channels/AgeGate.tsx
 msgid "This content is not available in your region."
 msgstr "이 콘텐츠는 내 지역에서 사용할 수 없어요."
@@ -5759,6 +6524,10 @@ msgstr "내 노트의 시작이에요."
 msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
 msgstr "이 키는 단독으로 사용할 수 없어요. Ctrl, Alt 또는 Shift를 추가하거나 다른 키를 선택하세요."
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "This login request has expired or was already answered. Ask the other device to show a new QR code."
+msgstr "이 로그인 요청은 만료되었거나 이미 응답되었어요. 다른 기기에서 새 QR 코드를 표시해 달라고 하세요."
+
 #: components/i18n/errors.tsx
 msgid "This message is already pinned."
 msgstr "이 메시지는 이미 고정되어 있어요."
@@ -5779,6 +6548,10 @@ msgstr "이 비밀번호는 과거 보안 유출에 나타난 적이 있어요. 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "This recap no longer exists."
 msgstr "이 요약은 더 이상 없어요."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "This request cannot be approved right now. Ask the other device to show a new QR code."
+msgstr "지금은 이 요청을 승인할 수 없어요. 다른 기기에서 새 QR 코드를 표시해 달라고 하세요."
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "This server is about..."
@@ -5820,6 +6593,14 @@ msgstr "사용할 수 없는 사용자 이름이에요."
 msgid "This will invalidate the current token and stop any existing instances of the bot from running."
 msgstr "현재 토큰이 무효화되고 실행 중인 봇 인스턴스가 모두 중지돼요."
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Through a relay (TURN)"
+msgstr "릴레이(TURN) 경유"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Time"
+msgstr "시간"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Time format"
 msgstr "시간 형식"
@@ -5851,6 +6632,14 @@ msgstr "멤버 타임아웃"
 msgid "Timeout Members"
 msgstr "타임아웃"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "TLS key log"
+msgstr "TLS 키 로그"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "To"
+msgstr "받는 곳"
+
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "Toggle deafen"
 msgstr "헤드셋 음소거 전환"
@@ -5879,6 +6668,14 @@ msgstr "토널 스팟"
 msgid "Too Long"
 msgstr "너무 김"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Too many attempts. Wait a moment and try again."
+msgstr "시도 횟수가 너무 많아요. 잠시 기다렸다가 다시 시도해 주세요."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Too many wrong codes. Wait a while before trying again."
+msgstr "잘못된 코드를 너무 많이 입력했어요. 잠시 기다렸다가 다시 시도해 주세요."
+
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Top left"
 msgstr "왼쪽 위"
@@ -5887,12 +6684,21 @@ msgstr "왼쪽 위"
 msgid "Top right"
 msgstr "오른쪽 위"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Topic"
+msgstr "주제"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Traditional (DD/MM/YYYY)"
 msgstr "전통식 (DD/MM/YYYY)"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Transferred"
+msgstr "전송량"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Transport"
 msgstr "전송 방식"
 
@@ -5922,6 +6728,18 @@ msgstr "다른 단어나 다른 범위로 시도해 보세요."
 msgid "Turn every sound on and reset their volumes and files?"
 msgstr "모든 소리를 켜고 볼륨과 파일을 초기화할까요?"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Turn it on to see what the app sends and receives."
+msgstr "켜면 앱이 보내고 받는 내용을 볼 수 있어요."
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Turn on recording"
+msgstr "기록 켜기"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turn on recording to see which servers the app talks to."
+msgstr "기록을 켜면 앱이 어떤 서버와 통신하는지 볼 수 있어요."
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Turn single sounds off, change their volume or use your own"
 msgstr "소리를 하나씩 끄거나, 볼륨을 바꾸거나, 직접 만든 소리를 사용하세요"
@@ -5929,6 +6747,18 @@ msgstr "소리를 하나씩 끄거나, 볼륨을 바꾸거나, 직접 만든 소
 #: components/app/interface/settings/user/Native.tsx
 msgid "Turn this off and closing the window quits AnyTalk right away."
 msgstr "이 옵션을 끄면 창을 닫을 때 AnyTalk가 바로 종료돼요."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turns off after restart"
+msgstr "다시 시작하면 꺼져요"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Turns on after restart"
+msgstr "다시 시작하면 켜져요"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Type"
+msgstr "유형"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 #~ msgid "Type in the search box and press Enter."
@@ -5963,6 +6793,10 @@ msgstr "알 수 없음"
 #: src/interface/channels/ChannelPage.tsx
 msgid "Unknown channel type!"
 msgstr "알 수 없는 채널 유형이에요!"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Unknown device"
+msgstr "알 수 없는 기기"
 
 #: components/markdown/plugins/customEmoji.tsx
 msgid "Unknown emote"
@@ -6121,6 +6955,10 @@ msgstr "Gifbox에 업로드"
 msgid "Uploading file `{fileName}`... {0}%"
 msgstr "파일 `{fileName}` 업로드 중... {0}%"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "URL"
+msgstr "URL"
+
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
 msgstr "코드 또는 초대 링크 사용"
@@ -6129,9 +6967,17 @@ msgstr "코드 또는 초대 링크 사용"
 msgid "Use a game controller to move around AnyTalk. Works with Xbox, PlayStation, Switch and Steam Deck controllers."
 msgstr "게임 컨트롤러로 AnyTalk을 조작해 보세요. Xbox, PlayStation, Switch, Steam Deck 컨트롤러에서 작동해요."
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a recovery code instead"
+msgstr "대신 복구 코드 사용"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Use hotkeys that work even while AnyTalk isn't focused, and keep AnyTalk running in the system tray."
 msgstr "AnyTalk가 포커스되어 있지 않아도 작동하는 단축키를 사용하고, AnyTalk를 시스템 트레이에서 계속 실행하세요."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use the authenticator app instead"
+msgstr "대신 인증 앱 사용"
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Use the graphics card to improve performance."
@@ -6263,6 +7109,10 @@ msgstr "보내는 영상 사본 (전체 / 절반 / 4분의 1 크기)"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "View (back) button"
 msgstr "뷰(뒤로) 버튼"
+
+#: components/modal/modals/UserProfilePhone.tsx
+msgid "View banner"
+msgstr "배너 보기"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View Channel"
@@ -6401,6 +7251,10 @@ msgstr "웹훅 이름"
 msgid "Webhooks"
 msgstr "웹훅"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "WebSocket"
+msgstr "WebSocket"
+
 #~ msgid "Welcome to"
 #~ msgstr "환영합니다"
 
@@ -6436,6 +7290,10 @@ msgstr "표시 시점"
 #: components/app/interface/settings/user/Overlay.tsx
 msgid "Whenever I'm in a call"
 msgstr "통화 중일 때 항상"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Where your data goes"
+msgstr "내 데이터가 가는 곳"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Whether other users can edit these settings"
@@ -6476,6 +7334,10 @@ msgstr "외 {0}명과 함께"
 msgid "with {participants}"
 msgstr "{participants}와(과) 함께"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Without the keys, Wireshark only sees encrypted TLS and DTLS traffic. What it can still tell you is where the data goes and how much. Compare that with the servers and sizes listed above."
+msgstr "키가 없으면 Wireshark에는 암호화된 TLS와 DTLS 트래픽만 보여요. 그래도 데이터가 어디로 얼마나 가는지는 알 수 있어요. 위에 나열된 서버와 크기를 비교해 보세요."
+
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Would you like to create a new group or server?"
 msgstr "새 그룹 또는 서버를 만들까요?"
@@ -6488,6 +7350,10 @@ msgstr "새 서버를 만들거나 기존 서버에 참여할까요?"
 msgid "Write a message"
 msgstr "메시지 작성"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Write TLS keys to a file"
+msgstr "TLS 키를 파일에 기록"
+
 #: components/app/interface/settings/user/Controller.tsx
 msgid "X (left button)"
 msgstr "X (왼쪽 버튼)"
@@ -6495,6 +7361,15 @@ msgstr "X (왼쪽 버튼)"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Y (top button)"
 msgstr "Y (위쪽 버튼)"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Yes"
+msgstr "예"
+
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+#: src/interface/navigation/bottomNav/YouScreen.tsx
+msgid "You"
+msgstr "나"
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "You agree that your bot is subject to the Acceptable Usage Policy."
@@ -6670,6 +7545,11 @@ msgstr "지원팀에 문의하지 않으면 귀하의 계정에 액세스할 수
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "다시 초대되지 않는 이상 다시 들어올 수 없어요."
 
+#. placeholder {0}: presence()
+#: src/interface/navigation/bottomNav/BottomNav.tsx
+msgid "You, {0}"
+msgstr "나, {0}"
+
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "You're all caught up"
 msgstr "모두 확인했어요"
@@ -6732,6 +7612,10 @@ msgstr "계정이 확인 되었어요!"
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your bot is under review"
 msgstr "봇을 검토하고 있어요"
+
+#: components/rtc/components/E2eeNotices.tsx
+msgid "Your browser can't encrypt calls, so you can't join."
+msgstr "브라우저에서 통화를 암호화할 수 없어서 참여할 수 없어요."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Your camera"

@@ -14,16 +14,19 @@ import "material-symbols/outlined.css";
 import "mdui/mdui.css";
 import { PublicBot, PublicChannelInvite } from "stoat.js";
 
+import { TrafficWindow } from "@revolt/app/interface/settings/user/developer/traffic/TrafficWindow";
 import FlowCheck from "@revolt/auth/src/flows/FlowCheck";
 import FlowConfirmReset from "@revolt/auth/src/flows/FlowConfirmReset";
 import FlowCreate from "@revolt/auth/src/flows/FlowCreate";
 import FlowDeleteAccount from "@revolt/auth/src/flows/FlowDelete";
 import FlowHome from "@revolt/auth/src/flows/FlowHome";
 import FlowLogin from "@revolt/auth/src/flows/FlowLogin";
+import FlowQrLogin from "@revolt/auth/src/flows/FlowQrLogin";
 import FlowResend from "@revolt/auth/src/flows/FlowResend";
 import FlowReset from "@revolt/auth/src/flows/FlowReset";
 import FlowVerify from "@revolt/auth/src/flows/FlowVerify";
 import { ClientContext, SoundContext, useClient } from "@revolt/client";
+import { parseQrLogin } from "@revolt/client/qrLoginCode";
 import { DeviceContext } from "@revolt/common";
 import { GamepadControls } from "@revolt/gamepad";
 import { I18nProvider } from "@revolt/i18n";
@@ -32,6 +35,7 @@ import { GlobalKeybinds, KeybindContext } from "@revolt/keybinds";
 import { ModalContext, ModalRenderer, useModals } from "@revolt/modal";
 import { VoiceContext } from "@revolt/rtc";
 import { StateContext, SyncWorker, useState } from "@revolt/state";
+import { startTrafficInspector } from "@revolt/traffic";
 import {
   FloatingManager,
   LoadTheme,
@@ -56,6 +60,11 @@ import "./serviceWorkerInterface";
 
 attachDevtoolsOverlay();
 
+// Install the traffic recorder after Sentry (imported first) has wrapped fetch
+// and XHR, so ours is the outermost layer and sees what the app code sends.
+// The stoat.js Client is only created later, so it uses the wrapped globals.
+startTrafficInspector();
+
 /**
  * Redirect PWA start to the last active path
  */
@@ -72,6 +81,22 @@ function SettingsRedirect() {
 
   onMount(() => openModal({ type: "settings", config: "user" }));
   return <PWARedirect />;
+}
+
+/**
+ * Open the approve step for a QR login code that came from the phone's own
+ * camera (`/qr-login#<id>`), then go home. Logged out visitors are sent to
+ * the login page by the interface route.
+ */
+function QrLoginRedirect() {
+  const { openModal } = useModals();
+
+  onMount(() => {
+    const id = parseQrLogin(location.href);
+    if (id) openModal({ type: "qr_login_approve", id });
+  });
+
+  return <Navigate href="/" />;
 }
 
 /**
@@ -134,6 +159,7 @@ function MountContext(props: { children?: JSX.Element }) {
                 <QueryClientProvider client={client}>
                   {props.children}
                   <ModalRenderer />
+                  <TrafficWindow />
                   <FloatingManager />
                   <AndroidNag />
                 </QueryClientProvider>
@@ -155,6 +181,7 @@ const routes = () => (
       <Route path="/create" component={FlowCreate} />
       <Route path="/create/:code" component={FlowCreate} />
       <Route path="/auth" component={FlowLogin} />
+      <Route path="/qr" component={FlowQrLogin} />
       <Route path="/resend" component={FlowResend} />
       <Route path="/reset" component={FlowReset} />
       <Route path="/verify/:token" component={FlowVerify} />
@@ -163,6 +190,7 @@ const routes = () => (
     </Route>
     <Route path="/" component={Interface as never}>
       <Route path="/pwa" component={PWARedirect} />
+      <Route path="/qr-login" component={QrLoginRedirect} />
       <Route path="/discover/*" component={Discover} />
       <Route path="/settings" component={SettingsRedirect} />
       <Route path="/invite/:code" component={InviteRedirect} />

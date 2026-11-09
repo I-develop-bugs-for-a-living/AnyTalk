@@ -50,7 +50,14 @@ import {
   setOverlayState,
 } from "./overlay";
 import { APP_ID, desktopEnvironment, isWayland } from "./platform";
+import { setRequestWatch } from "./requestWatch";
 import { installScreenShare, setNextScreenSource } from "./screen";
+import {
+  getTlsKeyLogState,
+  installTlsKeyLog,
+  revealTlsKeyLog,
+  setTlsKeyLog,
+} from "./tlsKeyLog";
 import {
   checkForUpdates,
   downloadUpdate,
@@ -102,6 +109,8 @@ if (process.platform === "linux") {
     "WebRTCPipeWireCapturer,GlobalShortcutsPortal",
   );
 }
+// Writes the TLS keys to a file when the user switched that on (inspector)
+installTlsKeyLog();
 if (process.platform === "win32") app.setAppUserModelId(APP_ID);
 if (process.platform === "linux") {
   // The shortcuts portal identifies the app by this desktop file name, and
@@ -235,6 +244,18 @@ function restartToUpdate() {
 /** Frame name prefix of the stream popout window (see rtc/streamPopout.ts) */
 const STREAM_POPOUT_FRAME = "anytalk-stream-popout";
 
+/** Frame name prefix of the network inspector's window, treated the same */
+const INSPECTOR_POPOUT_FRAME = "anytalk-inspector-popout";
+
+/** Stop reporting requests to the page (its recorder is off or gone). */
+function stopRequestWatch() {
+  setRequestWatch(
+    false,
+    () => mainWindow?.webContents,
+    () => {},
+  );
+}
+
 /** Create the main window with the saved size and frame style. */
 function createWindow() {
   const config = getConfig();
@@ -320,6 +341,7 @@ function createWindow() {
   win.on("closed", () => {
     mainWindow = undefined;
     destroyOverlay();
+    stopRequestWatch();
   });
 
   const wc = win.webContents;
@@ -341,6 +363,8 @@ function createWindow() {
       stopGamepad();
       // The new page knows nothing of the old call
       resetOverlay();
+      // and its recorder starts off, so nothing is collected for it
+      stopRequestWatch();
     }
   });
   wc.setWindowOpenHandler(({ url, frameName, referrer }) => {
@@ -352,7 +376,8 @@ function createWindow() {
     // handled below.
     if (
       url === "about:blank" &&
-      frameName.startsWith(STREAM_POPOUT_FRAME) &&
+      (frameName.startsWith(STREAM_POPOUT_FRAME) ||
+        frameName.startsWith(INSPECTOR_POPOUT_FRAME)) &&
       isServerUrl(wc.getURL()) &&
       isServerUrl(referrer.url)
     ) {
@@ -364,7 +389,10 @@ function createWindow() {
           resizable: true,
           fullscreenable: true,
           autoHideMenuBar: true,
-          backgroundColor: "#000000",
+          // black for streams, a neutral dark grey for the inspector
+          backgroundColor: frameName.startsWith(INSPECTOR_POPOUT_FRAME)
+            ? "#1a1a1a"
+            : "#000000",
           title: "AnyTalk",
           icon: nativeImage.createFromPath(
             join(
@@ -534,6 +562,29 @@ function registerIpc() {
     if (next.serverUrl !== previousUrl) loadApp();
     return next;
   });
+  handleApp(IPC.tlsKeyLogGet, () => getTlsKeyLogState());
+  handleApp(IPC.tlsKeyLogSet, async (enabled: unknown) => {
+    const result = await setTlsKeyLog(enabled === true, mainWindow);
+    if (result.restarting) {
+      // Set first so the close handler doesn't hide the window instead
+      quitting = true;
+      app.relaunch();
+      app.quit();
+    }
+    return result;
+  });
+  handleApp(IPC.tlsKeyLogReveal, () => revealTlsKeyLog());
+  // The page tells us when its recorder is on: only then are requests seen
+  handleApp(IPC.requestWatchSet, (on: unknown) =>
+    setRequestWatch(
+      on === true,
+      () => mainWindow?.webContents,
+      (batch) => {
+        if (mainWindow && !mainWindow.isDestroyed())
+          mainWindow.webContents.send(IPC.requestsSeen, batch);
+      },
+    ),
+  );
   handleApp(IPC.gamesGet, () => getRunningGames());
   handleApp(IPC.gamesFocused, () => getFocusedGame());
   // Not through handleApp: it needs the sender to grant user activation

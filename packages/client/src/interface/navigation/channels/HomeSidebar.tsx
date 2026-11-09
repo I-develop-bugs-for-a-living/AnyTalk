@@ -9,6 +9,7 @@ import { styled } from "styled-system/jsx";
 import { ConversationContextMenu } from "@revolt/app";
 import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
+import { countIncomingRequests } from "@revolt/common/lib/phoneTabs";
 import Instance from "@revolt/instance/Instance";
 import { TextWithEmoji } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
@@ -44,6 +45,12 @@ interface Props {
   openSavedNotes: (
     navigate?: ReturnType<typeof useNavigate>,
   ) => string | undefined;
+
+  /**
+   * Messages tab of the phone bottom bar: leaves out the Home and Servers
+   * buttons, which have their own tabs there
+   */
+  compact?: boolean;
 }
 
 /**
@@ -61,10 +68,9 @@ export const HomeSidebar = (props: Props) => {
 
   let scrollTargetElement!: HTMLDivElement;
 
-  const pendingRequests = createMemo(() => {
-    return client().users.filter((user) => user.relationship === "Incoming")
-      .length;
-  });
+  const pendingRequests = createMemo(() =>
+    countIncomingRequests(client().users),
+  );
 
   return (
     <SidebarBase
@@ -78,22 +84,24 @@ export const HomeSidebar = (props: Props) => {
             <Trans>Conversations</Trans>
           </Header>
 
-          <MenuButton
-            href="/app"
-            size="normal"
-            icon={<Symbol>home</Symbol>}
-            attention={
-              Instance.relPath(location.pathname) === "/app"
-                ? "selected"
-                : "normal"
-            }
-          >
-            <ButtonTitle>
-              <Trans>Home</Trans>
-            </ButtonTitle>
-          </MenuButton>
+          <Show when={!props.compact}>
+            <MenuButton
+              href="/app"
+              size="normal"
+              icon={<Symbol>home</Symbol>}
+              attention={
+                Instance.relPath(location.pathname) === "/app"
+                  ? "selected"
+                  : "normal"
+              }
+            >
+              <ButtonTitle>
+                <Trans>Home</Trans>
+              </ButtonTitle>
+            </MenuButton>
 
-          <div style={{ height: "5px" }} />
+            <div style={{ height: "5px" }} />
+          </Show>
 
           <MenuButton
             href="/friends"
@@ -116,22 +124,24 @@ export const HomeSidebar = (props: Props) => {
 
           <div style={{ height: "5px" }} />
 
-          <MenuButton
-            href="/servers"
-            size="normal"
-            icon={<Symbol>grid_view</Symbol>}
-            attention={
-              Instance.relPath(location.pathname) === "/servers"
-                ? "selected"
-                : "normal"
-            }
-          >
-            <ButtonTitle>
-              <Trans>Servers</Trans>
-            </ButtonTitle>
-          </MenuButton>
+          <Show when={!props.compact}>
+            <MenuButton
+              href="/servers"
+              size="normal"
+              icon={<Symbol>grid_view</Symbol>}
+              attention={
+                Instance.relPath(location.pathname) === "/servers"
+                  ? "selected"
+                  : "normal"
+              }
+            >
+              <ButtonTitle>
+                <Trans>Servers</Trans>
+              </ButtonTitle>
+            </MenuButton>
 
-          <div style={{ height: "5px" }} />
+            <div style={{ height: "5px" }} />
+          </Show>
 
           <Switch
             fallback={
@@ -216,7 +226,10 @@ export const HomeSidebar = (props: Props) => {
           </Deferred>
         </List>
       </div>
-      <VoiceStatusFooter />
+      {/* with the bottom bar only the Servers tab shows the call footer */}
+      <Show when={!props.compact}>
+        <VoiceStatusFooter />
+      </Show>
     </SidebarBase>
   );
 };

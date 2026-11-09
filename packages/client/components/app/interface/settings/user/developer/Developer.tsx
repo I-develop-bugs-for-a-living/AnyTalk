@@ -106,6 +106,19 @@ export function DeveloperSettings() {
         >
           <Trans>Compare recaps</Trans>
         </CategoryButton>
+        <CategoryButton
+          icon={<Symbol>lan</Symbol>}
+          action="chevron"
+          onClick={() => navigate("developer/traffic")}
+          description={
+            <Trans>
+              See what the app sends and receives, and export it to check
+              against Wireshark
+            </Trans>
+          }
+        >
+          <Trans>Network inspector</Trans>
+        </CategoryButton>
       </CategoryButton.Group>
     </Column>
   );

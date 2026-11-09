@@ -39,6 +39,7 @@ import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import MdAddCircle from "@material-design-icons/svg/filled/add_circle.svg?component-solid";
 import MdExplore from "@material-design-icons/svg/filled/explore.svg?component-solid";
 import MdGridView from "@material-design-icons/svg/filled/grid_view.svg?component-solid";
+import MdGroup from "@material-design-icons/svg/filled/group.svg?component-solid";
 import MdGroups3 from "@material-design-icons/svg/filled/groups_3.svg?component-solid";
 import MdHome from "@material-design-icons/svg/filled/home.svg?component-solid";
 import MdSettings from "@material-design-icons/svg/filled/settings.svg?component-solid";
@@ -147,9 +148,20 @@ const UpdateNoticeText = styled("div", {
 });
 
 /**
- * Home page
+ * Home page as a route (content pane)
  */
 export function HomePage() {
+  return <HomePageContent />;
+}
+
+/**
+ * Content of the home page
+ *
+ * `embedded` is the Home tab of the phone bottom bar: the page sits in the
+ * sidebar pane, so the header has no back arrow, a Friends button is added
+ * and every link also slides the content pane over the list.
+ */
+export function HomePageContent(props: { embedded?: boolean }) {
   const { openModal } = useModals();
   const navigate = useNavigate();
   const client = useClient();
@@ -157,6 +169,15 @@ export function HomePage() {
   const state = useState();
   const { t } = useLingui();
   const [updating, setUpdating] = createSignal(false);
+
+  /**
+   * Open a page; on phones this also brings the content pane forward
+   * @param path Route to open
+   */
+  const go = (path: string) => {
+    navigate(path);
+    state.appDrawer()?.setShown(true);
+  };
 
   // follow the desktop updater (safe to call repeatedly, no-op in the browser)
   onMount(watchUpdater);
@@ -178,9 +199,16 @@ export function HomePage() {
   return (
     <Base>
       <Header placement="primary">
-        <HeaderIcon>
+        <Show
+          when={props.embedded}
+          fallback={
+            <HeaderIcon>
+              <MdHome {...iconSize(22)} />
+            </HeaderIcon>
+          }
+        >
           <MdHome {...iconSize(22)} />
-        </HeaderIcon>
+        </Show>
         <Trans>Home</Trans>
       </Header>
       <div use:scrollable={{ class: content() }}>
@@ -267,7 +295,7 @@ export function HomePage() {
             <Switch fallback={null}>
               <Match when={showLoungeButton && isInLounge}>
                 <CategoryButton
-                  onClick={() => navigate("/server/01F7ZSBSFHQ8TA81725KQCSDDP")}
+                  onClick={() => go("/server/01F7ZSBSFHQ8TA81725KQCSDDP")}
                   description={
                     <Trans>
                       You can report issues and discuss improvements with us
@@ -305,7 +333,7 @@ export function HomePage() {
           <SeparatedColumn>
             <Show when={instance.isStoat}>
               <CategoryButton
-                onClick={() => navigate("/discover")}
+                onClick={() => go("/discover")}
                 description={
                   <Trans>
                     Find a community based on your hobbies or interests.
@@ -316,8 +344,19 @@ export function HomePage() {
                 <Trans>Discover AnyTalk</Trans>
               </CategoryButton>
             </Show>
+            <Show when={props.embedded}>
+              <CategoryButton
+                onClick={() => go("/friends")}
+                description={
+                  <Trans>See your friends and answer friend requests.</Trans>
+                }
+                icon={<MdGroup />}
+              >
+                <Trans>Friends</Trans>
+              </CategoryButton>
+            </Show>
             <CategoryButton
-              onClick={() => navigate("/servers")}
+              onClick={() => go("/servers")}
               description={<Trans>See all your servers at a glance.</Trans>}
               icon={<MdGridView />}
             >

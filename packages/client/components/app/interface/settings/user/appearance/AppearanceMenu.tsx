@@ -398,6 +398,24 @@ export function AppearanceMenu() {
 
       <Column>
         <Text class="title" size="small">
+          <Trans>Navigation</Trans>
+        </Text>
+
+        <Checkbox
+          checked={state.settings.getValue("appearance:bottom_nav")}
+          onChange={(event) =>
+            state.settings.setValue(
+              "appearance:bottom_nav",
+              event.currentTarget.checked,
+            )
+          }
+        >
+          <Trans>Bottom navigation bar on phones</Trans>
+        </Checkbox>
+      </Column>
+
+      <Column>
+        <Text class="title" size="small">
           <Trans>Chat Input</Trans>
         </Text>
 
