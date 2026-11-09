@@ -176,9 +176,11 @@ export default function FlowQrLogin() {
     setApproved({ session });
     try {
       const account = await controller.fetchQrAccount(session.token);
-      if (alive) setApproved({ session, account });
+      if (alive && unconfirmed === session) setApproved({ session, account });
     } catch {
-      if (alive) setApproved({ session, failed: true });
+      if (alive && unconfirmed === session) {
+        setApproved({ session, failed: true });
+      }
     }
   }
 
@@ -204,21 +206,40 @@ export default function FlowQrLogin() {
     if (alive) start();
   }
 
-  /** The page is closing: revoke with a request that outlives it */
-  function onPageHide() {
+  /**
+   * The page is closing: revoke with a request that outlives it. A page that
+   * goes into the back/forward cache may come back, but it may also be evicted
+   * without running any code, so the session is still revoked now and the
+   * flow restarts on `pageshow`.
+   * @param event Page transition event
+   */
+  function onPageHide(event: PageTransitionEvent) {
     if (unconfirmed && !proceeded) {
       controller.revokeQrSessionOnExit(unconfirmed);
+      unconfirmed = undefined;
+      if (event.persisted) setApproved(undefined);
     }
+  }
+
+  /**
+   * The page came back from the back/forward cache: the code may be stale and
+   * a session shown for confirmation was revoked, so start over
+   * @param event Page transition event
+   */
+  function onPageShow(event: PageTransitionEvent) {
+    if (event.persisted && !proceeded) start();
   }
 
   onMount(() => {
     window.addEventListener("pagehide", onPageHide);
+    window.addEventListener("pageshow", onPageShow);
     start();
   });
   onCleanup(() => {
     alive = false;
     clearTimeout(timer);
     window.removeEventListener("pagehide", onPageHide);
+    window.removeEventListener("pageshow", onPageShow);
     // left the screen without confirming
     if (unconfirmed && !proceeded) {
       controller.cancelQrSession(unconfirmed);
