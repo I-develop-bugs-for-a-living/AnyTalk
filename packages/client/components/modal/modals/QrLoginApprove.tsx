@@ -14,11 +14,11 @@ import { useClient } from "@revolt/client";
 import {
   type QrInfo,
   QrApiError,
-  approveMethod,
   approveQrRequest,
   denyQrRequest,
   describeUserAgent,
   getQrInfo,
+  shouldDenyOnClose,
 } from "@revolt/client/qrApi";
 import {
   Button,
@@ -86,13 +86,6 @@ export function QrLoginApproveModal(
    */
   function describe(err: unknown, approving: boolean): string {
     const status = err instanceof QrApiError ? err.status : 0;
-    if (
-      status === 400 &&
-      err instanceof QrApiError &&
-      err.type === "InvalidOperation"
-    ) {
-      return t`This request cannot be approved right now. Ask the other device to show a new QR code.`;
-    }
     if (status === 404) {
       return t`This login request has expired or was already answered. Ask the other device to show a new QR code.`;
     }
@@ -105,6 +98,7 @@ export function QrLoginApproveModal(
       return t`Too many wrong codes. Wait a while before trying again.`;
     }
     if (status === 400) {
+      // includes InvalidOperation: the request is in the wrong state
       return t`This request cannot be approved right now. Ask the other device to show a new QR code.`;
     }
     if (status === 429) {
@@ -112,6 +106,9 @@ export function QrLoginApproveModal(
     }
     return t`Something went wrong. Check your connection and try again.`;
   }
+
+  // Set once the user approved or denied, so closing does not deny again
+  let answered = false;
 
   onCleanup(() => setCode(""));
 
@@ -125,8 +122,7 @@ export function QrLoginApproveModal(
 
   /** Proof the approval needs, if any */
   const method = () => {
-    const current = info();
-    return current ? approveMethod(current) : undefined;
+    return info()?.method;
   };
 
   /** Approve the request, with the entered code if needed */
@@ -151,6 +147,7 @@ export function QrLoginApproveModal(
       );
       // Refresh the session list in case settings are open
       client().sessions.fetch();
+      answered = true;
       props.onClose();
     } catch (err) {
       if (err instanceof QrApiError && err.status === 404) {
@@ -170,6 +167,7 @@ export function QrLoginApproveModal(
   async function deny() {
     if (busy()) return;
     setBusy(true);
+    answered = true;
     try {
       await denyQrRequest(client().api, props.id);
     } catch {
@@ -178,10 +176,21 @@ export function QrLoginApproveModal(
     props.onClose();
   }
 
+  /** Dismissed (Escape, backdrop, Close): free the other device if it waits */
+  function dismiss() {
+    if (busy()) return;
+    if (shouldDenyOnClose(answered, !!loadError())) {
+      answered = true;
+      // fire and forget: the request expires on its own if this fails
+      denyQrRequest(client().api, props.id).catch(() => {});
+    }
+    props.onClose();
+  }
+
   return (
     <Dialog
       show={props.show}
-      onClose={() => (busy() ? undefined : props.onClose())}
+      onClose={dismiss}
       title={<Trans>Log in a new device?</Trans>}
       icon={<Symbol>qr_code_scanner</Symbol>}
       actions={

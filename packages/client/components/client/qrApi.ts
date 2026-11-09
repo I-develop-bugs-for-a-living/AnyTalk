@@ -33,14 +33,6 @@ export type QrApproveProof =
   | { totp_code: string }
   | { recovery_code: string };
 
-/**
- * Which proof an approval needs
- * @param info Info about the request
- */
-export function approveMethod(info: QrInfo): QrApproveMethod | undefined {
-  return info.method;
-}
-
 /** What the approving device learns about a request */
 export type QrInfo = {
   friendly_name?: string;
@@ -178,6 +170,17 @@ export function approveQrRequest(
 export function denyQrRequest(api: API.API, id: string) {
   assertId(id);
   return qrRequest<void>(api, "POST", `/${id}/deny`, {});
+}
+
+/**
+ * Whether closing the approve dialog should deny the request. A request that
+ * was neither answered nor already gone would otherwise stay "scanned" and keep
+ * the new device waiting until it expires.
+ * @param answered The user approved or denied it already
+ * @param gone The request failed to load or has expired
+ */
+export function shouldDenyOnClose(answered: boolean, gone: boolean): boolean {
+  return !answered && !gone;
 }
 
 /**
