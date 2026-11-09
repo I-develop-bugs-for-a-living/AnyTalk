@@ -44,6 +44,10 @@ msgstr "dddd [à] LT"
 msgid ":{0}: from {1}"
 msgstr ":{0}: de {1}"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "\"Copy Wireshark filter\" next to a server above puts a display filter for it on the clipboard. To line up times, set View, Time Display Format, UTC Date and Time of Day in Wireshark and compare with the absolute times in the exports. Browsers can hide the server name (Encrypted Client Hello, QUIC), so the filter may miss such connections."
+msgstr "« Copier le filtre Wireshark » à côté d'un serveur ci-dessus place un filtre d'affichage correspondant dans le presse-papiers. Pour aligner les heures, choisissez dans Wireshark View → Time Display Format → UTC Date and Time of Day, puis comparez avec les heures absolues des exports. Les navigateurs peuvent masquer le nom du serveur (Encrypted Client Hello, QUIC), le filtre peut donc manquer de telles connexions."
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "(changes are being saved…)"
 msgstr "(les modifications sont en cours d'enregistrement…)"
@@ -107,6 +111,11 @@ msgstr "{0, plural, one {# membre} many {# membres} other {# membres}}"
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
 msgstr "{0, plural, one {# nouvelle mention} many {# nouvelles mentions} other {# nouvelles mentions}}"
+
+#. placeholder {0}: droppedCount()
+#: components/app/interface/settings/user/developer/traffic/DroppedNotice.tsx
+msgid "{0, plural, one {# older entry was dropped to stay within the log's limits} other {# older entries were dropped to stay within the log's limits}}"
+msgstr "{0, plural, one {# ancienne entrée a été supprimée pour respecter les limites du journal} many {# anciennes entrées ont été supprimées pour respecter les limites du journal} other {# anciennes entrées ont été supprimées pour respecter les limites du journal}}"
 
 #. placeholder {0}: channel.voiceParticipants.size
 #: src/interface/home/FriendsOverview.tsx
@@ -738,6 +747,10 @@ msgstr "Tous les récapitulatifs"
 msgid "All roles have overrides."
 msgstr "Tous les rôles disposent de permissions spécifiques."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "All services"
+msgstr "Tous les services"
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "All Systems Operational"
 msgstr "Tous les systèmes sont opérationnels"
@@ -864,6 +877,10 @@ msgstr "AnyTalk démarrera dans la barre de tâches."
 #: src/AndroidNag.tsx
 msgid "AnyTalk works best as an app"
 msgstr "AnyTalk fonctionne mieux en tant qu'application"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "API"
+msgstr "API"
 
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -1208,6 +1225,14 @@ msgstr "Les clés de chiffrement des appels (DTLS-SRTP) ne sont pas dans ce fich
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Call encryption couldn't be loaded. Try reloading the page."
 msgstr "Le chiffrement des appels n'a pas pu être chargé. Essayez de recharger la page."
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Call media"
+msgstr "Média d'appel"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Call signalling"
+msgstr "Signalisation d'appel"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
@@ -1793,6 +1818,16 @@ msgstr "Copier l'ID de l'utilisateur"
 msgid "Copy webhook URL"
 msgstr "Copier l'URL du webhook"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Copy Wireshark filter"
+msgstr "Copier le filtre Wireshark"
+
+#. placeholder {0}: host()
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Copy Wireshark filter for {0}"
+msgstr "Copier le filtre Wireshark pour {0}"
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Could not change the key log. Try again."
 msgstr "Impossible de modifier le journal des clés. Réessayez."
@@ -1804,6 +1839,15 @@ msgstr "Impossible de modifier le journal des clés. Réessayez."
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Could not check which account this is. Cancel and try again."
 msgstr "Impossible de vérifier de quel compte il s'agit. Annulez et réessayez."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Could not copy the entry"
+msgstr "Impossible de copier l'entrée"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not copy the filter"
+msgstr "Impossible de copier le filtre"
 
 #: components/i18n/errors.tsx
 msgid "Could not find what you requested."
@@ -2531,6 +2575,10 @@ msgstr "Effectif <0/> (<1/>)"
 msgid "Email"
 msgstr "Adresse e-mail"
 
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Embeds proxy"
+msgstr "Proxy d'aperçus"
+
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Emoji"
 msgstr "Émoji"
@@ -2667,6 +2715,10 @@ msgstr "Bande passante d'envoi estimée"
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Event"
 msgstr "Événement"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Events"
+msgstr "Événements"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
@@ -2898,6 +2950,10 @@ msgstr "Téléchargez-le sur Google Play"
 #: components/state/stores/Experiments.ts
 msgid "GIF Picker Placeholder"
 msgstr "Espace réservé du sélecteur de GIF"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "GIF provider"
+msgstr "Fournisseur de GIF"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Gifbox is our own GIF service, so you can keep sharing GIFs right here on AnyTalk."
@@ -4277,8 +4333,12 @@ msgid "Off"
 msgstr "Désactivé"
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
-msgstr "Désactivé : les jetons, mots de passe et clés sont masqués. Se réinitialise au rechargement."
+#~ msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
+#~ msgstr "Désactivé : les jetons, mots de passe et clés sont masqués. Se réinitialise au rechargement."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Off: tokens, passwords, keys and your own IP addresses are hidden. Resets when you reload."
+msgstr "Désactivé : les jetons, mots de passe, clés et vos propres adresses IP sont masqués. Réinitialisé au rechargement."
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Offers to stream the games you play during a call. Detection happens only on this computer and nothing is sent."
@@ -4452,6 +4512,7 @@ msgid "Opening another stream while watching one shows them side by side. When o
 msgstr "Ouvrir un autre stream pendant que vous en regardez un les affiche côte à côte. Désactivé, il remplace le stream que vous regardiez."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
 #: components/modal/modals/ReportContent.tsx
 msgid "Other"
 msgstr "Autre"
@@ -5699,9 +5760,17 @@ msgstr "Les serveurs que vous rejoignez apparaissent ici."
 msgid "Servers, unread messages"
 msgstr "Serveurs, messages non lus"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Service"
+msgstr "Service"
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
-msgstr "Les jetons de session, mots de passe et clés d'appel apparaîtront à l'écran et dans les exports. Toute personne qui les voit ou les obtient pourrait se connecter à votre place. Activez cette option uniquement pour déboguer et ne partagez pas les exports."
+#~ msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+#~ msgstr "Les jetons de session, mots de passe et clés d'appel apparaîtront à l'écran et dans les exports. Toute personne qui les voit ou les obtient pourrait se connecter à votre place. Activez cette option uniquement pour déboguer et ne partagez pas les exports."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Session tokens, passwords, call keys and your own IP addresses will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+msgstr "Les jetons de session, mots de passe, clés d'appel et vos propres adresses IP apparaîtront à l'écran et dans les exports. Quiconque les voit ou les obtient pourrait se connecter à votre place. Activez cette option uniquement pour déboguer et ne partagez pas les exports."
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5802,6 +5871,10 @@ msgstr "Afficher les statistiques en direct sur les vignettes vidéo d'appel"
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Show only"
 msgstr "Afficher uniquement"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show only service"
+msgstr "Afficher uniquement le service"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Show Others"
@@ -6312,6 +6385,10 @@ msgstr "Le fichier \"{0}\" ({fileSize}) dépasse la taille maximale autorisée d
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The first version hasn't been published. Check back soon."
 msgstr "La première version n'a pas encore été publiée. Revenez bientôt."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "The HAR file holds requests, files and WebSocket connections. Call entries (route, encryption, byte counts, data messages) are not HTTP, so they are only in the JSON export. Both exports give every entry an absolute time (UTC, to the millisecond) to line up with a packet capture."
+msgstr "Le fichier HAR contient les requêtes, les fichiers et les connexions WebSocket. Les entrées d'appel (route, chiffrement, nombre d'octets, messages de données) ne sont pas du HTTP, elles figurent donc uniquement dans l'export JSON. Les deux exports donnent à chaque entrée une heure absolue (UTC, à la milliseconde) pour la comparer à une capture de paquets."
 
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
@@ -6886,6 +6963,10 @@ msgstr "Téléverser sur Gifbox"
 msgid "Uploading file `{fileName}`... {0}%"
 msgstr "Envoi du fichier `{fileName}`... {0} %"
 
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Uploads"
+msgstr "Envois"
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "URL"
 msgstr "URL"
@@ -7237,6 +7318,10 @@ msgstr "Tout le serveur"
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "Installateur Windows"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Wireshark filter copied"
+msgstr "Filtre Wireshark copié"
 
 #. placeholder {0}: names.join(", ")
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx

@@ -44,6 +44,10 @@ msgstr "dddd [at] LT"
 msgid ":{0}: from {1}"
 msgstr ":{0}: fwom {1}"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "\"Copy Wireshark filter\" next to a server above puts a display filter for it on the clipboard. To line up times, set View, Time Display Format, UTC Date and Time of Day in Wireshark and compare with the absolute times in the exports. Browsers can hide the server name (Encrypted Client Hello, QUIC), so the filter may miss such connections."
+msgstr ""
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "(changes are being saved…)"
 msgstr "(Changes awe being sawved...)"
@@ -107,6 +111,11 @@ msgstr "{0, plural, one {# Membew} other {# Membews}}"
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
 msgstr "{0, plural, one {# nyew mention} other {# nyew mentions}}"
+
+#. placeholder {0}: droppedCount()
+#: components/app/interface/settings/user/developer/traffic/DroppedNotice.tsx
+msgid "{0, plural, one {# older entry was dropped to stay within the log's limits} other {# older entries were dropped to stay within the log's limits}}"
+msgstr ""
 
 #. placeholder {0}: channel.voiceParticipants.size
 #: src/interface/home/FriendsOverview.tsx
@@ -761,6 +770,10 @@ msgstr "Aww wecaps"
 msgid "All roles have overrides."
 msgstr "Aww wowes have ovewwides."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "All services"
+msgstr ""
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "All Systems Operational"
 msgstr "Aww Systems Opewationyaw"
@@ -887,6 +900,10 @@ msgstr "AnyTalk wiww stawt in the system tway."
 #: src/AndroidNag.tsx
 msgid "AnyTalk works best as an app"
 msgstr "AnyTalk wowks best as an app"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "API"
+msgstr ""
 
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -1237,6 +1254,14 @@ msgstr ""
 
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Call encryption couldn't be loaded. Try reloading the page."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Call media"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Call signalling"
 msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
@@ -1827,6 +1852,16 @@ msgstr "Cowopy uwuser ID"
 msgid "Copy webhook URL"
 msgstr "Copy webhook URL"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Copy Wireshark filter"
+msgstr ""
+
+#. placeholder {0}: host()
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Copy Wireshark filter for {0}"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Could not change the key log. Try again."
 msgstr ""
@@ -1837,6 +1872,15 @@ msgstr ""
 
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Could not check which account this is. Cancel and try again."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Could not copy the entry"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not copy the filter"
 msgstr ""
 
 #: components/i18n/errors.tsx
@@ -2577,6 +2621,10 @@ msgstr "Effective <0/> (<1/>)"
 msgid "Email"
 msgstr "Emaiw"
 
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Embeds proxy"
+msgstr ""
+
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Emoji"
 msgstr "Emoji"
@@ -2712,6 +2760,10 @@ msgstr "Estimated upwoad bandwidth"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Event"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Events"
 msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
@@ -2944,6 +2996,10 @@ msgstr "Get it on Googwe Pway"
 #: components/state/stores/Experiments.ts
 msgid "GIF Picker Placeholder"
 msgstr "GIF Pickew Pwacehowdew"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "GIF provider"
+msgstr ""
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Gifbox is our own GIF service, so you can keep sharing GIFs right here on AnyTalk."
@@ -4330,7 +4386,11 @@ msgid "Off"
 msgstr "Off"
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
+#~ msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Off: tokens, passwords, keys and your own IP addresses are hidden. Resets when you reload."
 msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
@@ -4505,6 +4565,7 @@ msgid "Opening another stream while watching one shows them side by side. When o
 msgstr "Openying anyothew stweam whiwe watching onye shows them side by side. When off, it wepwaces the stweam you wewe watching."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
 #: components/modal/modals/ReportContent.tsx
 msgid "Other"
 msgstr "Othew"
@@ -5762,8 +5823,16 @@ msgstr ""
 msgid "Servers, unread messages"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Service"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+#~ msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Session tokens, passwords, call keys and your own IP addresses will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
 msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
@@ -5864,6 +5933,10 @@ msgstr "Show wive statistics on caww video tiwes"
 
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Show only"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show only service"
 msgstr ""
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
@@ -6381,6 +6454,10 @@ msgstr "The fiwe \"{0}\" ({fileSize}) exceeds the maximum size wimit of {maxSize
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The first version hasn't been published. Check back soon."
 msgstr "The fiwst vewsion hasn't been pubwished. Check back soon."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "The HAR file holds requests, files and WebSocket connections. Call entries (route, encryption, byte counts, data messages) are not HTTP, so they are only in the JSON export. Both exports give every entry an absolute time (UTC, to the millisecond) to line up with a packet capture."
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
@@ -6955,6 +7032,10 @@ msgstr "Upwoad to Gifbox"
 msgid "Uploading file `{fileName}`... {0}%"
 msgstr "Upwoading fiwe `{fileName}`... {0}%"
 
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Uploads"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "URL"
 msgstr ""
@@ -7314,6 +7395,10 @@ msgstr ""
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "Windows instawwew"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Wireshark filter copied"
+msgstr ""
 
 #. placeholder {0}: names.join(", ")
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx

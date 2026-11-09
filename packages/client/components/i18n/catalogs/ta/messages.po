@@ -44,6 +44,10 @@ msgstr "dddd LT"
 msgid ":{0}: from {1}"
 msgstr ":{0}: {1} இலிருந்து"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "\"Copy Wireshark filter\" next to a server above puts a display filter for it on the clipboard. To line up times, set View, Time Display Format, UTC Date and Time of Day in Wireshark and compare with the absolute times in the exports. Browsers can hide the server name (Encrypted Client Hello, QUIC), so the filter may miss such connections."
+msgstr ""
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "(changes are being saved…)"
 msgstr "(மாற்றங்கள் சேமிக்கப்படுகின்றன…)"
@@ -107,6 +111,11 @@ msgstr "{0, plural, one {# உறுப்பினர்} other {# உறுப
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
 msgstr "{0, plural, one {# புதிய குறிப்பு} other {# புதிய குறிப்புகள்}}"
+
+#. placeholder {0}: droppedCount()
+#: components/app/interface/settings/user/developer/traffic/DroppedNotice.tsx
+msgid "{0, plural, one {# older entry was dropped to stay within the log's limits} other {# older entries were dropped to stay within the log's limits}}"
+msgstr ""
 
 #. placeholder {0}: channel.voiceParticipants.size
 #: src/interface/home/FriendsOverview.tsx
@@ -761,6 +770,10 @@ msgstr "அனைத்து சுருக்கங்களும்"
 msgid "All roles have overrides."
 msgstr "அனைத்து பாத்திரங்களுக்கும் மேலெழுதல்கள் உள்ளன."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "All services"
+msgstr ""
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "All Systems Operational"
 msgstr "அனைத்து அமைப்புகளும் இயங்குகின்றன"
@@ -887,6 +900,10 @@ msgstr "AnyTalk சிஸ்டம் ட்ரேயில் தொடங்�
 #: src/AndroidNag.tsx
 msgid "AnyTalk works best as an app"
 msgstr "AnyTalk ஒரு பயன்பாடாக சிறப்பாக வேலை செய்கிறது"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "API"
+msgstr ""
 
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -1238,6 +1255,14 @@ msgstr ""
 
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Call encryption couldn't be loaded. Try reloading the page."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Call media"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Call signalling"
 msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
@@ -1828,6 +1853,16 @@ msgstr "பயனர் ஐடியை நகலெடு"
 msgid "Copy webhook URL"
 msgstr "வெப்ஹுக் URL ஐ நகலெடு"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Copy Wireshark filter"
+msgstr ""
+
+#. placeholder {0}: host()
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Copy Wireshark filter for {0}"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Could not change the key log. Try again."
 msgstr ""
@@ -1838,6 +1873,15 @@ msgstr ""
 
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Could not check which account this is. Cancel and try again."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Could not copy the entry"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not copy the filter"
 msgstr ""
 
 #: components/i18n/errors.tsx
@@ -2580,6 +2624,10 @@ msgstr "செயல்பாட்டில் <0/> (<1/>)"
 msgid "Email"
 msgstr "மின்னஞ்சல்"
 
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Embeds proxy"
+msgstr ""
+
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Emoji"
 msgstr "எமோஜி"
@@ -2715,6 +2763,10 @@ msgstr "மதிப்பிடப்பட்ட பதிவேற்ற அ�
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Event"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Events"
 msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
@@ -2947,6 +2999,10 @@ msgstr "Google Play இல் பெறுங்கள்"
 #: components/state/stores/Experiments.ts
 msgid "GIF Picker Placeholder"
 msgstr "GIF தேர்வி இடஒதுக்கீடு"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "GIF provider"
+msgstr ""
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Gifbox is our own GIF service, so you can keep sharing GIFs right here on AnyTalk."
@@ -4335,7 +4391,11 @@ msgid "Off"
 msgstr "அஃப்"
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
+#~ msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Off: tokens, passwords, keys and your own IP addresses are hidden. Resets when you reload."
 msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
@@ -4510,6 +4570,7 @@ msgid "Opening another stream while watching one shows them side by side. When o
 msgstr "ஒன்றைப் பார்க்கும்போது மற்றொரு ஸ்ட்ரீமைத் திறந்தால் அவை அருகருகே காட்டப்படும். முடக்கினால், பார்த்துக்கொண்டிருந்த ஸ்ட்ரீமை மாற்றிவிடும்."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
 #: components/modal/modals/ReportContent.tsx
 msgid "Other"
 msgstr "மற்றவை"
@@ -5769,8 +5830,16 @@ msgstr ""
 msgid "Servers, unread messages"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Service"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+#~ msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Session tokens, passwords, call keys and your own IP addresses will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
 msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
@@ -5871,6 +5940,10 @@ msgstr "அழைப்பு வீடியோ ஓடுகளில் நே
 
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Show only"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show only service"
 msgstr ""
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
@@ -6390,6 +6463,10 @@ msgstr "\"{0}\" கோப்பு ({fileSize}) அதிகபட்ச அள�
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The first version hasn't been published. Check back soon."
 msgstr "முதல் பதிப்பு இன்னும் வெளியிடப்படவில்லை. விரைவில் மீண்டும் பாருங்கள்."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "The HAR file holds requests, files and WebSocket connections. Call entries (route, encryption, byte counts, data messages) are not HTTP, so they are only in the JSON export. Both exports give every entry an absolute time (UTC, to the millisecond) to line up with a packet capture."
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
@@ -6964,6 +7041,10 @@ msgstr "Gifbox இல் பதிவேற்று"
 msgid "Uploading file `{fileName}`... {0}%"
 msgstr "`{fileName}` கோப்பைப் பதிவேற்றுகிறது... {0}%"
 
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Uploads"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "URL"
 msgstr ""
@@ -7326,6 +7407,10 @@ msgstr ""
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "Windows நிறுவி"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Wireshark filter copied"
+msgstr ""
 
 #. placeholder {0}: names.join(", ")
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx

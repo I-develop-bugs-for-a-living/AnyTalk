@@ -44,6 +44,10 @@ msgstr "dddd [ᔑℸ] LT"
 msgid ":{0}: from {1}"
 msgstr ":{0}: ⎓∷𝙹ᒲ {1}"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "\"Copy Wireshark filter\" next to a server above puts a display filter for it on the clipboard. To line up times, set View, Time Display Format, UTC Date and Time of Day in Wireshark and compare with the absolute times in the exports. Browsers can hide the server name (Encrypted Client Hello, QUIC), so the filter may miss such connections."
+msgstr "\"ᓵ𝙹!¡|| ∴╎∷ᒷᓭ⍑ᔑ∷ꖌ ⎓╎ꖎℸᒷ∷\" リᒷ/ℸ ℸ𝙹 ᔑ ᓭᒷ∷⍊ᒷ∷ ᔑʖ𝙹⍊ᒷ !¡⚍ℸᓭ ᔑ ↸╎ᓭ!¡ꖎᔑ|| ⎓╎ꖎℸᒷ∷ ⎓𝙹∷ ╎ℸ 𝙹リ ℸ⍑ᒷ ᓵꖎ╎!¡ʖ𝙹ᔑ∷↸. ℸ𝙹 ꖎ╎リᒷ ⚍!¡ ℸ╎ᒲᒷᓭ, ᓭᒷℸ ⍊╎ᒷ∴, ℸ╎ᒲᒷ ↸╎ᓭ!¡ꖎᔑ|| ⎓𝙹∷ᒲᔑℸ, ⚍ℸᓵ ↸ᔑℸᒷ ᔑリ↸ ℸ╎ᒲᒷ 𝙹⎓ ↸ᔑ|| ╎リ ∴╎∷ᒷᓭ⍑ᔑ∷ꖌ ᔑリ↸ ᓵ𝙹ᒲ!¡ᔑ∷ᒷ ∴╎ℸ⍑ ℸ⍑ᒷ ᔑʖᓭ𝙹ꖎ⚍ℸᒷ ℸ╎ᒲᒷᓭ ╎リ ℸ⍑ᒷ ᒷ/!¡𝙹∷ℸᓭ. ʖ∷𝙹∴ᓭᒷ∷ᓭ ᓵᔑリ ⍑╎↸ᒷ ℸ⍑ᒷ ᓭᒷ∷⍊ᒷ∷ リᔑᒲᒷ (ᒷリᓵ∷||!¡ℸᒷ↸ ᓵꖎ╎ᒷリℸ ⍑ᒷꖎꖎ𝙹, ᑑ⚍╎ᓵ), ᓭ𝙹 ℸ⍑ᒷ ⎓╎ꖎℸᒷ∷ ᒲᔑ|| ᒲ╎ᓭᓭ ᓭ⚍ᓵ⍑ ᓵ𝙹リリᒷᓵℸ╎𝙹リᓭ."
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "(changes are being saved…)"
 msgstr "(ᓵ⍑ᔑリ⊣ᒷᓭ ᔑ∷ᒷ ʖᒷ╎リ⊣ ᓭᔑ⍊ᒷ↸…)"
@@ -107,6 +111,11 @@ msgstr "{0, plural, one {# ᒲᒷᒲʖᒷ∷} other {# ᒲᒷᒲʖᒷ∷ᓭ}}"
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
 msgstr "{0, plural, one {# リᒷ∴ ᒲᒷリℸ╎𝙹リ} other {# リᒷ∴ ᒲᒷリℸ╎𝙹リᓭ}}"
+
+#. placeholder {0}: droppedCount()
+#: components/app/interface/settings/user/developer/traffic/DroppedNotice.tsx
+msgid "{0, plural, one {# older entry was dropped to stay within the log's limits} other {# older entries were dropped to stay within the log's limits}}"
+msgstr "{0, plural, one {# 𝙹ꖎ↸ᒷ∷ ᒷリℸ∷|| ∴ᔑᓭ ↸∷𝙹!¡!¡ᒷ↸ ℸ𝙹 ᓭℸᔑ|| ∴╎ℸ⍑╎リ ℸ⍑ᒷ ꖎ𝙹⊣'ᓭ ꖎ╎ᒲ╎ℸᓭ} other {# 𝙹ꖎ↸ᒷ∷ ᒷリℸ∷╎ᒷᓭ ∴ᒷ∷ᒷ ↸∷𝙹!¡!¡ᒷ↸ ℸ𝙹 ᓭℸᔑ|| ∴╎ℸ⍑╎リ ℸ⍑ᒷ ꖎ𝙹⊣'ᓭ ꖎ╎ᒲ╎ℸᓭ}}"
 
 #. placeholder {0}: channel.voiceParticipants.size
 #: src/interface/home/FriendsOverview.tsx
@@ -761,6 +770,10 @@ msgstr "ᔑꖎꖎ ∷ᒷᓵᔑ!¡ᓭ"
 msgid "All roles have overrides."
 msgstr "ᔑꖎꖎ ∷𝙹ꖎᒷᓭ ⍑ᔑ⍊ᒷ 𝙹⍊ᒷ∷∷╎↸ᒷᓭ."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "All services"
+msgstr "ᔑꖎꖎ ᓭᒷ∷⍊╎ᓵᒷᓭ"
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "All Systems Operational"
 msgstr "ᔑꖎꖎ ᓭ||ᓭℸᒷᒲᓭ 𝙹!¡ᒷ∷ᔑℸ╎𝙹リᔑꖎ"
@@ -887,6 +900,10 @@ msgstr "ᔑリ||ℸᔑꖎꖌ ∴╎ꖎꖎ ᓭℸᔑ∷ℸ ╎リ ℸ⍑ᒷ ᓭ||
 #: src/AndroidNag.tsx
 msgid "AnyTalk works best as an app"
 msgstr "ᔑリ||ℸᔑꖎꖌ ∴𝙹∷ꖌᓭ ʖᒷᓭℸ ᔑᓭ ᔑリ ᔑ!¡!¡"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "API"
+msgstr "ᔑ!¡╎"
 
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -1239,6 +1256,14 @@ msgstr "ᓵᔑꖎꖎ ᒷリᓵ∷||!¡ℸ╎𝙹リ (↸ℸꖎᓭ-ᓭ∷ℸ!¡) 
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Call encryption couldn't be loaded. Try reloading the page."
 msgstr "ᓵᔑꖎꖎ ᒷリᓵ∷||!¡ℸ╎𝙹リ ᓵ𝙹⚍ꖎ↸リ'ℸ ʖᒷ ꖎ𝙹ᔑ↸ᒷ↸. ℸ∷|| ∷ᒷꖎ𝙹ᔑ↸╎リ⊣ ℸ⍑ᒷ !¡ᔑ⊣ᒷ."
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Call media"
+msgstr "ᓵᔑꖎꖎ ᒲᒷ↸╎ᔑ"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Call signalling"
+msgstr "ᓵᔑꖎꖎ ᓭ╎⊣リᔑꖎꖎ╎リ⊣"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
@@ -1828,6 +1853,16 @@ msgstr "ᓵ𝙹!¡|| ⚍ᓭᒷ∷ ╎↸"
 msgid "Copy webhook URL"
 msgstr "ᓵ𝙹!¡|| ∴ᒷʖ⍑𝙹𝙹ꖌ ⚍∷ꖎ"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Copy Wireshark filter"
+msgstr "ᓵ𝙹!¡|| ∴╎∷ᒷᓭ⍑ᔑ∷ꖌ ⎓╎ꖎℸᒷ∷"
+
+#. placeholder {0}: host()
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Copy Wireshark filter for {0}"
+msgstr "ᓵ𝙹!¡|| ∴╎∷ᒷᓭ⍑ᔑ∷ꖌ ⎓╎ꖎℸᒷ∷ ⎓𝙹∷ {0}"
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Could not change the key log. Try again."
 msgstr "ᓵ𝙹⚍ꖎ↸ リ𝙹ℸ ᓵ⍑ᔑリ⊣ᒷ ℸ⍑ᒷ ꖌᒷ|| ꖎ𝙹⊣. ℸ∷|| ᔑ⊣ᔑ╎リ."
@@ -1839,6 +1874,15 @@ msgstr "ᓵ𝙹⚍ꖎ↸ リ𝙹ℸ ᓵ⍑ᔑリ⊣ᒷ ℸ⍑ᒷ ꖌᒷ|| ꖎ�
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Could not check which account this is. Cancel and try again."
 msgstr "ᓵ𝙹⚍ꖎ↸ リ𝙹ℸ ᓵ⍑ᒷᓵꖌ ∴⍑╎ᓵ⍑ ᔑᓵᓵ𝙹⚍リℸ ℸ⍑╎ᓭ ╎ᓭ. ᓵᔑリᓵᒷꖎ ᔑリ↸ ℸ∷|| ᔑ⊣ᔑ╎リ."
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Could not copy the entry"
+msgstr "ᓵ𝙹⚍ꖎ↸ リ𝙹ℸ ᓵ𝙹!¡|| ℸ⍑ᒷ ᒷリℸ∷||"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not copy the filter"
+msgstr "ᓵ𝙹⚍ꖎ↸ リ𝙹ℸ ᓵ𝙹!¡|| ℸ⍑ᒷ ⎓╎ꖎℸᒷ∷"
 
 #: components/i18n/errors.tsx
 msgid "Could not find what you requested."
@@ -2580,6 +2624,10 @@ msgstr "ᒷ⎓⎓ᒷᓵℸ╎⍊ᒷ <0/> (<1/>)"
 msgid "Email"
 msgstr "ᒷᒲᔑ╎ꖎ"
 
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Embeds proxy"
+msgstr "ᒷᒲʖᒷ↸ᓭ !¡∷𝙹/||"
+
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Emoji"
 msgstr "ᒷᒲ𝙹⋮╎"
@@ -2716,6 +2764,10 @@ msgstr "ᒷᓭℸ╎ᒲᔑℸᒷ↸ ⚍!¡ꖎ𝙹ᔑ↸ ʖᔑリ↸∴╎↸ℸ�
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Event"
 msgstr "ᒷ⍊ᒷリℸ"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Events"
+msgstr "ᒷ⍊ᒷリℸᓭ"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
@@ -2947,6 +2999,10 @@ msgstr "⊣ᒷℸ ╎ℸ 𝙹リ ⊣𝙹𝙹⊣ꖎᒷ !¡ꖎᔑ||"
 #: components/state/stores/Experiments.ts
 msgid "GIF Picker Placeholder"
 msgstr "⊣╎⎓ !¡╎ᓵꖌᒷ∷ !¡ꖎᔑᓵᒷ⍑𝙹ꖎ↸ᒷ∷"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "GIF provider"
+msgstr "⊣╎⎓ !¡∷𝙹⍊╎↸ᒷ∷"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Gifbox is our own GIF service, so you can keep sharing GIFs right here on AnyTalk."
@@ -4335,8 +4391,12 @@ msgid "Off"
 msgstr "𝙹⎓⎓"
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
-msgstr "𝙹⎓⎓: ℸ𝙹ꖌᒷリᓭ, !¡ᔑᓭᓭ∴𝙹∷↸ᓭ ᔑリ↸ ꖌᒷ||ᓭ ᔑ∷ᒷ ⍑╎↸↸ᒷリ. ∷ᒷᓭᒷℸᓭ ∴⍑ᒷリ ||𝙹⚍ ∷ᒷꖎ𝙹ᔑ↸."
+#~ msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
+#~ msgstr "𝙹⎓⎓: ℸ𝙹ꖌᒷリᓭ, !¡ᔑᓭᓭ∴𝙹∷↸ᓭ ᔑリ↸ ꖌᒷ||ᓭ ᔑ∷ᒷ ⍑╎↸↸ᒷリ. ∷ᒷᓭᒷℸᓭ ∴⍑ᒷリ ||𝙹⚍ ∷ᒷꖎ𝙹ᔑ↸."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Off: tokens, passwords, keys and your own IP addresses are hidden. Resets when you reload."
+msgstr "𝙹⎓⎓: ℸ𝙹ꖌᒷリᓭ, !¡ᔑᓭᓭ∴𝙹∷↸ᓭ, ꖌᒷ||ᓭ ᔑリ↸ ||𝙹⚍∷ 𝙹∴リ ╎!¡ ᔑ↸↸∷ᒷᓭᓭᒷᓭ ᔑ∷ᒷ ⍑╎↸↸ᒷリ. ∷ᒷᓭᒷℸᓭ ∴⍑ᒷリ ||𝙹⚍ ∷ᒷꖎ𝙹ᔑ↸."
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Offers to stream the games you play during a call. Detection happens only on this computer and nothing is sent."
@@ -4510,6 +4570,7 @@ msgid "Opening another stream while watching one shows them side by side. When o
 msgstr "𝙹!¡ᒷリ╎リ⊣ ᔑリ𝙹ℸ⍑ᒷ∷ ᓭℸ∷ᒷᔑᒲ ∴⍑╎ꖎᒷ ∴ᔑℸᓵ⍑╎リ⊣ 𝙹リᒷ ᓭ⍑𝙹∴ᓭ ℸ⍑ᒷᒲ ᓭ╎↸ᒷ ʖ|| ᓭ╎↸ᒷ. ∴⍑ᒷリ 𝙹⎓⎓, ╎ℸ ∷ᒷ!¡ꖎᔑᓵᒷᓭ ℸ⍑ᒷ ᓭℸ∷ᒷᔑᒲ ||𝙹⚍ ∴ᒷ∷ᒷ ∴ᔑℸᓵ⍑╎リ⊣."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
 #: components/modal/modals/ReportContent.tsx
 msgid "Other"
 msgstr "𝙹ℸ⍑ᒷ∷"
@@ -5769,9 +5830,17 @@ msgstr "ᓭᒷ∷⍊ᒷ∷ᓭ ||𝙹⚍ ⋮𝙹╎リ ᓭ⍑𝙹∴ ⚍!¡ ⍑�
 msgid "Servers, unread messages"
 msgstr "ᓭᒷ∷⍊ᒷ∷ᓭ, ⚍リ∷ᒷᔑ↸ ᒲᒷᓭᓭᔑ⊣ᒷᓭ"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Service"
+msgstr "ᓭᒷ∷⍊╎ᓵᒷ"
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
-msgstr "ᓭᒷᓭᓭ╎𝙹リ ℸ𝙹ꖌᒷリᓭ, !¡ᔑᓭᓭ∴𝙹∷↸ᓭ ᔑリ↸ ᓵᔑꖎꖎ ꖌᒷ||ᓭ ∴╎ꖎꖎ ᔑ!¡!¡ᒷᔑ∷ 𝙹リ ᓭᓵ∷ᒷᒷリ ᔑリ↸ ╎リ ᒷ/!¡𝙹∷ℸᓭ. ᔑリ||𝙹リᒷ ∴⍑𝙹 ᓭᒷᒷᓭ 𝙹∷ ⊣ᒷℸᓭ ℸ⍑ᒷᒲ ᓵ𝙹⚍ꖎ↸ ᓭ╎⊣リ ╎リ ᔑᓭ ||𝙹⚍. ℸ⚍∷リ ℸ⍑╎ᓭ 𝙹リ 𝙹リꖎ|| ℸ𝙹 ↸ᒷʖ⚍⊣, ᔑリ↸ ↸𝙹リ'ℸ ᓭ⍑ᔑ∷ᒷ ℸ⍑ᒷ ᒷ/!¡𝙹∷ℸᓭ."
+#~ msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+#~ msgstr "ᓭᒷᓭᓭ╎𝙹リ ℸ𝙹ꖌᒷリᓭ, !¡ᔑᓭᓭ∴𝙹∷↸ᓭ ᔑリ↸ ᓵᔑꖎꖎ ꖌᒷ||ᓭ ∴╎ꖎꖎ ᔑ!¡!¡ᒷᔑ∷ 𝙹リ ᓭᓵ∷ᒷᒷリ ᔑリ↸ ╎リ ᒷ/!¡𝙹∷ℸᓭ. ᔑリ||𝙹リᒷ ∴⍑𝙹 ᓭᒷᒷᓭ 𝙹∷ ⊣ᒷℸᓭ ℸ⍑ᒷᒲ ᓵ𝙹⚍ꖎ↸ ᓭ╎⊣リ ╎リ ᔑᓭ ||𝙹⚍. ℸ⚍∷リ ℸ⍑╎ᓭ 𝙹リ 𝙹リꖎ|| ℸ𝙹 ↸ᒷʖ⚍⊣, ᔑリ↸ ↸𝙹リ'ℸ ᓭ⍑ᔑ∷ᒷ ℸ⍑ᒷ ᒷ/!¡𝙹∷ℸᓭ."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Session tokens, passwords, call keys and your own IP addresses will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+msgstr "ᓭᒷᓭᓭ╎𝙹リ ℸ𝙹ꖌᒷリᓭ, !¡ᔑᓭᓭ∴𝙹∷↸ᓭ, ᓵᔑꖎꖎ ꖌᒷ||ᓭ ᔑリ↸ ||𝙹⚍∷ 𝙹∴リ ╎!¡ ᔑ↸↸∷ᒷᓭᓭᒷᓭ ∴╎ꖎꖎ ᔑ!¡!¡ᒷᔑ∷ 𝙹リ ᓭᓵ∷ᒷᒷリ ᔑリ↸ ╎リ ᒷ/!¡𝙹∷ℸᓭ. ᔑリ||𝙹リᒷ ∴⍑𝙹 ᓭᒷᒷᓭ 𝙹∷ ⊣ᒷℸᓭ ℸ⍑ᒷᒲ ᓵ𝙹⚍ꖎ↸ ᓭ╎⊣リ ╎リ ᔑᓭ ||𝙹⚍. ℸ⚍∷リ ℸ⍑╎ᓭ 𝙹リ 𝙹リꖎ|| ℸ𝙹 ↸ᒷʖ⚍⊣, ᔑリ↸ ↸𝙹リ'ℸ ᓭ⍑ᔑ∷ᒷ ℸ⍑ᒷ ᒷ/!¡𝙹∷ℸᓭ."
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5872,6 +5941,10 @@ msgstr "ᓭ⍑𝙹∴ ꖎ╎⍊ᒷ ᓭℸᔑℸ╎ᓭℸ╎ᓵᓭ 𝙹リ ᓵᔑ
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Show only"
 msgstr "ᓭ⍑𝙹∴ 𝙹リꖎ||"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show only service"
+msgstr "ᓭ⍑𝙹∴ 𝙹リꖎ|| ᓭᒷ∷⍊╎ᓵᒷ"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Show Others"
@@ -6390,6 +6463,10 @@ msgstr "ℸ⍑ᒷ ⎓╎ꖎᒷ \"{0}\" ({fileSize}) ᒷ/ᓵᒷᒷ↸ᓭ ℸ⍑�
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The first version hasn't been published. Check back soon."
 msgstr "ℸ⍑ᒷ ⎓╎∷ᓭℸ ⍊ᒷ∷ᓭ╎𝙹リ ⍑ᔑᓭリ'ℸ ʖᒷᒷリ !¡⚍ʖꖎ╎ᓭ⍑ᒷ↸. ᓵ⍑ᒷᓵꖌ ʖᔑᓵꖌ ᓭ𝙹𝙹リ."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "The HAR file holds requests, files and WebSocket connections. Call entries (route, encryption, byte counts, data messages) are not HTTP, so they are only in the JSON export. Both exports give every entry an absolute time (UTC, to the millisecond) to line up with a packet capture."
+msgstr "ℸ⍑ᒷ ⍑ᔑ∷ ⎓╎ꖎᒷ ⍑𝙹ꖎ↸ᓭ ∷ᒷᑑ⚍ᒷᓭℸᓭ, ⎓╎ꖎᒷᓭ ᔑリ↸ ∴ᒷʖᓭ𝙹ᓵꖌᒷℸ ᓵ𝙹リリᒷᓵℸ╎𝙹リᓭ. ᓵᔑꖎꖎ ᒷリℸ∷╎ᒷᓭ (∷𝙹⚍ℸᒷ, ᒷリᓵ∷||!¡ℸ╎𝙹リ, ʖ||ℸᒷ ᓵ𝙹⚍リℸᓭ, ↸ᔑℸᔑ ᒲᒷᓭᓭᔑ⊣ᒷᓭ) ᔑ∷ᒷ リ𝙹ℸ ⍑ℸℸ!¡, ᓭ𝙹 ℸ⍑ᒷ|| ᔑ∷ᒷ 𝙹リꖎ|| ╎リ ℸ⍑ᒷ ⋮ᓭ𝙹リ ᒷ/!¡𝙹∷ℸ. ʖ𝙹ℸ⍑ ᒷ/!¡𝙹∷ℸᓭ ⊣╎⍊ᒷ ᒷ⍊ᒷ∷|| ᒷリℸ∷|| ᔑリ ᔑʖᓭ𝙹ꖎ⚍ℸᒷ ℸ╎ᒲᒷ (⚍ℸᓵ, ℸ𝙹 ℸ⍑ᒷ ᒲ╎ꖎꖎ╎ᓭᒷᓵ𝙹リ↸) ℸ𝙹 ꖎ╎リᒷ ⚍!¡ ∴╎ℸ⍑ ᔑ !¡ᔑᓵꖌᒷℸ ᓵᔑ!¡ℸ⚍∷ᒷ."
 
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
@@ -6964,6 +7041,10 @@ msgstr "⚍!¡ꖎ𝙹ᔑ↸ ℸ𝙹 ⊣╎⎓ʖ𝙹/"
 msgid "Uploading file `{fileName}`... {0}%"
 msgstr "⚍!¡ꖎ𝙹ᔑ↸╎リ⊣ ⎓╎ꖎᒷ `{fileName}`... {0}%"
 
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Uploads"
+msgstr "⚍!¡ꖎ𝙹ᔑ↸ᓭ"
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "URL"
 msgstr "⚍∷ꖎ"
@@ -7326,6 +7407,10 @@ msgstr "∴⍑𝙹ꖎᒷ ᓭᒷ∷⍊ᒷ∷"
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "∴╎リ↸𝙹∴ᓭ ╎リᓭℸᔑꖎꖎᒷ∷"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Wireshark filter copied"
+msgstr "∴╎∷ᒷᓭ⍑ᔑ∷ꖌ ⎓╎ꖎℸᒷ∷ ᓵ𝙹!¡╎ᒷ↸"
 
 #. placeholder {0}: names.join(", ")
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
