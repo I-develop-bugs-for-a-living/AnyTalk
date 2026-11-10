@@ -125,6 +125,7 @@ import {
   pickPopoutApi,
   popoutSize,
 } from "./streamPopout";
+import type { StreamZoom } from "./streamZoom";
 import { VoiceProcessor } from "./VoiceProcessor";
 
 /** Why E2EE kept us out of a call or ended it: no browser support, worker or key exchange failure */
@@ -333,6 +334,15 @@ type Follow = {
   wake?: () => void;
 };
 
+/**
+ * Id of a track: its source and the participant's session
+ * @param source Track source
+ * @param sid Participant session id
+ */
+function makeTrackId(source: Track.Source, sid: string) {
+  return `${source}_${sid}`;
+}
+
 class Voice {
   /** Why the last window replacement failed, for the follow log */
   #swapFailure?: string;
@@ -440,6 +450,14 @@ class Voice {
    * entry holds the window; it never changes what is watched or focused.
    */
   popouts = new ReactiveMap<string, StreamPopout>();
+
+  /**
+   * Zoom of watched streams, by track id (see trackId). Kept here so a zoom
+   * survives moving the stream between the focus view, full screen and a
+   * popout window. Streams that aren't zoomed have no entry; an entry goes
+   * when the stream is no longer watched.
+   */
+  zooms = new ReactiveMap<string, StreamZoom>();
 
   /**
    * People whose stream was unpublished a moment ago: a window swap
@@ -1789,6 +1807,7 @@ class Voice {
     this.#pendingEnds.clear();
     this.endingStreams.clear();
     this.#endedWatches.clear();
+    this.zooms.clear();
     this.#followUnsupported = false;
     this.#cancelCapture();
     this.#cancelMicRecovery();
@@ -1831,6 +1850,7 @@ class Voice {
       });
 
       this.watching.clear();
+      this.zooms.clear();
       this.#endedWatches.clear();
       this.#setPendingFocus();
 
@@ -3219,7 +3239,7 @@ class Voice {
   }
 
   trackId(t: TrackReferenceOrPlaceholder) {
-    return `${t.source}_${t.participant.sid}`;
+    return makeTrackId(t.source, t.participant.sid);
   }
 
   toggleFocus(t?: TrackReferenceOrPlaceholder) {
@@ -3416,7 +3436,25 @@ class Voice {
     batch(() => {
       this.watching.delete(identity);
       if (this.pendingFocus() === identity) this.#setPendingFocus();
+      this.#forgetZoom(identity);
     });
+  }
+
+  /**
+   * Drop the zoom of someone's screen share. The room may have lost the
+   * participant already, so the track list is checked as well.
+   */
+  #forgetZoom(identity: string) {
+    if (!this.zooms.size) return;
+    const sids = new Set<string>();
+    const sid = this.room()?.getParticipantByIdentity(identity)?.sid;
+    if (sid) sids.add(sid);
+    for (const t of this.vidTracks()) {
+      if (t.participant.identity === identity) sids.add(t.participant.sid);
+    }
+    for (const id of sids) {
+      this.zooms.delete(makeTrackId(Track.Source.ScreenShare, id));
+    }
   }
 
   /**
