@@ -229,15 +229,20 @@ function quitApp() {
   app.quit();
 }
 
-/** Restart into the downloaded update (tray menu, app menu). */
-function restartToUpdate() {
+/**
+ * Restart into the downloaded update (tray menu, app menu, page buttons).
+ * @returns Whether the restart was started
+ */
+function restartToUpdate(): boolean {
   // Set first so the close handler doesn't hide the window instead of quitting
   quitting = true;
   try {
     installUpdate();
+    return true;
   } catch (error) {
     quitting = false;
     console.error("[updater] could not restart to update:", error);
+    return false;
   }
 }
 
@@ -613,7 +618,8 @@ function registerIpc() {
   handleApp(IPC.updaterDownload, () => downloadUpdate());
   handleApp(IPC.updaterInstall, () => {
     // Only once downloaded, same path as the tray item
-    if (getUpdaterState().status === "downloaded") restartToUpdate();
+    if (getUpdaterState().status !== "downloaded") return false;
+    return restartToUpdate();
   });
   handleApp(IPC.autostartGet, () => getAutostart());
   handleApp(IPC.autostartSet, (value: boolean) => setAutostart(value === true));

@@ -188,9 +188,8 @@ function exposeNative() {
     getState: () => invoke<UpdaterState>(IPC.updaterGetState),
     check: () => invoke<void>(IPC.updaterCheck),
     download: () => invoke<void>(IPC.updaterDownload),
-    install: () => {
-      invoke<void>(IPC.updaterInstall).catch(() => {});
-    },
+    // resolves to false when the install did not start; errors reach the page
+    install: () => invoke<boolean>(IPC.updaterInstall),
     onState: (callback: (state: UpdaterState) => void) => {
       updaterListeners.add(callback);
       return () => {
