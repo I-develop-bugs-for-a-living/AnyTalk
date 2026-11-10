@@ -109,6 +109,22 @@ declare global {
         ) => void,
       ): void;
       screenPickerCallback(idx: number, audio: boolean): Promise<void>;
+      // The source shape below must match `PickerSource` in
+      // packages/desktop/src/shared/ipc.ts
+      /**
+       * Re-reads the sources while the picker is open, missing in older
+       * desktop versions. Resolves with null when nothing new came back
+       * (picker closed, or a refresh is still running).
+       */
+      refreshScreenPicker?(thumbnails: boolean): Promise<
+        | {
+            idx: number;
+            name: string;
+            isFullScreen: boolean;
+            image?: string;
+          }[]
+        | null
+      >;
       /** Replaces all global hotkeys, resolves with which ones registered */
       setGlobalHotkeys(
         bindings: { action: string; accelerator: string; code?: string }[],

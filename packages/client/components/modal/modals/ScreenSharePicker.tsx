@@ -19,9 +19,24 @@ import {
 } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
-import { Show, createEffect, createMemo, on } from "solid-js";
+import {
+  Show,
+  createEffect,
+  createMemo,
+  createSignal,
+  on,
+  onCleanup,
+  onMount,
+} from "solid-js";
 import { styled } from "styled-system/jsx";
 import { Modals } from "../types";
+import { PickerSourceItem, mergeSources } from "./screenSharePickerSources";
+
+/** How often the source list is re-read while the picker is open */
+const REFRESH_INTERVAL_MS = 1500;
+
+/** Every n-th refresh also re-reads the thumbnails, they are expensive */
+const THUMBNAIL_EVERY = 4;
 
 export function ScreenSharePickerModal(
   props: DialogProps & Modals & { type: "screen_share_picker" },
@@ -29,8 +44,68 @@ export function ScreenSharePickerModal(
   const { voice } = useState();
   const { t } = useLingui();
 
+  // Live list of sources, kept current while the picker is open
+  const [list, setList] = createSignal(props.sources);
+
+  onMount(() => {
+    const refresh = window.native?.refreshScreenPicker;
+    if (!refresh) return;
+
+    let inFlight = false;
+    let stopped = false;
+    let polls = 0;
+
+    let queued: { thumbnails: boolean } | undefined;
+
+    /**
+     * Fetch the sources again. A request made while a fetch is running is
+     * remembered and runs once after it, so it is never dropped.
+     */
+    const poll = async (thumbnails = false) => {
+      if (stopped) return;
+      if (inFlight) {
+        queued = { thumbnails: thumbnails || !!queued?.thumbnails };
+        return;
+      }
+      inFlight = true;
+      try {
+        const withThumbnails = thumbnails || polls++ % THUMBNAIL_EVERY === 0;
+        const next = await refresh(withThumbnails);
+        if (next && !stopped)
+          setList((prev) => mergeSources(prev, next, withThumbnails));
+      } finally {
+        inFlight = false;
+      }
+      if (queued) {
+        const again = queued.thumbnails;
+        queued = undefined;
+        poll(again);
+      }
+    };
+
+    // Returning from another window (e.g. the game) must show it at once
+    const onVisible = () => {
+      if (document.visibilityState === "visible") poll(true);
+    };
+    const onFocus = () => poll(true);
+
+    const timer = setInterval(() => {
+      // Nothing to see while hidden, the visibility handler catches up
+      if (!document.hidden) poll();
+    }, REFRESH_INTERVAL_MS);
+    window.addEventListener("focus", onFocus);
+    document.addEventListener("visibilitychange", onVisible);
+
+    onCleanup(() => {
+      stopped = true;
+      clearInterval(timer);
+      window.removeEventListener("focus", onFocus);
+      document.removeEventListener("visibilitychange", onVisible);
+    });
+  });
+
   // Open on the screens, or on the apps when there is no screen to share
-  const hasScreens = props.sources.some((source) => source.isFullScreen);
+  const hasScreens = list().some((source) => source.isFullScreen);
 
   const group = createFormGroup({
     category: createFormControl(hasScreens ? "screens" : "apps"),
@@ -46,21 +121,36 @@ export function ScreenSharePickerModal(
   });
 
   /** Sources of the selected category, keeping their index in the full list */
+  const wrappers = new WeakMap<
+    object,
+    { item: PickerSourceItem; value: number }
+  >();
   const sources = createMemo(() =>
-    props.sources
+    list()
       .filter(
         (source) =>
           source.isFullScreen === (group.controls.category.value === "screens"),
       )
-      .map((source) => ({ item: source, value: source.idx })),
+      .map((source) => {
+        // Reuse the wrapper of an unchanged source so its tile isn't rebuilt
+        let wrapper = wrappers.get(source);
+        if (!wrapper) {
+          wrapper = { item: source, value: source.idx };
+          wrappers.set(source, wrapper);
+        }
+        return wrapper;
+      }),
   );
 
-  // Select the first source of the category, or none when it is empty, so a
-  // hidden source can never be submitted
+  // Keep the selected source while it still exists in the category, else
+  // select the first one, or none when it is empty, so a hidden source can
+  // never be submitted
   createEffect(
-    on(sources, (list) =>
-      group.controls.idx.setValue(list.slice(0, 1).map((s) => s.value)),
-    ),
+    on(sources, (items) => {
+      const current = group.controls.idx.value[0];
+      if (items.some((s) => s.value === current)) return;
+      group.controls.idx.setValue(items.slice(0, 1).map((s) => s.value));
+    }),
   );
 
   /** Whether a source of the visible category is selected */
