@@ -31,7 +31,7 @@ import {
   releaseNotesFor,
   releaseVersion,
 } from "./desktopRelease";
-import { updaterState, watchUpdater } from "./updaterState";
+import { installStarted, updaterState, watchUpdater } from "./updaterState";
 
 /**
  * Load the desktop releases, patch notes included
@@ -292,7 +292,14 @@ export default function Updates() {
             </Show>
             <Show when={updaterState()?.status === "downloaded"}>
               <Button
-                onPress={() => run(() => window.desktopUpdater?.install())}
+                onPress={() =>
+                  run(async () => {
+                    const result = await window.desktopUpdater?.install();
+                    if (!installStarted(result)) {
+                      throw new Error("the shell did not start the install");
+                    }
+                  })
+                }
               >
                 <Trans>Restart to install</Trans>
               </Button>

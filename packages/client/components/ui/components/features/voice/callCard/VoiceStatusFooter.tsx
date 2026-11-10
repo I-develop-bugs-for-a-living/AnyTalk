@@ -10,7 +10,7 @@ import { useState } from "@revolt/state";
 import { typography } from "@revolt/ui/components/design/Text";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
-import { AudioDeviceChevron } from "./AudioDeviceChevron";
+import { AudioDeviceChevron, SplitButton } from "./AudioDeviceChevron";
 import { GameStreamPrompt } from "./GameStreamPrompt";
 import { DeafenButton, LeaveCallButton, MuteButton } from "./VoiceCallButtons";
 
@@ -78,7 +78,7 @@ export function VoiceStatusFooter() {
         )}
       </Show>
       <Buttons>
-        <Split>
+        <SplitButton>
           <MuteButton size="sm" />
           <Show when={!isMobile}>
             <AudioDeviceChevron
@@ -86,8 +86,8 @@ export function VoiceStatusFooter() {
               variant={voice.microphone() ? "filled" : "tonal"}
             />
           </Show>
-        </Split>
-        <Split>
+        </SplitButton>
+        <SplitButton>
           <DeafenButton size="sm" />
           <Show when={!isMobile}>
             <AudioDeviceChevron
@@ -99,7 +99,7 @@ export function VoiceStatusFooter() {
               }
             />
           </Show>
-        </Split>
+        </SplitButton>
         <Show when={voice.channel()}>
           <LeaveCallButton size="sm" />
         </Show>
@@ -180,21 +180,5 @@ const Buttons = styled("div", {
     gap: "8px",
     justifyContent: "center",
     flexWrap: "wrap",
-  },
-});
-
-/**
- * A mute or deafen button with its device chevron attached (split button):
- * the touching corners are squared off
- */
-const Split = styled("div", {
-  base: {
-    display: "flex",
-    gap: "2px",
-
-    "& > button:not(:last-child)": {
-      borderStartEndRadius: "var(--borderRadius-xs)",
-      borderEndEndRadius: "var(--borderRadius-xs)",
-    },
   },
 });

@@ -14,7 +14,12 @@ import { styled } from "styled-system/jsx";
 
 import { UserContextMenu } from "@revolt/app";
 import { useUser } from "@revolt/markdown/users";
-import { useFastIsSpeaking, useVoice } from "@revolt/rtc";
+import {
+  createStreamZoom,
+  useFastIsSpeaking,
+  useVoice,
+  ZoomableStream,
+} from "@revolt/rtc";
 import { useState } from "@revolt/state";
 import {
   Avatar,
@@ -137,6 +142,16 @@ export function ParticipantTile(props: TileProps) {
     }
   };
 
+  // Zooming into a remote stream, for the focused tile and the multi-stream
+  // tiles (also in the full screen view), never the small grid tiles, our own
+  // preview or cameras. desktop only: no zoom on phones (user decision)
+  const zoomable = () =>
+    !touchOnly() &&
+    isScreenShare() &&
+    !participant.isLocal &&
+    (!!props.focus || !!props.fill);
+  const zoom = createStreamZoom(() => voice.trackId(track), zoomable);
+
   // Multi-stream view: this tile fills the whole stream area, the other tiles
   // stay mounted (and subscribed) underneath it
   const multiFocused = createMemo(() => !!voice.multiFocusTrack());
@@ -180,6 +195,7 @@ export function ParticipantTile(props: TileProps) {
         onKeyDown={(e) => {
           // keys on buttons inside the tile are theirs
           if (e.target !== e.currentTarget) return;
+          if (zoom.onKey(e)) return;
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
             e.currentTarget.click();
@@ -269,25 +285,33 @@ export function ParticipantTile(props: TileProps) {
             {/* The video stays mounted while hidden so the tile keeps its size.
                 A popped out stream is drawn in its own window instead. */}
             <Show when={!poppedOut()}>
-              <VideoTrack
-                style={{
-                  "grid-area": "1/1",
-                  "object-fit": "contain",
-                  width: "100%",
-                  height: "100%",
-                  overflow: "hidden",
-                  visibility: hideOwnStream() ? "hidden" : "visible",
-                }}
-                trackRef={track as TrackReference}
-                manageSubscription={true}
-                ref={videoRef}
-                on:resize={() => {
-                  setVideoDims({
-                    height: videoRef?.videoHeight || 0,
-                    width: videoRef?.videoWidth || 0,
-                  });
-                }}
-              />
+              <ZoomableStream zoom={zoom}>
+                <VideoTrack
+                  style={{
+                    "grid-area": "1/1",
+                    "object-fit": "contain",
+                    width: "100%",
+                    height: "100%",
+                    overflow: "hidden",
+                    visibility: hideOwnStream() ? "hidden" : "visible",
+                  }}
+                  trackRef={track as TrackReference}
+                  // A zoomed video is mostly outside its tile, so LiveKit's
+                  // visibility observer (needs 80% visible, unsubscribes after
+                  // 3 s) would drop the stream while zoomed. It reads this flag
+                  // once, so a zoomable stream is never managed by it: the
+                  // focused and multi-stream tiles are always in view anyway
+                  // and the stream is only subscribed while watched.
+                  manageSubscription={!zoomable()}
+                  ref={videoRef}
+                  on:resize={() => {
+                    setVideoDims({
+                      height: videoRef?.videoHeight || 0,
+                      width: videoRef?.videoWidth || 0,
+                    });
+                  }}
+                />
+              </ZoomableStream>
             </Show>
             <Show when={hideOwnStream()}>
               <OwnStreamHidden role="status">

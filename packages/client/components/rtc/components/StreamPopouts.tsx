@@ -22,9 +22,12 @@ import { styled } from "styled-system/jsx";
 
 import { useUser } from "@revolt/markdown/users";
 import { useSnackbar } from "@revolt/ui/components/design";
+import { touchOnly } from "@revolt/ui/components/features/voice/callCard/volumePanelState";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import { useVoice } from "../state";
+
+import { createStreamZoom, ZoomableStream } from "./ZoomableStream";
 
 /** How long a stream may be missing before its window is closed */
 const POPOUT_GRACE_MS = 2000;
@@ -131,6 +134,12 @@ function PopoutContent(props: {
   const user = useUser(participant.identity);
   const isMuted = useIsMuted({ participant, source });
 
+  // desktop only: no zoom on phones (user decision). Cameras aren't zoomed.
+  const zoom = createStreamZoom(
+    () => props.id,
+    () => !touchOnly() && source === Track.Source.ScreenShare,
+  );
+
   let container: HTMLDivElement | undefined;
   let video: HTMLVideoElement | undefined;
 
@@ -191,7 +200,17 @@ function PopoutContent(props: {
   };
 
   return (
-    <Container ref={container}>
+    <Container
+      ref={container}
+      class="group"
+      // focusable for the zoom keys; no outline, a click on the video focuses it
+      style={{ outline: "none" }}
+      tabIndex={-1}
+      // + / - / 0 zoom while the window has focus, not when a button has it
+      on:keydown={(e: KeyboardEvent) => {
+        if (e.target === e.currentTarget) zoom.onKey(e);
+      }}
+    >
       <Show
         when={!isMuted()}
         fallback={
@@ -200,18 +219,20 @@ function PopoutContent(props: {
           </Off>
         }
       >
-        <VideoTrack
-          style={{
-            width: "100%",
-            height: "100%",
-            "object-fit": "contain",
-            background: "black",
-          }}
-          ref={video}
-          trackRef={props.track as TrackReference}
-          // the main window decides what is subscribed
-          manageSubscription={false}
-        />
+        <ZoomableStream zoom={zoom} belowBar>
+          <VideoTrack
+            style={{
+              width: "100%",
+              height: "100%",
+              "object-fit": "contain",
+              background: "black",
+            }}
+            ref={video}
+            trackRef={props.track as TrackReference}
+            // the main window decides what is subscribed
+            manageSubscription={false}
+          />
+        </ZoomableStream>
       </Show>
       <Bar data-popout-bar="">
         <Name>{user().username}</Name>
@@ -261,6 +282,8 @@ const Container = styled("div", {
     background: "black",
     color: "#fff",
     fontFamily: "var(--fonts-primary, sans-serif)",
+    // the name bar's height; the zoom pill sits below it (ZoomableStream)
+    "--popout-bar-height": "48px",
 
     "&:hover [data-popout-bar], &:focus-within [data-popout-bar]": {
       opacity: 1,
@@ -291,6 +314,8 @@ const Bar = styled("div", {
     alignItems: "center",
     gap: "8px",
     padding: "8px 12px",
+    boxSizing: "border-box",
+    minBlockSize: "var(--popout-bar-height)",
     background: "linear-gradient(rgb(0 0 0 / 0.7), transparent)",
     opacity: 0,
     transition: "opacity 0.15s ease",

@@ -216,8 +216,11 @@ declare global {
       getState(): Promise<UpdaterState>;
       check(): Promise<void>;
       download(): Promise<void>;
-      /** Quits AnyTalk and installs the downloaded update */
-      install(): void;
+      /**
+       * Quits AnyTalk and installs the downloaded update. Resolves to false
+       * when nothing started; older desktop versions return nothing.
+       */
+      install(): Promise<boolean | void> | void;
       /** Listen for state changes, returns a function to stop listening */
       onState(cb: (state: UpdaterState) => void): () => void;
     };

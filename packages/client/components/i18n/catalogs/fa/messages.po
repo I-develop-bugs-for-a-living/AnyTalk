@@ -819,6 +819,10 @@ msgid "American (MM/DD/YYYY)"
 msgstr "آمریکایی (MM/DD/YYYY)"
 
 #: src/interface/Home.tsx
+msgid "An AnyTalk desktop update is available"
+msgstr ""
+
+#: src/interface/Home.tsx
 msgid "An AnyTalk desktop update is ready"
 msgstr ""
 
@@ -2507,10 +2511,31 @@ msgstr "دانلود برای Linux ‏(AppImage)"
 msgid "Download for Windows (.exe)"
 msgstr "دانلود برای Windows ‏(.exe)"
 
+#: src/interface/Home.tsx
+msgid "Download progress"
+msgstr ""
+
+#: src/interface/Home.tsx
+msgid "Download update"
+msgstr ""
+
 #. placeholder {0}: Math.round(updaterState()?.percent ?? 0)
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Downloading {0}%"
 msgstr "در حال دانلود {0}%"
+
+#. placeholder {0}: percent()
+#: src/interface/Home.tsx
+#~ msgid "Downloading the AnyTalk update ({0}%)"
+#~ msgstr ""
+
+#: src/interface/Home.tsx
+msgid "Downloading the AnyTalk update ({percent}%)"
+msgstr ""
+
+#: src/interface/Home.tsx
+msgid "Downloading..."
+msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Dropped frames per second"
@@ -4171,6 +4196,10 @@ msgstr "خنثی"
 msgid "NEW"
 msgstr "جدید"
 
+#: src/interface/Home.tsx
+msgid "New AnyTalk web version available"
+msgstr ""
+
 #: components/app/menus/ServerContextMenu.tsx
 msgid "New folder"
 msgstr "پوشه جدید"
@@ -5109,6 +5138,11 @@ msgstr "ارتباط"
 msgid "Reliable"
 msgstr ""
 
+#: components/app/interface/desktop/Titlebar.tsx
+#: src/interface/Home.tsx
+msgid "Reload"
+msgstr ""
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload and clear cache"
 msgstr "بارگذاری مجدد و پاک کردن حافظه نهان"
@@ -5336,6 +5370,10 @@ msgstr "بازنشانی به پیش‌فرض"
 msgid "Reset Token"
 msgstr "بازنشانی توکن"
 
+#: components/rtc/components/ZoomableStream.tsx
+msgid "Reset zoom"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Resolution"
 msgstr "وضوح"
@@ -5364,6 +5402,7 @@ msgstr "مشکلات امنیتی گزارش‌شده با مسئولیت‌پذ
 msgid "Restart to install"
 msgstr "راه‌اندازی مجدد برای نصب"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: src/interface/Home.tsx
 msgid "Restart to update"
 msgstr ""
@@ -5375,6 +5414,10 @@ msgstr "بازگرداندن پنجره تماس"
 
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Resume"
+msgstr ""
+
+#: src/interface/Home.tsx
+msgid "Retry download"
 msgstr ""
 
 #: components/app/menus/DraftMessageContextMenu.tsx
@@ -6224,6 +6267,10 @@ msgstr ""
 msgid "Stream is still running."
 msgstr "استریم هنوز در حال اجراست."
 
+#: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
+msgid "Stream options"
+msgstr ""
+
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Stream Settings"
 msgstr "تنظیمات استریم"
@@ -6409,6 +6456,10 @@ msgstr ""
 msgid "That QR code is not an AnyTalk login code. Point the camera at the code on the login screen of the new device."
 msgstr ""
 
+#: src/interface/Home.tsx
+msgid "The AnyTalk update could not be downloaded"
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "The bot has been removed from discover by moderators, the user must contact support."
 msgstr "ربات توسط مدیران از کاوش حذف شده است، کاربر باید با پشتیبانی تماس بگیرد."
@@ -6498,6 +6549,10 @@ msgstr "سرور از قبل در کاوش است، برای حذف آن کار�
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "The sound couldn't be saved."
 msgstr "صدا ذخیره نشد."
+
+#: src/interface/Home.tsx
+msgid "The update could not be started. Try again or use Settings, Updates."
+msgstr ""
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Theme"
@@ -7007,6 +7062,10 @@ msgstr "پیشرفت دانلود به‌روزرسانی"
 msgid "Update failed"
 msgstr "به‌روزرسانی ناموفق بود"
 
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "Update failed, retry"
+msgstr ""
+
 #: src/interface/Home.tsx
 msgid "Update now"
 msgstr ""
@@ -7019,6 +7078,7 @@ msgstr "به‌روزرسانی‌ها"
 msgid "Updates download in the background and install when you restart AnyTalk. Turn off to decide yourself when to update."
 msgstr "به‌روزرسانی‌ها در پس‌زمینه دانلود می‌شوند و با راه‌اندازی مجدد AnyTalk نصب می‌شوند. برای تصمیم‌گیری درباره زمان به‌روزرسانی، خاموش کنید."
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: src/interface/Home.tsx
 msgid "Updating..."
 msgstr ""
@@ -7766,3 +7826,15 @@ msgstr "کاربر شما از قبل ساخته شده است؟ دوباره و
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Yours"
 msgstr "مال شما"
+
+#: components/rtc/components/ZoomableStream.tsx
+msgid "Zoom"
+msgstr ""
+
+#: components/rtc/components/ZoomableStream.tsx
+msgid "Zoom in"
+msgstr ""
+
+#: components/rtc/components/ZoomableStream.tsx
+msgid "Zoom out"
+msgstr ""

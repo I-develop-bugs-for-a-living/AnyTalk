@@ -105,6 +105,10 @@ const iconButton2 = cva({
         background: "var(--md-sys-color-secondary-container)",
         "--colour": "var(--md-sys-color-on-secondary-container)",
       },
+      error: {
+        background: "var(--md-sys-color-error)",
+        "--colour": "var(--md-sys-color-on-error)",
+      },
       outlined: {
         border: "1px solid var(--md-sys-color-outline-variant)",
         "--colour": "var(--md-sys-color-on-surface-variant)",
@@ -174,7 +178,7 @@ const iconButton2 = cva({
   compoundVariants: [
     // disabled styles
     {
-      variant: ["filled", "tonal", "outlined"],
+      variant: ["filled", "tonal", "error", "outlined"],
       disabled: true,
       css: {
         // todo: check these are correct

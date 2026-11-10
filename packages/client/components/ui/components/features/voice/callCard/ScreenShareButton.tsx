@@ -1,111 +1,56 @@
-import { useFloating } from "solid-floating-ui";
-import { Show, createSignal, onCleanup } from "solid-js";
-import { Portal } from "solid-js/web";
-import { Motion, Presence } from "solid-motionone";
+import { Show, createEffect, createSignal } from "solid-js";
+
+import { useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
-import { autoUpdate, flip, offset, shift } from "@floating-ui/dom";
-import { useLingui } from "@lingui/solid/macro";
-
-import { ContextMenu, ContextMenuButton } from "@revolt/app/menus/ContextMenu";
+import { ContextMenuButton } from "@revolt/app/menus/ContextMenu";
 import { useInstance } from "@revolt/instance";
 import { useVoice } from "@revolt/rtc";
 import { SCREEN_SHARE_RESOLUTION_LABELS } from "@revolt/rtc/state";
 import { IconButton } from "@revolt/ui/components/design";
-import { isContextMenuKey } from "@revolt/ui/components/floating/contextMenuKeyboard";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
-import { floatingElements } from "@revolt/ui/directives";
 
-/** How long the menu stays open after the pointer leaves it */
-const CLOSE_DELAY_MS = 200;
+import {
+  DeviceChevronButton,
+  SplitButton,
+  chevronMenuHandlers,
+} from "./AudioDeviceChevron";
+import { AudioDeviceMenuPopup } from "./AudioDeviceMenu";
 
 /**
- * Start or stop sharing the screen. While streaming, hovering it offers to
- * switch window or change the stream's quality without restarting it, so
- * viewers keep watching.
+ * Start or stop sharing the screen. While streaming, the button turns red
+ * and a chevron (the same split button as the mute and deafen device
+ * chevrons) opens a menu to switch window or change the stream's quality
+ * without restarting it, so viewers keep watching.
  */
 export function ScreenShareButton(props: { size: "xs" | "sm" }) {
   const voice = useVoice();
   const { t } = useLingui();
   const { limits } = useInstance();
 
-  const [anchor, setAnchor] = createSignal<HTMLDivElement>();
-  const [menu, setMenu] = createSignal<HTMLDivElement>();
+  const [anchor, setAnchor] = createSignal<HTMLElement>();
   const [open, setOpen] = createSignal(false);
-  // whether the menu was opened with Shift+F10 / the ContextMenu key
+  // whether the menu was opened from the keyboard
   const [byKeyboard, setByKeyboard] = createSignal(false);
 
-  let closeTimer: ReturnType<typeof setTimeout> | undefined;
-  onCleanup(() => clearTimeout(closeTimer));
+  /** Whether a stream is running (the menu only applies then) */
+  const streaming = () => limits().video && !!voice.screenshare();
+  const hasMenu = () => streaming() && !!voice.streamOptions();
+  const label = () => t`Stream options`;
+  /** Label and tooltip of the main button, following what a press does */
+  const buttonLabel = () =>
+    limits().video
+      ? streaming()
+        ? t`Stop sharing`
+        : t`Share screen`
+      : t`Coming soon! 👀`;
 
-  const position = useFloating(anchor, menu, {
-    placement: "top",
-    whileElementsMounted: autoUpdate,
-    middleware: [offset(8), flip(), shift({ padding: 8 })],
+  // close the menu when the stream ends
+  createEffect(() => {
+    if (!hasMenu()) setOpen(false);
   });
 
-  function show() {
-    clearTimeout(closeTimer);
-    if (!voice.streamOptions()) return;
-
-    setByKeyboard(false);
-    setOpen(true);
-
-    // the menu takes the place of the button's tooltip; it is shown by the
-    // same pointer event, so hide it once that is handled
-    setTimeout(() =>
-      floatingElements()
-        .find((el) => anchor()?.contains(el.element))
-        ?.hide(),
-    );
-  }
-
-  /**
-   * Open the menu from the keyboard (Shift+F10 / ContextMenu key on the
-   * button), focusing its first item. A key press on the button itself still
-   * starts or stops sharing.
-   */
-  function onKeyDown(event: KeyboardEvent) {
-    if (!isContextMenuKey(event) || !voice.streamOptions()) return;
-
-    event.preventDefault();
-    event.stopPropagation();
-    clearTimeout(closeTimer);
-    setByKeyboard(true);
-
-    if (open()) {
-      // already open from hovering: move focus into it
-      menu()
-        ?.querySelector<HTMLElement>('[role="menuitem"]')
-        ?.focus({ preventScroll: true });
-    } else {
-      setOpen(true);
-    }
-  }
-
-  /**
-   * Swallow the release of the menu key, because some browsers open their own
-   * context menu on keyup
-   */
-  function onKeyUp(event: KeyboardEvent) {
-    if (isContextMenuKey(event) && voice.streamOptions()) {
-      event.preventDefault();
-    }
-  }
-
-  function hide() {
-    clearTimeout(closeTimer);
-    // a menu in use from the keyboard stays open when the mouse leaves
-    if (byKeyboard() && menu()?.contains(document.activeElement)) return;
-    closeTimer = setTimeout(() => setOpen(false), CLOSE_DELAY_MS);
-  }
-
-  function pick(action: () => void) {
-    clearTimeout(closeTimer);
-    setOpen(false);
-    action();
-  }
-
+  /** Current resolution and frame rate, shown next to the settings item */
   const quality = () => {
     const options = voice.streamOptions();
     return options
@@ -113,17 +58,21 @@ export function ScreenShareButton(props: { size: "xs" | "sm" }) {
       : "";
   };
 
+  /**
+   * Close the menu and run the chosen action
+   * @param action Action to run
+   */
+  function pick(action: () => void) {
+    setOpen(false);
+    action();
+  }
+
   return (
-    <div
-      ref={setAnchor}
-      onMouseEnter={show}
-      onMouseLeave={hide}
-      onKeyDown={onKeyDown}
-      onKeyUp={onKeyUp}
-    >
+    <SplitButton>
       <IconButton
         size={props.size}
-        variant={limits().video && voice.screenshare() ? "filled" : "tonal"}
+        variant={streaming() ? "error" : "tonal"}
+        aria-label={buttonLabel()}
         onPress={() => {
           setOpen(false);
           if (limits().video) voice.toggleScreenshare();
@@ -131,79 +80,59 @@ export function ScreenShareButton(props: { size: "xs" | "sm" }) {
         use:floating={{
           tooltip: {
             placement: "top",
-            content: limits().video
-              ? voice.screenshare()
-                ? t`Stop sharing`
-                : t`Share screen`
-              : t`Coming soon! 👀`,
+            content: buttonLabel(),
           },
         }}
         isDisabled={!limits().video}
       >
-        <Show
-          when={!limits().video || voice.screenshare()}
-          fallback={<Symbol>stop_screen_share</Symbol>}
-        >
-          <Symbol>screen_share</Symbol>
+        <Show when={streaming()} fallback={<Symbol>screen_share</Symbol>}>
+          <Symbol>stop_screen_share</Symbol>
         </Show>
       </IconButton>
 
-      <Portal mount={document.getElementById("floating")!}>
-        <Presence>
-          <Show when={open() && voice.streamOptions()}>
-            <Motion
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.1, easing: [0.87, 0, 0.13, 1] }}
-            >
-              <div
-                ref={setMenu}
-                onMouseEnter={show}
-                onMouseLeave={hide}
-                // keyboard focus in the menu keeps it open
-                onFocusIn={() => clearTimeout(closeTimer)}
-                style={{
-                  position: position.strategy,
-                  top: `${position.y ?? 0}px`,
-                  left: `${position.x ?? 0}px`,
-                  "z-index": "999",
-                }}
-              >
-                <ContextMenu
-                  initialFocus={byKeyboard() ? "first" : "none"}
-                  onRequestClose={() => setOpen(false)}
-                >
-                  <ContextMenuButton
-                    symbol={<Symbol size={16}>swap_horiz</Symbol>}
-                    onClick={() => pick(() => voice.switchScreenshareSource())}
-                  >
-                    {t`Switch window`}
-                  </ContextMenuButton>
-                  <ContextMenuButton
-                    symbol={<Symbol size={16}>tune</Symbol>}
-                    actionSymbol={<Quality>{quality()}</Quality>}
-                    onClick={() => pick(() => voice.openScreenshareSettings())}
-                  >
-                    {t`Resolution and FPS`}
-                  </ContextMenuButton>
-                  <ContextMenuButton
-                    symbol={<Symbol size={16}>stop_screen_share</Symbol>}
-                    destructive
-                    onClick={() => pick(() => voice.toggleScreenshare())}
-                  >
-                    {t`Stop sharing`}
-                  </ContextMenuButton>
-                </ContextMenu>
-              </div>
-            </Motion>
-          </Show>
-        </Presence>
-      </Portal>
-    </div>
+      <Show when={hasMenu()}>
+        <DeviceChevronButton
+          ref={setAnchor}
+          type="button"
+          variant="error"
+          size={props.size}
+          aria-label={label()}
+          aria-haspopup="menu"
+          aria-expanded={open()}
+          {...chevronMenuHandlers(open, setOpen, setByKeyboard)}
+          use:floating={{
+            tooltip: { placement: "top", content: label() },
+          }}
+        >
+          <Symbol size={20}>expand_less</Symbol>
+        </DeviceChevronButton>
+        <AudioDeviceMenuPopup
+          anchor={anchor()}
+          open={open()}
+          byKeyboard={byKeyboard()}
+          label={label()}
+          onClose={() => setOpen(false)}
+        >
+          <ContextMenuButton
+            symbol={<Symbol size={16}>swap_horiz</Symbol>}
+            onClick={() => pick(() => voice.switchScreenshareSource())}
+          >
+            {t`Switch window`}
+          </ContextMenuButton>
+          <ContextMenuButton
+            symbol={<Symbol size={16}>tune</Symbol>}
+            actionSymbol={<Quality>{quality()}</Quality>}
+            onClick={() => pick(() => voice.openScreenshareSettings())}
+          >
+            {t`Resolution and FPS`}
+          </ContextMenuButton>
+        </AudioDeviceMenuPopup>
+      </Show>
+    </SplitButton>
   );
 }
 
+/** Current quality, shown at the end of the settings item */
 const Quality = styled("span", {
   base: {
     marginInlineStart: "var(--gap-lg)",

@@ -796,6 +796,10 @@ msgid "American (MM/DD/YYYY)"
 msgstr "美式（MM/DD/YYYY）"
 
 #: src/interface/Home.tsx
+msgid "An AnyTalk desktop update is available"
+msgstr ""
+
+#: src/interface/Home.tsx
 msgid "An AnyTalk desktop update is ready"
 msgstr ""
 
@@ -2473,10 +2477,31 @@ msgstr "下載 Linux 版（AppImage）"
 msgid "Download for Windows (.exe)"
 msgstr "下載 Windows 版（.exe）"
 
+#: src/interface/Home.tsx
+msgid "Download progress"
+msgstr ""
+
+#: src/interface/Home.tsx
+msgid "Download update"
+msgstr ""
+
 #. placeholder {0}: Math.round(updaterState()?.percent ?? 0)
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Downloading {0}%"
 msgstr "正在下載 {0}%"
+
+#. placeholder {0}: percent()
+#: src/interface/Home.tsx
+#~ msgid "Downloading the AnyTalk update ({0}%)"
+#~ msgstr ""
+
+#: src/interface/Home.tsx
+msgid "Downloading the AnyTalk update ({percent}%)"
+msgstr ""
+
+#: src/interface/Home.tsx
+msgid "Downloading..."
+msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Dropped frames per second"
@@ -4136,6 +4161,10 @@ msgstr "中性"
 msgid "NEW"
 msgstr "新"
 
+#: src/interface/Home.tsx
+msgid "New AnyTalk web version available"
+msgstr ""
+
 #: components/app/menus/ServerContextMenu.tsx
 msgid "New folder"
 msgstr "新資料夾"
@@ -5073,6 +5102,11 @@ msgstr "最佳"
 msgid "Reliable"
 msgstr ""
 
+#: components/app/interface/desktop/Titlebar.tsx
+#: src/interface/Home.tsx
+msgid "Reload"
+msgstr ""
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload and clear cache"
 msgstr "重新載入並清除快取"
@@ -5300,6 +5334,10 @@ msgstr "重設為預設值"
 msgid "Reset Token"
 msgstr "重設權杖"
 
+#: components/rtc/components/ZoomableStream.tsx
+msgid "Reset zoom"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Resolution"
 msgstr "解析度"
@@ -5328,6 +5366,7 @@ msgstr "已負責任揭露的安全性問題"
 msgid "Restart to install"
 msgstr "重新啟動以安裝"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: src/interface/Home.tsx
 msgid "Restart to update"
 msgstr ""
@@ -5339,6 +5378,10 @@ msgstr "還原通話視窗"
 
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Resume"
+msgstr ""
+
+#: src/interface/Home.tsx
+msgid "Retry download"
 msgstr ""
 
 #: components/app/menus/DraftMessageContextMenu.tsx
@@ -6188,6 +6231,10 @@ msgstr ""
 msgid "Stream is still running."
 msgstr "直播仍在進行中。"
 
+#: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
+msgid "Stream options"
+msgstr ""
+
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Stream Settings"
 msgstr "直播設定"
@@ -6373,6 +6420,10 @@ msgstr ""
 msgid "That QR code is not an AnyTalk login code. Point the camera at the code on the login screen of the new device."
 msgstr ""
 
+#: src/interface/Home.tsx
+msgid "The AnyTalk update could not be downloaded"
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "The bot has been removed from discover by moderators, the user must contact support."
 msgstr "此機器人已被管理員從探索頁面移除，使用者必須聯絡支援團隊。"
@@ -6462,6 +6513,10 @@ msgstr "此伺服器已在探索頁面上，使用者必須聯絡支援團隊才
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "The sound couldn't be saved."
 msgstr "無法儲存此音效。"
+
+#: src/interface/Home.tsx
+msgid "The update could not be started. Try again or use Settings, Updates."
+msgstr ""
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Theme"
@@ -6971,6 +7026,10 @@ msgstr "更新下載進度"
 msgid "Update failed"
 msgstr "更新失敗"
 
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "Update failed, retry"
+msgstr ""
+
 #: src/interface/Home.tsx
 msgid "Update now"
 msgstr ""
@@ -6983,6 +7042,7 @@ msgstr "更新"
 msgid "Updates download in the background and install when you restart AnyTalk. Turn off to decide yourself when to update."
 msgstr "更新會在背景下載，並在你重新啟動 AnyTalk 時安裝。關閉後可自行決定何時更新。"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: src/interface/Home.tsx
 msgid "Updating..."
 msgstr ""
@@ -7726,3 +7786,15 @@ msgstr "你的使用者已經建立了？請嘗試重新登入或重新整理應
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Yours"
 msgstr "你的"
+
+#: components/rtc/components/ZoomableStream.tsx
+msgid "Zoom"
+msgstr ""
+
+#: components/rtc/components/ZoomableStream.tsx
+msgid "Zoom in"
+msgstr ""
+
+#: components/rtc/components/ZoomableStream.tsx
+msgid "Zoom out"
+msgstr ""

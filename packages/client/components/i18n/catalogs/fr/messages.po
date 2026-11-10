@@ -796,6 +796,10 @@ msgid "American (MM/DD/YYYY)"
 msgstr "Américain (MM/JJ/AAAA)"
 
 #: src/interface/Home.tsx
+msgid "An AnyTalk desktop update is available"
+msgstr "Une mise à jour du bureau AnyTalk est disponible"
+
+#: src/interface/Home.tsx
 msgid "An AnyTalk desktop update is ready"
 msgstr "Une mise à jour du bureau AnyTalk est prête"
 
@@ -2461,10 +2465,31 @@ msgstr "Télécharger pour Linux (AppImage)"
 msgid "Download for Windows (.exe)"
 msgstr "Télécharger pour Windows (.exe)"
 
+#: src/interface/Home.tsx
+msgid "Download progress"
+msgstr "Progression du téléchargement"
+
+#: src/interface/Home.tsx
+msgid "Download update"
+msgstr "Télécharger la mise à jour"
+
 #. placeholder {0}: Math.round(updaterState()?.percent ?? 0)
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Downloading {0}%"
 msgstr "Téléchargement : {0} %"
+
+#. placeholder {0}: percent()
+#: src/interface/Home.tsx
+#~ msgid "Downloading the AnyTalk update ({0}%)"
+#~ msgstr "Téléchargement de la mise à jour AnyTalk ({0} %)"
+
+#: src/interface/Home.tsx
+msgid "Downloading the AnyTalk update ({percent}%)"
+msgstr "Téléchargement de la mise à jour AnyTalk ({percent} %)"
+
+#: src/interface/Home.tsx
+msgid "Downloading..."
+msgstr "Téléchargement…"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Dropped frames per second"
@@ -4118,6 +4143,10 @@ msgstr "Neutre"
 msgid "NEW"
 msgstr "NOUVEAU"
 
+#: src/interface/Home.tsx
+msgid "New AnyTalk web version available"
+msgstr "Nouvelle version web d'AnyTalk disponible"
+
 #: components/app/menus/ServerContextMenu.tsx
 msgid "New folder"
 msgstr "Nouveau dossier"
@@ -5052,6 +5081,11 @@ msgstr "Pertinence"
 msgid "Reliable"
 msgstr "Fiable"
 
+#: components/app/interface/desktop/Titlebar.tsx
+#: src/interface/Home.tsx
+msgid "Reload"
+msgstr "Recharger"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload and clear cache"
 msgstr "Recharger et vider le cache"
@@ -5279,6 +5313,10 @@ msgstr "Rétablir par défaut"
 msgid "Reset Token"
 msgstr "Réinitialiser le token"
 
+#: components/rtc/components/ZoomableStream.tsx
+msgid "Reset zoom"
+msgstr "Réinitialiser le zoom"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Resolution"
 msgstr "Résolution"
@@ -5307,6 +5345,7 @@ msgstr "Problèmes de sécurité divulgués de manière responsable"
 msgid "Restart to install"
 msgstr "Redémarrer pour installer"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: src/interface/Home.tsx
 msgid "Restart to update"
 msgstr "Redémarrer pour mettre à jour"
@@ -5319,6 +5358,10 @@ msgstr "Restaurer la fenêtre d'appel"
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Resume"
 msgstr "Reprendre"
+
+#: src/interface/Home.tsx
+msgid "Retry download"
+msgstr "Relancer le téléchargement"
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 msgid "Retry sending"
@@ -6155,6 +6198,10 @@ msgstr "Diffuser le jeu au premier plan"
 msgid "Stream is still running."
 msgstr "Le stream est toujours en cours."
 
+#: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
+msgid "Stream options"
+msgstr "Options du stream"
+
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Stream Settings"
 msgstr "Réglages du stream"
@@ -6340,6 +6387,10 @@ msgstr "Ce mot de passe n'est pas correct. Vérifiez-le et réessayez."
 msgid "That QR code is not an AnyTalk login code. Point the camera at the code on the login screen of the new device."
 msgstr "Ce code QR n'est pas un code de connexion AnyTalk. Dirigez la caméra vers le code affiché sur l'écran de connexion du nouvel appareil."
 
+#: src/interface/Home.tsx
+msgid "The AnyTalk update could not be downloaded"
+msgstr "La mise à jour d'AnyTalk n'a pas pu être téléchargée"
+
 #: components/i18n/errors.tsx
 msgid "The bot has been removed from discover by moderators, the user must contact support."
 msgstr "Le bot a été retiré de Découvrir par les modérateurs, l'utilisateur doit contacter le support."
@@ -6429,6 +6480,10 @@ msgstr "Le serveur est déjà dans Découvrir, l'utilisateur doit contacter le s
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "The sound couldn't be saved."
 msgstr "Le son n'a pas pu être enregistré."
+
+#: src/interface/Home.tsx
+msgid "The update could not be started. Try again or use Settings, Updates."
+msgstr "La mise à jour n'a pas pu démarrer. Réessayez ou utilisez Paramètres, Mises à jour."
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Theme"
@@ -6938,6 +6993,10 @@ msgstr "Progression du téléchargement de la mise à jour"
 msgid "Update failed"
 msgstr "Échec de la mise à jour"
 
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "Update failed, retry"
+msgstr "Échec, réessayer"
+
 #: src/interface/Home.tsx
 msgid "Update now"
 msgstr "Mettre à jour maintenant"
@@ -6950,6 +7009,7 @@ msgstr "Mises à jour"
 msgid "Updates download in the background and install when you restart AnyTalk. Turn off to decide yourself when to update."
 msgstr "Les mises à jour se téléchargent en arrière-plan et s'installent au redémarrage d'AnyTalk. Désactivez cette option pour choisir vous-même quand mettre à jour."
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: src/interface/Home.tsx
 msgid "Updating..."
 msgstr "Mise à jour…"
@@ -7687,3 +7747,15 @@ msgstr "Votre compte utilisateur a déjà été créé ? Essayez de vous reconne
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Yours"
 msgstr "Les vôtres"
+
+#: components/rtc/components/ZoomableStream.tsx
+msgid "Zoom"
+msgstr "Zoom"
+
+#: components/rtc/components/ZoomableStream.tsx
+msgid "Zoom in"
+msgstr "Zoomer"
+
+#: components/rtc/components/ZoomableStream.tsx
+msgid "Zoom out"
+msgstr "Dézoomer"

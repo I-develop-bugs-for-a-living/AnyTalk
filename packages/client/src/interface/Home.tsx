@@ -1,11 +1,4 @@
-import {
-  Match,
-  Show,
-  Switch,
-  createMemo,
-  createSignal,
-  onMount,
-} from "solid-js";
+import { Match, Show, Switch, createMemo, onMount } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { PublicChannelInvite } from "stoat.js";
@@ -13,10 +6,14 @@ import { css, cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import {
+  clearUpdateFailed,
   desktopNoticeDismissed,
-  desktopUpdateDownloaded,
   dismissDesktopNotice,
   pickUpdateNotice,
+  runUpdate,
+  updateBusy,
+  updateFailed,
+  updaterState,
   watchUpdater,
 } from "@revolt/app/interface/settings/user/updaterState";
 import { useClient } from "@revolt/client";
@@ -168,7 +165,6 @@ export function HomePageContent(props: { embedded?: boolean }) {
   const instance = useInstance();
   const state = useState();
   const { t } = useLingui();
-  const [updating, setUpdating] = createSignal(false);
 
   /**
    * Open a page; on phones this also brings the content pane forward
@@ -186,10 +182,26 @@ export function HomePageContent(props: { embedded?: boolean }) {
   const notice = createMemo(() => {
     if (!state.settings.getValue("advanced:update_notice")) return undefined;
     return pickUpdateNotice(
-      desktopUpdateDownloaded() && !desktopNoticeDismissed(),
+      updaterState(),
+      desktopNoticeDismissed(),
       updateAvailable() && !noticeDismissed(),
     );
   });
+
+  /** Download progress of the desktop update, rounded for display */
+  const percentValue = () => Math.round(updaterState()?.percent ?? 0);
+
+  /** Text of the card while the desktop update downloads */
+  const downloadingText = () => {
+    const percent = percentValue();
+    return t`Downloading the AnyTalk update (${percent}%)`;
+  };
+
+  /** Whether the open card is the desktop update with this action */
+  const desktopAction = (action: string) => {
+    const current = notice();
+    return current?.type === "desktop" && current.action === action;
+  };
 
   // check if we're stoat.chat; if so, check if the user is in the Lounge
   const showLoungeButton = instance.isStoat;
@@ -217,48 +229,87 @@ export function HomePageContent(props: { embedded?: boolean }) {
             <UpdateNoticeText>
               <Symbol aria-hidden="true">system_update</Symbol>
               <Text class="body" size="large">
-                <Show
-                  when={notice() === "desktop"}
-                  fallback={
-                    <Trans>A new version of AnyTalk is available</Trans>
-                  }
-                >
-                  <Trans>An AnyTalk desktop update is ready</Trans>
-                </Show>
+                <span role="status" aria-live="polite">
+                  <Switch>
+                    <Match when={updateFailed()}>
+                      <Trans>
+                        The update could not be started. Try again or use
+                        Settings, Updates.
+                      </Trans>
+                    </Match>
+                    <Match when={desktopAction("restart")}>
+                      <Trans>An AnyTalk desktop update is ready</Trans>
+                    </Match>
+                    <Match when={desktopAction("download")}>
+                      <Trans>An AnyTalk desktop update is available</Trans>
+                    </Match>
+                    <Match when={desktopAction("downloading")}>
+                      {downloadingText()}
+                    </Match>
+                    <Match when={desktopAction("retry")}>
+                      <Trans>The AnyTalk update could not be downloaded</Trans>
+                    </Match>
+                    <Match when={!!window.native}>
+                      <Trans>New AnyTalk web version available</Trans>
+                    </Match>
+                    <Match when={true}>
+                      <Trans>A new version of AnyTalk is available</Trans>
+                    </Match>
+                  </Switch>
+                </span>
               </Text>
+              <Show when={desktopAction("downloading")}>
+                {/* native element, so screen readers announce the value */}
+                <progress
+                  class={css({
+                    width: "80px",
+                    height: "8px",
+                    flexShrink: 0,
+                    accentColor: "var(--md-sys-color-primary)",
+                  })}
+                  max={100}
+                  value={percentValue()}
+                  aria-label={t`Download progress`}
+                />
+              </Show>
             </UpdateNoticeText>
             <Button
               variant="filled"
-              isDisabled={updating()}
+              isDisabled={updateBusy() || desktopAction("downloading")}
               onPress={() => {
-                setUpdating(true);
-                if (notice() === "desktop") {
-                  // quits, installs and relaunches the app
-                  window.desktopUpdater?.install();
-                } else {
-                  applyUpdate();
-                }
-                // if nothing reloaded after a while, allow another try
-                setTimeout(() => setUpdating(false), 10000);
+                const current = notice();
+                if (current) runUpdate(current, applyUpdate);
               }}
             >
               <Switch fallback={<Trans>Update now</Trans>}>
-                <Match when={updating()}>
+                <Match when={desktopAction("downloading")}>
+                  <Trans>Downloading...</Trans>
+                </Match>
+                <Match when={updateBusy()}>
                   <Trans>Updating...</Trans>
                 </Match>
-                <Match when={notice() === "desktop"}>
+                <Match when={desktopAction("restart")}>
                   <Trans>Restart to update</Trans>
+                </Match>
+                <Match when={desktopAction("download")}>
+                  <Trans>Download update</Trans>
+                </Match>
+                <Match when={desktopAction("retry")}>
+                  <Trans>Retry download</Trans>
+                </Match>
+                <Match when={!!window.native}>
+                  <Trans>Reload</Trans>
                 </Match>
               </Switch>
             </Button>
             <IconButton
               variant="standard"
               aria-label={t`Dismiss`}
-              onPress={() =>
-                notice() === "desktop"
-                  ? dismissDesktopNotice()
-                  : dismissUpdateNotice()
-              }
+              onPress={() => {
+                clearUpdateFailed();
+                if (notice()?.type === "desktop") dismissDesktopNotice();
+                else dismissUpdateNotice();
+              }}
             >
               <Symbol aria-hidden="true">close</Symbol>
             </IconButton>

@@ -819,6 +819,10 @@ msgid "American (MM/DD/YYYY)"
 msgstr "النمط الأمريكي (MM/DD/YYYY)"
 
 #: src/interface/Home.tsx
+msgid "An AnyTalk desktop update is available"
+msgstr "يتوفر تحديث لسطح مكتب AnyTalk"
+
+#: src/interface/Home.tsx
 msgid "An AnyTalk desktop update is ready"
 msgstr "تحديث AnyTalk لسطح المكتب جاهز"
 
@@ -2504,10 +2508,31 @@ msgstr "تنزيل لنظام Linux (AppImage)"
 msgid "Download for Windows (.exe)"
 msgstr "تنزيل لنظام Windows (.exe)"
 
+#: src/interface/Home.tsx
+msgid "Download progress"
+msgstr "تقدم التنزيل"
+
+#: src/interface/Home.tsx
+msgid "Download update"
+msgstr "تنزيل التحديث"
+
 #. placeholder {0}: Math.round(updaterState()?.percent ?? 0)
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Downloading {0}%"
 msgstr "جارٍ التنزيل {0}%"
+
+#. placeholder {0}: percent()
+#: src/interface/Home.tsx
+#~ msgid "Downloading the AnyTalk update ({0}%)"
+#~ msgstr "جارٍ تنزيل تحديث AnyTalk ({0}%)"
+
+#: src/interface/Home.tsx
+msgid "Downloading the AnyTalk update ({percent}%)"
+msgstr "جارٍ تنزيل تحديث AnyTalk ({percent}%)"
+
+#: src/interface/Home.tsx
+msgid "Downloading..."
+msgstr "جارٍ التنزيل..."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Dropped frames per second"
@@ -4167,6 +4192,10 @@ msgstr "محايد"
 msgid "NEW"
 msgstr "جديد"
 
+#: src/interface/Home.tsx
+msgid "New AnyTalk web version available"
+msgstr "يتوفر إصدار ويب جديد من AnyTalk"
+
 #: components/app/menus/ServerContextMenu.tsx
 msgid "New folder"
 msgstr "مجلد جديد"
@@ -5104,6 +5133,11 @@ msgstr "الصلة"
 msgid "Reliable"
 msgstr "موثوق"
 
+#: components/app/interface/desktop/Titlebar.tsx
+#: src/interface/Home.tsx
+msgid "Reload"
+msgstr "إعادة تحميل"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload and clear cache"
 msgstr "إعادة التحميل ومسح ذاكرة التخزين المؤقت"
@@ -5331,6 +5365,10 @@ msgstr "إعادة التعيين إلى الافتراضي"
 msgid "Reset Token"
 msgstr "اعادة تعيين الرمز (Token)"
 
+#: components/rtc/components/ZoomableStream.tsx
+msgid "Reset zoom"
+msgstr "إعادة ضبط التكبير"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Resolution"
 msgstr "الدقة"
@@ -5359,6 +5397,7 @@ msgstr "ثغرات امنية تم الابلاغ عنها"
 msgid "Restart to install"
 msgstr "أعد التشغيل للتثبيت"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: src/interface/Home.tsx
 msgid "Restart to update"
 msgstr "أعد التشغيل للتحديث"
@@ -5371,6 +5410,10 @@ msgstr "استعادة نافذة المكالمة"
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Resume"
 msgstr "استئناف"
+
+#: src/interface/Home.tsx
+msgid "Retry download"
+msgstr "إعادة محاولة التنزيل"
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 msgid "Retry sending"
@@ -6219,6 +6262,10 @@ msgstr "بث اللعبة المركّز عليها"
 msgid "Stream is still running."
 msgstr "البث لا يزال يعمل."
 
+#: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
+msgid "Stream options"
+msgstr "خيارات البث"
+
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Stream Settings"
 msgstr "إعدادات البث"
@@ -6404,6 +6451,10 @@ msgstr "كلمة المرور غير صحيحة. تحقق منها وحاول م
 msgid "That QR code is not an AnyTalk login code. Point the camera at the code on the login screen of the new device."
 msgstr "رمز QR هذا ليس رمز تسجيل دخول AnyTalk. وجّه الكاميرا نحو الرمز في شاشة تسجيل الدخول على الجهاز الجديد."
 
+#: src/interface/Home.tsx
+msgid "The AnyTalk update could not be downloaded"
+msgstr "تعذّر تنزيل تحديث AnyTalk"
+
 #: components/i18n/errors.tsx
 msgid "The bot has been removed from discover by moderators, the user must contact support."
 msgstr "أزال المشرفون البوت من الاكتشاف، ويجب على المستخدم التواصل مع الدعم."
@@ -6493,6 +6544,10 @@ msgstr "الخادم موجود بالفعل في الاكتشاف، ويجب ع
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "The sound couldn't be saved."
 msgstr "تعذّر حفظ الصوت."
+
+#: src/interface/Home.tsx
+msgid "The update could not be started. Try again or use Settings, Updates."
+msgstr "تعذّر بدء التحديث. حاول مرة أخرى أو استخدم الإعدادات، التحديثات."
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Theme"
@@ -7002,6 +7057,10 @@ msgstr "تقدّم تنزيل التحديث"
 msgid "Update failed"
 msgstr "فشل التحديث"
 
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "Update failed, retry"
+msgstr "فشل التحديث، أعد المحاولة"
+
 #: src/interface/Home.tsx
 msgid "Update now"
 msgstr "التحديث الآن"
@@ -7014,6 +7073,7 @@ msgstr "التحديثات"
 msgid "Updates download in the background and install when you restart AnyTalk. Turn off to decide yourself when to update."
 msgstr "تُنزَّل التحديثات في الخلفية وتُثبَّت عند إعادة تشغيل AnyTalk. أوقف هذا الخيار لتقرر بنفسك متى تُحدِّث."
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: src/interface/Home.tsx
 msgid "Updating..."
 msgstr "جارٍ التحديث..."
@@ -7759,3 +7819,15 @@ msgstr "تم إنشاء حسابك؟ حاول الإتصال مجددا أو ق�
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 msgid "Yours"
 msgstr "خاصتك"
+
+#: components/rtc/components/ZoomableStream.tsx
+msgid "Zoom"
+msgstr "التكبير"
+
+#: components/rtc/components/ZoomableStream.tsx
+msgid "Zoom in"
+msgstr "تكبير"
+
+#: components/rtc/components/ZoomableStream.tsx
+msgid "Zoom out"
+msgstr "تصغير"

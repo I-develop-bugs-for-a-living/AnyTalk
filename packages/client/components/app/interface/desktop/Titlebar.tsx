@@ -22,6 +22,15 @@ import {
   applyUpdate,
   updateAvailable,
 } from "../../../../src/serviceWorkerInterface";
+import {
+  desktopUpdateDownloaded,
+  pickUpdateNotice,
+  runUpdate,
+  updateBusy,
+  updateFailed,
+  updaterState,
+  watchUpdater,
+} from "../settings/user/updaterState";
 
 const isMacOS = navigator.platform.startsWith("Mac");
 const isNative = !!window.native;
@@ -39,6 +48,19 @@ export function Titlebar() {
     if (stop) onCleanup(stop);
   }
   const { lifecycle } = useClientLifecycle();
+
+  // follow the desktop updater for the whole session (no-op if already
+  // watched or outside the desktop app)
+  watchUpdater();
+
+  // compact: only a ready desktop update or a web update, the download
+  // progress lives on the start page and in the settings; no dismissing here
+  const notice = () =>
+    pickUpdateNotice(
+      desktopUpdateDownloaded() ? updaterState() : undefined,
+      undefined,
+      updateAvailable(),
+    );
 
   /** Whether to show the disconnected look (after a short grace period) */
   const isDisconnected = createDisconnectedIndicator(() => lifecycle.state());
@@ -141,15 +163,36 @@ export function Titlebar() {
                   </a>
                 </Match>
               </Switch>
-              <Show when={updateAvailable()}>
+              <Show when={notice()}>
                 {" "}
                 <div
                   style={{
                     "-webkit-app-region": "no-drag",
                   }}
                 >
-                  <Button size="sm" onPress={applyUpdate}>
-                    <Trans>Update</Trans>
+                  <Button
+                    size="sm"
+                    isDisabled={updateBusy()}
+                    onPress={() => {
+                      const current = notice();
+                      if (current) runUpdate(current, applyUpdate);
+                    }}
+                  >
+                    <Switch
+                      fallback={
+                        isNative ? <Trans>Reload</Trans> : <Trans>Update</Trans>
+                      }
+                    >
+                      <Match when={updateFailed()}>
+                        <Trans>Update failed, retry</Trans>
+                      </Match>
+                      <Match when={updateBusy()}>
+                        <Trans>Updating...</Trans>
+                      </Match>
+                      <Match when={notice()?.type === "desktop"}>
+                        <Trans>Restart to update</Trans>
+                      </Match>
+                    </Switch>
                   </Button>
                 </div>
               </Show>
