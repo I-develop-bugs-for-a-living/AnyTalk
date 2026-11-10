@@ -16,7 +16,10 @@ import { useDevice } from "@revolt/common";
 import {
   type KindGroup,
   type RowEvent,
+  type ServiceId,
   type TrafficEntry,
+  SERVICES,
+  classifyService,
   describeRow,
   entries,
   entryDuration,
@@ -37,7 +40,9 @@ import { BottomSheet, useSnackbar } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import { CheckLabel, Pill, SearchInput } from "./controls";
+import { DroppedNotice } from "./DroppedNotice";
 import { EntryDetails } from "./EntryDetails";
+import { useServiceLabel } from "./serviceLabel";
 import {
   canOpenTrafficWindow,
   openTrafficWindow,
@@ -73,6 +78,7 @@ export function LiveView(props: { popout?: boolean }) {
 
   const [text, setText] = createSignal("");
   const [group, setGroup] = createSignal<KindGroup | "all">("all");
+  const [service, setService] = createSignal<ServiceId | "all">("all");
   const [hideNoise, setHideNoise] = createSignal(true);
   /**
    * Highest entry id seen when paused, undefined while live. Only the cutoff
@@ -91,8 +97,14 @@ export function LiveView(props: { popout?: boolean }) {
     const list = hideNoise() ? hideCallNoise(source()) : source();
     return filterEntries(list, {
       group: group() === "all" ? undefined : (group() as KindGroup),
+      service: service() === "all" ? undefined : (service() as ServiceId),
       text: text(),
     });
+  });
+  /** Services that occur in the recording, in the filter's order. */
+  const presentServices = createMemo(() => {
+    const found = new Set(source().map((e) => classifyService(e)));
+    return SERVICES.filter((s) => found.has(s));
   });
   const selectedIndex = createMemo(() =>
     shown().findIndex((e) => e.id === selectedId()),
@@ -171,6 +183,8 @@ export function LiveView(props: { popout?: boolean }) {
     }
   };
 
+  const serviceLabel = useServiceLabel();
+
   const groupLabel = (g: KindGroup | "all") =>
     ({
       all: t`All`,
@@ -225,6 +239,30 @@ export function LiveView(props: { popout?: boolean }) {
         </For>
       </Chips>
 
+      {/* only the services that occurred, and only when there is a choice */}
+      <Show when={presentServices().length > 1}>
+        <Chips role="group" aria-label={t`Show only service`}>
+          <Pill
+            type="button"
+            aria-pressed={service() === "all"}
+            on:click={() => setService("all")}
+          >
+            {t`All services`}
+          </Pill>
+          <For each={presentServices()}>
+            {(s) => (
+              <Pill
+                type="button"
+                aria-pressed={service() === s}
+                on:click={() => setService(s)}
+              >
+                {serviceLabel(s)}
+              </Pill>
+            )}
+          </For>
+        </Chips>
+      </Show>
+
       <Options>
         <CheckLabel>
           <input
@@ -246,6 +284,8 @@ export function LiveView(props: { popout?: boolean }) {
           {plural(shown().length, { one: "# entry", other: "# entries" })}
         </Count>
       </Options>
+
+      <DroppedNotice />
 
       <Body>
         <Switch>
@@ -379,7 +419,9 @@ function EntryRow(props: {
 }) {
   const { t } = useLingui();
   const eventLabel = useEventLabel();
+  const serviceLabel = useServiceLabel();
   const row = createMemo(() => describeRow(props.entry));
+  const service = createMemo(() => classifyService(props.entry));
   /** Summary with the translated route in front, for call connections. */
   const summary = () => {
     const route = row().route;
@@ -426,6 +468,9 @@ function EntryRow(props: {
       <Cell data-kind="summary">
         <Show when={row().desktop}>
           <DesktopTag>{t`Desktop app`}</DesktopTag>
+        </Show>
+        <Show when={service() !== "other"}>
+          <DesktopTag>{serviceLabel(service())}</DesktopTag>
         </Show>
         {summary()}
       </Cell>

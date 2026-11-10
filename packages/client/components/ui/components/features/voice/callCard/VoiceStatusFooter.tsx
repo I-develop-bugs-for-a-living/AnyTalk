@@ -7,12 +7,10 @@ import { useDevice } from "@revolt/common";
 import { useNavigate } from "@revolt/routing";
 import { useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
-import { IconButton } from "@revolt/ui/components/design/IconButton";
 import { typography } from "@revolt/ui/components/design/Text";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import { AudioDeviceChevron } from "./AudioDeviceChevron";
-import { callWindowHiddenOnPhone, showCallWindow } from "./callWindow";
 import { GameStreamPrompt } from "./GameStreamPrompt";
 import { DeafenButton, LeaveCallButton, MuteButton } from "./VoiceCallButtons";
 
@@ -104,17 +102,6 @@ export function VoiceStatusFooter() {
         </Split>
         <Show when={voice.channel()}>
           <LeaveCallButton size="sm" />
-        </Show>
-        {/* phones: the floating call window was hidden, bring it back */}
-        <Show when={voice.channel() && callWindowHiddenOnPhone()}>
-          <IconButton
-            size="sm"
-            variant="tonal"
-            aria-label={t`Show call window`}
-            onPress={showCallWindow}
-          >
-            <Symbol>picture_in_picture</Symbol>
-          </IconButton>
         </Show>
       </Buttons>
     </Footer>

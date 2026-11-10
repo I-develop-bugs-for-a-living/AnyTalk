@@ -229,3 +229,153 @@ describe("redaction of free text fields", () => {
     ).toBeUndefined();
   });
 });
+
+describe("redactAddresses", () => {
+  it("hides the address and port of host, srflx and relay candidates", async () => {
+    const { redactAddresses } = await import("./redact");
+    const out = redactAddresses(
+      "candidate:1 1 udp 2122260223 192.168.1.20 54321 typ host generation 0 ufrag abcd",
+    );
+    expect(out).not.toContain("192.168.1.20");
+    expect(out).not.toContain("54321");
+    expect(out).toContain("typ host generation 0 ufrag abcd");
+    expect(out).toContain("candidate:1 1 udp 2122260223");
+  });
+
+  it("hides the related address of reflexive candidates", async () => {
+    const { redactAddresses } = await import("./redact");
+    const out = redactAddresses(
+      "candidate:2 1 udp 1686052607 203.0.113.9 40000 typ srflx raddr 192.168.1.20 rport 40000 generation 0",
+    );
+    expect(out).not.toMatch(/203\.0\.113\.9|192\.168\.1\.20|40000/);
+    expect(out).toContain("typ srflx raddr");
+    expect(out).toContain("generation 0");
+  });
+
+  it("handles IPv6 and mDNS candidates", async () => {
+    const { redactAddresses } = await import("./redact");
+    const v6 = redactAddresses(
+      "candidate:3 1 udp 100 2001:db8::1234 50000 typ host",
+    );
+    expect(v6).not.toContain("2001:db8");
+    const mdns = redactAddresses(
+      "candidate:4 1 udp 100 3f2b1c9e-1111-2222-3333-444455556666.local 50001 typ host",
+    );
+    expect(mdns).not.toContain(".local");
+    expect(mdns).not.toContain("50001");
+  });
+
+  it("hides c= and o= lines, also inside JSON text", async () => {
+    const { redactAddresses } = await import("./redact");
+    const out = redactAddresses(
+      '{"sdp":"v=0\\r\\no=- 123 2 IN IP4 127.0.0.1\\r\\nc=IN IP4 203.0.113.9\\r\\na=rtcp:9 IN IP6 2001:db8::1\\r\\n"}',
+    );
+    expect(out).not.toMatch(/127\.0\.0\.1|203\.0\.113\.9|2001:db8/);
+    expect(out).toContain("\\r\\n");
+    expect(() => JSON.parse(out)).not.toThrow();
+  });
+
+  it("leaves other text alone", async () => {
+    const { redactAddresses } = await import("./redact");
+    expect(redactAddresses("ping 1.2.3.4 done")).toBe("ping 1.2.3.4 done");
+  });
+});
+
+describe("redactEntry hides own addresses in signalling frames", () => {
+  it("masks ws frames and leaves call connections visible", async () => {
+    const { redactEntry } = await import("./redact");
+    const frame = redactEntry({
+      kind: "ws",
+      id: 1,
+      connectionId: 1,
+      event: "frame",
+      url: "wss://lk.test/rtc",
+      host: "lk.test",
+      time: 0,
+      text: '{"candidate":"candidate:1 1 udp 1 10.0.0.5 5000 typ host"}',
+    });
+    expect(frame.text).not.toContain("10.0.0.5");
+    const conn = {
+      kind: "call-connection" as const,
+      id: 2,
+      time: 0,
+      pc: "publisher" as const,
+      relayed: false,
+      remoteAddress: "203.0.113.5",
+      remotePort: 7882,
+    };
+    expect(redactEntry(conn)).toBe(conn);
+  });
+});
+
+describe("redactAddresses on cut off previews", () => {
+  const leaks = (text: string) =>
+    /\d+\.\d+\.\d+\.\d+|2001:db8|[0-9a-f-]{20,}\.local/i.test(text);
+  const full =
+    "candidate:2 1 udp 1686052607 203.0.113.9 40000 typ srflx raddr 192.168.1.20 rport 40001 generation 0";
+
+  it("hides the address wherever the text is cut", async () => {
+    const { redactAddresses } = await import("./redact");
+    const start = full.indexOf("203");
+    for (let cut = start + 1; cut <= full.length; cut++) {
+      const out = redactAddresses(full.slice(0, cut));
+      // a cut inside the first octet leaves at most digits of one octet
+      expect(out, full.slice(0, cut)).not.toMatch(/\d+\.\d+\.\d+\.\d+/);
+      expect(out, full.slice(0, cut)).not.toContain("203.0");
+      if (cut > full.indexOf("192")) expect(out).not.toContain("192.168");
+    }
+  });
+
+  it("hides raddr without rport and a cut in the middle of rport", async () => {
+    const { redactAddresses } = await import("./redact");
+    expect(redactAddresses("typ srflx raddr 192.168.1.20")).not.toContain(
+      "192.168",
+    );
+    expect(
+      redactAddresses("typ srflx raddr 192.168.1.20 rport 400"),
+    ).not.toContain("400");
+  });
+
+  it("hides cut off IPv6 and mDNS addresses", async () => {
+    const { redactAddresses } = await import("./redact");
+    expect(leaks(redactAddresses("candidate:3 1 udp 100 2001:db8:1"))).toBe(
+      false,
+    );
+    expect(
+      leaks(
+        redactAddresses(
+          "candidate:4 1 udp 100 3f2b1c9e-1111-2222-3333-444455556666.lo",
+        ),
+      ),
+    ).toBe(false);
+  });
+});
+
+describe("redactAddresses structured fields", () => {
+  it("hides address-like JSON values", async () => {
+    const { redactAddresses } = await import("./redact");
+    const out = redactAddresses(
+      '{"address":"192.168.1.5","relatedAddress":"10.0.0.2","relayAddress":"2001:db8::7","ip":"abcd-1234.local","ipAddress":"198.51.100.4","port":5000}',
+    );
+    expect(out).not.toMatch(/192\.168|10\.0\.0|2001:db8|abcd-1234|198\.51/);
+    expect(out).toContain('"port":5000');
+    expect(() => JSON.parse(out)).not.toThrow();
+  });
+
+  it("keeps non-address values and cut off ones are hidden", async () => {
+    const { redactAddresses } = await import("./redact");
+    expect(redactAddresses('{"ip":"not an ip","address":"Main St 4"}')).toBe(
+      '{"ip":"not an ip","address":"Main St 4"}',
+    );
+    expect(redactAddresses('{"address":"192.168.')).not.toContain("192.168");
+  });
+
+  it("hides remote-candidates lines", async () => {
+    const { redactAddresses } = await import("./redact");
+    const out = redactAddresses(
+      "a=remote-candidates:1 192.168.1.5 5000 2 192.168.1.5 5001\r\na=end",
+    );
+    expect(out).not.toContain("192.168");
+    expect(out).toContain("a=end");
+  });
+});

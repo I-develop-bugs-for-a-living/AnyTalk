@@ -1,5 +1,13 @@
+import { classifyService } from "./services";
 import { findHeader } from "./summarize";
-import type { HeaderList, HttpEntry, TrafficEntry, WsEntry } from "./types";
+import type {
+  HeaderList,
+  HttpEntry,
+  ResourceEntry,
+  TrafficEntry,
+  WsEntry,
+} from "./types";
+import { entryTime } from "./view";
 
 /** Version of the export format, written into the creator field. */
 const VERSION = "1";
@@ -84,7 +92,53 @@ function harHttp(e: HttpEntry) {
     cache: {},
     timings: { send: 0, wait: time, receive: 0 },
     _source: e.source,
+    _service: classifyService(e),
     ...(e.resourceType ? { _resourceType: e.resourceType } : {}),
+  };
+}
+
+/**
+ * One HAR entry for a resource the browser loaded itself (image, video,
+ * iframe, ...). Only what the browser's timing API tells is filled in: URL,
+ * start, duration, status and sizes. Headers are empty, as they are not
+ * visible to the page.
+ */
+function harResource(e: ResourceEntry) {
+  const time = Math.max(0, e.durationMs);
+  return {
+    startedDateTime: new Date(e.start).toISOString(),
+    time,
+    request: {
+      method: "GET",
+      url: e.url,
+      httpVersion: harVersion(e.protocol),
+      cookies: [],
+      headers: [],
+      queryString: harQuery(e.url),
+      headersSize: -1,
+      bodySize: 0,
+    },
+    response: {
+      status: e.status ?? 0,
+      statusText: "",
+      httpVersion: harVersion(e.protocol),
+      cookies: [],
+      headers: [],
+      content: {
+        // 0 is what the timing API says when it may not tell the size
+        size: e.decodedBodySize > 0 ? e.decodedBodySize : -1,
+        mimeType: "",
+      },
+      redirectURL: "",
+      headersSize: -1,
+      bodySize: e.encodedBodySize > 0 ? e.encodedBodySize : -1,
+      _transferSize: e.transferSize,
+    },
+    cache: {},
+    timings: { send: 0, wait: time, receive: 0 },
+    _source: "resource",
+    _service: classifyService(e),
+    _resourceType: e.initiatorType,
   };
 }
 
@@ -132,12 +186,15 @@ function harSockets(entries: WsEntry[]) {
       cache: {},
       timings: { send: 0, wait: time, receive: 0 },
       _resourceType: "websocket",
+      _service: classifyService(first),
       _webSocketMessages: events
         .filter((e) => e.event === "frame")
         .map((e) => ({
           type: e.direction === "out" ? "send" : "receive",
           // seconds since the epoch, as Chrome writes them
           time: e.time / 1000,
+          // the same moment as an absolute ISO time, to match a capture
+          _timestamp: new Date(e.time).toISOString(),
           opcode: e.text === undefined ? 2 : 1,
           data: e.text ?? e.hex ?? "",
         })),
@@ -147,8 +204,10 @@ function harSockets(entries: WsEntry[]) {
 
 /**
  * Build a HAR 1.2 document from fetch/XMLHttpRequest entries (with the
- * browser's timing merged in, see `mergeResources`) and WebSocket entries.
- * Other entries are left out; use `buildJson` for everything.
+ * browser's timing merged in, see `mergeResources`), WebSocket entries and
+ * resources the browser loaded itself (images, video, iframes). Call entries
+ * are not HTTP and are left out; use `buildJson` for everything. Every entry
+ * starts at an absolute ISO time (`startedDateTime`, millisecond precision).
  *
  * @param entries Entries as returned by `entries()`, so already redacted
  *  unless the user asked for secrets
@@ -156,9 +215,14 @@ function harSockets(entries: WsEntry[]) {
 export function buildHar(entries: TrafficEntry[]) {
   const http = entries.filter((e): e is HttpEntry => e.kind === "http");
   const ws = entries.filter((e): e is WsEntry => e.kind === "ws");
-  const rows = [...http.map(harHttp), ...harSockets(ws)].sort((a, b) =>
-    a.startedDateTime.localeCompare(b.startedDateTime),
+  const resources = entries.filter(
+    (e): e is ResourceEntry => e.kind === "resource",
   );
+  const rows = [
+    ...http.map(harHttp),
+    ...resources.map(harResource),
+    ...harSockets(ws),
+  ].sort((a, b) => a.startedDateTime.localeCompare(b.startedDateTime));
   return {
     log: {
       version: "1.2",
@@ -170,7 +234,10 @@ export function buildHar(entries: TrafficEntry[]) {
 }
 
 /**
- * The plain JSON export: every entry as recorded (redacted as passed in).
+ * The plain JSON export: every entry as recorded (redacted as passed in),
+ * each with an absolute `timestamp` (ISO, millisecond precision, UTC) of when
+ * it happened and the `service` it talks to. The timestamps can be matched
+ * with the absolute time of a packet capture.
  *
  * @param entries Entries as returned by `entries()`
  */
@@ -178,6 +245,10 @@ export function buildJson(entries: TrafficEntry[]) {
   return {
     exportedAt: new Date().toISOString(),
     creator: { name: "AnyTalk network inspector", version: VERSION },
-    entries,
+    entries: entries.map((entry) => ({
+      ...entry,
+      timestamp: new Date(entryTime(entry)).toISOString(),
+      service: classifyService(entry),
+    })),
   };
 }

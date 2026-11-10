@@ -62,16 +62,37 @@ export function UserMenuItems(props: {
   onClose: () => void;
 }) {
   const { t } = useLingui();
-  const { openModal } = useModals();
+  const { openModal, showError } = useModals();
   const client = useClient();
   const user = useUser();
   const state = useState();
   const desktop = useRailDesktop();
   const close = () => props.onClose();
 
-  const setPresence = (
+  /**
+   * Change the presence. Errors (for example the server's limit of two profile
+   * edits per 10 seconds) are shown instead of being dropped silently.
+   */
+  const setPresence = async (
     presence: (API.DataEditUser["status"] & {})["presence"],
-  ) => user()?.edit({ status: { presence } });
+  ) => {
+    const self = user();
+    if (!self) return;
+
+    try {
+      await self.edit({ status: { presence } });
+
+      // the server leaves `status` out of its answer once you are invisible,
+      // so the previous presence (e.g. Focus) would stay in the local copy
+      if (presence === "Invisible") {
+        client().users.updateUnderlyingObject(self.id, {
+          status: { ...self.status, presence },
+        });
+      }
+    } catch (error) {
+      showError(error);
+    }
+  };
 
   function copyId() {
     navigator.clipboard.writeText(user()!.id);

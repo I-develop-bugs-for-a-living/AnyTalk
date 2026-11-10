@@ -1,4 +1,4 @@
-import { For, createSignal, onCleanup } from "solid-js";
+import { For, Show, createSignal, onCleanup } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
@@ -6,14 +6,21 @@ import { styled } from "styled-system/jsx";
 import type { BodySummary, HeaderList } from "@revolt/traffic";
 import {
   type TrafficEntry,
+  callFilter,
+  classifyService,
+  entryHost,
   formatBytes,
   formatClock,
   formatDuration,
+  hostFilter,
   remoteOf,
   tlsVersionName,
 } from "@revolt/traffic";
 
+import { useSnackbar } from "@revolt/ui";
+
 import { Pill } from "./controls";
+import { useServiceLabel } from "./serviceLabel";
 
 /** One line of the overview: a label and its value. */
 type Field = { label: string; value: string; mono?: boolean };
@@ -28,7 +35,10 @@ type Block = { title: string; text: string };
  */
 export function EntryDetails(props: { entry: TrafficEntry }) {
   const { t } = useLingui();
+  const serviceLabel = useServiceLabel();
+  const snackbar = useSnackbar();
   const [copied, setCopied] = createSignal(false);
+  const [copiedFilter, setCopiedFilter] = createSignal(false);
   let resetTimer: ReturnType<typeof setTimeout> | undefined;
   onCleanup(() => clearTimeout(resetTimer));
 
@@ -44,6 +54,7 @@ export function EntryDetails(props: { entry: TrafficEntry }) {
       out.push({ label, value: String(value), mono });
     };
 
+    add(t`Service`, serviceLabel(classifyService(e)));
     switch (e.kind) {
       case "http":
         add(t`Method`, e.method, true);
@@ -242,18 +253,60 @@ export function EntryDetails(props: { entry: TrafficEntry }) {
     return out;
   };
 
-  /** Copy the entry as JSON with the clipboard of the window it is shown in. */
-  const copy = async (event: Event) => {
+  /**
+   * Wireshark display filter for this entry: the remote address for a call
+   * connection, the TLS server name (or Host header) for others with a host.
+   */
+  const wiresharkFilter = (): string | undefined => {
+    const e = props.entry;
+    if (e.kind === "call-connection") return callFilter(e);
+    const host = entryHost(e);
+    if (!host) return undefined;
+    const secure =
+      e.kind === "call-info" || !("url" in e) || /^(https|wss):/.test(e.url);
+    return hostFilter(host, secure);
+  };
+
+  /** Copy text with the clipboard of the window the button is in. */
+  const copyText = async (
+    event: Event,
+    text: string,
+    done: () => void,
+    failure: string,
+  ) => {
     const view = (event.currentTarget as HTMLElement).ownerDocument.defaultView;
     try {
-      await (view?.navigator ?? navigator).clipboard.writeText(
-        JSON.stringify(props.entry, null, 2),
-      );
-      setCopied(true);
+      await (view?.navigator ?? navigator).clipboard.writeText(text);
+      done();
       clearTimeout(resetTimer);
-      resetTimer = setTimeout(() => setCopied(false), 1500);
+      resetTimer = setTimeout(() => {
+        setCopied(false);
+        setCopiedFilter(false);
+      }, 1500);
     } catch {
-      // clipboard not available here
+      snackbar.show({ message: failure });
+    }
+  };
+
+  /** Copy the entry as JSON. */
+  const copy = (event: Event) =>
+    copyText(
+      event,
+      JSON.stringify(props.entry, null, 2),
+      () => setCopied(true),
+      t`Could not copy the entry`,
+    );
+
+  /** Copy the Wireshark filter. */
+  const copyFilter = (event: Event) => {
+    const filter = wiresharkFilter();
+    if (filter) {
+      copyText(
+        event,
+        filter,
+        () => setCopiedFilter(true),
+        t`Could not copy the filter`,
+      );
     }
   };
 
@@ -277,11 +330,16 @@ export function EntryDetails(props: { entry: TrafficEntry }) {
           </section>
         )}
       </For>
-      <div>
+      <Actions>
         <Pill type="button" kind="tonal" on:click={copy}>
           {copied() ? t`Copied` : t`Copy JSON`}
         </Pill>
-      </div>
+        <Show when={wiresharkFilter()}>
+          <Pill type="button" on:click={copyFilter}>
+            {copiedFilter() ? t`Copied` : t`Copy Wireshark filter`}
+          </Pill>
+        </Show>
+      </Actions>
     </Wrap>
   );
 }
@@ -296,6 +354,11 @@ const Wrap = styled("div", {
     fontSize: "13px",
     color: "var(--md-sys-color-on-surface)",
   },
+});
+
+/** The copy buttons, wrapping on narrow screens */
+const Actions = styled("div", {
+  base: { display: "flex", flexWrap: "wrap", gap: "8px" },
 });
 
 /** Label and value pairs */

@@ -44,6 +44,10 @@ msgstr "dddd LT"
 msgid ":{0}: from {1}"
 msgstr ":{0}: ({1} より)"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "\"Copy Wireshark filter\" next to a server above puts a display filter for it on the clipboard. To line up times, set View, Time Display Format, UTC Date and Time of Day in Wireshark and compare with the absolute times in the exports. Browsers can hide the server name (Encrypted Client Hello, QUIC), so the filter may miss such connections."
+msgstr "上のサーバーの横にある「Wireshark フィルターをコピー」を押すと、そのサーバー用の表示フィルターがクリップボードにコピーされます。時刻を合わせるには、Wireshark で「View」→「Time Display Format」→「UTC Date and Time of Day」を選び、エクスポートの絶対時刻と比較してください。ブラウザーはサーバー名を隠すことがあるため(Encrypted Client Hello、QUIC)、フィルターで一致しない接続もあります。"
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "(changes are being saved…)"
 msgstr "(変更を保存しています...)"
@@ -107,6 +111,11 @@ msgstr "{0, plural, other {メンバー # 人}}"
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
 msgstr "{0, plural, other {新しいメンション # 件}}"
+
+#. placeholder {0}: droppedCount()
+#: components/app/interface/settings/user/developer/traffic/DroppedNotice.tsx
+msgid "{0, plural, one {# older entry was dropped to stay within the log's limits} other {# older entries were dropped to stay within the log's limits}}"
+msgstr "{0, plural, other {ログの上限を守るため、古いエントリー # 件を破棄しました}}"
 
 #. placeholder {0}: channel.voiceParticipants.size
 #: src/interface/home/FriendsOverview.tsx
@@ -687,6 +696,10 @@ msgstr "すべてのリキャップ"
 msgid "All roles have overrides."
 msgstr "すべてのロールに上書きがあります。"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "All services"
+msgstr "すべてのサービス"
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "All Systems Operational"
 msgstr "すべてのシステムが正常に稼働中"
@@ -813,6 +826,10 @@ msgstr "AnyTalk はシステムトレイで起動します。"
 #: src/AndroidNag.tsx
 msgid "AnyTalk works best as an app"
 msgstr "AnyTalk はアプリで使うのが最適です"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "API"
+msgstr "API"
 
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -1157,6 +1174,14 @@ msgstr "通話の暗号化 (DTLS-SRTP) のキーはこのファイルに含ま�
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Call encryption couldn't be loaded. Try reloading the page."
 msgstr "通話の暗号化を読み込めませんでした。ページを再読み込みしてください。"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Call media"
+msgstr "通話メディア"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Call signalling"
+msgstr "通話シグナリング"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
@@ -1742,6 +1767,16 @@ msgstr "ユーザーIDをコピー"
 msgid "Copy webhook URL"
 msgstr "ウェブフックURLをコピー"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Copy Wireshark filter"
+msgstr "Wireshark フィルターをコピー"
+
+#. placeholder {0}: host()
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Copy Wireshark filter for {0}"
+msgstr "{0} の Wireshark フィルターをコピー"
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Could not change the key log. Try again."
 msgstr "キーログを変更できませんでした。もう一度お試しください。"
@@ -1753,6 +1788,15 @@ msgstr "キーログを変更できませんでした。もう一度お試しく
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Could not check which account this is. Cancel and try again."
 msgstr "アカウントを確認できませんでした。キャンセルしてもう一度お試しください。"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Could not copy the entry"
+msgstr "エントリーをコピーできませんでした"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not copy the filter"
+msgstr "フィルターをコピーできませんでした"
 
 #: components/i18n/errors.tsx
 msgid "Could not find what you requested."
@@ -2480,6 +2524,10 @@ msgstr "<0/> に施行 (<1/>)"
 msgid "Email"
 msgstr "メールアドレス"
 
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Embeds proxy"
+msgstr "埋め込みプロキシ"
+
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Emoji"
 msgstr "絵文字"
@@ -2615,6 +2663,10 @@ msgstr "推定アップロード帯域幅"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Event"
+msgstr "イベント"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Events"
 msgstr "イベント"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
@@ -2848,6 +2900,10 @@ msgstr "Google Play で手に入れよう"
 msgid "GIF Picker Placeholder"
 msgstr "GIF ピッカー プレースホルダー"
 
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "GIF provider"
+msgstr "GIF プロバイダー"
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Gifbox is our own GIF service, so you can keep sharing GIFs right here on AnyTalk."
 msgstr "Gifbox は AnyTalk 独自の GIF サービスなので、ここで引き続き GIF を共有できます。"
@@ -2981,8 +3037,8 @@ msgid "Hide call signalling noise"
 msgstr "通話のシグナリングの雑多な通信を隠す"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardPiP.tsx
-msgid "Hide call window"
-msgstr "通話ウィンドウを隠す"
+#~ msgid "Hide call window"
+#~ msgstr "通話ウィンドウを隠す"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
@@ -4226,8 +4282,12 @@ msgid "Off"
 msgstr "オフ"
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
-msgstr "オフ:トークン、パスワード、鍵は隠されます。再読み込みでリセットされます。"
+#~ msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
+#~ msgstr "オフ:トークン、パスワード、鍵は隠されます。再読み込みでリセットされます。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Off: tokens, passwords, keys and your own IP addresses are hidden. Resets when you reload."
+msgstr "オフ:トークン、パスワード、キー、自分の IP アドレスは非表示になります。再読み込みするとリセットされます。"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Offers to stream the games you play during a call. Detection happens only on this computer and nothing is sent."
@@ -4401,6 +4461,7 @@ msgid "Opening another stream while watching one shows them side by side. When o
 msgstr "配信を視聴中に別の配信を開くと、並べて表示します。オフの場合は、視聴中の配信が置き換わります。"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
 #: components/modal/modals/ReportContent.tsx
 msgid "Other"
 msgstr "その他"
@@ -5648,9 +5709,17 @@ msgstr "参加したサーバーはここに表示されます。"
 msgid "Servers, unread messages"
 msgstr "サーバー、未読メッセージ"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Service"
+msgstr "サービス"
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
-msgstr "セッショントークン、パスワード、通話の鍵が画面とエクスポートに表示されます。それらを見たり入手したりした人は、あなたとしてサインインできてしまいます。デバッグ時のみオンにし、エクスポートは共有しないでください。"
+#~ msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+#~ msgstr "セッショントークン、パスワード、通話の鍵が画面とエクスポートに表示されます。それらを見たり入手したりした人は、あなたとしてサインインできてしまいます。デバッグ時のみオンにし、エクスポートは共有しないでください。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Session tokens, passwords, call keys and your own IP addresses will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+msgstr "セッショントークン、パスワード、通話キー、自分の IP アドレスが画面とエクスポートに表示されます。これらを見たり入手したりした人は、あなたとしてサインインできてしまいます。デバッグするときだけオンにし、エクスポートは共有しないでください。"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5729,8 +5798,8 @@ msgid "Show admin panel shortcuts in context menus"
 msgstr "コンテキストメニューに管理パネルのショートカットを表示"
 
 #: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
-msgid "Show call window"
-msgstr "通話ウィンドウを表示"
+#~ msgid "Show call window"
+#~ msgstr "通話ウィンドウを表示"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
@@ -5751,6 +5820,10 @@ msgstr "通話の映像タイルにライブ統計を表示"
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Show only"
 msgstr "絞り込み表示"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show only service"
+msgstr "このサービスのみ表示"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Show Others"
@@ -6055,6 +6128,10 @@ msgstr "配信の統計"
 msgid "Stream viewers"
 msgstr "配信の視聴者"
 
+#: components/ui/components/features/voice/callCard/VoiceCallCard.tsx
+msgid "Stream window. Use the arrow keys to move it."
+msgstr "配信ウィンドウ。矢印キーで移動できます。"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Streams"
 msgstr "配信"
@@ -6261,6 +6338,10 @@ msgstr "ファイル「{0}」（{fileSize}）が最大サイズ {maxSizeFormatte
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The first version hasn't been published. Check back soon."
 msgstr "最初のバージョンはまだ公開されていません。しばらくしてからご確認ください。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "The HAR file holds requests, files and WebSocket connections. Call entries (route, encryption, byte counts, data messages) are not HTTP, so they are only in the JSON export. Both exports give every entry an absolute time (UTC, to the millisecond) to line up with a packet capture."
+msgstr "HAR ファイルにはリクエスト、ファイル、WebSocket 接続が含まれます。通話のエントリー(経路、暗号化、バイト数、データメッセージ)は HTTP ではないため、JSON エクスポートにのみ含まれます。どちらのエクスポートも、パケットキャプチャと照合できるよう、各エントリーに絶対時刻(UTC、ミリ秒単位)が付きます。"
 
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
@@ -6835,6 +6916,10 @@ msgstr "Gifbox にアップロード"
 msgid "Uploading file `{fileName}`... {0}%"
 msgstr "ファイル `{fileName}` をアップロード中... {0}%"
 
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Uploads"
+msgstr "アップロード"
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "URL"
 msgstr "URL"
@@ -7186,6 +7271,10 @@ msgstr "サーバー全体"
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "Windows インストーラー"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Wireshark filter copied"
+msgstr "Wireshark フィルターをコピーしました"
 
 #. placeholder {0}: names.join(", ")
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx

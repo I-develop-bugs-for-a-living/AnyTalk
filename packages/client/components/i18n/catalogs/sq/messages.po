@@ -44,6 +44,10 @@ msgstr "dddd [në] LT"
 msgid ":{0}: from {1}"
 msgstr ":{0}: nga {1}"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "\"Copy Wireshark filter\" next to a server above puts a display filter for it on the clipboard. To line up times, set View, Time Display Format, UTC Date and Time of Day in Wireshark and compare with the absolute times in the exports. Browsers can hide the server name (Encrypted Client Hello, QUIC), so the filter may miss such connections."
+msgstr ""
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "(changes are being saved…)"
 msgstr "(ndryshimet po ruhen…)"
@@ -107,6 +111,11 @@ msgstr "{0, plural, one {# Anëtar} other {# Anëtarë}}"
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
 msgstr "{0, plural, one {# përmendje e re} other {# përmendje të reja}}"
+
+#. placeholder {0}: droppedCount()
+#: components/app/interface/settings/user/developer/traffic/DroppedNotice.tsx
+msgid "{0, plural, one {# older entry was dropped to stay within the log's limits} other {# older entries were dropped to stay within the log's limits}}"
+msgstr ""
 
 #. placeholder {0}: channel.voiceParticipants.size
 #: src/interface/home/FriendsOverview.tsx
@@ -761,6 +770,10 @@ msgstr "Të gjitha përmbledhjet"
 msgid "All roles have overrides."
 msgstr "Të gjitha rolet kanë mbivendosje."
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "All services"
+msgstr ""
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "All Systems Operational"
 msgstr "Të gjitha sistemet funksionale"
@@ -887,6 +900,10 @@ msgstr "AnyTalk do të nisë në tabakanë e sistemit."
 #: src/AndroidNag.tsx
 msgid "AnyTalk works best as an app"
 msgstr "AnyTalk funksionon më mirë si aplikacion"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "API"
+msgstr ""
 
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -1236,6 +1253,14 @@ msgstr ""
 
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Call encryption couldn't be loaded. Try reloading the page."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Call media"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Call signalling"
 msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
@@ -1825,6 +1850,16 @@ msgstr "Kopjo ID-në e përdoruesit"
 msgid "Copy webhook URL"
 msgstr "Kopjo URL-në e webhook-ut"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Copy Wireshark filter"
+msgstr ""
+
+#. placeholder {0}: host()
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Copy Wireshark filter for {0}"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Could not change the key log. Try again."
 msgstr ""
@@ -1835,6 +1870,15 @@ msgstr ""
 
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Could not check which account this is. Cancel and try again."
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Could not copy the entry"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not copy the filter"
 msgstr ""
 
 #: components/i18n/errors.tsx
@@ -2574,6 +2618,10 @@ msgstr "Në fuqi <0/> (<1/>)"
 msgid "Email"
 msgstr "Adresa e email-it"
 
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Embeds proxy"
+msgstr ""
+
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Emoji"
 msgstr "Emoji"
@@ -2709,6 +2757,10 @@ msgstr "Gjerësia e vlerësuar e brezit të ngarkimit"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Event"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Events"
 msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
@@ -2942,6 +2994,10 @@ msgstr "Merre në Google Play"
 msgid "GIF Picker Placeholder"
 msgstr "Vendmbajtësi i zgjedhësit të GIF-eve"
 
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "GIF provider"
+msgstr ""
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Gifbox is our own GIF service, so you can keep sharing GIFs right here on AnyTalk."
 msgstr "Gifbox është shërbimi ynë i GIF-eve, kështu që mund të vazhdosh të ndash GIF-e pikërisht këtu në AnyTalk."
@@ -3075,8 +3131,8 @@ msgid "Hide call signalling noise"
 msgstr ""
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardPiP.tsx
-msgid "Hide call window"
-msgstr ""
+#~ msgid "Hide call window"
+#~ msgstr ""
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
@@ -4326,7 +4382,11 @@ msgid "Off"
 msgstr "Çaktivizuar"
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
+#~ msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Off: tokens, passwords, keys and your own IP addresses are hidden. Resets when you reload."
 msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
@@ -4501,6 +4561,7 @@ msgid "Opening another stream while watching one shows them side by side. When o
 msgstr "Hapja e një transmetimi tjetër gjatë shikimit të një të parit i shfaq krah për krah. Kur është çaktivizuar, e zëvendëson transmetimin që po shikoje."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
 #: components/modal/modals/ReportContent.tsx
 msgid "Other"
 msgstr "Të tjera"
@@ -5757,8 +5818,16 @@ msgstr ""
 msgid "Servers, unread messages"
 msgstr ""
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Service"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+#~ msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Session tokens, passwords, call keys and your own IP addresses will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
 msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
@@ -5838,8 +5907,8 @@ msgid "Show admin panel shortcuts in context menus"
 msgstr "Shfaq shkurtoret e panelit të administratorit në menutë e kontekstit"
 
 #: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
-msgid "Show call window"
-msgstr ""
+#~ msgid "Show call window"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
@@ -5859,6 +5928,10 @@ msgstr "Shfaq statistikat live në pllakat e videos së thirrjes"
 
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Show only"
+msgstr ""
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show only service"
 msgstr ""
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
@@ -6170,6 +6243,10 @@ msgstr "Statistikat e transmetimit"
 msgid "Stream viewers"
 msgstr ""
 
+#: components/ui/components/features/voice/callCard/VoiceCallCard.tsx
+msgid "Stream window. Use the arrow keys to move it."
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Streams"
 msgstr "Transmetimet"
@@ -6376,6 +6453,10 @@ msgstr "Skedari \"{0}\" ({fileSize}) e kalon kufirin maksimal të madhësisë pr
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The first version hasn't been published. Check back soon."
 msgstr "Versioni i parë nuk është publikuar ende. Kthehu së shpejti."
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "The HAR file holds requests, files and WebSocket connections. Call entries (route, encryption, byte counts, data messages) are not HTTP, so they are only in the JSON export. Both exports give every entry an absolute time (UTC, to the millisecond) to line up with a packet capture."
+msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
@@ -6950,6 +7031,10 @@ msgstr "Ngarko në Gifbox"
 msgid "Uploading file `{fileName}`... {0}%"
 msgstr "Po ngarkohet skedari `{fileName}`... {0}%"
 
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Uploads"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "URL"
 msgstr ""
@@ -7307,6 +7392,10 @@ msgstr ""
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "Instaluesi i Windows"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Wireshark filter copied"
+msgstr ""
 
 #. placeholder {0}: names.join(", ")
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx

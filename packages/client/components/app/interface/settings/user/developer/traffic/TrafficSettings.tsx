@@ -18,6 +18,7 @@ import {
   buildHar,
   buildJson,
   clear,
+  destinationFilter,
   entries,
   fileStamp,
   formatBytes,
@@ -34,10 +35,13 @@ import {
   Column,
   Dialog,
   Text,
+  useSnackbar,
 } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import { useSettingsNavigation } from "../../../Settings";
+import { DroppedNotice } from "./DroppedNotice";
+import { useServiceLabel } from "./serviceLabel";
 
 /**
  * Settings, Developer, Network inspector: turn recording on, see where the
@@ -140,8 +144,8 @@ export function TrafficSettings() {
           onClick={toggleSecrets}
           description={
             <Trans>
-              Off: tokens, passwords and keys are hidden. Resets when you
-              reload.
+              Off: tokens, passwords, keys and your own IP addresses are hidden.
+              Resets when you reload.
             </Trans>
           }
         >
@@ -180,6 +184,18 @@ export function TrafficSettings() {
           </Button>
         </ErrorText>
       </Buttons>
+
+      <Text class="label">
+        <Trans>
+          The HAR file holds requests, files and WebSocket connections. Call
+          entries (route, encryption, byte counts, data messages) are not HTTP,
+          so they are only in the JSON export. Both exports give every entry an
+          absolute time (UTC, to the millisecond) to line up with a packet
+          capture.
+        </Trans>
+      </Text>
+
+      <DroppedNotice />
 
       <Show when={hasKeyLog()}>
         <Column gap="md">
@@ -322,6 +338,16 @@ export function TrafficSettings() {
             much. Compare that with the servers and sizes listed above.
           </Trans>
         </p>
+        <p>
+          <Trans>
+            "Copy Wireshark filter" next to a server above puts a display filter
+            for it on the clipboard. To line up times, set View, Time Display
+            Format, UTC Date and Time of Day in Wireshark and compare with the
+            absolute times in the exports. Browsers can hide the server name
+            (Encrypted Client Hello, QUIC), so the filter may miss such
+            connections.
+          </Trans>
+        </p>
         <Show
           when={window.native}
           fallback={
@@ -374,9 +400,10 @@ export function TrafficSettings() {
           ]}
         >
           <Trans>
-            Session tokens, passwords and call keys will appear on screen and in
-            exports. Anyone who sees or gets them could sign in as you. Turn
-            this on only to debug, and don't share the exports.
+            Session tokens, passwords, call keys and your own IP addresses will
+            appear on screen and in exports. Anyone who sees or gets them could
+            sign in as you. Turn this on only to debug, and don't share the
+            exports.
           </Trans>
         </Dialog>
       </Show>
@@ -402,13 +429,47 @@ function useTypeLabel() {
  * One row of the destinations: host, type, count and size.
  */
 function DestinationRow(props: { row: Destination }) {
+  const { t } = useLingui();
   const typeLabel = useTypeLabel();
+  const serviceLabel = useServiceLabel();
+  const snackbar = useSnackbar();
+
+  /** Wireshark display filter for this destination, if one can be built. */
+  const filter = () => destinationFilter(props.row);
+  const host = () => props.row.host;
+
+  /** Copy the Wireshark display filter that matches this destination. */
+  const copyFilter = async () => {
+    const text = filter();
+    if (!text) return;
+    try {
+      await navigator.clipboard.writeText(text);
+      snackbar.show({ message: t`Wireshark filter copied` });
+    } catch {
+      snackbar.show({ message: t`Could not copy the filter` });
+    }
+  };
+
   return (
     <li>
-      <code>{props.row.host}</code>
+      <div>
+        <code>{props.row.host}</code>
+        <small>{serviceLabel(props.row.service)}</small>
+      </div>
       <span>{typeLabel(props.row.type)}</span>
       <span>{props.row.count}</span>
       <span>{formatBytes(props.row.bytes)}</span>
+      <Show when={filter()} fallback={<span />}>
+        <Button
+          variant="text"
+          size="xs"
+          aria-label={t`Copy Wireshark filter for ${host()}`}
+          onPress={copyFilter}
+        >
+          <Symbol size={18}>content_copy</Symbol>
+          <Trans>Copy Wireshark filter</Trans>
+        </Button>
+      </Show>
     </li>
   );
 }
@@ -456,7 +517,12 @@ const Destinations = styled("ul", {
 
     "& li": {
       display: "grid",
-      gridTemplateColumns: "minmax(0, 1fr) 64px 48px 72px",
+      gridTemplateColumns: "minmax(0, 1fr) 64px 48px 72px auto",
+      _phone: {
+        gridTemplateColumns: "minmax(0, 1fr) 48px 40px 64px auto",
+        columnGap: "6px",
+        paddingInline: "12px",
+      },
       alignItems: "center",
       columnGap: "12px",
       minHeight: "44px",
@@ -470,6 +536,15 @@ const Destinations = styled("ul", {
       minWidth: 0,
       overflowWrap: "anywhere",
       fontFamily: "var(--fonts-monospace, monospace)",
+    },
+    "& li > div": { display: "flex", flexDirection: "column", minWidth: 0 },
+    "& li small": {
+      fontSize: "12px",
+      color: "var(--md-sys-color-on-surface-variant)",
+    },
+    // phones show only the icon, the label stays for screen readers
+    "& li button": {
+      _phone: { fontSize: 0, gap: 0, minWidth: "44px", minHeight: "44px" },
     },
     "& li > span:nth-of-type(n+2)": { textAlign: "end" },
     "& li > span:first-of-type": {

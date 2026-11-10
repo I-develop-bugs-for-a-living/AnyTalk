@@ -1,115 +1,50 @@
-import { Show } from "solid-js";
-
-import { useLingui } from "@lingui/solid/macro";
 import {
   TrackLoop,
   TrackReference,
-  useEnsureParticipant,
-  useIsMuted,
   useTrackRefContext,
-  useTracks,
   VideoTrack,
 } from "solid-livekit-components";
 
-import { Track } from "livekit-client";
 import { styled } from "styled-system/jsx";
 
-import { useUser } from "@revolt/markdown/users";
-import { useFastIsSpeaking, useVoice } from "@revolt/rtc";
-import { Avatar, IconButton } from "@revolt/ui/components/design";
-import { Row } from "@revolt/ui/components/layout";
-import { Symbol } from "@revolt/ui/components/utils/Symbol";
+import { useVoice } from "@revolt/rtc";
 
-import { hideCallWindow, isPhoneWidth } from "./callWindow";
 import { VoiceCallCardActions } from "./VoiceCallCardActions";
 import { VoiceCallCardStatus } from "./VoiceCallCardStatus";
 
+/**
+ * The floating call window: the stream or video the call window would show
+ * (see `Voice.pipTrack`) with the call status and controls over it
+ */
 export function VoiceCallCardPiP() {
-  const { t } = useLingui();
-  const voice = useVoice();
-  const audTracks = useTracks(
-    [{ source: Track.Source.Microphone, withPlaceholder: true }],
-    { onlySubscribed: false },
-  );
-
-  const hasFocusVideo = () => {
-    const track = voice.focusTrack();
-    if (!track) return false;
-
-    return (
-      track.source === Track.Source.ScreenShare ||
-      !useIsMuted({
-        participant: track.participant,
-        source: Track.Source.Camera,
-      })()
-    );
-  };
-
   return (
     <MiniCard data-mini-card>
       <VoiceCallCardStatus pip />
-      {/* phones: just the focused stream as background, no avatars */}
-      <Show when={!hasFocusVideo()} fallback={<MiniVideoTile />}>
-        <Show when={!isPhoneWidth()}>
-          <Row align justify grow wrap>
-            <TrackLoop tracks={audTracks}>{() => <ConnectedUser />}</TrackLoop>
-          </Row>
-        </Show>
-      </Show>
+      <MiniVideoTile />
       <MiniActions>
         <VoiceCallCardActions size="xs" />
       </MiniActions>
-      <Show when={isPhoneWidth()}>
-        <IconButton
-          data-hide-call-window
-          size="xs"
-          variant="tonal"
-          aria-label={t`Hide call window`}
-          onPress={hideCallWindow}
-        >
-          <Symbol>close</Symbol>
-        </IconButton>
-      </Show>
     </MiniCard>
   );
 }
 
-function ConnectedUser() {
-  const participant = useEnsureParticipant();
-
-  const isMuted = useIsMuted({
-    participant,
-    source: Track.Source.Microphone,
-  });
-
-  const isSpeaking = useFastIsSpeaking(participant);
-  const user = useUser(participant.identity);
-
-  return (
-    <UserIcon speaking={isSpeaking()}>
-      <Avatar
-        size={24}
-        src={user().avatar}
-        fallback={user().username}
-        shape="square"
-      />
-      <Show when={isMuted()}>
-        <Symbol background="rgba(0,0,0,.5)">mic_off</Symbol>
-      </Show>
-    </UserIcon>
-  );
-}
-
+/** Video of the track the floating window shows */
 function MiniVideoTile() {
   const voice = useVoice();
 
   return (
-    <TrackLoop tracks={() => [voice.focusTrack()!]}>
+    <TrackLoop
+      tracks={() => {
+        const track = voice.pipTrack();
+        return track ? [track] : [];
+      }}
+    >
       {() => <MiniVideo />}
     </TrackLoop>
   );
 }
 
+/** Fills the card with the track from the surrounding track context */
 function MiniVideo() {
   const track = useTrackRefContext();
 
@@ -130,29 +65,6 @@ function MiniVideo() {
     />
   );
 }
-
-const UserIcon = styled("div", {
-  base: {
-    display: "grid",
-    width: "24px",
-    height: "24px",
-    color: "#fffb",
-    overflow: "hidden",
-    borderRadius: "var(--borderRadius-circle)",
-
-    "& *": {
-      gridArea: "1/1",
-    },
-  },
-  variants: {
-    speaking: {
-      true: {
-        outlineOffset: "1px",
-        outline: "2px solid var(--md-sys-color-primary)",
-      },
-    },
-  },
-});
 
 /**
  * Holds the control bar of the mini tile. With a mouse the bar overlays the
@@ -210,14 +122,5 @@ const MiniCard = styled("div", {
 
     borderRadius: "var(--borderRadius-lg)",
     background: "var(--md-sys-color-secondary-container)",
-
-    // phones: the slim strip is one row, people on one side, controls on
-    // the other
-    _phone: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      padding: "var(--gap-sm) var(--gap-md)",
-      overflow: "hidden",
-    },
   },
 });

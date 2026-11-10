@@ -44,6 +44,10 @@ msgstr "dddd [在] LT"
 msgid ":{0}: from {1}"
 msgstr ":{0}:（来自 {1}）"
 
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "\"Copy Wireshark filter\" next to a server above puts a display filter for it on the clipboard. To line up times, set View, Time Display Format, UTC Date and Time of Day in Wireshark and compare with the absolute times in the exports. Browsers can hide the server name (Encrypted Client Hello, QUIC), so the filter may miss such connections."
+msgstr "点击上方服务器旁的“复制 Wireshark 过滤器”,会把对应的显示过滤器放入剪贴板。要对齐时间,请在 Wireshark 中选择 View → Time Display Format → UTC Date and Time of Day,再与导出文件中的绝对时间对比。浏览器可能隐藏服务器名称(Encrypted Client Hello、QUIC),因此过滤器可能漏掉这类连接。"
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "(changes are being saved…)"
 msgstr "(正在保存更改...)"
@@ -107,6 +111,11 @@ msgstr "{0, plural, other {# 位成员}}"
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
 msgstr "{0, plural, other {# 条新提及}}"
+
+#. placeholder {0}: droppedCount()
+#: components/app/interface/settings/user/developer/traffic/DroppedNotice.tsx
+msgid "{0, plural, one {# older entry was dropped to stay within the log's limits} other {# older entries were dropped to stay within the log's limits}}"
+msgstr "{0, plural, other {为遵守日志上限,已丢弃 # 条较早的记录}}"
 
 #. placeholder {0}: channel.voiceParticipants.size
 #: src/interface/home/FriendsOverview.tsx
@@ -761,6 +770,10 @@ msgstr "全部回顾"
 msgid "All roles have overrides."
 msgstr "所有角色都有覆盖设置。"
 
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "All services"
+msgstr "所有服务"
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "All Systems Operational"
 msgstr "所有系统运行正常"
@@ -887,6 +900,10 @@ msgstr "AnyTalk 将在系统托盘中启动。"
 #: src/AndroidNag.tsx
 msgid "AnyTalk works best as an app"
 msgstr "AnyTalk 作为应用体验最佳"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "API"
+msgstr "API"
 
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -1238,6 +1255,14 @@ msgstr "通话加密（DTLS-SRTP）密钥不在此文件中，因此即使有它
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Call encryption couldn't be loaded. Try reloading the page."
 msgstr "无法加载通话加密。请尝试刷新页面。"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Call media"
+msgstr "通话媒体"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Call signalling"
+msgstr "通话信令"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 #: components/app/interface/settings/user/notifications/Sounds.tsx
@@ -1827,6 +1852,16 @@ msgstr "复制用户 ID"
 msgid "Copy webhook URL"
 msgstr "复制 Webhook 链接"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Copy Wireshark filter"
+msgstr "复制 Wireshark 过滤器"
+
+#. placeholder {0}: host()
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Copy Wireshark filter for {0}"
+msgstr "复制 {0} 的 Wireshark 过滤器"
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Could not change the key log. Try again."
 msgstr "无法更改密钥日志，请重试。"
@@ -1838,6 +1873,15 @@ msgstr "无法更改密钥日志，请重试。"
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Could not check which account this is. Cancel and try again."
 msgstr "无法确认这是哪个账号。请取消后重试。"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Could not copy the entry"
+msgstr "无法复制该条目"
+
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Could not copy the filter"
+msgstr "无法复制过滤器"
 
 #: components/i18n/errors.tsx
 msgid "Could not find what you requested."
@@ -2573,6 +2617,10 @@ msgstr "生效 <0/>（<1/>）"
 msgid "Email"
 msgstr "电子邮件地址"
 
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Embeds proxy"
+msgstr "嵌入代理"
+
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Emoji"
 msgstr "表情"
@@ -2708,6 +2756,10 @@ msgstr "预估上传带宽"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Event"
+msgstr "事件"
+
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Events"
 msgstr "事件"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
@@ -2941,6 +2993,10 @@ msgstr "在 Google Play 下载"
 msgid "GIF Picker Placeholder"
 msgstr "GIF 选择器占位"
 
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "GIF provider"
+msgstr "GIF 提供商"
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Gifbox is our own GIF service, so you can keep sharing GIFs right here on AnyTalk."
 msgstr "Gifbox 是我们自己的 GIF 服务，你可以继续在 AnyTalk 上分享 GIF。"
@@ -3074,8 +3130,8 @@ msgid "Hide call signalling noise"
 msgstr "隐藏通话信令的冗余消息"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardPiP.tsx
-msgid "Hide call window"
-msgstr "隐藏通话窗口"
+#~ msgid "Hide call window"
+#~ msgstr "隐藏通话窗口"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
@@ -4326,8 +4382,12 @@ msgid "Off"
 msgstr "关"
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
-msgstr "关闭：令牌、密码和密钥将被隐藏。重新加载后会重置。"
+#~ msgid "Off: tokens, passwords and keys are hidden. Resets when you reload."
+#~ msgstr "关闭：令牌、密码和密钥将被隐藏。重新加载后会重置。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Off: tokens, passwords, keys and your own IP addresses are hidden. Resets when you reload."
+msgstr "关闭:令牌、密码、密钥和你自己的 IP 地址会被隐藏。重新加载后会重置。"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Offers to stream the games you play during a call. Detection happens only on this computer and nothing is sent."
@@ -4501,6 +4561,7 @@ msgid "Opening another stream while watching one shows them side by side. When o
 msgstr "观看直播时再打开另一个直播，会并排显示。关闭后，将替换你正在观看的直播。"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
 #: components/modal/modals/ReportContent.tsx
 msgid "Other"
 msgstr "其他"
@@ -5758,9 +5819,17 @@ msgstr "你加入的服务器会显示在这里。"
 msgid "Servers, unread messages"
 msgstr "服务器，有未读消息"
 
+#: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
+msgid "Service"
+msgstr "服务"
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
-msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
-msgstr "会话令牌、密码和通话密钥将显示在屏幕和导出文件中。任何看到或获取它们的人都可以以你的身份登录。仅在调试时开启，并且不要分享导出的文件。"
+#~ msgid "Session tokens, passwords and call keys will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+#~ msgstr "会话令牌、密码和通话密钥将显示在屏幕和导出文件中。任何看到或获取它们的人都可以以你的身份登录。仅在调试时开启，并且不要分享导出的文件。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Session tokens, passwords, call keys and your own IP addresses will appear on screen and in exports. Anyone who sees or gets them could sign in as you. Turn this on only to debug, and don't share the exports."
+msgstr "会话令牌、密码、通话密钥和你自己的 IP 地址将显示在屏幕和导出文件中。任何看到或获得它们的人都可能以你的身份登录。仅在调试时开启,并且不要分享导出文件。"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Sessions"
@@ -5839,8 +5908,8 @@ msgid "Show admin panel shortcuts in context menus"
 msgstr "在右键菜单中显示管理面板快捷方式"
 
 #: components/ui/components/features/voice/callCard/VoiceStatusFooter.tsx
-msgid "Show call window"
-msgstr "显示通话窗口"
+#~ msgid "Show call window"
+#~ msgstr "显示通话窗口"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
@@ -5861,6 +5930,10 @@ msgstr "在通话视频磁贴上显示实时统计"
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Show only"
 msgstr "仅显示"
+
+#: components/app/interface/settings/user/developer/traffic/LiveView.tsx
+msgid "Show only service"
+msgstr "仅显示此服务"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Show Others"
@@ -6171,6 +6244,10 @@ msgstr "直播统计"
 msgid "Stream viewers"
 msgstr "直播观众"
 
+#: components/ui/components/features/voice/callCard/VoiceCallCard.tsx
+msgid "Stream window. Use the arrow keys to move it."
+msgstr "直播窗口。使用方向键移动它。"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Streams"
 msgstr "直播"
@@ -6377,6 +6454,10 @@ msgstr "文件“{0}”（{fileSize}）超过了 {maxSizeFormatted} 的大小限
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "The first version hasn't been published. Check back soon."
 msgstr "第一个版本尚未发布，请稍后再来看看。"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "The HAR file holds requests, files and WebSocket connections. Call entries (route, encryption, byte counts, data messages) are not HTTP, so they are only in the JSON export. Both exports give every entry an absolute time (UTC, to the millisecond) to line up with a packet capture."
+msgstr "HAR 文件包含请求、文件和 WebSocket 连接。通话条目(路由、加密、字节数、数据消息)不属于 HTTP,因此只出现在 JSON 导出中。两种导出都会为每个条目提供绝对时间(UTC,精确到毫秒),以便与抓包记录对齐。"
 
 #: components/i18n/errors.tsx
 msgid "The item was removed by moderators, and as such future applications are prohibited. Contact support for more information."
@@ -6951,6 +7032,10 @@ msgstr "上传到 Gifbox"
 msgid "Uploading file `{fileName}`... {0}%"
 msgstr "正在上传文件 `{fileName}`... {0}%"
 
+#: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
+msgid "Uploads"
+msgstr "上传"
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "URL"
 msgstr "URL"
@@ -7310,6 +7395,10 @@ msgstr "整个服务器"
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Windows installer"
 msgstr "Windows 安装程序"
+
+#: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
+msgid "Wireshark filter copied"
+msgstr "已复制 Wireshark 过滤器"
 
 #. placeholder {0}: names.join(", ")
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx

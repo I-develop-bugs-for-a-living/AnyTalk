@@ -208,6 +208,75 @@ export function redactE2eeText(text: string): string {
   );
 }
 
+/** Replacement shown instead of an IP address or an mDNS host name. */
+export const REDACTED_ADDRESS = "[hidden address]";
+
+/** Replacement shown instead of the port of a hidden address. */
+const REDACTED_PORT = "[hidden port]";
+
+/** Characters of an address inside SDP, also when it sits in JSON text. */
+const ADDR = String.raw`[^\s\\",;]+`;
+
+/** JSON keys (case-insensitive) that may hold an address. */
+const ADDRESS_KEY = String.raw`"[\w-]*?(?:address|ip)"`;
+
+/** Whether a (possibly cut off) value looks like an IP address or `.local`. */
+function looksLikeAddress(value: string): boolean {
+  return (
+    /^\d{1,3}(\.\d{0,3}){1,3}$/.test(value) ||
+    /^[0-9a-f]*:[0-9a-f:.]*(%\w*)?$/i.test(value) ||
+    /^[\w-]+(\.[\w-]+)*\.local$/i.test(value)
+  );
+}
+
+/**
+ * Hide addresses of the user's own connection in text that may hold SDP or
+ * ICE candidates (signalling frames, data previews, errors). Covers:
+ * - candidate lines (`candidate:... <address> <port> typ ...`): the address
+ *   and a port after it. Previews are cut at a fixed length, so the tail
+ *   after the address is optional and an address cut in the middle is hidden
+ *   as far as it goes
+ * - `raddr <address> rport <port>` (the local base of a reflexive or relayed
+ *   candidate), with the same tolerance
+ * - `a=remote-candidates:` lines
+ * - `c=`, `o=` and `a=rtcp` connection lines (`IN IP4 <address>`)
+ * - JSON fields `address`, `relatedAddress`, `relayAddress`, `ip`,
+ *   `ipAddress` and similar, when the value looks like an IP address or a
+ *   `.local` name
+ * The address can be IPv4, IPv6 or an mDNS `<uuid>.local` name. Candidates of
+ * both sides look the same in a frame, so all of them are hidden. Over-hiding
+ * is the safe direction; other text is left as it is.
+ *
+ * @param text Any text
+ */
+export function redactAddresses(text: string): string {
+  if (!/candidate|IN\s+IP[46]|raddr|address|ip"/i.test(text)) return text;
+  return text
+    .replace(
+      new RegExp(
+        String.raw`(candidate:\S+\s+\d+\s+\S+\s+\d+\s+)${ADDR}(\s+\d*)?`,
+        "gi",
+      ),
+      (_m, lead: string, port: string | undefined) =>
+        `${lead}${REDACTED_ADDRESS}${port ? ` ${REDACTED_PORT}` : ""}`,
+    )
+    .replace(
+      new RegExp(String.raw`(raddr\s+)${ADDR}(\s+rport\s+\d*)?`, "gi"),
+      (_m, lead: string, port: string | undefined) =>
+        `${lead}${REDACTED_ADDRESS}${port ? ` rport ${REDACTED_PORT}` : ""}`,
+    )
+    .replace(/(remote-candidates:)[^\r\n"\\]*/gi, `$1${REDACTED_ADDRESS}`)
+    .replace(
+      new RegExp(String.raw`(\bIN\s+IP[46]\s+)${ADDR}`, "gi"),
+      `$1${REDACTED_ADDRESS}`,
+    )
+    .replace(
+      new RegExp(String.raw`(${ADDRESS_KEY}\s*:\s*")([^"\\]*)("?)`, "gi"),
+      (match, lead: string, value: string, close: string) =>
+        looksLikeAddress(value) ? `${lead}${REDACTED_ADDRESS}${close}` : match,
+    );
+}
+
 /**
  * Redact the preview text of a body summary.
  */
@@ -215,7 +284,7 @@ function redactBody(body: BodySummary, secretRoute: boolean): BodySummary {
   if (body.kind !== "text") return body;
   return {
     ...body,
-    text: secretRoute ? REDACTED : redactJsonText(body.text),
+    text: secretRoute ? REDACTED : redactAddresses(redactJsonText(body.text)),
   };
 }
 
@@ -223,7 +292,7 @@ function redactBody(body: BodySummary, secretRoute: boolean): BodySummary {
  * Redact the text of a preview string.
  */
 function redactPreview(text: string, secretRoute: boolean): string {
-  return secretRoute ? REDACTED : redactJsonText(text);
+  return secretRoute ? REDACTED : redactAddresses(redactJsonText(text));
 }
 
 /**
@@ -237,7 +306,10 @@ export function redactEntry<T extends TrafficEntry>(entry: T): T {
       const out: HttpEntry = {
         ...e,
         url: redactUrl(e.url),
-        error: e.error === undefined ? undefined : redactJsonText(e.error),
+        error:
+          e.error === undefined
+            ? undefined
+            : redactAddresses(redactJsonText(e.error)),
         requestHeaders: redactHeaders(e.requestHeaders),
         responseHeaders: redactHeaders(e.responseHeaders),
         requestBody: redactBody(e.requestBody, secretRoute),
@@ -253,10 +325,16 @@ export function redactEntry<T extends TrafficEntry>(entry: T): T {
       const out: WsEntry = {
         ...e,
         url: redactUrl(e.url),
-        text: e.text === undefined ? undefined : redactJsonText(e.text),
+        text:
+          e.text === undefined
+            ? undefined
+            : redactAddresses(redactJsonText(e.text)),
         // `hex` is only the first 32 bytes of a binary frame: too short to
         // hold a token or key, so it is shown as is
-        reason: e.reason === undefined ? undefined : redactJsonText(e.reason),
+        reason:
+          e.reason === undefined
+            ? undefined
+            : redactAddresses(redactJsonText(e.reason)),
       };
       return out as T;
     }
@@ -274,7 +352,7 @@ export function redactEntry<T extends TrafficEntry>(entry: T): T {
         e.topic === E2EE_TOPIC
           ? redactE2eeText(e.preview)
           : redactJsonText(e.preview);
-      return { ...e, preview } as T;
+      return { ...e, preview: redactAddresses(preview) } as T;
     }
     case "call-attribute": {
       const e = entry as CallAttributeEntry;
@@ -282,13 +360,18 @@ export function redactEntry<T extends TrafficEntry>(entry: T): T {
         ...e,
         attributes: e.attributes.map(({ key, value }) => ({
           key,
-          value: isSecretField(key) ? REDACTED : redactJsonText(value),
+          value: isSecretField(key)
+            ? REDACTED
+            : redactAddresses(redactJsonText(value)),
         })),
       } as T;
     }
     case "call-connection":
     case "call-bytes":
-      // addresses and byte counts are what the inspector exists to show
+      // The remote address is what the inspector exists to show and what the
+      // Wireshark filter needs. The local address and port are not recorded
+      // at all (only the candidate type and network type), so there is
+      // nothing of the user's own to hide here.
       return entry;
   }
 }

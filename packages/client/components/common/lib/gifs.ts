@@ -1,13 +1,22 @@
-import { MessageEmbed, WebsiteEmbed } from "stoat.js";
+import type { MessageEmbed, WebsiteEmbed } from "stoat.js";
 
 /**
  * Full origins of gif providers allowed to embed.
  */
-const GIF_PROVIDERS = [
+export const GIF_PROVIDERS = [
   "https://tenor.com",
   "https://giphy.com",
   "https://gifbox.me",
 ];
+
+/**
+ * Domains of the GIF providers (from `GIF_PROVIDERS`). Their media CDNs are
+ * subdomains of these (media.tenor.com, media1.giphy.com, i.giphy.com), so
+ * match by suffix.
+ */
+export const GIF_PROVIDER_DOMAINS = GIF_PROVIDERS.map(
+  (origin) => new URL(origin).hostname,
+);
 
 /**
  * Check the giffyness of an embed
