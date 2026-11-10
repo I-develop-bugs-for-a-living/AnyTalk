@@ -145,3 +145,23 @@ Do small edits (a few lines in a known file) and anything needing back-and-forth
   - `perf: load only the outlined icon font`
 - One logical change per commit. Keep generated catalog updates in their own commit.
 - Never commit `.env` files or touch submodule pointers unless asked.
+
+## Release notes
+
+Every desktop release gets hand-written release notes. They become the GitHub release body, which the "What's new" section of Settings → Updates shows (`settings/user/Updates.tsx`). Without them, the release falls back to GitHub's generated commit list.
+
+- Write `packages/desktop/release-notes/<version>.md` (e.g. `0.3.8.md`) when bumping the version, and commit it with the version bump (`chore: release desktop <version>`). The desktop workflow passes it to `gh release create --notes-file`.
+- Source: the commits since the previous `desktop-v*` tag (`git log desktop-v<previous>..HEAD`, done by `git-helper`). Skip changes users can't notice (chore, docs, refactors, tests, catalog extracts).
+- Group under these headings, in this order, and leave out empty groups: `### New features`, `### Changes`, `### Removed`, `### Bug fixes`. `feat` usually goes to New features, `fix` to Bug fixes, `perf` and behavior changes to Changes.
+- One short bullet per change: what the user gets, in plain words, not the commit subject or code names. Merge related commits into one bullet.
+- English only, plain markdown (it's rendered as is, not translated).
+
+Example:
+
+```markdown
+### New features
+- Occupied voice channels show how long people have been in them.
+
+### Bug fixes
+- The screen share picker now updates its window list while it's open, so games that started or got focus later show up.
+```
