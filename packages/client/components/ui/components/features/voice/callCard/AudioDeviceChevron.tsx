@@ -64,39 +64,20 @@ export function AudioDeviceChevron(props: {
 
   return (
     <Show when={hasChoice()}>
-      <Chevron
+      <DeviceChevronButton
         ref={setAnchor}
         type="button"
         variant={props.variant}
         aria-label={label()}
         aria-haspopup="menu"
         aria-expanded={open()}
-        onClick={(event) => {
-          // a click without a pointer (detail 0) comes from Enter or Space
-          setByKeyboard(event.detail === 0);
-          setOpen((o) => !o);
-        }}
-        onKeyDown={(event) => {
-          // arrow keys open the menu, like a menu button
-          if (
-            (event.key === "ArrowUp" || event.key === "ArrowDown") &&
-            !open()
-          ) {
-            event.preventDefault();
-            setByKeyboard(true);
-            setOpen(true);
-          }
-          if (event.key === "Escape" && open()) {
-            event.stopPropagation();
-            setOpen(false);
-          }
-        }}
+        {...chevronMenuHandlers(open, setOpen, setByKeyboard)}
         use:floating={{
           tooltip: { placement: "top", content: label() },
         }}
       >
         <Symbol size={20}>expand_less</Symbol>
-      </Chevron>
+      </DeviceChevronButton>
       <AudioDeviceMenuPopup
         anchor={anchor()}
         open={open()}
@@ -116,8 +97,46 @@ export function AudioDeviceChevron(props: {
   );
 }
 
-/** Narrow button on the end of a mute or deafen button, same colours */
-const Chevron = styled("button", {
+/**
+ * Click and key handlers of a chevron that opens a menu: Enter or Space (a
+ * click without a pointer) opens it for the keyboard, arrow keys open it,
+ * Escape closes it.
+ * @param open Whether the menu is open
+ * @param setOpen Open or close the menu
+ * @param setByKeyboard Remember whether the menu was opened by keyboard
+ */
+export function chevronMenuHandlers(
+  open: () => boolean,
+  setOpen: (open: boolean | ((o: boolean) => boolean)) => void,
+  setByKeyboard: (byKeyboard: boolean) => void,
+) {
+  return {
+    onClick: (event: MouseEvent) => {
+      // a click without a pointer (detail 0) comes from Enter or Space
+      setByKeyboard(event.detail === 0);
+      setOpen((o) => !o);
+    },
+    onKeyDown: (event: KeyboardEvent) => {
+      // arrow keys open the menu, like a menu button
+      if ((event.key === "ArrowUp" || event.key === "ArrowDown") && !open()) {
+        event.preventDefault();
+        setByKeyboard(true);
+        setOpen(true);
+      }
+      if (event.key === "Escape" && open()) {
+        event.stopPropagation();
+        setOpen(false);
+      }
+    },
+  };
+}
+
+/**
+ * Narrow button on the end of a button (mute, deafen or screen share), in
+ * its colours: variants filled, tonal and error, sizes sm (40px) and xs
+ * (32px). Phones always get the 44px touch target.
+ */
+export const DeviceChevronButton = styled("button", {
   base: {
     flexShrink: 0,
     display: "flex",
@@ -156,6 +175,30 @@ const Chevron = styled("button", {
         background: "var(--md-sys-color-secondary-container)",
         "--colour": "var(--md-sys-color-on-secondary-container)",
       },
+      error: {
+        background: "var(--md-sys-color-error)",
+        "--colour": "var(--md-sys-color-on-error)",
+      },
+    },
+    size: {
+      xs: { height: "32px", _phone: { height: "44px" } },
+      sm: {},
+    },
+  },
+});
+
+/**
+ * A button with its chevron attached (split button): the touching corners
+ * are squared off
+ */
+export const SplitButton = styled("div", {
+  base: {
+    display: "flex",
+    gap: "2px",
+
+    "& > button:not(:last-child)": {
+      borderStartEndRadius: "var(--borderRadius-xs)",
+      borderEndEndRadius: "var(--borderRadius-xs)",
     },
   },
 });
