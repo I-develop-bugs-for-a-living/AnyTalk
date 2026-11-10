@@ -8,6 +8,7 @@ import { styled } from "styled-system/jsx";
 import { useClientLifecycle } from "@revolt/client";
 import { State, TransitionType } from "@revolt/client/Controller";
 import { createDisconnectedIndicator } from "@revolt/client/disconnectedIndicator";
+import { setTitlebarBottom } from "@revolt/common";
 import { Button, Ripple, symbolSize, typography } from "@revolt/ui";
 
 import MdBuild from "@material-symbols/svg-400/outlined/build.svg?component-solid";
@@ -56,6 +57,19 @@ export function Titlebar() {
         }
       >
         <Motion.div
+          data-titlebar
+          ref={(el: HTMLElement) => {
+            // tell floating windows where the title bar ends
+            const update = () =>
+              setTitlebarBottom(el.getBoundingClientRect().bottom);
+            const observer = new ResizeObserver(update);
+            observer.observe(el);
+            update();
+            onCleanup(() => {
+              observer.disconnect();
+              setTitlebarBottom(0);
+            });
+          }}
           initial={{ height: 0 }}
           animate={{ height: "29px" }}
           exit={{ height: 0 }}

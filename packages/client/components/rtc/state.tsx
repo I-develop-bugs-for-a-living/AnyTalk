@@ -88,6 +88,7 @@ import {
   windowListed,
 } from "./gameFollow";
 import * as outputBus from "./outputBus";
+import { pickPipTrack } from "./pipTrack";
 import {
   type PttSource,
   micShouldBeOn,
@@ -3364,6 +3365,20 @@ class Voice {
    */
   watchedStreams() {
     return this.vidTracks().filter((t) => this.isWatchedStream(t));
+  }
+
+  /**
+   * The stream or video the floating call window shows: the focused one if it
+   * has video, else the first watched stream, else our own screen share.
+   * Streams in a window of their own don't count. Undefined means no floating window.
+   */
+  pipTrack() {
+    const own = this.vidTracks().find(
+      (t) => t.source === Track.Source.ScreenShare && t.participant.isLocal,
+    );
+    return pickPipTrack(this.focusTrack(), this.watchedStreams(), own, (t) =>
+      this.isPoppedOut(t),
+    );
   }
 
   /**

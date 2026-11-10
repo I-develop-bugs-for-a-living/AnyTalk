@@ -6,29 +6,39 @@ import {
   createContext,
   createEffect,
   createSignal,
-  on,
   onCleanup,
   onMount,
   useContext,
 } from "solid-js";
 import { Portal } from "solid-js/web";
 
+import { useLingui } from "@lingui/solid/macro";
 import { createResizeObserver } from "@solid-primitives/resize-observer";
 import { Channel } from "stoat.js";
 import { styled } from "styled-system/jsx";
 
+import { titlebarBottom, useDevice } from "@revolt/common";
 import { useVoice } from "@revolt/rtc";
 import { VoiceLayout } from "@revolt/rtc/state";
 import { useState } from "@revolt/state";
 import { SlideState } from "@revolt/ui/components/navigation/SlideDrawer";
 
-import { callWindowHiddenOnPhone, setCallWindowHidden } from "./callWindow";
+import {
+  Insets,
+  KEY_STEP,
+  Point,
+  Size,
+  clampPosition,
+  defaultPosition,
+  moveByKey,
+  parseStoredPosition,
+  passedDragThreshold,
+} from "./callWindowPlacement";
 import { VoiceCallCardActiveRoom } from "./VoiceCallCardActiveRoom";
 import { VoiceCallCardPiP } from "./VoiceCallCardPiP";
 import { VoiceCallCardPreview } from "./VoiceCallCardPreview";
 
 type Mode = "floating" | "moving";
-type FloatType = "tl" | "tr" | "bl" | "br";
 
 type Info = {
   channel: Channel;
@@ -37,88 +47,268 @@ type Info = {
   drawer?: SlideState;
 };
 
-const PAD = 16,
-  PAD_X = `${PAD}px`,
-  PAD_Y = `${PAD + 56}px`;
+/** Where the floating window position is remembered on this device */
+const POSITION_KEY = "anytalk:callWindowPosition";
+
+/**
+ * Read the remembered window position
+ * @returns The position, if one was saved and is readable
+ */
+function loadPosition(): Point | undefined {
+  try {
+    return parseStoredPosition(localStorage.getItem(POSITION_KEY));
+  } catch {
+    return undefined;
+  }
+}
+
+/**
+ * Remember the window position on this device; failures (private mode,
+ * full storage) are ignored
+ * @param pos Position to save
+ */
+function savePosition(pos: Point) {
+  try {
+    localStorage.setItem(POSITION_KEY, JSON.stringify(pos));
+  } catch {
+    // not remembered, the window still works
+  }
+}
+
+/** Hidden element used to read the safe-area insets, created once */
+let insetProbe: HTMLDivElement | undefined;
+
+/**
+ * Measure the space the floating window must keep clear: the safe areas
+ * (notch, home indicator) and the app title bar if it is showing.
+ * @returns Insets in pixels
+ */
+function measureInsets(): Insets {
+  // CSS env() can only be read through a styled element
+  if (!insetProbe || !insetProbe.isConnected) {
+    insetProbe = document.createElement("div");
+    insetProbe.setAttribute("aria-hidden", "true");
+    insetProbe.style.cssText =
+      "position:fixed;visibility:hidden;pointer-events:none;" +
+      "padding:env(safe-area-inset-top) env(safe-area-inset-right) " +
+      "env(safe-area-inset-bottom) env(safe-area-inset-left)";
+    document.body.appendChild(insetProbe);
+  }
+  const style = getComputedStyle(insetProbe);
+  const insets = {
+    top: parseFloat(style.paddingTop) || 0,
+    right: parseFloat(style.paddingRight) || 0,
+    bottom: parseFloat(style.paddingBottom) || 0,
+    left: parseFloat(style.paddingLeft) || 0,
+  };
+
+  const titlebar = document.querySelector("[data-titlebar]");
+  if (titlebar) {
+    insets.top = Math.max(insets.top, titlebar.getBoundingClientRect().bottom);
+  }
+  return insets;
+}
+
+/**
+ * Size of the floating window. Must match the `--flt-w` / `--flt-h` values of
+ * the `Float` styles; computed here so the size is right before the styles
+ * have been applied and while the window animates.
+ * @returns Size in pixels
+ */
+function floatingSize(): Size {
+  const width = Math.min(328, window.innerWidth - 32);
+  return { width, height: width * 0.57 };
+}
+
+/** Size of the viewport the window floats in */
+function viewportSize(): Size {
+  return { width: window.innerWidth, height: window.innerHeight };
+}
 
 const callCardContext = createContext<(info?: Info) => void>();
 
 /** Voice call card context */
 export function VoiceCallCardContext(props: { children: JSX.Element }) {
   const voice = useVoice();
+  const device = useDevice();
+  const { t } = useLingui();
   const inCall = () => !!voice.channel();
-
-  // a hidden call window comes back for the next call
-  createEffect(
-    on(
-      () => voice.channel()?.id,
-      () => setCallWindowHidden(false),
-    ),
-  );
 
   const [mode, setMode] = createSignal<Mode>();
   const [info, setInfo] = createSignal<Info>();
 
-  let ref: HTMLDivElement | undefined,
-    events: AbortController | null,
-    pid = 0,
-    ofsX = 0,
-    ofsY = 0;
+  let ref: HTMLDivElement | undefined;
 
-  function mouseDown(e: PointerEvent) {
-    pid = e.pointerId;
-    if (mode() === "floating") {
-      const pos = ref!.getBoundingClientRect();
-      ofsX = e.clientX - pos.x;
-      ofsY = e.clientY - pos.y;
+  /** Where the user wants the window; clamped whenever it is shown */
+  let wanted: Point | undefined = loadPosition();
+
+  /** Where the window was last put (the target, not the animated position) */
+  let applied: Point | undefined;
+
+  /**
+   * The press that may turn into a drag: pointer id, where it started and
+   * where the window was then
+   */
+  let drag:
+    | { pid: number; startX: number; startY: number; origin: Point }
+    | undefined;
+
+  /** Whether the press has moved far enough to be a drag */
+  let dragging = false;
+
+  /** Whether the click that ends a drag should be swallowed */
+  let suppressClick = false;
+
+  /** Put the window at the wanted position, kept inside the viewport */
+  function applyPosition(pos?: Point) {
+    const size = floatingSize();
+    const insets = measureInsets();
+    const viewport = viewportSize();
+    const target = clampPosition(
+      pos ?? wanted ?? defaultPosition(size, viewport, insets),
+      size,
+      viewport,
+      insets,
+    );
+    ref!.style.transform = `translate(${target.x}px, ${target.y}px)`;
+    applied = target;
+    return target;
+  }
+
+  /** Where the window is going to be (not mid-animation) */
+  function currentPosition(): Point {
+    return applied ?? applyPosition();
+  }
+
+  /** Stop any drag in progress */
+  function endDrag() {
+    drag = undefined;
+    dragging = false;
+  }
+
+  /**
+   * Remember a press on the window; it becomes a drag once the pointer moved
+   * a few pixels. Presses on the control buttons never get here, the button
+   * handles them and stops the event, so they can't start a drag.
+   * @param e Pointer event
+   */
+  function pointerDown(e: PointerEvent) {
+    if (mode() !== "floating" || !e.isPrimary) return;
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    drag = {
+      pid: e.pointerId,
+      startX: e.clientX,
+      startY: e.clientY,
+      origin: currentPosition(),
+    };
+  }
+
+  /**
+   * Move the window with the pointer once the drag threshold is passed
+   * @param e Pointer event
+   */
+  function pointerMove(e: PointerEvent) {
+    if (!drag || e.pointerId !== drag.pid) return;
+    const dx = e.clientX - drag.startX,
+      dy = e.clientY - drag.startY;
+
+    if (!dragging) {
+      // small movements are clicks on the controls inside the card
+      if (!passedDragThreshold(dx, dy)) return;
+      dragging = true;
       setMode("moving");
-      addEvents();
+      try {
+        ref!.setPointerCapture(e.pointerId);
+      } catch {
+        // pointer already gone, the drag ends on the next event
+      }
     }
-  }
 
-  function mouseMove(e: PointerEvent) {
-    if (e.pointerId !== pid) return;
     e.preventDefault();
-    const x = e.clientX - ofsX,
-      y = e.clientY - ofsY;
-    ref!.style.transform = `translate(${x}px, ${y}px)`;
+    applyPosition({ x: drag.origin.x + dx, y: drag.origin.y + dy });
   }
 
-  function mouseUp(e: PointerEvent) {
-    if (e.pointerId !== pid) return;
-    const sty = ref!.style,
-      pos = ref!.getBoundingClientRect(),
-      left = e.clientX - ofsX + pos.width / 2 < innerWidth / 2,
-      top = e.clientY - ofsY + pos.height / 2 < innerHeight / 2;
-
-    sty.transition = "all .2s cubic-bezier(0, 1.5, 0.85, 0.8)";
-    setFloat(left ? (top ? "tl" : "bl") : top ? "tr" : "br");
-    //Reset CSS transition on next render pass
-    setTimeout(() => (sty.transition = ""), 1);
-    resetEvents();
+  /**
+   * End a drag: remember where the window is
+   * @param e Pointer event
+   */
+  function pointerUp(e: PointerEvent) {
+    if (!drag || e.pointerId !== drag.pid) return;
+    if (dragging) {
+      wanted = currentPosition();
+      savePosition(wanted);
+      // the click that ends the drag must not press a button
+      suppressClick = true;
+      setTimeout(() => (suppressClick = false), 0);
+      setMode("floating");
+    }
+    endDrag();
   }
 
-  function addEvents() {
-    if (events) return;
-    events = new AbortController();
-    const opt = { passive: false, signal: events.signal };
-    document.addEventListener("pointermove", mouseMove, opt);
-    document.addEventListener("pointerup", mouseUp, opt);
+  /**
+   * A drag that the browser took away (cancelled or capture lost): keep the
+   * window where it is and remember that
+   * @param e Pointer event
+   */
+  function pointerCancel(e: PointerEvent) {
+    if (!drag || e.pointerId !== drag.pid) return;
+    if (dragging) {
+      wanted = currentPosition();
+      savePosition(wanted);
+      setMode("floating");
+    }
+    endDrag();
   }
 
-  function resetEvents() {
-    events?.abort();
-    events = null;
+  /**
+   * Arrow keys move the window when the window itself has focus
+   * @param e Keyboard event
+   */
+  function keyDown(e: KeyboardEvent) {
+    if (mode() !== "floating" || e.target !== e.currentTarget) return;
+    const next = moveByKey(
+      currentPosition(),
+      e.key,
+      e.shiftKey ? KEY_STEP * 4 : KEY_STEP,
+    );
+    if (!next) return;
+    e.preventDefault();
+    wanted = applyPosition(next);
+    savePosition(wanted);
+  }
+
+  /** Swallow the click that follows a drag */
+  function clickCapture(e: MouseEvent) {
+    if (!suppressClick) return;
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  /** Show the floating window at the remembered position */
+  function showFloating() {
+    const sty = ref!.style;
+    sty.width = "";
+    sty.height = "";
+    applyPosition();
+    setMode("floating");
   }
 
   createEffect(() => {
     const inf = info();
     if (!ref) return;
     const sty = ref.style;
-    resetEvents();
+
+    // The floating window is for watching a stream: in a call, a stream to
+    // show, not on a phone (there the call lives in the voice channel)
+    const floatingWanted =
+      inCall() && !!voice.pipTrack() && device.layout() !== "phone";
+
+    // a parked window must not take focus
+    ref.inert = false;
 
     //Set mode based on state
     if (voice.layout() === "fullscreen") {
+      endDrag();
       sty.transform = ``;
       sty.width = `100%`;
       sty.height = "";
@@ -128,37 +318,58 @@ export function VoiceCallCardContext(props: { children: JSX.Element }) {
       inf?.parentRect &&
       (!inf.drawer || inf.drawer === SlideState.SHOWN)
     ) {
+      endDrag();
       sty.transform = `translate(${inf.parentRect.x}px, ${inf.parentRect.y}px)`;
       sty.width = `${inf.parentRect.width}px`;
       sty.height = `${inf.parentRect.height}px`;
       setMode();
     } else if (inf?.pos && (!inf.drawer || inf.drawer === SlideState.SHOWN)) {
+      endDrag();
       sty.transform = `translate(${inf.pos.x}px, ${inf.pos.y}px)`;
       sty.width = `${inf.pos.width}px`;
       sty.height = voice.layout() === "collapsed" ? "56px" : "";
       setMode();
-    } else if (!inCall()) {
+    } else if (!floatingWanted) {
+      // nothing to float: park the window off screen
+      endDrag();
+      ref.inert = true;
       const y = inf?.pos.y ?? ref.getBoundingClientRect().y;
       sty.transform = `translate(${innerWidth + 50}px, ${y}px)`;
       sty.width = "";
       sty.height = "";
       setMode();
-    } else if (!mode()) setFloat("tr");
+    } else if (!mode()) showFloating();
   });
 
+  /** The voice channel the docked call card belongs to */
   const channel = () => info()?.channel;
 
-  function setFloat(float: FloatType) {
-    const sty = ref!.style,
-      x = float[1] === "l" ? PAD_X : `calc(100vw - var(--flt-w) - ${PAD_X})`,
-      y = float[0] === "t" ? PAD_Y : `calc(100dvh - var(--flt-h) - ${PAD_Y})`;
-    sty.transform = `translate(${x}, ${y})`;
-    sty.width = "";
-    sty.height = "";
-    setMode("floating");
+  let reclampFrame = 0;
+
+  /** Keep the window inside the viewport when it changes, once per frame */
+  function reclamp() {
+    if (reclampFrame) return;
+    reclampFrame = requestAnimationFrame(() => {
+      reclampFrame = 0;
+      if (ref && mode() === "floating") applyPosition(wanted);
+    });
   }
 
-  onCleanup(resetEvents);
+  onMount(() => {
+    window.addEventListener("resize", reclamp);
+    window.visualViewport?.addEventListener("resize", reclamp);
+    onCleanup(() => {
+      window.removeEventListener("resize", reclamp);
+      window.visualViewport?.removeEventListener("resize", reclamp);
+      cancelAnimationFrame(reclampFrame);
+    });
+  });
+
+  // the title bar comes and goes (disconnected banner) and changes height
+  createEffect(() => {
+    titlebarBottom();
+    reclamp();
+  });
 
   onMount(() => {
     document
@@ -190,16 +401,29 @@ export function VoiceCallCardContext(props: { children: JSX.Element }) {
       {props.children}
       <Portal mount={document.getElementById("floating")! as HTMLDivElement}>
         <Float
-          ref={ref}
+          ref={(el: HTMLDivElement) => {
+            ref = el;
+            // capture phase, so a drag never presses a button underneath
+            el.addEventListener("click", clickCapture, true);
+            el.addEventListener("lostpointercapture", pointerCancel);
+          }}
           mode={mode()}
-          onPointerDown={mouseDown}
+          onPointerDown={pointerDown}
+          onPointerMove={pointerMove}
+          onPointerUp={pointerUp}
+          onPointerCancel={pointerCancel}
+          onKeyDown={keyDown}
+          // arrow keys move the window while it has focus
+          tabIndex={mode() ? 0 : undefined}
+          role={mode() ? "group" : undefined}
+          aria-label={
+            mode()
+              ? t`Stream window. Use the arrow keys to move it.`
+              : undefined
+          }
           fullscreen={voice.layout() === "fullscreen"}
         >
           <Switch>
-            {/* hidden on phones: the call bar brings it back */}
-            <Match when={mode() && inCall() && callWindowHiddenOnPhone()}>
-              {null}
-            </Match>
             <Match when={mode() && inCall()}>
               <VoiceCallCardPiP />
             </Match>
@@ -226,6 +450,11 @@ const Float = styled("div", {
     transition: "all .3s cubic-bezier(1, 0, 0, 1)",
     height: "40vh",
     touchAction: "none",
+    borderRadius: "var(--borderRadius-lg)",
+    outlineOffset: "2px",
+    _focusVisible: {
+      outline: "2px solid var(--md-sys-color-primary)",
+    },
   },
   variants: {
     mode: {
@@ -257,14 +486,6 @@ const Float = styled("div", {
         "--flt-h": "calc(var(--flt-w) * 0.57)",
         width: "var(--flt-w)",
         height: "var(--flt-h)",
-
-        // phones: the floating card is always the slim collapsed strip (the
-        // same 56px as the collapsed card in the voice channel); the full
-        // call view opens from the voice channel
-        _phone: {
-          "--flt-w": "calc(100vw - 32px)",
-          "--flt-h": "56px",
-        },
       },
     },
   ],
