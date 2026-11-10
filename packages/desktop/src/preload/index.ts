@@ -119,6 +119,15 @@ function exposeNative() {
       if (id === undefined) return Promise.resolve();
       return invoke<void>(IPC.pickerResult, id, idx, audio).catch(() => {});
     },
+    refreshScreenPicker: (thumbnails: boolean) => {
+      const id = pickerId;
+      if (id === undefined) return Promise.resolve(null);
+      return invoke<PickerSource[] | null>(
+        IPC.pickerRefresh,
+        id,
+        thumbnails,
+      ).catch(() => null);
+    },
     setGlobalHotkeys: (bindings: HotkeyBinding[]) =>
       invoke<HotkeyResult[]>(IPC.hotkeysSet, bindings),
     onGlobalHotkey: (callback: (action: string) => void) => {

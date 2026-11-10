@@ -14,7 +14,43 @@ type PendingPicker = {
   id: number;
   sender: Electron.WebContents;
   finish: (value?: { idx: number; audio: boolean }) => void;
+  /** Every source offered so far by index, indexes are never reused */
+  known: Map<number, Electron.DesktopCapturerSource>;
+  /** Index handed out per source id, so a source keeps its index on refresh */
+  indexOf: Map<string, number>;
+  /** Whether a refresh is running, refreshes never overlap */
+  refreshing: boolean;
 };
+
+/**
+ * Turn captured sources into the picker's list. Each source keeps the index
+ * it got first, so a choice made against an older list still hits it.
+ *
+ * @param request The open picker request
+ * @param sources Sources just captured
+ * @returns The list for the page
+ */
+function toPickerSources(
+  request: PendingPicker,
+  sources: Electron.DesktopCapturerSource[],
+): PickerSource[] {
+  return sources.map((source) => {
+    let idx = request.indexOf.get(source.id);
+    if (idx === undefined) {
+      idx = request.indexOf.size;
+      request.indexOf.set(source.id, idx);
+    }
+    request.known.set(idx, source);
+    return {
+      idx,
+      name: source.name,
+      isFullScreen: source.id.startsWith("screen:"),
+      image: source.thumbnail.isEmpty()
+        ? source.appIcon?.toDataURL()
+        : source.thumbnail.toDataURL(),
+    };
+  });
+}
 
 /** How long a preselected source stays valid. */
 const PRESELECT_TTL_MS = 10_000;
@@ -44,30 +80,47 @@ let nextId = 1;
  *
  * @param sender The renderer that asked for screen capture
  * @param sources Sources to offer
- * @returns The choice, or undefined on cancel/timeout/busy
+ * @returns The chosen source and audio flag, or undefined on
+ * cancel/timeout/busy
  */
 function askRenderer(
   sender: Electron.WebContents,
-  sources: PickerSource[],
-): Promise<{ idx: number; audio: boolean } | undefined> {
+  sources: Electron.DesktopCapturerSource[],
+): Promise<
+  { source: Electron.DesktopCapturerSource; audio: boolean } | undefined
+> {
   if (pending) return Promise.resolve(undefined);
 
   return new Promise((resolve) => {
     const id = nextId++;
-    const finish = (value?: { idx: number; audio: boolean }) => {
-      clearTimeout(timer);
-      if (pending?.id === id) pending = undefined;
-      resolve(value);
+    const request: PendingPicker = {
+      id,
+      sender,
+      known: new Map(),
+      indexOf: new Map(),
+      refreshing: false,
+      finish: (value) => {
+        clearTimeout(timer);
+        if (pending?.id === id) pending = undefined;
+        resolve(
+          value && request.known.has(value.idx)
+            ? { source: request.known.get(value.idx)!, audio: value.audio }
+            : undefined,
+        );
+      },
     };
     // On timeout the page is told to forget the request, its modal can't be
     // closed from here, so a late answer is simply ignored
     const timer = setTimeout(() => {
       if (!sender.isDestroyed()) sender.send(IPC.pickerCancel, id);
-      finish();
+      request.finish();
     }, PICKER_TIMEOUT_MS);
 
-    pending = { id, sender, finish };
-    sender.send(IPC.pickerSources, { id, sources } satisfies PickerRequest);
+    pending = request;
+    sender.send(IPC.pickerSources, {
+      id,
+      sources: toPickerSources(request, sources),
+    } satisfies PickerRequest);
   });
 }
 
@@ -98,6 +151,38 @@ export function installScreenShare(
     },
   );
 
+  // The picker polls this while it is open, so windows that appear after it
+  // opened (e.g. a game that lost focus to the picker) show up. Polls skip
+  // the expensive thumbnails unless asked, and never overlap.
+  ipcMain.handle(
+    IPC.pickerRefresh,
+    async (event, id: unknown, thumbnails: unknown) => {
+      const request = pending;
+      if (!isTrusted(event) || !request) return null;
+      if (id !== request.id || event.sender !== request.sender) return null;
+      if (request.refreshing) return null;
+      request.refreshing = true;
+      try {
+        const sources = await desktopCapturer.getSources({
+          types: ["screen", "window"],
+          thumbnailSize:
+            thumbnails === true
+              ? { width: 192, height: 108 }
+              : { width: 0, height: 0 },
+          fetchWindowIcons: true,
+        });
+        // The picker may have closed while this was running
+        if (pending !== request) return null;
+        return toPickerSources(request, sources);
+      } catch (error) {
+        gameLog(`Picker refresh failed: ${String(error)}`);
+        return null;
+      } finally {
+        request.refreshing = false;
+      }
+    },
+  );
+
   session.defaultSession.setDisplayMediaRequestHandler(
     async (request, callback) => {
       try {
@@ -106,7 +191,7 @@ export function installScreenShare(
 
         const sources = await desktopCapturer.getSources({
           types: ["screen", "window"],
-          thumbnailSize: { width: 320, height: 180 },
+          thumbnailSize: { width: 192, height: 108 },
           fetchWindowIcons: true,
         });
         if (sources.length === 0) return callback({});
@@ -144,21 +229,10 @@ export function installScreenShare(
         const sender = webContents.fromFrame(request.frame);
         if (!sender) return callback({});
 
-        const choice = await askRenderer(
-          sender,
-          sources.map((source, idx) => ({
-            idx,
-            name: source.name,
-            isFullScreen: source.id.startsWith("screen:"),
-            image: source.thumbnail.isEmpty()
-              ? source.appIcon?.toDataURL()
-              : source.thumbnail.toDataURL(),
-          })),
-        );
-        const picked = choice && sources[choice.idx];
-        if (!picked) return callback({});
+        const choice = await askRenderer(sender, sources);
+        if (!choice) return callback({});
         callback({
-          video: picked,
+          video: choice.source,
           audio: audioFor(choice.audio && request.audioRequested),
         });
       } catch (error) {

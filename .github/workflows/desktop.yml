@@ -57,10 +57,19 @@ jobs:
           # Versions with a "-" (e.g. 1.0.0-beta.1) are pre-releases
           flags=""
           case "${GITHUB_REF_NAME#desktop-v}" in *-*) flags="--prerelease" ;; esac
+          # Hand-written notes (shown in Settings > Updates > What's new),
+          # GitHub's generated commit list only as a fallback
+          notes_file="packages/desktop/release-notes/${GITHUB_REF_NAME#desktop-v}.md"
+          if [ -f "$notes_file" ]; then
+            notes=(--notes-file "$notes_file")
+          else
+            echo "::warning::No $notes_file, using generated notes"
+            notes=(--generate-notes)
+          fi
           gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 \
             || gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" \
                  --verify-tag $flags \
-                 --title "AnyTalk Desktop ${GITHUB_REF_NAME#desktop-v}" --generate-notes
+                 --title "AnyTalk Desktop ${GITHUB_REF_NAME#desktop-v}" "${notes[@]}"
 
   build:
     name: Build (${{ matrix.os }})

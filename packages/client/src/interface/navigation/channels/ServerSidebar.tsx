@@ -35,6 +35,7 @@ import { UnreadCallout } from "@revolt/ui/components/features/navigation/UnreadC
 import { VoiceStatusFooter } from "@revolt/ui/components/features/voice/callCard/VoiceStatusFooter";
 import { useMoveVoiceUser } from "@revolt/ui/components/features/voice/useMoveVoiceUser";
 import { VoiceChannelPreview } from "@revolt/ui/components/features/voice/VoiceChannelPreview";
+import { VoiceChannelTimer } from "@revolt/ui/components/features/voice/VoiceChannelTimer";
 import {
   VOICE_USER_DRAG_TYPE,
   canMoveTo,
@@ -741,15 +742,29 @@ function Entry(
           </Show>
         }
       >
-        <OverflowingText>
-          <TextWithEmoji content={props.channel.name!} />
-        </OverflowingText>
+        <Row align grow minWidth={0}>
+          <NameWrapper>
+            <OverflowingText>
+              <TextWithEmoji content={props.channel.name!} />
+            </OverflowingText>
+          </NameWrapper>
+          <Show when={props.channel.isVoice}>
+            <VoiceChannelTimer channel={props.channel} />
+          </Show>
+        </Row>
       </MenuButton>
 
       <VoiceChannelPreview channel={props.channel} />
     </DropTarget>
   );
 }
+
+/**
+ * Lets the channel name shrink and ellipsize next to the timer
+ */
+const NameWrapper = styled("div", {
+  base: { flex: 1, minWidth: 0 },
+});
 
 /**
  * Channel entry, highlighted while someone can be dropped into it

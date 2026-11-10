@@ -42,8 +42,12 @@ in `packages/desktop` (it silences a harmless Node module-type warning).
 
 ## Releasing
 
-1. Bump `version` in `packages/desktop/package.json`, commit, push, and push
-   the tag `desktop-v<version>`.
+1. Bump `version` in `packages/desktop/package.json`, write the release notes
+   in `packages/desktop/release-notes/<version>.md` (format in the repo's
+   `CLAUDE.md`, "Release notes"), commit, push, and push the tag
+   `desktop-v<version>`. The workflow uses that file as the release body,
+   which the app shows under Settings → Updates → What's new. Without it,
+   GitHub's generated commit list is used.
 2. CI builds and publishes the release (installers, `latest*.yml`) as before.
    Installed apps that already verify will refuse it until step 3 is done, and
    retry every 4 hours (or at the next start).

@@ -20,6 +20,7 @@ export const IPC = {
   pickerSources: "picker:sources",
   pickerResult: "picker:result",
   pickerCancel: "picker:cancel",
+  pickerRefresh: "picker:refresh",
   gamesGet: "games:get",
   gamesChanged: "games:changed",
   gamesFocused: "games:focused",
