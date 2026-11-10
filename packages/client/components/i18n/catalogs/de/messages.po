@@ -796,6 +796,10 @@ msgid "American (MM/DD/YYYY)"
 msgstr "Amerikanisch (MM/TT/JJJJ)"
 
 #: src/interface/Home.tsx
+msgid "An AnyTalk desktop update is available"
+msgstr "Ein AnyTalk-Desktop-Update ist verfügbar"
+
+#: src/interface/Home.tsx
 msgid "An AnyTalk desktop update is ready"
 msgstr "Ein AnyTalk-Desktop-Update ist bereit"
 
@@ -2461,10 +2465,31 @@ msgstr "Für Linux herunterladen (AppImage)"
 msgid "Download for Windows (.exe)"
 msgstr "Für Windows herunterladen (.exe)"
 
+#: src/interface/Home.tsx
+msgid "Download progress"
+msgstr "Download-Fortschritt"
+
+#: src/interface/Home.tsx
+msgid "Download update"
+msgstr "Update herunterladen"
+
 #. placeholder {0}: Math.round(updaterState()?.percent ?? 0)
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Downloading {0}%"
 msgstr "Wird heruntergeladen: {0} %"
+
+#. placeholder {0}: percent()
+#: src/interface/Home.tsx
+#~ msgid "Downloading the AnyTalk update ({0}%)"
+#~ msgstr "AnyTalk-Update wird heruntergeladen ({0} %)"
+
+#: src/interface/Home.tsx
+msgid "Downloading the AnyTalk update ({percent}%)"
+msgstr "AnyTalk-Update wird heruntergeladen ({percent} %)"
+
+#: src/interface/Home.tsx
+msgid "Downloading..."
+msgstr "Wird heruntergeladen …"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Dropped frames per second"
@@ -4118,6 +4143,10 @@ msgstr "Neutral"
 msgid "NEW"
 msgstr "NEU"
 
+#: src/interface/Home.tsx
+msgid "New AnyTalk web version available"
+msgstr "Neue AnyTalk-Webversion verfügbar"
+
 #: components/app/menus/ServerContextMenu.tsx
 msgid "New folder"
 msgstr "Neuer Ordner"
@@ -5052,6 +5081,11 @@ msgstr "Relevanz"
 msgid "Reliable"
 msgstr "Zuverlässig"
 
+#: components/app/interface/desktop/Titlebar.tsx
+#: src/interface/Home.tsx
+msgid "Reload"
+msgstr "Neu laden"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload and clear cache"
 msgstr "Neu laden und Cache leeren"
@@ -5307,6 +5341,7 @@ msgstr "Sicherheitslücken verantwortungsvoll gemeldet"
 msgid "Restart to install"
 msgstr "Zum Installieren neu starten"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: src/interface/Home.tsx
 msgid "Restart to update"
 msgstr "Zum Aktualisieren neu starten"
@@ -5319,6 +5354,10 @@ msgstr "Anrufbereich wiederherstellen"
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Resume"
 msgstr "Fortsetzen"
+
+#: src/interface/Home.tsx
+msgid "Retry download"
+msgstr "Download wiederholen"
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 msgid "Retry sending"
@@ -6340,6 +6379,10 @@ msgstr "Das Passwort ist nicht korrekt. Überprüfe es und versuche es erneut."
 msgid "That QR code is not an AnyTalk login code. Point the camera at the code on the login screen of the new device."
 msgstr "Dieser QR-Code ist kein AnyTalk-Anmeldecode. Richte die Kamera auf den Code auf dem Anmeldebildschirm des neuen Geräts."
 
+#: src/interface/Home.tsx
+msgid "The AnyTalk update could not be downloaded"
+msgstr "Das AnyTalk-Update konnte nicht heruntergeladen werden"
+
 #: components/i18n/errors.tsx
 msgid "The bot has been removed from discover by moderators, the user must contact support."
 msgstr "Der Bot wurde von den Moderatoren aus „Entdecken“ entfernt, die Person muss sich an den Support wenden."
@@ -6429,6 +6472,10 @@ msgstr "Der Server ist bereits in „Entdecken“, die Person muss sich an den S
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "The sound couldn't be saved."
 msgstr "Der Sound konnte nicht gespeichert werden."
+
+#: src/interface/Home.tsx
+msgid "The update could not be started. Try again or use Settings, Updates."
+msgstr "Das Update konnte nicht gestartet werden. Versuche es erneut oder nutze Einstellungen, Updates."
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Theme"
@@ -6938,6 +6985,10 @@ msgstr "Fortschritt des Update-Downloads"
 msgid "Update failed"
 msgstr "Update fehlgeschlagen"
 
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "Update failed, retry"
+msgstr "Fehlgeschlagen, erneut versuchen"
+
 #: src/interface/Home.tsx
 msgid "Update now"
 msgstr "Jetzt aktualisieren"
@@ -6950,6 +7001,7 @@ msgstr "Updates"
 msgid "Updates download in the background and install when you restart AnyTalk. Turn off to decide yourself when to update."
 msgstr "Updates werden im Hintergrund geladen und beim Neustart von AnyTalk installiert. Deaktiviere die Option, um selbst zu entscheiden, wann aktualisiert wird."
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: src/interface/Home.tsx
 msgid "Updating..."
 msgstr "Wird aktualisiert …"

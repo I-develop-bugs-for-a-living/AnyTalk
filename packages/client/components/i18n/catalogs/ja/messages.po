@@ -745,6 +745,10 @@ msgid "American (MM/DD/YYYY)"
 msgstr "米国式 (月/日/西暦)"
 
 #: src/interface/Home.tsx
+msgid "An AnyTalk desktop update is available"
+msgstr "AnyTalkデスクトップのアップデートがあります"
+
+#: src/interface/Home.tsx
 msgid "An AnyTalk desktop update is ready"
 msgstr "AnyTalk デスクトップのアップデートの準備ができました"
 
@@ -2410,10 +2414,31 @@ msgstr "Linux 版をダウンロード（AppImage）"
 msgid "Download for Windows (.exe)"
 msgstr "Windows 版をダウンロード（.exe）"
 
+#: src/interface/Home.tsx
+msgid "Download progress"
+msgstr "ダウンロードの進行状況"
+
+#: src/interface/Home.tsx
+msgid "Download update"
+msgstr "アップデートをダウンロード"
+
 #. placeholder {0}: Math.round(updaterState()?.percent ?? 0)
 #: components/app/interface/settings/user/Updates.tsx
 msgid "Downloading {0}%"
 msgstr "ダウンロード中 {0}%"
+
+#. placeholder {0}: percent()
+#: src/interface/Home.tsx
+#~ msgid "Downloading the AnyTalk update ({0}%)"
+#~ msgstr "AnyTalkのアップデートをダウンロード中 ({0}%)"
+
+#: src/interface/Home.tsx
+msgid "Downloading the AnyTalk update ({percent}%)"
+msgstr "AnyTalkのアップデートをダウンロード中 ({percent}%)"
+
+#: src/interface/Home.tsx
+msgid "Downloading..."
+msgstr "ダウンロード中..."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Dropped frames per second"
@@ -4067,6 +4092,10 @@ msgstr "ニュートラル"
 msgid "NEW"
 msgstr "新規"
 
+#: src/interface/Home.tsx
+msgid "New AnyTalk web version available"
+msgstr "AnyTalkの新しいWeb版があります"
+
 #: components/app/menus/ServerContextMenu.tsx
 msgid "New folder"
 msgstr "新しいフォルダ"
@@ -5001,6 +5030,11 @@ msgstr "関連性"
 msgid "Reliable"
 msgstr "保証型"
 
+#: components/app/interface/desktop/Titlebar.tsx
+#: src/interface/Home.tsx
+msgid "Reload"
+msgstr "再読み込み"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Reload and clear cache"
 msgstr "再読み込みしてキャッシュを消去"
@@ -5256,6 +5290,7 @@ msgstr "脆弱性を報告した"
 msgid "Restart to install"
 msgstr "再起動してインストール"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: src/interface/Home.tsx
 msgid "Restart to update"
 msgstr "再起動してアップデート"
@@ -5268,6 +5303,10 @@ msgstr "通話ウィンドウを元に戻す"
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "Resume"
 msgstr "再開"
+
+#: src/interface/Home.tsx
+msgid "Retry download"
+msgstr "ダウンロードを再試行"
 
 #: components/app/menus/DraftMessageContextMenu.tsx
 msgid "Retry sending"
@@ -6289,6 +6328,10 @@ msgstr "パスワードが正しくありません。確認してもう一度お
 msgid "That QR code is not an AnyTalk login code. Point the camera at the code on the login screen of the new device."
 msgstr "このQRコードはAnyTalkのログインコードではありません。新しいデバイスのログイン画面にあるコードにカメラを向けてください。"
 
+#: src/interface/Home.tsx
+msgid "The AnyTalk update could not be downloaded"
+msgstr "AnyTalkのアップデートをダウンロードできませんでした"
+
 #: components/i18n/errors.tsx
 msgid "The bot has been removed from discover by moderators, the user must contact support."
 msgstr "このボットはモデレーターによって探索から削除されました。ユーザーはサポートに連絡してください。"
@@ -6378,6 +6421,10 @@ msgstr "このサーバーはすでに探索に載っています。削除する
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "The sound couldn't be saved."
 msgstr "サウンドを保存できませんでした。"
+
+#: src/interface/Home.tsx
+msgid "The update could not be started. Try again or use Settings, Updates."
+msgstr "アップデートを開始できませんでした。もう一度試すか、設定の「アップデート」をご利用ください。"
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Theme"
@@ -6887,6 +6934,10 @@ msgstr "アップデートのダウンロード進行状況"
 msgid "Update failed"
 msgstr "アップデートに失敗しました"
 
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "Update failed, retry"
+msgstr "失敗、再試行"
+
 #: src/interface/Home.tsx
 msgid "Update now"
 msgstr "今すぐ更新"
@@ -6899,6 +6950,7 @@ msgstr "アップデート"
 msgid "Updates download in the background and install when you restart AnyTalk. Turn off to decide yourself when to update."
 msgstr "アップデートはバックグラウンドでダウンロードされ、AnyTalk の再起動時にインストールされます。オフにすると、更新するタイミングを自分で決められます。"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: src/interface/Home.tsx
 msgid "Updating..."
 msgstr "更新中..."
