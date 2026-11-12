@@ -17,4 +17,10 @@ export const TRUSTED_UPDATE_KEYS: readonly TrustedKey[] = [
 MCowBQYDK2VwAyEAl8oQ0mclTQMhChpWKtAbndQ9ci0TP+FVciAWh8CikD4=
 -----END PUBLIC KEY-----`,
   },
+  {
+    owner: "Neparshath-coder <Kentch.Tahm@googlemail.com>",
+    publicKey: `-----BEGIN PUBLIC KEY-----
+MCowBQYDK2VwAyEALW2ylVZAeHkXPZ8l3R3Cge7fRWWDXLh4gSwCWlMQJ2Q=
+-----END PUBLIC KEY-----`,
+  },
 ];
