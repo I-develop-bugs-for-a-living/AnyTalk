@@ -2,7 +2,6 @@ import {
   Accessor,
   batch,
   createEffect,
-  createSignal,
   For,
   JSX,
   on,
@@ -146,6 +145,16 @@ export function ListView2(props: Props) {
   );
 }
 
+/**
+ * Number of skeleton messages. Covers the viewport area next to the
+ * content; the list fetches more as soon as the skeleton scrolls into view.
+ */
+const SKELETON_COUNT = 14;
+
+/**
+ * Loading placeholder shown above or below the messages. Fetches more when it
+ * scrolls into view, and animates only the messages that are on screen.
+ */
 function Skeleton(props: {
   onVisible(): void;
   containerRef: HTMLDivElement | undefined;
@@ -154,21 +163,31 @@ function Skeleton(props: {
 }) {
   let ref: HTMLDivElement | undefined;
 
-  // Shimmer only runs while the skeleton is on screen, off-screen
-  // animations of background-position still cost style recalculation every frame
-  const [onScreen, setOnScreen] = createSignal(false);
-
+  // The shimmer only runs for skeleton messages that are actually inside the
+  // scroll container. The whole skeleton is 100rem tall and overlaps the
+  // viewport long before its bars are visible, so a single container-level
+  // check would keep every bar animating. One shared observer toggles
+  // `data-on-screen` on each message instead.
   createEffect(
     on(
       () => [ref, props.containerRef] as const,
       ([ref, containerRef]) => {
         if (ref && containerRef) {
           const observer = new IntersectionObserver(
-            ([entry]) => entry && setOnScreen(entry.isIntersecting),
-            { root: containerRef },
+            (entries) => {
+              for (const entry of entries) {
+                entry.target.toggleAttribute(
+                  "data-on-screen",
+                  entry.isIntersecting,
+                );
+              }
+            },
+            { root: containerRef, rootMargin: "50px 0px" },
           );
 
-          observer.observe(ref);
+          for (const message of Array.from(ref.children)) {
+            observer.observe(message);
+          }
 
           onCleanup(() => observer.disconnect());
         }
@@ -202,12 +221,8 @@ function Skeleton(props: {
   );
 
   return (
-    <SkeletonBase
-      ref={ref}
-      align={props.align}
-      data-on-screen={onScreen() ? "" : undefined}
-    >
-      <For each={new Array(30).fill(0)}>
+    <SkeletonBase ref={ref} align={props.align}>
+      <For each={new Array(SKELETON_COUNT).fill(0)}>
         {() => (
           <Column gap="none">
             <Row>
@@ -273,20 +288,39 @@ const AvatarFrame = styled("div", {
   },
 });
 
+/**
+ * Skeleton placeholder shape. The shimmer is a gradient band on a
+ * pseudo-element moved with `transform`, which runs on the compositor
+ * and costs no main-thread style/paint work (unlike `background-position`).
+ */
 const Frame = styled("div", {
   base: {
-    background:
-      "linear-gradient(90deg, var(--md-sys-color-surface-container-highest) 25%, var(--md-sys-color-surface-container-high) 50%, var(--md-sys-color-surface-container-highest) 75%)",
-    backgroundSize: "200% 100%",
-    backgroundAttachment: "fixed",
-    animation: "skeletonShimmer 1.5s infinite",
-    // paused until the parent skeleton scrolls into view
-    animationPlayState: "paused",
+    position: "relative",
+    overflow: "hidden",
+    background: "var(--md-sys-color-surface-container-highest)",
+    "&::after": {
+      content: '""',
+      position: "absolute",
+      inset: 0,
+      background:
+        "linear-gradient(90deg, transparent 0%, var(--md-sys-color-surface-container-high) 50%, transparent 100%)",
+      transform: "translateX(-100%)",
+      animation: "skeletonSweep 1.5s infinite",
+      // paused until the parent skeleton message scrolls into view
+      animationPlayState: "paused",
+    },
     "[data-on-screen] &": {
-      animationPlayState: "running",
+      "&::after": {
+        animationPlayState: "running",
+        // only bars that are shown get a compositor layer
+        willChange: "transform",
+      },
     },
     "@media (prefers-reduced-motion: reduce)": {
-      animation: "none",
+      "&::after": {
+        animation: "none",
+        display: "none",
+      },
     },
   },
   variants: {
