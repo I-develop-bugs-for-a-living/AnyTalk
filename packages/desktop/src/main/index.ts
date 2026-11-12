@@ -35,6 +35,7 @@ import {
   isGameWindow,
   onGamesChange,
   setGameDetection,
+  wakeGameDetection,
 } from "./games";
 import {
   hookReleaseSupported,
@@ -339,6 +340,10 @@ function createWindow() {
       else win.minimize();
     }
   });
+  // The game scan slows down while hidden, so catch up when visible again
+  win.on("show", wakeGameDetection);
+  win.on("restore", wakeGameDetection);
+  win.on("focus", wakeGameDetection);
   // Windows asks open windows to close at logoff, don't block it
   win.on("session-end", () => {
     quitting = true;

@@ -21,10 +21,16 @@ describe("mergeSources", () => {
     expect(mergeSources(prev, [{ ...a }, { ...b }], true)).toBe(prev);
   });
 
-  it("keeps unchanged objects and order, appends new, drops gone", () => {
+  it("keeps unchanged objects and order, and appends new ones", () => {
     const c = { idx: 2, name: "C", isFullScreen: false };
     const result = mergeSources([a, b], [c, { ...a }], true);
-    expect(result).toEqual([a, c]);
+    expect(result).toEqual([a, b, c]);
+    expect(result[0]).toBe(a);
+  });
+
+  it("keeps a source missing from the poll, unchanged", () => {
+    const result = mergeSources([a, b], [{ ...b }], true);
+    expect(result).toEqual([a, b]);
     expect(result[0]).toBe(a);
   });
 

@@ -339,6 +339,55 @@ const IGNORED_TOOLS = new Set([
   "pressure-vessel-launch",
 ]);
 
+/** A cached `/proc` result for one pid: its `comm` and the names built from it. */
+export type PidCacheEntry = { comm: string; names: string[] };
+
+/**
+ * Forget the cached pids that are gone.
+ *
+ * @param cache Cached names per pid, pruned in place
+ * @param pids The pids that exist now
+ */
+export function prunePidCache(
+  cache: Map<number, PidCacheEntry>,
+  pids: number[],
+): void {
+  const alive = new Set(pids);
+  for (const pid of [...cache.keys()]) if (!alive.has(pid)) cache.delete(pid);
+}
+
+/**
+ * Whether `cmdline` must be read again for a pid. A process that execs into
+ * another program keeps its pid but gets a new `comm`, so a changed `comm`
+ * (or a new pid) means the cached names are out of date.
+ *
+ * @param known The cached entry, if any
+ * @param comm The `comm` read this scan
+ * @returns True when the cached names can't be reused
+ */
+export function needsCmdline(
+  known: PidCacheEntry | undefined,
+  comm: string,
+): boolean {
+  return !known || known.comm !== comm;
+}
+
+/**
+ * Pick the delay before the next scan.
+ *
+ * @param gameRunning Whether a game is detected now
+ * @param windowHidden Whether the app window is hidden or minimised
+ * @returns Milliseconds
+ */
+export function nextScanDelay(
+  gameRunning: boolean,
+  windowHidden: boolean,
+): number {
+  // A running game keeps the fast rate so status and streams stay current
+  if (gameRunning) return 3_000;
+  return windowHidden ? 30_000 : 5_000;
+}
+
 /**
  * Build the names of a Linux process from `/proc` data. Includes `comm`
  * (cut to 15 characters by the kernel), the base name of argv[0] and of any
