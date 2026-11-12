@@ -2,6 +2,7 @@ import {
   Accessor,
   batch,
   createEffect,
+  createSignal,
   For,
   JSX,
   on,
@@ -153,6 +154,28 @@ function Skeleton(props: {
 }) {
   let ref: HTMLDivElement | undefined;
 
+  // Shimmer only runs while the skeleton is on screen, off-screen
+  // animations of background-position still cost style recalculation every frame
+  const [onScreen, setOnScreen] = createSignal(false);
+
+  createEffect(
+    on(
+      () => [ref, props.containerRef] as const,
+      ([ref, containerRef]) => {
+        if (ref && containerRef) {
+          const observer = new IntersectionObserver(
+            ([entry]) => entry && setOnScreen(entry.isIntersecting),
+            { root: containerRef },
+          );
+
+          observer.observe(ref);
+
+          onCleanup(() => observer.disconnect());
+        }
+      },
+    ),
+  );
+
   function onEvent([entry]: IntersectionObserverEntry[]) {
     if (entry) {
       if (entry.isIntersecting) {
@@ -179,7 +202,11 @@ function Skeleton(props: {
   );
 
   return (
-    <SkeletonBase ref={ref} align={props.align}>
+    <SkeletonBase
+      ref={ref}
+      align={props.align}
+      data-on-screen={onScreen() ? "" : undefined}
+    >
       <For each={new Array(30).fill(0)}>
         {() => (
           <Column gap="none">
@@ -253,6 +280,14 @@ const Frame = styled("div", {
     backgroundSize: "200% 100%",
     backgroundAttachment: "fixed",
     animation: "skeletonShimmer 1.5s infinite",
+    // paused until the parent skeleton scrolls into view
+    animationPlayState: "paused",
+    "[data-on-screen] &": {
+      animationPlayState: "running",
+    },
+    "@media (prefers-reduced-motion: reduce)": {
+      animation: "none",
+    },
   },
   variants: {
     shape: {
