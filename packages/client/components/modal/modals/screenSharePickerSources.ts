@@ -13,7 +13,10 @@ export type PickerSourceItem = {
  * Merge a freshly fetched source list into the one on screen. Sources are
  * matched by `idx`, which the desktop app keeps stable per window. Unchanged
  * sources keep their object (so their tiles aren't recreated) and their
- * place in the list, new ones are appended and gone ones dropped.
+ * place in the list, new ones are appended. A source missing from `next`
+ * (e.g. a borderless window that just lost focus) is kept with its last
+ * known name, thumbnail and `idx`, so it stays selectable and still starts
+ * a capture for the right window if the user picks it.
  *
  * @param prev List currently shown
  * @param next Freshly fetched list
@@ -31,7 +34,11 @@ export function mergeSources(
 
   for (const old of prev) {
     const fresh = incoming.get(old.idx);
-    if (!fresh) continue;
+    if (!fresh) {
+      // Not seen in this poll, keep it as it was so it stays selectable
+      result.push(old);
+      continue;
+    }
     incoming.delete(old.idx);
 
     const image = hasThumbnails ? fresh.image : (old.image ?? fresh.image);
