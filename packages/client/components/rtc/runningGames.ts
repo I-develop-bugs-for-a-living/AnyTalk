@@ -52,14 +52,12 @@ export function subscribeRunningGames(
   return window.native.onRunningGamesChanged!(cb);
 }
 
-/** How often the list is read again, in case an update was missed */
-const REFRESH_MS = 30_000;
-
 /**
  * Games running on this computer, kept up to date while the calling component
  * lives. Empty outside the desktop app and while detection is off.
  * @param refreshOn Read the list again whenever this changes (e.g. when a
- * followed game is released), so a missed update can't leave it stale
+ * followed game is released), in case an update was missed. Besides this,
+ * the list is read on mount and then kept current by the push subscription
  */
 export function createRunningGames(
   refreshOn?: Accessor<unknown>,
@@ -101,13 +99,8 @@ export function createRunningGames(
       updated = true;
       if (active) update(list);
     });
-    const timer = setInterval(() => {
-      updated = false;
-      read();
-    }, REFRESH_MS);
     onCleanup(() => {
       active = false;
-      clearInterval(timer);
       stop();
     });
   });

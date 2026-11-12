@@ -1,4 +1,4 @@
-import { app, desktopCapturer } from "electron";
+import { BrowserWindow, app, desktopCapturer } from "electron";
 import { type ChildProcess, execFile, spawn } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { readFile, readdir } from "node:fs/promises";
@@ -10,16 +10,20 @@ import { gameLog } from "./gameLog";
 import {
   type GameMatch,
   type HandleTry,
+  type PidCacheEntry,
   type ProcInfo,
   type WindowInfo,
   assignWindows,
   linuxNames,
   matchGames,
+  needsCmdline,
   needsHandleQuery,
+  nextScanDelay,
   noteHandleQuery,
   parseTasklist,
   parseXpropActiveWindow,
   parseXpropPid,
+  prunePidCache,
   sameRunningGames,
   windowIdOf,
   withTimeout,
@@ -27,10 +31,8 @@ import {
 import { isWayland } from "./platform";
 import { isServerUrl } from "./url";
 
-/** Poll interval while no known game runs. */
-const IDLE_INTERVAL_MS = 5_000;
-/** Poll interval while a game runs, kept slow to leave the CPU to the game. */
-const ACTIVE_INTERVAL_MS = 3_000;
+/** Scans closer together than this are not triggered by window events. */
+const WAKE_MIN_GAP_MS = 5_000;
 /** A scan taking longer than this is abandoned. */
 const SCAN_TIMEOUT_MS = 25_000;
 
@@ -48,6 +50,8 @@ let enabled = false;
 let timer: ReturnType<typeof setTimeout> | undefined;
 /** The scan that is running now, there is never more than one. */
 let scanning: Promise<void> | undefined;
+/** When the last scan started. */
+let lastScanAt = 0;
 /** The list sent last. */
 let latest: RunningGame[] = [];
 /** Bundled and user games, loaded on first use. */
@@ -153,6 +157,9 @@ function run(
   });
 }
 
+/** Names per Linux pid, so `/proc/<pid>` is read once per process. */
+const pidCache = new Map<number, PidCacheEntry>();
+
 /**
  * List the running processes.
  *
@@ -173,21 +180,26 @@ async function listProcesses(): Promise<ProcInfo[] | undefined> {
   } catch {
     return undefined;
   }
-  const procs = await Promise.all(
-    dirs.map(async (dir): Promise<ProcInfo | undefined> => {
+  const pids = dirs.map(Number);
+  prunePidCache(pidCache, pids);
+  // `comm` is one small read per pid, `cmdline` only when it changed (exec)
+  await Promise.all(
+    pids.map(async (pid) => {
       try {
-        const [comm, cmdline] = await Promise.all([
-          readFile(`/proc/${dir}/comm`, "utf8"),
-          readFile(`/proc/${dir}/cmdline`, "utf8"),
-        ]);
-        return { pid: Number(dir), names: linuxNames(comm, cmdline) };
+        const comm = await readFile(`/proc/${pid}/comm`, "utf8");
+        if (!needsCmdline(pidCache.get(pid), comm)) return;
+        const cmdline = await readFile(`/proc/${pid}/cmdline`, "utf8");
+        pidCache.set(pid, { comm, names: linuxNames(comm, cmdline) });
       } catch {
         // The process ended while we looked
-        return undefined;
+        pidCache.delete(pid);
       }
     }),
   );
-  return procs.filter((proc): proc is ProcInfo => !!proc);
+  return pids.flatMap((pid) => {
+    const known = pidCache.get(pid);
+    return known ? [{ pid, names: known.names }] : [];
+  });
 }
 
 /** Number of the newest scan, older scans must not touch shared state. */
@@ -596,6 +608,7 @@ function publish(games: RunningGame[]) {
 function scan() {
   if (scanning || !enabled) return;
   const gen = ++generation;
+  lastScanAt = Date.now();
   scanning = (async () => {
     try {
       const started = Date.now();
@@ -621,9 +634,37 @@ function scan() {
     if (!enabled) return;
     timer = setTimeout(
       scan,
-      latest.length > 0 ? ACTIVE_INTERVAL_MS : IDLE_INTERVAL_MS,
+      nextScanDelay(latest.length > 0, isWindowHidden()),
     );
   });
+}
+
+/**
+ * Whether the app window is hidden (tray) or minimised, so nobody looks at
+ * the game list and scanning can slow down.
+ *
+ * @returns True when the window can't be seen
+ */
+function isWindowHidden(): boolean {
+  const contents = getTarget();
+  const win =
+    contents && !contents.isDestroyed()
+      ? BrowserWindow.fromWebContents(contents)
+      : null;
+  return !!win && (!win.isVisible() || win.isMinimized());
+}
+
+/**
+ * Scan right away when the window comes back (shown, restored, focused),
+ * because the slow hidden interval may have left the list out of date.
+ */
+export function wakeGameDetection() {
+  if (!enabled || scanning) return;
+  clearTimeout(timer);
+  // Window events come in bursts, so keep a gap since the last scan
+  const wait = Math.max(0, lastScanAt + WAKE_MIN_GAP_MS - Date.now());
+  if (wait === 0) scan();
+  else timer = setTimeout(scan, wait);
 }
 
 /**
