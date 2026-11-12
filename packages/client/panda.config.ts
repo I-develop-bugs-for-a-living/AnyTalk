@@ -65,12 +65,13 @@ export default defineConfig({
             background: "transparent",
           },
         },
-        skeletonShimmer: {
+        // compositor-only (transform) so it stays cheap
+        skeletonSweep: {
           "0%": {
-            backgroundPosition: "200% 0",
+            transform: "translateX(-100%)",
           },
           "100%": {
-            backgroundPosition: "-200% 0",
+            transform: "translateX(100%)",
           },
         },
       },

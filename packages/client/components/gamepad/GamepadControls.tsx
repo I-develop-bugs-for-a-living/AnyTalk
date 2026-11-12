@@ -10,6 +10,7 @@ import {
 import { KeybindAction, useTriggerKeybind } from "@revolt/keybinds";
 import { useState } from "@revolt/state";
 
+import { shouldWatchGamepads } from "./awake";
 import { ControllerAction, actionForButton, resolveBindings } from "./bindings";
 import { gamepadCapturing } from "./capture";
 import {
@@ -56,14 +57,28 @@ function connectedPads(): Gamepad[] {
 }
 
 /**
+ * Whether the window has focus and the page is visible right now
+ * @returns Boolean
+ */
+function isAwake(): boolean {
+  return shouldWatchGamepads(
+    true,
+    typeof document === "undefined" || document.hasFocus(),
+    typeof document === "undefined" ? "visible" : document.visibilityState,
+  );
+}
+
+/**
  * Lets a game controller drive the app: moving focus, pressing, going back,
  * context menus, switching channels and servers, scrolling and muting. See
  * ARCHITECTURE.md for the button layout.
  *
- * While no controller is connected, or the setting is off, the only thing
- * this listens to is the connect and disconnect events. Polling and the other
- * listeners exist only while a controller is connected, the setting is on and
- * the page is visible.
+ * While no controller is connected, the only thing this listens to is the
+ * connect and disconnect events. Polling and the other listeners exist only
+ * while a controller is connected, the setting is on and the page is visible.
+ * With the setting off, or while the window is unfocused or hidden, it doesn't
+ * listen or read controllers at all, so Chromium can stop its gamepad polling
+ * thread.
  */
 export function GamepadControls() {
   const state = useState();
@@ -71,6 +86,9 @@ export function GamepadControls() {
 
   /** Whether the user left controller support on */
   const enabled = () => state.settings.getValue("controller:enabled") ?? true;
+
+  /** Whether the window has focus and the page is visible */
+  const [awake, setAwake] = createSignal(isAwake());
 
   /** The push to talk button, which the app must leave alone */
   const pttButton = () =>
@@ -207,7 +225,7 @@ export function GamepadControls() {
    * Start polling when the page is visible
    */
   function startPolling() {
-    if (frame || document.visibilityState !== "visible") return;
+    if (frame || !isAwake()) return;
     layerWatch ??= watchLayers();
     frame = requestAnimationFrame(poll);
   }
@@ -225,10 +243,11 @@ export function GamepadControls() {
   }
 
   /**
-   * Pause while the page is hidden, resume when it is shown again
+   * Pause while the page is hidden or the window unfocused, resume when it is
+   * shown and focused again
    */
-  function onVisibilityChange() {
-    if (document.visibilityState === "visible") startPolling();
+  function onAwakeChange() {
+    if (isAwake()) startPolling();
     else stopPolling();
   }
 
@@ -248,7 +267,35 @@ export function GamepadControls() {
     setPadCount(connectedPads().length);
   }
 
+  /** Follows focus and visibility, which decide whether to ask for pads */
+  function updateAwake() {
+    setAwake(isAwake());
+  }
+
   onMount(() => {
+    window.addEventListener("focus", updateAwake);
+    window.addEventListener("blur", updateAwake);
+    document.addEventListener("visibilitychange", updateAwake);
+
+    onCleanup(() => {
+      window.removeEventListener("focus", updateAwake);
+      window.removeEventListener("blur", updateAwake);
+      document.removeEventListener("visibilitychange", updateAwake);
+    });
+  });
+
+  // listen for controllers only while the user can use one. Removing the
+  // listeners and not reading pads lets Chromium stop its polling thread. On
+  // coming back, one read catches controllers plugged in meanwhile.
+  createEffect(() => {
+    // awake() already covers focus and visibility
+    if (!enabled()) {
+      // no stale count for the settings page while support is off
+      setPadCount(0);
+      return;
+    }
+    if (!awake()) return;
+
     refreshCount();
     window.addEventListener("gamepadconnected", refreshCount);
     window.addEventListener("gamepaddisconnected", refreshCount);
@@ -266,13 +313,17 @@ export function GamepadControls() {
       (active) => {
         if (!active) return;
 
-        document.addEventListener("visibilitychange", onVisibilityChange);
+        document.addEventListener("visibilitychange", onAwakeChange);
+        window.addEventListener("focus", onAwakeChange);
+        window.addEventListener("blur", onAwakeChange);
         window.addEventListener("pointerdown", onOtherInput, true);
         window.addEventListener("keydown", onOtherInput, true);
         startPolling();
 
         onCleanup(() => {
-          document.removeEventListener("visibilitychange", onVisibilityChange);
+          document.removeEventListener("visibilitychange", onAwakeChange);
+          window.removeEventListener("focus", onAwakeChange);
+          window.removeEventListener("blur", onAwakeChange);
           window.removeEventListener("pointerdown", onOtherInput, true);
           window.removeEventListener("keydown", onOtherInput, true);
           stopPolling();
