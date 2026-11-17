@@ -1930,6 +1930,23 @@ msgstr "无法保存此设置。"
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "无法从 {hStr} 获取 AnyTalk 配置。"
 
+#. placeholder {0}: notice.name
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream for {0}."
+#~ msgstr "找不到 {0} 可串流的窗口。"
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream for {name}."
+msgstr "找不到 {name} 可串流的窗口。"
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream. Bring the app you want to share to the front, then press the hotkey again."
+msgstr "找不到可串流的窗口。请将要共享的应用切换到最前面，然后再次按下快捷键。"
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream. Click the window you want to share first."
+#~ msgstr "找不到可串流的窗口。请先点击要共享的窗口。"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Couldn't load downloads"
 msgstr "无法加载下载内容"
@@ -1942,6 +1959,18 @@ msgstr "无法将其移动到 {0}。"
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Couldn't set up call encryption. The server may need an update."
 msgstr "无法设置通话加密。服务器可能需要更新。"
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream."
+msgstr "无法开始串流。"
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream. Try running {name} in windowed or borderless mode."
+msgstr "无法开始串流。请尝试以窗口模式或无边框模式运行 {name}。"
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't start the stream. Try running the game in windowed or borderless mode."
+#~ msgstr "无法开始串流。请尝试以窗口模式或无边框模式运行游戏。"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "CPU"
@@ -6261,8 +6290,12 @@ msgid "Stream ended"
 msgstr "直播已结束"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Stream focused game"
-msgstr "直播当前聚焦的游戏"
+#~ msgid "Stream focused game"
+#~ msgstr "直播当前聚焦的游戏"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Stream focused window"
+msgstr "直播当前聚焦的窗口"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Stream is still running."

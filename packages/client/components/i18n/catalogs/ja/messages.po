@@ -1845,6 +1845,23 @@ msgstr "この設定を保存できませんでした。"
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "{hStr} から AnyTalk の設定を取得できませんでした。"
 
+#. placeholder {0}: notice.name
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream for {0}."
+#~ msgstr "{0} の配信するウィンドウが見つかりませんでした。"
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream for {name}."
+msgstr "{name} の配信するウィンドウが見つかりませんでした。"
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream. Bring the app you want to share to the front, then press the hotkey again."
+msgstr "配信するウィンドウが見つかりませんでした。共有したいアプリを最前面に表示してから、もう一度ホットキーを押してください。"
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream. Click the window you want to share first."
+#~ msgstr "配信するウィンドウが見つかりませんでした。先に共有したいウィンドウをクリックしてください。"
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Couldn't load downloads"
 msgstr "ダウンロードを読み込めませんでした"
@@ -1857,6 +1874,18 @@ msgstr "{0} に移動できませんでした。"
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Couldn't set up call encryption. The server may need an update."
 msgstr "通話の暗号化を設定できませんでした。サーバーの更新が必要かもしれません。"
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream."
+msgstr "配信を開始できませんでした。"
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream. Try running {name} in windowed or borderless mode."
+msgstr "配信を開始できませんでした。{name} をウィンドウモードまたはボーダーレスモードで実行してみてください。"
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't start the stream. Try running the game in windowed or borderless mode."
+#~ msgstr "配信を開始できませんでした。ゲームをウィンドウモードまたはボーダーレスモードで実行してみてください。"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "CPU"
@@ -6145,8 +6174,12 @@ msgid "Stream ended"
 msgstr "配信終了"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Stream focused game"
-msgstr "フォーカス中のゲームを配信"
+#~ msgid "Stream focused game"
+#~ msgstr "フォーカス中のゲームを配信"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Stream focused window"
+msgstr "フォーカス中のウィンドウを配信"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Stream is still running."

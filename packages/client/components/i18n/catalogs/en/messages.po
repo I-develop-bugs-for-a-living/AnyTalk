@@ -1931,6 +1931,23 @@ msgstr "Could not save this setting."
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "Couldn't fetch AnyTalk configuration from {hStr}."
 
+#. placeholder {0}: notice.name
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream for {0}."
+#~ msgstr "Couldn't find a window to stream for {0}."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream for {name}."
+msgstr "Couldn't find a window to stream for {name}."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream. Bring the app you want to share to the front, then press the hotkey again."
+msgstr "Couldn't find a window to stream. Bring the app you want to share to the front, then press the hotkey again."
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream. Click the window you want to share first."
+#~ msgstr "Couldn't find a window to stream. Click the window you want to share first."
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Couldn't load downloads"
 msgstr "Couldn't load downloads"
@@ -1943,6 +1960,18 @@ msgstr "Couldn't move them to {0}."
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Couldn't set up call encryption. The server may need an update."
 msgstr "Couldn't set up call encryption. The server may need an update."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream."
+msgstr "Couldn't start the stream."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream. Try running {name} in windowed or borderless mode."
+msgstr "Couldn't start the stream. Try running {name} in windowed or borderless mode."
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't start the stream. Try running the game in windowed or borderless mode."
+#~ msgstr "Couldn't start the stream. Try running the game in windowed or borderless mode."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "CPU"
@@ -6274,8 +6303,12 @@ msgid "Stream ended"
 msgstr "Stream ended"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Stream focused game"
-msgstr "Stream focused game"
+#~ msgid "Stream focused game"
+#~ msgstr "Stream focused game"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Stream focused window"
+msgstr "Stream focused window"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Stream is still running."
