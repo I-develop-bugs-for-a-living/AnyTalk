@@ -62,6 +62,7 @@ import { MuteKeybinds } from "./components/MuteKeybinds";
 import { OverlayPublisher } from "./components/OverlayPublisher";
 import { RoomAudioManager } from "./components/RoomAudioManager";
 import { StatsRecorder } from "./components/StatsRecorder";
+import { StreamNotices } from "./components/StreamNotices";
 import { StreamPopouts } from "./components/StreamPopouts";
 import { StreamViewers } from "./components/StreamViewers";
 import { VoiceKeybinds } from "./components/VoiceKeybinds";
@@ -104,11 +105,7 @@ import {
   shouldRejoin,
 } from "./reconnect";
 import { shouldRewatch } from "./rewatch";
-import {
-  fetchRunningGames,
-  gameDetectionAvailable,
-  subscribeRunningGames,
-} from "./runningGames";
+import { fetchRunningGames, subscribeRunningGames } from "./runningGames";
 import {
   setScreenCaptureKeepFocus,
   setScreenCaptureLimit,
@@ -130,6 +127,12 @@ import { VoiceProcessor } from "./VoiceProcessor";
 
 /** Why E2EE kept us out of a call or ended it: no browser support, worker or key exchange failure */
 export type E2eeNotice = { kind: "unsupported" | E2eeFailureKind };
+
+/**
+ * Why a game or window stream did not start properly: no window to capture
+ * (`name` is the game, when it is one), or the capture or publishing failed
+ */
+export type StreamNotice = { kind: "no-window" | "failed"; name?: string };
 
 type State =
   | "READY"
@@ -328,6 +331,8 @@ type Follow = {
   stalledOn?: string;
   /** The captured track ended and the wait for a new window is going on */
   grace?: boolean;
+  /** A failed swap was already warned about, until a swap works again */
+  warned?: boolean;
   /** Recaptures of the captured window after it stalled */
   refresh?: RefreshState;
   /** Ends the wait for a window after the capture ended, if one is going on */
@@ -381,6 +386,20 @@ class Voice {
    */
   e2eeNotice: Accessor<E2eeNotice | undefined>;
   #setE2eeNotice: Setter<E2eeNotice | undefined>;
+
+  /**
+   * Set (to a new object each time) when a stream started with the Stream
+   * button or the hotkey could not start, for the warning (see StreamNotices)
+   */
+  streamNotice: Accessor<StreamNotice | undefined>;
+  #setStreamNotice: Setter<StreamNotice | undefined>;
+
+  /**
+   * Capture source of the non-game window our stream shows, when it was
+   * started with the hotkey. Cleared whenever the stream is stopped or
+   * changed any other way.
+   */
+  #windowSourceId?: string;
 
   /** The last join was refused for an E2EE reason; retrying won't help */
   #e2eeRefused = false;
@@ -587,6 +606,10 @@ class Voice {
     const [e2eeNotice, setE2eeNotice] = createSignal<E2eeNotice>();
     this.e2eeNotice = e2eeNotice;
     this.#setE2eeNotice = setE2eeNotice;
+
+    const [streamNotice, setStreamNotice] = createSignal<StreamNotice>();
+    this.streamNotice = streamNotice;
+    this.#setStreamNotice = setStreamNotice;
 
     this.vidTracks = () => [];
 
@@ -2175,6 +2198,7 @@ class Voice {
     const audio = this.#streamAudio;
     // viewers must know it is over before the track goes away
     await this.#endFollow();
+    this.#windowSourceId = undefined;
     this.#shareToken = undefined;
     this.#currentVideo = undefined;
 
@@ -2226,6 +2250,7 @@ class Voice {
     preselected: boolean,
   ): Promise<CaptureResult> {
     let result: CaptureResult = "done";
+    if (!preselected) this.#windowSourceId = undefined;
     const capture: ScreenCapture = { tracks: [], publishing: false };
     this.#capture = capture;
 
@@ -2335,7 +2360,9 @@ class Voice {
         result = "cancelled";
       } else {
         result = "failed";
-        this.onErr(e);
+        // a game or window stream tells the user in plain words
+        if (preselected) this.#warnStream({ kind: "failed" });
+        else this.onErr(e);
       }
     } finally {
       // with the settings shown the start goes on in their callback
@@ -2510,13 +2537,17 @@ class Voice {
    * the stream moves over to it and viewers keep watching. Stopping the
    * stream or switching window by hand ends that.
    * @param gameId Id of the game, as reported by getRunningGames
+   * @param viaHotkey Started with the hotkey: a game without a window only
+   * warns. From the Stream button it opens the picker (or the system
+   * portal), which the user chooses from.
    */
-  async startGameStream(gameId: string) {
+  async startGameStream(gameId: string, viaHotkey = false) {
     const room = this.room();
     if (!room) return;
     if (this.#capture || !window.native?.setNextScreenSource) return;
 
     let best: RunningGameWindow | undefined;
+    let gameName: string | undefined;
     let result: CaptureResult = "failed";
 
     try {
@@ -2526,13 +2557,21 @@ class Voice {
         // use what is running right now, the list shown may be a moment old
         const game = (await fetchRunningGames()).find((g) => g.id === gameId);
         if (!game) return;
+        gameName = game.name;
+        this.#startingGame = game.name;
         best = game.windows[0];
 
         const target = best;
+        if (!target && viaHotkey) {
+          // Nothing to capture (Wayland, exclusive fullscreen) and no click
+          // to open a picker from: say so, never capture a whole screen
+          this.#warnStream({ kind: "no-window", name: game.name });
+          return;
+        }
         // Queued with the other swaps, the chosen source is set right before
-        // capturing so no earlier swap can take or clear it. No window
-        // (Wayland): null shows the normal picker or portal.
+        // capturing so no earlier swap can take or clear it
         result = await this.#swap(async () => {
+          this.#windowSourceId = undefined;
           if (this.screenshare()) {
             // Already streaming: move that stream over. Follow mode stays
             // as it is until the swap worked, so a failed swap loses nothing.
@@ -2542,6 +2581,7 @@ class Voice {
             }
             return swapped;
           }
+          // No window: null shows the normal picker or portal
           await window.native.setNextScreenSource?.(target?.sourceId ?? null);
           return this.#startScreenshare(room, !!target);
         });
@@ -2551,8 +2591,15 @@ class Voice {
       this.onErr(e);
       return;
     } finally {
+      this.#startingGame = undefined;
       // in case nothing took it
       window.native.setNextScreenSource?.(null);
+    }
+
+    // The window was gone when the capture started, twice. A user cancel
+    // can't happen here, there was no picker.
+    if (result === "cancelled" && best) {
+      this.#warnStream({ kind: "failed", name: gameName });
     }
 
     if (!best || !this.screenshare() || this.room() !== room) return;
@@ -2574,16 +2621,18 @@ class Voice {
   }
 
   /**
-   * The "stream focused game" hotkey: starts a stream of the game in front,
-   * swaps to it when another game is streamed, or stops the stream. Does
-   * nothing outside a call, without game detection or without a game.
-   * Pressing it while AnyTalk is in front and a stream runs stops the
-   * stream, since no game is focused then. A press while the previous one
-   * is still being handled is ignored.
+   * The "stream focused game" hotkey: starts a stream of the window in front
+   * (the game when it is a detected one, any other app otherwise), swaps to
+   * it when something else is streamed, or stops the stream. Warns when
+   * there is no window that can be captured (e.g. Wayland). Does nothing
+   * outside a call or outside the desktop app. Pressing it while AnyTalk is
+   * in front and a stream runs stops the stream, since no other window is
+   * in front then. A press while the previous one is still being handled is
+   * ignored.
    */
   async toggleFocusedGameStream() {
     if (this.#focusedGameBusy) return;
-    if (!this.room() || !gameDetectionAvailable()) return;
+    if (!this.room() || !window.native?.setNextScreenSource) return;
     this.#focusedGameBusy = true;
     try {
       await this.#toggleFocusedGameStream();
@@ -2594,8 +2643,17 @@ class Voice {
 
   /** The work of toggleFocusedGameStream, one press at a time */
   async #toggleFocusedGameStream() {
+    // Taken first: the main process only keeps the window for a moment
+    // after the global hotkey. Used only when no game is focused.
+    let foregroundSourceId: string | undefined;
+    try {
+      foregroundSourceId = (await window.native.getForegroundWindow?.())
+        ?.sourceId;
+    } catch (e) {
+      console.debug("[games] could not read the window in front:", e);
+    }
+
     const games = await fetchRunningGames();
-    if (games.length === 0) return;
 
     let focusedGameId: string | undefined;
     try {
@@ -2607,20 +2665,73 @@ class Voice {
     // a game that is no longer detected can't be streamed
     if (!games.some((g) => g.id === focusedGameId)) focusedGameId = undefined;
 
+    // a game in front is streamed as a game, not as a window
+    if (focusedGameId) foregroundSourceId = undefined;
+
     const decision = decideFocusedGameStream(
       this.screenshare(),
       this.followedGameId(),
-      games.map((g) => g.id),
       focusedGameId,
+      foregroundSourceId,
+      this.#windowSourceId,
     );
     try {
       if (decision.action === "stop") {
         await this.toggleScreenshare();
-      } else if (decision.action !== "none") {
-        await this.startGameStream(decision.gameId);
+      } else if (decision.action === "unavailable") {
+        this.#warnStream({ kind: "no-window" });
+      } else if (
+        decision.action === "start-window" ||
+        decision.action === "swap-window"
+      ) {
+        await this.#startWindowStream(decision.sourceId);
+      } else if (decision.action === "start" || decision.action === "swap") {
+        await this.startGameStream(decision.gameId, true);
       }
     } catch (e) {
       this.onErr(e);
+    }
+  }
+
+  /**
+   * Stream a window that is no detected game, without the picker and with
+   * the saved quality. No game follow: if the window goes away the stream
+   * ends the normal way.
+   * @param sourceId A source id the main process just resolved
+   */
+  async #startWindowStream(sourceId: string) {
+    const room = this.room();
+    if (!room || this.#capture) return;
+
+    let result: CaptureResult = "failed";
+    try {
+      result = await this.#swap(async () => {
+        this.#windowSourceId = undefined;
+        if (this.screenshare()) {
+          // the stream no longer belongs to a game
+          await this.#endFollow();
+          return this.#replaceSource(sourceId);
+        }
+        await window.native.setNextScreenSource?.(sourceId);
+        return this.#startScreenshare(room, true);
+      });
+    } catch (e) {
+      this.onErr(e);
+      return;
+    } finally {
+      // in case nothing took it
+      window.native.setNextScreenSource?.(null);
+    }
+
+    if (result === "cancelled") {
+      // no picker was shown, so the window was gone or can't be captured
+      this.#warnStream({ kind: "failed" });
+    } else if (
+      result === "done" &&
+      this.screenshare() &&
+      this.room() === room
+    ) {
+      this.#windowSourceId = sourceId;
     }
   }
 
@@ -2882,7 +2993,10 @@ class Voice {
    */
   async #followSwap(follow: Follow, sourceId: string): Promise<CaptureResult> {
     if (this.#follow !== follow) return "failed";
-    const result = await this.#replaceSource(sourceId);
+    // one warning per failure episode: it comes back after a swap worked
+    const result = await this.#replaceSource(sourceId, !follow.warned);
+    if (result === "failed") follow.warned = true;
+    else if (result === "done") follow.warned = false;
     console.debug(
       "[follow] swap to",
       sourceId,
@@ -3045,10 +3159,13 @@ class Voice {
    * the stream going
    * @param sourceId Capture this source without the picker, undefined shows
    * the picker (or the portal)
+   * @param warn Warn when a preselected capture fails, false for automatic
+   * follow swaps that may repeat
    * @returns How it ended, `done` when the stream shows the new capture
    */
-  async #replaceSource(sourceId?: string): Promise<CaptureResult> {
+  async #replaceSource(sourceId?: string, warn = true): Promise<CaptureResult> {
     const preselected = sourceId !== undefined;
+    if (!preselected) this.#windowSourceId = undefined;
     const room = this.room();
     const stream = this.streamOptions();
     // When the captured window closes, LiveKit unpublishes the ended track
@@ -3111,7 +3228,8 @@ class Voice {
         console.debug("[follow]", e.message);
         return "failed";
       }
-      this.onErr(e);
+      if (!preselected) this.onErr(e);
+      else if (warn) this.#warnStream({ kind: "failed" });
       return "failed";
     }
 
@@ -3753,6 +3871,20 @@ class Voice {
     return !!this.channel()?.havePermission("Speak");
   }
 
+  /**
+   * Show the warning that a game or window stream could not start. A failure
+   * while a game stream is being started names that game.
+   */
+  #warnStream(notice: StreamNotice) {
+    this.#setStreamNotice({
+      ...notice,
+      name: notice.name ?? this.#startingGame,
+    });
+  }
+
+  /** Name of the game whose stream is being started, for the warning */
+  #startingGame?: string;
+
   private onErr(e: unknown) {
     if ((e as Error).name !== "NotAllowedError")
       this.openModal({ type: "error2", error: e });
@@ -3804,6 +3936,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
         <MuteKeybinds />
         <CallSounds />
         <E2eeNotices />
+        <StreamNotices />
         <VoiceMoves />
       </RoomContext.Provider>
     </voiceContext.Provider>

@@ -859,7 +859,7 @@ async function foregroundWin32(): Promise<string | undefined> {
  * @returns The window id in the form of `windowIdOf`, or undefined where
  *   unsupported (Wayland, other systems) or when the lookup fails
  */
-async function foregroundWindowId(): Promise<string | undefined> {
+export async function foregroundWindowId(): Promise<string | undefined> {
   if (isWayland) return undefined;
   if (platform === "win32") return foregroundWin32();
   if (platform === "linux") {
