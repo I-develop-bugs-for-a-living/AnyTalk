@@ -1,4 +1,10 @@
-import { createMemo, createSignal, onCleanup, Show } from "solid-js";
+import {
+  createEffect,
+  createMemo,
+  createSignal,
+  onCleanup,
+  Show,
+} from "solid-js";
 import {
   TrackReference,
   useEnsureParticipant,
@@ -8,7 +14,7 @@ import {
 } from "solid-livekit-components";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
-import { Track } from "livekit-client";
+import { RemoteTrackPublication, Track } from "livekit-client";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
@@ -154,6 +160,24 @@ export function ParticipantTile(props: TileProps) {
     !participant.isLocal &&
     (!!props.focus || !!props.fill);
   const zoom = createStreamZoom(() => voice.trackId(track), zoomable);
+
+  // A zoomable tile (focused or multi-stream) opts out of LiveKit's visibility
+  // managed subscription (see manageSubscription below), so nothing else would
+  // subscribe its video: it only worked once the grid tile had done it.
+  // Subscribe the watched stream here, like the audio is in RoomAudioManager.
+  // Grid tiles are left alone: there the visibility observer owns the
+  // subscription. Unencrypted publications are skipped, CallE2ee refuses them.
+  createEffect(() => {
+    const pub = track.publication;
+    if (
+      zoomable() &&
+      !unwatched() &&
+      pub instanceof RemoteTrackPublication &&
+      pub.isEncrypted
+    ) {
+      pub.setSubscribed(true);
+    }
+  });
 
   // Multi-stream view: this tile fills the whole stream area, the other tiles
   // stay mounted (and subscribed) underneath it
