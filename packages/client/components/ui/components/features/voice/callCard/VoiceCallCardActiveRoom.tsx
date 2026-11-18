@@ -32,6 +32,7 @@ import {
   VoiceCallCardStatus,
 } from "./VoiceCallCardStatus";
 import {
+  leavesIntoFloating,
   setTheaterControlsHidden,
   touchOnly,
   volumePanelOpen,
@@ -66,11 +67,40 @@ export function VoiceCallCardActiveRoom() {
     }, THEATER_IDLE_MS);
   }
 
-  /** Hide the controls right away, e.g. when the window loses focus */
+  /** Whether the pointer is inside the card (a game stealing focus fires blur) */
+  let pointerInside = false;
+  /** Pending hide after the pointer left the card, cancelled by the next move */
+  let leaveTimer: ReturnType<typeof setTimeout> | undefined;
+
+  /** Hide the controls right away, e.g. after a tap on touch */
   function sleep() {
     if (volumePanelOpen()) return;
     clearTimeout(idleTimer);
     setIdle(true);
+  }
+
+  /** Window blur: keep the controls while the pointer is over the card */
+  function onBlur() {
+    if (pointerInside) return;
+    sleep();
+  }
+
+  /**
+   * The pointer left the card or the page: hide after a short delay that the
+   * next pointer move cancels. Leaves into the card or its portals (e.g. the
+   * volume panel) are ignored.
+   */
+  function leave(related: EventTarget | null, card?: Element) {
+    if (related instanceof Node && card?.contains(related)) return;
+    if (leavesIntoFloating(related)) return;
+    pointerInside = false;
+    clearTimeout(leaveTimer);
+    leaveTimer = setTimeout(sleep, LEAVE_HIDE_MS);
+  }
+
+  /** Mouse left the page */
+  function onDocLeave(e: MouseEvent) {
+    leave(e.relatedTarget);
   }
 
   // also restarts the idle timer once a volume panel closes
@@ -83,14 +113,15 @@ export function VoiceCallCardActiveRoom() {
   onCleanup(() => setTheaterControlsHidden(false));
 
   onMount(() => {
-    window.addEventListener("blur", sleep);
-    document.documentElement.addEventListener("mouseleave", sleep);
+    window.addEventListener("blur", onBlur);
+    document.documentElement.addEventListener("mouseleave", onDocLeave);
   });
 
   onCleanup(() => {
     clearTimeout(idleTimer);
-    window.removeEventListener("blur", sleep);
-    document.documentElement.removeEventListener("mouseleave", sleep);
+    clearTimeout(leaveTimer);
+    window.removeEventListener("blur", onBlur);
+    document.documentElement.removeEventListener("mouseleave", onDocLeave);
   });
 
   return (
@@ -99,7 +130,17 @@ export function VoiceCallCardActiveRoom() {
       theater={theater()}
       hideCursor={theater() && idle()}
       // a finger lifting also leaves, on touch only taps show or hide them
-      onPointerMove={(e) => theater() && e.pointerType !== "touch" && wake()}
+      onPointerEnter={(e) => {
+        if (e.pointerType === "touch") return;
+        pointerInside = true;
+      }}
+      onPointerMove={(e) => {
+        if (!theater() || e.pointerType === "touch") return;
+        pointerInside = true;
+        // moving again cancels a pending hide from a leave
+        clearTimeout(leaveTimer);
+        wake();
+      }}
       // touch has no mouse moving to wake the controls: a tap on the stream
       // or the bar shows or hides them, its buttons keep working
       onClick={(e) => {
@@ -113,7 +154,15 @@ export function VoiceCallCardActiveRoom() {
         else sleep();
       }}
       fullscreen={voice.layout() === "fullscreen" && !theater()}
-      onPointerLeave={(e) => theater() && e.pointerType !== "touch" && sleep()}
+      onPointerLeave={(e) => {
+        if (e.pointerType === "touch") return;
+        // reset the flag even outside theater, so it can't go stale
+        if (!theater()) {
+          pointerInside = false;
+          return;
+        }
+        leave(e.relatedTarget, e.currentTarget);
+      }}
     >
       <Show when={!collapsed()}>
         <VoiceCallCardEnableAudio />
@@ -215,7 +264,11 @@ function LayoutButtons() {
   );
 }
 
-const THEATER_IDLE_MS = 2500;
+/** Idle time before the full screen controls hide */
+const THEATER_IDLE_MS = 4000;
+
+/** Delay before hiding the controls after the pointer leaves the card */
+const LEAVE_HIDE_MS = 300;
 
 const TILE_MIN_WIDTH = "250px",
   TILE_MIN_FOCUS_HEIGHT = "100px",
