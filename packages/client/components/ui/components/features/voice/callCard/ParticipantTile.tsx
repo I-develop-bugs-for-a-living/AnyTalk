@@ -457,6 +457,7 @@ export function ParticipantTile(props: TileProps) {
             onClick={(e) => e.stopPropagation()}
             onKeyDown={(e) => e.stopPropagation()}
             clearOverlay={!theater()}
+            clearControls={theater()}
             compact={compact()}
           >
             <PopOutButton
@@ -619,6 +620,9 @@ export function ParticipantInfo(props: {
 export const tile = cva({
   base: {
     display: "grid",
+    // keeps the z-indexes of the tile's controls inside the tile: otherwise
+    // the badges and close buttons of covered tiles paint over an enlarged one
+    isolation: "isolate",
     aspectRatio: "16/9",
     transition: "all .3s ease, width 0s, height 0s",
     borderRadius: "var(--borderRadius-lg)",
@@ -880,8 +884,9 @@ const OwnStreamHidden = styled("div", {
     textAlign: "center",
     background: "#000",
     color: "#fff",
-    // sits above the hidden video that keeps the tile's size
-    zIndex: 1,
+    // sits above the hidden video that keeps the tile's size (positioned and
+    // later in the DOM), but below the later name row, which it must not cover
+    position: "relative",
   },
 });
 
@@ -958,6 +963,10 @@ const PopOutSlot = styled("div", {
   },
   variants: {
     clearOverlay: { true: { marginBlockEnd: "40px" } },
+    // full screen: the call's control bar covers the bottom of the stream
+    clearControls: {
+      true: { marginBlockEnd: "calc(72px + var(--safe-area-bottom))" },
+    },
     compact: { true: {} },
   },
   compoundVariants: [
