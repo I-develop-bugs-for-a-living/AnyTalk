@@ -1017,9 +1017,17 @@ msgstr "ᔑ⚍↸╎𝙹 ꖎᒷ⍊ᒷꖎ"
 msgid "Authenticator App"
 msgstr "ᔑ⚍ℸ⍑ᒷリℸ╎ᓵᔑℸ𝙹∷ ᔑ!¡!¡"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Authenticator app enabled."
+msgstr "ᔑ⚍ℸ⍑ᒷリℸ╎ᓵᔑℸ𝙹∷ ᔑ!¡!¡ ᒷリᔑʖꖎᒷ↸."
+
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Authenticator code"
 msgstr "ᔑ⚍ℸ⍑ᒷリℸ╎ᓵᔑℸ𝙹∷ ᓵ𝙹↸ᒷ"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Authenticator removed. Two-factor authentication is off."
+msgstr "ᔑ⚍ℸ⍑ᒷリℸ╎ᓵᔑℸ𝙹∷ ∷ᒷᒲ𝙹⍊ᒷ↸. ℸ∴𝙹-⎓ᔑᓵℸ𝙹∷ ᔑ⚍ℸ⍑ᒷリℸ╎ᓵᔑℸ╎𝙹リ ╎ᓭ 𝙹⎓⎓."
 
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Automatic"
@@ -1328,6 +1336,7 @@ msgstr "ᓵᔑリ'ℸ ⊣ᒷℸ ↸╎ᓭᓵ𝙹⍊ᒷ∷ ∷ᒷᑑ⚍ᒷᓭℸ 
 #: components/modal/modals/LeaveServer.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/MFARemoveAuthenticator.tsx
 #: components/modal/modals/Onboarding.tsx
 #: components/modal/modals/PinMessage.tsx
 #: components/modal/modals/QrScanner.tsx
@@ -1515,6 +1524,10 @@ msgstr "ᓵ⍑ᒷᓵꖌ╎リ⊣ ⎓𝙹∷ ⚍!¡↸ᔑℸᒷᓭ…"
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Checking the account..."
 msgstr "ᓵ⍑ᒷᓵꖌ╎リ⊣ ℸ⍑ᒷ ᔑᓵᓵ𝙹⚍リℸ..."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Checking…"
+msgstr "ᓵ⍑ᒷᓵꖌ╎リ⊣…"
 
 #: src/interface/Sidebar.tsx
 msgid "Choose a server from the list to see its channels."
@@ -4458,6 +4471,7 @@ msgstr "リ𝙹ℸ⍑╎リ⊣ ℸ𝙹 ᓭ⍑𝙹∴ ||ᒷℸ"
 msgid "Notifications"
 msgstr "リ𝙹ℸ╎⎓╎ᓵᔑℸ╎𝙹リᓭ"
 
+#: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
@@ -4509,6 +4523,7 @@ msgstr "𝙹ꖎ↸ᒷᓭℸ"
 msgid "Oldest joined"
 msgstr "𝙹ꖎ↸ᒷᓭℸ ⋮𝙹╎リᒷ↸"
 
+#: components/app/interface/settings/user/Account.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
 msgstr "𝙹リ"
@@ -4975,6 +4990,10 @@ msgstr "!¡∷𝙹ᒲ𝙹ℸᒷᓭ ⍑ᔑ∷ᒲ"
 msgid "Pronouns"
 msgstr "!¡∷𝙹リ𝙹⚍リᓭ"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Protects your account with a second step when you sign in or change sensitive settings."
+msgstr "!¡∷𝙹ℸᒷᓵℸᓭ ||𝙹⚍∷ ᔑᓵᓵ𝙹⚍リℸ ∴╎ℸ⍑ ᔑ ᓭᒷᓵ𝙹リ↸ ᓭℸᒷ!¡ ∴⍑ᒷリ ||𝙹⚍ ᓭ╎⊣リ ╎リ 𝙹∷ ᓵ⍑ᔑリ⊣ᒷ ᓭᒷリᓭ╎ℸ╎⍊ᒷ ᓭᒷℸℸ╎リ⊣ᓭ."
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Protocol"
 msgstr "!¡∷𝙹ℸ𝙹ᓵ𝙹ꖎ"
@@ -5225,6 +5244,7 @@ msgstr "∷ᒷᒲ𝙹ℸᒷ ᓭᒷ∷⍊ᒷ∷"
 
 #: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#: components/modal/modals/MFARemoveAuthenticator.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
 msgstr "∷ᒷᒲ𝙹⍊ᒷ"
@@ -5236,6 +5256,10 @@ msgstr "∷ᒷᒲ𝙹⍊ᒷ ᔑꖎꖎ ∷ᒷᔑᓵℸ╎𝙹リᓭ"
 #: components/app/interface/settings/user/Account.tsx
 msgid "Remove Authenticator"
 msgstr "∷ᒷᒲ𝙹⍊ᒷ ᔑ⚍ℸ⍑ᒷリℸ╎ᓵᔑℸ𝙹∷"
+
+#: components/modal/modals/MFARemoveAuthenticator.tsx
+msgid "Remove authenticator app?"
+msgstr "∷ᒷᒲ𝙹⍊ᒷ ᔑ⚍ℸ⍑ᒷリℸ╎ᓵᔑℸ𝙹∷ ᔑ!¡!¡?"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove Avatars"
@@ -6967,6 +6991,14 @@ msgstr "ℸ⚍∷リᓭ 𝙹⎓⎓ ᔑ⎓ℸᒷ∷ ∷ᒷᓭℸᔑ∷ℸ"
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Turns on after restart"
 msgstr "ℸ⚍∷リᓭ 𝙹リ ᔑ⎓ℸᒷ∷ ∷ᒷᓭℸᔑ∷ℸ"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Two-factor authentication"
+msgstr "ℸ∴𝙹-⎓ᔑᓵℸ𝙹∷ ᔑ⚍ℸ⍑ᒷリℸ╎ᓵᔑℸ╎𝙹リ"
+
+#: components/modal/modals/MFARemoveAuthenticator.tsx
+msgid "Two-factor authentication will be turned off for your account. You can turn it on again by setting up an authenticator app."
+msgstr "ℸ∴𝙹-⎓ᔑᓵℸ𝙹∷ ᔑ⚍ℸ⍑ᒷリℸ╎ᓵᔑℸ╎𝙹リ ∴╎ꖎꖎ ʖᒷ ℸ⚍∷リᒷ↸ 𝙹⎓⎓ ⎓𝙹∷ ||𝙹⚍∷ ᔑᓵᓵ𝙹⚍リℸ. ||𝙹⚍ ᓵᔑリ ℸ⚍∷リ ╎ℸ 𝙹リ ᔑ⊣ᔑ╎リ ʖ|| ᓭᒷℸℸ╎リ⊣ ⚍!¡ ᔑリ ᔑ⚍ℸ⍑ᒷリℸ╎ᓵᔑℸ𝙹∷ ᔑ!¡!¡."
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Type"

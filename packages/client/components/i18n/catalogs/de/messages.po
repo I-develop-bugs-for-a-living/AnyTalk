@@ -990,9 +990,17 @@ msgstr "Audiopegel"
 msgid "Authenticator App"
 msgstr "Authentifizierungs-App"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Authenticator app enabled."
+msgstr "Authenticator-App aktiviert."
+
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Authenticator code"
 msgstr "Authentifizierungscode"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Authenticator removed. Two-factor authentication is off."
+msgstr "Authenticator entfernt. Zwei-Faktor-Authentifizierung ist deaktiviert."
 
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Automatic"
@@ -1297,6 +1305,7 @@ msgstr "Der Status der Entdecken-Anfrage kann gerade nicht abgerufen werden"
 #: components/modal/modals/LeaveServer.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/MFARemoveAuthenticator.tsx
 #: components/modal/modals/Onboarding.tsx
 #: components/modal/modals/PinMessage.tsx
 #: components/modal/modals/QrScanner.tsx
@@ -1480,6 +1489,10 @@ msgstr "Suche nach Updates…"
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Checking the account..."
 msgstr "Konto wird überprüft..."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Checking…"
+msgstr "Wird geprüft…"
 
 #: src/interface/Sidebar.tsx
 msgid "Choose a server from the list to see its channels."
@@ -4400,6 +4413,7 @@ msgstr "Noch nichts anzuzeigen"
 msgid "Notifications"
 msgstr "Benachrichtigungen"
 
+#: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
@@ -4451,6 +4465,7 @@ msgstr "Älteste"
 msgid "Oldest joined"
 msgstr "Älteste Beitritte zuerst"
 
+#: components/app/interface/settings/user/Account.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
 msgstr "An"
@@ -4917,6 +4932,10 @@ msgstr "Fördert Gewalt"
 msgid "Pronouns"
 msgstr "Pronomen"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Protects your account with a second step when you sign in or change sensitive settings."
+msgstr "Schützt dein Konto mit einem zweiten Schritt bei der Anmeldung oder beim Ändern sensibler Einstellungen."
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Protocol"
 msgstr "Protokoll"
@@ -5163,6 +5182,7 @@ msgstr "Externer Server"
 
 #: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#: components/modal/modals/MFARemoveAuthenticator.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
 msgstr "Entfernen"
@@ -5174,6 +5194,10 @@ msgstr "Alle Reaktionen entfernen"
 #: components/app/interface/settings/user/Account.tsx
 msgid "Remove Authenticator"
 msgstr "Authenticator entfernen"
+
+#: components/modal/modals/MFARemoveAuthenticator.tsx
+msgid "Remove authenticator app?"
+msgstr "Authenticator-App entfernen?"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove Avatars"
@@ -6889,6 +6913,14 @@ msgstr "Wird nach Neustart ausgeschaltet"
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Turns on after restart"
 msgstr "Wird nach Neustart eingeschaltet"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Two-factor authentication"
+msgstr "Zwei-Faktor-Authentifizierung"
+
+#: components/modal/modals/MFARemoveAuthenticator.tsx
+msgid "Two-factor authentication will be turned off for your account. You can turn it on again by setting up an authenticator app."
+msgstr "Die Zwei-Faktor-Authentifizierung wird für dein Konto deaktiviert. Du kannst sie jederzeit wieder aktivieren, indem du eine Authenticator-App einrichtest."
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Type"

@@ -1016,9 +1016,17 @@ msgstr "오디오 레벨"
 msgid "Authenticator App"
 msgstr "인증 앱"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Authenticator app enabled."
+msgstr "인증 앱이 활성화되었어요."
+
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Authenticator code"
 msgstr "인증 코드"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Authenticator removed. Two-factor authentication is off."
+msgstr "인증 앱이 삭제되었어요. 2단계 인증이 꺼졌어요."
 
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Automatic"
@@ -1327,6 +1335,7 @@ msgstr "지금은 탐색 요청 상태를 불러올 수 없어요"
 #: components/modal/modals/LeaveServer.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/MFARemoveAuthenticator.tsx
 #: components/modal/modals/Onboarding.tsx
 #: components/modal/modals/PinMessage.tsx
 #: components/modal/modals/QrScanner.tsx
@@ -1514,6 +1523,10 @@ msgstr "업데이트 확인 중…"
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Checking the account..."
 msgstr "계정을 확인하는 중..."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Checking…"
+msgstr "확인 중…"
 
 #: src/interface/Sidebar.tsx
 msgid "Choose a server from the list to see its channels."
@@ -4453,6 +4466,7 @@ msgstr "아직 표시할 내용이 없어요"
 msgid "Notifications"
 msgstr "알림"
 
+#: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
@@ -4504,6 +4518,7 @@ msgstr "오래된 순"
 msgid "Oldest joined"
 msgstr "오래된 참여순"
 
+#: components/app/interface/settings/user/Account.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
 msgstr "켜짐"
@@ -4970,6 +4985,10 @@ msgstr "해로운 행위 조장"
 msgid "Pronouns"
 msgstr "호칭"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Protects your account with a second step when you sign in or change sensitive settings."
+msgstr "로그인하거나 민감한 설정을 변경할 때 두 번째 단계로 계정을 보호해요."
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Protocol"
 msgstr "프로토콜"
@@ -5220,6 +5239,7 @@ msgstr "원격 서버"
 
 #: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#: components/modal/modals/MFARemoveAuthenticator.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
 msgstr "제거"
@@ -5231,6 +5251,10 @@ msgstr "모든 반응 제거"
 #: components/app/interface/settings/user/Account.tsx
 msgid "Remove Authenticator"
 msgstr "인증기 제거"
+
+#: components/modal/modals/MFARemoveAuthenticator.tsx
+msgid "Remove authenticator app?"
+msgstr "인증 앱을 삭제할까요?"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove Avatars"
@@ -6958,6 +6982,14 @@ msgstr "다시 시작하면 꺼져요"
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Turns on after restart"
 msgstr "다시 시작하면 켜져요"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Two-factor authentication"
+msgstr "2단계 인증"
+
+#: components/modal/modals/MFARemoveAuthenticator.tsx
+msgid "Two-factor authentication will be turned off for your account. You can turn it on again by setting up an authenticator app."
+msgstr "계정의 2단계 인증이 꺼져요. 인증 앱을 설정하면 다시 켤 수 있어요."
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Type"

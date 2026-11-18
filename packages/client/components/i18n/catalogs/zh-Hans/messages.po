@@ -1016,9 +1016,17 @@ msgstr "音频电平"
 msgid "Authenticator App"
 msgstr "身份验证器应用"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Authenticator app enabled."
+msgstr "验证器应用已启用。"
+
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Authenticator code"
 msgstr "验证码"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Authenticator removed. Two-factor authentication is off."
+msgstr "验证器已移除。双重验证已关闭。"
 
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Automatic"
@@ -1327,6 +1335,7 @@ msgstr "暂时无法获取发现申请状态"
 #: components/modal/modals/LeaveServer.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/MFARemoveAuthenticator.tsx
 #: components/modal/modals/Onboarding.tsx
 #: components/modal/modals/PinMessage.tsx
 #: components/modal/modals/QrScanner.tsx
@@ -1514,6 +1523,10 @@ msgstr "正在检查更新…"
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Checking the account..."
 msgstr "正在检查账号..."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Checking…"
+msgstr "正在检查…"
 
 #: src/interface/Sidebar.tsx
 msgid "Choose a server from the list to see its channels."
@@ -4449,6 +4462,7 @@ msgstr "暂无可显示的内容"
 msgid "Notifications"
 msgstr "通知"
 
+#: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
@@ -4500,6 +4514,7 @@ msgstr "最旧"
 msgid "Oldest joined"
 msgstr "最早加入"
 
+#: components/app/interface/settings/user/Account.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
 msgstr "开"
@@ -4966,6 +4981,10 @@ msgstr "宣扬伤害"
 msgid "Pronouns"
 msgstr "代词"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Protects your account with a second step when you sign in or change sensitive settings."
+msgstr "在登录或更改敏感设置时通过第二步验证保护你的账号。"
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Protocol"
 msgstr "协议"
@@ -5216,6 +5235,7 @@ msgstr "远程服务器"
 
 #: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#: components/modal/modals/MFARemoveAuthenticator.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
 msgstr "移除"
@@ -5227,6 +5247,10 @@ msgstr "移除所有回应"
 #: components/app/interface/settings/user/Account.tsx
 msgid "Remove Authenticator"
 msgstr "移除身份验证器"
+
+#: components/modal/modals/MFARemoveAuthenticator.tsx
+msgid "Remove authenticator app?"
+msgstr "移除验证器应用？"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove Avatars"
@@ -6954,6 +6978,14 @@ msgstr "重启后关闭"
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Turns on after restart"
 msgstr "重启后开启"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Two-factor authentication"
+msgstr "双重验证"
+
+#: components/modal/modals/MFARemoveAuthenticator.tsx
+msgid "Two-factor authentication will be turned off for your account. You can turn it on again by setting up an authenticator app."
+msgstr "你的账号将关闭双重验证。设置验证器应用后可重新开启。"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Type"

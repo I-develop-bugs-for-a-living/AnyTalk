@@ -1016,9 +1016,17 @@ msgstr "مستوى الصوت"
 msgid "Authenticator App"
 msgstr "تطبيق المصادقة الثنائية"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Authenticator app enabled."
+msgstr "تم تفعيل تطبيق المصادقة."
+
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Authenticator code"
 msgstr "رمز المصادقة"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Authenticator removed. Two-factor authentication is off."
+msgstr "تمت إزالة تطبيق المصادقة. المصادقة الثنائية متوقفة."
 
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Automatic"
@@ -1326,6 +1334,7 @@ msgstr "لا يمكن جلب حالة طلب الاكتشاف الآن"
 #: components/modal/modals/LeaveServer.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/MFARemoveAuthenticator.tsx
 #: components/modal/modals/Onboarding.tsx
 #: components/modal/modals/PinMessage.tsx
 #: components/modal/modals/QrScanner.tsx
@@ -1512,6 +1521,10 @@ msgstr "جارٍ التحقق من التحديثات…"
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Checking the account..."
 msgstr "جارٍ التحقق من الحساب..."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Checking…"
+msgstr "جارٍ التحقق…"
 
 #: src/interface/Sidebar.tsx
 msgid "Choose a server from the list to see its channels."
@@ -4449,6 +4462,7 @@ msgstr "لا شيء لعرضه بعد"
 msgid "Notifications"
 msgstr "الإشعارات"
 
+#: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
@@ -4500,6 +4514,7 @@ msgstr "الأقدم"
 msgid "Oldest joined"
 msgstr "الأقدم انضمامًا"
 
+#: components/app/interface/settings/user/Account.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
 msgstr "مفعل"
@@ -4966,6 +4981,10 @@ msgstr "يدعم السلوك الضار"
 msgid "Pronouns"
 msgstr "الضمائر"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Protects your account with a second step when you sign in or change sensitive settings."
+msgstr "يحمي حسابك بخطوة ثانية عند تسجيل الدخول أو تغيير الإعدادات الحساسة."
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Protocol"
 msgstr "البروتوكول"
@@ -5215,6 +5234,7 @@ msgstr "خادم بعيد"
 
 #: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#: components/modal/modals/MFARemoveAuthenticator.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
 msgstr "يزيل"
@@ -5226,6 +5246,10 @@ msgstr "حذف كل التفاعلات"
 #: components/app/interface/settings/user/Account.tsx
 msgid "Remove Authenticator"
 msgstr "أزل موثقًا"
+
+#: components/modal/modals/MFARemoveAuthenticator.tsx
+msgid "Remove authenticator app?"
+msgstr "إزالة تطبيق المصادقة؟"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove Avatars"
@@ -6953,6 +6977,14 @@ msgstr "يتوقف بعد إعادة التشغيل"
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Turns on after restart"
 msgstr "يعمل بعد إعادة التشغيل"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Two-factor authentication"
+msgstr "المصادقة الثنائية"
+
+#: components/modal/modals/MFARemoveAuthenticator.tsx
+msgid "Two-factor authentication will be turned off for your account. You can turn it on again by setting up an authenticator app."
+msgstr "سيتم إيقاف المصادقة الثنائية لحسابك. يمكنك تفعيلها مجددًا بإعداد تطبيق مصادقة."
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Type"
