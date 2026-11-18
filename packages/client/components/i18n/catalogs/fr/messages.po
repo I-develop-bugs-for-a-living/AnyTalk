@@ -1896,6 +1896,23 @@ msgstr "Impossible d’enregistrer ce paramètre."
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "Impossible de récupérer la configuration de AnyTalk depuis {hStr}."
 
+#. placeholder {0}: notice.name
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream for {0}."
+#~ msgstr "Impossible de trouver une fenêtre à diffuser pour {0}."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream for {name}."
+msgstr "Impossible de trouver une fenêtre à diffuser pour {name}."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream. Bring the app you want to share to the front, then press the hotkey again."
+msgstr "Impossible de trouver une fenêtre à diffuser. Mettez l'application à partager au premier plan, puis appuyez de nouveau sur le raccourci."
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream. Click the window you want to share first."
+#~ msgstr "Impossible de trouver une fenêtre à diffuser. Cliquez d'abord sur la fenêtre que vous voulez partager."
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Couldn't load downloads"
 msgstr "Impossible de charger les téléchargements"
@@ -1908,6 +1925,18 @@ msgstr "Impossible de le déplacer vers {0}."
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Couldn't set up call encryption. The server may need an update."
 msgstr "Impossible de configurer le chiffrement des appels. Le serveur a peut-être besoin d'une mise à jour."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream."
+msgstr "Impossible de démarrer la diffusion."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream. Try running {name} in windowed or borderless mode."
+msgstr "Impossible de démarrer la diffusion. Essayez de lancer {name} en mode fenêtré ou sans bordure."
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't start the stream. Try running the game in windowed or borderless mode."
+#~ msgstr "Impossible de démarrer la diffusion. Essayez de lancer le jeu en mode fenêtré ou sans bordure."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "CPU"
@@ -6196,8 +6225,12 @@ msgid "Stream ended"
 msgstr "Stream terminé"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Stream focused game"
-msgstr "Diffuser le jeu au premier plan"
+#~ msgid "Stream focused game"
+#~ msgstr "Diffuser le jeu au premier plan"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Stream focused window"
+msgstr "Diffuser la fenêtre au premier plan"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Stream is still running."

@@ -1928,6 +1928,23 @@ msgstr "تعذّر حفظ هذا الإعداد."
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "تعذّر جلب إعدادات AnyTalk من {hStr}."
 
+#. placeholder {0}: notice.name
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream for {0}."
+#~ msgstr "تعذّر العثور على نافذة للبث لـ {0}."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream for {name}."
+msgstr "تعذّر العثور على نافذة للبث لـ {name}."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream. Bring the app you want to share to the front, then press the hotkey again."
+msgstr "تعذّر العثور على نافذة للبث. أحضر التطبيق الذي تريد مشاركته إلى الواجهة، ثم اضغط على مفتاح الاختصار مرة أخرى."
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream. Click the window you want to share first."
+#~ msgstr "تعذّر العثور على نافذة للبث. انقر أولاً على النافذة التي تريد مشاركتها."
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Couldn't load downloads"
 msgstr "تعذر تحميل ملفات التنزيل"
@@ -1940,6 +1957,18 @@ msgstr "تعذّر نقله إلى {0}."
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Couldn't set up call encryption. The server may need an update."
 msgstr "تعذّر إعداد تشفير المكالمات. قد يحتاج الخادم إلى تحديث."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream."
+msgstr "تعذّر بدء البث."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream. Try running {name} in windowed or borderless mode."
+msgstr "تعذّر بدء البث. جرّب تشغيل {name} في وضع النافذة أو وضع النافذة بلا حدود."
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't start the stream. Try running the game in windowed or borderless mode."
+#~ msgstr "تعذّر بدء البث. جرّب تشغيل اللعبة في وضع النافذة أو وضع النافذة بلا حدود."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "CPU"
@@ -6260,8 +6289,12 @@ msgid "Stream ended"
 msgstr "انتهى البث"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Stream focused game"
-msgstr "بث اللعبة المركّز عليها"
+#~ msgid "Stream focused game"
+#~ msgstr "بث اللعبة المركّز عليها"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Stream focused window"
+msgstr "بث النافذة المركّز عليها"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Stream is still running."

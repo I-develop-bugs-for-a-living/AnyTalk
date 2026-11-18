@@ -1902,6 +1902,23 @@ msgstr "No se pudo guardar este ajuste."
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "No se ha podido obtener la configuración de AnyTalk desde {hStr}."
 
+#. placeholder {0}: notice.name
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream for {0}."
+#~ msgstr "No se encontró ninguna ventana para transmitir de {0}."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream for {name}."
+msgstr "No se encontró ninguna ventana para transmitir de {name}."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream. Bring the app you want to share to the front, then press the hotkey again."
+msgstr "No se encontró ninguna ventana para transmitir. Pon en primer plano la aplicación que quieres compartir y vuelve a pulsar la tecla de acceso rápido."
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream. Click the window you want to share first."
+#~ msgstr "No se encontró ninguna ventana para transmitir. Haz clic primero en la ventana que quieres compartir."
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Couldn't load downloads"
 msgstr "No se pudieron cargar las descargas"
@@ -1914,6 +1931,18 @@ msgstr "No se pudo mover a {0}."
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Couldn't set up call encryption. The server may need an update."
 msgstr "No se pudo configurar el cifrado de llamadas. Puede que el servidor necesite una actualización."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream."
+msgstr "No se pudo iniciar la transmisión."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream. Try running {name} in windowed or borderless mode."
+msgstr "No se pudo iniciar la transmisión. Prueba a ejecutar {name} en modo ventana o sin bordes."
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't start the stream. Try running the game in windowed or borderless mode."
+#~ msgstr "No se pudo iniciar la transmisión. Prueba a ejecutar el juego en modo ventana o sin bordes."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "CPU"
@@ -6214,8 +6243,12 @@ msgid "Stream ended"
 msgstr "Transmisión finalizada"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Stream focused game"
-msgstr "Transmitir el juego en foco"
+#~ msgid "Stream focused game"
+#~ msgstr "Transmitir el juego en foco"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Stream focused window"
+msgstr "Transmitir la ventana en foco"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Stream is still running."

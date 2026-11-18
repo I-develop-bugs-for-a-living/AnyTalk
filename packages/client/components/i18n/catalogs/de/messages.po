@@ -1896,6 +1896,23 @@ msgstr "Diese Einstellung konnte nicht gespeichert werden."
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "AnyTalk Konfiguration konnte von {hStr} nicht geladen werden."
 
+#. placeholder {0}: notice.name
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream for {0}."
+#~ msgstr "Für {0} konnte kein Fenster zum Streamen gefunden werden."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream for {name}."
+msgstr "Für {name} konnte kein Fenster zum Streamen gefunden werden."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream. Bring the app you want to share to the front, then press the hotkey again."
+msgstr "Es konnte kein Fenster zum Streamen gefunden werden. Hole die App, die du teilen möchtest, in den Vordergrund und drücke dann erneut den Hotkey."
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream. Click the window you want to share first."
+#~ msgstr "Es konnte kein Fenster zum Streamen gefunden werden. Klicke zuerst auf das Fenster, das du teilen möchtest."
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Couldn't load downloads"
 msgstr "Downloads konnten nicht geladen werden"
@@ -1908,6 +1925,18 @@ msgstr "Konnte nicht nach {0} verschoben werden."
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Couldn't set up call encryption. The server may need an update."
 msgstr "Die Anrufverschlüsselung konnte nicht eingerichtet werden. Der Server braucht eventuell ein Update."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream."
+msgstr "Der Stream konnte nicht gestartet werden."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream. Try running {name} in windowed or borderless mode."
+msgstr "Der Stream konnte nicht gestartet werden. Starte {name} im Fenster- oder randlosen Modus."
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't start the stream. Try running the game in windowed or borderless mode."
+#~ msgstr "Der Stream konnte nicht gestartet werden. Starte das Spiel im Fenster- oder randlosen Modus."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "CPU"
@@ -6196,8 +6225,12 @@ msgid "Stream ended"
 msgstr "Stream beendet"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Stream focused game"
-msgstr "Fokussiertes Spiel streamen"
+#~ msgid "Stream focused game"
+#~ msgstr "Fokussiertes Spiel streamen"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Stream focused window"
+msgstr "Fokussiertes Fenster streamen"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Stream is still running."

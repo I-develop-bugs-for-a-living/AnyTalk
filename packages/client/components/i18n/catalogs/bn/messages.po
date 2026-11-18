@@ -1905,6 +1905,23 @@ msgstr "এই সেটিংটি সেভ করা যায়নি।"
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "{hStr} থেকে AnyTalk কনফিগারেশন আনা যায়নি।"
 
+#. placeholder {0}: notice.name
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream for {0}."
+#~ msgstr ""
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream for {name}."
+msgstr ""
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream. Bring the app you want to share to the front, then press the hotkey again."
+msgstr ""
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream. Click the window you want to share first."
+#~ msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Couldn't load downloads"
 msgstr "ডাউনলোড লোড করা যায়নি"
@@ -1917,6 +1934,18 @@ msgstr "তাদের {0} -এ সরানো যায়নি।"
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Couldn't set up call encryption. The server may need an update."
 msgstr ""
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream."
+msgstr ""
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream. Try running {name} in windowed or borderless mode."
+msgstr ""
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't start the stream. Try running the game in windowed or borderless mode."
+#~ msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "CPU"
@@ -6232,7 +6261,11 @@ msgid "Stream ended"
 msgstr "স্ট্রিম শেষ হয়েছে"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Stream focused game"
+#~ msgid "Stream focused game"
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Stream focused window"
 msgstr ""
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx

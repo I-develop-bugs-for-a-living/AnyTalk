@@ -182,6 +182,8 @@ function Snackbar(props: SnackbarProps) {
       closeable={props.closeable}
       auto-close-delay={props.autoCloseDelay}
       message-line={props.messageLine}
+      role="status"
+      aria-live="polite"
       style={{
         translate: "0 calc(-1 * var(--snackbar-offset-bottom, 80px))",
       }}

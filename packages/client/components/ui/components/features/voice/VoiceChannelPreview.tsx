@@ -1,5 +1,5 @@
 import { useNavigate } from "@solidjs/router";
-import { For, Show, createSignal, onCleanup, splitProps } from "solid-js";
+import { For, Show, splitProps } from "solid-js";
 import {
   TrackLoop,
   useEnsureParticipant,
@@ -8,7 +8,7 @@ import {
 } from "solid-livekit-components";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
-import { ParticipantEvent, Track } from "livekit-client";
+import { Track } from "livekit-client";
 import { Channel, VoiceParticipant } from "stoat.js";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
@@ -16,7 +16,12 @@ import { styled } from "styled-system/jsx";
 import { UserContextMenu } from "@revolt/app";
 import { useDevice } from "@revolt/common";
 import { useUser } from "@revolt/markdown/users";
-import { InRoom, useFastIsSpeaking, useVoice } from "@revolt/rtc";
+import {
+  InRoom,
+  useFastIsSpeaking,
+  useParticipantAttributes,
+  useVoice,
+} from "@revolt/rtc";
 
 import { Avatar, Ripple, typography } from "../../design";
 import { Row } from "../../layout";
@@ -111,12 +116,7 @@ function ParticipantLive(props: {
   const isSpeaking = useFastIsSpeaking(participant);
 
   // shared by clients as a participant attribute, see Voice#shareDeafen
-  const [attributes, setAttributes] = createSignal(participant.attributes);
-  const onAttributes = () => setAttributes({ ...participant.attributes });
-  participant.on(ParticipantEvent.AttributesChanged, onAttributes);
-  onCleanup(() =>
-    participant.off(ParticipantEvent.AttributesChanged, onAttributes),
-  );
+  const attributes = useParticipantAttributes(participant);
 
   const isDeafened = () => {
     if (participant.isLocal) return voice.deafen();

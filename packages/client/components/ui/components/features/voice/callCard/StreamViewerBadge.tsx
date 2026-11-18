@@ -19,7 +19,8 @@ import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { theaterControlsHidden, touchOnly } from "./volumePanelState";
 
 /**
- * Eye badge in the top start corner of a stream tile with the number of people
+ * Eye badge for the top start corner row of a stream tile (it must sit in a
+ * positioned overlay that spans the tile) with the number of people
  * watching it. The list of who watches shows on hover or keyboard focus, and
  * on touch a tap opens and closes it. Nothing shows without other viewers.
  */
@@ -145,18 +146,16 @@ function Viewer(props: { id: string }) {
 }
 
 /**
- * Covers the tile so the list can be as tall as the tile, only its children
- * take pointer input
+ * Item of the tile's top corner row (the parent is the positioned overlay, so
+ * the list can be as tall as the tile). Only its children take pointer input.
+ * As tall as the zoom pill next to it, so the badge lines up with it.
  */
 const Holder = styled("div", {
   base: {
-    gridArea: "1/1",
-    justifySelf: "start",
-    alignSelf: "stretch",
-    position: "relative",
-    minHeight: 0,
-    zIndex: 2,
-    padding: "var(--gap-sm)",
+    display: "flex",
+    alignItems: "center",
+    flexShrink: 0,
+    minHeight: "32px",
     pointerEvents: "none",
     transition: "var(--transitions-fast) opacity ease",
     "& > *": { pointerEvents: "auto" },

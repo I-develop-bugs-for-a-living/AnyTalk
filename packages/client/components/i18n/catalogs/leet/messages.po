@@ -1931,6 +1931,23 @@ msgstr "C0ULD N07 54V3 7H15 53771N6."
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "C0ULDN'7 F37CH 4NY74LK C0NF16U24710N F20M {hStr}."
 
+#. placeholder {0}: notice.name
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream for {0}."
+#~ msgstr "C0ULDN'7 F1ND 4 W1ND0W 70 57234M F02 {0}."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream for {name}."
+msgstr "C0ULDN'7 F1ND 4 W1ND0W 70 57234M F02 {name}."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream. Bring the app you want to share to the front, then press the hotkey again."
+msgstr "C0ULDN'7 F1ND 4 W1ND0W 70 57234M. 821N6 7H3 4PP Y0U W4N7 70 5H423 70 7H3 F20N7, 7H3N P2355 7H3 H07K3Y 4641N."
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream. Click the window you want to share first."
+#~ msgstr "C0ULDN'7 F1ND 4 W1ND0W 70 57234M. CL1CK 7H3 W1ND0W Y0U W4N7 70 5H423 F1257."
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Couldn't load downloads"
 msgstr "C0ULDN'7 L04D D0WNL04D5"
@@ -1943,6 +1960,18 @@ msgstr "C0ULDN'7 M0V3 7H3M 70 {0}."
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Couldn't set up call encryption. The server may need an update."
 msgstr "C0ULDN'7 537 UP C4LL 3NC2YP710N. 7H3 532V32 M4Y N33D 4N UPD473."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream."
+msgstr "C0ULDN'7 57427 7H3 57234M."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream. Try running {name} in windowed or borderless mode."
+msgstr "C0ULDN'7 57427 7H3 57234M. 72Y 2UNN1N6 {name} 1N W1ND0W3D 02 802D32L355 M0D3."
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't start the stream. Try running the game in windowed or borderless mode."
+#~ msgstr "C0ULDN'7 57427 7H3 57234M. 72Y 2UNN1N6 7H3 64M3 1N W1ND0W3D 02 802D32L355 M0D3."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "CPU"
@@ -6274,8 +6303,12 @@ msgid "Stream ended"
 msgstr "57234M 3ND3D"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Stream focused game"
-msgstr "57234M F0CU53D 64M3"
+#~ msgid "Stream focused game"
+#~ msgstr "57234M F0CU53D 64M3"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Stream focused window"
+msgstr "57234M F0CU53D W1ND0W"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Stream is still running."

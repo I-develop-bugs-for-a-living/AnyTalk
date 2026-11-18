@@ -1,13 +1,57 @@
-import { desktopCapturer, ipcMain, session, webContents } from "electron";
+import {
+  BrowserWindow,
+  desktopCapturer,
+  ipcMain,
+  session,
+  webContents,
+} from "electron";
 
 import { type PickerRequest, type PickerSource, IPC } from "../shared/ipc";
 import { gameLog } from "./gameLog";
-import { isGameWindow } from "./games";
+import { windowIdOf } from "./gameMatch";
+import { foregroundWindowId, isGameWindow } from "./games";
 import { isWayland } from "./platform";
+import {
+  type Allowance,
+  grantAllowance,
+  takeAllowance,
+} from "./sourceAllowance";
 import { isServerUrl } from "./url";
+import { resolveSourceLabel } from "./windowProgram";
 
 /** How long to wait for the user to choose before giving up. */
 const PICKER_TIMEOUT_MS = 120_000;
+
+/**
+ * The label of the source captured last, resolved in the background so the
+ * capture itself never waits for it. Cleared by every new capture request.
+ */
+let capturedLabel: Promise<string | undefined> | undefined;
+/** Number of the newest capture request, ties a label to its capture. */
+let captureId = 0;
+
+/**
+ * Start working out the label of a source that is being captured.
+ *
+ * @param source The source handed to the page
+ */
+function rememberCaptured(source: Electron.DesktopCapturerSource) {
+  captureId++;
+  capturedLabel = resolveSourceLabel(source).catch(() => undefined);
+}
+
+/**
+ * The label of the source captured last (game name or program name), for the
+ * page to share with the viewers.
+ *
+ * @returns The label, or undefined for screens and when none is known
+ */
+export async function getCapturedLabel(): Promise<string | undefined> {
+  const id = captureId;
+  const label = await capturedLabel;
+  // a newer capture started meanwhile: its label is not ours to hand out
+  return id === captureId ? label : undefined;
+}
 
 /** The one picker request waiting for the user's choice. */
 type PendingPicker = {
@@ -55,20 +99,117 @@ function toPickerSources(
 /** How long a preselected source stays valid. */
 const PRESELECT_TTL_MS = 10_000;
 
-/** One-shot source chosen ahead of the next capture request. */
-let preselected: { sourceId: string; expires: number } | undefined;
+/**
+ * How long the window in front, resolved when the global hotkey fired, waits
+ * for the page to pick it up.
+ */
+const ARM_TTL_MS = 2_000;
 
 /**
- * Remember a source for the next display-media request, which then skips
- * the picker. It is used once and expires after a few seconds.
+ * One-shot source chosen ahead of the next capture request. `trusted` is set
+ * when `requestPreselect` approved a window that is no game window.
+ */
+let preselected:
+  | { sourceId: string; expires: number; trusted: boolean }
+  | undefined;
+
+/*
+ * Trust model for capturing a window that is no detected game: the page is
+ * never allowed to name one. Only this process decides, and only because the
+ * user pressed the global "stream focused window" hotkey:
+ *  1. The hotkey fires here (`armForegroundWindow`), the window in front is
+ *     resolved by us and kept for ARM_TTL_MS. Our own windows and screens
+ *     are never kept.
+ *  2. The page asks `takeForegroundWindow`, which answers once with that
+ *     source and then grants it for `requestPreselect` for PRESELECT_TTL_MS,
+ *     once. Without a recent hotkey the answer is null.
+ *  3. `requestPreselect` accepts a game window or that one granted id. The
+ *     display-media handler then trusts what it accepted.
+ */
+
+/** The window in front at the last hotkey press, until picked up. */
+let armed: Allowance | undefined;
+/** The picked-up window that `requestPreselect` may accept, once. */
+let granted: Allowance | undefined;
+
+/**
+ * Ask whether a source may be preselected and, if so, remember it for the
+ * next display-media request, which then skips the picker. Allowed are
+ * windows of detected games and the one window handed out by
+ * `takeForegroundWindow`, once. Never a screen or any other id. The source is
+ * used once and expires after a few seconds.
  *
  * @param sourceId A `desktopCapturer` source id, or null to clear
+ * @returns Whether the source was accepted
  */
-export function setNextScreenSource(sourceId: string | null) {
-  preselected =
-    typeof sourceId === "string" && sourceId !== ""
-      ? { sourceId, expires: Date.now() + PRESELECT_TTL_MS }
-      : undefined;
+export function requestPreselect(sourceId: string | null): boolean {
+  preselected = undefined;
+  if (typeof sourceId !== "string" || sourceId === "") {
+    // clearing also takes back a granted window nobody used
+    granted = undefined;
+    return false;
+  }
+  const isGame = isGameWindow(sourceId);
+  let trusted = false;
+  if (!isGame) {
+    const taken = takeAllowance(granted, Date.now(), sourceId);
+    granted = taken.next;
+    trusted = taken.granted !== undefined;
+    if (!trusted) return false;
+  }
+  preselected = {
+    sourceId,
+    expires: Date.now() + PRESELECT_TTL_MS,
+    trusted,
+  };
+  return true;
+}
+
+/**
+ * Resolve the window in front into a capturable window source and keep it
+ * for the page to pick up. Called when the global "stream focused window"
+ * hotkey fires, never for the page. AnyTalk's own windows and screens never
+ * count, nothing is kept on Wayland or when the lookup fails.
+ */
+export async function armForegroundWindow(): Promise<void> {
+  armed = undefined;
+  granted = undefined;
+  try {
+    if (isWayland) return;
+    const id = await foregroundWindowId();
+    if (!id) return;
+
+    const own = BrowserWindow.getAllWindows()
+      .filter((win) => !win.isDestroyed())
+      .map((win) => windowIdOf(win.getMediaSourceId()));
+    if (own.includes(id)) return;
+
+    const sources = await desktopCapturer.getSources({
+      types: ["window"],
+      thumbnailSize: { width: 0, height: 0 },
+    });
+    const source = sources.find(
+      (candidate) =>
+        candidate.id.startsWith("window:") && windowIdOf(candidate.id) === id,
+    );
+    if (source) armed = grantAllowance(source.id, Date.now(), ARM_TTL_MS);
+  } catch (error) {
+    gameLog(`Resolving the window in front failed: ${String(error)}`);
+  }
+}
+
+/**
+ * Hand the window resolved at the last hotkey press to the page, once, and
+ * allow it to be preselected.
+ *
+ * @returns The source id, or null without a recent hotkey press or window
+ */
+export function takeForegroundWindow(): { sourceId: string } | null {
+  const taken = takeAllowance(armed, Date.now());
+  armed = undefined;
+  if (!taken.granted) return null;
+  granted = grantAllowance(taken.granted, Date.now(), PRESELECT_TTL_MS);
+  return { sourceId: taken.granted };
 }
 
 let pending: PendingPicker | undefined;
@@ -185,6 +326,8 @@ export function installScreenShare(
 
   session.defaultSession.setDisplayMediaRequestHandler(
     async (request, callback) => {
+      captureId++;
+      capturedLabel = undefined;
       try {
         if (!request.frame || !isServerUrl(request.frame.url))
           return callback({});
@@ -212,14 +355,17 @@ export function installScreenShare(
         const wanted = preselected;
         preselected = undefined;
         if (wanted && wanted.expires > Date.now()) {
-          const preset = isGameWindow(wanted.sourceId)
+          // approved when it was set: a game window or the granted window
+          const allowed = wanted.trusted || isGameWindow(wanted.sourceId);
+          const preset = allowed
             ? sources.find((source) => source.id === wanted.sourceId)
             : undefined;
           gameLog(
-            `Preselect ${wanted.sourceId}: isGameWindow ${isGameWindow(wanted.sourceId)}, found ${!!preset}, ` +
+            `Preselect ${wanted.sourceId}: allowed ${allowed}, found ${!!preset}, ` +
               (preset ? "captured" : "cancelled"),
           );
           if (!preset) return callback({});
+          rememberCaptured(preset);
           return callback({
             video: preset,
             audio: audioFor(request.audioRequested),
@@ -231,6 +377,7 @@ export function installScreenShare(
 
         const choice = await askRenderer(sender, sources);
         if (!choice) return callback({});
+        rememberCaptured(choice.source);
         callback({
           video: choice.source,
           audio: audioFor(choice.audio && request.audioRequested),

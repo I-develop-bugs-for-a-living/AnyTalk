@@ -49,7 +49,7 @@ export function HotkeysSettings() {
       icon: "mic",
     },
     [KeybindAction.VOICE_TOGGLE_GAME_STREAM]: {
-      title: <Trans>Stream focused game</Trans>,
+      title: <Trans>Stream focused window</Trans>,
       icon: "sports_esports",
     },
     [KeybindAction.TOGGLE_OVERLAY]: {

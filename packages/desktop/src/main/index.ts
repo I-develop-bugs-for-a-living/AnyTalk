@@ -32,7 +32,6 @@ import {
   getFocusedGame,
   getRunningGames,
   installGameDetection,
-  isGameWindow,
   onGamesChange,
   setGameDetection,
   wakeGameDetection,
@@ -52,7 +51,13 @@ import {
 } from "./overlay";
 import { APP_ID, desktopEnvironment, isWayland } from "./platform";
 import { setRequestWatch } from "./requestWatch";
-import { installScreenShare, setNextScreenSource } from "./screen";
+import {
+  armForegroundWindow,
+  getCapturedLabel,
+  installScreenShare,
+  requestPreselect,
+  takeForegroundWindow,
+} from "./screen";
 import {
   getTlsKeyLogState,
   installTlsKeyLog,
@@ -74,6 +79,12 @@ import {
   parseHttpUrl,
   serverOrigin,
 } from "./url";
+
+/**
+ * The hotkey action (`KeybindAction.VOICE_TOGGLE_GAME_STREAM` in the client)
+ * that streams the window in front, the one that resolves it here.
+ */
+const STREAM_FOCUSED_ACTION = "voice_toggle_game_stream";
 
 /** Permissions the server origin may use. */
 const ALLOWED_PERMISSIONS = new Set([
@@ -597,18 +608,24 @@ function registerIpc() {
   );
   handleApp(IPC.gamesGet, () => getRunningGames());
   handleApp(IPC.gamesFocused, () => getFocusedGame());
+  handleApp(IPC.screenForeground, () => takeForegroundWindow());
+  handleApp(IPC.screenSourceInfo, async () => ({
+    label: await getCapturedLabel(),
+  }));
   // Not through handleApp: it needs the sender to grant user activation
   ipcMain.handle(IPC.screenSourceSet, async (event, sourceId: unknown) => {
     if (!fromApp(event)) throw new Error("Untrusted sender");
-    // Only windows of detected games, never a screen or any other window
-    const allowed = typeof sourceId === "string" && isGameWindow(sourceId);
+    // Only windows of detected games or the window in front that we
+    // resolved at the last hotkey press, never a screen or any other window
+    const allowed = requestPreselect(
+      typeof sourceId === "string" ? sourceId : null,
+    );
     if (typeof sourceId === "string")
       gameLog(`Preselect requested ${sourceId}: allowed ${allowed}`);
-    setNextScreenSource(allowed ? sourceId : null);
     if (allowed) {
       // getDisplayMedia() needs transient activation, and an automatic
       // follow swap has no click. Running a no-op script as a user gesture
-      // in the app's main frame grants it, only for an approved game window.
+      // in the app's main frame grants it, only for an approved window.
       try {
         await event.sender.executeJavaScript("void 0", true);
         gameLog(`Activation granted for ${sourceId}`);
@@ -644,12 +661,20 @@ function registerIpc() {
         typeof b?.accelerator === "string" &&
         (b.code === undefined || typeof b.code === "string"),
     );
-    return setGlobalHotkeys(list, (action, edge) =>
-      mainWindow?.webContents.send(
-        edge === "down" ? IPC.hotkeyFired : IPC.hotkeyReleased,
-        action,
-      ),
-    );
+    return setGlobalHotkeys(list, (action, edge) => {
+      const send = () =>
+        mainWindow?.webContents.send(
+          edge === "down" ? IPC.hotkeyFired : IPC.hotkeyReleased,
+          action,
+        );
+      if (edge === "down" && action === STREAM_FOCUSED_ACTION) {
+        // Only this hotkey lets the page stream the window in front: find
+        // it now, and tell the page once it is known
+        armForegroundWindow().finally(send);
+      } else {
+        send();
+      }
+    });
   });
 
   handleApp(IPC.gamepadSet, (button: unknown) =>

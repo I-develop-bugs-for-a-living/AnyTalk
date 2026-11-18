@@ -1,4 +1,10 @@
-import { createMemo, createSignal, onCleanup, Show } from "solid-js";
+import {
+  createEffect,
+  createMemo,
+  createSignal,
+  onCleanup,
+  Show,
+} from "solid-js";
 import {
   TrackReference,
   useEnsureParticipant,
@@ -8,7 +14,7 @@ import {
 } from "solid-livekit-components";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
-import { Track } from "livekit-client";
+import { RemoteTrackPublication, Track } from "livekit-client";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
@@ -16,9 +22,12 @@ import { UserContextMenu } from "@revolt/app";
 import { useUser } from "@revolt/markdown/users";
 import {
   createStreamZoom,
+  streamAppOf,
   useFastIsSpeaking,
+  useParticipantAttributes,
   useVoice,
   ZoomableStream,
+  ZoomPill,
 } from "@revolt/rtc";
 import { useState } from "@revolt/state";
 import {
@@ -151,6 +160,24 @@ export function ParticipantTile(props: TileProps) {
     !participant.isLocal &&
     (!!props.focus || !!props.fill);
   const zoom = createStreamZoom(() => voice.trackId(track), zoomable);
+
+  // A zoomable tile (focused or multi-stream) opts out of LiveKit's visibility
+  // managed subscription (see manageSubscription below), so nothing else would
+  // subscribe its video: it only worked once the grid tile had done it.
+  // Subscribe the watched stream here, like the audio is in RoomAudioManager.
+  // Grid tiles are left alone: there the visibility observer owns the
+  // subscription. Unencrypted publications are skipped, CallE2ee refuses them.
+  createEffect(() => {
+    const pub = track.publication;
+    if (
+      zoomable() &&
+      !unwatched() &&
+      pub instanceof RemoteTrackPublication &&
+      pub.isEncrypted
+    ) {
+      pub.setSubscribed(true);
+    }
+  });
 
   // Multi-stream view: this tile fills the whole stream area, the other tiles
   // stay mounted (and subscribed) underneath it
@@ -285,7 +312,7 @@ export function ParticipantTile(props: TileProps) {
             {/* The video stays mounted while hidden so the tile keeps its size.
                 A popped out stream is drawn in its own window instead. */}
             <Show when={!poppedOut()}>
-              <ZoomableStream zoom={zoom}>
+              <ZoomableStream zoom={zoom} hidePill>
                 <VideoTrack
                   style={{
                     "grid-area": "1/1",
@@ -340,9 +367,23 @@ export function ParticipantTile(props: TileProps) {
         >
           <AudioStats />
         </Show>
-        {/* who watches this stream, never over the close button side */}
-        <Show when={isScreenShare() && !unwatched()}>
-          <StreamViewerBadge streamer={participant.identity} />
+        {/* who watches this stream (never over the close button side) and the
+            zoom buttons share one row, so they can't overlap: the zoom pill
+            sits right after the viewer badge, or alone when there is none */}
+        <Show
+          when={
+            (isScreenShare() && !unwatched()) ||
+            (zoom.enabled() && !poppedOut())
+          }
+        >
+          <TopCorner>
+            <Show when={isScreenShare() && !unwatched()}>
+              <StreamViewerBadge streamer={participant.identity} />
+            </Show>
+            <Show when={zoom.enabled() && !poppedOut()}>
+              <ZoomPill zoom={zoom} inline />
+            </Show>
+          </TopCorner>
         </Show>
         <Show when={props.fill}>
           <CloseStream onClick={(e) => e.stopPropagation()}>
@@ -442,6 +483,11 @@ export function ParticipantInfo(props: {
   const showInfo = () => props.part !== "volume";
   const showVolume = () => props.part !== "info";
 
+  // game or program the desktop app says is streamed, only on stream tiles
+  const attributes = useParticipantAttributes(participant);
+  const streamApp = () =>
+    isScreenShare() && !unwatched() ? streamAppOf(attributes()) : undefined;
+
   const isScreenShareAudioUserMuted = () =>
     !user().user!.self && state.voice.getScreenShareMuted(user().user!.id)
       ? "by-user"
@@ -451,7 +497,21 @@ export function ParticipantInfo(props: {
     <OverlayInner>
       <Show when={showInfo()}>
         <InfoGroup compact={props.compact}>
-          <OverflowingText>{user().username}</OverflowingText>
+          {/* one line, so a long label is cut before the name is */}
+          <OverflowingText
+            title={
+              streamApp() ? `${user().username} · ${streamApp()}` : undefined
+            }
+          >
+            {user().username}
+            <Show when={streamApp()}>
+              {/* the dot is decoration, screen readers get name and label */}
+              <StreamAppSeparator aria-hidden="true">
+                {" · "}
+              </StreamAppSeparator>
+              <StreamAppLabel>{streamApp()}</StreamAppLabel>
+            </Show>
+          </OverflowingText>
           <States compact={props.compact}>
             <ConnectionQualityIcon />
             {/* the stream replaces the streamer's own tile, so keep their mic state */}
@@ -686,6 +746,16 @@ const OverlayInner = styled("div", {
   },
 });
 
+/** Muted dot between the streamer's name and the streamed program */
+const StreamAppSeparator = styled("span", {
+  base: { opacity: 0.7 },
+});
+
+/** The streamed game or program next to the streamer's name */
+const StreamAppLabel = styled("span", {
+  base: { opacity: 0.7 },
+});
+
 /** Name and states on the start side, the name shrinks first */
 const InfoGroup = styled("div", {
   base: {
@@ -858,6 +928,30 @@ const PopOutButton = styled("button", {
       outline: "2px solid var(--md-sys-color-primary)",
       outlineOffset: "2px",
     },
+  },
+});
+
+/**
+ * Overlay row in the top start corner of a tile: viewer badge, then the zoom
+ * pill. It spans the tile's height so the viewer list can be as tall as the
+ * tile, and lets pointer input through except on its children.
+ */
+const TopCorner = styled("div", {
+  base: {
+    gridArea: "1/1",
+    justifySelf: "start",
+    alignSelf: "stretch",
+    position: "relative",
+    zIndex: 2,
+    minHeight: 0,
+    maxWidth: "100%",
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "flex-start",
+    alignContent: "flex-start",
+    gap: "var(--gap-sm)",
+    padding: "var(--gap-sm)",
+    pointerEvents: "none",
   },
 });
 

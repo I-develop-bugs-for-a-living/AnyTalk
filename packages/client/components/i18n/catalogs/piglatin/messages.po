@@ -1931,6 +1931,23 @@ msgstr "Ouldcay otnay avesay isthay ettingsay."
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "Ouldn'tcay etchfay AnyTalk onfigurationcay omfray {hStr}."
 
+#. placeholder {0}: notice.name
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream for {0}."
+#~ msgstr "Ouldn'tcay indfay ayay indowway otay eamstray orfay {0}."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream for {name}."
+msgstr "Ouldn'tcay indfay ayay indowway otay eamstray orfay {name}."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't find a window to stream. Bring the app you want to share to the front, then press the hotkey again."
+msgstr "Ouldn'tcay indfay ayay indowway otay eamstray. Ingbray ethay appyay ouyay antway otay areshay otay ethay ontfray, enthay esspray ethay otkeyhay againyay."
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't find a window to stream. Click the window you want to share first."
+#~ msgstr "Ouldn'tcay indfay ayay indowway otay eamstray. Ickclay ethay indowway ouyay antway otay areshay irstfay."
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Couldn't load downloads"
 msgstr "Ouldn'tcay oadlay ownloadsday"
@@ -1943,6 +1960,18 @@ msgstr "Ouldn'tcay ovemay emthay otay {0}."
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Couldn't set up call encryption. The server may need an update."
 msgstr "Ouldn'tcay etsay upyay allcay encryptionyay. Ethay erversay aymay eednay anyay updateyay."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream."
+msgstr "Ouldn'tcay artstay ethay eamstray."
+
+#: components/rtc/components/StreamNotices.tsx
+msgid "Couldn't start the stream. Try running {name} in windowed or borderless mode."
+msgstr "Ouldn'tcay artstay ethay eamstray. Ytray unningray {name} inyay indowedway oryay orderlessbay odemay."
+
+#: components/rtc/components/StreamNotices.tsx
+#~ msgid "Couldn't start the stream. Try running the game in windowed or borderless mode."
+#~ msgstr "Ouldn'tcay artstay ethay eamstray. Ytray unningray ethay amegay inyay indowedway oryay orderlessbay odemay."
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "CPU"
@@ -6274,8 +6303,12 @@ msgid "Stream ended"
 msgstr "Eamstray endedyay"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
-msgid "Stream focused game"
-msgstr "Eamstray ocusedfay amegay"
+#~ msgid "Stream focused game"
+#~ msgstr "Eamstray ocusedfay amegay"
+
+#: components/app/interface/settings/user/Hotkeys.tsx
+msgid "Stream focused window"
+msgstr "Eamstray ocusedfay indowway"
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Stream is still running."

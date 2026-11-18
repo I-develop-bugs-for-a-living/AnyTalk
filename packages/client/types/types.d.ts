@@ -146,11 +146,26 @@ declare global {
       getRunningGames?(): Promise<RunningGame[]>;
       /** The detected game that owns the window in front, missing in older desktop versions */
       getFocusedGame?(): Promise<{ id: string; sourceId: string } | null>;
+      /**
+       * The window that was in front when the global "stream focused window"
+       * hotkey was pressed, as a capture source. Answers once, within about
+       * two seconds of the press, otherwise null (also for AnyTalk's own
+       * windows and on Wayland). Taking it lets setNextScreenSource accept
+       * that one id, once. Missing in older desktop versions.
+       */
+      getForegroundWindow?(): Promise<{ sourceId: string } | null>;
+      /**
+       * What the last screen capture shows: the detected game's name or the
+       * program's name (e.g. "Firefox"), no label for whole screens. May take
+       * a moment to resolve. Missing in older desktop versions.
+       */
+      getCapturedSourceInfo?(): Promise<{ label?: string }>;
       /** Listen for changes of the running games, returns a function to stop listening */
       onRunningGamesChanged?(cb: (games: RunningGame[]) => void): () => void;
       /**
        * One-shot: the next screen capture skips the picker and captures this
-       * source (falls back to the picker if it is gone). null clears it.
+       * source (cancelled if it is gone). Only windows of detected games and
+       * the one getForegroundWindow just returned are accepted. null clears it.
        */
       setNextScreenSource?(sourceId: string | null): Promise<void>;
       /** Sends the call snapshot to the in-game overlay, missing in older desktop versions */

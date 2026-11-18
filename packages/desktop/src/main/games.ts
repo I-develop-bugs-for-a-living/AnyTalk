@@ -142,7 +142,7 @@ function loadEntries(): GameEntry[] {
  * @param timeout Milliseconds before the program is killed
  * @returns stdout, or undefined if it failed
  */
-function run(
+export function run(
   file: string,
   args: string[],
   timeout = 10_000,
@@ -706,6 +706,19 @@ export function isGameWindow(sourceId: string): boolean {
 }
 
 /**
+ * The name of the detected game that owns a window.
+ *
+ * @param sourceId A `desktopCapturer` source id
+ * @returns The game's name, or undefined for any other window
+ */
+export function gameNameOfWindow(sourceId: string): string | undefined {
+  if (!enabled) return undefined;
+  return latest.find((game) =>
+    game.windows.some((window) => window.sourceId === sourceId),
+  )?.name;
+}
+
+/**
  * The games found by the last scan.
  *
  * @returns Matched games only, empty when detection is off
@@ -859,7 +872,7 @@ async function foregroundWin32(): Promise<string | undefined> {
  * @returns The window id in the form of `windowIdOf`, or undefined where
  *   unsupported (Wayland, other systems) or when the lookup fails
  */
-async function foregroundWindowId(): Promise<string | undefined> {
+export async function foregroundWindowId(): Promise<string | undefined> {
   if (isWayland) return undefined;
   if (platform === "win32") return foregroundWin32();
   if (platform === "linux") {
