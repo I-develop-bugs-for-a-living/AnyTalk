@@ -171,7 +171,10 @@ const Holder = styled("div", {
       true: {
         opacity: 0,
         "& > *": { pointerEvents: "none" },
-        _groupHover: { opacity: 1, "& > *": { pointerEvents: "auto" } },
+        ".group[data-active] &": {
+          opacity: 1,
+          "& > *": { pointerEvents: "auto" },
+        },
         _focusWithin: { opacity: 1, "& > *": { pointerEvents: "auto" } },
       },
     },
