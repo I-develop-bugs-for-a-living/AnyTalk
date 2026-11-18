@@ -8,6 +8,7 @@ import type { State as ApplicationState } from "@revolt/state";
 import type { Session } from "@revolt/state/stores/Auth";
 
 import Instance from "../instance/Instance";
+import { deleteE2eeAccountData } from "../rtc/e2ee/accountData";
 import { autoAckCallNotices } from "./callNotices";
 import {
   type ProbeTarget,
@@ -771,6 +772,12 @@ export default class ClientController {
   }
 
   logout() {
+    // The account's call encryption identity and pins go with the session.
+    // Only an explicit logout wipes them: an `InvalidSession` kick (see
+    // `onState`) keeps them on purpose, it can be transient and signing in
+    // again would otherwise change this device's identity for no reason.
+    const userId = this.state.auth.getSession()?.userId;
+    if (userId) void deleteE2eeAccountData(userId);
     this.state.settings.resetNotificationsState();
     killServiceWorkerSubscription(this.instance.client, true);
     this.state.auth.removeSession();

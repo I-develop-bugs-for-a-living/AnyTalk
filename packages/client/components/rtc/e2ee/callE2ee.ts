@@ -13,15 +13,15 @@ import type {
   RemoteTrackPublication,
   Room,
 } from "livekit-client";
+import type { Channel, Client, ServerMember } from "stoat.js";
 
-import { type DeviceIdentity, loadOrCreateIdentity } from "./crypto";
-import { createIndexedDbIdentityStore } from "./identityStore";
+import { type AccessEventSource, wireAccessEvents } from "./accessEvents";
+import { accountData } from "./accountData";
+import { type ChannelAccess, createChannelPolicy } from "./channelPolicy";
 import { AnyTalkKeyProvider, isE2EESupported, RoomEvent } from "./keyProvider";
-import { createPersistentPinStore } from "./pinStore";
 import {
   type E2EEEvent,
   type PeerSnapshot,
-  type PinStore,
   E2EE_TOPIC,
   E2EESession,
   HELLO_ATTRIBUTE,
@@ -48,28 +48,37 @@ export interface CallE2eeState {
   encryptionErrors: number;
 }
 
-/** Device identity of this page, created once and shared by all calls. */
-let identityPromise: Promise<DeviceIdentity> | undefined;
-
-/** Loads (or creates) the device identity of this page once. */
-function getDeviceIdentity(): Promise<DeviceIdentity> {
-  identityPromise ??= loadOrCreateIdentity(
-    createIndexedDbIdentityStore(),
-  ).catch((err) => {
-    // do not cache a failure: the next call tries again
-    identityPromise = undefined;
-    throw err;
-  });
-  return identityPromise;
-}
-
-/** Pin store of this page, shared by all calls. */
-let pinStore: PinStore | undefined;
-
-/** Returns the shared, persistent pin store. */
-function getPinStore(): PinStore {
-  pinStore ??= createPersistentPinStore();
-  return pinStore;
+/**
+ * Builds the access rules of a channel from the Stoat client: members of the
+ * channel's server with the Connect permission for server channels, the
+ * recipients for DM and group calls.
+ */
+function channelAccess(
+  client: Client,
+  channel: Channel,
+): ChannelAccess<ServerMember> {
+  if (channel.serverId) {
+    const serverId = channel.serverId;
+    return {
+      kind: "server",
+      ownerId: () => channel.server?.ownerId,
+      getMember: (userId) => {
+        const key = { server: serverId, user: userId };
+        return client.serverMembers.hasByKey(key) &&
+          !client.serverMembers.isPartialByKey(key)
+          ? client.serverMembers.getByKey(key)
+          : undefined;
+      },
+      fetchMember: (userId) => client.serverMembers.fetch(serverId, userId),
+      canConnect: (member) => member.hasPermission(channel, "Connect"),
+    };
+  }
+  return {
+    kind: "recipients",
+    isRecipient: (userId) =>
+      channel.recipientIds.has(userId) ||
+      (channel.type === "Group" && channel.ownerId === userId),
+  };
 }
 
 /** True if this browser can encrypt call media (insertable streams and WebCrypto). */
@@ -99,16 +108,26 @@ export class CallE2ee {
   #cleanup: (() => void)[] = [];
   #disposed = false;
   readonly #selfId: string;
+  readonly #client: Client;
+  readonly #channel: Channel;
   readonly #onFailure: (kind: E2eeFailureKind) => void;
 
   /**
    * Creates the key provider and worker; `selfId` is our LiveKit identity
-   * (the user id). Throws if the worker cannot be created. `onFailure` is
-   * called when the worker crashes or the key exchange cannot start; the
-   * owner must then leave the call.
+   * (the user id). `client` and `channel` decide who may get our keys (see
+   * {@link channelAccess}). Throws if the worker cannot be created.
+   * `onFailure` is called when the worker crashes or the key exchange cannot
+   * start; the owner must then leave the call.
    */
-  constructor(selfId: string, onFailure: (kind: E2eeFailureKind) => void) {
+  constructor(
+    selfId: string,
+    client: Client,
+    channel: Channel,
+    onFailure: (kind: E2eeFailureKind) => void,
+  ) {
     this.#selfId = selfId;
+    this.#client = client;
+    this.#channel = channel;
     this.#onFailure = onFailure;
     this.keyProvider = new AnyTalkKeyProvider(selfId);
     this.worker = new E2eeWorker();
@@ -202,6 +221,9 @@ export class CallE2ee {
     );
   }
 
+  /** Who may be in this call; set by {@link start}. */
+  #access?: ReturnType<typeof createChannelPolicy>;
+
   /** Downgrade reports made before the session existed. */
   #pendingReports: [string, string][] = [];
 
@@ -216,17 +238,26 @@ export class CallE2ee {
       if (room.localParticipant.identity !== this.#selfId) {
         throw new Error("the LiveKit identity is not the logged in user");
       }
-      const identity = await getDeviceIdentity();
+      const identity = await accountData.getIdentity(this.#selfId);
       // unique per call instance: room name plus the room's server-side id
       const callId = `${room.name}|${await room.getSid()}`;
       if (this.#disposed) return;
+
+      // keys only go to people who may be in the call; the check may need a
+      // member lookup, its result re-runs the session through `reevaluate`
+      const access = createChannelPolicy(
+        channelAccess(this.#client, this.#channel),
+        () => void this.#session?.reevaluate(),
+      );
+      this.#access = access;
 
       const session = new E2EESession({
         callId,
         selfId: room.localParticipant.identity,
         identity,
-        pins: getPinStore(),
+        pins: accountData.getPins(this.#selfId),
         keySink: this.keyProvider,
+        policy: (peer) => access.allows(peer.identity),
         transport: {
           // only participants LiveKit shows us, never a server provided list
           getVisiblePeers: () => [...room.remoteParticipants.keys()],
@@ -351,6 +382,19 @@ export class CallE2ee {
     on(RoomEvent.Reconnected, () => {
       void session.republishHello().then(() => session.resendAll());
     });
+
+    // who may be in the call changed: re-check everyone, so the next
+    // rotation leaves out whoever lost access
+    if (this.#access) {
+      this.#cleanup.push(
+        wireAccessEvents(
+          this.#client as unknown as AccessEventSource,
+          { channelId: this.#channel.id, serverId: this.#channel.serverId },
+          this.#access,
+          () => void session.reevaluate(),
+        ),
+      );
+    }
 
     // retry failed sends
     const timer = setInterval(

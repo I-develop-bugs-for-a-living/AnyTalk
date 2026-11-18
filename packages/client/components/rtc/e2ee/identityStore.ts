@@ -6,8 +6,17 @@ const DB_NAME = "anytalk-e2ee";
 /** Name of the object store that holds the identity. */
 const STORE_NAME = "identity";
 
-/** Key of the single identity record. */
-const RECORD_KEY = "device";
+/**
+ * Key of the old, account independent identity record. It is never used any
+ * more (every account in one browser profile would publish the same key and
+ * so be linkable); {@link deleteLegacyIdentity} removes it.
+ */
+const LEGACY_RECORD_KEY = "device";
+
+/** Key of the identity record of one account. */
+export function identityRecordKey(userId: string): string {
+  return `device:${userId}`;
+}
 
 /** Creates a store that only lives in memory (lost on reload). */
 export function createMemoryIdentityStore(): IdentityStore {
@@ -53,22 +62,23 @@ async function withStore<T>(
 }
 
 /**
- * Creates an IndexedDB backed identity store (CryptoKey objects are stored
+ * Creates an IndexedDB backed identity store of one account (CryptoKey objects are stored
  * through structured clone, so the private key stays non-extractable).
  * It rejects on any IndexedDB failure; `loadOrCreateIdentity` catches that
  * and falls back to an in-memory identity without overwriting the record.
  * Creation uses `add()`, which fails if the key exists, so two tabs cannot
  * overwrite each other's identity.
  */
-export function createIndexedDbIdentityStore(): IdentityStore {
+export function createIndexedDbIdentityStore(userId: string): IdentityStore {
+  const recordKey = identityRecordKey(userId);
   return {
     load: () =>
-      withStore("readonly", (s) => s.get(RECORD_KEY)) as Promise<
+      withStore("readonly", (s) => s.get(recordKey)) as Promise<
         StoredIdentity | undefined
       >,
     async addIfAbsent(identity) {
       try {
-        await withStore("readwrite", (s) => s.add(identity, RECORD_KEY));
+        await withStore("readwrite", (s) => s.add(identity, recordKey));
         return true;
       } catch (error) {
         // the key already exists: another tab won the race
@@ -79,4 +89,20 @@ export function createIndexedDbIdentityStore(): IdentityStore {
       }
     },
   };
+}
+
+/** Deletes the stored identity of one account (on logout). Rejects on IndexedDB failure. */
+export async function deleteIdentity(userId: string): Promise<void> {
+  await withStore("readwrite", (s) => s.delete(identityRecordKey(userId)));
+}
+
+/**
+ * Deletes the old account independent identity record. It is dropped rather
+ * than adopted by the first account that logs in: we cannot know which
+ * account(s) published it, and adopting it would keep alt accounts of this
+ * profile linked. Peers see a new device for us once, which only shows the
+ * low-key "additional device" notice.
+ */
+export async function deleteLegacyIdentity(): Promise<void> {
+  await withStore("readwrite", (s) => s.delete(LEGACY_RECORD_KEY));
 }

@@ -221,8 +221,10 @@ export interface E2EESessionOptions {
   /**
    * Trust policy hook: decides whether keys are exchanged with a peer that
    * has a valid hello. Default: always (automatic mode). A future verified
-   * mode returns false for unverified or changed peers. Call
-   * {@link E2EESession.reevaluate} after its answer changes.
+   * mode returns false for unverified or changed peers. The call wiring also
+   * uses it to allow only people who may be in the call (a pending check
+   * answers false). It must be synchronous and cheap, it runs on every
+   * evaluation. Call {@link E2EESession.reevaluate} after its answer changes.
    */
   policy?: (peer: PeerSnapshot) => boolean;
   /** Time to wait for acks before switching the sending key. Default 300 ms. */
@@ -259,6 +261,22 @@ interface Peer {
   sessions: Map<string, CallSession>;
   active?: CallSession;
   keySent: boolean;
+  /** Our key was delivered to this peer at some point (kept when a resend is needed). */
+  everSent: boolean;
+  /**
+   * Epoch of the join rotation key this peer must start from. Set while a
+   * joiner's send is in progress or failed: retries send only keys of this
+   * epoch or newer, never the one that encrypted earlier media.
+   */
+  joinEpoch?: number;
+  /**
+   * A wrap to this peer went out (even if the send later looked failed or
+   * `keySent` was cleared for a resend), so it may hold a key of ours until
+   * a rotation leaves it out. Unlike `keySent` it survives resends.
+   */
+  heldKey: boolean;
+  /** Result of the last policy check seen by `reconcile`, to spot "now allowed". */
+  wasAllowed?: boolean;
   keyReceived: boolean;
   pinCommitted: boolean;
   helloTimedOut: boolean;
@@ -302,6 +320,15 @@ const MAX_REQUESTS = 5;
 
 /** Minimum time between two answered key requests of one peer. */
 const REQUEST_MIN_INTERVAL_MS = 1000;
+
+/** Joins within this time share one rotation (the key a joiner gets is fresh). */
+const JOIN_ROTATION_DELAY_MS = 1000;
+
+/**
+ * The first key of a session is not rotated for peers that join within this
+ * time of the start: nothing was encrypted with it yet that they must not read.
+ */
+const INITIAL_KEY_FRESH_MS = 2000;
 
 /** Maximum number of remembered call keys per peer. */
 const MAX_CALL_SESSIONS = 4;
@@ -355,6 +382,10 @@ export class E2EESession {
   private currentKey?: Uint8Array;
   private pending?: PendingKey;
   private helloValue?: string;
+  /** When the first key was created (clock time), for the join rotation rule. */
+  private startedAt = 0;
+  /** Timer that batches peers that joined into one rotation. */
+  private joinTimer?: unknown;
 
   /** Creates a session. Call {@link start} to publish the hello. */
   constructor(options: E2EESessionOptions) {
@@ -403,6 +434,7 @@ export class E2EESession {
       this.callKeys = callKeys;
       this.currentKey = key;
       this.currentEpoch = 0;
+      this.startedAt = this.clock.now();
       this.started = true;
       // peers whose hello arrived before start get the key now
       await this.reconcile();
@@ -437,6 +469,8 @@ export class E2EESession {
     if (this.pending?.timer !== undefined) {
       this.clock.clearTimeout(this.pending.timer);
     }
+    if (this.joinTimer !== undefined) this.clock.clearTimeout(this.joinTimer);
+    this.joinTimer = undefined;
     this.pending = undefined;
     return this.idle();
   }
@@ -463,13 +497,10 @@ export class E2EESession {
       this.clearHelloTimer(peer);
       this.clearRequestTimer(peer);
       this.peers.delete(identity);
-      if (
-        this.pending?.waiting.delete(identity) &&
-        !this.pending.waiting.size
-      ) {
-        await this.switchNow();
-      }
-      if (peer.keySent) await this.rotate();
+      const waited = this.pending?.waiting.delete(identity);
+      // the pending key may already be with the leaver: drop it, never adopt it
+      if (peer.keySent || peer.heldKey) await this.rotate([], true);
+      else if (waited && !this.pending?.waiting.size) await this.switchNow();
     });
   }
 
@@ -650,11 +681,18 @@ export class E2EESession {
   /** Whether keys may be exchanged with this peer (valid hello plus policy). */
   private allowed(peer: Peer): boolean {
     return (
+      this.passesChecks(peer) &&
+      (this.options.policy?.(this.snapshot(peer)) ?? true)
+    );
+  }
+
+  /** Whether the peer's hello and tracks are fine, before the policy is asked. */
+  private passesChecks(peer: Peer): boolean {
+    return (
       !!peer.hello &&
       !peer.invalid &&
       !peer.swapped &&
-      peer.unencryptedTracks.size === 0 &&
-      (this.options.policy?.(this.snapshot(peer)) ?? true)
+      peer.unencryptedTracks.size === 0
     );
   }
 
@@ -675,6 +713,8 @@ export class E2EESession {
         trust: "pending",
         sessions: new Map(),
         keySent: false,
+        everSent: false,
+        heldKey: false,
         keyReceived: false,
         pinCommitted: false,
         helloTimedOut: false,
@@ -782,8 +822,11 @@ export class E2EESession {
       }
     }
     peer.active = session;
-    // the peer has a new call key: it has none of our wraps under it yet
+    // the peer has a new call key: it has none of our wraps under it yet,
+    // and it counts as a joiner again so it only gets a newer key
     peer.keySent = false;
+    peer.everSent = false;
+    peer.joinEpoch = undefined;
     if (first) {
       peer.fingerprint = fingerprint;
       peer.identityTrust = this.lookupTrust(peer.identity, fingerprint);
@@ -828,27 +871,32 @@ export class E2EESession {
         }
         if (peer.requests >= MAX_REQUESTS) return;
         peer.requests++;
-        try {
-          await this.options.transport.sendData(
-            encoder.encode(
-              JSON.stringify({
-                t: "req",
-                v: PROTOCOL_VERSION,
-                call: this.options.callId,
-                from: this.options.selfId,
-                to: peer.identity,
-                epoch: 0,
-                n: b64uEncode(randomBytes(16)),
-              }),
-            ),
-            { destinationIdentities: [peer.identity], topic: E2EE_TOPIC },
-          );
-        } catch (error) {
-          this.emit({ type: "error", message: String(error) });
-        }
+        await this.sendKeyRequest(peer);
         this.scheduleRequest(peer, REQUEST_REPEAT_MS);
       });
     }, ms);
+  }
+
+  /** Asks one peer to send us its key (errors are reported as events). */
+  private async sendKeyRequest(peer: Peer): Promise<void> {
+    try {
+      await this.options.transport.sendData(
+        encoder.encode(
+          JSON.stringify({
+            t: "req",
+            v: PROTOCOL_VERSION,
+            call: this.options.callId,
+            from: this.options.selfId,
+            to: peer.identity,
+            epoch: 0,
+            n: b64uEncode(randomBytes(16)),
+          }),
+        ),
+        { destinationIdentities: [peer.identity], topic: E2EE_TOPIC },
+      );
+    } catch (error) {
+      this.emit({ type: "error", message: String(error) });
+    }
   }
 
   /** A peer asks for our key again: send it (rate limited). */
@@ -906,13 +954,101 @@ export class E2EESession {
   private async reconcile(): Promise<void> {
     let demoted = false;
     for (const peer of this.peers.values()) {
-      if (peer.keySent && !this.allowed(peer)) {
+      if ((peer.keySent || peer.heldKey) && !this.allowed(peer)) {
         peer.keySent = false;
+        // the rotation below leaves this peer out
+        peer.heldKey = false;
         demoted = true;
       }
+      if (!this.allowed(peer)) {
+        // whoever is denied may have recorded media since: if they are
+        // allowed again they are joiners and only get a newer key
+        peer.everSent = false;
+        peer.joinEpoch = undefined;
+      }
     }
-    if (demoted) await this.rotate();
-    for (const peer of this.peers.values()) await this.maybeSendKeys(peer);
+    // a join key that was dropped (stop, demotion) cannot be sent any more
+    for (const peer of this.peers.values()) {
+      if (
+        peer.joinEpoch !== undefined &&
+        !peer.everSent &&
+        peer.joinEpoch > this.currentEpoch &&
+        !this.pending
+      ) {
+        peer.joinEpoch = undefined;
+      }
+    }
+    // peers that never had a key of ours must not get the one that encrypted
+    // everything so far: they get a fresh key through a (batched) rotation
+    const joiners = this.joiners();
+    if (demoted) {
+      await this.rotate(joiners, true);
+    } else if (joiners.length && !this.initialKeyIsFresh()) {
+      this.scheduleJoinRotation();
+    }
+    for (const peer of this.peers.values()) {
+      // a peer that just became allowed may have sent its key while we
+      // dropped its messages: ask for it now instead of waiting for the timer
+      // (only tracked once the hello is valid, so a normal join is no change)
+      const ok = this.allowed(peer);
+      let becameAllowed = false;
+      if (this.passesChecks(peer)) {
+        becameAllowed = peer.wasAllowed === false && ok;
+        peer.wasAllowed = ok;
+      }
+      if (becameAllowed && !peer.keyReceived && this.started) {
+        // not awaited: a slow publish must not delay keys to the others
+        void this.sendKeyRequest(peer);
+      }
+      if (this.holdsBackForRotation(peer)) continue;
+      await this.maybeSendKeys(peer);
+    }
+  }
+
+  /** Peers that are allowed and have never received a key of ours. */
+  private joiners(): Peer[] {
+    if (!this.started) return [];
+    return [...this.peers.values()].filter(
+      (p) =>
+        !p.keySent &&
+        !p.everSent &&
+        p.joinEpoch === undefined &&
+        this.allowed(p) &&
+        this.isVisible(p.identity),
+    );
+  }
+
+  /**
+   * True while the first key is so young that nothing was encrypted with it
+   * yet; peers in the join burst at the start of a call get it as it is.
+   */
+  private initialKeyIsFresh(): boolean {
+    return (
+      this.currentEpoch === 0 &&
+      this.clock.now() - this.startedAt < INITIAL_KEY_FRESH_MS
+    );
+  }
+
+  /** Whether a peer waits for the join rotation instead of getting the current key. */
+  private holdsBackForRotation(peer: Peer): boolean {
+    return (
+      !peer.keySent &&
+      !peer.everSent &&
+      peer.joinEpoch === undefined &&
+      !this.initialKeyIsFresh()
+    );
+  }
+
+  /** Rotates once for all peers that joined within a short time. */
+  private scheduleJoinRotation(): void {
+    if (this.joinTimer !== undefined) return;
+    this.joinTimer = this.clock.setTimeout(() => {
+      void this.enqueue(async () => {
+        this.joinTimer = undefined;
+        const joiners = this.joiners();
+        if (joiners.length) await this.rotate(joiners);
+      });
+    }, JOIN_ROTATION_DELAY_MS);
   }
 
   /**
@@ -922,14 +1058,21 @@ export class E2EESession {
   private async maybeSendKeys(peer: Peer): Promise<void> {
     if (!this.started || !this.currentKey || peer.keySent) return;
     if (!this.allowed(peer) || !this.isVisible(peer.identity)) return;
+    // a joiner only gets keys from its join rotation on
+    const floor = peer.joinEpoch ?? 0;
+    const pendingOk = !!this.pending && this.pending.epoch >= floor;
+    if (this.currentEpoch < floor && !pendingOk) return;
     try {
-      await this.sendWrap(peer, this.currentEpoch, this.currentKey);
+      if (this.currentEpoch >= floor) {
+        await this.sendWrap(peer, this.currentEpoch, this.currentKey);
+      }
       const pending = this.pending;
-      if (pending) {
+      if (pending && pending.epoch >= floor) {
         const nonce = await this.sendWrap(peer, pending.epoch, pending.key);
         pending.waiting.set(peer.identity, nonce);
       }
       peer.keySent = true;
+      peer.everSent = true;
     } catch (error) {
       this.emit({ type: "error", message: String(error) });
     }
@@ -965,6 +1108,9 @@ export class E2EESession {
       ),
       { destinationIdentities: [peer.identity], topic: E2EE_TOPIC },
     );
+    // from here on the peer may hold a key of ours
+    peer.heldKey = true;
+    peer.everSent = true;
     this.emit({ type: "key-sent", identity: peer.identity, epoch });
     return nonce;
   }
@@ -1044,15 +1190,44 @@ export class E2EESession {
    * peers that hold the old one and switches the sending key after all acks
    * or the grace period. Receivers install it as soon as it arrives. The
    * grace timer starts before the sends so slow sends cannot delay it.
+   * `joiners` are peers that never had a key: they get only this new key,
+   * so they cannot decrypt anything sent before they were allowed.
    */
-  private async rotate(): Promise<void> {
+  private async rotate(
+    joiners: Peer[] = [],
+    dropPending = false,
+  ): Promise<void> {
     if (!this.started) return;
-    if (this.pending) await this.switchNow();
-    const epoch = this.currentEpoch + 1;
+    let base = this.currentEpoch;
+    if (this.pending && dropPending) {
+      // the rotation is caused by someone losing access, and the pending key
+      // may already be with them: never switch to it. Epochs still move on
+      // past it, receivers may have installed it.
+      base = this.pending.epoch;
+      if (this.pending.timer !== undefined) {
+        this.clock.clearTimeout(this.pending.timer);
+      }
+      this.pending = undefined;
+    } else if (this.pending) {
+      await this.switchNow();
+      base = this.currentEpoch;
+    }
+    const epoch = base + 1;
     const key = generateMediaKey();
-    const recipients = [...this.peers.values()].filter(
-      (p) => p.keySent && this.allowed(p) && this.isVisible(p.identity),
-    );
+    const recipients = [
+      ...new Set([
+        ...[...this.peers.values()].filter(
+          (p) =>
+            (p.keySent || p.heldKey) &&
+            this.allowed(p) &&
+            this.isVisible(p.identity),
+        ),
+        ...joiners.filter((p) => this.allowed(p) && this.isVisible(p.identity)),
+      ]),
+    ];
+    for (const peer of joiners) {
+      if (recipients.includes(peer)) peer.joinEpoch = epoch;
+    }
     const pending: PendingKey = { epoch, key, waiting: new Map() };
     this.pending = pending;
     pending.timer = this.clock.setTimeout(() => {
@@ -1066,8 +1241,10 @@ export class E2EESession {
           peer.identity,
           await this.sendWrap(peer, epoch, key),
         );
+        peer.keySent = true;
+        peer.everSent = true;
       } catch (error) {
-        // retried by reevaluate(); it will get the then-current key
+        // retried by reevaluate(); a joiner gets its join key again (joinEpoch)
         peer.keySent = false;
         this.emit({ type: "error", message: String(error) });
       }

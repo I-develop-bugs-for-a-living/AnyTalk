@@ -6,6 +6,7 @@ import {
   createMemo,
   createSignal,
   JSX,
+  on,
   Setter,
   useContext,
 } from "solid-js";
@@ -35,7 +36,7 @@ import {
   VideoEncoding,
   VideoPresets,
 } from "livekit-client";
-import { Channel } from "stoat.js";
+import { type Client, Channel } from "stoat.js";
 
 import { SoundController, useClient, useSound } from "@revolt/client";
 import { useInstance } from "@revolt/instance";
@@ -361,6 +362,7 @@ class Voice {
 
   /** Id of the logged in user, which is our LiveKit identity */
   #selfId: () => string | undefined;
+  #client: () => Client | undefined;
 
   /** When people last moved into or out of our channel, by user id */
   #movedAt = new Map<string, number>();
@@ -596,9 +598,11 @@ class Voice {
     sound: SoundController,
     device: Device,
     selfId: () => string | undefined,
+    client: () => Client | undefined,
   ) {
     this.#settings = voiceSettings;
     this.#selfId = selfId;
+    this.#client = client;
     // the windows belong to this page, don't leave them behind when it goes
     window.addEventListener("pagehide", () => this.closeAllPopouts());
     this.sound = sound;
@@ -781,7 +785,9 @@ class Voice {
     try {
       const selfId = this.#selfId();
       if (!selfId) throw new Error("not logged in");
-      e2ee = new CallE2ee(selfId, (kind) => {
+      const client = this.#client();
+      if (!client) throw new Error("not connected");
+      e2ee = new CallE2ee(selfId, client, channel, (kind) => {
         // only the call this belongs to; leaving also stops any rejoin
         if (this.e2ee() !== e2ee) return;
         this.#setE2eeNotice({ kind });
@@ -4063,6 +4069,20 @@ export function VoiceContext(props: { children: JSX.Element }) {
     sound,
     device,
     () => client()?.user?.id,
+    client,
+  );
+
+  // The call's key policy listens to one client. If the controller replaces
+  // it (reconnect with a new session, logout), those listeners would watch a
+  // dead object and stop excluding people, so the call ends instead.
+  createEffect(
+    on(
+      client,
+      () => {
+        if (voice.room()) voice.disconnect();
+      },
+      { defer: true },
+    ),
   );
 
   return (
