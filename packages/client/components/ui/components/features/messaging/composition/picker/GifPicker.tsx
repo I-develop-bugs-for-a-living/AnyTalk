@@ -29,6 +29,7 @@ import {
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import { debounce } from "@revolt/common";
+import { isGifProviderUrl } from "@revolt/common/lib/gifs";
 import { CompositionMediaPickerContext } from "./CompositionMediaPicker";
 
 /**
@@ -338,6 +339,8 @@ function Categories() {
   const trendingCategories = useQuery<GifCategory[]>(() => ({
     queryKey: ["trendingGifCategories"],
     queryFn: () => {
+      // fail closed: never send the session token without a configured Gifbox
+      if (!instance.gifboxUrl) throw new Error("No Gifbox configured");
       const [authHeader, authHeaderValue] = client()!.authenticationHeader;
 
       return fetch(`${instance.gifboxUrl}/categories?locale=en_US`, {
@@ -453,10 +456,24 @@ function GifSearch(props: { query: string }) {
   const instance = useInstance();
 
   const { onMessage } = useContext(CompositionMediaPickerContext);
+  const { t } = useLingui();
+
+  /** Only show media from GIF providers or the configured Gifbox's own origin */
+  const isSafeMedia = (url?: string) => {
+    if (!url) return false;
+    if (isGifProviderUrl(url)) return true;
+    try {
+      return new URL(url).origin === new URL(instance.gifboxUrl ?? "").origin;
+    } catch {
+      return false;
+    }
+  };
 
   const search = useQuery<GifResult[]>(() => ({
     queryKey: ["gifs", props.query],
     queryFn: () => {
+      // fail closed: never send the session token without a configured Gifbox
+      if (!instance.gifboxUrl) throw new Error("No Gifbox configured");
       const [authHeader, authHeaderValue] = client()!.authenticationHeader;
 
       return fetch(
@@ -517,24 +534,33 @@ function GifSearch(props: { query: string }) {
         <Masonry role="list">
           <For each={search.data}>
             {(gif) => (
-              <GifTile
-                role="listitem"
-                tabIndex={0}
-                onClick={() => onMessage(gif.url)}
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  e.stopImmediatePropagation();
-                }}
-              >
-                <video
-                  playsinline
-                  loop
-                  autoplay
-                  muted
-                  src={gif.media_formats.tinywebm.url}
-                />
-              </GifTile>
+              <Show when={isSafeMedia(gif.media_formats?.tinywebm?.url)}>
+                <GifTile
+                  role="listitem"
+                  tabIndex={0}
+                  aria-label={t`Send GIF`}
+                  onClick={() => onMessage(gif.url)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      onMessage(gif.url);
+                    }
+                  }}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                  }}
+                >
+                  <video
+                    playsinline
+                    loop
+                    autoplay
+                    muted
+                    src={gif.media_formats.tinywebm.url}
+                  />
+                </GifTile>
+              </Show>
             )}
           </For>
         </Masonry>

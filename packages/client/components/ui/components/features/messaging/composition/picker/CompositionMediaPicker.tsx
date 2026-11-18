@@ -19,6 +19,7 @@ import { flip, offset, shift } from "@floating-ui/dom";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
+import { useInstance } from "@revolt/instance";
 import { Button } from "@revolt/ui/components/design";
 import { Row } from "@revolt/ui/components/layout";
 
@@ -55,6 +56,7 @@ export const CompositionMediaPickerContext = createContext(
 
 export function CompositionMediaPicker(props: Props) {
   const [anchor, setAnchor] = createSignal<HTMLElement>();
+  const instance = useInstance();
   const [show, setShow] = createSignal<"gif" | "emoji">();
   let altRef: HTMLDivElement | undefined;
 
@@ -74,7 +76,9 @@ export function CompositionMediaPicker(props: Props) {
         ref: setAnchor,
         onClickGif: (_, ref) => {
           altRef = ref;
-          setShow((current) => (current === "gif" ? undefined : "gif"));
+          // no Gifbox configured for this instance: open emoji instead
+          const target = instance.gifboxUrl ? "gif" : "emoji";
+          setShow((current) => (current === target ? undefined : target));
         },
         onClickEmoji: (_, ref) => {
           altRef = ref;
@@ -112,6 +116,7 @@ function Picker(
     setShow: Setter<"gif" | "emoji" | undefined>;
   },
 ) {
+  const instance = useInstance();
   const [floating, setFloating] = createSignal<HTMLDivElement>();
   const [fixed, setFixed] = createSignal(false);
 
@@ -155,25 +160,28 @@ function Picker(
       }
     >
       <Container>
-        <Row justify class="CompositionButton">
-          <Button
-            groupActive={props.show() === "gif"}
-            onPress={() => props.setShow("gif")}
-            group="connected-start"
-          >
-            <Trans>GIFs</Trans>
-          </Button>
-          <Button
-            groupActive={props.show() === "emoji"}
-            onPress={() => props.setShow("emoji")}
-            group="connected-end"
-          >
-            <Trans>Emoji</Trans>
-          </Button>
-        </Row>
+        {/* the tab row is pointless with only emoji, so hide it then */}
+        <Show when={instance.gifboxUrl}>
+          <Row justify class="CompositionButton">
+            <Button
+              groupActive={props.show() === "gif"}
+              onPress={() => props.setShow("gif")}
+              group="connected-start"
+            >
+              <Trans>GIFs</Trans>
+            </Button>
+            <Button
+              groupActive={props.show() === "emoji"}
+              onPress={() => props.setShow("emoji")}
+              group="connected-end"
+            >
+              <Trans>Emoji</Trans>
+            </Button>
+          </Row>
+        </Show>
 
         <Switch fallback={<Trans>Not available yet.</Trans>}>
-          <Match when={props.show() === "gif"}>
+          <Match when={props.show() === "gif" && instance.gifboxUrl}>
             <GifPicker />
           </Match>
           <Match when={props.show() === "emoji"}>
