@@ -9,7 +9,11 @@ import {
 } from "stoat.js";
 import { css } from "styled-system/css";
 
-import { isGifBox, isGif as isGifLib } from "@revolt/common/lib/gifs";
+import {
+  isGifBoxUrl,
+  isGif as isGifLib,
+  isGifProviderUrl,
+} from "@revolt/common/lib/gifs";
 import { useModals } from "@revolt/modal";
 import { SizedContent } from "@revolt/ui/components/utils";
 
@@ -47,10 +51,10 @@ export function Embed(props: { embed: MessageEmbed }) {
       <Match when={image()}>
         <SizedContent width={image()!.width} height={image()!.height}>
           <img
-            // bypass proxy for known GIF providers
+            // bypass proxy only when the media itself is hosted by a GIF provider
             // TODO: Remove the Gifbox check here once gifbox embeds are fixed
             src={
-              isGIF() && !isGifBox(props.embed)
+              isGifProviderUrl(image()!.url) && !isGifBoxUrl(image()!.url)
                 ? image()!.url
                 : image()!.proxiedURL
             }
@@ -74,10 +78,10 @@ export function Embed(props: { embed: MessageEmbed }) {
             autoplay={isGIF()}
             controls={!isGIF()}
             preload="metadata"
-            // bypass proxy for known GIF providers
+            // bypass proxy only when the media itself is hosted by a GIF provider
             // TODO: Remove the Gifbox check here once gifbox embeds are fixed
             src={
-              isGIF() && !isGifBox(props.embed)
+              isGifProviderUrl(video()!.url) && !isGifBoxUrl(video()!.url)
                 ? video()!.url
                 : video()!.proxiedURL
             }

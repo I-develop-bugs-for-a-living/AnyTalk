@@ -362,7 +362,9 @@ const Pill = styled("div", {
     transition: "var(--transitions-fast) opacity",
 
     "&[data-visible]": { opacity: 1 },
-    ".group:hover &": { opacity: 1 },
+    ".group[data-active] &": { opacity: 1 },
+    // other groups (e.g. the pop-out window) have no tile state: plain hover
+    ".group:hover:not(.vc_tile) &": { opacity: 1 },
     ".group:focus-within &": { opacity: 1 },
     "&:focus-within": { opacity: 1 },
   },

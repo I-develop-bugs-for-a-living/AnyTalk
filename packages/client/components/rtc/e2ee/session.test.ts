@@ -590,4 +590,300 @@ describe("E2EESession", () => {
     expect(b.keys.some((k) => k.identity === "alice")).toBe(false);
     expect(room.log.some((m) => m.from === "bob")).toBe(false);
   });
+
+  it("sends no key to a peer while the policy says pending, then sends after reevaluate", async () => {
+    const { clock } = createClock();
+    const room = createRoom();
+    let allowed = false;
+    const a = await room.join("alice", {
+      identity: await generateIdentity(),
+      clock,
+      policy: (peer) => peer.identity !== "bob" || allowed,
+    });
+    const b = await room.join("bob", {
+      identity: await generateIdentity(),
+      clock,
+    });
+    await settle();
+    expect(room.log.some((m) => m.from === "alice" && m.to[0] === "bob")).toBe(
+      false,
+    );
+    expect(b.keys.some((k) => k.identity === "alice")).toBe(false);
+    allowed = true;
+    await a.session.reevaluate();
+    await settle();
+    expect(b.keys.some((k) => k.identity === "alice")).toBe(true);
+  });
+
+  it("rotates when a key holder stops being allowed by the policy", async () => {
+    const { clock } = createClock();
+    const room = createRoom();
+    let bobAllowed = true;
+    const a = await room.join("alice", {
+      identity: await generateIdentity(),
+      clock,
+      policy: (peer) => peer.identity !== "bob" || bobAllowed,
+    });
+    const b = await room.join("bob", {
+      identity: await generateIdentity(),
+      clock,
+    });
+    const c = await room.join("carol", {
+      identity: await generateIdentity(),
+      clock,
+    });
+    await settle();
+    expect(b.keys.some((k) => k.identity === "alice")).toBe(true);
+    bobAllowed = false;
+    await a.session.reevaluate();
+    await settle();
+    // carol got the new key, bob did not
+    expect(c.keys.filter((k) => k.identity === "alice").at(-1)!.index).toBe(1);
+    expect(
+      b.keys.filter((k) => k.identity === "alice").map((k) => k.index),
+    ).toEqual([0]);
+  });
+
+  it("gives a joiner a fresh key, not the one that encrypted earlier media", async () => {
+    const t = createClock();
+    const room = createRoom();
+    const a = await room.join("alice", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+    });
+    // alice has been in the call for a while
+    t.advance(10_000);
+    const b = await room.join("bob", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+    });
+    await settle();
+    t.advance(1000);
+    await settle();
+    const own = a.keys.filter((k) => k.identity === "alice");
+    expect(own.map((k) => k.index)).toEqual([0, 1]);
+    const bobView = b.keys.filter((k) => k.identity === "alice");
+    expect(bobView.map((k) => k.index)).toEqual([1]);
+    expect(bobView[0].key).toEqual(own[1].key);
+    expect(bobView[0].key).not.toEqual(own[0].key);
+  });
+
+  it("shares one rotation between peers that join together", async () => {
+    const t = createClock();
+    const room = createRoom();
+    const a = await room.join("alice", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+    });
+    t.advance(10_000);
+    const b = await room.join("bob", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+    });
+    const c = await room.join("carol", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+    });
+    await settle();
+    t.advance(1000);
+    await settle();
+    expect(
+      a.keys.filter((k) => k.identity === "alice").map((k) => k.index),
+    ).toEqual([0, 1]);
+    expect(
+      b.keys.filter((k) => k.identity === "alice").map((k) => k.index),
+    ).toEqual([1]);
+    expect(
+      c.keys.filter((k) => k.identity === "alice").map((k) => k.index),
+    ).toEqual([1]);
+  });
+
+  it("does not rotate for peers in the join burst right after the start", async () => {
+    const t = createClock();
+    const room = createRoom();
+    const a = await room.join("alice", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+    });
+    await room.join("bob", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+    });
+    await room.join("carol", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+    });
+    await settle();
+    t.advance(1000);
+    await settle();
+    expect(
+      a.keys.filter((k) => k.identity === "alice").map((k) => k.index),
+    ).toEqual([0]);
+  });
+
+  it("treats a peer that was denied and allowed again as a joiner", async () => {
+    const t = createClock();
+    const room = createRoom();
+    let bobAllowed = true;
+    const a = await room.join("alice", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+      policy: (peer) => peer.identity !== "bob" || bobAllowed,
+    });
+    const b = await room.join("bob", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+    });
+    await room.join("carol", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+    });
+    await settle();
+    t.advance(5000);
+    bobAllowed = false;
+    await a.session.reevaluate();
+    await settle();
+    const deniedEpoch = a.keys
+      .filter((k) => k.identity === "alice")
+      .at(-1)!.index;
+    expect(deniedEpoch).toBe(1);
+    bobAllowed = true;
+    await a.session.reevaluate();
+    await settle();
+    t.advance(1000);
+    await settle();
+    // bob got a key newer than anything from the time he was denied
+    const bobEpochs = b.keys
+      .filter((k) => k.identity === "alice")
+      .map((k) => k.index);
+    expect(bobEpochs).toEqual([0, 2]);
+  });
+
+  it("asks a peer for its key at once when the policy starts allowing it", async () => {
+    const { clock } = createClock();
+    const room = createRoom();
+    let allowed = false;
+    const a = await room.join("alice", {
+      identity: await generateIdentity(),
+      clock,
+      policy: (peer) => peer.identity !== "bob" || allowed,
+    });
+    const b = await room.join("bob", {
+      identity: await generateIdentity(),
+      clock,
+    });
+    await settle();
+    // bob's wrap to alice was dropped while he was pending
+    expect(a.keys.some((k) => k.identity === "bob")).toBe(false);
+    allowed = true;
+    await a.session.reevaluate();
+    await settle();
+    expect(b).toBeDefined();
+    expect(a.keys.some((k) => k.identity === "bob")).toBe(true);
+  });
+
+  it("retries a failed join key without scheduling another rotation", async () => {
+    const t = createClock();
+    const room = createRoom();
+    const a = await room.join("alice", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+    });
+    t.advance(10_000);
+    const b = await room.join("bob", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+    });
+    await settle();
+    room.failing.from = "alice";
+    room.failing.count = 1;
+    t.advance(1000);
+    await settle();
+    expect(b.keys.some((k) => k.identity === "alice")).toBe(false);
+    // the retry sends the same join key, no second rotation
+    await a.session.reevaluate();
+    await settle();
+    t.advance(1000);
+    await settle();
+    t.advance(300);
+    await settle();
+    const own = a.keys.filter((k) => k.identity === "alice");
+    expect(own.map((k) => k.index)).toEqual([0, 1]);
+    expect(
+      b.keys.filter((k) => k.identity === "alice").map((k) => k.index),
+    ).toEqual([1]);
+  });
+
+  it("rotates and withholds keys when a peer is denied around resendAll", async () => {
+    const t = createClock();
+    const room = createRoom();
+    let bobAllowed = true;
+    const a = await room.join("alice", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+      policy: (peer) => peer.identity !== "bob" || bobAllowed,
+    });
+    const b = await room.join("bob", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+    });
+    const c = await room.join("carol", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+    });
+    await settle();
+    t.advance(5000);
+    bobAllowed = false;
+    await a.session.resendAll();
+    await settle();
+    expect(
+      c.keys.filter((k) => k.identity === "alice").map((k) => k.index),
+    ).toEqual([0, 1]);
+    expect(
+      b.keys.filter((k) => k.identity === "alice").map((k) => k.index),
+    ).toEqual([0]);
+  });
+
+  it("rotates for a peer denied after a failed rotation send to it", async () => {
+    const t = createClock();
+    const room = createRoom();
+    let bobAllowed = true;
+    const a = await room.join("alice", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+      policy: (peer) => peer.identity !== "bob" || bobAllowed,
+    });
+    const b = await room.join("bob", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+    });
+    await room.join("carol", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+    });
+    const d = await room.join("dave", {
+      identity: await generateIdentity(),
+      clock: t.clock,
+    });
+    await settle();
+    t.advance(5000);
+    // the rotation caused by dave leaving fails to reach bob (first recipient)
+    room.failing.from = "alice";
+    room.failing.count = 1;
+    await room.leave("dave");
+    await settle();
+    expect(d).toBeDefined();
+    bobAllowed = false;
+    await a.session.reevaluate();
+    await settle();
+    t.advance(300);
+    await settle();
+    const own = a.keys
+      .filter((k) => k.identity === "alice")
+      .map((k) => k.index);
+    expect(own.at(-1)).toBeGreaterThanOrEqual(2);
+    expect(
+      b.keys.filter((k) => k.identity === "alice").map((k) => k.index),
+    ).toEqual([0]);
+  });
 });

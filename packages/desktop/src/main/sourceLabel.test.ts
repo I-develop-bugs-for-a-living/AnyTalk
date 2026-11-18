@@ -2,11 +2,15 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
 import {
+  JAVA_TITLE_MAX_LENGTH,
   LABEL_MAX_LENGTH,
   chooseLabel,
+  encodePowerShell,
+  isJavaProgram,
   parseProgramInfo,
   parseWmClass,
   presentableName,
+  processNameByTitle,
   sanitizeLabel,
 } from "./sourceLabel.ts";
 
@@ -61,6 +65,54 @@ describe("chooseLabel", () => {
   });
 });
 
+describe("java programs", () => {
+  const javaw = { name: "javaw", description: "OpenJDK Platform binary" };
+  it("detects runtimes by process name or description", () => {
+    assert.equal(isJavaProgram({ name: "javaw.exe" }), true);
+    assert.equal(isJavaProgram({ name: "JAVA" }), true);
+    assert.equal(
+      isJavaProgram({ name: "x", description: "Java(TM) Platform SE binary" }),
+      true,
+    );
+    assert.equal(isJavaProgram({ name: "firefox" }), false);
+  });
+  it("uses the window title", () => {
+    assert.equal(
+      chooseLabel(javaw, "GT: New Horizons 2.8.1"),
+      "GT: New Horizons 2.8.1",
+    );
+  });
+  it("truncates long titles with an ellipsis", () => {
+    const label = chooseLabel(javaw, "x".repeat(200));
+    assert.equal(label?.length, JAVA_TITLE_MAX_LENGTH);
+    assert.equal(label?.endsWith("\u2026"), true);
+  });
+  it("cuts a 60 character title to 47 characters and an ellipsis", () => {
+    const title = "a".repeat(30) + "b".repeat(30);
+    assert.equal(
+      chooseLabel(javaw, title),
+      "a".repeat(30) + "b".repeat(17) + "\u2026",
+    );
+  });
+  it("does not treat other platform binaries as Java", () => {
+    assert.equal(
+      isJavaProgram({ name: "x", description: "Some Platform binary" }),
+      false,
+    );
+    assert.equal(isJavaProgram({ name: "java-lang-Thread" }), true);
+  });
+  it("falls back to Java without a title", () => {
+    assert.equal(chooseLabel(javaw, ""), "Java");
+    assert.equal(chooseLabel(javaw, undefined), "Java");
+  });
+  it("still ignores the title for other programs", () => {
+    assert.equal(
+      chooseLabel({ name: "ff", description: "Firefox" }, "Secret page"),
+      "Firefox",
+    );
+  });
+});
+
 describe("parsers", () => {
   it("reads the lookup output", () => {
     assert.deepEqual(parseProgramInfo('{"n":"a","d":"B","p":""}'), {
@@ -76,5 +128,32 @@ describe("parsers", () => {
       "firefox",
     );
     assert.equal(parseWmClass("not found"), undefined);
+  });
+});
+
+describe("encodePowerShell", () => {
+  it("encodes as base64 UTF-16LE", () => {
+    assert.equal(encodePowerShell("a"), "YQA=");
+  });
+});
+
+describe("processNameByTitle", () => {
+  const row = (name: string, title: string) =>
+    `"${name}","1","Console","1","10 K","Running","u","0:00:01","${title}"`;
+  it("finds the process by exact title", () => {
+    const out = [
+      row("javaw.exe", "GT: New Horizons 2.8.1"),
+      row("a.exe", "N/A"),
+    ].join("\r\n");
+    assert.equal(
+      processNameByTitle(out, "GT: New Horizons 2.8.1"),
+      "javaw.exe",
+    );
+  });
+  it("gives nothing for no match, empty title or ambiguity", () => {
+    const out = [row("a.exe", "T"), row("b.exe", "T")].join("\n");
+    assert.equal(processNameByTitle(out, "T"), undefined);
+    assert.equal(processNameByTitle(out, "X"), undefined);
+    assert.equal(processNameByTitle(out, " "), undefined);
   });
 });

@@ -5,6 +5,19 @@ import { createSignal } from "solid-js";
  */
 export const touchOnly = () => !matchMedia("(hover: hover)").matches;
 
+/**
+ * Whether a pointer leave goes into a floating layer (volume panel, popover,
+ * tooltip, dialog) that belongs to the leaving element, so it isn't a real leave
+ */
+export function leavesIntoFloating(related: EventTarget | null) {
+  return (
+    related instanceof Element &&
+    !!related.closest(
+      "#floating, [data-floating], [role=dialog], [role=tooltip]",
+    )
+  );
+}
+
 const [openPanels, setOpenPanels] = createSignal(0);
 
 /**

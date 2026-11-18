@@ -24,10 +24,11 @@ const PICKER_TIMEOUT_MS = 120_000;
 
 /**
  * The label of the source captured last, resolved in the background so the
- * capture itself never waits for it. Cleared by every new capture request.
+ * capture itself never waits for it. Only replaced by a newer capture, so a
+ * request that ends without a capture (cancelled picker) keeps it.
  */
 let capturedLabel: Promise<string | undefined> | undefined;
-/** Number of the newest capture request, ties a label to its capture. */
+/** Number of the newest capture, ties a label to its capture. */
 let captureId = 0;
 
 /**
@@ -49,7 +50,8 @@ function rememberCaptured(source: Electron.DesktopCapturerSource) {
 export async function getCapturedLabel(): Promise<string | undefined> {
   const id = captureId;
   const label = await capturedLabel;
-  // a newer capture started meanwhile: its label is not ours to hand out
+  // the capture really was replaced meanwhile: its label is not ours to hand
+  // out. A request that did not end in a capture does not count.
   return id === captureId ? label : undefined;
 }
 
@@ -326,8 +328,6 @@ export function installScreenShare(
 
   session.defaultSession.setDisplayMediaRequestHandler(
     async (request, callback) => {
-      captureId++;
-      capturedLabel = undefined;
       try {
         if (!request.frame || !isServerUrl(request.frame.url))
           return callback({});
@@ -343,6 +343,7 @@ export function installScreenShare(
           wanted && process.platform === "win32" ? "loopback" : undefined;
 
         if (isWayland) {
+          rememberCaptured(sources[0]);
           return callback({
             video: sources[0],
             audio: audioFor(request.audioRequested),

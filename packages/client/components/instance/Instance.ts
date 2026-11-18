@@ -7,6 +7,7 @@ import { setServiceUrls } from "@revolt/traffic";
 import { Client, UserLimits } from "stoat.js";
 
 import { DefaultHost } from ".";
+import { deriveGifboxUrl, resolveGifboxUrl, trimSlashes } from "./gifboxUrl";
 
 const R_RelPath = /^\/i\/[^/]+/;
 
@@ -20,7 +21,8 @@ export default class Instance {
   readonly apiUrl: string;
   readonly mediaUrl: string;
   readonly proxyUrl: string;
-  readonly gifboxUrl: string;
+  /** Gifbox URL configured for this instance, undefined if none (picker off) */
+  readonly gifboxUrl: string | undefined;
 
   #cli;
   #setCli;
@@ -44,8 +46,18 @@ export default class Instance {
     this.apiUrl = appCfg.api;
     this.mediaUrl = apiCfg.features.autumn.url;
     this.proxyUrl = apiCfg.features.january.url;
-    //TODO Gifbox URL from backend
-    this.gifboxUrl = CONFIGURATION.DEV_GIFBOX_URL || "https://api.gifbox.me";
+    // never use a public Gifbox: the session token is sent there
+    this.gifboxUrl = resolveGifboxUrl(
+      (apiCfg.features as { gifbox?: { url?: string } }).gifbox?.url,
+      trimSlashes(appCfg.api) === trimSlashes(CONFIGURATION.DEFAULT_API_URL)
+        ? CONFIGURATION.DEV_GIFBOX_URL
+        : undefined,
+      deriveGifboxUrl(
+        [apiCfg.features.january.url, apiCfg.features.autumn.url],
+        appCfg.api,
+      ),
+      appCfg.api,
+    );
 
     // let the network inspector label traffic per service
     setServiceUrls({
@@ -53,7 +65,7 @@ export default class Instance {
       events: apiCfg.ws,
       uploads: this.mediaUrl,
       embeds: this.proxyUrl,
-      gif: this.gifboxUrl,
+      ...(this.gifboxUrl ? { gif: this.gifboxUrl } : {}),
     });
 
     //Features

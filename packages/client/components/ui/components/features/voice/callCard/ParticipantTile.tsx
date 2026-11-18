@@ -47,7 +47,11 @@ import { ConnectionQualityIcon } from "./ConnectionQualityIcon";
 import { StreamViewerBadge } from "./StreamViewerBadge";
 import { StreamVolumeButton } from "./StreamVolumeButton";
 import { TrackStats } from "./TrackStats";
-import { theaterControlsHidden, touchOnly } from "./volumePanelState";
+import {
+  leavesIntoFloating,
+  theaterControlsHidden,
+  touchOnly,
+} from "./volumePanelState";
 
 /**
  * Whether this window is focused and visible
@@ -161,6 +165,33 @@ export function ParticipantTile(props: TileProps) {
     (!!props.focus || !!props.fill);
   const zoom = createStreamZoom(() => voice.trackId(track), zoomable);
 
+  // One shared visibility state for the tile's hover layer: the name overlay,
+  // the viewer badge, the zoom pill and the close button all key off the
+  // tile's data-active attribute, so they show and hide together. A pointer
+  // move shows them, they hide after an idle time or shortly after the pointer
+  // leaves (the next move cancels that). Window blur (a game taking focus)
+  // doesn't hide them. In the full screen stream they follow the call
+  // controls, which have the same timing.
+  const [pointerActive, setPointerActive] = createSignal(false);
+  /** Whether keyboard focus is on the tile or inside it */
+  const [keyboardFocus, setKeyboardFocus] = createSignal(false);
+  let activeTimer: ReturnType<typeof setTimeout> | undefined;
+  let tileLeaveTimer: ReturnType<typeof setTimeout> | undefined;
+  /** Show the hover layer and restart its idle timer */
+  const wakeTile = () => {
+    clearTimeout(tileLeaveTimer);
+    setPointerActive(true);
+    clearTimeout(activeTimer);
+    activeTimer = setTimeout(() => setPointerActive(false), TILE_IDLE_MS);
+  };
+  onCleanup(() => {
+    clearTimeout(activeTimer);
+    clearTimeout(tileLeaveTimer);
+  });
+  /** Whether the tile's hover layer shows */
+  const tileActive = () =>
+    theater() ? !theaterControlsHidden() : pointerActive() || keyboardFocus();
+
   // A zoomable tile (focused or multi-stream) opts out of LiveKit's visibility
   // managed subscription (see manageSubscription below), so nothing else would
   // subscribe its video: it only worked once the grid tile had done it.
@@ -210,6 +241,26 @@ export function ParticipantTile(props: TileProps) {
           }) + " vc_tile group"
         }
         data-stream-tile={props.fill ? "" : undefined}
+        data-active={tileActive() ? "" : undefined}
+        onPointerMove={(e) => e.pointerType !== "touch" && wakeTile()}
+        // keyboard focus (not a click) shows the hover layer, too
+        onFocusIn={(e) =>
+          setKeyboardFocus((e.target as Element).matches(":focus-visible"))
+        }
+        onFocusOut={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget as Node | null))
+            setKeyboardFocus(false);
+        }}
+        onPointerLeave={(e) => {
+          if (e.pointerType === "touch") return;
+          // into a portal of the tile (e.g. a volume panel): stay
+          if (leavesIntoFloating(e.relatedTarget)) return;
+          clearTimeout(tileLeaveTimer);
+          tileLeaveTimer = setTimeout(
+            () => setPointerActive(false),
+            TILE_LEAVE_MS,
+          );
+        }}
         aria-pressed={props.fill ? enlarged() : undefined}
         // out of reach while covered, so keyboard and screen readers skip it
         inert={covered()}
@@ -406,6 +457,7 @@ export function ParticipantTile(props: TileProps) {
             onClick={(e) => e.stopPropagation()}
             onKeyDown={(e) => e.stopPropagation()}
             clearOverlay={!theater()}
+            clearControls={theater()}
             compact={compact()}
           >
             <PopOutButton
@@ -568,6 +620,9 @@ export function ParticipantInfo(props: {
 export const tile = cva({
   base: {
     display: "grid",
+    // keeps the z-indexes of the tile's controls inside the tile: otherwise
+    // the badges and close buttons of covered tiles paint over an enlarged one
+    isolation: "isolate",
     aspectRatio: "16/9",
     transition: "all .3s ease, width 0s, height 0s",
     borderRadius: "var(--borderRadius-lg)",
@@ -695,6 +750,13 @@ const Overlay = styled("div", {
   base: {
     minWidth: 0,
     gridArea: "1/1",
+    // The zoomable stream underneath is positioned, which paints it above
+    // any non-positioned sibling: without this the name row is drawn under
+    // the video. It covers the whole tile, so it lets the pointer through to
+    // the stream (zoom and pan) and only its controls take clicks.
+    position: "relative",
+    pointerEvents: "none",
+    "& button, & a, & [role=button], & [tabindex]": { pointerEvents: "auto" },
 
     padding: "var(--gap-md) var(--gap-lg)",
 
@@ -711,9 +773,8 @@ const Overlay = styled("div", {
       true: {
         opacity: 0,
 
-        _groupHover: {
-          opacity: 1,
-        },
+        ".group[data-active] &": { opacity: 1 },
+        ".group:has(:focus-visible) &": { opacity: 1 },
       },
       false: {
         opacity: 1,
@@ -804,7 +865,7 @@ const VolumeSlot = styled("div", {
         "@media (hover: hover)": {
           opacity: 0,
           transition: "var(--transitions-fast) opacity",
-          _groupHover: { opacity: 1 },
+          ".group[data-active] &": { opacity: 1 },
           _groupFocusWithin: { opacity: 1 },
           "&:has([data-open])": { opacity: 1 },
         },
@@ -823,8 +884,9 @@ const OwnStreamHidden = styled("div", {
     textAlign: "center",
     background: "#000",
     color: "#fff",
-    // sits above the hidden video that keeps the tile's size
-    zIndex: 1,
+    // sits above the hidden video that keeps the tile's size (positioned and
+    // later in the DOM), but below the later name row, which it must not cover
+    position: "relative",
   },
 });
 
@@ -901,6 +963,10 @@ const PopOutSlot = styled("div", {
   },
   variants: {
     clearOverlay: { true: { marginBlockEnd: "40px" } },
+    // full screen: the call's control bar covers the bottom of the stream
+    clearControls: {
+      true: { marginBlockEnd: "calc(72px + var(--safe-area-bottom))" },
+    },
     compact: { true: {} },
   },
   compoundVariants: [
@@ -965,9 +1031,18 @@ const CloseStream = styled("div", {
     alignSelf: "start",
     zIndex: 1,
     padding: "var(--gap-sm)",
-    opacity: 0,
-    transition: "var(--transitions-fast) opacity",
-    _groupHover: { opacity: 1 },
-    _focusWithin: { opacity: 1 },
+    // touch has no hover: there the close button always shows
+    "@media (hover: hover)": {
+      opacity: 0,
+      transition: "var(--transitions-fast) opacity",
+      ".group[data-active] &": { opacity: 1 },
+      _focusWithin: { opacity: 1 },
+    },
   },
 });
+
+/** Idle time before a tile's hover layer (name, viewers, zoom) hides */
+const TILE_IDLE_MS = 4000;
+
+/** Delay before the hover layer hides after the pointer leaves the tile */
+const TILE_LEAVE_MS = 300;

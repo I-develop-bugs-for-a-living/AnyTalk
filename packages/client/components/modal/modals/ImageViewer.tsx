@@ -17,7 +17,7 @@ import { styled } from "styled-system/jsx";
 import { Column, Dialog, DialogProps, IconButton, Text } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
-import { isGifBox } from "@revolt/common/lib/gifs";
+import { isGifBoxUrl, isGifProviderUrl } from "@revolt/common/lib/gifs";
 import { Modals } from "../types";
 
 export function ImageViewerModal(
@@ -175,7 +175,8 @@ export function ImageViewerModal(
                       "aspect-ratio": `${props.gif!.width}/${props.gif!.height}`,
                     }}
                     src={
-                      isGifBox(props.gif!)
+                      isGifBoxUrl(props.gif!.url) ||
+                      !isGifProviderUrl(props.gif!.url)
                         ? props.gif!.proxiedURL
                         : props.gif!.url
                     }
