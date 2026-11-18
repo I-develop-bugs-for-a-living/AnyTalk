@@ -53,6 +53,7 @@ import { APP_ID, desktopEnvironment, isWayland } from "./platform";
 import { setRequestWatch } from "./requestWatch";
 import {
   armForegroundWindow,
+  getCapturedLabel,
   installScreenShare,
   requestPreselect,
   takeForegroundWindow,
@@ -608,6 +609,9 @@ function registerIpc() {
   handleApp(IPC.gamesGet, () => getRunningGames());
   handleApp(IPC.gamesFocused, () => getFocusedGame());
   handleApp(IPC.screenForeground, () => takeForegroundWindow());
+  handleApp(IPC.screenSourceInfo, async () => ({
+    label: await getCapturedLabel(),
+  }));
   // Not through handleApp: it needs the sender to grant user activation
   ipcMain.handle(IPC.screenSourceSet, async (event, sourceId: unknown) => {
     if (!fromApp(event)) throw new Error("Untrusted sender");

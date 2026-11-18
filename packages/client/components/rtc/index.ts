@@ -36,6 +36,8 @@ export {
   setGameDetection,
 } from "./runningGames";
 export { useFastIsSpeaking } from "./speaking";
+export { streamAppOf } from "./streamApp";
+export { useParticipantAttributes } from "./useParticipantAttributes";
 export { stoatSinkName } from "./virtualMic";
 
 // missing outside secure contexts (e.g. a dev server opened over http)

@@ -110,6 +110,7 @@ import {
   setScreenCaptureKeepFocus,
   setScreenCaptureLimit,
 } from "./screenCapture";
+import { sanitizeStreamApp, STREAM_APP_ATTRIBUTE } from "./streamApp";
 import {
   FOLLOW_ATTRIBUTE,
   followCleared,
@@ -463,6 +464,16 @@ class Voice {
    * for the rest of the call on purpose, so a stop is never delayed again.
    */
   #followUnsupported = false;
+
+  /** Like #followUnsupported, for the streamed program's name */
+  #streamAppUnsupported = false;
+  /**
+   * The streamed program's name that is set or on its way to the server
+   * (a send that timed out may still arrive), so a stop knows to clear it
+   */
+  #streamAppShared: string | undefined;
+  /** Bumped by every new capture, stop and leave, to drop stale label shares */
+  #streamAppGen = 0;
 
   /**
    * Streams shown in a window of their own, by track id (see trackId). Each
@@ -1832,6 +1843,9 @@ class Voice {
     this.#endedWatches.clear();
     this.zooms.clear();
     this.#followUnsupported = false;
+    this.#streamAppUnsupported = false;
+    this.#streamAppShared = undefined;
+    this.#streamAppGen++;
     this.#cancelCapture();
     this.#cancelMicRecovery();
     this.#stopWatchingMic();
@@ -2197,9 +2211,14 @@ class Voice {
   async #stopScreenshare(room: Room) {
     const audio = this.#streamAudio;
     // viewers must know it is over before the track goes away
+    // invalidates label shares under way, before anything is awaited
+    this.#streamAppGen++;
     await this.#endFollow();
-    this.#windowSourceId = undefined;
     this.#shareToken = undefined;
+    // Not awaited, stopping must not wait for the label. It is sent when a
+    // name was set or is still on its way (a timed out send may arrive late).
+    if (this.#streamAppShared !== undefined) void this.#shareStreamApp("");
+    this.#windowSourceId = undefined;
     this.#currentVideo = undefined;
 
     await room.localParticipant.setScreenShareEnabled(false);
@@ -2437,6 +2456,8 @@ class Voice {
     if (!swap) this.#shareToken = {};
     this.#currentVideo = video;
     const gen = ++this.#trackGen;
+    // a new capture: label reads of the previous one are out of date
+    this.#streamAppGen++;
 
     // This event is only fired if the screen share is ended by closing the window being streamed.
     // This catches the ending and disables screen sharing on our side. If this weren't here,
@@ -2479,6 +2500,85 @@ class Voice {
     // also shares the audio when chosen
     await this.#applyStreamOptions(room, options);
     if (!swap) this.sound.playSound("streamStart");
+    // not awaited: the name is a nicety, the stream must not wait for it
+    void this.#shareCapturedApp(room);
+  }
+
+  /**
+   * Tell the viewers which game or program the desktop app is capturing.
+   * Browsers can't know and send nothing. Never rejects.
+   */
+  async #shareCapturedApp(room: Room) {
+    const read = window.native?.getCapturedSourceInfo;
+    if (!read || this.#streamAppUnsupported) return;
+    const gen = ++this.#streamAppGen;
+    const current = () =>
+      this.#streamAppGen === gen && this.room() === room && !!this.#shareToken;
+    let label: string | undefined;
+    try {
+      label = sanitizeStreamApp(
+        (await window.native.getCapturedSourceInfo?.())?.label,
+      );
+    } catch (e) {
+      console.debug("[rtc] could not read the captured program:", e);
+      return;
+    }
+    // stopped, left or captured again meanwhile: the newer owner decides
+    if (!current()) return;
+    // a screen (no label) after a window clears the old name
+    if (label === undefined && this.#streamAppShared === undefined) return;
+    await this.#shareStreamApp(label ?? "");
+    // The stream stopped while sending: that stop may have run before the
+    // name was marked, so clear it here. A newer capture sets its own.
+    if (
+      !current() &&
+      !this.#shareToken &&
+      label !== undefined &&
+      this.#streamAppShared !== undefined
+    ) {
+      void this.#shareStreamApp("");
+    }
+  }
+
+  /**
+   * Set the participant attribute with the streamed game or program name,
+   * "" removes it. Modelled on #shareFollow: never rejects, gives up after a
+   * moment, and stops trying for the call once the server refuses.
+   * @param label The name, "" to clear
+   */
+  async #shareStreamApp(label: string) {
+    const room = this.room();
+    if (!room || this.#streamAppUnsupported) return;
+    // plain Stoat gives no right to set attributes: don't even try
+    if (room.localParticipant.permissions?.canUpdateMetadata === false) {
+      this.#streamAppUnsupported = true;
+      console.debug("[rtc] not allowed to set attributes, program not shared");
+      return;
+    }
+    // a name counts as set as soon as it is sent, it may arrive after the
+    // timeout. A clear only counts once the server confirmed it.
+    if (label) this.#streamAppShared = label;
+    let confirmed = false;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    try {
+      await Promise.race([
+        room.localParticipant
+          .setAttributes({ [STREAM_APP_ATTRIBUTE]: label })
+          .then(() => {
+            confirmed = true;
+          }),
+        new Promise<void>((resolve) => {
+          timer = setTimeout(resolve, FOLLOW_ATTRIBUTE_TIMEOUT_MS);
+        }),
+      ]);
+      if (!label && confirmed) this.#streamAppShared = undefined;
+    } catch (err) {
+      this.#streamAppShared = undefined;
+      this.#streamAppUnsupported = true;
+      console.debug("[rtc] could not share the program, not trying again", err);
+    } finally {
+      clearTimeout(timer);
+    }
   }
 
   /** Log what the published capture delivers, to find out why one is black */

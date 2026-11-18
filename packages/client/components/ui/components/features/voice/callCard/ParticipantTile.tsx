@@ -16,12 +16,14 @@ import { UserContextMenu } from "@revolt/app";
 import { useUser } from "@revolt/markdown/users";
 import {
   createStreamZoom,
+  streamAppOf,
   useFastIsSpeaking,
+  useParticipantAttributes,
   useVoice,
   ZoomableStream,
+  ZoomPill,
 } from "@revolt/rtc";
 import { useState } from "@revolt/state";
-  ZoomPill,
 import {
   Avatar,
   Button,
@@ -457,6 +459,11 @@ export function ParticipantInfo(props: {
   const showInfo = () => props.part !== "volume";
   const showVolume = () => props.part !== "info";
 
+  // game or program the desktop app says is streamed, only on stream tiles
+  const attributes = useParticipantAttributes(participant);
+  const streamApp = () =>
+    isScreenShare() && !unwatched() ? streamAppOf(attributes()) : undefined;
+
   const isScreenShareAudioUserMuted = () =>
     !user().user!.self && state.voice.getScreenShareMuted(user().user!.id)
       ? "by-user"
@@ -466,7 +473,21 @@ export function ParticipantInfo(props: {
     <OverlayInner>
       <Show when={showInfo()}>
         <InfoGroup compact={props.compact}>
-          <OverflowingText>{user().username}</OverflowingText>
+          {/* one line, so a long label is cut before the name is */}
+          <OverflowingText
+            title={
+              streamApp() ? `${user().username} · ${streamApp()}` : undefined
+            }
+          >
+            {user().username}
+            <Show when={streamApp()}>
+              {/* the dot is decoration, screen readers get name and label */}
+              <StreamAppSeparator aria-hidden="true">
+                {" · "}
+              </StreamAppSeparator>
+              <StreamAppLabel>{streamApp()}</StreamAppLabel>
+            </Show>
+          </OverflowingText>
           <States compact={props.compact}>
             <ConnectionQualityIcon />
             {/* the stream replaces the streamer's own tile, so keep their mic state */}
@@ -702,6 +723,16 @@ const OverlayInner = styled("div", {
 });
 
 /** Name and states on the start side, the name shrinks first */
+/** Muted dot between the streamer's name and the streamed program */
+const StreamAppSeparator = styled("span", {
+  base: { opacity: 0.7 },
+});
+
+/** The streamed game or program next to the streamer's name */
+const StreamAppLabel = styled("span", {
+  base: { opacity: 0.7 },
+});
+
 const InfoGroup = styled("div", {
   base: {
     flex: "1 1 0",
@@ -876,22 +907,6 @@ const PopOutButton = styled("button", {
   },
 });
 
-/** Buttons in the top corner of a tile, shown on hover */
-const CloseStream = styled("div", {
-  base: {
-    display: "flex",
-    gap: "var(--gap-xs)",
-    gridArea: "1/1",
-    justifySelf: "end",
-    alignSelf: "start",
-    zIndex: 1,
-    padding: "var(--gap-sm)",
-    opacity: 0,
-    transition: "var(--transitions-fast) opacity",
-    _groupHover: { opacity: 1 },
-    _focusWithin: { opacity: 1 },
-  },
-});
 /**
  * Overlay row in the top start corner of a tile: viewer badge, then the zoom
  * pill. It spans the tile's height so the viewer list can be as tall as the
@@ -916,3 +931,19 @@ const TopCorner = styled("div", {
   },
 });
 
+/** Buttons in the top corner of a tile, shown on hover */
+const CloseStream = styled("div", {
+  base: {
+    display: "flex",
+    gap: "var(--gap-xs)",
+    gridArea: "1/1",
+    justifySelf: "end",
+    alignSelf: "start",
+    zIndex: 1,
+    padding: "var(--gap-sm)",
+    opacity: 0,
+    transition: "var(--transitions-fast) opacity",
+    _groupHover: { opacity: 1 },
+    _focusWithin: { opacity: 1 },
+  },
+});

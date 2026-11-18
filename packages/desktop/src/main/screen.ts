@@ -17,9 +17,41 @@ import {
   takeAllowance,
 } from "./sourceAllowance";
 import { isServerUrl } from "./url";
+import { resolveSourceLabel } from "./windowProgram";
 
 /** How long to wait for the user to choose before giving up. */
 const PICKER_TIMEOUT_MS = 120_000;
+
+/**
+ * The label of the source captured last, resolved in the background so the
+ * capture itself never waits for it. Cleared by every new capture request.
+ */
+let capturedLabel: Promise<string | undefined> | undefined;
+/** Number of the newest capture request, ties a label to its capture. */
+let captureId = 0;
+
+/**
+ * Start working out the label of a source that is being captured.
+ *
+ * @param source The source handed to the page
+ */
+function rememberCaptured(source: Electron.DesktopCapturerSource) {
+  captureId++;
+  capturedLabel = resolveSourceLabel(source).catch(() => undefined);
+}
+
+/**
+ * The label of the source captured last (game name or program name), for the
+ * page to share with the viewers.
+ *
+ * @returns The label, or undefined for screens and when none is known
+ */
+export async function getCapturedLabel(): Promise<string | undefined> {
+  const id = captureId;
+  const label = await capturedLabel;
+  // a newer capture started meanwhile: its label is not ours to hand out
+  return id === captureId ? label : undefined;
+}
 
 /** The one picker request waiting for the user's choice. */
 type PendingPicker = {
@@ -294,6 +326,8 @@ export function installScreenShare(
 
   session.defaultSession.setDisplayMediaRequestHandler(
     async (request, callback) => {
+      captureId++;
+      capturedLabel = undefined;
       try {
         if (!request.frame || !isServerUrl(request.frame.url))
           return callback({});
@@ -331,6 +365,7 @@ export function installScreenShare(
               (preset ? "captured" : "cancelled"),
           );
           if (!preset) return callback({});
+          rememberCaptured(preset);
           return callback({
             video: preset,
             audio: audioFor(request.audioRequested),
@@ -342,6 +377,7 @@ export function installScreenShare(
 
         const choice = await askRenderer(sender, sources);
         if (!choice) return callback({});
+        rememberCaptured(choice.source);
         callback({
           video: choice.source,
           audio: audioFor(choice.audio && request.audioRequested),

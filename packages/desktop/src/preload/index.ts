@@ -157,6 +157,8 @@ function exposeNative() {
       invoke<{ id: string; sourceId: string } | null>(IPC.gamesFocused),
     getForegroundWindow: () =>
       invoke<{ sourceId: string } | null>(IPC.screenForeground),
+    getCapturedSourceInfo: () =>
+      invoke<{ label?: string }>(IPC.screenSourceInfo),
     onRunningGamesChanged: (callback: (games: RunningGame[]) => void) => {
       gamesListeners.add(callback);
       return () => {

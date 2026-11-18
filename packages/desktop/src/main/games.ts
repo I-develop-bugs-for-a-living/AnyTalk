@@ -142,7 +142,7 @@ function loadEntries(): GameEntry[] {
  * @param timeout Milliseconds before the program is killed
  * @returns stdout, or undefined if it failed
  */
-function run(
+export function run(
   file: string,
   args: string[],
   timeout = 10_000,
@@ -703,6 +703,19 @@ export function isGameWindow(sourceId: string): boolean {
       game.windows.some((window) => window.sourceId === sourceId),
     )
   );
+}
+
+/**
+ * The name of the detected game that owns a window.
+ *
+ * @param sourceId A `desktopCapturer` source id
+ * @returns The game's name, or undefined for any other window
+ */
+export function gameNameOfWindow(sourceId: string): string | undefined {
+  if (!enabled) return undefined;
+  return latest.find((game) =>
+    game.windows.some((window) => window.sourceId === sourceId),
+  )?.name;
 }
 
 /**

@@ -26,6 +26,7 @@ export const IPC = {
   gamesFocused: "games:focused",
   screenSourceSet: "screen:source-set",
   screenForeground: "screen:foreground",
+  screenSourceInfo: "screen:source-info",
   errorInfo: "error:info",
   errorRetry: "error:retry",
   errorSetUrl: "error:set-url",

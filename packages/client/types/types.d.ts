@@ -154,6 +154,12 @@ declare global {
        * that one id, once. Missing in older desktop versions.
        */
       getForegroundWindow?(): Promise<{ sourceId: string } | null>;
+      /**
+       * What the last screen capture shows: the detected game's name or the
+       * program's name (e.g. "Firefox"), no label for whole screens. May take
+       * a moment to resolve. Missing in older desktop versions.
+       */
+      getCapturedSourceInfo?(): Promise<{ label?: string }>;
       /** Listen for changes of the running games, returns a function to stop listening */
       onRunningGamesChanged?(cb: (games: RunningGame[]) => void): () => void;
       /**
