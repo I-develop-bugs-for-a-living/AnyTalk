@@ -722,7 +722,6 @@ const OverlayInner = styled("div", {
   },
 });
 
-/** Name and states on the start side, the name shrinks first */
 /** Muted dot between the streamer's name and the streamed program */
 const StreamAppSeparator = styled("span", {
   base: { opacity: 0.7 },
@@ -733,6 +732,7 @@ const StreamAppLabel = styled("span", {
   base: { opacity: 0.7 },
 });
 
+/** Name and states on the start side, the name shrinks first */
 const InfoGroup = styled("div", {
   base: {
     flex: "1 1 0",
