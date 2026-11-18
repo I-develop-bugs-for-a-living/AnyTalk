@@ -545,6 +545,10 @@ msgstr "AnyTalk の新しいバージョンが利用できます"
 msgid "A packet capture (for example Wireshark) therefore shows only DTLS/SRTP ciphertext, and the media server only sees end-to-end ciphertext."
 msgstr "そのため、パケットキャプチャ(Wireshark など)ではDTLS/SRTPの暗号文しか見えず、メディアサーバーにはエンドツーエンドの暗号文しか見えません。"
 
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+msgid "A small picture of your stream, updated every few minutes, shows when someone points at you in the channel list."
+msgstr "数分ごとに更新される配信の小さな画像が、チャンネル一覧で誰かがあなたにカーソルを合わせたときに表示されます。"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream in your call ends"
 msgstr "通話中の配信が終了したとき"
@@ -3617,6 +3621,10 @@ msgstr "読み込む ({0})"
 msgid "Loading message"
 msgstr "メッセージを読み込み中"
 
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+msgid "Loading preview…"
+msgstr "プレビューを読み込み中…"
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Local candidate"
 msgstr "ローカル候補"
@@ -4232,6 +4240,10 @@ msgstr "このバージョンのパッチノートはありません。"
 msgid "No permissions set yet"
 msgstr "権限の設定はまだありません"
 
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+msgid "No preview yet"
+msgstr "プレビューはまだありません"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "No recaps yet. Turn on \"Record call recaps\", then join a call."
 msgstr "リキャップはまだありません。「通話リキャップを記録」をオンにして、通話に参加してください。"
@@ -4798,6 +4810,11 @@ msgstr "選択中の項目を押す、またはメッセージ欄で送信"
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Preview"
 msgstr "プレビュー"
+
+#. placeholder {0}: props.name
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+#~ msgid "Preview of {0}'s stream"
+#~ msgstr "{0}の配信のプレビュー"
 
 #: components/app/interface/settings/user/Controller.tsx
 #~ msgid "Previous and next channel"
@@ -5874,6 +5891,10 @@ msgstr "新しいコードを表示"
 msgid "Show a notice when a new version is available"
 msgstr "新しいバージョンが利用可能になったら通知を表示する"
 
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+msgid "Show a preview of my stream to people outside the call"
+msgstr "通話に参加していない人に配信のプレビューを表示する"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show admin panel shortcuts in context menus"
 msgstr "コンテキストメニューに管理パネルのショートカットを表示"
@@ -6192,6 +6213,10 @@ msgstr "配信はまだ実行中です。"
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 msgid "Stream options"
 msgstr "配信オプション"
+
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+msgid "Stream preview: {name}"
+msgstr "配信のプレビュー: {name}"
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Stream Settings"

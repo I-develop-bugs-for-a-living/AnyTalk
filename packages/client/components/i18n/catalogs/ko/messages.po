@@ -617,6 +617,10 @@ msgstr "AnyTalk 새 버전을 사용할 수 있어요"
 msgid "A packet capture (for example Wireshark) therefore shows only DTLS/SRTP ciphertext, and the media server only sees end-to-end ciphertext."
 msgstr "따라서 패킷 캡처(예: Wireshark)에는 DTLS/SRTP 암호문만 보이고, 미디어 서버에는 종단 간 암호문만 보여요."
 
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+msgid "A small picture of your stream, updated every few minutes, shows when someone points at you in the channel list."
+msgstr "몇 분마다 업데이트되는 내 스트림의 작은 이미지가 채널 목록에서 누군가 나를 가리킬 때 표시돼요."
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream in your call ends"
 msgstr "통화 중인 스트림이 끝날 때"
@@ -3721,6 +3725,10 @@ msgstr "파일 불러오기 ({0})"
 msgid "Loading message"
 msgstr "메시지 불러오는 중"
 
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+msgid "Loading preview…"
+msgstr "미리보기 불러오는 중…"
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Local candidate"
 msgstr "로컬 후보"
@@ -4336,6 +4344,10 @@ msgstr "이 버전의 패치 노트가 없어요."
 msgid "No permissions set yet"
 msgstr "아직 설정된 권한이 없어요"
 
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+msgid "No preview yet"
+msgstr "아직 미리보기 없음"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "No recaps yet. Turn on \"Record call recaps\", then join a call."
 msgstr "아직 요약이 없어요. \"통화 요약 기록\"을 켠 다음 통화에 참여하세요."
@@ -4902,6 +4914,11 @@ msgstr "선택한 항목 누르기 또는 메시지 입력창에서 보내기"
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Preview"
 msgstr "미리 보기"
+
+#. placeholder {0}: props.name
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+#~ msgid "Preview of {0}'s stream"
+#~ msgstr "{0}님의 스트림 미리보기"
 
 #: components/app/interface/settings/user/Controller.tsx
 #~ msgid "Previous and next channel"
@@ -5988,6 +6005,10 @@ msgstr "새 코드 표시"
 msgid "Show a notice when a new version is available"
 msgstr "새 버전이 있으면 알림 표시"
 
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+msgid "Show a preview of my stream to people outside the call"
+msgstr "통화 밖의 사람에게 내 스트림 미리보기 표시"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show admin panel shortcuts in context menus"
 msgstr "컨텍스트 메뉴에 관리자 패널 바로가기 표시"
@@ -6312,6 +6333,10 @@ msgstr "스트림이 아직 실행 중이에요."
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 msgid "Stream options"
 msgstr "스트림 옵션"
+
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+msgid "Stream preview: {name}"
+msgstr "스트림 미리보기: {name}"
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Stream Settings"

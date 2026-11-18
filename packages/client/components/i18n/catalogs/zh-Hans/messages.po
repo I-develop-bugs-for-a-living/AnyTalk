@@ -617,6 +617,10 @@ msgstr "AnyTalk 有新版本可用"
 msgid "A packet capture (for example Wireshark) therefore shows only DTLS/SRTP ciphertext, and the media server only sees end-to-end ciphertext."
 msgstr "因此，抓包（例如使用 Wireshark）只能看到 DTLS/SRTP 密文，而媒体服务器只能看到端到端密文。"
 
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+msgid "A small picture of your stream, updated every few minutes, shows when someone points at you in the channel list."
+msgstr "当有人在频道列表中指向你时，会显示你直播画面的小图，每隔几分钟更新一次。"
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream in your call ends"
 msgstr "通话中的直播结束时"
@@ -3717,6 +3721,10 @@ msgstr "加载文件（{0}）"
 msgid "Loading message"
 msgstr "正在加载消息"
 
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+msgid "Loading preview…"
+msgstr "正在加载预览…"
+
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Local candidate"
 msgstr "本地候选"
@@ -4332,6 +4340,10 @@ msgstr "此版本没有更新日志。"
 msgid "No permissions set yet"
 msgstr "尚未设置权限"
 
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+msgid "No preview yet"
+msgstr "暂无预览"
+
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "No recaps yet. Turn on \"Record call recaps\", then join a call."
 msgstr "还没有回顾。请开启“录制通话回顾”，然后加入通话。"
@@ -4898,6 +4910,11 @@ msgstr "按下所选项目,或在消息输入框中发送"
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Preview"
 msgstr "预览"
+
+#. placeholder {0}: props.name
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+#~ msgid "Preview of {0}'s stream"
+#~ msgstr "{0}的直播预览"
 
 #: components/app/interface/settings/user/Controller.tsx
 #~ msgid "Previous and next channel"
@@ -5984,6 +6001,10 @@ msgstr "显示新二维码"
 msgid "Show a notice when a new version is available"
 msgstr "有新版本时显示通知"
 
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+msgid "Show a preview of my stream to people outside the call"
+msgstr "向通话之外的人显示我的直播预览"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show admin panel shortcuts in context menus"
 msgstr "在右键菜单中显示管理面板快捷方式"
@@ -6308,6 +6329,10 @@ msgstr "直播仍在进行。"
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 msgid "Stream options"
 msgstr "直播选项"
+
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+msgid "Stream preview: {name}"
+msgstr "直播预览：{name}"
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Stream Settings"
