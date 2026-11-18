@@ -36,7 +36,7 @@ Read-only git commands (`git log`, `git show`, `git diff`, `git blame`) are fine
 
 ## The local test stack
 
-The only target for live tests. It is a Docker Compose stack in `~/Github/AnyPortal_Apps/self-hosted` (upstream `stoatchat/self-hosted`) that runs the patched api `ghcr.io/neparshath-coder/anytalk-server-api:v0.15.7-anytalk` with all other Stoat services on v0.15.7. Production runs v0.15.5, so mention it when a finding might depend on the version.
+The only target for live tests. It is a Docker Compose stack in `~/Github/AnyPortal_Apps/self-hosted` (upstream `stoatchat/self-hosted`) that runs the patched api `ghcr.io/neparshath-coder/anytalk-server-api:v0.16.2-anytalk` with all other Stoat services on v0.16.2. `compose.local-api.yml` there can swap the api for a locally built image; only the user switches it. Check `../AnyTalk-Server/COOLIFY-SWITCH.md` for the version production runs, and mention it when a finding might depend on the version.
 
 | What | Where |
 |---|---|
@@ -48,7 +48,7 @@ The only target for live tests. It is a Docker Compose stack in `~/Github/AnyPor
 - `test-accounts.json` holds three accounts (`attacker`, `victim`, `bystander`) with email, password, user ID and session token (header `x-session-token`), and a server "Security Test" owned by `victim` with a text channel, a voice channel and an invite. `attacker` and `bystander` are plain members. Read the IDs from the file, don't hardcode them.
 - If a token stops working, log in again with `POST /auth/session/login` and the email and password from the file. Don't write to the file.
 - Caddy uses a self-signed certificate: use `NODE_TLS_REJECT_UNAUTHORIZED=0` for Node, `curl -k`, and `ignoreHTTPSErrors: true` in Playwright.
-- Before live tests, check it's up: `docker compose ps` in the stack folder and `curl -sk https://localhost/api` (returns JSON with `"revolt":"0.15.7"`). If it's stopped, start it with `docker compose up -d` and say so in the report. Don't change its config, images, or `data/` folder, and never wipe it.
+- Before live tests, check it's up: `docker compose ps` in the stack folder and `curl -sk https://localhost/api` (returns JSON with `"revolt":"0.16.2"`). If it's stopped, start it with `docker compose up -d` and say so in the report. Don't change its config, images, or `data/` folder, and never wipe it.
 - Join a call with `POST /channels/<voice_channel>/join_call` and body `{"node":"worldwide"}`. The response holds the LiveKit token.
 - Create extra servers, channels, roles or messages for tests as needed, and remove them afterwards where you can. Don't change or delete the three accounts or the "Security Test" server. If a test breaks one of them anyway, say so in the report.
 - To test the AnyTalk client against the stack, run the separate Vite instance on `127.0.0.1:5180` pointed at `https://localhost/api` (see the rules above).
