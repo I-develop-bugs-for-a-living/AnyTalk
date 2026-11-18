@@ -65,6 +65,7 @@ import { RoomAudioManager } from "./components/RoomAudioManager";
 import { StatsRecorder } from "./components/StatsRecorder";
 import { StreamNotices } from "./components/StreamNotices";
 import { StreamPopouts } from "./components/StreamPopouts";
+import { StreamPreviewUploader } from "./components/StreamPreviewUploader";
 import { StreamViewers } from "./components/StreamViewers";
 import { VoiceKeybinds } from "./components/VoiceKeybinds";
 import { VoiceMoves } from "./components/VoiceMoves";
@@ -4093,6 +4094,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
           <RoomAudioManager />
           <VoiceKeybinds />
           <StreamViewers />
+          <StreamPreviewUploader />
           <StreamPopouts />
         </InRoom>
         <StatsRecorder />

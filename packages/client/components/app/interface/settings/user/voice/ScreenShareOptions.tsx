@@ -75,6 +75,19 @@ export function ScreenShareOptions() {
           <Trans>Always Ask for Screen Share Quality</Trans>
         </CategoryButton>
         <CategoryButton
+          icon={<Symbol>preview</Symbol>}
+          action={<Checkbox checked={voice.streamPreview} />}
+          onClick={() => (voice.streamPreview = !voice.streamPreview)}
+          description={
+            <Trans>
+              A small picture of your stream, updated every few minutes, shows
+              when someone points at you in the channel list.
+            </Trans>
+          }
+        >
+          <Trans>Show a preview of my stream to people outside the call</Trans>
+        </CategoryButton>
+        <CategoryButton
           icon={<Symbol>grid_view</Symbol>}
           action={<Checkbox checked={voice.multiStream} />}
           onClick={() => voiceContext.setMultiStream(!voice.multiStream)}

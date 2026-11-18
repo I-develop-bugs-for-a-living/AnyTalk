@@ -314,6 +314,13 @@ declare module "solid-js" {
            * Where the tooltip should be placed
            */
           placement: Placement;
+
+          /**
+           * Also show the tooltip while the element has keyboard focus (Escape closes
+           * it). Screen readers don't get the tooltip content, so it must only
+           * hold visual extras, like a thumbnail.
+           */
+          showOnFocus?: boolean;
         } & (
           | {
               /**

@@ -109,6 +109,8 @@ export interface TypeVoice {
   screenShareFrameRate: ScreenShareFrameRate;
   screenShareQualityAsk: boolean;
   screenShareAudio: boolean;
+  /** Upload a thumbnail of our stream for people outside the call */
+  streamPreview: boolean;
   /** Watching another stream adds it next to the current one(s) */
   multiStream: boolean;
 
@@ -164,6 +166,7 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       screenShareFrameRate: 30,
       screenShareQualityAsk: true,
       screenShareAudio: true,
+      streamPreview: true,
       multiStream: true,
       inputVolume: 1.0,
       outputVolume: 1.0,
@@ -262,6 +265,10 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
 
     if (typeof input.screenShareAudio === "boolean") {
       data.screenShareAudio = input.screenShareAudio;
+    }
+
+    if (typeof input.streamPreview === "boolean") {
+      data.streamPreview = input.streamPreview;
     }
 
     if (typeof input.multiStream === "boolean") {
@@ -501,6 +508,13 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
   }
 
   /**
+   * Set whether a preview of our stream is uploaded
+   */
+  set streamPreview(value: boolean) {
+    this.set("streamPreview", value);
+  }
+
+  /**
    * Set screen share audio
    */
   set screenShareAudio(value: boolean) {
@@ -624,6 +638,13 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
    */
   get screenShareQualityAsk(): boolean {
     return this.get().screenShareQualityAsk;
+  }
+
+  /**
+   * Get whether a preview of our stream is uploaded
+   */
+  get streamPreview(): boolean {
+    return this.get().streamPreview;
   }
 
   /**
