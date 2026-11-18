@@ -21,6 +21,7 @@ import {
   ZoomableStream,
 } from "@revolt/rtc";
 import { useState } from "@revolt/state";
+  ZoomPill,
 import {
   Avatar,
   Button,
@@ -285,7 +286,7 @@ export function ParticipantTile(props: TileProps) {
             {/* The video stays mounted while hidden so the tile keeps its size.
                 A popped out stream is drawn in its own window instead. */}
             <Show when={!poppedOut()}>
-              <ZoomableStream zoom={zoom}>
+              <ZoomableStream zoom={zoom} hidePill>
                 <VideoTrack
                   style={{
                     "grid-area": "1/1",
@@ -340,9 +341,23 @@ export function ParticipantTile(props: TileProps) {
         >
           <AudioStats />
         </Show>
-        {/* who watches this stream, never over the close button side */}
-        <Show when={isScreenShare() && !unwatched()}>
-          <StreamViewerBadge streamer={participant.identity} />
+        {/* who watches this stream (never over the close button side) and the
+            zoom buttons share one row, so they can't overlap: the zoom pill
+            sits right after the viewer badge, or alone when there is none */}
+        <Show
+          when={
+            (isScreenShare() && !unwatched()) ||
+            (zoom.enabled() && !poppedOut())
+          }
+        >
+          <TopCorner>
+            <Show when={isScreenShare() && !unwatched()}>
+              <StreamViewerBadge streamer={participant.identity} />
+            </Show>
+            <Show when={zoom.enabled() && !poppedOut()}>
+              <ZoomPill zoom={zoom} inline />
+            </Show>
+          </TopCorner>
         </Show>
         <Show when={props.fill}>
           <CloseStream onClick={(e) => e.stopPropagation()}>
@@ -877,3 +892,27 @@ const CloseStream = styled("div", {
     _focusWithin: { opacity: 1 },
   },
 });
+/**
+ * Overlay row in the top start corner of a tile: viewer badge, then the zoom
+ * pill. It spans the tile's height so the viewer list can be as tall as the
+ * tile, and lets pointer input through except on its children.
+ */
+const TopCorner = styled("div", {
+  base: {
+    gridArea: "1/1",
+    justifySelf: "start",
+    alignSelf: "stretch",
+    position: "relative",
+    zIndex: 2,
+    minHeight: 0,
+    maxWidth: "100%",
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "flex-start",
+    alignContent: "flex-start",
+    gap: "var(--gap-sm)",
+    padding: "var(--gap-sm)",
+    pointerEvents: "none",
+  },
+});
+

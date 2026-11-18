@@ -8,7 +8,11 @@ export { useVoice, VoiceContext } from "./state";
 
 export { InRoom } from "./components/InRoom";
 export { RoomAudioManager } from "./components/RoomAudioManager";
-export { createStreamZoom, ZoomableStream } from "./components/ZoomableStream";
+export {
+  createStreamZoom,
+  ZoomableStream,
+  ZoomPill,
+} from "./components/ZoomableStream";
 export { findEarpiece, isIOSBusMode } from "./outputBus";
 export {
   type OverlayVisibility,

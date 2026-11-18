@@ -99,9 +99,9 @@ export function ZoomableStream(props: {
   children: JSX.Element;
   /** Push the pill down, clear of a bar along the top edge */
   belowBar?: boolean;
+  /** Don't draw the zoom pill, the caller shows a ZoomPill itself */
+  hidePill?: boolean;
 }) {
-  const { t } = useLingui();
-
   let frame: HTMLDivElement | undefined;
 
   onMount(() => {
@@ -222,17 +222,6 @@ export function ZoomableStream(props: {
     });
   });
 
-  /** Keep a press on a pill button from reaching the tile or the window */
-  const stop = (e: Event) => e.stopPropagation();
-
-  /** Enter and Space on a pill button must not also press the tile */
-  const stopActivation = (e: KeyboardEvent) => {
-    if (e.key === "Enter" || e.key === " ") e.stopPropagation();
-  };
-
-  /** The zoom as a percentage, for the reset button */
-  const percent = () => `${Math.round(props.zoom.zoom().scale * 100)}%`;
-
   return (
     <Frame
       ref={frame}
@@ -250,45 +239,77 @@ export function ZoomableStream(props: {
       >
         {props.children}
       </Picture>
-      <Show when={props.zoom.enabled()}>
+      <Show when={props.zoom.enabled() && !props.hidePill}>
         {/* desktop only: no zoom on phones (user decision) */}
-        <Pill
-          role="group"
-          aria-label={t`Zoom`}
-          data-zoom-pill=""
-          data-visible={isZoomed(props.zoom.zoom()) ? "" : undefined}
-          belowBar={props.belowBar}
-          on:pointerdown={stop}
-          on:click={stop}
-          on:keydown={stopActivation}
-        >
-          <PillButton
-            type="button"
-            aria-label={t`Zoom out`}
-            title={t`Zoom out`}
-            on:click={() => props.zoom.zoomBy(1 / BUTTON_STEP)}
-          >
-            <Symbol size={18}>remove</Symbol>
-          </PillButton>
-          <PillValue
-            type="button"
-            aria-label={t`Reset zoom`}
-            title={t`Reset zoom`}
-            on:click={() => props.zoom.reset()}
-          >
-            {percent()}
-          </PillValue>
-          <PillButton
-            type="button"
-            aria-label={t`Zoom in`}
-            title={t`Zoom in`}
-            on:click={() => props.zoom.zoomBy(BUTTON_STEP)}
-          >
-            <Symbol size={18}>add</Symbol>
-          </PillButton>
-        </Pill>
+        <ZoomPill zoom={props.zoom} belowBar={props.belowBar} />
       </Show>
     </Frame>
+  );
+}
+
+/**
+ * The zoom buttons (out, reset with percentage, in). By default it floats at
+ * the top-start corner of the nearest positioned parent; with `inline` it is a
+ * plain flex item, so a caller can put it in a shared overlay row with other
+ * controls (see ZoomableStream's `hidePill`).
+ */
+export function ZoomPill(props: {
+  zoom: StreamZoomController;
+  /** Push the pill down, clear of a bar along the top edge */
+  belowBar?: boolean;
+  /** Not absolutely positioned: the parent lays it out */
+  inline?: boolean;
+}) {
+  const { t } = useLingui();
+
+  /** Keep a press on a pill button from reaching the tile or the window */
+  const stop = (e: Event) => e.stopPropagation();
+
+  /** Enter and Space on a pill button must not also press the tile */
+  const stopActivation = (e: KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") e.stopPropagation();
+  };
+
+  /** The zoom as a percentage, for the reset button */
+  const percent = () => `${Math.round(props.zoom.zoom().scale * 100)}%`;
+
+  return (
+    <Pill
+      role="group"
+      aria-label={t`Zoom`}
+      data-zoom-pill=""
+      data-visible={isZoomed(props.zoom.zoom()) ? "" : undefined}
+      belowBar={props.belowBar}
+      inline={props.inline}
+      on:pointerdown={stop}
+      on:click={stop}
+      on:keydown={stopActivation}
+    >
+      <PillButton
+        type="button"
+        aria-label={t`Zoom out`}
+        title={t`Zoom out`}
+        on:click={() => props.zoom.zoomBy(1 / BUTTON_STEP)}
+      >
+        <Symbol size={18}>remove</Symbol>
+      </PillButton>
+      <PillValue
+        type="button"
+        aria-label={t`Reset zoom`}
+        title={t`Reset zoom`}
+        on:click={() => props.zoom.reset()}
+      >
+        {percent()}
+      </PillValue>
+      <PillButton
+        type="button"
+        aria-label={t`Zoom in`}
+        title={t`Zoom in`}
+        on:click={() => props.zoom.zoomBy(BUTTON_STEP)}
+      >
+        <Symbol size={18}>add</Symbol>
+      </PillButton>
+    </Pill>
   );
 }
 
@@ -347,6 +368,15 @@ const Pill = styled("div", {
   },
   variants: {
     belowBar: { true: { marginBlockStart: "var(--popout-bar-height, 48px)" } },
+    // laid out by a parent flex row instead of floating in the corner
+    inline: {
+      true: {
+        position: "static",
+        margin: 0,
+        flexShrink: 0,
+        pointerEvents: "auto",
+      },
+    },
   },
 });
 
