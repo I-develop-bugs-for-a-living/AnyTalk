@@ -110,7 +110,11 @@ import {
   setScreenCaptureKeepFocus,
   setScreenCaptureLimit,
 } from "./screenCapture";
-import { sanitizeStreamApp, STREAM_APP_ATTRIBUTE } from "./streamApp";
+import {
+  isPermissionDenied,
+  sanitizeStreamApp,
+  STREAM_APP_ATTRIBUTE,
+} from "./streamApp";
 import {
   FOLLOW_ATTRIBUTE,
   followCleared,
@@ -474,6 +478,8 @@ class Voice {
   #streamAppShared: string | undefined;
   /** Bumped by every new capture, stop and leave, to drop stale label shares */
   #streamAppGen = 0;
+  /** Bumped by every send of the program name, so a retry can tell it is stale */
+  #streamAppSetGen = 0;
 
   /**
    * Streams shown in a window of their own, by track id (see trackId). Each
@@ -2510,7 +2516,15 @@ class Voice {
    */
   async #shareCapturedApp(room: Room) {
     const read = window.native?.getCapturedSourceInfo;
-    if (!read || this.#streamAppUnsupported) return;
+    if (!read) {
+      // the browser build has no native side: nothing to share, not a fault
+      console.debug("[rtc] program not shared: no native source info");
+      return;
+    }
+    if (this.#streamAppUnsupported) {
+      console.warn("[rtc] program not shared: server refused it earlier");
+      return;
+    }
     const gen = ++this.#streamAppGen;
     const current = () =>
       this.#streamAppGen === gen && this.room() === room && !!this.#shareToken;
@@ -2520,11 +2534,15 @@ class Voice {
         (await window.native.getCapturedSourceInfo?.())?.label,
       );
     } catch (e) {
-      console.debug("[rtc] could not read the captured program:", e);
+      console.warn("[rtc] program not shared: could not read it", e);
       return;
     }
     // stopped, left or captured again meanwhile: the newer owner decides
-    if (!current()) return;
+    if (!current()) {
+      console.warn("[rtc] program not shared: capture was replaced or ended");
+      return;
+    }
+    console.debug("[rtc] captured program label:", label ?? "(none)");
     // a screen (no label) after a window clears the old name
     if (label === undefined && this.#streamAppShared === undefined) return;
     await this.#shareStreamApp(label ?? "");
@@ -2548,36 +2566,63 @@ class Voice {
    */
   async #shareStreamApp(label: string) {
     const room = this.room();
-    if (!room || this.#streamAppUnsupported) return;
+    if (!room) {
+      console.warn("[rtc] program not shared: not in a call");
+      return;
+    }
+    if (this.#streamAppUnsupported) {
+      console.warn("[rtc] program not shared: server refused it earlier");
+      return;
+    }
     // plain Stoat gives no right to set attributes: don't even try
     if (room.localParticipant.permissions?.canUpdateMetadata === false) {
       this.#streamAppUnsupported = true;
-      console.debug("[rtc] not allowed to set attributes, program not shared");
+      console.warn(
+        "[rtc] program not shared: canUpdateMetadata is false (server grant missing)",
+      );
       return;
     }
     // a name counts as set as soon as it is sent, it may arrive after the
     // timeout. A clear only counts once the server confirmed it.
+    const my = ++this.#streamAppSetGen;
     if (label) this.#streamAppShared = label;
     let confirmed = false;
-    let timer: ReturnType<typeof setTimeout> | undefined;
-    try {
-      await Promise.race([
-        room.localParticipant
-          .setAttributes({ [STREAM_APP_ATTRIBUTE]: label })
-          .then(() => {
-            confirmed = true;
+    // a timeout is retried once, a refusal is not
+    for (let attempt = 0; attempt < 2 && !confirmed; attempt++) {
+      // a newer send (or another call) took over: leave its state alone
+      if (my !== this.#streamAppSetGen || this.room() !== room) return;
+      let timer: ReturnType<typeof setTimeout> | undefined;
+      try {
+        await Promise.race([
+          room.localParticipant
+            .setAttributes({ [STREAM_APP_ATTRIBUTE]: label })
+            .then(() => {
+              confirmed = true;
+            }),
+          new Promise<void>((resolve) => {
+            timer = setTimeout(resolve, FOLLOW_ATTRIBUTE_TIMEOUT_MS);
           }),
-        new Promise<void>((resolve) => {
-          timer = setTimeout(resolve, FOLLOW_ATTRIBUTE_TIMEOUT_MS);
-        }),
-      ]);
-      if (!label && confirmed) this.#streamAppShared = undefined;
-    } catch (err) {
+        ]);
+        if (!confirmed) {
+          console.warn(
+            `[rtc] program not confirmed in time (attempt ${attempt + 1})`,
+          );
+        }
+      } catch (err) {
+        if (my === this.#streamAppSetGen) this.#streamAppShared = undefined;
+        // only a refusal is permanent, other errors may pass
+        if (isPermissionDenied(err)) this.#streamAppUnsupported = true;
+        console.warn(
+          `[rtc] could not share the program${this.#streamAppUnsupported ? ", not trying again" : ""}`,
+          err,
+        );
+        return;
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+    if (!label && confirmed && my === this.#streamAppSetGen) {
       this.#streamAppShared = undefined;
-      this.#streamAppUnsupported = true;
-      console.debug("[rtc] could not share the program, not trying again", err);
-    } finally {
-      clearTimeout(timer);
     }
   }
 

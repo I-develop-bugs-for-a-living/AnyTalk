@@ -29,3 +29,15 @@ export function streamAppOf(
 ): string | undefined {
   return sanitizeStreamApp(attributes?.[STREAM_APP_ATTRIBUTE]);
 }
+
+/**
+ * Whether an error from setting the attribute is the server refusing the
+ * right to do so (permanent for the call), not a timeout or a hiccup.
+ * @param error What `setAttributes` rejected with
+ */
+export function isPermissionDenied(error: unknown): boolean {
+  const text = error instanceof Error ? error.message : String(error);
+  return /permission|not allowed|forbidden|denied|unauthori[sz]ed|\b40[13]\b/i.test(
+    text,
+  );
+}

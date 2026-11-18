@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  isPermissionDenied,
+  sanitizeStreamApp,
   STREAM_APP_ATTRIBUTE,
   STREAM_APP_MAX_LENGTH,
-  sanitizeStreamApp,
   streamAppOf,
 } from "./streamApp";
 
@@ -34,5 +35,16 @@ describe("streamAppOf", () => {
     expect(streamAppOf({ [STREAM_APP_ATTRIBUTE]: "" })).toBeUndefined();
     expect(streamAppOf({})).toBeUndefined();
     expect(streamAppOf(undefined)).toBeUndefined();
+  });
+});
+
+describe("isPermissionDenied", () => {
+  it("recognises refusals", () => {
+    expect(isPermissionDenied(new Error("permission denied"))).toBe(true);
+    expect(isPermissionDenied("Forbidden")).toBe(true);
+  });
+  it("does not treat other errors as refusals", () => {
+    expect(isPermissionDenied(new Error("request timed out"))).toBe(false);
+    expect(isPermissionDenied(new Error("engine not connected"))).toBe(false);
   });
 });
