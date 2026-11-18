@@ -47,6 +47,7 @@ import { LinkWarningModal } from "./modals/LinkWarning";
 import { MFAEnableTOTPModal } from "./modals/MFAEnableTOTP";
 import { MFAFlowModal } from "./modals/MFAFlow";
 import { MFARecoveryModal } from "./modals/MFARecovery";
+import { MFARemoveAuthenticatorModal } from "./modals/MFARemoveAuthenticator";
 import { OnboardingModal } from "./modals/Onboarding";
 import { PinMessageModal } from "./modals/PinMessage";
 import { PolicyChangeModal } from "./modals/PolicyChange";
@@ -163,6 +164,8 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
       return <MFAEnableTOTPModal {...modalProps} />;
     case "mfa_flow":
       return <MFAFlowModal {...modalProps} />;
+    case "mfa_remove_authenticator":
+      return <MFARemoveAuthenticatorModal {...modalProps} />;
     case "mfa_recovery":
       return <MFARecoveryModal {...modalProps} />;
     case "onboarding":

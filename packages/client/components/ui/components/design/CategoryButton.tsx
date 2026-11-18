@@ -53,6 +53,9 @@ export interface Props {
   readonly variant?: "filled" | "tonal" | "tertiary" | "tertiaryAlt";
 
   readonly ignoreClick?: boolean;
+
+  /** Purely informational row: no ripple, no pointer feedback */
+  readonly static?: boolean;
 }
 
 /**
@@ -74,7 +77,9 @@ export function CategoryButton(props: Props) {
         props.onClick?.();
       }}
     >
-      <Ripple />
+      <Show when={!props.static}>
+        <Ripple />
+      </Show>
 
       <Show when={props.icon !== "blank"}>
         <IconWrapper

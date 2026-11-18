@@ -192,6 +192,10 @@ export type Modals =
       callback: (code?: string) => Promise<void>;
       reject?: (reason?: string) => void;
     }
+  | {
+      type: "mfa_remove_authenticator";
+      callback: (confirmed: boolean) => void;
+    }
   | ({
       type: "mfa_flow";
     } & (

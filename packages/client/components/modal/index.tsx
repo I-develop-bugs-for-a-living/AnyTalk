@@ -143,6 +143,8 @@ export class ModalControllerExtended extends ModalController {
 
     this.mfaFlow = this.mfaFlow.bind(this);
     this.mfaEnableTOTP = this.mfaEnableTOTP.bind(this);
+    this.confirmRemoveAuthenticator =
+      this.confirmRemoveAuthenticator.bind(this);
     this.showError = this.showError.bind(this);
     this.openLink = this.openLink.bind(this);
   }
@@ -159,6 +161,16 @@ export class ModalControllerExtended extends ModalController {
         mfa,
         callback,
       }),
+    );
+  }
+
+  /**
+   * Ask the user to confirm removing the authenticator app
+   * @returns Whether the user confirmed
+   */
+  confirmRemoveAuthenticator() {
+    return new Promise<boolean>((callback) =>
+      this.openModal({ type: "mfa_remove_authenticator", callback }),
     );
   }
 

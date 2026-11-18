@@ -172,9 +172,7 @@ export function MFAFlowModal(
     <Dialog
       show={props.show}
       onClose={() =>
-        props.state === "unknown" || selectedMethod()
-          ? undefined
-          : props.onClose()
+        props.state === "unknown" || selectedMethod() ? undefined : onCancel()
       }
       title={<Trans>Confirm action</Trans>}
       actions={getActions()}
