@@ -3870,7 +3870,7 @@ class Voice {
       this.#registerPopout(id, kind, win, stopFollowing);
       return true;
     } catch (e) {
-      console.debug("[rtc] could not pop out the stream with", kind, e);
+      console.warn("[rtc] could not pop out the stream with", kind, e);
     }
 
     return false;
