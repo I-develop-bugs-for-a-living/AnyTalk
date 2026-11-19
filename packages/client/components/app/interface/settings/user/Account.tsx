@@ -1,4 +1,12 @@
-import { Match, Show, Switch, createMemo, createSignal } from "solid-js";
+import {
+  For,
+  Match,
+  Show,
+  Switch,
+  createMemo,
+  createResource,
+  createSignal,
+} from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { MFATicket } from "stoat.js";
@@ -6,11 +14,33 @@ import { css } from "styled-system/css";
 
 import { useClient, useClientLifecycle } from "@revolt/client";
 import {
+  type Passkey,
+  defaultPasskeyName,
+  deletePasskey,
+  fetchMfaStatus,
+  finishPasskeyRegistration,
+  isUnsupportedByServer,
+  listPasskeys,
+  passkeysSupportedByBrowser,
+  renamePasskey,
+  startPasskeyRegistration,
+} from "@revolt/client/passkeyApi";
+import {
   createMfaResource,
   createOwnProfileResource,
 } from "@revolt/client/resources";
+import { isPromptCancelled } from "@revolt/client/webauthn";
 import { useModals } from "@revolt/modal";
-import { CategoryButton, Column, Row, iconSize, useSnackbar } from "@revolt/ui";
+import {
+  CategoryButton,
+  Column,
+  IconButton,
+  Row,
+  Symbol,
+  Time,
+  iconSize,
+  useSnackbar,
+} from "@revolt/ui";
 
 import MdAlternateEmail from "@material-design-icons/svg/outlined/alternate_email.svg?component-solid";
 import MdBlock from "@material-design-icons/svg/outlined/block.svg?component-solid";
@@ -22,7 +52,6 @@ import MdVerifiedUser from "@material-design-icons/svg/outlined/verified_user.sv
 
 import { useSettingsNavigation } from "../Settings";
 
-import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { UserSummary } from "./account/index";
 
 /**
@@ -175,9 +204,157 @@ function MultiFactorAuth() {
   const mfa = createMfaResource();
   const snackbar = useSnackbar();
   const { t } = useLingui();
-  const { openModal, mfaEnableTOTP, showError, confirmRemoveAuthenticator } =
-    useModals();
+  const {
+    openModal,
+    mfaEnableTOTP,
+    showError,
+    confirmRemoveAuthenticator,
+    askPasskeyName,
+    confirmRemovePasskey,
+    askCreatePasskey,
+  } = useModals();
   const { withTicket, withTicketResult } = createMfaAction(mfa);
+
+  // Passkeys: null when the browser or the server doesn't support them, in
+  // which case the whole passkey row stays hidden
+  const [passkeys, { refetch: refetchPasskeys }] = createResource(
+    async (): Promise<Passkey[] | null> => {
+      if (!passkeysSupportedByBrowser()) return null;
+      try {
+        return await listPasskeys(client().api);
+      } catch (err) {
+        // a 404 means the server runs without passkeys: expected, stay quiet
+        if (!isUnsupportedByServer(err)) {
+          console.error("Failed to load passkeys:", err);
+        }
+        return null;
+      }
+    },
+  );
+
+  /** Whether two-factor authentication is on, through any method */
+  const twoFactorEnabled = () =>
+    (mfa.data?.authenticatorEnabled ?? false) || (passkeys()?.length ?? 0) > 0;
+
+  /**
+   * Short message for a failed passkey action, unless the user just dismissed
+   * the browser prompt
+   * @param err Error thrown by the browser or the server
+   * @param fallback Message for errors without a better one
+   */
+  function reportPasskeyError(err: unknown, fallback: string) {
+    if (isPromptCancelled(err)) return;
+    if ((err as { name?: string } | null)?.name === "InvalidStateError") {
+      snackbar.show({
+        message: t`This device already has a passkey for your account.`,
+      });
+      return;
+    }
+    console.error("Passkey action failed:", err);
+    snackbar.show({ message: fallback });
+  }
+
+  /**
+   * Add a passkey: ask for a name, confirm with MFA, let the browser create
+   * the passkey (from its own tap, see below) and hand it to the server
+   */
+  async function addPasskey() {
+    const name = await askPasskeyName(
+      "add",
+      defaultPasskeyName(passkeys() ?? [], t`Passkey`),
+    );
+    if (!name) return;
+
+    const result = await withTicketResult(async (ticket) => {
+      try {
+        ticket._consume();
+        const { challenge_id, options } = await startPasskeyRegistration(
+          client().api,
+          ticket.token,
+        );
+        // Safari needs the creation to start from a tap, and the request
+        // above used the last one up: the dialog has its own button for it
+        const created = await askCreatePasskey(options);
+        if (!created) {
+          snackbar.show({ message: t`Passkey not added.` });
+          return undefined;
+        }
+        if ("error" in created) throw created.error;
+        return await finishPasskeyRegistration(
+          client().api,
+          challenge_id,
+          name,
+          created.credential,
+        );
+      } catch (err) {
+        if (isPromptCancelled(err)) {
+          // the MFA check already passed, so say that nothing was added
+          snackbar.show({ message: t`Passkey not added.` });
+        } else {
+          reportPasskeyError(err, t`Couldn't add the passkey. Try again.`);
+        }
+        return undefined;
+      }
+    });
+
+    if (result.status !== "done" || !result.value) return;
+
+    await Promise.all([refetchPasskeys(), mfa.refetch()]);
+    snackbar.show({ message: t`Passkey added.` });
+
+    // the first passkey turns 2FA on and comes with recovery codes
+    if (result.value.recovery_codes?.length && mfa.data) {
+      openModal({
+        type: "mfa_recovery",
+        mfa: mfa.data,
+        codes: result.value.recovery_codes,
+      });
+    }
+  }
+
+  /**
+   * Rename a passkey
+   * @param passkey Passkey to rename
+   */
+  async function renameExistingPasskey(passkey: Passkey) {
+    const name = await askPasskeyName("rename", passkey.name);
+    if (!name || name === passkey.name) return;
+
+    try {
+      await renamePasskey(client().api, passkey.id, name);
+      await refetchPasskeys();
+      snackbar.show({ message: t`Passkey renamed.` });
+    } catch (err) {
+      reportPasskeyError(err, t`Couldn't rename the passkey. Try again.`);
+    }
+  }
+
+  /**
+   * Remove a passkey after confirmation and an MFA check
+   * @param passkey Passkey to remove
+   */
+  async function removeExistingPasskey(passkey: Passkey) {
+    // removing the only passkey without an authenticator app turns 2FA off
+    const lastFactor =
+      (passkeys()?.length ?? 0) <= 1 && !mfa.data?.authenticatorEnabled;
+    if (!(await confirmRemovePasskey(passkey.name, lastFactor))) return;
+
+    const result = await withTicketResult(async (ticket) => {
+      try {
+        ticket._consume();
+        await deletePasskey(client().api, passkey.id, ticket.token);
+        return true;
+      } catch (err) {
+        reportPasskeyError(err, t`Couldn't remove the passkey. Try again.`);
+        return false;
+      }
+    });
+
+    if (result.status !== "done" || !result.value) return;
+
+    await Promise.all([refetchPasskeys(), mfa.refetch()]);
+    snackbar.show({ message: t`Passkey removed.` });
+  }
 
   /**
    * Show recovery codes
@@ -193,6 +370,22 @@ function MultiFactorAuth() {
   async function generateRecoveryCodes() {
     const codes = await withTicket((ticket) => ticket.generateRecoveryCodes());
     if (codes) openModal({ type: "mfa_recovery", mfa: mfa.data!, codes });
+  }
+
+  /**
+   * After the authenticator app is set up, hand out recovery codes if the
+   * account has none yet (like the first passkey does). Existing codes are
+   * left alone, as generating new ones would invalidate them. The server
+   * spends an MFA ticket per request, so this asks for one more confirmation.
+   */
+  async function offerRecoveryCodes() {
+    let hasCodes = true;
+    try {
+      hasCodes = !!(await fetchMfaStatus(client().api)).recovery_active;
+    } catch {
+      // status unknown: don't risk replacing codes the user may have
+    }
+    if (!hasCodes) await generateRecoveryCodes();
   }
 
   /**
@@ -221,6 +414,8 @@ function MultiFactorAuth() {
           ? t`Authenticator app enabled.`
           : t`MFA setup canceled.`,
       });
+
+      if (enabled) await offerRecoveryCodes();
     } catch (err) {
       if (err === "MFACancelled") {
         snackbar.show({ message: t`MFA setup canceled.` });
@@ -263,8 +458,8 @@ function MultiFactorAuth() {
         }
         action={
           <TwoFactorStatus
-            loading={mfa.isLoading}
-            enabled={mfa.data?.authenticatorEnabled ?? false}
+            loading={mfa.isLoading || passkeys.loading}
+            enabled={twoFactorEnabled()}
           />
         }
       >
@@ -340,7 +535,86 @@ function MultiFactorAuth() {
           </Match>
         </Switch>
       </CategoryButton.Collapse>
-      {/* A future "Passkeys" row goes here, next to the other methods. */}
+      {/* hidden when the browser or the server has no passkey support */}
+      <Show when={passkeys()}>
+        <CategoryButton.Collapse
+          icon={<Symbol>passkey</Symbol>}
+          title={<Trans>Passkeys</Trans>}
+          description={
+            <Trans>
+              Sign in and confirm actions with your fingerprint, face or device
+              lock
+            </Trans>
+          }
+        >
+          <Show when={passkeys()!.length === 0}>
+            <CategoryButton
+              static
+              ignoreClick
+              icon={<Symbol>passkey</Symbol>}
+              description={
+                <Trans>Add one to sign in without typing your password.</Trans>
+              }
+            >
+              <Trans>No passkeys yet</Trans>
+            </CategoryButton>
+          </Show>
+          <For each={passkeys()}>
+            {(passkey) => (
+              <CategoryButton
+                static
+                ignoreClick
+                icon={<Symbol>passkey</Symbol>}
+                description={
+                  <Show
+                    when={passkey.last_used}
+                    fallback={
+                      <Trans>
+                        Added{" "}
+                        <Time value={passkey.created_at} format="relative" />
+                        {" · "}Never used
+                      </Trans>
+                    }
+                  >
+                    <Trans>
+                      Added{" "}
+                      <Time value={passkey.created_at} format="relative" />
+                      {" · "}Last used{" "}
+                      <Time value={passkey.last_used!} format="relative" />
+                    </Trans>
+                  </Show>
+                }
+                action={[
+                  <IconButton
+                    aria-label={t`Rename passkey ${passkey.name}`}
+                    onPress={() => renameExistingPasskey(passkey)}
+                  >
+                    <Symbol>edit</Symbol>
+                  </IconButton>,
+                  <IconButton
+                    aria-label={t`Remove passkey ${passkey.name}`}
+                    onPress={() => removeExistingPasskey(passkey)}
+                  >
+                    <Symbol>delete</Symbol>
+                  </IconButton>,
+                ]}
+              >
+                {passkey.name}
+              </CategoryButton>
+            )}
+          </For>
+          <CategoryButton
+            icon={<Symbol>add</Symbol>}
+            disabled={mfa.isLoading}
+            onClick={addPasskey}
+            description={
+              <Trans>Use this device or a security key to sign in</Trans>
+            }
+          >
+            <Trans>Add a passkey</Trans>
+          </CategoryButton>
+        </CategoryButton.Collapse>
+      </Show>
     </CategoryButton.Group>
   );
 }

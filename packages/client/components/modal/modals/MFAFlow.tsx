@@ -3,15 +3,26 @@ import { BiRegularArchive, BiSolidKey, BiSolidKeyboard } from "solid-icons/bi";
 import {
   For,
   Match,
+  Show,
   Switch,
   createEffect,
   createSignal,
+  onCleanup,
   onMount,
 } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { API } from "stoat.js";
 
+import { useClient } from "@revolt/client";
+import {
+  type PasskeyChallenge,
+  PasskeyApiError,
+  answerWithChallenge,
+  fetchMfaStatus,
+  startWebAuthnMfa,
+} from "@revolt/client/passkeyApi";
+import { isPromptCancelled } from "@revolt/client/webauthn";
 import {
   CategoryButton,
   CircularProgress,
@@ -19,11 +30,18 @@ import {
   Dialog,
   DialogProps,
   Form2,
+  Symbol,
   Text,
 } from "@revolt/ui";
 
 import { useModals } from "..";
 import { Modals } from "../types";
+
+/**
+ * Method list of the modal: the API's methods plus passkeys, which stoat.js's
+ * type does not know about
+ */
+type Method = API.MFAMethod | "WebAuthn";
 
 /**
  * Modal to create an MFA ticket
@@ -33,15 +51,16 @@ export function MFAFlowModal(
 ) {
   const { t } = useLingui();
   const { showError } = useModals();
+  const client = useClient();
 
   // Keep track of available methods
-  const [methods, setMethods] = createSignal<API.MFAMethod[] | undefined>(
+  const [methods, setMethods] = createSignal<Method[] | undefined>(
     // eslint-disable-next-line solid/reactivity
     props.state === "unknown" ? props.available_methods : undefined,
   );
 
   // Current state of the modal
-  const [selectedMethod, setSelected] = createSignal<API.MFAMethod>();
+  const [selectedMethod, setSelected] = createSignal<Method>();
 
   const group = createFormGroup({
     password: createFormControl(""),
@@ -49,10 +68,67 @@ export function MFAFlowModal(
     recovery_code: createFormControl(""),
   });
 
+  // Set when the modal is gone, so late answers are ignored
+  let unmounted = false;
+  onCleanup(() => {
+    unmounted = true;
+  });
+
+  // Passkey challenge fetched as soon as the passkey method is picked, so
+  // Confirm only has to open the browser prompt (Safari needs that)
+  let passkeyChallenge: { challenge: PasskeyChallenge; at: number } | undefined;
+
+  /**
+   * API and login ticket to ask for a passkey challenge with. While logging in
+   * there is no session yet, so the caller passes its own unauthenticated `api`
+   * and the login `ticket`; with a session, the logged-in client is used.
+   */
+  const passkeyApi = () =>
+    props.state === "unknown" ? (props.api ?? client().api) : client().api;
+  const passkeyTicket = () =>
+    props.state === "unknown" ? props.ticket : undefined;
+
+  /** Fetch a challenge ahead of Confirm; failures are retried on Confirm */
+  async function prefetchPasskey() {
+    passkeyChallenge = undefined;
+    try {
+      const challenge = await startWebAuthnMfa(passkeyApi(), passkeyTicket());
+      // ignore the answer if the user moved on meanwhile
+      if (unmounted || selectedMethod() !== "WebAuthn") return;
+      passkeyChallenge = { challenge, at: Date.now() };
+    } catch {
+      // Confirm fetches one itself
+    }
+  }
+
+  // True while the challenge for the "tap again" step is being fetched
+  let fetching = false;
+
+  // Set when a challenge had to be fetched on Confirm, so the user taps again
+  const [tapAgain, setTapAgain] = createSignal(false);
+
+  createEffect(() => {
+    setTapAgain(false);
+    if (selectedMethod() === "WebAuthn") prefetchPasskey();
+  });
+
   // Fetch available methods if they have not been provided.
-  onMount(() => {
+  onMount(async () => {
     if (!methods() && props.state === "known") {
-      setMethods(props.mfa.availableMethods);
+      // stoat.js only knows about the authenticator app, so ask the server
+      // for the full status to find out whether passkeys are on too
+      try {
+        const status = await fetchMfaStatus(client().api);
+        if (unmounted) return;
+        const list: Method[] = [];
+        if (status.totp_mfa) list.push("Totp");
+        if (status.security_key_mfa) list.push("WebAuthn");
+        if (list.length === 0) list.push("Password");
+        else if (status.recovery_active) list.push("Recovery");
+        setMethods(list);
+      } catch {
+        if (!unmounted) setMethods(props.mfa.availableMethods);
+      }
     }
   });
 
@@ -68,6 +144,8 @@ export function MFAFlowModal(
    * Callback to generate a new ticket or send response back up the chain
    */
   async function onSubmit() {
+    // ignore taps while the "tap again" challenge is still being fetched
+    if (fetching) return;
     try {
       const method = selectedMethod();
       if (!method) return;
@@ -84,6 +162,53 @@ export function MFAFlowModal(
         case "Recovery":
           mfa_response = { recovery_code: group.controls.recovery_code.value };
           break;
+        case "WebAuthn": {
+          // the browser asks for the passkey; no form field involved
+          let answer;
+          // use the prefetched challenge (a server keeps it for 120 s)
+          const stored =
+            passkeyChallenge && Date.now() - passkeyChallenge.at < 100_000
+              ? passkeyChallenge
+              : undefined;
+          if (!stored) {
+            // Safari only opens the passkey prompt straight from a tap, and
+            // the fetch below uses that up. So fetch now, keep the challenge
+            // and ask for one more tap instead of failing silently.
+            passkeyChallenge = undefined;
+            fetching = true;
+            let challenge;
+            try {
+              challenge = await startWebAuthnMfa(passkeyApi(), passkeyTicket());
+            } finally {
+              fetching = false;
+            }
+            if (unmounted) return;
+            passkeyChallenge = { challenge, at: Date.now() };
+            setTapAgain(true);
+            return;
+          }
+          setTapAgain(false);
+          passkeyChallenge = undefined;
+          try {
+            // no await before this call: the tap must reach the browser
+            answer = await answerWithChallenge(stored.challenge);
+          } catch (error) {
+            // a dismissed prompt just leaves the dialog open; the challenge
+            // is not spent by that, so keep it
+            if (isPromptCancelled(error)) {
+              passkeyChallenge = stored;
+              return;
+            }
+            if (error instanceof PasskeyApiError) {
+              showError(error);
+              return;
+            }
+            throw error;
+          }
+          if (!answer) return;
+          mfa_response = answer as unknown as API.MFAResponse;
+          break;
+        }
         default:
           return;
       }
@@ -98,6 +223,8 @@ export function MFAFlowModal(
       props.onClose();
     } catch (error) {
       showError(error);
+      // a failed attempt spent the challenge: get a new one
+      if (selectedMethod() === "WebAuthn") prefetchPasskey();
     }
   }
 
@@ -120,6 +247,7 @@ export function MFAFlowModal(
   }
 
   function canSubmit() {
+    if (selectedMethod() === "WebAuthn") return true;
     return (
       Form2.canSubmit(group) &&
       (group.controls.password.value ||
@@ -223,6 +351,24 @@ export function MFAFlowModal(
                     label={t`Recovery Code`}
                   />
                 </Match>
+                <Match when={selectedMethod() === "WebAuthn"}>
+                  <Text>
+                    <Trans>
+                      Choose Confirm, then approve with your passkey when your
+                      device asks.
+                    </Trans>
+                  </Text>
+                  <Show when={tapAgain()}>
+                    <div role="status">
+                      <Text>
+                        <Trans>
+                          The passkey request is ready. Choose Confirm once
+                          more.
+                        </Trans>
+                      </Text>
+                    </div>
+                  </Show>
+                </Match>
               </Switch>
             </Match>
             <Match when={methods()}>
@@ -240,6 +386,9 @@ export function MFAFlowModal(
                         </Match>
                         <Match when={method === "Recovery"}>
                           <BiRegularArchive size={24} />
+                        </Match>
+                        <Match when={method === "WebAuthn"}>
+                          <Symbol>passkey</Symbol>
                         </Match>
                       </Switch>
                     }
@@ -260,6 +409,9 @@ export function MFAFlowModal(
                       </Match>
                       <Match when={method === "Recovery"}>
                         <Trans>Recovery Code</Trans>
+                      </Match>
+                      <Match when={method === "WebAuthn"}>
+                        <Trans>Passkey</Trans>
                       </Match>
                     </Switch>
                   </CategoryButton>

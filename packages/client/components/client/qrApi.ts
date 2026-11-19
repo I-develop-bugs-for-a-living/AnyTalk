@@ -27,11 +27,17 @@ export type QrRequest = {
 /** Proof asked for when approving */
 export type QrApproveMethod = "password" | "totp_or_recovery";
 
+/** Second factor sent along with an approval: a passkey answer */
+export type QrApprovePasskey = {
+  webauthn: { challenge_id: string; credential: Record<string, unknown> };
+};
+
 /** Proof sent along with an approval */
 export type QrApproveProof =
   | { password: string }
   | { totp_code: string }
-  | { recovery_code: string };
+  | { recovery_code: string }
+  | QrApprovePasskey;
 
 /** What the approving device learns about a request */
 export type QrInfo = {
@@ -42,9 +48,44 @@ export type QrInfo = {
   user_agent?: string;
   created_at: string;
   expires_at: string;
-  /** Which proof the approving device must give */
+  /** Which proof the approving device must give (older servers) */
   method: QrApproveMethod;
+  /** Methods that can approve, e.g. `Totp`, `WebAuthn` (newer servers) */
+  allowed_methods?: string[];
 };
+
+/** What the approving device can offer to prove it is the owner */
+export type QrApproveOptions = {
+  password: boolean;
+  totp: boolean;
+  recovery: boolean;
+  passkey: boolean;
+};
+
+/**
+ * Work out which proofs an approval accepts. Prefers `allowed_methods` and
+ * falls back to the old `method` field.
+ * @param info What the server told about the request
+ */
+export function qrApproveOptions(
+  info: Pick<QrInfo, "method" | "allowed_methods">,
+): QrApproveOptions {
+  const list = info.allowed_methods;
+  if (list) {
+    return {
+      password: list.includes("Password"),
+      totp: list.includes("Totp"),
+      recovery: list.includes("Recovery"),
+      passkey: list.includes("WebAuthn"),
+    };
+  }
+  return {
+    password: info.method === "password",
+    totp: info.method === "totp_or_recovery",
+    recovery: info.method === "totp_or_recovery",
+    passkey: false,
+  };
+}
 
 /** An error answer from the server */
 export class QrApiError extends Error {
