@@ -104,6 +104,7 @@ declare global {
             idx: number;
             name: string;
             isFullScreen: boolean;
+            audio?: "screen" | "game" | "none";
             image?: string;
           }[],
         ) => void,
@@ -121,6 +122,7 @@ declare global {
             idx: number;
             name: string;
             isFullScreen: boolean;
+            audio?: "screen" | "game" | "none";
             image?: string;
           }[]
         | null

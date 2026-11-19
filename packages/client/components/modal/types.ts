@@ -376,6 +376,8 @@ export type Modals =
         resolution: ScreenShareResolution;
         frameRate: ScreenShareFrameRate;
         audio: boolean;
+        /** What sound the captured source can share, Windows desktop only */
+        sourceAudio?: "screen" | "game" | "none";
       };
       resolutions: { value: ScreenShareResolution; label: string }[];
       audio: boolean;
@@ -404,12 +406,14 @@ export type Modals =
         resolution: ScreenShareResolution,
         frameRate: ScreenShareFrameRate,
         audio: boolean,
+        sourceAudio?: "screen" | "game" | "none",
       ) => void;
       resolutions: { value: ScreenShareResolution; label: string }[];
       sources: {
         idx: number;
         name: string;
         isFullScreen: boolean;
+        audio?: "screen" | "game" | "none";
         image?: string;
       }[];
       onCancel: () => void;

@@ -153,6 +153,28 @@ export function ScreenSharePickerModal(
     }),
   );
 
+  /** What sound the selected source can share, undefined when unrestricted */
+  const selectedAudio = createMemo(
+    () => list().find((s) => s.idx === group.controls.idx.value[0])?.audio,
+  );
+
+  // A window that isn't a game can't share sound on Windows: untick and lock
+  // "Share audio" while it is selected, and bring the choice back after
+  let audioChoice = group.controls.audio.value;
+  createEffect(
+    on(selectedAudio, (audio) => {
+      const control = group.controls.audio;
+      if (audio === "none") {
+        if (!control.isDisabled) audioChoice = control.value;
+        control.setValue(false);
+        control.markDisabled(true);
+      } else if (control.isDisabled) {
+        control.markDisabled(false);
+        control.setValue(audioChoice);
+      }
+    }),
+  );
+
   /** Whether a source of the visible category is selected */
   const canSubmit = createMemo(() =>
     sources().some((source) => source.value === group.controls.idx.value[0]),
@@ -174,6 +196,7 @@ export function ScreenSharePickerModal(
       group.controls.resolution.value,
       frameRate,
       group.controls.audio.value,
+      selectedAudio(),
     );
     props.onClose();
   }
@@ -273,14 +296,39 @@ export function ScreenSharePickerModal(
               value: String(frameRate),
             }))}
           />
-          <Form2.Checkbox control={group.controls.audio}>
+          <Form2.Checkbox
+            control={group.controls.audio}
+            aria-describedby="screen-share-audio-note"
+          >
             <Trans>Share audio</Trans>
           </Form2.Checkbox>
+          <Show when={selectedAudio() === "game" || selectedAudio() === "none"}>
+            <AudioNote id="screen-share-audio-note">
+              {selectedAudio() === "game" ? (
+                <Trans>Other apps' sound is shared too.</Trans>
+              ) : (
+                <Trans>
+                  Sound can only be shared for whole screens and games.
+                </Trans>
+              )}
+            </AudioNote>
+          </Show>
         </Column>
       </form>
     </Dialog>
   );
 }
+
+/** Short explanation under "Share audio" */
+const AudioNote = styled("p", {
+  base: {
+    margin: 0,
+    marginBlockStart: "calc(var(--gap-sm) * -1)",
+    paddingInlineStart: "var(--gap-xl)",
+    color: "var(--md-sys-color-on-surface-variant)",
+    fontSize: "0.875rem",
+  },
+});
 
 /** Placeholder shown when the selected category has no sources */
 const Empty = styled("div", {

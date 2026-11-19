@@ -6,6 +6,7 @@ export type PickerSourceItem = {
   idx: number;
   name: string;
   isFullScreen: boolean;
+  audio?: "screen" | "game" | "none";
   image?: string;
 };
 
@@ -45,6 +46,7 @@ export function mergeSources(
     result.push(
       old.name === fresh.name &&
         old.isFullScreen === fresh.isFullScreen &&
+        old.audio === fresh.audio &&
         old.image === image
         ? old
         : { ...fresh, image },

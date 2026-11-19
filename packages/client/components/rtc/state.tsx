@@ -197,6 +197,11 @@ export type StreamOptions = {
   resolution: ScreenShareResolution;
   frameRate: ScreenShareFrameRate;
   audio: boolean;
+  /**
+   * What sound the captured source can share (set by the desktop app on
+   * Windows only), undefined when unknown or unrestricted
+   */
+  sourceAudio?: "screen" | "game" | "none";
 };
 
 /** A screen share that is being started, not published yet */
@@ -2135,9 +2140,9 @@ class Voice {
             cancelled = true;
             window.native.screenPickerCallback?.(-1, false);
           },
-          callback: (idx, resolution, frameRate, audio) => {
+          callback: (idx, resolution, frameRate, audio, sourceAudio) => {
             window.native.screenPickerCallback?.(idx, audio);
-            picked = { resolution, frameRate, audio };
+            picked = { resolution, frameRate, audio, sourceAudio };
           },
           sources: sources,
           resolutions: this.#resolutionOptions(),
@@ -3443,6 +3448,7 @@ class Voice {
           resolution: pickedOptions?.resolution ?? stream.resolution,
           frameRate: pickedOptions?.frameRate ?? stream.frameRate,
           audio: !!newAudio,
+          sourceAudio: pickedOptions?.sourceAudio,
         },
         true,
       );
@@ -3494,9 +3500,12 @@ class Voice {
       audio: !!this.#streamAudio,
       onCancel: () => {},
       callback: (resolution, frameRate, audio) =>
-        this.#applyStreamOptions(room, { resolution, frameRate, audio }).catch(
-          (e) => this.onErr(e),
-        ),
+        this.#applyStreamOptions(room, {
+          resolution,
+          frameRate,
+          audio,
+          sourceAudio: stream.sourceAudio,
+        }).catch((e) => this.onErr(e)),
     });
   }
 

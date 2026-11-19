@@ -181,6 +181,12 @@ export type PickerSource = {
   idx: number;
   name: string;
   isFullScreen: boolean;
+  /**
+   * What sound the source can share. Only set on Windows: "screen" and
+   * "game" use system loopback (a game also carries other apps' sound),
+   * "none" can't share sound. Absent means no restriction.
+   */
+  audio?: "screen" | "game" | "none";
   image?: string;
 };
 

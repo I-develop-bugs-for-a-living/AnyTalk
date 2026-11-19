@@ -11,6 +11,7 @@ import { gameLog } from "./gameLog";
 import { windowIdOf } from "./gameMatch";
 import { foregroundWindowId, isGameWindow } from "./games";
 import { isWayland } from "./platform";
+import { loopbackFor, sourceAudio } from "./screenAudio";
 import {
   type Allowance,
   grantAllowance,
@@ -91,6 +92,7 @@ function toPickerSources(
       idx,
       name: source.name,
       isFullScreen: source.id.startsWith("screen:"),
+      audio: sourceAudio(process.platform, source.id, isGameWindow(source.id)),
       image: source.thumbnail.isEmpty()
         ? source.appIcon?.toDataURL()
         : source.thumbnail.toDataURL(),
@@ -339,14 +341,22 @@ export function installScreenShare(
         });
         if (sources.length === 0) return callback({});
 
-        const audioFor = (wanted: boolean) =>
-          wanted && process.platform === "win32" ? "loopback" : undefined;
+        // Loopback records all system sound, so on Windows it is only used
+        // for screens and games, never for another window (checked here, not
+        // just in the picker)
+        const audioFor = (wanted: boolean, source: { id: string }) =>
+          loopbackFor(
+            process.platform,
+            wanted,
+            source.id,
+            isGameWindow(source.id),
+          );
 
         if (isWayland) {
           rememberCaptured(sources[0]);
           return callback({
             video: sources[0],
-            audio: audioFor(request.audioRequested),
+            audio: audioFor(request.audioRequested, sources[0]),
           });
         }
 
@@ -369,7 +379,7 @@ export function installScreenShare(
           rememberCaptured(preset);
           return callback({
             video: preset,
-            audio: audioFor(request.audioRequested),
+            audio: audioFor(request.audioRequested, preset),
           });
         }
 
@@ -381,7 +391,10 @@ export function installScreenShare(
         rememberCaptured(choice.source);
         callback({
           video: choice.source,
-          audio: audioFor(choice.audio && request.audioRequested),
+          audio: audioFor(
+            choice.audio && request.audioRequested,
+            choice.source,
+          ),
         });
       } catch (error) {
         console.error("Screen share failed", error);
