@@ -44,6 +44,11 @@ msgstr "dddd [47] LT"
 msgid ":{0}: from {1}"
 msgstr ":{0}: F20M {1}"
 
+#. placeholder {0}: props.name
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "\"{0}\" will no longer work for signing in or confirming actions. You can add it again later."
+msgstr "\"{0}\" W1LL N0 L0N632 W02K F02 516N1N6 1N 02 C0NF12M1N6 4C710N5. Y0U C4N 4DD 17 4641N L4732."
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "\"Copy Wireshark filter\" next to a server above puts a display filter for it on the clipboard. To line up times, set View, Time Display Format, UTC Date and Time of Day in Wireshark and compare with the absolute times in the exports. Browsers can hide the server name (Encrypted Client Hello, QUIC), so the filter may miss such connections."
 msgstr "\"C0PY W1235H42K F1L732\" N3X7 70 4 532V32 480V3 PU75 4 D15PL4Y F1L732 F02 17 0N 7H3 CL1P8042D. 70 L1N3 UP 71M35, 537 V13W, 71M3 D15PL4Y F02M47, U7C D473 4ND 71M3 0F D4Y 1N W1235H42K 4ND C0MP423 W17H 7H3 4850LU73 71M35 1N 7H3 3XP0275. 820W5325 C4N H1D3 7H3 532V32 N4M3 (3NC2YP73D CL13N7 H3LL0, QU1C), 50 7H3 F1L732 M4Y M155 5UCH C0NN3C710N5."
@@ -689,6 +694,10 @@ msgstr "4DD"
 msgid "Add a new friend"
 msgstr "4DD 4 N3W F213ND"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Add a passkey"
+msgstr "4DD 4 P455K3Y"
+
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Add Bot"
 msgstr "4DD 807"
@@ -714,6 +723,10 @@ msgstr "4DD N3W M3M8325 70 7H3 620UP"
 msgid "Add one of my recaps"
 msgstr "4DD 0N3 0F MY 23C4P5"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Add one to sign in without typing your password."
+msgstr "4DD 0N3 70 516N 1N W17H0U7 7YP1N6 Y0U2 P455W02D."
+
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Add reaction"
 msgstr "4DD 234C710N"
@@ -725,6 +738,18 @@ msgstr "4DD 5747U5 73X7"
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Add to folder"
 msgstr "4DD 70 F0LD32"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Added <0/>"
+#~ msgstr "4DD3D <0/>"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Added <0/> · Last used <1/>"
+msgstr "4DD3D <0/> · L457 U53D <1/>"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Added <0/> · Never used"
+msgstr "4DD3D <0/> · N3V32 U53D"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Admin"
@@ -1338,6 +1363,9 @@ msgstr "C4N'7 637 D15C0V32 23QU357 5747U5 216H7 N0W"
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/MFARemoveAuthenticator.tsx
 #: components/modal/modals/Onboarding.tsx
+#: components/modal/modals/PasskeyCreate.tsx
+#: components/modal/modals/PasskeyName.tsx
+#: components/modal/modals/PasskeyRemove.tsx
 #: components/modal/modals/PinMessage.tsx
 #: components/modal/modals/QrScanner.tsx
 #: components/modal/modals/RemoveMember.tsx
@@ -1536,6 +1564,18 @@ msgstr "CH0053 4 532V32 F20M 7H3 L157 70 533 175 CH4NN3L5."
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
 msgstr "CH0053 4 U532N4M3"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Choose Approve, then confirm with your passkey when your device asks."
+msgstr "CH0053 4PP20V3, 7H3N C0NF12M W17H Y0U2 P455K3Y WH3N Y0U2 D3V1C3 45K5."
+
+#: components/modal/modals/MFAFlow.tsx
+msgid "Choose Confirm, then approve with your passkey when your device asks."
+msgstr "CH0053 C0NF12M, 7H3N 4PP20V3 W17H Y0U2 P455K3Y WH3N Y0U2 D3V1C3 45K5."
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Choose Create passkey, then confirm with your device when it asks."
+msgstr "CH0053 C23473 P455K3Y, 7H3N C0NF12M W17H Y0U2 D3V1C3 WH3N 17 45K5."
 
 #: components/modal/modals/Onboarding.tsx
 msgid "Choose username"
@@ -1763,6 +1803,7 @@ msgstr "C0N73N7 8234K5 0N3 02 M023 L4W5"
 #: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
+#: components/modal/modals/PasskeyName.tsx
 msgid "Continue"
 msgstr "C0N71NU3"
 
@@ -1944,6 +1985,10 @@ msgstr "C0ULD N07 234D 7H3 K3Y L06 57473."
 msgid "Could not save this setting."
 msgstr "C0ULD N07 54V3 7H15 53771N6."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't add the passkey. Try again."
+msgstr "C0ULDN'7 4DD 7H3 P455K3Y. 72Y 4641N."
+
 #: components/instance/index.tsx
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "C0ULDN'7 F37CH 4NY74LK C0NF16U24710N F20M {hStr}."
@@ -1974,9 +2019,21 @@ msgstr "C0ULDN'7 L04D D0WNL04D5"
 msgid "Couldn't move them to {0}."
 msgstr "C0ULDN'7 M0V3 7H3M 70 {0}."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't remove the passkey. Try again."
+msgstr "C0ULDN'7 23M0V3 7H3 P455K3Y. 72Y 4641N."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't rename the passkey. Try again."
+msgstr "C0ULDN'7 23N4M3 7H3 P455K3Y. 72Y 4641N."
+
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Couldn't set up call encryption. The server may need an update."
 msgstr "C0ULDN'7 537 UP C4LL 3NC2YP710N. 7H3 532V32 M4Y N33D 4N UPD473."
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "Couldn't sign in with a passkey. Try again or sign in another way."
+msgstr "C0ULDN'7 516N 1N W17H 4 P455K3Y. 72Y 4641N 02 516N 1N 4N07H32 W4Y."
 
 #: components/rtc/components/StreamNotices.tsx
 msgid "Couldn't start the stream."
@@ -2097,6 +2154,10 @@ msgstr "C23473 1NV1735 F02 07H325 70 U53"
 msgid "Create or join a server"
 msgstr "C23473 02 J01N 4 532V32"
 
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Create passkey"
+msgstr "C23473 P455K3Y"
+
 #: components/modal/modals/CreateRole.tsx
 msgid "Create Role"
 msgstr "C23473 20L3"
@@ -2113,6 +2174,10 @@ msgstr "C23473 532V32 3M0J1"
 #: components/app/interface/settings/channel/webhooks/WebhooksList.tsx
 msgid "Create Webhook"
 msgstr "C23473 W38H00K"
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Create your passkey"
+msgstr "C23473 Y0U2 P455K3Y"
 
 #: components/app/interface/settings/user/Sessions.tsx
 msgid "Created <0/>"
@@ -2993,6 +3058,10 @@ msgstr "F02 3 H0U25"
 msgid "For 8 hours"
 msgstr "F02 8 H0U25"
 
+#: components/modal/modals/PasskeyName.tsx
+msgid "For example the name of this device"
+msgstr "F02 3X4MPL3 7H3 N4M3 0F 7H15 D3V1C3"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frame rate"
 msgstr "F24M3 2473"
@@ -3594,6 +3663,10 @@ msgstr "L4N6U463"
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Last sync <0/>"
 msgstr "L457 5YNC <0/>"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Last used <0/>"
+#~ msgstr "L457 U53D <0/>"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Latest"
@@ -4216,6 +4289,7 @@ msgstr "MY 8075"
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
+#: components/modal/modals/PasskeyName.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Name"
 msgstr "N4M3"
@@ -4223,6 +4297,10 @@ msgstr "N4M3"
 #: src/interface/servers/ServerOverview.tsx
 msgid "Name (A-Z)"
 msgstr "N4M3 (4-Z)"
+
+#: components/modal/modals/PasskeyName.tsx
+msgid "Name your passkey"
+msgstr "N4M3 Y0U2 P455K3Y"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Navigation"
@@ -4251,6 +4329,10 @@ msgstr "N37W02K 7YP3"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
 msgstr "N3U724L"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Never used"
+#~ msgstr "N3V32 U53D"
 
 #: components/ui/components/features/messaging/elements/MessageDivider.tsx
 msgid "NEW"
@@ -4353,6 +4435,10 @@ msgstr "N0 L4N6U4635 F0UND"
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "No matches"
 msgstr "N0 M47CH35"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "No passkeys yet"
+msgstr "N0 P455K3Y5 Y37"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "No patch notes for this version."
@@ -4727,6 +4813,31 @@ msgstr "P42D0N U532"
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Partial Outage"
 msgstr "P42714L 0U7463"
+
+#: components/app/interface/settings/user/Account.tsx
+#: components/modal/modals/MFAFlow.tsx
+msgid "Passkey"
+msgstr "P455K3Y"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey added."
+msgstr "P455K3Y 4DD3D."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey not added."
+msgstr "P455K3Y N07 4DD3D."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey removed."
+msgstr "P455K3Y 23M0V3D."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey renamed."
+msgstr "P455K3Y 23N4M3D."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkeys"
+msgstr "P455K3Y5"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
@@ -5245,6 +5356,7 @@ msgstr "23M073 532V32"
 #: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/MFARemoveAuthenticator.tsx
+#: components/modal/modals/PasskeyRemove.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
 msgstr "23M0V3"
@@ -5286,6 +5398,15 @@ msgstr "23M0V3 M3M832"
 msgid "Remove other members' avatars"
 msgstr "23M0V3 07H32 M3M8325' 4V47425"
 
+#. placeholder {0}: passkey.name
+#: components/app/interface/settings/user/Account.tsx
+msgid "Remove passkey {0}"
+msgstr "23M0V3 P455K3Y {0}"
+
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "Remove passkey?"
+msgstr "23M0V3 P455K3Y?"
+
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "23M0V3 234C710N"
@@ -5314,6 +5435,7 @@ msgstr "23M0V35 KN0CK5 0N 7H3 D35K 02 M1C20PH0N3"
 
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/modal/modals/EditCategory.tsx
+#: components/modal/modals/PasskeyName.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename"
 msgstr "23N4M3"
@@ -5326,6 +5448,15 @@ msgstr "23N4M3 C473602Y"
 #: components/modal/modals/EditEmoji.tsx
 msgid "Rename emoji"
 msgstr "23N4M3 3M0J1"
+
+#: components/modal/modals/PasskeyName.tsx
+msgid "Rename passkey"
+msgstr "23N4M3 P455K3Y"
+
+#. placeholder {0}: passkey.name
+#: components/app/interface/settings/user/Account.tsx
+msgid "Rename passkey {0}"
+msgstr "23N4M3 P455K3Y {0}"
 
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename Session"
@@ -6145,6 +6276,14 @@ msgstr "5H0W1N6 7H3 0LD357 {limit} 235UL75"
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr "5H0W5 WH0 15 74LK1N6 1N Y0U2 C4LL 0N 70P 0F Y0U2 64M3. 17 W02K5 0V32 802D32L355 4ND W1ND0W3D 64M35, N07 0V32 3XCLU51V3 FULL5C233N."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Sign in and confirm actions with your fingerprint, face or device lock"
+msgstr "516N 1N 4ND C0NF12M 4C710N5 W17H Y0U2 F1N632P21N7, F4C3 02 D3V1C3 L0CK"
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "Sign in with a passkey"
+msgstr "516N 1N W17H 4 P455K3Y"
+
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Sign into AnyTalk"
@@ -6544,6 +6683,14 @@ msgstr "7H47 4C710N H4D N0 3FF3C7."
 msgid "That code is not correct. Check it and try again."
 msgstr "7H47 C0D3 15 N07 C0223C7. CH3CK 17 4ND 72Y 4641N."
 
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "That passkey was not accepted. Try again or sign in another way."
+msgstr "7H47 P455K3Y W45 N07 4CC3P73D. 72Y 4641N 02 516N 1N 4N07H32 W4Y."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That passkey was not accepted. Try again or use another method."
+msgstr "7H47 P455K3Y W45 N07 4CC3P73D. 72Y 4641N 02 U53 4N07H32 M37H0D."
+
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "That password is not correct. Check it and try again."
 msgstr "7H47 P455W02D 15 N07 C0223C7. CH3CK 17 4ND 72Y 4641N."
@@ -6629,6 +6776,22 @@ msgstr "7H3 L061N W45 D3N13D 0N 7H3 07H32 D3V1C3."
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
 msgstr "7H3 N37W02K 1N5P3C702 23C02D5 WH47 4NY74LK 53ND5 4ND 23C31V35, 50 Y0U C4N CH3CK 17 4641N57 4 700L L1K3 W1235H42K. 17 15 0FF 8Y D3F4UL7 4ND N07H1N6 15 53N7 4NYWH323."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "The passkey request is ready. Choose Approve once more."
+msgstr "7H3 P455K3Y 23QU357 15 234DY. CH0053 4PP20V3 0NC3 M023."
+
+#: components/modal/modals/MFAFlow.tsx
+msgid "The passkey request is ready. Choose Confirm once more."
+msgstr "7H3 P455K3Y 23QU357 15 234DY. CH0053 C0NF12M 0NC3 M023."
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "The passkey request was renewed. Choose Sign in with a passkey once more."
+msgstr "7H3 P455K3Y 23QU357 W45 23N3W3D. CH0053 516N 1N W17H 4 P455K3Y 0NC3 M023."
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "The passkey was not created. Choose Create passkey to try again."
+msgstr "7H3 P455K3Y W45 N07 C23473D. CH0053 C23473 P455K3Y 70 72Y 4641N."
 
 #: components/i18n/errors.tsx
 msgid "The password is too short."
@@ -6727,6 +6890,10 @@ msgstr "7H15 C0D3 W45 M4D3 0N 4N 4DD2355 7H47 0NLY W02K5 0N 7H3 07H32 D3V1C3 (L0
 msgid "This content is not available in your region."
 msgstr "7H15 C0N73N7 15 N07 4V41L48L3 1N Y0U2 23610N."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "This device already has a passkey for your account."
+msgstr "7H15 D3V1C3 4L234DY H45 4 P455K3Y F02 Y0U2 4CC0UN7."
+
 #: components/i18n/errors.tsx
 msgid "This feature is currently disabled."
 msgstr "7H15 F347U23 15 CU223N7LY D1548L3D."
@@ -6755,6 +6922,10 @@ msgstr "7H15 15 7H3 57427 0F Y0U2 C0NV3254710N."
 #: components/ui/components/features/messaging/elements/ConversationStart.tsx
 msgid "This is the start of your notes."
 msgstr "7H15 15 7H3 57427 0F Y0U2 N0735."
+
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "This is your last second factor, so two-factor authentication will be turned off."
+msgstr "7H15 15 Y0U2 L457 53C0ND F4C702, 50 7W0-F4C702 4U7H3N71C4710N W1LL 83 7U2N3D 0FF."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
@@ -6904,6 +7075,7 @@ msgstr "70N4L 5P07"
 msgid "Too Long"
 msgstr "700 L0N6"
 
+#: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Too many attempts. Wait a moment and try again."
 msgstr "700 M4NY 4773MP75. W417 4 M0M3N7 4ND 72Y 4641N."
@@ -7212,6 +7384,10 @@ msgstr "UPL04D5"
 msgid "URL"
 msgstr "U2L"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a code instead"
+msgstr "U53 4 C0D3 1N5734D"
+
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
 msgstr "U53 4 C0D3 02 1NV173 L1NK"
@@ -7219,6 +7395,10 @@ msgstr "U53 4 C0D3 02 1NV173 L1NK"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Use a game controller to move around AnyTalk. Works with Xbox, PlayStation, Switch and Steam Deck controllers."
 msgstr "U53 4 64M3 C0N720LL32 70 M0V3 420UND 4NY74LK. W02K5 W17H X80X, PL4Y574710N, 5W17CH 4ND 5734M D3CK C0N720LL325."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a passkey instead"
+msgstr "U53 4 P455K3Y 1N5734D"
 
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Use a recovery code instead"
@@ -7239,6 +7419,10 @@ msgstr "U53 7H3 4U7H3N71C4702 4PP 1N5734D"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Use the graphics card to improve performance. Takes effect after you restart AnyTalk."
 msgstr "U53 7H3 624PH1C5 C42D 70 1MP20V3 P32F02M4NC3. 74K35 3FF3C7 4F732 Y0U 2357427 4NY74LK."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Use this device or a security key to sign in"
+msgstr "U53 7H15 D3V1C3 02 4 53CU217Y K3Y 70 516N 1N"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "User"

@@ -44,6 +44,11 @@ msgstr "dddd [atyay] LT"
 msgid ":{0}: from {1}"
 msgstr ":{0}: omfray {1}"
 
+#. placeholder {0}: props.name
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "\"{0}\" will no longer work for signing in or confirming actions. You can add it again later."
+msgstr "\"{0}\" illway onay ongerlay orkway orfay igningsay inyay oryay onfirmingcay actionsyay. Ouyay ancay addyay ityay againyay aterlay."
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "\"Copy Wireshark filter\" next to a server above puts a display filter for it on the clipboard. To line up times, set View, Time Display Format, UTC Date and Time of Day in Wireshark and compare with the absolute times in the exports. Browsers can hide the server name (Encrypted Client Hello, QUIC), so the filter may miss such connections."
 msgstr "\"Opycay Iresharkway ilterfay\" extnay otay ayay erversay aboveyay utspay ayay isplayday ilterfay orfay ityay onyay ethay ipboardclay. Otay inelay upyay imestay, etsay Iewvay, Imetay Isplayday Ormatfay, UTCYAY Ateday andyay Imetay ofyay Ayday inyay Iresharkway andyay omparecay ithway ethay absoluteyay imestay inyay ethay exportsyay. Owsersbray ancay idehay ethay erversay amenay (Encryptedyay Ientclay Ellohay, ICQUAY), osay ethay ilterfay aymay issmay uchsay onnectionscay."
@@ -689,6 +694,10 @@ msgstr "Addyay"
 msgid "Add a new friend"
 msgstr "Addyay ayay ewnay iendfray"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Add a passkey"
+msgstr "Addyay ayay asskeypay"
+
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Add Bot"
 msgstr "Addyay Otbay"
@@ -714,6 +723,10 @@ msgstr "Addyay ewnay embersmay otay ethay oupgray"
 msgid "Add one of my recaps"
 msgstr "Addyay oneyay ofyay ymay ecapsray"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Add one to sign in without typing your password."
+msgstr "Addyay oneyay otay ignsay inyay ithoutway ypingtay ouryay asswordpay."
+
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Add reaction"
 msgstr "Addyay eactionray"
@@ -725,6 +738,18 @@ msgstr "Addyay atusstay exttay"
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Add to folder"
 msgstr "Addyay otay olderfay"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Added <0/>"
+#~ msgstr "Addedyay <0/>"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Added <0/> · Last used <1/>"
+msgstr "Addedyay <0/> · Astlay usedyay <1/>"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Added <0/> · Never used"
+msgstr "Addedyay <0/> · Evernay usedyay"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Admin"
@@ -1338,6 +1363,9 @@ msgstr "An'tcay etgay iscoverday equestray atusstay ightray ownay"
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/MFARemoveAuthenticator.tsx
 #: components/modal/modals/Onboarding.tsx
+#: components/modal/modals/PasskeyCreate.tsx
+#: components/modal/modals/PasskeyName.tsx
+#: components/modal/modals/PasskeyRemove.tsx
 #: components/modal/modals/PinMessage.tsx
 #: components/modal/modals/QrScanner.tsx
 #: components/modal/modals/RemoveMember.tsx
@@ -1536,6 +1564,18 @@ msgstr "Oosechay ayay erversay omfray ethay istlay otay eesay itsyay annelschay.
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
 msgstr "Oosechay ayay usernameyay"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Choose Approve, then confirm with your passkey when your device asks."
+msgstr "Oosechay Approveyay, enthay onfirmcay ithway ouryay asskeypay enwhay ouryay eviceday asksyay."
+
+#: components/modal/modals/MFAFlow.tsx
+msgid "Choose Confirm, then approve with your passkey when your device asks."
+msgstr "Oosechay Onfirmcay, enthay approveyay ithway ouryay asskeypay enwhay ouryay eviceday asksyay."
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Choose Create passkey, then confirm with your device when it asks."
+msgstr "Oosechay Eatecray asskeypay, enthay onfirmcay ithway ouryay eviceday enwhay ityay asksyay."
 
 #: components/modal/modals/Onboarding.tsx
 msgid "Choose username"
@@ -1763,6 +1803,7 @@ msgstr "Ontentcay reaksbay oneyay oryay oremay awslay"
 #: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
+#: components/modal/modals/PasskeyName.tsx
 msgid "Continue"
 msgstr "Ontinuecay"
 
@@ -1944,6 +1985,10 @@ msgstr "Ouldcay otnay eadray ethay eykay oglay atestay."
 msgid "Could not save this setting."
 msgstr "Ouldcay otnay avesay isthay ettingsay."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't add the passkey. Try again."
+msgstr "Ouldn'tcay addyay ethay asskeypay. Ytray againyay."
+
 #: components/instance/index.tsx
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "Ouldn'tcay etchfay AnyTalk onfigurationcay omfray {hStr}."
@@ -1974,9 +2019,21 @@ msgstr "Ouldn'tcay oadlay ownloadsday"
 msgid "Couldn't move them to {0}."
 msgstr "Ouldn'tcay ovemay emthay otay {0}."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't remove the passkey. Try again."
+msgstr "Ouldn'tcay emoveray ethay asskeypay. Ytray againyay."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't rename the passkey. Try again."
+msgstr "Ouldn'tcay enameray ethay asskeypay. Ytray againyay."
+
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Couldn't set up call encryption. The server may need an update."
 msgstr "Ouldn'tcay etsay upyay allcay encryptionyay. Ethay erversay aymay eednay anyay updateyay."
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "Couldn't sign in with a passkey. Try again or sign in another way."
+msgstr "Ouldn'tcay ignsay inyay ithway ayay asskeypay. Ytray againyay oryay ignsay inyay anotheryay ayway."
 
 #: components/rtc/components/StreamNotices.tsx
 msgid "Couldn't start the stream."
@@ -2097,6 +2154,10 @@ msgstr "Eatecray invitesyay orfay othersyay otay useyay"
 msgid "Create or join a server"
 msgstr "Eatecray oryay oinjay ayay erversay"
 
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Create passkey"
+msgstr "Eatecray asskeypay"
+
 #: components/modal/modals/CreateRole.tsx
 msgid "Create Role"
 msgstr "Eatecray Oleray"
@@ -2113,6 +2174,10 @@ msgstr "Eatecray erversay emojiyay"
 #: components/app/interface/settings/channel/webhooks/WebhooksList.tsx
 msgid "Create Webhook"
 msgstr "Eatecray Ebhookway"
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Create your passkey"
+msgstr "Eatecray ouryay asskeypay"
 
 #: components/app/interface/settings/user/Sessions.tsx
 msgid "Created <0/>"
@@ -2993,6 +3058,10 @@ msgstr "Orfay 3 ourshay"
 msgid "For 8 hours"
 msgstr "Orfay 8 ourshay"
 
+#: components/modal/modals/PasskeyName.tsx
+msgid "For example the name of this device"
+msgstr "Orfay exampleyay ethay amenay ofyay isthay eviceday"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frame rate"
 msgstr "Amefray ateray"
@@ -3594,6 +3663,10 @@ msgstr "Anguagelay"
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Last sync <0/>"
 msgstr "Astlay yncsay <0/>"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Last used <0/>"
+#~ msgstr "Astlay usedyay <0/>"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Latest"
@@ -4216,6 +4289,7 @@ msgstr "Ymay Otsbay"
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
+#: components/modal/modals/PasskeyName.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Name"
 msgstr "Amenay"
@@ -4223,6 +4297,10 @@ msgstr "Amenay"
 #: src/interface/servers/ServerOverview.tsx
 msgid "Name (A-Z)"
 msgstr "Amenay (Ayay-Zay)"
+
+#: components/modal/modals/PasskeyName.tsx
+msgid "Name your passkey"
+msgstr "Amenay ouryay asskeypay"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Navigation"
@@ -4251,6 +4329,10 @@ msgstr "Etworknay ypetay"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
 msgstr "Eutralnay"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Never used"
+#~ msgstr "Evernay usedyay"
 
 #: components/ui/components/features/messaging/elements/MessageDivider.tsx
 msgid "NEW"
@@ -4353,6 +4435,10 @@ msgstr "Onay anguageslay oundfay"
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "No matches"
 msgstr "Onay atchesmay"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "No passkeys yet"
+msgstr "Onay asskeyspay etyay"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "No patch notes for this version."
@@ -4727,6 +4813,31 @@ msgstr "Ardonpay Useryay"
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Partial Outage"
 msgstr "Artialpay Outageyay"
+
+#: components/app/interface/settings/user/Account.tsx
+#: components/modal/modals/MFAFlow.tsx
+msgid "Passkey"
+msgstr "Asskeypay"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey added."
+msgstr "Asskeypay addedyay."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey not added."
+msgstr "Asskeypay otnay addedyay."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey removed."
+msgstr "Asskeypay emovedray."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey renamed."
+msgstr "Asskeypay enamedray."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkeys"
+msgstr "Asskeyspay"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
@@ -5245,6 +5356,7 @@ msgstr "Emoteray Erversay"
 #: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/MFARemoveAuthenticator.tsx
+#: components/modal/modals/PasskeyRemove.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
 msgstr "Emoveray"
@@ -5286,6 +5398,15 @@ msgstr "Emoveray Embermay"
 msgid "Remove other members' avatars"
 msgstr "Emoveray otheryay embersmay' avatarsyay"
 
+#. placeholder {0}: passkey.name
+#: components/app/interface/settings/user/Account.tsx
+msgid "Remove passkey {0}"
+msgstr "Emoveray asskeypay {0}"
+
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "Remove passkey?"
+msgstr "Emoveray asskeypay?"
+
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "Emoveray eactionray"
@@ -5314,6 +5435,7 @@ msgstr "Emovesray ocksknay onyay ethay eskday oryay icrophonemay"
 
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/modal/modals/EditCategory.tsx
+#: components/modal/modals/PasskeyName.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename"
 msgstr "Enameray"
@@ -5326,6 +5448,15 @@ msgstr "Enameray ategorycay"
 #: components/modal/modals/EditEmoji.tsx
 msgid "Rename emoji"
 msgstr "Enameray emojiyay"
+
+#: components/modal/modals/PasskeyName.tsx
+msgid "Rename passkey"
+msgstr "Enameray asskeypay"
+
+#. placeholder {0}: passkey.name
+#: components/app/interface/settings/user/Account.tsx
+msgid "Rename passkey {0}"
+msgstr "Enameray asskeypay {0}"
 
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename Session"
@@ -6145,6 +6276,14 @@ msgstr "Owingshay ethay oldestyay {limit} esultsray"
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr "Owsshay owhay isyay alkingtay inyay ouryay allcay onyay optay ofyay ouryay amegay. Ityay orksway overyay orderlessbay andyay indowedway amesgay, otnay overyay exclusiveyay ullscreenfay."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Sign in and confirm actions with your fingerprint, face or device lock"
+msgstr "Ignsay inyay andyay onfirmcay actionsyay ithway ouryay ingerprintfay, acefay oryay eviceday ocklay"
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "Sign in with a passkey"
+msgstr "Ignsay inyay ithway ayay asskeypay"
+
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Sign into AnyTalk"
@@ -6544,6 +6683,14 @@ msgstr "Atthay actionyay adhay onay effectyay."
 msgid "That code is not correct. Check it and try again."
 msgstr "Atthay odecay isyay otnay orrectcay. Eckchay ityay andyay ytray againyay."
 
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "That passkey was not accepted. Try again or sign in another way."
+msgstr "Atthay asskeypay asway otnay acceptedyay. Ytray againyay oryay ignsay inyay anotheryay ayway."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That passkey was not accepted. Try again or use another method."
+msgstr "Atthay asskeypay asway otnay acceptedyay. Ytray againyay oryay useyay anotheryay ethodmay."
+
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "That password is not correct. Check it and try again."
 msgstr "Atthay asswordpay isyay otnay orrectcay. Eckchay ityay andyay ytray againyay."
@@ -6629,6 +6776,22 @@ msgstr "Ethay oginlay asway eniedday onyay ethay otheryay eviceday."
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
 msgstr "Ethay etworknay inspectoryay ecordsray atwhay AnyTalk endssay andyay eceivesray, osay ouyay ancay eckchay ityay againstyay ayay ooltay ikelay Iresharkway. Ityay isyay offyay ybay efaultday andyay othingnay isyay entsay anywhereyay."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "The passkey request is ready. Choose Approve once more."
+msgstr "Ethay asskeypay equestray isyay eadyray. Oosechay Approveyay onceyay oremay."
+
+#: components/modal/modals/MFAFlow.tsx
+msgid "The passkey request is ready. Choose Confirm once more."
+msgstr "Ethay asskeypay equestray isyay eadyray. Oosechay Onfirmcay onceyay oremay."
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "The passkey request was renewed. Choose Sign in with a passkey once more."
+msgstr "Ethay asskeypay equestray asway enewedray. Oosechay Ignsay inyay ithway ayay asskeypay onceyay oremay."
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "The passkey was not created. Choose Create passkey to try again."
+msgstr "Ethay asskeypay asway otnay eatedcray. Oosechay Eatecray asskeypay otay ytray againyay."
 
 #: components/i18n/errors.tsx
 msgid "The password is too short."
@@ -6727,6 +6890,10 @@ msgstr "Isthay odecay asway ademay onyay anyay addressyay atthay onlyyay orksway
 msgid "This content is not available in your region."
 msgstr "Isthay ontentcay isyay otnay availableyay inyay ouryay egionray."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "This device already has a passkey for your account."
+msgstr "Isthay eviceday alreadyyay ashay ayay asskeypay orfay ouryay accountyay."
+
 #: components/i18n/errors.tsx
 msgid "This feature is currently disabled."
 msgstr "Isthay eaturefay isyay urrentlycay isabledday."
@@ -6755,6 +6922,10 @@ msgstr "Isthay isway ethay artstay ofway yourway onversationcay."
 #: components/ui/components/features/messaging/elements/ConversationStart.tsx
 msgid "This is the start of your notes."
 msgstr "Isthay isyay ethay artstay ofyay ouryay otesnay."
+
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "This is your last second factor, so two-factor authentication will be turned off."
+msgstr "Isthay isyay ouryay astlay econdsay actorfay, osay otway-actorfay authenticationyay illway ebay urnedtay offyay."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
@@ -6904,6 +7075,7 @@ msgstr "Onaltay Otspay"
 msgid "Too Long"
 msgstr "Ootay Onglay"
 
+#: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Too many attempts. Wait a moment and try again."
 msgstr "Ootay anymay attemptsyay. Aitway ayay omentmay andyay ytray againyay."
@@ -7212,6 +7384,10 @@ msgstr "Uploadsyay"
 msgid "URL"
 msgstr "URLYAY"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a code instead"
+msgstr "Useyay ayay odecay insteadyay"
+
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
 msgstr "Useyay ayay odecay oryay inviteyay inklay"
@@ -7219,6 +7395,10 @@ msgstr "Useyay ayay odecay oryay inviteyay inklay"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Use a game controller to move around AnyTalk. Works with Xbox, PlayStation, Switch and Steam Deck controllers."
 msgstr "Useyay ayay amegay ontrollercay otay ovemay aroundyay AnyTalk. Orksway ithway Oxxbay, PlayStation, Itchsway andyay Eamstay Eckday ontrollerscay."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a passkey instead"
+msgstr "Useyay ayay asskeypay insteadyay"
 
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Use a recovery code instead"
@@ -7239,6 +7419,10 @@ msgstr "Useyay ethay authenticatoryay appyay insteadyay"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Use the graphics card to improve performance. Takes effect after you restart AnyTalk."
 msgstr "Useyay ethay aphicsgray ardcay otay improveyay erformancepay. Akestay effectyay afteryay ouyay estartray AnyTalk."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Use this device or a security key to sign in"
+msgstr "Useyay isthay eviceday oryay ayay ecuritysay eykay otay ignsay inyay"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "User"

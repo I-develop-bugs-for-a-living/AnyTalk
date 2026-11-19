@@ -44,6 +44,11 @@ msgstr "dddd [في] LT"
 msgid ":{0}: from {1}"
 msgstr ":{0}: من {1}"
 
+#. placeholder {0}: props.name
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "\"{0}\" will no longer work for signing in or confirming actions. You can add it again later."
+msgstr "لن يعمل «{0}» بعد الآن لتسجيل الدخول أو تأكيد الإجراءات. يمكنك إضافته مرة أخرى لاحقًا."
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "\"Copy Wireshark filter\" next to a server above puts a display filter for it on the clipboard. To line up times, set View, Time Display Format, UTC Date and Time of Day in Wireshark and compare with the absolute times in the exports. Browsers can hide the server name (Encrypted Client Hello, QUIC), so the filter may miss such connections."
 msgstr "يؤدي الضغط على «نسخ عامل تصفية Wireshark» بجانب أحد الخوادم أعلاه إلى نسخ عامل تصفية عرض خاص به إلى الحافظة. لمطابقة الأوقات، اختر في Wireshark: «View → Time Display Format → UTC Date and Time of Day»، ثم قارنها بالأوقات المطلقة في الملفات المصدّرة. قد تخفي المتصفحات اسم الخادم (Encrypted Client Hello وQUIC)، لذا قد لا يلتقط عامل التصفية بعض هذه الاتصالات."
@@ -689,6 +694,10 @@ msgstr "إضافة"
 msgid "Add a new friend"
 msgstr "إضافة صديق جديد"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Add a passkey"
+msgstr "إضافة مفتاح مرور"
+
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Add Bot"
 msgstr "إضافة بوت"
@@ -714,6 +723,10 @@ msgstr "إضافة اعضاء جدد للمجموعة"
 msgid "Add one of my recaps"
 msgstr "إضافة أحد ملخصاتي"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Add one to sign in without typing your password."
+msgstr "أضف مفتاحًا لتسجيل الدخول دون كتابة كلمة المرور."
+
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Add reaction"
 msgstr "أضف تفاعلًا"
@@ -725,6 +738,18 @@ msgstr "إضافة نص الحالة"
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Add to folder"
 msgstr "إضافة إلى مجلد"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Added <0/>"
+#~ msgstr "أُضيف <0/>"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Added <0/> · Last used <1/>"
+msgstr "أُضيف <0/> · آخر استخدام <1/>"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Added <0/> · Never used"
+msgstr "أُضيف <0/> · لم يُستخدم قط"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Admin"
@@ -1336,6 +1361,9 @@ msgstr "لا يمكن جلب حالة طلب الاكتشاف الآن"
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/MFARemoveAuthenticator.tsx
 #: components/modal/modals/Onboarding.tsx
+#: components/modal/modals/PasskeyCreate.tsx
+#: components/modal/modals/PasskeyName.tsx
+#: components/modal/modals/PasskeyRemove.tsx
 #: components/modal/modals/PinMessage.tsx
 #: components/modal/modals/QrScanner.tsx
 #: components/modal/modals/RemoveMember.tsx
@@ -1533,6 +1561,18 @@ msgstr "اختر خادمًا من القائمة لعرض قنواته."
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
 msgstr "قم بإختيار اسم مستعار"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Choose Approve, then confirm with your passkey when your device asks."
+msgstr "اختر «موافقة»، ثم أكّد باستخدام مفتاح المرور عندما يطلب جهازك ذلك."
+
+#: components/modal/modals/MFAFlow.tsx
+msgid "Choose Confirm, then approve with your passkey when your device asks."
+msgstr "اختر «تأكيد»، ثم وافق باستخدام مفتاح المرور عندما يطلب جهازك ذلك."
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Choose Create passkey, then confirm with your device when it asks."
+msgstr "اختر «إنشاء مفتاح مرور»، ثم أكّد باستخدام جهازك عندما يطلب ذلك."
 
 #: components/modal/modals/Onboarding.tsx
 msgid "Choose username"
@@ -1760,6 +1800,7 @@ msgstr "يخالف المحتوى قانونًا واحدًا أو أكثر"
 #: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
+#: components/modal/modals/PasskeyName.tsx
 msgid "Continue"
 msgstr "استمرار"
 
@@ -1941,6 +1982,10 @@ msgstr "تعذّرت قراءة حالة سجل المفاتيح."
 msgid "Could not save this setting."
 msgstr "تعذّر حفظ هذا الإعداد."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't add the passkey. Try again."
+msgstr "تعذّرت إضافة مفتاح المرور. حاول مرة أخرى."
+
 #: components/instance/index.tsx
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "تعذّر جلب إعدادات AnyTalk من {hStr}."
@@ -1971,9 +2016,21 @@ msgstr "تعذر تحميل ملفات التنزيل"
 msgid "Couldn't move them to {0}."
 msgstr "تعذّر نقله إلى {0}."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't remove the passkey. Try again."
+msgstr "تعذّرت إزالة مفتاح المرور. حاول مرة أخرى."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't rename the passkey. Try again."
+msgstr "تعذّرت إعادة تسمية مفتاح المرور. حاول مرة أخرى."
+
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Couldn't set up call encryption. The server may need an update."
 msgstr "تعذّر إعداد تشفير المكالمات. قد يحتاج الخادم إلى تحديث."
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "Couldn't sign in with a passkey. Try again or sign in another way."
+msgstr "تعذّر تسجيل الدخول باستخدام مفتاح المرور. حاول مرة أخرى أو سجّل الدخول بطريقة أخرى."
 
 #: components/rtc/components/StreamNotices.tsx
 msgid "Couldn't start the stream."
@@ -2093,6 +2150,10 @@ msgstr "قم بإنشاء دعوات ليستعملها الاخرين"
 msgid "Create or join a server"
 msgstr "إنشاء خادم أو الانضمام إليه"
 
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Create passkey"
+msgstr "إنشاء مفتاح مرور"
+
 #: components/modal/modals/CreateRole.tsx
 msgid "Create Role"
 msgstr "إنشاء رتبة"
@@ -2109,6 +2170,10 @@ msgstr "انشاء رموز تعبيرية للسيرفر"
 #: components/app/interface/settings/channel/webhooks/WebhooksList.tsx
 msgid "Create Webhook"
 msgstr "انشاء وبهوك"
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Create your passkey"
+msgstr "أنشئ مفتاح المرور الخاص بك"
 
 #: components/app/interface/settings/user/Sessions.tsx
 msgid "Created <0/>"
@@ -2987,6 +3052,10 @@ msgstr "ل3 ساعات"
 msgid "For 8 hours"
 msgstr "ل8 ساعات"
 
+#: components/modal/modals/PasskeyName.tsx
+msgid "For example the name of this device"
+msgstr "مثلًا اسم هذا الجهاز"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frame rate"
 msgstr "معدل الإطارات"
@@ -3585,6 +3654,10 @@ msgstr "اللغة"
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Last sync <0/>"
 msgstr "اخر مزامنة <0/>"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Last used <0/>"
+#~ msgstr "آخر استخدام <0/>"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Latest"
@@ -4207,6 +4280,7 @@ msgstr "البوتّات الخاصة بي"
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
+#: components/modal/modals/PasskeyName.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Name"
 msgstr "الاسم"
@@ -4214,6 +4288,10 @@ msgstr "الاسم"
 #: src/interface/servers/ServerOverview.tsx
 msgid "Name (A-Z)"
 msgstr "الاسم (أ-ي)"
+
+#: components/modal/modals/PasskeyName.tsx
+msgid "Name your passkey"
+msgstr "سمِّ مفتاح المرور"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Navigation"
@@ -4242,6 +4320,10 @@ msgstr "نوع الشبكة"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
 msgstr "محايد"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Never used"
+#~ msgstr "لم يُستخدم قط"
 
 #: components/ui/components/features/messaging/elements/MessageDivider.tsx
 msgid "NEW"
@@ -4344,6 +4426,10 @@ msgstr "لم يتم العثور على لغات"
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "No matches"
 msgstr "لا نتائج مطابقة"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "No passkeys yet"
+msgstr "لا توجد مفاتيح مرور بعد"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "No patch notes for this version."
@@ -4718,6 +4804,31 @@ msgstr "العفو عن مستخدم"
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Partial Outage"
 msgstr "انقطاع جزئي"
+
+#: components/app/interface/settings/user/Account.tsx
+#: components/modal/modals/MFAFlow.tsx
+msgid "Passkey"
+msgstr "مفتاح المرور"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey added."
+msgstr "تمت إضافة مفتاح المرور."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey not added."
+msgstr "لم تتم إضافة مفتاح المرور."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey removed."
+msgstr "تمت إزالة مفتاح المرور."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey renamed."
+msgstr "تمت إعادة تسمية مفتاح المرور."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkeys"
+msgstr "مفاتيح المرور"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
@@ -5235,6 +5346,7 @@ msgstr "خادم بعيد"
 #: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/MFARemoveAuthenticator.tsx
+#: components/modal/modals/PasskeyRemove.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
 msgstr "يزيل"
@@ -5276,6 +5388,15 @@ msgstr "إزالة العضو"
 msgid "Remove other members' avatars"
 msgstr "حذف الصور الشخصية للاعضاء الاخرين"
 
+#. placeholder {0}: passkey.name
+#: components/app/interface/settings/user/Account.tsx
+msgid "Remove passkey {0}"
+msgstr "إزالة مفتاح المرور {0}"
+
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "Remove passkey?"
+msgstr "إزالة مفتاح المرور؟"
+
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "حذف التفاعل"
@@ -5304,6 +5425,7 @@ msgstr "يزيل طرقات المكتب أو الميكروفون"
 
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/modal/modals/EditCategory.tsx
+#: components/modal/modals/PasskeyName.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename"
 msgstr "اعادة تسمية"
@@ -5316,6 +5438,15 @@ msgstr "إعادة تسمية الفآت"
 #: components/modal/modals/EditEmoji.tsx
 msgid "Rename emoji"
 msgstr "إعادة تسمية الرمز التعبيري"
+
+#: components/modal/modals/PasskeyName.tsx
+msgid "Rename passkey"
+msgstr "إعادة تسمية مفتاح المرور"
+
+#. placeholder {0}: passkey.name
+#: components/app/interface/settings/user/Account.tsx
+msgid "Rename passkey {0}"
+msgstr "إعادة تسمية مفتاح المرور {0}"
 
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename Session"
@@ -6133,6 +6264,14 @@ msgstr "عرض أقدم {limit} نتيجة"
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr "تعرض من يتحدث في مكالمتك فوق لعبتك. تعمل مع الألعاب في وضع النافذة وبلا إطار، وليس مع ملء الشاشة الحصري."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Sign in and confirm actions with your fingerprint, face or device lock"
+msgstr "سجّل الدخول وأكّد الإجراءات ببصمتك أو وجهك أو قفل الجهاز"
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "Sign in with a passkey"
+msgstr "تسجيل الدخول بمفتاح مرور"
+
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Sign into AnyTalk"
@@ -6530,6 +6669,14 @@ msgstr "لم يكن لهذا الإجراء أي تأثير."
 msgid "That code is not correct. Check it and try again."
 msgstr "الرمز غير صحيح. تحقق منه وحاول مرة أخرى."
 
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "That passkey was not accepted. Try again or sign in another way."
+msgstr "لم يُقبل مفتاح المرور هذا. حاول مرة أخرى أو سجّل الدخول بطريقة أخرى."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That passkey was not accepted. Try again or use another method."
+msgstr "لم يُقبل مفتاح المرور هذا. حاول مرة أخرى أو استخدم طريقة أخرى."
+
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "That password is not correct. Check it and try again."
 msgstr "كلمة المرور غير صحيحة. تحقق منها وحاول مرة أخرى."
@@ -6615,6 +6762,22 @@ msgstr "تم رفض تسجيل الدخول على الجهاز الآخر."
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
 msgstr "يسجّل مفتش الشبكة ما يرسله AnyTalk ويستقبله لتتمكن من مقارنته بأداة مثل Wireshark. وهو متوقف افتراضيًا ولا يُرسَل أي شيء إلى أي مكان."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "The passkey request is ready. Choose Approve once more."
+msgstr "طلب مفتاح المرور جاهز. اختر «موافقة» مرة أخرى."
+
+#: components/modal/modals/MFAFlow.tsx
+msgid "The passkey request is ready. Choose Confirm once more."
+msgstr "طلب مفتاح المرور جاهز. اختر «تأكيد» مرة أخرى."
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "The passkey request was renewed. Choose Sign in with a passkey once more."
+msgstr "تم تجديد طلب مفتاح المرور. اختر «تسجيل الدخول بمفتاح مرور» مرة أخرى."
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "The passkey was not created. Choose Create passkey to try again."
+msgstr "لم يتم إنشاء مفتاح المرور. اختر «إنشاء مفتاح مرور» للمحاولة مرة أخرى."
 
 #: components/i18n/errors.tsx
 msgid "The password is too short."
@@ -6713,6 +6876,10 @@ msgstr "تم إنشاء هذا الرمز على عنوان يعمل على ال
 msgid "This content is not available in your region."
 msgstr "هذا المحتوى غير متاح في منطقتك."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "This device already has a passkey for your account."
+msgstr "لدى هذا الجهاز مفتاح مرور لحسابك بالفعل."
+
 #: components/i18n/errors.tsx
 msgid "This feature is currently disabled."
 msgstr "هذه الميزة معطلة حاليا."
@@ -6741,6 +6908,10 @@ msgstr "هذه هي بداية محادثتكم."
 #: components/ui/components/features/messaging/elements/ConversationStart.tsx
 msgid "This is the start of your notes."
 msgstr "هذه بداية ملاحظاتك."
+
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "This is your last second factor, so two-factor authentication will be turned off."
+msgstr "هذا آخر عامل ثانٍ لديك، لذلك سيتم إيقاف المصادقة الثنائية."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
@@ -6890,6 +7061,7 @@ msgstr "بقعة نغمة"
 msgid "Too Long"
 msgstr "طويل جدًا"
 
+#: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Too many attempts. Wait a moment and try again."
 msgstr "محاولات كثيرة جدًا. انتظر قليلًا وحاول مرة أخرى."
@@ -7198,6 +7370,10 @@ msgstr "عمليات الرفع"
 msgid "URL"
 msgstr "URL"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a code instead"
+msgstr "استخدام رمز بدلًا من ذلك"
+
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
 msgstr "إستخدام رمز أو رابط دعوة"
@@ -7205,6 +7381,10 @@ msgstr "إستخدام رمز أو رابط دعوة"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Use a game controller to move around AnyTalk. Works with Xbox, PlayStation, Switch and Steam Deck controllers."
 msgstr "استخدم وحدة تحكم الألعاب للتنقل في AnyTalk. تعمل مع وحدات تحكم Xbox وPlayStation وSwitch وSteam Deck."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a passkey instead"
+msgstr "استخدام مفتاح مرور بدلًا من ذلك"
 
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Use a recovery code instead"
@@ -7225,6 +7405,10 @@ msgstr "استخدام تطبيق المصادقة بدلًا من ذلك"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Use the graphics card to improve performance. Takes effect after you restart AnyTalk."
 msgstr "استخدم بطاقة الرسومات لتحسين الأداء. يسري بعد إعادة تشغيل AnyTalk."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Use this device or a security key to sign in"
+msgstr "استخدم هذا الجهاز أو مفتاح أمان لتسجيل الدخول"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "User"

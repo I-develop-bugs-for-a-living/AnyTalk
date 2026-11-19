@@ -44,6 +44,11 @@ msgstr "dddd LT"
 msgid ":{0}: from {1}"
 msgstr ":{0}: ({1} 출처)"
 
+#. placeholder {0}: props.name
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "\"{0}\" will no longer work for signing in or confirming actions. You can add it again later."
+msgstr "\"{0}\"은(는) 더 이상 로그인이나 작업 확인에 사용할 수 없어요. 나중에 다시 추가할 수 있어요."
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "\"Copy Wireshark filter\" next to a server above puts a display filter for it on the clipboard. To line up times, set View, Time Display Format, UTC Date and Time of Day in Wireshark and compare with the absolute times in the exports. Browsers can hide the server name (Encrypted Client Hello, QUIC), so the filter may miss such connections."
 msgstr "위 서버 옆의 \"Wireshark 필터 복사\"를 누르면 해당 서버의 표시 필터가 클립보드에 복사돼요. 시간을 맞추려면 Wireshark에서 View → Time Display Format → UTC Date and Time of Day를 선택하고 내보내기 파일의 절대 시간과 비교하세요. 브라우저가 서버 이름을 숨길 수 있어서(Encrypted Client Hello, QUIC) 필터가 일부 연결을 놓칠 수 있어요."
@@ -689,6 +694,10 @@ msgstr "추가"
 msgid "Add a new friend"
 msgstr "새로운 친구 추가"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Add a passkey"
+msgstr "패스키 추가"
+
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Add Bot"
 msgstr "봇 추가"
@@ -714,6 +723,10 @@ msgstr "그룹에 새 멤버들 추가"
 msgid "Add one of my recaps"
 msgstr "내 요약 추가"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Add one to sign in without typing your password."
+msgstr "추가하면 비밀번호를 입력하지 않고 로그인할 수 있어요."
+
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Add reaction"
 msgstr "반응 추가하기"
@@ -725,6 +738,18 @@ msgstr "상태 메시지 추가"
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Add to folder"
 msgstr "폴더에 추가"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Added <0/>"
+#~ msgstr "추가됨 <0/>"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Added <0/> · Last used <1/>"
+msgstr "추가일 <0/> · 마지막 사용 <1/>"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Added <0/> · Never used"
+msgstr "추가일 <0/> · 사용한 적 없음"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Admin"
@@ -1337,6 +1362,9 @@ msgstr "지금은 탐색 요청 상태를 불러올 수 없어요"
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/MFARemoveAuthenticator.tsx
 #: components/modal/modals/Onboarding.tsx
+#: components/modal/modals/PasskeyCreate.tsx
+#: components/modal/modals/PasskeyName.tsx
+#: components/modal/modals/PasskeyRemove.tsx
 #: components/modal/modals/PinMessage.tsx
 #: components/modal/modals/QrScanner.tsx
 #: components/modal/modals/RemoveMember.tsx
@@ -1535,6 +1563,18 @@ msgstr "목록에서 서버를 선택하면 채널을 볼 수 있어요."
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
 msgstr "사용자 이름을 정하세요"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Choose Approve, then confirm with your passkey when your device asks."
+msgstr "승인을 선택한 다음, 기기에서 요청하면 패스키로 확인해 주세요."
+
+#: components/modal/modals/MFAFlow.tsx
+msgid "Choose Confirm, then approve with your passkey when your device asks."
+msgstr "확인을 선택한 다음, 기기에서 요청하면 패스키로 승인해 주세요."
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Choose Create passkey, then confirm with your device when it asks."
+msgstr "패스키 만들기를 선택한 다음, 기기에서 요청하면 확인해 주세요."
 
 #: components/modal/modals/Onboarding.tsx
 msgid "Choose username"
@@ -1762,6 +1802,7 @@ msgstr "콘텐츠가 하나 이상의 법률을 위반함"
 #: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
+#: components/modal/modals/PasskeyName.tsx
 msgid "Continue"
 msgstr "계속"
 
@@ -1943,6 +1984,10 @@ msgstr "키 로그 상태를 읽지 못했어요."
 msgid "Could not save this setting."
 msgstr "이 설정을 저장하지 못했어요."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't add the passkey. Try again."
+msgstr "패스키를 추가하지 못했어요. 다시 시도해 주세요."
+
 #: components/instance/index.tsx
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "{hStr}에서 AnyTalk 설정을 가져오지 못했어요."
@@ -1973,9 +2018,21 @@ msgstr "다운로드를 불러오지 못했어요"
 msgid "Couldn't move them to {0}."
 msgstr "{0}(으)로 옮기지 못했어요."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't remove the passkey. Try again."
+msgstr "패스키를 삭제하지 못했어요. 다시 시도해 주세요."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't rename the passkey. Try again."
+msgstr "패스키 이름을 변경하지 못했어요. 다시 시도해 주세요."
+
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Couldn't set up call encryption. The server may need an update."
 msgstr "통화 암호화를 설정하지 못했어요. 서버 업데이트가 필요할 수 있어요."
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "Couldn't sign in with a passkey. Try again or sign in another way."
+msgstr "패스키로 로그인하지 못했어요. 다시 시도하거나 다른 방법으로 로그인해 주세요."
 
 #: components/rtc/components/StreamNotices.tsx
 msgid "Couldn't start the stream."
@@ -2095,6 +2152,10 @@ msgstr "다른 사람이 사용할 초대 만들기"
 msgid "Create or join a server"
 msgstr "서버 만들기 또는 참여"
 
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Create passkey"
+msgstr "패스키 만들기"
+
 #: components/modal/modals/CreateRole.tsx
 msgid "Create Role"
 msgstr "역할 만들기"
@@ -2111,6 +2172,10 @@ msgstr "서버 이모지 만들기"
 #: components/app/interface/settings/channel/webhooks/WebhooksList.tsx
 msgid "Create Webhook"
 msgstr "웹훅 만들기"
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Create your passkey"
+msgstr "패스키 만들기"
 
 #: components/app/interface/settings/user/Sessions.tsx
 msgid "Created <0/>"
@@ -2990,6 +3055,10 @@ msgstr "3시간 동안"
 msgid "For 8 hours"
 msgstr "8시간 동안"
 
+#: components/modal/modals/PasskeyName.tsx
+msgid "For example the name of this device"
+msgstr "예: 이 기기의 이름"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frame rate"
 msgstr "프레임 속도"
@@ -3589,6 +3658,10 @@ msgstr "언어"
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Last sync <0/>"
 msgstr "마지막 동기화 <0/>"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Last used <0/>"
+#~ msgstr "마지막 사용 <0/>"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Latest"
@@ -4211,6 +4284,7 @@ msgstr "내 봇"
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
+#: components/modal/modals/PasskeyName.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Name"
 msgstr "이름"
@@ -4218,6 +4292,10 @@ msgstr "이름"
 #: src/interface/servers/ServerOverview.tsx
 msgid "Name (A-Z)"
 msgstr "이름순 (A-Z)"
+
+#: components/modal/modals/PasskeyName.tsx
+msgid "Name your passkey"
+msgstr "패스키 이름 정하기"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Navigation"
@@ -4246,6 +4324,10 @@ msgstr "네트워크 유형"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
 msgstr "뉴트럴"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Never used"
+#~ msgstr "사용한 적 없음"
 
 #: components/ui/components/features/messaging/elements/MessageDivider.tsx
 msgid "NEW"
@@ -4348,6 +4430,10 @@ msgstr "언어를 찾을 수 없어요"
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "No matches"
 msgstr "일치하는 항목 없음"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "No passkeys yet"
+msgstr "아직 패스키가 없어요"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "No patch notes for this version."
@@ -4722,6 +4808,31 @@ msgstr "사용자 차단 해제"
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Partial Outage"
 msgstr "부분 장애"
+
+#: components/app/interface/settings/user/Account.tsx
+#: components/modal/modals/MFAFlow.tsx
+msgid "Passkey"
+msgstr "패스키"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey added."
+msgstr "패스키를 추가했어요."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey not added."
+msgstr "패스키를 추가하지 못했어요."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey removed."
+msgstr "패스키를 삭제했어요."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey renamed."
+msgstr "패스키 이름을 변경했어요."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkeys"
+msgstr "패스키"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
@@ -5240,6 +5351,7 @@ msgstr "원격 서버"
 #: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/MFARemoveAuthenticator.tsx
+#: components/modal/modals/PasskeyRemove.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
 msgstr "제거"
@@ -5281,6 +5393,15 @@ msgstr "멤버 제거"
 msgid "Remove other members' avatars"
 msgstr "다른 멤버의 아바타 제거"
 
+#. placeholder {0}: passkey.name
+#: components/app/interface/settings/user/Account.tsx
+msgid "Remove passkey {0}"
+msgstr "패스키 {0} 삭제"
+
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "Remove passkey?"
+msgstr "패스키를 삭제할까요?"
+
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "반응 제거"
@@ -5309,6 +5430,7 @@ msgstr "책상이나 마이크를 두드리는 소리를 없애요"
 
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/modal/modals/EditCategory.tsx
+#: components/modal/modals/PasskeyName.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename"
 msgstr "이름 변경"
@@ -5321,6 +5443,15 @@ msgstr "카테고리 이름 변경"
 #: components/modal/modals/EditEmoji.tsx
 msgid "Rename emoji"
 msgstr "이모지 이름 변경"
+
+#: components/modal/modals/PasskeyName.tsx
+msgid "Rename passkey"
+msgstr "패스키 이름 변경"
+
+#. placeholder {0}: passkey.name
+#: components/app/interface/settings/user/Account.tsx
+msgid "Rename passkey {0}"
+msgstr "패스키 {0} 이름 변경"
 
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename Session"
@@ -6138,6 +6269,14 @@ msgstr "가장 오래된 결과 {limit}개 표시 중"
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr "통화에서 누가 말하고 있는지 게임 화면 위에 보여줘요. 테두리 없는 창 모드와 창 모드 게임에서 작동하며, 독점 전체 화면에서는 작동하지 않아요."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Sign in and confirm actions with your fingerprint, face or device lock"
+msgstr "지문, 얼굴 또는 기기 잠금으로 로그인하고 작업을 확인해요"
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "Sign in with a passkey"
+msgstr "패스키로 로그인"
+
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Sign into AnyTalk"
@@ -6535,6 +6674,14 @@ msgstr "그 작업은 아무 효과가 없었어요."
 msgid "That code is not correct. Check it and try again."
 msgstr "코드가 올바르지 않아요. 확인한 후 다시 시도해 주세요."
 
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "That passkey was not accepted. Try again or sign in another way."
+msgstr "이 패스키는 허용되지 않았어요. 다시 시도하거나 다른 방법으로 로그인해 주세요."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That passkey was not accepted. Try again or use another method."
+msgstr "이 패스키는 허용되지 않았어요. 다시 시도하거나 다른 방법을 사용해 주세요."
+
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "That password is not correct. Check it and try again."
 msgstr "비밀번호가 올바르지 않아요. 확인한 후 다시 시도해 주세요."
@@ -6620,6 +6767,22 @@ msgstr "다른 기기에서 로그인이 거부되었어요."
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
 msgstr "네트워크 검사기는 AnyTalk이 보내고 받는 내용을 기록해서 Wireshark 같은 도구로 대조할 수 있게 해요. 기본적으로 꺼져 있고 어디로도 전송되지 않아요."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "The passkey request is ready. Choose Approve once more."
+msgstr "패스키 요청이 준비됐어요. 승인을 한 번 더 선택해 주세요."
+
+#: components/modal/modals/MFAFlow.tsx
+msgid "The passkey request is ready. Choose Confirm once more."
+msgstr "패스키 요청이 준비됐어요. 확인을 한 번 더 선택해 주세요."
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "The passkey request was renewed. Choose Sign in with a passkey once more."
+msgstr "패스키 요청이 갱신됐어요. 패스키로 로그인을 한 번 더 선택해 주세요."
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "The passkey was not created. Choose Create passkey to try again."
+msgstr "패스키를 만들지 못했어요. 패스키 만들기를 선택해 다시 시도해 주세요."
 
 #: components/i18n/errors.tsx
 msgid "The password is too short."
@@ -6718,6 +6881,10 @@ msgstr "이 코드는 다른 기기에서만 작동하는 주소(localhost)로 �
 msgid "This content is not available in your region."
 msgstr "이 콘텐츠는 내 지역에서 사용할 수 없어요."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "This device already has a passkey for your account."
+msgstr "이 기기에는 내 계정의 패스키가 이미 있어요."
+
 #: components/i18n/errors.tsx
 msgid "This feature is currently disabled."
 msgstr "이 기능은 현재 꺼져 있어요."
@@ -6746,6 +6913,10 @@ msgstr "내 대화의 시작이에요."
 #: components/ui/components/features/messaging/elements/ConversationStart.tsx
 msgid "This is the start of your notes."
 msgstr "내 노트의 시작이에요."
+
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "This is your last second factor, so two-factor authentication will be turned off."
+msgstr "마지막 두 번째 인증 수단이라서 2단계 인증이 꺼져요."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
@@ -6895,6 +7066,7 @@ msgstr "토널 스팟"
 msgid "Too Long"
 msgstr "너무 김"
 
+#: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Too many attempts. Wait a moment and try again."
 msgstr "시도 횟수가 너무 많아요. 잠시 기다렸다가 다시 시도해 주세요."
@@ -7203,6 +7375,10 @@ msgstr "업로드"
 msgid "URL"
 msgstr "URL"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a code instead"
+msgstr "대신 코드 사용"
+
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
 msgstr "코드 또는 초대 링크 사용"
@@ -7210,6 +7386,10 @@ msgstr "코드 또는 초대 링크 사용"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Use a game controller to move around AnyTalk. Works with Xbox, PlayStation, Switch and Steam Deck controllers."
 msgstr "게임 컨트롤러로 AnyTalk을 조작해 보세요. Xbox, PlayStation, Switch, Steam Deck 컨트롤러에서 작동해요."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a passkey instead"
+msgstr "대신 패스키 사용"
 
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Use a recovery code instead"
@@ -7230,6 +7410,10 @@ msgstr "대신 인증 앱 사용"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Use the graphics card to improve performance. Takes effect after you restart AnyTalk."
 msgstr "그래픽 카드를 사용해 성능을 향상해요. AnyTalk를 다시 시작하면 적용돼요."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Use this device or a security key to sign in"
+msgstr "이 기기 또는 보안 키로 로그인"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "User"

@@ -44,6 +44,11 @@ msgstr "dddd LT"
 msgid ":{0}: from {1}"
 msgstr ":{0}: ({1} より)"
 
+#. placeholder {0}: props.name
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "\"{0}\" will no longer work for signing in or confirming actions. You can add it again later."
+msgstr "「{0}」はログインや操作の確認に使えなくなります。後でもう一度追加できます。"
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "\"Copy Wireshark filter\" next to a server above puts a display filter for it on the clipboard. To line up times, set View, Time Display Format, UTC Date and Time of Day in Wireshark and compare with the absolute times in the exports. Browsers can hide the server name (Encrypted Client Hello, QUIC), so the filter may miss such connections."
 msgstr "上のサーバーの横にある「Wireshark フィルターをコピー」を押すと、そのサーバー用の表示フィルターがクリップボードにコピーされます。時刻を合わせるには、Wireshark で「View」→「Time Display Format」→「UTC Date and Time of Day」を選び、エクスポートの絶対時刻と比較してください。ブラウザーはサーバー名を隠すことがあるため(Encrypted Client Hello、QUIC)、フィルターで一致しない接続もあります。"
@@ -617,6 +622,10 @@ msgstr "追加"
 msgid "Add a new friend"
 msgstr "フレンドを追加"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Add a passkey"
+msgstr "パスキーを追加"
+
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Add Bot"
 msgstr "Botを追加"
@@ -642,6 +651,10 @@ msgstr "新しいメンバーをグループに追加できます"
 msgid "Add one of my recaps"
 msgstr "自分のリキャップを追加"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Add one to sign in without typing your password."
+msgstr "パスワードを入力せずにログインするには、追加してください。"
+
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Add reaction"
 msgstr "リアクションを追加"
@@ -653,6 +666,18 @@ msgstr "ステータスを設定"
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Add to folder"
 msgstr "フォルダに追加"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Added <0/>"
+#~ msgstr "追加日 <0/>"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Added <0/> · Last used <1/>"
+msgstr "追加日 <0/> · 最終使用 <1/>"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Added <0/> · Never used"
+msgstr "追加日 <0/> · 未使用"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Admin"
@@ -1256,6 +1281,9 @@ msgstr "現在、探索リクエストの状況を取得できません"
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/MFARemoveAuthenticator.tsx
 #: components/modal/modals/Onboarding.tsx
+#: components/modal/modals/PasskeyCreate.tsx
+#: components/modal/modals/PasskeyName.tsx
+#: components/modal/modals/PasskeyRemove.tsx
 #: components/modal/modals/PinMessage.tsx
 #: components/modal/modals/QrScanner.tsx
 #: components/modal/modals/RemoveMember.tsx
@@ -1450,6 +1478,18 @@ msgstr "リストからサーバーを選ぶと、チャンネルが表示され
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
 msgstr "ユーザー名を入力"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Choose Approve, then confirm with your passkey when your device asks."
+msgstr "「承認」を選び、デバイスの案内に従ってパスキーで確認してください。"
+
+#: components/modal/modals/MFAFlow.tsx
+msgid "Choose Confirm, then approve with your passkey when your device asks."
+msgstr "「確認」を選び、デバイスの案内に従ってパスキーで承認してください。"
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Choose Create passkey, then confirm with your device when it asks."
+msgstr "「パスキーを作成」を選び、デバイスの案内に従って確認してください。"
 
 #: components/modal/modals/Onboarding.tsx
 msgid "Choose username"
@@ -1677,6 +1717,7 @@ msgstr "コンテンツが規約に違反しています"
 #: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
+#: components/modal/modals/PasskeyName.tsx
 msgid "Continue"
 msgstr "続行"
 
@@ -1858,6 +1899,10 @@ msgstr "キーログの状態を読み取れませんでした。"
 msgid "Could not save this setting."
 msgstr "この設定を保存できませんでした。"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't add the passkey. Try again."
+msgstr "パスキーを追加できませんでした。もう一度お試しください。"
+
 #: components/instance/index.tsx
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "{hStr} から AnyTalk の設定を取得できませんでした。"
@@ -1888,9 +1933,21 @@ msgstr "ダウンロードを読み込めませんでした"
 msgid "Couldn't move them to {0}."
 msgstr "{0} に移動できませんでした。"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't remove the passkey. Try again."
+msgstr "パスキーを削除できませんでした。もう一度お試しください。"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't rename the passkey. Try again."
+msgstr "パスキーの名前を変更できませんでした。もう一度お試しください。"
+
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Couldn't set up call encryption. The server may need an update."
 msgstr "通話の暗号化を設定できませんでした。サーバーの更新が必要かもしれません。"
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "Couldn't sign in with a passkey. Try again or sign in another way."
+msgstr "パスキーでログインできませんでした。もう一度試すか、別の方法でログインしてください。"
 
 #: components/rtc/components/StreamNotices.tsx
 msgid "Couldn't start the stream."
@@ -2009,6 +2066,10 @@ msgstr "招待リンクを発行できます"
 msgid "Create or join a server"
 msgstr "サーバーを作成または参加"
 
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Create passkey"
+msgstr "パスキーを作成"
+
 #: components/modal/modals/CreateRole.tsx
 msgid "Create Role"
 msgstr "ロールを作成"
@@ -2025,6 +2086,10 @@ msgstr "サーバーの絵文字を作成できます"
 #: components/app/interface/settings/channel/webhooks/WebhooksList.tsx
 msgid "Create Webhook"
 msgstr "ウェブフックを作成"
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Create your passkey"
+msgstr "パスキーを作成"
 
 #: components/app/interface/settings/user/Sessions.tsx
 msgid "Created <0/>"
@@ -2893,6 +2958,10 @@ msgstr "3時間"
 msgid "For 8 hours"
 msgstr "8時間"
 
+#: components/modal/modals/PasskeyName.tsx
+msgid "For example the name of this device"
+msgstr "例：このデバイスの名前"
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frame rate"
 msgstr "フレームレート"
@@ -3485,6 +3554,10 @@ msgstr "言語"
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Last sync <0/>"
 msgstr "最後の同期は<0/>です"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Last used <0/>"
+#~ msgstr "最終使用 <0/>"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Latest"
@@ -4107,6 +4180,7 @@ msgstr "自分のボット"
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
+#: components/modal/modals/PasskeyName.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Name"
 msgstr "名前"
@@ -4114,6 +4188,10 @@ msgstr "名前"
 #: src/interface/servers/ServerOverview.tsx
 msgid "Name (A-Z)"
 msgstr "名前（A-Z）"
+
+#: components/modal/modals/PasskeyName.tsx
+msgid "Name your passkey"
+msgstr "パスキーに名前を付ける"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Navigation"
@@ -4142,6 +4220,10 @@ msgstr "ネットワークの種類"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
 msgstr "ニュートラル"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Never used"
+#~ msgstr "未使用"
 
 #: components/ui/components/features/messaging/elements/MessageDivider.tsx
 msgid "NEW"
@@ -4244,6 +4326,10 @@ msgstr "言語が見つかりません"
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "No matches"
 msgstr "一致なし"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "No passkeys yet"
+msgstr "パスキーはまだありません"
 
 #: components/app/interface/settings/user/Updates.tsx
 msgid "No patch notes for this version."
@@ -4618,6 +4704,31 @@ msgstr "BANを解除"
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Partial Outage"
 msgstr "一部障害"
+
+#: components/app/interface/settings/user/Account.tsx
+#: components/modal/modals/MFAFlow.tsx
+msgid "Passkey"
+msgstr "パスキー"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey added."
+msgstr "パスキーを追加しました。"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey not added."
+msgstr "パスキーを追加できませんでした。"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey removed."
+msgstr "パスキーを削除しました。"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey renamed."
+msgstr "パスキーの名前を変更しました。"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkeys"
+msgstr "パスキー"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
@@ -5132,6 +5243,7 @@ msgstr "リモートサーバー"
 #: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/MFARemoveAuthenticator.tsx
+#: components/modal/modals/PasskeyRemove.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
 msgstr "削除"
@@ -5173,6 +5285,15 @@ msgstr "メンバーを削除"
 msgid "Remove other members' avatars"
 msgstr "他のメンバーのアバターを変更できます"
 
+#. placeholder {0}: passkey.name
+#: components/app/interface/settings/user/Account.tsx
+msgid "Remove passkey {0}"
+msgstr "パスキー {0} を削除"
+
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "Remove passkey?"
+msgstr "パスキーを削除しますか？"
+
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "リアクションを削除"
@@ -5201,6 +5322,7 @@ msgstr "机やマイクをたたく音を取り除きます"
 
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/modal/modals/EditCategory.tsx
+#: components/modal/modals/PasskeyName.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename"
 msgstr "名前を変更"
@@ -5213,6 +5335,15 @@ msgstr "カテゴリー名を変更"
 #: components/modal/modals/EditEmoji.tsx
 msgid "Rename emoji"
 msgstr "絵文字の名前を変更"
+
+#: components/modal/modals/PasskeyName.tsx
+msgid "Rename passkey"
+msgstr "パスキーの名前を変更"
+
+#. placeholder {0}: passkey.name
+#: components/app/interface/settings/user/Account.tsx
+msgid "Rename passkey {0}"
+msgstr "パスキー {0} の名前を変更"
 
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename Session"
@@ -6024,6 +6155,14 @@ msgstr "最古の {limit} 件の結果を表示中"
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr "通話で誰が話しているかをゲームの上に表示します。ボーダーレスとウィンドウモードのゲームで動作し、排他的フルスクリーンでは動作しません。"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Sign in and confirm actions with your fingerprint, face or device lock"
+msgstr "指紋、顔、デバイスのロックでログインや操作の確認ができます"
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "Sign in with a passkey"
+msgstr "パスキーでログイン"
+
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Sign into AnyTalk"
@@ -6415,6 +6554,14 @@ msgstr "その操作は効果がありませんでした。"
 msgid "That code is not correct. Check it and try again."
 msgstr "コードが正しくありません。確認してもう一度お試しください。"
 
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "That passkey was not accepted. Try again or sign in another way."
+msgstr "このパスキーは受け付けられませんでした。もう一度試すか、別の方法でログインしてください。"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That passkey was not accepted. Try again or use another method."
+msgstr "このパスキーは受け付けられませんでした。もう一度試すか、別の方法を使ってください。"
+
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "That password is not correct. Check it and try again."
 msgstr "パスワードが正しくありません。確認してもう一度お試しください。"
@@ -6500,6 +6647,22 @@ msgstr "もう一方のデバイスでログインが拒否されました。"
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
 msgstr "ネットワークインスペクターは AnyTalk が送受信する内容を記録し、Wireshark などのツールと照合できるようにします。初期設定ではオフで、どこにも送信されません。"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "The passkey request is ready. Choose Approve once more."
+msgstr "パスキーのリクエストの準備ができました。もう一度「承認」を選んでください。"
+
+#: components/modal/modals/MFAFlow.tsx
+msgid "The passkey request is ready. Choose Confirm once more."
+msgstr "パスキーのリクエストの準備ができました。もう一度「確認」を選んでください。"
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "The passkey request was renewed. Choose Sign in with a passkey once more."
+msgstr "パスキーのリクエストが更新されました。もう一度「パスキーでログイン」を選んでください。"
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "The passkey was not created. Choose Create passkey to try again."
+msgstr "パスキーを作成できませんでした。「パスキーを作成」を選んで、もう一度お試しください。"
 
 #: components/i18n/errors.tsx
 msgid "The password is too short."
@@ -6598,6 +6761,10 @@ msgstr "このコードは、もう一方のデバイスでしか使えないア
 msgid "This content is not available in your region."
 msgstr "このコンテンツはお住まいの地域では利用できません。"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "This device already has a passkey for your account."
+msgstr "このデバイスには、あなたのアカウントのパスキーがすでにあります。"
+
 #: components/i18n/errors.tsx
 msgid "This feature is currently disabled."
 msgstr "この機能は現在無効です。"
@@ -6626,6 +6793,10 @@ msgstr "これが会話の始まりです。"
 #: components/ui/components/features/messaging/elements/ConversationStart.tsx
 msgid "This is the start of your notes."
 msgstr "これがノートの始まりです。"
+
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "This is your last second factor, so two-factor authentication will be turned off."
+msgstr "これが最後の第2要素のため、2要素認証はオフになります。"
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
@@ -6775,6 +6946,7 @@ msgstr "トーナルスポット"
 msgid "Too Long"
 msgstr "長すぎます"
 
+#: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Too many attempts. Wait a moment and try again."
 msgstr "試行回数が多すぎます。しばらく待ってからもう一度お試しください。"
@@ -7083,6 +7255,10 @@ msgstr "アップロード"
 msgid "URL"
 msgstr "URL"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a code instead"
+msgstr "代わりにコードを使う"
+
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
 msgstr "コードまたは招待リンクを使う"
@@ -7090,6 +7266,10 @@ msgstr "コードまたは招待リンクを使う"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Use a game controller to move around AnyTalk. Works with Xbox, PlayStation, Switch and Steam Deck controllers."
 msgstr "ゲームコントローラーでAnyTalkを操作できます。Xbox、PlayStation、Switch、Steam Deckのコントローラーに対応しています。"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a passkey instead"
+msgstr "代わりにパスキーを使う"
 
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Use a recovery code instead"
@@ -7110,6 +7290,10 @@ msgstr "代わりに認証アプリを使う"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Use the graphics card to improve performance. Takes effect after you restart AnyTalk."
 msgstr "グラフィックカードを使ってパフォーマンスを向上させます。AnyTalk の再起動後に反映されます。"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Use this device or a security key to sign in"
+msgstr "このデバイスまたはセキュリティキーでログイン"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "User"

@@ -44,6 +44,11 @@ msgstr "dddd [在] LT"
 msgid ":{0}: from {1}"
 msgstr ":{0}:，來自 {1}"
 
+#. placeholder {0}: props.name
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "\"{0}\" will no longer work for signing in or confirming actions. You can add it again later."
+msgstr ""
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "\"Copy Wireshark filter\" next to a server above puts a display filter for it on the clipboard. To line up times, set View, Time Display Format, UTC Date and Time of Day in Wireshark and compare with the absolute times in the exports. Browsers can hide the server name (Encrypted Client Hello, QUIC), so the filter may miss such connections."
 msgstr ""
@@ -668,6 +673,10 @@ msgstr "添加"
 msgid "Add a new friend"
 msgstr "新增好友"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Add a passkey"
+msgstr ""
+
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Add Bot"
 msgstr "新增機器人"
@@ -693,6 +702,10 @@ msgstr "將新成員加入群組"
 msgid "Add one of my recaps"
 msgstr "加入我的一份回顧"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Add one to sign in without typing your password."
+msgstr ""
+
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Add reaction"
 msgstr "新增表情回應"
@@ -704,6 +717,18 @@ msgstr "添加狀態文字"
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Add to folder"
 msgstr "加入資料夾"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Added <0/>"
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Added <0/> · Last used <1/>"
+msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Added <0/> · Never used"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Admin"
@@ -1313,6 +1338,9 @@ msgstr "目前無法取得探索申請狀態"
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/MFARemoveAuthenticator.tsx
 #: components/modal/modals/Onboarding.tsx
+#: components/modal/modals/PasskeyCreate.tsx
+#: components/modal/modals/PasskeyName.tsx
+#: components/modal/modals/PasskeyRemove.tsx
 #: components/modal/modals/PinMessage.tsx
 #: components/modal/modals/QrScanner.tsx
 #: components/modal/modals/RemoveMember.tsx
@@ -1510,6 +1538,18 @@ msgstr ""
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
 msgstr "選擇使用者名稱"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Choose Approve, then confirm with your passkey when your device asks."
+msgstr ""
+
+#: components/modal/modals/MFAFlow.tsx
+msgid "Choose Confirm, then approve with your passkey when your device asks."
+msgstr ""
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Choose Create passkey, then confirm with your device when it asks."
+msgstr ""
 
 #: components/modal/modals/Onboarding.tsx
 msgid "Choose username"
@@ -1737,6 +1777,7 @@ msgstr "內容違反一條或多條規定"
 #: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
+#: components/modal/modals/PasskeyName.tsx
 msgid "Continue"
 msgstr "繼續"
 
@@ -1918,6 +1959,10 @@ msgstr ""
 msgid "Could not save this setting."
 msgstr "無法儲存此設定。"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't add the passkey. Try again."
+msgstr ""
+
 #: components/instance/index.tsx
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "無法從 {hStr} 取得 AnyTalk 設定。"
@@ -1948,8 +1993,20 @@ msgstr "無法載入下載項目"
 msgid "Couldn't move them to {0}."
 msgstr "無法將其移至 {0}。"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't remove the passkey. Try again."
+msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't rename the passkey. Try again."
+msgstr ""
+
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Couldn't set up call encryption. The server may need an update."
+msgstr ""
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "Couldn't sign in with a passkey. Try again or sign in another way."
 msgstr ""
 
 #: components/rtc/components/StreamNotices.tsx
@@ -2069,6 +2126,10 @@ msgstr "建立邀請供他人使用"
 msgid "Create or join a server"
 msgstr "建立或加入伺服器"
 
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Create passkey"
+msgstr ""
+
 #: components/modal/modals/CreateRole.tsx
 msgid "Create Role"
 msgstr "建立身分組"
@@ -2085,6 +2146,10 @@ msgstr "建立伺服器表情符號"
 #: components/app/interface/settings/channel/webhooks/WebhooksList.tsx
 msgid "Create Webhook"
 msgstr "建立 Webhook"
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Create your passkey"
+msgstr ""
 
 #: components/app/interface/settings/user/Sessions.tsx
 msgid "Created <0/>"
@@ -2956,6 +3021,10 @@ msgstr "3 小時"
 msgid "For 8 hours"
 msgstr "8 小時"
 
+#: components/modal/modals/PasskeyName.tsx
+msgid "For example the name of this device"
+msgstr ""
+
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frame rate"
 msgstr "畫面更新率"
@@ -3554,6 +3623,10 @@ msgstr "語言"
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Last sync <0/>"
 msgstr "上次同步 <0/>"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Last used <0/>"
+#~ msgstr ""
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Latest"
@@ -4176,12 +4249,17 @@ msgstr "我的機器人"
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
+#: components/modal/modals/PasskeyName.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Name"
 msgstr "名稱"
 
 #: src/interface/servers/ServerOverview.tsx
 msgid "Name (A-Z)"
+msgstr ""
+
+#: components/modal/modals/PasskeyName.tsx
+msgid "Name your passkey"
 msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
@@ -4211,6 +4289,10 @@ msgstr ""
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
 msgstr "中性"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Never used"
+#~ msgstr ""
 
 #: components/ui/components/features/messaging/elements/MessageDivider.tsx
 msgid "NEW"
@@ -4312,6 +4394,10 @@ msgstr "找不到語言"
 
 #: components/app/interface/settings/user/developer/traffic/LiveView.tsx
 msgid "No matches"
+msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "No passkeys yet"
 msgstr ""
 
 #: components/app/interface/settings/user/Updates.tsx
@@ -4687,6 +4773,31 @@ msgstr "解除使用者停權"
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Partial Outage"
 msgstr "部分中斷"
+
+#: components/app/interface/settings/user/Account.tsx
+#: components/modal/modals/MFAFlow.tsx
+msgid "Passkey"
+msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey added."
+msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey not added."
+msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey removed."
+msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey renamed."
+msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkeys"
+msgstr ""
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
@@ -5204,6 +5315,7 @@ msgstr "遠端伺服器"
 #: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
 #: components/modal/modals/MFARemoveAuthenticator.tsx
+#: components/modal/modals/PasskeyRemove.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
 msgstr "移除"
@@ -5245,6 +5357,15 @@ msgstr "移除成員"
 msgid "Remove other members' avatars"
 msgstr "移除其他成員的大頭貼"
 
+#. placeholder {0}: passkey.name
+#: components/app/interface/settings/user/Account.tsx
+msgid "Remove passkey {0}"
+msgstr ""
+
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "Remove passkey?"
+msgstr ""
+
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
 msgstr "移除表情回應"
@@ -5273,6 +5394,7 @@ msgstr "消除敲擊桌面或麥克風的聲音"
 
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/modal/modals/EditCategory.tsx
+#: components/modal/modals/PasskeyName.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename"
 msgstr "重新命名"
@@ -5285,6 +5407,15 @@ msgstr "重新命名分類"
 #: components/modal/modals/EditEmoji.tsx
 msgid "Rename emoji"
 msgstr "重新命名表情符號"
+
+#: components/modal/modals/PasskeyName.tsx
+msgid "Rename passkey"
+msgstr ""
+
+#. placeholder {0}: passkey.name
+#: components/app/interface/settings/user/Account.tsx
+msgid "Rename passkey {0}"
+msgstr ""
 
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename Session"
@@ -6102,6 +6233,14 @@ msgstr ""
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr ""
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Sign in and confirm actions with your fingerprint, face or device lock"
+msgstr ""
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "Sign in with a passkey"
+msgstr ""
+
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Sign into AnyTalk"
@@ -6499,6 +6638,14 @@ msgstr "該操作沒有任何效果。"
 msgid "That code is not correct. Check it and try again."
 msgstr ""
 
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "That passkey was not accepted. Try again or sign in another way."
+msgstr ""
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That passkey was not accepted. Try again or use another method."
+msgstr ""
+
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "That password is not correct. Check it and try again."
 msgstr ""
@@ -6583,6 +6730,22 @@ msgstr ""
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
+msgstr ""
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "The passkey request is ready. Choose Approve once more."
+msgstr ""
+
+#: components/modal/modals/MFAFlow.tsx
+msgid "The passkey request is ready. Choose Confirm once more."
+msgstr ""
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "The passkey request was renewed. Choose Sign in with a passkey once more."
+msgstr ""
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "The passkey was not created. Choose Create passkey to try again."
 msgstr ""
 
 #: components/i18n/errors.tsx
@@ -6682,6 +6845,10 @@ msgstr ""
 msgid "This content is not available in your region."
 msgstr "此內容在你的地區無法使用。"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "This device already has a passkey for your account."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "This feature is currently disabled."
 msgstr "此功能目前已停用。"
@@ -6710,6 +6877,10 @@ msgstr "這裡是聊天室的起始。"
 #: components/ui/components/features/messaging/elements/ConversationStart.tsx
 msgid "This is the start of your notes."
 msgstr "這裡是您筆記的開始。"
+
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "This is your last second factor, so two-factor authentication will be turned off."
+msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
@@ -6859,6 +7030,7 @@ msgstr "Tonal Spot"
 msgid "Too Long"
 msgstr "太長"
 
+#: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Too many attempts. Wait a moment and try again."
 msgstr ""
@@ -7167,6 +7339,10 @@ msgstr ""
 msgid "URL"
 msgstr ""
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a code instead"
+msgstr ""
+
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
 msgstr "使用邀請碼或邀請連結"
@@ -7174,6 +7350,10 @@ msgstr "使用邀請碼或邀請連結"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Use a game controller to move around AnyTalk. Works with Xbox, PlayStation, Switch and Steam Deck controllers."
 msgstr "使用遊戲控制器在 AnyTalk 中操作。支援 Xbox、PlayStation、Switch 與 Steam Deck 控制器。"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a passkey instead"
+msgstr ""
 
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Use a recovery code instead"
@@ -7194,6 +7374,10 @@ msgstr ""
 #: components/app/interface/settings/user/Native.tsx
 msgid "Use the graphics card to improve performance. Takes effect after you restart AnyTalk."
 msgstr "使用顯示卡來提升效能。重新啟動 AnyTalk 後生效。"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Use this device or a security key to sign in"
+msgstr ""
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "User"
