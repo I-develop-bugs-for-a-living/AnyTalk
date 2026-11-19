@@ -23,7 +23,7 @@ import { stoatSinkName } from "@revolt/rtc";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 /**
- * The audio devices (inputs or outputs) to offer: without the virtual
+ * The devices (audio inputs, outputs or cameras) to offer: without the virtual
  * device, the system default first.
  * @param devices Devices as listed by the browser
  * @returns Devices to offer
@@ -50,7 +50,7 @@ const sharedLists = new Map<string, Accessor<MediaDeviceInfo[]>>();
  * @param kind Device kind
  * @returns Devices as offered by the app, following plug and unplug
  */
-function sharedDeviceList(kind: "audioinput" | "audiooutput") {
+function sharedDeviceList(kind: "audioinput" | "audiooutput" | "videoinput") {
   let list = sharedLists.get(kind);
   if (!list) {
     list = createRoot(() => {
@@ -73,7 +73,7 @@ function sharedDeviceList(kind: "audioinput" | "audiooutput") {
  * @param preferred Preferred device ID, if any
  */
 export function createDeviceList(
-  kind: "audioinput" | "audiooutput",
+  kind: "audioinput" | "audiooutput" | "videoinput",
   preferred: () => string | undefined,
 ) {
   const devices = sharedDeviceList(kind);
