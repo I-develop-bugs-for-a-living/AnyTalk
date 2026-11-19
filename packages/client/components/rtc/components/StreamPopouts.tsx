@@ -13,7 +13,6 @@ import {
   TrackReference,
   TrackReferenceOrPlaceholder,
   useIsMuted,
-  VideoTrack,
 } from "solid-livekit-components";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
@@ -27,6 +26,7 @@ import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import { useVoice } from "../state";
 
+import { CallVideoTrack } from "./CallVideoTrack";
 import { createStreamZoom, ZoomableStream } from "./ZoomableStream";
 
 /** How long a stream may be missing before its window is closed */
@@ -220,7 +220,7 @@ function PopoutContent(props: {
         }
       >
         <ZoomableStream zoom={zoom} belowBar>
-          <VideoTrack
+          <CallVideoTrack
             style={{
               width: "100%",
               height: "100%",

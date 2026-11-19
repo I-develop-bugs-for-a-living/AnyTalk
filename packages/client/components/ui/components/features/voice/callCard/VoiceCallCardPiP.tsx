@@ -2,12 +2,11 @@ import {
   TrackLoop,
   TrackReference,
   useTrackRefContext,
-  VideoTrack,
 } from "solid-livekit-components";
 
 import { styled } from "styled-system/jsx";
 
-import { useVoice } from "@revolt/rtc";
+import { CallVideoTrack, useVoice } from "@revolt/rtc";
 
 import { VoiceCallCardActions } from "./VoiceCallCardActions";
 import { VoiceCallCardStatus } from "./VoiceCallCardStatus";
@@ -49,7 +48,7 @@ function MiniVideo() {
   const track = useTrackRefContext();
 
   return (
-    <VideoTrack
+    <CallVideoTrack
       style={{
         position: "absolute",
         top: 0,

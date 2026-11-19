@@ -7,6 +7,7 @@ import { getVirtmic } from "./virtualMic";
 
 export { useVoice, VoiceContext } from "./state";
 
+export { CallVideoTrack } from "./components/CallVideoTrack";
 export { InRoom } from "./components/InRoom";
 export { RoomAudioManager } from "./components/RoomAudioManager";
 export {

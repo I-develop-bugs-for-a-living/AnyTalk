@@ -1,6 +1,7 @@
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { createFormControl, createFormGroup } from "solid-forms";
 
+import { CallVideoTrack } from "@revolt/rtc";
 import { useState } from "@revolt/state";
 import {
   ScreenShareFrameRate,
@@ -9,7 +10,6 @@ import {
   closestScreenShareResolution,
 } from "@revolt/state/stores/Voice";
 import { Column, Dialog, DialogProps, Form2 } from "@revolt/ui";
-import { VideoTrack } from "solid-livekit-components";
 
 import { Show } from "solid-js";
 import { Modals } from "../types";
@@ -93,7 +93,7 @@ export function ScreenShareSettingsModal(
         fallback={
           <Show when={props.trackReference}>
             {(trackReference) => (
-              <VideoTrack
+              <CallVideoTrack
                 trackRef={trackReference()}
                 style={{
                   padding: "var(--gap-md)",
