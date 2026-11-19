@@ -4062,8 +4062,11 @@ class Voice {
   #startingGame?: string;
 
   private onErr(e: unknown) {
-    if ((e as Error).name !== "NotAllowedError")
+    if ((e as Error).name !== "NotAllowedError") {
+      // the modal only shows the message: keep the original error and stack
+      console.error("[rtc]", e);
       this.openModal({ type: "error2", error: e });
+    }
   }
 }
 

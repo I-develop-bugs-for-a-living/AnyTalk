@@ -7,6 +7,7 @@ import {
   createSignal,
   on,
   onCleanup,
+  untrack,
   useContext,
 } from "solid-js";
 
@@ -390,8 +391,13 @@ export function floating(element: HTMLElement, accessor: Accessor<Props>) {
             element.removeEventListener("focusin", onFocusIn);
             element.removeEventListener("focusout", onFocusOut);
             element.removeEventListener("keydown", onEscape);
-            // the tooltip content is gone, don't leave it open
-            trigger("tooltip", false);
+            // the tooltip content is gone, don't leave it open. Not through
+            // trigger(): it reads the directive's config, whose getters can
+            // read memos of components that are mid-disposal, which re-runs
+            // (and cleans) a parent whose cleanup loop is still running and
+            // throws "node.owned[i]" on null when leaving a call.
+            if (untrack(show)?.tooltip) setShow(undefined);
+            clearTimeout(tTmr);
             element.removeEventListener("mouseenter", onMouseEnter);
             element.removeEventListener("mouseleave", onMouseLeave);
             element.removeEventListener("touchstart", onTouch);
