@@ -40,6 +40,20 @@ ipcRenderer.on(IPC.pickerCancel, (_event, id: number) => {
   if (pickerId === id) pickerId = undefined;
 });
 
+/** Where the page wants the sound of a per-process capture, by capture id. */
+const appAudioListeners = new Map<
+  number,
+  { chunk: (data: Float32Array) => void; ended: (message: string) => void }
+>();
+ipcRenderer.on(IPC.appAudioChunk, (_event, id: number, data: Float32Array) => {
+  appAudioListeners.get(id)?.chunk(data);
+});
+ipcRenderer.on(IPC.appAudioEnded, (_event, id: number, message: string) => {
+  const listener = appAudioListeners.get(id);
+  appAudioListeners.delete(id);
+  listener?.ended(message);
+});
+
 /** Cached settings, so the client can read them synchronously. */
 const initialConfig: DesktopConfig | null = ipcRenderer.sendSync(
   IPC.configGetSync,
@@ -100,6 +114,7 @@ function exposeNative() {
     },
     platform: info.platform,
     isWayland: () => info.isWayland,
+    processLoopback: info.processLoopback,
     desktopEnvironment: info.desktopEnvironment,
     minimise: () => invoke(IPC.windowMinimise),
     maximise: () => invoke(IPC.windowMaximise),
@@ -168,6 +183,24 @@ function exposeNative() {
     // Present only in shells that have the overlay, the client checks for it
     setOverlayState: (state: OverlayState) =>
       invoke<void>(IPC.overlaySet, state),
+    // Per-process audio of a window share (Windows, missing in older shells).
+    // `attachAppAudio` resolves with the capture's id once chunks flow to
+    // `chunk`, or null when the share has no such audio.
+    attachAppAudio: async (
+      chunk: (data: Float32Array) => void,
+      ended: (message: string) => void,
+    ) => {
+      // chunks only flow after the attach and arrive as later events than
+      // this reply, so registering once the id is known loses none
+      const id = await invoke<number | null>(IPC.appAudioAttach);
+      if (id === null) return null;
+      appAudioListeners.set(id, { chunk, ended });
+      return id;
+    },
+    stopAppAudio: (id: number) => {
+      appAudioListeners.delete(id);
+      return invoke<void>(IPC.appAudioStop, id);
+    },
     setNextScreenSource: (sourceId: string | null) =>
       invoke<void>(IPC.screenSourceSet, sourceId),
     // Network inspector extras, missing in older desktop versions

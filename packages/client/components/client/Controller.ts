@@ -18,6 +18,7 @@ import {
   probeSocket,
 } from "./lifecycleWake";
 import { killServiceWorkerSubscription } from "./NotificationsController";
+import { finishPasskeyLogin, startPasskeyLogin } from "./passkeyApi";
 import {
   QrApiError,
   createQrRequest,
@@ -618,7 +619,7 @@ export default class ClientController {
 
     // Prompt for MFA verification if necessary
     if (session.result === "MFA") {
-      const { allowed_methods } = session;
+      const { allowed_methods, ticket } = session;
       while (session.result === "MFA") {
         const mfa_response: API.MFAResponse | undefined = await new Promise(
           (callback) =>
@@ -626,6 +627,8 @@ export default class ClientController {
               type: "mfa_flow",
               state: "unknown",
               available_methods: allowed_methods,
+              ticket,
+              api: this.api,
               callback,
             }),
         );
@@ -649,6 +652,43 @@ export default class ClientController {
         throw "Cancelled";
       }
     }
+
+    this.finishLogin(session);
+  }
+
+  /**
+   * Sign in without a password: ask the server for a passkey challenge
+   */
+  startPasskeyLogin() {
+    return startPasskeyLogin(this.api);
+  }
+
+  /**
+   * Finish a passkey sign-in with the credential the browser made. A passkey
+   * sign-in is a full sign-in, so there is no second step afterwards.
+   * @param challenge_id Challenge the credential answers
+   * @param credential Credential from the browser
+   */
+  async finishPasskeyLogin(
+    challenge_id: string,
+    credential: Record<string, unknown>,
+  ) {
+    const session = await finishPasskeyLogin(
+      this.api,
+      challenge_id,
+      credential,
+      this.friendlyName(),
+    );
+    this.finishLogin(session);
+  }
+
+  /**
+   * Act on the answer to a login: stop for a disabled account, otherwise
+   * start the session. Shared by password and passkey sign-in.
+   * @param session Answer from the server
+   */
+  private finishLogin(session: API.ResponseLogin) {
+    if (session.result === "MFA") throw "Cancelled";
 
     if (session.result === "Disabled") {
       // TODO

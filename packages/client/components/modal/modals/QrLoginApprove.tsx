@@ -2,6 +2,8 @@ import {
   Match,
   Show,
   Switch,
+  createEffect,
+  createMemo,
   createSignal,
   onCleanup,
   onMount,
@@ -12,25 +14,36 @@ import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
 import {
+  type PasskeyChallenge,
+  answerWithChallenge,
+  startWebAuthnMfa,
+} from "@revolt/client/passkeyApi";
+import {
+  type QrApproveProof,
   type QrInfo,
   QrApiError,
   approveQrRequest,
   denyQrRequest,
   describeUserAgent,
   getQrInfo,
+  qrApproveOptions,
   shouldDenyOnClose,
 } from "@revolt/client/qrApi";
+import {
+  isPromptCancelled,
+  isWebAuthnSupported,
+} from "@revolt/client/webauthn";
 import {
   Button,
   CircularProgress,
   Column,
   Dialog,
   DialogProps,
+  Symbol,
   Text,
   TextField,
   Time,
 } from "@revolt/ui";
-import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import { Modals } from "../types";
 
@@ -62,6 +75,9 @@ const Facts = styled("dl", {
   },
 });
 
+/** Way of proving ownership in the approve dialog */
+type ProofMode = "password" | "code" | "passkey";
+
 /**
  * Modal shown on the logged-in device after scanning a login QR code: shows
  * which device asks to log in, and lets the user approve or deny it.
@@ -75,7 +91,8 @@ export function QrLoginApproveModal(
   const [info, setInfo] = createSignal<QrInfo>();
   const [loadError, setLoadError] = createSignal<string>();
   const [code, setCode] = createSignal("");
-  const [useRecovery, setUseRecovery] = createSignal(false);
+  const [useRecovery, setUseRecovery] = createSignal<boolean>();
+  const [chosenMode, setChosenMode] = createSignal<ProofMode>();
   const [busy, setBusy] = createSignal(false);
   const [error, setError] = createSignal<string>();
 
@@ -90,7 +107,10 @@ export function QrLoginApproveModal(
       return t`This login request has expired or was already answered. Ask the other device to show a new QR code.`;
     }
     if (status === 401 && approving) {
-      return method() === "password"
+      if (mode() === "passkey") {
+        return t`That passkey was not accepted. Try again or use another method.`;
+      }
+      return mode() === "password"
         ? t`That password is not correct. Check it and try again.`
         : t`That code is not correct. Check it and try again.`;
     }
@@ -110,7 +130,11 @@ export function QrLoginApproveModal(
   // Set once the user approved or denied, so closing does not deny again
   let answered = false;
 
-  onCleanup(() => setCode(""));
+  let disposed = false;
+  onCleanup(() => {
+    disposed = true;
+    setCode("");
+  });
 
   onMount(async () => {
     try {
@@ -120,36 +144,123 @@ export function QrLoginApproveModal(
     }
   });
 
-  /** Proof the approval needs, if any */
-  const method = () => {
-    return info()?.method;
-  };
+  /** Proofs the server accepts for this approval */
+  const options = createMemo(() => {
+    const current = info();
+    return current ? qrApproveOptions(current) : undefined;
+  });
+
+  /** Whether a passkey can be offered here: server allows it and browser can */
+  const passkeyPossible = () => !!options()?.passkey && isWebAuthnSupported();
+
+  /** Whether a typed code can be offered here */
+  const codePossible = () => !!options()?.totp || !!options()?.recovery;
+
+  /** Proof the approval needs, if any: the user's choice or the best default */
+  const mode = createMemo<ProofMode | undefined>(() => {
+    const opts = options();
+    if (!opts) return undefined;
+    const chosen = chosenMode();
+    if (chosen) return chosen;
+    if (opts.password) return "password";
+    if (passkeyPossible()) return "passkey";
+    if (codePossible()) return "code";
+    // the server wants a passkey this browser cannot give: show it anyway so
+    // the failure is explained instead of offering nothing
+    return opts.passkey ? "passkey" : undefined;
+  });
+
+  // Passkey challenge fetched as soon as passkey mode shows, so Approve only
+  // has to open the browser prompt (Safari needs that)
+  let passkeyChallenge: { challenge: PasskeyChallenge; at: number } | undefined;
+
+  /** Fetch a challenge ahead of Approve; failures are retried on Approve */
+  async function prefetchPasskey() {
+    passkeyChallenge = undefined;
+    try {
+      const challenge = await startWebAuthnMfa(client().api);
+      // ignore the answer if the user moved on or the dialog is gone
+      if (disposed || mode() !== "passkey") return;
+      passkeyChallenge = { challenge, at: Date.now() };
+    } catch {
+      // Approve fetches one itself
+    }
+  }
+
+  // True while the challenge for the "tap again" step is being fetched
+  let fetching = false;
+
+  // Set when a challenge had to be fetched on Approve, so the user taps again
+  const [tapAgain, setTapAgain] = createSignal(false);
+
+  createEffect(() => {
+    setTapAgain(false);
+    if (mode() === "passkey") prefetchPasskey();
+  });
+
+  /** Whether the typed code is a recovery code (the only kind if no app) */
+  const recoveryMode = () => useRecovery() ?? !options()?.totp;
 
   /** Approve the request, with the entered code if needed */
   async function approve() {
-    if (busy()) return;
+    if (busy() || fetching) return;
     const value = code().trim().replace(/\s/g, "");
-    if (method() && !value) return;
+    if ((mode() === "password" || mode() === "code") && !value) return;
 
     setBusy(true);
     setError(undefined);
     try {
-      await approveQrRequest(
-        client().api,
-        props.id,
-        method() === "password"
-          ? { password: code() }
-          : method()
-            ? useRecovery()
-              ? { recovery_code: value }
-              : { totp_code: value }
-            : undefined,
-      );
+      let proof: QrApproveProof | undefined;
+      if (mode() === "password") {
+        proof = { password: code() };
+      } else if (mode() === "code") {
+        proof = recoveryMode()
+          ? { recovery_code: value }
+          : { totp_code: value };
+      } else if (mode() === "passkey") {
+        // the browser asks for the passkey; a dismissed prompt changes nothing
+        const stored =
+          passkeyChallenge && Date.now() - passkeyChallenge.at < 100_000
+            ? passkeyChallenge
+            : undefined;
+        if (!stored) {
+          // Safari only opens the passkey prompt straight from a tap, and
+          // the fetch below uses that up. So fetch now, keep the challenge
+          // and ask for one more tap instead of failing silently.
+          passkeyChallenge = undefined;
+          fetching = true;
+          let challenge;
+          try {
+            challenge = await startWebAuthnMfa(client().api);
+          } finally {
+            fetching = false;
+          }
+          if (disposed) return;
+          passkeyChallenge = { challenge, at: Date.now() };
+          setTapAgain(true);
+          return;
+        }
+        setTapAgain(false);
+        passkeyChallenge = undefined;
+        try {
+          // no await before this call: the tap must reach the browser
+          proof = await answerWithChallenge(stored.challenge);
+        } catch (err) {
+          // not spent by a dismissed prompt: keep the challenge
+          if (isPromptCancelled(err)) passkeyChallenge = stored;
+          throw err;
+        }
+        if (!proof) return;
+      }
+      await approveQrRequest(client().api, props.id, proof);
       // Refresh the session list in case settings are open
       client().sessions.fetch();
       answered = true;
       props.onClose();
     } catch (err) {
+      if (isPromptCancelled(err)) return;
+      // a failed attempt spent the challenge: get a new one
+      if (mode() === "passkey") prefetchPasskey();
       if (err instanceof QrApiError && err.status === 404) {
         // Too many wrong answers, or the request expired: nothing left to try
         setLoadError(describe(err, true));
@@ -211,7 +322,9 @@ export function QrLoginApproveModal(
                   return false;
                 },
                 isDisabled:
-                  busy() || (method() !== undefined && code().trim() === ""),
+                  busy() ||
+                  ((mode() === "password" || mode() === "code") &&
+                    code().trim() === ""),
               },
             ]
           : [{ text: <Trans>Close</Trans> }]
@@ -268,7 +381,7 @@ export function QrLoginApproveModal(
                 </Text>
               </Warning>
 
-              <Show when={method() === "password"}>
+              <Show when={mode() === "password"}>
                 <Text>
                   <Trans>
                     Enter your account password to approve this login.
@@ -283,30 +396,72 @@ export function QrLoginApproveModal(
                   disabled={busy()}
                 />
               </Show>
-              <Show when={method() === "totp_or_recovery"}>
+              <Show when={mode() === "code"}>
                 <TextField
                   label={
-                    useRecovery() ? t`Recovery code` : t`Authenticator code`
+                    recoveryMode() ? t`Recovery code` : t`Authenticator code`
                   }
                   value={code()}
                   onInput={(e) => setCode(e.currentTarget.value)}
-                  inputmode={useRecovery() ? "text" : "numeric"}
+                  inputmode={recoveryMode() ? "text" : "numeric"}
                   autocomplete="one-time-code"
                   disabled={busy()}
                 />
+                <Show when={options()?.totp && options()?.recovery}>
+                  <Button
+                    variant="text"
+                    onPress={() => {
+                      setUseRecovery(!recoveryMode());
+                      setCode("");
+                    }}
+                  >
+                    <Show
+                      when={recoveryMode()}
+                      fallback={<Trans>Use a recovery code instead</Trans>}
+                    >
+                      <Trans>Use the authenticator app instead</Trans>
+                    </Show>
+                  </Button>
+                </Show>
+              </Show>
+              <Show when={mode() === "passkey"}>
+                <Text>
+                  <Trans>
+                    Choose Approve, then confirm with your passkey when your
+                    device asks.
+                  </Trans>
+                </Text>
+                <Show when={tapAgain()}>
+                  <div role="status">
+                    <Text>
+                      <Trans>
+                        The passkey request is ready. Choose Approve once more.
+                      </Trans>
+                    </Text>
+                  </div>
+                </Show>
+              </Show>
+              {/* switch between the ways to prove it is you */}
+              <Show when={mode() === "code" && passkeyPossible()}>
                 <Button
                   variant="text"
                   onPress={() => {
-                    setUseRecovery(!useRecovery());
+                    setChosenMode("passkey");
                     setCode("");
                   }}
                 >
-                  <Show
-                    when={useRecovery()}
-                    fallback={<Trans>Use a recovery code instead</Trans>}
-                  >
-                    <Trans>Use the authenticator app instead</Trans>
-                  </Show>
+                  <Trans>Use a passkey instead</Trans>
+                </Button>
+              </Show>
+              <Show when={mode() === "passkey" && codePossible()}>
+                <Button
+                  variant="text"
+                  onPress={() => {
+                    setChosenMode("code");
+                    setCode("");
+                  }}
+                >
+                  <Trans>Use a code instead</Trans>
                 </Button>
               </Show>
 

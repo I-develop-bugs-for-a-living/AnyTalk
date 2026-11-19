@@ -10,7 +10,6 @@ import {
   useEnsureParticipant,
   useIsMuted,
   useTrackRefContext,
-  VideoTrack,
 } from "solid-livekit-components";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
@@ -21,6 +20,7 @@ import { styled } from "styled-system/jsx";
 import { UserContextMenu } from "@revolt/app";
 import { useUser } from "@revolt/markdown/users";
 import {
+  CallVideoTrack,
   createStreamZoom,
   streamAppOf,
   useFastIsSpeaking,
@@ -364,7 +364,7 @@ export function ParticipantTile(props: TileProps) {
                 A popped out stream is drawn in its own window instead. */}
             <Show when={!poppedOut()}>
               <ZoomableStream zoom={zoom} hidePill>
-                <VideoTrack
+                <CallVideoTrack
                   style={{
                     "grid-area": "1/1",
                     "object-fit": "contain",

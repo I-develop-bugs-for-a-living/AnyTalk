@@ -7,6 +7,7 @@ import {
   createSignal,
   on,
   onCleanup,
+  untrack,
   useContext,
 } from "solid-js";
 
@@ -321,6 +322,26 @@ export function floating(element: HTMLElement, accessor: Accessor<Props>) {
     trigger("tooltip", false);
   }
 
+  /** Keyboard focus shows opt-in tooltips (showOnFocus) like hovering does */
+  function onFocusIn(e: FocusEvent) {
+    if (e.target === element && element.matches(":focus-visible")) {
+      trigger("tooltip", true);
+      element.addEventListener("keydown", onEscape);
+    }
+  }
+
+  function onFocusOut(e: FocusEvent) {
+    if (e.target === element) {
+      trigger("tooltip", false);
+      element.removeEventListener("keydown", onEscape);
+    }
+  }
+
+  /** Escape closes a tooltip shown by focus */
+  function onEscape(e: KeyboardEvent) {
+    if (e.key === "Escape") trigger("tooltip", false);
+  }
+
   function onTouch() {
     isTouching = true;
     clearTimeout(tTmr);
@@ -350,17 +371,33 @@ export function floating(element: HTMLElement, accessor: Accessor<Props>) {
       () => accessor().tooltip,
       (tooltip) => {
         if (tooltip) {
-          element.ariaLabel =
+          // an empty aria text keeps the element's own name
+          const label =
             typeof tooltip.content === "string"
               ? tooltip.content
               : tooltip!.aria!;
+          if (label) element.ariaLabel = label;
 
           element.addEventListener("mouseenter", onMouseEnter);
           element.addEventListener("mouseleave", onMouseLeave);
           element.addEventListener("touchstart", onTouch);
           element.addEventListener("touchend", onTouch);
+          if (tooltip.showOnFocus) {
+            element.addEventListener("focusin", onFocusIn);
+            element.addEventListener("focusout", onFocusOut);
+          }
 
           onCleanup(() => {
+            element.removeEventListener("focusin", onFocusIn);
+            element.removeEventListener("focusout", onFocusOut);
+            element.removeEventListener("keydown", onEscape);
+            // the tooltip content is gone, don't leave it open. Not through
+            // trigger(): it reads the directive's config, whose getters can
+            // read memos of components that are mid-disposal, which re-runs
+            // (and cleans) a parent whose cleanup loop is still running and
+            // throws "node.owned[i]" on null when leaving a call.
+            if (untrack(show)?.tooltip) setShow(undefined);
+            clearTimeout(tTmr);
             element.removeEventListener("mouseenter", onMouseEnter);
             element.removeEventListener("mouseleave", onMouseLeave);
             element.removeEventListener("touchstart", onTouch);

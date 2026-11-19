@@ -10,6 +10,8 @@ files:
   - node_modules/uiohook-napi/**
   - node_modules/node-gyp-build/**
   - node_modules/koffi/**
+  # Per-process audio add-on, built by scripts/build-native.mjs (Windows builds only)
+  - native/app-audio/app-audio.node
   # koffi bundles prebuilds for every platform, keep win32_x64 only (the only
   # target). An arm64 target would need the matching prebuild kept as well.
   - "!node_modules/koffi/{doc,src,vendor,lib}"
@@ -25,6 +27,7 @@ asarUnpack:
   - node_modules/uiohook-napi/**
   - node_modules/node-gyp-build/**
   - node_modules/koffi/**
+  - native/app-audio/app-audio.node
 publish:
   provider: github
   owner: I-develop-bugs-for-a-living

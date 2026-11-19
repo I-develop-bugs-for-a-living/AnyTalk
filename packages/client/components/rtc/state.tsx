@@ -55,6 +55,7 @@ import { watchCallTraffic } from "@revolt/traffic";
 import { VoiceCallCardContext } from "@revolt/ui/components/features/voice/callCard/VoiceCallCard";
 
 import { Device, useDevice } from "@revolt/common";
+import { nextDeviceId, oppositeFacingMode } from "./cameraFlip";
 import { CallSounds } from "./components/CallSounds";
 import { E2eeNotices } from "./components/E2eeNotices";
 import { GamepadPushToTalk } from "./components/GamepadPushToTalk";
@@ -65,6 +66,7 @@ import { RoomAudioManager } from "./components/RoomAudioManager";
 import { StatsRecorder } from "./components/StatsRecorder";
 import { StreamNotices } from "./components/StreamNotices";
 import { StreamPopouts } from "./components/StreamPopouts";
+import { StreamPreviewUploader } from "./components/StreamPreviewUploader";
 import { StreamViewers } from "./components/StreamViewers";
 import { VoiceKeybinds } from "./components/VoiceKeybinds";
 import { VoiceMoves } from "./components/VoiceMoves";
@@ -196,6 +198,11 @@ export type StreamOptions = {
   resolution: ScreenShareResolution;
   frameRate: ScreenShareFrameRate;
   audio: boolean;
+  /**
+   * What sound the captured source can share (set by the desktop app on
+   * Windows only), undefined when unknown or unrestricted
+   */
+  sourceAudio?: "screen" | "app" | "game" | "none";
 };
 
 /** A screen share that is being started, not published yet */
@@ -209,13 +216,16 @@ type ScreenCapture = {
 };
 
 /** Stream audio is captured as is, without the processing meant for voices */
-const STREAM_AUDIO_CAPTURE: AudioCaptureOptions = {
+const streamAudioCapture = (): AudioCaptureOptions => ({
   autoGainControl: false,
   echoCancellation: false,
   noiseSuppression: false,
   voiceIsolation: false,
-  restrictOwnAudio: true,
-};
+  // Keeps the call out of the shared system sound. The desktop app does it
+  // with process loopback, which old Windows builds (below 20348) lack, so
+  // there it is left off and plain loopback is used.
+  restrictOwnAudio: window.native?.processLoopback !== false,
+});
 
 /**
  * Stream audio is music and video sound rather than speech: send it in
@@ -421,6 +431,18 @@ class Voice {
 
   video: Accessor<boolean>;
   #setVideo: Setter<boolean>;
+
+  /** Device ID of the camera in use, undefined while the camera is off */
+  activeVideoDeviceId: Accessor<string | undefined>;
+  #setActiveVideoDeviceId: Setter<string | undefined>;
+
+  /** How many cameras the browser lists, refreshed when the camera turns on */
+  cameraCount: Accessor<number>;
+  #setCameraCount: Setter<number>;
+
+  /** Whether a camera flip is running */
+  flipping: Accessor<boolean>;
+  #setFlipping: Setter<boolean>;
 
   screenshare: Accessor<boolean>;
   #setScreenshare: Setter<boolean>;
@@ -645,6 +667,19 @@ class Voice {
     this.video = video;
     this.#setVideo = setVideo;
 
+    const [activeVideoDeviceId, setActiveVideoDeviceId] =
+      createSignal<string>();
+    this.activeVideoDeviceId = activeVideoDeviceId;
+    this.#setActiveVideoDeviceId = setActiveVideoDeviceId;
+
+    const [cameraCount, setCameraCount] = createSignal(0);
+    this.cameraCount = cameraCount;
+    this.#setCameraCount = setCameraCount;
+
+    const [flipping, setFlipping] = createSignal(false);
+    this.flipping = flipping;
+    this.#setFlipping = setFlipping;
+
     const [screenshare, setScreenshare] = createSignal(false);
     this.screenshare = screenshare;
     this.#setScreenshare = setScreenshare;
@@ -855,8 +890,10 @@ class Voice {
       this.#setChannel(channel);
       this.#setState(rejoining ? "RECONNECTING" : "CONNECTING");
       this.#setVideo(false);
+      this.#setActiveVideoDeviceId(undefined);
       this.#setScreenshare(false);
     });
+    this.#watchCamera(room);
 
     // Whether we got into the call, a failed attempt isn't worth rejoining
     let joined = false;
@@ -1366,6 +1403,166 @@ class Voice {
       // check the microphone only once the track has been replaced
       .then(() => bus && this.#recoverMicrophone())
       .catch((err) => console.error("[rtc] could not switch microphone", err));
+  }
+
+  /** The live camera track, if the camera is on */
+  #cameraTrack(room: Room | undefined) {
+    return room?.localParticipant.getTrackPublication(Track.Source.Camera)
+      ?.videoTrack as LocalVideoTrack | undefined;
+  }
+
+  /**
+   * Keep `activeVideoDeviceId` following the camera in use, and refresh the
+   * camera count when the camera turns on (permission exists by then, so
+   * browsers that hide cameras before it list them all).
+   * @param room Room
+   */
+  #watchCamera(room: Room) {
+    // LiveKit emits these while a disconnect tears the call UI down (the track
+    // is unpublished from inside a Solid cleanup). Writing a signal right then
+    // re-runs effects whose owner is mid-disposal and Solid's cleanNode throws
+    // "node.owned[i]" on null. A microtask lets the disposal finish first.
+    // Late events of an old room must not write into a newer call.
+    const sync = () =>
+      queueMicrotask(() => {
+        if (this.room() !== room) return;
+        this.#setActiveVideoDeviceId(
+          this.#cameraTrack(room)?.mediaStreamTrack.getSettings().deviceId,
+        );
+      });
+
+    room.on(RoomEvent.LocalTrackPublished, (publication) => {
+      if (publication.source !== Track.Source.Camera) return;
+      sync();
+      // one listener per track, even if it is published again
+      const track = publication.videoTrack;
+      track?.off(TrackEvent.Restarted, sync);
+      track?.on(TrackEvent.Restarted, sync);
+      Room.getLocalDevices("videoinput", false)
+        .then((devices) => {
+          if (this.room() === room) this.#setCameraCount(devices.length);
+        })
+        .catch(() => {});
+    });
+    room.on(RoomEvent.LocalTrackUnpublished, (publication) => {
+      if (publication.source === Track.Source.Camera) {
+        publication.videoTrack?.off(TrackEvent.Restarted, sync);
+        queueMicrotask(() => {
+          if (this.room() === room) this.#setActiveVideoDeviceId(undefined);
+        });
+      }
+    });
+  }
+
+  /**
+   * Choose the camera. Switches the live camera, or just remembers the
+   * choice while the camera is off (LiveKit applies it on the next start).
+   * @param deviceId Camera (undefined or "default" for the system default)
+   */
+  setVideoInput(deviceId?: string) {
+    const id = !deviceId || deviceId === "default" ? undefined : deviceId;
+    this.#settings.preferredVideoDevice = id;
+
+    const room = this.room();
+    if (!room) return;
+    const track = this.#cameraTrack(room);
+    const sync = () => {
+      // the call may have ended or changed while the camera was switching
+      if (this.room() !== room) return;
+      this.#setActiveVideoDeviceId(
+        this.#cameraTrack(room)?.mediaStreamTrack.getSettings().deviceId,
+      );
+    };
+
+    if (id) {
+      room
+        .switchActiveDevice("videoinput", id)
+        .then(sync)
+        .catch((err) => console.error("[rtc] could not switch camera", err));
+      return;
+    }
+
+    // switchActiveDevice would store {exact: "default"}, which breaks the
+    // camera: use the system default by not asking for a device at all
+    const defaults = room.options.videoCaptureDefaults;
+    room.options.videoCaptureDefaults = { ...defaults, deviceId: undefined };
+    if (track && !track.isMuted) {
+      track
+        .restartTrack({ resolution: defaults?.resolution })
+        .then(sync)
+        .catch((err) => console.error("[rtc] could not switch camera", err));
+    }
+  }
+
+  /**
+   * Flip between the front and back camera while the camera is on. Uses the
+   * facing mode the camera reports; without one (or when it reopens the same
+   * camera, like a webcam that says "user"), cycles to the next camera.
+   * Ignored while a flip is still running.
+   */
+  async flipCamera() {
+    const room = this.room();
+    const track = this.#cameraTrack(room);
+    if (!room || !track || track.isMuted || this.flipping()) return;
+
+    this.#setFlipping(true);
+    const resolution = room.options.videoCaptureDefaults?.resolution;
+    const before = track.mediaStreamTrack.getSettings();
+    try {
+      // restartTrack replaces the constraints, so the resolution is passed
+      // each time. A facing mode loses against a device ID, hence no device.
+      const cycle = async () => {
+        const cameras = await Room.getLocalDevices("videoinput", false);
+        const next = nextDeviceId(
+          cameras.map((d) => d.deviceId),
+          before.deviceId,
+        );
+        if (next) {
+          await track.restartTrack({ deviceId: { exact: next }, resolution });
+        }
+      };
+
+      const facing = oppositeFacingMode(before.facingMode);
+      if (facing) {
+        await track.restartTrack({ facingMode: facing, resolution });
+        if (track.mediaStreamTrack.getSettings().deviceId === before.deviceId) {
+          await cycle();
+        }
+      } else {
+        await cycle();
+      }
+
+      // remember the camera now in use, so camera off and on keeps it
+      const now = track.mediaStreamTrack;
+      if (this.room() !== room) return;
+      if (now.readyState !== "live" || track.isMuted) return;
+      const actual = now.getSettings().deviceId;
+      this.#settings.preferredVideoDevice = actual;
+      room.options.videoCaptureDefaults = {
+        ...room.options.videoCaptureDefaults,
+        deviceId: actual,
+      };
+      this.#setActiveVideoDeviceId(actual);
+    } catch (e) {
+      console.error("[rtc] could not flip camera", e);
+      // the old track is already stopped: reopen the previous camera so the
+      // camera doesn't stay dead while it is shown as on
+      if (track.mediaStreamTrack.readyState === "ended") {
+        await track
+          .restartTrack({
+            deviceId: before.deviceId ? { exact: before.deviceId } : undefined,
+            resolution,
+          })
+          .catch((err) => console.error("[rtc] could not restore camera", err));
+      }
+      if (this.room() === room) {
+        this.#setActiveVideoDeviceId(
+          this.#cameraTrack(room)?.mediaStreamTrack.getSettings().deviceId,
+        );
+      }
+    } finally {
+      this.#setFlipping(false);
+    }
   }
 
   /**
@@ -2134,9 +2331,9 @@ class Voice {
             cancelled = true;
             window.native.screenPickerCallback?.(-1, false);
           },
-          callback: (idx, resolution, frameRate, audio) => {
+          callback: (idx, resolution, frameRate, audio, sourceAudio) => {
             window.native.screenPickerCallback?.(idx, audio);
-            picked = { resolution, frameRate, audio };
+            picked = { resolution, frameRate, audio, sourceAudio };
           },
           sources: sources,
           resolutions: this.#resolutionOptions(),
@@ -2149,9 +2346,9 @@ class Voice {
     });
   }
 
-  /** Whether the captured stream audio is currently sent */
-  #streamAudioShared(room: Room) {
-    const audio = this.#streamAudio;
+  /** Whether the given (default: the kept) stream audio is currently sent */
+  #streamAudioShared(room: Room, track = this.#streamAudio) {
+    const audio = track;
     return (
       !!audio &&
       room.localParticipant.getTrackPublication(Track.Source.ScreenShareAudio)
@@ -2171,12 +2368,20 @@ class Voice {
     audio?.on(TrackEvent.UpstreamPaused, () => {
       if (!this.#holdStreamAudio) audio.resumeUpstream();
     });
+
+    // A capture that ended by itself (e.g. the shared app was closed) leaves
+    // nothing to turn on again, so forget the track, unless it was replaced
+    audio?.on(TrackEvent.Ended, () => {
+      if (this.#streamAudio === audio) this.#streamAudio = undefined;
+    });
   }
 
   /** Start or stop sending the captured stream audio */
   async #shareStreamAudio(room: Room, share: boolean) {
     const audio = this.#streamAudio;
     if (!audio || share === this.#streamAudioShared(room)) return;
+    // an ended capture can't be published again
+    if (share && audio.mediaStreamTrack.readyState === "ended") return;
 
     if (share) {
       await room.localParticipant.publishTrack(audio, {
@@ -2237,7 +2442,7 @@ class Voice {
 
     // the stream may have ended on its own, which leaves the audio behind
     if (audio) {
-      if (this.#streamAudioShared(room)) {
+      if (this.#streamAudioShared(room, audio)) {
         await room.localParticipant.unpublishTrack(audio);
       }
       audio.stop();
@@ -2306,7 +2511,7 @@ class Voice {
       try {
         tracks = await room.localParticipant.createScreenTracks({
           resolution: chosenQuality?.resolution,
-          audio: STREAM_AUDIO_CAPTURE,
+          audio: streamAudioCapture(),
         });
       } finally {
         setScreenCaptureKeepFocus(false);
@@ -3341,6 +3546,11 @@ class Voice {
     const picked = this.#registerScreenPicker(preselected);
     this.#prepareCapture();
 
+    // Taken before the new capture starts: the desktop app ends the old
+    // app-audio capture then, and that ending clears `#streamAudio`, which
+    // must not make us skip taking the old audio track down
+    const oldAudio = this.#streamAudio;
+
     // whether the stream we were asked to change is gone or another one
     const stale = () => this.#shareToken !== token || this.room() !== room;
 
@@ -3355,7 +3565,7 @@ class Voice {
             stream.resolution,
             stream.frameRate,
           ).resolution,
-          audio: STREAM_AUDIO_CAPTURE,
+          audio: streamAudioCapture(),
         });
         // Only a preselected capture is time limited: with the picker or
         // portal open, the user may take as long as they like
@@ -3404,7 +3614,6 @@ class Voice {
       // captures (game windows), so publish the new capture the way a fresh
       // share is: take down the old one first. The new tracks are captured
       // already, so a cancelled picker never gets here.
-      const oldAudio = this.#streamAudio;
       const stillPublished =
         room.localParticipant.getTrackPublication(Track.Source.ScreenShare)
           ?.track === video;
@@ -3417,7 +3626,7 @@ class Voice {
       }
       video.stop();
       if (oldAudio) {
-        if (this.#streamAudioShared(room)) {
+        if (this.#streamAudioShared(room, oldAudio)) {
           await room.localParticipant.unpublishTrack(oldAudio);
         }
         oldAudio.stop();
@@ -3442,6 +3651,7 @@ class Voice {
           resolution: pickedOptions?.resolution ?? stream.resolution,
           frameRate: pickedOptions?.frameRate ?? stream.frameRate,
           audio: !!newAudio,
+          sourceAudio: pickedOptions?.sourceAudio,
         },
         true,
       );
@@ -3493,9 +3703,12 @@ class Voice {
       audio: !!this.#streamAudio,
       onCancel: () => {},
       callback: (resolution, frameRate, audio) =>
-        this.#applyStreamOptions(room, { resolution, frameRate, audio }).catch(
-          (e) => this.onErr(e),
-        ),
+        this.#applyStreamOptions(room, {
+          resolution,
+          frameRate,
+          audio,
+          sourceAudio: stream.sourceAudio,
+        }).catch((e) => this.onErr(e)),
     });
   }
 
@@ -3869,7 +4082,7 @@ class Voice {
       this.#registerPopout(id, kind, win, stopFollowing);
       return true;
     } catch (e) {
-      console.debug("[rtc] could not pop out the stream with", kind, e);
+      console.warn("[rtc] could not pop out the stream with", kind, e);
     }
 
     return false;
@@ -4037,8 +4250,11 @@ class Voice {
   #startingGame?: string;
 
   private onErr(e: unknown) {
-    if ((e as Error).name !== "NotAllowedError")
+    if ((e as Error).name !== "NotAllowedError") {
+      // the modal only shows the message: keep the original error and stack
+      console.error("[rtc]", e);
       this.openModal({ type: "error2", error: e });
+    }
   }
 }
 
@@ -4093,6 +4309,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
           <RoomAudioManager />
           <VoiceKeybinds />
           <StreamViewers />
+          <StreamPreviewUploader />
           <StreamPopouts />
         </InRoom>
         <StatsRecorder />

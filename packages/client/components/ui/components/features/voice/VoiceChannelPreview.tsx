@@ -1,5 +1,13 @@
 import { useNavigate } from "@solidjs/router";
-import { For, Show, splitProps } from "solid-js";
+import {
+  For,
+  Show,
+  createEffect,
+  createSignal,
+  on,
+  onMount,
+  splitProps,
+} from "solid-js";
 import {
   TrackLoop,
   useEnsureParticipant,
@@ -14,6 +22,7 @@ import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { UserContextMenu } from "@revolt/app";
+import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
 import { useUser } from "@revolt/markdown/users";
 import {
@@ -26,12 +35,13 @@ import {
 import { Avatar, Ripple, typography } from "../../design";
 import { Row } from "../../layout";
 
-import { VoiceStatefulUserIcons } from "./VoiceStatefulUserIcons";
+import { createPreviewCache } from "./streamPreviewCache";
 import {
   VOICE_USER_DRAG_TYPE,
   canMoveFrom,
   setDraggedVoiceUser,
 } from "./voiceMove";
+import { VoiceStatefulUserIcons } from "./VoiceStatefulUserIcons";
 
 /**
  * Render a preview of users (or the active participants) for a given channel
@@ -39,6 +49,11 @@ import {
  * Designed for the server sidebar to be below channels
  */
 export function VoiceChannelPreview(props: { channel: Channel }) {
+  const client = useClient();
+
+  // previews belong to the session, drop them when it ends or changes
+  createEffect(on(client, () => previewCache.clear(), { defer: true }));
+
   return (
     <InRoom
       channelId={props.channel.id}
@@ -169,6 +184,7 @@ function ParticipantPreview(props: {
       deafened={!props.participant.isReceiving()}
       camera={props.participant.isCamera()}
       screenshare={props.participant.isScreensharing()}
+      showPreview
       onWatch={() => {
         // join the call first, then open their stream
         const userId = props.participant.userId;
@@ -176,6 +192,70 @@ function ParticipantPreview(props: {
         voice.connect(props.channel).then(() => voice.watchStream(userId));
       }}
     />
+  );
+}
+
+/** Previews of streams seen so far, shared by all rows */
+const previewCache = createPreviewCache();
+
+/**
+ * Thumbnail of someone's stream, fetched when it is first shown
+ */
+function StreamPreviewThumb(props: {
+  channelId: string;
+  userId: string;
+  name: string;
+}) {
+  const client = useClient();
+  const { t } = useLingui();
+  const [state, setState] = createSignal<
+    { status: "loading" } | { status: "none" } | { status: "ok"; url: string }
+  >({ status: "loading" });
+
+  onMount(() => {
+    const load = async () => {
+      const [header, value] = client().authenticationHeader;
+      const response = await fetch(
+        `${client().options.baseURL}/channels/${props.channelId}/voice/preview/${props.userId}`,
+        { headers: { [header]: value } },
+      );
+      if (!response.ok) return undefined;
+      return URL.createObjectURL(await response.blob());
+    };
+
+    previewCache.get(props.channelId, props.userId, load).then((url) => {
+      setState(url ? { status: "ok", url } : { status: "none" });
+    });
+  });
+
+  return (
+    <PreviewFrame>
+      <Show
+        when={(() => {
+          const current = state();
+          return current.status === "ok" ? current.url : undefined;
+        })()}
+        fallback={
+          <PreviewNote>
+            {state().status === "loading" ? (
+              <Trans>Loading preview…</Trans>
+            ) : (
+              <Trans>No preview yet</Trans>
+            )}
+          </PreviewNote>
+        }
+      >
+        {(url) => (
+          <PreviewImage
+            src={url()}
+            alt={(() => {
+              const name = props.name;
+              return t`Stream preview: ${name}`;
+            })()}
+          />
+        )}
+      </Show>
+    </PreviewFrame>
   );
 }
 
@@ -224,6 +304,8 @@ function CommonUser(props: {
   /** Open this user's stream; clicking them does this while they stream */
   onWatch?: () => void;
   isLive?: boolean;
+  /** Show a thumbnail of the stream on hover (people outside the call) */
+  showPreview?: boolean;
 }) {
   const [iconProps, rest] = splitProps(props, ["muted", "deafened", "camera"]);
 
@@ -232,6 +314,12 @@ function CommonUser(props: {
   const { t } = useLingui();
   const { isMobile } = useDevice();
   const canWatch = () => rest.screenshare && !!rest.onWatch;
+
+  // only people who may join the call get a preview, and only for streams
+  const canPreview = () =>
+    !!rest.showPreview &&
+    rest.screenshare &&
+    rest.channel.havePermission("Connect");
 
   // drag people into another voice channel to move them (desktop only: phones
   // and keyboards use "Move to channel" in the user context menu)
@@ -266,6 +354,22 @@ function CommonUser(props: {
       }}
       onDragEnd={() => setDraggedVoiceUser(undefined)}
       use:floating={{
+        // desktop only: hover and keyboard focus, phones keep the watch action
+        tooltip: canPreview()
+          ? {
+              placement: "right",
+              showOnFocus: true,
+              // the row keeps its own name for screen readers
+              aria: "",
+              content: () => (
+                <StreamPreviewThumb
+                  channelId={rest.channel.id}
+                  userId={rest.userId}
+                  name={user().username}
+                />
+              ),
+            }
+          : undefined,
         // while streaming, a click opens the stream instead
         userCard:
           canWatch() || !user().user
@@ -353,6 +457,31 @@ const previewUser = cva({
         },
       },
     },
+  },
+});
+
+const PreviewFrame = styled("div", {
+  base: {
+    width: "280px",
+    maxWidth: "100%",
+    minHeight: "48px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
+    borderRadius: "var(--borderRadius-sm)",
+    background: "var(--md-sys-color-surface-container-high)",
+  },
+});
+
+const PreviewImage = styled("img", {
+  base: { display: "block", maxWidth: "100%" },
+});
+
+const PreviewNote = styled("span", {
+  base: {
+    padding: "8px",
+    color: "var(--md-sys-color-on-surface-variant)",
   },
 });
 

@@ -8,6 +8,7 @@ type Props = {
   name?: string;
   checked?: boolean;
   disabled?: boolean;
+  "aria-describedby"?: string;
   indeterminate?: boolean;
   class?: string;
   onChange?: (event: { currentTarget: { checked: boolean } }) => void;

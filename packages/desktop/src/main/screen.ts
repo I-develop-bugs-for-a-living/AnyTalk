@@ -7,10 +7,12 @@ import {
 } from "electron";
 
 import { type PickerRequest, type PickerSource, IPC } from "../shared/ipc";
+import { appCaptureLookup, startAppShare } from "./appAudioShare";
 import { gameLog } from "./gameLog";
 import { windowIdOf } from "./gameMatch";
 import { foregroundWindowId, isGameWindow } from "./games";
 import { isWayland } from "./platform";
+import { type AppCapture, loopbackFor, sourceAudio } from "./screenAudio";
 import {
   type Allowance,
   grantAllowance,
@@ -55,6 +57,41 @@ export async function getCapturedLabel(): Promise<string | undefined> {
   return id === captureId ? label : undefined;
 }
 
+/**
+ * The ids (as in `windowIdOf`) of AnyTalk's own windows.
+ *
+ * @returns A set of window ids
+ */
+function ownWindowIds(): Set<string> {
+  const ids = new Set<string>();
+  for (const win of BrowserWindow.getAllWindows()) {
+    if (win.isDestroyed()) continue;
+    const id = windowIdOf(win.getMediaSourceId());
+    if (id) ids.add(id);
+  }
+  return ids;
+}
+
+/**
+ * Whether a source is AnyTalk's own: one of its windows, or a window of its
+ * own process tree (a child window or a native dialog). Such a source never
+ * shares sound, it would echo the call.
+ *
+ * @param sourceId A `desktopCapturer` source id
+ * @param ownIds Our windows, from `ownWindowIds`
+ * @param app Per-process capture info for the source, when the add-on works
+ * @returns True for our own sources
+ */
+function isOwnSource(
+  sourceId: string,
+  ownIds: Set<string>,
+  app: AppCapture | undefined,
+): boolean {
+  const id = windowIdOf(sourceId);
+  if (id && ownIds.has(id)) return true;
+  return app?.pid !== undefined && app.ownPids.includes(app.pid);
+}
+
 /** The one picker request waiting for the user's choice. */
 type PendingPicker = {
   id: number;
@@ -69,6 +106,36 @@ type PendingPicker = {
 };
 
 /**
+ * What sound a source may share, with our own windows and processes counted.
+ *
+ * @param sourceId A `desktopCapturer` source id
+ * @param ownIds Our windows, from `ownWindowIds`
+ * @param appCapture The add-on lookup, when it works
+ * @returns The kind, as in `sourceAudio`
+ */
+function audioKindOf(
+  sourceId: string,
+  ownIds: Set<string>,
+  appCapture: ((sourceId: string) => AppCapture | undefined) | undefined,
+) {
+  const app = appCapture?.(sourceId);
+  return sourceAudio(
+    process.platform,
+    sourceId,
+    isOwnSource(sourceId, ownIds, app),
+    app,
+  );
+}
+
+/**
+ * Turn captured sources into the picker's list. Each source keeps the index
+ * it got first, so a choice made against an older list still hits it.
+ *
+ * @param request The open picker request
+ * @param sources Sources just captured
+ * @returns The list for the page
+ */
+/**
  * Turn captured sources into the picker's list. Each source keeps the index
  * it got first, so a choice made against an older list still hits it.
  *
@@ -80,6 +147,8 @@ function toPickerSources(
   request: PendingPicker,
   sources: Electron.DesktopCapturerSource[],
 ): PickerSource[] {
+  const appCapture = appCaptureLookup();
+  const ownIds = ownWindowIds();
   return sources.map((source) => {
     let idx = request.indexOf.get(source.id);
     if (idx === undefined) {
@@ -91,6 +160,7 @@ function toPickerSources(
       idx,
       name: source.name,
       isFullScreen: source.id.startsWith("screen:"),
+      audio: audioKindOf(source.id, ownIds, appCapture),
       image: source.thumbnail.isEmpty()
         ? source.appIcon?.toDataURL()
         : source.thumbnail.toDataURL(),
@@ -339,14 +409,36 @@ export function installScreenShare(
         });
         if (sources.length === 0) return callback({});
 
-        const audioFor = (wanted: boolean) =>
-          wanted && process.platform === "win32" ? "loopback" : undefined;
-
+        // On Windows a window's own sound is captured with the add-on: it
+        // starts here and the page attaches to it after getDisplayMedia
+        // resolved. Where that can't be done (no add-on, an old Windows, no
+        // process, a UWP window, a failed start) the window gets system
+        // loopback, which the page asks for without AnyTalk's own sound.
+        // AnyTalk's own windows get no sound. Checked here, not just in the
+        // picker.
+        const sender = webContents.fromFrame(request.frame) ?? undefined;
+        // looked up once for this request, not per source
+        const appCapture = appCaptureLookup();
+        const ownIds = ownWindowIds();
+        const audioFor = (wanted: boolean, source: { id: string }) => {
+          const app = appCapture?.(source.id);
+          // one verdict for the picker's list and for what is captured
+          const isOwn = isOwnSource(source.id, ownIds, app);
+          if (
+            wanted &&
+            app?.pid !== undefined &&
+            sourceAudio(process.platform, source.id, isOwn, app) === "app" &&
+            startAppShare(sender, app.pid)
+          )
+            return undefined;
+          // no add-on, or starting it failed: the loopback rules
+          return loopbackFor(process.platform, wanted, source.id, isOwn);
+        };
         if (isWayland) {
           rememberCaptured(sources[0]);
           return callback({
             video: sources[0],
-            audio: audioFor(request.audioRequested),
+            audio: audioFor(request.audioRequested, sources[0]),
           });
         }
 
@@ -369,11 +461,10 @@ export function installScreenShare(
           rememberCaptured(preset);
           return callback({
             video: preset,
-            audio: audioFor(request.audioRequested),
+            audio: audioFor(request.audioRequested, preset),
           });
         }
 
-        const sender = webContents.fromFrame(request.frame);
         if (!sender) return callback({});
 
         const choice = await askRenderer(sender, sources);
@@ -381,7 +472,10 @@ export function installScreenShare(
         rememberCaptured(choice.source);
         callback({
           video: choice.source,
-          audio: audioFor(choice.audio && request.audioRequested),
+          audio: audioFor(
+            choice.audio && request.audioRequested,
+            choice.source,
+          ),
         });
       } catch (error) {
         console.error("Screen share failed", error);

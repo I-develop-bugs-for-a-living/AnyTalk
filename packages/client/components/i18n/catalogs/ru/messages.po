@@ -44,6 +44,11 @@ msgstr "dddd [в] LT"
 msgid ":{0}: from {1}"
 msgstr ":{0}: с сервера {1}"
 
+#. placeholder {0}: props.name
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "\"{0}\" will no longer work for signing in or confirming actions. You can add it again later."
+msgstr ""
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "\"Copy Wireshark filter\" next to a server above puts a display filter for it on the clipboard. To line up times, set View, Time Display Format, UTC Date and Time of Day in Wireshark and compare with the absolute times in the exports. Browsers can hide the server name (Encrypted Client Hello, QUIC), so the filter may miss such connections."
 msgstr ""
@@ -596,6 +601,10 @@ msgstr ""
 msgid "A packet capture (for example Wireshark) therefore shows only DTLS/SRTP ciphertext, and the media server only sees end-to-end ciphertext."
 msgstr ""
 
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+msgid "A small picture of your stream, updated every few minutes, shows when someone points at you in the channel list."
+msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream in your call ends"
 msgstr "Трансляция в вашем звонке заканчивается"
@@ -664,6 +673,10 @@ msgstr "Добавить"
 msgid "Add a new friend"
 msgstr "Добавить нового друга"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Add a passkey"
+msgstr ""
+
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Add Bot"
 msgstr "Добавить бота"
@@ -689,6 +702,10 @@ msgstr "Добавить новых людей в группу"
 msgid "Add one of my recaps"
 msgstr "Добавить один из моих итогов"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Add one to sign in without typing your password."
+msgstr ""
+
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Add reaction"
 msgstr "Добавить реакцию"
@@ -700,6 +717,18 @@ msgstr "Добавить статус"
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Add to folder"
 msgstr "Добавить в папку"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Added <0/>"
+#~ msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Added <0/> · Last used <1/>"
+msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Added <0/> · Never used"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Admin"
@@ -882,6 +911,11 @@ msgstr "AnyTalk будет запускаться свернутым в сист
 msgid "AnyTalk works best as an app"
 msgstr "AnyTalk лучше работает в приложении"
 
+#: components/modal/modals/ScreenSharePicker.tsx
+#: components/modal/modals/ScreenShareSettings.tsx
+msgid "AnyTalk's own sound can't be shared."
+msgstr "Собственный звук AnyTalk нельзя передать."
+
 #: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
 msgid "API"
 msgstr ""
@@ -986,8 +1020,16 @@ msgstr "Уровень звука"
 msgid "Authenticator App"
 msgstr "Приложение для аутентификации"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Authenticator app enabled."
+msgstr ""
+
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Authenticator code"
+msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Authenticator removed. Two-factor authentication is off."
 msgstr ""
 
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
@@ -1251,6 +1293,7 @@ msgid "Calls: how they are encrypted"
 msgstr ""
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/CameraButton.tsx
 msgid "Camera"
 msgstr "Камера"
 
@@ -1296,7 +1339,11 @@ msgstr "Сейчас не удаётся получить статус заяв�
 #: components/modal/modals/LeaveServer.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/MFARemoveAuthenticator.tsx
 #: components/modal/modals/Onboarding.tsx
+#: components/modal/modals/PasskeyCreate.tsx
+#: components/modal/modals/PasskeyName.tsx
+#: components/modal/modals/PasskeyRemove.tsx
 #: components/modal/modals/PinMessage.tsx
 #: components/modal/modals/QrScanner.tsx
 #: components/modal/modals/RemoveMember.tsx
@@ -1483,6 +1530,10 @@ msgstr "Проверка обновлений…"
 msgid "Checking the account..."
 msgstr ""
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Checking…"
+msgstr ""
+
 #: src/interface/Sidebar.tsx
 msgid "Choose a server from the list to see its channels."
 msgstr ""
@@ -1490,6 +1541,18 @@ msgstr ""
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
 msgstr "Введие своё имя пользователя"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Choose Approve, then confirm with your passkey when your device asks."
+msgstr ""
+
+#: components/modal/modals/MFAFlow.tsx
+msgid "Choose Confirm, then approve with your passkey when your device asks."
+msgstr ""
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Choose Create passkey, then confirm with your device when it asks."
+msgstr ""
 
 #: components/modal/modals/Onboarding.tsx
 msgid "Choose username"
@@ -1601,8 +1664,8 @@ msgstr "Свернуть окно звонка"
 msgid "Colours"
 msgstr "Цвета"
 
+#: components/ui/components/features/voice/callCard/CameraButton.tsx
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Coming soon! 👀"
 msgstr "Скоро появится! 👀"
 
@@ -1717,6 +1780,7 @@ msgstr "Содержимое нарушает один или несколько
 #: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
+#: components/modal/modals/PasskeyName.tsx
 msgid "Continue"
 msgstr "Продолжить"
 
@@ -1898,6 +1962,10 @@ msgstr ""
 msgid "Could not save this setting."
 msgstr "Не удалось сохранить эту настройку."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't add the passkey. Try again."
+msgstr ""
+
 #: components/instance/index.tsx
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "Не удалось получить конфигурацию AnyTalk из {hStr}."
@@ -1928,8 +1996,20 @@ msgstr "Не удалось загрузить файлы"
 msgid "Couldn't move them to {0}."
 msgstr "Не удалось переместить их в {0}."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't remove the passkey. Try again."
+msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't rename the passkey. Try again."
+msgstr ""
+
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Couldn't set up call encryption. The server may need an update."
+msgstr ""
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "Couldn't sign in with a passkey. Try again or sign in another way."
 msgstr ""
 
 #: components/rtc/components/StreamNotices.tsx
@@ -2049,6 +2129,10 @@ msgstr "Создать приглашение для других"
 msgid "Create or join a server"
 msgstr "Создать сервер или присоединиться"
 
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Create passkey"
+msgstr ""
+
 #: components/modal/modals/CreateRole.tsx
 msgid "Create Role"
 msgstr "Создать Роль"
@@ -2065,6 +2149,10 @@ msgstr "Создать эмодзи сервера"
 #: components/app/interface/settings/channel/webhooks/WebhooksList.tsx
 msgid "Create Webhook"
 msgstr "Создать Вебхук"
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Create your passkey"
+msgstr ""
 
 #: components/app/interface/settings/user/Sessions.tsx
 msgid "Created <0/>"
@@ -2892,6 +2980,10 @@ msgstr ""
 msgid "Fixed controls"
 msgstr ""
 
+#: components/ui/components/features/voice/callCard/CameraButton.tsx
+msgid "Flip camera"
+msgstr "Переключить камеру"
+
 #: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2935,6 +3027,10 @@ msgstr "На 3 часа"
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "For 8 hours"
 msgstr "На 8 часов"
+
+#: components/modal/modals/PasskeyName.tsx
+msgid "For example the name of this device"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frame rate"
@@ -3532,6 +3628,10 @@ msgstr "Язык"
 msgid "Last sync <0/>"
 msgstr "Последняя синхронизцая <0/>"
 
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Last used <0/>"
+#~ msgstr ""
+
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Latest"
 msgstr "Последние"
@@ -3678,6 +3778,10 @@ msgstr "Загрузить файл ({0})"
 
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Loading message"
+msgstr ""
+
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+msgid "Loading preview…"
 msgstr ""
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
@@ -4149,12 +4253,17 @@ msgstr "Мои боты"
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
+#: components/modal/modals/PasskeyName.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Name"
 msgstr "Имя"
 
 #: src/interface/servers/ServerOverview.tsx
 msgid "Name (A-Z)"
+msgstr ""
+
+#: components/modal/modals/PasskeyName.tsx
+msgid "Name your passkey"
 msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
@@ -4184,6 +4293,10 @@ msgstr ""
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
 msgstr "Нейтрально"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Never used"
+#~ msgstr ""
 
 #: components/ui/components/features/messaging/elements/MessageDivider.tsx
 msgid "NEW"
@@ -4287,6 +4400,10 @@ msgstr "Языки не найдены"
 msgid "No matches"
 msgstr ""
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "No passkeys yet"
+msgstr ""
+
 #: components/app/interface/settings/user/Updates.tsx
 msgid "No patch notes for this version."
 msgstr "Для этой версии нет списка изменений."
@@ -4294,6 +4411,10 @@ msgstr "Для этой версии нет списка изменений."
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No permissions set yet"
 msgstr "Разрешений пока нет"
+
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+msgid "No preview yet"
+msgstr ""
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "No recaps yet. Turn on \"Record call recaps\", then join a call."
@@ -4400,6 +4521,7 @@ msgstr ""
 msgid "Notifications"
 msgstr "Уведомления"
 
+#: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
@@ -4451,6 +4573,7 @@ msgstr "Старые"
 msgid "Oldest joined"
 msgstr ""
 
+#: components/app/interface/settings/user/Account.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
 msgstr "Вкл"
@@ -4592,6 +4715,10 @@ msgstr "При открытии другой трансляции во врем�
 msgid "Other"
 msgstr "Другое"
 
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Other apps' sound is shared too."
+msgstr ""
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Other downloads"
 msgstr "Другие загрузки"
@@ -4654,6 +4781,31 @@ msgstr "Простить Пользователя"
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Partial Outage"
 msgstr "Частичный сбой"
+
+#: components/app/interface/settings/user/Account.tsx
+#: components/modal/modals/MFAFlow.tsx
+msgid "Passkey"
+msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey added."
+msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey not added."
+msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey removed."
+msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey renamed."
+msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkeys"
+msgstr ""
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
@@ -4862,6 +5014,11 @@ msgstr "Нажать на выбранный элемент или отправ�
 msgid "Preview"
 msgstr "Предпросмотр"
 
+#. placeholder {0}: props.name
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+#~ msgid "Preview of {0}'s stream"
+#~ msgstr ""
+
 #: components/app/interface/settings/user/Controller.tsx
 #~ msgid "Previous and next channel"
 #~ msgstr "Предыдущий и следующий канал"
@@ -4911,6 +5068,10 @@ msgstr "Способствует причинению вреда"
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Pronouns"
 msgstr "Местоимения"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Protects your account with a second step when you sign in or change sensitive settings."
+msgstr ""
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Protocol"
@@ -5161,6 +5322,8 @@ msgstr "Удаленный сервер"
 
 #: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#: components/modal/modals/MFARemoveAuthenticator.tsx
+#: components/modal/modals/PasskeyRemove.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
 msgstr "Удалить"
@@ -5172,6 +5335,10 @@ msgstr "Убрать все реакции"
 #: components/app/interface/settings/user/Account.tsx
 msgid "Remove Authenticator"
 msgstr "Удалить аутентификатор"
+
+#: components/modal/modals/MFARemoveAuthenticator.tsx
+msgid "Remove authenticator app?"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove Avatars"
@@ -5197,6 +5364,15 @@ msgstr "Удалить участника"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove other members' avatars"
 msgstr "Убрать аватары других участников"
+
+#. placeholder {0}: passkey.name
+#: components/app/interface/settings/user/Account.tsx
+msgid "Remove passkey {0}"
+msgstr ""
+
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "Remove passkey?"
+msgstr ""
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
@@ -5226,6 +5402,7 @@ msgstr "Убирает стуки по столу или микрофону"
 
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/modal/modals/EditCategory.tsx
+#: components/modal/modals/PasskeyName.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename"
 msgstr "Переименовать"
@@ -5238,6 +5415,15 @@ msgstr "Переименовать категорию"
 #: components/modal/modals/EditEmoji.tsx
 msgid "Rename emoji"
 msgstr "Переименовать эмодзи"
+
+#: components/modal/modals/PasskeyName.tsx
+msgid "Rename passkey"
+msgstr ""
+
+#. placeholder {0}: passkey.name
+#: components/app/interface/settings/user/Account.tsx
+msgid "Rename passkey {0}"
+msgstr ""
 
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename Session"
@@ -5940,6 +6126,10 @@ msgstr ""
 msgid "Show a notice when a new version is available"
 msgstr ""
 
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+msgid "Show a preview of my stream to people outside the call"
+msgstr ""
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show admin panel shortcuts in context menus"
 msgstr "Показывать ярлыки админ-панели в контекстных меню"
@@ -6045,6 +6235,14 @@ msgstr ""
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr ""
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Sign in and confirm actions with your fingerprint, face or device lock"
+msgstr ""
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "Sign in with a passkey"
+msgstr ""
+
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Sign into AnyTalk"
@@ -6143,6 +6341,10 @@ msgstr ""
 msgid "Sort by"
 msgstr ""
 
+#: components/modal/modals/ScreenSharePicker.tsx
+#~ msgid "Sound can only be shared for whole screens and games."
+#~ msgstr ""
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
 msgstr "Громкость звука"
@@ -6191,7 +6393,7 @@ msgstr "Спойлер"
 msgid "SRTP cipher"
 msgstr ""
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/CameraButton.tsx
 msgid "Start camera"
 msgstr "Включить камеру"
 
@@ -6216,7 +6418,7 @@ msgstr ""
 msgid "Status"
 msgstr "Статус"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/CameraButton.tsx
 msgid "Stop camera"
 msgstr "Выключить камеру"
 
@@ -6260,6 +6462,10 @@ msgstr "Трансляция всё ещё идёт."
 
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 msgid "Stream options"
+msgstr ""
+
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+msgid "Stream preview: {name}"
 msgstr ""
 
 #: components/modal/modals/ScreenShareSettings.tsx
@@ -6435,6 +6641,14 @@ msgstr "Это действие ни к чему не привело."
 msgid "That code is not correct. Check it and try again."
 msgstr ""
 
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "That passkey was not accepted. Try again or sign in another way."
+msgstr ""
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That passkey was not accepted. Try again or use another method."
+msgstr ""
+
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "That password is not correct. Check it and try again."
 msgstr ""
@@ -6519,6 +6733,22 @@ msgstr ""
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
+msgstr ""
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "The passkey request is ready. Choose Approve once more."
+msgstr ""
+
+#: components/modal/modals/MFAFlow.tsx
+msgid "The passkey request is ready. Choose Confirm once more."
+msgstr ""
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "The passkey request was renewed. Choose Sign in with a passkey once more."
+msgstr ""
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "The passkey was not created. Choose Create passkey to try again."
 msgstr ""
 
 #: components/i18n/errors.tsx
@@ -6618,6 +6848,10 @@ msgstr ""
 msgid "This content is not available in your region."
 msgstr "Этот контент недоступен в вашем регионе."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "This device already has a passkey for your account."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "This feature is currently disabled."
 msgstr "Эта функция пока недоступна."
@@ -6646,6 +6880,10 @@ msgstr "Это начало вашей беседы."
 #: components/ui/components/features/messaging/elements/ConversationStart.tsx
 msgid "This is the start of your notes."
 msgstr "Это начало ваших заметок."
+
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "This is your last second factor, so two-factor authentication will be turned off."
+msgstr ""
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
@@ -6795,6 +7033,7 @@ msgstr "Тональное Пятно"
 msgid "Too Long"
 msgstr "Слишком длинно"
 
+#: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Too many attempts. Wait a moment and try again."
 msgstr ""
@@ -6881,6 +7120,14 @@ msgstr ""
 
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Turns on after restart"
+msgstr ""
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Two-factor authentication"
+msgstr ""
+
+#: components/modal/modals/MFARemoveAuthenticator.tsx
+msgid "Two-factor authentication will be turned off for your account. You can turn it on again by setting up an authenticator app."
 msgstr ""
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
@@ -7095,6 +7342,10 @@ msgstr ""
 msgid "URL"
 msgstr ""
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a code instead"
+msgstr ""
+
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
 msgstr "Использовать код или ссылку приглашения"
@@ -7102,6 +7353,10 @@ msgstr "Использовать код или ссылку приглашени
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Use a game controller to move around AnyTalk. Works with Xbox, PlayStation, Switch and Steam Deck controllers."
 msgstr "Используйте геймпад для навигации по AnyTalk. Работает с геймпадами Xbox, PlayStation, Switch и Steam Deck."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a passkey instead"
+msgstr ""
 
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Use a recovery code instead"
@@ -7122,6 +7377,10 @@ msgstr ""
 #: components/app/interface/settings/user/Native.tsx
 msgid "Use the graphics card to improve performance. Takes effect after you restart AnyTalk."
 msgstr "Использовать видеокарту для повышения производительности. Вступит в силу после перезапуска AnyTalk."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Use this device or a security key to sign in"
+msgstr ""
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "User"

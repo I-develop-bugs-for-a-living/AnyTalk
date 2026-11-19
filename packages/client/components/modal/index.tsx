@@ -10,6 +10,7 @@ import { SetStoreFunction, createStore } from "solid-js/store";
 
 import type { MFA, MFATicket } from "stoat.js";
 
+import type { CredentialJson, OptionsJson } from "@revolt/client/webauthn";
 import { Keybind, KeybindAction } from "@revolt/keybinds";
 import { dismissFloatingElements } from "@revolt/ui";
 
@@ -143,6 +144,11 @@ export class ModalControllerExtended extends ModalController {
 
     this.mfaFlow = this.mfaFlow.bind(this);
     this.mfaEnableTOTP = this.mfaEnableTOTP.bind(this);
+    this.confirmRemoveAuthenticator =
+      this.confirmRemoveAuthenticator.bind(this);
+    this.askPasskeyName = this.askPasskeyName.bind(this);
+    this.confirmRemovePasskey = this.confirmRemovePasskey.bind(this);
+    this.askCreatePasskey = this.askCreatePasskey.bind(this);
     this.showError = this.showError.bind(this);
     this.openLink = this.openLink.bind(this);
   }
@@ -159,6 +165,58 @@ export class ModalControllerExtended extends ModalController {
         mfa,
         callback,
       }),
+    );
+  }
+
+  /**
+   * Ask the user to confirm removing the authenticator app
+   * @returns Whether the user confirmed
+   */
+  confirmRemoveAuthenticator() {
+    return new Promise<boolean>((callback) =>
+      this.openModal({ type: "mfa_remove_authenticator", callback }),
+    );
+  }
+
+  /**
+   * Ask for the name of a passkey
+   * @param mode Adding a new one or renaming
+   * @param initial Name to start with
+   * @returns The name, or undefined if cancelled
+   */
+  askPasskeyName(mode: "add" | "rename", initial: string) {
+    return new Promise<string | undefined>((callback) =>
+      this.openModal({ type: "passkey_name", mode, initial, callback }),
+    );
+  }
+
+  /**
+   * Ask the user to confirm removing a passkey
+   * @param name Name of the passkey
+   * @param turnsOffTwoFactor Whether removing it leaves no second factor
+   * @returns Whether the user confirmed
+   */
+  confirmRemovePasskey(name: string, turnsOffTwoFactor: boolean) {
+    return new Promise<boolean>((callback) =>
+      this.openModal({
+        type: "passkey_remove",
+        name,
+        turnsOffTwoFactor,
+        callback,
+      }),
+    );
+  }
+
+  /**
+   * Show the step that creates a passkey from a tap, so the browser accepts it
+   * @param options Registration options from the server
+   * @returns The credential or the error, or undefined if cancelled
+   */
+  askCreatePasskey(options: OptionsJson) {
+    return new Promise<
+      { credential: CredentialJson } | { error: unknown } | undefined
+    >((callback) =>
+      this.openModal({ type: "passkey_create", options, callback }),
     );
   }
 

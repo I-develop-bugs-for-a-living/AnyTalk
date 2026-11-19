@@ -9,7 +9,8 @@ import { styled } from "styled-system/jsx";
 import MdError from "@material-design-icons/svg/filled/error.svg?component-solid";
 import { TranslatedError } from "@revolt/i18n/errors";
 
-const ErrorContainer = styled("span", {
+/** Inline error message row, shared by the auth flows */
+export const ErrorContainer = styled("span", {
   base: {
     color: "var(--md-sys-color-error)",
     display: "flex",
@@ -98,6 +99,8 @@ interface FieldPreset {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value?: any;
   disabled?: boolean;
+  /** Replaces the field's default `autocomplete` token(s) */
+  autocomplete?: string;
 }
 
 /**
@@ -124,6 +127,10 @@ export function Fields(props: FieldProps) {
                 required
                 {...fieldConfiguration[field.field]}
                 name={field.field}
+                autocomplete={
+                  field.autocomplete ??
+                  fieldConfiguration[field.field].autocomplete
+                }
                 label={fieldConfiguration[field.field].name()}
                 placeholder={fieldConfiguration[field.field].placeholder()}
                 disabled={field.disabled}

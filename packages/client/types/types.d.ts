@@ -91,6 +91,8 @@ declare global {
       };
       platform: "win32" | "linux" | "darwin";
       isWayland(): boolean;
+      /** False on Windows builds below 20348, where excluding AnyTalk's own sound from system audio isn't possible (missing in older shells) */
+      processLoopback?: boolean;
       desktopEnvironment: string;
       minimise(): Promise<void>;
       maximise(): Promise<void>;
@@ -104,11 +106,24 @@ declare global {
             idx: number;
             name: string;
             isFullScreen: boolean;
+            audio?: "screen" | "app" | "game" | "none";
             image?: string;
           }[],
         ) => void,
       ): void;
       screenPickerCallback(idx: number, audio: boolean): Promise<void>;
+      /**
+       * Per-process audio of a window share (Windows desktop app, missing in
+       * older shells). Resolves with the capture's id once `chunk` receives
+       * 48 kHz stereo interleaved float32, or null if this share has none.
+       * `ended` is called once if the capture ends by itself.
+       */
+      attachAppAudio?(
+        chunk: (data: Float32Array) => void,
+        ended: (message: string) => void,
+      ): Promise<number | null>;
+      /** Stops the capture `attachAppAudio` returned */
+      stopAppAudio?(id: number): Promise<void>;
       // The source shape below must match `PickerSource` in
       // packages/desktop/src/shared/ipc.ts
       /**
@@ -121,6 +136,7 @@ declare global {
             idx: number;
             name: string;
             isFullScreen: boolean;
+            audio?: "screen" | "app" | "game" | "none";
             image?: string;
           }[]
         | null
@@ -314,6 +330,13 @@ declare module "solid-js" {
            * Where the tooltip should be placed
            */
           placement: Placement;
+
+          /**
+           * Also show the tooltip while the element has keyboard focus (Escape closes
+           * it). Screen readers don't get the tooltip content, so it must only
+           * hold visual extras, like a thumbnail.
+           */
+          showOnFocus?: boolean;
         } & (
           | {
               /**

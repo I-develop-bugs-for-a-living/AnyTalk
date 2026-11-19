@@ -4,13 +4,13 @@ import { Show } from "solid-js";
 import { useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
-import { useInstance } from "@revolt/instance";
 import { isIOSBusMode, screenShareSupported, useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
 import { IconButton } from "@revolt/ui/components/design";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import { AudioDevicesButton } from "./AudioDevicesButton";
+import { CameraButton } from "./CameraButton";
 import { EarpieceToggleButton } from "./EarpieceToggleButton";
 import { ScreenShareButton } from "./ScreenShareButton";
 import { DeafenButton, LeaveCallButton, MuteButton } from "./VoiceCallButtons";
@@ -24,7 +24,6 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
   const state = useState();
   const navigate = useNavigate();
   const { t } = useLingui();
-  const { limits } = useInstance();
 
   return (
     <Actions>
@@ -70,26 +69,7 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
         <EarpieceToggleButton size={props.size} />
       </Show>
       <Show when={props.size !== "xs"}>
-        <IconButton
-          size={props.size}
-          variant={limits().video && voice.video() ? "filled" : "tonal"}
-          onPress={() => {
-            if (limits().video) voice.toggleCamera();
-          }}
-          use:floating={{
-            tooltip: {
-              placement: "top",
-              content: limits().video
-                ? voice.video()
-                  ? t`Stop camera`
-                  : t`Start camera`
-                : t`Coming soon! 👀`,
-            },
-          }}
-          isDisabled={!limits().video}
-        >
-          <Symbol>camera_video</Symbol>
-        </IconButton>
+        <CameraButton size={props.size} />
       </Show>
       {/* Phone browsers can't share their screen */}
       <Show when={screenShareSupported}>

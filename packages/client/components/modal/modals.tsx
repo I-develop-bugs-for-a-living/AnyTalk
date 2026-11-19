@@ -47,7 +47,11 @@ import { LinkWarningModal } from "./modals/LinkWarning";
 import { MFAEnableTOTPModal } from "./modals/MFAEnableTOTP";
 import { MFAFlowModal } from "./modals/MFAFlow";
 import { MFARecoveryModal } from "./modals/MFARecovery";
+import { MFARemoveAuthenticatorModal } from "./modals/MFARemoveAuthenticator";
 import { OnboardingModal } from "./modals/Onboarding";
+import { PasskeyCreateModal } from "./modals/PasskeyCreate";
+import { PasskeyNameModal } from "./modals/PasskeyName";
+import { PasskeyRemoveModal } from "./modals/PasskeyRemove";
 import { PinMessageModal } from "./modals/PinMessage";
 import { PolicyChangeModal } from "./modals/PolicyChange";
 import { QrLoginApproveModal } from "./modals/QrLoginApprove";
@@ -163,6 +167,14 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
       return <MFAEnableTOTPModal {...modalProps} />;
     case "mfa_flow":
       return <MFAFlowModal {...modalProps} />;
+    case "mfa_remove_authenticator":
+      return <MFARemoveAuthenticatorModal {...modalProps} />;
+    case "passkey_create":
+      return <PasskeyCreateModal {...modalProps} />;
+    case "passkey_name":
+      return <PasskeyNameModal {...modalProps} />;
+    case "passkey_remove":
+      return <PasskeyRemoveModal {...modalProps} />;
     case "mfa_recovery":
       return <MFARecoveryModal {...modalProps} />;
     case "onboarding":

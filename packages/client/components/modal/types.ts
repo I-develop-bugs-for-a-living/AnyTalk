@@ -23,6 +23,7 @@ import {
 
 import type { SettingsConfigurations } from "@revolt/app";
 import { CategoryData } from "@revolt/app/menus/CategoryContextMenu";
+import type { CredentialJson, OptionsJson } from "@revolt/client/webauthn";
 import { ServerFolder } from "@revolt/state/stores/ServerFolders";
 import {
   ScreenShareFrameRate,
@@ -192,6 +193,32 @@ export type Modals =
       callback: (code?: string) => Promise<void>;
       reject?: (reason?: string) => void;
     }
+  | {
+      type: "mfa_remove_authenticator";
+      callback: (confirmed: boolean) => void;
+    }
+  | {
+      type: "passkey_name";
+      mode: "add" | "rename";
+      initial: string;
+      callback: (name?: string) => void;
+    }
+  | {
+      type: "passkey_create";
+      /** Registration options from the server */
+      options: OptionsJson;
+      /** The credential, or the error to report; undefined if cancelled */
+      callback: (
+        result?: { credential: CredentialJson } | { error: unknown },
+      ) => void;
+    }
+  | {
+      type: "passkey_remove";
+      name: string;
+      /** Removing it leaves no second factor, so 2FA turns off */
+      turnsOffTwoFactor: boolean;
+      callback: (confirmed: boolean) => void;
+    }
   | ({
       type: "mfa_flow";
     } & (
@@ -203,6 +230,10 @@ export type Modals =
       | {
           state: "unknown";
           available_methods: API.MFAMethod[];
+          /** Login MFA ticket, needed to ask for a passkey challenge */
+          ticket?: string;
+          /** API to ask for the passkey challenge with (login: no session) */
+          api?: API.API;
           callback: (response?: API.MFAResponse) => void;
         }
     ))
@@ -345,6 +376,8 @@ export type Modals =
         resolution: ScreenShareResolution;
         frameRate: ScreenShareFrameRate;
         audio: boolean;
+        /** What sound the captured source can share, Windows desktop only */
+        sourceAudio?: "screen" | "app" | "game" | "none";
       };
       resolutions: { value: ScreenShareResolution; label: string }[];
       audio: boolean;
@@ -373,12 +406,14 @@ export type Modals =
         resolution: ScreenShareResolution,
         frameRate: ScreenShareFrameRate,
         audio: boolean,
+        sourceAudio?: "screen" | "app" | "game" | "none",
       ) => void;
       resolutions: { value: ScreenShareResolution; label: string }[];
       sources: {
         idx: number;
         name: string;
         isFullScreen: boolean;
+        audio?: "screen" | "app" | "game" | "none";
         image?: string;
       }[];
       onCancel: () => void;

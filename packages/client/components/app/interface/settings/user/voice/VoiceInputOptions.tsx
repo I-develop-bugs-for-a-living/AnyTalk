@@ -139,10 +139,13 @@ function SelectInput(props: { kind: MediaDeviceKind }) {
             return;
           }
 
-          //Can't setActiveMediaDevice to "default" for video, only audio
-          //But it can be applied on livekit init, so this choice will be remembered
-          if (props.kind !== "videoinput" || id !== "default")
-            mMedia.setActiveMediaDevice(id);
+          if (props.kind === "videoinput") {
+            // also remembers "default" and works while the camera is off
+            voice.setVideoInput(id);
+            return;
+          }
+
+          mMedia.setActiveMediaDevice(id);
           state.voice[setKey()] = id === "default" ? undefined : id;
         }
       }}

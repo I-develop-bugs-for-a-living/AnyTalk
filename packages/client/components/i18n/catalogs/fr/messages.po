@@ -44,6 +44,11 @@ msgstr "dddd [à] LT"
 msgid ":{0}: from {1}"
 msgstr ":{0}: de {1}"
 
+#. placeholder {0}: props.name
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "\"{0}\" will no longer work for signing in or confirming actions. You can add it again later."
+msgstr "« {0} » ne pourra plus servir à vous connecter ni à confirmer des actions. Vous pourrez le rajouter plus tard."
+
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "\"Copy Wireshark filter\" next to a server above puts a display filter for it on the clipboard. To line up times, set View, Time Display Format, UTC Date and Time of Day in Wireshark and compare with the absolute times in the exports. Browsers can hide the server name (Encrypted Client Hello, QUIC), so the filter may miss such connections."
 msgstr "« Copier le filtre Wireshark » à côté d'un serveur ci-dessus place un filtre d'affichage correspondant dans le presse-papiers. Pour aligner les heures, choisissez dans Wireshark View → Time Display Format → UTC Date and Time of Day, puis comparez avec les heures absolues des exports. Les navigateurs peuvent masquer le nom du serveur (Encrypted Client Hello, QUIC), le filtre peut donc manquer de telles connexions."
@@ -596,6 +601,10 @@ msgstr "Une nouvelle version d'AnyTalk est disponible"
 msgid "A packet capture (for example Wireshark) therefore shows only DTLS/SRTP ciphertext, and the media server only sees end-to-end ciphertext."
 msgstr "Une capture de paquets (par exemple avec Wireshark) ne montre donc que du texte chiffré DTLS/SRTP, et le serveur multimédia ne voit que du texte chiffré de bout en bout."
 
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+msgid "A small picture of your stream, updated every few minutes, shows when someone points at you in the channel list."
+msgstr "Une petite image de votre stream, mise à jour toutes les quelques minutes, s’affiche lorsque quelqu’un vous survole dans la liste des salons."
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "A stream in your call ends"
 msgstr "Un stream de votre appel se termine"
@@ -664,6 +673,10 @@ msgstr "Ajouter"
 msgid "Add a new friend"
 msgstr "Ajouter un nouvel ami"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Add a passkey"
+msgstr "Ajouter une clé d’accès"
+
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Add Bot"
 msgstr "Ajouter un bot"
@@ -689,6 +702,10 @@ msgstr "Ajouter de nouveaux membres au groupe"
 msgid "Add one of my recaps"
 msgstr "Ajouter l'un de mes récapitulatifs"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Add one to sign in without typing your password."
+msgstr "Ajoutez-en une pour vous connecter sans saisir votre mot de passe."
+
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Add reaction"
 msgstr "Ajouter une réaction"
@@ -700,6 +717,18 @@ msgstr "Ajouter un texte au statut"
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Add to folder"
 msgstr "Ajouter au dossier"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Added <0/>"
+#~ msgstr "Ajoutée <0/>"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Added <0/> · Last used <1/>"
+msgstr "Ajoutée <0/> · Dernière utilisation <1/>"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Added <0/> · Never used"
+msgstr "Ajoutée <0/> · Jamais utilisée"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Admin"
@@ -882,6 +911,11 @@ msgstr "AnyTalk démarrera dans la barre de tâches."
 msgid "AnyTalk works best as an app"
 msgstr "AnyTalk fonctionne mieux en tant qu'application"
 
+#: components/modal/modals/ScreenSharePicker.tsx
+#: components/modal/modals/ScreenShareSettings.tsx
+msgid "AnyTalk's own sound can't be shared."
+msgstr "Le son d'AnyTalk lui-même ne peut pas être partagé."
+
 #: components/app/interface/settings/user/developer/traffic/serviceLabel.ts
 msgid "API"
 msgstr "API"
@@ -986,9 +1020,17 @@ msgstr "Niveau audio"
 msgid "Authenticator App"
 msgstr "Application d'authentification"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Authenticator app enabled."
+msgstr "Application d’authentification activée."
+
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Authenticator code"
 msgstr "Code d'authentification"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Authenticator removed. Two-factor authentication is off."
+msgstr "Application d’authentification supprimée. L’authentification à deux facteurs est désactivée."
 
 #: components/app/interface/settings/user/profile/BannerColourField.tsx
 msgid "Automatic"
@@ -1248,6 +1290,7 @@ msgid "Calls: how they are encrypted"
 msgstr "Appels : comment ils sont chiffrés"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/voice/callCard/CameraButton.tsx
 msgid "Camera"
 msgstr "Caméra"
 
@@ -1293,7 +1336,11 @@ msgstr "Impossible d'obtenir l'état de la demande Découvrir pour le moment"
 #: components/modal/modals/LeaveServer.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
 #: components/modal/modals/MFAFlow.tsx
+#: components/modal/modals/MFARemoveAuthenticator.tsx
 #: components/modal/modals/Onboarding.tsx
+#: components/modal/modals/PasskeyCreate.tsx
+#: components/modal/modals/PasskeyName.tsx
+#: components/modal/modals/PasskeyRemove.tsx
 #: components/modal/modals/PinMessage.tsx
 #: components/modal/modals/QrScanner.tsx
 #: components/modal/modals/RemoveMember.tsx
@@ -1477,6 +1524,10 @@ msgstr "Recherche de mises à jour…"
 msgid "Checking the account..."
 msgstr "Vérification du compte..."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Checking…"
+msgstr "Vérification…"
+
 #: src/interface/Sidebar.tsx
 msgid "Choose a server from the list to see its channels."
 msgstr "Choisissez un serveur dans la liste pour voir ses salons."
@@ -1484,6 +1535,18 @@ msgstr "Choisissez un serveur dans la liste pour voir ses salons."
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Choose a username"
 msgstr "Choisir un nom d'utilisateur"
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Choose Approve, then confirm with your passkey when your device asks."
+msgstr "Choisissez Approuver, puis confirmez avec votre clé d’accès quand votre appareil le demande."
+
+#: components/modal/modals/MFAFlow.tsx
+msgid "Choose Confirm, then approve with your passkey when your device asks."
+msgstr "Choisissez Confirmer, puis approuvez avec votre clé d’accès quand votre appareil le demande."
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Choose Create passkey, then confirm with your device when it asks."
+msgstr "Choisissez Créer une clé d’accès, puis confirmez avec votre appareil quand il le demande."
 
 #: components/modal/modals/Onboarding.tsx
 msgid "Choose username"
@@ -1595,8 +1658,8 @@ msgstr "Réduire la fenêtre d'appel"
 msgid "Colours"
 msgstr "Couleurs"
 
+#: components/ui/components/features/voice/callCard/CameraButton.tsx
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 msgid "Coming soon! 👀"
 msgstr "Bientôt disponible ! 👀"
 
@@ -1711,6 +1774,7 @@ msgstr "Le contenu enfreint une ou plusieurs lois"
 #: components/auth/src/flows/FlowQrLogin.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
+#: components/modal/modals/PasskeyName.tsx
 msgid "Continue"
 msgstr "Continuer"
 
@@ -1892,6 +1956,10 @@ msgstr "Impossible de lire l'état du journal des clés."
 msgid "Could not save this setting."
 msgstr "Impossible d’enregistrer ce paramètre."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't add the passkey. Try again."
+msgstr "Impossible d’ajouter la clé d’accès. Réessayez."
+
 #: components/instance/index.tsx
 msgid "Couldn't fetch AnyTalk configuration from {hStr}."
 msgstr "Impossible de récupérer la configuration de AnyTalk depuis {hStr}."
@@ -1922,9 +1990,21 @@ msgstr "Impossible de charger les téléchargements"
 msgid "Couldn't move them to {0}."
 msgstr "Impossible de le déplacer vers {0}."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't remove the passkey. Try again."
+msgstr "Impossible de supprimer la clé d’accès. Réessayez."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Couldn't rename the passkey. Try again."
+msgstr "Impossible de renommer la clé d’accès. Réessayez."
+
 #: components/rtc/components/E2eeNotices.tsx
 msgid "Couldn't set up call encryption. The server may need an update."
 msgstr "Impossible de configurer le chiffrement des appels. Le serveur a peut-être besoin d'une mise à jour."
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "Couldn't sign in with a passkey. Try again or sign in another way."
+msgstr "Impossible de se connecter avec une clé d’accès. Réessayez ou connectez-vous autrement."
 
 #: components/rtc/components/StreamNotices.tsx
 msgid "Couldn't start the stream."
@@ -2043,6 +2123,10 @@ msgstr "Créer des invitations à l'usage d'autres personnes"
 msgid "Create or join a server"
 msgstr "Créer ou rejoindre un serveur"
 
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Create passkey"
+msgstr "Créer une clé d’accès"
+
 #: components/modal/modals/CreateRole.tsx
 msgid "Create Role"
 msgstr "Créer un rôle"
@@ -2059,6 +2143,10 @@ msgstr "Créer un emoji sur le serveur"
 #: components/app/interface/settings/channel/webhooks/WebhooksList.tsx
 msgid "Create Webhook"
 msgstr "Créer un Webhook"
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "Create your passkey"
+msgstr "Créez votre clé d’accès"
 
 #: components/app/interface/settings/user/Sessions.tsx
 msgid "Created <0/>"
@@ -2883,6 +2971,10 @@ msgstr "Premiers octets"
 msgid "Fixed controls"
 msgstr "Commandes fixes"
 
+#: components/ui/components/features/voice/callCard/CameraButton.tsx
+msgid "Flip camera"
+msgstr "Changer de caméra"
+
 #: components/modal/modals/UserProfilePhone.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -2926,6 +3018,10 @@ msgstr "Pendant 3 heures"
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "For 8 hours"
 msgstr "Pendant 8 heures"
+
+#: components/modal/modals/PasskeyName.tsx
+msgid "For example the name of this device"
+msgstr "Par exemple, le nom de cet appareil"
 
 #: components/app/interface/settings/user/developer/StreamRecaps.tsx
 msgid "Frame rate"
@@ -3520,6 +3616,10 @@ msgstr "Langue"
 msgid "Last sync <0/>"
 msgstr "Dernière synchronisation <0/>"
 
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Last used <0/>"
+#~ msgstr "Dernière utilisation <0/>"
+
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Latest"
 msgstr "Récents"
@@ -3667,6 +3767,10 @@ msgstr "Charger le fichier ({0})"
 #: src/interface/navigation/servers/Inbox.tsx
 msgid "Loading message"
 msgstr "Chargement du message"
+
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+msgid "Loading preview…"
+msgstr "Chargement de l’aperçu…"
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Local candidate"
@@ -4137,6 +4241,7 @@ msgstr "Mes bots"
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
+#: components/modal/modals/PasskeyName.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Name"
 msgstr "Nom"
@@ -4144,6 +4249,10 @@ msgstr "Nom"
 #: src/interface/servers/ServerOverview.tsx
 msgid "Name (A-Z)"
 msgstr "Nom (A-Z)"
+
+#: components/modal/modals/PasskeyName.tsx
+msgid "Name your passkey"
+msgstr "Nommez votre clé d’accès"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Navigation"
@@ -4172,6 +4281,10 @@ msgstr "Type de réseau"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
 msgstr "Neutre"
+
+#: components/app/interface/settings/user/Account.tsx
+#~ msgid "Never used"
+#~ msgstr "Jamais utilisée"
 
 #: components/ui/components/features/messaging/elements/MessageDivider.tsx
 msgid "NEW"
@@ -4275,6 +4388,10 @@ msgstr "Aucune langue trouvée"
 msgid "No matches"
 msgstr "Aucun résultat"
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "No passkeys yet"
+msgstr "Aucune clé d’accès pour l’instant"
+
 #: components/app/interface/settings/user/Updates.tsx
 msgid "No patch notes for this version."
 msgstr "Aucune note de version pour cette version."
@@ -4282,6 +4399,10 @@ msgstr "Aucune note de version pour cette version."
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No permissions set yet"
 msgstr "Aucune permission définie pour le moment"
+
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+msgid "No preview yet"
+msgstr "Pas encore d’aperçu"
 
 #: components/app/interface/settings/user/developer/CallRecaps.tsx
 msgid "No recaps yet. Turn on \"Record call recaps\", then join a call."
@@ -4388,6 +4509,7 @@ msgstr "Rien à afficher pour l'instant"
 msgid "Notifications"
 msgstr "Notifications"
 
+#: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 #: components/app/interface/settings/user/Overlay.tsx
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
@@ -4439,6 +4561,7 @@ msgstr "Anciens"
 msgid "Oldest joined"
 msgstr "Adhésion la plus ancienne"
 
+#: components/app/interface/settings/user/Account.tsx
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "On"
 msgstr "Activé"
@@ -4580,6 +4703,10 @@ msgstr "Ouvrir un autre stream pendant que vous en regardez un les affiche côte
 msgid "Other"
 msgstr "Autre"
 
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Other apps' sound is shared too."
+msgstr "Le son des autres applications est aussi partagé."
+
 #: components/app/interface/settings/user/DesktopDownload.tsx
 msgid "Other downloads"
 msgstr "Autres téléchargements"
@@ -4642,6 +4769,31 @@ msgstr "Pardonner l'Utilisateur"
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Partial Outage"
 msgstr "Panne partielle"
+
+#: components/app/interface/settings/user/Account.tsx
+#: components/modal/modals/MFAFlow.tsx
+msgid "Passkey"
+msgstr "Clé d’accès"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey added."
+msgstr "Clé d’accès ajoutée."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey not added."
+msgstr "Clé d’accès non ajoutée."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey removed."
+msgstr "Clé d’accès supprimée."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkey renamed."
+msgstr "Clé d’accès renommée."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Passkeys"
+msgstr "Clés d’accès"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/auth/src/flows/Form.tsx
@@ -4850,6 +5002,11 @@ msgstr "Valider l'élément sélectionné ou envoyer depuis la zone de message"
 msgid "Preview"
 msgstr "Aperçu"
 
+#. placeholder {0}: props.name
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+#~ msgid "Preview of {0}'s stream"
+#~ msgstr "Aperçu du stream de {0}"
+
 #: components/app/interface/settings/user/Controller.tsx
 #~ msgid "Previous and next channel"
 #~ msgstr "Salon précédent et suivant"
@@ -4899,6 +5056,10 @@ msgstr "Favorise les préjudices"
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Pronouns"
 msgstr "Pronoms"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Protects your account with a second step when you sign in or change sensitive settings."
+msgstr "Protège votre compte avec une seconde étape lors de la connexion ou de la modification de paramètres sensibles."
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Protocol"
@@ -5146,6 +5307,8 @@ msgstr "Serveur distant"
 
 #: components/app/interface/settings/user/Controller.tsx
 #: components/app/interface/settings/user/developer/CompareRecaps.tsx
+#: components/modal/modals/MFARemoveAuthenticator.tsx
+#: components/modal/modals/PasskeyRemove.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove"
 msgstr "Retirer"
@@ -5157,6 +5320,10 @@ msgstr "Supprimer toutes les réactions"
 #: components/app/interface/settings/user/Account.tsx
 msgid "Remove Authenticator"
 msgstr "Supprimer l'authentificateur"
+
+#: components/modal/modals/MFARemoveAuthenticator.tsx
+msgid "Remove authenticator app?"
+msgstr "Supprimer l’application d’authentification ?"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove Avatars"
@@ -5182,6 +5349,15 @@ msgstr "Supprimer le membre"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove other members' avatars"
 msgstr "Supprimer les avatars des autres membres"
+
+#. placeholder {0}: passkey.name
+#: components/app/interface/settings/user/Account.tsx
+msgid "Remove passkey {0}"
+msgstr "Supprimer la clé d’accès {0}"
+
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "Remove passkey?"
+msgstr "Supprimer la clé d’accès ?"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Remove reaction"
@@ -5211,6 +5387,7 @@ msgstr "Supprime les bruits de coups sur le bureau ou le microphone"
 
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/modal/modals/EditCategory.tsx
+#: components/modal/modals/PasskeyName.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename"
 msgstr "Renommer"
@@ -5223,6 +5400,15 @@ msgstr "Renommer la catégorie"
 #: components/modal/modals/EditEmoji.tsx
 msgid "Rename emoji"
 msgstr "Renommer l'émoji"
+
+#: components/modal/modals/PasskeyName.tsx
+msgid "Rename passkey"
+msgstr "Renommer la clé d’accès"
+
+#. placeholder {0}: passkey.name
+#: components/app/interface/settings/user/Account.tsx
+msgid "Rename passkey {0}"
+msgstr "Renommer la clé d’accès {0}"
 
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename Session"
@@ -5925,6 +6111,10 @@ msgstr "Afficher un nouveau code"
 msgid "Show a notice when a new version is available"
 msgstr "Afficher une notification lorsqu'une nouvelle version est disponible"
 
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+msgid "Show a preview of my stream to people outside the call"
+msgstr "Afficher un aperçu de mon stream aux personnes hors de l’appel"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Show admin panel shortcuts in context menus"
 msgstr "Afficher les raccourcis du panneau d'administration dans les menus contextuels"
@@ -6030,6 +6220,14 @@ msgstr "Affichage des {limit} résultats les plus anciens"
 msgid "Shows who is talking in your call on top of your game. It works over borderless and windowed games, not over exclusive fullscreen."
 msgstr "Affiche qui parle dans votre appel par-dessus votre jeu. Fonctionne sur les jeux en fenêtré et sans bordure, pas en plein écran exclusif."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "Sign in and confirm actions with your fingerprint, face or device lock"
+msgstr "Connectez-vous et confirmez vos actions avec votre empreinte, votre visage ou le verrouillage de l’appareil"
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "Sign in with a passkey"
+msgstr "Se connecter avec une clé d’accès"
+
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/auth/src/flows/FlowQrLogin.tsx
 msgid "Sign into AnyTalk"
@@ -6125,6 +6323,10 @@ msgstr "Une erreur s'est produite. Vérifiez votre connexion et réessayez."
 msgid "Sort by"
 msgstr "Trier par"
 
+#: components/modal/modals/ScreenSharePicker.tsx
+#~ msgid "Sound can only be shared for whole screens and games."
+#~ msgstr "Le son ne peut être partagé que pour les écrans entiers et les jeux."
+
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Sound volume"
 msgstr "Volume des sons"
@@ -6173,7 +6375,7 @@ msgstr "Spoiler"
 msgid "SRTP cipher"
 msgstr "Chiffrement SRTP"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/CameraButton.tsx
 msgid "Start camera"
 msgstr "Activer la caméra"
 
@@ -6198,7 +6400,7 @@ msgstr "Démarré"
 msgid "Status"
 msgstr "Statut"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/callCard/CameraButton.tsx
 msgid "Stop camera"
 msgstr "Couper la caméra"
 
@@ -6243,6 +6445,10 @@ msgstr "Le stream est toujours en cours."
 #: components/ui/components/features/voice/callCard/ScreenShareButton.tsx
 msgid "Stream options"
 msgstr "Options du stream"
+
+#: components/ui/components/features/voice/VoiceChannelPreview.tsx
+msgid "Stream preview: {name}"
+msgstr "Aperçu du stream : {name}"
 
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Stream Settings"
@@ -6417,6 +6623,14 @@ msgstr "Cette action n'a eu aucun effet."
 msgid "That code is not correct. Check it and try again."
 msgstr "Ce code n'est pas correct. Vérifiez-le et réessayez."
 
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "That passkey was not accepted. Try again or sign in another way."
+msgstr "Cette clé d’accès n’a pas été acceptée. Réessayez ou connectez-vous autrement."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "That passkey was not accepted. Try again or use another method."
+msgstr "Cette clé d’accès n’a pas été acceptée. Réessayez ou utilisez une autre méthode."
+
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "That password is not correct. Check it and try again."
 msgstr "Ce mot de passe n'est pas correct. Vérifiez-le et réessayez."
@@ -6502,6 +6716,22 @@ msgstr "La connexion a été refusée sur l'autre appareil."
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "The network inspector records what AnyTalk sends and receives, so you can check it against a tool like Wireshark. It is off by default and nothing is sent anywhere."
 msgstr "L'inspecteur réseau enregistre ce qu'AnyTalk envoie et reçoit, pour que vous puissiez le comparer avec un outil comme Wireshark. Il est désactivé par défaut et rien n'est envoyé ailleurs."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "The passkey request is ready. Choose Approve once more."
+msgstr "La demande de clé d’accès est prête. Choisissez Approuver une fois de plus."
+
+#: components/modal/modals/MFAFlow.tsx
+msgid "The passkey request is ready. Choose Confirm once more."
+msgstr "La demande de clé d’accès est prête. Choisissez Confirmer une fois de plus."
+
+#: components/auth/src/flows/FlowLogin.tsx
+msgid "The passkey request was renewed. Choose Sign in with a passkey once more."
+msgstr "La demande de clé d’accès a été renouvelée. Choisissez Se connecter avec une clé d’accès une fois de plus."
+
+#: components/modal/modals/PasskeyCreate.tsx
+msgid "The passkey was not created. Choose Create passkey to try again."
+msgstr "La clé d’accès n’a pas été créée. Choisissez Créer une clé d’accès pour réessayer."
 
 #: components/i18n/errors.tsx
 msgid "The password is too short."
@@ -6600,6 +6830,10 @@ msgstr "Ce code a été créé avec une adresse qui ne fonctionne que sur l'autr
 msgid "This content is not available in your region."
 msgstr "Ce contenu n'est pas disponible dans votre pays."
 
+#: components/app/interface/settings/user/Account.tsx
+msgid "This device already has a passkey for your account."
+msgstr "Cet appareil a déjà une clé d’accès pour votre compte."
+
 #: components/i18n/errors.tsx
 msgid "This feature is currently disabled."
 msgstr "Cette fonctionnalité est actuellement désactivée."
@@ -6628,6 +6862,10 @@ msgstr "Voici le début de votre conversation."
 #: components/ui/components/features/messaging/elements/ConversationStart.tsx
 msgid "This is the start of your notes."
 msgstr "Voici le début de vos notes."
+
+#: components/modal/modals/PasskeyRemove.tsx
+msgid "This is your last second factor, so two-factor authentication will be turned off."
+msgstr "C’est votre dernier second facteur : l’authentification à deux facteurs sera donc désactivée."
 
 #: components/app/interface/settings/user/Hotkeys.tsx
 msgid "This key can't be used on its own. Add Ctrl, Alt or Shift, or pick another key."
@@ -6777,6 +7015,7 @@ msgstr "Repère tonal"
 msgid "Too Long"
 msgstr "Trop long"
 
+#: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Too many attempts. Wait a moment and try again."
 msgstr "Trop de tentatives. Patientez un instant et réessayez."
@@ -6864,6 +7103,14 @@ msgstr "Se désactive après le redémarrage"
 #: components/app/interface/settings/user/developer/traffic/TrafficSettings.tsx
 msgid "Turns on after restart"
 msgstr "S'active après le redémarrage"
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Two-factor authentication"
+msgstr "Authentification à deux facteurs"
+
+#: components/modal/modals/MFARemoveAuthenticator.tsx
+msgid "Two-factor authentication will be turned off for your account. You can turn it on again by setting up an authenticator app."
+msgstr "L’authentification à deux facteurs sera désactivée pour votre compte. Vous pourrez la réactiver en configurant une application d’authentification."
 
 #: components/app/interface/settings/user/developer/traffic/EntryDetails.tsx
 msgid "Type"
@@ -7077,6 +7324,10 @@ msgstr "Envois"
 msgid "URL"
 msgstr "URL"
 
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a code instead"
+msgstr "Utiliser un code à la place"
+
 #: components/modal/modals/JoinServer.tsx
 msgid "Use a code or invite link"
 msgstr "Utiliser un code ou un lien d'invitation"
@@ -7084,6 +7335,10 @@ msgstr "Utiliser un code ou un lien d'invitation"
 #: components/app/interface/settings/user/Controller.tsx
 msgid "Use a game controller to move around AnyTalk. Works with Xbox, PlayStation, Switch and Steam Deck controllers."
 msgstr "Utilisez une manette de jeu pour naviguer dans AnyTalk. Compatible avec les manettes Xbox, PlayStation, Switch et Steam Deck."
+
+#: components/modal/modals/QrLoginApprove.tsx
+msgid "Use a passkey instead"
+msgstr "Utiliser une clé d’accès à la place"
 
 #: components/modal/modals/QrLoginApprove.tsx
 msgid "Use a recovery code instead"
@@ -7104,6 +7359,10 @@ msgstr "Utiliser plutôt l'application d'authentification"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Use the graphics card to improve performance. Takes effect after you restart AnyTalk."
 msgstr "Utilise la carte graphique pour améliorer les performances. Pris en compte après le redémarrage d'AnyTalk."
+
+#: components/app/interface/settings/user/Account.tsx
+msgid "Use this device or a security key to sign in"
+msgstr "Utilisez cet appareil ou une clé de sécurité pour vous connecter"
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "User"

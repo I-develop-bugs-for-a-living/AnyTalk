@@ -1,6 +1,7 @@
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { createFormControl, createFormGroup } from "solid-forms";
 
+import { CallVideoTrack } from "@revolt/rtc";
 import { useState } from "@revolt/state";
 import {
   ScreenShareFrameRate,
@@ -9,7 +10,6 @@ import {
   closestScreenShareResolution,
 } from "@revolt/state/stores/Voice";
 import { Column, Dialog, DialogProps, Form2 } from "@revolt/ui";
-import { VideoTrack } from "solid-livekit-components";
 
 import { Show } from "solid-js";
 import { Modals } from "../types";
@@ -40,6 +40,9 @@ export function ScreenShareSettingsModal(
     ),
     dontAsk: createFormControl(false),
   });
+
+  /** A window that isn't a game can't share sound on Windows */
+  const cannotShareSound = () => props.live?.sourceAudio === "none";
 
   async function onSubmit() {
     const frameRate = Number(
@@ -90,7 +93,7 @@ export function ScreenShareSettingsModal(
         fallback={
           <Show when={props.trackReference}>
             {(trackReference) => (
-              <VideoTrack
+              <CallVideoTrack
                 trackRef={trackReference()}
                 style={{
                   padding: "var(--gap-md)",
@@ -136,8 +139,11 @@ export function ScreenShareSettingsModal(
               value: String(frameRate),
             }))}
           />
-          <Show when={props.audio}>
-            <Form2.Checkbox control={group.controls.audio}>
+          <Show when={props.audio || cannotShareSound()}>
+            <Form2.Checkbox
+              control={group.controls.audio}
+              aria-describedby="screen-share-audio-note"
+            >
               <Trans>Share audio</Trans>
             </Form2.Checkbox>
           </Show>
@@ -147,7 +153,12 @@ export function ScreenShareSettingsModal(
               <Trans>Don't ask me again</Trans>
             </Form2.Checkbox>
           </Show>
-          <Show when={!props.audio}>
+          <Show when={cannotShareSound()}>
+            <small id="screen-share-audio-note">
+              <Trans>AnyTalk's own sound can't be shared.</Trans>
+            </small>
+          </Show>
+          <Show when={!props.audio && !cannotShareSound()}>
             <small>
               <Show
                 when={props.live}
