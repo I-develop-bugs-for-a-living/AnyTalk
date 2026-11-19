@@ -6,7 +6,7 @@ export type PickerSourceItem = {
   idx: number;
   name: string;
   isFullScreen: boolean;
-  audio?: "screen" | "game" | "none";
+  audio?: "screen" | "app" | "game" | "none";
   image?: string;
 };
 

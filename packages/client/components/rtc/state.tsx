@@ -201,7 +201,7 @@ export type StreamOptions = {
    * What sound the captured source can share (set by the desktop app on
    * Windows only), undefined when unknown or unrestricted
    */
-  sourceAudio?: "screen" | "game" | "none";
+  sourceAudio?: "screen" | "app" | "game" | "none";
 };
 
 /** A screen share that is being started, not published yet */
@@ -215,13 +215,16 @@ type ScreenCapture = {
 };
 
 /** Stream audio is captured as is, without the processing meant for voices */
-const STREAM_AUDIO_CAPTURE: AudioCaptureOptions = {
+const streamAudioCapture = (): AudioCaptureOptions => ({
   autoGainControl: false,
   echoCancellation: false,
   noiseSuppression: false,
   voiceIsolation: false,
-  restrictOwnAudio: true,
-};
+  // Keeps the call out of the shared system sound. The desktop app does it
+  // with process loopback, which old Windows builds (below 20348) lack, so
+  // there it is left off and plain loopback is used.
+  restrictOwnAudio: window.native?.processLoopback !== false,
+});
 
 /**
  * Stream audio is music and video sound rather than speech: send it in
@@ -2155,9 +2158,9 @@ class Voice {
     });
   }
 
-  /** Whether the captured stream audio is currently sent */
-  #streamAudioShared(room: Room) {
-    const audio = this.#streamAudio;
+  /** Whether the given (default: the kept) stream audio is currently sent */
+  #streamAudioShared(room: Room, track = this.#streamAudio) {
+    const audio = track;
     return (
       !!audio &&
       room.localParticipant.getTrackPublication(Track.Source.ScreenShareAudio)
@@ -2177,12 +2180,20 @@ class Voice {
     audio?.on(TrackEvent.UpstreamPaused, () => {
       if (!this.#holdStreamAudio) audio.resumeUpstream();
     });
+
+    // A capture that ended by itself (e.g. the shared app was closed) leaves
+    // nothing to turn on again, so forget the track, unless it was replaced
+    audio?.on(TrackEvent.Ended, () => {
+      if (this.#streamAudio === audio) this.#streamAudio = undefined;
+    });
   }
 
   /** Start or stop sending the captured stream audio */
   async #shareStreamAudio(room: Room, share: boolean) {
     const audio = this.#streamAudio;
     if (!audio || share === this.#streamAudioShared(room)) return;
+    // an ended capture can't be published again
+    if (share && audio.mediaStreamTrack.readyState === "ended") return;
 
     if (share) {
       await room.localParticipant.publishTrack(audio, {
@@ -2243,7 +2254,7 @@ class Voice {
 
     // the stream may have ended on its own, which leaves the audio behind
     if (audio) {
-      if (this.#streamAudioShared(room)) {
+      if (this.#streamAudioShared(room, audio)) {
         await room.localParticipant.unpublishTrack(audio);
       }
       audio.stop();
@@ -2312,7 +2323,7 @@ class Voice {
       try {
         tracks = await room.localParticipant.createScreenTracks({
           resolution: chosenQuality?.resolution,
-          audio: STREAM_AUDIO_CAPTURE,
+          audio: streamAudioCapture(),
         });
       } finally {
         setScreenCaptureKeepFocus(false);
@@ -3347,6 +3358,11 @@ class Voice {
     const picked = this.#registerScreenPicker(preselected);
     this.#prepareCapture();
 
+    // Taken before the new capture starts: the desktop app ends the old
+    // app-audio capture then, and that ending clears `#streamAudio`, which
+    // must not make us skip taking the old audio track down
+    const oldAudio = this.#streamAudio;
+
     // whether the stream we were asked to change is gone or another one
     const stale = () => this.#shareToken !== token || this.room() !== room;
 
@@ -3361,7 +3377,7 @@ class Voice {
             stream.resolution,
             stream.frameRate,
           ).resolution,
-          audio: STREAM_AUDIO_CAPTURE,
+          audio: streamAudioCapture(),
         });
         // Only a preselected capture is time limited: with the picker or
         // portal open, the user may take as long as they like
@@ -3410,7 +3426,6 @@ class Voice {
       // captures (game windows), so publish the new capture the way a fresh
       // share is: take down the old one first. The new tracks are captured
       // already, so a cancelled picker never gets here.
-      const oldAudio = this.#streamAudio;
       const stillPublished =
         room.localParticipant.getTrackPublication(Track.Source.ScreenShare)
           ?.track === video;
@@ -3423,7 +3438,7 @@ class Voice {
       }
       video.stop();
       if (oldAudio) {
-        if (this.#streamAudioShared(room)) {
+        if (this.#streamAudioShared(room, oldAudio)) {
           await room.localParticipant.unpublishTrack(oldAudio);
         }
         oldAudio.stop();

@@ -307,9 +307,7 @@ export function ScreenSharePickerModal(
               {selectedAudio() === "game" ? (
                 <Trans>Other apps' sound is shared too.</Trans>
               ) : (
-                <Trans>
-                  Sound can only be shared for whole screens and games.
-                </Trans>
+                <Trans>AnyTalk's own sound can't be shared.</Trans>
               )}
             </AudioNote>
           </Show>

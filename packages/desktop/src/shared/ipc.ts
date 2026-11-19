@@ -21,6 +21,10 @@ export const IPC = {
   pickerResult: "picker:result",
   pickerCancel: "picker:cancel",
   pickerRefresh: "picker:refresh",
+  appAudioAttach: "appaudio:attach",
+  appAudioStop: "appaudio:stop",
+  appAudioChunk: "appaudio:chunk",
+  appAudioEnded: "appaudio:ended",
   gamesGet: "games:get",
   gamesChanged: "games:changed",
   gamesFocused: "games:focused",
@@ -170,6 +174,11 @@ export type AppInfo = {
   origin: string;
   platform: "win32" | "linux" | "darwin";
   isWayland: boolean;
+  /**
+   * Whether system audio can be captured without AnyTalk's own sound.
+   * False on Windows builds below 20348, where that needs process loopback.
+   */
+  processLoopback: boolean;
   desktopEnvironment: string;
   desktopVersion: string;
   errorPageUrl: string;
@@ -184,9 +193,10 @@ export type PickerSource = {
   /**
    * What sound the source can share. Only set on Windows: "screen" and
    * "game" use system loopback (a game also carries other apps' sound),
-   * "none" can't share sound. Absent means no restriction.
+   * "app" captures just the window's own process, "none" can't share
+   * sound. Absent means no restriction.
    */
-  audio?: "screen" | "game" | "none";
+  audio?: "screen" | "app" | "game" | "none";
   image?: string;
 };
 

@@ -107,6 +107,15 @@ jobs:
 
       - run: pnpm install --frozen-lockfile --filter anytalk-desktop...
 
+      # Per-process audio add-on (Rust), Windows only. The runner has the
+      # MSVC toolchain; the target is added explicitly to be sure.
+      - name: Build the per-process audio add-on
+        if: runner.os == 'Windows'
+        shell: bash
+        run: |
+          rustup target add x86_64-pc-windows-msvc
+          pnpm --filter anytalk-desktop run build:native --target x86_64-pc-windows-msvc
+
       - run: pnpm --filter anytalk-desktop run typecheck
 
       - run: pnpm --filter anytalk-desktop run test

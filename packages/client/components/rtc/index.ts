@@ -1,3 +1,4 @@
+import { createAppAudioTrack } from "./appAudioTrack";
 import {
   screenCaptureLimit,
   takeScreenCaptureKeepFocus,
@@ -128,6 +129,17 @@ if (mediaDevices && originalMediaCall)
 
         stream.getAudioTracks().forEach((t) => stream.removeTrack(t));
         stream.addTrack(audio.getAudioTracks()[0]);
+      }
+    }
+
+    // Windows desktop: the desktop app captures just the shared window's
+    // process, its sound replaces whatever the browser captured. Without
+    // such audio this does nothing and the capture is used as it is.
+    if (opts && opts.audio && window.native?.attachAppAudio) {
+      const appAudio = await createAppAudioTrack(stream.getVideoTracks()[0]);
+      if (appAudio) {
+        stream.getAudioTracks().forEach((t) => stream.removeTrack(t));
+        stream.addTrack(appAudio);
       }
     }
 

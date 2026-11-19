@@ -11,6 +11,7 @@ import {
   shell,
 } from "electron";
 import { execFile } from "node:child_process";
+import { release } from "node:os";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 
@@ -23,6 +24,8 @@ import {
   CLIENT_WRITABLE_KEYS,
   IPC,
 } from "../shared/ipc";
+import { supportsProcessLoopback } from "./appAudioLogic";
+import { installAppAudio, stopAppShare } from "./appAudioShare";
 import { getAutostart, setAutostart } from "./autostart";
 import { getConfig, updateConfig } from "./config";
 import { ensureLinuxDesktopFile } from "./desktopFile";
@@ -137,6 +140,9 @@ function appInfo(): AppInfo {
     origin: serverOrigin(),
     platform: process.platform as AppInfo["platform"],
     isWayland,
+    processLoopback:
+      process.platform !== "win32" ||
+      supportsProcessLoopback(process.platform, release()),
     desktopEnvironment,
     desktopVersion: app.getVersion(),
     errorPageUrl,
@@ -754,6 +760,7 @@ if (!app.requestSingleInstanceLock()) {
   app.on("will-quit", () => {
     quitting = true;
     globalShortcut.unregisterAll();
+    stopAppShare();
   });
   // With minimise to tray off, closing the last window quits
   app.on("window-all-closed", () => app.quit());
@@ -767,6 +774,7 @@ if (!app.requestSingleInstanceLock()) {
     registerIpc();
     installPermissions();
     installScreenShare(fromApp);
+    installAppAudio(fromApp);
     installGameDetection(
       () => mainWindow?.webContents,
       getConfig().gameDetection,

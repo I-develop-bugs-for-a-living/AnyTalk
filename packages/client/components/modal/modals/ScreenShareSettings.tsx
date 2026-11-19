@@ -155,9 +155,7 @@ export function ScreenShareSettingsModal(
           </Show>
           <Show when={cannotShareSound()}>
             <small id="screen-share-audio-note">
-              <Trans>
-                Sound can only be shared for whole screens and games.
-              </Trans>
+              <Trans>AnyTalk's own sound can't be shared.</Trans>
             </small>
           </Show>
           <Show when={!props.audio && !cannotShareSound()}>
